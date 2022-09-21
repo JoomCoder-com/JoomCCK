@@ -1,2 +1,2 @@
 # JoomCCK
-Advanced CCK for Joomla 4+
+Advanced CCK for Joomla 4+ (based on Cobalt CCK v8)
