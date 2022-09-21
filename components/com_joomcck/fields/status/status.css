@@ -1,0 +1,24 @@
+.status_list  { 
+	border: 2px solid #e0e0e0;
+	margin-bottom: 10px !important;
+	margin-top: 5px !important;	
+	padding: 3px;
+	line-height: 25px;
+	border-radius: 5px;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	background-color: white;
+	z-index: 100;	
+}
+.status_list li { 
+	list-style-type: none;
+	cursor: pointer;
+}
+.st_open { 
+	margin: 2px;
+	cursor: pointer;
+}
+.status_view {
+	white-space: nowrap;
+	position: absolute;
+}

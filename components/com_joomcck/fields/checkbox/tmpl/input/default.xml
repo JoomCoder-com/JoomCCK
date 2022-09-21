@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<fieldparams>
+    <form>
+        <fields name="tmpl_default">
+            <fieldset name="general" label="FS_GENERAL">
+				<field name="columns" type="list" default="2" label="F_COLUMNS">
+					<option value="1">1</option>
+					<option value="2">2</option>
+					<option value="3">3</option>
+					<option value="4">4</option>
+					<option value="6">6</option>
+				</field>
+			</fieldset>
+        </fields>
+    </form>
+</fieldparams>

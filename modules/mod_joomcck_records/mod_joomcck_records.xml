@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension type="module" version="3.0" client="site" method="upgrade">
+    <name>Joomcck - Module - Records</name>
+    <author>JoomBoost</author>
+    <creationDate>March 2012</creationDate>
+    <copyright>Copyright (C) 2005 - 2012 JoomBoost (https://www.joomBoost.com). All rights reserved.</copyright>
+    <license>GNU/GPL http://www.gnu.org/copyleft/gpl.html</license>
+    <authorEmail>support@joomBoost.com</authorEmail>
+    <authorUrl>https://www.joomBoost.com</authorUrl>
+	<version>8.87</version>
+    <description><![CDATA[ Joomcck Records ]]></description>
+    <files>
+        <filename module="mod_joomcck_records">mod_joomcck_records.php</filename>
+        <filename>index.html</filename>
+        <folder>language</folder>
+    </files>
+    <config>
+        <fields name="params">
+            <fieldset label="General" name="general" addfieldpath="/libraries/mint/forms/fields/">
+                <field name="section_id" type="meresourcessection" required="true" select="1" type_elem_name="types"
+                       default="" label="Select section"
+                       description="Select the Home section which will for this module."/>
+                <field name="types" type="mertype" size="10" default="" multi="1" label="Only following types"/>
+                <field name="orderby" type="list" default="r.ctime DESC" label="Primary Order" description="">
+                    <option value="r.ctime ASC">Oldest first</option>
+                    <option value="r.ctime DESC">Most recent first</option>
+                    <option value="r.mtime DESC">Last Modified First</option>
+                    <option value="r.mtime ASC">First Modified First</option>
+                    <option value="r.title ASC">Title Alphabetical</option>
+                    <option value="r.title DESC">Title Reverse-Alphabetical</option>
+                    <option value="name ASC">Author Alphabetical</option>
+                    <option value="name DESC">Author Reverse-Alphabetical</option>
+                    <option value="r.hits DESC">Most Hits</option>
+                    <option value="r.hits ASC">Least Hits</option>
+                    <option value="r.votes_result DESC">Most Rated</option>
+                    <option value="r.votes_result ASC">Least Rated</option>
+                    <option value="r.comments DESC">Most Commented</option>
+                    <option value="r.comments ASC">Least Commented</option>
+                    <option value="r.favorite_num DESC">Most Favorited</option>
+                    <option value="r.favorite_num ASC">Least Favorited</option>
+                    <option value="RAND() ">Random</option>
+                </field>
+                <field name="view_what" type="list" default="" label="What to show">
+                    <option value="all">Any article</option>
+
+                    <option value="followed">User follow</option>
+                    <option value="favorited">Bookmarks</option>
+                    <option value="rated">Rated by user</option>
+                    <option value="commented">Commented by user</option>
+                    <option value="unpublished">Waits for approval</option>
+                    <option value="visited">Visited</option>
+                    <option value="hidden">Hidden</option>
+                    <option value="expired">Expired</option>
+                    <option value="created">Created</option>
+                    <option value="show_children">Children</option>
+                    <option value="show_parents">Parents</option>
+
+                    <option value="exclude_featured">Excluding featured</option>
+                    <option value="only_featured">Only featured</option>
+                    <option value="exclude_expired">Excluding expired</option>
+                    <option value="only_expired">Only expired</option>
+                    <option value="only_future">Only future</option>
+                    <option value="new_reviews">New reviews for my articles...</option>
+                    <option value="field_value">Field value equal to...</option>
+                    <option value="last_created">Added for the lats N days</option>
+                </field>
+
+                <field name="rsection_id" type="meresourcessection" select="1" type_elem_name="types"
+                       default="" label="Section with reviewed articles"
+                       description="Select the section where articles that was reviewed are saved. Works only with What to show - New reviews for my articles..."/>
+
+                <field label="Field" description="Only works with What to show - Field value equal to... or Children and Parents " name="field_src" type="meresourcesfields"/>
+                <field label="Field Value"  description="Only works with What to show - Field value equal to... You can use placeholders [USERNAME]" name="field_value" type="text"/>
+                <field name="fvco" type="list" default="0" label="Field value comparison">
+                    <option value="= '{0}'">Equal</option>
+                    <option value="!= '{0}'">Not equal</option>
+                    <option value="LIKE '%{0}%'">Contain</option>
+                    <option value="LIKE '{0}%'">Start with</option>
+                    <option value="LIKE '%{0}'">End with</option>
+                    <option value="&gt; {0}">Greater than</option>
+                    <option value="&lt; {0}">Less than</option>
+                    <option value="IS NULL">Is null</option>
+                    <option value="IS NOT NULL">Is not null</option>
+                </field>
+                <field label="Added last N days" name="ndays" type="text" size="3" default="5"/>
+
+                <field label="Categories limit IDs" name="catids" type="text"/>
+                <field name="cat_restrict" type="list" default="0" label="Category limit mode">
+                    <option value="0">No</option>
+                    <option value="1">Current category</option>
+                    <option value="2">Current category tree</option>
+                </field>
+                <field name="user_restrict" type="radio" default="0" label="User limit">
+                    <option value="0">Do not restrict</option>
+					<option value="1">Restrict currently logged in user</option>
+					<option value="2">Restrict current user's homepage</option>
+					<option value="3">Restrict current user's homepage or curently logged in</option>
+					<option value="4">Restrict curently logged in or current user's homepage</option>
+                </field>
+                <field label="Template overwrite" name="tmpl" type="mersubtmpls" default="" exclude="calendar"
+                       description="Template to display list of articles. The changes takes effect only after relogin or session cleanup"
+                       tmpltype="itemlist">
+                    <option value="">Do not override template</option>
+                </field>
+                <field label="No records message" name="norecords" type="text" description="Show this message is there are not records. Hide module is there is no message."/>
+                <field label="Limit" name="limit" type="text" size="3" default="5"/>
+                <field name="lang_mode" type="list" default="0" label="Language mode">
+                    <option value="0">Articles on any language</option>
+                    <option value="1">Articles on current language</option>
+                </field>
+                <field name="force_itemid" type="menuitem" default="0" label="Override article menu ID" >
+                    <option value="">- Use default -</option>
+				</field>
+            </fieldset>
+            <fieldset name="advanced">
+                <field name="layout" type="modulelayout" label="JFIELD_ALT_LAYOUT_LABEL"
+                       description="JFIELD_ALT_MODULE_LAYOUT_DESC"/>
+                <field name="moduleclass_sfx" type="text" label="COM_MODULES_FIELD_MODULECLASS_SFX_LABEL"
+                       description="COM_MODULES_FIELD_MODULECLASS_SFX_DESC"/>
+                <field name="cache" type="list" default="1" label="COM_MODULES_FIELD_CACHING_LABEL"
+                       description="COM_MODULES_FIELD_CACHING_DESC">
+                    <option value="1">JGLOBAL_USE_GLOBAL</option>
+                    <option value="0">COM_MODULES_FIELD_VALUE_NOCACHING</option>
+                </field>
+                <field name="cache_time" type="text" default="900" label="COM_MODULES_FIELD_CACHE_TIME_LABEL"
+                       description="COM_MODULES_FIELD_CACHE_TIME_DESC"/>
+                <field name="cachemode" type="hidden" default="itemid">
+                    <option value="itemid"></option>
+                </field>
+            </fieldset>
+        </fields>
+    </config>
+</extension>

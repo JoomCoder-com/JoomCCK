@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<metadata>
+	<layout title="CURLUSERLIST">
+		<message>CURLUSERLISTDESCR</message>
+	</layout>
+	<fields name="request">
+		<fieldset name="request" label="CURLGP" addfieldpath="/libraries/mint/forms/fields"	>
+			<field name="section_id" required="true" type="meresourcessection" default="" label="CURLHCAT" global="0" />
+			<field name="view_what" type="text" label="CURLWV" default="created" description="CURLWVDESC" />
+		</fieldset>
+	</fields>
+</metadata>

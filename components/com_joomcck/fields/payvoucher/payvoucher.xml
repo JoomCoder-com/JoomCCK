@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<joomcckfield>
+	<name>Pay Voucher</name>
+	<group>Commerce Form Elements</group>
+
+	<config>
+		<fields name="params">
+			<fieldset name="tmpl">
+				<field type="cobtmpllist" name="template_input" onchange="ajax_load_sub_params(this, '/components/com_joomcck/fields/payvoucher/tmpl/input');" filter="php$" hide_none="1" hide_default="1" directory="/components/com_joomcck/fields/payvoucher/tmpl/input" label="F_TMPLINPUT" default="default.php" />
+				<field type="cobtmpllist" name="template_output_list" onchange="ajax_load_sub_params(this, '/components/com_joomcck/fields/payvoucher/tmpl/output');" filter="php$" hide_none="1" hide_default="1" directory="/components/com_joomcck/fields/payvoucher/tmpl/output" label="F_TMPLLIST" default="default.php" />
+				<field type="cobtmpllist" name="template_output_full" onchange="ajax_load_sub_params(this, '/components/com_joomcck/fields/payvoucher/tmpl/output');" filter="php$" hide_none="1" hide_default="1" directory="/components/com_joomcck/fields/payvoucher/tmpl/output" label="F_TMPLFULL" default="default.php" />
+			</fieldset>
+			<fieldset name="general" label="FS_GENERAL">
+				<field name="single" type="radio" class="btn-group" default="0" label="F_ONEVOUCHERPERUSER">
+					<option value="0">JNO</option>
+					<option value="1">JYES</option>
+				</field>
+			</fieldset>
+
+			<fieldset name="commerciale" label="FS_SALEEVENTS">
+				<field name="new_sale" type="radio" class="btn-group" default="1" label="F_NEWSALEEVENT">
+					<option value="0">JNO</option>
+					<option value="1">JYES</option>
+				</field>
+				<field name="new_sale_manual" type="radio" class="btn-group" default="1" label="F_NEWSALEEVENTMANUAL">
+					<option value="0">JNO</option>
+					<option value="1">JYES</option>
+				</field>
+				<field name="order_updated" type="radio" class="btn-group" default="1" label="F_BUYERSTATUSCHANGED">
+					<option value="0">JNO</option>
+					<option value="1">JYES</option>
+				</field>
+			</fieldset>
+			
+			<fieldset name="commercial1" label="FS_SALELABELS">
+				<field type="text" size="40" name="item_name" default="Voucher: %s" label="F_PRODUCTNAMEFORGATEWAY" />
+				<field type="text" size="40" name="purchase_title" default="You have already purchased this voucher" label="F_ALREADYPURCHASED" />
+				<field type="text" size="40" name="all_sales_text" default="My all sales" label="F_ALLSALES" />
+				<field type="text" size="40" name="all_orders_text" default="My all purchased vouchers" label="F_ALLPURCHASES" />
+			</fieldset>
+			<fieldset name="commercial" label="FS_SALEOPTIONS">
+				<field name="all_sales_link" type="radio" class="btn-group" default="1" label="F_ALLSALESLINK">
+					<option value="0">JNO</option>
+					<option value="1">JYES</option>
+				</field>
+				<field name="all_sales_iid" label="F_SALES_IID" type="menuitem">
+					<option value="">XML_OPTION_NOMENUITEM</option>
+				</field>
+				<field name="all_orders_link" type="radio" class="btn-group" default="1" label="F_ALLORDERSLINK">
+					<option value="0">JNO</option>
+					<option value="1">JYES</option>
+				</field>
+				<field name="all_orders_iid" label="F_ORDERS_IID" type="menuitem">
+					<option value="">XML_OPTION_NOMENUITEM</option>
+				</field>
+				<field name="show_order" type="list" default="3" label="F_SHOWORDERDETAILS">
+					<option value="0">XML_OPT_NO</option>
+					<option value="1">XML_OPT_LIST</option>
+					<option value="2">XML_OPT_FULL</option>
+					<option value="3">XML_OPT_BOTH</option>
+				</field>
+				<field name="send_mail" type="radio" class="btn-group" default="1" label="F_SENDMAIL" description="F_SENDMAIL_DESCR">
+					<option value="0">JNO</option>
+					<option value="1">JYES</option>
+				</field>
+				<field name="mail_msg" type="textarea" cols="50" rows="5" default="Hello, [USER].\n You have bought the product [PRODUCT] from [SALER]. You can follow the order here [ORDERS].\n\nRegards, [SITE_NAME]\n[SITE_URL]" label="F_EMAILMGS" description="F_EMAILMGS_DESCR" />
+				<field name="log" type="radio" class="btn-group" default="0" label="F_DEBUGLOD" description="Saved in joomla_root/logs/gateway/log.txt">
+					<option value="0">JNO</option>
+					<option value="1">JYES</option>
+				</field>
+				<field name="allow_gateway" type="accesslevel" default="2" label="F_WHOCANCHOOSEGATEWAY">
+					<option value="0">XML_OPT_NOONE</option>
+				</field>
+				<field type="cgateway" name="default_gateway" onchange="ajax_loadpayform(this)" required="required" label="F_DEFAULTGATEWAY" />
+			</fieldset>
+		</fields>
+	</config>
+</joomcckfield>

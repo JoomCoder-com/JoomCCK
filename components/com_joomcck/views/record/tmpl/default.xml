@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<metadata>
+	<layout title="CURLART">
+		<message>CURLARTDESCR</message>
+	</layout>
+	<fields name="request">
+		<fieldset name="request" label="CURLGP" addfieldpath="/administrator/components/com_joomcck/models/fields">
+			<field name="id" type="text" size="3" default="" label="CURLRECID" />
+		</fieldset>
+
+	</fields>
+	<fields name="params">
+		<fieldset name="basic" label="CURLRECGEN" addfieldpath="/libraries/mint/forms/fields">
+			<field label="CURLRECGENTEMP" name="tmpl_article" type="cobtmpls" default="" tmpltype="article" />
+		</fieldset>
+	</fields>
+</metadata>

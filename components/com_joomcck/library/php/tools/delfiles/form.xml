@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<form>
+    <fieldset name="delfiles">
+        <field type="list" name="deleted_articles" label="Deleted article" description="When article is deleted, or files in the article, files on the disk and in file regestry are not deleted, to be able to restore that article from version control. After apply this option, you may restore article but not its uploaded files." default="0">
+            <option value="1">JYES</option>
+            <option value="0">JNO</option>
+        </field>
+        <field type="list" name="unsaved_articles" label="Unsaved articles" description="Delete uploaded files on attempt to create article but finaly article has not been saved." default="0">
+            <option value="1">JYES</option>
+            <option value="0">JNO</option>
+        </field>
+        <field type="list" name="unlinked" label="Unlinked files" description="Look for all files on the disk and match against file registry. If in the registry bot not on th edisk, delete registry, if not on the registry but on the disk, delete file." default="0">
+            <option value="1">JYES</option>
+            <option value="0">JNO</option>
+        </field>
+    </fieldset>
+</form>

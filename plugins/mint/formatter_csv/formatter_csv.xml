@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension version="3.0" type="plugin" group="mint" method="upgrade">
+	<name>Joomcck - Plugin - Formatter - CSV</name>
+    <author>JoomBoost</author>
+    <creationDate>October 15 2012</creationDate>
+    <copyright>JoomBoost</copyright>
+    <license>GNU/GPL http://www.gnu.org/copyleft/gpl.html</license>
+    <authorEmail>support@joomBoost.com</authorEmail>
+    <authorUrl>https://www.joomBoost.com</authorUrl>
+	<version>8.28</version>
+	<description>
+	<![CDATA[ CSV formatter plugin for Joomcck 8 ]]>
+	</description>
+	<files>
+		<filename plugin="formatter_csv">formatter_csv.php</filename>
+		<folder>tmpl</folder>
+	</files>
+	<config>
+		<fields name="params">
+			<fieldset name="general" label="General">
+				<field name="strip_html" type="radio" class="btn-group" label="Srtip HTML tags from text" default="0">
+					<option value="0">No</option>
+					<option value="1">Yes</option>
+				</field>
+				<field name="download" type="radio" class="btn-group" label="Force Download" default="0">
+					<option value="0">No</option>
+					<option value="1">Yes</option>
+				</field>
+				<field name="enclosed" size="10" type="text" default="&quot;" label="Enclosure" />
+				<field name="delimiter" size="10" type="text" default="," label="Delimiter" />
+				<field name="field_format" type="radio" class="btn-group" label="Fields value format" default="0">
+					<option value="0">String</option>
+					<option value="1">JSON</option>
+				</field>
+				<field name="field_glue" size="10" type="text" default=", " label="Fields value glue" />
+                <field type="filelist" name="tmpl_list" filter="php$" hide_none="1" hide_default="1" directory="/plugins/mint/formatter_csv/tmpl/list" label="List template" default="csv.php" />
+                <field type="filelist" name="tmpl_full" filter="php$" hide_none="1" hide_default="1" directory="/plugins/mint/formatter_csv/tmpl/record" label="Full template" default="csv.php" />
+			</fieldset>
+		</fields>
+	</config>
+</extension>

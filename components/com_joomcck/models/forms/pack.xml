@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form>
+
+	<field name="id" type="text" default="0" label="ID" description="id" class="readonly" readonly="true" />
+
+	<field name="name" type="text" label="XFORM_PACKNAME" class="inputbox" size="40" required="true"/>
+
+	<field name="author_email" type="text" label="XFORM_PACKAUTHOREMAIL" class="inputbox" size="40" />
+	<field name="author_url" type="text" label="XFORM_PACKAUTHORURL" class="inputbox" size="40" />
+	<field name="author_name" type="text" label="XFORM_PACKAUTHORNAME" class="inputbox" size="40" />
+	<field name="copyright" type="text" label="XFORM_PACKCOPYRIGHT" class="inputbox" size="40" default="&amp;copy; 2012 - My company. All rights reserved." />
+
+	<field name="key" type="text" default="0" label="JGLOBAL_FIELD_KEY_LABEL" description="UNIQUE_PACK_KEY" class="readonly" readonly="true" filter="unset" />
+
+	<field name="version" type="text" default="0" label="JGLOBAL_FIELD_VERSION_LABEL" description="id" class="readonly" readonly="true" />
+
+	<field name="description" type="editor" filter="safehtml" label="CDESCR" class="inputbox" cols="40" rows="5"/>
+
+	<field name="checked_out" type="hidden" filter="unset" />
+
+	<field name="add_files" type="textarea" label="XML_LABEL_SP_ADDFILES" description="CADDFIELSDESCR" cols="65" rows="10" />
+
+	<field name="checked_out_time" type="hidden" filter="unset" />
+
+	<field name="ctime" type="text" label="JGLOBAL_CREATED_DATE" class="readonly" filter="unset" readonly="true" />
+
+	<field name="mtime" type="text" label="JGLOBAL_FIELD_MODIFIED_LABEL" class="readonly" filter="unset" readonly="true" />
+
+	<field name="addkey" type="radio" class="btn-group" default="0" label="XML_LABEL_SP_ADDKEY" description="CADDKEYDESCR">
+		<option value="0">CNO</option>
+		<option value="1">CYES</option>
+	</field>
+	<field name="demo" type="radio" class="btn-group" default="0" label="XML_LABEL_SP_DEMO" description="XML_LABEL_SP_DEMODESCR">
+		<option value="0">CNO</option>
+		<option value="1">CYES</option>
+	</field>
+	<field name="user" type="list" default="1" label="XML_LABEL_SP_USERS" description="CRECORD_AUTHORS">
+		<option value="1">CPACK_REPALCE_USR</option>
+		<option value="2">CPACK_MACH_REPLACE</option>
+		<option value="3">CPACK_MACH_CREATE</option>
+	</field>
+
+</form>

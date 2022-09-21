@@ -1,0 +1,1 @@
+{"fields":[{"name":"id","type":"int(10)","null":"NO","default":0},{"name":"field_id","type":"int(11)","null":"YES","default":0},{"name":"category_id","type":"int(11)","null":"YES","default":0},{"name":"record_id","type":"int(11)","null":"YES","default":0}],"primary":"id","engine":"MyISAM"}

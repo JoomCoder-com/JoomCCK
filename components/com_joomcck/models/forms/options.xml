@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form>
+	<field name="subscribe" id="subscribe" type="radio" class="btn-group" label="CSUBSCRTHISSEC" description="" size="1" default="1">
+		<option value="1">JYES</option>
+		<option value="0">JNO</option>
+	</field>
+	<field name="schedule" id="schedule" type="list" label="CEMAILSHEDULE" description="" class="inputbox" default="2">
+		<option value="0">C_OPT_SEND_NO</option>
+		<option value="1">C_OPT_SEND_IMMED</option>
+		<option value="2">C_OPT_SEND_DAY</option>
+		<option value="3">C_OPT_SEND_WEEK</option>
+		<option value="4">C_OPT_SEND_MONTH</option>
+		<option value="5">C_OPT_SEND_QUOT</option>
+	</field>
+	<field type="language" name="language" label="CALEERTLANG" class="inputbox" default="en-GB" />
+</form>

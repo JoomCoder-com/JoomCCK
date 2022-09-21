@@ -1,0 +1,13 @@
+.rating-container {
+	white-space: nowrap;
+}
+.table-rating {
+	width: 1% !important;
+}
+
+.input-append img { vertical-align: middle }
+
+.has-context .btn-group {
+    margin-bottom: -3px;
+    margin-top: -3px;
+}

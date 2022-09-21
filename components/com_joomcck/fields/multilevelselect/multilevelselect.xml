@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<joomcckfield>
+	<name>Multiple Level Select</name>
+	<group>Special Form Elements</group>
+
+	<config>
+		<fields name="params">
+			<fieldset name="tmpl">
+				<field type="cobtmpllist" name="template_input" onchange="ajax_load_sub_params(this, '/components/com_joomcck/fields/multilevelselect/tmpl/input');" filter="php$" hide_none="1" hide_default="1" directory="/components/com_joomcck/fields/multilevelselect/tmpl/input" label="F_TMPLINPUT" default="default.php" />
+				<field type="cobtmpllist" name="template_output_list" onchange="ajax_load_sub_params(this, '/components/com_joomcck/fields/multilevelselect/tmpl/output');" filter="php$" hide_none="1" hide_default="1" directory="/components/com_joomcck/fields/multilevelselect/tmpl/output" label="F_TMPLLIST" default="default.php" />
+				<field type="cobtmpllist" name="template_output_full" onchange="ajax_load_sub_params(this, '/components/com_joomcck/fields/multilevelselect/tmpl/output');" filter="php$" hide_none="1" hide_default="1" directory="/components/com_joomcck/fields/multilevelselect/tmpl/output" label="F_TMPLFULL" default="default.php" />
+			</fieldset>
+			<fieldset name="filter" label="FS_FILTERGEN">
+				<field name="filter_enable" type="mradio" condition='{"1":["params_params_template_filter","params_params_filter_hide","params_params_filter_descr","params_params_template_filter_module","fieldset-name-filter2"]}' class="btn-group" default="0" label="F_ENABLE" description="">
+					<option value="0">JNO</option>
+					<option value="1">JYES</option>
+				</field>
+				<field type="cobtmpllist" name="template_filter" onchange="ajax_load_sub_params(this, '/components/com_joomcck/fields/multilevelselect/tmpl/filter');" filter="php$" hide_none="1" hide_default="1" directory="/components/com_joomcck/fields/multilevelselect/tmpl/filter" label="F_TMPLFILTER" default="autocomplete.php" />
+				<field type="cobtmpllist" name="template_filter_module" onchange="ajax_load_sub_params(this, '/components/com_joomcck/fields/multilevelselect/tmpl/filter');" filter="php$" hide_none="1" hide_default="1" directory="/components/com_joomcck/fields/multilevelselect/tmpl/filter" label="F_TMPLFILTERMODULE" default="autocomplete.php" />
+				<field name="filter_hide" type="mradio" class="btn-group" default="0" label="F_HIDE" description="F_HIDE_DESCR">
+					<option value="0">JNO</option>
+					<option value="1">JYES</option>
+				</field>
+				<field name="filter_descr" type="text" default="" size="40" label="F_DESCR" description="" />
+			</fieldset>
+			<fieldset name="filter2" label="FS_FILTERFIELDSPEC">
+				<field name="filter_linkage" type="mlist" condition='{"not0":["params_params_filter_icon","params_params_filter_tip", "params_params_filter_show_number"]}' default="0" label="F_VALUELINKAGE" description="F_VALUELINKAGE_DESCR">
+					<option value="0">XML_OPT_NOFILTERLINK</option>
+					<option value="1">XML_OPT_VALUEASFLINK</option>
+					<option value="2">XML_OPT_SMALICONASFLINK</option>
+				</field>
+				<field name="filter_icon" type="imagelist" default="funnel-small.png" directory="/components/com_joomcck/images/filter/" label="F_ICON" description="F_ICON_DESCR" />
+				<field name="filter_tip" type="text" default="Show all records where %s is equal to %s" size="40" label="F_VALUETOOLTIP" description="F_VALUETOOLTIP_DESCR" />
+				<field name="filter_show_number" type="radio" class="btn-group" default="1" label="F_FBOXSHOWNUMS" description="F_FBOXSHOWNUMS_DESCR">
+					<option value="0">JNO</option>
+					<option value="1">JYES</option>
+				</field>
+			</fieldset>
+
+			<fieldset name="general" label="FS_GENERAL" addfieldpath="/components/com_joomcck/fields/multilevelselect/elements">
+				<field name="values" type="cmlsconstructor" label="F_VALUESCONSTRUCTOR" />
+				<field name="labels" type="textarea" label="F_LABELS" rows="3" cols="30"/>
+				<field name="sort" type="list" default="2" label="F_SORT" description="">
+					<option value="1">XML_OPT_ASENTERED</option>
+					<option value="2">XML_OPT_ACS</option>
+					<option value="3">XML_OPT_DESC</option>
+				</field>
+				<field name="childs_num" type="radio" class="btn-group" default="0" label="F_SHOWCHILDSNUM">
+					<option value="0">JNO</option>
+					<option value="1">JYES</option>
+				</field>
+				<field name="max_values" type="text" size="2" default="3" label="F_MAXVALUES" description="F_MAXVALUES_DESCR" />
+
+				<field name="min_levels_req" type="text" size="2" default="0" label="F_MINLEVELSREQUIED" description="F_MINLEVELSREQUIED_DESCR" />
+
+				<field name="separator" type="text" size="2" default=" - " label="F_LEVELSEPARATOR" description="F_LEVELSEPARATOR_DESCR" />
+			</fieldset>
+			
+			<fieldset name="users" label="FS_USERSVALUE">
+				<field name="add_value" type="maccesslevel" condition='{"not0":["params_params_user_value_label","params_params_max_levels","params_params_canedit"]}' default="0" label="F_WHOCANADD" description="F_WHOCANADD_DESCR">
+					<option value="0">XML_OPT_NOONE</option>
+				</field>
+				<field name="canedit" type="accesslevel" default="3" label="F_WHOEDIT">
+					<option value="0">XML_OPT_NOONE</option>
+				</field>
+				<field name="user_value_label" type="text" size="50" default="Your variant" label="F_USERVALUELABEL" description="" />
+				<field name="max_levels" type="text" size="2" default="3" label="F_MAXLEVELS" description="F_MAXLEVELS_DESCR" />
+			</fieldset>
+
+		</fields>
+
+	</config>
+</joomcckfield>

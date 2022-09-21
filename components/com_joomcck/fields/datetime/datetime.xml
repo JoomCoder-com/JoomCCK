@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<joomcckfield>
+	<name>Date And Time</name>
+	<group>Special Form Elements</group>
+
+	<config>
+		<fields name="params">
+			<fieldset name="tmpl">
+				<field type="cobtmpllist" name="template_input" onchange="ajax_load_sub_params(this, '/components/com_joomcck/fields/datetime/tmpl/input');" filter="php$" hide_none="1" hide_default="1" directory="/components/com_joomcck/fields/datetime/tmpl/input" label="F_TMPLINPUT" default="single_date_picker.php" />
+				<field type="cobtmpllist" name="template_output_list" onchange="ajax_load_sub_params(this, '/components/com_joomcck/fields/datetime/tmpl/output');" filter="php$" hide_none="1" hide_default="1" directory="/components/com_joomcck/fields/datetime/tmpl/output" label="F_TMPLLIST" default="list.php" />
+				<field type="cobtmpllist" name="template_output_full" onchange="ajax_load_sub_params(this, '/components/com_joomcck/fields/datetime/tmpl/output');" filter="php$" hide_none="1" hide_default="1" directory="/components/com_joomcck/fields/datetime/tmpl/output" label="F_TMPLFULL" default="list.php" />
+			</fieldset>
+
+			<fieldset name="core">
+				<field name="sortable" type="radio" class="btn-group" default="0" label="F_SORTABLE" description="">
+					<option value="0">JNO</option>
+					<option value="1">JYES</option>
+				</field>
+			</fieldset>
+			<fieldset name="filter" label="FS_FILTERGEN">
+				<field name="filter_enable" type="mradio" condition='{"1":["params_params_template_filter","params_params_filter_hide","params_params_filter_descr","params_params_template_filter_module","fieldset-name-filter2"]}' class="btn-group" default="0" label="F_ENABLE" description="">
+					<option value="0">JNO</option>
+					<option value="1">JYES</option>
+				</field>
+				<field type="cobtmpllist" name="template_filter" onchange="ajax_load_sub_params(this, '/components/com_joomcck/fields/datetime/tmpl/filter');" filter="php$" hide_none="1" hide_default="1" directory="/components/com_joomcck/fields/datetime/tmpl/filter" label="F_TMPLFILTER" default="single_date_picker.php" />
+				<field type="cobtmpllist" name="template_filter_module" onchange="ajax_load_sub_params(this, '/components/com_joomcck/fields/datetime/tmpl/filter');" filter="php$" hide_none="1" hide_default="1" directory="/components/com_joomcck/fields/datetime/tmpl/filter" label="F_TMPLFILTERMODULE" default="single_date_picker.php" />
+				<field name="filter_hide" type="mradio" class="btn-group" default="0" label="F_HIDE" description="F_HIDE_DESCR">
+					<option value="0">JNO</option>
+					<option value="1">JYES</option>
+				</field>
+				<field name="filter_descr" type="text" default="" size="40" label="F_DESCR" description="" />
+			</fieldset>
+
+			<fieldset name="filter2" label="FS_FILTERFIELDSPEC">
+				<field name="filter_format" type="mlist" condition='{"100":["params_params_filter_custom"]}' label="F_INPUTFORMAT" default="D MMMM YYYY" description="F_INPUTFORMAT_DESCR">
+					<option value="hh:mm A, dddd, d MMMM Y">12:46 AM, Tuesday, 30 December 2007</option>
+					<option value="dddd, D MMMM YYYY">Tuesday, 30 December 2007</option>
+					<option value="hh:mm A, D MMMM YYYY">12:46 AM, 30 December 2007</option>
+					<option value="hh:mm A, D MMM YYYY">12:46 AM, 30 Dec 2007</option>
+					<option value="hh:mm A, MMMM YYYY">12:46 AM, 30 December</option>
+					<option value="D MMMM YYYY">30 December 2007</option>
+					<option value="hh:mm A, D MMM YYYY">12:46 AM, 30 Dec 2007</option>
+					<option value="D MMM YYYY">30 Dec 2007</option>
+					<option value="D MMMM">30 December</option>
+					<option value="D MMM">30 Dec</option>
+					<option value="dddd">Tuesday</option>
+					<option value="100">XML_OPT_CUSTOM</option>
+				</field>
+				<field name="filter_custom" type="metext" label="F_CUSTOMFORMAT" prepend="You can see possible formats &lt;a href='https://momentjs.com/docs/#/displaying/format/' target='_blank'&gt;here&lt;/a&gt;&lt;br /&gt;" description="F_CUSTOMFORMAT_DESCR" />
+				<field name="filter_linkage" type="mlist" condition='{"1":["params_params_filter_tip"],"2":["params_params_filter_icon","params_params_filter_tip"]}' default="0" label="F_VALUELINKAGE" description="F_VALUELINKAGE_DESCR">
+					<option value="0">XML_OPT_NOFILTERLINK</option>
+					<option value="1">XML_OPT_VALUEASFLINK</option>
+					<option value="2">XML_OPT_SMALICONASFLINK</option>
+				</field>
+				<field name="filter_icon" type="imagelist" default="funnel-small.png" directory="/components/com_joomcck/images/filter/" label="F_ICON" description="F_ICON_DESCR" />
+				<field name="filter_tip" type="text" default="Show all records where %s is equal to %s" size="40" label="F_VALUETOOLTIP" description="F_VALUETOOLTIP_DESCR" />
+				<field name="filter_type" type="mlist" condition='{"100":["params_params_custom_input"]}' default="0" label="F_FILTER_TYPE" description="">
+					<option value="0">XML_OPT_FILT_SINGLE</option>
+					<option value="1">XML_OPT_FILT_FROM</option>
+					<option value="2">XML_OPT_FILT_TO</option>
+					<option value="3">XML_OPT_FILT_BETWEEN</option>
+				</field>
+			</fieldset>
+
+			<fieldset name="general" label="FS_INPUT">
+				<field name="input_default" type="mlist" condition='{"100":["params_params_custom_input"]}' default="0" label="F_INPUTSDEFAULT" description="">
+					<option value="0">XML_OPT_NOTHING</option>
+					<option value="now">XML_OPT_NOW</option>
+					<option value="1 day">XML_OPT_DAY</option>
+					<option value="1 month">XML_OPT_MONTH</option>
+					<option value="1 year">XML_OPT_YEAR</option>
+					<option value="100">XML_OPT_CUSTOM</option>
+				</field>
+				<field name="custom_input" type="text" default="" label="F_INPUTCUSTOM" description="F_INPUTCUSTOM_DESCR" />
+
+				<field name="format" type="mlist" condition='{"100":["params_params_custom"]}' label="F_INPUTFORMAT" default="D MMMM YYYY" description="F_INPUTFORMAT_DESCR">
+					<option value="hh:mm A, dddd, d MMMM Y">12:46 AM, Tuesday, 30 December 2007</option>
+					<option value="dddd, D MMMM YYYY">Tuesday, 30 December 2007</option>
+					<option value="hh:mm A, D MMMM YYYY">12:46 AM, 30 December 2007</option>
+					<option value="hh:mm A, D MMM YYYY">12:46 AM, 30 Dec 2007</option>
+					<option value="hh:mm A, MMMM YYYY">12:46 AM, 30 December</option>
+					<option value="D MMMM YYYY">30 December 2007</option>
+					<option value="hh:mm A, D MMM YYYY">12:46 AM, 30 Dec 2007</option>
+					<option value="D MMM YYYY">30 Dec 2007</option>
+					<option value="D MMMM">30 December</option>
+					<option value="D MMM">30 Dec</option>
+					<option value="dddd">Tuesday</option>
+					<option value="100">XML_OPT_CUSTOM</option>
+				</field>
+				<field name="custom" type="metext" label="F_CUSTOMFORMAT" prepend="You can see possible formats &lt;a href='https://momentjs.com/docs/#/displaying/format/' target='_blank'&gt;here&lt;/a&gt;&lt;br /&gt;" description="F_CUSTOMFORMAT_DESCR" />
+
+				<field name="field_id_type" key="id" type="meresourcesfields" size="1" multiple="false" label="F_FIELDWITHEVENTTYPE" description="F_FIELDWITHEVENTTYPEDESCR" filters="'select'"/>
+				<field name="max_dates" type="text" label="F_MAX_DATE" description="F_MAX_DATE_DESCR" default="0" />
+				<field name="min_dates" type="text" label="F_MIN_DATE" description="F_MIN_DATE_DESCR" default="0" />
+			</fieldset>
+			<fieldset name="override" label="FS_OVERRIDE" description="">
+				<field name="ovr_ctime" type="mradio" condition='{"1":["params_params_ctime_add"]}' class="btn-group" label="F_OVERRIDERECORDCTIME" default="0" description="">
+					<option value="0">JNO</option>
+					<option value="1">JYES</option>
+				</field>
+				<field name="ctime_add" type="text" default="" label="F_CTIMEMODIFYVAL" description="F_CTIMEMODIFYVAL_DESCR" />
+				<field name="ovr_extime" type="mradio" condition='{"1":["params_params_extime_add"]}' class="btn-group" label="F_OVERRIDERECORDEXTIME" default="0" description="">
+					<option value="0">JNO</option>
+					<option value="1">JYES</option>
+				</field>
+				<field name="extime_add" type="text" default="" label="F_EXTIMEMODIFYVAL" description="F_EXTIMEMODIFYVAL_DESCR" />
+			</fieldset>
+
+
+			<fieldset name="output" label="FS_OUTPUT">
+				<field name="format_out" type="mlist" condition='{"100":["params_params_custom_out"]}' label="F_FORMAT" default="d M Y" description="">
+					<option value="h:i A, l, d F Y">12:46 AM, Tuesday, 30 December 2007</option>
+					<option value="l, d F Y">Tuesday, 30 December 2007</option>
+					<option value="h:i A, d F Y">12:46 AM, 30 December 2007</option>
+					<option value="h:i A, d M Y">12:46 AM, 30 Dec 2007</option>
+					<option value="h:i A, F Y">12:46 AM, 30 December</option>
+					<option value="d F Y">30 December 2007</option>
+					<option value="h:i A, d M">12:46 AM, 30 Dec</option>
+					<option value="d M Y">30 Dec 2007</option>
+					<option value="d F">30 December</option>
+					<option value="d M">30 Dec</option>
+					<option value="l">Tuesday</option>
+					<option value="100">XML_OPT_CUSTOM</option>
+				</field>
+				<field name="custom_out" type="metext" label="F_CUSTOMFORMAT" prepend="You can see characters list &lt;a href='http://php.net/manual/en/function.date.php' target='_blank'&gt;here&lt;/a&gt;&lt;br /&gt;" description="" />
+			</fieldset>
+		</fields>
+	</config>
+</joomcckfield>

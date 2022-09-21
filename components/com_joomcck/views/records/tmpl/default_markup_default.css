@@ -1,0 +1,42 @@
+.alpha-index {
+	text-align: center;
+}
+
+.alpha-index .label-warning {
+	cursor: pointer;
+}
+
+.alpha-index .alpha-set {
+	margin: 5px 0;
+}
+.filter-worns .alert {
+	white-space: nowrap;
+	margin-right: 10px;
+	text-align: left;
+}
+
+.filter-worns .alert div {
+	font-weight: bold;
+	font-size: 105%;
+	margin-top: 1px;
+}
+
+.control-box .badge {
+	margin-left: 5px;
+}
+
+.avatar {
+	text-align: center;
+	vertical-align: middle;
+}
+#cnav .navbar-inner {
+	padding-left: 0px;
+    padding-right: 5px;
+}
+.pagination .pagination-list li {
+	float: left;
+	padding: 0px !important;
+}
+.tab-content {
+    overflow: visible;
+}

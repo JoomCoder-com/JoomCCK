@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<metadata>
+	<layout title="CSALERSALES">
+		<message>CSALERSALESDESCR</message>
+	</layout>
+	<fields name="params">
+		<fieldset name="form" label="CURLSETTAD">
+			<field name="allow_users" type="text" default="42" label="CUSERIDSWHOCANSEEALLSALES" description="CUSERIDSWHOCANSEEALLSALESDESCR" />
+		</fieldset>
+	</fields>
+</metadata>

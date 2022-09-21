@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form>
+	<fields name="pay">
+		<fieldset name="public" label="2CheckOut Options">
+			<field name="allow_vendor" type="accesslevel" default="2" label="Who can enter Vendor code" >
+				<option value="0">No one</option>
+			</field>
+			<field name="default_vendor" type="text" default="" label="Default Vendor code" />
+			<field name="allow_amount" type="radio" class="btn-group" default="0" description="Used for donations" label="Buyers can change amount">
+				<option value="0">No</option>
+				<option value="1">Yes</option>
+			</field>
+			<field name="default_amount" type="text" default="10" description="Used for donations" size="3" label="Default amount" />
+			<field name="allow_count" type="radio" class="btn-group" default="0" label="Buyers can change quantity">
+				<option value="0">No</option>
+				<option value="1">Yes</option>
+			</field>
+			<field name="default_count" type="text" default="1" size="3" label="Default quantity" />
+			
+			<field name="allow_lang" type="accesslevel" default="2" label="Who can enter Process language" >
+				<option value="0">No one</option>
+			</field>
+			<field name="default_lang" type="list" default="en" label="Default process language" >
+				<option value="zh">Chinese</option>
+				<option value="da">Danish</option>
+				<option value="nl">Dutch</option>
+				<option value="en">English</option>
+				<option value="fr">French</option>
+				<option value="gr">German</option>
+				<option value="el">Greek</option>
+				<option value="it">Italian</option>
+				<option value="jp">Japanese</option>
+				<option value="no">Norwegian</option>
+				<option value="pt">Portuguese</option>
+				<option value="sl">Slovenian</option>
+				<option value="es_ib">Spanish (European)</option>
+				<option value="es_la">Spanish (Latin)</option>
+				<option value="sv">Swedish</option>
+			</field>
+			<field name="allow_sword" type="accesslevel" default="2" label="Who can enter Secret word" >
+				<option value="0">No one</option>
+			</field>
+			<field name="default_sword" type="text" default="" label="Default Secret word" description="This is secret word that you can set in 2CO admin area under Look &amp; Feel area to secure check the payment" />
+			
+			<field name="allow_currency" type="accesslevel" default="2" label="Who can select currentcy sign">
+				<option value="0">No one</option>
+			</field>
+			<field name="default_currency" type="list" default="USD" label="Default currency" description="This field is not related to 2CheckOut currency. For payment process there would be used currency set in vendor's 2Checkout profile">
+				<option value="AUD">Australian Dollar (AUD)</option>
+				<option value="BRL">Brazilian Real (BRL)</option>
+				<option value="CAD">Canadian Dollar (CAD)</option>
+				<option value="CZK">Czech Koruna (CZK)</option>
+				<option value="DKK">Danish Krone (DKK)</option>
+				<option value="EUR">Euro (EUR)</option>
+				<option value="HKD">Hong Kong Dollar (HKD)</option>
+				<option value="HUF">Hungarian Forint (HUF)</option>
+				<option value="ILS">Israeli New Sheqel (ILS)</option>
+				<option value="JPY">Japanese Yen (JPY)</option>
+				<option value="MYR">Malaysian Ringgit (MYR)</option>
+				<option value="MXN">Mexican Peso (MXN)</option>
+				<option value="NOK">Norwegian Krone (NOK)</option>
+				<option value="NZD">New Zealand Dollar (NZD)</option>
+				<option value="PHP">Philippine Peso (PHP)</option>
+				<option value="PLN">Polish Zloty (PLN)</option>
+				<option value="GBP">Pound Sterling (GBP)</option>
+				<option value="SGD">Singapore Dollar (SGD)</option>
+				<option value="SEK">Swedish Krona (SEK)</option>
+				<option value="CHF">Swiss Franc (CHF)</option>
+				<option value="TWD">Taiwan New Dollar (TWD)</option>
+				<option value="THB">Thai Baht (THB)</option>
+				<option value="TRY">Turkish Lira (TRY)</option>
+				<option value="USD">U.S. Dollar (USD)</option>
+			</field>
+			
+			<field name="allow_coupon" type="accesslevel" default="2" label="Who can set coupon">
+				<option value="0">No one</option>
+			</field>
+			
+			<field name="allow_block" type="accesslevel" default="2" label="Who can set Block pending results" >
+				<option value="0">No one</option>
+			</field>
+			<field name="default_block" type="list" default="0" label="Block Pending Result by default" description="Do not automatically activate transactions that rturned pending(not approved) state. note, this will require you manually activate orders on receivein aproval confirmation.">
+				<option value="0">No</option>
+				<option value="1">Yes</option>
+			</field>
+			
+	        <field name="demo" type="list" default="0" label="Demo mode" description="Switch Mode to demo for testing perpose.">
+				<option value="0">No</option>
+				<option value="1">Yes</option>
+			</field>
+		</fieldset>
+	</fields>
+</form>

@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="utf-8"?>
+<form>
+	<name>Default</name>
+	<author>JoomBoost</author>
+	<creationDate>Febrary 2012</creationDate>
+	<copyright>Copyright (C) 2005 - 2012 JoomBoost. All rights reserved.</copyright>
+	<license>Commercial (https://www.joomBoost.com/commercial-license)</license>
+	<authorEmail>support@joomBoost.com</authorEmail>
+	<authorUrl>www.JoomBoost.com</authorUrl>
+	<version>8.44</version>
+	<description>Template Submission form</description>
+
+	<fields name="tmpl_params">
+		<fieldset name="general" label="General">
+			<field name="form_grouping_type" type="list" label="X_GROUPTIPE"  default="1" description="X_GROUPTIPE_DESCR">
+				<option value="0">X_GRONOTGROUP</option>
+				<option value="1">X_GROTABS</option>
+				<option value="4">X_GROVTABS</option>
+				<option value="2">X_GRESLID</option>
+				<option value="3">X_GROFIELDSET</option>
+			</field>
+			<field label="LTCATEGORYSELECT" name="tmpl_category" type="cobtmpls" default="default" tmpltype="categoryselect" />
+			<field name="css" type="textarea" rows="10" cols="39"  default="" label="X_CUSTOMCSS" />
+			<field name="tab_main" type="text" default="Main" label="X_TABMAIN" />
+			<field name="tab_main_descr" type="textarea" rows="10" cols="39"  default="" label="X_TABMAINDESCR" />
+		</fieldset>
+	</fields>
+	<fields name="tmpl_core">
+		<fieldset name="main" label="CGENERAL">
+			<field name="form_heading" type="radio" class="btn-group" label="X_HOWHEAD"  default="1">
+				<option value="0">CNO</option>
+				<option value="1">CYES</option>
+			</field>
+			<field name="form_heading_text" type="text" class="btn-group" label="X_HOWHEADTEXT"  default="" />
+			<field name="form_captcha" type="radio" class="btn-group" label="X_SHOWCAPTCHAPUBLIC"  default="1">
+				<option value="0">CNO</option>
+				<option value="1">CYES</option>
+			</field>
+			<field name="form_public_alert" type="text" label="X_FORMPUALERT"  default="You are not registerd. You will not be able to edit your post later."/>
+
+		</fieldset>
+		<fieldset name="maini" label="Icons">
+			<field name="item_icon_title_icon" type="fieldicon" default="edit.png" label="Record title icon" />
+			<field name="form_title_icon" type="radio" class="btn-group" label="X_SHOWTITLEICON"  default="1">
+				<option value="0">CNO</option>
+				<option value="1">CYES</option>
+			</field>
+			<field name="form_tags_icon" type="radio" class="btn-group" label="X_SHOWTAGICON"  default="1">
+				<option value="0">CNO</option>
+				<option value="1">CYES</option>
+			</field>
+			<field name="form_anywhere_icon" type="radio" class="btn-group" label="X_SHOWAWICON"  default="1">
+				<option value="0">CNO</option>
+				<option value="1">CYES</option>
+			</field>
+			<field name="form_anywhere_who_icon" type="radio" class="btn-group" label="X_SHOWREPOICON"  default="1">
+				<option value="0">CNO</option>
+				<option value="1">CYES</option>
+			</field>
+			<field name="form_category_icon" type="radio" class="btn-group" label="X_SHOWCATICON"  default="1">
+				<option value="0">CNO</option>
+				<option value="1">CYES</option>
+			</field>
+			<field name="form_extime_icon" type="radio" class="btn-group" label="X_SHOWEXTIMEICON"  default="1">
+				<option value="0">CNO</option>
+				<option value="1">CYES</option>
+			</field>
+			<field name="form_ctime_icon" type="radio" class="btn-group" label="X_SHOWCTIMEICON"  default="1">
+				<option value="0">CNO</option>
+				<option value="1">CYES</option>
+			</field>
+			<field name="form_hidden_icon" type="radio" class="btn-group" label="X_SHOW_HIDDENICON"  default="1">
+				<option value="0">CNO</option>
+				<option value="1">CYES</option>
+			</field>
+			<field name="item_icon_fields" type="radio" class="btn-group" default="1" label="Fields Icons" description="">
+				<option value="0">CNO</option>
+				<option value="1">CYES</option>
+			</field>
+		</fieldset>
+		<fieldset name="shows" label="CSHOWFIELDS">
+			<field name="form_show_ctime" type="accesslevel" default="3" label="CCTIME"  >
+				<option value="0">Do not show</option>
+			</field>
+			<field name="form_show_extime" type="accesslevel" default="3" label="CEXTIME" >
+				<option value="0">Do not show</option>
+			</field>
+			<field name="form_show_ftime" type="accesslevel" default="3" label="CFTIME" >
+				<option value="0">Do not show</option>
+			</field>
+			<field name="form_show_hidden" type="accesslevel" default="3" label="CHIDEUNHIDE" >
+				<option value="0">Do not show</option>
+			</field>
+			<field name="form_show_langs" type="accesslevel" default="3" label="CLANGUAGE" >
+				<option value="0">Do not show</option>
+			</field>
+			<field name="form_show_votes" type="accesslevel" default="0" label="CVOTENUM" >
+				<option value="0">Do not show</option>
+			</field>
+			<field name="form_show_hits" type="accesslevel" default="0" label="CHITS" >
+				<option value="0">Do not show</option>
+			</field>
+			<field name="form_show_ip" type="accesslevel" default="0" label="CIP" >
+				<option value="0">Do not show</option>
+			</field>
+			<field name="form_show_votes_result" type="accesslevel" default="0" label="CVOTERES" >
+				<option value="0">Do not show</option>
+			</field>
+			<field name="form_show_featured" type="accesslevel" default="3" label="CFEATURED" >
+				<option value="0">Do not show</option>
+			</field>
+			<field name="form_show_user_id" type="accesslevel" default="3" label="CAUTHOR" >
+				<option value="0">Do not show</option>
+			</field>
+			<field name="form_show_archive" type="accesslevel" default="3" label="CARCHIVEFIELD" >
+				<option value="0">Do not show</option>
+			</field>
+			<field name="form_show_access" type="accesslevel" default="3" label="CACCESSFIELD" >
+				<option value="0">Do not show</option>
+			</field>
+			<field name="form_show_published" type="accesslevel" default="3" label="CPUBLISHEDF" >
+				<option value="0">Do not show</option>
+			</field>
+		</fieldset>
+		<fieldset name="seo" label="CCEOFIELDS">
+			<field name="form_show_meta_descr" type="accesslevel" default="2" label="CMETADESCRF" >
+				<option value="0">Do not show</option>
+			</field>
+			<field name="form_show_meta_key" type="accesslevel" default="2" label="CMETAKEYF" >
+				<option value="0">Do not show</option>
+			</field>
+			<field name="form_show_meta_robots" type="accesslevel" default="2" label="CROPOTFILDS" >
+				<option value="0">Do not show</option>
+			</field>
+			<field name="form_show_alias" type="accesslevel" default="2" label="CALIASFIELD" >
+				<option value="0">Do not show</option>
+			</field>
+		</fieldset>
+		<fieldset name="bshows" label="Show Buttons">
+			<field name="form_show_apply_button" type="accesslevel" label="X_SHOWAPPLYB"  default="1">
+				<option value="0">Do not show</option>
+			</field>
+			<field name="form_show_save_button" type="accesslevel" label="X_SHOWSAVEB"  default="1">
+				<option value="0">Do not show</option>
+			</field>
+			<field name="form_show_savenew_button" type="accesslevel" label="X_SHOWSAVENEWB"  default="1">
+				<option value="0">Do not show</option>
+			</field>
+			<field name="form_show_savecopy_button" type="accesslevel" label="X_SHOWSAVECOPY"  default="1">
+				<option value="0">Do not show</option>
+			</field>
+			<field name="form_show_close_button" type="accesslevel" label="X_SHOWCLOSEB"  default="1">
+				<option value="0">Do not show</option>
+			</field>
+			<field name="form_button_position" type="list" label="X_BUTTONPOSITION" default="3">
+				<option value="1">CTOP</option>
+				<option value="2">CBOTTOM</option>
+				<option value="3">CTOPBOTTOM</option>
+			</field>
+		</fieldset>
+
+		<fieldset name="labels" label="CFIELDLABELS">
+			<field name="form_label_title" type="text" default="Title" label="CTITLE"  size="40" />
+			<field name="form_label_anywhere" type="text" default="Where to post" label="CWHEERTOPOST"  size="40" />
+			<field name="form_label_anywhere_who" type="text" default="Who can repost" label="X_SHOWREPOICON"  size="40" />
+			<field name="form_label_ctime" type="text" default="Start from" label="CCTIME"  size="40" />
+			<field name="form_label_extime" type="text" default="End on" label="CEXTIME"  size="40" />
+			<field name="form_label_ftime" type="text" default="Featured expire on" label="CFTIME"  size="40" />
+			<field name="form_label_hidden" type="text" default="Do you want to hide this record?" label="CHIHEUNHIDE"  size="40" />
+			<field name="form_label_langs" type="text" default="Language" label="CLANGUAGE"  size="40" />
+			<field name="form_label_votes" type="text" default="Votes" label="CVOTES"  size="40" />
+			<field name="form_label_hits" type="text" default="Hits" label="CHITS"  size="40" />
+			<field name="form_label_ip" type="text" default="IP Address" label="CIP"  size="40" />
+			<field name="form_label_votes_result" type="text" default="Vote value" label="CVOTERES"  size="40" />
+			<field name="form_label_featured" type="text" default="Is Featured" label="CFEATURED"  size="40" />
+			<field name="form_label_user_id" type="text" default="Author" label="CAUTHOR"  size="40" />
+			<field name="form_label_archive" type="text" default="Archive" label="CARCHIVE"  size="40" />
+			<field name="form_label_access" type="text" default="Access" label="CACCESS"  size="40" />
+			<field name="form_label_published" type="text" default="Published" label="CPUBLISHED"  size="40" />
+			<field name="form_label_category" type="text" default="Category" label="CCATEGORY"  size="40" />
+			<field name="form_label_tags" type="text" default="Tags" label="CTAGS"  size="40" />
+		</fieldset>
+
+		<fieldset name="blabels" label="Button Labels">
+			<field name="form_label_apply_button" type="text" default="Apply" label="CAPPLY"  size="40" />
+			<field name="form_label_save_button" type="text" default="Save &amp; Close" label="CSAVECLOSE"  size="40" />
+			<field name="form_label_savenew_button" type="text" default="Save &amp; New" label="CSAVENEW"  size="40" />
+			<field name="form_label_savecopy_button" type="text" default="Save as Copy" label="CCOPY"  size="40" />
+			<field name="form_label_close_button" type="text" default="Cancel" label="CCANCEL"  size="40" />
+		</fieldset>
+
+
+	</fields>
+</form>

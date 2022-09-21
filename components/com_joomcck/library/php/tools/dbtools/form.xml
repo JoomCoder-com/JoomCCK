@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<form>
+    <fieldset name="dbtools" label="DB Tools">
+        <field type="list" name="db_action" label="Operation" description="" default="1" required="true">
+            <option value="1">OPTIMIZE</option>
+            <option value="2">REPAIR</option>
+            <option value="3">ANALYZE</option>
+            <option value="4">TRUNCATE (empty)</option>
+            <option value="5">CHECK</option>
+        </field>
+        <field type="medbtables" name="db_tables" label="Tables" description="" default="" multiple="multiple" size="20"
+               required="true"/>
+    </fieldset>
+</form>

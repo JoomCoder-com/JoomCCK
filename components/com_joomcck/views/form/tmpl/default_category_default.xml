@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<form>
+	<name>Default</name>
+	<author>JoomBoost</author>
+	<creationDate>Febrary 2012</creationDate>
+	<copyright>Copyright (C) 2005 - 2012 JoomBoost. All rights reserved.
+	</copyright>
+	<license>Commercial (https://www.joomBoost.com/commercial-license)
+	</license>
+	<authorEmail>support@joomBoost.com</authorEmail>
+	<authorUrl>www.JoomBoost.com</authorUrl>
+	<version>8.21</version>
+	<description>Template Category select</description>
+
+	<fields name="tmpl_params">
+		<fieldset name="general">
+			<field name="single_catselect_size" type="text" size="2" default="1" label="CCATSELECTSIZESINGLE" description="CCATSELECTSIZESINGLEDESC"/>
+			<field name="multiple_catselect_size" type="text" size="2" default="20" label="CCATSELECTSIZEMULTI" description="CCATSELECTSIZEMILTIDESC"/>
+			<field name="cat_ordering" type="list" label="CORDERING" default="c.lft ASC">
+				<option value="c.lft ASC">CORDERING</option>
+				<option value="c.title ASC">CORDERNAMEASC</option>
+				<option value="c.title DESC">CORDERNAMEDESC</option>
+			</field>
+			<field name="first_element" type="text" default="- Select Category -" label="CCATFERSTELEMENT" />
+		</fieldset>
+	</fields>
+	<fields name="tmpl_core">
+		<fieldset name="general2">
+			<field name="category_label" type="radio" class="btn-group" label="CSHOWLABEL" default="1">
+				<option value="0">CNO</option>
+				<option value="1">CYES</option>
+			</field>
+		</fieldset>
+	</fields>
+</form>

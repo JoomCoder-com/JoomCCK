@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<fieldparams>
+    <form>
+        <fields name="tmpl_simple_select">
+			<fieldset name="years" label="F_YEARS">
+				<field name="year_up" type="text" size="3" label="F_YEARSUP" default="80" description="" />
+				<field name="year_down" type="text" size="3" label="F_YEARSDOWN" default="15" />
+			</fieldset>
+        </fields>
+    </form>
+</fieldparams>

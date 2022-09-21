@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form>
+	<field id="id" name="id" type="text" default="0"
+		label="ID" readonly="true" class="readonly" />
+	<field id="title" name="title" type="textarea" default="" label="CTITLE" required="true" filter="safeHtml" />
+	<field id="description" name="description" type="editor" label="CDESCR"
+		class="inputbox" filter="safehtml"/>
+	<field id="ordering" name="ordering" type="orderinggroups" class="inputbox"
+		label="CORDERING" />
+
+	<field name="type_id" type="hidden" />
+	<field name="icon" label="CGROUPICON" type="fieldicon" />
+	<field name="checked_out" type="hidden" filter="unset" />
+	<field name="checked_out_time" type="hidden" filter="unset" />
+</form>

@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<joomcckfield>
+	<name>Textarea</name>
+	<group>Simple Form Elements</group>
+
+	<config><fields name="params">
+		<fieldset name="tmpl">
+			<field type="cobtmpllist" name="template_input" onchange="ajax_load_sub_params(this, '/components/com_joomcck/fields/textarea/tmpl/input');" filter="php$" hide_none="1" hide_default="1" directory="/components/com_joomcck/fields/textarea/tmpl/input" label="F_TMPLINPUT" default="default.php" />
+			<field type="cobtmpllist" name="template_output_list" onchange="ajax_load_sub_params(this, '/components/com_joomcck/fields/textarea/tmpl/output');" filter="php$" hide_none="1" hide_default="1" directory="/components/com_joomcck/fields/textarea/tmpl/output" label="F_TMPLLIST" default="default.php" />
+			<field type="cobtmpllist" name="template_output_full" onchange="ajax_load_sub_params(this, '/components/com_joomcck/fields/textarea/tmpl/output');" filter="php$" hide_none="1" hide_default="1" directory="/components/com_joomcck/fields/textarea/tmpl/output" label="F_TMPLFULL" default="default.php" />
+		</fieldset>
+		<fieldset name="core">
+			<field name="sortable" type="radio" class="btn-group" default="0" label="F_SORTABLE" description="">
+				<option value="0">JNO</option>
+				<option value="1">JYES</option>
+			</field>
+		</fieldset>
+
+		<fieldset name="general" label="FS_GENERAL">
+			<field name="default_value" type="textarea" label="F_DEFAULTVALUE"  rows="2" cols="35" description="F_DEFAULTVALUE_DESCR" />
+			<field name="placeholder" type="text" label="F_PLACEHOLDER" />
+			<field name="intro" type="text" default="0" label="F_LIMITINLIST" description="F_LIMITINLIST_DESCR" />
+			<field name="seemore" type="text" default="..." label="F_HIDDENTXT"  />
+            <field name="prepare" type="radio" class="btn-group" default="1" label="F_PREPARE">
+                <option value="0">JNO</option>
+                <option value="1">JYES</option>
+            </field>
+            <field name="mention" type="radio" class="btn-group" default="1" label="F_MENTION" description="F_MENTIONDESCR">
+                <option value="0">JNO</option>
+                <option value="1">JYES</option>
+            </field>
+		</fieldset>
+
+		<fieldset name="format" label="FS_FORMATF">
+			<field name="height" type="text" default="300px" label="F_HEIGHT" description="F_HEIGHT_DESCR" />
+		</fieldset>
+		<fieldset name="limit" label="FS_ENTERLIMIT">
+			<field name="maxlen" type="text" default="0" size="3" label="F_MAXLENGTH" description="F_MAXLENGTH_DESCR" />
+			<field name="minlen" type="text" default="0" size="3" label="F_MINLENGTH" />
+			<field name="notify" type="radio" class="btn-group" default="1" label="F_HOWMANYCAHRSLEFT">
+				<option value="0">JNO</option>
+				<option value="1">JYES</option>
+			</field>
+			<field name="symbols_left_msg" type="text" size="40" default="There are (%s) characters left of %d allowed" label="F_NOTIFYTEXT" description="F_NOTIFYTEXT_DESCR" />
+		</fieldset>
+		<fieldset name="grow" label="FS_GROWINPUT">
+			<field name="grow_enable" type="radio" class="btn-group" default="1" label="F_GROWENABLE" description="F_GROWENABLE_DESCR">
+				<option value="0">JNO</option>
+				<option value="1">JYES</option>
+			</field>
+			<field name="grow_max_height" type="text" default="350" label="F_GROWMAXHEIGHT" description="F_GROWMAXHEIGHT_DESCR" />
+			<!--<field name="grow_min_height" type="text" default="50" label="F_GROWMINHEIGHT" description="F_GROWMINHEIGHT_DESCR" />-->
+		</fieldset>
+		<fieldset label="FS_BBCODE" name="bb">
+	        <field name="bbcode" type="radio" class="btn-group" default="0" label="F_USEBBCODE" description="">
+				<option value="0">JNO</option>
+				<option value="1">JYES</option>
+			</field>
+	        <field name="bbcode_menu" type="radio" class="btn-group" default="0" label="F_SHOWBBCODEMENU" description="">
+				<option value="0">JNO</option>
+				<option value="1">JYES</option>
+			</field>
+			<field name="bbcode_text" type="text" size="40" default="We understand BBcode" label="F_BBCODETXT" />
+			<field name="bbcode_text_show" type="radio" class="btn-group" default="1" label="F_SHOWBBCODETXT" description="">
+				<option value="0">JNO</option>
+				<option value="1">JYES</option>
+			</field>
+			<field name="bbcode_attr" type="text" default="rel='nofollow'" label="F_LINKATTR" description="" />
+		</fieldset>
+		<fieldset label="FS_MARKDOWN" name="output_filter">
+			<field name="markdown" type="radio" class="btn-group" default="1" label="F_USEMARKDOWN" description="">
+				<option value="0">JNO</option>
+				<option value="1">JYES</option>
+			</field>
+			<field name="markdown_text" type="text" size="40" default="We understand markdown" label="F_MARKDOWNTXT" />
+			<field name="markdown_text_show" type="radio" class="btn-group" default="1" label="F_SHOWMARKDOWNTXT" description="">
+				<option value="0">JNO</option>
+				<option value="1">JYES</option>
+			</field>
+		</fieldset>
+		<fieldset label="FS_HTML" name="input_filter" description="FS_HTML_DESCR">
+	        <field name="allow_html" type="list" default="2" label="F_ALLOWHTML" description="">
+				<option value="0">JNO</option>
+				<option value="1">XML_OPT_ALLOWALL</option>
+				<option value="2">XML_OPT_ALLOWALLBUTFILTER</option>
+			</field>
+			<field name="tags_mode" type="list" default="1" label="F_FILTERTAGSMODE" description="">
+				<option value="0">XML_OPT_WHITELIST</option>
+				<option value="1">XML_OPT_BLACKLIST</option>
+			</field>
+			<field type="textarea" cols="35" rows="2" name="filter_tags"  label="F_FILTERTAGSLIST" default="iframe, script"  description="F_FILTERTAGSLIST_DESCR"/>
+
+			<field name="attr_mode" type="list" default="1" label="F_FILTERATTRSMODE" description="">
+				<option value="0">XML_OPT_WHITELIST</option>
+				<option value="1">XML_OPT_BLACKLIST</option>
+			</field>
+			<field type="textarea" cols="35" rows="2" name="filter_attr"  label="F_FILTERATTRSLIST" default="" description="F_FILTERATTRSLIST_DESCR" />
+		</fieldset>
+
+
+	</fields>
+
+</config></joomcckfield>

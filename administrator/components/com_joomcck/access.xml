@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<access component="com_joomcck">
+	<section name="component">
+		<action name="core.manage" title="JACTION_MANAGE" description="JACTION_MANAGE_COMPONENT_DESC" />
+		<!-- <action name="core.admin" title="JACTION_ADMIN" description="JACTION_ADMIN_COMPONENT_DESC" />
+		<action name="core.create" title="JACTION_CREATE" description="JACTION_CREATE_COMPONENT_DESC" />
+		<action name="core.delete" title="JACTION_DELETE" description="JACTION_DELETE_COMPONENT_DESC" />
+		<action name="core.edit" title="JACTION_EDIT" description="JACTION_EDIT_COMPONENT_DESC" />
+		<action name="core.edit.state" title="JACTION_EDITSTATE" description="JACTION_EDITSTATE_COMPONENT_DESC" /> -->
+	</section>
+	<!-- <section name="type">
+		<action name="core.create" title="JACTION_CREATE" description="COM_CATEGORIES_ACCESS_CREATE_DESC" />
+		<action name="core.delete" title="JACTION_DELETE" description="COM_CATEGORIES_ACCESS_DELETE_DESC" />
+		<action name="core.edit" title="JACTION_EDIT" description="COM_CATEGORIES_ACCESS_EDIT_DESC" />
+		<action name="core.edit.state" title="JACTION_EDITSTATE" description="COM_CATEGORIES_ACCESS_EDITSTATE_DESC" />
+		<action name="core.edit.own" title="JACTION_EDITOWN" description="COM_CATEGORIES_ACCESS_EDITOWN_DESC" />
+		<action name="core.field.create" title="JACTION_FIELDCREATE" description="JACTION_FIELDCREATEDESC" />
+		<action name="core.field.delete" title="JACTION_FIELDDELETE" description="JACTION_FIELDDELETEDESC" />
+		<action name="core.field.edit" title="JACTION_FIELDEDIT"  description="JACTION_FIELDEDITDESC" />
+		<action name="core.field.edit.state" title="JACTION_FIELDEDITSTATE" description="JACTION_FIELDEDITSTATEDESC" />
+		<action name="core.field.edit.own" title="JACTION_FIELDEDITOWN" description="JACTION_FIELDEDITOWNDESC" />
+		<action name="core.field.edit.article" title="JACTION_FIELDEDITART" default="1" description="JACTION_FIELDEDITARTDESC" />
+		<action name="core.field.view" title="JACTION_FIELDVIEW" description="JACTION_FIELDVIEWDESC" />
+		<action name="core.field.display" title="JACTION_FIELDDISPLAY" description="JACTION_FIELDDISPLAYDESC" />
+		<action name="core.field.submit" title="JACTION_FIELDSUBMIT" description="JACTION_FIELDSUBMITDESC" />
+	</section>
+	<section name="category">
+		<action name="core.create" title="JACTION_CREATE" description="JACTION_CREATE_COMPONENT_DESC" />
+		<action name="core.delete" title="JACTION_DELETE" description="JACTION_DELETE_COMPONENT_DESC" />
+		<action name="core.edit" title="JACTION_EDIT" description="JACTION_EDIT_COMPONENT_DESC" />
+		<action name="core.edit.state" title="JACTION_EDIT_STATE" description="JACTION_EDIT_STATE_COMPONENT_DESC" />
+	</section>
+	<section name="filters">
+		<action name="core.delete" title="JACTION_DELETE" description="JACTION_DELETE_COMPONENT_DESC" />
+		<action name="core.edit" title="JACTION_EDIT" description="JACTION_EDIT_COMPONENT_DESC" />
+		<action name="core.edit.state" title="JACTION_EDIT_STATE" description="JACTION_EDIT_STATE_COMPONENT_DESC" />
+	</section>
+	<section name="field">
+		<action name="core.delete" title="JACTION_DELETE" description="JACTION_DELETE_COMPONENT_DESC" />
+		<action name="core.edit" title="JACTION_EDIT" description="JACTION_EDIT_COMPONENT_DESC" />
+		<action name="core.edit.state" title="JACTION_EDIT_STATE" description="JACTION_EDIT_STATE_COMPONENT_DESC" />
+		<action name="core.view" title="JACTION_VIEW_STATE" description="JACTION_VIEW_STATE_COMPONENT_DESC" />
+		<action name="core.submit" title="JACTION_SUBMIT_STATE" description="JACTION_SUBMIT_STATE_COMPONENT_DESC" />
+	</section> -->
+</access>

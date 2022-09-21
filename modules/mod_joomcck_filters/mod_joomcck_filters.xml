@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension type="module" version="3.0" client="site" method="upgrade">
+	<name>Joomcck - Module - Filters</name>
+	<author>JoomBoost</author>
+	<creationDate>March 2012</creationDate>
+	<copyright>Copyright (C) 2005 - 2012 JoomBoost (https://www.joomBoost.com). All rights reserved.</copyright>
+	<license>GNU/GPL http://www.gnu.org/copyleft/gpl.html</license>
+	<authorEmail>support@joomBoost.com</authorEmail>
+	<authorUrl>https://www.joomBoost.com</authorUrl>
+	<version>8.59</version>
+	<description><![CDATA[ Joomcck - Filters ]]></description>
+	<files>
+		<filename module="mod_joomcck_filters">mod_joomcck_filters.php</filename>
+		<filename>index.html</filename>
+		<folder>tmpl/</folder>
+	</files>
+	<config>
+		<fields name="params">
+			<fieldset label="General" name="general" addfieldpath="/libraries/mint/forms/fields/">
+				<field name="section_id" type="meresourcessection" default="" label="Select section" description="Select the Home section which will for this module." />
+				<field name="show_icons" type="radio" class="btn-group" default="1" label="Show field icons">
+					<option value="0">No</option>
+					<option value="1">Yes</option>
+				</field>
+				<field name="form_hide" type="radio" class="btn-group" default="1" label="Hide on new article form">
+					<option value="0">No</option>
+					<option value="1">Yes</option>
+				</field>
+				<field name="field_id_exclude" type="meresourcesfields" key="id" size="15" multiple="true" default="" label="Fields to exclude" />
+				<field name="filter_fields_template" type="radio" class="btn-group" default="module" label="Choose fields template" description="Each Type Field has a Section and a Module template setting. Choose either for this module.">
+					<option value="module">Module</option>
+					<option value="section">Section (non module)</option>
+				</field>
+				<field name="filter_search" type="radio" class="btn-group" default="1" label="text search">
+					<option value="0">No</option>
+					<option value="1">Yes</option>
+				</field>
+				<field name="filter_type_type" type="list" default="1" label="Content type">
+					<option value="0">- No filter -</option>
+					<option value="1">Checkboxes</option>
+					<option value="2">Select</option>
+				</field>
+				<field name="filter_users_type" type="list" default="1" label="Users">
+					<option value="0">- No filter -</option>
+					<option value="1">Autocomplete</option>
+					<option value="2">Checkboxes</option>
+					<option value="3">Select</option>
+				</field>
+				<field name="filter_category_type" type="list" default="1" label="Categories">
+					<option value="0">- No filter -</option>
+					<option value="1">Autocomplete</option>
+					<option value="2">Checkboxes</option>
+					<option value="3">Select</option>
+					<option value="4">Multiple Select</option>
+				</field>
+				<field name="filter_empty_cats" type="radio" class="btn-group" default="1" label="Show empty categories" description="If No can reduce performance!">
+					<option value="0">No</option>
+					<option value="1">Yes</option>
+				</field>
+				<field name="filter_tags_type" type="list" default="1" label="Tags">
+					<option value="0">- No filter -</option>
+					<option value="1">Autocomplete</option>
+					<option value="2">Checkboxes</option>
+					<option value="3">Select</option>
+					<option value="4">Tag Cloud</option>
+				</field>
+				<field name="layout" type="modulelayout" label="JFIELD_ALT_LAYOUT_LABEL" description="JFIELD_ALT_MODULE_LAYOUT_DESC" />
+				<field name="type_label" type="text" size="40" default="Content Type" label="Content type" />
+				<field name="user_label" type="text" size="40" default="Author" label="Users" />
+				<field name="category_label" type="text" size="40" default="Category" label="Categories" />
+				<field name="tag_label" type="text" size="40" default="Tags" label="Tags" />
+			</fieldset>
+			<fieldset name="advanced">
+				<field name="moduleclass_sfx" type="text" label="COM_MODULES_FIELD_MODULECLASS_SFX_LABEL" description="COM_MODULES_FIELD_MODULECLASS_SFX_DESC" />
+				<field name="cache" type="list" default="0" label="COM_MODULES_FIELD_CACHING_LABEL" description="COM_MODULES_FIELD_CACHING_DESC">
+					<option value="0">COM_MODULES_FIELD_VALUE_NOCACHING</option>
+				</field>
+			</fieldset>
+		</fields>
+	</config>
+</extension>

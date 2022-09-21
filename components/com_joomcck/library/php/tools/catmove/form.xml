@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<form>
+    <fieldset name="catmove" addfieldpath="/libraries/mint/forms/fields/">
+        <field name="section_id" type="meresourcessection" default="" alias="1" label="Within Section" global="0" append=""/>
+        <field name="cat_from" type="text" label="From category ID" />
+        <field name="cat_to" type="text" label="To category ID" />
+    </fieldset>
+</form>

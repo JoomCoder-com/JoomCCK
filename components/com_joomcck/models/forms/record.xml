@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<form>
+
+	<field id="title" name="title" onchange="Joomcck.fieldError('title');" type="text" label="JGLOBAL_TITLE" description="JFIELD_TITLE_DESC" class="span12" size="30" required="true" />
+
+	<field id="published" name="published" type="list" label="JSTATUS" description="JFIELD_PUBLISHED_DESC" class="inputbox" size="1" default="1">
+		<option value="1">JPUBLISHED</option>
+		<option value="0">JUNPUBLISHED</option>
+	</field>
+
+	<field id="archive" name="archive" type="list" label="JSTATUS" description="JFIELD_PUBLISHED_DESC" class="inputbox" size="1" default="0">
+		<option value="1">archive</option>
+		<option value="0">unarchive</option>
+	</field>
+
+	<field id="featured" name="featured" type="list" label="JGLOBAL_FIELD_FEATURED_LABEL" description="JGLOBAL_FIELD_FEATURED_DESC" class="inputbox" default="0">
+		<option value="0">JNO</option>
+		<option value="1">JYES</option>
+	</field>
+
+	<field id="hidden" name="hidden" type="list" label="JGLOBAL_FIELD_HIDDEN_LABEL" description="JGLOBAL_FIELD_HIDDEN_DESC" class="inputbox" default="0">
+		<option value="0">JNO</option>
+		<option value="1">JYES</option>
+	</field>
+	<field id="whorepost" name="whorepost" type="list" label="JGLOBAL_FIELD_HOREPOST" description="JGLOBAL_FIELD_HIDDEN_DESC" class="inputbox" default="2">
+		<option value="0">CHRNONE</option>
+		<option value="1">CHRFOLLOWER</option>
+		<option value="2">CHRANYONE</option>
+	</field>
+
+	<field id="ucatid" name="ucatid" type="meusercategories" required="true" label="JFIELD_USERCATEGORIES_LABEL"  />
+
+	<field id="ctime" name="ctime" type="calendar" filter="user_utc" format="%Y-%m-%d %H:%M:%S"/>
+	<field id="extime" name="extime" type="calendar" label="JGLOBAL_FIELD_PUBLISH_DOWN_LABEL" description="JGLOBAL_FIELD_PUBLISH_DOWN_DESC" class="inputbox" format="%Y-%m-%d %H:%M:%S" size="22" filter="user_utc" />
+	<field id="ftime" name="ftime" type="calendar" label="JGLOBAL_FIELD_FEATURED_DOWN_LABEL" description="JGLOBAL_FIELD_FEATURED_DOWN_DESC" class="inputbox" format="%Y-%m-%d %H:%M:%S" size="22" filter="user_utc" />
+	<field id="mtime" name="mtime" type="calendar" filter="user_utc"/>
+
+	<field id="hits" name="hits" type="text" label="JFIELD_HITS_LABEL" description="JFIELD_HITS_DESC" class="inputbox" size="10" />
+	<field id="votes" name="votes" type="text" label="JFIELD_VOTES_LABEL" description="JFIELD_VOTES_DESC" class="inputbox" size="10" />
+	<field id="votes_result" name="votes_result" type="text" label="JFIELD_VOTES_RESULT_LABEL" description="JFIELD_VOTES_RESULT_DESC" class="inputbox" size="10" />
+
+	<field name="langs" type="language" default="en-GB" label="JFIELD_LANGUAGE_LABEL" description="JFIELD_LANGUAGE_DESC" class="inputbox">
+		<option value="*">JALL</option>
+	</field>
+
+	<field id="meta_key" name="meta_key" type="textarea" label="JFIELD_META_KEYWORDS_LABEL" description="JFIELD_META_KEYWORDS_DESC" class="span12" rows="5" cols="50" />
+	<field id="meta_descr" name="meta_descr" type="textarea" label="JFIELD_META_DESCRIPTION_LABEL" description="JFIELD_META_DESCRIPTION_DESC" class="span12" rows="5" cols="50" />
+	<field id="meta_index" name="meta_index" type="list" label="JFIELD_META_INDEX_LABEL" description="JFIELD_META_INDEX_DESC" class="span12" >
+		<option value="">JGLOBAL_USE_GLOBAL</option>
+		<option value="index, follow">Allow search engines index this article</option>
+		<option value="noindex, nofollow">Disallow search engines index this article</option>
+	</field>
+	<field id="alias" name="alias" type="text" label="JFIELD_ALIAS_LABEL" class="span12"/>
+
+	<field id="exalert" name="exalert" type="text" label="JFIELD_EXALERT_LABEL" description="JFIELD_EXALERT_DESC" class="inputbox"  />
+	<field id="access_key" name="access_key" type="text" label="JFIELD_ACCESS_KEY_LABEL" description="JFIELD_ACCESS_KEY_DESC" class="inputbox"  />
+	<field id="categories" name="categories" type="text" label="JFIELD_CATEGORIES_LABEL" description="JFIELD_CATEGORIES_DESC" class="inputbox"  />
+	<field id="fieldsdata" name="fieldsdata" type="text" label="JFIELD_FIELDSDATA_LABEL" description="JFIELD_FIELDSDATA_DESC" class="inputbox"  />
+	<field id="tags" name="tags" type="metags" label="Tags" description="" class="inputbox"  />
+	<field id="access" name="access" type="accesslevel" label="JFIELD_ACCESS_LABEL" description="JFIELD_ACCESS_DESC" class="inputbox" size="1" />
+	<!-- <field name="captcha" type="captcha" label="Captcha" required="true"/>
+	<field name="hidecaptcha" type="hidden" value="1" /> -->
+
+	<field name="captcha" type="captcha" label="COM_JOOMCCK_CAPTCHA_LABEL" description="COM_JOOMCCK_CAPTCHA_DESC"	validate="captcha"/>
+
+	<field id="id" name="id" type="hidden" default="0"/>
+	<field id="type_id" name="type_id" type="hidden"  />
+	<field id="multirating" name="multirating" label="Multirating" type="text"  />
+	<field id="fields" name="fields" type="hidden"  />
+	<field id="category" name="category" type="hidden"  />
+	<field id="section_id" name="section_id" type="hidden"  />
+	<field id="user_id" name="user_id" type="meuser"  />
+	<field id="asset_id" name="asset_id" type="text" filter="unset" />
+	<field name="ip" type="text"  readonly="true" class="readonly" />
+
+	<field name="checked_out" type="hidden" filter="unset" />
+	<field name="checked_out_time" type="hidden" filter="unset" />
+</form>

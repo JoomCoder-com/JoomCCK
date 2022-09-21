@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension version="3.0" type="plugin" group="content" method="upgrade">
+	<name>Content - Glossary</name>
+	<creationDate>27 July 2011</creationDate>
+	<author>Mighty Extensions</author>
+	<authorEmail>support@mightyextensions.com</authorEmail>
+	<authorUrl>http://www.mightyextensions.com</authorUrl>
+	<copyright>Copyright Mighty Extensions</copyright>
+	<license>License, for example GNU/GPL</license>
+	<version>8.19</version>
+	<description>This plugin allow you to turn Mighty resources section
+		into glossary. In Mighty resources you create section and add articles
+		there, that will be glossary list. Then in this plugin you select that
+		section	and all words will be highlighted, linked and tooltiped. Good 
+		is you can have public glossary list on the site, and even allow other 
+		users to submit new glossary elements. Note: You need turn on 
+		glossary plugin in HTML field. Glossary works only in HTML field.
+	</description>
+	<files>
+		<filename plugin="glossary">glossary.php</filename>
+	</files>
+	<updateservers>
+		<server type="extension" priority="2" name="JoomBoost Update Server">http://JoomBoost.com/updates/glossary.xml</server>
+	</updateservers>
+	<config>
+		<fields name="params">
+			<fieldset name="basic" addfieldpath="/libraries/mint/forms/fields">
+				<field name="categories" type="meresourcessection" label="Source Sections" description="" />
+				<field name="types" type="meresourcestype" label="Limit by type" multi="1" />
+				<field name="field" type="meresourcesfields" filters="'html','text','textarea','radio','select','checkbox','multipleselect','listautocomplete'" label="Description Field"/>
+				<field name="link" type="list" default="0" label="Link"
+					description="Create link to full article. Do not suggest to use it. May slow down site.">
+					<option value="0">Do not use</option>
+					<option value="1">Use</option>
+					<option value="2">Use with hits nums</option>
+				</field>
+				<field name="css" rows="3" cols="40" type="textarea" default="cursor:pointer; background-color:yellow; text-decoration:underline;"
+					label="CSS" description="How to highlight found words" />
+			</fieldset>
+		</fields>
+	</config>
+</extension>

@@ -1,0 +1,1 @@
+{"fields":[{"name":"id","type":"int(10)","null":"NO","default":0},{"name":"name","type":"varchar(255)","null":"NO","default":""},{"name":"code2","type":"varchar(2)","null":"NO","default":""},{"name":"code3","type":"varchar(3)","null":"NO","default":""},{"name":"phone_code","type":"varchar(10)","null":"NO","default":""}],"primary":"id","engine":"MyISAM"}

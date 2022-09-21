@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<form>
+	<field name="id" type="text" default="0" label="ID" description="id" class="readonly" readonly="true" />
+
+	<field name="pack_id" type="hidden" />
+
+	<field name="section_id" type="cpacksections" label="CSECTION" required="true"/>
+
+	<fields name="params">
+		<fieldset name="params" label="XML_LABEL_COPYSECTIONTEMPLATES" >
+			<field name="tmpl_markup" type="radio" class="btn-group" default="1" label="XML_LABEL_SP_MARKUP" >
+				<option value="0">CNO</option>
+				<option value="1">CYES</option>
+			</field>
+			<field name="tmpl_list" type="radio" default="1" class="btn-group"
+				label="XML_LABEL_SP_LIST" >
+				<option value="0">CNO</option>
+				<option value="1">CYES</option>
+			</field>
+			<field name="tmpl_category" type="radio" class="btn-group" default="1"
+				label="XML_LABEL_SP_CATINDEX">
+				<option value="0">CNO</option>
+				<option value="1">CYES</option>
+			</field>
+			<field name="tmpl_compare" type="radio" class="btn-group" default="1" label="XML_LABEL_SP_COMPARE">
+				<option value="0">CNO</option>
+				<option value="1">CYES</option>
+			</field>
+		</fieldset>
+	</fields>
+</form>

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<fieldparams>
+	<form>
+		<fields name="tmpl_list">
+			<fieldset name="years" label="F_YEARS">
+				<field name="type" type="list" condition='{"2":["params_tmpl_list_delimiter"]}' class="input" label="F_TYPE_OF_LIST" default="1" description="">
+					<option value="1">XML_OPT_UL_LIST</option>
+					<option value="2">XML_OPT_SEPARATOR</option>
+				</field>
+				<field name="delimiter" type="text" label="F_LISTDELIMITER" default=", " />
+			</fieldset>
+		</fields>
+	</form>
+</fieldparams>

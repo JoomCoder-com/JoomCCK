@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form>
+	<field id="published" name="published" type="list" label="JSTATUS" description="JFIELD_PUBLISHED_DESC" class="inputbox" size="1" default="-1">
+		<option value="-1">NOCHANGE</option>
+		<option value="1">JPUBLISHED</option>
+		<option value="0">JUNPUBLISHED</option>
+	</field>
+	<field id="featured" name="featured" type="list" label="JGLOBAL_FIELD_FEATURED_LABEL" description="JGLOBAL_FIELD_FEATURED_DESC" class="inputbox" default="-1">
+		<option value="-1">NOCHANGE</option>
+		<option value="0">JNO</option>
+		<option value="1">JYES</option>
+	</field>
+	<field id="ctime" name="ctime" type="calendar" label="CCTIME" filter="user_utc" format="%Y-%m-%d %H:%M:%S"/>
+	<field id="extime" name="extime" type="calendar" label="CEXTIME" description="JGLOBAL_FIELD_PUBLISH_DOWN_DESC" class="inputbox" format="%Y-%m-%d %H:%M:%S" size="22" filter="user_utc" />
+	<field id="ftime" name="ftime" type="calendar" label="CFTIME" description="JGLOBAL_FIELD_FEATURED_DOWN_DESC" class="inputbox" format="%Y-%m-%d %H:%M:%S" size="22" filter="user_utc" />
+	<field id="mtime" name="mtime" type="calendar" label="CMTIME" filter="user_utc"/>
+	<field name="langs" type="language" default="-1" label="JFIELD_LANGUAGE_LABEL" description="JFIELD_LANGUAGE_DESC" class="inputbox">
+		<option value="-1">NOCHANGE</option>
+		<option value="*">JALL</option>
+	</field>
+	<field id="meta_key" name="meta_key" type="textarea" label="JFIELD_META_KEYWORDS_LABEL" description="JFIELD_META_KEYWORDS_DESC" class="span12" rows="5" cols="50" />
+	<field id="meta_descr" name="meta_descr" type="textarea" label="JFIELD_META_DESCRIPTION_LABEL" description="JFIELD_META_DESCRIPTION_DESC" class="span12" rows="5" cols="50" />
+	<field id="meta_index" name="meta_index" type="list" default="-1" label="JFIELD_META_INDEX_LABEL" description="JFIELD_META_INDEX_DESC" class="span12" >
+		<option value="-1">NOCHANGE</option>
+		<option value="index, follow">Allow search engines index this article</option>
+		<option value="noindex, nofollow">Disallow search engines index this article</option>
+	</field>
+	<field id="access" name="access" type="accesslevel" label="JFIELD_ACCESS_LABEL" description="JFIELD_ACCESS_DESC" class="inputbox" default="-1" size="1">
+		<option value="-1">NOCHANGE</option>
+	</field>
+	<field id="user_id" label="CUSER" name="user_id" type="meuser"  />
+</form>

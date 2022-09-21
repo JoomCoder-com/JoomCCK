@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<joomcckfield>
+	<name>Image</name>
+	<group>Media Form Elements</group>
+	
+	<config>
+		<fields name="params">
+			<fieldset name="tmpl">
+				<field type="cobtmpllist" name="template_input" onchange="ajax_load_sub_params(this, '/components/com_joomcck/fields/image/tmpl/input');" filter="php$" hide_none="1" hide_default="1" directory="/components/com_joomcck/fields/image/tmpl/input" label="F_TMPLINPUT" default="default.php" />
+				<field type="cobtmpllist" name="template_output_list" onchange="ajax_load_sub_params(this, '/components/com_joomcck/fields/image/tmpl/output');" filter="php$" hide_none="1" hide_default="1" directory="/components/com_joomcck/fields/image/tmpl/output" label="F_TMPLLIST" default="list.php" />
+				<field type="cobtmpllist" name="template_output_full" onchange="ajax_load_sub_params(this, '/components/com_joomcck/fields/image/tmpl/output');" filter="php$" hide_none="1" hide_default="1" directory="/components/com_joomcck/fields/image/tmpl/output" label="F_TMPLFULL" default="full.php" />
+			</fieldset>
+			<fieldset name="general" label="FS_GENERAL">
+				<field name="select_type" type="list" default="0" label="F_IMGSOURCE" description="F_IMGTYPE_DESCR">
+					<option value="2">XML_OPT_UPLOAD</option>
+					<option value="0">XML_OPT_INITDIRECTORY</option>
+					<option value="1">XML_OPT_JOOMLAMEDIAMNG</option>
+			  	</field>
+				<field name="formats" type="text" size="40" label="F_FORMATS" default="png,jpg,gif,jpeg" description=""/>
+				<field name="directory" type="text" size="40" label="F_INITDIRECTORY" default="images" description=""/>
+			  	<field name="show_subfolders" type="radio" class="btn-group" default="0" label="F_SUBFOLDER">
+					<option value="0">JNO</option>
+					<option value="1">JYES</option>
+			  	</field>
+			  	<field name="allow_caption" type="radio" class="btn-group" default="0" label="F_ALLOWSEIMGCAPTION" description="F_ALLOWSEIMGCAPTION_DESCR">
+					<option value="0">JNO</option>
+					<option value="1">JYES</option>
+			  	</field>
+        		<field name="default_img" type="media" size="40" default="" label="F_DEFAULTPATH" description="F_DEFAULTPATH_DESCR" />
+        		<field type="text" name="subfolder" label="F_SPECSUBFOLDER" description="F_SPECSUBFOLDER_DESCR" default="image" />
+			</fieldset>
+
+			<fieldset name="thumbs_list" label="FS_LISTVIEW" description="">
+				<field name="list_mode" type="radio" class="btn-group" default="1" label="F_IMGSIZE" description="">
+					<option value="0">XML_OPT_ORIGINAL</option>
+					<option value="1">XML_OPT_RESIZED</option>
+				</field>
+				<field name="lightbox_list" type="radio" class="btn-group" default="0" label="F_ALLOWLIGHTBOX" description="">
+					<option value="0">JNO</option>
+					<option value="1">JYES</option>
+			  	</field>
+				<field name="img_list_hspace" type="text" size="3" default="0" label="F_HSPACE" description="" />
+        		<field name="img_list_vspace" type="text" size="3" default="0" label="F_VSPACE" description="" />
+				<field name="thumbs_list_height" type="text" default="100" size="3" label="F_THUMBHEIGHT" description=""/>
+				<field name="thumbs_list_width" type="text" default="100" size="3" label="F_THUMBWIDTH" description=""/>
+				<field name="thumbs_list_quality" type="text" default="80" size="3" label="F_THUMBQUALITY" description=""/>
+				<field name="thumbs_list_mode" type="mepictureresize" default="6" label="F_THUMBRESIZEMODE" description="">
+					<option value="1">XML_OPT_CROP</option>
+					<option value="2">XML_OPT_FIT</option>
+					<option value="3">XML_OPT_FULL</option>
+					<option value="6">XML_OPT_PROPORTIONAL</option>
+					<option value="4">XML_OPT_WIDTHBASED</option>
+					<option value="5">XML_OPT_HEIGHTBASED</option>
+				</field>
+				<field name="thumbs_list_stretch" type="radio" class="btn-group" default="0" label="F_STRETCHIFSMALLER" description="">
+					<option value="0">JNO</option>
+					<option value="1">JYES</option>
+				</field>
+				<field name="thumbs_list_bg" type="text" size="5" default="#000000" label="F_THUMBBG" />
+				
+			</fieldset>
+			<fieldset name="thumbs2" label="FS_FULLVIEW" description="">
+				<field name="full_mode" type="radio" class="btn-group" default="0" label="F_IMGSIZE" description="">
+					<option value="0">XML_OPT_ORIGINAL</option>
+					<option value="1">XML_OPT_RESIZED</option>
+				</field>
+				<field name="lightbox_full" type="radio" class="btn-group" default="0" label="F_ALLOWLIGHTBOX" description="F_ALLOWLIGHTBOX_DESCR">
+					<option value="0">JNO</option>
+					<option value="1">JYES</option>
+			  	</field>
+				<field name="img_hspace" type="text" size="3" default="0" label="F_HSPACE" description="" />
+        		<field name="img_vspace" type="text" size="3" default="0" label="F_VSPACE" description="" />
+				<field name="thumbs_height" type="text" default="100" size="3" label="F_RESIZEHEIGHT" description="" />
+				<field name="thumbs_width" type="text" default="100" size="3" label="F_RESIZEWIDTH" description=""/>
+				<field name="thumbs_quality" type="text" default="80" size="3" label="F_RESIZEQUALITY" description=""/>
+				<field name="thumbs_mode" type="mepictureresize" default="6" label="F_RESIZEMODE" description="">
+					<option value="1">XML_OPT_CROP</option>
+					<option value="2">XML_OPT_FIT</option>
+					<option value="3">XML_OPT_FULL</option>
+					<option value="6">XML_OPT_PROPORTIONAL</option>
+					<option value="4">XML_OPT_WIDTHBASED</option>
+					<option value="5">XML_OPT_HEIGHTBASED</option>
+				</field>
+				<field name="thumbs_stretch" type="radio" class="btn-group" default="0" label="F_FULLSTRETCHIFSMALLER" description="">
+					<option value="0">JNO</option>
+					<option value="1">JYES</option>
+				</field>
+				<field name="thumbs_bg" type="text" size="5" default="#000000" label="F_THUMBBG" />
+			</fieldset>
+		</fields>
+	</config>
+</joomcckfield>

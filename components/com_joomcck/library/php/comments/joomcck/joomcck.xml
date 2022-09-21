@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<form>
+    <name>Joomcck - Types as comments</name>
+    <fields name="comments">
+        <fieldset name="comments">
+            <field name="section_id" type="csectionstypess" required="true" type_elem_name="types" default=""
+                   label="Select section" description="Select the Home section where to store comments."/>
+            <field name="type_id" type="mertype" required="true" label="Content type"/>
+            <field label="Force Category" name="catid" type="text" size="3" default="" description="Insert category Id or IDs separated by coma to limit submission. Only those categories will be allowed."/>
+        </fieldset>
+        <fieldset name="params" label="Parameters">
+            <field type="filelist" name="layout" filter="php$" hide_none="1" hide_default="1" directory="/components/com_joomcck/library/php/comments/joomcck/layouts" label="Layout" default="default.php" />
+            <field name="access" type="accesslevel" default="1" label="Who can see comments block" />
+            <field label="Description" name="descr" type="textarea" default=""/>
+            <field label="Title" name="title" type="text" size="40" default="Comments"/>
+            <field label="All Title" name="title2" type="text" size="40" default="All discussions of %s"/>
+            <field label="Button All" name="button2" type="text" size="40" default="Show all discussions"/>
+            <field name="button_access" type="accesslevel" default="1" label="Who can see New comment button" >
+                <option value="0">Do not show</option>
+                <option value="-1">Only article author</option>
+            </field>
+            <field label="New comment button label" name="button" type="text" size="40" default="Start new discussion"/>
+			<field name="new_position" type="list" default="2" label="New comment button position">
+				<option value="1">Top</option>
+				<option value="2">Bottom</option>
+				<option value="3">Both</option>
+			</field>
+            <field label="New comment button class" name="new_class" type="text" size="40" default="btn btn-primary btn-large"/>
+
+			<field name="author_add" type="radio" class="btn-group" default="1" label="Allow author of article to add comments">
+				<option value="0">No</option>
+				<option value="1">Yes</option>
+			</field>
+			<field name="author_see" type="radio" class="btn-group" default="1" label="Allow author of article to see special comments by others">
+				<option value="0">No</option>
+				<option value="1">Yes</option>
+			</field>
+            <field label="Allow author message" name="author_add_msg" type="text" size="40" default="You cannot submit comments to your own articles."/>
+            <field label="Comments disabled" name="comdisabled" type="text" size="40" default="You cannot add new comment. Comments are disabled for this article."/>
+        </fieldset>
+        <fieldset name="list" label="Comments List">
+            <field name="orderby" type="list" default="r.ctime DESC" label="Primary Order">
+                <option value="r.ctime ASC">Oldest first</option>
+                <option value="r.ctime DESC">Most recent first</option>
+                <option value="r.mtime DESC">Last Modified First</option>
+                <option value="r.mtime ASC">First Modified First</option>
+                <option value="r.title ASC">Title Alphabetical</option>
+                <option value="r.title DESC">Title Reverse-Alphabetical</option>
+                <option value="name ASC">Author Alphabetical</option>
+                <option value="name DESC">Author Reverse-Alphabetical</option>
+                <option value="r.hits DESC">Most Hits</option>
+                <option value="r.hits ASC">Least Hits</option>
+                <option value="r.votes_result DESC">Most Rated</option>
+                <option value="r.votes_result ASC">Least Rated</option>
+                <option value="r.comments DESC">Most Commented</option>
+                <option value="r.comments ASC">Least Commented</option>
+                <option value="r.favorite_num DESC">Most Favorited</option>
+                <option value="r.favorite_num ASC">Least Favorited</option>
+                <option value="RAND() ">Random</option>
+            </field>
+            <field label="Template overwrite" name="tmpl_list" type="cobtmpls" default="default" exclude="calendar"
+                   description="Template to display list of articles. The changes takes effect only after relogin or session cleanup"
+                   tmpltype="itemlist">
+                <option value="">X_DONOTOVERRIDETMPL</option>
+            </field>
+            <field label="Limit" name="limit" type="text" size="3" default="10"/>
+        </fieldset>
+        <fieldset name="rating" label="Average Rating">
+            <field name="rating" type="radio" class="btn-group" default="1" label="Calculate average rating">
+                <option value="0">No</option>
+                <option value="1">Yes</option>
+            </field>
+            <field label="Rating template" name="tmpl_rating" type="cobtmpls" default="default" tmpltype="rating"/>
+        </fieldset>
+        <fieldset name="limits" label="Limits Per User">
+            <field label="Limit per user per article" name="user_limit" type="text" size="3" default="0"
+                   description="How many comments same user may add for the same parent article. Might be unlimited if discussions and only one if reviews."/>
+            <field label="Limit message" name="limit_msg" type="text" size="3"
+                   default="You may add only one review per listing. And you had added one already. Please edit your review if you want."/>
+            <field name="limit_redirect" type="radio" class="btn-group" default="1"
+                   label="Redirect to edit if only 1 allowed.">
+                <option value="0">No</option>
+                <option value="1">Yes</option>
+            </field>
+        </fieldset>
+    </fields>
+</form>

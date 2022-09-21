@@ -1,0 +1,43 @@
+.flow-drop.flow-dragover {
+	border: 2px #62c462 dashed;
+	background-color: #f1fff1;
+}
+.flow-drop {
+	padding: 15px;
+	border: 2px #f1f1f1 dashed;
+	border-radius: 5px;
+}
+.flow-size {
+	text-wrap: nowrap;
+}
+.flow-info {
+	position: absolute;
+	background-color: aqua;
+	top: 0;
+	right: 0;
+}
+.flow-progress-file {
+	position: absolute;
+	bottom: 0;
+	right: 0;
+	width: 100%;
+	height: 5px !important;
+	margin-bottom: 0px !important;
+}
+.flow-progress-file .bar {
+	height: 5px;
+}
+.flow-files {
+	display: flex;
+	justify-content: space-around;
+	flex-direction: row;
+	margin: 5px 0;
+}
+.flow-files .flow-files-item {
+	flex-grow: 1;
+	margin: 0 5px;
+}
+.flow-progress-buttons {
+	text-align: right;
+	margin-bottom: 5px;
+}

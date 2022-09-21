@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<fieldparams>
+	<form>
+		<fields name="tmpl_countdown">
+			<fieldset name="years" label="F_YEARS">
+				<field name="elapse" type="mradio" class="btn-group" label="F_CD_ELAPCE" default="0" description="">
+					<option value="0">JNO</option>
+					<option value="1">JYES</option>
+				</field>
+				<field name="cd_format" type="mlist" condition='{"100":["params_tmpl_countdown_cd_custom"]}' class="input" label="F_CD_FORMAT" default="" description="">
+					<option value="%d days %H hr %M min %S sec">%d days %H hr %M min %S sec</option>
+					<option value="%d days %H:%M:%S">%d days %H:%M:%S</option>
+					<option value="%H:%M:%S">%H:%M:%S</option>
+					<option value="100">XML_OPT_CUSTOM</option>
+				</field>
+				<field name="cd_custom" type="metext" label="F_CUSTOMFORMAT" prepend="You can see characters list &lt;a href='http://hilios.github.io/jQuery.countdown/documentation.html#formatter' target='_blank'&gt;here&lt;/a&gt;&lt;br /&gt;" description="" />
+			</fieldset>
+		</fields>
+	</form>
+</fieldparams>

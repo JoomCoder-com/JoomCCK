@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<form>
+	<name>Cackle - Social Comments</name>
+
+	<fields name="comments">
+		<fieldset name="comments">
+			<field name="id" label="Widget ID" required="1" type="text" default="" />
+			<field name="theme" type="list" default="simple" label="Theme">
+				<option value="standard">Standard</option>
+				<option value="simple">Simple</option>
+			</field>
+			<field name="sort" type="list" default="desc" label="Sort">
+				<option value="desc">Descending</option>
+				<option value="asc">Ascending</option>
+			</field>
+		</fieldset>
+	</fields>
+</form>

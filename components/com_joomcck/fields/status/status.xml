@@ -1,0 +1,240 @@
+<?xml version="1.0" encoding="utf-8"?>
+<joomcckfield>
+	<name>Status</name>
+	<group>Special Form Elements</group>
+
+	<config>
+		<fields name="params">
+			<fieldset name="tmpl">
+				<field type="cobtmpllist" name="template_input" onchange="ajax_load_sub_params(this, '/components/com_joomcck/fields/status/tmpl/input');" filter="php$" hide_none="1" hide_default="1" directory="/components/com_joomcck/fields/status/tmpl/input" label="F_TMPLINPUT" default="default.php" />
+				<field type="cobtmpllist" name="template_output_list" onchange="ajax_load_sub_params(this, '/components/com_joomcck/fields/status/tmpl/output');" filter="php$" hide_none="1" hide_default="1" directory="/components/com_joomcck/fields/status/tmpl/output" label="F_TMPLLIST" default="default.php" />
+				<field type="cobtmpllist" name="template_output_full" onchange="ajax_load_sub_params(this, '/components/com_joomcck/fields/status/tmpl/output');" filter="php$" hide_none="1" hide_default="1" directory="/components/com_joomcck/fields/status/tmpl/output" label="F_TMPLFULL" default="default.php" />
+			</fieldset>
+			<fieldset name="core">
+				<field name="sortable" type="radio" class="btn-group" default="0" label="F_SORTABLE" description="">
+					<option value="0">JNO</option>
+					<option value="1">JYES</option>
+				</field>
+			</fieldset>
+			<fieldset name="filter" label="FS_FILTERGEN">
+				<field name="filter_enable" type="mradio" condition='{"1":["params_params_template_filter","params_params_filter_hide","params_params_filter_descr","params_params_template_filter_module","fieldset-name-filter2"]}' class="btn-group" default="0" label="F_ENABLE" description="">
+					<option value="0">JNO</option>
+					<option value="1">JYES</option>
+				</field>
+				<field type="cobtmpllist" name="template_filter" onchange="ajax_load_sub_params(this, '/components/com_joomcck/fields/status/tmpl/filter');" filter="php$" hide_none="1" hide_default="1" directory="/components/com_joomcck/fields/status/tmpl/filter" label="F_TMPLFILTER" default="autocomplete.php" />
+				<field type="cobtmpllist" name="template_filter_module" onchange="ajax_load_sub_params(this, '/components/com_joomcck/fields/status/tmpl/filter');" filter="php$" hide_none="1" hide_default="1" directory="/components/com_joomcck/fields/status/tmpl/filter" label="F_TMPLFILTERMODULE" default="autocomplete.php" />
+				<field name="filter_hide" type="mradio" class="btn-group" default="0" label="F_HIDE" description="F_HIDE_DESCR">
+					<option value="0">JNO</option>
+					<option value="1">JYES</option>
+				</field>
+				<field name="filter_descr" type="text" default="" size="40" label="F_DESCR" description="" />
+			</fieldset>
+			<fieldset name="filter2" label="FS_FILTERFIELDSPEC">
+				<field name="filter_linkage" type="mlist" condition='{"not0":["params_params_filter_icon","params_params_filter_tip", "params_params_filter_show_number"]}' default="0" label="F_VALUELINKAGE" description="F_VALUELINKAGE_DESCR">
+					<option value="0">XML_OPT_NOFILTERLINK</option>
+					<option value="1">XML_OPT_VALUEASFLINK</option>
+					<option value="2">XML_OPT_SMALICONASFLINK</option>
+				</field>
+				<field name="filter_icon" type="imagelist" default="funnel-small.png" directory="/components/com_joomcck/images/filter/" label="F_ICON" description="F_ICON_DESCR" />
+				<field name="filter_tip" type="text" default="Show all records where %s is equal to %s" size="40" label="F_VALUETOOLTIP" description="F_VALUETOOLTIP_DESCR" />
+				<field name="filter_show_number" type="radio" class="btn-group" default="1" label="F_FBOXSHOWNUMS" description="F_FBOXSHOWNUMS_DESCR">
+					<option value="0">JNO</option>
+					<option value="1">JYES</option>
+				</field>
+			</fieldset>
+
+			<fieldset name="general" label="FS_GENERAL">
+				<field name="default" type="list" default="1" label="F_DEFAULT_STATUS" description="">
+					<option value="1">F_STATUS1</option>
+					<option value="2">F_STATUS2</option>
+					<option value="3">F_STATUS3</option>
+					<option value="4">F_STATUS4</option>
+					<option value="5">F_STATUS5</option>
+					<option value="6">F_STATUS6</option>
+				</field>
+				<field type="accesslevel" name="moderator" default="3" label="Who is moderator">
+					<option value="0">XML_OPT_NOONE</option>
+				</field>
+				<field name="change_default" type="list" default="2" label="F_CHANGESTATUSTOONMODEROPEN" description="">
+					<option value="0">XML_OPT_DONOTSET</option>
+					<option value="1">F_STATUS1</option>
+					<option value="2">F_STATUS2</option>
+					<option value="3">F_STATUS3</option>
+					<option value="4">F_STATUS4</option>
+					<option value="5">F_STATUS5</option>
+					<option value="6">F_STATUS6</option>
+				</field>
+				<field name="add_comment" type="list" default="1" label="F_SETSTATUSONADDCOMMENT" description="">
+					<option value="0">XML_OPT_DONOTSET</option>
+					<option value="1">F_STATUS1</option>
+					<option value="2">F_STATUS2</option>
+					<option value="3">F_STATUS3</option>
+					<option value="4">F_STATUS4</option>
+					<option value="5">F_STATUS5</option>
+					<option value="6">F_STATUS6</option>
+				</field>
+				<field name="block_comment" type="list" default="5" label="F_DISABLECOMMENTSONSTATUSCHANGE" description="">
+					<option value="0">XML_OPT_DONOTDISABLE</option>
+					<option value="1">F_STATUS1</option>
+					<option value="2">F_STATUS2</option>
+					<option value="3">F_STATUS3</option>
+					<option value="4">F_STATUS4</option>
+					<option value="5">F_STATUS5</option>
+					<option value="6">F_STATUS6</option>
+				</field>
+				<field name="rsubscribe" type="list" default="" multiple="true" label="F_SUBSCRIBERECORD" description="F_SUBSCRIBERECORD_DESCR">
+					<option value="1">F_STATUS1</option>
+					<option value="2">F_STATUS2</option>
+					<option value="3">F_STATUS3</option>
+					<option value="4">F_STATUS4</option>
+					<option value="5">F_STATUS5</option>
+					<option value="6">F_STATUS6</option>
+				</field>
+				<field name="runsubscribe" type="list" default="" multiple="true" label="F_UNSUBSCRIBERECORD" description="F_UNSUBSCRIBERECORD_DESCR">
+					<option value="1">F_STATUS1</option>
+					<option value="2">F_STATUS2</option>
+					<option value="3">F_STATUS3</option>
+					<option value="4">F_STATUS4</option>
+					<option value="5">F_STATUS5</option>
+					<option value="6">F_STATUS6</option>
+				</field>
+				<field name="sort" type="list" default="2" label="F_SORT" description="">
+					<option value="1">XML_OPT_ASENTERED</option>
+					<option value="2">XML_OPT_ACS</option>
+					<option value="3">XML_OPT_DESC</option>
+				</field>
+				<field name="width" type="text" default="150" label="F_STATLISTMAXWIDTH" size="3" />
+				<field name="list" type="list" default="1" label="F_LISTVIEW" description="">
+					<option value="1">XML_OPT_ICON</option>
+					<option value="2">XML_OPT_TEXT</option>
+					<option value="3">XML_OPT_BOTH</option>
+				</field>
+				<field name="full" type="list" default="3" label="F_FULLVIEW" description="">
+					<option value="1">XML_OPT_ICON</option>
+					<option value="2">XML_OPT_TEXT</option>
+					<option value="3">XML_OPT_BOTH</option>
+				</field>
+				<field name="sql_action_on_save" type="radio" class="btn-group" default="0" label="F_SQLACTIONONSAVE">
+					<option value="0">JNO</option>
+					<option value="1">JYES</option>
+				</field>
+			</fieldset>
+			<fieldset name="notify" label="FS_NOTIFYPARAMS">
+				<field name="notify" type="list" multiple="true" size="5" default="" label="F_NOTIFYONSTATUSCHANGETO" description="">
+					<option value="1">F_STATUS1</option>
+					<option value="2">F_STATUS2</option>
+					<option value="3">F_STATUS3</option>
+					<option value="4">F_STATUS4</option>
+					<option value="5">F_STATUS5</option>
+					<option value="6">F_STATUS6</option>
+				</field>
+				<field type="accesslevel" name="notified" default="2" label="F_WHOISNOTIFIED">
+					<option value="0">XML_OPT_NOONE</option>
+				</field>
+			</fieldset>
+			<fieldset name="access" label="FS_WHOCANCHOOSESTATUS">
+				<field type="accesslevel" name="access1" default="1" label="F_STATUS1">
+					<option value="0">XML_OPT_NOONE</option>
+					<option value="-1">XML_OPT_ONLYAUTHOR</option>
+				</field>
+				<field type="accesslevel" name="access2" default="1" label="F_STATUS2">
+					<option value="0">XML_OPT_NOONE</option>
+					<option value="-1">XML_OPT_ONLYAUTHOR</option>
+				</field>
+				<field type="accesslevel" name="access3" default="1" label="F_STATUS3">
+					<option value="0">XML_OPT_NOONE</option>
+					<option value="-1">XML_OPT_ONLYAUTHOR</option>
+				</field>
+				<field type="accesslevel" name="access4" default="3" label="F_STATUS4">
+					<option value="0">XML_OPT_NOONE</option>
+					<option value="-1">XML_OPT_ONLYAUTHOR</option>
+				</field>
+				<field type="accesslevel" name="access5" default="3" label="F_STATUS5">
+					<option value="0">XML_OPT_NOONE</option>
+					<option value="-1">XML_OPT_ONLYAUTHOR</option>
+				</field>
+				<field type="accesslevel" name="access6" default="0" label="F_STATUS6">
+					<option value="0">XML_OPT_NOONE</option>
+					<option value="-1">XML_OPT_ONLYAUTHOR</option>
+				</field>
+
+			</fieldset>
+			<fieldset name="labels" label="FS_LABELS" description="FS_LABELS_DESCR">
+				<field type="text" name="status1" label="F_STATUS1" size="40" default="Pending" description="" />
+				<field type="text" name="status2" label="F_STATUS2" size="40" default="Revised" description="" />
+				<field type="text" name="status3" label="F_STATUS3" size="40" default="Solved" description="" />
+				<field type="text" name="status4" label="F_STATUS4" size="40" default="In progress" description="" />
+				<field type="text" name="status5" label="F_STATUS5" size="40" default="Closed" description="" />
+				<field type="text" name="status6" label="F_STATUS6" size="40" default="" description="" />
+			</fieldset>
+			<fieldset name=" s" label="FS_STATUSICONS" description="FS_STATUSICONS_DESCR" addfieldpath="/components/com_joomcck/fields/status/field">
+				<field type="icons" directory="components/com_joomcck/fields/status/icons" name="icon1" label="F_ICON1" default="clock-frame.png" />
+				<field type="icons" directory="components/com_joomcck/fields/status/icons" name="icon2" label="F_ICON2" default="eye.png" />
+				<field type="icons" directory="components/com_joomcck/fields/status/icons" name="icon3" label="F_ICON3" default="tick.png" />
+				<field type="icons" directory="components/com_joomcck/fields/status/icons" name="icon4" label="F_ICON4" default="hammer.png" />
+				<field type="icons" directory="components/com_joomcck/fields/status/icons" name="icon5" label="F_ICON5" default="lock.png" />
+				<field type="icons" directory="components/com_joomcck/fields/status/icons" name="icon6" label="F_ICON6" default="" />
+			</fieldset>
+
+			<fieldset name="alerts" label="FS_EMAILALERTS" description="FS_EMAILALERTSDESCR">
+				<field type="list" name="sendto" default="3" label="F_ALERTSEND">
+					<option value="1">XML_OPT_AUTHOR</option>
+					<option value="2">XML_OPT_EMAILFIELD</option>
+					<option value="3">XML_OPT_EMAILCUSTOM</option>
+				</field>
+				<field type="text" name="custom_email" label="F_CUSTOMEMAIL" size="50" default="" />
+				<field type="text" name="email_subject" label="F_EMAILSUBJECT" default="Email Alert - Status Change" />
+				<field type="textarea" name="emailbody1" label="F_EMAILBODY1" cols="30" />
+				<field type="textarea" name="emailbody2" label="F_EMAILBODY2" cols="30" />
+				<field type="textarea" name="emailbody3" label="F_EMAILBODY3" cols="30" />
+				<field type="textarea" name="emailbody4" label="F_EMAILBODY4" cols="30" />
+				<field type="textarea" name="emailbody5" label="F_EMAILBODY5" cols="30" />
+				<field type="textarea" name="emailbody6" label="F_EMAILBODY6" cols="30" />
+			</fieldset>
+
+			<fieldset name="sql1" label="X_SQLACTIONSTATUS1" description="X_SQLACTION_DESCR">
+				<field name="sql_action_s1" type="radio" class="btn-group" default="0" label="F_SQLACTIONENABLE">
+					<option value="0">JNO</option>
+					<option value="1">JYES</option>
+				</field>
+				<field name="sql_source_s1" type="textarea" cols="40" rows="3" default="" label="F_SQLQUERY" />
+			</fieldset>
+			<fieldset name="sql2" label="X_SQLACTIONSTATUS2" description="X_SQLACTION_DESCR">
+				<field name="sql_action_s2" type="radio" class="btn-group" default="0" label="F_SQLACTIONENABLE">
+					<option value="0">JNO</option>
+					<option value="1">JYES</option>
+				</field>
+				<field name="sql_source_s2" type="textarea" cols="40" rows="3" default="" label="F_SQLQUERY" />
+			</fieldset>
+			<fieldset name="sql3" label="X_SQLACTIONSTATUS3" description="X_SQLACTION_DESCR">
+				<field name="sql_action_s3" type="radio" class="btn-group" default="0" label="F_SQLACTIONENABLE">
+					<option value="0">JNO</option>
+					<option value="1">JYES</option>
+				</field>
+				<field name="sql_source_s3" type="textarea" cols="40" rows="3" default="" label="F_SQLQUERY" />
+			</fieldset>
+			<fieldset name="sql4" label="X_SQLACTIONSTATUS4" description="X_SQLACTION_DESCR">
+				<field name="sql_action_s4" type="radio" class="btn-group" default="0" label="F_SQLACTIONENABLE">
+					<option value="0">JNO</option>
+					<option value="1">JYES</option>
+				</field>
+				<field name="sql_source_s4" type="textarea" cols="40" rows="3" default="" label="F_SQLQUERY" />
+			</fieldset>
+			<fieldset name="sql5" label="X_SQLACTIONSTATUS5" description="X_SQLACTION_DESCR">
+				<field name="sql_action_s5" type="radio" class="btn-group" default="0" label="F_SQLACTIONENABLE">
+					<option value="0">JNO</option>
+					<option value="1">JYES</option>
+				</field>
+				<field name="sql_source_s5" type="textarea" cols="40" rows="3" default="" label="F_SQLQUERY" />
+			</fieldset>
+			<fieldset name="sql6" label="X_SQLACTIONSTATUS6" description="X_SQLACTION_DESCR">
+				<field name="sql_action_s6" type="radio" class="btn-group" default="0" label="F_SQLACTIONENABLE">
+					<option value="0">JNO</option>
+					<option value="1">JYES</option>
+				</field>
+				<field name="sql_source_s6" type="textarea" cols="40" rows="3" default="" label="F_SQLQUERY" />
+			</fieldset>
+		</fields>
+
+	</config>
+</joomcckfield>

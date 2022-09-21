@@ -1,0 +1,34 @@
+@CHARSET "UTF-8";
+.mainwrap-list {
+	position: relative;
+}
+.image-wrapper-over1 {
+	-moz-transform: scale(1.1) rotate(-15deg) translate(-10%, -15%) skew(0deg, 0deg);
+	-webkit-transform: scale(1.1) rotate(-15deg) translate(-10%, -15%) skew(0deg, 0deg);
+	-o-transform: scale(1.1) rotate(-15deg) translate(-10%, -15%) skew(0deg, 0deg);
+	-ms-transform: scale(1.1) rotate(-15deg) translate(-10%, -15%) skew(0deg, 0deg);
+	transform: scale(1.1) rotate(-15deg) translate(-10%, -15%) skew(0deg, 0deg);
+}
+.image-wrapper-over2 {
+	-moz-transform: scale(1.1) rotate(0deg) translate(0px, 0px) skew(0deg, 0deg);
+	-webkit-transform: scale(1.1) rotate(0deg) translate(0px, 0px) skew(0deg, 0deg);
+	-o-transform: scale(1.1) rotate(0deg) translate(0px, 0px) skew(0deg, 0deg);
+	-ms-transform: scale(1.1) rotate(0deg) translate(0px, 0px) skew(0deg, 0deg);
+	transform: scale(1.1) rotate(0deg) translate(0px, 0px) skew(0deg, 0deg);
+}
+
+.image-wrapper-over3 {
+	-moz-transform: scale(1.1) rotate(15deg) translate(15%, 15%) skew(0deg, 0deg);
+	-webkit-transform: scale(1.1) rotate(15deg) translate(15%, 15%) skew(0deg, 0deg);
+	-o-transform: scale(1.1) rotate(15deg) translate(15%, 15%) skew(0deg, 0deg);
+	-ms-transform: scale(1.1) rotate(15deg) translate(15%, 15%) skew(0deg, 0deg);
+	transform: scale(1.1) rotate(15deg) translate(15%, 15%) skew(0deg, 0deg);
+}
+
+.image-wrapper-thumb {
+	-webkit-transition: all 200ms ease;
+	-moz-transition: all 200ms ease;
+	-o-transition: all 200ms ease;
+	transition: all 200ms ease;
+	position: absolute;
+}

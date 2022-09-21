@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<joomcckfield>
+	<name>Quick2cart</name>
+	<group>Commerce Form Elements</group>
+
+	<config>
+		<fields name="params" addpathfield="/libraries/mint/forms/fields">
+			<fieldset name="tmpl">
+				<field type="cobtmpllist" name="template_input" onchange="ajax_load_sub_params(this, '/components/com_joomcck/fields/q2c/tmpl/input');" filter="php$" hide_none="1" hide_default="1" directory="/components/com_joomcck/fields/q2c/tmpl/input" label="F_TMPLINPUT" default="default.php" />
+				<field type="cobtmpllist" name="template_output_list" onchange="ajax_load_sub_params(this, '/components/com_joomcck/fields/q2c/tmpl/output');" filter="php$" hide_none="1" hide_default="1" directory="/components/com_joomcck/fields/q2c/tmpl/output" label="F_TMPLLIST" default="default.php" />
+				<field type="cobtmpllist" name="template_output_full" onchange="ajax_load_sub_params(this, '/components/com_joomcck/fields/q2c/tmpl/output');" filter="php$" hide_none="1" hide_default="1" directory="/components/com_joomcck/fields/q2c/tmpl/output" label="F_TMPLFULL" default="default.php" />
+			</fieldset>
+			<fieldset name="general" label="FS_GENERAL" description="Q2C_DESCR">
+
+			</fieldset>
+		</fields>
+	</config>
+</joomcckfield>

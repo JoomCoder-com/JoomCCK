@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<form>
+	<name>Calendar</name>
+	<author>JoomBoost</author>
+	<creationDate>April 2012</creationDate>
+	<copyright>Copyright (C) 2005 - 2012 JoomBoost. All rights reserved.</copyright>
+	<license>Commercial (https://www.joomBoost.com/commercial-license)</license>
+	<authorEmail>support@joomBoost.com</authorEmail>
+	<authorUrl>www.JoomBoost.com</authorUrl>
+	<version>8.36</version>
+	<description><![CDATA[ Calendar view ]]></description>
+
+	<fields name="tmpl_params">
+		<fieldset name="general" label="Calendar options">
+			<field name="field_id_cal" key="id" type="meresourcesfields" size="1" multiple="false" label="Field with datetime" filters="'datetime'"/>
+			<field label="Default view" name="view" type="list" default="month">
+				<option value="year">Year</option>
+				<option value="month">Month</option>
+				<option value="week">Week</option>
+				<option value="day">Day</option>
+			</field>
+			<field name="cal_start" type="text" default="now" label="Start date (now or yyyy-mm-dd)" />
+			<field name="cal_nav" type="radio" class="btn-group" default="1" label="Enable navigation">
+				<option value="0">CNO</option>
+				<option value="1">CYES</option>
+			</field>
+			<field name="cal_view_year" type="radio" class="btn-group" default="1" label="Enable year view">
+				<option value="0">CNO</option>
+				<option value="1">CYES</option>
+			</field>
+			<field name="cal_view_month" type="radio" class="btn-group" default="1" label="Enable month view">
+				<option value="0">CNO</option>
+				<option value="1">CYES</option>
+			</field>
+			<field name="cal_view_week" type="radio" class="btn-group" default="1" label="Enable week view">
+				<option value="0">CNO</option>
+				<option value="1">CYES</option>
+			</field>
+			<field name="cal_view_day" type="radio" class="btn-group" default="1" label="Enable day view">
+				<option value="0">CNO</option>
+				<option value="1">CYES</option>
+			</field>
+			<field name="cal_weekday" type="radio" class="btn-group" default="1" label="Enable first day of week switcher">
+				<option value="0">CNO</option>
+				<option value="1">CYES</option>
+			</field>
+		</fieldset>
+	</fields>
+	<fields name="tmpl_core">
+		<fieldset name="general2" label="List under calendar">
+			<field label="Show list of records under the calendar" name="tmpl_list" type="cobtmpls" default="" tmpltype="itemlist">
+				<option value="0">Do not show anything</option>
+			</field>
+			<field name="list_title" type="text" default="Latest events" label="List title"/>
+			<field name="item_limit_default" type="text" size="3" default="20" label="X_DEFAULTPAGLIMIT"/>
+			<field name="item_pagination" type="hidden" default="0" label="Hide Limit Box" description=""/>
+			<field name="item_limit_box" type="hidden" default="0" label="Hide Limit Box" description=""/>
+		</fieldset>
+	</fields>
+</form>

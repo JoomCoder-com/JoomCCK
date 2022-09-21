@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<form>
+  <name>Default</name>
+	<author>JoomBoost</author>
+	<creationDate>Febrary 2012</creationDate>
+	<copyright>Copyright (C) 2005 - 2012 JoomBoost. All rights reserved.</copyright>
+	<license>Commercial (https://www.joomBoost.com/commercial-license)</license>
+	<authorEmail>support@joomBoost.com</authorEmail>
+	<authorUrl>www.JoomBoost.com</authorUrl>
+	<version>8.17</version>
+	<description>Category index layout</description>
+	
+	
+	<fields name="tmpl_core">
+		<fieldset name="title" label="CTITLE">
+			<field name="show_title" type="radio" class="btn-group" default="0" label="X_SHOWTITLE">
+				<option value="0">CNO</option>
+				<option value="1">CYES</option>
+			</field>
+			<field name="tag" type="text" size="3" default="h4" label="CHTMLTAG" />
+			<field name="title_label" type="text" size="40" default="Category Index" label="CTITLE" />
+		</fieldset>
+	</fields>
+	<fields name="tmpl_params">
+		<fieldset name="categories" label="CCATEGORIES">
+			<field name="cat_descr" type="list" default="0" label="CDESCR" >
+				<option value="0">CNO</option>
+				<option value="before">CTOOLTIPBEFOR</option>
+				<option value="after">CTOOLTIOPAFTER</option>
+				<option value="full">CTOOLTIPFULL</option>
+			</field>		
+			<field name="cat_img" type="radio" class="btn-group" default="0" label="CIMAGE">
+				<option value="0">CNO</option>
+				<option value="1">CYES</option>
+			</field>
+			<field name="cat_img_width" type="text" size="3" default="200" label="CIMGMAXWIDTH"  />
+			<field name="cat_ordering" type="list" default="c.lft ASC" label="CORDERING" >
+				<option value="c.lft ASC">CORDERING</option>
+				<option value="c.title ASC">CORDERNAMEASC</option>
+				<option value="c.title DESC">CORDERNAMEDESC</option>
+			</field>
+			<field name="cat_nums" type="list" default="current" label="X_RECNUMS" >
+				<option value="0">X_RNDONOTSHOW</option>
+				<option value="1">X_RNCURRENT</option>
+			</field>
+			<field name="cat_cols" type="list" default="3" label="X_CATCOLUMNS" >
+				<option value="1">X_1C</option>
+				<option value="2">X_2C</option>
+				<option value="3">X_3C</option>
+				<option value="4">X_4C</option>
+				<option value="5">X_5C</option>
+				<option value="6">X_6C</option>
+				<option value="7">X_7C</option>
+				<option value="8">X_8C</option>
+				<option value="9">X_9C</option>
+				<option value="10">X_10C</option>
+			</field>
+	
+			<field name="cat_unfold" type="radio" class="btn-group" default="0" label="CUNFOLDALL" >
+				<option value="0">CNO</option>
+				<option value="1">CYES</option>
+			</field>
+			<field name="cat_empty" type="radio" class="btn-group" default="1" label="X_EMPTYCATS" description="X_EMPTYCATDESC">
+				<option value="0">CNO</option>
+				<option value="1">CYES</option>
+			</field>
+			<field name="cat_type" type="list" default="2" label="CDISPLAYMODE" >
+				<option value="1">X_DMODECURRENT</option>
+				<option value="2">X_DMODEALLSEC</option>
+			</field>
+			<field name="highlight" type="text" size="5" default="red" label="CHILIGHT" />
+			
+		</fieldset>
+		
+		<fieldset name="subcategories" label="CSUBCATEGORIES">
+			<field name="subcat_empty" type="radio" class="btn-group" default="1" label="X_SHOWEMPTY" description="X_SHOWEMPRYDESCR">
+				<option value="0">CNO</option>
+				<option value="1">CYES</option>
+			</field>
+			<field name="subcat_nums" type="list" default="all" label="X_SUBCATNUMS" >
+				<option value="0">X_RNDONOTSHOW</option>
+				<option value="current">X_RNCURRENT</option>
+			</field>
+			<field name="subcat_level" type="list" default="1" label="X_DEPTHLEVEL"  >
+				<option value="0">X_NOSUBCATS</option>
+				<option value="1">J1</option>
+				<option value="2">J2</option>
+				<option value="3">J3</option>
+			</field>
+			<field name="subcat_limit" type="list" default="5" label="X_SUBCATLIMIT" >
+				<option value="1">X_1SUBCAT</option>
+				<option value="2">X_2SUBCAT</option>
+				<option value="3">X_3SUBCAT</option>
+				<option value="4">X_4SUBCAT</option>
+				<option value="5">X_5SUBCAT</option>
+				<option value="6">X_6SUBCAT</option>
+				<option value="7">X_7SUBCAT</option>
+				<option value="8">X_8SUBCAT</option>
+				<option value="9">X_9SUBCAT</option>
+				<option value="10">X_10SUBCAT</option>
+				<option value="15">X_15SUBCAT</option>
+				<option value="20">X_20SUBCAT</option>
+				<option value="30">X_30SUBCAT</option>
+				<option value="500">X_NOLIMIT</option>
+			</field>
+		</fieldset>
+	</fields>
+	
+	
+</form>

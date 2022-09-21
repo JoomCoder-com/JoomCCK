@@ -1,0 +1,90 @@
+.fileinput-button {
+	position: relative;
+	overflow: hidden;
+	display: inline-block;
+}
+.fileinput-button input {
+	position: absolute;
+	top: 0;
+	right: 0;
+	margin: 0;
+	opacity: 0;
+	-ms-filter: "alpha(opacity=0)";
+	font-size: 200px !important;
+	direction: ltr;
+	cursor: pointer;
+}
+
+/* Fixes for IE < 8 */
+@media screen\9 {
+	.fileinput-button input {
+		filter: alpha(opacity=0);
+		font-size: 100%;
+		height: 100%;
+	}
+}
+
+.progress-animated .progress-bar,
+.progress-animated .bar {
+	background: url("../img/progressbar.gif") !important;
+	filter: none;
+}
+.fileupload-process {
+	float: right;
+	display: none;
+}
+.fileupload-processing .fileupload-process,
+.files .processing .preview {
+	display: block;
+	width: 32px;
+	height: 32px;
+	background: url("../img/loading.gif") center no-repeat;
+	background-size: contain;
+}
+.files audio,
+.files video {
+	max-width: 300px;
+}
+.toggle[type="checkbox"] {
+	transform: scale(2);
+	margin-left: 10px;
+}
+
+@media (max-width: 767px) {
+	.fileupload-buttonbar .btn {
+		margin-bottom: 5px;
+	}
+	.fileupload-buttonbar .delete,
+	.fileupload-buttonbar .toggle,
+	.files .toggle,
+	.files .btn span {
+		display: none;
+	}
+	.files .name {
+		width: 80px;
+		word-wrap: break-word;
+	}
+	.files audio,
+	.files video {
+		max-width: 80px;
+	}
+	.files img,
+	.files canvas {
+		max-width: 100%;
+	}
+}
+.fileinput-button input {
+	position: static;
+	opacity: 1;
+	filter: none;
+	font-size: inherit !important;
+	direction: inherit;
+}
+.fileinput-button span {
+	display: none;
+}
+.fileinput-button i,
+.fileupload-buttonbar .delete,
+.fileupload-buttonbar .toggle {
+	display: none;
+}

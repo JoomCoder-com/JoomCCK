@@ -1,0 +1,260 @@
+<?xml version="1.0" encoding="utf-8"?>
+<joomcckfield>
+	<name>Gallery</name>
+	<group>Media Form Elements</group>
+
+	<config>
+		<fields name="params">
+			<fieldset name="tmpl">
+				<field type="cobtmpllist" name="template_input" onchange="ajax_load_sub_params(this, '/components/com_joomcck/fields/gallery/tmpl/input');" filter="php$" hide_none="1" hide_default="1" directory="/components/com_joomcck/fields/gallery/tmpl/input" label="F_TMPLINPUT" default="default.php" />
+				<field type="cobtmpllist" name="template_output_list" onchange="ajax_load_sub_params(this, '/components/com_joomcck/fields/gallery/tmpl/output');" filter="php$" hide_none="1" hide_default="1" directory="/components/com_joomcck/fields/gallery/tmpl/output" label="F_TMPLLIST" default="list.php" />
+				<field type="cobtmpllist" name="template_output_full" onchange="ajax_load_sub_params(this, '/components/com_joomcck/fields/gallery/tmpl/output');" filter="php$" hide_none="1" hide_default="1" directory="/components/com_joomcck/fields/gallery/tmpl/output" label="F_TMPLFULL" default="full.php" />
+			</fieldset>
+			<fieldset name="general" label="FS_UPLOAD">
+				<field name="file_formats" size="40" type="text" default="zip, jpg, png, jpeg, gif, txt, md, bmp" label="F_ALLOWEDFORMATS" />
+				<field name="max_count" type="text" default="0" size="3" label="F_MAXCOUNTLIMIT" />
+				<field name="max_size" type="text" size="3" label="F_MAXSIZE" description="" default="2048" />
+				<field name="subfolder" type="text" label="F_SPECSUBFOLDER" description="F_SPECSUBFOLDER_DESCR" default="uploads" />
+				<field name="delete_access" type="radio" class="btn-group" default="1" label="F_AUTHORCANDELETE">
+					<option value="0">JNO</option>
+					<option value="1">JYES</option>
+				</field>
+				<field name="allow_edit_title" type="radio" class="btn-group" default="1" label="F_ALLOWEDITTITLE">
+					<option value="0">JNO</option>
+					<option value="1">JYES</option>
+				</field>
+				<field name="allow_add_descr" type="radio" class="btn-group" default="1" label="F_ALLOWADDDESCR">
+					<option value="0">JNO</option>
+					<option value="1">JYES</option>
+				</field>
+				<field name="uploader" default="1" type="mlist" condition='{"1":["fieldset-name-flow"],"2":["fieldset-name-mooupload"]}' label="F_UPLOADER">
+					<option value="1">Flow</option>
+					<option value="2">Mooupload</option>
+				</field>
+			</fieldset>
+			<fieldset name="mooupload" label="FS_UPLOAD_MOO">
+				<field name="method" type="list" label="F_UPLOADMETHOD">
+					<option value="auto">XML_OPT_AUTO</option>
+					<option value="html5">XML_OPT_HTML5</option>
+					<option value="html4">XML_OPT_HTML4</option>
+					<option value="flash">XML_OPT_FLASH</option>
+				</field>
+			</fieldset>
+			<fieldset name="flow" label="FS_UPLOAD_FLOW">
+				<field name="flow_drop" type="radio" class="btn-group" default="1" label="FF_DROP">
+					<option value="0">JNO</option>
+					<option value="1">JYES</option>
+				</field>
+				<field name="flow_file" type="radio" class="btn-group" default="1" label="FF_FILE">
+					<option value="0">JNO</option>
+					<option value="1">JYES</option>
+				</field>
+				<field name="flow_img" type="radio" class="btn-group" default="0" label="FF_IMG">
+					<option value="0">JNO</option>
+					<option value="1">JYES</option>
+				</field>
+				<field name="flow_folder" type="radio" class="btn-group" default="1" label="FF_FOLDER">
+					<option value="0">JNO</option>
+					<option value="1">JYES</option>
+				</field>
+				<field name="flow_default" type="radio" class="btn-group" default="1" label="FF_DEFAULT">
+					<option value="0">JNO</option>
+					<option value="1">JYES</option>
+				</field>
+			</fieldset>
+			<fieldset name="advanced" label="FS_FORMATPARAMS">
+				<field name="sort" type="list" default="0" label="F_SORTBY" description="">
+					<option value="0 ASC">XML_OPT_NAMEASC</option>
+					<option value="0 DESC">XML_OPT_NAMEDESC</option>
+					<option value="1 ASC">XML_OPT_SIZEASC</option>
+					<option value="1 DESC">XML_OPT_SIZEDESC</option>
+					<option value="2 ASC">XML_OPT_HITSASC</option>
+					<option value="2 DESC">XML_OPT_HITSDESC</option>
+					<option value="3 ASC">XML_OPT_IDASC</option>
+					<option value="3 DESC">XML_OPT_IDDESC</option>
+				</field>
+				<field name="lightbox_click_list" type="list" default="0" label="F_CLICKONTHUMBLIST" description="">
+					<option value="0">XML_OPT_POPUPGAL</option>
+					<option value="1">XML_OPT_ARTICLEFULLVIEW</option>
+				</field>
+				<field name="lightbox_click_full" type="list" default="0" label="F_CLICKONTHUMBFULL" description="">
+					<option value="0">XML_OPT_POPUPGAL</option>
+					<option value="1">XML_OPT_ARTICLEFULLVIEW</option>
+				</field>
+			</fieldset>
+
+			<fieldset name="core" label="F_PROCESSORIGINAL" description="F_PROCESSORIGINAL_DESCR">
+				<field name="original_width" type="text" default="1024" size="3" label="F_ORIGWIDTH" />
+				<field name="original_height" type="text" default="1024" size="3" label="F_ORIGHEIGHT" />
+				<field name="download_all" type="radio" class="btn-group" default="0" label="F_DOWNLOADALL" description="">
+					<option value="0">JNO</option>
+					<option value="1">JYES</option>
+				</field>
+
+			</fieldset>
+			<fieldset name="full" label="FS_FULLVIEW" description="FS_FULLVIEW_DESCR">
+				<field name="full_width" type="text" default="800" size="3" label="F_FULLWIDTH" description="" />
+				<field name="full_height" type="text" default="600" size="3" label="F_FULLHEIGHT" description="" />
+				<field name="full_quality" type="text" default="100" size="3" label="F_FULLQUALITY" description="" />
+				<field name="full_mode" type="mepictureresize" default="6" label="F_FULLEMODE" description="">
+					<option value="1">XML_OPT_CROP</option>
+					<option value="2">XML_OPT_FIT</option>
+					<option value="3">XML_OPT_FULL</option>
+					<option value="6">XML_OPT_PROPORTIONAL</option>
+					<option value="4">XML_OPT_WIDTHBASED</option>
+					<option value="5">XML_OPT_HEIGHTBASED</option>
+				</field>
+				<field name="full_stretch" type="radio" class="btn-group" default="0" label="F_FULLSTRETCH" description="">
+					<option value="0">JNO</option>
+					<option value="1">JYES</option>
+				</field>
+			</fieldset>
+
+			<fieldset name="thumbs_list" label="FS_LISTVIEW" description="FS_LISTVIEW_DESCR">
+				<field name="thumbs_list_width" type="text" default="100" size="3" label="F_THUMBWIDTH" description="" />
+				<field name="thumbs_list_height" type="text" default="100" size="3" label="F_THUMBHEIGHT" description="" />
+				<field name="thumbs_list_quality" type="text" default="80" size="3" label="F_THUMBQUALITY" description="" />
+				<field name="thumbs_list_mode" type="mepictureresize" default="1" label="F_THUMBRESIZEMODE" description="">
+					<option value="1">XML_OPT_CROP</option>
+					<option value="2">XML_OPT_FIT</option>
+					<option value="3">XML_OPT_FULL</option>
+					<option value="6">XML_OPT_PROPORTIONAL</option>
+					<option value="4">XML_OPT_WIDTHBASED</option>
+					<option value="5">XML_OPT_HEIGHTBASED</option>
+				</field>
+				<field name="thumbs_list_stretch" type="radio" class="btn-group" default="0" label="F_THUMBSTRETCH" description="">
+					<option value="0">JNO</option>
+					<option value="1">JYES</option>
+				</field>
+				<field name="thumbs_list_random" type="radio" class="btn-group" default="1" label="F_RANDOMTHUMDS" description="F_RANDOMTHUMDS_DESCR">
+					<option value="0">JNO</option>
+					<option value="1">JYES</option>
+				</field>
+				<field name="thumbs_list_theme" type="filelist" default="default" directory="components/com_joomcck/fields/gallery/gallerybox/thumb-themes" filter="css$" hide_none="1" hide_default="1" label="F_THEMES" description="" />
+			</fieldset>
+
+			<fieldset name="thumbs" label="FS_RECORDFULLVIEWMODE">
+				<field name="thumbs_resize_mode" type="list" default="100" label="F_THUMBRESIZEMODE" description="">
+					<option value="1">XML_OPT_AUTO</option>
+					<option value="2">XML_OPT_CUSTOM</option>
+				</field>
+			</fieldset>
+			<fieldset name="thumbs1" label="FS_RECORDFULLVIEWMODEAUTO" description="FS_RECORDFULLVIEWMODEAUTO_DESCR">
+				<field name="column_width" type="text" default="600" size="3" label="F_TILEPANEWIDTH" description="" />
+				<field name="max_height" type="text" default="250" size="3" label="F_MAXROWHEIGHT" description="" />
+				<field name="image_in_row" type="text" default="5" size="3" label="F_MAXNUMINROW" description="" />
+				<field name="image_padding" type="text" default="2" size="3" label="F_PADDING" description="" />
+				<field name="image_border" type="text" default="2" size="3" label="F_BORDER" description="" />
+				<field name="image_border_color" type="text" default="#e0e0e0" size="10" label="F_BORDERCOLOR" description="" />
+				<field name="image_border_radius" type="text" default="5" size="3" label="F_BORDERRADIUS" description="" />
+				<field name="image_shadow" type="text" default="inset 0px 0px 10px 5px rgba(0, 0, 0, 0.3)" size="50" label="F_SHADOW" description="F_SHADOW_DESCR" />
+			</fieldset>
+			<fieldset name="thumbs2" label="FS_RECORDFULLVIEWMODECUSTOM" description="FS_RECORDFULLVIEWMODECUSTOM_DESCR">
+				<field name="thumbs_width" type="text" default="100" size="3" label="F_CUSTOMWIDTH" description="" />
+				<field name="thumbs_height" type="text" default="100" size="3" label="F_CUSTOMHEIGHT" description="" />
+				<field name="thumbs_quality" type="text" default="80" size="3" label="F_CUSTOMQUALITY" description="" />
+				<field name="thumbs_background_color" type="text" default="#FFFFFF" label="F_CUSTOMBGCOLOR" description="" />
+				<field name="thumbs_mode" type="mepictureresize" default="1" label="F_CUSTOMMODE" description="">
+					<option value="1">XML_OPT_CROP</option>
+					<option value="2">XML_OPT_FIT</option>
+					<option value="3">XML_OPT_FULL</option>
+					<option value="6">XML_OPT_PROPORTIONAL</option>
+					<option value="4">XML_OPT_WIDTHBASED</option>
+					<option value="5">XML_OPT_HEIGHTBASED</option>
+				</field>
+				<field name="thumbs_stretch" type="radio" class="btn-group" default="0" label="F_CUSTOMSTRETCH" description="">
+					<option value="0">JNO</option>
+					<option value="1">JYES</option>
+				</field>
+			</fieldset>
+
+			<fieldset name="popup" label="FS_POPUP" description="">
+				<field name="show_mode" type="list" default="gallerybox" label="F_SHOWMODE" description="">
+					<option value="gallerybox">XML_OPT_GALLERYBOX</option>
+					<option value="lightbox">XML_OPT_LIGHTBOX</option>
+					<option value="rokbox">XML_OPT_ROCKBOX</option>
+				</field>
+			</fieldset>
+			<fieldset name="gallery" label="FS_POPUP_GALLERY" description="">
+				<field name="theme" type="list" default="Dark" label="F_THEME" description="">
+					<option value="Dark">XML_OPT_DARK</option>
+					<option value="Light">XML_OPT_LIGHT</option>
+					<option value="Minimal">XML_OPT_MINIMAL</option>
+					<option value="Smooth">XML_OPT_SMOOTH</option>
+				</field>
+				<field name="rate_access" type="accesslevel" default="1" label="F_WHOCANRATE">
+					<option value="0">XML_OPT_NOONE</option>
+				</field>
+				<field name="tmpl_rating" label="F_RATINGTMPL" type="cobtmpls" default="default" tmpltype="rating" />
+				<field name="allow_comments" type="accesslevel" default="2" label="F_WHOCANCOMMENT" description="">
+					<option value="0">XML_OPT_NOONE</option>
+				</field>
+				<field name="allow_info" type="accesslevel" default="2" label="F_WHOCANVIEWINFO" description="">
+					<option value="0">XML_OPT_NOONE</option>
+				</field>
+				<field name="show_avatar" type="radio" class="btn-group" default="1" label="F_SHOWAVATAR" description="">
+					<option value="0">JNO</option>
+					<option value="1">JYES</option>
+				</field>
+				<field name="avatar_width" type="text" default="40" label="F_AVATARWIDTH" description="" />
+				<field name="avatar_height" type="text" default="40" label="F_AVATARHEIGHT" description="" />
+				<field name="show_comment_avatar" type="radio" class="btn-group" default="1" label="F_SHOWCOMMENTAVATAR" description="">
+					<option value="0">JNO</option>
+					<option value="1">JYES</option>
+				</field>
+				<field name="comment_avatar_width" type="text" default="20" label="F_COMMENTAVATARWIDTH" description="" />
+				<field name="comment_avatar_height" type="text" default="20" label="F_COMMENTAVATARHEIGHT" description="" />
+				<field name="show_username" type="list" default="1" label="F_SHOWUSERNAME" description="">
+					<option value="0">XML_OPT_NOONE</option>
+					<option value="name">XML_OPT_NAME</option>
+					<option value="username">XML_OPT_USERNAME</option>
+				</field>
+				<field name="comment_author" type="radio" class="btn-group" default="1" label="F_AUTHORCANDELETECOMMENT" description="">
+					<option value="0">JNO</option>
+					<option value="1">JYES</option>
+				</field>
+				<field name="record_author" type="radio" class="btn-group" default="1" label="F_RAUTHORCANMODERATECOMMENTS" description="">
+					<option value="0">JNO</option>
+					<option value="1">JYES</option>
+				</field>
+				<field name="allow_download" type="accesslevel" default="1" label="F_ALLOWDOWNLOADORIGINAL" description="">
+					<option value="0">XML_OPT_NOONE</option>
+				</field>
+				<field name="count_views" type="radio" class="btn-group" default="1" label="F_COUNTVIEWS" description="">
+					<option value="0">JNO</option>
+					<option value="1">JYES</option>
+				</field>
+				<field name="show_location" type="radio" class="btn-group" default="1" label="F_SHOWGOOGLEMAPIFPOSSIBLE" description="">
+					<option value="0">JNO</option>
+					<option value="1">JYES</option>
+				</field>
+			</fieldset>
+			<fieldset name="emerald" label="F_DOWNLOADSUBSCR" description="F_DOWNLOADSUBSCR_DESCR" addfieldpath="/components/com_emerald/models/fields/">
+				<field name="subscription" type="planslist" condition='{"not0":["params_params_subscr_skip_moderator","params_params_subscription_count","params_params_subscription_msg","params_params_subscription_redirect","params_params_can_select_subscr","params_params_subscr_skip","params_params_subscr_skip_author"]}' default="" multiple="true" label="F_SUBSCR_PLANS" description="" />
+				<field name="subscr_skip" type="accesslevel" default="3" label="F_SUBSCR_SKIPFOR" description="F_SUBSCR_SKIPFORDESCR">
+					<option value="0">XML_OPT_NOONE</option>
+				</field>
+				<field name="subscr_skip_author" type="radio" class="btn-group" default="1" label="F_SUBSCR_SKIPAUTHOR" description="">
+					<option value="0">CNO</option>
+					<option value="1">CYES</option>
+				</field>
+				<field name="subscr_skip_moderator" type="radio" class="btn-group" default="1" label="F_SUBSCR_SKIPMODER" description="F_SUBSCR_SKIPMODERDESCR">
+					<option value="0">CNO</option>
+					<option value="1">CYES</option>
+				</field>
+				<field name="subscription_count" type="radio" default="" class="btn-group" multiple="true" label="F_SUBSCR_COUNTLIMIT" description="F_SUBSCR_COUNTLIMITDESCR">
+					<option value="0">CNO</option>
+					<option value="1">CYES</option>
+				</field>
+				<field name="subscription_msg" type="text" size="40" default="You cannot download this file. You have to be subscribed member" label="F_SUBSCR_MSG" description="" />
+				<field name="subscription_redirect" type="list" default="1" label="F_SUBSCR_BEHAVE">
+					<option value="0">F_SUBSCR_BEHAVE1</option>
+					<option value="1">F_SUBSCR_BEHAVE2</option>
+				</field>
+				<field name="can_select_subscr" type="accesslevel" default="0" label="F_WHOCANSELECTSUBSCR" description="">
+					<option value="0">XML_OPT_NOONE</option>
+				</field>
+			</fieldset>
+		</fields>
+	</config>
+</joomcckfield>

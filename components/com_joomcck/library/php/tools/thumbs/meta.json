@@ -1,0 +1,5 @@
+{
+	"label": "Clean Thumbnails Cache",
+	"description": "Delete all thumbnails. Will be regenerated on next view. Useful if change tumbnailing mode.",
+	"height": "300"
+}

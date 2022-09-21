@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension type="module" version="3.0" client="site" method="upgrade">
+    <name>Joomcck - Module - Notifications</name>
+    <author>JoomBoost</author>
+    <creationDate>March 2012</creationDate>
+    <copyright>Copyright (C) 2005 - 2012 JoomBoost (https://www.joomBoost.com). All rights reserved.</copyright>
+    <license>GNU/GPL http://www.gnu.org/copyleft/gpl.html</license>
+    <authorEmail>support@joomBoost.com</authorEmail>
+    <authorUrl>https://www.joomBoost.com</authorUrl>
+	<version>8.33</version>
+    <description><![CDATA[ Joomcck - Notifications ]]></description>
+    <files>
+        <filename module="mod_joomcck_notifications">mod_joomcck_notifications.php</filename>
+        <filename>helper.php</filename>
+        <filename>index.html</filename>
+        <folder>tmpl/</folder>
+        <folder>Scrollable/</folder>
+    </files>
+    <config>
+        <fields name="params">
+            <fieldset label="General" name="general" addfieldpath="/libraries/mint/forms/fields/">
+                <field name="section_id" type="meresourcessection" default="" multi="1" label="Select section"
+                       description="Select the Home section which will for this module."/>
+                <field name="layout" type="modulelayout" label="JFIELD_ALT_LAYOUT_LABEL"
+                       description="JFIELD_ALT_MODULE_LAYOUT_DESC"/>
+                <field name="moduleclass_sfx" type="text" default="" label="Module Class Suffix"
+                       description="PARAMMODULECLASSSUFFIX"/>
+            </fieldset>
+            <fieldset label="Default Template Settings" name="default">
+                <field name="height" type="text" label="Notifications list height (px)" description="" default="200"
+                       size="5"/>
+                <field name="time" type="text" label="Update list time (sec)" description="" default="3" size="5"/>
+
+            </fieldset>
+            <fieldset label="Bootstrap Notifications" name="bsnoti">
+                <field name="limit" type="text" label="Limit" default="5" size="3" description="How many notifications per page" />
+                <field name="noti_width" type="text" label="Width" default="320" size="3" />
+                <field name="noti_position" type="list" label="Position" default="bottom-left">
+                    <option value="top-left">Top left</option>
+                    <option value="top-right">Top right</option>
+                    <option value="bottom-left">Bottom left</option>
+                    <option value="bottom-right">Bottom right</option>
+                    <option value="center">Center</option>
+                </field>
+                <field name="noti_style" type="list" label="Style" default="bangTidy">
+                    <option value="info">Bootstrap Info</option>
+                    <option value="success">Bootstrap Success</option>
+                    <option value="warning">Bootstrap Warning</option>
+                    <option value="danger">Bootstrap Danger</option>
+                    <option value="inverse">Bootstrap Inverse</option>
+
+                    <option value="blackgloss">Custom Black Gloss</option>
+                    <option value="bangTidy">Custom Bang Tidy</option>
+                </field>
+            </fieldset>
+        </fields>
+    </config>
+</extension>

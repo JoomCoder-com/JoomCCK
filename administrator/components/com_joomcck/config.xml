@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<config>
+	<fieldset name="global" label="XML_FSETLBL_CNF_GLOBAL" description="XML_FSETDESC_CNF_GLOBAL" addfieldpath="/administrator/components/com_joomcck/models/fields">
+		<field name="general_upload" type="medirectories" label="XML_FIELD_LABEL_CNF_GENERAL_UPLOAD" required="true" default="uploads" description="XML_FIELD_DESCR_CNF_GENERAL_UPLOAD" hide_default="1" directory="" relative_path="1"
+			relative_path_value="root" levels="1" invite_label="Select Secure Dir" exclude="administrator|media|.svn|.settings|CVS|tmp|cache|components|libraries|plugins|templates|includes|languge|modules|xmlrpc|language|logs" />
+		<field name="folder_format" label="XML_FIELD_LABEL_CNF_FOLDERFORMAT" type="list" default="Y-m" description="XML_FIELD_DESCR_CNF_FOLDERFORMATDESCR">
+			<option value="Y">YYYY</option>
+			<option value="Y-m">YYYY-MM</option>
+			<option value="Y/m">YYYY/MM</option>
+			<option value="Y-m-d">YYYY-MM-DD</option>
+			<option value="Y/m/d">YYYY/MM/DD</option>
+		</field>
+		<field name="community" type="folderlist" label="XML_FIELD_LABEL_CNF_COMMUNITYINTEGR" hide_none="1" hide_default="1" default="com_joomcck" directory="/components/com_joomcck/library/php/community" description="XML_FIELD_DESCR_CNF_COMMUNITYINTEGR" />
+		<field label="XML_MODERATOR" name="moderator" type="user" required="true" default="" />
+		<field label="XML_MODERATORGROUP" name="moderator_group" type="accesslevel" default="0">
+			<option value="0">XML_OPT_NOONE</option>
+		</field>
+		<field name="captcha" type="plugins" folder="captcha" default="recaptcha" label="XML_CAPTCHA" description="XML_CAPTCHA_DESCR" filter="cmd" >
+			<option value="">JOPTION_USE_DEFAULT</option>
+			<option value="0">JOPTION_DO_NOT_USE</option>
+		</field>
+
+		<field name="general_copyright" type="radio" class="btn-group" label="XML_FIELD_LABEL_CNF_SHOWPOWEREDBY" default="1" description="XML_FIELD_DESCR_CNF_SHOWPOWEREDBY">
+			<option value="1">JYES</option>
+			<option value="0">JNO</option>
+		</field>
+		<field name="compatibility" type="radio" class="btn-group" label="XML_FIELD_LABEL_CNF_COMPAT" default="0" description="XML_FIELD_LABEL_CNF_COMPATDESCR">
+			<option value="1">JYES</option>
+			<option value="0">JNO</option>
+		</field>
+		<field name="general_help" label="XML_FIELD_LABEL_CNF_SHOWHELPBAR" type="radio" class="btn-group" default="1" description="XML_FIELD_DESCR_CNF_SHOWHELPBAR">
+			<option value="1">JYES</option>
+			<option value="0">JNO</option>
+		</field>
+		<field name="gravatar" type="radio" class="btn-group" label="XML_FIELD_LABEL_CNF_GRAVATAR" default="1">
+			<option value="1">JYES</option>
+			<option value="0">JNO</option>
+		</field>
+		<field name="cron_key" type="text" default="" size="40" label="C_CRONSECRETWORD" />
+		<field name="map_key" type="text" default="" size="40" label="Google map API key" />
+		<field name="tmpl_prefix" type="text" default="" size="40" label="CTMPL_PREFIX" description="CTMPL_PREFIX_DESCR" />
+		<field name="tmpl_full" type="radio" class="btn-group" label="XML_FIELD_LABEL_CNF_TMPL_FULL" description="XML_FIELD_LABEL_CNF_TMPL_FULL_DESCR" default="0">
+			<option value="1">JYES</option>
+			<option value="0">JNO</option>
+		</field>
+	</fieldset>
+
+	<fieldset name="router" label="XML_FIELD_LABEL_SEF" description="XML_FSETDESC_CNF_SEO">
+		<field label="XML_FIELD_LABEL_CNF_ROUTER" name="sef_router" type="filelist" directory="/components/com_joomcck/routers" hide_none="1" hide_default="1" default="main_router.php" filter=".php" />
+		<field label="XML_FIELD_LABEL_CNF_CATEGORYPATH" name="sef_category" type="list" default="0" description="XML_FIELD_DESCR_CNF_CATEGORYPATH">
+			<option value="0">O_CNF_CURCATEGORY</option>
+			<option value="full">O_CNF_FULLCATEGORYPATH</option>
+		</field>
+		<field label="XML_FIELD_LABEL_CNF_FILTERNOFOLLOW" class="btn-group" name="filter_nofollow" type="radio" default="1" description="XML_LINK_NOFOLLOW">
+			<option value="1">JYES</option>
+			<option value="0">JNO</option>
+		</field>
+		<field name="separator" default=":" type="list" label="JFIELD_METADATA_SEPARATOR_LABEL" description="JFIELD_METADATA_SEPARATOR_DESCR">
+			<option value=":">:</option>
+			<option value="_">_</option>
+			<option value="~">~</option>
+		</field>
+		<field name="robots" type="list" label="JFIELD_METADATA_ROBOTS_LABEL" description="JFIELD_METADATA_ROBOTS_DESC">
+			<option value="">JGLOBAL_USE_GLOBAL</option>
+			<option value="index, follow">JGLOBAL_INDEX_FOLLOW</option>
+			<option value="noindex, follow">JGLOBAL_NOINDEX_FOLLOW</option>
+			<option value="index, nofollow">JGLOBAL_INDEX_NOFOLLOW</option>
+			<option value="noindex, nofollow">JGLOBAL_NOINDEX_NOFOLLOW</option>
+		</field>
+		<field name="author" type="text" label="JAUTHOR" description="JFIELD_METADATA_AUTHOR_DESC" size="20" />
+		<field name="rights" type="textarea" label="JFIELD_META_RIGHTS_LABEL" description="JFIELD_META_RIGHTS_DESC" required="" filter="string" cols="30" rows="2" />
+		<field name="metakey" type="textarea" label="JFIELD_META_KEYWORDS_LABEL" description="JFIELD_META_KEYWORDS_DESC" class="inputbox" rows="3" cols="30" />
+		<field name="metadesc" type="textarea" label="JFIELD_META_DESCRIPTION_LABEL" description="JFIELD_META_DESCRIPTION_DESC" class="inputbox" rows="3" cols="30" />
+	</fieldset>
+
+	<fieldset name="censor" label="XML_FSETLBL_CNF_CENSOR">
+		<field label="XML_FIELD_LABEL_CNF_ENABLECENSOR" name="censor" type="radio" class="btn-group" default="1">
+			<option value="1">JYES</option>
+			<option value="0">JNO</option>
+		</field>
+		<field label="XML_FIELD_LABEL_CNF_BADWORDS" name="censor_words" type="textarea" default="fuck, porn, porno, bitch" description="XML_FIELD_DESCR_CNF_BADWORDS" cols="35" rows="5" />
+		<field label="XML_FIELD_LABEL_CNF_REPLACE" name="censor_replace" type="text" default="CENSORED" />
+	</fieldset>
+	
+	<fieldset name="permissions" label="JCONFIG_PERMISSIONS_LABEL" description="JCONFIG_PERMISSIONS_DESC">
+		<field name="rules" type="rules" label="JCONFIG_PERMISSIONS_LABEL" class="inputbox" filter="rules" validate="rules" component="com_joomcck" section="component" />
+	</fieldset>
+</config>

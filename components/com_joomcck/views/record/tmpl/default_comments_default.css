@@ -1,0 +1,14 @@
+.private {
+	background-color: #FCFDE2;
+	padding: 5px;
+	-webkit-border-radius: 5px;
+    border-radius: 5px;
+    border: 1px solid #D1CC96;
+}
+.published {
+	background-color: #FDEEE2;
+	padding: 5px;
+	-webkit-border-radius: 5px;
+    border-radius: 5px;
+    border: 1px solid #CCADAD;
+}

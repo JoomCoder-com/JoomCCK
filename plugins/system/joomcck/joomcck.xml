@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension version="2.5" type="plugin" group="system" method="upgrade">
+    <name>System - Joomcck</name>
+	<author>JoomBoost</author>
+	<license>GNU/GPLv3 http://www.gnu.org/licenses/gpl-3.0.html</license>
+	<authorEmail>support@joomBoost.com</authorEmail>
+	<authorUrl>https://www.joomBoost.com</authorUrl>
+	<creationDate>March 2012</creationDate>
+	<copyright>(c) 2012 JoomBoost</copyright>
+	<version>8.9</version>
+    <description>Joomcck system plugin</description>
+    <files>
+        <filename plugin="joomcck">joomcck.php</filename>
+    </files>
+    <config>
+        <fields name="params" />
+    </config>
+</extension>

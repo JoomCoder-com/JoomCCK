@@ -1,0 +1,1 @@
+{"fields":[{"name":"id","type":"int(10)","null":"NO","default":0},{"name":"import","type":"int(11)","null":"YES","default":0},{"name":"text","type":"text","null":"YES","default":null},{"name":"ctime","type":"datetime","null":"YES","default":"0000-00-00 00:00:00"}],"primary":"id","keys":{"idx_import":{"type":"KEY","fields":"`import`"}},"engine":"MyISAM"}

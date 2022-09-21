@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<form>
+	<name>RSComments - Joomla Comments</name>
+	<author>JoomBoost</author>
+	<license>GPL GNU</license>
+	<authorEmail>support@joomBoost.com</authorEmail>
+	<authorUrl>https://www.joomBoost.com</authorUrl>
+	<creationDate>1 March 2012</creationDate>
+	<copyright>(c) 2012 JoomBoost</copyright>
+	<version>1.0</version>
+	<description></description>
+
+	<fields name="comments" />
+</form>

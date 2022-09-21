@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<extension type="file" version="3.0" method="upgrade">
+	<name>[NAME]</name>
+	<author>[AUTHOR_NAME]</author>
+	<authorEmail>[AUTHOR_EMAIL]</authorEmail>
+	<authorUrl>[AUTHOR_URL]</authorUrl>
+	<creationDate>[CTIME]</creationDate>
+	<copyright><![CDATA[ [COPYRIGHT] ]]></copyright>
+	<license>GNU/GPL http://www.gnu.org/copyleft/gpl.html</license>
+	<version>Build 9.[VERSION]</version>
+	<description><![CDATA[
+		<div class="hero-unit" style="text-align:left;">
+			<h1>PACK: [NAME] <small>Joomcck 9 Pack</small></h1>
+			[DESCR]
+		</div>
+	]]></description>
+
+	<key>[KEY]</key>
+
+	<scriptfile>install.pack.php</scriptfile>
+
+	<fileset>
+		<files folder="admin" target="administrator/components/com_joomcck/packs">
+			<folder>[KEY]</folder>
+		</files>
+		<files folder="site" target="components/com_joomcck/">[FRONT]
+		</files>
+[ADD]
+	</fileset>
+</extension>

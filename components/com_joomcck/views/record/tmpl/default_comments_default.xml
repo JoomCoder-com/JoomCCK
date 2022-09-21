@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<form>
+	<name>Default</name>
+	<author>JoomBoost</author>
+	<creationDate>Febrary 2012</creationDate>
+	<copyright>Copyright (C) 2005 - 2012 JoomBoost. All rights reserved.</copyright>
+	<license>Commercial (https://www.joomBoost.com/commercial-license)</license>
+	<authorEmail>support@joomBoost.com</authorEmail>
+	<authorUrl>www.JoomBoost.com</authorUrl>
+	<version>8.29</version>
+	<description>Template Category select</description>
+
+	<fields name="tmpl_params">
+		<fieldset name="comments_t">
+			<field name="comments_indent" label="X_COMMENTINDENT" type="text" size="3" default="35"  />
+		</fieldset>
+	</fields>
+
+	<fields name="tmpl_core">
+		<fieldset name="comments_format" label="Format">
+
+			<field name="comments_sort" type="list" default="date" label="X_SECORDER" >
+				<option value="ctime ASC">X_OLD_FIRST</option>
+				<option value="ctime DESC">X_RECENTFIRLST</option>
+			</field>
+
+			<field name="comments_author_avatar" type="radio" class="btn-group" default="1" label="X_AUTHORAVATAR" >
+				<option value="0">CNO</option>
+				<option value="1">CYES</option>
+			</field>
+			<field name="comments_author_avatar_width" label="X_AUTHAVATWIDTH" type="text" size="3" default="100"  />
+			<field name="comments_author_avatar_height" label="X_AUTHAVATHEIGHT" type="text" size="3" default="100"  />
+
+			<field name="comments_editor" label="Editor" type="plugins" folder="editors" default="tinymce"  />
+			<field name="comments_time_format" type="list" default="l, d F Y" label="CDATEFORMAT" >
+				<option value="h:i A, l, d F Y">12:00 AM, Tuesday, 30 December 2007</option>
+				<option value="h:i A, l, F d, Y">12:00 AM, Tuesday, December 30, 2007</option>
+				<option value="l, d F Y">Tuesday, 30 December 2007</option>
+				<option value="l, F d, Y">Tuesday, December 30, 2007</option>
+				<option value="d F Y">30 December 2007</option>
+				<option value="F d, Y">December 30, 2007</option>
+				<option value="d M Y">30 Dec 2007</option>
+				<option value="M d, Y">Dec 30, 2007</option>
+				<option value="d.m.y">30.12.07</option>
+				<option value="m.d.y">12.30.17</option>
+				<option value="m-d-y">30-12-07</option>
+				<option value="d-m-y">12-30-07</option>
+				<option value="d/m/y">30/12/07</option>
+				<option value="m/d/y">12/30/07</option>
+			</field>
+			<field name="comments_nested" label="X_NETLEVEL" type="list" default="1" >
+				<option value="1">J1</option>
+				<option value="2">J2</option>
+				<option value="3">J3</option>
+				<option value="4">J4</option>
+				<option value="5">J5</option>
+				<option value="6">J6</option>
+				<option value="7">J7</option>
+				<option value="8">J8</option>
+				<option value="9">J9</option>
+				<option value="10">J10</option>
+			</field>
+			<field name="comments_subscribe" type="radio" class="btn-group" default="1" label="X_ALLOWFOOLW" description="X_ALLOWFOLLWDESCR">
+				<option value="0">CNO</option>
+				<option value="1">CYES</option>
+			</field>
+			<field name="textarea_height" type="text" default="300" label="X_TEXTAREAHEIGHT" />
+		</fieldset>
+		<fieldset name="comments_show" label="CELEMENTS">
+			<field name="comments_title" type="radio" class="btn-group" default="1" label="X_COMTITLE" >
+				<option value="0">CNO</option>
+				<option value="1">CYES</option>
+			</field>
+			<field name="comments_username" type="radio" class="btn-group" default="1" label="X_HOWUSERNAME" >
+				<option value="0">CNO</option>
+				<option value="1">CYES</option>
+			</field>
+			<field name="comments_date" type="radio" class="btn-group" default="1" label="X_SHOWCTIME" >
+				<option value="0">CNO</option>
+				<option value="1">CYES</option>
+			</field>
+			<field name="comments_rss_button" type="radio" class="btn-group" default="1" label="X_SHOWRSS" >
+				<option value="0">CNO</option>
+				<option value="1">CYES</option>
+			</field>
+			<field name="comemnts_fold" type="radio" class="btn-group" default="1" label="X_FORLDCOMMENTS" description="X_FOLD_DESCR">
+				<option value="0">CNO</option>
+				<option value="1">CYES</option>
+			</field>
+			<field name="comemnts_limit_box" type="radio" class="btn-group" default="1" label="X_PAGLIMITBOX" description="X_PAGLIMITDESCR">
+				<option value="0">CNO</option>
+				<option value="1">CYES</option>
+			</field>
+			<field name="comments_pagination" label="X_DEAFULTLIMIT" type="list" default="20" description="X_PAGDEFLIMITDESCR">
+				<option value="5">5</option>
+				<option value="10">10</option>
+				<option value="20">20</option>
+				<option value="30">30</option>
+				<option value="40">40</option>
+				<option value="50">50</option>
+				<option value="100">100</option>
+			</field>
+			<field name="comments_title_lbl" label="X_COMTITLBL" type="text" size="40" default="Comments"  />
+			<field name="comments_add_title_lbl" label="X_ADNEWLABEL" type="text" size="40" default="Add New Comment"  />
+			<field name="comments_button_title_lbl" label="X_BUTTONTITLE" type="text" size="40" default="Post Comment"  />
+		</fieldset>
+	</fields>
+</form>

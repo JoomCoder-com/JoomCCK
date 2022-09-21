@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<form>
+    <fieldset name="geo" addfieldpath="/libraries/mint/forms/fields/">
+        <field name="field_id_geo" key="id" type="meresourcesfields" size="1" multiple="false" default="" label="Field with position source" filters="'geo'"/>
+    </fieldset>
+</form>

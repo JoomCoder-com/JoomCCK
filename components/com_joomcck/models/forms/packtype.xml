@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<form>
+	<config>
+			<fieldset name="sp_type_templates" label="XML_LABEL_SP_TYPETEMPLATES">
+				<field name="tmpl_article" type="radio" class="btn-group" default="1" label="XML_LABEL_SP_ARTICLE">
+					<option value="0">CNO</option>
+					<option value="1">CYES</option>
+				</field>
+				<field name="tmpl_articleform" type="radio" class="btn-group" default="1" label="XML_LABEL_SP_ARTICLEFORM">
+					<option value="0">CNO</option>
+					<option value="1">CYES</option>
+				</field>
+				<field name="rating" type="radio" class="btn-group" default="1" label="XML_LABEL_SP_RATINGS">
+					<option value="0">CNO</option>
+					<option value="1">CYES</option>
+				</field>
+				<field name="tmpl_comment" type="radio" class="btn-group" default="1" label="XML_LABEL_SP_COMMENT" description="asfasdfasdf">
+					<option value="0">CNO</option>
+					<option value="1">CYES</option>
+				</field>
+				<field name="tmpl_category" type="radio" class="btn-group" data-toggle="buttons-radio" default="1" label="XML_LABEL_SP_CATEGORYSELECT">
+					<option value="0">CNO</option>
+					<option value="1">CYES</option>
+				</field>
+			</fieldset>
+			<fieldset name="sp_type_content" label="XML_LABEL_SP_TYPECONTENT">
+				<field name="copy_content" type="radio" class="btn-group" default="1" label="XML_LABEL_SP_COPYCONTENT">
+					<option value="0">CNO</option>
+					<option value="1">CYES</option>
+				</field>
+			</fieldset>
+			<fieldset name="sp_type_fields" label="XML_LABEL_SP_FIELDSTEMPLATES">
+				<field name="copy_field_templates" type="radio" class="btn-group" default="0" label="XML_LABEL_SP_COPYFIELDSTEMPLATES">
+					<option value="0">CNO</option>
+					<option value="1">CYES</option>
+				</field>
+				<field name="copy_field_record_templates" type="radio" class="btn-group" default="0" description="XML_LABEL_SP_COPYFIELDSRECORDTEMPLATES_DESCR" label="XML_LABEL_SP_COPYFIELDSRECORDTEMPLATES">
+					<option value="0">CNO</option>
+					<option value="1">CYES</option>
+				</field>
+			</fieldset>
+	</config>
+</form>

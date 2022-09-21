@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension type="component" version="3.0" method="upgrade">
+	<name>com_joomcck</name>
+	<author>JoomBoost</author>
+	<creationDate>21/09/2022</creationDate>
+	<copyright><![CDATA[ (c) 2013-2022 JoomBoost]]></copyright>
+	<license>GNU/GPL http://www.gnu.org/copyleft/gpl.html</license>
+	<authorEmail>support@joomBoost.com</authorEmail>
+	<authorUrl>https://www.joomBoost.com</authorUrl>
+	<version>4.0</version>
+	<scriptfile>install.php</scriptfile>
+	<files folder="site">
+		<filename>api.php</filename>
+		<filename>joomcck.php</filename>
+		<filename>controller.php</filename>
+		<filename>index.html</filename>
+		<filename>router.php</filename>
+
+		<folder>configs/</folder>
+		<folder>controllers/</folder>
+		<folder>images/</folder>
+		<folder>layouts/</folder>
+		<folder>library/</folder>
+		<folder>models/</folder>
+		<folder>routers/</folder>
+		<folder>tables/</folder>
+		<folder>views/</folder>
+	</files>
+	<languages folder="site">
+		<language tag="en-GB">language/en-GB/en-GB.com_joomcck.ini</language>
+	</languages>
+	<administration>
+		<menu link="option=com_joomcck&amp;view=records" img="components/com_joomcck/images/menu/joomcck.png">com_joomcck</menu>
+		<submenu>
+			<menu link="option=com_joomcck&amp;view=about" img="class:info">About</menu>
+			<menu link="option=com_config&amp;view=component&amp;component=com_joomcck" img="class:config">Configuration</menu>
+		</submenu>
+		<files folder="admin">
+			<filename>access.xml</filename>
+			<filename>joomcck.php</filename>
+			<filename>controller.php</filename>
+			<filename>index.html</filename>
+			<filename>config.xml</filename>
+
+			<folder>images</folder>
+			<folder>library</folder>
+			<folder>views</folder>
+		</files>
+		<languages folder="admin">
+			<language tag="en-GB">language/en-GB/en-GB.com_joomcck.ini</language>
+			<language tag="en-GB">language/en-GB/en-GB.com_joomcck.sys.ini</language>
+		</languages>
+	</administration>
+	<restorepoint>
+		<customdirs>
+			<dir>modules/mod_joomcck_category</dir>
+			<dir>modules/mod_joomcck_sectionstatistics</dir>
+			<dir>modules/mod_joomcck_tagcoud</dir>
+			<dir>plugins/mint</dir>
+			<dir>plugins/search/joomcck</dir>
+			<dir>plugins/content/glossary</dir>
+			<dir>media/mint</dir>
+			<dir>library/mint</dir>
+		</customdirs>
+		<langfiles>
+			<lang></lang>
+		</langfiles>
+		<extraprefixes>
+			<prefix>js_res</prefix>
+		</extraprefixes>
+	</restorepoint>
+</extension>

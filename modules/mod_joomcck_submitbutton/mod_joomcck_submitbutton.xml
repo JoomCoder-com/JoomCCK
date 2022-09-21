@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension type="module" version="3.0" client="site" method="upgrade">
+	<name>Joomcck - Module - Submit Button</name>
+	<author>JoomBoost</author>
+	<creationDate>June 2012</creationDate>
+	<copyright>Copyright (C) 2005 - 2012 JoomBoost (https://www.joomBoost.com). All rights reserved.</copyright>
+	<license>GNU/GPL http://www.gnu.org/copyleft/gpl.html</license>
+	<authorEmail>support@joomBoost.com</authorEmail>
+	<authorUrl>https://www.joomBoost.com</authorUrl>
+	<version>8.39</version>
+
+	<description><![CDATA[ Joomcck Submit new article button ]]></description>
+	<files>
+		<filename module="mod_joomcck_submitbutton">mod_joomcck_submitbutton.php</filename>
+		<filename>index.html</filename>
+		<folder>tmpl/</folder>
+	</files>
+	<languages>
+		<language tag="en-GB">en-GB.mod_joomcck_submitbutton.ini</language>
+	</languages>
+	<config>
+		<fields name="params">
+			<fieldset label="General" name="general" addfieldpath="/libraries/mint/forms/fields/">
+				<field name="section_id" type="meresourcessection" default="" label="Default section" description="Select the Home section which will for this module." />
+				<field name="types" type="mertype" size="10" default="" multi="1" label="Only following types" description="If not selected all section types will be active"/>
+				<field name="display" type="list" default="0" label="Display mode">
+					<option value="0">Everywhere</option>
+					<option value="1">In given section only</option>
+				</field>
+				<field name="category" type="radio" class="btn-group" default="0" label="Preselect category">
+					<option value="0">JNO</option>
+					<option value="1">JYES</option>
+				</field>
+				<field name="follow" type="radio" class="btn-group" default="0" label="Follow section parameters" description="Sometimes you want submit button to be shown only in categories where submission is allowed and you configure section accordingly. DO you want this button to follow this parameters or simply show it on all section pages? ">
+					<option value="0">JNO</option>
+					<option value="1">JYES</option>
+				</field>
+				<field name="label" type="text" default="Add New %s" label="Label" />
+				<field name="layout" type="modulelayout" label="JFIELD_ALT_LAYOUT_LABEL" description="JFIELD_ALT_MODULE_LAYOUT_DESC" />
+				<field name="moduleclass_sfx" type="text" default="" label="Module Class Suffix" description="PARAMMODULECLASSSUFFIX" />
+			</fieldset>
+
+
+		</fields>
+	</config>
+</extension>

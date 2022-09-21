@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<joomcckfield>
+	<name>HTML</name>
+	<group>Simple Form Elements</group>
+
+	<config>
+		<fields name="params" addpathfield="/libraries/mint/forms/fields">
+			<fieldset name="tmpl">
+				<field type="cobtmpllist" name="template_input" onchange="ajax_load_sub_params(this, '/components/com_joomcck/fields/html/tmpl/input');" filter="php$" hide_none="1" hide_default="1" directory="/components/com_joomcck/fields/html/tmpl/input" label="F_TMPLINPUT" default="default.php" />
+				<field type="cobtmpllist" name="template_output_list" onchange="ajax_load_sub_params(this, '/components/com_joomcck/fields/html/tmpl/output');" filter="php$" hide_none="1" hide_default="1" directory="/components/com_joomcck/fields/html/tmpl/output" label="F_TMPLLIST" default="default.php" />
+				<field type="cobtmpllist" name="template_output_full" onchange="ajax_load_sub_params(this, '/components/com_joomcck/fields/html/tmpl/output');" filter="php$" hide_none="1" hide_default="1" directory="/components/com_joomcck/fields/html/tmpl/output" label="F_TMPLFULL" default="default.php" />
+			</fieldset>
+			<fieldset name="general" label="FS_GENERAL">
+				<field name="default_value" type="textarea" label="F_DEFAULT" rows="8" cols="35" description="F_DEFAULT_DESCR" />
+			</fieldset>
+			<fieldset label="FS_READMORE" name="rm">
+				<field name="intro" type="text" default="2000" label="F_INTROLENGTH" description="F_INTROLENGTH_DESCR" />
+				<field name="hide_intro" type="radio" class="btn-group" default="0" label="F_HIDEINTROONFULL" description="F_HIDEINTROONFULL_DESCR">
+					<option value="0">JNO</option>
+					<option value="1">JYES</option>
+				</field>
+				<field name="readmore" type="radio" class="btn-group" default="0" label="F_READMORE">
+					<option value="0">JNO</option>
+					<option value="1">JYES</option>
+				</field>
+				<field name="readmore_lbl" type="text" default="Read More..." label="F_READMORETEXT"/>
+				<field name="full" type="text" default="0" label="F_FULLLENGTH" description="F_FULLLENGTH_DESCR" />
+			</fieldset>
+			<fieldset label="FS_EDITOR" name="editor">
+				<field name="editor" type="plugins" folder="editors" default="tinymce" label="F_EDITORSTYLE" description="" />
+				<field name="short" type="radio" class="btn-group" default="0" label="F_SIMPLEMODE" description="F_SIMPLEMODE_DESCR">
+					<option value="0">JNO</option>
+					<option value="1">JYES</option>
+				</field>
+				<field name="height" type="text" default="300" size="3" label="F_HEIGHT" description="F_HEIGHT_DESCR" />
+				<field name="editor_btn" type="meplugins" group="editors-xtd" default="" label="F_BUTTONS" multi="1" size="4" description="F_BUTTONS_DESCR" />
+				<field name="plugins" type="meplugins" group="content" default="pagebreak" label="F_PLUGINS" multi="1" size="5" description="F_PLUGINS_DESCR" />
+			</fieldset>
+			<fieldset label="FS_HTML" name="input_filter">
+				<field name="allow_html" type="accesslevel" default="3" label="F_NOTFILTERFOR" description="" />
+				<field name="tags_mode" type="list" default="1" label="F_FILTERTAGSMODE" description="">
+					<option value="0">XML_OPT_WHITELIST</option>
+					<option value="1">XML_OPT_BLACKLIST</option>
+				</field>
+				<field type="textarea" cols="35" rows="2" name="filter_tags" label="F_FILTERTAGSLIST" default="iframe, script" description="F_FILTERTAGSLIST_DESCR" />
+
+				<field name="attr_mode" type="list" default="1" label="F_FILTERATTRMODE" description="">
+					<option value="0">XML_OPT_WHITELIST</option>
+					<option value="1">XML_OPT_BLACKLIST</option>
+				</field>
+				<field type="textarea" cols="35" rows="2" name="filter_attr" label="F_FILTERATTRLIST" default="rel" description="F_FILTERATTRLIST_DESCR" />
+			</fieldset>
+		</fields>
+
+	</config>
+</joomcckfield>

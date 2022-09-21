@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<form>
+    <fieldset name="useridreplace" label="Move/Delete User">
+        <field type="text" name="user_from" label="User ID" description="Enter ID of the user which you are going to delete or already deleted" size="5" />
+        <field type="radio" class="btn-group" name="user_delete" label="Delete user after process" description="Delete user from Joomla core user table after process" default="0">
+            <option value="0">No</option>
+            <option value="1">Yes</option>
+        </field>
+        <field type="list" name="action" label="What to do" description="" default="2">
+            <option value="1">Delete all user records from DB</option>
+            <option value="2">Replace user ID with another user ID</option>
+        </field>
+        <field type="text" name="user_to" label="Move to another user ID" description="Enter user ID you want to replace to" size="5" />
+    </fieldset>
+</form>

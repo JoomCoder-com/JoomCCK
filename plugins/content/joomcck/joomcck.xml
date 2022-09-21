@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension version="3.0" type="plugin" group="content" method="upgrade">
+	<name>Content - Plugin - Review/Discuss with Joomcck 8</name>
+	<author>JoomBoost</author>
+	<creationDate>October 2012</creationDate>
+	<copyright>Copyright (C) 2005 - 2012 JoomBoost. All rights reserved.</copyright>
+	<license>GNU General Public License version 2 or later; see LICENSE.txt</license>
+	<authorEmail>support@JoomBoost.org</authorEmail>
+	<authorUrl>www.JoomBoost.org</authorUrl>
+	<version>8.31</version>
+	<description><![CDATA[
+        Inserts discussions/reviews into core Joomla articles. Use <code>{joomcck-discussion}</code>
+        in the text of the article or list categories in <code>In Categories</code> parameter as IDs separated by coma. Eg: <code>3,12,4</code>.
+	]]>
+        </description>
+	<files>
+		<filename plugin="joomcck">joomcck.php</filename>
+		<filename>index.html</filename>
+	</files>
+	<config>
+		<fields name="params">
+
+			<fieldset name="basic" addfieldpath="/libraries/mint/forms/fields">
+				<field name="section_id" type="csectionstypess" required="true" type_elem_name="types" default="" label="Select section" description="Select the Home section where to store comments." />
+				<field name="type_id" type="mertype" required="true" label="Content type" />
+				<field name="orderby" type="list" default="r.ctime DESC" label="Primary Order">
+					<option value="r.ctime ASC">Oldest first</option>
+					<option value="r.ctime DESC">Most recent first</option>
+					<option value="r.mtime DESC">Last Modified First</option>
+					<option value="r.mtime ASC">First Modified First</option>
+					<option value="r.title ASC">Title Alphabetical</option>
+					<option value="r.title DESC">Title Reverse-Alphabetical</option>
+					<option value="name ASC">Author Alphabetical</option>
+					<option value="name DESC">Author Reverse-Alphabetical</option>
+					<option value="r.hits DESC">Most Hits</option>
+					<option value="r.hits ASC">Least Hits</option>
+					<option value="r.votes_result DESC">Most Rated</option>
+					<option value="r.votes_result ASC">Least Rated</option>
+					<option value="r.comments DESC">Most Commented</option>
+					<option value="r.comments ASC">Least Commented</option>
+					<option value="r.favorite_num DESC">Most Favorited</option>
+					<option value="r.favorite_num ASC">Least Favorited</option>
+					<option value="RAND() ">Random</option>
+				</field>
+				<field label="Template overwrite" name="tmpl" type="mersubtmpls" default="default" exclude="calendar" description="Template to display list of articles. The changes takes effect only after relogin or session cleanup" tmpltype="itemlist" />
+				<field label="Limit" name="limit" type="text" size="3" default="10" />
+				<field name="rating" type="radio" class="btn-group" default="1" label="Calculate average rating">
+					<option value="0">No</option>
+					<option value="1">Yes</option>
+				</field>
+				<field label="Rating template" name="rating_tmpl" type="mersubtmpls" default="default" exclude="calendar" description="Template to display list of articles. The changes takes effect only after relogin or session cleanup" tmpltype="rating" />
+
+				<field label="Default Category" description="Joomcck category to submit discussions to. Only single integer is allowed" name="defcat" type="text" default="" />
+
+				<field label="In Categories" description="In Joomla articles located in this categories this plugin wil be triggered. Coma separate value."
+                       name="joomcat" type="text" default="" />
+				<field label="Description" name="descr" type="textarea" default="" />
+				<field label="Title in article" name="title" type="text" size="40" default="Discussions" />
+				<field label="Title in the list" name="title_all" type="text" size="40" default="All discussions of %s" />
+				<field label="New article button" name="button" type="text" size="40" default="Start a Discussion" />
+				<field label="All articles button" name="button_all" type="text" size="40" default="All Discussions" />
+			</fieldset>
+
+		</fields>
+	</config>
+</extension>

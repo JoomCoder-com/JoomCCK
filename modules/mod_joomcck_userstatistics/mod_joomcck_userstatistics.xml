@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension type="module" version="3.0" client="site" method="upgrade">
+	<name>Joomcck - Module - User Statictics</name>
+	<author>JoomBoost</author>
+	<creationDate>June 2012</creationDate>
+	<copyright>Copyright (C) 2005 - 2012 JoomBoost (https://www.joomBoost.com). All rights reserved.</copyright>
+	<license>GNU/GPL http://www.gnu.org/copyleft/gpl.html</license>
+	<authorEmail>support@joomBoost.com</authorEmail>
+	<authorUrl>https://www.joomBoost.com</authorUrl>
+	<version>8.21</version>
+
+	<description><![CDATA[ Joomcck User Statictics ]]></description>
+	<files>
+		<filename module="mod_joomcck_userstatistics">mod_joomcck_userstatistics.php</filename>
+		<filename>helper.php</filename>
+		<filename>index.html</filename>
+		<folder>tmpl/</folder>
+	</files>
+	<languages>
+		<language tag="en-GB">en-GB.mod_joomcck_userstatistics.ini</language>
+	</languages>
+	<config>
+		<fields name="params">
+			<fieldset label="General" name="general" addfieldpath="/libraries/mint/forms/fields/">
+				<field name="section_id" type="meresourcessection" default="" label="Default section" description="Select the Home section which will for this module." />
+				<field name="current_section" type="radio" default="0" label="Define section" description="Defines if statistics would be shown for current section or default one. If section is not defined on the page there would be used default section">
+					<option value="0">Static</option>
+					<option value="1">Dinamic</option>
+				</field>
+				<field name="created" type="radio" default="1" label="User records number" description="">
+					<option value="0">No</option>
+					<option value="1">Yes</option>
+				</field>
+				<field name="comments_left" type="radio" default="1" label="Comments number&lt;br&gt;left in user records" description="How many comments are left in user records">
+					<option value="0">No</option>
+					<option value="1">Yes</option>
+				</field>
+				<field name="commented" type="radio" default="1" label="User comments number" description="How many comments user left">
+					<option value="0">No</option>
+					<option value="1">Yes</option>
+				</field>
+				<field name="readers" type="radio" default="1" label="Readers number" description="">
+					<option value="0">No</option>
+					<option value="1">Yes</option>
+				</field>
+				<field name="use_anonim" type="radio" default="1" label="Count every anonimous &lt;br&gt;user for readers num" description="">
+					<option value="0">No</option>
+					<option value="1">Yes</option>
+				</field>
+				<field name="visited" type="radio" default="1" label="Hits number" description="">
+					<option value="0">No</option>
+					<option value="1">Yes</option>
+				</field>
+				<field name="rating_average" type="radio" default="1" label="Average rating &lt;br&gt;of user records" description="">
+					<option value="0">No</option>
+					<option value="1">Yes</option>
+				</field>
+				<field name="whofollow" type="radio" default="1" label="User records &lt;br&gt;followers number" description="">
+					<option value="0">No</option>
+					<option value="1">Yes</option>
+				</field>
+				<field name="followed" type="radio" default="1" label="Followed records number" description="">
+					<option value="0">No</option>
+					<option value="1">Yes</option>
+				</field>
+				<field name="whofavorited" type="radio" default="1" label="User records &lt;br&gt;bookmarked number" description="">
+					<option value="0">No</option>
+					<option value="1">Yes</option>
+				</field>
+				<field name="favorited" type="radio" default="1" label="Bookmarks number" description="How many records user added to bookmarks">
+					<option value="0">No</option>
+					<option value="1">Yes</option>
+				</field>
+
+				<field name="layout" type="modulelayout" label="JFIELD_ALT_LAYOUT_LABEL" description="JFIELD_ALT_MODULE_LAYOUT_DESC" />
+				<field name="moduleclass_sfx" type="text" default="" label="Module Class Suffix" description="PARAMMODULECLASSSUFFIX" />
+			</fieldset>
+
+
+		</fields>
+	</config>
+</extension>

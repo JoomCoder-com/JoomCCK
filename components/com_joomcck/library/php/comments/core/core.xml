@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<form>
+	<name>Joomcck - Built-In Comments</name>
+
+	<fields name="comments">
+		<fieldset name="comments" label="FS_GENERAL">
+			<field name="comment_captcha" type="radio" class="btn-group" default="1" label="X_COMMCAPTCHAPUBLIC">
+				<option value="0">CNO</option>
+				<option value="1">CYES</option>
+			</field>
+			<field name="comments_approve" type="radio" class="btn-group" default="0" label="X_COMMREQAPPROVE">
+				<option value="0">CNO</option>
+				<option value="1">CYES</option>
+			</field>
+			<field name="comments_nocomment" type="radio" class="btn-group" default="0" label="X_NOCOMMENT_MSG">
+				<option value="0">CNO</option>
+				<option value="1">CYES</option>
+			</field>
+			<field name="comments_rss" type="radio" class="btn-group" default="0" label="X_COMMENT_RSS">
+				<option value="0">CNO</option>
+				<option value="1">CYES</option>
+			</field>
+		</fieldset>
+		<fieldset name="comments_rules" label="X_COMMRULES">
+			<field name="comments_access_post" type="accesslevel" default="1" label="X_COMMWHOCANPOST">
+				<option value="0">XML_OPT_NOONE</option>
+			</field>
+			<field name="comments_access_access" type="accesslevel" default="1" label="X_COMMWHOCANACCESS">
+				<option value="0">XML_OPT_NOONE</option>
+			</field>
+			<field name="comments_access_view" type="accesslevel" default="1" label="X_COMMWHOCANVIEW" description="X_COMMWHOVIEWDESCR">
+				<option value="0">XML_OPT_NOONE</option>
+			</field>
+
+			<field name="comments_access_moderate" type="accesslevel" default="3" label="X_COMMWHOMODERATE" description="X_COMMMODERDESCR">
+				<option value="0">XML_OPT_NOONE</option>
+			</field>
+
+			<field name="comments_lang_mode" type="list" default="0" label="X_COMMLANGMOD">
+				<option value="0">X_OPT_COMANYLANG</option>
+				<option value="1">X_OPT_COMMCURRLANG</option>
+			</field>
+
+			<field name="comments_approve" type="radio" class="btn-group" default="0" label="X_COMMREQAPPROVE">
+				<option value="0">CNO</option>
+				<option value="1">CYES</option>
+			</field>
+			<field name="comments_approve_public" type="radio" class="btn-group" default="0" label="X_COMMREQAPPROVEPUBLIC">
+				<option value="0">CNO</option>
+				<option value="1">CYES</option>
+			</field>
+			<field name="comments_approve_author" type="radio" class="btn-group" default="0" label="X_COMMAUTHORCANMODER" description="X_COMMAUTHMODERDESCR">
+				<option value="0">CNO</option>
+				<option value="1">CYES</option>
+			</field>
+			<field name="comments_author_block" type="radio" class="btn-group" default="1" label="X_COMMCANDISABLE" description="X_COMMAUTHCANDESABLEDESCR">
+				<option value="0">CNO</option>
+				<option value="1">CYES</option>
+			</field>
+			<field name="comments_comment_author_edit" type="radio" class="btn-group" default="1" label="X_COMMAUTHCANEDIT">
+				<option value="0">CNO</option>
+				<option value="1">CYES</option>
+			</field>
+			<field name="comments_comment_author_delete" type="radio" class="btn-group" default="1" label="X_COMMAUTHCANDELETE">
+				<option value="0">CNO</option>
+				<option value="1">CYES</option>
+			</field>
+		</fieldset>
+
+		<fieldset name="comments_private" label="C_FSLPRIVATECOMM">
+			<field name="comments_private" type="accesslevel" default="3" label="X_COMMWHOPRIVATE">
+				<option value="0">XML_OPT_NOONE</option>
+			</field>
+			<field name="comments_hide_access" type="accesslevel" default="3" label="X_COMMWHOVIEWPRIVATE" description="X_COMMVIEWPRIVATEDESCR">
+				<option value="0">XML_OPT_NOONE</option>
+			</field>
+			<field name="comments_hide_access_author" type="radio" class="btn-group" default="1" label="X_COMMAUTHCANVIEWPRIVATE" description="X_COMMAUTHVIEWPRIVATEDESCR">
+				<option value="0">CNO</option>
+				<option value="1">CYES</option>
+			</field>
+		</fieldset>
+
+
+		<fieldset name="comments_rate" label="X_FSLRATING">
+			<field name="comments_rate_rate" type="accesslevel" default="1" label="X_COMMWHORATECOMM">
+				<option value="0">XML_OPT_NOONE</option>
+			</field>
+			<field name="comments_rate_view" type="accesslevel" default="1" label="X_COMMWHOVIEWRATE">
+				<option value="0">XML_OPT_NOONE</option>
+			</field>
+			<field name="comments_rate_delete" type="text" size="5" default="100" label="X_COMMAUTOUNPUD" description="X_COMMAUTOUNPUBDESCR" />
+		</fieldset>
+
+		<fieldset name="comments_attach" label="X_FSLATTACH">
+			<field name="comment_attach" type="accesslevel" default="3" label="X_COMMWHOATTACH">
+				<option value="0">XML_OPT_NOONE</option>
+			</field>
+			<field name="comments_attachment_overwrite" type="radio" class="btn-group" default="1" label="X_COMMOVERRIDEEXISTING">
+				<option value="0">CNO</option>
+				<option value="1">CYES</option>
+			</field>
+			<field name="comments_attachment_hit" type="radio" class="btn-group" default="1" label="X_COMMSOWDOWNNUM">
+				<option value="0">CNO</option>
+				<option value="1">CYES</option>
+			</field>
+			<field name="comments_attachment_size" type="radio" class="btn-group" default="1" label="X_COMMSHOWSIZE">
+				<option value="0">CNO</option>
+				<option value="1">CYES</option>
+			</field>
+			<field name="comments_allowed_formats" size="50" type="text" default="pdf, zip, doc, jpg, jpeg, png, gz, tar, docx, xls, xlsx, ppt, pptx" label="DOWN_FORMAT" />
+			<field name="comments_attachment_max" type="text" default="2097152" label="DOWN_MAXSIZE" />
+			<field name="comments_max_count" type="text" default="3" size="3" label="DOWN_MAXXNUM" />
+		</fieldset>
+
+		<fieldset name="type_subscr15" label="XML_EMERCOMMENT" description="XML_EMEPCOMMENT_DESC" addfieldpath="/administrator/components/com_joomcck/models/fields">
+			<field name="type_comment_subscription" type="emrplanslist" default="" label="XML_LABEL_SUB_PLANS" multiple="multiple" class="inputbox" />
+			<field name="type_comment_subscription_count" type="radio" class="btn-group" default="0" label="XML_LABEL_SUB_COUNT">
+				<option value="0">CNO</option>
+				<option value="1">CYES</option>
+			</field>
+			<field name="type_comment_msg" type="text" size="50" default="10" label="XML_LABEL_SUB_COUNT" />
+		</fieldset>
+	</fields>
+</form>

@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8"?>
+<joomcckfield>
+	<name>Email</name>
+	<group>Special Form Elements</group>
+
+	<config>
+		<fields name="params">
+			<fieldset name="tmpl">
+				<field type="cobtmpllist" name="template_input" onchange="ajax_load_sub_params(this, '/components/com_joomcck/fields/email/tmpl/input');" filter="php$" hide_none="1" hide_default="1" directory="/components/com_joomcck/fields/email/tmpl/input" label="F_TMPLINPUT" default="default.php" />
+				<field type="cobtmpllist" name="template_output_list" onchange="ajax_load_sub_params(this, '/components/com_joomcck/fields/email/tmpl/output');" filter="php$" hide_none="1" hide_default="1" directory="/components/com_joomcck/fields/email/tmpl/output" label="F_TMPLLIST" default="default.php" />
+				<field type="cobtmpllist" name="template_output_full" onchange="ajax_load_sub_params(this, '/components/com_joomcck/fields/email/tmpl/output');" filter="php$" hide_none="1" hide_default="1" directory="/components/com_joomcck/fields/email/tmpl/output" label="F_TMPLFULL" default="default.php" />
+			</fieldset>
+			<fieldset name="core">
+				<field name="sortable" type="radio" class="btn-group" default="0" label="F_SORTABLE">
+					<option value="0">JNO</option>
+					<option value="1">JYES</option>
+				</field>
+			</fieldset>
+			<fieldset name="filter" label="FS_FILTERGEN">
+				<field name="filter_enable" type="mradio" condition='{"1":["params_params_template_filter","params_params_filter_hide","params_params_filter_descr","params_params_template_filter_module","fieldset-name-filter2"]}' class="btn-group" default="0" label="F_ENABLE" description="">
+					<option value="0">JNO</option>
+					<option value="1">JYES</option>
+				</field>
+				<field type="cobtmpllist" name="template_filter" onchange="ajax_load_sub_params(this, '/components/com_joomcck/fields/email/tmpl/filter');" filter="php$" hide_none="1" hide_default="1" directory="/components/com_joomcck/fields/email/tmpl/filter" label="F_TMPLFILTER" default="autocomplete.php" />
+				<field type="cobtmpllist" name="template_filter_module" onchange="ajax_load_sub_params(this, '/components/com_joomcck/fields/email/tmpl/filter');" filter="php$" hide_none="1" hide_default="1" directory="/components/com_joomcck/fields/email/tmpl/filter" label="F_TMPLFILTERMODULE" default="autocomplete.php" />
+				<field name="filter_hide" type="mradio" class="btn-group" default="0" label="F_HIDE" description="F_HIDE_DESCR">
+					<option value="0">JNO</option>
+					<option value="1">JYES</option>
+				</field>
+				<field name="filter_descr" type="text" default="" size="40" label="F_DESCR" description="" />
+			</fieldset>
+			<fieldset name="filter2" label="FS_FILTERFIELDSPEC">
+				<field name="filter_linkage" type="mlist" condition='{"not0":["params_params_filter_show_number","params_params_filter_tip"]}' default="0" label="F_VALUELINKAGE" description="F_VALUELINKAGE_DESCR">
+					<option value="0">XML_OPT_NOFILTERLINK</option>
+					<option value="1">XML_OPT_VALUEASFLINK</option>
+					<option value="2">XML_OPT_SMALICONASFLINK</option>
+				</field>
+				<field name="filter_tip" type="text" default="Show all records where %s is equal to %s" size="40" label="F_VALUETOOLTIP" description="F_VALUETOOLTIP_DESCR" />
+				<field name="filter_show_number" type="radio" class="btn-group" default="1" label="F_FBOXSHOWNUMS" description="F_FBOXSHOWNUMS_DESCR">
+					<option value="0">JNO</option>
+					<option value="1">JYES</option>
+				</field>
+			</fieldset>
+			<fieldset name="general" label="FS_GENERAL">
+				<field name="enter_mail" type="accesslevel" default="1" label="F_WHOCANENTER">
+					<option value="0">XML_OPT_NOBODY</option>
+				</field>
+				<field name="view_mail" type="accesslevel" default="1" label="F_WHOCANVIEW">
+					<option value="0">XML_OPT_NOBODY</option>
+				</field>
+				<field name="acemail" type="radio" class="btn-group" default="0" label="F_ACYMAIL">
+					<option value="0">JNO</option>
+					<option value="1">JYES</option>
+				</field>
+				<field name="acemail_text" type="text" default="I want to subscribe to newssletter" size="5" label="F_ACYTEXT" />
+				<field name="qr_code" type="radio" class="btn-group" default="0" label="F_SHOWQR">
+					<option value="0">JNO</option>
+					<option value="1">JYES</option>
+				</field>
+				<field name="qr_width" type="text" default="60" size="5" label="F_QRSIZE" />
+			</fieldset>
+
+			<fieldset name="send" label="FS_SENDINGOPT">
+				<field type="cobtmpllist" name="template_body" onchange="ajax_load_sub_params(this, '/components/com_joomcck/fields/email/tmpl/email');" filter="php$" hide_none="1" hide_default="1" directory="/components/com_joomcck/fields/email/tmpl/email" label="F_TMPLBODY" default="default.php" />
+				<field name="send_mail" type="accesslevel" default="3" label="F_SHOWCANSEND">
+					<option value="0">XML_OPT_NOBODY</option>
+				</field>
+				<field name="to" type="list" default="1" label="F_SENDTO">
+					<option value="1">XML_OPT_FVALUE</option>
+					<option value="2">XML_OPT_ADMIN</option>
+					<option value="3">XML_OPT_AUTHOR</option>
+					<option value="4">XML_OPT_ENTERVAL</option>
+					<option value="5">XML_OPT_CUSTOM</option>
+				</field>
+				<field name="email_format" type="radio" class="btn-group" default="1" label="F_EMAILFORMAT">
+					<option value="0">Plain Text</option>
+					<option value="1">HTML</option>
+				</field>
+				<field name="dafault_user_email" type="radio" class="btn-group" default="1" label="F_DEFAULTUSER_EMAIL">
+					<option value="0">JNO</option>
+					<option value="1">JYES</option>
+				</field>
+				<field name="custom" type="text" size="50" default="" label="F_CUSTOM" />
+				<field name="copy_to" type="text" class="btn-group" default="" label="F_SENDCOPYEMAIL" description="F_SENDCOPYEMAILDESCR" />
+				<field name="change_name_from" type="radio" class="btn-group" default="1" label="F_ALLOWCHANGESENDERNAME">
+					<option value="0">JNO</option>
+					<option value="1">JYES</option>
+				</field>
+				<field name="change_email_from" type="radio" class="btn-group" default="1" label="F_ALLOWCHANGESENDEREMAIL">
+					<option value="0">JNO</option>
+					<option value="1">JYES</option>
+				</field>
+				<field name="cc" type="radio" class="btn-group" default="0" label="F_SHOWCC" description="F_SHOWCC_DESCR">
+					<option value="0">JNO</option>
+					<option value="1">JYES</option>
+				</field>
+				<field name="subject_style" type="list" default="0" label="F_SUBJECT">
+					<option value="0">XML_OPT_NOSUBJ</option>
+					<option value="1">XML_OPT_INPUT</option>
+					<option value="2">XML_OPT_SELECT</option>
+				</field>
+				<field name="pre_subject_val" type="textarea" cols="35" rows="5" default="" label="F_PREDEFSUBJVALUES" description="F_PREDEFSUBJVALUES_DESCR" />
+				<field name="subject" type="text" size="50" default="" label="F_DEFAULTSUBJ" />
+				<field name="show_body" type="radio" class="btn-group" default="1" label="F_ALLOWENTERMSG">
+					<option value="0">JNO</option>
+					<option value="1">JYES</option>
+				</field>
+				<field name="body" type="textarea" cols="35" rows="5" default="" label="F_DEFAULTMSG" />
+				<field name="attachment" type="radio" class="btn-group" default="1" label="F_SHOWATTACHMENT">
+					<option value="0">JNO</option>
+					<option value="1">JYES</option>
+				</field>
+				<field name="formats" type="text" size="50" default="zip, tar, rar, txt, jpeg, jpg, pdf, gif, doc, xls" label="F_ATTACHFORMATS" />
+				<field name="attach_num" type="text" size="3" default="1" label="F_ATTACHNUM" />
+				<field name="button" type="text" size="50" default="Send" label="F_SUTTONLABEL" />
+				<field name="copy_to_sender" type="radio" class="btn-group" default="1" label="F_ALLOWSENDCOPY">
+					<option value="0">JNO</option>
+					<option value="1">JYES</option>
+				</field>
+				<field name="additional_fields" type="textarea" cols="35" rows="5" default="" label="D_ADDITION" description="D_ADDITIONDESCR" />
+				<field name="show_captcha" type="radio" class="btn-group" default="1" label="F_SHOWCAPTCHA">
+					<option value="0">JNO</option>
+					<option value="1">JYES</option>
+				</field>
+				<field name="rep_name" type="text" label="F_REPNAME" />
+				<field name="rep_email" type="text" label="F_REPEMAIL" />
+			</fieldset>
+			<fieldset name="form" label="FS_MAILFORM">
+				<field name="form_style" type="list" default="2" label="F_STYLE" description="FS_MAILFORM_DESCR">
+					<option value="1">XML_OPT_SLIDEDOWN</option>
+					<option value="2">XML_OPT_POPUP</option>
+					<option value="3">XML_OPT_FIXED</option>
+				</field>
+				<field type="cobtmpllist" name="template_form" onchange="ajax_load_sub_params(this, '/components/com_joomcck/fields/email/tmpl/form');" filter="php$" hide_none="1" hide_default="1" directory="/components/com_joomcck/fields/email/tmpl/form" label="F_TMPLFORM" default="default.php" />
+				<field name="popup_label" type="text" size="40" default="Send e-mail online" label="F_POPUPLABEL" />
+			</fieldset>
+		</fields>
+
+	</config>
+</joomcckfield>

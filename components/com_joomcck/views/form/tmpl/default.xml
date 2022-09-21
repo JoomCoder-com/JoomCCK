@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<metadata>
+	<layout title="CURLSUBMITARTICLE">
+		<message>CURLSUBMITDESCR</message>
+	</layout>
+	<fields name="request" addfieldpath="/libraries/JoomBoost/forms/fields">
+		<fieldset name="request">
+			<field name="type_id" type="meresourcestype" default="0" required="true" label="CURLTYPEID"/>
+			<field name="section_id" type="meresourcessection" default="0" required="true" label="CURLSECTIONID"/>
+		</fieldset>
+	</fields>
+</metadata>

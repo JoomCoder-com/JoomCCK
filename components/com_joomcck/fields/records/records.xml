@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<joomcckfield>
+	<name>Records</name>
+	<group>Relation Form Elements</group>
+
+	<config><fields name="params">
+			<fieldset name="tmpl">
+				<field type="cobtmpllist" name="template_output_full" onchange="ajax_load_sub_params(this, '/components/com_joomcck/fields/records/tmpl/output');" filter="php$" hide_none="1" hide_default="1" directory="/components/com_joomcck/fields/records/tmpl/output" label="F_TMPLFULL" default="default.php" />
+			</fieldset>
+		<fieldset name="general2" label="FS_WHATTOSHOW">
+			<field name="list_type" type="list" default="" label="F_WHATTOSHOW" description="">
+				<option value="">XML_OPT_ANYARTICLE</option>
+				<option value="author_created">XML_OPT_AUTHORCREATED</option>
+				<option value="author_favorited">XML_OPT_AUTHORFAVORITED</option>
+				<option value="author_rated">XML_OPT_AUTHORRATED</option>
+				<option value="author_commented">XML_OPT_AUTHORCOMMENTED</option>
+				<option value="author_visited">XML_OPT_AUTHORVISITED</option>
+
+				<option value="visitor_created">XML_OPT_VISITORCREATED</option>
+				<option value="visitor_favorited">XML_OPT_VISITORFAVORITED</option>
+				<option value="visitor_rated">XML_OPT_VISITORRATED</option>
+				<option value="visitor_commented">XML_OPT_VISITORCOMMENTED</option>
+				<option value="visitor_visited">XML_OPT_VISITORVISITED</option>
+
+				<option value="who_comment">XML_OPT_WHOCOMMENT</option>
+				<option value="who_rate">XML_OPT_WHORATE</option>
+				<option value="who_visit">XML_OPT_WHOVISIT</option>
+				<option value="who_favorite">XML_OPT_WHOFAVORITE</option>
+
+				<option value="tag_related">XML_OPT_TAGRELATED</option>
+				<option value="author_tag_related">XML_OPT_AUTHORTAGRELATED</option>
+				<option value="field_data">XML_OPT_FIELDDATA</option>
+				<option value="user_field_data">XML_OPT_USERFIELDDATA</option>
+				<option value="distance">XML_OPT_DISTANCE</option>
+			</field>
+			<field name="section_id" type="meresourcessection" label="CSECTION" description="" />
+			<field name="type" type="mertype" default="" multi="1" label="F_ONLYFOLLOWINGTYPES" />
+			<field name="field_from" type="meresourcesfields" default="" label="F_SEARCHFROMFIELD" type_strict="1" filters="'text','radio','select','checkbox','multiselect','multilevelselect','boolean','email','telephone','listautocomplete','datetime','image','status'" description="You can choose only 'text', 'radiobutton', 'select_simple', 'checkbox', 'multiselect', 'multilevelselect', 'select_relate' field type." />
+			<field name="field_in" type="meresourcesfields" default="" label="F_SEARCHINFIELD" filters="'text','radio','select','checkbox','multiselect','multilevelselect','boolean','email','telephone','listautocomplete','datetime','image','status'" description="You can choose only 'text', 'radiobutton', 'select_simple', 'checkbox', 'multiselect', 'multilevelselect', 'select_relate' field type." />
+			<field name="category_affect" type="radio" class="btn-group" default="0" label="F_CATAFFECT" description="F_CATAFECTDESC">
+				<option value="0">JNO</option>
+				<option value="1">JYES</option>
+			</field>
+			<field name="distance" type="text" default="5" label="F_DISTANCE" description="F_DISTANCEDESCR" />
+			<field name="field_distance" type="meresourcesfields" key="id" default="" label="F_DISTANCEFIELD" filters="'geo'" description="" />
+		</fieldset>
+		<fieldset name="general3" label="FS_HOWTOSHOW">
+			<field name="limit" type="text" size="3" default="5" label="CLIMIT" description="" />
+			<field label="F_TMPLFULLOVERRIDE" name="tmpl_list" type="cobtmpls" select="1" default="" description="" tmpltype="itemlist">
+				<option value="">X_DONOTOVERRIDETMPL</option>
+			</field>
+			<field name="orderby" type="list" default="" label="CORDERING" description="CORDERING_DESCR">
+				<option value="r.ctime ASC">XML_OPT_CTIMEASC</option>
+				<option value="r.ctime DESC">XML_OPT_CTIMEDESC</option>
+				<option value="r.mtime DESC">XML_OPT_MODIFIEDDESC</option>
+				<option value="r.mtime ASC">XML_OPT_MODIFIEDASC</option>
+				<option value="r.title ASC">XML_OPT_TITLEASC</option>
+				<option value="r.title DESC">XML_OPT_TITLEDESC</option>
+				<option value="name ASC">XML_OPT_AUTHORASC</option>
+				<option value="name DESC">XML_OPT_AUTHORDESC</option>
+				<option value="r.hits DESC">XML_OPT_MOSTHITS</option>
+				<option value="r.hits ASC">XML_OPT_LEASTHITS</option>
+				<option value="r.votes_result DESC">XML_OPT_MOSTRATED</option>
+				<option value="r.votes_result ASC">XML_OPT_LEASTRATED</option>
+				<option value="r.comments DESC">XML_OPT_MOSTCOMMENTED</option>
+				<option value="r.comments ASC">XML_OPT_LEASTCOMMENTED</option>
+				<option value="r.favorite_num DESC">XML_OPT_MOSTFAVOR</option>
+				<option value="r.favorite_num ASC">XML_OPT_LEASTFAVOR</option>
+				<option value="RAND() ">XML_OPT_RANDOM</option>
+			</field>
+			<field name="r_no_records" type="text" default="No records found" label="F_NORECORDS" size="40" description="F_NORECORDS_DESCR" />
+			<field name="r_no_login" type="text" default="You are not logined to see items here" label="F_NOLOGIN" size="40" description="F_NOLOGIN_DESCR" />
+		</fieldset>
+
+	</fields>
+
+</config></joomcckfield>

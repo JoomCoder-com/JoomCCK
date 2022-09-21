@@ -1,0 +1,32 @@
+div.select-list.well {
+	overflow: auto;
+	margin-right: 10px;
+	float: left;
+	list-style-type: none;
+	display: block;
+	min-width: 120px;
+	max-width: 170px;
+	min-height: 50px;
+	max-height: 200px;
+	padding: 5px;
+}
+
+div.select-list ul.nav {
+    margin: 0;
+    padding: 0;
+}
+div.select-list ul.nav li a {
+	padding: 3px 3px;
+    margin: 0;
+	text-overflow: ellipsis;
+    overflow: hidden;
+	white-space: nowrap;
+}
+div.select-list ul.nav li img {
+	cursor: pointer;
+	position: relative;
+}
+
+#categories_list div{
+	margin-right: 10px;
+}

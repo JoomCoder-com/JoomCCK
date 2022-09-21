@@ -1,0 +1,8 @@
+<?php
+$contacts = array(
+	'magent' => array(
+		'label' => JText::_('Mail.ru Agent'), 
+		'patern' => '[NAME]: <a href="aim:goim?screenname=[VALUE]">[VALUE]</a>', 
+		'icon' => JURI::root() . 'components/com_joomcck/fields/geo/icons/aol.png'
+	),
+);

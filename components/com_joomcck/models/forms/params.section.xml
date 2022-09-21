@@ -1,0 +1,340 @@
+<?xml version="1.0" encoding="utf-8"?>
+<form>
+	<fields name="events">
+		<fieldset name="cobevents" label="X_PERSONEVENTS" description="X_ENETDESCR">
+			<field name="event" type="joomcckevents" label="X_EVENTS"/>
+		</fieldset>
+		<fieldset name="generalevents">
+			<field name="subscribe_section" type="accesslevel" default="2" label="X_SECSECSUBSCR">
+				<option value="0">XML_OPT_NOONE</option>
+			</field>
+			<field name="subscribe_category" type="accesslevel" default="2" label="X_SECCATSUBSCR">
+				<option value="0">XML_OPT_NOONE</option>
+			</field>
+			<field name="subscribe_record" type="accesslevel" default="2" label="X_SECALLOWRECSUBSCR">
+				<option value="0">XML_OPT_NOONE</option>
+			</field>
+			<field name="subscribe_user" type="accesslevel" default="2" label="X_SECUSERSUBSCR">
+				<option value="0">XML_OPT_NOONE</option>
+			</field>
+		</fieldset>
+		<fieldset name="generalevents2">
+			<field name="alerts" type="mradio" class="btn-group" default="1" label="X_SECENABLEEMAIL">
+				<option value="0">CNO</option>
+				<option value="1">CYES</option>
+			</field>
+			<field name="user_manage" type="mradio" class="btn-group" default="1" label="X_SECUSEROVER" description="X_SECUSEROVERDESCR">
+				<option value="0">CNO</option>
+				<option value="1">CYES</option>
+			</field>
+			<field name="event_date_format" type="list" default="" label="X_EVETNDATEFORMAT">
+				<option value="">X_CUSTOMDATE</option>
+				<option value="h:i A, l, d F Y">12:00 AM, Tuesday, 30 December 2007</option>
+				<option value="h:i A, l, F d, Y">12:00 AM, Tuesday, December 30, 2007</option>
+				<option value="l, d F Y">Tuesday, 30 December 2007</option>
+				<option value="l, F d, Y">Tuesday, December 30, 2007</option>
+				<option value="d F Y">30 December 2007</option>
+				<option value="F d, Y">December 30, 2007</option>
+				<option value="d M Y">30 Dec 2007</option>
+				<option value="M d, Y">Dec 30, 2007</option>
+				<option value="d.m.y">30.12.07</option>
+				<option value="m.d.y">12.30.17</option>
+				<option value="m-d-y">30-12-07</option>
+				<option value="d-m-y">12-30-07</option>
+				<option value="m/d/y">30/12/07</option>
+				<option value="d/m/y">12/30/07</option>
+			</field>
+			<field name="event_date_custom" type="text" default="d M Y" label="X_CUSTOMDATE"/>
+		</fieldset>
+	</fields>
+	<fields name="general">
+		<fieldset name="general" label="CFSLPROPERTIERS">
+			<field name="status" type="list" default="1" label="X_SECSTATUS">
+				<option value="0">X_OPTOFFLINE</option>
+				<option value="1">X_OPTONLINE</option>
+			</field>
+			<field name="status_msg" type="textarea" rows="3" cols="27" default="This section is currently offline. Please, check back later." label="X_SECOFFLINEMSG"/>
+			<field label="X_SECIID" name="category_itemid" type="menuitem">
+				<option value="">XML_OPTION_NOMENUITEM</option>
+			</field>
+			<field label="X_NOACCESSREDIRECT" name="noaccess_redirect" type="menuitem" description="X_NOACCESSREDIRECT_DESCR">
+				<option value="">XML_OPTION_NOMENUITEM</option>
+			</field>
+			<field name="orderby" type="list" default="r.ctime DESC" label="X_SECORDER">
+				<option value="r.ctime ASC">X_OPTORDERTIMEA</option>
+				<option value="r.ctime DESC">X_OPTORDERTIMED</option>
+				<option value="r.extime ASC">X_OPTORDEREXTIMEA</option>
+				<option value="r.extime DESC">X_OPTORDEREXTIMED</option>
+				<option value="r.mtime DESC">X_OPTORDERMTIMEA</option>
+				<option value="r.mtime ASC">X_OPTORDERMTIMED</option>
+				<option value="r.title ASC">X_OPTORDERTITLEA</option>
+				<option value="r.title DESC">X_OPTORDERTITLED</option>
+				<option value="name ASC">X_OPTORDERNAMEA</option>
+				<option value="name DESC">X_OPTORDERNAMED</option>
+				<option value="r.hits DESC">X_OPTORDERHITSA</option>
+				<option value="r.hits ASC">X_OPTORDERHOTSD</option>
+				<option value="r.votes_result DESC">X_OPTORDERVOTESA</option>
+				<option value="r.votes_result ASC">X_OPTORDERVODETD</option>
+				<option value="r.comments DESC">X_OPTORDERCOMMENTA</option>
+				<option value="r.comments ASC">X_OPTORDERCOMMENTD</option>
+				<option value="r.favorite_num DESC">X_OPTORDERFAVORITE</option>
+				<option value="r.favorite_num ASC">X_OPTORDERFAVORITED</option>
+				<option value="RAND() ">X_OPTORDERRAND</option>
+			</field>
+			<field name="lang_mode" type="list" default="0" label="X_SECLANGMODE">
+				<option value="0">X_OPTLANGANY</option>
+				<option value="1">X_OPTLANGCURR</option>
+			</field>
+			<field name="records_mode" type="list" default="0" label="X_SECRECORDMOD" description="X_SECRECORDMODEDESCR">
+				<option value="0">X_OPTRECORDMODECAT</option>
+				<option value="1">X_OPTRECORDMODECATSUBCAT</option>
+			</field>
+			<field name="filter_mode" type="list" default="1" label="X_SECFILTERMOD" description="X_SECFILTERMODEDESCR">
+				<option value="0">X_OPTFILTERMODESEC</option>
+				<option value="1">X_OPTFILTERMODERECMODE</option>
+			</field>
+			<field name="cat_mode" type="list" default="1" label="X_CATMOD" description="XX_CATMOD">
+				<option value="0">X_OPTCOUNTTFAST</option>
+				<option value="1">X_OPTCOUNTSMART</option>
+			</field>
+			<field name="can_display" type="usergroup" default="0" label="X_WHOCANDISPLAY" description="X_WHOCANDISPLAYDESCR">
+				<option value="0">- Select Group -</option>
+			</field>
+			<field name="featured_first" type="mradio" class="btn-group" default="0" label="X_SEC_FEATUREFIRST" description="X_SECFEATUREFORSTDECR">
+				<option value="0">CNO</option>
+				<option value="1">CYES</option>
+			</field>
+			<field name="marknew" type="mradio" class="btn-group" w="1" default="0" label="X_SEC_MARKNEW" description="XX_SECMARKNEWDECR">
+				<option value="0">CNO</option>
+				<option value="1">CYES</option>
+			</field>
+			<field name="show_future_records" type="accesslevel" default="3" label="X_SECWHOSEEFEATURED" description="X_SECFEATUREDDESCR">
+				<option value="0">XML_OPT_NOONE</option>
+			</field>
+			<field name="show_past_records" type="accesslevel" default="3" label="X_SECWHOSEEEXPIRE" description="X_SECEXPIREDESCR">
+				<option value="0">XML_OPT_NOONE</option>
+			</field>
+			<field name="show_restrict" type="accesslevel" default="1" label="X_SECSHOWRESTRICREC" description="X_SEC_SHOWRESCRICTRECDESCR">
+				<option value="0">XML_OPT_NOONE</option>
+			</field>
+			<field name="show_children" type="accesslevel" default="0" label="X_SECSHOWCHILDREN" description="X_SEC_SHOWRESCCHILDDESCR">
+				<option value="0">XML_OPT_NOONE</option>
+			</field>
+			<field name="have_unpublished" type="mradio" class="btn-group" default="1" label="X_SECSHAVEUNPUB" description="XX_SECSHAVEUNPUBDESCR">
+				<option value="0">CNO</option>
+				<option value="1">CYES</option>
+			</field>
+			<field name="item_label" type="text" default="item" label="X_ITEMLABEL" description="X_ITEMLABEL_DESCR"/>
+			<field name="count_hits" type="mradio" class="btn-group" default="1" label="X_SECHITCOUNT">
+				<option value="0">CNO</option>
+				<option value="1">CYES</option>
+			</field>
+		</fieldset>
+
+		<fieldset name="general2" label="X_SEFFSLSECTIONHOME">
+			<field name="section_home_items" type="list" default="1" label="X_SECSHOWRECHOME" description="X_SECSHOWRECHOMEDESCR">
+				<option value="0">CSECNOTSHOW</option>
+				<option value="1">CSECSHOWROOT</option>
+				<option value="2">CSECSHOWALL</option>
+			</field>
+			<field name="section_home_orderby" type="list" default="r.ctime DESC" label="X_SECHOMEORDER">
+				<option value="r.ctime ASC">X_OPTORDERTIMEA</option>
+				<option value="r.ctime DESC">X_OPTORDERTIMED</option>
+				<option value="r.mtime DESC">X_OPTORDERMTIMEA</option>
+				<option value="r.mtime ASC">X_OPTORDERMTIMED</option>
+				<option value="r.title ASC">X_OPTORDERTITLEA</option>
+				<option value="r.title DESC">X_OPTORDERTITLED</option>
+				<option value="name ASC">X_OPTORDERNAMEA</option>
+				<option value="name DESC">X_OPTORDERNAMED</option>
+				<option value="r.hits DESC">X_OPTORDERHITSA</option>
+				<option value="r.hits ASC">X_OPTORDERHOTSD</option>
+				<option value="r.votes_result DESC">X_OPTORDERVOTESA</option>
+				<option value="r.votes_result ASC">X_OPTORDERVODETD</option>
+				<option value="r.comments DESC">X_OPTORDERCOMMENTA</option>
+				<option value="r.comments ASC">X_OPTORDERCOMMENTD</option>
+				<option value="r.favorite_num DESC">X_OPTORDERFAVORITE</option>
+				<option value="r.favorite_num ASC">X_OPTORDERFAVORITED</option>
+				<option value="RAND() ">X_OPTORDERRAND</option>
+			</field>
+			<field name="home_featured_first" type="mradio" class="btn-group" default="0" label="X_SEC_FEATUREFIRST" description="X_SECFEATUREFORSTDECR">
+				<option value="0">CNO</option>
+				<option value="1">CYES</option>
+			</field>
+		</fieldset>
+
+		<fieldset name="submission" label="X_SECFSLSUBMIT" addpath="/components/com_resource/elements">
+			<field required="true" name="type" type="mertype" default="" multi="1" label="X_SECSUBMITTIPE" description="X_SECTYPESUBMITDESCR"/>
+			<field name="record_submit_limit" type="text" size="3" default="0" label="X_SECSUBMITLIMIT" description="X_SECSUBMITLIMIT"/>
+		</fieldset>
+
+		<fieldset name="general_tmpl" label="X_SECFSLTMPL">
+			<field label="X_SECTMPLMARKAP" name="tmpl_markup" type="cobtmpls" default="default" description="X_SECTMPLMARKUPDESCR" tmpltype="markup"/>
+			<field label="X_SECTMPLRECLIST" name="tmpl_list" type="cobtmpls" multi="1" default="default" description="X_SECTMPLRECLISTDESCR" tmpltype="itemlist"/>
+			<field label="X_SECTMPLCATINDEX" name="tmpl_category" type="cobtmpls" default="default" tmpltype="category">
+				<option value="0">CNONE</option>
+			</field>
+			<field label="X_SECTMPLCOMPARE" name="tmpl_compare" type="cobtmpls" default="vertical" description="X_SECCOMPAREDESCR" tmpltype="itemlist"/>
+			<field name="tmpl_list_default" type="text" default="default" label="X_SECTMPLDEFAULT" description="X_SECTMPLDEFAULTDESCR"/>
+		</fieldset>
+	</fields>
+	<fields name="more">
+		<fieldset name="search" label="X_SECSEARCHOPT" description="X_SECSEARCHOPTDESCR">
+			<field name="search_mode" type="list" default="3" label="X_SRCHMODE">
+				<option value="1">X_SRCHM1</option>
+				<option value="2">X_SRCHM2</option>
+				<option value="3">X_SRCHM3</option>
+			</field>
+			<field name="search_title" type="mradio" class="btn-group" default="1" label="X_SECSEARCHTITLE">
+				<option value="0">CNO</option>
+				<option value="1">CYES</option>
+			</field>
+			<field name="search_name" type="mradio" class="btn-group" default="0" label="X_SECSEARCHNAME">
+				<option value="0">CNO</option>
+				<option value="1">CYES</option>
+			</field>
+			<field name="search_email" type="mradio" class="btn-group" default="0" label="X_SECSEARCHEMAIL">
+				<option value="0">CNO</option>
+				<option value="1">CYES</option>
+			</field>
+			<field name="search_comments" type="mradio" class="btn-group" default="0" label="X_SECSEARCHCOMMENTS">
+				<option value="0">CNO</option>
+				<option value="1">CYES</option>
+			</field>
+			<!--<field name="search_category" type="mradio" class="btn-group" default="0" label="X_SECSEARCHCATEGORY">
+				<option value="0">CNO</option>
+				<option value="1">CYES</option>
+			</field>-->
+		</fieldset>
+        <fieldset name="general_rss" label="X_SECFSLFEED">
+            <field name="feed_link" type="mradio" class="btn-group" condition='{"1":["params_more_records_mode","params_more_feed_limit","params_more_feed_link2","params_more_orderby_rss","params_more_feed_link_type"]}' default="0" label="X_SECENABLERSS">
+                <option value="0">CNO</option>
+                <option value="1">CYES</option>
+            </field>
+            <field name="feed_link2" type="mradio" class="btn-group" default="1" label="X_SECENABLEATOM">
+                <option value="0">CNO</option>
+                <option value="1">CYES</option>
+            </field>
+            <field name="records_mode" type="list" default="0" label="X_SECRECORDMOD" description="X_SECRECORDMODEDESCR">
+                <option value="0">X_OPTRECORDMODECAT</option>
+                <option value="1">X_OPTRECORDMODECATSUBCAT</option>
+            </field>
+            <field label="X_SECMAXFEEDITEMS" name="feed_limit" type="text" default="50"/>
+            <field name="orderby_rss" type="list" default="r.ctime DESC" label="X_SECORDER">
+                <option value="r.ctime ASC">X_OPTORDERTIMEA</option>
+                <option value="r.ctime DESC">X_OPTORDERTIMED</option>
+                <option value="r.mtime DESC">X_OPTORDERMTIMEA</option>
+                <option value="r.mtime ASC">X_OPTORDERMTIMED</option>
+            </field>
+            <field name="feed_link_type" type="list" default="1" label="X_SECFEEDTYPE">
+                <option value="1">X_SECFEEDTYPESEC</option>
+                <option value="2">X_SECFEEDTYPECAT</option>
+            </field>
+        </fieldset>
+		<fieldset name="metadata" label="X_SECFSLMETA">
+			<field name="metadesc" type="textarea" label="JFIELD_META_DESCRIPTION_LABEL" description="JFIELD_META_DESCRIPTION_DESC" rows="3" cols="40"/>
+
+			<field name="metakey" type="textarea" label="JFIELD_META_KEYWORDS_LABEL" description="JFIELD_META_KEYWORDS_DESC" rows="3" cols="40"/>
+
+
+			<field name="author" type="text" label="JAUTHOR" description="JFIELD_METADATA_AUTHOR_DESC" size="30"/>
+
+			<field name="robots" type="list" label="JFIELD_METADATA_ROBOTS_LABEL" description="JFIELD_METADATA_ROBOTS_DESC">
+				<option value="">JGLOBAL_USE_GLOBAL</option>
+				<option value="index, follow">JGLOBAL_INDEX_FOLLOW</option>
+				<option value="noindex, follow">JGLOBAL_NOINDEX_FOLLOW</option>
+				<option value="index, nofollow">JGLOBAL_INDEX_NOFOLLOW</option>
+				<option value="noindex, nofollow">JGLOBAL_NOINDEX_NOFOLLOW</option>
+			</field>
+		</fieldset>
+	</fields>
+
+	<fields name="personalize" addfieldpath="/libraries/mint/forms/fields/">
+		<fieldset name="vip" label="X_EMERALDVIP" description="X_ENABLEVIPDESCR">
+			<field name="vip" type="maccesslevel" default="0" condition='{"not0":["params_personalize_novip","params_personalize_glod_amount","params_personalize_vip_gold","params_personalize_vip_silver","params_personalize_vip_gray"]}' label="X_ENABLEVIP">
+				<option value="0">XML_OPT_NOONE</option>
+			</field>
+			<field name="novip" type="accesslevel" default="3" label="X_DONOTCHOW">
+				<option value="0">XML_OPT_NOONE</option>
+			</field>
+
+			<field name="glod_amount" type="text" default="250" label="X_VIPGOLDSTARTWITH"/>
+			<field type="filelist" name="vip_gold" filter="png$" hide_none="1" hide_default="1"
+				   directory="/components/com_joomcck/images/vip" label="X_VIPGOLD" default="vipGold.png"/>
+			<field type="filelist" name="vip_silver" filter="png$" hide_none="1" hide_default="1"
+				   directory="/components/com_joomcck/images/vip" label="X_VIPSILVER" default="vipSilver.png"/>
+			<field type="filelist" name="vip_gray" filter="png$" hide_none="1" hide_default="1"
+				   directory="/components/com_joomcck/images/vip" label="X_VIPOLD" default="vipGray.png"/>
+
+
+		</fieldset>
+		<fieldset name="persa" label="X_GENERALPERS">
+			<field name="breadcrumbs" type="mradio" class="btn-group" default="1" label="X_SECPERSONBREAD" description="X_SECPERSONBREADDESCR">
+				<option value="0">CNO</option>
+				<option value="1">CYES</option>
+			</field>
+			<field name="personalize" type="mradio" class="btn-group" default="0" condition='{"1":["fieldset-name-persa2","fieldset-name-user-section-set"]}' description="XX_SECUSERSUBSCRDESCR" label="X_SECPERSONZ">
+				<option value="0">CNO</option>
+				<option value="1">CYES</option>
+			</field>
+		</fieldset>
+		<fieldset name="persa2" label="X_GENERALPERS2">
+			<field name="records_mode" type="list" default="0" label="X_SECRECORDMOD">
+				<option value="0">X_OPTRECORDMODEUSER</option>
+				<option value="1">X_OPTRECORDMODEUSERALL</option>
+			</field>
+			<field name="author_mode" type="list" default="username" label="X_SECPERSONZNAME">
+				<option value="name">X_OPTUSERNAME</option>
+				<option value="username">X_OPTUSELLOGIN</option>
+			</field>
+			<field name="post_anywhere" type="mradio" class="btn-group" default="0" label="X_SECPERSONZPOST" description="X_SECPERSONZPOSTDESCR">
+				<option value="0">CNO</option>
+				<option value="1">CYES</option>
+			</field>
+			<field name="home_text" type="text" default="See all artilces" size="3" label="X_HOMETEXT"/>
+			<field name="text_icon" type="fieldicon" default="home.png" size="3" label="X_TEXTICON"/>
+			<field name="onlinestatus" type="mradio" class="btn-group" default="1" description="XX_ONLINESTATUSDESCR" label="X_ONLINESTATUS">
+				<option value="0">CNO</option>
+				<option value="1">CYES</option>
+			</field>
+		</fieldset>
+		<fieldset name="categories-private-sub" label="X_SECFSLUCAT">
+			<field name="pcat_submit" type="maccesslevel" condition='{"not0":["params_personalize_pcat_meta","params_personalize_pcat_icon","params_personalize_pcat_descr_length","params_personalize_pcat_limit"]}' default="0" label="X_SECWHOSUBMITUCAT">
+				<option value="0">XML_OPT_NOONE</option>
+			</field>
+			<field name="pcat_limit" type="text" default="10" size="3" label="X_SECUCATLIMIT" description="X_SECUCATLIMITDESCR"/>
+			<field name="pcat_descr_length" type="text" default="200" size="3" label="X_SECUCATDESCRLENGTH" description="X_SECUCATDESCRLENGTHDESCR"/>
+			<field name="pcat_icon" type="mradio" class="btn-group" default="1" label="X_SECUCATICON">
+				<option value="0">CNO</option>
+				<option value="1">CYES</option>
+			</field>
+			<field name="pcat_meta" type="accesslevel" default="2" label="X_SECWHOENTERMETA">
+				<option value="0">XML_OPT_NOONE</option>
+			</field>
+
+		</fieldset>
+		<fieldset name="user-section-set" label="X_USERSECTIONSET">
+			<field name="allow_section_set" type="mradio" class="btn-group" default="1" label="X_ALLOWSECTIONSET" description="">
+				<option value="0">CNO</option>
+				<option value="1">CYES</option>
+			</field>
+			<field name="allow_change_header" type="mradio" class="btn-group" default="1" label="X_ALLOWCHANGEHEADER" description="">
+				<option value="0">CNO</option>
+				<option value="1">CYES</option>
+			</field>
+			<field name="allow_change_descr" type="mradio" class="btn-group" default="1" label="X_ALLOWCHANGEMSG" description="">
+				<option value="0">CNO</option>
+				<option value="1">CYES</option>
+			</field>
+			<field name="user_sec_descr_length" type="text" default="200" size="3" label="X_USERSECTIONDESCRLENGTH" description="X_USERSECTIONDESCRLENGTHDESCR"/>
+
+			<field name="allow_access_control" type="mradio" class="btn-group" default="1" label="X_ALLOWACCESSCONTROL" description="">
+				<option value="0">CNO</option>
+				<option value="1">CYES</option>
+			</field>
+			<field name="allow_access_control_add" type="mradio" class="btn-group" default="1" label="X_ALLOWACCESSCONTROLADDNEW" description="">
+				<option value="0">CNO</option>
+				<option value="1">CYES</option>
+			</field>
+		</fieldset>
+	</fields>
+</form>

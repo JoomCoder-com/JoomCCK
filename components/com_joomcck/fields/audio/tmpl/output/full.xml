@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<fieldparams>
+    <form>
+        <fields name="tmpl_full">
+            <fieldset name="audio" label="FS_FORMATPARAMS">
+				<field name="show_download" label="F_SHOWDOWNL" type="accesslevel" default="1">
+					<option value="0">XML_OPT_NOONE</option>
+				</field>
+			</fieldset>
+			<fieldset name="playerfull" label="F_PLAYERFULL">
+				<field name="width" type="text" size="3" label="F_PLAYERWIDTH" default="350" description="" />
+				<field name="height" type="text" size="3" label="F_PLAYERHEIGHT" default="27" />
+				<field name="hits" label="F_DONTLOADHITS" type="radio" class="btn-group" default="0">
+					<option value="1">JYES</option>
+					<option value="0">JNO</option>
+				</field>
+				<field name="listbar" label="F_SHOWLISTBAR" type="radio" class="btn-group" default="0">
+					<option value="1">JYES</option>
+					<option value="0">JNO</option>
+				</field>
+			</fieldset>
+			<fieldset name="id3" label="F_IDTAGS" description="F_IDTAGDESCR">
+				<field name="show_artist" label="F_SHOWARTIST" type="radio" class="btn-group" default="0">
+					<option value="1">JYES</option>
+					<option value="0">JNO</option>
+				</field>
+				<field name="show_album" label="F_SHOWALBUM" type="radio" class="btn-group" default="0">
+					<option value="1">JYES</option>
+					<option value="0">JNO</option>
+				</field>
+				<field name="show_year" label="F_SHOWYEAR" type="radio" class="btn-group" default="0">
+					<option value="1">JYES</option>
+					<option value="0">JNO</option>
+				</field>
+				<field name="show_comment" label="F_SHOWCOMMENT" type="radio" class="btn-group" default="0">
+					<option value="1">JYES</option>
+					<option value="0">JNO</option>
+				</field>
+				<field name="show_genre" label="F_SHOWGANRE" type="radio" class="btn-group" default="0">
+					<option value="1">JYES</option>
+					<option value="0">JNO</option>
+				</field>
+			</fieldset>
+        </fields>
+    </form>
+</fieldparams>

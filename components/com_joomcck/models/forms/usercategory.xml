@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<form>
+	<field name="id" type="hidden"  />
+
+	<field name="user_id" type="text" label="JGLOBAL_FIELD_CREATED_BY_LABEL" desc="JGLOBAL_FIELD_CREATED_BY_DESC" />
+
+	<field name="section_id" type="hidden" />
+	
+	<field name="ctime" type="text" label="JGLOBAL_CREATED_DATE" class="readonly" filter="unset" readonly="true" />
+
+	<fields name="params">
+		<fieldset name="params">
+			<field label="CMETAKEY" name="meta_key" type="textarea" description="" />
+			<field label="CMETADESCR" name="meta_descr" type="textarea"  />
+		</fieldset>
+	</fields>
+	
+	<field name="name" type="text" label="JGLOBAL_TITLE" description="JFIELD_TITLE_DESC" class="inputbox" size="40" required="true" />
+
+	<field name="hits" type="text" label="CHITS" description="" class="inputbox" />
+
+	<field name="rate" type="text" label="CRATES" description="" class="inputbox" />
+
+	<field name="rate_count" type="text" label="CRATECOUNT" description="" class="inputbox" />
+
+	<field name="icon" type="file" label="CICON" />
+				
+	<field name="description" type="textarea" label="JGLOBAL_DESCRIPTION" class="inputbox" filter="safehtml"/>
+
+	<field name="published" type="list" class="inputbox" default="1" size="1" label="JSTATUS" description="JFIELD_PUBLISHED_DESC">
+		<option value="1">JPUBLISHED</option>
+		<option value="0">JUNPUBLISHED</option>
+	</field>
+	
+	<field name="checked_out" type="hidden" filter="unset" />
+
+	<field name="checked_out_time" type="hidden" filter="unset" />
+
+	<field name="access" type="accesslevel" label="JFIELD_ACCESS_LABEL"	description="JFIELD_ACCESS_DESC" class="inputbox" />
+
+	<field name="alias" type="text" label="JFIELD_ALIAS_LABEL" description="JFIELD_ALIAS_DESC" class="inputbox" size="40" />
+	
+	<field name="mtime" type="text" label="JGLOBAL_FIELD_MODIFIED_LABEL" class="readonly" filter="unset" readonly="true" />
+
+</form>

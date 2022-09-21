@@ -1,0 +1,538 @@
+<?xml version="1.0" encoding="utf-8"?>
+<form>
+	<name>Default</name>
+	<author>JoomBoost</author>
+	<creationDate>Febrary 2012</creationDate>
+	<copyright>Copyright (C) 2005 - 2012 JoomBoost. All rights reserved.
+	</copyright>
+	<license>Commercial (https://www.joomBoost.com/commercial-license)
+	</license>
+	<authorEmail>support@joomBoost.com</authorEmail>
+	<authorUrl>www.JoomBoost.com</authorUrl>
+	<version>8.110</version>
+	<description>Template Markup layout</description>
+
+	<fields name="main">
+		<fieldset name="general">
+			<field name="description_mode" type="list" default="full" label="Category/section description mode">
+				<option value="0">CNO</option>
+				<option value="before">CTOOLTIPBEFOR</option>
+				<option value="after">CTOOLTIOPAFTER</option>
+				<option value="full">CTOOLTIPFULL</option>
+			</field>
+			<field name="css" type="textarea" rows="10" cols="39"  default="" label="X_CUSTOMCSS" />
+		</fieldset>
+		<fieldset name="alpha" label="CALPHAINDEX">
+			<field name="alpha" type="radio" class="btn-group" default="1" label="X_AIENABLE">
+				<option value="0">CNO</option>
+				<option value="1">CYES</option>
+			</field>
+			<field name="alpha_text" type="text" size="40" default="q w e r t y u i o p a s d f g h j k l z x c v b n m" label="X_ALPHATEXT" description="X_ALPHATEXTDESCR" />
+			<field name="smart" type="radio" class="worning btn-group" default="1" label="X_AIONLYUSED">
+				<option value="0">CNO</option>
+				<option value="1">CYES</option>
+			</field>
+			<field name="alpha_num" type="radio" class="btn-group" default="0" label="X_SHOWNUMBERS" w="1">
+				<option value="0">CNO</option>
+				<option value="1">CYES</option>
+			</field>
+		</fieldset>
+	</fields>
+
+	<fields name="filters">
+		<fieldset name="filters" label="CFILTERS">
+			<field name="filters" type="radio" class="btn-group" default="1" label="CENABLEFILTERS">
+				<option value="0">CNO</option>
+				<option value="1">CYES</option>
+			</field>
+			<field name="filters_home" type="radio" class="btn-group" default="1" label="CENABLEFILTERSHOME">
+				<option value="0">CNO</option>
+				<option value="1">CYES</option>
+			</field>
+			<field name="worns" type="radio" class="btn-group" default="1" label="X_FILTERWORNINGS">
+				<option value="0">CNO</option>
+				<option value="1">CYES</option>
+			</field>
+		</fieldset>
+		<fieldset name="f2" label="X_FILTERMODES">
+			<field name="filter_descr" type="radio" class="btn-group" default="1" label="X_SHOWFILTERDESCR">
+				<option value="0">CNO</option>
+				<option value="1">CYES</option>
+			</field>
+			<field name="filter_type_type" type="list" default="1" label="X_FILTERCONTMODE">
+				<option value="1">CCHECKBOXES</option>
+				<option value="2">CSELECT</option>
+				<option value="3">CTOGGLE</option>
+			</field>
+			<field name="filter_users_type" type="list" default="1" label="X_FILTER_AUTHMOD">
+				<option value="1">CAUTOCOMPLETE</option>
+				<option value="2">CCHECKBOXES</option>
+				<option value="3">CSELECT</option>
+			</field>
+			<field name="filter_category_type" type="list" default="1" label="X_FILTERCATMODE">
+				<option value="1">CAUTOCOMPLETE</option>
+				<option value="2">CCHECKBOXES</option>
+				<option value="3">CCINGLESELECT</option>
+				<option value="4">CMULTISELECT</option>
+				<option value="5">CAJAXSELECT</option>
+			</field>
+			<field name="filter_tags_type" type="list" default="1" label="X_FILTERTAGMODE">
+				<option value="1">CAUTOCOMPLETE</option>
+				<option value="2">CCHECKBOXES</option>
+				<option value="3">CSELECT</option>
+				<option value="4">CCLOUD</option>
+			</field>
+		</fieldset>
+		<fieldset name="f3" label="CFILTERICONS">
+			<field name="filter_type_icon" type="radio" class="btn-group" default="1" label="CCONTENTTYPES">
+				<option value="0">CNO</option>
+				<option value="1">CYES</option>
+			</field>
+			<field name="filter_user_icon" type="radio" class="btn-group" default="1" label="CAUTHORS">
+				<option value="0">CNO</option>
+				<option value="1">CYES</option>
+			</field>
+			<field name="filter_tag_icon" type="radio" class="btn-group" default="1" label="CTAGS">
+				<option value="0">CNO</option>
+				<option value="1">CYES</option>
+			</field>
+			<field name="filter_category_icon" type="radio" class="btn-group" default="1" label="CCATEGORIES">
+				<option value="0">CNO</option>
+				<option value="1">CYES</option>
+			</field>
+			<field name="filter_fields_icon" type="radio" class="btn-group" default="1" label="CFIELDS">
+				<option value="0">CNO</option>
+				<option value="1">CYES</option>
+			</field>
+		</fieldset>
+
+		<fieldset name="f4" label="CFILTERLABELS">
+			<field name="type_label" type="text" size="40" default="Content Type" label="CCONTENTTYPES" />
+			<field name="tag_label" type="text" size="40" default="Tags" label="CTAGS" />
+			<field name="user_label" type="text" size="40" default="Author" label="CAUTHOR" />
+			<field name="category_label" type="text" size="40" default="Category" label="CCATEGORIES" />
+		</fieldset>
+		<fieldset name="f5" label="CGENERALFILTERS">
+			<field name="show_search" type="accesslevel" default="1" label="C_WHOCANSEARCHTEXT">
+				<option value="0">XML_OPT_NOONE</option>
+			</field>
+			<field name="show_more" type="accesslevel" default="1" label="C_WHOFILTERS">
+				<option value="0">XML_OPT_NOONE</option>
+			</field>
+		</fieldset>
+		<fieldset name="f6" label="C_ADDIFILTERS">
+			<field name="filter_type" type="accesslevel" default="1" label="CCONTENTTYPES" description="CFILETRTYPEDESCR">
+				<option value="0">XML_OPT_NOONE</option>
+			</field>
+			<field name="filter_cat" type="accesslevel" default="1" label="CCATEGORIES">
+				<option value="0">XML_OPT_NOONE</option>
+			</field>
+			<field name="filter_user" type="accesslevel" default="1" label="CAUTHORS">
+				<option value="0">XML_OPT_NOONE</option>
+			</field>
+			<field name="filter_tags" type="accesslevel" default="1" label="CTAGS">
+				<option value="0">XML_OPT_NOONE</option>
+			</field>
+			<field name="filter_fields" type="accesslevel" default="1" label="CFIELDS">
+				<option value="0">XML_OPT_NOONE</option>
+			</field>
+		</fieldset>
+	</fields>
+
+	<fields name="title">
+		<fieldset name="title" label="CTITLE">
+			<field name="title_show" type="list" default="1" label="X_SHOWTITLE">
+				<option value="0">X_TITLENO</option>
+				<option value="1">X_TITLESECCAT</option>
+				<option value="2">X_TITLEMENUPARAM</option>
+				<option value="3">X_TITLECUSTOM</option>
+			</field>
+			<field name="title_section_name" type="radio" class="btn-group" default="1" label="X_SECINTITLE">
+				<option value="0">CNO</option>
+				<option value="1">CYES</option>
+			</field>
+			<field name="title_category_name" type="radio" class="btn-group" default="1" label="X_CATINTITLE">
+				<option value="0">CNO</option>
+				<option value="1">CYES</option>
+			</field>
+			<field name="title_static" type="text" size="40" default="This is static title in markup template parameters" label="X_TITLECUSTOMSTAT" />
+		</fieldset>
+		<fieldset name="t1" label="CUSERLISTTITLES">
+			<field name="TITLE_0_CREATED" type="text" default="Records created by %s" label="CCREATED" />
+			<field name="TITLE_0_RATED" type="text" default="Records rated by %s" label="CRATED" />
+			<field name="TITLE_0_FAVORITED" type="text" default="User %s bookmarks" label="CBOOKMARKED" />
+			<field name="TITLE_0_VISITED" type="text" default="Records viewed by %s" label="CVISITED" />
+			<field name="TITLE_0_COMMENTED" type="text" default="Records commented by %s" label="CCOMMENTED" />
+			<field name="TITLE_0_FOLLOW" type="text" default="Records which %s is following" label="CWATCHED" />
+		</fieldset>
+		<fieldset name="t2" label="CMYLISTTITLES">
+			<field name="TITLE_1_CREATED" type="text" default="My records" label="CCREATED" />
+			<field name="TITLE_1_RATED" type="text" default="Records I rated" label="CRATED" />
+			<field name="TITLE_1_FAVORITED" type="text" default="My bookmarks" label="CBOOKMARKED" />
+			<field name="TITLE_1_COMMENTED" type="text" default="Records I commented" label="CCOMMENTED" />
+			<field name="TITLE_1_HIDDEN" type="text" default="My hidden records" label="CHIDDEN" />
+			<field name="TITLE_1_VISITED" type="text" default="Records that I visited" label="CVISITED" />
+			<field name="TITLE_1_UNPUBLISHED" type="text" default="Waiting for approval" label="CUNPUBLISHED" />
+			<field name="TITLE_1_EXPIRED" type="text" default="My expired records" label="CEXPIRED" />
+			<field name="TITLE_1_FEATURED" type="text" default="My featured records" label="CFEATURED" />
+			<field name="TITLE_1_EVENTS" type="text" default="With new events" label="CWITHEVENTS" />
+			<field name="TITLE_1_FOLLOW" type="text" default="Records I follow" label="CWATCHED" />
+		</fieldset>
+	</fields>
+	<fields name="personal">
+		<fieldset name="user" label="CUSERCATEGORIES">
+			<field name="user_categories" type="radio" class="btn-group" default="1" label="X_AUTHORCATEGORIES">
+				<option value="0">CNO</option>
+				<option value="1">CYES</option>
+			</field>
+			<field name="user_categories_icons" type="radio" class="btn-group" default="1" label="X_AUTHORCATEGORIESICONS">
+				<option value="0">CNO</option>
+				<option value="1">CYES</option>
+			</field>
+			<field name="cat_icon_width" type="text" size="3" default="100" label="X_AUTHCATICONWIDTH" />
+			<field name="cat_icon_height" type="text" size="3" default="100" label="X_AUTHCATICONHEIGHT" />
+			<field name="user_cat_cols" type="list" default="3" label="X_AUTHCATCOLS">
+				<option value="2">X_2C</option>
+				<option value="3">X_3C</option>
+				<option value="4">X_4C</option>
+				<option value="6">X_6C</option>
+			</field>
+
+		</fieldset>
+		<fieldset name="uinfo" label="FS_USERINFO" description="FS_USERINFODESC">
+			<field name="user_avatar" type="radio" class="btn-group" default="1" label="X_AUTHORAVATAR">
+				<option value="0">CNO</option>
+				<option value="1">CYES</option>
+			</field>
+			<field name="user_avatar_w" type="text" size="3" default="60" label="X_AUTHAVATWIDTH" />
+			<field name="user_avatar_h" type="text" size="3" default="60" label="X_AUTHAVATHEIGHT" />
+			<field name="user_message" type="radio" class="btn-group" default="1" label="X_AUTHORMSG">
+				<option value="0">CNO</option>
+				<option value="1">CYES</option>
+			</field>
+			<field name="user_info" type="radio" class="btn-group" default="1" label="X_AUTHORINFO">
+				<option value="0">CNO</option>
+				<option value="1">CYES</option>
+			</field>
+			<field name="user_menu" type="radio" class="btn-group" default="1" label="X_AUTHORMENU">
+				<option value="0">CNO</option>
+				<option value="1">CYES</option>
+			</field>
+		</fieldset>
+	</fields>
+	<fields name="menu">
+		<fieldset name="menu" label="CMENUSTYLE">
+			<field name="menu" type="accesslevel" default="1" label="CENABLEMENU">
+				<option value="0">XML_OPT_NOONE</option>
+			</field>
+			<field name="menu_home" type="accesslevel" default="1" label="CENABLEMENUHOME">
+				<option value="0">XML_OPT_NOONE</option>
+			</field>
+		</fieldset>
+		<fieldset name="micons" label="CMENUICONS">
+			<field name="menu_templates_icon" type="radio" class="btn-group" default="1" label="X_TEMPLATESWITCH" >
+				<option value="0">CNO</option>
+				<option value="1">CYES</option>
+			</field>
+			<field name="menu_all_records_icon" type="radio" class="btn-group" default="1" label="X_ALLRECICON" >
+				<option value="0">CNO</option>
+				<option value="1">CYES</option>
+			</field>
+			<field name="menu_home_icon" type="radio" class="btn-group" default="1" label="X_HOMELABEL" >
+				<option value="0">CNO</option>
+				<option value="1">CYES</option>
+			</field>
+			<field name="menu_up_icon" type="radio" class="btn-group" default="1" label="X_UPLABEL" >
+				<option value="0">CNO</option>
+				<option value="1">CYES</option>
+			</field>
+			<field name="menu_newrecord_icon" type="radio" class="btn-group" default="1" label="X_NEWREC" >
+				<option value="0">CNO</option>
+				<option value="1">CYES</option>
+			</field>
+			<field name="menu_ordering_icon" type="radio" class="btn-group" default="1" label="X_RECORDER" >
+				<option value="0">CNO</option>
+				<option value="1">CYES</option>
+			</field>
+			<field name="menu_user_icon" type="radio" class="btn-group" default="1" label="X_USERMENU" >
+				<option value="0">CNO</option>
+				<option value="1">CYES</option>
+			</field>
+		</fieldset>
+		<fieldset name="m1" label="CUSERMENUICONS">
+			<field name="menu_user_subscribe_icon" type="radio" class="btn-group" default="1" label="COPTIONS">
+				<option value="0">CNO</option>
+				<option value="1">CYES</option>
+			</field>
+			<field name="menu_user_my_icon" type="radio" class="btn-group" default="1" label="CCREATED">
+				<option value="0">CNO</option>
+				<option value="1">CYES</option>
+			</field>
+			<field name="menu_user_follow_icon" type="radio" class="btn-group" default="1" label="CWATCHED">
+				<option value="0">CNO</option>
+				<option value="1">CYES</option>
+			</field>
+			<field name="menu_user_events_icon" type="radio" class="btn-group" default="1" label="CWITHEVENTS">
+				<option value="0">CNO</option>
+				<option value="1">CYES</option>
+			</field>
+			<field name="menu_user_favorite_icon" type="radio" class="btn-group" default="1" label="CBOOKMARKED">
+				<option value="0">CNO</option>
+				<option value="1">CYES</option>
+			</field>
+			<field name="menu_user_expire_icon" type="radio" class="btn-group" default="1" label="CEXPIRED">
+				<option value="0">CNO</option>
+				<option value="1">CYES</option>
+			</field>
+			<field name="menu_user_feature_icon" type="radio" class="btn-group" default="1" label="CFEATURED">
+				<option value="0">CNO</option>
+				<option value="1">CYES</option>
+			</field>
+			<field name="menu_user_hidden_icon" type="radio" class="btn-group" default="1" label="CHIDDEN">
+				<option value="0">CNO</option>
+				<option value="1">CYES</option>
+			</field>
+			<field name="menu_user_unpublished_icon" type="radio" class="btn-group" default="1" label="CUNPUBLISHED">
+				<option value="0">CNO</option>
+				<option value="1">CYES</option>
+			</field>
+			<field name="menu_user_rated_icon" type="radio" class="btn-group" default="1" label="CRATED">
+				<option value="0">CNO</option>
+				<option value="1">CYES</option>
+			</field>
+			<field name="menu_user_commented_icon" type="radio" class="btn-group" default="1" label="CCOMMENTED">
+				<option value="0">CNO</option>
+				<option value="1">CYES</option>
+			</field>
+			<field name="menu_user_visited_icon" type="radio" class="btn-group" default="1" label="CVISITED">
+				<option value="0">CNO</option>
+				<option value="1">CYES</option>
+			</field>
+			<field name="menu_user_moder_icon" type="radio" class="btn-group" default="1" label="CMODERATORS">
+				<option value="0">CNO</option>
+				<option value="1">CYES</option>
+			</field>
+			<field name="menu_user_cat_manage_icon" type="radio" class="btn-group" default="1" label="CCATMANAGER">
+				<option value="0">CNO</option>
+				<option value="1">CYES</option>
+			</field>
+			<field name="menu_user_cat_add_icon" type="radio" class="btn-group" default="1" label="CADDCATEGORY">
+				<option value="0">CNO</option>
+				<option value="1">CYES</option>
+			</field>
+		</fieldset>
+		<fieldset name="m2" label="CORDERICONS">
+			<field name="menu_order_ctime_icon" type="radio" class="btn-group" default="1" label="CCREATED">
+				<option value="0">CNO</option>
+				<option value="1">CYES</option>
+			</field>
+			<field name="menu_order_mtime_icon" type="radio" class="btn-group" default="1" label="CMODIFIED">
+				<option value="0">CNO</option>
+				<option value="1">CYES</option>
+			</field>
+			<field name="menu_order_extime_icon" type="radio" class="btn-group" default="1" label="CEXPIRE">
+				<option value="0">CNO</option>
+				<option value="1">CYES</option>
+			</field>
+			<field name="menu_order_title_icon" type="radio" class="btn-group" default="1" label="CTITLE">
+				<option value="0">CNO</option>
+				<option value="1">CYES</option>
+			</field>
+			<field name="menu_order_hits_icon" type="radio" class="btn-group" default="1" label="CHITS">
+				<option value="0">CNO</option>
+				<option value="1">CYES</option>
+			</field>
+			<field name="menu_order_username_icon" type="radio" class="btn-group" default="1" label="CAUTHORNAME">
+				<option value="0">CNO</option>
+				<option value="1">CYES</option>
+			</field>
+			<field name="menu_order_votes_result_icon" type="radio" class="btn-group" default="1" label="CRATED">
+				<option value="0">CNO</option>
+				<option value="1">CYES</option>
+			</field>
+			<field name="menu_order_comments_icon" type="radio" class="btn-group" default="1" label="COMMENTNUM">
+				<option value="0">CNO</option>
+				<option value="1">CYES</option>
+			</field>
+			<field name="menu_order_favorite_num_icon" type="radio" class="btn-group" default="1" label="CFAVORNUM">
+				<option value="0">CNO</option>
+				<option value="1">CYES</option>
+			</field>
+			<field name="menu_order_fields_icon" type="radio" class="btn-group" default="1" label="X_ORDERFIELDS">
+				<option value="0">CNO</option>
+				<option value="1">CYES</option>
+			</field>
+		</fieldset>
+		<fieldset name="m3" label="CMENUELEMENTS">
+			<field name="menu_user" type="accesslevel" default="2" label="X_USERMENU">
+				<option value="0">XML_OPT_NOONE</option>
+            </field>
+			<field name="menu_templates" type="accesslevel" default="1" label="X_TEMPLATESWITCH" >
+				<option value="0">XML_OPT_NOONE</option>
+			</field>
+			<field name="menu_newrecord" type="accesslevel" default="1" label="X_NEWREC" >
+				<option value="0">XML_OPT_NOONE</option>
+			</field>
+			<field name="menu_newrecord_home" type="accesslevel" default="1" label="X_NEWRECNOME" >
+				<option value="0">XML_OPT_NOONE</option>
+			</field>
+			<field name="menu_ordering" type="accesslevel" default="1" label="X_RECORDER" >
+				<option value="0">XML_OPT_NOONE</option>
+			</field>
+			<field name="menu_all" type="radio" class="btn-group" default="1" label="X_ALLRECORDS" >
+				<option value="0">CNO</option>
+				<option value="1">CYES</option>
+			</field>
+			<field name="menu_home_button" type="radio" class="btn-group" default="1" label="X_HOMELABEL2" >
+				<option value="0">CNO</option>
+				<option value="1">CYES</option>
+			</field>
+			<field name="menu_up" type="radio" class="btn-group" default="1" label="X_UPLABEL" >
+				<option value="0">CNO</option>
+				<option value="1">CYES</option>
+			</field>
+			<field name="menu_user_numbers" type="radio" default="1" class="btn-group"  label="X_USERMENUSHOWNUM" >
+				<option value="0">CNO</option>
+				<option value="1">CYES</option>
+			</field>
+            <field name="menu_templates_sort" type="list" default="1" label="X_TEMPLATESWITCHSORT" >
+                <option value="0">CSORTASIS</option>
+                <option value="1">CSORTBYNAME</option>
+            </field>
+		</fieldset>
+		<fieldset name="m4" label="C_WHOCANORDERBY">
+			<field name="menu_order_ctime" type="accesslevel" default="1" label="CCREATED">
+				<option value="0">XML_OPT_NOONE</option>
+			</field>
+			<field name="menu_order_mtime" type="accesslevel" default="1" label="CMODIFIED">
+				<option value="0">XML_OPT_NOONE</option>
+			</field>
+			<field name="menu_order_extime" type="accesslevel" default="0" label="CEXPIRE">
+				<option value="0">XML_OPT_NOONE</option>
+			</field>
+			<field name="menu_order_title" type="accesslevel" default="1" label="CTITLE">
+				<option value="0">XML_OPT_NOONE</option>
+			</field>
+			<field name="menu_order_hits" type="accesslevel" default="1" label="CHITS">
+				<option value="0">XML_OPT_NOONE</option>
+			</field>
+			<field name="menu_order_username" type="accesslevel" default="1" label="CAUTHORNAME">
+				<option value="0">XML_OPT_NOONE</option>
+			</field>
+			<field name="menu_order_votes_result" type="accesslevel" default="1" label="CRATING">
+				<option value="0">XML_OPT_NOONE</option>
+			</field>
+			<field name="menu_order_comments" type="accesslevel" default="1" label="COMMENTNUM">
+				<option value="0">XML_OPT_NOONE</option>
+			</field>
+			<field name="menu_order_favorite_num" type="accesslevel" default="1" label="CFAVORNUM">
+				<option value="0">XML_OPT_NOONE</option>
+			</field>
+			<field name="menu_order_fields" type="accesslevel" default="1" label="X_ORDERFIELDS">
+				<option value="0">XML_OPT_NOONE</option>
+			</field>
+		</fieldset>
+		<fieldset name="m5" label="Ordering Labels">
+			<field name="menu_order_ctime_label" type="text" default="Time created" label="CCREATED" />
+			<field name="menu_order_mtime_label" type="text" default="Time modified" label="CMODIFIED" />
+			<field name="menu_order_extime_label" type="text" default="Expire" label="CEXPIRE" />
+			<field name="menu_order_title_label" type="text" default="Title" label="CTITLE" />
+			<field name="menu_order_hits_label" type="text" default="Hits" label="CHITS" />
+			<field name="menu_order_username_label" type="text" default="Author name" label="CAUTHORNAME" />
+			<field name="menu_order_votes_result_label" type="text" default="Rating" label="CRATING" />
+			<field name="menu_order_comments_label" type="text" default="Number of comments" label="COMMENTNUM" />
+			<field name="menu_order_favorite_num_label" type="text" default="Number of bookmarks" label="CFAVORNUM" />
+		</fieldset>
+		<fieldset name="m6" label="X_USERMENU">
+			<field name="menu_user_my" type="radio" class="btn-group" default="1" label="CCREATED">
+				<option value="0">CNO</option>
+				<option value="1">CYES</option>
+			</field>
+			<field name="menu_user_favorite" type="radio" class="btn-group" default="1" label="CBOOKMARKED">
+				<option value="0">CNO</option>
+				<option value="1">CYES</option>
+			</field>
+			<field name="menu_user_expire" type="radio" class="btn-group" default="1" label="CEXPIRED">
+				<option value="0">CNO</option>
+				<option value="1">CYES</option>
+			</field>
+			<field name="menu_user_feature" type="radio" class="btn-group" default="1" label="CFEATURED">
+				<option value="0">CNO</option>
+				<option value="1">CYES</option>
+			</field>
+			<field name="menu_user_hidden" type="radio" class="btn-group" default="1" label="CHIDDEN">
+				<option value="0">CNO</option>
+				<option value="1">CYES</option>
+			</field>
+			<field name="menu_user_unpublished" type="radio" class="btn-group" default="1" label="CUNPUBLISHED">
+				<option value="0">CNO</option>
+				<option value="1">CYES</option>
+			</field>
+			<field name="menu_user_rated" type="radio" class="btn-group" default="1" label="CRATED">
+				<option value="0">CNO</option>
+				<option value="1">CYES</option>
+			</field>
+			<field name="menu_user_commented" type="radio" class="btn-group" default="1" label="CCOMMENTED">
+				<option value="0">CNO</option>
+				<option value="1">CYES</option>
+			</field>
+			<field name="menu_user_visited" type="radio" class="btn-group" default="1" label="CVISITED">
+				<option value="0">CNO</option>
+				<option value="1">CYES</option>
+			</field>
+			<field name="menu_user_moder" type="radio" class="btn-group" default="1" label="CMODERATORS">
+				<option value="0">CNO</option>
+				<option value="1">CYES</option>
+			</field>
+
+			<field name="menu_user_followed" type="radio" class="btn-group" default="1" label="CWATCHED">
+				<option value="0">CNO</option>
+				<option value="1">CYES</option>
+			</field>
+
+			<field name="menu_user_evented" type="radio" class="btn-group" default="1" label="CWITHEVENTS">
+				<option value="0">CNO</option>
+				<option value="1">CYES</option>
+			</field>
+
+			<field name="menu_user_cat_manage" type="radio" class="btn-group" default="1" label="CCATMANAGER">
+				<option value="0">CNO</option>
+				<option value="1">CYES</option>
+			</field>
+			<field name="menu_user_cat_add" type="radio" class="btn-group" default="1" label="CADDCATEGORY">
+				<option value="0">CNO</option>
+				<option value="1">CYES</option>
+			</field>
+		</fieldset>
+
+		<fieldset name="mlabels" label="CMENUROOT">
+			<field name="menu_all_records" type="text" default="All records" label="X_ALLRECORDS" />
+			<field name="menu_home_label" type="text" default="Home" label="X_HOMELABEL" />
+			<field name="menu_up_label" type="text" default="Level up" label="X_UPLABEL" />
+			<field name="menu_templates_label" type="text" default="Switch View" label="X_TEMPLATESWITCH" />
+			<field name="menu_newrecord_label" type="text" default="Post Here" label="X_NEWREC" />
+			<field name="menu_ordering_label" type="text" default="Sort By" label="X_RECORDER" />
+			<field name="menu_user_label" type="text" default="My Menu" label="X_USERMENU" />
+			<field name="menu_user_register" type="text" default="Register or login to submit %s" label="X_REQREGISTER" />
+			<field name="menu_user_single" type="text" default="Post %s here" label="X_SINGLESUBMIT" />
+		</fieldset>
+		<fieldset name="mlabels2" label="CUSERMENULABELS">
+			<field name="menu_user_subscribe_label" type="text" default="Options" label="CSUBSCROPTIONS" />
+			<field name="menu_user_my_label" type="text" default="My Homepage" label="CCREATEDME" />
+			<field name="menu_user_other_label" type="text" default="Created" label="CCREATEDOTHER" />
+			<field name="menu_user_follow_label" type="text" default="Watched" label="CWATCHED" />
+			<field name="menu_user_events_label" type="text" default="With new events" label="CWITHEVENTS" />
+			<field name="menu_user_favorite_label" type="text" default="Bookmarked" label="CBOOKMARKED" />
+			<field name="menu_user_expire_label" type="text" default="Expired" label="CEXPIRED" />
+			<field name="menu_user_feature_label" type="text" default="Featured" label="CFEATURED" />
+			<field name="menu_user_hidden_label" type="text" default="Hidden" label="CHIDDEN" />
+			<field name="menu_user_unpublished_label" type="text" default="On approval" label="CUNPUBLISHED" />
+			<field name="menu_user_rated_label" type="text" default="Rated" label="CRATED" />
+			<field name="menu_user_commented_label" type="text" default="Commented" label="CCOMMENTED" />
+			<field name="menu_user_visited_label" type="text" default="Visited" label="CVISITED" />
+			<field name="menu_user_moder_label" type="text" default="Moderators" label="CMODERATORS" />
+			<field name="menu_user_cat_manage_label" type="text" default="Categories" label="CCATMANAGER" />
+			<field name="menu_user_cat_add_label" type="text" default="Add New Category" label="CADDCATEGORY" />
+		</fieldset>
+	</fields>
+</form>

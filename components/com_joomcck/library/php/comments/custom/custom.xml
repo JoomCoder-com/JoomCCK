@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<form>
+	<name>Custom JavaScript Comments</name>
+
+	<fields name="comments">
+		<fieldset name="comments" label="X_COMMCUSTOM"
+			description="X_COMMCUSTOMDESCR">
+			<field name="comment_custom_js_comm" label="X_COMMCUSTOMJSCOMM"
+				type="textarea" cols="30" rows="15" default="" />
+			<field name="comment_custom_js_numm" label="X_COMMCUSTOMJSNUM"
+				type="textarea" cols="30" rows="15" default="" />
+		</fieldset>
+	</fields>
+</form>

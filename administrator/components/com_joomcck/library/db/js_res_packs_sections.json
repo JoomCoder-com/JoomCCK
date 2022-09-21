@@ -1,0 +1,1 @@
+{"fields":[{"name":"id","type":"int(10)","null":"NO","default":0},{"name":"pack_id","type":"int(11)","null":"NO","default":0},{"name":"section_id","type":"int(11)","null":"NO","default":0},{"name":"params","type":"text","null":"NO","default":null}],"primary":"id","engine":"MyISAM"}

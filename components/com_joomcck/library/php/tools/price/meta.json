@@ -1,0 +1,5 @@
+{
+	"label": "Price Change",
+	"description": "This tool change value of one field, based on the other. For example change field price based on product SN. It accepts only JSON, so use online tools to convert CSV to JSON.",
+	"height": "400"
+}

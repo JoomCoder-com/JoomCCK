@@ -1,0 +1,21 @@
+table.list td{
+	padding:3px;
+}
+table.list td,table.list tr{
+	border:0px solid; 
+}
+table.list .cat-name {
+	margin: 0 0 5px 0 !important;
+	padding: 8px !important;
+	background-color: #efefef;
+	border-bottom: 2px solid #e0e0e0;
+	border-radius:5px;
+}
+table.list UL {
+	margin: 0px !important;
+	padding: 0 0 0 18px;
+}
+.subcat {
+	padding-left: 10px;
+	
+}

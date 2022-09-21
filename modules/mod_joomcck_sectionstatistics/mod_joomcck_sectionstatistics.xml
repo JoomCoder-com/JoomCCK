@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension type="module" version="3.0" client="site" method="upgrade">
+	<name>Joomcck - Module - Section Statictics</name>
+	<author>JoomBoost</author>
+	<creationDate>June 2012</creationDate>
+	<copyright>Copyright (C) 2005 - 2012 JoomBoost (https://www.joomBoost.com). All rights reserved.</copyright>
+	<license>GNU/GPL http://www.gnu.org/copyleft/gpl.html</license>
+	<authorEmail>support@joomBoost.com</authorEmail>
+	<authorUrl>https://www.joomBoost.com</authorUrl>
+	<version>8.44</version>
+
+	<description><![CDATA[ Joomcck Section Statictics ]]></description>
+	<files>
+		<filename module="mod_joomcck_sectionstatistics">mod_joomcck_sectionstatistics.php</filename>
+		<filename>helper.php</filename>
+		<filename>index.html</filename>
+		<folder>tmpl/</folder>
+	</files>
+	<config>
+		<fields name="params">
+			<fieldset label="General" name="general" addfieldpath="/libraries/mint/forms/fields/">
+				<field name="section_id" type="meresourcessection" default="" label="Default section" description="Select the Home section which will for this module." />
+				<field name="current_section" type="radio" class="btn-group btn-group-yesno" default="0" label="Define section" description="Defines if statistics would be shown for current section or default one. If section is not defined on the page there would be used default section">
+					<option value="0">Static</option>
+					<option value="1">Dinamic</option>
+				</field>
+				<field name="records_num" type="radio" class="btn-group btn-group-yesno" default="1" label="Show records number" description="">
+					<option value="0">No</option>
+					<option value="1">Yes</option>
+				</field>
+				<field name="comments_num" type="radio" class="btn-group btn-group-yesno" default="1" label="Show comments number" description="">
+					<option value="0">No</option>
+					<option value="1">Yes</option>
+				</field>
+				<field name="authors_num" type="radio" class="btn-group btn-group-yesno" default="1" label="Show authors number" description="">
+					<option value="0">No</option>
+					<option value="1">Yes</option>
+				</field>
+				<field name="members_num" type="radio" class="btn-group btn-group-yesno" default="1" label="Show members number" description="">
+					<option value="0">No</option>
+					<option value="1">Yes</option>
+				</field>
+				<field name="views_num" type="radio" class="btn-group btn-group-yesno" default="1" label="Show views number" description="">
+					<option value="0">No</option>
+					<option value="1">Yes</option>
+				</field>
+				<field name="use_anonim" type="radio" class="btn-group btn-group-yesno" default="1" label="Count every anonimous &lt;br&gt;user for members num" description="">
+					<option value="0">No</option>
+					<option value="1">Yes</option>
+				</field>
+
+				<field name="layout" type="modulelayout" label="JFIELD_ALT_LAYOUT_LABEL" description="JFIELD_ALT_MODULE_LAYOUT_DESC" />
+
+				<field name="moduleclass_sfx" type="text" default="" label="Module Class Suffix" description="PARAMMODULECLASSSUFFIX" />
+
+			</fieldset>
+			<fieldset label="Labels" name="lbls" addfieldpath="/libraries/mint/forms/fields/">
+
+				<field name="records_num_label" type="text" default="Articles" label="Records number" description=""/>
+				<field name="comments_num_label" type="text" default="Comments" label="Comments number" description=""/>
+				<field name="authors_num_label" type="text" default="Authors" label="Authors number" description=""/>
+				<field name="members_num_label" type="text" default="Members" label="Members number" description=""/>
+				<field name="views_num_label" type="text" default="Views" label="Views number" description=""/>
+			</fieldset>
+		</fields>
+	</config>
+</extension>

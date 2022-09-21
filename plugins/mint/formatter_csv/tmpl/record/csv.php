@@ -1,0 +1,1 @@
+No CSV for Article view.

@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form>
+	<fields name="pay">
+		<fieldset name="public" label="PayPal Options" description="Note! If you disable IPN you will have to enter authcode (identity token) and it will be imposible for frontend users to sell. Also Auto Return and  (PDT) Payment Data Transfer have to be ON.">
+			<field type="filelist" name="button_tmpl" filter="php$" hide_none="1" hide_default="1" directory="/components/com_joomcck/gateways/paypal/tmpl" label="Button template" default="default.php" />
+
+			<field name="sandbox" type="radio" class="btn-group" default="0" label="Use sandbox" description="Sandbox is a paypal test environment">
+				<option value="0">No</option>
+				<option value="1">Yes</option>
+			</field>
+			<field name="ipn" type="radio" class="btn-group" default="1" label="IPN is enabled">
+				<option value="0">No</option>
+				<option value="1">Yes</option>
+			</field>
+			<field name="authcode" class="inputbox" type="text" description="Authorization code from your account. Required if IPN is turned off" default="" size="40" label="PDT identity token" />
+			<field name="shipping" type="list" default="1" label="Shipping address">
+				<option value="0">Prompt for an address, but do not require one</option>
+				<option value="1">Do not prompt for an address</option>
+				<option value="2">Prompt for an address, and require one</option>
+			</field>
+			<field name="allow_count" type="radio" class="btn-group" default="0" label="Buyers can change quantity">
+				<option value="0">No</option>
+				<option value="1">Yes</option>
+			</field>
+			<field name="default_count" class="inputbox" type="text" default="1" size="3" label="Default quantity" />
+			<field name="allow_amount" type="radio" class="btn-group" default="0" description="Used for donations" label="Buyers can change amount">
+				<option value="0">No</option>
+				<option value="1">Yes</option>
+			</field>
+			<field name="default_amount" class="inputbox" type="text" default="10" description="Used for donations" size="3" label="Default amount" />
+			
+			<field name="allow_email" type="accesslevel" default="2" label="Who can enter PayPal email">
+				<option value="0">No one</option>
+			</field>
+			<field name="allow_email" type="accesslevel" default="2" label="Who can enter PayPal email">
+				<option value="0">No one</option>
+			</field>
+			<field name="business" class="inputbox" type="text" default="" size="35" label="PayPal default email" />
+			<field name="allow_currency" type="accesslevel" default="2" label="Who can select currentcy sign">
+				<option value="0">No one</option>
+			</field>
+			<field name="default_currency" type="list" class="span4" default="USD" label="Default currency">
+				<option value="AUD">Australian Dollar (AUD)</option>
+				<option value="BRL">Brazilian Real (BRL)</option>
+				<option value="CAD">Canadian Dollar (CAD)</option>
+				<option value="CZK">Czech Koruna (CZK)</option>
+				<option value="DKK">Danish Krone (DKK)</option>
+				<option value="EUR">Euro (EUR)</option>
+				<option value="HKD">Hong Kong Dollar (HKD)</option>
+				<option value="HUF">Hungarian Forint (HUF)</option>
+				<option value="ILS">Israeli New Sheqel (ILS)</option>
+				<option value="JPY">Japanese Yen (JPY)</option>
+				<option value="MYR">Malaysian Ringgit (MYR)</option>
+				<option value="MXN">Mexican Peso (MXN)</option>
+				<option value="NOK">Norwegian Krone (NOK)</option>
+				<option value="NZD">New Zealand Dollar (NZD)</option>
+				<option value="PHP">Philippine Peso (PHP)</option>
+				<option value="PLN">Polish Zloty (PLN)</option>
+				<option value="GBP">Pound Sterling (GBP)</option>
+				<option value="SGD">Singapore Dollar (SGD)</option>
+				<option value="SEK">Swedish Krona (SEK)</option>
+				<option value="CHF">Swiss Franc (CHF)</option>
+				<option value="TWD">Taiwan New Dollar (TWD)</option>
+				<option value="THB">Thai Baht (THB)</option>
+				<option value="TRY">Turkish Lira (TRY)</option>
+				<option value="USD">U.S. Dollar (USD)</option>
+			</field>
+			
+			<field name="allow_discount" type="accesslevel" default="2" label="Who can set discount">
+				<option value="0">No one</option>
+			</field>
+			<field name="discount_type" type="list" default="discount_rate" label="Discount type">
+				<option value="discount_amount">Flat rate</option>
+				<option value="discount_rate">Percentage</option>
+			</field>
+			<field name="default_discount" class="inputbox" type="text" description="0.001 - 100 for percentage and anything for flat rate but not more than total amount" default="" size="3" label="Default discount" />
+			
+			<field name="allow_tax_rate" type="accesslevel" default="2" label="Who can set tax">
+				<option value="0">No one</option>
+			</field>
+			<field name="tax_type" type="list" default="tax_rate" label="Tax type">
+				<option value="tax">Flat rate</option>
+				<option value="tax_rate">Percentage</option>
+			</field>
+			<field name="default_tax" class="inputbox" type="text" description="0.001 - 100 for percentage and anything for flat rate but not more than total amount" default="" size="3" label="Default tax" />
+		</fieldset>
+        <fieldset name="adaptive" label="Adaptive Payments" description="">
+            <field name="adaptive" type="radio" class="btn-group" default="0" label="Enable adaptive payments">
+                <option value="0">No</option>
+                <option value="1">Yes</option>
+            </field>
+            <field name="adaptive_type" type="list" default="3" label="Adaptive method">
+                <option value="1">Parallel</option>
+                <option value="2">Changed you are primary receiver</option>
+                <option value="3">Changed seller is primary receiver</option>
+            </field>
+			<field name="earn_percent" class="inputbox" type="text" default="15" label="You interest in %" />
+			<field name="earn_trans" class="inputbox" type="text" default="0.2" label="You interest per transaction" />
+			<field name="minimum_amount" class="inputbox" type="text" default="1" label="Minimum purchase amount" description="What should be the minimum purchase amount we start tu use adaptive payment. Sometimes it makes no sense on purchases below 1 USD." />
+
+			<field name="fee_payer" type="list" default="SECONDARYONLY" label="Who pays fees">
+				<option value="SENDER">Sender</option>
+				<option value="PRIMARYRECEIVER">Primary receiver</option>
+				<option value="SECONDARYONLY">Secondary receiver</option>
+				<option value="EACHRECEIVER">All receivers</option>
+			</field>
+			<field name="payment_type" type="list" default="SERVICE" label="Payment type">
+				<option value="GOODS">Non-digital goods</option>
+				<option value="SERVICE">Services</option>
+				<option value="DIGITALGOODS">Digital goods</option>
+				<option value="PERSONAL">person-to-person</option>
+				<option value="CASHADVANCE">person-to-person payment for a cash advance</option>
+            </field>
+
+			<field name="caller_id" class="inputbox" type="text" description="Your PayPal email that will collect % off sales" label="Your PayPal email" />
+			<field name="api_user" class="inputbox" type="text" description="" label="API User Id" />
+			<field name="api_password" class="inputbox" type="text" description="" label="API Password" />
+			<field name="api_signature" class="inputbox" type="text" description="" label="API Signature" />
+			<field name="api_appid" class="inputbox" type="text" description="" label="API Application Id" />
+		</fieldset>
+	</fields>
+</form>

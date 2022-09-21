@@ -1,0 +1,1 @@
+{"fields":[{"name":"id","type":"int(10)","null":"NO","default":0},{"name":"user_id","type":"int(11)","null":"YES","default":0},{"name":"section_id","type":"int(11)","null":"YES","default":0}],"primary":"id","keys":{"idx_sec":{"type":"KEY","fields":"`section_id`"}},"engine":"InnoDB"}

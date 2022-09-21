@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<form>
+    <fieldset name="smf" label="Import" addfieldpath="/libraries/mint/forms/fields" description="Simply click import button">
+        <field name="section_id" type="meresourcessection" default="" alias="1" label="Forum Section" global="0" append="" />
+        <field name="type_id" type="mertype" default="" label="Topic Type" />
+        <field name="text_field" type="meresourcesfields" key="id" default="" label="Body text field" />
+        <field name="categories" type="textarea" default="1::2" label="Category conversion" description="1::2 means 1 - category of SMF forum and 2 category on Joomcck forum" />
+    </fieldset>
+</form>

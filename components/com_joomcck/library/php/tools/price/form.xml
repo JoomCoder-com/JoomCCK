@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<form>
+    <fieldset name="price" label="Price update" addfieldpath="/plugins/mint/toolset/tools/price/">
+        <field name="section_id" type="meresourcessection" default="" alias="1" label="Section" global="0" append="" />
+        <field name="field_id_price" key="id" type="meresourcesfields" size="1" multiple="false" default="" label="Price field" filters="'text','digits'"/>
+        <field name="field_id_article" key="id" type="meresourcesfields" size="1" multiple="false" default="" label="Article field" filters="'text'"/>
+        <field name="file" type="fupload"  label="JSON File" />
+    </fieldset>
+</form>

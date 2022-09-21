@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<joomcckfield>
+    <name>Read Also</name>
+    <group>Relation Form Elements</group>
+
+
+    <config>
+        <fields name="params">
+            <fieldset name="tmpl">
+                <field type="cobtmpllist" name="template_input" onchange="ajax_load_sub_params(this, '/components/com_joomcck/fields/readmore/tmpl/input');" filter="php$" hide_none="1" hide_default="1" directory="/components/com_joomcck/fields/readmore/tmpl/input" label="F_TMPLINPUT" default="default.php"/>
+                <field type="cobtmpllist" name="template_output_full" onchange="ajax_load_sub_params(this, '/components/com_joomcck/fields/readmore/tmpl/output');" filter="php$" hide_none="1" hide_default="1" directory="/components/com_joomcck/fields/readmore/tmpl/output" label="F_TMPLFULL" default="default.php"/>
+            </fieldset>
+            <fieldset name="ctrl" label="FS_FORMCONTROL">
+                <field name="input_mode" required="true" type="list" default="1" label="F_CHOSERELATEDRECORDSMETHOD">
+                    <option value="2">XML_OPT_AUTOCOMPLETEAJAX</option>
+                    <option value="3">XML_OPT_CHECKBOXES</option>
+                    <option value="4">XML_OPT_MULTISELECT</option>
+                    <option value="5">XML_OPT_POPUP</option>
+                </field>
+                <field name="strict_to_user" type="accesslevel" label="F_USERNOTSTRICTFOR" default="1" description="F_USERNOTSTRICTFOR_DESCR">
+                    <option value="0">XML_OPT_NOONE</option>
+                </field>
+                <field name="strict_to_user_mode" type="list" label="F_STRICTTOUSERMODE" default="3">
+                    <option value="1">XML_OPT_STRICTTOCURRENTUSER</option>
+                    <option value="2">XML_OPT_STRICTTOAUTOR</option>
+                    <option value="3">XML_OPT_STRICTTOAUTORORCURRENT</option>
+                </field>
+                <field name="strict" type="list" default="1" label="F_CONNECT" description="F_CONNECTDESCR">
+                    <option value="0">F_COONECT_1</option>
+                    <option value="1">F_COONECT_2</option>
+                </field>
+                <field name="multi_limit" type="text" size="3" default="10" label="F_LIMITRELATION"/>
+                <field name="type" type="mertype" default="" multi="1" label="F_TYPEPLUSCURRENT"/>
+                <field name="max_result" type="text" size="3" default="10" label="F_AUTOCOMPLETEMAXRESULT" description=""/>
+                <field name="control_label" type="text" size="40" default="Add related records" label="F_POPUPLINKTEXT"/>
+                <field label="F_TMPLFULLOVERRIDE" name="tmpl_list" type="cobtmpls" default="default" description="" tmpltype="itemlist">
+                    <option value="0">X_SECTMPLDEFAULT</option>
+                </field>
+                <field name="orderby" type="list" default="" label="CORDERING">
+                    <option value="r.ctime ASC">XML_OPT_CTIMEASC</option>
+                    <option value="r.ctime DESC">XML_OPT_CTIMEDESC</option>
+                    <option value="r.mtime DESC">XML_OPT_MODIFIEDDESC</option>
+                    <option value="r.mtime ASC">XML_OPT_MODIFIEDASC</option>
+                    <option value="r.title ASC">XML_OPT_TITLEASC</option>
+                    <option value="r.title DESC">XML_OPT_TITLEDESC</option>
+                    <option value="name ASC">XML_OPT_AUTHORASC</option>
+                    <option value="name DESC">XML_OPT_AUTHORDESC</option>
+                    <option value="r.hits DESC">XML_OPT_MOSTHITS</option>
+                    <option value="r.hits ASC">XML_OPT_LEASTHITS</option>
+                    <option value="r.votes_result DESC">XML_OPT_MOSTRATED</option>
+                    <option value="r.votes_result ASC">XML_OPT_LEASTRATED</option>
+                    <option value="r.comments DESC">XML_OPT_MOSTCOMMENTED</option>
+                    <option value="r.comments ASC">XML_OPT_LEASTCOMMENTED</option>
+                    <option value="r.favorite_num DESC">XML_OPT_MOSTFAVOR</option>
+                    <option value="r.favorite_num ASC">XML_OPT_LEASTFAVOR</option>
+                    <option value="RAND() ">XML_OPT_RANDOM</option>
+                </field>
+            </fieldset>
+        </fields>
+
+    </config>
+</joomcckfield>

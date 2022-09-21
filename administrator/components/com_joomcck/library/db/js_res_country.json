@@ -1,0 +1,1 @@
+{"fields":[{"name":"id","type":"varchar(2)","null":"NO","default":""},{"name":"name","type":"varchar(64)","null":"NO","default":""}],"engine":"MyISAM"}

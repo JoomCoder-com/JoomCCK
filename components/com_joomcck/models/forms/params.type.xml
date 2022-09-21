@@ -1,0 +1,458 @@
+<?xml version="1.0" encoding="utf-8"?>
+<form>
+	<fields name="properties">
+		<fieldset name="prop" label="CFSLPROPERTIERS">
+			<field name="item_itemid" type="menuitem" label="CLMENUIID">
+				<option value="">XML_OPTION_NOMENUITEM</option>
+			</field>
+			<field name="item_compare" type="list" default="4" label="CLCOMPAREARTICLES" description="CDESCRCOMPAREARTICLES">
+				<option value="0">COPTCOMPARE1</option>
+				<option value="2">COPTCOMPARE2</option>
+				<option value="3">COPTCOMPARE3</option>
+				<option value="4">COPTCOMPARE4</option>
+				<option value="5">COPTCOMPARE5</option>
+			</field>
+			<field name="item_can_favorite" type="accesslevel" default="2" label="CWHOCANBOOKMARK" description="CDESCWHOBOOKMARK">
+				<option value="0">XML_OPT_NOONE</option>
+			</field>
+			<field name="item_can_moderate" type="accesslevel" default="3" label="CWNOMODER">
+				<option value="0">XML_OPT_NOONE</option>
+			</field>
+			<field name="item_edit" type="mradio" class="btn-group" default="1" label="CAUTHCANEDIT" description="CDESCAUTHCANEDIT">
+				<option value="0">CNO</option>
+				<option value="1">CYES</option>
+			</field>
+			<field name="item_delete" type="mradio" class="btn-group" default="1" label="CAUTHORCANDLETE" description="CAUTHORCANDELETECOMMENT">
+				<option value="0">CNO</option>
+				<option value="1">CYES</option>
+			</field>
+			<!-- <field name="allow_archive" class="btn-group" type="mradio" default="0" label="CAUTHORCANARCHIVE">
+				<option value="0">CNO</option>
+				<option value="1">CYES</option>
+			</field> -->
+			<field name="allow_extend" type="mradio" class="btn-group" default="0" label="CAUTHORCANPROLONG" description="CAUTHORCANPROLONG_DESCR">
+				<option value="0">CNO</option>
+				<option value="1">CYES</option>
+			</field>
+			<field name="allow_hide" type="mradio" class="btn-group" default="0" label="CAUTHCANHIDE" description="CALLOWHIDERECORDS">
+				<option value="0">CNO</option>
+				<option value="1">CYES</option>
+			</field>
+			<field name="default_extend" type="text" default="10" label="CPROLONGXDAYS" description="CPROLONGDESCR" size="2" />
+			<field name="item_expire_access" type="accesslevel" default="3" label="CEXPIRECHANGEACCES">
+				<option value="0">XML_OPT_NOONE</option>
+			</field>
+		</fieldset>
+		<fieldset name="title" label="CFTITLEPARAMS">
+			<field name="item_title" type="mlist" condition='{"1":["params_properties_item_title_unique"],"2":["params_properties_item_title_limit","params_properties_item_title_composite"]}' default="1" label="CRECORDTITLEMODE">
+				<option value="0">CRETTITLEMOD_1</option>
+				<option value="1">CRETTITLEMOD_2</option>
+				<option value="2">CRETTITLEMOD_3</option>
+			</field>
+			<field name="item_title_unique" type="mradio" class="btn-group" default="0" label="CTITLEUNIQUIE">
+				<option value="0">CNO</option>
+				<option value="1">CYES</option>
+			</field>
+			<field name="item_title_composite" type="text" default="" label="CCOMPOSITETITLEMASK" description="CCOMPOSITETITLEDESCR" size="40" />
+			<field name="item_title_limit" type="text" size="3" default="0" label="CTITLELIMIT" />
+		</fieldset>
+		<fieldset name="tags" label="CTYPETAGS">
+			<field name="item_can_view_tag" type="maccesslevel" condition='{"not0":["params_properties_item_tags_max","params_properties_item_tag_num","params_properties_item_tag_relevance","params_properties_item_tag_htmltags","params_properties_item_can_attach_tag","params_properties_item_can_add_tag"]}' default="0" label="CWHOVIEWTAGS" description="CWHOVIEWTAGS_DESCR">
+				<option value="0">XML_OPT_NOONE</option>
+			</field>
+			<field name="item_can_add_tag" type="accesslevel" default="2" label="CWHOADDREMOVETAGS">
+				<option value="0">XML_OPT_NOONE</option>
+				<option value="-1">COPTRATEAUTHOR</option>
+			</field>
+			<field name="item_can_attach_tag" type="accesslevel" default="2" label="CWHOATTACHTAGS">
+				<option value="0">XML_OPT_NOONE</option>
+				<option value="-1">COPTRATEAUTHOR</option>
+			</field>
+			<!-- <field name="item_can_remove_tag" type="accesslevel" default="3" label="CWHOREMOVETAGS">
+				<option value="0">XML_OPT_NOONE</option>
+				<option value="-1">COPTRATEAUTHOR</option>
+			</field> -->
+			<field name="item_tag_htmltags" type="text" default="h1, h2, h3, h4, h5, h6, strong, em, b, i, big" label="CTAGHTMKLIST" size="40" />
+			<field name="item_tag_relevance" type="list" default="0" label="CTAGRELIVANCEMODE">
+				<option value="0">CTAGRMOD_DONOT</option>
+				<option value="1">CTAGRMOD_BASEDONTAGS</option>
+				<option value="2">CTAGRMOD_BASEDONCAOUNT</option>
+				<option value="3">CTAGRMOD_RAND</option>
+			</field>
+			<field name="item_tag_num" type="list" default="0" label="CTAGSHOWNUM">
+				<option value="0">CNO</option>
+				<option value="1">CTAGSHONUM_HITS</option>
+				<option value="2">CTAGSHOWNUM_COUNT</option>
+				<option value="3">CTAGSHOWNUM_BOTH</option>
+			</field>
+			<field name="item_tags_max" type="text" default="25" label="CTAGSMAX" size="3" />
+		</fieldset>
+		<fieldset name="templates" label="CFSLTMPL">
+			<field label="CTMPLFULLARTICLE" name="tmpl_article" type="cobtmpls" default="default" tmpltype="article" />
+			<field label="CTMPLSUBMIT" name="tmpl_articleform" type="cobtmpls" default="default" tmpltype="articleform" />
+			<field label="CTMPLRATING" name="tmpl_rating" type="cobtmpls" noparams="1" default="default" tmpltype="rating" />
+			<field label="CTMPLCOMMENT" name="tmpl_comment" type="cobtmpls" default="default" tmpltype="comments" />
+		</fieldset>
+		<fieldset name="rating" label="CFSLRATING">
+			<field name="rate_access" type="maccesslevel" default="0" condition='{"not0":["params_properties_rate_access_author","params_properties_rate_multirating_sort","params_properties_rate_multirating_tmpl","params_properties_rate_multirating","params_properties_rate_smart_minimum","params_properties_rate_smart_before","params_properties_rate_multirating_options","params_properties_rate_mode"]}' label="CRATEWHOCANRATE">
+				<option value="0">XML_OPT_NOONE</option>
+				<option value="-1">COPTRATEAUTHOR</option>
+			</field>
+			<field name="rate_access_author" type="mradio" class="btn-group" default="0" label="CRATEACCESAUTHOR">
+				<option value="0">CNO</option>
+				<option value="1">CYES</option>
+			</field>
+			<field name="rate_mode" type="list" default="1" label="CRATECALCULATEMODE" description="CRATINGMODEDSCR">
+				<option value="1">CRATEMODE_PLAIN</option>
+				<option value="2">CRATEMODE_BAYE</option>
+				<option value="3">CRATEMODE_SMART</option>
+			</field>
+			<field name="rate_smart_before" label="CRATEDAYS" description="CRATEDAYSDESCR" type="text" default="60" />
+			<field name="rate_smart_minimum" label="CRATEMINVOTES" type="text" default="5" />
+			<field name="rate_multirating" type="mradio" class="btn-group" default="0" label="CRATEMULTIPLE">
+				<option value="0">CNO</option>
+				<option value="1">CYES</option>
+			</field>
+			<field name="rate_multirating_options" type="memultiratings" label="CRATEMULTIPLEOPTIONS" rows="5" cols="40" />
+			<field name="rate_multirating_tmpl" type="filelist" filter="php$" hide_none="1" hide_default="1" directory="/components/com_joomcck/views/rating_tmpls/multirating" label="CRATEMULTIPLETMPT" default="default.php" />
+			<field name="rate_multirating_sort" type="list" default="2" label="CRATESORT">
+				<option value="1">X_OPTASIS</option>
+				<option value="2">X_OPTATOZ</option>
+				<option value="3">X_OPTZTOA</option>
+			</field>
+		</fieldset>
+	</fields>
+	<fields name="audit">
+		<fieldset name="verw" label="FS_GENERAL" description="FS_AUDITDESCR">
+			<field name="audit_date_format" type="list" default="" label="X_EVETNDATEFORMAT">
+				<option value="">X_CUSTOMDATE</option>
+				<option value="h:i A, l, d F Y">12:00 AM, Tuesday, 30 December 2007</option>
+				<option value="h:i A, l, F d, Y">12:00 AM, Tuesday, December 30, 2007</option>
+				<option value="l, d F Y">Tuesday, 30 December 2007</option>
+				<option value="l, F d, Y">Tuesday, December 30, 2007</option>
+				<option value="d F Y">30 December 2007</option>
+				<option value="F d, Y">December 30, 2007</option>
+				<option value="d M Y">30 Dec 2007</option>
+				<option value="M d, Y">Dec 30, 2007</option>
+				<option value="d.m.y">30.12.07</option>
+				<option value="m.d.y">12.30.17</option>
+				<option value="m-d-y">30-12-07</option>
+				<option value="d-m-y">12-30-07</option>
+				<option value="m/d/y">30/12/07</option>
+				<option value="d/m/y">12/30/07</option>
+			</field>
+			<field name="audit_date_custom" label="X_CUSTOMDATE" default="h:i A, d M Y" type="text" />
+		</fieldset>
+
+		<fieldset name="ver" label="CVERSIONING">
+			<field name="versioning" type="mradio" condition='{"1":["params_audit_versioning_max"]}' class="btn-group" default="0" label="CENABLEVERS">
+				<option value="0">CNO</option>
+				<option value="1">CYES</option>
+			</field>
+			<field name="versioning_max" size="2" type="text" default="10" label="CVERMAX" />
+		</fieldset>
+		<fieldset name="verl" label="CLOG" description="CAUDITLOGDESCR">
+			<field name="audit_log" type="mradio" condition='{"1":["params_audit_itemid","fieldset-name-verw","fieldset-name-ver2"]}'  class="btn-group" default="0" label="CENABLELOG">
+				<option value="0">CNO</option>
+				<option value="1">CYES</option>
+			</field>
+			<field name="itemid" type="menuitem" label="CLMENUIID">
+				<option value="">XML_OPTION_NOMENUITEM</option>
+			</field>
+		</fieldset>
+		<fieldset name="ver2" label="CLOGEVENTS">
+			<field name="al1" type="joomcckauditevents" index="1" class="btn-group" default="1" label="CAUDLOG1_ADMIN">
+				<option value="0">CNO</option>
+				<option value="1">CYES</option>
+			</field>
+			<field name="al2" type="joomcckauditevents" index="2" class="btn-group" default="1" label="CAUDLOG2_ADMIN">
+				<option value="0">CNO</option>
+				<option value="1">CYES</option>
+			</field>
+			<field name="al26" type="joomcckauditevents" index="26" class="btn-group" default="1" label="CAUDLOG26_ADMIN">
+				<option value="0">CNO</option>
+				<option value="1">CYES</option>
+			</field>
+			<field name="al3" type="joomcckauditevents" index="3" class="btn-group" default="1" label="CAUDLOG3_ADMIN">
+				<option value="0">CNO</option>
+				<option value="1">CYES</option>
+			</field>
+			<field name="al4" type="joomcckauditevents" index="4" class="btn-group" default="1" label="CAUDLOG4_ADMIN">
+				<option value="0">CNO</option>
+				<option value="1">CYES</option>
+			</field>
+			<field name="al5" type="joomcckauditevents" index="5" class="btn-group" default="1" label="CAUDLOG5_ADMIN">
+				<option value="0">CNO</option>
+				<option value="1">CYES</option>
+			</field>
+			<field name="al6" type="joomcckauditevents" index="6" class="btn-group" default="1" label="CAUDLOG6_ADMIN">
+				<option value="0">CNO</option>
+				<option value="1">CYES</option>
+			</field>
+			<field name="al7" type="joomcckauditevents" index="7" class="btn-group" default="1" label="CAUDLOG7_ADMIN">
+				<option value="0">CNO</option>
+				<option value="1">CYES</option>
+			</field>
+			<field name="al8" type="joomcckauditevents" index="8" class="btn-group" default="1" label="CAUDLOG8_ADMIN">
+				<option value="0">CNO</option>
+				<option value="1">CYES</option>
+			</field>
+			<field name="al9" type="joomcckauditevents" index="9" class="btn-group" default="1" label="CAUDLOG9_ADMIN">
+				<option value="0">CNO</option>
+				<option value="1">CYES</option>
+			</field>
+			<field name="al10" type="joomcckauditevents" index="10" class="btn-group" default="1" label="CAUDLOG10_ADMIN">
+				<option value="0">CNO</option>
+				<option value="1">CYES</option>
+			</field>
+			<field name="al25" type="joomcckauditevents" index="25" class="btn-group" default="1" label="CAUDLOG25_ADMIN">
+				<option value="0">CNO</option>
+				<option value="1">CYES</option>
+			</field>
+			<field name="al12" type="joomcckauditevents" index="12" class="btn-group" default="1" label="CAUDLOG12_ADMIN">
+				<option value="0">CNO</option>
+				<option value="1">CYES</option>
+			</field>
+			<field name="al13" type="joomcckauditevents" index="13" class="btn-group" default="1" label="CAUDLOG13_ADMIN">
+				<option value="0">CNO</option>
+				<option value="1">CYES</option>
+			</field>
+			<field name="al14" type="joomcckauditevents" index="14" class="btn-group" default="1" label="CAUDLOG14_ADMIN">
+				<option value="0">CNO</option>
+				<option value="1">CYES</option>
+			</field>
+			<field name="al15" type="joomcckauditevents" index="15" class="btn-group" default="1" label="CAUDLOG15_ADMIN">
+				<option value="0">CNO</option>
+				<option value="1">CYES</option>
+			</field>
+			<field name="al16" type="joomcckauditevents" index="16" class="btn-group" default="1" label="CAUDLOG16_ADMIN">
+				<option value="0">CNO</option>
+				<option value="1">CYES</option>
+			</field>
+			<field name="al17" type="joomcckauditevents" index="17" class="btn-group" default="1" label="CAUDLOG17_ADMIN">
+				<option value="0">CNO</option>
+				<option value="1">CYES</option>
+			</field>
+			<field name="al18" type="joomcckauditevents" index="18" class="btn-group" default="1" label="CAUDLOG18_ADMIN">
+				<option value="0">CNO</option>
+				<option value="1">CYES</option>
+			</field>
+			<field name="al19" type="joomcckauditevents" index="19" class="btn-group" default="1" label="CAUDLOG19_ADMIN">
+				<option value="0">CNO</option>
+				<option value="1">CYES</option>
+			</field>
+			<field name="al20" type="joomcckauditevents" index="20" class="btn-group" default="1" label="CAUDLOG20_ADMIN">
+				<option value="0">CNO</option>
+				<option value="1">CYES</option>
+			</field>
+			<field name="al27" type="joomcckauditevents" index="27" class="btn-group" default="1" label="CAUDLOG27_ADMIN">
+				<option value="0">CNO</option>
+				<option value="1">CYES</option>
+			</field>
+			<field name="al28" type="joomcckauditevents" index="28" class="btn-group" default="1" label="CAUDLOG28_ADMIN">
+				<option value="0">CNO</option>
+				<option value="1">CYES</option>
+			</field>
+			<field name="al29" type="joomcckauditevents" index="29" class="btn-group" default="1" label="CAUDLOG29_ADMIN">
+				<option value="0">CNO</option>
+				<option value="1">CYES</option>
+			</field>
+			<field name="al30" type="joomcckauditevents" index="30" class="btn-group" default="1" label="CAUDLOG30_ADMIN">
+				<option value="0">CNO</option>
+				<option value="1">CYES</option>
+			</field>
+			<field name="al32" type="joomcckauditevents" index="31" class="btn-group" default="1" label="CAUDLOG32_ADMIN">
+				<option value="0">CNO</option>
+				<option value="1">CYES</option>
+			</field>
+		</fieldset>
+	</fields>
+	<fields name="submission">
+		<fieldset name="submit" label="X_FSLSUBMITBEHAV">
+			<field name="submission" type="accesslevel" default="1" label="X_WHOCANSUBMIT">
+				<option value="0">XML_OPT_NOONE</option>
+			</field>
+			<field name="can_edit" type="accesslevel" default="-1" label="X_WHOCANEDIT">
+				<option value="0">XML_OPT_NOONE</option>
+				<option value="-1">COPTRATEAUTHOR</option>
+			</field>
+			<field name="access" type="accesslevel" default="1" label="X_WHOCANVIEW" description="X_WHOCANVIEWDESCR">
+				<option value="0">XML_OPT_NOONE</option>
+			</field>
+			<field name="public_edit" type="mradio" class="btn-group" default="1" label="X_PUBLICEDIT">
+				<option value="0">CNO</option>
+				<option value="1">CYES</option>
+			</field>
+			<field name="autopublish" type="mradio" class="btn-group" default="1" label="X_AUTOAPROVENEW">
+				<option value="0">CNO</option>
+				<option value="1">CYES</option>
+			</field>
+			<field name="edit_autopublish" type="mradio" class="btn-group" default="1" label="X_AUTOAPPROVEEDIT">
+				<option value="0">CNO</option>
+				<option value="1">CYES</option>
+			</field>
+
+			<field name="redirect" type="list" default="1" label="X_SAVECLOSERULES" description="X_SAVECLOSERULESDESCR">
+				<option value="1">X_OPT_SAVECLOSELIST</option>
+				<option value="2">X_OPT_SAVECLOSE2</option>
+				<option value="3">X_OPT_SAVECLOSE1</option>
+			</field>
+			<field name="redirect_url" type="text" default="" size="40" label="X_REDIRECTURL" description="X_REDIRECTURLDESCR" />
+			<field name="submit_msg" type="text" label="X_AFTERSUBMITMSG" default="JLIB_APPLICATION" description="X_AFTERSUBMITMSGDESCR" />
+			<field name="save_msg" type="text" label="X_AFTERSAVEMSG" default="JLIB_APPLICATION" description="X_AFTERSAVEMSGDESCR" />
+			<field name="default_expire" type="text" default="0" label="X_AUTOEXPIRE" description="X_AUTOEXPIREDESCR" size="2" />
+			<field name="public_alert" type="mradio" class="btn-group" default="1" label="X_ALERTPUBILCUSER" description="X_ALERTPUBLICUSERDESCR">
+				<option value="0">CNO</option>
+				<option value="1">CYES</option>
+			</field>
+			<field name="limits_total" type="text" default="0" label="X_LIMITTOTAL" />
+			<field name="limits_day" type="text" default="0" label="X_LIMITTOTALDAY" />
+		</fieldset>
+
+		<fieldset name="categories" label="X_TYPECATBEHAV">
+			<field name="allow_category" type="maccesslevel" condition='{"not0":["params_submission_first_category","params_submission_multi_category","params_submission_multi_max_num"]}' default="1" label="X_WHOCANSELECTCATEGORY" description="X_WHOCANSELCTCATDESCT">
+				<option value="0">XML_OPT_NOONE</option>
+			</field>
+			<field name="first_category" type="mradio" class="btn-group" default="0" label="X_ALLOWROOTSUBMIT" description="X_ALLOWROOTSUBMITDESCR">
+				<option value="0">CNO</option>
+				<option value="1">CYES</option>
+			</field>
+			<field name="multi_category" type="mradio" class="btn-group" default="0" label="X_ALLOWMULTICAT" description="X_ALLOWMULICATDESCR">
+				<option value="0">CNO</option>
+				<option value="1">CYES</option>
+			</field>
+			<field name="multi_max_num" type="text" default="3" size="3" label="X_MAXMULTICAT" />
+		</fieldset>
+		<fieldset name="metadata" label="X_TYPEFSLMETA">
+			<field name="robots" type="list" label="JFIELD_METADATA_ROBOTS_LABEL" description="JFIELD_METADATA_ROBOTS_DESC">
+				<option value="">JGLOBAL_USE_GLOBAL</option>
+				<option value="index, follow">JGLOBAL_INDEX_FOLLOW</option>
+				<option value="noindex, follow">JGLOBAL_NOINDEX_FOLLOW</option>
+				<option value="index, nofollow">JGLOBAL_INDEX_NOFOLLOW</option>
+				<option value="noindex, nofollow">JGLOBAL_NOINDEX_NOFOLLOW</option>
+			</field>
+		</fieldset>
+	</fields>
+	<fields name="comments">
+		<fieldset name="comments" label="X_COMMPROVIDER" description="X_COMMPROVIDERDESCR">
+			<field name="comments" type="joomcckcomments" default="1" label="X_COMMPROV" />
+		</fieldset>
+	</fields>
+	<fields name="emerald" addfieldpath="/components/com_emerald/models/fields/">
+		<fieldset name="type_subscr" label="CEMERALDGENERAL">
+			<field name="subscr_skip" type="accesslevel" default="3" label="XML_LABEL_F_SUB_SKIP_WHO" description="XML_DECRSKIPSUBSCRACCESS">
+				<option value="0">XML_OPT_NOONE</option>
+			</field>
+			<field name="subscr_author_skip" type="mradio" class="btn-group" default="1" label="XML_LABEL_F_SUB_SKIP_AUTHOR">
+				<option value="0">CNO</option>
+				<option value="1">CYES</option>
+			</field>
+			<field name="subscr_moderator_skip" type="mradio" class="btn-group" default="1" label="XML_LABEL_F_SUB_SKIP_MODER" description="XML_SUBSRESTRSKIPMODER">
+				<option value="0">CNO</option>
+				<option value="1">CYES</option>
+			</field>
+
+		</fieldset>
+
+		<fieldset name="type_subscr6" label="XML_EMERTARTDISPL" description="XML_EMERDISPLAYRESTRDESCR">
+			<field name="type_display_subscription" type="emrplanslist" default="" label="XML_LABEL_SUB_PLANS" multiple="multiple" class="inputbox" />
+			<field name="type_display_subscription_msg" type="text" size="50" default="You cannot see this article because article author subscritpion has expired." label="XML_LABEL_SUB_MSG" />
+			<field name="type_display_subscription_count" type="mradio" class="btn-group" default="0" label="XML_LABEL_SUB_COUNT">
+				<option value="0">CNO</option>
+				<option value="1">CYES</option>
+			</field>
+		</fieldset>
+		<fieldset name="type_subscr13" label="XML_EMERRESTRVIEW" description="XML_EMERVIEWRESTRDESCR">
+			<field name="type_view_subscription" type="emrplanslist" default="" label="XML_LABEL_SUB_PLANS" multiple="multiple" class="inputbox" />
+			<field name="type_view_subscription_msg" type="text" size="50" default="You cannot see this article because your subscritpion has expired." label="XML_LABEL_SUB_MSG" />
+			<field name="type_view_subscription_count" type="mradio" class="btn-group" default="0" label="XML_LABEL_SUB_COUNT">
+				<option value="0">CNO</option>
+				<option value="1">CYES</option>
+			</field>
+		</fieldset>
+		<fieldset name="type_subscr1" label="XML_EMERRESTRSUBMISION">
+			<field name="type_submit_subscription" type="emrplanslist" default="" multiple="multiple" class="inputbox" label="XML_LABEL_SUB_PLANS" />
+			<field name="type_submit_subscription_msg" type="text" size="50" default="To submit you need to be subscribed user and have following subscriptions" label="XML_LABEL_SUB_MSG" />
+			<field name="type_submit_subscription_count" type="mradio" class="btn-group" default="" label="XML_LABEL_SUB_COUNT">
+				<option value="0">CNO</option>
+				<option value="1">CYES</option>
+			</field>
+		</fieldset>
+		<fieldset name="type_subscr2" label="XML_EMERRESTREDIT">
+			<field name="type_edit_subscription" type="emrplanslist" default="" multiple="multiple" class="inputbox" label="XML_LABEL_SUB_PLANS" />
+			<field name="type_edit_subscription_msg" type="text" size="50" default="To edit you need to be subscribed user and have folowing subscriptions" label="XML_LABEL_SUB_MSG" />
+			<field name="type_edit_subscription_count" type="mradio" class="btn-group" default="" label="XML_LABEL_SUB_COUNT">
+				<option value="0">CNO</option>
+				<option value="1">CYES</option>
+			</field>
+		</fieldset>
+		<fieldset name="type_subscr3" label="XML_EMERRESTRADDCOMENT">
+			<field name="type_comment_subscription" type="emrplanslist" default="" multiple="multiple" class="inputbox" label="XML_LABEL_SUB_PLANS" />
+			<field name="type_comment_subscription_msg" type="text" size="50" default="To comment you need to be subscribed user and have folowing subscriptions" label="XML_LABEL_SUB_MSG" />
+			<field name="type_comment_subscription_count" type="mradio" class="btn-group" default="" label="XML_LABEL_SUB_COUNT">
+				<option value="0">CNO</option>
+				<option value="1">CYES</option>
+			</field>
+		</fieldset>
+		<fieldset name="type_subscr12" label="XML_EMERRESTRMULTICAT" description="XML_EMERRESTRMULTICAT_DESCR">
+			<field name="type_multicat_subscription" type="emrplanslist" default="" multiple="multiple" class="inputbox" label="XML_LABEL_SUB_PLANS" />
+			<field name="type_multicat_subscription_msg" type="text" size="50" default="To submit this item to multiple categories you have to be subscribed member." label="XML_LABEL_SUB_MSG" />
+			<field name="type_multicat_subscription_count" type="mradio" class="btn-group" default="" label="XML_LABEL_SUB_COUNT">
+				<option value="0">CNO</option>
+				<option value="1">CYES</option>
+			</field>
+		</fieldset>
+		<fieldset name="type_subscr4" label="XML_EMERRESTRMAKEFEATURED">
+			<field name="type_feature_subscription" type="emrplanslist" default="" multiple="multiple" class="inputbox" label="XML_LABEL_SUB_PLANS" />
+			<field name="type_feature_subscription_msg" type="text" size="50" default="To make record featured you need to be subscribed user and have folowing subscriptions" label="XML_LABEL_SUB_MSG" />
+			<field name="type_feature_subscription_count" type="mradio" class="btn-group" default="" label="XML_LABEL_SUB_COUNT">
+				<option value="0">CNO</option>
+				<option value="1">CYES</option>
+			</field>
+			<field name="type_feature_subscription_time" type="text" size="3" default="30" label="XML_EMERFEARTUREDDAYS" description="XML_FEATUREHOWMANYDESCR" />
+			<field name="type_feature_unfeature" type="accesslevel" default="2" label="X_WHOCANUNFEATURE">
+				<option value="0">XML_OPT_NOONE</option>
+			</field>
+		</fieldset>
+		<fieldset name="type_subscr5" label="XML_EMERRESTRPROLONG" description="XML_EMERPROLONGDAYDESCR">
+			<field name="type_extend_subscription" type="emrplanslist" default="" multiple="multiple" class="inputbox" label="XML_LABEL_SUB_PLANS" />
+			<field name="type_extend_subscription_msg" type="text" size="50" default="To prolong you need to be subscribed user and have folowing subscriptions" label="XML_LABEL_SUB_MSG" />
+			<field name="type_extend_subscription_count" type="mradio" class="btn-group" default="0" label="XML_LABEL_SUB_COUNT">
+				<option value="0">CNO</option>
+				<option value="1">CYES</option>
+			</field>
+		</fieldset>
+		<fieldset name="type_subscr14" label="XML_EMEPERDAY" description="XML_EMEPERDAY_DESC">
+			<field name="type_ulimit_subscription" type="emrplanslist" default="" label="XML_LABEL_SUB_PLANS" multiple="multiple" class="inputbox" />
+			<field name="type_ulimit_subscription_count" type="mradio" class="btn-group" default="0" label="XML_LABEL_SUB_COUNT">
+				<option value="0">CNO</option>
+				<option value="1">CYES</option>
+			</field>
+			<field name="type_ulimit_count" type="text" size="50" default="10" label="XML_EMEPERDAY_COUNT" />
+		</fieldset>
+		<fieldset name="type_subscr15" label="XML_EMERPUBLISH" description="XML_EMEPPUBLISH_DESC">
+			<field name="type_publish_subscription" type="emrplanslist" default="" label="XML_LABEL_SUB_PLANS" multiple="multiple" class="inputbox" />
+			<field name="type_publish_subscription_count" type="mradio" class="btn-group" default="0" label="XML_LABEL_SUB_COUNT">
+				<option value="0">CNO</option>
+				<option value="1">CYES</option>
+			</field>
+			<field name="type_publish_count" type="text" size="50" default="10" label="XML_LABEL_SUB_COUNT" />
+		</fieldset>
+	</fields>
+	<fields name="category_limit">
+		<fieldset name="cl" label="FS_PARAMETERS">
+			<field label="CCATALLOWDISALLOWT" class="btn-group" name="allow" type="mradio" default="1">
+				<option value="0">CDISALLOW</option>
+				<option value="1">CALLOW</option>
+			</field>
+			<field label="CCATEGORYRESTRICTFOR" name="category_limit_mode" type="list" default="0">
+				<option value="0">CCURRENT_CATEGORY</option>
+				<option value="1">CCATEGORY_SUBCATEGORY</option>
+			</field>
+			<field label="CSHOWRESTRICTEDCAT" class="btn-group" name="show_restricted" type="mradio" default="0" description="CSHOWRESTRICTEDCAT_DESCR">
+				<option value="0">CNO</option>
+				<option value="1">CYES</option>
+			</field>
+		</fieldset>
+	</fields>
+</form>

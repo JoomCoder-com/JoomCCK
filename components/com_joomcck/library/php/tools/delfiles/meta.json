@@ -1,0 +1,6 @@
+{
+	"label": "Uploads Cleanup",
+	"description": "<p>CLean up disk space and delete uploaded files.</p>",
+	"long_description": "<p><b>Attention!!! Always make backup of uploads folder and Joomcck BD before using this tool. You will not be able to restore files through Audit log after this tool is applied.</b></p><ul><li></li></ul><p>When users delete files they are not removed from disk giving Joomcck opportunity to restore through version control.</p><p>Sometimes users attach and upload files but not finalize article save.</p>",
+	"height": "300"
+}

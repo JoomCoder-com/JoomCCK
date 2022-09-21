@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="utf-8"?>
+<joomcckfield>
+	<name>Uploads</name>
+	<group>Media Form Elements</group>
+
+	<config>
+		<fields name="params">
+			<fieldset name="tmpl">
+				<field type="cobtmpllist" name="template_input" onchange="ajax_load_sub_params(this, '/components/com_joomcck/fields/uploads/tmpl/input');" filter="php$" hide_none="1" hide_default="1" directory="/components/com_joomcck/fields/uploads/tmpl/input" label="F_TMPLINPUT" default="default.php" />
+				<field type="cobtmpllist" name="template_output_list" onchange="ajax_load_sub_params(this, '/components/com_joomcck/fields/uploads/tmpl/output');" filter="php$" hide_none="1" hide_default="1" directory="/components/com_joomcck/fields/uploads/tmpl/output" label="F_TMPLLIST" default="default.php" />
+				<field type="cobtmpllist" name="template_output_full" onchange="ajax_load_sub_params(this, '/components/com_joomcck/fields/uploads/tmpl/output');" filter="php$" hide_none="1" hide_default="1" directory="/components/com_joomcck/fields/uploads/tmpl/output" label="F_TMPLFULL" default="default.php" />
+			</fieldset>
+			<fieldset name="general" label="FS_UPLOAD">
+				<field name="file_formats" size="40" type="text" default="zip, jpg, png, jpeg, gif, txt, md, bmp" label="F_ALLOWEDFORMATS" />
+				<field name="max_count" type="text" default="0" size="3" label="F_MAXCOUNTLIMIT" />
+				<field name="max_size" type="text" size="3" label="F_MAXSIZE" description="" default="2048" />
+				<field name="subfolder" type="text" label="F_SPECSUBFOLDER" description="F_SPECSUBFOLDER_DESCR" default="uploads" />
+				<field name="delete_access" type="radio" class="btn-group" default="1" label="F_AUTHORCANDELETE">
+					<option value="0">JNO</option>
+					<option value="1">JYES</option>
+				</field>
+				<field name="allow_edit_title" type="radio" class="btn-group" default="1" label="F_ALLOWEDITTITLE">
+					<option value="0">JNO</option>
+					<option value="1">JYES</option>
+				</field>
+				<field name="allow_add_descr" type="radio" class="btn-group" default="1" label="F_ALLOWADDDESCR">
+					<option value="0">JNO</option>
+					<option value="1">JYES</option>
+				</field>
+				<field name="uploader" default="1" type="mlist" condition='{"1":["fieldset-name-flow"],"2":["fieldset-name-mooupload"]}' label="F_UPLOADER">
+					<option value="1">Flow</option>
+					<option value="2">Mooupload</option>
+				</field>
+			</fieldset>
+			<fieldset name="mooupload" label="FS_UPLOAD_MOO">
+				<field name="method" type="list" label="F_UPLOADMETHOD">
+					<option value="auto">XML_OPT_AUTO</option>
+					<option value="html5">XML_OPT_HTML5</option>
+					<option value="html4">XML_OPT_HTML4</option>
+					<option value="flash">XML_OPT_FLASH</option>
+				</field>
+			</fieldset>
+			<fieldset name="flow" label="FS_UPLOAD_FLOW">
+				<field name="flow_drop" type="radio" class="btn-group" default="1" label="FF_DROP">
+					<option value="0">JNO</option>
+					<option value="1">JYES</option>
+				</field>
+				<field name="flow_file" type="radio" class="btn-group" default="1" label="FF_FILE">
+					<option value="0">JNO</option>
+					<option value="1">JYES</option>
+				</field>
+				<field name="flow_img" type="radio" class="btn-group" default="0" label="FF_IMG">
+					<option value="0">JNO</option>
+					<option value="1">JYES</option>
+				</field>
+				<field name="flow_folder" type="radio" class="btn-group" default="1" label="FF_FOLDER">
+					<option value="0">JNO</option>
+					<option value="1">JYES</option>
+				</field>
+				<field name="flow_default" type="radio" class="btn-group" default="1" label="FF_DEFAULT">
+					<option value="0">JNO</option>
+					<option value="1">JYES</option>
+				</field>
+			</fieldset>
+			<fieldset name="advanced" label="FS_FORMATPARAMS">
+				<field name="show_hit" type="list" default="2" label="F_SHOWHITS" description="">
+					<option value="0">XML_OPT_NO</option>
+					<option value="1">XML_OPT_LIST</option>
+					<option value="2">XML_OPT_FULL</option>
+					<option value="3">XML_OPT_BOTH</option>
+				</field>
+				<field name="show_size" type="list" default="3" label="F_SHOWSIZE" description="">
+					<option value="0">XML_OPT_NO</option>
+					<option value="1">XML_OPT_LIST</option>
+					<option value="2">XML_OPT_FULL</option>
+					<option value="3">XML_OPT_BOTH</option>
+				</field>
+				<field name="show_descr" type="list" default="2" label="F_SHOWDESCR" description="">
+					<option value="0">XML_OPT_NO</option>
+					<option value="1">XML_OPT_LIST</option>
+					<option value="2">XML_OPT_FULL</option>
+					<option value="3">XML_OPT_BOTH</option>
+				</field>
+				<field type="text" size="3" name="list_limit" default="5" label="F_LISTVIEWLIMIT" description="F_LISTVIEWLIMIT_DESCR" />
+				<field name="show_in_browser" type="list" default="0" label="F_DOWNLOADLINK" description="">
+					<option value="0">XML_OPT_FORCEDOWNLOADWINDOW</option>
+					<option value="1">XML_OPT_OPENINBROWSER</option>
+				</field>
+				<field name="show_target" type="list" default="0" label="F_SHOWTARGET" description="F_SHOWTARGET_DESCR">
+					<option value="0">XML_OPT_NEWTAB</option>
+					<option value="1">XML_OPT_NEWWINDOW</option>
+					<option value="2">XML_OPT_JOOMLAPOPUP</option>
+					<option value="3">XML_OPT_CURRENTWINDOW</option>
+				</field>
+				<field name="sort" type="list" default="0" label="F_SORTBY" description="">
+					<option value="0 ASC">XML_OPT_NAMEASC</option>
+					<option value="0 DESC">XML_OPT_NAMEDESC</option>
+					<option value="1 ASC">XML_OPT_SIZEASC</option>
+					<option value="1 DESC">XML_OPT_SIZEDESC</option>
+					<option value="2 ASC">XML_OPT_HITSASC</option>
+					<option value="2 DESC">XML_OPT_HITSDESC</option>
+					<option value="3 ASC">XML_OPT_IDASC</option>
+					<option value="3 DESC">XML_OPT_IDDESC</option>
+				</field>
+				<field name="show_download" label="F_SHOWDOWNL" type="accesslevel" default="1">
+					<option value="0">XML_OPT_NOONE</option>
+				</field>
+				<field name="allow_download" label="F_ALLOWDOWNL" type="accesslevel" default="1">
+					<option value="0">XML_OPT_NOONE</option>
+				</field>
+			</fieldset>
+			<fieldset name="emerald" label="F_DOWNLOADSUBSCR" description="F_DOWNLOADSUBSCR_DESCR"  addfieldpath="/components/com_emerald/models/fields/">
+				<field name="subscription" type="planslist" condition='{"not0":["params_params_subscr_skip_moderator","params_params_subscription_count","params_params_subscription_msg","params_params_subscription_redirect","params_params_can_select_subscr","params_params_subscr_skip","params_params_subscr_skip_author"]}' default="" multiple="true" label="F_SUBSCR_PLANS" description="" />
+				<field name="subscr_skip" type="accesslevel" default="3" label="F_SUBSCR_SKIPFOR" description="F_SUBSCR_SKIPFORDESCR">
+					<option value="0">XML_OPT_NOONE</option>
+				</field>
+				<field name="subscr_skip_author" type="radio" class="btn-group" default="1" label="F_SUBSCR_SKIPAUTHOR" description="">
+					<option value="0">CNO</option>
+					<option value="1">CYES</option>
+				</field>
+				<field name="subscr_skip_moderator" type="radio" class="btn-group" default="1" label="F_SUBSCR_SKIPMODER" description="F_SUBSCR_SKIPMODERDESCR">
+					<option value="0">CNO</option>
+					<option value="1">CYES</option>
+				</field>
+				<field name="subscription_count" type="radio" default="" class="btn-group" multiple="true" label="F_SUBSCR_COUNTLIMIT" description="F_SUBSCR_COUNTLIMITDESCR">
+					<option value="0">CNO</option>
+					<option value="1">CYES</option>
+				</field>
+				<field name="subscription_msg" type="text" size="40" default="You cannot download this file. You have to be subscribed member" label="F_SUBSCR_MSG" description="" />
+				<field name="subscription_redirect" type="list" default="1" label="F_SUBSCR_BEHAVE">
+					<option value="0">F_SUBSCR_BEHAVE1</option>
+					<option value="1">F_SUBSCR_BEHAVE2</option>
+				</field>
+				<field name="can_select_subscr" type="accesslevel" default="0" label="F_WHOCANSELECTSUBSCR" description="">
+					<option value="0">XML_OPT_NOONE</option>
+				</field>
+			</fieldset>
+		</fields>
+
+	</config>
+</joomcckfield>

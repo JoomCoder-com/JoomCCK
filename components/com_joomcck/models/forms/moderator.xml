@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<form>
+	<field name="id" type="hidden" />
+
+	<field name="user_id" type="meuser" label="CUSER" class="inputbox" />
+
+	<field name="section_id" type="hidden"/>
+
+	<field name="ctime" type="text" label="JGLOBAL_CREATED_DATE"
+		class="readonly" filter="unset" readonly="true" />
+
+	<fields name="params">
+		<fieldset name="records">
+			<field label="CMODALLOWEDIT" name="allow_edit" type="checkbox"
+				description="" value="1" />
+			<field label="CMODALLOWDELETE" name="allow_delete" type="checkbox"
+				description="" value="1" />
+			<field label="CMODALLOWARCHIVE" name="allow_archive" type="checkbox"
+				description="" value="1" />
+			<field label="CMODALLOWFEATURED" name="allow_featured" type="checkbox"
+				description="" value="1" />
+			<field label="CMODALLOWEXTEND" name="allow_extend" type="checkbox"
+				description="" value="1" />
+			<field label="CMODALLOWTAGS" name="allow_addtags" type="checkbox"
+				description="" value="1" />
+			<field label="CMODALLOWDISCOMM" name="allow_disable_comments"
+				type="checkbox" description="" value="1" />
+			<field label="CMODUNPUB" name="allow_publish" type="checkbox"
+				description="" value="1" />
+			<field label="CMODALLLOWHIDE" name="allow_hide" type="checkbox"
+				description="" value="1" />
+			<field label="CMODALLOWRESTRICT" name="allow_restricted" type="checkbox"
+				description="" value="1" />
+			<field label="CMODALLOWNEWREC" name="allow_new_record" type="checkbox"
+				description="" value="1" />
+		</fieldset>
+		
+		<fieldset name="special">
+			<field label="CMODALLOWMOD" name="allow_moderators" type="checkbox"
+				description="" value="1" />
+		</fieldset>
+		
+		<fieldset name="sales">
+			<field label="CMODALLOWSALE" name="allow_sales" type="checkbox"
+				description="" value="1" />
+			<field label="CMODALLOWSALEADD" name="allow_sales_add" type="checkbox"
+				description="" value="1" />
+			<field label="CMODALLOWSALECH" name="allow_sales_status" type="checkbox"
+				description="" value="1" />
+		</fieldset>
+		
+		<fieldset name="audit">
+			<field label="CMODALLOWRESTOR" name="allow_restore" type="checkbox"
+				description="" value="1" />
+			<field label="CMODALLOWAUDITLOG" name="allow_audit_log" type="checkbox"
+				description="" value="1" />
+			<field label="CMODALLOWCOMPATE" name="allow_compare" type="checkbox"
+				description="" value="1" />
+			<field label="CMODALLOWROLLEBACK" name="allow_rollback" type="checkbox"
+				description="" value="1" />
+		</fieldset>
+	</fields>
+	
+	<field label="CCATALLOWDISALLOW" name="allow" type="radio" class="btn-group" default="1">
+		<option value="0">CDISALLOW</option>
+		<option value="1">CALLOW</option>
+	</field>
+	<field label="CCATEGORYRESTRICTFOR" name="category_limit_mode" type="list" default="0">
+		<option value="0">CCURRENT_CATEGORY</option>
+		<option value="1">CCATEGORY_SUBCATEGORY</option>
+	</field>
+
+	<field name="icon" type="filelist" directory="/components/com_joomcck/images/moderator"
+		default="" label="CICON" hide_default="1" />
+
+
+	<field id="published" name="published" type="list" label="CSTATE"
+		class="inputbox" size="1" default="1">
+		<option value="1">JPUBLISHED</option>
+		<option value="0">JUNPUBLISHED</option>
+	</field>
+
+	<field name="user" type="text" label="User" class="readonly"
+		readonly="true" />
+
+	<field name="description" rows="4" cols="50" type="textarea"
+		label="JGLOBAL_DESCRIPTION" class="inputbox" filter="safehtml" />
+
+	<field name="published" type="list" class="inputbox" default="1"
+		size="1" label="JSTATUS" description="JFIELD_PUBLISHED_DESC">
+		<option value="1">JPUBLISHED</option>
+		<option value="0">JUNPUBLISHED</option>
+	</field>
+	
+	<field name="category" type="hidden" />
+	<field name="checked_out" type="hidden" filter="unset" />
+
+	<field name="checked_out_time" type="hidden" filter="unset" />
+
+</form>

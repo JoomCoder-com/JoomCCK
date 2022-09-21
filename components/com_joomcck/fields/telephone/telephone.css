@@ -1,0 +1,18 @@
+.tel_table tr, .tel_table td {
+	border: 0px;
+	padding: 2px;
+}
+
+.flag_icon {
+	width: 16px;
+}
+div.text input {
+    margin-bottom: 0px;
+}
+
+div.mui-autocompleter {
+    text-align: left;
+}
+div.mui-autocompleter div.mui-autocompleter-menu {
+	width: 300px;	
+}

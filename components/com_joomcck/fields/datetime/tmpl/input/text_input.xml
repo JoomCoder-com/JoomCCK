@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<fieldparams>
+	<form>
+		<fields name="tmpl_text_input">
+			<fieldset name="input" label="FS_INPUT">
+				<field name="mask" type="mlist" label="F_FORMAT" condition='{"100":["params_tmpl_text_input_custom"]}' default="d/m/y">
+					<option value="d/m/y">31/01/2007</option>
+					<option value="m/d/y">01/31/2007</option>
+					<option value="d-m-y">31-01-2007</option>
+					<option value="m-d-y">01-31-2007</option>
+					<option value="d.m.y">31.01.2007</option>
+					<option value="m.d.y">01.31.2007</option>
+					<option value="d/m/y h:s">31/01/2007 23:59</option>
+					<option value="m/d/y h:s">01/31/2007 23:59</option>
+					<option value="d-m-y h:s">31-01-2007 23:59</option>
+					<option value="m-d-y h:s">01-31-2007 23:59</option>
+					<option value="d.m.y h:s">31.01.2007 23:59</option>
+					<option value="m.d.y h:s">01.31.2007 23:59</option>
+					<option value="100">XML_OPT_CUSTOM</option>
+				</field>
+				<field name="custom" type="metext" label="F_CUSTOMFORMAT" prepend="You can use d - day, m - month, y - year, h - hour, s - minute" />
+			</fieldset>
+		</fields>
+	</form>
+</fieldparams>

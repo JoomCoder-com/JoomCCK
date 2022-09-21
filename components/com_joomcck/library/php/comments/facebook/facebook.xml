@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<form>
+	<name>Facebook - Social Comments</name>
+
+	<fields name="comments">
+		<fieldset name="comments">
+			<field name="appid" label="Your app ID" size="20" type="text" default="" required="true" />
+			<field name="moder" label="Moderator facebook user ID" size="20" type="text" default="" />
+			<field name="limit" label="Number of comments" size="5" type="text" default="10" />
+			<field name="width" label="Width (px)" size="5" type="text" default="500" />
+			<field name="theme" label="Theme" type="list" default="light">
+				<option value="light">Light</option>
+				<option value="dark">Dark</option>
+			</field>
+		</fieldset>
+	</fields>
+</form>

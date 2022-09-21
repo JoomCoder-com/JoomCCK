@@ -1,0 +1,54 @@
+<?php
+/**
+ * by JoomBoost
+ * a component for Joomla! 3.x CMS (http://www.joomla.org)
+ * Author Website: https://www.joomBoost.com/
+ * @copyright Copyright (C) 2007-2014 JoomBoost (https://www.joomBoost.com). All rights reserved.
+ * @license   GNU/GPL http://www.gnu.org/copyleft/gpl.html
+ */
+
+defined('_JEXEC') or die('Restricted access');
+$filters = [];
+if($displayData->state->get('filter.search')) {
+	$filters['filter.search'] = 'filter.search';
+}
+foreach ($displayData->_filters AS $i => $filter) {
+	// Exclude type filter in fields llist
+	if($displayData->input->get('view') == 'tfields' && $filter['id'] == 'filter_type') {
+		continue;
+	}
+	if($displayData->state->get(str_replace('_', '.', $filter['id']))) {
+		$filters[str_replace('_', '.', $filter['id'])] = $filter['id'];
+	}
+}
+?>
+
+<div class="pull-right search-box">
+	<div class="input-append">
+		<?php if(!empty($displayData->_filters)): ?>
+			<button type="button" class="btn pull-right" data-toggle="collapse" rel="tooltip" data-target="#list-filters-box" data-original-title="<?php echo JText::_('CFILTER'); ?>">
+				<?php echo HTMLFormatHelper::icon('funnel.png'); ?>
+			</button>
+		<?php endif; ?>
+		<?php if($filters): ?>
+			<button rel="tooltip" class="btn btn-warning pull-right" type="button" id="cob-filters-reset" data-original-title="<?php echo JText::_('JSEARCH_FILTER_CLEAR'); ?>">
+				<?php echo HTMLFormatHelper::icon('cross.png'); ?>
+			</button>
+		<?php endif; ?>
+		<button class="btn pull-right" rel="tooltip" type="submit" data-original-title="<?php echo JText::_('CSEARCH'); ?>">
+			<?php echo HTMLFormatHelper::icon('magnifier.png'); ?>
+		</button>
+
+		<input type="text" class="span6 pull-right" placeholder="<?php echo JText::_('CSEARCHPLACEHOLDER'); ?>" name="filter_search" id="filter_search" value="<?php echo $displayData->state->get('filter.search'); ?>"/>
+	</div>
+</div>
+<script>
+(function($){
+	$('#cob-filters-reset').click(function(){
+		<?php foreach($filters as $filter): ?>
+		document.getElementById('<?php echo $filter ?>').value = '';
+		<?php endforeach; ?>
+		this.form.submit();
+	});
+}(jQuery))
+</script>

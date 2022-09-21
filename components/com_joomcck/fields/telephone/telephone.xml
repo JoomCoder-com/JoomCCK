@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<joomcckfield>
+	<name>Telephone</name>
+	<group>Special Form Elements</group>
+
+	<config>
+		<fields name="params">
+			<fieldset name="tmpl">
+				<field type="cobtmpllist" name="template_input" onchange="ajax_load_sub_params(this, '/components/com_joomcck/fields/telephone/tmpl/input');" filter="php$" hide_none="1" hide_default="1" directory="/components/com_joomcck/fields/telephone/tmpl/input" label="F_TMPLINPUT" default="default.php" />
+				<field type="cobtmpllist" name="template_output_list" onchange="ajax_load_sub_params(this, '/components/com_joomcck/fields/telephone/tmpl/output');" filter="php$" hide_none="1" hide_default="1" directory="/components/com_joomcck/fields/telephone/tmpl/output" label="F_TMPLLIST" default="default.php" />
+				<field type="cobtmpllist" name="template_output_full" onchange="ajax_load_sub_params(this, '/components/com_joomcck/fields/telephone/tmpl/output');" filter="php$" hide_none="1" hide_default="1" directory="/components/com_joomcck/fields/telephone/tmpl/output" label="F_TMPLFULL" default="default.php" />
+			</fieldset>
+			<fieldset name="core">
+				<field name="sortable" type="radio" class="btn-group" default="0" label="F_SORTABLE" description="">
+					<option value="0">JNO</option>
+					<option value="1">JYES</option>
+				</field>
+			</fieldset>
+			<fieldset name="filter" label="FS_FILTERGEN">
+				<field name="filter_enable" type="mradio" condition='{"1":["params_params_template_filter","params_params_filter_hide","params_params_filter_descr","params_params_template_filter_module","fieldset-name-filter2"]}' class="btn-group" default="0" label="F_ENABLE" description="">
+					<option value="0">JNO</option>
+					<option value="1">JYES</option>
+				</field>
+				<field type="cobtmpllist" name="template_filter" onchange="ajax_load_sub_params(this, '/components/com_joomcck/fields/telephone/tmpl/filter');" filter="php$" hide_none="1" hide_default="1" directory="/components/com_joomcck/fields/telephone/tmpl/filter" label="F_TMPLFILTER" default="autocomplete.php" />
+				<field type="cobtmpllist" name="template_filter_module" onchange="ajax_load_sub_params(this, '/components/com_joomcck/fields/telephone/tmpl/filter');" filter="php$" hide_none="1" hide_default="1" directory="/components/com_joomcck/fields/telephone/tmpl/filter" label="F_TMPLFILTERMODULE" default="autocomplete.php" />
+				<field name="filter_hide" type="mradio" class="btn-group" default="0" label="F_HIDE" description="F_HIDE_DESCR">
+					<option value="0">JNO</option>
+					<option value="1">JYES</option>
+				</field>
+				<field name="filter_descr" type="text" default="" size="40" label="F_DESCR" description="" />
+			</fieldset>
+			<fieldset name="filter2" label="FS_FILTERFIELDSPEC">
+				<field name="filter_linkage" type="mlist" condition='{"not0":["params_params_filter_icon","params_params_filter_tip", "params_params_filter_show_number"]}' default="0" label="F_VALUELINKAGE" description="F_VALUELINKAGE_DESCR">
+					<option value="0">XML_OPT_NOFILTERLINK</option>
+					<option value="1">XML_OPT_VALUEASFLINK</option>
+					<option value="2">XML_OPT_SMALICONASFLINK</option>
+				</field>
+				<field name="filter_icon" type="imagelist" default="funnel-small.png" directory="/components/com_joomcck/images/filter/" label="F_ICON" description="F_ICON_DESCR" />
+				<field name="filter_tip" type="text" default="Show all records where %s is equal to %s" size="40" label="F_VALUETOOLTIP" description="F_VALUETOOLTIP_DESCR" />
+				<field name="filter_show_number" type="radio" class="btn-group" default="1" label="F_FBOXSHOWNUMS" description="F_FBOXSHOWNUMS_DESCR">
+					<option value="0">JNO</option>
+					<option value="1">JYES</option>
+				</field>
+			</fieldset>
+			<fieldset name="general" label="FS_GENERAL">
+				<field name="pattern_country" type="text" default="+[country]" size="5" label="F_OUTPUTPATTERN_COUNTRY" description="" />
+				<field name="pattern_region" type="text" default=" ([region])" size="5" label="F_OUTPUTPATTERN_AREA" description="" />
+				<field name="pattern_tel" type="text" default=" [tel]" size="5" label="F_OUTPUTPATTERN_PHONE" description="" />
+				<field name="pattern_ext" type="text" default="#[ext]" size="5" label="F_OUTPUTPATTERN_EXT" description="" />
+				<field name="extension" type="radio" class="btn-group" default="1" label="F_ALLOWEXTENSION" description="">
+					<option value="0">JNO</option>
+					<option value="1">JYES</option>
+				</field>
+
+				<field name="qr_code" type="radio" class="btn-group" default="0" label="F_SHOWQR" description="">
+					<option value="0">JNO</option>
+					<option value="1">JYES</option>
+				</field>
+				<field name="qr_width" type="text" default="120" size="5" label="F_QRSIZE" description="" />
+			</fieldset>
+		</fields>
+	</config>
+</joomcckfield>

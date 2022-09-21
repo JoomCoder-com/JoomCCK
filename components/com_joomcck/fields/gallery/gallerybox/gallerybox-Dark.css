@@ -1,0 +1,306 @@
+#gmbOverlay {
+	position: fixed;
+	z-index: 9998;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 150%;
+	background-color: #000;
+	cursor: pointer;
+}
+
+#gmbOverlay.mbOverlayOpaque {
+	background: transparent url(80.png) repeat;
+}
+
+#gmbOverlay.mbOverlayAbsolute {
+	position: absolute;
+}
+
+#gmbOverlay.mbMobile {
+	position: absolute;
+	background-color: transparent;
+}
+
+#gmbBottom.mbMobile {
+	line-height: 24px;
+	font-size: 16px;
+}
+
+		/*	Overlay panel styling	*/
+
+#gmbCenter {
+	position: absolute;
+	z-index: 9999;
+	left: 50%;
+	padding: 10px;
+	background-color: #000;
+	-webkit-border-radius: 10px;
+	-khtml-border-radius: 10px;
+	-moz-border-radius: 10px;
+	border-radius: 10px;
+	filter: progid:DXImageTransform.Microsoft.Shadow(Strength=5, Direction=180, Color='#000000'); /* For IE 5.5 - 7 */
+	-ms-filter: "progid:DXImageTransform.Microsoft.Shadow(Strength=5, Direction=180, Color='#000000')"; /* For IE 8 */
+	-webkit-box-shadow: 0px 5px 20px rgba(0,0,0,0.50);
+	-khtml-box-shadow: 0px 5px 20px rgba(0,0,0,0.50);
+	-moz-box-shadow: 0px 5px 20px rgba(0,0,0,0.50);
+	box-shadow: 0px 5px 20px rgba(0,0,0,0.50);
+}
+
+#gmbCenter.mbLoading {
+	background: #000 url(images/loading-dark.gif) no-repeat center;
+		/*	This style is applied only during animation.	*/
+		/*	For example, the next lines turn off shadows	*/
+		/*	improving browser performance on slow systems.	*/
+		/*	To leave shadows on, just remove the following:	*/
+	-webkit-box-shadow: none;
+	-khtml-box-shadow: none;
+	-moz-box-shadow: none;
+	box-shadow: none;
+}
+
+#gmbMedia {
+	position: relative;
+	font-family: Myriad, Verdana, Arial, Helvetica, sans-serif;
+	line-height: 20px;
+	font-size: 12px;
+	color: #fff;
+	text-align: center;
+	background-position: center center;
+	background-repeat: no-repeat;
+	background-color: #171717;
+	border: 1px solid #171717;
+}
+
+		/*	Title, Caption and Button styling	*/
+
+
+
+
+#gmbTitle, #gmbPrevLink, #gmbNextLink, #gmbCloseLink {
+	display: inline;
+	color: #fff;
+	font-weight: bold;
+}
+
+#gmbNumber {
+	display: inline;
+	color: #999;
+/*	line-height: 0.8em; */
+	font-size: 0.8em;
+	margin: auto 10px;
+}
+
+#gmbCaption {
+	display: block;
+	color: #999;
+	line-height: 1.6em;
+	font-size: 0.8em;
+}
+
+#gmbPrevLink, #gmbNextLink, #gmbCloseLink {
+	float: right;
+	outline: none;
+	margin: 0 0 0 10px;
+	font-weight: normal;
+}
+
+#gmbPrevLink b, #gmbNextLink b, #gmbCloseLink b {
+	color: #eee;
+	font-weight: bold;
+	text-decoration: underline;
+}
+
+#gmbPrevLink big, #gmbNextLink big, #gmbCloseLink big {
+	color: #eee;
+	font-size: 1.4em;
+/*	line-height: 0.9em;*/
+	font-weight: bold;
+}
+
+
+		/*	Error message styling	*/
+
+#gmbError {
+	position: relative;
+	font-family: Myriad, Verdana, Arial, Helvetica, sans-serif;
+	line-height: 20px;
+	font-size: 12px;
+	color: #fff;
+	text-align: center;
+	border: 10px solid #700;
+	padding: 10px 10px 10px;
+	margin: 20px;
+	-webkit-border-radius: 5px;
+	-khtml-border-radius: 5px;
+	-moz-border-radius: 5px;
+	border-radius: 5px;
+}
+
+#gmbError a, #gmbError a:link, #gmbError a:visited, #gmbError a:hover, #gmbError a:active {
+	color: #d00;
+	font-weight: bold;
+	text-decoration: underline;
+}
+
+
+
+
+#gmbAccordion ul li {
+	color: #B2B2B2;
+}
+#gmbAccordion ul li:nth-child(odd) {
+	background-color: #171717;
+}
+
+
+#gmbNextLink:hover,#gmbPrevLink:hover {
+	background-color: #202020;
+	opacity: 1;
+}
+
+#gmbCloseLink:HOVER {
+	background-color: #ffe4e4;
+}
+
+#gmbNextLink {
+	-moz-border-radius-topleft: 0px;
+	-moz-border-radius-topright: 10px;
+	-moz-border-radius-bottomright: 10px;
+	-moz-border-radius-bottomleft: 0px;
+	-webkit-border-radius: 0px 10px 10px 0px;
+	border-radius: 0px 10px 10px 0px;
+	border: 1px solid transparent;
+}
+
+#gmbPrevLink {
+	-moz-border-radius-topleft: 10px;
+	-moz-border-radius-topright: 0px;
+	-moz-border-radius-bottomright: 0px;
+	-moz-border-radius-bottomleft: 10px;
+	-webkit-border-radius: 10px 0px 0px 10px;
+	border-radius: 10px 0px 0px 10px;
+	border: 1px solid transparent;
+}
+
+.commentUser {
+	float: left;
+	color: #626262;
+}
+
+.commentText {
+	clear: both;
+}
+
+.disactiveInput {
+	display: none;
+}
+
+.tbl,.tbl td,.tbl tr {
+	font-size: 10px;
+	border: 0px solid #fff !important;
+	color: #b5b5b5;
+}
+
+.gallery-name {
+	font-size: 14px;
+	font-weight: normal;
+}
+
+#titletext {
+	font-size: 11px;
+	color: #b2b2b2;
+	font-weight: normal;
+}
+
+#gmbCenter * {
+	font-family: Myriad, Verdana, Arial, Helvetica, sans-serif;
+}
+
+#gmbAccordion h3 {
+	background-color: #2f2f2f;
+	color: #626262;
+	font-size: 18px;
+	font-weight: normal;
+	text-align: left;
+	-webkit-border-radius: 3px;
+	-moz-border-radius: 3px;
+	border-radius: 3px;
+}
+
+#gmbAccordion ul {
+	-webkit-border-radius: 3px;
+	-moz-border-radius: 3px;
+	border-radius: 3px;
+}
+
+#gmbCenter .rating-container {
+	background-color: #555;
+	padding: 5px !important;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px; 
+	border-radius: 5px;
+}
+
+#gmbCenter .rating-container * {
+	opacity: 1 !important;
+}
+
+.download-button:hover {
+	background: rgb(191,210,85); /* Old browsers */
+	background: -moz-linear-gradient(top,  rgba(191,210,85,1) 0%, rgba(142,185,42,1) 50%, rgba(114,170,0,1) 51%, rgba(158,203,45,1) 100%); /* FF3.6+ */
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(191,210,85,1)), color-stop(50%,rgba(142,185,42,1)), color-stop(51%,rgba(114,170,0,1)), color-stop(100%,rgba(158,203,45,1))); /* Chrome,Safari4+ */
+	background: -webkit-linear-gradient(top,  rgba(191,210,85,1) 0%,rgba(142,185,42,1) 50%,rgba(114,170,0,1) 51%,rgba(158,203,45,1) 100%); /* Chrome10+,Safari5.1+ */
+	background: -o-linear-gradient(top,  rgba(191,210,85,1) 0%,rgba(142,185,42,1) 50%,rgba(114,170,0,1) 51%,rgba(158,203,45,1) 100%); /* Opera 11.10+ */
+	background: -ms-linear-gradient(top,  rgba(191,210,85,1) 0%,rgba(142,185,42,1) 50%,rgba(114,170,0,1) 51%,rgba(158,203,45,1) 100%); /* IE10+ */
+	background: linear-gradient(top,  rgba(191,210,85,1) 0%,rgba(142,185,42,1) 50%,rgba(114,170,0,1) 51%,rgba(158,203,45,1) 100%); /* W3C */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#bfd255', endColorstr='#9ecb2d',GradientType=0 ); /* IE6-9 */
+		
+}
+.download-button {
+	background: rgb(180, 227, 145); /* Old browsers */
+	background: -moz-linear-gradient(top, rgba(180, 227, 145, 1) 0%, rgba(97, 196, 25, 1) 50%, rgba(180, 227, 145, 1) 100% ); /* FF3.6+ */
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, rgba(180, 227, 145, 1) ), color-stop(50%, rgba(97, 196, 25, 1) ), color-stop(100%, rgba(180, 227, 145, 1) ) ); /* Chrome,Safari4+ */
+	background: -webkit-linear-gradient(top, rgba(180, 227, 145, 1) 0%, rgba(97, 196, 25, 1) 50%, rgba(180, 227, 145, 1) 100% ); /* Chrome10+,Safari5.1+ */
+	background: -o-linear-gradient(top, rgba(180, 227, 145, 1) 0%, rgba(97, 196, 25, 1) 50%, rgba(180, 227, 145, 1) 100% ); /* Opera 11.10+ */
+	background: -ms-linear-gradient(top, rgba(180, 227, 145, 1) 0%, rgba(97, 196, 25, 1) 50%, rgba(180, 227, 145, 1) 100% ); /* IE10+ */
+	background: linear-gradient(top, rgba(180, 227, 145, 1) 0%, rgba(97, 196, 25, 1) 50%, rgba(180, 227, 145, 1) 100% ); /* W3C */
+	filter: progid:DXImageTransform.Microsoft.gradient(  startColorstr='#b4e391', endColorstr='#b4e391', GradientType=0 );
+	-webkit-border-radius: 5px; 
+	-moz-border-radius: 5px;
+	border-radius: 5px; /* IE6-9 */
+	padding: 1px 5px !important;
+	border: 3px solid #72aa00;
+	-webkit-transition: all 0.2 ease;
+	-moz-transition: all 0.2 ease;
+	-o-transition: all 0.2 ease;
+	transition: all 0.2 ease;
+}
+.download-button img {
+	float: left;
+	margin-right: 5px !important;
+	margin-top: 3px !important;
+}
+.download-button a {
+	text-decoration: none !important;
+	color: #284720 !important;
+	font-weight: bolder;
+	background-color: transparent !important;
+	text-shadow: 1px 1px 3px #f2ffe5;
+	filter: dropshadow(color=#f2ffe5, offx=1, offy=1);
+}
+.download-button a div {
+	font-size: 10px;
+	font-weight: normal;
+	padding-left: 22px !important;
+}
+#googlemap {
+    height: 200px;
+    width: 239px;
+	border: 5px solid #626262;
+}
+#savecommenttext {
+	background-color: #626262;
+	border: 1px solid #888888;
+	color: white;
+}

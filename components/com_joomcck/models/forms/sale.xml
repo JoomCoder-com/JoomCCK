@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form>
+	<field id="id" name="id" default="0" label="X_SALEID" readonly="true" class="readonly" />
+	<field id="user_id" onclick="alert(123)" name="user_id" type="text" label="X_USERIDORNAME" description="" class="inputbox" size="30" required="true" />
+	<field name="record_id" type="text" label="X_PRODUCT" required="true" size="4" default="0" readonly="true" class="readonly" />
+	<field name="amount" type="text" label="X_AMOUNT" size="5" default="0"/>
+	<field name="gateway_id" label="X_ORDERID" size="30" required="true" />
+	<field id="comment" name="comment" cols="30" rows="6" label="CCOMMENT" type="textarea" class="inputbox" filter="safehtml" />
+	<field id="status" name="status" label="CSTATUS" type="list" class="inputbox" default="5">
+		<option value="1">STAT_CANCEL</option>
+		<option value="2">STAT_FAIL</option>
+		<option value="3">STAT_WAIT</option>
+		<option value="4">STAT_REFUND</option>
+		<option value="5">STAT_CONFIRM</option>
+	</field>
+</form>
