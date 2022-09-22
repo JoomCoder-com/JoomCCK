@@ -2,7 +2,7 @@
 <form>
 	<fields name="events">
 		<fieldset name="cobevents" label="X_PERSONEVENTS" description="X_ENETDESCR">
-			<field name="event" type="joomcckevents" label="X_EVENTS"/>
+			<field name="event" type="cckevents" label="X_EVENTS"/>
 		</fieldset>
 		<fieldset name="generalevents">
 			<field name="subscribe_section" type="accesslevel" default="2" label="X_SECSECSUBSCR">

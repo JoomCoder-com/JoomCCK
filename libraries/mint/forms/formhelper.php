@@ -201,7 +201,7 @@ class MEFormHelper
 						$hidden[] = $field;
 						continue;
 					}
-					if($field->type == 'Caddress' || $field->type == 'Ccontacts' || $field->type == 'Clinks' || $field->type == 'Joomcckevents')
+					if($field->type == 'Caddress' || $field->type == 'Ccontacts' || $field->type == 'Clinks' || $field->type == 'Cckevents')
 					{
 						if(trim($out) == '<legend>' . JText::_($fieldset->label) . '</legend><table class="table table-bordered  table-striped table-hover">')
 						{
@@ -212,7 +212,7 @@ class MEFormHelper
 							$out .= '</table>';
 						}
 						//$out .= '<tr class="row'.$i = 1 - $i.'"><td colspan="2">';
-						if($field->type != 'Joomcckevents')
+						if($field->type != 'Cckevents')
 						{
 							$out .= '<legend>' . $field->label . '</legend>';
 							$out .= '<br />';

@@ -47,6 +47,9 @@ class Url
 
 	static public function add($section, $type, $category)
 	{
+
+
+
 		$url = 'index.php?option=com_joomcck&view=form&section_id=' . $section->id;
 		$url .= '&type_id=' . $type->id . COBS . JApplication::stringURLSafe($type->name);
 		if(!empty($category->id))
@@ -54,7 +57,7 @@ class Url
 			$url .= '&cat_id=' . $category->id . COBS . JApplication::stringURLSafe($category->title);
 		}
 
-		$itemid = $type->params->get('properties.item_itemid');
+		$itemid = isset($type->params) ? $type->params->get('properties.item_itemid') : '';
 
 		if(empty($itemid) && $section->params->get('general.category_itemid'))
 		{

@@ -161,107 +161,107 @@
 			</field>
 		</fieldset>
 		<fieldset name="ver2" label="CLOGEVENTS">
-			<field name="al1" type="joomcckauditevents" index="1" class="btn-group" default="1" label="CAUDLOG1_ADMIN">
+			<field name="al1" type="cckauditevents" index="1" class="btn-group" default="1" label="CAUDLOG1_ADMIN">
 				<option value="0">CNO</option>
 				<option value="1">CYES</option>
 			</field>
-			<field name="al2" type="joomcckauditevents" index="2" class="btn-group" default="1" label="CAUDLOG2_ADMIN">
+			<field name="al2" type="cckauditevents" index="2" class="btn-group" default="1" label="CAUDLOG2_ADMIN">
 				<option value="0">CNO</option>
 				<option value="1">CYES</option>
 			</field>
-			<field name="al26" type="joomcckauditevents" index="26" class="btn-group" default="1" label="CAUDLOG26_ADMIN">
+			<field name="al26" type="cckauditevents" index="26" class="btn-group" default="1" label="CAUDLOG26_ADMIN">
 				<option value="0">CNO</option>
 				<option value="1">CYES</option>
 			</field>
-			<field name="al3" type="joomcckauditevents" index="3" class="btn-group" default="1" label="CAUDLOG3_ADMIN">
+			<field name="al3" type="cckauditevents" index="3" class="btn-group" default="1" label="CAUDLOG3_ADMIN">
 				<option value="0">CNO</option>
 				<option value="1">CYES</option>
 			</field>
-			<field name="al4" type="joomcckauditevents" index="4" class="btn-group" default="1" label="CAUDLOG4_ADMIN">
+			<field name="al4" type="cckauditevents" index="4" class="btn-group" default="1" label="CAUDLOG4_ADMIN">
 				<option value="0">CNO</option>
 				<option value="1">CYES</option>
 			</field>
-			<field name="al5" type="joomcckauditevents" index="5" class="btn-group" default="1" label="CAUDLOG5_ADMIN">
+			<field name="al5" type="cckauditevents" index="5" class="btn-group" default="1" label="CAUDLOG5_ADMIN">
 				<option value="0">CNO</option>
 				<option value="1">CYES</option>
 			</field>
-			<field name="al6" type="joomcckauditevents" index="6" class="btn-group" default="1" label="CAUDLOG6_ADMIN">
+			<field name="al6" type="cckauditevents" index="6" class="btn-group" default="1" label="CAUDLOG6_ADMIN">
 				<option value="0">CNO</option>
 				<option value="1">CYES</option>
 			</field>
-			<field name="al7" type="joomcckauditevents" index="7" class="btn-group" default="1" label="CAUDLOG7_ADMIN">
+			<field name="al7" type="cckauditevents" index="7" class="btn-group" default="1" label="CAUDLOG7_ADMIN">
 				<option value="0">CNO</option>
 				<option value="1">CYES</option>
 			</field>
-			<field name="al8" type="joomcckauditevents" index="8" class="btn-group" default="1" label="CAUDLOG8_ADMIN">
+			<field name="al8" type="cckauditevents" index="8" class="btn-group" default="1" label="CAUDLOG8_ADMIN">
 				<option value="0">CNO</option>
 				<option value="1">CYES</option>
 			</field>
-			<field name="al9" type="joomcckauditevents" index="9" class="btn-group" default="1" label="CAUDLOG9_ADMIN">
+			<field name="al9" type="cckauditevents" index="9" class="btn-group" default="1" label="CAUDLOG9_ADMIN">
 				<option value="0">CNO</option>
 				<option value="1">CYES</option>
 			</field>
-			<field name="al10" type="joomcckauditevents" index="10" class="btn-group" default="1" label="CAUDLOG10_ADMIN">
+			<field name="al10" type="cckauditevents" index="10" class="btn-group" default="1" label="CAUDLOG10_ADMIN">
 				<option value="0">CNO</option>
 				<option value="1">CYES</option>
 			</field>
-			<field name="al25" type="joomcckauditevents" index="25" class="btn-group" default="1" label="CAUDLOG25_ADMIN">
+			<field name="al25" type="cckauditevents" index="25" class="btn-group" default="1" label="CAUDLOG25_ADMIN">
 				<option value="0">CNO</option>
 				<option value="1">CYES</option>
 			</field>
-			<field name="al12" type="joomcckauditevents" index="12" class="btn-group" default="1" label="CAUDLOG12_ADMIN">
+			<field name="al12" type="cckauditevents" index="12" class="btn-group" default="1" label="CAUDLOG12_ADMIN">
 				<option value="0">CNO</option>
 				<option value="1">CYES</option>
 			</field>
-			<field name="al13" type="joomcckauditevents" index="13" class="btn-group" default="1" label="CAUDLOG13_ADMIN">
+			<field name="al13" type="cckauditevents" index="13" class="btn-group" default="1" label="CAUDLOG13_ADMIN">
 				<option value="0">CNO</option>
 				<option value="1">CYES</option>
 			</field>
-			<field name="al14" type="joomcckauditevents" index="14" class="btn-group" default="1" label="CAUDLOG14_ADMIN">
+			<field name="al14" type="cckauditevents" index="14" class="btn-group" default="1" label="CAUDLOG14_ADMIN">
 				<option value="0">CNO</option>
 				<option value="1">CYES</option>
 			</field>
-			<field name="al15" type="joomcckauditevents" index="15" class="btn-group" default="1" label="CAUDLOG15_ADMIN">
+			<field name="al15" type="cckauditevents" index="15" class="btn-group" default="1" label="CAUDLOG15_ADMIN">
 				<option value="0">CNO</option>
 				<option value="1">CYES</option>
 			</field>
-			<field name="al16" type="joomcckauditevents" index="16" class="btn-group" default="1" label="CAUDLOG16_ADMIN">
+			<field name="al16" type="cckauditevents" index="16" class="btn-group" default="1" label="CAUDLOG16_ADMIN">
 				<option value="0">CNO</option>
 				<option value="1">CYES</option>
 			</field>
-			<field name="al17" type="joomcckauditevents" index="17" class="btn-group" default="1" label="CAUDLOG17_ADMIN">
+			<field name="al17" type="cckauditevents" index="17" class="btn-group" default="1" label="CAUDLOG17_ADMIN">
 				<option value="0">CNO</option>
 				<option value="1">CYES</option>
 			</field>
-			<field name="al18" type="joomcckauditevents" index="18" class="btn-group" default="1" label="CAUDLOG18_ADMIN">
+			<field name="al18" type="cckauditevents" index="18" class="btn-group" default="1" label="CAUDLOG18_ADMIN">
 				<option value="0">CNO</option>
 				<option value="1">CYES</option>
 			</field>
-			<field name="al19" type="joomcckauditevents" index="19" class="btn-group" default="1" label="CAUDLOG19_ADMIN">
+			<field name="al19" type="cckauditevents" index="19" class="btn-group" default="1" label="CAUDLOG19_ADMIN">
 				<option value="0">CNO</option>
 				<option value="1">CYES</option>
 			</field>
-			<field name="al20" type="joomcckauditevents" index="20" class="btn-group" default="1" label="CAUDLOG20_ADMIN">
+			<field name="al20" type="cckauditevents" index="20" class="btn-group" default="1" label="CAUDLOG20_ADMIN">
 				<option value="0">CNO</option>
 				<option value="1">CYES</option>
 			</field>
-			<field name="al27" type="joomcckauditevents" index="27" class="btn-group" default="1" label="CAUDLOG27_ADMIN">
+			<field name="al27" type="cckauditevents" index="27" class="btn-group" default="1" label="CAUDLOG27_ADMIN">
 				<option value="0">CNO</option>
 				<option value="1">CYES</option>
 			</field>
-			<field name="al28" type="joomcckauditevents" index="28" class="btn-group" default="1" label="CAUDLOG28_ADMIN">
+			<field name="al28" type="cckauditevents" index="28" class="btn-group" default="1" label="CAUDLOG28_ADMIN">
 				<option value="0">CNO</option>
 				<option value="1">CYES</option>
 			</field>
-			<field name="al29" type="joomcckauditevents" index="29" class="btn-group" default="1" label="CAUDLOG29_ADMIN">
+			<field name="al29" type="cckauditevents" index="29" class="btn-group" default="1" label="CAUDLOG29_ADMIN">
 				<option value="0">CNO</option>
 				<option value="1">CYES</option>
 			</field>
-			<field name="al30" type="joomcckauditevents" index="30" class="btn-group" default="1" label="CAUDLOG30_ADMIN">
+			<field name="al30" type="cckauditevents" index="30" class="btn-group" default="1" label="CAUDLOG30_ADMIN">
 				<option value="0">CNO</option>
 				<option value="1">CYES</option>
 			</field>
-			<field name="al32" type="joomcckauditevents" index="31" class="btn-group" default="1" label="CAUDLOG32_ADMIN">
+			<field name="al32" type="cckauditevents" index="31" class="btn-group" default="1" label="CAUDLOG32_ADMIN">
 				<option value="0">CNO</option>
 				<option value="1">CYES</option>
 			</field>
@@ -335,7 +335,7 @@
 	</fields>
 	<fields name="comments">
 		<fieldset name="comments" label="X_COMMPROVIDER" description="X_COMMPROVIDERDESCR">
-			<field name="comments" type="joomcckcomments" default="1" label="X_COMMPROV" />
+			<field name="comments" type="cckcomments" default="1" label="X_COMMPROV" />
 		</fieldset>
 	</fields>
 	<fields name="emerald" addfieldpath="/components/com_emerald/models/fields/">

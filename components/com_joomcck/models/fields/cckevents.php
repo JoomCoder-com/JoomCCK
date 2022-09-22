@@ -14,13 +14,16 @@ jimport('joomla.form.formfield');
 jimport('joomla.filesystem.folder');
 jimport('joomla.filesystem.file');
 
-class JFormFieldJoomcckevents extends JFormField
+class JFormFieldCckevents extends JFormField
 {
 
-	public $type = 'Joomcckevents';
+	public $type = 'Cckevents';
 
 	public function getInput()
 	{
+
+
+
 		$patern = '<tr><td nowrap="nowrap">%s</td><td>%s</td><td>%s</td><td nowrap="nowrap">%s</td><td nowrap="nowrap">%s</td><td>%s</td><td>%s</td></tr>';
 
 		$html[] = '<table class="table table-striped">';

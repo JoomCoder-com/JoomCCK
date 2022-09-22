@@ -5,9 +5,9 @@ jimport('joomla.form.formfield');
 
 JFormHelper::loadFieldClass('melist');
 
-class JFormFieldJoomcckcomments extends JFormMEFieldList
+class JFormFieldCckcomments extends JFormMEFieldList
 {
-	public $type = 'Joomcckcomments';
+	public $type = 'Cckcomments';
 
 	protected function getOptions()
 	{

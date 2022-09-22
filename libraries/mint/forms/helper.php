@@ -250,7 +250,7 @@ class MFormHelper
 					break;
 
 				case self::STYLE_TABLE:
-					$full_width = array('Caddress', 'Ccontacts', 'Clinks', 'Joomcckevents', 'Editor');
+					$full_width = array('Caddress', 'Ccontacts', 'Clinks', 'Cckevents', 'Editor');
 					if(in_array($field->type, $full_width))
 					{
 						$pattern = $tmpl['style-table-full'];
