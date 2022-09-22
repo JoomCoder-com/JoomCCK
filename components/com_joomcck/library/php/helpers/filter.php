@@ -17,7 +17,7 @@ class FilterHelper
 
 	}
 
-	public static function filterLink($name, $value, $text, $type, $tip = NULL, $section)
+	public static function filterLink($name, $value, $text, $type, $tip, $section)
 	{
 		$url = 'task=records.filter';
 		if($type && count($section->params->get('general.type')) > 1)
@@ -44,7 +44,7 @@ class FilterHelper
 		return sprintf($patern, ($tip ? ' data-original-title="' . htmlspecialchars($tip, ENT_COMPAT, 'UTF-8') . '"' : NULL), JRoute::_($url), $text);
 	}
 
-	public static function filterButton($name, $value, $type, $tip = NULL, $section, $icon = 'funnel-small.png')
+	public static function filterButton($name, $value, $type, $tip, $section, $icon = 'funnel-small.png')
 	{
 		$img = JHtml::image(JURI::root() . 'media/mint/icons/16/' . $icon, strip_tags($tip), array('border' => 0, 'align' => 'absmiddle'));
 

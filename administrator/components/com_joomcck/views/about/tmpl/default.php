@@ -9,8 +9,8 @@
 
 defined('_JEXEC') or die('Restricted access'); ?>
 <div class="hero-unit" style="text-align: left;">
-<h1>Joomcck 9 CCK <small><b>Mint</b>Joomla</small></h1>
-<p>Joomcck 9 is a great extension to aid in the design of components and content for your site.
+<h1>JoomBoost <small><b>Mint</b>Joomla</small></h1>
+<p>JoomCCK is a great extension to aid in the design of components and content for your site.
 You can use it to create hundreds of different sections of your site.</p>
 <a class="btn btn-warning btn-large" target="_blank" href="<?php echo $this->linkCP ?>"><?php echo JText::_('COB_START') ?></a>
 <a class="btn btn-primary" href="https://www.joomBoost.com">Joomcck Homepage</a>

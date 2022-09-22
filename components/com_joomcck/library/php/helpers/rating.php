@@ -72,7 +72,7 @@ class RatingHelp
 		return TRUE;
 	}
 
-	public static function loadRating($tmpl_name, $current, $prod_id, $index = 0, $callbackfunction, $rating_active, $record_id = '')
+	public static function loadRating($tmpl_name, $current, $prod_id, $index, $callbackfunction, $rating_active, $record_id = '')
 	{
 		$document = JFactory::getDocument();
 		$document->addScript(JURI::root(TRUE) . '/components/com_joomcck/library/js/felixrating.js');
