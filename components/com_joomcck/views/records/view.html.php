@@ -390,7 +390,7 @@ class JoomcckViewRecords extends MViewBase
 			ArrayHelper::trim_r($alpha_sets);
 			foreach($alpha_sets as &$set)
 			{
-				$set = explode(' ', JString::strtoupper($set));
+				$set = explode(' ', \Joomla\String\StringHelper::strtoupper($set));
 				ArrayHelper::clean_r($set);
 				ArrayHelper::trim_r($set);
 				sort($set);
@@ -499,7 +499,7 @@ class JoomcckViewRecords extends MViewBase
 		// && $this->submission_types && in_array($markup->get('menu.menu_newrecord'), $this->user->getAuthorisedViewLevels()))
 
 
-		$url = JFactory::getURI();
+		$url = \Joomla\CMS\Uri\Uri::getInstance();
 		$url->delVar('filter_order');
 		$url->delVar('filter_order_Dir');
 		$this->action = $url->toString();

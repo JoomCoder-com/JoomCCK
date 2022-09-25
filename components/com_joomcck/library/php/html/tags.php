@@ -742,7 +742,7 @@ class JHTMLTags
 
 		$id = $item->id;
 		$db = JFactory::getDBO();
-		$url = JFactory::getURI();
+		$url = \Joomla\CMS\Uri\Uri::getInstance();
 		$user = JFactory::getUser();
 		$section_id ? NULL : $section_id = JRequest::getInt('category_id');
 

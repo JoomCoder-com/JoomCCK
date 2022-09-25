@@ -8,6 +8,8 @@
  * @license   GNU/GPL http://www.gnu.org/copyleft/gpl.html
  */
 
+use Joomla\CMS\Language\Text;
+
 defined('_JEXEC') or die;
 
 // Include dependancies
@@ -20,11 +22,12 @@ jimport('joomla.filesystem.file');
 jimport('joomla.registry.registry');
 
 require_once JPATH_ROOT . '/administrator/components/com_joomcck/library/helpers/toolbar.php';
-JHTML::_('behavior.tooltip');
 
 if(!JFactory::getUser()->authorise('core.manage', 'com_joomcck'))
 {
-	return JError::raiseWarning(404, JText::_('JERROR_ALERTNOAUTHOR'));
+
+	throw new \Exception(Text::_('JERROR_ALERTNOAUTHOR'), 404);
+
 }
 
 $controller = MControllerBase::getInstance('Joomcck');

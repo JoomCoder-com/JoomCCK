@@ -22,7 +22,7 @@ class JoomcckViewModerators extends MViewBase
 			return;
 		}
 
-		$uri = JFactory::getURI();
+		$uri = \Joomla\CMS\Uri\Uri::getInstance();
 // 		$this->action = $uri->toString();
 
 		$this->items = $this->get('Items');

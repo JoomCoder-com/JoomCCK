@@ -410,7 +410,7 @@ class HTMLFormatHelper
 
 		$addstring = " " . $addstring;
 
-		if(JString::strlen($string) > $length)
+		if(\Joomla\String\StringHelper::strlen($string) > $length)
 		{
 			if(!empty($string) && $length > 0)
 			{
@@ -426,14 +426,14 @@ class HTMLFormatHelper
 				$currentTag = "";
 				$tagLevel   = 0;
 
-				$noTagLength = JString::strlen(strip_tags($string));
+				$noTagLength = \Joomla\String\StringHelper::strlen(strip_tags($string));
 
 				// Parser loop
-				$strLen = JString::strlen($string);
+				$strLen = \Joomla\String\StringHelper::strlen($string);
 				for($j = 0; $j < $strLen; $j++)
 				{
 
-					$currentChar = JString::substr($string, $j, 1);
+					$currentChar = \Joomla\String\StringHelper::substr($string, $j, 1);
 					$ret .= $currentChar;
 
 					// Lesser than event
@@ -469,24 +469,24 @@ class HTMLFormatHelper
 						$isText = TRUE;
 
 						// Opening tag handler
-						if((JString::strpos($currentTag, "<") !== FALSE) && (JString::strpos($currentTag, "/>") === FALSE) && (JString::strpos($currentTag, "</") === FALSE))
+						if((\Joomla\String\StringHelper::strpos($currentTag, "<") !== FALSE) && (\Joomla\String\StringHelper::strpos($currentTag, "/>") === FALSE) && (\Joomla\String\StringHelper::strpos($currentTag, "</") === FALSE))
 						{
 
 							// Tag has attribute(s)
-							if(JString::strpos($currentTag, " ") !== FALSE)
+							if(\Joomla\String\StringHelper::strpos($currentTag, " ") !== FALSE)
 							{
-								$currentTag = JString::substr($currentTag, 1, JString::strpos($currentTag, " ") - 1);
+								$currentTag = \Joomla\String\StringHelper::substr($currentTag, 1, \Joomla\String\StringHelper::strpos($currentTag, " ") - 1);
 							}
 							else
 							{
 								// Tag doesn't have attribute(s)
-								$currentTag = JString::substr($currentTag, 1, -1);
+								$currentTag = \Joomla\String\StringHelper::substr($currentTag, 1, -1);
 							}
 
 							array_push($tagsArray, $currentTag);
 
 						}
-						else if(JString::strpos($currentTag, "</") !== FALSE)
+						else if(\Joomla\String\StringHelper::strpos($currentTag, "</") !== FALSE)
 						{
 							array_pop($tagsArray);
 						}
@@ -505,11 +505,11 @@ class HTMLFormatHelper
 				{
 					if($lastSpacePosition != -1)
 					{
-						$ret = JString::substr($string, 0, $lastSpacePosition);
+						$ret = \Joomla\String\StringHelper::substr($string, 0, $lastSpacePosition);
 					}
 					else
 					{
-						$ret = JString::substr($string, $j);
+						$ret = \Joomla\String\StringHelper::substr($string, $j);
 					}
 				}
 
@@ -527,7 +527,7 @@ class HTMLFormatHelper
 			}
 
 			// only add 'tail' string if text was cut
-			if(JString::strlen($string) > $length)
+			if(\Joomla\String\StringHelper::strlen($string) > $length)
 			{
 				return ($ret . $addstring);
 			}

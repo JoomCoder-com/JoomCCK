@@ -697,7 +697,7 @@ class packInstallerScript
             }
             if ($file == 'tags') {
                 $db  = JFactory::getDBO();
-                $sql = "SELECT id FROM #__js_res_tags WHERE LOWER(`tag`) = '" . JString::strtolower($row['tag']) . "'";
+                $sql = "SELECT id FROM #__js_res_tags WHERE LOWER(`tag`) = '" . \Joomla\String\StringHelper::strtolower($row['tag']) . "'";
                 $db->setQuery($sql);
                 $tid = $db->loadResult();
                 if ($tid) {

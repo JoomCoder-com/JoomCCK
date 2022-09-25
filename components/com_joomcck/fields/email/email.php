@@ -111,7 +111,7 @@ class JFormFieldCEmail extends CFormField
 	{
 		$params   = $this->params;
 		$document = JFactory::getDocument();
-		$uri      = JFactory::getURI();
+		$uri      = \Joomla\CMS\Uri\Uri::getInstance();
 
 		$this->author = JFactory::getUser($record->user_id);
 		$this->user   = JFactory::getUser();

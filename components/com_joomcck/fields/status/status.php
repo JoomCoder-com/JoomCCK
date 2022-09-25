@@ -505,7 +505,7 @@ class JFormFieldCStatus extends CFormField
 	private function _sendAlert($to, $record = NULL)
 	{
 		$body = $this->params->get('params.emailbody' . $to, '');
-		$body = JString::trim($body);
+		$body = \Joomla\String\StringHelper::trim($body);
 
 		if(!$body)
 		{

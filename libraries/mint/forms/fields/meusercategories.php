@@ -31,7 +31,7 @@ class JFormFieldMEUsercategories extends JFormField
 		$html .= JHtml::_('select.genericlist', $categories, $this->name, 'class="inputbox"', 'value', 'text', $this->value, $this->id);
 		if($this->required)
 		{
-		    $uri		= JFactory::getUri();
+		    $uri		= \Joomla\CMS\Uri\Uri::getInstance();
             $return		= base64_encode($uri);
 		    $html .= '<a class="btn" href="'.JRoute::_('index.php?option=com_joomcck&view=category&section_id='.JRequest::getInt('section_id').'&task=usercategory.add&return='.$return).'">
 		    			<img src="'.JURI::root().'media/mint/icons/16/plus-button.png" align="absmiddle" alt="'.JText::_('Add New').'" /> '.JText::_('Add New').'

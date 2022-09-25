@@ -38,7 +38,7 @@ class JoomcckControllerTemplates extends MControllerForm
 		JSession::checkToken() or jexit(JText::_('JINVALID_TOKEN'));
 
 		$app = JFactory::getApplication();
-		$uri = JFactory::getURI();
+		$uri = \Joomla\CMS\Uri\Uri::getInstance();
 		$uri->setVar('tab', $this->input->get('tab'));
 
 		$model = $this->getModel();
@@ -100,7 +100,7 @@ class JoomcckControllerTemplates extends MControllerForm
 		JSession::checkToken() or jexit(JText::_('JINVALID_TOKEN'));
 
 		$app = JFactory::getApplication();
-		$uri = JFactory::getURI();
+		$uri = \Joomla\CMS\Uri\Uri::getInstance();
 		$uri->setVar('tab', $this->input->get('tab'));
 
 		$new_name = $this->input->get('tmplname');
@@ -124,7 +124,7 @@ class JoomcckControllerTemplates extends MControllerForm
 		JSession::checkToken() or jexit(JText::_('JINVALID_TOKEN'));
 
 		$tmpls = $this->input->get('cid', array(), 'array');
-		$uri   = JFactory::getURI();
+		$uri   = \Joomla\CMS\Uri\Uri::getInstance();
 		$uri->setVar('tab', $this->input->get('tab'));
 		$app = JFactory::getApplication();
 
@@ -156,7 +156,7 @@ class JoomcckControllerTemplates extends MControllerForm
 
 	public function save($key = NULL, $urlVar = NULL)
 	{
-		$uri    = JFactory::getURI();
+		$uri    = \Joomla\CMS\Uri\Uri::getInstance();
 		$app    = JFactory::getApplication();
 		$task   = $this->input->getCmd('task');
 		$type   = $this->input->get('type');

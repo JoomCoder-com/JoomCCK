@@ -28,7 +28,7 @@ class MintPayPaypal extends MintPayAbstract
 			return 'No email';
 		}
 
-		$url = JFactory::getURI();
+		$url = \Joomla\CMS\Uri\Uri::getInstance();
 		$url->setVar('rid', $field->record->id);
 		$url->setVar('fid', $field->id);
 

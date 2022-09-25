@@ -66,11 +66,11 @@ if($saveOrder)
 			<th width="5%" nowrap="nowrap">
 				<?php echo JHtml::_('grid.sort', 'CGROUPNAME', 'g.title', $listDirn, $listOrder); ?>
 			</th>
-			<th width="1%"><span rel="tooltip" data-original-title="<?php echo JText::_('JGLOBAL_FIELD_KEY_LABEL'); ?>"><?php echo JString::substr(JText::_('JGLOBAL_FIELD_KEY_LABEL'), 0, 1) ?></span></th>
-			<th width="1%"><span rel="tooltip" data-original-title="<?php echo JText::_('XML_LABEL_F_REQ'); ?>"><?php echo JString::substr(JText::_('XML_LABEL_F_REQ'), 0, 1) ?></span></th>
-			<th width="1%"><span rel="tooltip" data-original-title="<?php echo JText::_('XML_LABEL_F_SEARCHABLE'); ?>"><?php echo JString::substr(JText::_('XML_LABEL_F_SEARCHABLE'), 0, 1) ?></span></th>
-			<th width="1%"><span rel="tooltip" data-original-title="<?php echo JText::_('INTRO'); ?>"><?php echo JString::substr(JText::_('XML_LABEL_F_SHOW_INTRO'), 0, 1) ?></span></th>
-			<th width="1%"><span rel="tooltip" data-original-title="<?php echo JText::_('FULL'); ?>"><?php echo JString::substr(JText::_('XML_LABEL_F_SHOW_FULL'), 0, 1) ?></span></th>
+			<th width="1%"><span rel="tooltip" data-original-title="<?php echo JText::_('JGLOBAL_FIELD_KEY_LABEL'); ?>"><?php echo \Joomla\String\StringHelper::substr(JText::_('JGLOBAL_FIELD_KEY_LABEL'), 0, 1) ?></span></th>
+			<th width="1%"><span rel="tooltip" data-original-title="<?php echo JText::_('XML_LABEL_F_REQ'); ?>"><?php echo \Joomla\String\StringHelper::substr(JText::_('XML_LABEL_F_REQ'), 0, 1) ?></span></th>
+			<th width="1%"><span rel="tooltip" data-original-title="<?php echo JText::_('XML_LABEL_F_SEARCHABLE'); ?>"><?php echo \Joomla\String\StringHelper::substr(JText::_('XML_LABEL_F_SEARCHABLE'), 0, 1) ?></span></th>
+			<th width="1%"><span rel="tooltip" data-original-title="<?php echo JText::_('INTRO'); ?>"><?php echo \Joomla\String\StringHelper::substr(JText::_('XML_LABEL_F_SHOW_INTRO'), 0, 1) ?></span></th>
+			<th width="1%"><span rel="tooltip" data-original-title="<?php echo JText::_('FULL'); ?>"><?php echo \Joomla\String\StringHelper::substr(JText::_('XML_LABEL_F_SHOW_FULL'), 0, 1) ?></span></th>
 			<th width="1%" class="nowrap">
 				<?php echo JHtml::_('grid.sort', 'ID', 'f.id', $listDirn, $listOrder); ?>
 			</th>

@@ -17,7 +17,7 @@ class JoomcckViewComms extends MViewBase
 
 		JHtml::_('behavior.tooltip');
 
-		$uri          = JFactory::getURI();
+		$uri          = \Joomla\CMS\Uri\Uri::getInstance();
 		$this->action = $uri->toString();
 
 		$this->state      = $this->get('State');
@@ -73,7 +73,7 @@ class JoomcckViewComms extends MViewBase
 
 		MRToolBar::addSubmenu('comments');
 
-		JSubMenuHelper::setAction('index.php?option=com_joomcck&view=comments');
+		\Joomla\CMS\HTML\Helpers\Sidebar::setAction('index.php?option=com_joomcck&view=comments');
 
 
 	}

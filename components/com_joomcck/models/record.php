@@ -175,8 +175,8 @@ class JoomcckModelRecord extends MModelItem
 		}
 
 		$data->url  = Url::record($data, $type, $section, $category_id);
-		$data->canon  = JFactory::getURI()->getScheme() . '://' . JFactory::getURI()->getHost() . JRoute::_(Url::record($data, $type, $section, array_shift($cat_ids)));
-		$data->href = JFactory::getURI()->getScheme() . '://' . JFactory::getURI()->getHost() . JRoute::_($data->url);
+		$data->canon  = \Joomla\CMS\Uri\Uri::getInstance()->getScheme() . '://' . \Joomla\CMS\Uri\Uri::getInstance()->getHost() . JRoute::_(Url::record($data, $type, $section, array_shift($cat_ids)));
+		$data->href = \Joomla\CMS\Uri\Uri::getInstance()->getScheme() . '://' . \Joomla\CMS\Uri\Uri::getInstance()->getHost() . JRoute::_($data->url);
 
 		$robots = $type->params->get('submission.robots');
 

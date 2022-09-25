@@ -408,7 +408,7 @@ class JoomcckTableRecord extends JTable
 		$this->title = CensorHelper::cleanText($this->title);
 		if($type->params->get('properties.item_title_limit', 0))
 		{
-			if(JString::strlen($this->title) > $type->params->get('properties.item_title_limit', 0))
+			if(\Joomla\String\StringHelper::strlen($this->title) > $type->params->get('properties.item_title_limit', 0))
 			{
 				$this->setError(JText::sprintf('C_MSG_TITLETOLONG', $type->params->get('properties.item_title_limit', 0)));
 

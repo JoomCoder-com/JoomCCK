@@ -41,7 +41,7 @@ $key = $record->id.$this->id;
 	</script>
 <?php endif; ?>
 <br>
-<form action="<?php echo JFactory::getURI()->toString();?>" method="post" enctype="multipart/form-data">
+<form action="<?php echo \Joomla\CMS\Uri\Uri::getInstance()->toString();?>" method="post" enctype="multipart/form-data">
 	<table class="table table-hover">
 		<?php if ($to):?>
 		<tr>

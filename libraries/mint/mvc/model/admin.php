@@ -811,8 +811,8 @@ abstract class MModelAdmin extends MModelForm
 		$table = $this->getTable();
 		while ($table->load(array('alias' => $alias, 'catid' => $category_id)))
 		{
-			$title = JString::increment($title);
-			$alias = JString::increment($alias, 'dash');
+			$title = \Joomla\String\StringHelper::increment($title);
+			$alias = \Joomla\String\StringHelper::increment($alias, 'dash');
 		}
 
 		return array($title, $alias);

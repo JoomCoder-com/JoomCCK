@@ -7,6 +7,8 @@
  * @license GNU/GPL http://www.gnu.org/copyleft/gpl.html
  */
 
+use Joomla\CMS\HTML\Helpers\Sidebar;
+
 defined('_JEXEC') or die;
 
 /**
@@ -21,19 +23,19 @@ class MRToolBar extends JToolBarHelper
 {
 	public static function addSubmenu($vName = 'records')
 	{
-		JSubMenuHelper::addEntry(
+		Sidebar::addEntry(
 			'<img src="'.JUri::root(TRUE).'/media/mint/icons/16/gear.png" align="absmiddle"> '.
 			JText::_('XML_SUBMENU_CONFIGURATION'),
-			'index.php?option=com_config&view=component&component=com_joomcck&return='.base64_encode(JFactory::getURI()),
+			'index.php?option=com_config&view=component&component=com_joomcck&return='.base64_encode(\Joomla\CMS\Uri\Uri::getInstance()),
 			$vName == 'config'
 		);
-		JSubMenuHelper::addEntry(
+		Sidebar::addEntry(
 			'<img src="'.JUri::root(TRUE).'/media/mint/icons/16/information.png" align="absmiddle"> '.
 			JText::_('XML_SUBMENU_ABOUT'),
 			'index.php?option=com_joomcck&view=about',
 			$vName == 'about'
 		);
-		JSubMenuHelper::addEntry(
+		Sidebar::addEntry(
 			'<img src="'.JUri::root(TRUE).'/media/mint/icons/16/lifebuoy.png" align="absmiddle"> '.
 			JText::_('XML_SUBMENU_SUPPORT'),
 			'https://www.joomBoost.com/support/community-forum/category-items/6-community-forum/48-joomcck-8.html',

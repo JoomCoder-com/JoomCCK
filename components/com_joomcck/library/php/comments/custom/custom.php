@@ -16,7 +16,7 @@ class JoomcckCommentsCustom extends JoomcckComments {
 	public function getNum($type, $record)
 	{
 		$code = $type->params->get('comments.comment_custom_js_numm');
-		$code = str_replace(array('[URL]', '[ID]'), array(JFactory::getURI()->toString(), $record->id), $code);
+		$code = str_replace(array('[URL]', '[ID]'), array(\Joomla\CMS\Uri\Uri::getInstance()->toString(), $record->id), $code);
 		
 		return $code;
 	}
@@ -25,7 +25,7 @@ class JoomcckCommentsCustom extends JoomcckComments {
 	{
 		$out[] = '<h2>'.JText::_('CCOMMENTS').'</h2>';
 		$code = $type->params->get('comments.comment_custom_js_comm');
-		$code = str_replace(array('[URL]', '[ID]'), array(JFactory::getURI()->toString(), $record->id), $code);
+		$code = str_replace(array('[URL]', '[ID]'), array(\Joomla\CMS\Uri\Uri::getInstance()->toString(), $record->id), $code);
 		
 		$out[] = $code;
 		

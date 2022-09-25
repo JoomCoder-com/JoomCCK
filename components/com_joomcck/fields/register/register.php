@@ -146,7 +146,7 @@ class JFormFieldCregister extends CFormField
 			return FALSE;
 		}
 
-		if($user_params->get('minimum_length') && (JString::strlen((string)$values->get('pass')) < $user_params->get('minimum_length')))
+		if($user_params->get('minimum_length') && (\Joomla\String\StringHelper::strlen((string)$values->get('pass')) < $user_params->get('minimum_length')))
 		{
 			$this->setError(JText::plural('COM_USERS_MSG_PASSWORD_TOO_SHORT_N', $user_params->get('minimum_length')));
 

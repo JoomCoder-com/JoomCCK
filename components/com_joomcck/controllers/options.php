@@ -108,7 +108,7 @@ class JoomcckControllerOptions extends MControllerAdmin
 		}
 
 		$app->enqueueMessage(JText::_('CMSGOPTIONSSAVED'));
-		$this->setRedirect(JFactory::getURI()->toString());
+		$this->setRedirect(\Joomla\CMS\Uri\Uri::getInstance()->toString());
 	}
 
 	public function savesectionoptions()
@@ -171,7 +171,7 @@ class JoomcckControllerOptions extends MControllerAdmin
 
 
 		$app->enqueueMessage(JText::_('CMSGSECTIONOPTIONSSAVED'));
-		$this->setRedirect(JFactory::getURI()->toString());
+		$this->setRedirect(\Joomla\CMS\Uri\Uri::getInstance()->toString());
 	}
 
 }

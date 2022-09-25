@@ -155,7 +155,7 @@ class JFormFieldCImage extends CFormField
 				$time   = time();
 				$params = JComponentHelper::getParams('com_joomcck');
 				$date   = date($params->get('folder_format', 'Y-m'), $time);
-				$ext    = JString::strtolower(JFile::getExt($file['name']));
+				$ext    = \Joomla\String\StringHelper::strtolower(JFile::getExt($file['name']));
 
 				$subfolder = $this->params->get('params.subfolder');
 

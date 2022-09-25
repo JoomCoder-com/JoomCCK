@@ -109,31 +109,31 @@ foreach ($exclude as &$value) {
 
 			<?php if($params->get('tmpl_core.item_comments_num') == 1):?>
 				<th nowrap="nowrap" class="cob-comm-th">
-					<span rel="tooltip" data-original-title="<?php echo JText::_('CCOMMENTS');?>"><?php echo JString::substr(JText::_('CCOMMENTS'), 0, 1)?></span>
+					<span rel="tooltip" data-original-title="<?php echo JText::_('CCOMMENTS');?>"><?php echo \Joomla\String\StringHelper::substr(JText::_('CCOMMENTS'), 0, 1)?></span>
 				</th>
 			<?php endif;?>
 
 			<?php if($params->get('tmpl_core.item_favorite_num') == 1):?>
 				<th nowrap="nowrap" class="cob-num-th">
-					<span rel="tooltip" data-original-title="<?php echo JText::_('CFAVORITE');?>"><?php echo JString::substr(JText::_('CFAVORITE'), 0, 1)?></span>
+					<span rel="tooltip" data-original-title="<?php echo JText::_('CFAVORITE');?>"><?php echo \Joomla\String\StringHelper::substr(JText::_('CFAVORITE'), 0, 1)?></span>
 				</th>
 			<?php endif;?>
 
 			<?php if($params->get('tmpl_core.item_vote_num') == 1):?>
 				<th nowrap="nowrap" class="cob-vote-th">
-					<span rel="tooltip" data-original-title="<?php echo JText::_('CVOTES');?>"><?php echo JString::substr(JText::_('CVOTES'), 0, 1)?></span>
+					<span rel="tooltip" data-original-title="<?php echo JText::_('CVOTES');?>"><?php echo \Joomla\String\StringHelper::substr(JText::_('CVOTES'), 0, 1)?></span>
 				</th>
 			<?php endif;?>
 
 			<?php if($params->get('tmpl_core.item_follow_num') == 1):?>
 				<th nowrap="nowrap" class="cob-follow-th">
-					<span rel="tooltip" data-original-title="<?php echo JText::_('CFOLLOWERS');?>"><?php echo JString::substr(JText::_('CFOLLOWERS'), 0, 1)?></span>
+					<span rel="tooltip" data-original-title="<?php echo JText::_('CFOLLOWERS');?>"><?php echo \Joomla\String\StringHelper::substr(JText::_('CFOLLOWERS'), 0, 1)?></span>
 				</th>
 			<?php endif;?>
 
 			<?php if($params->get('tmpl_core.item_hits') == 1):?>
 				<th nowrap="nowrap" width="1%" class="cob-hit-th">
-					<span rel="tooltip" data-original-title="<?php echo JText::_('CHITS');?>"><?php echo JString::substr(JText::_('CHITS'), 0, 1)?></span>
+					<span rel="tooltip" data-original-title="<?php echo JText::_('CHITS');?>"><?php echo \Joomla\String\StringHelper::substr(JText::_('CHITS'), 0, 1)?></span>
 				</th>
 			<?php endif;?>
 		</tr>

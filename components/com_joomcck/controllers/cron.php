@@ -128,7 +128,7 @@ class JoomcckControllerCron extends MControllerAdmin
 
 		foreach($sorted_notes as $user_id => $records)
 		{
-			$text = JString::str_ireplace('[MESSAGE_BODY]', $msg, $main);
+			$text = \Joomla\String\StringHelper::str_ireplace('[MESSAGE_BODY]', $msg, $main);
 			$num      = 0;
 			$note_ids = $list = array();
 
@@ -164,9 +164,9 @@ class JoomcckControllerCron extends MControllerAdmin
 						case 'comment_deleted':
 							if($comment = strip_tags($note->params->get('comment')))
 							{
-								if(JString::strlen($comment) > 50)
+								if(\Joomla\String\StringHelper::strlen($comment) > 50)
 								{
-									$comment = JString::substr($comment, 0, 50) . '...';
+									$comment = \Joomla\String\StringHelper::substr($comment, 0, 50) . '...';
 								}
 								$event .= '<p>' . $comment . '<p>';
 							}

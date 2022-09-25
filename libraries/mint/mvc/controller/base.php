@@ -231,9 +231,10 @@ class MControllerBase extends JObject
 		$input = JFactory::getApplication()->input;
 
 		// Get the environment configuration.
-		$basePath = array_key_exists('base_path', $config) ? $config['base_path'] : JPATH_COMPONENT;
+		$basePath = array_key_exists('base_path', $config) ? $config['base_path'] : JPATH_ROOT.'/components/com_joomcck';
 		$format   = $input->getWord('format');
 		$command  = $input->get('task', 'display');
+
 
 		// Check for array format.
 		$filter = JFilterInput::getInstance();
@@ -246,6 +247,7 @@ class MControllerBase extends JObject
 		{
 			$command = $filter->clean($command, 'cmd');
 		}
+
 
 		// Check for a controller.task command.
 		if (strpos($command, '.') !== false)
@@ -273,8 +275,12 @@ class MControllerBase extends JObject
 			$backuppath = $basePath . '/' . $backupfile;
 		}
 
+		echo '<pre>';
+
+
 		// Get the controller class name.
 		$class = ucfirst($prefix) . 'Controller' . ucfirst($type);
+
 
 		// Include the class if not present.
 		if (!class_exists($class))
@@ -332,8 +338,9 @@ class MControllerBase extends JObject
 
 		$this->input = JFactory::getApplication()->input;
 
+
 		// Determine the methods to exclude from the base class.
-		$xMethods = get_class_methods('JControllerBase');
+		$xMethods = get_class_methods('\Joomla\CMS\MVC\Controller\BaseController');
 
 		// Get the public methods in this class using reflection.
 		$r = new ReflectionClass($this);

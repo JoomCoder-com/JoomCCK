@@ -13,7 +13,7 @@ class JoomcckViewPacksections extends MViewBase
 {
 	public function display($tpl = null)
 	{
-		$uri = JFactory::getURI();
+		$uri = \Joomla\CMS\Uri\Uri::getInstance();
 		$this->action = $uri->toString();
 
 		$pack_model = MModelBase::getInstance('Pack', 'JoomcckModel');

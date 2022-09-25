@@ -24,7 +24,7 @@ class JFormFieldCTextarea extends CFormField
 
 		if($max_length > 0)
 		{
-			$text = JString::substr($text, 0, $max_length);
+			$text = \Joomla\String\StringHelper::substr($text, 0, $max_length);
 		}
 		$text = htmlspecialchars(stripslashes($text), ENT_QUOTES, 'UTF-8');
 
@@ -129,7 +129,7 @@ class JFormFieldCTextarea extends CFormField
 			$value = HTMLFormatHelper::bb2html($value, $this->params->get('params.bbcode_attr'));
 		}
 
-		$text_length = JString::strlen(str_replace(array(" ", "\r", "\n", "\t"), '', strip_tags($value)));
+		$text_length = \Joomla\String\StringHelper::strlen(str_replace(array(" ", "\r", "\n", "\t"), '', strip_tags($value)));
 
 		if($text_length && $this->params->get('params.minlen') && $text_length < $this->params->get('params.minlen'))
 		{
@@ -140,7 +140,7 @@ class JFormFieldCTextarea extends CFormField
 			$this->setError(JText::sprintf("CTOOMUCH", $this->params->get('params.maxlen'), $this->label));
 		}
 
-		$len = JString::strlen(str_replace(array('<?php', '?>', '&amp;', '<hr>'), array('&lt;?php', '?&gt;', '&', '<hr />'), $value));
+		$len = \Joomla\String\StringHelper::strlen(str_replace(array('<?php', '?>', '&amp;', '<hr>'), array('&lt;?php', '?&gt;', '&', '<hr />'), $value));
 
 		if($this->params->get('params.allow_html', 1) == 2)
 		{
@@ -158,7 +158,7 @@ class JFormFieldCTextarea extends CFormField
 			$value = JFilterInput::getInstance($tags, $attr, $tag_mode, $attmode)->clean($value);
 			$value = str_replace(array('^@^', '@^@', '^^^', '@@@'), array('&lt;?php', '?&gt;', '&lt;', '&gt;'), $value);
 
-			$len1 = JString::strlen($value);
+			$len1 = \Joomla\String\StringHelper::strlen($value);
 			if($len != $len1)
 			{
 				$this->setError(JText::sprintf('TA_ENTEREDTAGSATTRSNOTALLOWED', $this->label));

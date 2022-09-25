@@ -39,7 +39,7 @@ class JoomcckViewTools extends MViewBase
 
 	function _tool()
 	{
-		$uri = JFactory::getURI();
+		$uri = \Joomla\CMS\Uri\Uri::getInstance();
 
 		$this->form   = $this->get('ToolForm');
 		$this->tool   = $this->get('Tool');

@@ -395,7 +395,7 @@ class ArrayHelper
 		}
 		foreach($array as $k => &$val)
 		{
-			$val = JString::strtolower($val);
+			$val = \Joomla\String\StringHelper::strtolower($val);
 		}
 		if(!$array)
 		{

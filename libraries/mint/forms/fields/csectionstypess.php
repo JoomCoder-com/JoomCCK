@@ -48,7 +48,7 @@ class JFormFieldCsectionstypess extends JFormMEFieldList
 		$html = parent::getInput();
 		
 		$doc = JFactory::getDocument();
-		$uri = JFactory::getURI();
+		$uri = \Joomla\CMS\Uri\Uri::getInstance();
 		$doc->addScriptDeclaration("
 			function ajax_reloadTypes(id, value)
 			{

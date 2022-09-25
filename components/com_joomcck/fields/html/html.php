@@ -177,7 +177,7 @@ class JFormFieldCHtml extends CFormField
 		$user = JFactory::getUser();
 		if (!in_array($this->params->get('params.allow_html', 3), $user->getAuthorisedViewLevels()))
 		{
-			$len = JString::strlen($value);
+			$len = \Joomla\String\StringHelper::strlen($value);
 
 			$tags = explode(',', $this->params->get('params.filter_tags'));
 			$attr = explode(',', $this->params->get('params.filter_attr'));
@@ -187,7 +187,7 @@ class JFormFieldCHtml extends CFormField
 			ArrayHelper::clean_r($attr);
 
 			$value = JFilterInput::getInstance($tags, $attr, $this->params->get('params.tags_mode', 0), $this->params->get('params.attr_mode', 0))->clean($value, 'html');
-			$len1 = JString::strlen($value);
+			$len1 = \Joomla\String\StringHelper::strlen($value);
 			if ($len != $len1)
 			{
 				$this->setError(JText::sprintf("H_ENTEREDTAGSATTRSNOTALLOWEDMSG", $this->label));

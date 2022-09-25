@@ -17,7 +17,7 @@ $js         = '';
 ?>
 
 <?php if($params->get('params.notify', 0) == 1 && $max_length > 0) :
-	$symbols_left = $max_length - JString::strlen($this->value);
+	$symbols_left = $max_length - \Joomla\String\StringHelper::strlen($this->value);
 	$symbols_left = $symbols_left < 0 ? 0 : $symbols_left;
 	?>
 	<div class="alert alert-warning" id="alert-limit-<?php echo $this->id ?>">

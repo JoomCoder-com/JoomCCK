@@ -20,7 +20,7 @@ defined('_JEXEC') or die();
     <small><?php echo $this->tool->description; ?></small>
 </div>
 
-<form action="<?php echo JFactory::getURI()->toString(); ?>" method="post" name="adminForm" id="adminForm" enctype="multipart/form-data">
+<form action="<?php echo \Joomla\CMS\Uri\Uri::getInstance()->toString(); ?>" method="post" name="adminForm" id="adminForm" enctype="multipart/form-data">
     <a class="btn btn-warning" href="<?php echo JRoute::_('index.php?option=com_joomcck&view=tools') ?>"><?php echo Mint::_('CGOBACK') ?></a>
     <button align="right" data-style="expand-left" class="btn btn-primary ladda-button" onclick="javascript:submitbutton('tools.apply')" style="float: right;">
 		<span class="ladda-label"><?php echo JText::_('CRUNTOOL')?></span>

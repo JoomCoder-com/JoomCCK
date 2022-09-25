@@ -17,7 +17,7 @@ $app = JFactory::getApplication();
 ?>
 
 <br>
-<form action="<?php echo JFactory::getURI()->toString();?>" method="post" name="adminForm" id="adminForm" class=" form-horizontal"  style="padding: 20px">
+<form action="<?php echo \Joomla\CMS\Uri\Uri::getInstance()->toString();?>" method="post" name="adminForm" id="adminForm" class=" form-horizontal"  style="padding: 20px">
 	<?php if(!$this->user->get('id')):?>
 		<div class="control-group">
 			<?php echo $this->form->getLabel('name') ; ?>

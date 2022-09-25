@@ -348,7 +348,7 @@ class JoomcckControllerFiles extends MControllerAdmin
         }
 
         $filename =  $request->getFileName();
-        $ext  = JString::strtolower(JFile::getExt($filename));
+        $ext  = \Joomla\String\StringHelper::strtolower(JFile::getExt($filename));
         $exts    = explode(',', str_replace(' ', '', $field->params->get('params.file_formats', 'zip, jpg, png, jpeg, gif, txt, md, bmp')));
 
         if (!in_array($ext, $exts)) {
@@ -406,7 +406,7 @@ class JoomcckControllerFiles extends MControllerAdmin
         if ($response['finish']) {
             $user = JFactory::getUser();
 
-            $ext       = JString::strtolower(JFile::getExt($response['upload_name']));
+            $ext       = \Joomla\String\StringHelper::strtolower(JFile::getExt($response['upload_name']));
             $subfolder = $ext;
             if ($field_id = $this->input->getInt('field_id')) {
                 $field = JTable::getInstance('Field', 'JoomcckTable');
@@ -438,7 +438,7 @@ class JoomcckControllerFiles extends MControllerAdmin
 
         $time = time();
         $date = date($params->get('folder_format', 'Y-m'), $time);
-        $ext  = JString::strtolower(JFile::getExt($realname));
+        $ext  = \Joomla\String\StringHelper::strtolower(JFile::getExt($realname));
         $subfolder     = $field->params->get('params.subfolder', $field->field_type);
 
         $dest  = JPATH_ROOT . DIRECTORY_SEPARATOR . $params->get('general_upload') . DIRECTORY_SEPARATOR . $subfolder . DIRECTORY_SEPARATOR;

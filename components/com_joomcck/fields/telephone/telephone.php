@@ -214,9 +214,9 @@ class JFormFieldCTelephone extends CFormField
 			$data[$k]->value = $val->phone_code;
 
 			$data[$k]->flag = '';
-			if(JFile::exists(JPATH_ROOT.'/media/mint/icons/flag/16/' . JString::strtolower($val->code2) . '.png'))
+			if(JFile::exists(JPATH_ROOT.'/media/mint/icons/flag/16/' . \Joomla\String\StringHelper::strtolower($val->code2) . '.png'))
 			{
-				$data[$k]->flag = '<img src="' . JURI::root(TRUE) . '/media/mint/icons/flag/16/' . JString::strtolower($val->code2) . '.png" border="0" align="absmiddle" alt="' . JText::_($val->name) . '">';
+				$data[$k]->flag = '<img src="' . JURI::root(TRUE) . '/media/mint/icons/flag/16/' . \Joomla\String\StringHelper::strtolower($val->code2) . '.png" border="0" align="absmiddle" alt="' . JText::_($val->name) . '">';
 			}
 		}
 		return $data;

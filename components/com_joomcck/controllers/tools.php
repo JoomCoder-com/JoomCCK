@@ -29,7 +29,7 @@ class JoomcckControllerTools extends MControllerForm
 	{
 
 		$name = $this->input->get('name');
-		$uri  = JFactory::getURI();
+		$uri  = \Joomla\CMS\Uri\Uri::getInstance();
 
 		$params = new JRegistry('');
 		if(@$_POST['jform'])

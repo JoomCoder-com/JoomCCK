@@ -77,7 +77,7 @@ class JoomcckControllerElements extends MControllerAdmin
 		}
 
 		$app->enqueueMessage('CMSGOPTIONSSAVED');
-		$this->setRedirect(JFactory::getURI()->toString());
+		$this->setRedirect(\Joomla\CMS\Uri\Uri::getInstance()->toString());
 	}
 
 }

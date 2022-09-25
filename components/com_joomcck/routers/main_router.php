@@ -83,7 +83,7 @@ function cleanAlias($alias)
 		$alias = str_replace('--', '-', $alias);
 	}
 
-	return JString::strtolower(JText::_(JString::strtoupper($alias)));
+	return \Joomla\String\StringHelper::strtolower(JText::_(\Joomla\String\StringHelper::strtoupper($alias)));
 }
 
 function explodeUrlParam($param)

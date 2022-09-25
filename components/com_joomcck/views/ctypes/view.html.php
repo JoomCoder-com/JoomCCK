@@ -24,7 +24,7 @@ class JoomcckViewCTypes extends MViewBase
 	{
 		JHtml::_('behavior.tooltip');
 
-		$uri          = JFactory::getURI();
+		$uri          = \Joomla\CMS\Uri\Uri::getInstance();
 		$this->action = $uri->toString();
 
 		$this->state      = $this->get('State');

@@ -22,7 +22,7 @@ defined('_JEXEC') or die();
 	<li>It will update only associated(selected) fields, and will leave other fields untouched should they already contain any data.</li>
 </ul>
 
-<form action="<?php echo JFactory::getURI()->toString(); ?>" method="post" name="adminForm" id="adminForm" class="form-horizontal">
+<form action="<?php echo \Joomla\CMS\Uri\Uri::getInstance()->toString(); ?>" method="post" name="adminForm" id="adminForm" class="form-horizontal">
 	<div class="row-fluid">
 		<?php echo JHtml::_('select.genericlist', $this->presets, 'preset', 'class="span12"');?>
 	</div>

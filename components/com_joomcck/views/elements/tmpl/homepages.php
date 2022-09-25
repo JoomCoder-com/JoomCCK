@@ -11,7 +11,7 @@ defined('_JEXEC') or die();
 JHtml::_('dropdown.init');
 ?>
 <br />
-<form action="<?php echo JFactory::getUri()->toString(); ?>" method="post" name="adminForm" id="sales-form">
+<form action="<?php echo \Joomla\CMS\Uri\Uri::getInstance()->toString(); ?>" method="post" name="adminForm" id="sales-form">
 	<div class="controls controls-row">
 		<table class="pull-right">
 			<tr>

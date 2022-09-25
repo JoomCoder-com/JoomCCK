@@ -52,7 +52,7 @@
 }
 </style>
 
-<form action="<?php echo JFactory::getURI()->toString(); ?>" method="post" name="adminForm" id="adminForm" class="form-horizontal">
+<form action="<?php echo \Joomla\CMS\Uri\Uri::getInstance()->toString(); ?>" method="post" name="adminForm" id="adminForm" class="form-horizontal">
         <div class="control-group">
             <label class="control-label" for="type"><?php echo JText::_('CSECTION') ?></label>
             <div class="controls">

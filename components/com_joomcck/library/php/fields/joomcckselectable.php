@@ -100,7 +100,7 @@ class CFormFieldSelectable extends CFormField
 			foreach($this->value as $value)
 			{
 				$val = explode($this->params->get('params.color_separator', '^'), $value);
-				if(!in_array(JString::strtolower($val[0]), $list2))
+				if(!in_array(\Joomla\String\StringHelper::strtolower($val[0]), $list2))
 				{
 					$list[] = $value;
 					$save = TRUE;

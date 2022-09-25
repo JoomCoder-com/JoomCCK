@@ -7,6 +7,8 @@
  * @license GNU/GPL http://www.gnu.org/copyleft/gpl.html
  */
 
+use Joomla\CMS\Installer\Installer;
+
 defined('_JEXEC') || die();
 jimport('joomla.application.component.view');
 /**
@@ -26,7 +28,7 @@ class JoomcckViewAbout extends MViewBase
         $data2 = ['version' => 'Not Installed'];
 
         $file = JPATH_COMPONENT_ADMINISTRATOR . DIRECTORY_SEPARATOR . 'joomcck.xml';
-        $data = JApplicationHelper::parseXMLInstallFile($file);
+        $data = Installer::parseXMLInstallFile($file);
 
         $fields_path = JPATH_ROOT . DIRECTORY_SEPARATOR . 'components' . DIRECTORY_SEPARATOR . 'com_joomcck' . DIRECTORY_SEPARATOR . 'fields';
 
@@ -53,7 +55,7 @@ class JoomcckViewAbout extends MViewBase
         ]);
 
         $live_site    = substr(JURI::root(), 0, -1);
-        $app          = JApplication::getInstance('site');
+        $app          = Joomla\CMS\Application\CMSApplication::getInstance('site');
         $router       = $app->getRouter();
         $url          = $router->build($live_site . '/index.php?option=com_joomcck&view=cpanel&Itemid=' . $menu_table->id);
         $this->linkCP = $url->toString();

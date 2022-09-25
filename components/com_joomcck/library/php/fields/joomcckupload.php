@@ -140,7 +140,7 @@ class CFormFieldUpload extends CFormField
         $out   = $saved   = [];
         $files = JTable::getInstance('Files', 'JoomcckTable');
         foreach ($this->value as $key => $file) {
-            if (!JString::strcmp($key, 'subscriptions')) {
+            if (!\Joomla\String\StringHelper::strcmp($key, 'subscriptions')) {
                 continue;
             }
             $out[]   = $file['realname'];
@@ -638,7 +638,7 @@ class CFormFieldUpload extends CFormField
                 continue;
             }
 
-            $ext      = JString::strtolower(JFile::getExt($file));
+            $ext      = \Joomla\String\StringHelper::strtolower(JFile::getExt($file));
             $new_name = JFactory::getDate($record->ctime)->toUnix() . '_' . md5($file) . '.' . $ext;
 
             $file = $this->_find_import_file($params->get('field.' . $this->id . '.path'), $file);

@@ -103,7 +103,7 @@ class plgContentJoomcck extends JPlugin
 		JRequest::setVar('parent', 0);
 		JRequest::setVar('parent_id', 0);
 
-		$return = urlencode(base64_encode(JFactory::getURI()->toString()));
+		$return = urlencode(base64_encode(\Joomla\CMS\Uri\Uri::getInstance()->toString()));
 		$app = JFactory::getApplication();
 
 		if(in_array($stype->params->get('submission.submission'), $user->getAuthorisedViewLevels()))
