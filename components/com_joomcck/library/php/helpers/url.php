@@ -6,6 +6,9 @@
  * @copyright Copyright (C) 2012 JoomBoost (https://www.joomBoost.com). All rights reserved.
  * @license   GNU/GPL http://www.gnu.org/copyleft/gpl.html
  */
+
+use Joomla\CMS\Application\ApplicationHelper;
+
 defined('_JEXEC') or die();
 
 $component_params = JComponentHelper::getParams('com_joomcck');
@@ -48,13 +51,15 @@ class Url
 	static public function add($section, $type, $category)
 	{
 
+        if(!isset($type->id))
+            return '#';
 
 
 		$url = 'index.php?option=com_joomcck&view=form&section_id=' . $section->id;
-		$url .= '&type_id=' . $type->id . COBS . JApplication::stringURLSafe($type->name);
+		$url .= '&type_id=' . $type->id . COBS . ApplicationHelper::stringURLSafe($type->name);
 		if(!empty($category->id))
 		{
-			$url .= '&cat_id=' . $category->id . COBS . JApplication::stringURLSafe($category->title);
+			$url .= '&cat_id=' . $category->id . COBS . ApplicationHelper::stringURLSafe($category->title);
 		}
 
 		$itemid = isset($type->params) ? $type->params->get('properties.item_itemid') : '';
@@ -161,7 +166,7 @@ class Url
 
 		$array['view']       = 'records';
 		$array['section_id'] = $section->id . COBS . $section->alias;
-		$array['user_id']    = $user->get('id') . COBS . JApplication::stringURLSafe($user->get($section->params->get('personalize.author_mode')));
+		$array['user_id']    = $user->get('id') . COBS . ApplicationHelper::stringURLSafe($user->get($section->params->get('personalize.author_mode')));
 		$array['view_what']  = $view_what;
 		if($section->params->get('general.category_itemid'))
 		{
@@ -249,7 +254,7 @@ class Url
 
 		if($section->params->get('personalize.personalize') && $record->user_id)
 		{
-			$url .= '&user_id=' . $record->user_id . COBS . JApplication::stringURLSafe(JFactory::getUser($record->user_id)->get($section->params->get('personalize.author_mode')));
+			$url .= '&user_id=' . $record->user_id . COBS . ApplicationHelper::stringURLSafe(JFactory::getUser($record->user_id)->get($section->params->get('personalize.author_mode')));
 		}
 		if(!empty($category->id))
 		{
@@ -346,7 +351,7 @@ class Url
 		{
 			$url .= '&ucat_id=' . $ucategory_id;
 		}
-		$url .= '&user_id=' . $user_id . COBS . JApplication::stringURLSafe(JFactory::getUser($user_id)->get($section->params->get('personalize.author_mode')));
+		$url .= '&user_id=' . $user_id . COBS . ApplicationHelper::stringURLSafe(JFactory::getUser($user_id)->get($section->params->get('personalize.author_mode')));
 		$url .= '&Itemid=' . $section->params->get('general.category_itemid');
 
 		return $url;

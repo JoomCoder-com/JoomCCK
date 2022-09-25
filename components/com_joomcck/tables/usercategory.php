@@ -43,7 +43,7 @@ class JoomcckTableUsercategory extends JTable
 		}
 		$this->mtime = $date;
 		
-		$this->alias = JApplication::stringURLSafe($this->name);
+		$this->alias = \Joomla\CMS\Application\ApplicationHelper::stringURLSafe($this->name);
 
 		return true;
 	}

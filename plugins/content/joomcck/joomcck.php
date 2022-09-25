@@ -109,7 +109,7 @@ class plgContentJoomcck extends JPlugin
 		if(in_array($stype->params->get('submission.submission'), $user->getAuthorisedViewLevels()))
 		{
 			$url = 'index.php?option=com_joomcck&view=form&section_id=' . $section->id;
-			$url .= '&type_id=' . $stype->id . ':' . JApplication::stringURLSafe($stype->name);
+			$url .= '&type_id=' . $stype->id . ':' . \Joomla\CMS\Application\ApplicationHelper::stringURLSafe($stype->name);
 			$url .= '&defcat_id='.$this->params->get('defcat', 0);
 			$url .= '&parent_id='.$row->id;
 			$url .= '&parent=com_content';

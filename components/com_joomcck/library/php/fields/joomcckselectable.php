@@ -295,7 +295,7 @@ class CFormFieldSelectable extends CFormField
 		return _getSQLValues($this, $assoc);
 	}
 
-	private function _getvalues($limit = 0, $record, $type, $section, $client)
+	private function _getvalues($limit, $record, $type, $section, $client)
 	{
 		$user = JFactory::getUser();
 		if($this->type == 'listautocomplete')

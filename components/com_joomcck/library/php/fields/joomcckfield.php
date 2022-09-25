@@ -118,7 +118,7 @@ class CFormField extends JFormField
 		return $out;
 	}
 
-	protected  function _display_output($client = 'full', $record, $type, $section)
+	protected  function _display_output($client, $record, $type, $section)
 	{
 		ob_start();
 

@@ -491,7 +491,7 @@ class JoomcckTableRecord extends JTable
 			$this->alias = JFactory::getDate()->format('Y-m-d-H-i-s');
 		}
 
-		$this->alias = JApplication::stringURLSafe(strip_tags(CensorHelper::cleanText($this->alias)));
+		$this->alias = \Joomla\CMS\Application\ApplicationHelper::stringURLSafe(strip_tags(CensorHelper::cleanText($this->alias)));
 
 		return TRUE;
 	}
@@ -627,7 +627,7 @@ class JoomcckTableRecord extends JTable
 			$this->alias = JFactory::getDate()->format('Y-m-d-H-i-s');
 		}
 
-		$this->alias = JApplication::stringURLSafe(strip_tags($this->alias));
+		$this->alias = \Joomla\CMS\Application\ApplicationHelper::stringURLSafe(strip_tags($this->alias));
 
 		return TRUE;
 	}

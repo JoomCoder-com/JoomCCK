@@ -103,7 +103,7 @@ class JoomcckTableSection extends JTable
 			$this->alias = $this->title ? $this->title : $this->name;
 		}
 
-		$this->alias = JApplication::stringURLSafe($this->alias);
+		$this->alias = \Joomla\CMS\Application\ApplicationHelper::stringURLSafe($this->alias);
 		if(trim(str_replace('-', '', $this->alias)) == '')
 		{
 			$this->alias = JFactory::getDate()->format('Y-m-d-H-i-s');

@@ -179,7 +179,7 @@ function JoomcckBuildRoute(&$query)
 				$user       = explodeUrlParam($query['user_id']);
 				if(count($user) < 2)
 				{
-					$user[1] = JApplication::stringURLSafe(JFactory::getUser($user[0])->get(ItemsStore::getSection($section[0])->params->get('personalize.author_mode')));
+					$user[1] = \Joomla\CMS\Application\ApplicationHelper::stringURLSafe(JFactory::getUser($user[0])->get(ItemsStore::getSection($section[0])->params->get('personalize.author_mode')));
 				}
 				$segments[] = ($user[0] . '-' . cleanAlias($user[1]));
 				break;
@@ -225,7 +225,7 @@ function JoomcckBuildRoute(&$query)
 				$user = explodeUrlParam($query['user_id']);
 				if(count($user) < 2)
 				{
-					$user[1] = JApplication::stringURLSafe(CCommunityHelper::getName($user[0], ItemsStore::getSection($section[0]), array('nohtml' => 1)));
+					$user[1] = \Joomla\CMS\Application\ApplicationHelper::stringURLSafe(CCommunityHelper::getName($user[0], ItemsStore::getSection($section[0]), array('nohtml' => 1)));
 				}
 				$segments[] = ($user[0].'-'.cleanAlias($user[1]));
 				break;
@@ -255,7 +255,7 @@ function JoomcckBuildRoute(&$query)
 				$user       = explodeUrlParam($query['user_id']);
 				if(!isset($user[1]))
 				{
-					$user[1] = JApplication::stringURLSafe(JFactory::getUser($user[0])->get('name'));
+					$user[1] = \Joomla\CMS\Application\ApplicationHelper::stringURLSafe(JFactory::getUser($user[0])->get('name'));
 				}
 				$segments[] = $user[0] . '-' . $user[1];
 			}
@@ -314,7 +314,7 @@ function JoomcckBuildRoute(&$query)
 				if(isset($query['type_id']))
 				{
 					$type       = explodeUrlParam($query['type_id']);
-					$segments[] = $type[0] . (isset($type[1]) ? '-' . JApplication::stringURLSafe($type[1]) : '');
+					$segments[] = $type[0] . (isset($type[1]) ? '-' . \Joomla\CMS\Application\ApplicationHelper::stringURLSafe($type[1]) : '');
 				}
 				if(isset($query['cat_id']))
 				{
