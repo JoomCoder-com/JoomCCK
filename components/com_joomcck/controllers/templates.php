@@ -71,7 +71,7 @@ class JoomcckControllerTemplates extends MControllerForm
 
 			if($matches[1] == 'default')
 			{
-				JError::raiseWarning(500, JText::_('C_MSG_DEAFULEUNINSTALL'));
+				throw new GenericDataException(JText::_('C_MSG_DEAFULEUNINSTALL'), 500);
 				unset($tmpls[$k]);
 			}
 		}

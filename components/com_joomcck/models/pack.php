@@ -100,7 +100,7 @@ class JoomcckModelPack extends MModelAdmin
         $pack_sections = MModelBase::getInstance('Packsections', 'JoomcckModel')->getPackSectoins($pack_id);
 
         if (!$pack_sections) {
-            JError::raiseWarning(404, JText::sprintf('CPACKNOSECTIONS', $this->pack->name));
+            JFactory::getApplication()->enqueueMessage(JText::sprintf('CPACKNOSECTIONS', $this->pack->name),'warning');
 
             return false;
         }

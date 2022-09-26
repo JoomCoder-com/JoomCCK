@@ -81,13 +81,13 @@ class JoomcckModelUsers extends MModelList
 
 		$groups = json_decode(JoomcckFilter::base64(JFactory::getApplication()->input->get('groups', '', 'BASE64')));
 		if (isset($groups)) {
-			JArrayHelper::toInteger($groups);
+			\Joomla\Utilities\ArrayHelper::toInteger($groups);
 		}
 		$this->setState('filter.groups', $groups);
 
 		$excluded = json_decode(JoomcckFilter::base64(JFactory::getApplication()->input->get('excluded', '', 'BASE64')));
 		if (isset($excluded)) {
-			JArrayHelper::toInteger($excluded);
+			\Joomla\Utilities\ArrayHelper::toInteger($excluded);
 		}
 		$this->setState('filter.excluded', $excluded);
 

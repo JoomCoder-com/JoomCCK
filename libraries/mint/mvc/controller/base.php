@@ -275,9 +275,6 @@ class MControllerBase extends JObject
 			$backuppath = $basePath . '/' . $backupfile;
 		}
 
-		echo '<pre>';
-
-
 		// Get the controller class name.
 		$class = ucfirst($prefix) . 'Controller' . ucfirst($type);
 

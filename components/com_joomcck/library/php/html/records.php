@@ -26,7 +26,7 @@ abstract class JHtmlRecords
 			0	=> array('<i class="icon-star-empty"></i>',	'records.featured',	'COM_JOOMCCK_TOGGLE_TO_FEATURE'),
 			1	=> array('<i class="icon-star"></i>',		'records.unfeatured','COM_JOOMCCK_TOGGLE_TO_UNFEATURE'),
 		);
-		$state	= JArrayHelper::getValue($states, (int) $value, $states[1]);
+		$state	= \Joomla\Utilities\ArrayHelper::getValue($states, (int) $value, $states[1]);
 
 		if ($canChange) {
 			$html	= '<a href="#" class="btn btn-micro" onclick="return listItemTask(\'cb'.$i.'\',\''.$state[1].'\')" rel="tooltip" data-original-title="'.JText::_($state[2]).'">'

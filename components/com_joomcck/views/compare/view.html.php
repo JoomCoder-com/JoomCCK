@@ -19,7 +19,7 @@ class JoomcckViewCompare extends MViewBase
 
 		if (! $app->input->getInt('section_id'))
 		{
-			JError::raiseWarning(500, JText::_('CNOSECTION'));
+			throw new GenericDataException(JText::_('CNOSECTION'), 500);
 			return FALSE;
 		}
 

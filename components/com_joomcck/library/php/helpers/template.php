@@ -40,7 +40,7 @@ class CTmpl
 
 		if(!$template)
 		{
-			JError::raiseWarning(404, JText::_('CTEMPLATENOTFOUND').': '.$name);
+			JFactory::getApplication()->enqueueMessage(JText::_('CTEMPLATENOTFOUND').': '.$name,'warning');
 		}
 
 		$template = explode('.', $template);

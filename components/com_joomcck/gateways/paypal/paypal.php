@@ -169,7 +169,7 @@ class MintPayPaypal extends MintPayAbstract
 			'X-PAYPAL-RESPONSE-DATA-FORMAT: JSON'
 		);
 
-		$amount = JArrayHelper::getValue($post, 'amount', $options->get('pay.amount', $field->params->get('pay.default_amount', 0)));
+		$amount = \Joomla\Utilities\ArrayHelper::getValue($post, 'amount', $options->get('pay.amount', $field->params->get('pay.default_amount', 0)));
 
 		$amount2 = 0;
 		if($amount > $field->params->get('pay.minimum_amount', 0))
@@ -248,7 +248,7 @@ class MintPayPaypal extends MintPayAbstract
 			$data                     = array(
 				'payKey'                                           => $response->get('payKey'),
 				'receiverOptions[0].invoiceData.item[0].name'      => JText::sprintf($field->params->get('params.item_name', 'SSI_ITEMNAME'), $record->title),
-				'receiverOptions[0].invoiceData.item[0].itemCount' => JArrayHelper::getValue($post, 'quantity', 1),
+				'receiverOptions[0].invoiceData.item[0].itemCount' => \Joomla\Utilities\ArrayHelper::getValue($post, 'quantity', 1),
 				'receiverOptions[0].invoiceData.item[0].price'     => $amount,
 				'receiverOptions[0].invoiceData.item[0].itemPrice' => $amount
 			);

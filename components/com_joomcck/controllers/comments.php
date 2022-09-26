@@ -29,7 +29,7 @@ class JoomcckControllerComments extends MControllerAdmin
 	{
 		
 		$cid	= $this->input->get('cid', array(), '', 'array');
-		JArrayHelper::toInteger($cid);
+		\Joomla\Utilities\ArrayHelper::toInteger($cid);
 
 		JTable::addIncludePath(JPATH_ROOT . '/components/com_joomcck/tables');
 		$comment = JTable::getInstance('Cobcomments', 'JoomcckTable');
@@ -72,7 +72,7 @@ class JoomcckControllerComments extends MControllerAdmin
 		$task 	= $this->getTask();
 		
 		$cid	= $this->input->get('cid', array(), '', 'array');
-		JArrayHelper::toInteger($cid);
+		\Joomla\Utilities\ArrayHelper::toInteger($cid);
 		
 		$comment = JTable::getInstance('Cobcomments', 'JoomcckTable');
 		$comment->load($cid[0]);

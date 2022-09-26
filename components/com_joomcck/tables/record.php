@@ -131,7 +131,7 @@ class JoomcckTableRecord extends JTable
 		$type        = MModelBase::getInstance('Form', 'JoomcckModel')->getRecordType($this->type_id);
 		$fields_list = MModelBase::getInstance('Fields', 'JoomcckModel')->getFormFields($type->id);
 
-		$post = JArrayHelper::getValue($_POST, 'jform', array(), 'array');
+		$post = \Joomla\Utilities\ArrayHelper::getValue($_POST, 'jform', array(), 'array');
 
 		$fields = @$post['fields'];
 		settype($fields, 'array');
@@ -240,7 +240,7 @@ class JoomcckTableRecord extends JTable
 
 
 			ArrayHelper::clean_r($categories, TRUE);
-			JArrayHelper::toInteger($categories);
+			\Joomla\Utilities\ArrayHelper::toInteger($categories);
 
 			if($section->categories && !$categories && !$type->params->get('submission.first_category', 0))
 			{

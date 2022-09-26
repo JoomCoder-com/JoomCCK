@@ -75,7 +75,7 @@ class plgSearchJoomcck extends JPlugin
 		{
 			return $out;
 		}
-		JArrayHelper::toInteger($intersect);
+		\Joomla\Utilities\ArrayHelper::toInteger($intersect);
 		
 		$sArchived = $this->params->get('search_archived', 1);
 		$limit = $this->params->def('search_limit', 50);

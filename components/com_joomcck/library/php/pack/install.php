@@ -382,7 +382,7 @@ class packInstallerScript
                 $params     = new JRegistry($table->params);
                 $categories = $params->get('category_limit.category');
                 settype($categories, 'array');
-                JArrayHelper::toInteger($categories);
+                \Joomla\Utilities\ArrayHelper::toInteger($categories);
                 $ids = [];
                 foreach ($categories as $id) {
                     if (!$id) {
@@ -428,7 +428,7 @@ class packInstallerScript
                 $params = new JRegistry($table->params);
                 $types  = $params->get('general.type');
                 settype($types, 'array');
-                JArrayHelper::toInteger($types);
+                \Joomla\Utilities\ArrayHelper::toInteger($types);
                 $ids = [];
                 foreach ($types as $id) {
                     if (!$id) {
@@ -453,7 +453,7 @@ class packInstallerScript
                     $params = new JRegistry($table->params);
                     $types  = $params->get('posttype');
                     settype($types, 'array');
-                    JArrayHelper::toInteger($types);
+                    \Joomla\Utilities\ArrayHelper::toInteger($types);
                     $ids = [];
                     foreach ($types as $id) {
                         if (!$id) {

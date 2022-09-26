@@ -21,7 +21,7 @@ class plgContentGlossary extends JPlugin
 		$app = JFactory::getApplication();
 		$document = JFactory::getDocument();
 
-		if($app->isClient('administrator'))
+		if($app->isAdmin())
 		{
 			return;
 		}
@@ -38,7 +38,7 @@ class plgContentGlossary extends JPlugin
 		$where = array();
 		$sections = $this->params->get('categories');
 		ArrayHelper::clean_r($sections);
-		JArrayHelper::toInteger($sections);
+		\Joomla\Utilities\ArrayHelper::toInteger($sections);
 		$sections[] = 0;
 
 		$query = $db->getQuery(true);

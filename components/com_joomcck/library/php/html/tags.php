@@ -80,7 +80,7 @@ class JHTMLTags
 		}
 
         ArrayHelper::clean_r($default);
-		JArrayHelper::toInteger($default);
+		\Joomla\Utilities\ArrayHelper::toInteger($default);
         
         $db = JFactory::getDbo();
         $app = JFactory::getApplication();
@@ -124,7 +124,7 @@ class JHTMLTags
 		}
 
 		ArrayHelper::clean_r($default);
-		JArrayHelper::toInteger($default);
+		\Joomla\Utilities\ArrayHelper::toInteger($default);
 		if($default)
 		{
 			$db = JFactory::getDbo();
@@ -155,7 +155,7 @@ class JHTMLTags
 	public static function tagpills($section, $default)
 	{
 		ArrayHelper::clean_r($default);
-		JArrayHelper::toInteger($default);
+		\Joomla\Utilities\ArrayHelper::toInteger($default);
 
         $db = JFactory::getDbo();
 

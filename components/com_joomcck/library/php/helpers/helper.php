@@ -211,7 +211,7 @@ class AttachmentHelper
 		{
 			if(is_array($file))
 			{
-				$file = JArrayHelper::toObject($file);
+				$file = \Joomla\Utilities\ArrayHelper::toObject($file);
 			}
 			$file->url = JURI::root(TRUE) . '/index.php?option=com_joomcck&task=files.download_attach&tmpl=component&id=' . $file->id;
 		}

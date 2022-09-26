@@ -497,7 +497,7 @@ class JoomcckModelCat extends MModelAdmin
 	{
 		// $value comes as {parent_id}.{section}
 		$parts		= explode('.', $value);
-		$parentId	= (int) JArrayHelper::getValue($parts, 0, 1);
+		$parentId	= (int) \Joomla\Utilities\ArrayHelper::getValue($parts, 0, 1);
 
 		$table	= $this->getTable();
 		$db		= $this->getDbo();
@@ -751,7 +751,7 @@ class JoomcckModelCat extends MModelAdmin
 		if (!empty($children)) {
 			// Remove any duplicates and sanitize ids.
 			$children = array_unique($children);
-			JArrayHelper::toInteger($children);
+			\Joomla\Utilities\ArrayHelper::toInteger($children);
 
 			// Check for a database error.
 			if ($db->getErrorNum()) {

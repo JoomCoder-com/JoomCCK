@@ -188,7 +188,7 @@ class SMF2Joomcck {
 			$file = JPATH_ROOT . DIRECTORY_SEPARATOR . 'components/com_joomcck/fields/' . $field->field_type . '/' . $field->field_type . '.php';
 			if(!JFile::exists($file))
 			{
-				JError::raiseWarning(404, JText::sprintf("CFIELDNOTFOUND", $field->field_type));
+				JFactory::getApplication()->enqueueMessage(JText::sprintf("CFIELDNOTFOUND", $field->field_type),'warning');
 				continue;
 			}
 			require_once $file;

@@ -164,7 +164,7 @@ class JoomcckModelRecord extends MModelItem
 		}
 		$data->categories_links = $category_links;
 
-		JArrayHelper::toInteger($cat_ids);
+		\Joomla\Utilities\ArrayHelper::toInteger($cat_ids);
 		if($app->input->getInt('cat_id') && in_array($app->input->getInt('cat_id'), $cat_ids))
 		{
 			$category_id = $app->input->getInt('cat_id');

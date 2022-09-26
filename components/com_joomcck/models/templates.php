@@ -60,7 +60,7 @@ function parseXMLTemplateFile($path)
 		// Read the file to see if it's a valid component XML file
 		if(!JFile::exists($path))
 		{
-			JError::raiseWarning(404, 'File not found: '.$path);
+			JFactory::getApplication()->enqueueMessage('File not found: '.$path,'warning');
 			return false;
 		}
 		$xml = simplexml_load_file($path);

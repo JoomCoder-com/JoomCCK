@@ -43,7 +43,7 @@ class JoomcckControllerTags extends MControllerBase
 		}
 		else
 		{
-			JError::raiseWarning(500, $model->_error_msg);
+			throw new GenericDataException($model->_error_msg, 500);
 			$this->setRedirect('index.php?option=com_joomcck&view=tags');
 		}
 	}

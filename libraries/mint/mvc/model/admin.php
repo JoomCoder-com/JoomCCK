@@ -150,7 +150,7 @@ abstract class MModelAdmin extends MModelForm
 	{
 		// Sanitize ids.
 		$pks = array_unique($pks);
-		JArrayHelper::toInteger($pks);
+		\Joomla\Utilities\ArrayHelper::toInteger($pks);
 
 		// Remove any values of zero.
 		if (array_search(0, $pks, true))
@@ -195,7 +195,7 @@ abstract class MModelAdmin extends MModelForm
 
 		if (!empty($commands['category_id']))
 		{
-			$cmd = JArrayHelper::getValue($commands, 'move_copy', 'c');
+			$cmd = \Joomla\Utilities\ArrayHelper::getValue($commands, 'move_copy', 'c');
 
 			if ($cmd == 'c')
 			{
@@ -847,7 +847,7 @@ abstract class MModelAdmin extends MModelForm
 
 		// Convert to the JObject before adding other data.
 		$properties = $table->getProperties(1);
-		$item = JArrayHelper::toObject($properties, 'JObject');
+		$item = \Joomla\Utilities\ArrayHelper::toObject($properties, 'JObject');
 
 		if (property_exists($item, 'params'))
 		{

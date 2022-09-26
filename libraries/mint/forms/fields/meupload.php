@@ -40,7 +40,7 @@ class JFormFieldMeupload extends JFormField
 		{
 			foreach ($this->value as $key => $value)
 			{
-				$def[$key] = JArrayHelper::fromObject($value);
+				$def[$key] = \Joomla\Utilities\ArrayHelper::fromObject($value);
 			}
 
 			return $def;

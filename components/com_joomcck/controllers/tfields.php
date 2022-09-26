@@ -44,8 +44,8 @@ class JoomcckControllerTfields extends MControllerAdmin
 		$order = $this->input->post->get('order', array(), 'array');
 
 		// Sanitize the input
-		JArrayHelper::toInteger($pks);
-		JArrayHelper::toInteger($order);
+		\Joomla\Utilities\ArrayHelper::toInteger($pks);
+		\Joomla\Utilities\ArrayHelper::toInteger($order);
 
 		// Get the model
 		$model = $this->getModel();
@@ -76,7 +76,7 @@ class JoomcckControllerTfields extends MControllerAdmin
 			'show_full' => 1, 'notshow_full' => 0
 		);
 		$task = $this->getTask();
-		$value = JArrayHelper::getValue($data, $task, 0, 'int');
+		$value = \Joomla\Utilities\ArrayHelper::getValue($data, $task, 0, 'int');
 
 		if (empty($cid))
 		{
@@ -88,7 +88,7 @@ class JoomcckControllerTfields extends MControllerAdmin
 			$model = $this->getModel();
 
 			// Make sure the item ids are integers
-			JArrayHelper::toInteger($cid);
+			\Joomla\Utilities\ArrayHelper::toInteger($cid);
 
 			// Publish the items.
 			if (!$model->changeState($task, $cid, $value))

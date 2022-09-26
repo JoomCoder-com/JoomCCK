@@ -46,7 +46,7 @@ class JoomcckModelItem extends MModelAdmin
 		}
 		// Sanitize the ids.
 		$pks = (array) $pks;
-		JArrayHelper::toInteger($pks);
+		\Joomla\Utilities\ArrayHelper::toInteger($pks);
 
 		if (empty($pks)) {
 			$this->setError(JText::_('C_MSG_SELECTITEM'));
@@ -136,7 +136,7 @@ class JoomcckModelItem extends MModelAdmin
 	{
 		// Sanitize the ids.
 		$pks = (array) $pks;
-		JArrayHelper::toInteger($pks);
+		\Joomla\Utilities\ArrayHelper::toInteger($pks);
 
 		if (empty($pks)) {
 			$this->setError(JText::_('COM_JOOMCCK_NO_ITEM_SELECTED'));

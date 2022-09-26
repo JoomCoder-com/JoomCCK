@@ -13,7 +13,7 @@ $text = htmlspecialchars(stripslashes($this->value), ENT_QUOTES, 'UTF-8');
 $height = $params->get('params.height', '300');
 ?>
 
-<?php if ($params->get('params.short', 0) && !$app->isClient('administrator')):?>
+<?php if ($params->get('params.short', 0) && !$app->isAdmin()):?>
 	<?php echo $this->editor->display('jform[fields]['. $this->id.']', $text, '100%', $height, '60', '20', $this->buttons, 'field_'.$this->id, null, $this->user->id, $this->editorParams);?>
 <?php else : ?>
 	<?php

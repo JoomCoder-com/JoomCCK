@@ -85,7 +85,7 @@ class JoomcckControllerItems extends JoomcckControllerRecords
     public function delete()
     {
         $ids = $this->input->get('cid', [], '', 'array');
-        JArrayHelper::toInteger($ids);
+        \Joomla\Utilities\ArrayHelper::toInteger($ids);
 
         if (empty($ids)) {
             $this->redirect(Url::view('items', false));

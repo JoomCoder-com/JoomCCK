@@ -17,7 +17,7 @@ class JoomcckViewTypes extends MViewBase
         
         if (!JFactory::getApplication()->input->getInt('section_id'))
         {
-            JError::raiseWarning(404, JText::_('CNOSECTION'));
+            JFactory::getApplication()->enqueueMessage(JText::_('CNOSECTION'),'warning');
             return;
         }
         

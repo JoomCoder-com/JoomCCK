@@ -15,7 +15,7 @@ class JoomcckViewCategory extends MViewBase
         
         if (! JFactory::getApplication()->input->getInt('section_id'))
 		{
-			JError::raiseWarning(500, JText::_('CNOSECTION'));
+			throw new GenericDataException(JText::_('CNOSECTION'), 500);
 			return FALSE;
 		}
 		

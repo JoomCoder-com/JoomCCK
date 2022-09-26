@@ -31,7 +31,7 @@ class JFormFieldSectiontypes extends JFormFieldList
 		$types = $section->params->get('general.type');
 		
 		ArrayHelper::clean_r($types);
-		JArrayHelper::toInteger($types);
+		\Joomla\Utilities\ArrayHelper::toInteger($types);
 		$types[] = 0;
 		
 		$query = $db->getQuery(TRUE);

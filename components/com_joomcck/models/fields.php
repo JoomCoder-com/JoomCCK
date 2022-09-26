@@ -132,7 +132,7 @@ class JoomcckModelFields extends MModelList
 				$file = JPATH_ROOT. '/components/com_joomcck/fields/'.$item->field_type.'/'.$item->field_type.'.php';
 				if(!JFile::exists($file))
 				{
-					JError::raiseWarning(404, JText::sprintf("CFIELDNOTFOUND", $item->field_type));
+					JFactory::getApplication()->enqueueMessage(JText::sprintf("CFIELDNOTFOUND", $item->field_type),'warning');
 					continue;
 				}
 				require_once $file;
@@ -197,7 +197,7 @@ class JoomcckModelFields extends MModelList
 			$file = JPATH_ROOT. '/components/com_joomcck/fields/'.$field->field_type.'/'.$field->field_type.'.php';
 			if(!JFile::exists($file))
 			{
-				JError::raiseWarning(404, JText::sprintf("CFIELDNOTFOUND", $field->field_type));
+				JFactory::getApplication()->enqueueMessage(JText::sprintf("CFIELDNOTFOUND", $field->field_type),'warning');
 				continue;
 			}
 			require_once $file;

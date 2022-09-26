@@ -7,6 +7,8 @@
  * @license GNU/GPL http://www.gnu.org/copyleft/gpl.html
  */
 
+use Joomla\CMS\MVC\View\GenericDataException;
+
 defined('_JEXEC') or die();
 jimport('mint.mvc.controller.admin');
 class JoomcckControllerField extends MControllerAdmin
@@ -29,7 +31,9 @@ class JoomcckControllerField extends MControllerAdmin
 
 		if(!$field_id)
 		{
-			JError::raiseError(500, JText::_('CERRNOFILEID'));
+
+			throw new GenericDataException(JText::_('CERRNOFILEID'), 500);
+
 			return;
 		}
 
@@ -39,7 +43,8 @@ class JoomcckControllerField extends MControllerAdmin
 
 		if(!$field_table->id)
 		{
-			JError::raiseError(500, JText::_('CERRNOFILED'));
+			throw new GenericDataException(JText::_('CERRNOFILEID'), 500);
+
 			return;
 		}
 
@@ -47,13 +52,14 @@ class JoomcckControllerField extends MControllerAdmin
 		$field_path =  JPATH_ROOT . '/components/com_joomcck/fields' . DIRECTORY_SEPARATOR . $field_table->field_type . DIRECTORY_SEPARATOR . $field_table->field_type . '.php';
 		if(!JFile::exists($field_path))
 		{
-			JError::raiseError(500, JText::_('CERRNOFILEHDD'));
+			throw new GenericDataException(JText::_('CERRNOFILEHDD'), 500);
+
 			return;
 		}
 
 		if(!$func)
 		{
-			JError::raiseError(500, JText::_('AJAX_NOFUNCNAME'));
+			throw new GenericDataException(JText::_('AJAX_NOFUNCNAME'), 500);
 			return;
 		}
 
@@ -73,7 +79,7 @@ class JoomcckControllerField extends MControllerAdmin
 		$classname = 'JFormFieldC' . ucfirst($field_table->field_type);
 		if(!class_exists($classname))
 		{
-			JError::raiseError(500, JText::_('CCLASSNOTFOUND'));
+			throw new GenericDataException(JText::_('CCLASSNOTFOUND'), 500);
 			return ;
 		}
 
@@ -81,14 +87,15 @@ class JoomcckControllerField extends MControllerAdmin
 
 		if(!method_exists($fieldclass, $func))
 		{
-			JError::raiseError(500, JText::_('AJAX_METHODNOTFOUND'));
+			throw new GenericDataException(JText::_('AJAX_METHODNOTFOUND'), 500);
 			return ;
 		}
 		$result = $fieldclass->$func($_POST, $record, $this, (count($_POST) ? null : $_GET) );
 
 		if($fieldclass->getErrors())
 		{
-			JError::raiseError(500, $fieldclass->getError());
+			throw new GenericDataException($fieldclass->getError(), 500);
+
 			return;
 		}
 	}

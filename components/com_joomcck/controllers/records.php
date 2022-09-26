@@ -8,6 +8,8 @@
  * @license   GNU/GPL http://www.gnu.org/copyleft/gpl.html
  */
 
+use Joomla\CMS\MVC\View\GenericDataException;
+
 defined('_JEXEC') or die();
 jimport('mint.mvc.controller.admin');
 class JoomcckControllerRecords extends MControllerAdmin
@@ -259,7 +261,7 @@ class JoomcckControllerRecords extends MControllerAdmin
 
 		if(!$name)
 		{
-			JError::raiseError(500, 'no table:' . $table_class);
+			throw new GenericDataException('no table:' . $table_class, 500);
 
 			return;
 		}
@@ -496,7 +498,8 @@ class JoomcckControllerRecords extends MControllerAdmin
 
 		if(!$this->record->delete())
 		{
-			JError::raiseError(500, 'Cannot delete, something is wrong');
+			throw new GenericDataException('Cannot delete, something is wrong', 500);
+
 
 			return;
 		}
@@ -644,7 +647,8 @@ class JoomcckControllerRecords extends MControllerAdmin
 	{
 		if($err)
 		{
-			JError::raiseWarning(500, $msg);
+			throw new GenericDataException($msg, 500);
+
 		}
 		else
 		{
@@ -767,7 +771,7 @@ class JoomcckControllerRecords extends MControllerAdmin
 			$tags = explode(',', $tags);
 
 			ArrayHelper::clean_r($tags);
-			JArrayHelper::toInteger($tags);
+			\Joomla\Utilities\ArrayHelper::toInteger($tags);
 		}
 		$app->setUserState('com_joomcck.section' . $key . '.filter_tag', $tags);
 
@@ -778,7 +782,7 @@ class JoomcckControllerRecords extends MControllerAdmin
 			$users = explode(',', $users);
 
 			ArrayHelper::clean_r($users);
-			JArrayHelper::toInteger($users);
+			\Joomla\Utilities\ArrayHelper::toInteger($users);
 		}
 		$app->setUserState('com_joomcck.section' . $key . '.filter_user', $users);
 
@@ -789,7 +793,7 @@ class JoomcckControllerRecords extends MControllerAdmin
 			$cats = explode(',', $cats);
 
 			ArrayHelper::clean_r($cats);
-			JArrayHelper::toInteger($cats);
+			\Joomla\Utilities\ArrayHelper::toInteger($cats);
 		}
 		$app->setUserState('com_joomcck.section' . $key . '.filter_cat', $cats);
 
@@ -871,7 +875,7 @@ class JoomcckControllerRecords extends MControllerAdmin
 
 		if(empty($ids))
 		{
-			JError::raiseWarning(500, JText::_('JERROR_NO_ITEMS_SELECTED'));
+			throw new GenericDataException(JText::_('JERROR_NO_ITEMS_SELECTED'), 500);
 		}
 		else
 		{
@@ -879,7 +883,7 @@ class JoomcckControllerRecords extends MControllerAdmin
 
 			if(!$model->copy($ids))
 			{
-				JError::raiseWarning(500, $model->getError());
+				throw new GenericDataException($model->getError(), 500);
 			}
 		}
 
@@ -964,14 +968,14 @@ class JoomcckControllerRecords extends MControllerAdmin
 		$ids    = $this->input->get('cid', array(), '', 'array');
 		if(empty($ids))
 		{
-			JError::raiseWarning(500, JText::_('JERROR_NO_ITEMS_SELECTED'));
+			throw new GenericDataException(JText::_('JERROR_NO_ITEMS_SELECTED'), 500);
 		}
 		else
 		{
 			$model = MModelBase::getInstance('Item', 'JoomcckModel');
 			if(!$model->reset($ids, $task))
 			{
-				JError::raiseWarning(500, $model->getError());
+				throw new GenericDataException($model->getError(), 500);
 			}
 		}
 

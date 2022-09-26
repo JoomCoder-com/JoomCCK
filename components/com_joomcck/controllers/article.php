@@ -59,7 +59,7 @@ class JoomcckControllerArticle extends MControllerForm
 
 		// Initialise variables.
 		$user		= JFactory::getUser();
-		$categoryId	= JArrayHelper::getValue($data, 'catid', $this->input->getInt('catid'), 'int');
+		$categoryId	= \Joomla\Utilities\ArrayHelper::getValue($data, 'catid', $this->input->getInt('catid'), 'int');
 		$allow		= null;
 
 		if ($categoryId) {

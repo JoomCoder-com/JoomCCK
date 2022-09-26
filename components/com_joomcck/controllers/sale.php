@@ -144,7 +144,7 @@ class JoomcckControllerSale extends MControllerForm
 		$allow_users = $active->params->get('allow_users', false);
 		$user_ids = explode(',', $allow_users);
 
-		JArrayHelper::toInteger($user_ids);
+		\Joomla\Utilities\ArrayHelper::toInteger($user_ids);
 		ArrayHelper::clean_r($user_ids);
 
 		return (in_array(JFactory::getUser()->get('id'), $user_ids));

@@ -24,14 +24,14 @@ class JoomcckViewDiff extends MViewBase
 		$version = $app->input->getInt('version', false);
 		if(!$version)
 		{	
-			JError::raiseWarning(404, JText::_('NOVERSIONID'));
+			JFactory::getApplication()->enqueueMessage(JText::_('NOVERSIONID'),'warning');
 			return;
 		}
 		
 		$record_id = $app->input->getInt('record_id', false);
 		if(!$record_id)
 		{
-			JError::raiseWarning(404, JText::_('NORECORDID'));
+			JFactory::getApplication()->enqueueMessage(JText::_('NORECORDID'),'warning');
 			return;
 		}
 		

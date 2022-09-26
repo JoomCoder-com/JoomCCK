@@ -474,7 +474,7 @@ abstract class MModelBase extends JObject
 				return false;
 			}
 
-			$rowArray = JArrayHelper::fromObject(json_decode($historyTable->version_data));
+			$rowArray = \Joomla\Utilities\ArrayHelper::fromObject(json_decode($historyTable->version_data));
 
 			$typeId = JTable::getInstance('Contenttype')->getTypeId($this->typeAlias);
 

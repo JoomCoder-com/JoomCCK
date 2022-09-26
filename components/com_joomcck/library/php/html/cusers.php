@@ -30,7 +30,7 @@ class JHTMLCUsers
 		{
 			$ids[] = $user->get('id');
 		}
-		JArrayHelper::toInteger($ids);
+		\Joomla\Utilities\ArrayHelper::toInteger($ids);
 
 		$db->setQuery("SELECT u.id, uo.params AS prm
 			FROM `#__users` AS u
@@ -106,7 +106,7 @@ class JHTMLCUsers
 			$id = isset($params['id']) ? $params['id'] : $id;
 		}
 		ArrayHelper::clean_r($default);
-		JArrayHelper::toInteger($default);
+		\Joomla\Utilities\ArrayHelper::toInteger($default);
 		if($default)
 		{
 			$db = JFactory::getDbo();

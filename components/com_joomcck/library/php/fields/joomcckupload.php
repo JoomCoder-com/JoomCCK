@@ -318,7 +318,7 @@ class CFormFieldUpload extends CFormField
         }
         foreach ($list as $idx => &$file) {
             if (is_array($file)) {
-                $file = JArrayHelper::toObject($file);
+                $file = \Joomla\Utilities\ArrayHelper::toObject($file);
             }
             if ($this->params->get('params.show_in_browser', 0) == 0) {
                 $file->url = $this->getDownloadUrl($record, $file, $idx);

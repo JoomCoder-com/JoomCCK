@@ -7,6 +7,9 @@
  * @copyright Copyright (C) 2012 JoomBoost (https://www.joomBoost.com). All rights reserved.
  * @license   GNU/GPL http://www.gnu.org/copyleft/gpl.html
  */
+
+use Joomla\CMS\HTML\HTMLHelper;
+
 defined('_JEXEC') or die();
 
 /**
@@ -33,9 +36,14 @@ class JoomcckController extends MControllerBase
 
 		$app = JFactory::getApplication();
 
+		HTMLHelper::_('jquery.framework');
+
+
 		if(!JComponentHelper::getParams('com_joomcck')->get('general_upload'))
 		{
-			JError::raiseWarning(400, JText::_('CUPLOADREQ'));
+
+
+			\Joomla\CMS\Factory::getApplication()->enqueueMessage(JText::_('CUPLOADREQ'),'error');
 
 			return;
 		}
@@ -49,12 +57,14 @@ class JoomcckController extends MControllerBase
 		{
 			if(!JFactory::getUser()->get('id'))
 			{
-				JError::raiseWarning(403, JText::_('CPLEASELOGIN'));
+				$app->enqueueMessage(JText::_('CPLEASELOGIN'),'warning');
+				$app->setHeader('status', 403, true);
 				$app->redirect(JRoute::_('index.php?option=com_users&view=login&return='.base64_encode(JUri::getInstance()->toString()), false));
 			}
 			if(!MECAccess::isAdmin())
 			{
-				JError::raiseWarning(403, JText::_('CCANNOTACCESSADMINAREA'));
+				$app->enqueueMessage(JText::_('CCANNOTACCESSADMINAREA'),'warning');
+				$app->setHeader('status', 403, true);
 				$app->redirect(JRoute::_('/'));
 			}
 

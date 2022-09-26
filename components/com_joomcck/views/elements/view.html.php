@@ -248,7 +248,7 @@ class JoomcckViewElements extends MViewBase
 		$model_category       = new JoomcckModelCategory();
 		if(! JFactory::getApplication()->input->getInt('section_id'))
 		{
-			JError::raiseWarning(404, JText::_('CNOSECTION'));
+			JFactory::getApplication()->enqueueMessage(JText::_('CNOSECTION'),'warning');
 			return;
 		}
 		$section = ItemsStore::getSection(JFactory::getApplication()->input->getInt('section_id'));

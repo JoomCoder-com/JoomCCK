@@ -175,7 +175,7 @@ class JoomcckViewRecord extends MViewBase
 			}
 			else
 			{
-				JError::raiseWarning(404, JText::sprintf('CFORMATERNOTFOUND', $formatter));
+				JFactory::getApplication()->enqueueMessage(JText::sprintf('CFORMATERNOTFOUND', $formatter),'warning');
 			}
 		}
 

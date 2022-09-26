@@ -85,7 +85,7 @@ class JFormFieldCobCategoryParent extends JFormFieldList
 
 		// Check for a database error.
 		if ($db->getErrorNum()) {
-			JError::raiseWarning(500, $db->getErrorMsg());
+			throw new GenericDataException($db->getErrorMsg(), 500);
 		}
 
 		// Pad the option text with spaces using depth level as a multiplier.

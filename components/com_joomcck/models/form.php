@@ -194,7 +194,7 @@ class JoomcckModelForm extends MModelAdmin
 
 		$obj               = $data;
 		$fields_highlights = array();
-		JArrayHelper::toObject($obj);
+		\Joomla\Utilities\ArrayHelper::toObject($obj);
 
 		foreach($fields_list as $field)
 		{

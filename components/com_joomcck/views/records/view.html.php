@@ -33,7 +33,7 @@ class JoomcckViewRecords extends MViewBase
 
 		if(!$app->input->getInt('section_id'))
 		{
-			JError::raiseWarning(404, JText::_('CNOSECTION'));
+			JFactory::getApplication()->enqueueMessage(JText::_('CNOSECTION'),'warning');
 
 			return;
 		}
@@ -43,7 +43,7 @@ class JoomcckViewRecords extends MViewBase
 
 		if($section->published == 0)
 		{
-			JError::raiseWarning(404, JText::_('CERR_SECTIONUNPUB'));
+			JFactory::getApplication()->enqueueMessage(JText::_('CERR_SECTIONUNPUB'),'warning');
 			$this->_redirect();
 
 			return;
@@ -180,7 +180,7 @@ class JoomcckViewRecords extends MViewBase
 			}
 			else
 			{
-				JError::raiseWarning(404, JText::sprintf('CFORMATERNOTFOUND', $formatter));
+				JFactory::getApplication()->enqueueMessage(JText::sprintf('CFORMATERNOTFOUND', $formatter),'warning');
 			}
 		}
 

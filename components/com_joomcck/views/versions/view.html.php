@@ -24,7 +24,7 @@ class JoomcckViewVersions extends MViewBase
 		$record_id = JFactory::getApplication()->input->getInt('record_id');
 		if(!$record_id)
 		{
-			JError::raiseWarning(404, JText::_('NORECORDID'));
+			JFactory::getApplication()->enqueueMessage(JText::_('NORECORDID'),'warning');
 
 			return;
 		}

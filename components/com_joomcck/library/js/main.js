@@ -121,10 +121,10 @@ var _gaq = _gaq || [];
 		$('*[rel="popover"]').popover();
 		$('.tip-bottom').tooltip({placement: "bottom"});
 
-		jQuery('.radio.btn-group label').addClass('btn');
-		jQuery(".btn-group label:not(.active)").click(function() {
-			var label = jQuery(this);
-			var input = jQuery('#' + label.attr('for'));
+		$('.radio.btn-group label').addClass('btn');
+		$(".btn-group label:not(.active)").click(function() {
+			var label = $(this);
+			var input = $('#' + label.attr('for'));
 
 			if(!input.prop('checked')) {
 				label.closest('.btn-group').find("label").removeClass('active btn-success btn-danger btn-primary');
@@ -138,25 +138,25 @@ var _gaq = _gaq || [];
 				input.prop('checked', true);
 			}
 		});
-		jQuery(".btn-group input[checked=checked]").each(function() {
-			if(jQuery(this).val() == '') {
-				jQuery("label[for=" + jQuery(this).attr('id') + "]").addClass('active btn-primary');
-			} else if(jQuery(this).val() == 0) {
-				jQuery("label[for=" + jQuery(this).attr('id') + "]").addClass('active btn-danger');
+		$(".btn-group input[checked=checked]").each(function() {
+			if($(this).val() == '') {
+				$("label[for=" + $(this).attr('id') + "]").addClass('active btn-primary');
+			} else if($(this).val() == 0) {
+				$("label[for=" + $(this).attr('id') + "]").addClass('active btn-danger');
 			} else {
-				jQuery("label[for=" + jQuery(this).attr('id') + "]").addClass('active btn-success');
+				$("label[for=" + $(this).attr('id') + "]").addClass('active btn-success');
 			}
 		});
 	};
 
 	Joomcck.setAndSubmit = function(el, val) {
-		var elm = jQuery('#' + el);
+		var elm = $('#' + el);
 		elm.val(val).attr('selected', true);
 		elm.parents('form').submit();
 	};
 
 	Joomcck.checkAndSubmit = function(el) {
-		var elm = jQuery(el);
+		var elm = $(el);
 		elm.attr('checked', true);
 		setTimeout(function() {
 			elm.parents('form').submit();
@@ -182,8 +182,8 @@ var _gaq = _gaq || [];
 	}
 
 	Joomcck.hidehead = function() {
-		jQuery('header.header').css('display', 'none');
-		jQuery('div.container-main').css('margin-top', '55px');
+		$('header.header').css('display', 'none');
+		$('div.container-main').css('margin-top', '55px');
 	};
 
 	/**
@@ -194,7 +194,7 @@ var _gaq = _gaq || [];
 	 *            Joomla task. eg: resords.delete
 	 */
 	Joomcck.submitTask = function(task) {
-		if(jQuery('input[name="boxchecked"]').val() == 0) {
+		if($('input[name="boxchecked"]').val() == 0) {
 			alert('Please first make a selection from the list');
 		} else {
 			Joomla.submitbutton(task);
@@ -781,11 +781,11 @@ var _gaq = _gaq || [];
 
 	Joomcck.field_call_url = '<?php echo JRoute::_("index.php?option=com_joomcck&task=ajax.field_call&tmpl=component", FALSE);?>';
 
-}(jQuery));
+}($));
 
 
 function trackComment(comment, id) {
-	jQuery.ajax({
+	$.ajax({
 		url:  '<?php echo JRoute::_("index.php?option=com_joomcck&task=ajax.trackcomment&tmpl=component", FALSE); ?>',
 		data: {
 			record_id: id

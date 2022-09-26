@@ -74,6 +74,7 @@ if(JFile::exists($em_api))
 	require_once $em_api;
 }
 
+use Joomla\CMS\MVC\View\GenericDataException;
 use Joomla\Registry\Registry;
 
 class JoomcckApi
@@ -193,15 +194,17 @@ class JoomcckApi
 
 		if(!$field_table->id)
 		{
-			JError::raiseError(500, JText::_('CERRNOFILED'));
 
+			throw new GenericDataException(JText::_('CERRNOFILED'), 500);
 			return;
 		}
 
 		$field_path = JPATH_ROOT . "/components/com_joomcck/fields/{$field_table->field_type}/{$field_table->field_type}.php";
 		if(!JFile::exists($field_path))
 		{
-			JError::raiseError(500, JText::_('CERRNOFILEHDD'));
+
+			throw new GenericDataException(implode(JText::_('CERRNOFILEHDD')), 500);
+
 
 			return;
 		}
@@ -221,7 +224,7 @@ class JoomcckApi
 		$classname = 'JFormFieldC' . ucfirst($field_table->field_type);
 		if(!class_exists($classname))
 		{
-			JError::raiseError(500, JText::_('CCLASSNOTFOUND'));
+			throw new GenericDataException(implode(JText::_('CCLASSNOTFOUND')), 500);
 
 			return;
 		}
@@ -252,7 +255,7 @@ class JoomcckApi
 
 		if(!method_exists($fieldclass, $func))
 		{
-			JError::raiseError(500, JText::_('AJAX_METHODNOTFOUND'));
+			throw new GenericDataException(implode(JText::_('AJAX_METHODNOTFOUND')), 500);
 
 			return;
 		}

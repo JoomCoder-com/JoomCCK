@@ -203,7 +203,7 @@ class JoomcckModelAuditlog extends MModelList
 
 			$section_id = $this->state->get('auditlog.section_id');
 			ArrayHelper::clean_r($section_id, TRUE);
-			JArrayHelper::toInteger($section_id);
+			\Joomla\Utilities\ArrayHelper::toInteger($section_id);
 			$section_id = implode(',', $section_id);
 			if(!empty($section_id))
 			{
@@ -264,7 +264,7 @@ class JoomcckModelAuditlog extends MModelList
 			}
 
 			$section_id = $this->state->get('auditlog.section_id');
-			JArrayHelper::toInteger($section_id);
+			\Joomla\Utilities\ArrayHelper::toInteger($section_id);
 			if($section_id)
 			{
 				$query->where('a.section_id IN (' . implode(',', $section_id) . ')');

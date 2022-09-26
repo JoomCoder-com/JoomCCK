@@ -542,7 +542,7 @@ class JFormFieldCDatetime extends CFormField
         $ids = $db->loadColumn();
 
         ArrayHelper::clean_r($ids);
-        JArrayHelper::toInteger($ids);
+        \Joomla\Utilities\ArrayHelper::toInteger($ids);
 
         if (empty($ids)) {
             return null;
