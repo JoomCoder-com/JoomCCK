@@ -8,7 +8,7 @@
  */
 defined('_JEXEC') or die();
 
-JHtml::_('behavior.modal', 'a.modal_' . $this->id);
+JHtml::_('bootstrap.modal', 'a.modal_' . $this->id);
 ?>
 
 <?php if(!$this->isadmin): ?>

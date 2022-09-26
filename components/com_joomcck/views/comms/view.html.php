@@ -15,7 +15,7 @@ class JoomcckViewComms extends MViewBase
 	public function display($tpl = NULL)
 	{
 
-		JHtml::_('behavior.tooltip');
+		JHtml::_('bootstrap.tooltip');
 
 		$uri          = \Joomla\CMS\Uri\Uri::getInstance();
 		$this->action = $uri->toString();

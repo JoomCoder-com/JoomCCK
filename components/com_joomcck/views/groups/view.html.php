@@ -21,7 +21,7 @@ class JoomcckViewGroups extends MViewBase
 
 	public function display($tpl = null)
 	{
-		JHtml::_('behavior.tooltip');
+		JHtml::_('bootstrap.tooltip');
 
 		$app = JFactory::getApplication();
 

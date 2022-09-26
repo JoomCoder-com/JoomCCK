@@ -550,7 +550,7 @@ class HTMLFormatHelper
 	public static function loadHead()
 	{
 		$document = JFactory::getDocument();
-		if(!JFactory::getApplication()->isAdmin())
+		if(!JFactory::getApplication()->isClient('administrator'))
 		{
 			$document->addScript(JRoute::_('index.php?option=com_joomcck&task=ajax.mainJS&Itemid=1'));
 		}

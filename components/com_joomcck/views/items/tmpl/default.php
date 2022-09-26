@@ -11,7 +11,7 @@ defined('_JEXEC') or die('Restricted access');
 
 JHtml::addIncludePath(JPATH_COMPONENT . '/helpers/html');
 JHtml::_('dropdown.init');
-JHtml::_('behavior.modal', 'a.modal');
+JHtml::_('bootstrap.modal', 'a.modal');
 JHtml::_('formbehavior.chosen', '.select');
 
 $user = JFactory::getUser();

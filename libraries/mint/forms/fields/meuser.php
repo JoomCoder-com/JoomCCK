@@ -64,7 +64,7 @@ class JFormFieldMeuser extends JFormField
 		$onchange = (string) $this->element['onchange'];
 
 		// Load the modal behavior script.
-		JHtml::_('behavior.modal');
+		JHtml::_('bootstrap.modal');
 
 		// Build the script.
 		$script = array();

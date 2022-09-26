@@ -26,7 +26,7 @@ class JoomcckViewItems extends MViewBase
 	}
 
 	private function _default() {
-		JHtml::_('behavior.tooltip');
+		JHtml::_('bootstrap.tooltip');
 
 		$this->state      = $this->get('State');
 		$this->items      = $this->get('Items');

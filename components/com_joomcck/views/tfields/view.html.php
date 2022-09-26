@@ -15,7 +15,7 @@ class JoomcckViewTfields extends MViewBase
 
 	public function display($tpl = NULL)
 	{
-		JHtml::_('behavior.tooltip');
+		JHtml::_('bootstrap.tooltip');
 
 		$app          = JFactory::getApplication();
 		$uri          = JUri::getInstance();

@@ -12,7 +12,7 @@ defined('_JEXEC') || die('Restricted access');
 $view = JFactory::getApplication()->input->getCmd('view');
 JHtml::_('behavior.formvalidation');
 JHtml::_('behavior.keepalive');
-JHtml::_('behavior.modal');
+JHtml::_('bootstrap.modal');
 ?>
 <script type="text/javascript">
 	Joomla.submitbutton = function(task) {

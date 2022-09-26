@@ -47,8 +47,8 @@ class JoomcckViewTools extends MViewBase
 
 	function _list()
 	{
-		JHTML::_('behavior.tooltip');
-		JHTML::_('behavior.modal');
+		JHTML::_('bootstrap.tooltip');
+		JHTML::_('bootstrap.modal');
 
 		$this->tools = $this->get('Tools');
 	}

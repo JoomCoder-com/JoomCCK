@@ -10,7 +10,7 @@
 
 defined('_JEXEC') or die('Restricted access');
 
-JHtml::_('behavior.tooltip');
+JHtml::_('bootstrap.tooltip');
 JHtml::_('behavior.formvalidation');
 JHtml::_('behavior.keepalive');
 ?>

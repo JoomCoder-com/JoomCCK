@@ -48,8 +48,8 @@ if(JComponentHelper::getParams('com_joomcck')->get('compatibility'))
 	JHtml::_('bootstrap.loadCss');
 }
 
-JHTML::_('behavior.tooltip');
-JHTML::_('behavior.modal');
+JHTML::_('bootstrap.tooltip');
+JHTML::_('bootstrap.modal');
 JHTML::_('bootstrap.popover', '*[rel="popover"]',
 	array(
 		'placement' => 'bottom',

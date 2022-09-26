@@ -153,7 +153,7 @@ class plgSearchJoomcck extends JPlugin
 		//$query->select("MATCH (fieldsdata) AGAINST ({$search}{$search_mode}) AS searchresult");
 		
 
-		if($app->isSite() && $app->getLanguageFilter())
+		if($app->isClient('site') && $app->getLanguageFilter())
 		{
 			$query->where('langs IN (' . $db->Quote($tag) . ',' . $db->Quote('*') . ')');
 		}

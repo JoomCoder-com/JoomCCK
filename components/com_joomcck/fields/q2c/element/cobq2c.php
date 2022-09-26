@@ -33,7 +33,7 @@ class JFormFieldCobQ2C extends JFormFieldList
 			JLoader::load('comquick2cartHelper');
 		}
 
-		JHtml::_('behavior.modal', 'a.modal');
+		JHtml::_('bootstrap.modal', 'a.modal');
 
 		$pid    = JFactory::getApplication()->input->get('a_id');
 		$client = "com_joomcck";

@@ -12,7 +12,7 @@ defined('_JEXEC') or die('Restricted access'); ?>
 <?php
 JHtml::_('behavior.formvalidation');
 JHtml::_('behavior.keepalive');
-JHtml::_('behavior.modal');
+JHtml::_('bootstrap.modal');
 ?>
 <form action="<?php echo JUri::getInstance()->toString(); ?>" method="post" name="adminForm" id="adminForm" class="form-horizontal">
 	<?php echo HTMLFormatHelper::layout('item', $this); ?>

@@ -21,7 +21,7 @@ class JFormFieldCImage extends CFormField
 		$params = $this->params;
 		$user   = JFactory::getUser();
 		$doc    = JFactory::getDocument();
-		JHtml::_('behavior.modal');
+		JHtml::_('bootstrap.modal');
 		$this->directory = str_replace('\\', '/', $params->get('params.directory', 'images')) . '/';
 
 		if(is_string($this->value))

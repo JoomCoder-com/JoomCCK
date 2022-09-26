@@ -12,14 +12,14 @@ defined('_JEXEC') or die ('Restricted access');
 jimport('joomla.application.component.view');
 jimport('joomla.filesystem.folder');
 
-JHTML::_('behavior.modal', 'a.modal');
+JHTML::_('bootstrap.modal', 'a.modal');
 
 class JoomcckViewVotes extends MViewBase
 {
 
 	public function display($tpl = NULL)
 	{
-		JHtml::_('behavior.tooltip');
+		JHtml::_('bootstrap.tooltip');
 
 		$this->state      = $this->get('State');
 		$this->items      = $this->get('Items');

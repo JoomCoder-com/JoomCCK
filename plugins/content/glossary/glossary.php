@@ -21,12 +21,12 @@ class plgContentGlossary extends JPlugin
 		$app = JFactory::getApplication();
 		$document = JFactory::getDocument();
 
-		if($app->isAdmin())
+		if($app->isClient('administrator'))
 		{
 			return;
 		}
 
-		JHTML::_('behavior.tooltip');
+		JHTML::_('bootstrap.tooltip');
 
 		$field = $this->params->get('field');
 		if(! $field)

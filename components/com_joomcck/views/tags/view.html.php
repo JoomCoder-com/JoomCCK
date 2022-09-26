@@ -22,7 +22,7 @@ class JoomcckViewTags extends MViewBase
 
 	function display($tpl = NULL)
 	{
-		JHtml::_('behavior.tooltip');
+		JHtml::_('bootstrap.tooltip');
 
 		$this->state      = $this->get('State');
 		$this->items      = $this->get('Items');

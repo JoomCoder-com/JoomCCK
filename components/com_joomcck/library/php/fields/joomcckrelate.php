@@ -12,7 +12,7 @@ defined('_JEXEC') or die();
 
 jimport('joomla.html.html');
 
-JHtml::_('behavior.modal');
+JHtml::_('bootstrap.modal');
 
 require_once JPATH_ROOT . '/components/com_joomcck/library/php/fields/joomcckfield.php';
 require_once JPATH_ROOT . '/components/com_joomcck/api.php';

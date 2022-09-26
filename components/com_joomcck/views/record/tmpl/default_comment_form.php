@@ -9,7 +9,7 @@
 
 defined('_JEXEC') or die();
 JHtml::_('behavior.keepalive');
-JHtml::_('behavior.tooltip');
+JHtml::_('bootstrap.tooltip');
 JHtml::_('behavior.formvalidation');
 $this->comment_form->setFieldAttribute('comment','editor', $this->tmpl_params['comment']->get('tmpl_core.comments_editor', 'tinymce'));
 ?>

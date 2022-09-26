@@ -45,7 +45,7 @@ class JFormFieldMersubtmpls extends JFormFieldList
         
         // FIXIT: old joomcck
         if($old) {
-            JHtml::_('behavior.modal');
+            JHtml::_('bootstrap.modal');
             $document = JFactory::getDocument();
             $document->addStyleDeclaration('.tmpl_button{padding: 2px; font-size: 110%;}.tmpl_button img { padding: 0 2px 0 0; margin: 0px;}');
             $document->addScript(JUri::base(TRUE) . '/components/com_joomcck/library/js/main.js');

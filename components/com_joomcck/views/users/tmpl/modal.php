@@ -8,7 +8,7 @@
  */
 defined('_JEXEC') or die();
 
-JHtml::_('behavior.tooltip');
+JHtml::_('bootstrap.tooltip');
 
 $field		= JFactory::getApplication()->input->getCmd('field');
 $function	= 'jSelectUser_'.$field;

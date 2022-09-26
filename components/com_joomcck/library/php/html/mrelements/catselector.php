@@ -147,7 +147,7 @@ defined('_JEXEC') or die('Restricted access');
 				$.ajax({
 					url: '<?php
 							$url = JRoute::_("index.php?option=com_joomcck&task=ajax.category_children&tmpl=component", FALSE);
-							if(JFactory::getApplication()->isAdmin())
+							if(JFactory::getApplication()->isClient('administrator'))
 							{
 								$url = str_replace('/administrator', '', $url);
 							}

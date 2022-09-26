@@ -8,7 +8,7 @@
  */
 defined('_JEXEC') or die();
 JHtml::_('behavior.formvalidation');
-JHtml::_('behavior.modal');
+JHtml::_('bootstrap.modal');
 
 ?>
 <style>

@@ -9,7 +9,7 @@
 
 defined('_JEXEC') or die();
 
-JHTML::_('behavior.modal', 'a.cmodal');
+JHTML::_('bootstrap.modal', 'a.cmodal');
 
 jimport('joomla.application.component.view');
 class JoomcckViewTField extends MViewBase
