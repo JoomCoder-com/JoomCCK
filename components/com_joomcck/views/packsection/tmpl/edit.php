@@ -17,7 +17,7 @@ JHtml::_('script', 'system/tabs.js', false, true);
 <script type="text/javascript">
 	Joomla.submitbutton = function(task)
 	{
-		if (task == 'packsection.cancel' || document.formvalidator.isValid(document.id('item-form'))) {
+		if (task == 'packsection.cancel' || document.formvalidator.isValid(document.getElementById('item-form'))) {
 			<?php //echo $this->form->getField('description')->save(); ?>
 			Joomla.submitform(task, document.getElementById('item-form'));
 		}

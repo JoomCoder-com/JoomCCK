@@ -26,7 +26,7 @@ function getActiveClass($view)
 }
 
 ?>
-<nav class="navbar navbar-expand-md navbar-dark bg-dark">
+<nav class="navbar navbar-expand-md navbar-dark bg-dark mb-3">
     <div class="container-fluid">
         <a class="navbar-brand" href="<?php echo Url::view('cpanel') ?>">JoomCCK</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
@@ -36,26 +36,26 @@ function getActiveClass($view)
             <ul class="navbar-nav">
                 <li class="nav-item <?php getActiveClass('item'); ?>">
                     <a class="nav-link" href="<?php echo Url::view('items') ?>">
-			            <?php echo HTMLFormatHelper::icon('blue-documents-stack.png'); ?>
-			            <?php echo JText::_('XML_SUBMENU_RECORDS'); ?>
+						<?php echo HTMLFormatHelper::icon('blue-documents-stack.png'); ?>
+						<?php echo JText::_('XML_SUBMENU_RECORDS'); ?>
                     </a>
                 </li>
                 <li class="nav-item <?php getActiveClass('section'); ?>">
                     <a class="nav-link" href="<?php echo Url::view('sections') ?>">
-			            <?php echo HTMLFormatHelper::icon('folder.png'); ?>
-			            <?php echo JText::_('XML_SUBMENU_SECTIONS'); ?>
+						<?php echo HTMLFormatHelper::icon('folder.png'); ?>
+						<?php echo JText::_('XML_SUBMENU_SECTIONS'); ?>
                     </a>
                 </li>
                 <li class="nav-item <?php getActiveClass('ctype'); ?>">
                     <a class="nav-link" href="<?php echo Url::view('ctypes') ?>">
-			            <?php echo HTMLFormatHelper::icon('category.png'); ?>
-			            <?php echo JText::_('XML_SUBMENU_TYPES'); ?>
+						<?php echo HTMLFormatHelper::icon('category.png'); ?>
+						<?php echo JText::_('XML_SUBMENU_TYPES'); ?>
                     </a>
                 </li>
                 <li class="nav-item <?php getActiveClass('template'); ?>">
                     <a class="nav-link" href="<?php echo Url::view('templates') ?>">
-			            <?php echo HTMLFormatHelper::icon('document-text-image.png'); ?>
-			            <?php echo JText::_('XML_SUBMENU_TEMPLATES'); ?>
+						<?php echo HTMLFormatHelper::icon('document-text-image.png'); ?>
+						<?php echo JText::_('XML_SUBMENU_TEMPLATES'); ?>
                     </a>
                 </li>
                 <li class="nav-item dropdown <?php echo (in_array($view, array('emstates', 'emtaxes', 'emimports', 'emanalytics')) ? 'active' : NULL) . $disabled; ?>">
@@ -63,56 +63,56 @@ function getActiveClass($view)
                     <ul class="dropdown-menu">
                         <li class="<?php getActiveClass('pack'); ?>">
                             <a class="dropdown-item" href="<?php echo Url::view('packs') ?>">
-					            <?php echo HTMLFormatHelper::icon('luggage.png'); ?>
-					            <?php echo JText::_('XML_SUBMENU_PACK'); ?>
+								<?php echo HTMLFormatHelper::icon('luggage.png'); ?>
+								<?php echo JText::_('XML_SUBMENU_PACK'); ?>
                             </a>
                         </li>
                         <li class="<?php getActiveClass('import'); ?>">
                             <a class="dropdown-item" href="<?php echo Url::view('import') ?>">
-					            <?php echo HTMLFormatHelper::icon('drive-download.png'); ?>
-					            <?php echo JText::_('XML_SUBMENU_IMPORT'); ?>
+								<?php echo HTMLFormatHelper::icon('drive-download.png'); ?>
+								<?php echo JText::_('XML_SUBMENU_IMPORT'); ?>
                             </a>
                         </li>
                         <li class="<?php getActiveClass('moderator'); ?>">
                             <a class="dropdown-item" href="<?php echo Url::view('moderators') ?>">
-					            <?php echo HTMLFormatHelper::icon('user-share.png'); ?>
-					            <?php echo JText::_('CMODERATORS'); ?>
+								<?php echo HTMLFormatHelper::icon('user-share.png'); ?>
+								<?php echo JText::_('CMODERATORS'); ?>
                             </a>
                         </li>
                         <li class="<?php getActiveClass('tool'); ?>">
                             <a class="dropdown-item" href="<?php echo Url::view('tools') ?>">
-					            <?php echo HTMLFormatHelper::icon('hammer.png'); ?>
-					            <?php echo JText::_('XML_SUBMENU_TOOLS'); ?>
+								<?php echo HTMLFormatHelper::icon('hammer.png'); ?>
+								<?php echo JText::_('XML_SUBMENU_TOOLS'); ?>
                             </a>
                         </li>
                         <li class="<?php getActiveClass('auditlog'); ?>">
                             <a class="dropdown-item" href="<?php echo Url::view('auditlog') ?>">
-					            <?php echo HTMLFormatHelper::icon('clipboard-list.png'); ?>
-					            <?php echo JText::_('XML_SUBMENU_AUDIT'); ?>
+								<?php echo HTMLFormatHelper::icon('clipboard-list.png'); ?>
+								<?php echo JText::_('XML_SUBMENU_AUDIT'); ?>
                             </a>
                         </li>
                         <li class="<?php getActiveClass('notifications'); ?>">
                             <a class="dropdown-item" href="<?php echo Url::view('notifications') ?>">
-					            <?php echo HTMLFormatHelper::icon('bell.png'); ?>
-					            <?php echo JText::_('XML_SUBMENU_NOTIFY'); ?>
+								<?php echo HTMLFormatHelper::icon('bell.png'); ?>
+								<?php echo JText::_('XML_SUBMENU_NOTIFY'); ?>
                             </a>
                         </li>
                         <li class="<?php getActiveClass('vote'); ?>">
                             <a class="dropdown-item" href="<?php echo Url::view('votes') ?>">
-					            <?php echo HTMLFormatHelper::icon('star.png'); ?>
-					            <?php echo JText::_('XML_SUBMENU_VOTES'); ?>
+								<?php echo HTMLFormatHelper::icon('star.png'); ?>
+								<?php echo JText::_('XML_SUBMENU_VOTES'); ?>
                             </a>
                         </li>
                         <li class="<?php getActiveClass('comm'); ?>">
                             <a class="dropdown-item" href="<?php echo Url::view('comms') ?>">
-					            <?php echo HTMLFormatHelper::icon('balloons.png'); ?>
-					            <?php echo JText::_('XML_SUBMENU_COMMENTS'); ?>
+								<?php echo HTMLFormatHelper::icon('balloons.png'); ?>
+								<?php echo JText::_('XML_SUBMENU_COMMENTS'); ?>
                             </a>
                         </li>
                         <li class="<?php getActiveClass('tag'); ?>">
                             <a class="dropdown-item" href="<?php echo Url::view('tags') ?>">
-					            <?php echo HTMLFormatHelper::icon('price-tag.png'); ?>
-					            <?php echo JText::_('XML_SUBMENU_TAGS'); ?>
+								<?php echo HTMLFormatHelper::icon('price-tag.png'); ?>
+								<?php echo JText::_('XML_SUBMENU_TAGS'); ?>
                             </a>
                         </li>
                     </ul>

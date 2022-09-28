@@ -17,20 +17,20 @@ class CCommunityHelper
 
 	static public function karma($actor, $target, $options, $record)
 	{
-		$dispatcher = JEventDispatcher::getInstance();
-		$dispatcher->trigger('onKarma', array($actor, $target, $options, $record));
+		$dispatcher = JFactory::getApplication();
+		$dispatcher->triggerEvent('onKarma', array($actor, $target, $options, $record));
 	}
 
 	static public function avtivity($actor, $target, $options, $record)
 	{
-		$dispatcher = JEventDispatcher::getInstance();
-		$dispatcher->trigger('onActivity', array($actor, $target, $options, $record));
+		$dispatcher = JFactory::getApplication();
+		$dispatcher->triggerEvent('onActivity', array($actor, $target, $options, $record));
 	}
 
 	static public function notify($user_id, $options)
 	{
-		$dispatcher = JEventDispatcher::getInstance();
-		$dispatcher->trigger('onNotification', array($user_id, $options));
+		$dispatcher = JFactory::getApplication();
+		$dispatcher->triggerEvent('onNotification', array($user_id, $options));
 
 		$array = array(
 			'id'      => NULL,

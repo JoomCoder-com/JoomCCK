@@ -171,8 +171,8 @@ class JoomcckViewRecords extends MViewBase
 			$plg = JPluginHelper::importPlugin('mint', 'formatter_' . strtolower($formatter));
 			if($plg)
 			{
-				$dispatcher = JEventDispatcher::getInstance();
-				$dispatcher->trigger('onListFormat', array(
+				$dispatcher = JFactory::getApplication();
+				$dispatcher->triggerEvent('onListFormat', array(
 					$this
 				));
 

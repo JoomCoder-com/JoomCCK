@@ -625,7 +625,7 @@ class MModelList extends MModelBase
 		$dispatcher = JDispatcher::getInstance();
 
 		// Trigger the form preparation event.
-		$results = $dispatcher->trigger('onContentPrepareForm', array($form, $data));
+		$results = $dispatcher->triggerEvent('onContentPrepareForm', array($form, $data));
 
 		// Check for errors encountered while preparing the form.
 		if (count($results) && in_array(false, $results, true))

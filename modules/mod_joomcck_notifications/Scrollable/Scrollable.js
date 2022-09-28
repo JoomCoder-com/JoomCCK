@@ -36,7 +36,7 @@ var Scrollable = new Class({
 		}
 		else {
 			var scrollable = this;
-			this.element = document.id(element);
+			this.element = document.getElementById(element);
 			if (!this.element) return 0;
 
 			this.active = false;

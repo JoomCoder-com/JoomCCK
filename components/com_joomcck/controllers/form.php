@@ -65,7 +65,7 @@ class JoomcckControllerForm extends MControllerForm
 
 		$dispatcher = JDispatcher::getInstance();
 		JPluginHelper::importPlugin('mint');
-		$dispatcher->trigger('onBeforeArticleSaved', array(($record['id'] == 0), $record, $section, $type));
+		$dispatcher->triggerEvent('onBeforeArticleSaved', array(($record['id'] == 0), $record, $section, $type));
 
 		parent::save($key, $urlVar);
 	}
@@ -412,7 +412,7 @@ class JoomcckControllerForm extends MControllerForm
 
 		$dispatcher = JDispatcher::getInstance();
 		JPluginHelper::importPlugin('mint');
-		$dispatcher->trigger('onAfterArticleSaved', array($isnew, $record, $fields, $section, $type));
+		$dispatcher->triggerEvent('onAfterArticleSaved', array($isnew, $record, $fields, $section, $type));
 
 		if($this->getTask() == 'save')
 		{

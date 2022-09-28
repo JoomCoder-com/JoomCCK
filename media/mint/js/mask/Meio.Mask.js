@@ -320,6 +320,6 @@ provides: [Meio.Mask]
 
 	global.Meio = Meio;
 
-})(this, document.id);
+})(this, document.getElementById);
 
 

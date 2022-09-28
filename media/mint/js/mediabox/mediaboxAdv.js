@@ -35,7 +35,7 @@ var Mediabox;
 
 	window.addEvent("domready", function() {
 		// Create and append the Mediabox HTML code at the bottom of the document
-		document.id(document.body).adopt(
+		document.getElementById(document.body).adopt(
 			$$([
 				overlay = new Element("div", {id: "mbOverlay"}).addEvent("click", close),
 				center = new Element("div", {id: "mbCenter"})
@@ -784,8 +784,8 @@ var Mediabox;
 				mediaWidth = mediaWidth || options.defaultWidth;
 				mediaHeight = mediaHeight || options.defaultHeight;
 				URLsplit = URL.split('#');
-//				preload = new Element("div", {id: "mbMediaInline"}).adopt(document.id(URLsplit[1]).getChildren().clone([true,true]));
-				preload = document.id(URLsplit[1]);
+//				preload = new Element("div", {id: "mbMediaInline"}).adopt(document.getElementById(URLsplit[1]).getChildren().clone([true,true]));
+				preload = document.getElementById(URLsplit[1]);
 				startEffect();
 // HTML (applies to ALL links not recognised as a specific media type)
 			} else {
@@ -825,7 +825,7 @@ var Mediabox;
 					mediaHeight = preload.height = parseInt((mediaWidth/preload.width)*mediaHeight);
 					preload.width = mediaWidth;
 				}
-				if (Browser.ie) preload = document.id(preload);
+				if (Browser.ie) preload = document.getElementById(preload);
 				if (options.clickBlock) preload.addEvent('mousedown', function(e){ e.stop(); }).addEvent('contextmenu', function(e){ e.stop(); });
 				media.setStyles({backgroundImage: "none", display: ""});
 				preload.inject(media);

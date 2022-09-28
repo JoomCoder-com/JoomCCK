@@ -724,7 +724,7 @@ abstract class MModelAdmin extends MModelForm
 	 */
 	public function delete(&$pks)
 	{
-		$dispatcher = JEventDispatcher::getInstance();
+		$dispatcher = JFactory::getApplication();
 		$pks = (array) $pks;
 		$table = $this->getTable();
 
@@ -744,7 +744,7 @@ abstract class MModelAdmin extends MModelForm
 					$context = $this->option . '.' . $this->name;
 
 					// Trigger the onContentBeforeDelete event.
-					$result = $dispatcher->trigger($this->event_before_delete, array($context, $table));
+					$result = $dispatcher->triggerEvent($this->event_before_delete, array($context, $table));
 
 					if (in_array(false, $result, true))
 					{
@@ -759,7 +759,7 @@ abstract class MModelAdmin extends MModelForm
 					}
 
 					// Trigger the onContentAfterDelete event.
-					$dispatcher->trigger($this->event_after_delete, array($context, $table));
+					$dispatcher->triggerEvent($this->event_after_delete, array($context, $table));
 
 				}
 				else
@@ -920,7 +920,7 @@ abstract class MModelAdmin extends MModelForm
 	 */
 	public function publish(&$pks, $value = 1)
 	{
-		$dispatcher = JEventDispatcher::getInstance();
+		$dispatcher = JFactory::getApplication();
 		$user = JFactory::getUser();
 		$table = $this->getTable();
 		$pks = (array) $pks;
@@ -957,7 +957,7 @@ abstract class MModelAdmin extends MModelForm
 		$context = $this->option . '.' . $this->name;
 
 		// Trigger the onContentChangeState event.
-		$result = $dispatcher->trigger($this->event_change_state, array($context, $pks, $value));
+		$result = $dispatcher->triggerEvent($this->event_change_state, array($context, $pks, $value));
 
 		if (in_array(false, $result, true))
 		{
@@ -1054,7 +1054,7 @@ abstract class MModelAdmin extends MModelForm
 	 */
 	public function save($data)
 	{
-		$dispatcher = JEventDispatcher::getInstance();
+		$dispatcher = JFactory::getApplication();
 		$table = $this->getTable();
 
 		$key = $table->getKeyName();
@@ -1093,7 +1093,7 @@ abstract class MModelAdmin extends MModelForm
 			}
 
 			// Trigger the onContentBeforeSave event.
-			$result = $dispatcher->trigger($this->event_before_save, array($this->option . '.' . $this->name, $table, $isNew));
+			$result = $dispatcher->triggerEvent($this->event_before_save, array($this->option . '.' . $this->name, $table, $isNew,$data = []));
 
 			if (in_array(false, $result, true))
 			{
@@ -1112,7 +1112,7 @@ abstract class MModelAdmin extends MModelForm
 			$this->cleanCache();
 
 			// Trigger the onContentAfterSave event.
-			$dispatcher->trigger($this->event_after_save, array($this->option . '.' . $this->name, $table, $isNew));
+			$dispatcher->triggerEvent($this->event_after_save, array($this->option . '.' . $this->name, $table, $isNew));
 		}
 		catch (Exception $e)
 		{

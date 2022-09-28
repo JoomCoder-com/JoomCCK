@@ -32,7 +32,7 @@ $app = JFactory::getApplication();
 		var hfid = [];
 		var isValid = true;
 		var errorText = [];
-		//if(task != 'form.cancel' && !document.formvalidator.isValid(document.id('adminForm')))
+		//if(task != 'form.cancel' && !document.formvalidator.isValid(document.getElementById('adminForm')))
 		{
 			//isValid = false;
 		}

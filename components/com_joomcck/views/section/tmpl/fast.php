@@ -10,13 +10,14 @@
 
 defined('_JEXEC') || die('Restricted access');
 $view = JFactory::getApplication()->input->getCmd('view');
-JHtml::_('behavior.formvalidation');
+JHtml::_('behavior.formvalidator');
 JHtml::_('behavior.keepalive');
 JHtml::_('bootstrap.modal');
 ?>
 <script type="text/javascript">
+
 	Joomla.submitbutton = function(task) {
-		if(task == 'section.cancel' || document.formvalidator.isValid(document.id('adminForm'))) {
+		if(task == 'section.cancel' || document.formvalidator.isValid(document.getElementById('adminForm'))) {
 			Joomla.submitform(task, document.getElementById('item-form'));
 		}
 		else {

@@ -49,7 +49,7 @@ var Gallerybox = new Class({
 	},
 
 	createUI: function(){
-		document.id(document.body).adopt(
+		document.getElementById(document.body).adopt(
 				$$([
 					this.overlay = new Element("div", {id: "gmbOverlay"}).addEvent("click", this.close.pass([], this)),
 					this.center = new Element("div", {id: "gmbCenter"})

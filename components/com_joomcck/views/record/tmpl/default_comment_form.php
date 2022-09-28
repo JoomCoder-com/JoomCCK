@@ -16,7 +16,7 @@ $this->comment_form->setFieldAttribute('comment','editor', $this->tmpl_params['c
 
 <script type="text/javascript">
 Joomla.submitbutton = function(task) {
-	if (task == 'article.cancel' || document.formvalidator.isValid(document.id('adminForm'))) {
+	if (task == 'article.cancel' || document.formvalidator.isValid(document.getElementById('adminForm'))) {
 		<?php echo $this->comment_form->getField('comment')->save(); ?>
 		Joomla.submitform(task);
 	} else {

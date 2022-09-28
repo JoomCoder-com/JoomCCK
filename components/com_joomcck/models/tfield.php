@@ -125,7 +125,7 @@ class JoomcckModelTfield extends MModelAdmin
 
 	public function changeState($task, &$pks, $value = 1)
 	{
-		$dispatcher = JEventDispatcher::getInstance();
+		$dispatcher = JFactory::getApplication();
 		$user       = JFactory::getUser();
 		$table      = $this->getTable();
 		$pks        = (array)$pks;

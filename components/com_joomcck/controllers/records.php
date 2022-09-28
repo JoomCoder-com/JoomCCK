@@ -612,8 +612,8 @@ class JoomcckControllerRecords extends MControllerAdmin
 		$this->_finish(JText::_('CMSG_RECDELETEDOK'));
 
 		JPluginHelper::importPlugin('mint');
-		$dispatcher = JEventDispatcher::getInstance();
-		$dispatcher->trigger('onRecordDelete', array($this->record));
+		$dispatcher = JFactory::getApplication();
+		$dispatcher->triggerEvent('onRecordDelete', array($this->record));
 
 		$this->setRedirect(JoomcckFilter::base64($this->input->getBase64('return')));
 

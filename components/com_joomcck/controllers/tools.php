@@ -47,7 +47,7 @@ class JoomcckControllerTools extends MControllerForm
 		{
 			$dispatcher = JDispatcher::getInstance();
 			JPluginHelper::importPlugin('mint');
-			$dispatcher->trigger('onToolExecute', array(
+			$dispatcher->triggerEvent('onToolExecute', array(
 				$name,
 				$params
 			));

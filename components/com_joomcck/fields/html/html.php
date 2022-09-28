@@ -167,7 +167,7 @@ class JFormFieldCHtml extends CFormField
 				// strict loading of content type plugin - loadmodule to warn rss feed breaking
 				if ($this->request->get("format") == 'feed' && $plugin == 'loadmodule') continue;
 			}
-			$dispatcher->trigger('onContentPrepare', array('com_joomcck.record', &$row, &$this->params, $this->request->getInt('limitstart', 0)));
+			$dispatcher->triggerEvent('onContentPrepare', array('com_joomcck.record', &$row, &$this->params, $this->request->getInt('limitstart', 0)));
 			$value = $row->text;
 		}
 		return $value;

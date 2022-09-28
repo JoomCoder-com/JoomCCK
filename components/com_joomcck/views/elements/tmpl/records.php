@@ -101,7 +101,7 @@ $k = 0;
 				<button class="btn" type="submit">
 					<?php echo HTMLFormatHelper::icon('document-search-result.png');  ?>
 				<?php echo JText::_('JSEARCH_FILTER_SUBMIT'); ?></button>
-				<button class="btn" type="button" onclick="document.id('filter_search2').value='';this.form.submit();">
+				<button class="btn" type="button" onclick="document.getElementById('filter_search2').value='';this.form.submit();">
 					<?php echo HTMLFormatHelper::icon('eraser.png');  ?>
 				<?php echo JText::_('JSEARCH_FILTER_CLEAR'); ?></button>
 			</div>

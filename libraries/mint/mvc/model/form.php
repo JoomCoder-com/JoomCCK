@@ -233,11 +233,11 @@ abstract class MModelForm extends MModelBase
 	protected function preprocessData($context, &$data)
 	{
 		// Get the dispatcher and load the users plugins.
-		$dispatcher = JEventDispatcher::getInstance();
+		$dispatcher = JFactory::getApplication();
 		JPluginHelper::importPlugin('content');
 
 		// Trigger the data preparation event.
-		$results = $dispatcher->trigger('onContentPrepareData', array($context, $data));
+		$results = $dispatcher->triggerEvent('onContentPrepareData', array($context, $data));
 
 		// Check for errors encountered while preparing the data.
 		if (count($results) > 0 && in_array(false, $results, true))
@@ -265,10 +265,10 @@ abstract class MModelForm extends MModelBase
 		JPluginHelper::importPlugin($group);
 
 		// Get the dispatcher.
-		$dispatcher = JEventDispatcher::getInstance();
+		$dispatcher = JFactory::getApplication();
 
 		// Trigger the form preparation event.
-		$results = $dispatcher->trigger('onContentPrepareForm', array($form, $data));
+		$results = $dispatcher->triggerEvent('onContentPrepareForm', array($form, $data));
 
 		// Check for errors encountered while preparing the form.
 		if (count($results) && in_array(false, $results, true))

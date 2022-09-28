@@ -20,7 +20,7 @@ JHtml::_('behavior.keepalive');
 
 <script type="text/javascript">
 	Joomla.submitbutton = function(task) {
-		if(task == 'cat.cancel' || document.formvalidator.isValid(document.id('item-form'))) {
+		if(task == 'cat.cancel' || document.formvalidator.isValid(document.getElementById('item-form'))) {
 			<?php echo $this->form->getField('description')->save(); ?>
 			Joomla.submitform(task, document.getElementById('item-form'));
 		} else {

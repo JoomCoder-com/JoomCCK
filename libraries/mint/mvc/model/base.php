@@ -556,7 +556,7 @@ abstract class MModelBase extends JObject
 	protected function cleanCache($group = null, $client_id = 0)
 	{
 		$conf = JFactory::getConfig();
-		$dispatcher = JEventDispatcher::getInstance();
+		$dispatcher = JFactory::getApplication();
 
 		$options = array(
 			'defaultgroup' => ($group) ? $group : (isset($this->option) ? $this->option : JFactory::getApplication()->input->get('option')),
@@ -566,6 +566,6 @@ abstract class MModelBase extends JObject
 		$cache->clean();
 
 		// Trigger the onContentCleanCache event.
-		$dispatcher->trigger($this->event_clean_cache, $options);
+		$dispatcher->triggerEvent($this->event_clean_cache, $options);
 	}
 }

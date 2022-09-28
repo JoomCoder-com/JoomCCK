@@ -16,7 +16,7 @@ JHtml::_('behavior.keepalive');
 <script type="text/javascript">
 	function submitbutton(task)
 	{
-		if (task == 'filter.cancel' || document.formvalidator.isValid(document.id('adminForm'))) {
+		if (task == 'filter.cancel' || document.formvalidator.isValid(document.getElementById('adminForm'))) {
 			<?php echo $this->form->getField('comment')->save(); ?>
 			Joomla.submitform(task);
 		}
