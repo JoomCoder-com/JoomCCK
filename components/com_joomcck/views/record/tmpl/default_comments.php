@@ -57,7 +57,7 @@ if(JoomcckCommentHelper::laded($this->item->id)) {
 			console.log(id);
 			if(json.success)
 			{
-				jQuery('#comment_rate_control_' + id).html('<span class="badge badge-info">' + json.result + '</span>');
+				jQuery('#comment_rate_control_' + id).html('<span class="badgebg-info">' + json.result + '</span>');
 			}
 			else
 			{

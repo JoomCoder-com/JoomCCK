@@ -102,7 +102,7 @@ $listDirn = $this->state->get('list.direction');
 						JHtml::_('dropdown.divider');
 						JHtml::_('dropdown.addCustomItem', JText::_('C_OPENSECTION'), JRoute::_(Url::records($item)));
 						JHtml::_('dropdown.divider');
-						JHtml::_('dropdown.addCustomItem', JText::_('C_MANAGE_CATS') . ' <span class="badge' . ($item->categories ? ' badge-success' : NULL) . '">' . $item->categories . '</span>', JRoute::_('index.php?option=com_joomcck&view=cats&section_id=' . $item->id));
+						JHtml::_('dropdown.addCustomItem', JText::_('C_MANAGE_CATS') . ' <span class="badge' . ($item->categories ? 'bg-success' : ' bg-light text-dark border') . '">' . $item->categories . '</span>', JRoute::_('index.php?option=com_joomcck&view=cats&section_id=' . $item->id));
 
 						echo JHtml::_('dropdown.render');
 						?>
@@ -112,10 +112,10 @@ $listDirn = $this->state->get('list.direction');
 					<a rel="tooltip" data-original-title="<?php echo JText::_('CCATEGOY_MANAGE'); ?>" href="<?php echo JRoute::_('index.php?option=com_joomcck&view=cats&section_id=' . $item->id) ?>">
 						<?php echo JText::_('CCATEGORIES'); ?>
 					</a>
-					<span class="badge<?php echo($item->fieldnum ? ' badge-success' : NULL) ?>"><?php echo $item->fieldnum; ?></span>
+					<span class="badge<?php echo($item->fieldnum ? 'bg-success' : ' bg-light text-dark border') ?>"><?php echo $item->fieldnum; ?></span>
 				</td>
 				<td class="center">
-					<span class="badge <?php echo($item->records ? ' badge-info' : NULL) ?>"><?php echo $item->records ?></span>
+					<span class="badge <?php echo($item->records ? 'bg-info' : ' bg-light text-dark border') ?>"><?php echo $item->records ?></span>
 				</td>
 				<td class="center">
 					<?php echo $item->language; ?>

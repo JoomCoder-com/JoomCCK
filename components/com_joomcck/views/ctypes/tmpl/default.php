@@ -119,7 +119,7 @@ $listDirn	= $this->state->get('list.direction');
 							endif;
 
 							JHtml::_('dropdown.divider');
-							JHtml::_('dropdown.addCustomItem', JText::_('C_MANAGE_FIELDS').' <span class="badge'.($item->fieldnum ? ' badge-success' : NULL).'">'.$item->fieldnum.'</span>', JRoute::_('index.php?option=com_joomcck&view=tfields&filter_type='.$item->id));
+							JHtml::_('dropdown.addCustomItem', JText::_('C_MANAGE_FIELDS').' <span class="badge'.($item->fieldnum ? 'bg-success' : ' bg-light text-dark border').'">'.$item->fieldnum.'</span>', JRoute::_('index.php?option=com_joomcck&view=tfields&filter_type='.$item->id));
 
 							echo JHtml::_('dropdown.render');
 							?>
@@ -132,7 +132,7 @@ $listDirn	= $this->state->get('list.direction');
 					<?php else:?>
 						<?php echo JText::_('CFIELDS');?>
 					<?php endif;?>
-					<span class="badge<?php if($item->fieldnum){echo ' badge-success';}?>"><?php echo $item->fieldnum?></span>
+					<span class="badge<?php if($item->fieldnum){echo 'bg-success';}?>"><?php echo $item->fieldnum?></span>
 				</td>
 				<td class="center">
 					<?php echo $item->language; ?>

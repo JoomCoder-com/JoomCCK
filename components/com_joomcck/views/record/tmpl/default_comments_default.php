@@ -52,9 +52,9 @@ if($this->comment->level > 1)
 	$height = 50;
 }
 $bc = '';
-if($this->comment->rate > 0) $bc = ' badge-info';
-if($this->comment->rate < 0) $bc = ' badge-important';
-if($this->comment->rate > 10) $bc = ' badge-success';
+if($this->comment->rate > 0) $bc = 'bg-info';
+if($this->comment->rate < 0) $bc = 'bg-dark';
+if($this->comment->rate > 10) $bc = 'bg-success';
 ?>
 <a name="comment<?php echo $this->comment->id?>"></a>
 <div style="margin-left: <?php echo $params->get('tmpl_params.comments_indent') * ($this->comment->level - 1)?>px;" id="comment<?php echo $this->comment->id?>-container" class="">

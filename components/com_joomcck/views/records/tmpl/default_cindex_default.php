@@ -65,7 +65,7 @@ $api = new JoomcckApi();
 								<?php endif;?>
 							</a>
 							<?php if($params->get('tmpl_params.cat_nums') && ($category->params->get('submission') || $category->records_num)):?>
-								<span class="badge badge-info"><?php echo $category->records_num;?></span>
+								<span class="badgebg-info"><?php echo $category->records_num;?></span>
 							<?php endif;?>
 						</<?php echo $params->get('tmpl_core.tag', 'h4')?>>
 

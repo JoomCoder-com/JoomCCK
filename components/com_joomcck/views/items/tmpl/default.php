@@ -120,16 +120,16 @@ $listDirn = $this->state->get('list.direction');
 
 					JHtml::_('dropdown.divider');
 					if($item->hits):
-						JHtml::_('dropdown.addCustomItem', JText::_('C_TOOLBAR_RESET_HITS') . " <span class=\"badge badge-info\">{$item->hits}</span>", 'javascript:void(0)', 'onclick="listItemTask(\'cb' . $i . '\',\'records.reset_hits\')"');
+						JHtml::_('dropdown.addCustomItem', JText::_('C_TOOLBAR_RESET_HITS') . " <span class=\"badgebg-info\">{$item->hits}</span>", 'javascript:void(0)', 'onclick="listItemTask(\'cb' . $i . '\',\'records.reset_hits\')"');
 					endif;
 					if($item->comments):
-						JHtml::_('dropdown.addCustomItem', JText::_('C_TOOLBAR_RESET_COOMENT') . " <span class=\"badge badge-info\">{$item->comments}</span>", 'javascript:void(0)', 'onclick="listItemTask(\'cb' . $i . '\',\'records.reset_com\')"');
+						JHtml::_('dropdown.addCustomItem', JText::_('C_TOOLBAR_RESET_COOMENT') . " <span class=\"badgebg-info\">{$item->comments}</span>", 'javascript:void(0)', 'onclick="listItemTask(\'cb' . $i . '\',\'records.reset_com\')"');
 					endif;
 					if($item->votes):
-						JHtml::_('dropdown.addCustomItem', JText::_('C_TOOLBAR_RESET_RATING') . " <span class=\"badge badge-info\">{$item->votes}</span>", 'javascript:void(0)', 'onclick="listItemTask(\'cb' . $i . '\',\'records.reset_vote\')"');
+						JHtml::_('dropdown.addCustomItem', JText::_('C_TOOLBAR_RESET_RATING') . " <span class=\"badgebg-info\">{$item->votes}</span>", 'javascript:void(0)', 'onclick="listItemTask(\'cb' . $i . '\',\'records.reset_vote\')"');
 					endif;
 					if($item->favorite_num):
-						JHtml::_('dropdown.addCustomItem', JText::_('C_TOOLBAR_RESET_FAVORIT') . " <span class=\"badge badge-info\">{$item->favorite_num}</span>", 'javascript:void(0)', 'onclick="listItemTask(\'cb' . $i . '\',\'records.reset_fav\')"');
+						JHtml::_('dropdown.addCustomItem', JText::_('C_TOOLBAR_RESET_FAVORIT') . " <span class=\"badgebg-info\">{$item->favorite_num}</span>", 'javascript:void(0)', 'onclick="listItemTask(\'cb' . $i . '\',\'records.reset_fav\')"');
 					endif;
 
 					echo JHtml::_('dropdown.render');
@@ -178,12 +178,12 @@ $listDirn = $this->state->get('list.direction');
 						<span class="badge"><small><?php echo $this->escape($item->hits); ?></small></span>
 
 						<?php echo JHtml::_('grid.sort', 'CCOMMENTS', 'a.comments', $listDirn, $listOrder); ?>
-						<a rel="tooltip" data-original-title="<?php echo JText::_('CSHOWRECORDCOMMENTS'); ?>" href="<?php echo JRoute::_('index.php?option=com_joomcck&view=comms&filter_search=record:' . $item->id); ?>" class="badge badge-info">
+						<a rel="tooltip" data-original-title="<?php echo JText::_('CSHOWRECORDCOMMENTS'); ?>" href="<?php echo JRoute::_('index.php?option=com_joomcck&view=comms&filter_search=record:' . $item->id); ?>" class="badgebg-info">
 							<small><?php echo $this->escape($item->comments); ?></small>
 						</a>
 
 						<?php echo JHtml::_('grid.sort', 'CVOTES', 'a.votes', $listDirn, $listOrder); ?>
-						<a rel="tooltip" data-original-title="<?php echo JText::_('CSHOWRECORDVOTES'); ?>" href="<?php echo JRoute::_('index.php?option=com_joomcck&view=votes&filter_search=record:' . $item->id); ?>" class="badge badge-info">
+						<a rel="tooltip" data-original-title="<?php echo JText::_('CSHOWRECORDVOTES'); ?>" href="<?php echo JRoute::_('index.php?option=com_joomcck&view=votes&filter_search=record:' . $item->id); ?>" class="badgebg-info">
 							<small><?php echo $this->escape($item->votes); ?></small>
 						</a>
 

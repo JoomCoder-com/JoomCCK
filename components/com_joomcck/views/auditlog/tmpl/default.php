@@ -171,7 +171,7 @@ $this->_filters = true;
 						</small>
 					<?php endif;?>
 				</td>
-				<td><span class="badge badge-info">v.<?php echo (int)@$params->version;?></span></td>
+				<td><span class="badgebg-info">v.<?php echo (int)@$params->version;?></span></td>
 				<td class="has-context">
 					<?php ob_start ();?>
 

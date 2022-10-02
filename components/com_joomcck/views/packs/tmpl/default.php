@@ -71,13 +71,13 @@ $listDirn = $this->state->get('list.direction');
 				<td nowrap="nowrap">
 					<a href="<?php echo JRoute::_('index.php?option=com_joomcck&view=packsections&filter_pack=' . $item->id) ?>">
 						<?php echo JText::_('CSECTIONS'); ?></a>
-					<span class="badge badge-success"><?php echo $item->secnum ?></span>
+					<span class="badgebg-success"><?php echo $item->secnum ?></span>
 				</td>
 				<td class="nowrap center">
 					<?php echo $item->key; ?>
 				</td>
 				<td nowrap="nowrap">
-					<span class="badge badge-success">9.<?php echo $item->version; ?></span>
+					<span class="badgebg-success">9.<?php echo $item->version; ?></span>
 				</td>
 				<td align="center">
 					<a class="btn btn-primary btn-mini" href="<?php echo JRoute::_('index.php?option=com_joomcck&task=pack.build&pack_id=' . $item->id) ?>"><?php echo JText::_('CBUILD') ?></a><br/>
@@ -85,7 +85,7 @@ $listDirn = $this->state->get('list.direction');
 				<td nowrap="nowrap">
 					<small>
 						<?php echo $item->download; ?>
-						<br/><?php echo JText::_('Size'); ?>: <span class="badge badge-info"><?php echo $item->size; ?></span>
+						<br/><?php echo JText::_('Size'); ?>: <span class="badgebg-info"><?php echo $item->size; ?></span>
 						<br/><?php echo JText::_('CBTIME'); ?>: <?php echo $item->btime != '0000-00-00 00:00:00' ? JDate::getInstance($item->btime) : JText::_('CNEVER'); ?>
 					</small>
 				</td>

@@ -449,7 +449,7 @@ class CEventsHelper
 			$attr = sprintf(' rel="tooltipright" data-original-title="%s"', htmlspecialchars(implode('<br>', $text), ENT_QUOTES, 'UTF-8'));
 		}
 
-		$out = '<span class="badge badge-important badge-notification"' . $attr . '>' . $num . '</span>';
+		$out = '<span class="badgebg-darkbg-info"' . $attr . '>' . $num . '</span>';
 
 		if($url)
 		{
