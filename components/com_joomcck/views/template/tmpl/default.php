@@ -10,8 +10,10 @@
 defined('_JEXEC') or die('Restricted access');
 
 JHtml::_('bootstrap.tooltip');
-JHtml::_('behavior.formvalidation');
-JHtml::_('behavior.keepalive');
+/** @var Joomla\CMS\WebAsset\WebAssetManager $wa */
+$wa = $this->document->getWebAssetManager();
+$wa->useScript('keepalive')
+	->useScript('form.validate');
 ?>
 <script type="text/javascript">
 	Joomla.submitbutton = function(task) {

@@ -10,8 +10,12 @@
 
 defined('_JEXEC') or die('Restricted access'); ?>
 <?php
-JHtml::_('behavior.formvalidation');
-JHtml::_('behavior.keepalive');
+
+/** @var Joomla\CMS\WebAsset\WebAssetManager $wa */
+$wa = $this->document->getWebAssetManager();
+$wa->useScript('keepalive')
+	->useScript('form.validate');
+
 JHtml::_('bootstrap.modal');
 ?>
 <form action="<?php echo JUri::getInstance()->toString(); ?>" method="post" name="adminForm" id="adminForm" class="form-horizontal">
