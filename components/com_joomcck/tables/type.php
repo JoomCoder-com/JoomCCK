@@ -27,7 +27,7 @@ class JoomcckTableType extends JTable
 
 	public function bind($array, $ignore = '')
 	{
-		$params = JRequest::getVar('params', array(), 'post', 'array');
+		$params = \Joomla\CMS\Factory::getApplication()->input->post->get('params', array(), 'array');
 		if($params)
 		{
 			$registry = new JRegistry();

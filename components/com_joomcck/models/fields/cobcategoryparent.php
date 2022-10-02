@@ -45,7 +45,7 @@ class JFormFieldCobCategoryParent extends JFormFieldList
 		$db		= JFactory::getDbo();
 		$query	= $db->getQuery(true);
 	
-		$section = JRequest::getInt('section_id');
+		$section = \Joomla\CMS\Factory::getApplication()->input->getInt('section_id',0);
 		$query->select('name as text');
 		$query->from('#__js_res_sections');
 		$query->where('id = '.$section);

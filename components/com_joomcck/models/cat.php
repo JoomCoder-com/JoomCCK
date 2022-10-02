@@ -7,6 +7,8 @@
  * @license GNU/GPL http://www.gnu.org/copyleft/gpl.html
  */
 
+use Joomla\CMS\Factory;
+
 defined('_JEXEC') or die;
 jimport('mint.mvc.model.admin');
 
@@ -82,14 +84,14 @@ class JoomcckModelCat extends MModelAdmin
 	{
 		$app = JFactory::getApplication('administrator');
 
-		$parentId = JRequest::getInt('parent_id');
+		$parentId = Factory::getApplication()->input->getInt('parent_id');
 		$this->setState('cat.parent_id', $parentId);
 
 		// Load the User state.
-		$pk = (int) JRequest::getInt('id');
+		$pk = (int) Factory::getApplication()->input->getInt('id');
 		$this->setState('cat.id', $pk);
 
-		$section = JRequest::getInt('section_id');
+		$section = Factory::getApplication()->input->getInt('section_id',0);
 		$this->setState('cat.section_id', $section);
 		$parts = explode('.',$section);
 
@@ -336,7 +338,7 @@ class JoomcckModelCat extends MModelAdmin
 		$table		= $this->getTable();
 		$pk			= (!empty($data['id'])) ? $data['id'] : (int)$this->getState($this->getName().'.id');
 		$isNew		= true;
-		$post = JRequest::getVar('jform', array(), 'post', 'array');
+		$post = Factory::getApplication()->input->post->get('jform', array(), 'array');
 		$data['relative_cats'] = isset($post['relative_cats']) ? $post['relative_cats'] : array();
 
 		// Load the row if saving an existing category.
@@ -351,7 +353,7 @@ class JoomcckModelCat extends MModelAdmin
 		}
 
 		// Alter the title for save as copy
-		if (JRequest::getVar('task') == 'save2copy') {
+		if (Factory::getApplication()->input->getCmd('task') == 'save2copy') {
 			list($title,$alias) = $this->generateNewTitle($data['parent_id'], $data['alias'], $data['title']);
 			$data['title']	= $title;
 			$data['alias']	= $alias;
@@ -462,7 +464,7 @@ class JoomcckModelCat extends MModelAdmin
 		// Check that user has edit permission for every category being changed
 		// Note that the entire batch operation fails if any category lacks edit permission
 		$user	= JFactory::getUser();
-		$section = JRequest::getInt('section_id');
+		$section = \Joomla\CMS\Factory::getApplication()->input->getInt('section_id',0);
 		foreach ($pks as $pk) {
 			if (!$user->authorise('core.edit', 'com_joomcck.cat.'.$pk)) {
 				// Error since user cannot edit this category
@@ -502,7 +504,7 @@ class JoomcckModelCat extends MModelAdmin
 		$table	= $this->getTable();
 		$db		= $this->getDbo();
 		$user	= JFactory::getUser();
-		$section = JRequest::getInt('section_id');
+		$section = \Joomla\CMS\Factory::getApplication()->input->getInt('section_id',0);
 
 		// Check that the parent exists
 		if ($parentId) {
@@ -662,7 +664,7 @@ class JoomcckModelCat extends MModelAdmin
 		$table	= $this->getTable();
 		$db		= $this->getDbo();
 		$user	= JFactory::getUser();
-		$section = JRequest::getInt('section_id');
+		$section = \Joomla\CMS\Factory::getApplication()->input->getInt('section_id',0);
 
 		// Check that the parent exists.
 		if ($parentId) {

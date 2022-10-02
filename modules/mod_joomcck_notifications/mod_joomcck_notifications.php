@@ -10,7 +10,7 @@ defined('_JEXEC') or die('Restricted access');
 
 // Include the syndicate functions only once
 require_once (dirname(__FILE__) . DIRECTORY_SEPARATOR . 'helper.php');
-$Itemid = JRequest::getInt('Itemid');
+$Itemid = \Joomla\CMS\Factory::getApplication()->input->getInt('Itemid');
 $headerText = trim($params->get('header_text'));
 $footerText = trim($params->get('footer_text'));
 

@@ -91,7 +91,7 @@ function parseXMLTemplateFile($path)
 	{
 		$app = JFactory::getApplication();
 
-		$userfile = JRequest::getVar('install_package', null, 'files', 'array');
+		$userfile = \Joomla\CMS\Factory::getApplication()->input->files->get('install_package', null, 'array');
 		$tmp_dest 	= $app->getCfg('tmp_path'). DIRECTORY_SEPARATOR .$userfile['name'];
 		$tmp_src	= $userfile['tmp_name'];
 

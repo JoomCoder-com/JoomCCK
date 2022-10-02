@@ -55,7 +55,7 @@ class JFormFieldOrderinggroups extends JFormField
 		// Build the query for the ordering list.
 		$query = 'SELECT ordering AS value, title AS text' .
 				' FROM #__js_res_fields_group' .
-				' WHERE type_id ='.JRequest::getInt('type_id').
+				' WHERE type_id ='.\Joomla\CMS\Factory::getApplication()->input->getInt('type_id',0).
 				' ORDER BY ordering';
 		// Create a read-only list (no name) with a hidden input to store the value.
 		if ((string) $this->element['readonly'] == 'true') {

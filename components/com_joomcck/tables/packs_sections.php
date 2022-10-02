@@ -27,8 +27,8 @@ class JoomcckTablePacks_sections extends JTable
 		
 		$data['mtime'] = JFactory::getDate()->toSql();
 		
-		$params = JRequest::getVar('jform', array(), 'post', 'array');
-		$params_types = JRequest::getVar('params', array(), 'post', 'array');
+		$params = \Joomla\CMS\Factory::getApplication()->input->post->get('jform', [], 'array');
+		$params_types = \Joomla\CMS\Factory::getApplication()->input->post->get('params', [], 'array');
 		if(isset($params['params']))
 		{
 			$result = array_merge($params['params'], $params_types);

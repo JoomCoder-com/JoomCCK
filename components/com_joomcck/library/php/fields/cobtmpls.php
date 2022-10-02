@@ -133,7 +133,7 @@ class JFormFieldCobtmpls extends JFormFieldList
 			return $this->_key;
 		}
 
-		$encid = $app->input->getVar('encid', FALSE);
+		$encid = $app->input->get('encid', FALSE);
 		if($encid)
 		{
 			$this->_key = $encid;

@@ -13,10 +13,10 @@ if(!JFactory::getUser()->id) return;
 // Include the syndicate functions only once
 require_once (dirname(__FILE__) . DIRECTORY_SEPARATOR . 'helper.php');
 include_once JPATH_ROOT. DIRECTORY_SEPARATOR .'components'. DIRECTORY_SEPARATOR .'com_joomcck'. DIRECTORY_SEPARATOR .'library'. DIRECTORY_SEPARATOR .'php'. DIRECTORY_SEPARATOR .'helpers'. DIRECTORY_SEPARATOR .'helper.php';
-$Itemid = JRequest::getInt('Itemid');
+$Itemid = \Joomla\CMS\Factory::getApplication()->input->getInt('Itemid');
 $section_id = $params->get('section_id');
 
-if($params->get('current_section', 0) && $cur = JRequest::getInt('section_id'))
+if($params->get('current_section', 0) && $cur = \Joomla\CMS\Factory::getApplication()->input->getInt('section_id'))
 {
 	$section_id = $cur;
 }

@@ -24,7 +24,7 @@ class JFormFieldCpacksections extends JFormField
 	public function getInput()
 	{
 		$db = JFactory::getDbo();
-		if(!JRequest::getInt('id' , 0))
+		if(!\Joomla\CMS\Factory::getApplication()->input->getInt('id' , 0))
 		{
 			$app = JFactory::getApplication();
 			$pack_id = $app->getUserStateFromRequest('com_joomcck.packsections.pack', 'pack_id');

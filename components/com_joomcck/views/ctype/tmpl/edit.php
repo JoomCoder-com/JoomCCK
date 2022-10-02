@@ -146,7 +146,7 @@ JHtml::_('behavior.keepalive');
 				dataType: 'html',
 				data: {
 					adp: $('#params_comments_comments').val(),
-					type:<?php echo JRequest::getInt('id')?>
+					type:<?php echo \Joomla\CMS\Factory::getApplication()->input->getInt('id',0)?>
 				}
 			}).done(function(data) {
 				$(this).html(data);

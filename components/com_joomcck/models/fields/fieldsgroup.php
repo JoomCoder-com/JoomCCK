@@ -22,7 +22,7 @@ class JFormFieldFieldsgroup extends JFormFieldList
 		$db = JFactory::getDbo();
 		$query = 'SELECT id AS value, title AS text' .
 				' FROM #__js_res_fields_group' .
-				' WHERE type_id = ' . JRequest::getInt('type_id');
+				' WHERE type_id = ' . \Joomla\CMS\Factory::getApplication()->input->getInt('type_id',0);
 				' ORDER BY ordering';
 		$db->setQuery($query);
 		$list = $db->loadObjectList();

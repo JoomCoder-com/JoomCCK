@@ -92,16 +92,16 @@ class plgContentJoomcck extends JPlugin
 		$section = ItemsStore::getSection($this->params->get('section_id'));
 		$user = JFactory::getUser();
 
-		JRequest::setVar('parent_id', $row->id);
-		JRequest::setVar('parent', 'com_content');
+		\Joomla\CMS\Factory::getApplication()->input->set('parent_id', $row->id);
+		\Joomla\CMS\Factory::getApplication()->input->set('parent', 'com_content');
 
 		$api = new JoomcckApi();
 		$result = $api->records($section->id, 'children', $this->params->get('orderby'), array($stype->id), NULL, $this->params->get('defcat', 0), $this->params->get('limit', 5), $this->params->get('tmpl'), 'com_content');
 		$out[] = $result['html'];
 		$out[] = '<div class="clearfix"></div><br>';
 
-		JRequest::setVar('parent', 0);
-		JRequest::setVar('parent_id', 0);
+		\Joomla\CMS\Factory::getApplication()->input->set('parent', 0);
+		\Joomla\CMS\Factory::getApplication()->input->set('parent_id', 0);
 
 		$return = urlencode(base64_encode(\Joomla\CMS\Uri\Uri::getInstance()->toString()));
 		$app = JFactory::getApplication();

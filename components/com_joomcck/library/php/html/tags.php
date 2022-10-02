@@ -744,7 +744,7 @@ class JHTMLTags
 		$db = JFactory::getDBO();
 		$url = \Joomla\CMS\Uri\Uri::getInstance();
 		$user = JFactory::getUser();
-		$section_id ? NULL : $section_id = JRequest::getInt('category_id');
+		$section_id ? NULL : $section_id = \Joomla\CMS\Factory::getApplication()->input->getInt('category_id',0);
 
 		$sql = "SELECT t.id, t.tag  FROM #__js_res_tags_history AS h
 		LEFT JOIN #__js_res_tags AS t ON t.id = h.tag_id
@@ -803,7 +803,7 @@ class JHTMLTags
 							WHERE rc.catid = {$section_id} AND h.tag_id = {$tag->id} {$where} GROUP BY h.id";
 							break;
 						case 3:
-							//$category = JRequest::getInt('category_id', $section_id);
+							//$category = \Joomla\CMS\Factory::getApplication()->input->getInt('category_id', $section_id);
 							$ids = ResHelper::getCategoryChildrenIds($section_id);
 							$sql = "SELECT h.id FROM #__js_res_tags_history AS h
 							LEFT JOIN #__js_res_record AS r ON r.id = h.record_id

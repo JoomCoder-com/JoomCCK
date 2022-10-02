@@ -78,7 +78,7 @@ if(!function_exists('mod_getChildsDef')) { function mod_getChildsDef($category, 
 			if (!$params->get('cat_empty', 1) && !$cat->records_num) continue;
 			$class = array();  
 			$class[] = 'item-'.$cat->id;
-			if($cat->id ==  JRequest::getInt('cat_id') && JRequest::getWord('option') == 'com_joomcck' && JRequest::getInt('section_id') == $params->get('section_id'))
+			if($cat->id ==  \Joomla\CMS\Factory::getApplication()->input->getInt('cat_id',0) && \Joomla\CMS\Factory::getApplication()->input->getWord('option','') == 'com_joomcck' && \Joomla\CMS\Factory::getApplication()->input->getInt('section_id') == $params->get('section_id'))
 				$class[] = 'active';
 			if($cat->childs_num)
 				$class[] = 'parent';

@@ -48,7 +48,7 @@ class JoomcckModelFields extends MModelList
 		$query->where('f.type_id = '.$typeId);
 		$query->where('f.published = 1');
 
-		if($module_field = JFactory::getApplication()->input->getVar('module_video'))
+		if($module_field = JFactory::getApplication()->input->get('module_video'))
 		{
 			settype($module_field, 'array');
 			$query->where("f.id IN (".implode(',', $module_field).")");

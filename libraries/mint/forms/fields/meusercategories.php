@@ -18,8 +18,8 @@ class JFormFieldMEUsercategories extends JFormField
     protected function getInput()
     {
         $db	= JFactory::getDBO();
-        $user = JFactory::getUser(JRequest::getInt('cat_user_id'));
-        $section_id = JRequest::getInt('section_id');
+        $user = JFactory::getUser(\Joomla\CMS\Factory::getApplication()->input->getInt('cat_user_id',0));
+        $section_id = \Joomla\CMS\Factory::getApplication()->input->getInt('section_id',0);
 
 		$sql = "SELECT id AS value, name AS text FROM `#__js_res_category_user`
 				WHERE published = 1 AND user_id = {$user->get('id')} AND section_id = {$section_id}
@@ -33,7 +33,7 @@ class JFormFieldMEUsercategories extends JFormField
 		{
 		    $uri		= \Joomla\CMS\Uri\Uri::getInstance();
             $return		= base64_encode($uri);
-		    $html .= '<a class="btn" href="'.JRoute::_('index.php?option=com_joomcck&view=category&section_id='.JRequest::getInt('section_id').'&task=usercategory.add&return='.$return).'">
+		    $html .= '<a class="btn" href="'.JRoute::_('index.php?option=com_joomcck&view=category&section_id='.\Joomla\CMS\Factory::getApplication()->input->getInt('section_id',0).'&task=usercategory.add&return='.$return).'">
 		    			<img src="'.JURI::root().'media/mint/icons/16/plus-button.png" align="absmiddle" alt="'.JText::_('Add New').'" /> '.JText::_('Add New').'
 					</a></div>';
 		}

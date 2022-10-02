@@ -26,7 +26,10 @@ class JoomcckModelGroups extends MModelList
 	{
 		$app = JFactory::getApplication('administrator');
 
-		$type = $app->getUserStateFromRequest($this->context.'.groups.type', 'type_id', JRequest::getInt('type_id', 0), 'int');
+
+
+
+		$type = $app->getUserStateFromRequest($this->context.'.groups.type', 'type_id', \Joomla\CMS\Factory::getApplication()->input->getInt('type_id', 0), 'int');
 		$this->setState('groups.type', $type);
 
 

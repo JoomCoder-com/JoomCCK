@@ -29,7 +29,7 @@ JHtml::_('behavior.keepalive');
 	}
 </script>
 
-<form action="<?php echo JRoute::_('index.php?option=com_joomcck&view=category&section_id=' . JRequest::getInt('section_id') . '&layout=edit&id=' . (int)$this->item->id); ?>" method="post" name="adminForm" id="item-form"
+<form action="<?php echo JRoute::_('index.php?option=com_joomcck&view=category&section_id=' . \Joomla\CMS\Factory::getApplication()->input->getInt('section_id',0) . '&layout=edit&id=' . (int)$this->item->id); ?>" method="post" name="adminForm" id="item-form"
 	  class="form-validate form-horizontal">
 	<?php echo HTMLFormatHelper::layout('item', $this); ?>
 	<div class="page-header">

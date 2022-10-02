@@ -21,7 +21,7 @@ class modJoomcckTagcloudHelper
 		
 		$where = array();
 		
-		if($params->get('depends_on_user') && $uid = JRequest::getVar('user_id', 0))
+		if($params->get('depends_on_user') && $uid = \Joomla\CMS\Factory::getApplication()->input->getVar('user_id', 0))
 		{
 			$where[] = " h.user_id = {$uid} ";
 		}

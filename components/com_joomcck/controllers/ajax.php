@@ -1095,7 +1095,7 @@ class JoomcckControllerAjax extends MControllerAdmin
 
 	public function remove_notification()
 	{
-		$id         = $this->input->getVar('id');
+		$id         = $this->input->getInt('id');
 		$section_id = $this->input->getInt('section_id');
 
 		$user  = JFactory::getUser();
@@ -1128,8 +1128,8 @@ class JoomcckControllerAjax extends MControllerAdmin
 
 	public function remove_notification_by()
 	{
-		$type = $this->input->getVar('type');
-		$list = $this->input->getVar('list');
+		$type = $this->input->get('type');
+		$list = $this->input->get('list');
 		if(!count($list) && $type != 'read')
 		{
 			echo json_encode(
@@ -1205,7 +1205,7 @@ class JoomcckControllerAjax extends MControllerAdmin
 	public function get_notifications()
 	{
 		$ids        = $this->input->get('exist', array(0), 'array');
-		$section_id = $this->input->getVar('section_id');
+		$section_id = $this->input->getInt('section_id');
 		$user       = JFactory::getUser();
 		$db         = JFactory::getDbo();
 		$query      = $db->getQuery(TRUE);
@@ -1253,7 +1253,7 @@ class JoomcckControllerAjax extends MControllerAdmin
 
 	public function remove_log()
 	{
-		$id = $this->input->getVar('id');
+		$id = $this->input->getInt('id');
 
 		$db    = JFactory::getDbo();
 		$query = $db->getQuery(TRUE);

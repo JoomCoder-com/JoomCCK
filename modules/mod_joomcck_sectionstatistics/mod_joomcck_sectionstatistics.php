@@ -11,10 +11,10 @@ defined('_JEXEC') || die('Restricted access');
 require_once dirname(__FILE__) . '/helper.php';
 include_once JPATH_ROOT . '/components/com_joomcck/library/php/helpers/helper.php';
 
-$Itemid     = JRequest::getInt('Itemid');
+$Itemid     = \Joomla\CMS\Factory::getApplication()->input->getInt('Itemid');
 $section_id = $params->get('section_id');
 
-if ($params->get('current_section', 0) && $cur = JRequest::getInt('section_id')) {
+if ($params->get('current_section', 0) && $cur = \Joomla\CMS\Factory::getApplication()->input->getInt('section_id')) {
     $section_id = $cur;
 }
 

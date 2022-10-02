@@ -14,7 +14,7 @@ if(!function_exists('mod_getChildsDrop')) { function mod_getChildsDrop($category
 		<ul class="dropdown-menu">
 			<?php foreach($category->children as $i => $cat ) :
 				if (!$params->get('tmpl_params.subcat_empty', 1) && !$cat->num_current && !$cat->num_all) continue;  ?>
-			<li class="dropdown<?php if($cat->childs_num) echo '-submenu';?><?php /*if(JRequest::getInt('cat_id') == $cat->id) echo ' open';*/ ?>">
+			<li class="dropdown<?php if($cat->childs_num) echo '-submenu';?><?php /*if(\Joomla\CMS\Factory::getApplication()->input->getInt('cat_id') == $cat->id) echo ' open';*/ ?>">
 				<?php if($params->get('tmpl_params.subcat_limit', 5) <= $i && (count($category->children) > $params->get('tmpl_params.subcat_limit', 5))):?>
 				<a href="<?php echo $category->link;?>"><?php echo JText::_('CMORECATS').'...'?></a></li>
 				<?php break;?>
