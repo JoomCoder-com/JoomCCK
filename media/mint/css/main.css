@@ -1,3 +1,12 @@
+/* New CSS for Joomla 4 */
+
+#joomcckContainer joomla-tab{
+    width: 100% !important;
+}
+
+/* End of New CSS for Joomla 4 */
+
+/* maybe this css old css code will removed */
 [class^="icon-"], [class*=" icon-"] {
     background-image: none;
 }
