@@ -15,7 +15,7 @@ defined('_JEXEC') or die('Restricted access'); ?>
 </style>
 <ul class="unstyled">
 	<?php foreach ($list as $id):?>
-	  <li class="mod-avatar pull-left">
+	  <li class="mod-avatar float-start">
 		  <?php
 		  $lbl = '<img src="'.CCommunityHelper::getAvatar($id, $params->get('ava_size', 32), $params->get('ava_size', 32)).'" class="'.$params->get('ava_style', 'img-polaroid').'">';
 		  $options = array('nobadge' => 1, 'label' => $lbl, 'noonlinestatus' => 1, 'tooltip' => 'name');

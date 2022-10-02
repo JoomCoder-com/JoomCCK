@@ -32,7 +32,7 @@ div.btn-group[data-toggle=buttons-radio] input[type=radio] {
 </style>
 
 <div class="page-header">
-	<button class="btn pull-right" type="button" onclick="window.location = '<?php echo JRoute::_('index.php?option=com_joomcck&view=notifications')?>'">
+	<button class="btn float-end" type="button" onclick="window.location = '<?php echo JRoute::_('index.php?option=com_joomcck&view=notifications')?>'">
 		<?php echo HTMLFormatHelper::icon('bell.png');  ?>
 		<?php echo JText::_('CNOTCENTR');?>
 		<?php if($num):?>
@@ -47,7 +47,7 @@ div.btn-group[data-toggle=buttons-radio] input[type=radio] {
 
 <form name="adminForm" id="adminForm" method="post" class="form-horizontal">
 	<div class="btn-toolbar clearfix">
-		<div class="pull-right">
+		<div class="float-end">
 			<button class="btn" onclick="Joomla.submitbutton('options.saveoptions')">
 				<?php echo HTMLFormatHelper::icon('disk.png');  ?>
 				<?php echo JText::_('CSAVE');?>
@@ -62,7 +62,7 @@ div.btn-group[data-toggle=buttons-radio] input[type=radio] {
 		</div>
 
 		<?php if($back):?>
-			<button type="button" class="btn pull-left" onclick="location.href = '<?php echo $back;?>'">
+			<button type="button" class="btn float-start" onclick="location.href = '<?php echo $back;?>'">
 				<?php echo HTMLFormatHelper::icon('arrow-180.png');  ?>
 				<?php echo JText::_('CBACKTOSECTION'); ?>
 			</button>
@@ -95,11 +95,11 @@ div.btn-group[data-toggle=buttons-radio] input[type=radio] {
 
 			<?php if(!empty($this->section->id)):?>
 				<div class="btn-toolbar">
-					<div class="pull-right">
+					<div class="float-end">
 						<?php echo $this->sec_follow;?>
 					</div>
 				</div>
-				<label class="pull-left checkbox">
+				<label class="float-start checkbox">
 					<input <?php if(isset($this->data['autofollow'][$section->id])) {echo ' checked="checked"';} ?>
 						type="checkbox" name="jform[autofollow][<?php echo $section->id?>]"
 						value="<?php echo $section->id?>" />
@@ -199,7 +199,7 @@ div.btn-group[data-toggle=buttons-radio] input[type=radio] {
 
 						</div>
 						<div class="clearfix"></div>
-						<div class="pull-right">
+						<div class="float-end">
 							<button type="button" <?php echo ($section->records ? NULL : 'style="display: none;"');?> class="btn" id="unsub-<?php echo $section->id?>" onclick="Joomcck.ajax_unsubscr_sec(<?php echo $section->id;?>)">
 								<?php echo JText::_('CUNSUBREC')?>
 								<span class="badge"><?php echo $section->records;?></span>
@@ -209,7 +209,7 @@ div.btn-group[data-toggle=buttons-radio] input[type=radio] {
 								<span class="badge"><?php echo $section->records_total - $section->records;?></span>
 							</button>
 						</div>
-						<div id="bro-ba" style="width:50px; display:none;" class="progress progress-striped active pull-left">
+						<div id="bro-ba" style="width:50px; display:none;" class="progress progress-striped active float-start">
 							<div class="bar" style="width: 100%;"></div>
 						</div>
 						<div class="clearfix"></div>

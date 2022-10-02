@@ -87,7 +87,7 @@ if(!function_exists('mod_getChildsDef')) { function mod_getChildsDef($category, 
 			<a href="<?php echo JRoute::_($cat->link)?>">
 				<?php echo JText::_($cat->title);?>
 				<?php if($params->get('cat_nums', 0)):?>
-					<span class="label pull-right"><?php echo $cat->records_num; ?></span>
+					<span class="label float-end"><?php echo $cat->records_num; ?></span>
 				<?php endif;?>				
 			</a>			
 			<?php if($cat->childs_num):?>

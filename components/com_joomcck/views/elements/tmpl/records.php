@@ -95,7 +95,7 @@ $k = 0;
 <form name="adminForm" id="adminForm" method="post">
 	<div class="container-fluid">
 		<div id="row-fluid">
-			<div class="pull-left input-append">
+			<div class="float-start input-append">
 
 				<input type="text" name="filter_search2" id="filter_search2" value="<?php echo $this->state->get('records.search2'); ?>" />
 				<button class="btn" type="submit">
@@ -106,7 +106,7 @@ $k = 0;
 				<?php echo JText::_('JSEARCH_FILTER_CLEAR'); ?></button>
 			</div>
 			<?php if(JFactory::getApplication()->input->get('mode') == 'form'):?>
-			<div class="pull-right">
+			<div class="float-end">
 				<button type="button" class="btn" onclick="closeWindow()">
 					<?php echo HTMLFormatHelper::icon('tick-button.png');  ?>
 				<?php echo JText::_('CAPPLY');?></button>
@@ -141,7 +141,7 @@ $k = 0;
 				<?php endforeach;?>
 			</tbody>
 		</table>
-		<div class="pull-right"><?php echo $this->pagination->getPagesCounter(); ?></div>
+		<div class="float-end"><?php echo $this->pagination->getPagesCounter(); ?></div>
 		<div class="pagination">
 			<?php echo $this->pagination->getPagesLinks(); ?>
 		</div>

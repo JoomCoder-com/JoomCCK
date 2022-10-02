@@ -53,7 +53,7 @@ $can_delete = $field->iscomment ? FALSE : $field->_getDeleteAccess();
             <tr id="flow-file-<?php echo $f['id'] ?>">
                 <td>
                     <?php if(!$field->iscomment): ?>
-                        <div class="pull-right" id="flow-menu<?php echo $field->id; ?>">
+                        <div class="float-end" id="flow-menu<?php echo $field->id; ?>">
                             <?php if($can_delete): ?>
                                 <a href="javascript:void(0);" class="btn-delete" data-id="<?php echo $f['id'] ?>">
                                     <?php echo HTMLFormatHelper::icon('cross-button.png') ?></a>
@@ -207,7 +207,7 @@ $can_delete = $field->iscomment ? FALSE : $field->_getDeleteAccess();
             $('#flow-list<?php echo $field->id; ?> tbody').append($.parseHTML(`<tr class="flow-file" id="flow-file-${file.uniqueIdentifier}">
                 <td style="position:relative">
                     <?php if(!$field->iscomment): ?>
-                        <div class="pull-right" id="flow-menu<?php echo $field->id; ?>">
+                        <div class="float-end" id="flow-menu<?php echo $field->id; ?>">
                             <?php if($can_delete): ?>
                                 <a href="javascript:void(0);" class="btn-delete" data-id="${file.uniqueIdentifier}"><?php echo HTMLFormatHelper::icon('cross-button.png') ?></a>
                             <?php endif; ?>

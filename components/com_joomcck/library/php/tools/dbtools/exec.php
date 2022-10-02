@@ -69,4 +69,15 @@ switch($params->get('db_action'))
 			$app->enqueueMessage(JText::_('TRUNCATE Table') . ': ' . $table);
 		}
 		break;
+	case 6: // update database structure
+
+		// require install file
+		require_once JPATH_ADMINISTRATOR.'/components/com_joomcck/install.php';
+
+		$install = new com_joomcckInstallerScript();
+		$install->_updateTables();
+		$app->enqueueMessage('Database structure updated!','success');
+
+
+		break;
 }

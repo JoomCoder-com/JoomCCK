@@ -120,7 +120,7 @@ $lang = $lang[0];
 <?php if(in_array($this->params->get('params.map_marker'), $this->user->getAuthorisedViewLevels())):?>
 	<h5>
 		<?php if(!$this->params->get('params.map_require')):?>
-		<button class="btn btn-mini btn-danger pull-right hide" id="rmp<?php echo $this->id?>" type="button"><?php echo JText::_('G_REMOVEPOSITION');?></button>
+		<button class="btn btn-mini btn-danger float-end hide" id="rmp<?php echo $this->id?>" type="button"><?php echo JText::_('G_REMOVEPOSITION');?></button>
 		<?php endif; ?>
 
 		<?php if($this->params->get('params.map_require')):?>

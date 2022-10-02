@@ -45,7 +45,7 @@ JHtml::_('behavior.keepalive');
 
 	<div class="tab-content">
 		<div class="tab-pane active" id="page-main">
-			<div class="pull-left" style="max-width: 600px; margin-right: 20px;">
+			<div class="float-start" style="max-width: 600px; margin-right: 20px;">
 				<div class="control-group">
 					<div class="control-label"><?php echo $this->form->getLabel('id'); ?></div>
 					<div class="controls"><?php echo $this->form->getInput('id'); ?></div>
@@ -66,64 +66,64 @@ JHtml::_('behavior.keepalive');
 				<?php echo $this->form->getInput('description'); ?>
 
 			</div>
-			<div class="pull-left" style="max-width: 600px;">
+			<div class="float-start" style="max-width: 600px;">
 				<?php echo MFormHelper::renderFieldset($this->params_form, 'prop', $this->item->params, 'properties'); ?>
 			</div>
 		</div>
 		<div class="tab-pane" id="page-params">
-			<div class="pull-left" style="max-width: 600px; margin-right: 20px;">
+			<div class="float-start" style="max-width: 600px; margin-right: 20px;">
 				<?php echo MFormHelper::renderFieldset($this->params_form, 'templates', $this->item->params, 'properties'); ?>
 				<?php echo MFormHelper::renderFieldset($this->params_form, 'tags', $this->item->params, 'properties'); ?>
 			</div>
-			<div class="pull-left" style="max-width: 600px;">
+			<div class="float-start" style="max-width: 600px;">
 				<?php echo MFormHelper::renderFieldset($this->params_form, 'title', $this->item->params, 'properties'); ?>
 				<?php echo MFormHelper::renderFieldset($this->params_form, 'rating', $this->item->params, 'properties'); ?>
 			</div>
 		</div>
 		<div class="tab-pane" id="page-submission">
-			<div class="pull-left" style="max-width: 600px; margin-right: 20px;">
+			<div class="float-start" style="max-width: 600px; margin-right: 20px;">
 				<?php echo MFormHelper::renderFieldset($this->params_form, 'submit', $this->item->params, 'submission'); ?>
 			</div>
-			<div class="pull-left" style="max-width: 600px;">
+			<div class="float-start" style="max-width: 600px;">
 				<?php echo MFormHelper::renderFieldset($this->params_form, 'categories', $this->item->params, 'submission'); ?>
 				<?php echo MFormHelper::renderFieldset($this->params_form, 'metadata', $this->item->params, 'submission'); ?>
 			</div>
 		</div>
 		<div class="tab-pane" id="page-limit">
-			<div class="pull-left" style="max-width: 600px; margin-right: 20px;">
+			<div class="float-start" style="max-width: 600px; margin-right: 20px;">
 				<?php echo MFormHelper::renderGroup($this->params_form, $this->item->params, 'category_limit'); ?>
 			</div>
-			<div class="pull-left">
+			<div class="float-start">
 				<legend><?php echo JText::_('CCATEGORYLIMIT') ?></legend>
 				<?php echo JHtml::_('mrelements.catselector', 'params[category_limit][category][]', 0, @$this->item->params['category_limit']['category'], 0); ?>
 			</div>
 		</div>
 		<div class="tab-pane" id="page-comments">
-			<div class="pull-left" style="max-width: 600px; margin-right: 20px;">
+			<div class="float-start" style="max-width: 600px; margin-right: 20px;">
 				<?php echo MFormHelper::renderGroup($this->params_form, $this->item->params, 'comments'); ?>
 				<div id="comments-params"></div>
 			</div>
 		</div>
 		<div class="tab-pane" id="page-audit">
-			<div class="pull-left" style="max-width: 600px; margin-right: 20px;">
+			<div class="float-start" style="max-width: 600px; margin-right: 20px;">
 				<?php echo MFormHelper::renderFieldset($this->params_form, 'ver', $this->item->params, 'audit'); ?>
 				<?php echo MFormHelper::renderFieldset($this->params_form, 'verl', $this->item->params, 'audit'); ?>
 				<?php echo MFormHelper::renderFieldset($this->params_form, 'verw', $this->item->params, 'audit'); ?>
 			</div>
-			<div class="pull-left" style="max-width: 600px;">
+			<div class="float-start" style="max-width: 600px;">
 				<?php echo MFormHelper::renderFieldset($this->params_form, 'ver2', $this->item->params, 'audit'); ?>
 			</div>
 		</div>
 		<div class="tab-pane" id="page-emerald">
 			<p class="lead"><?php echo JText::_('FS_EMERALDINTEGRATE') ?>
 
-			<div class="pull-left" style="max-width: 600px; margin-right: 20px;">
+			<div class="float-start" style="max-width: 600px; margin-right: 20px;">
 				<?php echo MFormHelper::renderFieldset($this->params_form, 'type_subscr', $this->item->params, 'emerald'); ?>
 				<?php echo MFormHelper::renderFieldset($this->params_form, 'type_subscr6', $this->item->params, 'emerald'); ?>
 				<?php echo MFormHelper::renderFieldset($this->params_form, 'type_subscr13', $this->item->params, 'emerald'); ?>
 				<?php echo MFormHelper::renderFieldset($this->params_form, 'type_subscr1', $this->item->params, 'emerald'); ?>
 			</div>
-			<div class="pull-left" style="max-width: 600px;">
+			<div class="float-start" style="max-width: 600px;">
 				<?php echo MFormHelper::renderFieldset($this->params_form, 'type_subscr2', $this->item->params, 'emerald'); ?>
 				<?php echo MFormHelper::renderFieldset($this->params_form, 'type_subscr3', $this->item->params, 'emerald'); ?>
 				<?php echo MFormHelper::renderFieldset($this->params_form, 'type_subscr12', $this->item->params, 'emerald'); ?>

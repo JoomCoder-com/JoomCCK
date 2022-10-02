@@ -28,10 +28,10 @@ foreach($this->statuses as $key => $status)
 }
 ?>
 
-<span id="field_<?php echo $id;?>" class="pull-left"><?php echo $this->out;?></span>
+<span id="field_<?php echo $id;?>" class="float-start"><?php echo $this->out;?></span>
 
 <?php if (count($list)): ?>
-	<div class="btn-group pull-left" style="margin-left: 5px;">
+	<div class="btn-group float-start" style="margin-left: 5px;">
 		<a class="dropdown-toggle btn btn-micro" data-toggle="dropdown" rel="tooltip" data-original-title="<?php echo JText::_('ST_CHANGETO');?>"><span class="caret"></span></a>
 		<ul class="dropdown-menu" ><?php echo implode("\n", $list);?></ul>
 	</div>

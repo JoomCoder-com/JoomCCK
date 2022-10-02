@@ -41,11 +41,11 @@ $current_user = JFactory::getUser($this->input->getInt('user_id', $this->user->g
 <?php elseif($markup->get('title.title_show')):?>
 	<div class="page-header">
 		<?php if(in_array($this->section->params->get('events.subscribe_category'), $this->user->getAuthorisedViewLevels()) && $this->input->getInt('cat_id')):?>
-			<div class="pull-right">
+			<div class="float-end">
 				<?php echo HTMLFormatHelper::followcat($this->input->getInt('cat_id'), $this->section);?>
 			</div>
 		<?php elseif(in_array($this->section->params->get('events.subscribe_section'), $this->user->getAuthorisedViewLevels())):?>
-			<div class="pull-right">
+			<div class="float-end">
 				<?php echo HTMLFormatHelper::followsection($this->section);?>
 			</div>
 		<?php endif;?>
@@ -89,7 +89,7 @@ $current_user = JFactory::getUser($this->input->getInt('user_id', $this->user->g
 		<div class="navbar" id="cnav">
 			<div class="navbar-inner">
 			<?php if($markup->get('filters.filters')):?>
-				<div class="form-inline navbar-form pull-right search-form">
+				<div class="form-inline navbar-form float-end search-form">
 					<span style="display: none;">Search box</span>
 					<?php if(in_array($markup->get('filters.show_search'), $this->user->getAuthorisedViewLevels())):?>
 						<input type="text" style="max-width: 100px; min-width: 50px;" placeholder="<?php echo JText::_('CSEARCHPLACEHOLDER');  ?>" name="filter_search"
@@ -476,7 +476,7 @@ $current_user = JFactory::getUser($this->input->getInt('user_id', $this->user->g
 
 		<?php if(in_array($markup->get('filters.show_more'), $this->user->getAuthorisedViewLevels()) && $markup->get('filters.filters')):?>
 			<div class="fade collapse separator-box" id="filter-collapse">
-				<div class="btn-group pull-right">
+				<div class="btn-group float-end">
 					<button class="btn btn-primary" onclick="Joomla.submitbutton('records.filters')">
 						<img src="<?php echo JURI::root(TRUE)?>/media/mint/icons/16/tick-button.png" align="absmiddle" alt="<?php echo JText::_('CAPPLY');?>" />
 						<?php echo JText::_('CAPPLY');?></button>
@@ -644,7 +644,7 @@ $current_user = JFactory::getUser($this->input->getInt('user_id', $this->user->g
 <?php if($markup->get('filters.worns') && count($this->worns)):?>
 <div class="filter-worns">
 	<?php foreach ($this->worns AS $worn):?>
-		<div class="alert pull-left">
+		<div class="alert float-start">
 			<button type="button" class="close" data-dismiss="alert" onclick="Joomcck.cleanFilter('<?php echo $worn->name?>')" rel="tooltip" data-original-title="<?php echo JText::_('CDELETEFILTER')?>">
 			<img alt="X" src="<?php echo JURI::root(TRUE)?>/media/mint/icons/16/cross.png"></button>
 			<div><?php echo $worn->label?></div>
@@ -652,7 +652,7 @@ $current_user = JFactory::getUser($this->input->getInt('user_id', $this->user->g
 		</div>
 	<?php endforeach;?>
 	<?php if(count($this->worns) > 1): ?>
-		<button onclick="Joomla.submitbutton('records.cleanall');" class="alert alert-error  pull-left">
+		<button onclick="Joomla.submitbutton('records.cleanall');" class="alert alert-error  float-start">
 			<div><?php echo JText::_('CORESET'); ?></div>
 			<?php echo JText::_('CODELETEALLFILTERS'); ?>
 		</button>

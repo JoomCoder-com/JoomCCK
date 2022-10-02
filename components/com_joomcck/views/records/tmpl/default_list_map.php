@@ -78,7 +78,7 @@ if($params->get('tmpl_params.map_claster'))
 	<?php if($params->get('tmpl_params.map_heat')): ?>
 		<span class="btn btn-small" id="heat"><?php echo JText::_('CHEATMAP') ?></span>
 	<?php endif; ?>
-	<div class="btn-group pull-right">
+	<div class="btn-group float-end">
 		<?php if($params->get('tmpl_params.map_weather')): ?>
 			<span class="btn btn-small" id="cloud"><?php echo JText::_('CCLOUDS') ?></span>
 			<span class="btn btn-small" id="weather"><?php echo JText::_('CWEATHER') ?></span>

@@ -11,7 +11,7 @@ defined('_JEXEC') or die(); ?>
 <h1 class="title"><?php echo JText::_('CCOMPAREVIEW') ?></h1>
 
 <div class="controls controls-row">
-	<div class="pull-right">
+	<div class="float-end">
 		<button class="btn" onclick="Joomcck.CleanCompare('<?php echo $this->back;?>', '<?php echo @$this->section->id ?>')">
 			<?php echo JText::_('CCLEANCOMPARE') ?>
 		</button>

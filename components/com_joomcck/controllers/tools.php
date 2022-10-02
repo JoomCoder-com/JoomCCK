@@ -37,6 +37,8 @@ class JoomcckControllerTools extends MControllerForm
 			$params->loadArray(@$_POST['jform']);
 		}
 
+
+
         $file = JPATH_ROOT . '/components/com_joomcck/library/php/tools/' . $name . '/exec.php';
 
 		if(JFile::exists($file))

@@ -26,7 +26,7 @@ if(!$back)
 
 	<div class="btn-toolbar">
 
-		<div class="btn-group pull-right">
+		<div class="btn-group float-end">
 			<button type="button" class="btn" onclick="location.href = '<?php echo $back;?>'">
 				<?php echo HTMLFormatHelper::icon('arrow-180.png');  ?>
 				<?php echo JText::_('CGOBACK'); ?>

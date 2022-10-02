@@ -199,10 +199,10 @@ if(
 
 	<div class="img-polaroid" style="width: <?php echo $this->params->get('params.map_dwidth', '100%');?>; height:<?php echo $this->params->get('params.map_dheight', '200px');?>">
 		<?php if($sho_map): ?>
-			<div <?php echo ($this->params->get('params.sv_layout') == 1 && $sho_sv ? 'style="width:50%;height:'.$height.'%" class="MapDetail pull-left"' : 'class="MapDetail" style="width:100%;height:'.$height.'%"'); ?> id="map_canvas_<?php echo $record->id;?>_<?php echo $this->id;?>"></div>
+			<div <?php echo ($this->params->get('params.sv_layout') == 1 && $sho_sv ? 'style="width:50%;height:'.$height.'%" class="MapDetail float-start"' : 'class="MapDetail" style="width:100%;height:'.$height.'%"'); ?> id="map_canvas_<?php echo $record->id;?>_<?php echo $this->id;?>"></div>
 		<?php endif; ?>
 		<?php if($sho_sv): ?>
-			<div <?php echo ($this->params->get('params.sv_layout') == 1 && $sho_map ? 'style="width:50%;height:'.$height.'%" class="StreetviewDetail pull-left"' : 'class="StreetviewDetail" style="width:100%;height:'.$height.'%"'); ?> id="map_pano_<?php echo $record->id;?>_<?php echo $this->id;?>"></div>
+			<div <?php echo ($this->params->get('params.sv_layout') == 1 && $sho_map ? 'style="width:50%;height:'.$height.'%" class="StreetviewDetail float-start"' : 'class="StreetviewDetail" style="width:100%;height:'.$height.'%"'); ?> id="map_pano_<?php echo $record->id;?>_<?php echo $this->id;?>"></div>
 		<?php endif; ?>
 		<div class="clearfix"></div>
 	</div>

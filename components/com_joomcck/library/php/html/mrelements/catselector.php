@@ -17,7 +17,7 @@ defined('_JEXEC') or die('Restricted access');
 <div id="categories_list">
 	<?php if (!empty($defaults)): ?>
 		<?php	foreach ( $defaults as $item ):?>
-		<div class="pull-left alert alert-info">
+		<div class="float-start alert alert-info">
 			<button type="button" class="close" onclick="CatSelector.remove(<?php echo $item->id;?>)" data-dismiss="alert">×</button>
 			<?php echo $item->title;?>
 			<br /><small><?php echo $item->path;?></small>
@@ -49,7 +49,7 @@ defined('_JEXEC') or die('Restricted access');
 						<li id="category-<?php echo $c->section_id; ?>-<?php echo $c->id; ?>">
 							<a href="javascript:void(0);" <?php if($c->children){ echo 'onclick="CatSelector.get_children('.$c->id.', '.$c->section_id.', 1)"';}else{echo ' class="disabled"';}?>>
 								<?php if($c->id != JFactory::getApplication()->input->getInt('id') && $c->params->get('submission', 1)):?>
-									<img class="pull-right" id="s_icon<?php echo $c->id;?>"
+									<img class="float-end" id="s_icon<?php echo $c->id;?>"
 										src="<?php echo JURI::root(TRUE);?>/media/mint/icons/16/plus-button.png"
 										onclick="CatSelector.add(<?php echo $c->id;?>, '<?php echo $c->title;?>', '<?php echo $c->path;?>')" />
 								<?php endif;?>
@@ -103,7 +103,7 @@ defined('_JEXEC') or die('Restricted access');
 			'<input type="hidden" name="<?php echo $name?>" value="' + id + '" />';
 
 			var li = $(document.createElement("div"))
-				.attr('class', 'pull-left alert alert-info')
+				.attr('class', 'float-start alert alert-info')
 				.html(out);
 			$('#categories_list').append(li);
 			$('#s_icon' + id).css('display', 'none');
@@ -194,7 +194,7 @@ defined('_JEXEC') or die('Restricted access');
 
 						if(obj.params.submission == "1")
 						{
-							html += '<img class="pull-right" id="s_icon' + obj.id +
+							html += '<img class="float-end" id="s_icon' + obj.id +
 								'" src="<?php echo JURI::root(TRUE);?>/media/mint/icons/16/plus-button.png" ' +
 								'onclick="CatSelector.add(' + obj.id +', \'' + obj.title +'\', \'' + obj.path +'\')" />';
 						}

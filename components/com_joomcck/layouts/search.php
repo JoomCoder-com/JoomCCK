@@ -23,23 +23,23 @@ foreach ($displayData->_filters AS $i => $filter) {
 }
 ?>
 
-<div class="pull-right search-box">
+<div class="float-end search-box">
 	<div class="input-append">
 		<?php if(!empty($displayData->_filters)): ?>
-			<button type="button" class="btn pull-right" data-toggle="collapse" rel="tooltip" data-target="#list-filters-box" data-original-title="<?php echo JText::_('CFILTER'); ?>">
+			<button type="button" class="btn float-end" data-toggle="collapse" rel="tooltip" data-target="#list-filters-box" data-original-title="<?php echo JText::_('CFILTER'); ?>">
 				<?php echo HTMLFormatHelper::icon('funnel.png'); ?>
 			</button>
 		<?php endif; ?>
 		<?php if($filters): ?>
-			<button rel="tooltip" class="btn btn-warning pull-right" type="button" id="cob-filters-reset" data-original-title="<?php echo JText::_('JSEARCH_FILTER_CLEAR'); ?>">
+			<button rel="tooltip" class="btn btn-warning float-end" type="button" id="cob-filters-reset" data-original-title="<?php echo JText::_('JSEARCH_FILTER_CLEAR'); ?>">
 				<?php echo HTMLFormatHelper::icon('cross.png'); ?>
 			</button>
 		<?php endif; ?>
-		<button class="btn pull-right" rel="tooltip" type="submit" data-original-title="<?php echo JText::_('CSEARCH'); ?>">
+		<button class="btn float-end" rel="tooltip" type="submit" data-original-title="<?php echo JText::_('CSEARCH'); ?>">
 			<?php echo HTMLFormatHelper::icon('magnifier.png'); ?>
 		</button>
 
-		<input type="text" class="span6 pull-right" placeholder="<?php echo JText::_('CSEARCHPLACEHOLDER'); ?>" name="filter_search" id="filter_search" value="<?php echo $displayData->state->get('filter.search'); ?>"/>
+		<input type="text" class="span6 float-end" placeholder="<?php echo JText::_('CSEARCHPLACEHOLDER'); ?>" name="filter_search" id="filter_search" value="<?php echo $displayData->state->get('filter.search'); ?>"/>
 	</div>
 </div>
 <script>

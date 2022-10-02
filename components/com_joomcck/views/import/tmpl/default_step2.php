@@ -32,7 +32,7 @@ defined('_JEXEC') or die();
 	</div>
 
 	<div class="form-actions">
-		<button class="pull-right btn btn-primary" type="button" id="next-step"><?php echo JText::_('CNEXT')?></button>
+		<button class="float-end btn btn-primary" type="button" id="next-step"><?php echo JText::_('CNEXT')?></button>
 	</div>
 	<input type="hidden" name="task" value="import.import">
 	<input type="hidden" name="step" value="3">

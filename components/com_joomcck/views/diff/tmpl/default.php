@@ -50,7 +50,7 @@ td.key {
 			<th width="">
 				<?php echo JText::_('CVERSION');?> v.<?php echo $this->item->version;?>
 				<?php if($this->versions):?>
-					<div class="btn-group pull-right">
+					<div class="btn-group float-end">
 						<a class="btn btn-small dropdown-toggle" data-toggle="dropdown" href="#"><span class="caret"></span></a>
 						<ul class="dropdown-menu">
 							<?php foreach ($this->versions as $value):?>

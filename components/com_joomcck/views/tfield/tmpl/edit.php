@@ -82,7 +82,7 @@ JHtml::_('behavior.keepalive');
 	</ul>
 	<div class="tab-content">
 		<div class="tab-pane active" id="page-main">
-			<div class="pull-left" style="max-width: 450px; margin-right: 20px;">
+			<div class="float-start" style="max-width: 450px; margin-right: 20px;">
 				<div class="control-group">
 					<div class="control-label"><?php echo $this->form->getLabel('id'); ?></div>
 					<div class="controls"><?php echo $this->form->getInput('id'); ?></div>
@@ -114,7 +114,7 @@ JHtml::_('behavior.keepalive');
 				<?php echo MFormHelper::renderFieldset($this->params_form, 'access2_edit', $this->item->params, 'core'); ?>
 
 			</div>
-			<div class="pull-left" style="max-width: 450px">
+			<div class="float-start" style="max-width: 450px">
 				<legend><?php echo JText::_('CFIELDPARAMS'); ?></legend>
 				<div id="additional-form">
 					<?php echo @$this->parameters?>
@@ -125,12 +125,12 @@ JHtml::_('behavior.keepalive');
 		</div>
 		<div class="tab-pane" id="page-emerald">
 			<p class="lead"><?php echo JText::_('FS_EMERALDINTEGRATE')?>
-			<div class="pull-left" style="max-width: 500px; margin-right: 20px;">
+			<div class="float-start" style="max-width: 500px; margin-right: 20px;">
 				<?php echo MFormHelper::renderFieldset($this->params_form, 'sp', $this->item->params, 'emerald'); ?>
 				<?php echo MFormHelper::renderFieldset($this->params_form, 'sp4', $this->item->params, 'emerald'); ?>
 				<?php echo MFormHelper::renderFieldset($this->params_form, 'sp3', $this->item->params, 'emerald'); ?>
 			</div>
-			<div class="pull-left" style="max-width: 500px;">
+			<div class="float-start" style="max-width: 500px;">
 				<?php echo MFormHelper::renderFieldset($this->params_form, 'sp2', $this->item->params, 'emerald'); ?>
 				<?php echo MFormHelper::renderFieldset($this->params_form, 'sp21', $this->item->params, 'emerald'); ?>
 			</div>

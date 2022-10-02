@@ -34,7 +34,7 @@ $params = $this->section->params;
 	
 	<?php if($back):?>
 	<div class="btn-toolbar clearfix">
-		<div class="pull-right">
+		<div class="float-end">
 		<button type="button" class="btn" onclick="location.href = '<?php echo $back;?>'">
 			<?php echo HTMLFormatHelper::icon('arrow-180.png');  ?>
 			<?php echo JText::_('CBACKTOSECTION'); ?>

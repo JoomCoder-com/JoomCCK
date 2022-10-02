@@ -30,7 +30,7 @@ var allowed<?php echo $this->id; ?> = <?php echo $params->get('params.max_levels
 (function($){
 
 	Mls<?php echo $this->id; ?>.edit = function(el, level, parent_id) {
-		var select = $(el).parent('div.pull-left.form-inline').children('select');
+		var select = $(el).parent('div.float-start.form-inline').children('select');
 		if(select.val() == 0){
 			Joomcck.fieldError('<?php echo $this->id; ?>', '<?php echo htmlentities(JText::_('MLS_CHOSESOMETHING'), ENT_QUOTES, 'UTF-8') ?>');
 			return;
@@ -227,7 +227,7 @@ var allowed<?php echo $this->id; ?> = <?php echo $params->get('params.max_levels
 				$(document.createElement('div'))
 					.attr({
 						'id': "mls-<?php echo $this->id; ?>-container"+level,
-						'class': "pull-left form-inline",
+						'class': "float-start form-inline",
 						'style':'margin-right:15px; margin-bottom:5px'
 					})
 					.html(json.result)
@@ -360,17 +360,17 @@ var allowed<?php echo $this->id; ?> = <?php echo $params->get('params.max_levels
 			$k = $parent = 1;
 			foreach ( $this->value[0] as $id => $name ):
 			?>
-			<div id="mls-<?php echo $this->id; ?>-container<?php echo $k;?>" class="pull-left form-inline" style="margin-right:15px;margin-bottom: 5px;">
+			<div id="mls-<?php echo $this->id; ?>-container<?php echo $k;?>" class="float-start form-inline" style="margin-right:15px;margin-bottom: 5px;">
 				<?php echo $this->_drawList(array('parent_id' => $parent, 'level' => $k, 'selected' => $id, 'filter' => 0)); ?>
 			</div>
 			<?php $parent = $id; $k++; endforeach;?>
 			<?php if($this->params->get('params.max_levels') >= $k):?>
-				<div id="mls-<?php echo $this->id; ?>-container<?php echo $k;?>" class="pull-left form-inline" style="margin-right:15px;margin-bottom: 5px;">
+				<div id="mls-<?php echo $this->id; ?>-container<?php echo $k;?>" class="float-start form-inline" style="margin-right:15px;margin-bottom: 5px;">
 					<?php echo $this->_drawList(array('parent_id' => $parent, 'level' => $k, 'filter' => 0)); ?>
 				</div>
 			<?php endif;?>
 		<?php else:?>
-			<div id="mls-<?php echo $this->id; ?>-container1" class="pull-left form-inline" style="margin-right:15px;margin-bottom: 5px;">
+			<div id="mls-<?php echo $this->id; ?>-container1" class="float-start form-inline" style="margin-right:15px;margin-bottom: 5px;">
 				<?php echo $this->_drawList(array('parent_id' => 1, 'level' => 1, 'filter' => 0)); ?>
 			</div>
 		<?php endif;?>

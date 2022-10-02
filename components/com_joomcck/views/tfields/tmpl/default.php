@@ -135,7 +135,7 @@ if($saveOrder)
 					<?php echo JHtml::_('field.state', $item->published, $i, 'tfields.', $canChange); ?>
 				</td>
 				<td>
-					<div class="pull-left">
+					<div class="float-start">
 						<?php if($item->checked_out) : ?>
 							<?php echo JHtml::_('jgrid.checkedout', $i, $item->checked_out, $item->checked_out_time, 'tfields.', $canCheckin); ?>
 						<?php endif; ?>

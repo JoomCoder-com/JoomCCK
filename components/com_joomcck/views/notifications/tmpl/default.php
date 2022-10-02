@@ -146,7 +146,7 @@ if($this->items)
 		<div class="clearfix"></div>
 
 		<div>
-			<div class="pull-left">
+			<div class="float-start">
 				<?php if($this->items) : ?>
 					<button class="btn" type="button" onclick="Joomcck.markRead('all');">
 						<?php echo HTMLFormatHelper::icon('asterisk.png'); ?>
@@ -159,8 +159,8 @@ if($this->items)
 					</button>
 				<?php endif; ?>
 			</div>
-			<div class="pull-right">
-				<button class="btn pull-right" type="button"
+			<div class="float-end">
+				<button class="btn float-end" type="button"
 						onclick="window.location = '<?php echo JRoute::_('index.php?option=com_joomcck&view=options') ?>'">
 					<?php echo HTMLFormatHelper::icon('gear.png'); ?>
 					<?php echo JText::_('CEVENTS_SETTINGS'); ?>
@@ -195,7 +195,7 @@ if($this->items)
 								<?php echo HTMLFormatHelper::icon('cross-button.png'); ?>
 								<?php echo JText::_("CCLEARREAD"); ?>
 							</button>
-							<button class="btn pull-right btn-danger" type="button"
+							<button class="btn float-end btn-danger" type="button"
 									onclick="if(!confirm('<?php echo JText::_("EVENT_CONFIRM_DELETE") ?>') ) {return;} Joomcck.removeNtf('all'); return;">
 								<?php echo HTMLFormatHelper::icon('cross-button.png'); ?>
 								<?php echo JText::_("CCLEARHISTORY"); ?>

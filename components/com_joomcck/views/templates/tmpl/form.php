@@ -31,7 +31,7 @@ $app = JFactory::getApplication();
 		</style>
 		<div class="navbar navbar-fixed-top">
 			<div class="navbar-inner">
-				<div class="pull-right">
+				<div class="float-end">
 					<button class="btn" type="button" onclick="javascript:Joomcck.submitTask('templates.apply')"><i class="icon-edit"></i> <?php echo JText::_('CSAVE') ?></button>
 					<button class="btn" type="button" onclick="javascript:Joomla.submitbutton('templates.saveclose')"><i class="icon-save"></i> <?php echo JText::_('CSAVECLOSE') ?></button>
 					<button class="btn" type="button" onclick="<?php echo(!JFactory::getApplication()->input->get('inner') ? 'parent.SqueezeBox.close();' : "javascript:Joomla.submitbutton('templates.cancel')"); ?>"><i

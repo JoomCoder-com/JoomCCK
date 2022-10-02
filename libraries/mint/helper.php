@@ -14,7 +14,10 @@ class Mint
 {
 	static function _($text, $default = NULL, $jsSafe = FALSE, $interpretBackSlashes = TRUE, $script = FALSE)
 	{
-		$key   = strtoupper(JFilterInput::getInstance(NULL, NULL, 1, 1)->clean(strip_tags($text), 'cmd'));
+
+		$text = JFilterInput::getInstance([], [], 1, 1)->clean(strip_tags($text), 'cmd');
+
+		$key   = strtoupper($text);
 		$trans = JText::_($key, $jsSafe, $interpretBackSlashes, $script);
 
 		if($key === $trans)

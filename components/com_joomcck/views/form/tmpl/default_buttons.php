@@ -10,7 +10,7 @@
 defined('_JEXEC') or die();
 ?>
 <div class="form-actions">
-<div class="pull-right">
+<div class="float-end">
 	<?php if(!$this->isCheckedOut()):?>
 		<?php if(in_array($this->tmpl_params->get('tmpl_core.form_show_apply_button'), $this->user->getAuthorisedViewLevels())):?>
 			<button type="button" class="btn-submit btn btn-primary btn-large" onclick="Joomla.submitbutton('form.apply');">

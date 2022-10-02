@@ -91,7 +91,7 @@
 
 
 	<div class="form-actions">
-		<button class="pull-right btn btn-primary" id="next-step" disabled="disabled"><?php echo JText::_('CNEXT') ?></button>
+		<button class="float-end btn btn-primary" id="next-step" disabled="disabled"><?php echo JText::_('CNEXT') ?></button>
 	</div>
 	<input type="hidden" name="key" value="<?php echo $jsoncode ?>">
 	<input type="hidden" name="step" value="2">

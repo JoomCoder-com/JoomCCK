@@ -60,7 +60,7 @@ defined('_JEXEC') or die();
 					<b><?php echo $item->ident; ?></b> [<?php echo $item->name ?>]
 				<?php endif; ?>
 
-				<small class="pull-right">
+				<small class="float-end">
 					<a href="<?php echo Url::task('template.edit_php', $ident); ?>">PHP</a> |
 					<a href="<?php echo Url::task('template.edit_xml', $ident); ?>">XML</a> |
 					<a href="<?php echo Url::task('template.edit_css', $ident); ?>">CSS</a> |

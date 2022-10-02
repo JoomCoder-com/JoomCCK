@@ -50,13 +50,13 @@ if($saveOrder)
 <div class="page-header"><h1><?php echo JText::sprintf('CSECTIONCATS', $this->section->name); ?></h1></div>
 <form action="<?php echo JRoute::_('index.php?option=com_joomcck&view=categories&section_id=' . $section); ?>" method="post" name="adminForm" id="adminForm">
 	<div class="btn-toolbar clearfix">
-		<div class="pull-left">
+		<div class="float-start">
 			<button type="button" class="btn" onclick="location.href = '<?php echo JRoute::_(Url::user('created', $user->get('id'), $this->section->id)); ?>'">
 				<?php echo HTMLFormatHelper::icon('arrow-180.png'); ?>
 				<?php echo JText::_('CBACKTOSECTION'); ?>
 			</button>
 		</div>
-		<div class="pull-right">
+		<div class="float-end">
 			<button type="button" style="margin-right: 5px" class="btn btn-primary" onclick="Joomla.submitbutton('usercategory.add');">
 				<?php echo HTMLFormatHelper::icon('plus-button.png'); ?>
 				<?php echo JText::_('CADDNEW'); ?>
@@ -167,12 +167,12 @@ if($saveOrder)
 			<?php endforeach; ?>
 			</tbody>
 		</table>
-		<div class="pagination pull-right">
+		<div class="pagination float-end">
 			<?php echo $this->pagination->getPagesCounter(); ?>
 			<?php echo $this->pagination->getLimitBox(); ?>
 		</div>
 
-		<div class="pull-left pagination">
+		<div class="float-start pagination">
 			<?php echo $this->pagination->getPagesLinks(); ?>
 		</div>
 	<?php endif; ?>

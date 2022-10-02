@@ -61,7 +61,7 @@ var Mls_f<?php echo $this->id; ?> = {};
 			var newdiv = $(document.createElement('div'))
 			.attr({
 				'id': "fmls-<?php echo $this->id; ?>-container"+level, 
-				'class': "pull-left form-inline", 
+				'class': "float-start form-inline", 
 				'style':'margin-right:15px'
 			});
 			newdiv.append(json.result);
@@ -83,7 +83,7 @@ var Mls_f<?php echo $this->id; ?> = {};
 }
 </style>
 <div id="fmls-<?php echo $this->id; ?>-levels" class="fmls_filter">
-	<div id="fmls-<?php echo $this->id; ?>-container1" class="pull-left form-inline">
+	<div id="fmls-<?php echo $this->id; ?>-container1" class="float-start form-inline">
 		<?php 
 		echo $this->_drawList(array('parent_id' => 1, 'level' => 1, 'filter' => true, 'selected' => (isset($this->values[0]) ? $this->values[0] : false))); ?>
 	</div>

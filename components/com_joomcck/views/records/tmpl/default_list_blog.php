@@ -30,7 +30,7 @@ if(!class_exists('CarticleHelper'))
 			unset($obj->items[$this->k++]);
 			?>
 			<article class="has-context<?php if($item->featured) {echo ' featured';}?>">
-				<div class="pull-right controls">
+				<div class="float-end controls">
 					<div class="btn-group" style="display: none;">
 						<?php echo HTMLFormatHelper::bookmark($item, $obj->submission_types[$item->type_id], $params);?>
 						<?php echo HTMLFormatHelper::follow($item, $obj->section);?>
@@ -157,7 +157,7 @@ if(!class_exists('CarticleHelper'))
 
 					<div class="well well-small">
 						<?php if($params->get('tmpl_core.item_author_avatar')):?>
-							<div class="pull-right">
+							<div class="float-end">
 								<img class="img-polaroid" src="<?php echo CCommunityHelper::getAvatar($item->user_id, $params->get('tmpl_core.item_author_avatar_width', 40), $params->get('tmpl_core.item_author_avatar_height', 40));?>" />
 							</div>
 						<?php endif;?>
@@ -259,7 +259,7 @@ $helper->exclude = $exclude;
 	<ul class="nav nav-tabs nav-stacked">
 		<?php foreach ($this->items AS $item):?>
 			<li class="has-context">
-				<div class="pull-right controls">
+				<div class="float-end controls">
 					<div class="btn-group" style="display: none;">
 						<?php echo HTMLFormatHelper::bookmark($item, $this->submission_types[$item->type_id], $params);?>
 						<?php echo HTMLFormatHelper::follow($item, $this->section);?>

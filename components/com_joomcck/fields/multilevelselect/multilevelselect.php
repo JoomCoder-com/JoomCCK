@@ -659,7 +659,7 @@ class JFormFieldCMultilevelselect extends CFormField
 		foreach ($rows as $row)
 		{
 			$out[] = '<li id="row'.$row->id.'" class="list-level-'.$row->level.'">';
-			$out[] = '<div class="btn-group btn-ctrl pull-right">';
+			$out[] = '<div class="btn-group btn-ctrl float-end">';
 			$out[] = '<button onclick="mls_input('.($row->level + 1).', '.$row->id.')" class="btn btn-mini">'.JHtml::image($img_add, JText::_('MLS_ADDCHILD'), 'align="absmiddle"');
 			$out[] = '</button><button onclick="mls_edit('.$row->id.')" class="btn btn-mini">'.JHtml::image($img_edit, JText::_('MLS_EDIT'), 'align="absmiddle"');
 			$out[] = '</button><button onclick="mls_delete('.$row->id.')" class="btn btn-mini">'.JHtml::image($img_del, JText::_('MLS_DELETE'), 'align="absmiddle"');

@@ -13,7 +13,7 @@ $view   = JFactory::getApplication()->input->getCmd('view');
 $single = preg_replace('/s$/iU', '', $view);
 ?>
 
-<div class="pull-left">
+<div class="float-start">
 	<img src="<?php echo JUri::root(TRUE); ?>/components/com_joomcck/images/arrow-turn-270-left.png" alt="Select and" class="arrow"/>
 	<?php if(!in_array($view, array('tags', 'votes', 'items'))): ?>
 		<button type="button" class="btn-submit btn" onclick="if (document.adminForm.boxchecked.value==0){alert('<?php echo JText::_('SELECTFIRST', TRUE) ?>');}else{Joomla.submitbutton('<?php echo $single; ?>.edit');}">
@@ -72,7 +72,7 @@ $single = preg_replace('/s$/iU', '', $view);
 	<?php endif; ?>
 </div>
 <?php if(!in_array($view, array('tags', 'votes', 'comms'))): ?>
-	<div class="pull-right">
+	<div class="float-end">
 		<?php if($view == 'items'): ?>
 			<div class="btn-group">
 				<button class="btn-submit btn btn-primary dropdown-toggle" data-toggle="dropdown" href="#">

@@ -47,7 +47,7 @@ $js         = '';
 	JFactory::getDocument()->addScript(JURI::root(TRUE) . '/components/com_joomcck/fields/textarea/assets/bbeditor.js');
 	?>
 	<div id="controls_<?php echo $this->id; ?>">
-		<div class="btn-group pull-left">
+		<div class="btn-group float-start">
 			<button type="button" class="btn btn-small"><?php echo JText::_("TA_BBCODEBOLD"); ?></button>
 			<button type="button" class="btn btn-small"><?php echo JText::_("TA_BBCODEITALIC"); ?></button>
 			<button type="button" class="btn btn-small"><?php echo JText::_("TA_BBCODEUNDERLINE"); ?></button>
@@ -59,7 +59,7 @@ $js         = '';
 			<button type="button" rel="tooltip" data-original-title="<?php echo JText::_("TA_BBCODECODE"); ?>"
 					class="btn btn-small"><i class="icon-tools"></i></button>
 		</div>
-		<div class="pull-right form-inline">
+		<div class="float-end form-inline">
 			<label><?php echo JText::_("Font size"); ?></label>
 			<select style="width: 50px;">
 				<option value="1">1</option>

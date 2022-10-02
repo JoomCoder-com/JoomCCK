@@ -144,7 +144,7 @@ class JoomcckModelComments extends MModelList
 		$comment->canmoderate = NULL;
 		$comment->canedit     = NULL;
 		$comment->comment = JHtml::_('content.prepare', $comment->comment, null, 'com_joomcck.comment');
-		$comment->comment = JFilterInput::getInstance(null, null, 1, 1, 1)->clean($comment->comment, 'html');
+		$comment->comment = JFilterInput::getInstance([], [], 1, 1, 1)->clean($comment->comment, 'html');
 		$comment->private = (boolean)($comment->private == 1);
 
 

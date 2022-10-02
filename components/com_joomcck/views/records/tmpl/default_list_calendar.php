@@ -27,7 +27,7 @@ $doc->addScript(JUri::root(TRUE) . '/components/com_joomcck/fields/datetime/asse
 ?>
 
 <?php if($params->get('tmpl_params.cal_weekday')): ?>
-	<select id="first_day" class="pull-right">
+	<select id="first_day" class="float-end">
 		<option value="1"><?php echo JText::_('COFDMO'); ?></option>
 		<option value="2"><?php echo JText::_('COFDSU'); ?></option>
 	</select>
@@ -37,7 +37,7 @@ $doc->addScript(JUri::root(TRUE) . '/components/com_joomcck/fields/datetime/asse
 		<tr>
 			<td>
 				<?php if($params->get('tmpl_params.cal_nav')): ?>
-					<div class="pull-left form-inline">
+					<div class="float-start form-inline">
 						<div class="btn-group">
 							<button class="btn btn-small btn-primary"
 									data-calendar-nav="prev"><?php echo HTMLFormatHelper::icon('arrow-180.png'); ?> <?php echo JText::_('Prev'); ?>
@@ -51,7 +51,7 @@ $doc->addScript(JUri::root(TRUE) . '/components/com_joomcck/fields/datetime/asse
 			</td>
 			<td align="center"><h3 id="cal-title"></h3></td>
 			<td>
-				<div class="pull-right form-inline">
+				<div class="float-end form-inline">
 					<div class="btn-group">
 						<?php if($params->get('tmpl_params.cal_view_year')): ?>
 							<button class="btn btn-small btn-warning"

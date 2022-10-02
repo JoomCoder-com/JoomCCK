@@ -75,7 +75,7 @@ $listDirn = $this->state->get('list.direction');
 					<?php echo JHtml::_('jgrid.published', $item->published, $i, 'sections.', $canChange); ?>
 				</td>
 				<td class="has-context">
-					<div class="pull-left">
+					<div class="float-start">
 						<?php if($item->checked_out) : ?>
 							<?php echo JHtml::_('jgrid.checkedout', $i, $item->checked_out, $item->checked_out_time, 'sections.', $canCheckin); ?>
 						<?php endif; ?>
@@ -83,7 +83,7 @@ $listDirn = $this->state->get('list.direction');
 							<?php echo $this->escape($item->name); ?>
 						</a>
 					</div>
-					<div class="pull-left">
+					<div class="float-start">
 						<?php
 						// Create dropdown items
 						JHtml::_('dropdown.edit', $item->id, 'section.');

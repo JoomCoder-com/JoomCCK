@@ -63,7 +63,7 @@ class JFormFieldMjfolderList extends JFormFieldList
 						stack.html('');
 						$.each(json.result, function(k, v){
 							$(document.createElement('img'))
-								.attr({class:'pull-left marker-icon', src: '".JUri::root(TRUE)."/{$this->element['directory']}/' + sel.val() + '/' + v})
+								.attr({class:'float-start marker-icon', src: '".JUri::root(TRUE)."/{$this->element['directory']}/' + sel.val() + '/' + v})
 								.click(function(){
 										input.val(v);
 										$('#icon{$this->fieldname}').attr('src', '".JUri::root(TRUE)."/{$this->element['directory']}/' + sel.val() + '/' + v);

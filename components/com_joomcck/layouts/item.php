@@ -13,13 +13,13 @@ $isNew = !JFactory::getApplication()->input->getInt('id');
 $params = new JRegistry($displayData);
 ?>
 
-<div class="pull-right search-box">
+<div class="float-end search-box">
 	<div class="form-inline">
-		<button type="button" class="btn btn-danger pull-right" onclick="Joomla.submitbutton('<?php echo $view; ?>.cancel')">
+		<button type="button" class="btn btn-danger float-end" onclick="Joomla.submitbutton('<?php echo $view; ?>.cancel')">
 			<?php echo JText::_('CCANCEL'); ?>
 		</button>
 		<?php if($params->get('nosave') !== 1 ): ?>
-			<div class="btn-group pull-right" style="display: inline-block">
+			<div class="btn-group float-end" style="display: inline-block">
 				<button type="button" class="btn btn-primary" onclick="Joomla.submitbutton('<?php echo $view; ?>.save')">
 					<?php echo JText::_('CSAVE'); ?>
 				</button>
@@ -38,7 +38,7 @@ $params = new JRegistry($displayData);
 				<?php endif; ?>
 			</div>
 		<?php endif; ?>
-		<button type="button" class="btn pull-right" onclick="Joomla.submitbutton('<?php echo $view; ?>.apply<?php echo $params->get('task_ext'); ?>')">
+		<button type="button" class="btn float-end" onclick="Joomla.submitbutton('<?php echo $view; ?>.apply<?php echo $params->get('task_ext'); ?>')">
 			<?php echo JText::_('CAPPLY'); ?>
 		</button>
 	</div>

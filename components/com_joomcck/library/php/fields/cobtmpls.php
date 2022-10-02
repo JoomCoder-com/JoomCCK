@@ -60,7 +60,7 @@ class JFormFieldCobtmpls extends JFormFieldList
 		}
 
 		$out = sprintf(
-			'<div class="pull-left">%s</div><div class="pull-left" style="margin-left:10px" id="%s_link">%s</div>', 
+			'<div class="float-start">%s</div><div class="float-start" style="margin-left:10px" id="%s_link">%s</div>', 
 			JHTML::_('select.genericlist', $options, $this->name . ($multi ? '[]' : NULL), $multi . $javascript, 'value', 'text', $this->value, "{$this->id}"),
 			str_replace(array(']', '['), '', $this->id), 
 			$script

@@ -14,7 +14,7 @@ $listDirn	= $displayData->escape($displayData->state->get('list.direction'));
 <tfoot>
 <tr>
 	<td colspan="20">
-		<div class="pull-right">
+		<div class="float-end">
 			<div class="btn-group">
 				<select  name="directionTable" id="directionTable" class="input-medium select" onchange="Joomcck.orderTable('<?php echo $listOrder ?>')">
 					<option value=""><?php echo JText::_('JFIELD_ORDERING_DESC'); ?></option>
@@ -36,7 +36,7 @@ $listDirn	= $displayData->escape($displayData->state->get('list.direction'));
 			</div>
 			<?php echo str_replace(array('<option value="0">' . JText::_('JALL') . '</option>', 'class="inputbox'), array('', 'class="select'), $displayData->pagination->getLimitBox()); ?>
 		</div>
-		<div style="pull-left">
+		<div style="float-start">
 			<small>
 				<?php if($displayData->pagination->getPagesCounter()): ?>
 					<?php echo $displayData->pagination->getPagesCounter(); ?> |

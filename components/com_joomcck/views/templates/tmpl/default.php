@@ -45,7 +45,7 @@ defined('_JEXEC') or die();
 <?php echo HTMLFormatHelper::layout('navbar'); ?>
 
 <div class="page-header">
-	<a href="http://docs.JoomBoost.com/en/joomcck/custom-templates-general" target="_blank" class="pull-right search-box btn btn-mini">
+	<a href="http://docs.JoomBoost.com/en/joomcck/custom-templates-general" target="_blank" class="float-end search-box btn btn-mini">
 		<?php echo JText::_('COM_CUSTOMTMPL'); ?>
 	</a>
 

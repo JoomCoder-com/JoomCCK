@@ -176,7 +176,7 @@ foreach ($exclude as &$value) {
 								</div>
 							<?php endif;?>
 							<?php if($this->submission_types[$item->type_id]->params->get('properties.item_title')):?>
-								<div class="pull-left">
+								<div class="float-start">
 									<<?php echo $params->get('tmpl_core.title_tag', 'h2');?> class="record-title">
 										<?php if($params->get('tmpl_core.item_link')):?>
 											<a <?php echo $item->nofollow ? 'rel="nofollow"' : '';?> href="<?php echo JRoute::_($item->url);?>">

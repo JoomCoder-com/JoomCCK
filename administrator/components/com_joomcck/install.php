@@ -38,7 +38,7 @@ class com_joomcckInstallerScript
     {
         $this->_deleteFiles();
         $this->_updateTables();
-        $this->_joomcck9();
+        $this->_joomcck();
         $this->_createLink();
 
         return true;
@@ -131,7 +131,7 @@ class com_joomcckInstallerScript
         return $default;
     }
 
-    private function _joomcck9()
+    private function _joomcck()
     {
         define('CDIR', JPATH_ROOT . '/administrator/components/com_joomcck/');
 
@@ -174,7 +174,7 @@ class com_joomcckInstallerScript
      * @param  bool|TRUE   $update
      * @throws Exception
      */
-    private function _updateTables($update = true)
+    public function _updateTables($update = true)
     {
         $prefix = JFactory::getApplication()->getCfg('dbprefix');
         $db     = JFactory::getDbo();
@@ -183,6 +183,7 @@ class com_joomcckInstallerScript
         $list = $db->loadColumn();
 
         $tables = JFolder::files(JPATH_ROOT . '/administrator/components/com_joomcck/library/db', '\.json$');
+
 
         foreach ($tables as $file) {
             if (substr($file, 0, 6) == 'h0o6u_') {
@@ -226,6 +227,8 @@ class com_joomcckInstallerScript
                         $sql = "ALTER TABLE `{$table}` CHANGE COLUMN `{$field->name}` " . $update;
                     }
 
+
+
                     if ($sql) {
                         if ($update) {
                             JFactory::getApplication()->enqueueMessage("Table update: " . $sql);
@@ -235,6 +238,7 @@ class com_joomcckInstallerScript
                         $db->execute();
                     }
                 }
+
 
                 if (!empty($source->primary)) {
                     $all_fields[] = $source->primary;
@@ -506,6 +510,7 @@ class com_joomcckInstallerScript
 		(236,'Zambia','ZM','ZMB','260'), (237,'Zimbabwe','ZW','ZWE','263');");
         $db->execute();
 
+		/*
         $db->setQuery("UPDATE #__js_res_comments AS c SET c.section_id = (SELECT section_id FROM #__js_res_record WHERE id = c.record_id) WHERE c.section_id = 0");
         $db->execute();
 
@@ -527,7 +532,7 @@ class com_joomcckInstallerScript
 
         $db->setQuery("INSERT INTO `#__js_res_subscribe` (user_id, ref_id, type, ctime, section_id)
 				SELECT user_id, cat_id, 'category', ctime, section_id FROM `#__js_res_subscribe_cat`");
-        $db->execute();
+        $db->execute();*/
     }
 
     private function _deleteFiles()

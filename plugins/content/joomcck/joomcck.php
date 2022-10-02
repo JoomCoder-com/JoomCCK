@@ -69,7 +69,7 @@ class plgContentJoomcck extends JPlugin
 			$db->setQuery($query);
 
 			$result = $db->loadResult();
-			$out[] = '<div id="rating-block" class="pull-right">'.JText::_('Total').': '.
+			$out[] = '<div id="rating-block" class="float-end">'.JText::_('Total').': '.
 				RatingHelp::loadRating($this->params->get('rating_tmpl', 'default'), $result, 0, 0, 'Joomcck.ItemRatingCallBack', 0, 0).'</div>';
 
 		}

@@ -86,7 +86,7 @@ $listDirn	= $this->state->get('list.direction');
 					<?php echo JHtml::_('jgrid.published', $item->published, $i, 'ctypes.', $canChange);?>
 				</td>
 				<td class="nowrap has-context">
-					<div class="pull-left">
+					<div class="float-start">
 						<?php if ($item->checked_out) : ?>
 							<?php echo JHtml::_('jgrid.checkedout', $i, $item->checked_out, $item->checked_out_time, 'ctypes.', $canCheckin); ?>
 						<?php endif; ?>
@@ -102,7 +102,7 @@ $listDirn	= $this->state->get('list.direction');
 							<br /><small><?php echo strip_tags($item->description);?></small>
 						<?php endif;?>
 					</div>
-					<div class="pull-left">
+					<div class="float-start">
 						<?php
 							// Create dropdown items
 							JHtml::_('dropdown.edit', $item->id, 'ctype.');

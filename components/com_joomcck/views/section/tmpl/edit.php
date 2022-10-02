@@ -31,7 +31,7 @@ JHtml::_('bootstrap.modal');
 	</ul>
 	<div class="tab-content">
 		<div class="tab-pane active" id="page-main">
-			<div class="pull-left" style="max-width: 500px; min-width:600px; margin-right: 20px;">
+			<div class="float-start" style="max-width: 500px; min-width:600px; margin-right: 20px;">
 				<div class="control-group">
 					<div class="control-label"><?php echo $this->form->getLabel('id'); ?></div>
 					<div class="controls"><?php echo $this->form->getInput('id'); ?></div>
@@ -63,18 +63,18 @@ JHtml::_('bootstrap.modal');
 				<div><?php echo $this->form->getInput('description'); ?></div>
 
 			</div>
-			<div class="pull-left" style="max-width: 500px">
+			<div class="float-start" style="max-width: 500px">
 				<?php echo MFormHelper::renderFieldset($this->params_form, 'general', $this->item->params, 'general', MFormHelper::FIELDSET_SEPARATOR_HEADER, MFormHelper::STYLE_TABLE); ?>
 			</div>
 		</div>
 
 		<div class="tab-pane" id="page-params">
-			<div class="pull-left" style="max-width: 600px; margin-right: 20px;">
+			<div class="float-start" style="max-width: 600px; margin-right: 20px;">
 				<?php echo MFormHelper::renderFieldset($this->params_form, 'general2', $this->item->params, 'general', MFormHelper::FIELDSET_SEPARATOR_HEADER, MFormHelper::STYLE_TABLE); ?>
 				<?php echo MFormHelper::renderFieldset($this->params_form, 'submission', $this->item->params, 'general', MFormHelper::FIELDSET_SEPARATOR_HEADER, MFormHelper::STYLE_TABLE); ?>
 				<?php echo MFormHelper::renderFieldset($this->params_form, 'general_tmpl', $this->item->params, 'general', MFormHelper::FIELDSET_SEPARATOR_HEADER, MFormHelper::STYLE_TABLE); ?>
 			</div>
-			<div class="pull-left" style="max-width: 500px;">
+			<div class="float-start" style="max-width: 500px;">
 				<?php echo MFormHelper::renderFieldset($this->params_form, 'search', $this->item->params, 'more', MFormHelper::FIELDSET_SEPARATOR_HEADER, MFormHelper::STYLE_TABLE); ?>
 				<?php echo MFormHelper::renderFieldset($this->params_form, 'general_rss', $this->item->params, 'more', MFormHelper::FIELDSET_SEPARATOR_HEADER, MFormHelper::STYLE_TABLE); ?>
 				<?php echo MFormHelper::renderFieldset($this->params_form, 'metadata', $this->item->params, 'more', MFormHelper::FIELDSET_SEPARATOR_HEADER, MFormHelper::STYLE_TABLE); ?>
@@ -82,22 +82,22 @@ JHtml::_('bootstrap.modal');
 		</div>
 
 		<div class="tab-pane" id="page-personalize">
-			<div class="pull-left" style="max-width: 500px; margin-right: 20px;">
+			<div class="float-start" style="max-width: 500px; margin-right: 20px;">
 				<?php echo MFormHelper::renderFieldset($this->params_form, 'persa', $this->item->params, 'personalize', MFormHelper::FIELDSET_SEPARATOR_HEADER, MFormHelper::STYLE_TABLE); ?>
 				<?php echo MFormHelper::renderFieldset($this->params_form, 'persa2', $this->item->params, 'personalize', MFormHelper::FIELDSET_SEPARATOR_HEADER, MFormHelper::STYLE_TABLE); ?>
 				<?php echo MFormHelper::renderFieldset($this->params_form, 'user-section-set', $this->item->params, 'personalize', MFormHelper::FIELDSET_SEPARATOR_HEADER, MFormHelper::STYLE_TABLE); ?>
 			</div>
-			<div class="pull-left" style="max-width: 500px;">
+			<div class="float-start" style="max-width: 500px;">
 				<?php echo MFormHelper::renderFieldset($this->params_form, 'categories-private-sub', $this->item->params, 'personalize', MFormHelper::FIELDSET_SEPARATOR_HEADER, MFormHelper::STYLE_TABLE); ?>
 				<?php echo MFormHelper::renderFieldset($this->params_form, 'vip', $this->item->params, 'personalize', MFormHelper::FIELDSET_SEPARATOR_HEADER, MFormHelper::STYLE_TABLE); ?>
 			</div>
 		</div>
 
 		<div class="tab-pane" id="page-events">
-			<div class="pull-left" style="max-width: 500px; margin-right: 20px;">
+			<div class="float-start" style="max-width: 500px; margin-right: 20px;">
 				<?php echo MFormHelper::renderFieldset($this->params_form, 'generalevents', $this->item->params, 'events', MFormHelper::FIELDSET_SEPARATOR_HEADER, MFormHelper::STYLE_TABLE); ?>
 			</div>
-			<div class="pull-left" style="max-width: 500px;">
+			<div class="float-start" style="max-width: 500px;">
 				<?php echo MFormHelper::renderFieldset($this->params_form, 'generalevents2', $this->item->params, 'events', MFormHelper::FIELDSET_SEPARATOR_HEADER, MFormHelper::STYLE_TABLE); ?>
 			</div>
 			<div class="clearfix"></div>

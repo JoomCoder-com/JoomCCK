@@ -11,7 +11,7 @@ defined('_JEXEC') or die();
 <ul class="nav nav-pills nav-stacked" id="dates_list<?php echo $this->id; ?>">
 <?php foreach($this->value AS $date): ?>
 	<li><a>
-		<span class="pull-right mdp-close" style="cursor:pointer;"><?php echo HTMLFormatHelper::icon('cross.png') ?></span>
+		<span class="float-end mdp-close" style="cursor:pointer;"><?php echo HTMLFormatHelper::icon('cross.png') ?></span>
 		<span class="mdp-list"><?php echo $date ?></span>
 		<input type="hidden" name="jform[fields][<?php echo $this->id; ?>][]" value="<?php echo $date ?>" /></a>
 	</li>
@@ -40,7 +40,7 @@ defined('_JEXEC') or die();
 			$(this).closest('li').remove();
 		});
 
-		var li = $('<li>').append($.parseHTML(`<a><span class="pull-right mdp-close" style="cursor:pointer;"><?php echo HTMLFormatHelper::icon('cross.png') ?></span>
+		var li = $('<li>').append($.parseHTML(`<a><span class="float-end mdp-close" style="cursor:pointer;"><?php echo HTMLFormatHelper::icon('cross.png') ?></span>
 		<span class="mdp-list"></span>
 		<input type="hidden" name="jform[fields][<?php echo $this->id; ?>][]" value="" /></a>`));
 

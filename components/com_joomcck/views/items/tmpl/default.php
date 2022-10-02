@@ -135,7 +135,7 @@ $listDirn = $this->state->get('list.direction');
 					echo JHtml::_('dropdown.render');
 					?>
 				</div>
-				<div class="pull-left">
+				<div class="float-start">
 					<?php if($item->checked_out) : ?>
 						<?php echo JHtml::_('jgrid.checkedout', $i, $item->checked_out, $item->checked_out_time, 'records.', $canCheckin); ?>
 					<?php endif; ?>

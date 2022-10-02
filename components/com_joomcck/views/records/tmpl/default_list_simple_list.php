@@ -52,7 +52,7 @@ JHtml::_('dropdown.init');
 		<div class="has-context<?php if($item->featured) echo ' success' ?>">
 			<a name="record<?php echo $item->id;?>"></a>
 			<?php if($this->user->get('id')):?>
-				<div class="pull-right controls">
+				<div class="float-end controls">
 					<div class="btn-group" style="display: none;">
 						<?php echo HTMLFormatHelper::bookmark($item, $this->submission_types[$item->type_id], $params);?>
 						<?php echo HTMLFormatHelper::follow($item, $this->section);?>

@@ -49,7 +49,7 @@ defined('_JEXEC') or die('Restricted access');
 	<?php if(count($f_types) > 1): ?>
 		<legend>
 			<?php if($params->get('show_icons', 1)): ?>
-				<span class="pull-left filter-icon"><?php echo HTMLFormatHelper::icon('block.png'); ?></span>
+				<span class="float-start filter-icon"><?php echo HTMLFormatHelper::icon('block.png'); ?></span>
 			<?php endif; ?>
 			<?php echo $params->get('type_label'); ?>
 		</legend>
@@ -70,7 +70,7 @@ defined('_JEXEC') or die('Restricted access');
 	<?php if($params->get('filter_tags_type')): ?>
 		<legend>
 			<?php if($params->get('show_icons', 1)): ?>
-				<span class="pull-left filter-icon"><?php echo HTMLFormatHelper::icon('price-tag.png'); ?></span>
+				<span class="float-start filter-icon"><?php echo HTMLFormatHelper::icon('price-tag.png'); ?></span>
 			<?php endif; ?>
 			<?php echo $params->get('tag_label'); ?>
 		</legend>
@@ -90,7 +90,7 @@ defined('_JEXEC') or die('Restricted access');
 	<?php if($params->get('filter_users_type')): ?>
 		<legend>
 			<?php if($params->get('show_icons', 1)): ?>
-				<span class="pull-left filter-icon"><?php echo HTMLFormatHelper::icon('user.png'); ?></span>
+				<span class="float-start filter-icon"><?php echo HTMLFormatHelper::icon('user.png'); ?></span>
 			<?php endif; ?>
 			<?php echo $params->get('user_label'); ?>
 		</legend>
@@ -108,7 +108,7 @@ defined('_JEXEC') or die('Restricted access');
 	<?php if($params->get('filter_category_type')): ?>
 		<legend>
 			<?php if($params->get('show_icons', 1)): ?>
-				<span class="pull-left filter-icon"><?php echo HTMLFormatHelper::icon('category.png'); ?></span>
+				<span class="float-start filter-icon"><?php echo HTMLFormatHelper::icon('category.png'); ?></span>
 			<?php endif; ?>
 			<?php echo $params->get('category_label'); ?>
 		</legend>
@@ -132,7 +132,7 @@ defined('_JEXEC') or die('Restricted access');
 		<?php if(trim($f)): ?>
 			<legend>
 				<?php if($params->get('show_icons', 1) && $filter->params->get('core.icon')): ?>
-					<span class="pull-left filter-icon"><?php echo HTMLFormatHelper::icon($filter->params->get('core.icon')); ?></span>
+					<span class="float-start filter-icon"><?php echo HTMLFormatHelper::icon($filter->params->get('core.icon')); ?></span>
 				<?php endif; ?>
 				<?php echo $filter->label; ?>
 				<?php if($filter->params->get('params.filter_descr')): ?>

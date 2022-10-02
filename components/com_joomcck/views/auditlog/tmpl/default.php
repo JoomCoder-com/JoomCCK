@@ -28,7 +28,7 @@ $this->_filters = true;
 	<div class="collapse fade" id="list-filters-box">
 		<br>
 		<div class="tabbable">
-			<button class="btn pull-right btn-primary" type="submit">
+			<button class="btn float-end btn-primary" type="submit">
 				<?php echo JText::_('CSEARCH');?>
 			</button>
 			<ul class="nav nav-tabs" id="filter-tabs">
@@ -87,11 +87,11 @@ $this->_filters = true;
 							</div>
 						<?php endif;?>
 						<div class="row-fluid">
-							<div class="pull-left">
+							<div class="float-start">
 								<label>From</label>
 								<?php echo JHtml::calendar((string)$this->state->get('auditlog.fcs'), 'filter_cal_start', 'fcs')?>
 							</div>
-							<div class="pull-right">
+							<div class="float-end">
 								<label>To</label>
 								<?php echo JHtml::calendar((string)$this->state->get('auditlog.fce'), 'filter_cal_end', 'fce')?>
 							</div>
@@ -207,7 +207,7 @@ $this->_filters = true;
 					<?php ob_end_clean ()?>
 
 					<?php if(trim($controls)):?>
-						<div class="btn-group pull-right" style="display: none;">
+						<div class="btn-group float-end" style="display: none;">
 							<?php echo $controls;?>
 						</div>
 					<?php endif;?>

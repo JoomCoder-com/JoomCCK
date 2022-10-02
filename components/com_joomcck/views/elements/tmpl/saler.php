@@ -90,7 +90,7 @@ function status($s, $t, $o)
 <form action="<?php echo JRoute::_('index.php?option=com_joomcck&view=elements&layout=saler&Itemid='.JFactory::getApplication()->input->getInt('Itemid')); ?>" method="post" name="adminForm" id="sales-form">
 
 	<div class="controls controls-row">
-		<div class="input-append pull-left">
+		<div class="input-append float-start">
 			<input type="text" name="filter_search" size="16" id="filter_search" value="<?php echo $this->state->get('filter.search'); ?>"/>
 			<button class="btn" type="submit">
 				<?php echo HTMLFormatHelper::icon('magnifier.png');  ?>
@@ -105,7 +105,7 @@ function status($s, $t, $o)
 				<?php echo HTMLFormatHelper::icon('funnel.png');  ?>
 			</button>
 		</div>
-		<button class="btn pull-right" onclick="window.location ='<?php echo JRoute::_('index.php?option=com_joomcck&view=elements&layout=addsale'); ?>';return false;">
+		<button class="btn float-end" onclick="window.location ='<?php echo JRoute::_('index.php?option=com_joomcck&view=elements&layout=addsale'); ?>';return false;">
 			<?php echo HTMLFormatHelper::icon('plus.png');  ?>
 			<?php echo JText::_('CADDSALE'); ?>
 		</button>
@@ -228,12 +228,12 @@ function status($s, $t, $o)
 		</tbody>
 
 	</table>
-	<div class="pagination pull-right">
+	<div class="pagination float-end">
 		<?php echo $this->pagination->getPagesCounter(); ?>
 		<?php echo $this->pagination->getLimitBox();?>
 	</div>
 
-	<div class="pull-left pagination">
+	<div class="float-start pagination">
 		<?php echo $this->pagination->getPagesLinks(); ?>
 	</div>
 

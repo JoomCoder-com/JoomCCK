@@ -15,7 +15,7 @@ defined('_JEXEC') or die();
 		<legend><?php echo JText::_('CIMPORTPARAMS')?></legend>
 		<div class="control-group">
 			<label class="control-label" for="name"><?php echo JText::_('CNAME');?>
-				<span class="pull-right" rel="tooltip" data-original-title="<?php echo JText::_('CREQUIRED') ?>">
+				<span class="float-end" rel="tooltip" data-original-title="<?php echo JText::_('CREQUIRED') ?>">
 					<?php echo HTMLFormatHelper::icon('asterisk-small.png');  ?></span>
 			</label>
 
@@ -27,7 +27,7 @@ defined('_JEXEC') or die();
 		</div>
 		<div class="control-group">
 			<label class="control-label" for="name"><?php echo JText::_('ID');?>
-				<span class="pull-right" rel="tooltip" data-original-title="<?php echo JText::_('CREQUIRED') ?>">
+				<span class="float-end" rel="tooltip" data-original-title="<?php echo JText::_('CREQUIRED') ?>">
 					<?php echo HTMLFormatHelper::icon('asterisk-small.png');  ?></span>
 			</label>
 
@@ -42,7 +42,7 @@ defined('_JEXEC') or die();
 			<legend><?php echo JText::_('CCATEGORIES')?></legend>
 			<div class="control-group">
 				<label class="control-label" for="name"><?php echo JText::_('CCATEGORY');?>
-					<span class="pull-right" rel="tooltip" data-original-title="<?php echo JText::_('CREQUIRED') ?>">
+					<span class="float-end" rel="tooltip" data-original-title="<?php echo JText::_('CREQUIRED') ?>">
 						<?php echo HTMLFormatHelper::icon('asterisk-small.png');  ?></span>
 				</label>
 
@@ -65,7 +65,7 @@ defined('_JEXEC') or die();
 		<?php if($this->type->params->get('properties.item_title') == 1): ?>
 			<div class="control-group">
 				<label class="control-label" for="name"><?php echo JText::_('CTITLE');?>
-					<span class="pull-right" rel="tooltip" data-original-title="<?php echo JText::_('CREQUIRED') ?>">
+					<span class="float-end" rel="tooltip" data-original-title="<?php echo JText::_('CREQUIRED') ?>">
 						<?php echo HTMLFormatHelper::icon('asterisk-small.png');  ?></span>
 				</label>
 
@@ -106,7 +106,7 @@ defined('_JEXEC') or die();
 			<div class="control-group">
 				<label class="control-label" for="type"><?php echo $field->label;?>
 					<?php if($field->required): ?>
-						<span class="pull-right" rel="tooltip" data-original-title="<?php echo JText::_('CREQUIRED') ?>">
+						<span class="float-end" rel="tooltip" data-original-title="<?php echo JText::_('CREQUIRED') ?>">
 							<?php echo HTMLFormatHelper::icon('asterisk-small.png');  ?></span>
 					<?php endif;?>
 				</label>

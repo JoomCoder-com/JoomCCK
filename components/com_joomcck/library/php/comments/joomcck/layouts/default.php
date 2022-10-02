@@ -22,7 +22,7 @@ $data = $displayData;
 <?php endif; ?>
 
 <?php if(!empty($data->rating)): ?>
-	<div id="rating-block" class="pull-right">
+	<div id="rating-block" class="float-end">
 		<?php echo JText::_('CTOTALRATING') ?>:
 		<?php echo RatingHelp::loadRating($data->params->get('comments.tmpl_rating', 'default'), $data->rating, 0, 0, 'Joomcck.ItemRatingCallBack', 0, 0) ?>
 	</div>

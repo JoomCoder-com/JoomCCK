@@ -67,7 +67,7 @@ if($this->comment->rate > 10) $bc = ' badge-success';
 		<div class="span<?php echo $this->comment->level > 1 ? 11 : 10; ?> has-context<?php echo  $this->comment->private ? ' private' : null; echo  !$this->comment->published ? ' published' : null?>">
 
 			<?php if(in_array($this->type->params->get('comments.comments_rate_view', 1), $this->user->getAuthorisedViewLevels())):?>
-				<div class="pull-right">
+				<div class="float-end">
 					<?php if($this->comment->canrate):?>
 						<span id="comment_rate_control_<?php echo $this->comment->id?>">
 							<a href="javascript:void(0);" onclick="ajax_rateComment(<?php echo $this->comment->id?>, 1)">
@@ -84,7 +84,7 @@ if($this->comment->rate > 10) $bc = ' badge-success';
 				</div>
 			<?php endif;?>
 			
-			<div class="pull-left" style="height: 25px;">
+			<div class="float-start" style="height: 25px;">
 				<?php if($this->comment->private): ?>
 					<?php echo HTMLFormatHelper::icon('lock.png', JText::_('CCOMMPRIVATE'));  ?>
 				<?php endif;?>
@@ -105,7 +105,7 @@ if($this->comment->rate > 10) $bc = ' badge-success';
 			</div>
 			
 			<?php if($menu || $replay):?>
-				<div class="btn-group pull-left" style="display: none; margin-left: 20px;">
+				<div class="btn-group float-start" style="display: none; margin-left: 20px;">
 					<?php if(isset($replay)):?>
 						<?php echo $replay; ?>
 					<?php endif;?>

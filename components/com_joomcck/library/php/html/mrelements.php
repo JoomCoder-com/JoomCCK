@@ -187,13 +187,13 @@ class JHTMLMrelements
 		");
 
 		$out[] = '
-			<div class="pull-left">
+			<div class="float-start">
 				<input type="checkbox" class="toggle">
 				<button type="button" class="btn btn-danger btn-mini delete">
 					Delete
 				</button>
 			</div>
-			<div class="pull-right">
+			<div class="float-end">
 				<span class="btn btn-success btn-mini fileinput-button">
 					<span>Add files...</span>
 					<input type="file" name="tmpfileuploader[]" multiple>

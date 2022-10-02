@@ -24,7 +24,7 @@ $app = $this->params->get('params.append', NULL);
 </div>
 
 <div style="margin: 20px;">
-	<div class="pull-left form-inline">
+	<div class="float-start form-inline">
 		<label class=""><?php echo $this->params->get('params.label_min') ?> </label>
 
 		<div class="<?php if($prep) {echo ' input-prepend';} if($app) {echo ' input-append';}?>">
@@ -40,7 +40,7 @@ $app = $this->params->get('params.append', NULL);
 		</div>
 	</div>
 
-	<div class="pull-right form-inline">
+	<div class="float-end form-inline">
 		<label class=""><?php echo $this->params->get('params.label_max') ?></label>
 
 		<div class="<?php if($prep) {echo ' input-prepend';} if($app) {echo ' input-append';}?>">

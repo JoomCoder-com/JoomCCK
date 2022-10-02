@@ -29,7 +29,7 @@ $num = CEventsHelper::showNum('total', 0);
 
 <div class="page-header">
 	<?php if($this->isMe):?>
-		<div class="btn-group pull-right">
+		<div class="btn-group float-end">
 			<?php if($params->get('menu.menu_user_cat_manage') && in_array($this->section->params->get('personalize.pcat_submit'), $this->user->getAuthorisedViewLevels())):?>
 				<a class="btn btn-small" rel="tooltip" data-original-title="<?php echo JText::_($params->get('menu.menu_user_cat_manage_label', 'Manage Categories'))?>" href="<?php echo JRoute::_(Url::_('categories').'&return='.Url::back())?>">
 					<img src="<?php echo JURI::root(TRUE);?>/media/mint/icons/16/category.png" align="absmiddle" /></a>
@@ -45,7 +45,7 @@ $num = CEventsHelper::showNum('total', 0);
 			<?php endif;?>
 		</div>
 	<?php elseif ($this->user->get('id') && in_array($this->section->params->get('events.subscribe_user'), $this->user->getAuthorisedViewLevels())):?>
-		<div class="pull-right">
+		<div class="float-end">
 			<?php echo HTMLFormatHelper::followuser($current_user->get('id'), $this->section);?>
 		</div>
 	<?php endif;?>
@@ -131,7 +131,7 @@ $num = CEventsHelper::showNum('total', 0);
 	<?php endif;?>
 
 	<?php if(!empty($this->user_category->description)):?>
-		<div class="lead pull-left">
+		<div class="lead float-start">
 			<?php echo $this->user_category->description; ?>
 		</div>
 	<?php endif;?>

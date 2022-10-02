@@ -29,9 +29,9 @@ JHtml::_('bootstrap.modal');
 <?php echo HTMLFormatHelper::layout('navbar'); ?>
 
 <form action="<?php echo JUri::getInstance()->toString(); ?>" method="post" name="adminForm" id="adminForm" class="form-horizontal">
-	<div class="pull-right search-box">
+	<div class="float-end search-box">
 		<div class="form-inline">
-			<button type="button" class="btn btn-danger pull-right" onclick="Joomla.submitbutton('<?php echo $view; ?>.cancel')">
+			<button type="button" class="btn btn-danger float-end" onclick="Joomla.submitbutton('<?php echo $view; ?>.cancel')">
 				<?php echo JText::_('CCANCEL'); ?>
 			</button>
 			<button type="button" class="btn btn-primary" onclick="Joomla.submitbutton('<?php echo $view; ?>.save')">
@@ -47,7 +47,7 @@ JHtml::_('bootstrap.modal');
 	</div>
 
 	<div class="tab-pane active" id="page-main">
-		<div class="pull-left" style="max-width: 500px; min-width:600px; margin-right: 20px;">
+		<div class="float-start" style="max-width: 500px; min-width:600px; margin-right: 20px;">
 			<div class="control-group">
 				<div class="control-label"><?php echo $this->form->getLabel('name'); ?></div>
 				<div class="controls"><?php echo $this->form->getInput('name'); ?></div>

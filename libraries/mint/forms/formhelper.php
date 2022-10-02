@@ -225,7 +225,7 @@ class MEFormHelper
 					else
 					{
 						$out .= '<tr><td>';
-						if(substr($field->description, 0, 3) == 'XX_') $out .= '<img src="'.JUri::root(true).'/media/mint/icons/16/exclamation-button.png" alt="Important" class="pull-right">';
+						if(substr($field->description, 0, 3) == 'XX_') $out .= '<img src="'.JUri::root(true).'/media/mint/icons/16/exclamation-button.png" alt="Important" class="float-end">';
 						$out .= $field->label;
 						$out .= '</td><td nowrap="nowrap">';
 						$out .= $form->getInput($field->fieldname, $group, $defaults->get(sprintf($defaultGetName, $group, $field->fieldname)));

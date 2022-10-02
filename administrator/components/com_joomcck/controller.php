@@ -56,6 +56,9 @@ class JoomcckController extends MControllerBase
 		return $this;
 	}
 
+
+
+
 	public function getModel($name = '', $prefix = 'JoomcckModel', $config = array())
 	{
 		return parent::getModel($name, $prefix, $config);

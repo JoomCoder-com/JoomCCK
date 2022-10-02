@@ -25,7 +25,7 @@ defined('_JEXEC') or die();
 </script>
 
 <form action="" id="adminForm" name="adminForm" method="post">
-	<div class="pull-right controls controls-row">
+	<div class="float-end controls controls-row">
 		<div class="row-fluid">
 			<input type="text" class="span4" name="filter_search" value="<?php echo $this->state->get('filter.search');?>" />
 			<?php
@@ -66,12 +66,12 @@ defined('_JEXEC') or die();
 		</tboby>
 	</table>
 
-	<div class="pagination pull-right">
+	<div class="pagination float-end">
 		<?php echo $this->pagination->getPagesCounter(); ?>
 		<?php echo $this->pagination->getLimitBox();?>
 	</div>
 
-	<div class="pull-left pagination">
+	<div class="float-start pagination">
 		<?php echo $this->pagination->getPagesLinks(); ?>
 	</div>
 
