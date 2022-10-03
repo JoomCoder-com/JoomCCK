@@ -16,9 +16,11 @@ $single = preg_replace('/s$/iU', '', $view);
 <div class="float-start">
 	<img src="<?php echo JUri::root(TRUE); ?>/components/com_joomcck/images/arrow-turn-270-left.png" alt="Select and" class="arrow"/>
 	<?php if(!in_array($view, array('tags', 'votes', 'items'))): ?>
-		<button type="button" class="btn-submit btn btn-light border" onclick="if (document.adminForm.boxchecked.value==0){alert('<?php echo JText::_('SELECTFIRST', TRUE) ?>');}else{Joomla.submitbutton('<?php echo $single; ?>.edit');}">
-			<?php echo JText::_('CEDIT'); ?>
-		</button>
+		<div class="btn-group">
+            <button type="button" class="btn-submit btn btn-light border" onclick="if (document.adminForm.boxchecked.value==0){alert('<?php echo JText::_('SELECTFIRST', TRUE) ?>');}else{Joomla.submitbutton('<?php echo $single; ?>.edit');}">
+				<?php echo JText::_('CEDIT'); ?>
+            </button>
+        </div>
 	<?php endif; ?>
 
 	<?php if(!in_array($view, array('packs', 'packsections', 'tags', 'votes'))): ?>
