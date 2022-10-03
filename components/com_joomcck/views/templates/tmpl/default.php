@@ -7,6 +7,8 @@
  * @license   GNU/GPL http://www.gnu.org/copyleft/gpl.html
  */
 
+use Joomla\CMS\HTML\HTMLHelper;
+
 defined('_JEXEC') or die();
 ?>
 
@@ -57,99 +59,83 @@ defined('_JEXEC') or die();
 
 <?php echo $this->loadTemplate('buttons'); ?>
 
-<form action="<?php echo $this->action; ?>" enctype="multipart/form-data" method="post" name="adminForm1" class="form-horizontal">
-	<div id="ins_form" class="fade collapse">
-		<div class="well">
-			<div class="form-inline">
-				<?php if($this->ftp) : ?>
-					<?php echo $this->loadTemplate('ftp'); ?>
-				<?php endif; ?>
+<div id="joomcckContainer">
+    <form action="<?php echo $this->action; ?>" enctype="multipart/form-data" method="post" name="adminForm1" class="form-horizontal">
+        <div id="ins_form" class="fade collapse">
+            <div class="well">
+                <div class="form-inline">
+					<?php if($this->ftp) : ?>
+						<?php echo $this->loadTemplate('ftp'); ?>
+					<?php endif; ?>
 
-				<label><?php echo JText::_('LUPLOAD'); ?>: </label>
-				<input id="upload-file" type="file" name="install_package">
-				<button id="upload-submit" class="btn btn-primary" type="button" onclick="submitbutton1()">
-					<?php echo JText::_('CUPLOAD'); ?> &amp; <?php echo JText::_('CINSTALL'); ?>
-				</button>
-				<input type="hidden" name="task" value="templates.install"/>
-				<?php echo JHTML::_('form.token'); ?>
-			</div>
-		</div>
-	</div>
-</form>
+                    <label><?php echo JText::_('LUPLOAD'); ?>: </label>
+                    <input id="upload-file" type="file" name="install_package">
+                    <button id="upload-submit" class="btn btn-primary" type="button" onclick="submitbutton1()">
+						<?php echo JText::_('CUPLOAD'); ?> &amp; <?php echo JText::_('CINSTALL'); ?>
+                    </button>
+                    <input type="hidden" name="task" value="templates.install"/>
+					<?php echo JHTML::_('form.token'); ?>
+                </div>
+            </div>
+        </div>
+    </form>
 
-<div class="clearfix"></div>
+    <div class="clearfix"></div>
+    <form action="<?php echo JUri::getInstance()->toString(); ?>" method="post" name="adminForm" id="adminForm" class="form-horizontal">
+        <div id="cr_form" class="fade collapse">
+            <div class="well">
+                <div class="form-inline">
+                    <label><?php echo JText::_('LNEWNAME'); ?></label>
 
+                    <input id="renamecopy_name" type="text" name="tmplname">
+                    <button id="" class="btn" onclick="submitbutton2('templates.rename')">
+						<?php echo JText::_('CRENAME'); ?>
+                    </button>
+                    <button id="" class="btn" onclick="submitbutton2('templates.copy')">
+						<?php echo JText::_('CCOPY'); ?>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="clearfix"></div>
 
-<form action="<?php echo JUri::getInstance()->toString(); ?>" method="post" name="adminForm" id="adminForm" class="form-horizontal">
-	<div id="cr_form" class="fade collapse">
-		<div class="well">
-			<div class="form-inline">
-				<label><?php echo JText::_('LNEWNAME'); ?></label>
+        <br>
 
-				<input id="renamecopy_name" type="text" name="tmplname">
-				<button id="" class="btn" onclick="submitbutton2('templates.rename')">
-					<?php echo JText::_('CRENAME'); ?>
-				</button>
-				<button id="" class="btn" onclick="submitbutton2('templates.copy')">
-					<?php echo JText::_('CCOPY'); ?>
-				</button>
-			</div>
-		</div>
-	</div>
-	<div class="clearfix"></div>
+	    <?php echo HTMLHelper::_('uitab.startTabSet', 'myTab', ['active' => 'page-main', 'recall' => true, 'breakpoint' => 768]); ?>
+            <?php echo HTMLHelper::_('uitab.addTab', 'myTab', 'page-main', JText::_('LTMARKUP')); ?>
+	            <?php echo $this->loadTemplate('list_markup'); ?>
+            <?php echo HTMLHelper::_('uitab.endTab'); ?>
+	    <?php echo HTMLHelper::_('uitab.addTab', 'myTab', 'page-markup', JText::_('LTITEMLIST')); ?>
+	        <?php echo $this->loadTemplate('list_itemlist'); ?>
+	    <?php echo HTMLHelper::_('uitab.endTab'); ?>
+	    <?php echo HTMLHelper::_('uitab.addTab', 'myTab', 'page-rating', JText::_('LTRATING')); ?>
+	    <?php echo $this->loadTemplate('list_rating'); ?>
+	    <?php echo HTMLHelper::_('uitab.endTab'); ?>
+	    <?php echo HTMLHelper::_('uitab.addTab', 'myTab', 'page-comments', JText::_('LTCOMMENTS')); ?>
+	    <?php echo $this->loadTemplate('list_comments'); ?>
+	    <?php echo HTMLHelper::_('uitab.endTab'); ?>
+	    <?php echo HTMLHelper::_('uitab.addTab', 'myTab', 'page-record', JText::_('LTARTICLE')); ?>
+	    <?php echo $this->loadTemplate('list_article'); ?>
+	    <?php echo HTMLHelper::_('uitab.endTab'); ?>
+	    <?php echo HTMLHelper::_('uitab.addTab', 'myTab', 'page-form', JText::_('LTARTICLEFORMS')); ?>
+	    <?php echo $this->loadTemplate('list_articleform'); ?>
+	    <?php echo HTMLHelper::_('uitab.endTab'); ?>
+	    <?php echo HTMLHelper::_('uitab.addTab', 'myTab', 'page-catselect', JText::_('LTCATEGORYSELECT')); ?>
+	    <?php echo $this->loadTemplate('list_categoryselect'); ?>
+	    <?php echo HTMLHelper::_('uitab.endTab'); ?>
+	    <?php echo HTMLHelper::_('uitab.addTab', 'myTab', 'page-catindex', JText::_('LTCATINDEX')); ?>
+	    <?php echo $this->loadTemplate('list_category'); ?>
+	    <?php echo HTMLHelper::_('uitab.endTab'); ?>
+	    <?php echo HTMLHelper::_('uitab.endTabSet'); ?>
 
-	<br>
+        <?php // 2 templates not yet added, maybe we will add in future ?>
+	    <?php /*<li><a href="#page-filters" data-toggle="tab"><?php echo JText::_('LTFILTERS')?></a></li>*/ ?>
+	    <?php /*<li><a href="#page-usermenu" data-toggle="tab"><?php echo JText::_('LTUSERMENU')?></a></li>*/ ?>
+	    <?php // echo $this->loadTemplate('list_filters');?>
+	    <?php // echo $this->loadTemplate('list_user_menu');?>
 
-	<div class="tabbable tabs-left">
-		<ul class="nav nav-tabs">
-			<li class="active"><a href="#page-markup" data-toggle="tab"><?php echo JText::_('LTMARKUP') ?></a></li>
-			<li><a href="#page-records" data-toggle="tab"><?php echo JText::_('LTITEMLIST') ?></a></li>
-			<li><a href="#page-rating" data-toggle="tab"><?php echo JText::_('LTRATING') ?></a></li>
-			<li><a href="#page-comments" data-toggle="tab"><?php echo JText::_('LTCOMMENTS') ?></a></li>
-			<li><a href="#page-record" data-toggle="tab"><?php echo JText::_('LTARTICLE') ?></a></li>
-			<li><a href="#page-form" data-toggle="tab"><?php echo JText::_('LTARTICLEFORMS') ?></a></li>
-			<li><a href="#page-catselect" data-toggle="tab"><?php echo JText::_('LTCATEGORYSELECT') ?></a></li>
-			<?php /*<li><a href="#page-filters" data-toggle="tab"><?php echo JText::_('LTFILTERS')?></a></li>*/ ?>
-			<li><a href="#page-catindex" data-toggle="tab"><?php echo JText::_('LTCATINDEX') ?></a></li>
-			<?php /*<li><a href="#page-usermenu" data-toggle="tab"><?php echo JText::_('LTUSERMENU')?></a></li>*/ ?>
-		</ul>
-
-		<div class="tab-content">
-			<div class="tab-pane active" id="page-markup">
-				<?php echo $this->loadTemplate('list_markup'); ?>
-			</div>
-			<div class="tab-pane" id="page-records">
-				<?php echo $this->loadTemplate('list_itemlist'); ?>
-			</div>
-			<div class="tab-pane" id="page-rating">
-				<?php echo $this->loadTemplate('list_rating'); ?>
-			</div>
-			<div class="tab-pane" id="page-comments">
-				<?php echo $this->loadTemplate('list_comments'); ?>
-			</div>
-			<div class="tab-pane" id="page-record">
-				<?php echo $this->loadTemplate('list_article'); ?>
-			</div>
-			<div class="tab-pane" id="page-form">
-				<?php echo $this->loadTemplate('list_articleform'); ?>
-			</div>
-			<div class="tab-pane" id="page-catselect">
-				<?php echo $this->loadTemplate('list_categoryselect'); ?>
-			</div>
-			<?php /*<div class="tab-pane" id="page-filters">
-				<?php echo $this->loadTemplate('list_filters');?>
-			</div>*/
-			?>
-			<div class="tab-pane" id="page-catindex">
-				<?php echo $this->loadTemplate('list_category'); ?>
-			</div>
-			<?php /*<div class="tab-pane" id="page-usermenu">
-				<?php echo $this->loadTemplate('list_user_menu');?>
-			</div>*/
-			?>
-		</div>
-	</div>
-	<input type="hidden" name="task" value=""/>
-	<input type="hidden" name="boxchecked" value="0"/>
-	<?php echo JHTML::_('form.token'); ?>
-</form>
+        <input type="hidden" name="task" value=""/>
+        <input type="hidden" name="boxchecked" value="0"/>
+		<?php echo JHTML::_('form.token'); ?>
+    </form>
+</div>
