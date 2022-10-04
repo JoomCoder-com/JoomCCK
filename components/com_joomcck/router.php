@@ -1,19 +1,91 @@
 <?php
 /**
- * Joomcck by JoomBoost
- * a component for Joomla! 1.7 - 2.5 CMS (http://www.joomla.org)
- * Author Website: https://www.joomBoost.com/
- * @copyright Copyright (C) 2012 JoomBoost (https://www.joomBoost.com). All rights reserved.
- * @license GNU/GPL http://www.gnu.org/copyleft/gpl.html
+ * @package     Joomla.site
+ * @subpackage  Joomrecipe
+ *
+ * @copyright   Copyright (C) 2013 - 2018 JoomBoost. All rights reserved.
+ * @license     GNU General Public License http://www.gnu.org/copyleft/gpl.html
+ * @author      JoomBoost
  */
-defined('_JEXEC') or die('Restricted access');
-jimport('joomla.filesystem.file');
 
-$params = JComponentHelper::getParams('com_joomcck');
-$router = $params->get('sef_router', 'main_router.php');
- 
-$lang = JFactory::getLanguage();
-$lang->load('com_joomcck');
-$lang->load();
+defined('_JEXEC') or die;
 
-include_once JPATH_ROOT. '/components/com_joomcck/routers'. DIRECTORY_SEPARATOR .$router;
+
+/**
+ * @package        Joomrecipe
+ * @copyright    2013-2017 JoomBoost, https://www.joomboost.com
+ * @license        GNU/GPL http://www.gnu.org/copyleft/gpl.html
+ */
+
+\defined('_JEXEC') or die;
+
+JLoader::registerNamespace("Joomla\\Component\\Joomcck\\Site\\Service", JPATH_SITE . '/components/com_joomcck/src/Services');
+
+use Joomla\CMS\Application\SiteApplication;
+use Joomla\CMS\Categories\CategoryFactoryInterface;
+use Joomla\CMS\Component\Router\RouterView;
+use Joomla\CMS\Menu\AbstractMenu;
+use Joomla\Database\DatabaseInterface;
+
+
+/**
+ * Routing class of com_joomfaqs
+ *
+ * @since  3.3
+ */
+class JoomrecipeRouter extends RouterView
+{
+	/**
+	 * Flag to remove IDs
+	 *
+	 * @var    boolean
+	 */
+	protected $noIDs = false;
+
+	/**
+	 * The category factory
+	 *
+	 * @var CategoryFactoryInterface
+	 *
+	 * @since  4.0.0
+	 */
+	private $categoryFactory;
+
+	/**
+	 * The category cache
+	 *
+	 * @var  array
+	 *
+	 * @since  4.0.0
+	 */
+	private $categoryCache = [];
+
+	/**
+	 * The db
+	 *
+	 * @var DatabaseInterface
+	 *
+	 * @since  4.0.0
+	 */
+	private $db;
+
+	/**
+	 * Content Component router constructor
+	 *
+	 * @param SiteApplication $app The application object
+	 * @param AbstractMenu $menu The menu object to work with
+	 * @param CategoryFactoryInterface $categoryFactory The category object
+	 * @param DatabaseInterface $db The database object
+	 */
+	public function __construct(SiteApplication $app, AbstractMenu $menu)
+	{
+		parent::__construct($app, $menu);
+		$this->attachRule(new \Joomla\Component\Joomcck\Site\Service\RouterRules($this));
+	}
+
+
+
+
+
+
+}

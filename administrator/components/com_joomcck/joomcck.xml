@@ -24,6 +24,7 @@
 		<folder>routers/</folder>
 		<folder>tables/</folder>
 		<folder>views/</folder>
+		<folder>src</folder>
 	</files>
 	<languages folder="site">
 		<language tag="en-GB">language/en-GB/en-GB.com_joomcck.ini</language>
