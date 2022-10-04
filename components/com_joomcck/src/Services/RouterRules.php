@@ -324,7 +324,6 @@ class RouterRules implements RulesInterface
 
 		$vars = JoomcckParseRoute($segments);
 
-
 		unset($segments);
 
         return $vars;

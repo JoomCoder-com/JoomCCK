@@ -33,7 +33,7 @@ use Joomla\Database\DatabaseInterface;
  *
  * @since  3.3
  */
-class JoomrecipeRouter extends RouterView
+class JoomcckRouter extends RouterView
 {
 	/**
 	 * Flag to remove IDs
