@@ -154,7 +154,18 @@ class JoomcckModelCategories extends MModelList
 			}
 			$this->_db->setQuery($sql);
 
-			$nums = $this->_db->loadAssocList("catid","num");
+
+			try
+			{
+				$nums = $this->_db->loadAssocList("catid","num");
+			}catch(RuntimeException $e){
+				\Joomla\CMS\Factory::getApplication()->enqueueMessage($e->getMessage(),'error');
+				return false;
+			}
+
+
+
+
 		}
 
 		foreach ( $items as $key => $item )
@@ -194,12 +205,7 @@ class JoomcckModelCategories extends MModelList
 			$out = $this->sort($byparent, $this->parent_id);
 		}
 
-		// Check for a database error.
-		if ($this->_db->getErrorNum())
-		{
-			$this->setError($this->_db->getErrorMsg());
-			return false;
-		}
+
 
 		// Add the items to the internal cache.
 		$this->cache[$store] = $out;

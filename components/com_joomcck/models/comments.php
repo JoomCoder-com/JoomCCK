@@ -98,7 +98,15 @@ class JoomcckModelComments extends MModelList
 			$query_childs->order('c.lft ASC');
 			$this->_db->setQuery($query_childs);
 
-			$result = $this->_db->loadObjectList();
+
+			try{
+				$result = $this->_db->loadObjectList();
+			}catch (RuntimeException $e){
+				\Joomla\CMS\Factory::getApplication()->enqueueMessage($e->getMessage(),'error');
+				return false;
+			}
+
+
 
 			foreach($result as $com)
 			{
@@ -106,14 +114,6 @@ class JoomcckModelComments extends MModelList
 			}
 		}
 
-		//		var_dump($comments);exit;
-		// Check for a database error.
-		if($this->_db->getErrorNum())
-		{
-			$this->setError($this->_db->getErrorMsg());
-
-			return FALSE;
-		}
 
 		// Add the items to the internal cache.
 		$cache[$record_id] = $comments;

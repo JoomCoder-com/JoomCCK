@@ -755,11 +755,6 @@ class JoomcckModelCat extends MModelAdmin
 			$children = array_unique($children);
 			\Joomla\Utilities\ArrayHelper::toInteger($children);
 
-			// Check for a database error.
-			if ($db->getErrorNum()) {
-				$this->setError($db->getErrorMsg());
-				return false;
-			}
 		}
 
 		return true;

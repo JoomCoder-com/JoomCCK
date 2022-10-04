@@ -251,12 +251,12 @@ class JoomcckModelCats extends MModelList
 		}
 
 		// Check for a database error.
-		if($this->_db->getErrorNum())
+		/*if($this->_db->getErrorNum())
 		{
 			$this->setError($this->_db->getErrorMsg());
 
 			return FALSE;
-		}
+		}*/
 
 		// Add the items to the internal cache.
 		return $out;

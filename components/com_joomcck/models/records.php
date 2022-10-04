@@ -1701,13 +1701,6 @@ class JoomcckModelRecords extends MModelList
 		$total       = (int)$this->_getListCount($query);
 		$this->total = 0;
 
-		// Check for a database error.
-		if($this->_db->getErrorNum())
-		{
-			$this->setError($this->_db->getErrorMsg());
-
-			return FALSE;
-		}
 
 		// Add the total to the internal cache.
 		$this->cache[$store] = $total;

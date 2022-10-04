@@ -7,6 +7,8 @@
  * @license GNU/GPL http://www.gnu.org/copyleft/gpl.html
  */
 
+use Joomla\CMS\MVC\View\GenericDataException;
+
 defined('_JEXEC') or die('Restricted access');
 
 jimport('joomla.database.tablenested');
@@ -214,14 +216,11 @@ class JoomcckTableCobCategory extends JTableNested
 		$query->order('p.lft');
 
 		$this->_db->setQuery($query);
-		$path = $this->_db->loadObjectList();
 
-		// Check for a database error.
-		if ($this->_db->getErrorNum())
-		{
-			$e = new JException(JText::sprintf('JLIB_DATABASE_ERROR_GET_PATH_FAILED', get_class($this), $this->_db->getErrorMsg()));
-			$this->setError($e);
-			return false;
+		try{
+			$path = $this->_db->loadObjectList();
+		}catch (RuntimeException $e){
+			throw new GenericDataException($e->getMessage(), 500);
 		}
 
 		return $path;

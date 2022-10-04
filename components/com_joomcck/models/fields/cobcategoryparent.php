@@ -7,6 +7,8 @@
  * @license GNU/GPL http://www.gnu.org/copyleft/gpl.html
  */
 
+use Joomla\CMS\MVC\View\GenericDataException;
+
 defined('JPATH_BASE') or die;
 
 jimport('joomla.html.html');
@@ -80,13 +82,18 @@ class JFormFieldCobCategoryParent extends JFormFieldList
 		$db->setQuery($query);
 
 		$options1 = $db->loadObjectList();
-		$options = array_merge($options, $options1);
-		//print_r($options);
 
-		// Check for a database error.
-		if ($db->getErrorNum()) {
-			throw new GenericDataException($db->getErrorMsg(), 500);
+
+
+		try{
+			$options1 = $db->loadObjectList();
+		}catch (RuntimeException $e){
+			throw new GenericDataException($e->getMessage(), 500);
 		}
+
+
+		$options = array_merge($options, $options1);
+
 
 		// Pad the option text with spaces using depth level as a multiplier.
 		for ($i = 0, $n = count($options); $i < $n; $i++)
