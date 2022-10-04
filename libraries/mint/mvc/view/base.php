@@ -856,7 +856,7 @@ class MViewBase extends JObject
 
 		if($menu)
 		{
-			$text .= ' - ' . $menu->params->get('page_title', $menu->title);
+			$text .= ' - ' . $menu->getParams()->get('page_title', $menu->title);
 			$this->appParams->def('page_heading', $text);
 		}
 		// Check for empty title and add site name if param is set

@@ -426,9 +426,9 @@ class JoomcckViewRecord extends MViewBase
 		{
 			$this->appParams->def('page_heading', $title);
 
-			if($menu->params->get('page_title'))
+			if($menu->getParams()->get('page_title'))
 			{
-				$title = $menu->params->get('page_title');
+				$title = $menu->getParams()->get('page_title');
 			}
 		}
 

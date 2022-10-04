@@ -56,7 +56,7 @@ class JoomcckViewModerator extends MViewBase
 
     	if($menu)
     	{
-    		$title = $menu->params->get('page_title', $menu->title);
+    		$title = $menu->getParams()->get('page_title', $menu->title);
     		$this->appParams->def('page_heading', $title);
     	}
 
