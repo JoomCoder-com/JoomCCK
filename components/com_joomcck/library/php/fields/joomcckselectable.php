@@ -37,7 +37,8 @@ class CFormFieldSelectable extends CFormField
 
 	public function validateField($value, $record, $type, $section)
 	{
-		return parent::validate($value, $section);
+
+		return parent::validateField($value, $record, $type, $section);
 	}
 
 	public function onPrepareFullTextSearch($value, $record, $type, $section)

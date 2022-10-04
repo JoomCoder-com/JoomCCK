@@ -124,7 +124,7 @@ class JFormFieldCGeo extends CFormField
 
 		}
 
-		parent::validate($value, $section);
+		parent::validateField($value, $record, $type, $section);
 	}
 
 	public function onPrepareFullTextSearch($value, $record, $type, $section)

@@ -62,7 +62,7 @@ class JoomcckControllerTfield extends MControllerForm
 		$key = 'k'.md5($data['label'].'-'.$data['field_type']);
 
 		$db->setQuery("UPDATE #__js_res_record_values SET field_key = '{$key}', field_type = '{$data['field_type']}', field_label = '". $db->escape($data['label']) ."' WHERE field_id = ".$model->getState('tfield.id'));
-		$db->query();
+		$db->execute();
 	}
 
 	protected function allowAdd($data = array())

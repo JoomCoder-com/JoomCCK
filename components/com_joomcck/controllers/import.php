@@ -300,7 +300,7 @@ class JoomcckControllerImport extends MControllerAdmin
 				if(!empty($fulltext))
 				{
 					$db->setQuery("UPDATE `#__js_res_record` SET fieldsdata = '" . $db->escape(strip_tags(implode(', ', $fulltext))) . "' WHERE id = $item->id");
-					$db->query();
+					$db->execute();
 				}
 
 				unset($fulltext, $user);
@@ -469,7 +469,7 @@ class JoomcckControllerImport extends MControllerAdmin
 		$sql = "INSERT INTO #__js_res_import_rows (id, `import`,`text`,`ctime`) VALUES (null, %d, '%s', NOW())";
 		$sql = sprintf($sql, $this->key, $this->db->escape(json_encode($data)));
 		$this->db->setQuery($sql);
-		$this->db->query();
+		$this->db->execute();
 
 		$columns     = array_keys($data);
 		$this->heads = array_unique(array_merge($this->heads, $columns));

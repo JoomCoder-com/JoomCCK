@@ -111,7 +111,7 @@ function _deleteFiles($files)
 
     $sql = "DELETE FROM `#__js_res_files` WHERE id IN (" . implode(',', $files_ids) . ")";
     $db->setQuery($sql);
-    $db->query();
+    $db->execute();
 
     return $size;
 }

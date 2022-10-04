@@ -64,7 +64,7 @@ class JoomcckControllerElements extends MControllerAdmin
 		$db = JFactory::getDbo();
 		$sql = "DELETE FROM #__js_res_user_options_autofollow WHERE user_id = ".$me->get('id');
 		$db->setQuery($sql);
-		$db->query();
+		$db->execute();
 
 		if(is_array($data['autofollow']))
 		{
@@ -72,7 +72,7 @@ class JoomcckControllerElements extends MControllerAdmin
 			{
 				$sql = "INSERT INTO #__js_res_user_options_autofollow VALUES (NULL, {$me->id}, {$sid})";
 				$db->setQuery($sql);
-				$db->query();
+				$db->execute();
 			}
 		}
 

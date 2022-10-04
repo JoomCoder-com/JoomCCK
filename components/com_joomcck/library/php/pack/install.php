@@ -846,7 +846,7 @@ class packInstallerScript
             if ($section_id) {
                 $query = "UPDATE `#__js_res_categories` SET `path` = REPLACE(`path`, 'root/', '') WHERE `section_id` = {$section_id}";
                 $db->setQuery($query);
-                $db->query();
+                $db->execute();
             }
         }
 

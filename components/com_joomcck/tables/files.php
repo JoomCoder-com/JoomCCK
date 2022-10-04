@@ -63,7 +63,7 @@ class  JoomcckTableFiles extends JTable
 		$record_id = (int)$record['id'];
 		
 		$this->_db->setQuery("UPDATE #__js_res_files SET saved = 1, record_id = {$record_id}, field_id = {$field_id} WHERE id IN('".implode("','", $files)."')");
-		$this->_db->query();
+		$this->_db->execute();
 	}
 
 }

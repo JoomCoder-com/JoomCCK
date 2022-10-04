@@ -118,7 +118,7 @@ class JoomcckControllerRecords extends MControllerAdmin
 
 		$db = JFactory::getDbo();
 		$db->setQuery("DELETE FROM `#__js_res_record_repost` WHERE record_id = {$this->record->id} AND host_id = " . JFactory::getUser()->get('id'));
-		$db->query();
+		$db->execute();
 
 		$this->record->onRepost();
 
@@ -166,7 +166,7 @@ class JoomcckControllerRecords extends MControllerAdmin
 
 		$sql = "INSERT INTO #__js_res_record (id) values (" . $this->input->getInt('id') . ")";
 		$db->setQuery($sql);
-		$db->query();
+		$db->execute();
 
 		$this->record = JTable::getInstance('Record', 'JoomcckTable');
 
@@ -194,7 +194,7 @@ class JoomcckControllerRecords extends MControllerAdmin
 		$this->_restore_table($notifications, 'Notificat', 'ref_1');
 
 		$db->setQuery("DELETE FROM #__js_res_audit_restore WHERE record_id = " . $this->input->getInt('id'));
-		$db->query();
+		$db->execute();
 
 		ATlog::log($this->record, ATlog::REC_RESTORED);
 		$this->_finish(JText::_('CMSG_RESTORED'));
@@ -273,7 +273,7 @@ class JoomcckControllerRecords extends MControllerAdmin
 			$sql .= " AND ref_type = 'record' ";
 		}
 		$db->setQuery($sql);
-		$db->query();
+		$db->execute();
 
 		foreach($list AS $item)
 		{

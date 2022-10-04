@@ -63,7 +63,7 @@ class JoomcckControllerForm extends MControllerForm
 			$app->setUserState('com_joomcck.edit.form.id', $record['id']);
 		}
 
-		$dispatcher = JDispatcher::getInstance();
+		$dispatcher = \Joomla\CMS\Factory::getApplication();
 		JPluginHelper::importPlugin('mint');
 		$dispatcher->triggerEvent('onBeforeArticleSaved', array(($record['id'] == 0), $record, $section, $type));
 
@@ -288,7 +288,7 @@ class JoomcckControllerForm extends MControllerForm
 
                 $sql = 'DELETE FROM #__js_res_tags_history WHERE record_id = ' . $record_id . ' AND tag_id NOT IN (' . implode(',', $tag_ids) . ')';
                 $db->setQuery($sql);
-                $db->query();
+                $db->execute();
             }
 
             $record->tags = count($rtags) ? json_encode($rtags) : '';
@@ -303,7 +303,7 @@ class JoomcckControllerForm extends MControllerForm
 			{
 				$sql = "DELETE FROM `#__js_res_record_repost` WHERE record_id = $record_id AND is_reposted = 0";
 				$db->setQuery($sql);
-				$db->query();
+				$db->execute();
 
 				$data = array('record_id' => $record_id, 'ctime' => JFactory::getDate()->toSql(), 'is_reposted' => 0);
 				foreach($posts as $pid)
@@ -410,7 +410,7 @@ class JoomcckControllerForm extends MControllerForm
 		CEmeraldHelper::countLimit('type', $method, $type, $record);
 		CSubscriptionsHelper::subscribe_record($record);
 
-		$dispatcher = JDispatcher::getInstance();
+		$dispatcher = \Joomla\CMS\Factory::getApplication();
 		JPluginHelper::importPlugin('mint');
 		$dispatcher->triggerEvent('onAfterArticleSaved', array($isnew, $record, $fields, $section, $type));
 

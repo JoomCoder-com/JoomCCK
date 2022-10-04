@@ -360,7 +360,7 @@ class MintPayAbstract
 	{
 		$db = JFactory::getDbo();
 		$db->setQuery("UPDATE #__js_res_sales SET `num` = `num` + 1 WHERE id = {$order_id}");
-		$db->query();
+		$db->execute();
 	}
 
 	protected function _price($amount, $currency, $tag = 'b')

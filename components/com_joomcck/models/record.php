@@ -539,7 +539,7 @@ class JoomcckModelRecord extends MModelItem
 
 		$db = $this->getDbo();
 		$db->setQuery("UPDATE #__js_res_record SET hits = hits + 1 WHERE id = " . $item->id);
-		$db->query();
+		$db->execute();
 
 		CEventsHelper::notify('record', CEventsHelper::_RECORD_VIEW, $item->id, $item->section_id, 0, 0, 0, $item, 2, $item->user_id);
 

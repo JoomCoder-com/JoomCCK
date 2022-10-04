@@ -48,7 +48,7 @@ class JoomcckControllerFiles extends MControllerAdmin
             $data            = json_encode($data);
 
             $db->setQuery("UPDATE #__js_res_record SET fields = '{$data}' WHERE id = " . $record->id);
-            $db->query();
+            $db->execute();
         }
     }
 

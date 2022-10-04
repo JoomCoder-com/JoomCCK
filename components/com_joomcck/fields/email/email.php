@@ -54,7 +54,7 @@ class JFormFieldCEmail extends CFormField
 			return FALSE;
 		}
 
-		return parent::validate($value, $section);
+		return parent::validateField($value, $record, $type, $section);
 	}
 
 	public function onPrepareSave($value, $record, $type, $section)

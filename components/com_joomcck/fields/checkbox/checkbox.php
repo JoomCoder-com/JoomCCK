@@ -70,7 +70,7 @@ class JFormFieldCCheckbox extends CFormFieldSelectable
             }
         }
 
-        return parent::validate($value, $section);
+        return parent::validateField($value, $record, $type, $section);
     }
     public function onImportData($row, $params)
     {

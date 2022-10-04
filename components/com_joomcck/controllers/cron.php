@@ -42,7 +42,7 @@ class JoomcckControllerCron extends MControllerAdmin
 			WHERE checked_out > 0
 			AND checked_out_time < '{$date}' - INTERVAL $interval MINUTE";
 		$db->setQuery($sql);
-		$db->query();
+		$db->execute();
 	}
 
 	public function sendAlert()
@@ -140,7 +140,7 @@ class JoomcckControllerCron extends MControllerAdmin
 				if(empty($record->id))
 				{
 					$db->setQuery("DELETE FROM #__js_res_notifications WHERE ref_1 = $id");
-					$db->query();
+					$db->execute();
 					continue;
 				}
 

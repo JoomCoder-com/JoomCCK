@@ -47,7 +47,7 @@ class JoomcckTableField extends JTable
 		{
 			$sql = "DELETE FROM #__js_res_record_values WHERE field_id = ".($pk ? $pk : $this->id);
 			$this->_db->setQuery($sql);
-			$this->_db->query();
+			$this->_db->execute();
 
 			return true;
 		}

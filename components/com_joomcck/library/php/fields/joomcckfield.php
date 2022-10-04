@@ -255,6 +255,7 @@ class CFormField extends JFormField
 		}
 	}
 
+
 	public function onRenderList($record, $type, $section)
 	{
 		return true;

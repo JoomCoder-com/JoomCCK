@@ -117,10 +117,10 @@ class JoomcckModelItem extends MModelAdmin
 			foreach ($sql AS $s)
 			{
 				$db->setQuery($s);
-				$db->query();
+				$db->execute();
 			}
 
-			if (!$db->query()) {
+			if (!$db->execute()) {
 				throw new Exception($db->getErrorMsg());
 			}
 

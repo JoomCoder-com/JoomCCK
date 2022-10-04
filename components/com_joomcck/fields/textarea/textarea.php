@@ -59,7 +59,7 @@ class JFormFieldCTextarea extends CFormField
 	{
 		$this->_filter($value, $section);
 
-		return parent::validate($value, $section);
+		return parent::validateField($value, $record, $type, $section);
 	}
 
 	public function onPrepareFullTextSearch($value, $record, $type, $section)

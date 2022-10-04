@@ -105,7 +105,7 @@ class JFormFieldCDatetime extends CFormField
         if ($this->params->get('params.min_dates', 0) > 0 && count($value) < $this->params->get('params.min_dates', 0)) {
             $this->setError(JText::sprintf('F_ERROR_MIN', $this->params->get('params.min_dates', 0)));
         }
-        parent::validate($value, $section);
+        parent::validateField($value, $record, $type, $section);
     }
 
     public function onJSValidate()

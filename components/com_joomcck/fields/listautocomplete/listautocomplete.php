@@ -61,7 +61,7 @@ class JFormFieldCListautocomplete extends CFormFieldSelectable
 			return FALSE;
 		}
 
-		return parent::validate($value, $section);
+		return parent::validateField($value, $record, $type, $section);
 	}
 
 	public function onGetSqlValues($post)

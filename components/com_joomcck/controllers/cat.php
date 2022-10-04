@@ -43,7 +43,7 @@ class JoomcckControllerCat extends MControllerForm
 			$categories[$id] = $validData['title'];
 			$cats = $db->escape(json_encode($categories));
 			$db->setQuery("UPDATE `#__js_res_record` SET categories = '{$cats}' WHERE id = {$item->id}");
-			$db->query();
+			$db->execute();
 		}
 
 		$db->setQuery("SELECT COUNT(*) FROM `#__js_res_categories` WHERE section_id = {$section->id}");

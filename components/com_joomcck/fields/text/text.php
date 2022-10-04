@@ -105,7 +105,7 @@ class JFormFieldCtext extends CFormFieldSelectable
 			}
 		}
 
-		return parent::validate($value, $section);
+		return parent::validateField($value, $record, $type, $section);
 
 	}
 

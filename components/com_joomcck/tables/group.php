@@ -25,7 +25,7 @@ class JoomcckTableGroup extends JTable
 		if ($pk)
 		{
 			$this->_db->setQuery("UPDATE #__js_res_fields SET group_id = 0 WHERE group_id = $pk");
-			$this->_db->query();
+			$this->_db->execute();
 		}
 
 		parent::delete($pk);

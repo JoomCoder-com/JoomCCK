@@ -622,7 +622,7 @@ class MModelList extends MModelBase
 		JPluginHelper::importPlugin($group);
 
 		// Get the dispatcher.
-		$dispatcher = JDispatcher::getInstance();
+		$dispatcher = \Joomla\CMS\Factory::getApplication();
 
 		// Trigger the form preparation event.
 		$results = $dispatcher->triggerEvent('onContentPrepareForm', array($form, $data));

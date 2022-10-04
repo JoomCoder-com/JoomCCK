@@ -334,7 +334,7 @@ class JoomcckModelCat extends MModelAdmin
 	public function save($data)
 	{
 		// Initialise variables;
-		$dispatcher = JDispatcher::getInstance();
+		$dispatcher = \Joomla\CMS\Factory::getApplication();
 		$table		= $this->getTable();
 		$pk			= (!empty($data['id'])) ? $data['id'] : (int)$this->getState($this->getName().'.id');
 		$isNew		= true;
@@ -810,7 +810,7 @@ class JoomcckModelCat extends MModelAdmin
 			foreach($pks AS $id)
 			{
 				$db->setQuery("UPDATE `#__js_res_record_category` SET published = '{$value}' WHERE catid = {$id}");
-				$db->query();
+				$db->execute();
 			}
 		}
 	}

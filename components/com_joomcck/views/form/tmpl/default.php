@@ -10,8 +10,6 @@ defined('_JEXEC') or die();
 
 JHtml::_('behavior.keepalive');
 JHtml::_('bootstrap.tooltip');
-JHtml::_('behavior.calendar');
-JHtml::_('behavior.formvalidation');
 
 $app = JFactory::getApplication();
 
@@ -199,7 +197,9 @@ $app = JFactory::getApplication();
 
 <form method="post" action="<?php echo JUri::getInstance()->toString()?>" name="adminForm" id="adminForm" class="form-validate" enctype="multipart/form-data">
 	<?php if(in_array($this->tmpl_params->get('tmpl_core.form_button_position', 1), array(1,3))):?>
-		<?php echo $this->loadTemplate('buttons');?>
+		<div class="clearfix mb-3">
+			<?php echo $this->loadTemplate('buttons');?>
+        </div>
 	<?php endif;?>
 
 	<?php echo $this->loadTemplate('form_'.$this->params->get('properties.tmpl_articleform'));?>

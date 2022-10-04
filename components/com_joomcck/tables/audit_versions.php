@@ -67,7 +67,7 @@ class JoomcckTableAudit_versions extends JTable
 			$this->_db->setQuery('SELECT MIN(version) FROM #__js_res_audit_versions WHERE record_id = '.$this->record_id);
 			$v = $this->_db->loadResult();
 			$this->_db->setQuery('DELETE FROM #__js_res_audit_versions WHERE record_id = '.$this->record_id.' AND version = '.$v);
-			$this->_db->query();
+			$this->_db->execute();
 		}
 
 

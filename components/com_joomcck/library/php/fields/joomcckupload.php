@@ -690,6 +690,6 @@ class CFormFieldUpload extends CFormField
         }
         $jform = $this->request->get('jform', [], 'array');
 
-        parent::validate($value, $section);
+        parent::validateField($value, $record, $type, $section);
     }
 }

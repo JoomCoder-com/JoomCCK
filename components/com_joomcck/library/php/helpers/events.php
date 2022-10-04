@@ -364,7 +364,7 @@ class CEventsHelper
 	{
 		$db = Jfactory::getDbo();
 		$db->setQuery("DELETE FROM #__js_res_notifications WHERE ref_1 = " . $id . ' AND user_id = ' . JFactory::getUser()->get('id') . ' AND ref_2 = ' . JFactory::getApplication()->input->getInt('section_id'));
-		$db->query();
+		$db->execute();
 	}
 
 	static public function markReadRecord($record)
@@ -372,7 +372,7 @@ class CEventsHelper
 		$db = Jfactory::getDbo();
 
 		$db->setQuery("UPDATE #__js_res_notifications SET state_new = 0, notified = 1 WHERE ref_1 = " . $record->id . ' AND user_id = ' . JFactory::getUser()->get('id') . ' AND ref_2 = ' . $record->section_id);
-		$db->query();
+		$db->execute();
 	}
 
 	static public function getNum($type, $id = 0, $key = 'num')

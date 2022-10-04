@@ -70,7 +70,7 @@ class JFormFieldCHtml extends CFormField
 	{
 		$this->_filter($value);
 
-		return parent::validate($value, $section);
+		return parent::validateField($value, $record, $type, $section);
 	}
 
 	public function onPrepareFullTextSearch($value, $record, $type, $section)
@@ -152,7 +152,7 @@ class JFormFieldCHtml extends CFormField
 
 	private function prepare($value)
 	{
-		$dispatcher = JDispatcher::getInstance();
+		$dispatcher = \Joomla\CMS\Factory::getApplication();
 		$plugins = $this->params->get('params.plugins');
 		$out = '';
 		$row = new stdClass();

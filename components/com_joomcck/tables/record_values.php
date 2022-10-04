@@ -70,7 +70,7 @@ class JoomcckTableRecord_values extends JTable
 		}
 		//$query->where("field_type NOT IN ('parent', 'child')");
 		$this->_db->setQuery($query);
-		$this->_db->query();
+		$this->_db->execute();
 
 		return TRUE;
 	}

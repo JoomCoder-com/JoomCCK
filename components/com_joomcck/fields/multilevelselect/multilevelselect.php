@@ -105,7 +105,7 @@ class JFormFieldCMultilevelselect extends CFormField
 			}
 		}
 
-		return parent::validate($value, $section);
+		return parent::validateField($value, $record, $type, $section);
 	}
 	public function onPrepareFullTextSearch($value, $record, $type, $section)
 	{
@@ -679,7 +679,7 @@ class JFormFieldCMultilevelselect extends CFormField
 	{
 		$db = JFactory::getDbo();
 		$db->setQuery("UPDATE `#__js_res_field_multilevelselect` SET name = '".$db->escape($post['name'])."' WHERE id = ".$post['mlsid']);
-		if($db->query())
+		if($db->execute())
 			return 1;
 		return 0;
 	}
@@ -724,7 +724,7 @@ class JFormFieldCMultilevelselect extends CFormField
 		$query = "UPDATE #__js_res_field_multilevelselect SET name='{$post['value']}' WHERE id='{$post['id']}'";
 		$db = JFactory::getDbo();
 		$db->setQuery($query);
-		$db->query();
+		$db->execute();
 		return true;
 	}
 
@@ -741,7 +741,7 @@ class JFormFieldCMultilevelselect extends CFormField
 		$ids = $db->loadColumn();
 		$sql = "DELETE FROM `#__js_res_field_multilevelselect` WHERE id IN (".implode(',', $ids).")";
 		$db->setQuery($sql);
-		$db->query();
+		$db->execute();
 		return $ids;
 	}
 

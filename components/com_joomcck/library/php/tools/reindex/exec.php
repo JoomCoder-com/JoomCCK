@@ -73,7 +73,7 @@ if(!empty($ids))
 
 		$db2 = JFactory::getDbo();
 		$db2->setQuery("UPDATE `#__js_res_record` SET fieldsdata = '" . $db2->escape(strip_tags(implode(', ', $out_fieldsdata))) . "' WHERE id = $item->id");
-		$db2->query();
+		$db2->execute();
 
 		unset($db2, $out_fieldsdata, $user, $type, $section);
 

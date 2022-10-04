@@ -56,7 +56,7 @@ class JFormFieldCTelephone extends CFormField
 			$this->setError(JText::sprintf('CFIELDINCORRECT', $this->label));
 			return FALSE;
 		}
-		return parent::validate($value, $section);
+		return parent::validateField($value, $record, $type, $section);
 	}
 
 	public function onPrepareSave($value, $record, $type, $section)

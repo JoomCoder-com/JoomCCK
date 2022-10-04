@@ -199,7 +199,7 @@ class JoomcckControllerAjax extends MControllerAdmin
 
 		$db = JFactory::getDbo();
 		$db->setQuery("DELETE FROM #__js_res_subscribe WHERE section_id = " . $this->input->getInt('section_id') . " AND user_id = " . $user->get('id'));
-		if($db->query())
+		if($db->execute())
 		{
 			AjaxHelper::send($db->getAffectedRows(), 'rows');
 		}
@@ -626,7 +626,7 @@ class JoomcckControllerAjax extends MControllerAdmin
 			{
 				$db = JFactory::getDbo();
 				$db->setQuery('UPDATE #__js_res_category_user SET icon = "" WHERE id = ' . $id);
-				$db->query();
+				$db->execute();
 				AjaxHelper::send(1);
 			}
 		}
@@ -1117,7 +1117,7 @@ class JoomcckControllerAjax extends MControllerAdmin
 			$query->where('id IN (' . implode(', ', $id) . ')');
 		}
 		$db->setQuery($query);
-		$db->query();
+		$db->execute();
 		if($db->getErrors())
 		{
 			AjaxHelper::error(JText::_($db->getError()));
@@ -1191,7 +1191,7 @@ class JoomcckControllerAjax extends MControllerAdmin
 		$query->from('#__js_res_notifications');
 		$query->where("id IN (" . implode(", ", $ids) . ")");
 		$db->setQuery($query);
-		$db->query();
+		$db->execute();
 		if($db->getErrors())
 		{
 			AjaxHelper::error(JText::_($db->getError()));
@@ -1266,7 +1266,7 @@ class JoomcckControllerAjax extends MControllerAdmin
 		$query->where('id IN (' . implode(', ', $id) . ')');
 
 		$db->setQuery($query);
-		$db->query();
+		$db->execute();
 		if($db->getErrors())
 		{
 			echo AjaxHelper::error(JText::_($db->getError()));

@@ -68,7 +68,7 @@ class METoolSetUserHelper
 		{
 			$sql = "DELETE FROM #__users WHERE id = {$from}";
 			$db->setQuery($sql);
-			$db->query();
+			$db->execute();
 		}
 		JFactory::getApplication()->enqueueMessage(JText::_('Successfully'));
 	}

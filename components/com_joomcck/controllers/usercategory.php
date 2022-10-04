@@ -184,7 +184,7 @@ class JoomcckControllerUsercategory extends MControllerForm
 			{
 				$db = JFactory::getDbo();
 				$db->setQuery('UPDATE #__js_res_category_user SET icon = "' . $id . '.' . $ext . '" WHERE id = ' . $id);
-				$db->query();
+				$db->execute();
 			}
 		}
 

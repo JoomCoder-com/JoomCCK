@@ -550,7 +550,7 @@ class CFormFieldRelate extends CFormField
 			}
 		}
 
-		return parent::validate($value, $section);
+		return parent::validateField($value, $record, $type, $section);
 	}
 
 	public function onJSValidate()

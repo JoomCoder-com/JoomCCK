@@ -279,7 +279,7 @@ class JoomcckTableCobCategory extends JTableNested
 		$this->_db->setQuery($query);
 
 		// Check for a database error.
-		if (!$this->_db->query())
+		if (!$this->_db->execute())
 		{
 			$e = new JException(JText::sprintf('JLIB_DATABASE_ERROR_REBUILDPATH_FAILED', get_class($this), $this->_db->getErrorMsg()));
 			$this->setError($e);

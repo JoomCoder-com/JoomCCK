@@ -152,7 +152,7 @@ class JoomcckModelTags extends MModelList
 		$query = 'UPDATE #__js_res_tags SET tag = "' . $tag . '" WHERE id =' . $id;
 
 		$db->setQuery($query);
-		$db->query();
+		$db->execute();
 
 		return true;
 	}

@@ -84,31 +84,31 @@ $k = 0;
 	
 </style>
 
-<div class="form-horizontal">
+<div class="form-horizontal clearfix">
 <?php if(in_array($params->get('tmpl_params.form_grouping_type', 0), array(1, 4))):?>
 	<div class="tabbable<?php if($params->get('tmpl_params.form_grouping_type', 0) == 4) echo ' tabs-left' ?>">
 		<ul class="nav nav-tabs" id="tabs-list">
-			<li><a href="#tab-main" data-toggle="tab"><?php echo JText::_($params->get('tmpl_params.tab_main', 'Main'));?></a></li>
+			<li class="nav-item"><a href="#tab-main" class="nav-link active"  data-bs-toggle="tab"><?php echo JText::_($params->get('tmpl_params.tab_main', 'Main'));?></a></li>
 
 			<?php if(isset($this->sorted_fields)):?>
 				<?php foreach ($this->sorted_fields as $group_id => $fields) :?>
 					<?php if($group_id == 0) continue;?>
-					<li><a class="taberlink" href="#tab-<?php echo $group_id?>" data-toggle="tab"><?php echo HTMLFormatHelper::icon($this->field_groups[$group_id]['icon'])?> <?php echo $this->field_groups[$group_id]['name']?></a></li>
+					<li><a class="taberlink nav-link" href="#tab-<?php echo $group_id?>"  data-bs-toggle="tab"><?php echo HTMLFormatHelper::icon($this->field_groups[$group_id]['icon'])?> <?php echo $this->field_groups[$group_id]['name']?></a></li>
 				<?php endforeach;?>
 			<?php endif;?>
 
 			<?php if(count($this->meta)):?>
-				<li><a href="#tab-meta" data-toggle="tab"><?php echo JText::_('Meta Data');?></a></li>
+				<li class="nav-item"><a class="nav-link" href="#tab-meta"  data-bs-toggle="tab"><?php echo JText::_('Meta Data');?></a></li>
 			<?php endif;?>
 			<?php if(count($this->core_admin_fields)):?>
-				<li><a href="#tab-special" data-toggle="tab"><?php echo JText::_('Special Fields');?></a></li>
+				<li class="nav-item"><a class="nav-link"  href="#tab-special"  data-bs-toggle="tab"><?php echo JText::_('Special Fields');?></a></li>
 			<?php endif;?>
 			<?php if(count($this->core_fields)):?>
-				<li><a href="#tab-core" data-toggle="tab"><?php echo JText::_('Core Fields');?></a></li>
+				<li class="nav-item"><a class="nav-link"  href="#tab-core"  data-bs-toggle="tab"><?php echo JText::_('Core Fields');?></a></li>
 			<?php endif;?>
 		</ul>
 <?php endif;?>
-	<?php group_start($this, $params->get('tmpl_params.tab_main', 'Main'), 'tab-main');?>
+	<?php group_start($this, $params->get('tmpl_params.tab_main', 'Main'), 'tab-main',true);?>
 
     <?php if($params->get('tmpl_params.tab_main_descr')):?>
         <?php echo $params->get('tmpl_params.tab_main_descr'); ?>
@@ -422,9 +422,12 @@ $k = 0;
 
 
 <?php
-function group_start($data, $label, $name)
+function group_start($data, $label, $name,$main = false)
 {
 	static $start = false;
+
+	$main = $main ? 'show active' : '';
+
 	switch ($data->tmpl_params->get('tmpl_params.form_grouping_type', 0))
 	{
 		//tab
@@ -435,7 +438,7 @@ function group_start($data, $label, $name)
 				echo '<div class="tab-content" id="tabs-box">';
 				$start = TRUE;
 			}
-			echo '<div class="tab-pane" id="'.$name.'">';
+			echo '<div class="tab-pane fade '.$main.'" id="'.$name.'">';
 			break;
 		//slider
 		case 2:

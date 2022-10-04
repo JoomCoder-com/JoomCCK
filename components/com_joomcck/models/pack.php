@@ -87,7 +87,7 @@ class JoomcckModelPack extends MModelAdmin
         if ($result) {
             $db = JFactory::getDbo();
             $db->setQuery("DELETE FROM #__js_res_packs_sections WHERE pack_id IN (" . implode(',', $pks) . ")");
-            $db->query();
+            $db->execute();
         }
     }
 

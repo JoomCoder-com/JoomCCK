@@ -75,7 +75,7 @@ class JoomcckModelTools extends JModelAdmin
 
         /*
 
-		$dispatcher = JDispatcher::getInstance();
+		$dispatcher = \Joomla\CMS\Factory::getApplication();
 		JPluginHelper::importPlugin('mint');
 		$form = $dispatcher->triggerEvent('onToolGetForm', array(
 			'com_joomcck.tools',	$form, null, null

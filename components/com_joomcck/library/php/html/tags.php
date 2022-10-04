@@ -817,7 +817,7 @@ class JHTMLTags
 							break;
 					}
 					$db->setQuery($sql);
-					$db->query();
+					$db->execute();
 					$num = $db->getNumRows();
 					$tag->tag .= " ({$num}) ";
 					$numbers[$tag->id][$section_id] = $num;

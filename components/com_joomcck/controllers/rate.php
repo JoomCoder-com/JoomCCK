@@ -150,7 +150,7 @@ class JoomcckControllerRate extends MControllerAdmin
 		}
 
     	$db->setQuery($sql);
-		$db->query();
+		$db->execute();
 
 		if($index == 500 || (count($options) > 1 && count($options) == count($ratings)))
 		{
@@ -168,7 +168,7 @@ class JoomcckControllerRate extends MControllerAdmin
             $query = "UPDATE #__js_res_record SET votes_result = " . (int)$new->rating . ",  votes = " . (int)$new->total . "
                 WHERE id = {$record->parent_id}";
             $db->setQuery($query);
-            $db->query();
+            $db->execute();
         }
 
 		if(!isset($out['result']))
@@ -211,7 +211,7 @@ class JoomcckControllerRate extends MControllerAdmin
 
 		$sql = "UPDATE #__js_res_files SET rating = " . (int)$rating->rating . ",  rating_nums = " . (int)$rating->total . "  WHERE id = {$file->id}";
 		$db->setQuery($sql);
-		$db->query();
+		$db->execute();
 
 		$out = array('success' => 1);
 		echo json_encode($out);
