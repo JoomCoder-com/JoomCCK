@@ -54,7 +54,7 @@ class JFormFieldCUrl extends CFormField
 		return $js;
 	}
 
-	public function validate($value, $record, $type, $section)
+	public function validateField($value, $record, $type, $section)
 	{
 		$vals = 0;
 		if($value)
@@ -83,7 +83,7 @@ class JFormFieldCUrl extends CFormField
 			}
 		}
 
-		return parent::validate($value, $record, $type, $section);
+		return parent::validate($value, $section);
 	}
 
 	public function onStoreValues($validData, $record)

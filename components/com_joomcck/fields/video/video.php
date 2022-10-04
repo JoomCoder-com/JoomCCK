@@ -253,7 +253,7 @@ JWP;
 		return $value;
 	}
 
-	public function validate($value, $record, $type, $section)
+	public function validateField($value, $record, $type, $section)
 	{
 		$total = 0;
 		if(isset($value['files']))

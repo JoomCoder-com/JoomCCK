@@ -199,7 +199,8 @@ class JoomcckModelForm extends MModelAdmin
 		foreach($fields_list as $field)
 		{
 			$value = @$fields[$field->id];
-			$field->validate($value, $obj, $data, $section);
+
+			$field->validateField($value, $obj, $data, $section);
 			if($field->getErrors())
 			{
 				foreach($field->getErrors() as $err)

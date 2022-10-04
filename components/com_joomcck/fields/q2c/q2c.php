@@ -45,9 +45,9 @@ class JFormFieldCQ2c extends CFormField
 		return $this->_display_input();
 	}
 
-	public function validate($value, $record, $type, $section)
+	public function validateField($value, $record, $type, $section)
 	{
-		return parent::validate($value, $record, $type, $section);
+		return parent::validate($value, $section);
 	}
 
 	public function onPrepareFullTextSearch($value, $record, $type, $section)

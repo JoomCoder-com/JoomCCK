@@ -97,7 +97,7 @@ class JFormFieldCDatetime extends CFormField
         return $this->_display_input();
     }
 
-    public function validate($value, $record, $type, $section)
+    public function validateField($value, $record, $type, $section)
     {
         if ($this->params->get('params.max_dates', 0) > 0 && count($value) > $this->params->get('params.max_dates', 0)) {
             $this->setError(JText::sprintf('F_ERROR_MAX', $this->params->get('params.max_dates', 0)));
@@ -105,7 +105,7 @@ class JFormFieldCDatetime extends CFormField
         if ($this->params->get('params.min_dates', 0) > 0 && count($value) < $this->params->get('params.min_dates', 0)) {
             $this->setError(JText::sprintf('F_ERROR_MIN', $this->params->get('params.min_dates', 0)));
         }
-        parent::validate($value, $record, $type, $section);
+        parent::validate($value, $section);
     }
 
     public function onJSValidate()

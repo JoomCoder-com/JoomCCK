@@ -540,7 +540,7 @@ class CFormFieldRelate extends CFormField
 		return $this->_display_output($client, $record, $type, $section);
 	}
 
-	public function validate($value, $record, $type, $section)
+	public function validateField($value, $record, $type, $section)
 	{
 		if($this->params->get('params.multi_limit'))
 		{
@@ -550,7 +550,7 @@ class CFormFieldRelate extends CFormField
 			}
 		}
 
-		return parent::validate($value, $record, $type, $section);
+		return parent::validate($value, $section);
 	}
 
 	public function onJSValidate()

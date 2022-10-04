@@ -66,9 +66,9 @@ class JFormFieldCStatus extends CFormField
 		return $js;
 	}
 
-	public function validate($value, $record, $type, $section)
+	public function validateField($value, $record, $type, $section)
 	{
-		return parent::validate($value, $record, $type, $section);
+		return parent::validate($value, $section);
 	}
 
 	public function onPrepareSave($value, $record, $type, $section)

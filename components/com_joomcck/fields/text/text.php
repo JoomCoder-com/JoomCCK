@@ -71,7 +71,7 @@ class JFormFieldCtext extends CFormFieldSelectable
 		return $js;
 	}
 
-	public function validate($value, $record, $type, $section)
+	public function validateField($value, $record, $type, $section)
 	{
 		$mask = $this->params->get('params.mask', 0);
 		if($mask->mask_type && $this->params->get('params.show_mask', 1))
@@ -105,7 +105,7 @@ class JFormFieldCtext extends CFormFieldSelectable
 			}
 		}
 
-		return parent::validate($value, $record, $type, $section);
+		return parent::validate($value, $section);
 
 	}
 

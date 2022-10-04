@@ -58,7 +58,7 @@ class JFormFieldCImage extends CFormField
 		}
 	}
 
-	public function validate($value, $record, $type, $section)
+	public function validateField($value, $record, $type, $section)
 	{
 		if($this->params->get('params.select_type', 2) == 2)
 		{

@@ -46,7 +46,7 @@ class JFormFieldCregister extends CFormField
 		return $out;
 	}
 
-	public function validate($value, $record, $type, $section)
+	public function validateField($value, $record, $type, $section)
 	{
 		$user = JFactory::getUser();
 		if($user->get('id'))

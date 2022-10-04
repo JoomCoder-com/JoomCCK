@@ -53,7 +53,7 @@ class JFormFieldCListautocomplete extends CFormFieldSelectable
 		return $js;
 	}
 
-	public function validate($value, $record, $type, $section)
+	public function validateField($value, $record, $type, $section)
 	{
 		if ($this->params->get('params.max_items', 0) && (is_array($value) && count($value) > $this->params->get('params.max_items')))
 		{
@@ -61,7 +61,7 @@ class JFormFieldCListautocomplete extends CFormFieldSelectable
 			return FALSE;
 		}
 
-		return parent::validate($value, $record, $type, $section);
+		return parent::validate($value, $section);
 	}
 
 	public function onGetSqlValues($post)

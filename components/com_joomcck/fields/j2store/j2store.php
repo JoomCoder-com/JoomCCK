@@ -32,9 +32,9 @@ class JFormFieldCJ2Store extends CFormField
 	}
 
 
-	public function validate($value, $record, $type, $section)
+	public function validateField($value, $record, $type, $section)
 	{
-		return parent::validate($value, $record, $type, $section);
+		return parent::validate($value, $section);
 	}
 
 	public function onPrepareFullTextSearch($value, $record, $type, $section)

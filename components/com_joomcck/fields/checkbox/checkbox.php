@@ -62,7 +62,7 @@ class JFormFieldCCheckbox extends CFormFieldSelectable
         return $js;
     }
 
-    public function validate($value, $record, $type, $section)
+    public function validateField($value, $record, $type, $section)
     {
         if ($this->params->get('params.total_limit')) {
             if (count($value) > $this->params->get('params.total_limit')) {
@@ -70,7 +70,7 @@ class JFormFieldCCheckbox extends CFormFieldSelectable
             }
         }
 
-        return parent::validate($value, $record, $type, $section);
+        return parent::validate($value, $section);
     }
     public function onImportData($row, $params)
     {

@@ -44,7 +44,7 @@ class JFormFieldCTelephone extends CFormField
 		return $js;
 	}
 
-	public function validate($value, $record, $type, $section)
+	public function validateField($value, $record, $type, $section)
 	{
 		if($this->required && ($value['country'] == '' && $value['region'] == '' && $value['tel'] == ''))
 		{
@@ -56,7 +56,7 @@ class JFormFieldCTelephone extends CFormField
 			$this->setError(JText::sprintf('CFIELDINCORRECT', $this->label));
 			return FALSE;
 		}
-		return parent::validate($value, $record, $type, $section);
+		return parent::validate($value, $section);
 	}
 
 	public function onPrepareSave($value, $record, $type, $section)

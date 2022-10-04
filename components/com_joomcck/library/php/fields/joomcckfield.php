@@ -212,7 +212,7 @@ class CFormField extends JFormField
 		return $this->value;
 	}
 
-	public function validate($value, $record, $type, $section)
+	public function validateField($value, $record, $type, $section)
 	{
 		$user = JFactory::getUser();
 		$jform = $this->request->get('jform', array(), 'array');

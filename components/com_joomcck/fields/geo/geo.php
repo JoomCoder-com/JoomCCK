@@ -69,7 +69,7 @@ class JFormFieldCGeo extends CFormField
 		return $js;
 	}
 
-	public function validate($value, $record, $type, $section)
+	public function validateField($value, $record, $type, $section)
 	{
 		$links    = self::getAditionalinks();
 		$contacts = self::getAditionalFields();
@@ -124,7 +124,7 @@ class JFormFieldCGeo extends CFormField
 
 		}
 
-		parent::validate($value, $record, $type, $section);
+		parent::validate($value, $section);
 	}
 
 	public function onPrepareFullTextSearch($value, $record, $type, $section)

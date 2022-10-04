@@ -68,7 +68,7 @@ class JFormFieldCMultiselect extends CFormFieldSelectable
 		return $js;
 	}
 
-	public function validate($value, $record, $type, $section)
+	public function validateField($value, $record, $type, $section)
 	{
 		if($this->params->get('params.total_limit'))
 		{
@@ -78,7 +78,7 @@ class JFormFieldCMultiselect extends CFormFieldSelectable
 			}
 		}
 
-		return parent::validate($value, $record, $type, $section);
+		return parent::validate($value, $section);
 	}
 
 	public function onImportData($row, $params)

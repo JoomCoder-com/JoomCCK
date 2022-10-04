@@ -33,7 +33,7 @@ class JFormFieldCDigits extends CFormField
 
 		return $js .= "\n\t\tif(!jQuery('#field_{$this->id}').val().match(/^[-\+]?[\d\.]*$/)){isValid = false; errorText.push('{$text}'); hfid.push({$this->id});}";
 	}
-	public function validate($value, $record, $type, $section)
+	public function validateField($value, $record, $type, $section)
 	{
 		if($this->params->get('params.val_max', false) && $this->params->get('params.val_min', false))
 		{

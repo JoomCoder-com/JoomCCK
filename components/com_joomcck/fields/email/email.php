@@ -45,7 +45,7 @@ class JFormFieldCEmail extends CFormField
 		return $js;
 	}
 
-	public function validate($value, $record, $type, $section)
+	public function validateField($value, $record, $type, $section)
 	{
 		if($value && !JMailHelper::isEmailAddress($value))
 		{
@@ -54,7 +54,7 @@ class JFormFieldCEmail extends CFormField
 			return FALSE;
 		}
 
-		return parent::validate($value, $record, $type, $section);
+		return parent::validate($value, $section);
 	}
 
 	public function onPrepareSave($value, $record, $type, $section)

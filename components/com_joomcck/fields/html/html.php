@@ -66,11 +66,11 @@ class JFormFieldCHtml extends CFormField
 
 	}
 
-	public function validate($value, $record, $type, $section)
+	public function validateField($value, $record, $type, $section)
 	{
 		$this->_filter($value);
 
-		return parent::validate($value, $record, $type, $section);
+		return parent::validate($value, $section);
 	}
 
 	public function onPrepareFullTextSearch($value, $record, $type, $section)

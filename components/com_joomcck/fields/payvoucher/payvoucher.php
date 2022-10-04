@@ -128,10 +128,10 @@ class JFormFieldCPayvoucher extends CFormField
 
 	}
 
-	public function validate($value, $record, $type, $section)
+	public function validateField($value, $record, $type, $section)
 	{
 		$this->_crean_vouchers($value);
-		return parent::validate($value, $record, $type, $section);
+		return parent::validate($value, $section);
 	}
 	public function onPrepareSave($value, $record, $type, $section)
 	{
