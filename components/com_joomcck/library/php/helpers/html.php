@@ -28,7 +28,7 @@ class HTMLFormatHelper
 			return;
 		}
 
-		$format = '<a id="followsec-%d" type="button" class="btn btn-small%s" onclick="Joomcck.followSection(%d);" onmouseover="%s" onmouseout="%s">
+		$format = '<a id="followsec-%d" type="button" class="btn btn-light border btn-sm %s" onclick="Joomcck.followSection(%d);" onmouseover="%s" onmouseout="%s">
 		<img id="follow_%d" align="absmiddle" src="%s/media/mint/icons/16/follow%d.png"/>
 		<span id="followtext_%d">%s</span></a>';
 
@@ -73,7 +73,7 @@ class HTMLFormatHelper
 		);
 		$stable->load($data);
 
-		$format = '<a id="followcat-%d" type="button" class="btn btn-small%s" onclick="Joomcck.followCat(%d, %d);" onmouseover="%s" onmouseout="%s">
+		$format = '<a id="followcat-%d" type="button" class="btn btn-sm%s" onclick="Joomcck.followCat(%d, %d);" onmouseover="%s" onmouseout="%s">
 		<img id="follow_%d" align="absmiddle" src="%s/media/mint/icons/16/follow%d.png"/>
 		<span id="followtext_%d">%s</span></a>';
 
@@ -127,7 +127,7 @@ class HTMLFormatHelper
 		);
 		$stable->load($data);
 
-		$format = '<a id="followuser-%d" type="button" class="btn btn-small%s" onclick="Joomcck.followUser(%d, %s);" onmouseover="%s" onmouseout="%s">
+		$format = '<a id="followuser-%d" type="button" class="btn btn-sm%s" onclick="Joomcck.followUser(%d, %s);" onmouseover="%s" onmouseout="%s">
 		<img id="followuser_%d" align="absmiddle" src="%s/media/mint/icons/16/follow%d.png"/>
 		<span id="followtext_%d">%s</span></a>';
 

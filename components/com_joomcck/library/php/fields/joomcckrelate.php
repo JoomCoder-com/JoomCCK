@@ -309,7 +309,7 @@ class CFormFieldRelate extends CFormField
 			}
 		</style>
 		<div id="parent_list<?php echo $this->id; ?>"></div>
-		<a data-toggle="modal" role="button" class="btn btn-small btn-warning"
+		<a data-toggle="modal" role="button" class="btn btn-sm btn-warning"
 		   href="#modal<?php echo $this->id; ?>"><?php echo JText::_($this->params->get('params.control_label')) ?></a>
 
 		<div style="width:770px;" class="modal hide fade" id="modal<?php echo $this->id; ?>" tabindex="-1"

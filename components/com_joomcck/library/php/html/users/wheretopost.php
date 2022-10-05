@@ -21,7 +21,7 @@ defined('_JEXEC') or die(); ?>
   <?php endforeach;?>
 </div>
 
-<a href="#wheretopost" class="btn btn-small" data-toggle="modal" role="button"><?php echo JText::_('CSELECTWTP');?></a>
+<a href="#wheretopost" class="btn-sm btn-light border" data-toggle="modal" role="button"><?php echo JText::_('CSELECTWTP');?></a>
   
   
 <div style="width:700px;" class="modal hide fade" id="wheretopost" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">

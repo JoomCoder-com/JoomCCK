@@ -16,7 +16,7 @@ defined('_JEXEC') or die();
 
 <?php if($this->params->get('params.all_sales_link') && $this->is_seler && !$this->is_free):?>
 	<a href="index.php?option=com_joomcck&view=elements&layout=saler&filter_section=<?php echo $this->request->getInt('section_id');?>&Itemid=<?php echo $this->params->get('params.all_sales_iid', $this->request->getInt('Itemid'));?>"
-		class="btn btn-small">
+		class="btn btn-sm btn-light border">
 		<?php echo JText::_($this->params->get('params.all_sales_text', 'All sold files'));?>
 	</a>
 <?php endif; ?>
@@ -30,7 +30,7 @@ defined('_JEXEC') or die();
 			<?php echo JText::_($this->params->get('params.purchase_title', 'You have already purchased this product'));?>
 		</p>
 		<?php if($this->params->get('params.all_orders_link')):?>
-			<a class="btn btn-small btn-success" href="<?php echo JRoute::_('index.php?option=com_joomcck&view=elements&layout=buyer&filter_section='.$this->request->getInt('section_id').'&Itemid='.$this->params->get('params.all_orders_iid', $this->request->getInt('Itemid')));?>">
+			<a class="btn btn-sm btn-success" href="<?php echo JRoute::_('index.php?option=com_joomcck&view=elements&layout=buyer&filter_section='.$this->request->getInt('section_id').'&Itemid='.$this->params->get('params.all_orders_iid', $this->request->getInt('Itemid')));?>">
 				<?php echo JText::_($this->params->get('params.all_orders_text', 'My all purchases'));?></a>
 		<?php endif; ?>
 	</div>

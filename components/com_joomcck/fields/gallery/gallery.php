@@ -712,7 +712,7 @@ class JFormFieldCGallery extends CFormFieldUpload
 		if(in_array($this->params->get('params.allow_comments'), $this->user->getAuthorisedViewLevels()))
 		{
 			return '<textarea id="savecommenttext" class="inputbox"></textarea>
-				<a class="btn btn-small" href="javascript:void(0);" onclick="if($(\'savecommenttext\').value == \'\'){alert(\'' . JText::_('CCOMMENT_EMPTY') . '\');return false;}gb' . $this->id . '_' . $this->record->id . '.saveComment();">
+				<a class="btn btn-sm btn-light border" href="javascript:void(0);" onclick="if($(\'savecommenttext\').value == \'\'){alert(\'' . JText::_('CCOMMENT_EMPTY') . '\');return false;}gb' . $this->id . '_' . $this->record->id . '.saveComment();">
         	    ' . JText::_('G_SAVE') . '</a>';
 		}
 		else

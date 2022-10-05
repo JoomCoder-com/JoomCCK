@@ -357,13 +357,13 @@ class JoomcckModelRecord extends MModelItem
 
 		if($notitle)
 		{
-			$pattern        = '<a class="joomcck-control-item joomcck-control-item-%s" href="%s"><img border="0" src="' . JURI::root(TRUE) . '/media/mint/icons/16/%s" alt="%s" align="absmiddle" title="%s" /></a>';
-			$confirm_patern = '<a class="joomcck-control-item joomcck-control-item-%s" href="%s" onclick="javascript:if(!confirm(\'%s\')){return false;}"><img border="0" src="' . JURI::root(TRUE) . '/media/mint/icons/16/%s" alt="%s" align="absmiddle" title="%s" /></a>';
+			$pattern        = '<a class="dropdown-item joomcck-control-item joomcck-control-item-%s" href="%s"><img border="0" src="' . JURI::root(TRUE) . '/media/mint/icons/16/%s" alt="%s" align="absmiddle" title="%s" /></a>';
+			$confirm_patern = '<a class="dropdown-item joomcck-control-item joomcck-control-item-%s" href="%s" onclick="javascript:if(!confirm(\'%s\')){return false;}"><img border="0" src="' . JURI::root(TRUE) . '/media/mint/icons/16/%s" alt="%s" align="absmiddle" title="%s" /></a>';
 		}
 		else
 		{
-			$pattern        = '<a class="joomcck-control-item joomcck-control-item-%s" href="%s"><img border="0" src="' . JURI::root(TRUE) . '/media/mint/icons/16/%s" alt="%s" align="absmiddle" /> %s</a>';
-			$confirm_patern = '<a class="joomcck-control-item joomcck-control-item-%s" href="%s" onclick="javascript:if(!confirm(\'%s\')){return false;}"><img border="0" src="' . JURI::root(TRUE) . '/media/mint/icons/16/%s" alt="%s" align="absmiddle" /> %s</a>';
+			$pattern        = '<a class="dropdown-item joomcck-control-item joomcck-control-item-%s" href="%s"><img border="0" src="' . JURI::root(TRUE) . '/media/mint/icons/16/%s" alt="%s" align="absmiddle" /> %s</a>';
+			$confirm_patern = '<a class="dropdown-item joomcck-control-item joomcck-control-item-%s" href="%s" onclick="javascript:if(!confirm(\'%s\')){return false;}"><img border="0" src="' . JURI::root(TRUE) . '/media/mint/icons/16/%s" alt="%s" align="absmiddle" /> %s</a>';
 		}
 		$out = array();
 		if(!$user->get('id'))

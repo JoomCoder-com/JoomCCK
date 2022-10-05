@@ -39,11 +39,11 @@ $doc->addScript(JUri::root(TRUE) . '/components/com_joomcck/fields/datetime/asse
 				<?php if($params->get('tmpl_params.cal_nav')): ?>
 					<div class="float-start form-inline">
 						<div class="btn-group">
-							<button class="btn btn-small btn-primary"
+							<button class="btn btn-sm btn-primary"
 									data-calendar-nav="prev"><?php echo HTMLFormatHelper::icon('arrow-180.png'); ?> <?php echo JText::_('Prev'); ?>
 							</button>
-							<button class="btn btn-small" data-calendar-nav="today"><?php echo JText::_('Today'); ?></button>
-							<button class="btn btn-small btn-primary" data-calendar-nav="next">
+							<button class="btn-sm btn-light border" data-calendar-nav="today"><?php echo JText::_('Today'); ?></button>
+							<button class="btn btn-sm btn-primary" data-calendar-nav="next">
 								<?php echo JText::_('Next'); ?> <?php echo HTMLFormatHelper::icon('arrow.png'); ?></button>
 						</div>
 					</div>
@@ -54,19 +54,19 @@ $doc->addScript(JUri::root(TRUE) . '/components/com_joomcck/fields/datetime/asse
 				<div class="float-end form-inline">
 					<div class="btn-group">
 						<?php if($params->get('tmpl_params.cal_view_year')): ?>
-							<button class="btn btn-small btn-warning"
+							<button class="btn btn-sm btn-warning"
 									data-calendar-view="year"><?php echo JText::_('Year'); ?></button>
 						<?php endif; ?>
 						<?php if($params->get('tmpl_params.cal_view_month')): ?>
-							<button class="btn btn-small btn-warning active"
+							<button class="btn btn-sm btn-warning active"
 									data-calendar-view="month"><?php echo JText::_('Month'); ?></button>
 						<?php endif; ?>
 						<?php if($params->get('tmpl_params.cal_view_week')): ?>
-							<button class="btn btn-small btn-warning"
+							<button class="btn btn-sm btn-warning"
 									data-calendar-view="week"><?php echo JText::_('Week'); ?></button>
 						<?php endif; ?>
 						<?php if($params->get('tmpl_params.cal_view_day')): ?>
-							<button class="btn btn-small btn-warning"
+							<button class="btn btn-sm btn-warning"
 									data-calendar-view="day"><?php echo JText::_('Day'); ?></button>
 						<?php endif; ?>
 					</div>

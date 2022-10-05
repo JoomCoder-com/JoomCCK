@@ -109,9 +109,9 @@ $lang = $lang[0];
 		<?php endif;?>
 		<?php if(in_array($this->params->get('params.map_marker'), $this->user->getAuthorisedViewLevels())):?>
 			<br/>
-			<button class="btn btn-small" type="button" id="toadr_loc<?php echo $this->id; ?>"><?php echo JText::_('G_ADDRESSFROMMARKER');?></button>
+			<button class="btn btn- btn-light border" type="button" id="toadr_loc<?php echo $this->id; ?>"><?php echo JText::_('G_ADDRESSFROMMARKER');?></button>
 
-			<button class="btn btn-small" type="button" id="adr_loc<?php echo $this->id; ?>"><?php echo JText::_('G_MARKERFROMADDRESS');?></button>
+			<button class="btn btn-sm btn-light border" type="button" id="adr_loc<?php echo $this->id; ?>"><?php echo JText::_('G_MARKERFROMADDRESS');?></button>
 		<?php endif;?>
 		<div class="clearfix"></div>
 	<?php endif;?>

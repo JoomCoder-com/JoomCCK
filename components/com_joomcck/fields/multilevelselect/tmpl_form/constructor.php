@@ -50,7 +50,7 @@ span.hint {
 	<ul id="parent1" class="unstyled">
 	<li id="row1">
 		<?php echo JText::_('MLS_ROOT'); ?>
-		<img class="btn btn-small" src="<?php echo $img_add?>" align="absmiddle" onclick="mls_input(<?php echo $level?>, 1)" alt="<?php echo JText::_('MLS_ADDCHILD') ?>">
+		<img class="btn btn-sm btn-light border" src="<?php echo $img_add?>" align="absmiddle" onclick="mls_input(<?php echo $level?>, 1)" alt="<?php echo JText::_('MLS_ADDCHILD') ?>">
 	</li>
 		<?php echo implode("\n\t", $result); ?>
 	</ul>

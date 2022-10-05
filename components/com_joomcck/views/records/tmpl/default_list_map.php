@@ -73,27 +73,27 @@ if($params->get('tmpl_params.map_claster'))
 
 <div class="form-horizontal">
 	<?php if($params->get('tmpl_params.map_fitbonds', 1)): ?>
-		<span class="btn btn-small btn-primary" onclick="fitBounds()"><?php echo JText::_('CFITMAP') ?></span>
+		<span class="btn btn-sm btn-primary" onclick="fitBounds()"><?php echo JText::_('CFITMAP') ?></span>
 	<?php endif; ?>
 	<?php if($params->get('tmpl_params.map_heat')): ?>
-		<span class="btn btn-small" id="heat"><?php echo JText::_('CHEATMAP') ?></span>
+		<span class="btn-sm btn-light border" id="heat"><?php echo JText::_('CHEATMAP') ?></span>
 	<?php endif; ?>
 	<div class="btn-group float-end">
 		<?php if($params->get('tmpl_params.map_weather')): ?>
-			<span class="btn btn-small" id="cloud"><?php echo JText::_('CCLOUDS') ?></span>
-			<span class="btn btn-small" id="weather"><?php echo JText::_('CWEATHER') ?></span>
+			<span class="btn-sm btn-light border" id="cloud"><?php echo JText::_('CCLOUDS') ?></span>
+			<span class="btn-sm btn-light border" id="weather"><?php echo JText::_('CWEATHER') ?></span>
 		<?php endif; ?>
 		<?php if($params->get('tmpl_params.map_pano')): ?>
-			<span class="btn btn-small" id="pano"><?php echo JText::_('CPNORAMIO') ?></span>
+			<span class="btn-sm btn-light border" id="pano"><?php echo JText::_('CPNORAMIO') ?></span>
 		<?php endif; ?>
 		<?php if($params->get('tmpl_params.map_traff')): ?>
-			<span class="btn btn-small" id="traff"><?php echo JText::_('CTRAFF') ?></span>
+			<span class="btn-sm btn-light border" id="traff"><?php echo JText::_('CTRAFF') ?></span>
 		<?php endif; ?>
 		<?php if($params->get('tmpl_params.map_trans')): ?>
-			<span class="btn btn-small" id="trans"><?php echo JText::_('CTRANS') ?></span>
+			<span class="btn-sm btn-light border" id="trans"><?php echo JText::_('CTRANS') ?></span>
 		<?php endif; ?>
 		<?php if($params->get('tmpl_params.map_bike')): ?>
-			<span class="btn btn-small" id="bike"><?php echo JText::_('CBIKE') ?></span>
+			<span class="btn-sm btn-light border" id="bike"><?php echo JText::_('CBIKE') ?></span>
 		<?php endif; ?>
 	</div>
 </div>

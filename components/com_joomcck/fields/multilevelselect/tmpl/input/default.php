@@ -377,7 +377,7 @@ var allowed<?php echo $this->id; ?> = <?php echo $params->get('params.max_levels
 	</div>
 
 	<?php if($params->get('params.max_values') > 1): ?>
-		<input type="button" id="add-button" class="btn btn-small btn-warning"
+		<input type="button" id="add-button" class="btn btn-sm btn-warning"
 			value="<?php echo JText::_('MLS_ADD');?>"
 			onclick="Mls<?php echo $this->id; ?>.addItem();">
 	<?php endif;?>

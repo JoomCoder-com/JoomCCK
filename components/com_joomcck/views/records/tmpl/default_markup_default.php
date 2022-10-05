@@ -145,21 +145,21 @@ $current_user = JFactory::getUser($this->input->getInt('user_id', $this->user->g
 								$o = array();
 								if(in_array($type->params->get('submission.submission'),  $this->user->getAuthorisedViewLevels()) || MECAccess::allowNew($type, $this->section))
 								{
-									$o[] = '<a href="'.Url::add($this->section, $type, $this->category).'">'.JText::_($type->name).'</a>';
+									$o[] = '<a class="btn btn-light border btn-sm" href="'.Url::add($this->section, $type, $this->category).'">'.JText::_($type->name).'</a>';
 								}
 								else
 								{
-									$o[] = '<a class="disabled" rel="tooltipright" data-original-title="'.JText::sprintf($markup->get('menu.menu_user_register', 'Register or login to submit %s'), JText::_($type->name)).'">'.JText::_($type->name).'</a>';
+									$o[] = '<a  class="btn btn-light border btn-sm" class="disabled" rel="tooltipright" data-original-title="'.JText::sprintf($markup->get('menu.menu_user_register', 'Register or login to submit %s'), JText::_($type->name)).'">'.JText::_($type->name).'</a>';
 								}
 								if($o)
 								{
-									$l[] = '<li>'.implode('', $o).'</li>';
+									$l[] = '<li class="me-2">'.implode('', $o).'</li>';
 								}
 							}
 							?>
 							<?php if($l):?>
-								<li class="dropdown">
-									<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+								<li class="dropdown me-2">
+									<a href="#" class="dropdown-toggle btn btn-light border btn-sm" data-toggle="dropdown">
 										<?php if($markup->get('menu.menu_newrecord_icon')):?>
 											<?php echo HTMLFormatHelper::icon('plus.png');  ?>
 										<?php endif;?>
@@ -173,13 +173,13 @@ $current_user = JFactory::getUser($this->input->getInt('user_id', $this->user->g
 							<?php endif;?>
 						<?php elseif(count($this->postbuttons) == 1) : ?>
 							<?php $submit = array_values($this->postbuttons); $submit = array_shift($submit);?>
-							<li class="dropdown">
+							<li class="dropdown me-2">
 								<a
 									<?php if(!(in_array($submit->params->get('submission.submission'),  $this->user->getAuthorisedViewLevels()) || MECAccess::allowNew($submit, $this->section))): ?>
-										class="disabled tip-bottom" rel="tooltip" href="#"
+										class="disabled tip-bottom  btn btn-light border btn-sm" rel="tooltip" href="#"
 										data-original-title="<?php echo JText::sprintf($markup->get('menu.menu_user_register', 'Register or login to submit <b>%s</b>'), JText::_($submit->name))?>"
 									<?php else:?>
-										href="<?php echo Url::add($this->section, $submit, $this->category);?>"
+                                        class="btn btn-light border btn-sm" href="<?php echo Url::add($this->section, $submit, $this->category);?>"
 									<?php endif;?>
 								>
 									<?php if($markup->get('menu.menu_newrecord_icon')):?>
@@ -218,8 +218,8 @@ $current_user = JFactory::getUser($this->input->getInt('user_id', $this->user->g
 					<?php endif;?>
 
 					<?php if(in_array($markup->get('menu.menu_ordering'), $this->user->getAuthorisedViewLevels()) && $this->items):?>
-						<li class="dropdown">
-							<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+						<li class="dropdown me-2">
+							<a href="#" class="dropdown-toggle btn btn-light border btn-sm" data-toggle="dropdown">
 								<?php if($markup->get('menu.menu_ordering_icon')):?>
 									<?php echo HTMLFormatHelper::icon('sort.png');  ?>
 								<?php endif;?>
@@ -288,8 +288,8 @@ $current_user = JFactory::getUser($this->input->getInt('user_id', $this->user->g
 
 					<?php if(in_array($markup->get('menu.menu_user'), $this->user->getAuthorisedViewLevels()) && $this->user->id && !$this->isMe):?>
 						<?php $counts = $this->_getUsermenuCounts($markup);?>
-						<li class="dropdown" id="joomcck-user-menu">
-							<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+						<li class="dropdown me-2" id="joomcck-user-menu">
+							<a href="#" class="dropdown-toggle btn btn-light border btn-sm" data-bs-toggle="dropdown">
 								<?php if($markup->get('menu.menu_user_icon')):?>
 									<?php echo HTMLFormatHelper::icon('user.png');  ?>
 								<?php endif;?>
@@ -298,7 +298,7 @@ $current_user = JFactory::getUser($this->input->getInt('user_id', $this->user->g
 							</a>
 							<ul class="dropdown-menu">
 								<?php if($markup->get('menu.menu_user_my')):?>
-									<li><a href="<?php echo JRoute::_(Url::user('created'));?>">
+									<li><a class="dropdown-item" href="<?php echo JRoute::_(Url::user('created'));?>">
 										<?php if($markup->get('menu.menu_user_my_icon')):?>
 											<?php echo HTMLFormatHelper::icon($this->section->params->get('personalize.text_icon', 'home.png'));?>
 										<?php endif;?>
@@ -308,7 +308,7 @@ $current_user = JFactory::getUser($this->input->getInt('user_id', $this->user->g
 								<?php endif;?>
 
 								<?php if($markup->get('menu.menu_user_followed') && $counts->followed):?>
-									<li><a href="<?php echo JRoute::_(Url::user('follow'));?>">
+									<li><a class="dropdown-item" href="<?php echo JRoute::_(Url::user('follow'));?>">
 										<?php if($markup->get('menu.menu_user_follow_icon')):?>
 											<img src="<?php echo JURI::root(TRUE);?>/media/mint/icons/16/follow1.png" align="absmiddle" />
 										<?php endif;?>
@@ -318,7 +318,7 @@ $current_user = JFactory::getUser($this->input->getInt('user_id', $this->user->g
 								<?php endif;?>
 
 								<?php if($markup->get('menu.menu_user_evented') && CEventsHelper::getNum('section', $this->section->id)):?>
-									<li><a href="<?php echo JRoute::_(Url::user('events'));?>">
+									<li><a class="dropdown-item" href="<?php echo JRoute::_(Url::user('events'));?>">
 										<?php if($markup->get('menu.menu_user_events_icon')):?>
 											<img src="<?php echo JURI::root(TRUE);?>/media/mint/icons/16/bell.png" align="absmiddle" />
 										<?php endif;?>
@@ -328,7 +328,7 @@ $current_user = JFactory::getUser($this->input->getInt('user_id', $this->user->g
 								<?php endif;?>
 
 								<?php if($markup->get('menu.menu_user_favorite') && $counts->favorited):?>
-									<li><a href="<?php echo JRoute::_(Url::user('favorited'));?>">
+									<li><a class="dropdown-item" href="<?php echo JRoute::_(Url::user('favorited'));?>">
 										<?php if($markup->get('menu.menu_user_favorite_icon')):?>
 											<img src="<?php echo JURI::root(TRUE) . '/media/mint/icons/bookmarks/' . $listparams->get('tmpl_core.bookmark_icons', 'star') . '/state1.png';?>" align="absmiddle" />
 										<?php endif;?>
@@ -337,7 +337,7 @@ $current_user = JFactory::getUser($this->input->getInt('user_id', $this->user->g
 									</a></li>
 								<?php endif;?>
 								<?php if($markup->get('menu.menu_user_rated') && $counts->rated):?>
-									<li><a href="<?php echo JRoute::_(Url::user('rated'));?>">
+									<li><a class="dropdown-item" href="<?php echo JRoute::_(Url::user('rated'));?>">
 										<?php if($markup->get('menu.menu_user_rated_icon')):?>
 											<img src="<?php echo JURI::root(TRUE);?>/media/mint/icons/16/star.png" align="absmiddle" />
 										<?php endif;?>
@@ -347,7 +347,7 @@ $current_user = JFactory::getUser($this->input->getInt('user_id', $this->user->g
 								<?php endif;?>
 
 								<?php if($markup->get('menu.menu_user_commented') && $counts->commented):?>
-									<li><a href="<?php echo JRoute::_(Url::user('commented'));?>">
+									<li><a  class="dropdown-item" href="<?php echo JRoute::_(Url::user('commented'));?>">
 										<?php if($markup->get('menu.menu_user_commented_icon')):?>
 											<img src="<?php echo JURI::root(TRUE);?>/media/mint/icons/16/balloon-left.png" align="absmiddle" />
 										<?php endif;?>
@@ -357,7 +357,7 @@ $current_user = JFactory::getUser($this->input->getInt('user_id', $this->user->g
 								<?php endif;?>
 
 								<?php if($markup->get('menu.menu_user_visited') && $counts->visited):?>
-									<li><a href="<?php echo JRoute::_(Url::user('visited'));?>">
+									<li><a class="dropdown-item" href="<?php echo JRoute::_(Url::user('visited'));?>">
 										<?php if($markup->get('menu.menu_user_visited_icon')):?>
 											<img src="<?php echo JURI::root(TRUE);?>/media/mint/icons/16/hand-point-090.png" align="absmiddle" />
 										<?php endif;?>
@@ -367,7 +367,7 @@ $current_user = JFactory::getUser($this->input->getInt('user_id', $this->user->g
 								<?php endif;?>
 
 								<?php if($markup->get('menu.menu_user_expire') && $counts->expired):?>
-									<li><a href="<?php echo JRoute::_(Url::user('expired'));?>">
+									<li><a class="dropdown-item" href="<?php echo JRoute::_(Url::user('expired'));?>">
 										<?php if($markup->get('menu.menu_user_expire_icon')):?>
 											<img src="<?php echo JURI::root(TRUE);?>/media/mint/icons/16/clock--exclamation.png" align="absmiddle" />
 										<?php endif;?>
@@ -377,7 +377,7 @@ $current_user = JFactory::getUser($this->input->getInt('user_id', $this->user->g
 								<?php endif;?>
 
 								<?php if($markup->get('menu.menu_user_hidden') && $counts->hidden):?>
-									<li><a href="<?php echo JRoute::_(Url::user('hidden'));?>">
+									<li><a class="dropdown-item" href="<?php echo JRoute::_(Url::user('hidden'));?>">
 										<?php if($markup->get('menu.menu_user_hidden_icon')):?>
 											<img src="<?php echo JURI::root(TRUE);?>/media/mint/icons/16/eye-half.png" align="absmiddle" />
 										<?php endif;?>
@@ -387,7 +387,7 @@ $current_user = JFactory::getUser($this->input->getInt('user_id', $this->user->g
 								<?php endif;?>
 
 								<?php if($markup->get('menu.menu_user_feature') && $counts->featured):?>
-									<li><a href="<?php echo JRoute::_(Url::user('featured'));?>">
+									<li><a class="dropdown-item" href="<?php echo JRoute::_(Url::user('featured'));?>">
 										<?php if($markup->get('menu.menu_user_feature_icon')):?>
 											<img src="<?php echo JURI::root(TRUE);?>/media/mint/icons/16/arrow-curve-090-left.png" align="absmiddle" />
 										<?php endif;?>
@@ -397,7 +397,7 @@ $current_user = JFactory::getUser($this->input->getInt('user_id', $this->user->g
 								<?php endif;?>
 
 								<?php if($markup->get('menu.menu_user_unpublished') && $counts->unpublished):?>
-									<li><a href="<?php echo JRoute::_(Url::user('unpublished'));?>">
+									<li><a  class="dropdown-item" href="<?php echo JRoute::_(Url::user('unpublished'));?>">
 										<?php if($markup->get('menu.menu_user_unpublished_icon')):?>
 											<img src="<?php echo JURI::root(TRUE);?>/media/mint/icons/16/minus-circle.png" align="absmiddle" />
 										<?php endif;?>
@@ -625,11 +625,11 @@ $current_user = JFactory::getUser($this->input->getInt('user_id', $this->user->g
 			<div class="alpha-set">
 				<?php foreach ($set AS $alpha):?>
 					<?php if(in_array($alpha, $this->alpha_list)):?>
-						<span class="label label-warning" onclick="Joomcck.applyFilter('filter_alpha', '<?php echo $alpha?>')"
+						<span class="badge bg-warning" onclick="Joomcck.applyFilter('filter_alpha', '<?php echo $alpha?>')"
 							<?php echo $markup->get('main.alpha_num') ? 'rel="tooltip" data-original-title="'.JText::plural('CXNRECFOUND',
 								@$this->alpha_totals[$alpha]).'"' : NULL;?>><?php echo $alpha; ?></span>
 					<?php else:?>
-						<span class="label"><?php echo $alpha; ?></span>
+						<span class="badge bg-light text-muted border"><?php echo $alpha; ?></span>
 					<?php endif;?>
 				<?php endforeach;?>
 			</div>
@@ -644,8 +644,8 @@ $current_user = JFactory::getUser($this->input->getInt('user_id', $this->user->g
 <?php if($markup->get('filters.worns') && count($this->worns)):?>
 <div class="filter-worns">
 	<?php foreach ($this->worns AS $worn):?>
-		<div class="alert float-start">
-			<button type="button" class="close" data-dismiss="alert" onclick="Joomcck.cleanFilter('<?php echo $worn->name?>')" rel="tooltip" data-original-title="<?php echo JText::_('CDELETEFILTER')?>">
+		<div class="alert alert-info float-start">
+			<button type="button" class="close btn btn-sm btn-light border" data-dismiss="alert" onclick="Joomcck.cleanFilter('<?php echo $worn->name?>')" rel="tooltip" data-original-title="<?php echo JText::_('CDELETEFILTER')?>">
 			<img alt="X" src="<?php echo JURI::root(TRUE)?>/media/mint/icons/16/cross.png"></button>
 			<div><?php echo $worn->label?></div>
 			<?php echo $worn->text?>

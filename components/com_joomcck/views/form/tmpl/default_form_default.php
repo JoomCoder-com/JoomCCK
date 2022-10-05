@@ -408,19 +408,6 @@ $k = 0;
 	<br />
 </div>
 
-<script type="text/javascript">
-	<?php if(in_array($params->get('tmpl_params.form_grouping_type', 0), array(1,4))):?>
-		jQuery('#tabs-list a:first').tab('show');
-	<?php elseif(in_array($params->get('tmpl_params.form_grouping_type', 0), array(2))):?>
-		jQuery('#tab-main').collapse('show');
-	<?php endif;?>
-</script>
-
-
-
-
-
-
 <?php
 function group_start($data, $label, $name,$main = false)
 {

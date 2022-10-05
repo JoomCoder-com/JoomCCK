@@ -4,6 +4,10 @@
     width: 100% !important;
 }
 
+.hide{
+    display: none;
+}
+
 /* End of New CSS for Joomla 4 */
 
 /* maybe this css old css code will removed */

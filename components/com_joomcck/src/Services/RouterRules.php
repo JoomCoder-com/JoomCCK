@@ -310,9 +310,6 @@ class RouterRules implements RulesInterface
     {
 
         $segments = JoomcckBuildRoute($query);
-
-
-
         return $segments;
 
     }
@@ -323,9 +320,7 @@ class RouterRules implements RulesInterface
 
 
 		$vars = JoomcckParseRoute($segments);
-
 		unset($segments);
-
         return $vars;
     }
 }

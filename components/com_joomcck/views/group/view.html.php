@@ -53,7 +53,7 @@ class JoomcckViewGroup extends MViewBase
 		if($isNew)
 		{
 			$bar = JToolBar::getInstance();
-			$bar->appendButton('Custom', '<a class="btn btn-small" href="'.JRoute::_('index.php?option=com_joomcck&view=groups').'"><i class="icon-cancel "></i> '.JText::_('JTOOLBAR_CANCEL').'</a>', 'cancel');
+			$bar->appendButton('Custom', '<a class="btn btn-sm btn-light border" href="'.JRoute::_('index.php?option=com_joomcck&view=groups').'"><i class="icon-cancel "></i> '.JText::_('JTOOLBAR_CANCEL').'</a>', 'cancel');
 		}
 		else
 		{

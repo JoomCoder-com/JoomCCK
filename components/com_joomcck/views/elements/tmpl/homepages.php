@@ -52,7 +52,7 @@ JHtml::_('dropdown.init');
 						<?php $out[] = '<br /><small> '.$this->params->get('sections.'.JFactory::getApplication()->input->getInt('section_id').'.title').'</small>'; ?>
 					<?php endif; ?>
 					<div class="btn-group float-end" style="display:none;">
-						<button onclick="parent.choosewheretopost(<?php echo $this->author; ?>, '<?php echo htmlentities(str_replace(array("\n", "\r"), '',implode('', $out)), ENT_QUOTES, 'UTF-8') ?>')" type="button" class="btn btn-small btn-primary">Choose</button>
+						<button onclick="parent.choosewheretopost(<?php echo $this->author; ?>, '<?php echo htmlentities(str_replace(array("\n", "\r"), '',implode('', $out)), ENT_QUOTES, 'UTF-8') ?>')" type="button" class="btn btn-sm btn-primary">Choose</button>
 					</div>
 					<?php echo implode('', $out); ?>
 				</td>
@@ -68,7 +68,7 @@ JHtml::_('dropdown.init');
 					$out[] = '<br /><small> '.$params->get('sections.'.JFactory::getApplication()->input->getInt('section_id').'.title').'</small>';
 				}
 				echo sprintf('<tr class="success user-list"><td>%s</td><td class="has-context"><div class="btn-group float-end" style="display:none;">
-						<button onclick="parent.choosewheretopost(%d, \'%s\')" type="button" class="btn btn-small btn-primary">Choose</button>
+						<button onclick="parent.choosewheretopost(%d, \'%s\')" type="button" class="btn btn-sm btn-primary">Choose</button>
 					</div>%s</td></tr>', $key + 2, $value->id, htmlentities(str_replace(array("\n", "\r"), '',implode('', $out)), ENT_QUOTES, 'UTF-8'), implode('', $out));
 			}?>
 			<?php foreach ($this->all as $key => $value) {
@@ -82,7 +82,7 @@ JHtml::_('dropdown.init');
 					$out[] = '<br /><small> '.$params->get('sections.'.JFactory::getApplication()->input->getInt('section_id').'.title').'</small>';
 				}
 				echo sprintf('<tr class=" user-list"><td>%s</td><td class="has-context"><div class="btn-group float-end" style="display:none;">
-						<button onclick="parent.choosewheretopost(%d, \'%s\')" type="button" class="btn btn-small btn-primary">Choose</button>
+						<button onclick="parent.choosewheretopost(%d, \'%s\')" type="button" class="btn btn-sm btn-primary">Choose</button>
 					</div>%s</td></tr>', $key + 2, $value->id, htmlentities(str_replace(array("\n", "\r"), '',implode('', $out)), ENT_QUOTES, 'UTF-8'), implode('', $out));
 			}?>
 		</tbody>

@@ -143,7 +143,7 @@ class JFormFieldCHtml extends CFormField
 		$count2 = strlen($value);
 		if($count2 < $count1 && $this->params->get('params.readmore'))
 		{
-			$value .= '<p>'.JHtml::link($record->url, JText::_($this->params->get('params.readmore_lbl','H_READMORE')), array('class' => 'btn btn-primary btn-small')).'</p>';
+			$value .= '<p>'.JHtml::link($record->url, JText::_($this->params->get('params.readmore_lbl','H_READMORE')), array('class' => 'btn btn-primary btn-sm')).'</p>';
 		}
 
 		$this->value = $value;

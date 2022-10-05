@@ -21,7 +21,7 @@ if($this->show_btn_new)
 	$url .= '&return='.Url::back();
 	$url .= '&Itemid='.$section->params->get('general.category_itemid');
 
-	$links[] = sprintf('<a href="%s" class="btn btn-small">%s</a>', JRoute::_($url), JText::_($this->params->get('params.invite_add_more')));
+	$links[] = sprintf('<a href="%s" class="btn btn-sm btn-light border">%s</a>', JRoute::_($url), JText::_($this->params->get('params.invite_add_more')));
 }
 
 if($this->show_btn_exist)
@@ -33,7 +33,7 @@ if($this->show_btn_exist)
 	'&field_id='.$this->id.
 	'&excludes='.implode(',', $this->content['ids']);
 
-	$links[] = "<a data-toggle=\"modal\" role=\"button\" class=\"btn btn-small\" href=\"#modal_".$key."\">\n".JText::_($this->params->get('params.add_existing_label'))."</a>\n";
+	$links[] = "<a data-toggle=\"modal\" role=\"button\" class=\"btn btn-sm btn-light border\" href=\"#modal_".$key."\">\n".JText::_($this->params->get('params.add_existing_label'))."</a>\n";
 	?>
 		<div style="width:770px;" class="modal hide fade" id="modal_<?php echo $key;?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 			<div class="modal-header">
@@ -61,7 +61,7 @@ if($this->show_btn_exist)
 
 if($this->show_btn_all)
 {
-	$links[] = sprintf('<a href="%s" class="btn btn-small">%s</a>', JRoute::_($this->show_btn_all), $this->params->get('params.invite_view_more'));
+	$links[] = sprintf('<a href="%s" class="btn btn-sm btn-light border">%s</a>', JRoute::_($this->show_btn_all), $this->params->get('params.invite_view_more'));
 }
 ?>
 

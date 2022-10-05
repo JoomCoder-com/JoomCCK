@@ -40,7 +40,7 @@ $directory = $this->directory;
 ?>
 
 <?php case 1: ?>
-	<a class="modal memodal-button btn btn-warning btn-small" rel="{handler: 'iframe', size: {x: 800, y: 500}}" onclick="return false;"
+	<a class="modal memodal-button btn btn-warning btn-sm" rel="{handler: 'iframe', size: {x: 800, y: 500}}" onclick="return false;"
 		href="<?php echo JRoute::_('index.php?option=com_media&view=images&folder='.str_replace(array('images/', '/'), '', $directory).'&tmpl=component&fieldid='.$this->id.'&asset=com_media&author=');?>"
 		title="<?php echo JText::_('I_SELECTIMG');?>"><?php echo JText::_('I_SELECTIMG');?></a>
 
@@ -53,7 +53,7 @@ $directory = $this->directory;
 		<input type="file" name="fields<?php echo $this->id;?>image" id="jformfields<?php echo $this->id;?>image"/>
 		<input type="hidden" size="40"  name="jform[fields][<?php echo $this->id;?>][image]" id="jformfields<?php echo $this->id;?>hiddenimage"
 		value="<?php echo (isset($this->value['image']) ? stripslashes($this->value['image']) : '');?>"/>
-		<button type="button" class="btn btn-danger btn-small" data-image-path="<?php echo $this->value['image']; ?>" data-image-field-id="<?php echo $this->id;?>"><?php echo JText::_('F_DELETE_IMAGE')?></button>
+		<button type="button" class="btn btn-danger btn-sm" data-image-path="<?php echo $this->value['image']; ?>" data-image-field-id="<?php echo $this->id;?>"><?php echo JText::_('F_DELETE_IMAGE')?></button>
 	</div>
 <?php break;?>
 

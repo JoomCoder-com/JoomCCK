@@ -40,7 +40,7 @@ if (in_array($params->get('params.send_mail', 3), $this->user->getAuthorisedView
 	{
 
 	case 1 :?>
-		<a href="javascript: void(0);" onclick="getEmailIframe('<?php echo $key;?>', '<?php echo $url_form;?>');" data-role="button" class="btn btn-primary btn-small" data-toggle="collapse" data-target="#email_form<?php echo $record->id;?>">
+		<a href="javascript: void(0);" onclick="getEmailIframe('<?php echo $key;?>', '<?php echo $url_form;?>');" data-role="button" class="btn btn-primary btn-sm" data-toggle="collapse" data-target="#email_form<?php echo $record->id;?>">
 			<?php echo JText::_($this->params->get('params.popup_label', $this->label));?>
 		</a>
 
@@ -49,7 +49,7 @@ if (in_array($params->get('params.send_mail', 3), $this->user->getAuthorisedView
 	<?php break; ?>
 
 	<?php case 2:?>
-		<a class="btn btn-primary btn-small" onclick="getEmailIframe('<?php echo $key;?>', '<?php echo $url_form;?>');" href="#emailmodal<?php echo $this->id;?>" data-toggle="modal" role="button">
+		<a class="btn btn-primary btn-sm" onclick="getEmailIframe('<?php echo $key;?>', '<?php echo $url_form;?>');" href="#emailmodal<?php echo $this->id;?>" data-toggle="modal" role="button">
 			<?php echo JText::_($this->params->get('params.popup_label', $this->label));?>
 		</a>
 

@@ -31,16 +31,16 @@ $num = CEventsHelper::showNum('total', 0);
 	<?php if($this->isMe):?>
 		<div class="btn-group float-end">
 			<?php if($params->get('menu.menu_user_cat_manage') && in_array($this->section->params->get('personalize.pcat_submit'), $this->user->getAuthorisedViewLevels())):?>
-				<a class="btn btn-small" rel="tooltip" data-original-title="<?php echo JText::_($params->get('menu.menu_user_cat_manage_label', 'Manage Categories'))?>" href="<?php echo JRoute::_(Url::_('categories').'&return='.Url::back())?>">
+				<a class="btn-sm btn-light border" rel="tooltip" data-original-title="<?php echo JText::_($params->get('menu.menu_user_cat_manage_label', 'Manage Categories'))?>" href="<?php echo JRoute::_(Url::_('categories').'&return='.Url::back())?>">
 					<img src="<?php echo JURI::root(TRUE);?>/media/mint/icons/16/category.png" align="absmiddle" /></a>
 			<?php endif;?>
 			<?php if($params->get('menu.menu_user_moder') && MECAccess::allowModerate(NULL, NULL, $this->section)):?>
-				<a class="btn btn-small" rel="tooltip" data-original-title="<?php echo JText::_($params->get('menu.menu_user_moder_label', 'Manage Moderators'))?>" href="<?php echo JRoute::_('index.php?option=com_joomcck&view=moderators&filter_section='.$this->section->id.'&return='.Url::back());?>">
+				<a class="btn-sm btn-light border" rel="tooltip" data-original-title="<?php echo JText::_($params->get('menu.menu_user_moder_label', 'Manage Moderators'))?>" href="<?php echo JRoute::_('index.php?option=com_joomcck&view=moderators&filter_section='.$this->section->id.'&return='.Url::back());?>">
 						<img src="<?php echo JURI::root(TRUE);?>/media/mint/icons/16/user-share.png" align="absmiddle" /></a>
 			<?php endif;?>
 
 			<?php if($this->section->params->get('personalize.allow_section_set', 1)):?>
-				<a class="btn btn-small" rel="tooltip" data-original-title="<?php echo JText::sprintf('CSELECTOPTIONS', $this->section->name);?>" href="<?php echo JRoute::_('index.php?option=com_joomcck&view=options&layout=section&section_id='.$this->section->id.'&return='.Url::back());?>">
+				<a class="btn-sm btn-light border" rel="tooltip" data-original-title="<?php echo JText::sprintf('CSELECTOPTIONS', $this->section->name);?>" href="<?php echo JRoute::_('index.php?option=com_joomcck&view=options&layout=section&section_id='.$this->section->id.'&return='.Url::back());?>">
 					<img src="<?php echo JURI::root(TRUE);?>/media/mint/icons/16/gear.png" align="absmiddle" /></a>
 			<?php endif;?>
 		</div>
