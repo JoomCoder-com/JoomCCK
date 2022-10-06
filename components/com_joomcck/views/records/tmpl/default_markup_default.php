@@ -85,22 +85,23 @@ $current_user = JFactory::getUser($this->input->getInt('user_id', $this->user->g
 <form method="post" action="<?php echo $this->action; ?>" name="adminForm" id="adminForm" enctype="multipart/form-data">
 	<!-- --------------  Show menu and filters ---------------------- -->
 	<?php if(in_array($markup->get('menu.menu'), $this->user->getAuthorisedViewLevels()) || in_array($markup->get('menu.menu'), $this->user->getAuthorisedViewLevels())): ?>
-		<DIV class="clearfix"></DIV>
+		<div class="clearfix"></div>
 		<div class="navbar" id="cnav">
-			<div class="navbar-inner">
+			<div class="navbar-inner w-100 mb-3">
 			<?php if($markup->get('filters.filters')):?>
 				<div class="form-inline navbar-form float-end search-form">
 					<span style="display: none;">Search box</span>
-					<?php if(in_array($markup->get('filters.show_search'), $this->user->getAuthorisedViewLevels())):?>
-						<input type="text" style="max-width: 100px; min-width: 50px;" placeholder="<?php echo JText::_('CSEARCHPLACEHOLDER');  ?>" name="filter_search"
-							   value="<?php echo htmlentities($this->state->get('records.search'), ENT_COMPAT, 'utf-8');?>" />
-					<?php endif;?>
-					<?php if(in_array($markup->get('filters.show_more'), $this->user->getAuthorisedViewLevels())):?>
-						<a class="btn btn-mini btn-link" data-toggle="collapse" data-target="#filter-collapse" rel="tooltip" data-original-title="<?php echo JText::_('CMORESEARCHOPTIONS')?>">
-							<?php echo HTMLFormatHelper::icon('binocular.png');  ?>
-						</a>
-					<?php endif;?>
-				</div>
+                    <div class="input-group">
+	                    <?php if(in_array($markup->get('filters.show_search'), $this->user->getAuthorisedViewLevels())):?>
+                            <input class="form-control form-control-sm" type="text" style="max-width: 100px; min-width: 50px;" placeholder="<?php echo JText::_('CSEARCHPLACEHOLDER');  ?>" name="filter_search"
+                                   value="<?php echo htmlentities($this->state->get('records.search'), ENT_COMPAT, 'utf-8');?>" />
+	                    <?php endif;?>
+	                    <?php if(in_array($markup->get('filters.show_more'), $this->user->getAuthorisedViewLevels())):?>
+                            <button type="button" class="btn btn-sm btn-light border" data-toggle="collapse" data-target="#filter-collapse" rel="tooltip" data-original-title="<?php echo JText::_('CMORESEARCHOPTIONS')?>">
+			                    <?php echo HTMLFormatHelper::icon('binocular.png');  ?>
+                            </button>
+	                    <?php endif;?>
+                    </div>				</div>
 			<?php endif;?>
 
 			<?php if($markup->get('menu.menu')):?>
@@ -219,7 +220,7 @@ $current_user = JFactory::getUser($this->input->getInt('user_id', $this->user->g
 
 					<?php if(in_array($markup->get('menu.menu_ordering'), $this->user->getAuthorisedViewLevels()) && $this->items):?>
 						<li class="dropdown me-2">
-							<a href="#" class="dropdown-toggle btn btn-light border btn-sm" data-toggle="dropdown">
+							<a href="#" class="dropdown-toggle btn btn-light border btn-sm" data-bs-toggle="dropdown">
 								<?php if($markup->get('menu.menu_ordering_icon')):?>
 									<?php echo HTMLFormatHelper::icon('sort.png');  ?>
 								<?php endif;?>
@@ -303,7 +304,7 @@ $current_user = JFactory::getUser($this->input->getInt('user_id', $this->user->g
 											<?php echo HTMLFormatHelper::icon($this->section->params->get('personalize.text_icon', 'home.png'));?>
 										<?php endif;?>
 										<?php echo JText::_($markup->get('menu.menu_user_my_label', 'My Homepage'))?>
-										<span class="badge"><?php echo $counts->created;?></span>
+										<span class="badge bg-light text-muted border"><?php echo $counts->created;?></span>
 									</a></li>
 								<?php endif;?>
 
@@ -313,7 +314,7 @@ $current_user = JFactory::getUser($this->input->getInt('user_id', $this->user->g
 											<img src="<?php echo JURI::root(TRUE);?>/media/mint/icons/16/follow1.png" align="absmiddle" />
 										<?php endif;?>
 										<?php echo JText::_($markup->get('menu.menu_user_follow_label', 'Watched'))?>
-										<span class="badge"><?php echo $counts->followed;?></span>
+										<span class="badge bg-light text-muted border"><?php echo $counts->followed;?></span>
 									</a></li>
 								<?php endif;?>
 
@@ -333,7 +334,7 @@ $current_user = JFactory::getUser($this->input->getInt('user_id', $this->user->g
 											<img src="<?php echo JURI::root(TRUE) . '/media/mint/icons/bookmarks/' . $listparams->get('tmpl_core.bookmark_icons', 'star') . '/state1.png';?>" align="absmiddle" />
 										<?php endif;?>
 										<?php echo JText::_($markup->get('menu.menu_user_favorite_label', 'Bookmarked'))?>
-										<span class="badge"><?php echo $counts->favorited; ?></span>
+										<span class="badge bg-light text-muted border"><?php echo $counts->favorited; ?></span>
 									</a></li>
 								<?php endif;?>
 								<?php if($markup->get('menu.menu_user_rated') && $counts->rated):?>
@@ -342,7 +343,7 @@ $current_user = JFactory::getUser($this->input->getInt('user_id', $this->user->g
 											<img src="<?php echo JURI::root(TRUE);?>/media/mint/icons/16/star.png" align="absmiddle" />
 										<?php endif;?>
 										<?php echo JText::_($markup->get('menu.menu_user_rated_label', 'Rated'))?>
-										<span class="badge"><?php echo $counts->rated; ?></span>
+										<span class="badge bg-light text-muted border"><?php echo $counts->rated; ?></span>
 									</a></li>
 								<?php endif;?>
 
@@ -352,7 +353,7 @@ $current_user = JFactory::getUser($this->input->getInt('user_id', $this->user->g
 											<img src="<?php echo JURI::root(TRUE);?>/media/mint/icons/16/balloon-left.png" align="absmiddle" />
 										<?php endif;?>
 										<?php echo JText::_($markup->get('menu.menu_user_commented_label', 'Commented'))?>
-										<span class="badge"><?php echo $counts->commented; ?></span>
+										<span class="badge bg-light text-muted border"><?php echo $counts->commented; ?></span>
 									</a></li>
 								<?php endif;?>
 
@@ -362,7 +363,7 @@ $current_user = JFactory::getUser($this->input->getInt('user_id', $this->user->g
 											<img src="<?php echo JURI::root(TRUE);?>/media/mint/icons/16/hand-point-090.png" align="absmiddle" />
 										<?php endif;?>
 										<?php echo JText::_($markup->get('menu.menu_user_visited_label', 'Visited'))?>
-										<span class="badge"><?php echo $counts->visited; ?></span>
+										<span class="badge bg-light text-muted border"><?php echo $counts->visited; ?></span>
 									</a></li>
 								<?php endif;?>
 
@@ -372,7 +373,7 @@ $current_user = JFactory::getUser($this->input->getInt('user_id', $this->user->g
 											<img src="<?php echo JURI::root(TRUE);?>/media/mint/icons/16/clock--exclamation.png" align="absmiddle" />
 										<?php endif;?>
 										<?php echo JText::_($markup->get('menu.menu_user_expire_label', 'Expired'))?>
-										<span class="badge"><?php echo $counts->expired; ?></span>
+										<span class="badge bg-light text-muted border"><?php echo $counts->expired; ?></span>
 									</a></li>
 								<?php endif;?>
 
@@ -382,7 +383,7 @@ $current_user = JFactory::getUser($this->input->getInt('user_id', $this->user->g
 											<img src="<?php echo JURI::root(TRUE);?>/media/mint/icons/16/eye-half.png" align="absmiddle" />
 										<?php endif;?>
 										<?php echo JText::_($markup->get('menu.menu_user_hidden_label', 'Hidden'))?>
-										<span class="badge"><?php echo $counts->hidden; ?></span>
+										<span class="badge bg-light text-muted border"><?php echo $counts->hidden; ?></span>
 									</a></li>
 								<?php endif;?>
 
@@ -392,7 +393,7 @@ $current_user = JFactory::getUser($this->input->getInt('user_id', $this->user->g
 											<img src="<?php echo JURI::root(TRUE);?>/media/mint/icons/16/arrow-curve-090-left.png" align="absmiddle" />
 										<?php endif;?>
 										<?php echo JText::_($markup->get('menu.menu_user_feature_label', 'Fetured'))?>
-										<span class="badge"><?php echo $counts->featured; ?></span>
+										<span class="badge bg-light text-muted border"><?php echo $counts->featured; ?></span>
 									</a></li>
 								<?php endif;?>
 
@@ -402,14 +403,14 @@ $current_user = JFactory::getUser($this->input->getInt('user_id', $this->user->g
 											<img src="<?php echo JURI::root(TRUE);?>/media/mint/icons/16/minus-circle.png" align="absmiddle" />
 										<?php endif;?>
 										<?php echo JText::_($markup->get('menu.menu_user_unpublished_label', 'On Approval'))?>
-										<span class="badge"><?php echo $counts->unpublished; ?></span>
+										<span class="badge bg-light text-muted border"><?php echo $counts->unpublished; ?></span>
 									</a></li>
 								<?php endif;?>
 
 
 								<?php if($markup->get('menu.menu_user_moder') && MECAccess::allowModerate(NULL, NULL, $this->section)):?>
 									<li class="divider"></li>
-									<li><a href="<?php echo JRoute::_('index.php?option=com_joomcck&view=moderators&filter_section='.$this->section->id.'&return='.Url::back());?>">
+									<li><a class="dropdown-item" href="<?php echo JRoute::_('index.php?option=com_joomcck&view=moderators&filter_section='.$this->section->id.'&return='.Url::back());?>">
 										<?php if($markup->get('menu.menu_user_moder_icon')):?>
 											<img src="<?php echo JURI::root(TRUE);?>/media/mint/icons/16/user-share.png" align="absmiddle" />
 										<?php endif;?>
@@ -435,7 +436,7 @@ $current_user = JFactory::getUser($this->input->getInt('user_id', $this->user->g
 												<img src="<?php echo JURI::root(TRUE);?>/media/mint/icons/16/category.png" align="absmiddle" />
 											<?php endif;?>
 											<?php echo JText::_($markup->get('menu.menu_user_cat_manage_label', 'Categories'))?>
-											<span class="badge"><?php echo $counts->categories; ?></span>
+											<span class="badge bg-light text-muted border"><?php echo $counts->categories; ?></span>
 										</a>
 										<?php if($markup->get('menu.menu_user_cat_add')):?>
 											<ul class="dropdown-menu">
@@ -591,10 +592,6 @@ $current_user = JFactory::getUser($this->input->getInt('user_id', $this->user->g
 				</div><!--  tabable -->
 				<br>
 			</div><!--  collapse -->
-
-			<script type="text/javascript">
-				jQuery('#vtabs a:first').tab('show');
-			</script>
 		<?php endif;?>
 	<?php endif;?>
 

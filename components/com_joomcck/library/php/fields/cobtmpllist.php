@@ -158,7 +158,7 @@ class JFormFieldCobTmplList extends JFormFieldList
 			$form = MFormHelper::getFieldParams($xml, JFactory::getApplication()->input->get('id'), $this->value ?: $this->default);
 
 			$html[] = <<<EOT
-			<a href="#config_$this->id" role="button" class="btn btn-mini" data-toggle="modal">$icon</a>
+			<a href="#config_$this->id" role="button" class="btn btn-sm btn-light border" data-toggle="modal">$icon</a>
 			<div id="config_$this->id" class="modal hide" tabindex="-1" role="dialog" aria-labelledby="mtitle_$this->id" aria-hidden="true">
 			<div class="modal-header">
 			  <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>

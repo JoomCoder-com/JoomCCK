@@ -65,7 +65,7 @@ $api = new JoomcckApi();
 								<?php endif;?>
 							</a>
 							<?php if($params->get('tmpl_params.cat_nums') && ($category->params->get('submission') || $category->records_num)):?>
-								<span class="badgebg-info"><?php echo $category->records_num;?></span>
+								<span class="badge bg-info"><?php echo $category->records_num;?></span>
 							<?php endif;?>
 						</<?php echo $params->get('tmpl_core.tag', 'h4')?>>
 
@@ -102,7 +102,7 @@ $api = new JoomcckApi();
 					<a tabindex="-1" href="<?php echo JRoute::_($cat->link)?>">
 						<?php echo $cat->title;?>
 						<?php if($params->get('tmpl_params.subcat_nums', 0) && $cat->params->get('submission')):?>
-							<span class="badge"><?php echo (int)$cat->records_num; ?></span>
+							<span class="badge bg-light text-muted border"><?php echo (int)$cat->records_num; ?></span>
 						<?php endif;?>
 					</a>
 

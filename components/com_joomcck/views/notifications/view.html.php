@@ -122,7 +122,7 @@ class JoomcckViewNotifications extends MViewBase
 			if(in_array($event, $event_types))
 			{
 				$options[] = JHTML::_('select.option', $event, $title);
-				$show_events[$event] = $title.' <span class="badge">'.$event_types1[$event].'</span>';
+				$show_events[$event] = $title.' <span class="badge bg-light text-muted border">'.$event_types1[$event].'</span>';
 			}
 		}
 		$list['events'] = JHtml::_('select.genericlist', $options, 'event', 'onchange="this.form.submit();"', 'value', 'text', $this->state->get('notifications.event'));

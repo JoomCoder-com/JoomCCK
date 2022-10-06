@@ -27,7 +27,7 @@ class JHTMLMrelements
 			$direction = ($direction == 'desc') ? 'asc' : 'desc';
 		}
 
-		$html = '<a href="javascript:void(0);" onclick="Joomla.tableOrdering(\'' . $order . '\',\'' . $direction . '\',\'' . $task . '\');">';
+		$html = '<a class="dropdown-item" href="javascript:void(0);" onclick="Joomla.tableOrdering(\'' . $order . '\',\'' . $direction . '\',\'' . $task . '\');">';
 		$html .= JText::_($title);
 
 		if($order == $selected)
@@ -244,7 +244,7 @@ class JHTMLMrelements
 			        <td>
 			            <p class="name">
 			            	<a href="' . JUri::root() . $path . $file['fullpath'] . '" target="blank"><span id="title' . $file['id'] . '">' . ($file['title'] ? $file['title'] : $file['realname']) . '</span></a>
-			            	<button class="btn btn-mini" type="button" onclick="addTitleInterface()">Edit title</button>
+			            	<button class="btn btn-sm btn-light border" type="button" onclick="addTitleInterface()">Edit title</button>
 			            </p>
 
 						<input type="hidden" name="' . $name . '[]" value="' . $file['filename'] . '">

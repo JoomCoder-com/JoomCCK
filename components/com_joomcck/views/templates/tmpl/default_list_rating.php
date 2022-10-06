@@ -63,7 +63,7 @@ defined('_JEXEC') or die();
 			</td>
 
 			<td>
-				<small><span class="badgebg-success"><?php echo $item->version; ?></span></small>
+				<small><span class="badge bg-success"><?php echo $item->version; ?></span></small>
 			</td>
 			<td>
 				<small>

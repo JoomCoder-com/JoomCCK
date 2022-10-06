@@ -404,7 +404,7 @@ class CFormFieldSelectable extends CFormField
 			$label_num = $label;
 			if($this->params->get('params.filter_show_number', 1))
 			{
-				$label_num .= '<span class="badge">' . $item->num . '</span>';
+				$label_num .= '<span class="badge bg-light text-muted border">' . $item->num . '</span>';
 			}
 			$out[] = $item->text;
 		}

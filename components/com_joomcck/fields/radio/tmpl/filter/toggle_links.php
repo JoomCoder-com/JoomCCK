@@ -21,7 +21,7 @@ $default = $this->default;
 		<li <?php if(in_array($value->field_value, $default) ) echo 'class="active"';?> id="flt-<?php echo $this->id;?>-<?php echo $key;?>" onclick="Joomcck.setHiddenSelectableFlt<?php echo $this->id;?>(this.id, '<?php echo addslashes(htmlspecialchars($value->field_value));?>')">
 		<a href="javascript:void(0);">
 			<?php echo $label;?>
-			<span class="badge"><?php echo ($this->params->get('params.filter_show_number', 1) ? $value->num : NULL);?></span>
+			<span class="badge bg-light text-muted border"><?php echo ($this->params->get('params.filter_show_number', 1) ? $value->num : NULL);?></span>
 		</a>	
 		<?php if (in_array($value->field_value, $default)) : ?>
 			<input type="hidden" name="filters[<?php echo $this->key;?>][value][]" value="<?php echo htmlspecialchars($value->field_value);?>" id="flt-<?php echo $this->id;?>-<?php echo $key;?>-hid">

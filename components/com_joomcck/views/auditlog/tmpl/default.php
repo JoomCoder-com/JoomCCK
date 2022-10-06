@@ -171,36 +171,36 @@ $this->_filters = true;
 						</small>
 					<?php endif;?>
 				</td>
-				<td><span class="badgebg-info">v.<?php echo (int)@$params->version;?></span></td>
+				<td><span class="badge bg-info">v.<?php echo (int)@$params->version;?></span></td>
 				<td class="has-context">
 					<?php ob_start ();?>
 
 					<?php IF($item->event == ATlog::REC_FILE_DELETED):?>
-						<a class="btn btn-mini" rel="tooltip" data-original-title="<?php echo JText::_('CRESTOREFILLE');?>" href="<?php echo Url::task('records.rectorefile', $item->record_id.'&fid='.$params->file->id.'&field_id='.$params->file->field_id)?>">
+						<a class="btn btn-sm btn-light border" rel="tooltip" data-original-title="<?php echo JText::_('CRESTOREFILLE');?>" href="<?php echo Url::task('records.rectorefile', $item->record_id.'&fid='.$params->file->id.'&field_id='.$params->file->field_id)?>">
 							<?php echo HTMLFormatHelper::icon('universal.png');  ?></a>
 					<?php endif;?>
 					<?php IF($item->event == ATlog::REC_NEW):?>
-						<a class="btn btn-mini" rel="tooltip" data-original-title="<?php echo JText::_('CDELETE');?>" href="<?php echo Url::task('records.delete', $item->record_id)?>">
+						<a class="btn btn-sm btn-light border" rel="tooltip" data-original-title="<?php echo JText::_('CDELETE');?>" href="<?php echo Url::task('records.delete', $item->record_id)?>">
 							<?php echo HTMLFormatHelper::icon('cross-button.png');  ?></a>
 					<?php endif;?>
 					<?php IF($item->event == ATlog::REC_PUBLISHED || ($item->event == ATlog::REC_NEW && @$params->published == 1)):?>
-						<a class="btn btn-mini" rel="tooltip" data-original-title="<?php echo JText::_('CUNPUB');?>" href="<?php echo Url::task('records.sunpub', $item->record_id); ?>">
+						<a class="btn btn-sm btn-light border" rel="tooltip" data-original-title="<?php echo JText::_('CUNPUB');?>" href="<?php echo Url::task('records.sunpub', $item->record_id); ?>">
 							<?php echo HTMLFormatHelper::icon('cross-circle.png');  ?></a>
 					<?php endif;?>
 					<?php IF($item->event == ATlog::REC_UNPUBLISHED || ($item->event == ATlog::REC_NEW && @$params->published == 0)):?>
-						<a class="btn btn-mini" rel="tooltip" data-original-title="<?php echo JText::_('CPUB');?>" href="<?php echo Url::task('records.spub', $item->record_id); ?>">
+						<a class="btn btn-sm btn-light border" rel="tooltip" data-original-title="<?php echo JText::_('CPUB');?>" href="<?php echo Url::task('records.spub', $item->record_id); ?>">
 							<?php echo HTMLFormatHelper::icon('tick.png');  ?></a>
 					<?php endif;?>
 					<?php IF($item->event == ATlog::REC_EDIT && $this->type_objects[$item->type_id]->params->get('audit.versioning')):?>
-						<a class="btn btn-mini" rel="tooltip" data-original-title="<?php echo JText::_('CCOMPAREVERSION');?>"
+						<a class="btn btn-sm btn-light border" rel="tooltip" data-original-title="<?php echo JText::_('CCOMPAREVERSION');?>"
 							href="<?php echo $url = 'index.php?option=com_joomcck&view=diff&record_id=' . $item->record_id . '&version=' . ($params->version) . '&return=' . Url::back(); ?>">
 							<?php echo HTMLFormatHelper::icon('edit-diff.png');  ?></a>
-						<a class="btn btn-mini" rel="tooltip" data-original-title="<?php echo JText::sprintf('CROLLBACKVERSION', ($params->version - 1));?>"
+						<a class="btn btn-sm btn-light border" rel="tooltip" data-original-title="<?php echo JText::sprintf('CROLLBACKVERSION', ($params->version - 1));?>"
 							href="<?php echo Url::task('records.rollback', $item->record_id.'&version='.($params->version - 1)); ?>">
 							<?php echo HTMLFormatHelper::icon('arrow-merge-180-left.png');  ?></a>
 					<?php endif;?>
 					<?php IF(!$item->isrecord):?>
-						<a class="btn btn-mini" rel="tooltip" data-original-title="<?php echo JText::_('CRESTORE');?>" href="<?php echo Url::task('records.restore', $item->record_id)?>">
+						<a class="btn btn-sm btn-light border" rel="tooltip" data-original-title="<?php echo JText::_('CRESTORE');?>" href="<?php echo Url::task('records.restore', $item->record_id)?>">
 							<?php echo HTMLFormatHelper::icon('universal.png');  ?></a>
 					<?php endif;?>
 					<?php $controls = ob_get_contents ();?>

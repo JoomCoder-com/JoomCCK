@@ -173,9 +173,9 @@ span.hint {
 						$.each(json.result, function(key, val){
 							out += '<li id="row' + val.id + '" style="margin-left:' + ((val.level - 1) * 20) + 'px">';
 							out += '<div class="btn-group btn-ctrl float-end">';
-							out += '<button onclick="mls_input('+ (val.level + 1)+', '+val.id+')" class="btn btn-mini"><img src="<?php echo $img_add?>" alt="<?php echo JText::_('MLS_ADDCHILD')?>" align="absmiddle">';
-							out += '</button><button onclick="mls_edit('+val.id+')" class="btn btn-mini"><img src="<?php echo $img_edit?>" alt="<?php echo JText::_('MLS_EDIT')?>" align="absmiddle">';
-							out += '</button><button onclick="mls_delete('+val.id+')" class="btn btn-mini"><img src="<?php echo $img_del?>" alt="<?php echo JText::_('MLS_DELETE')?>" align="absmiddle">';
+							out += '<button onclick="mls_input('+ (val.level + 1)+', '+val.id+')" class="btn btn-sm btn-light border"><img src="<?php echo $img_add?>" alt="<?php echo JText::_('MLS_ADDCHILD')?>" align="absmiddle">';
+							out += '</button><button onclick="mls_edit('+val.id+')" class="btn btn-sm btn-light border"><img src="<?php echo $img_edit?>" alt="<?php echo JText::_('MLS_EDIT')?>" align="absmiddle">';
+							out += '</button><button onclick="mls_delete('+val.id+')" class="btn btn-sm btn-light border"><img src="<?php echo $img_del?>" alt="<?php echo JText::_('MLS_DELETE')?>" align="absmiddle">';
 							out += '</button></div><span id="item'+val.id+'">'+val.name+'</span><div class="clearfix"></div></li>';
 						});
 						$("#row"+parent_id).after(out);

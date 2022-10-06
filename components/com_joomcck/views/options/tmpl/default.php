@@ -202,11 +202,11 @@ div.btn-group[data-toggle=buttons-radio] input[type=radio] {
 						<div class="float-end">
 							<button type="button" <?php echo ($section->records ? NULL : 'style="display: none;"');?> class="btn" id="unsub-<?php echo $section->id?>" onclick="Joomcck.ajax_unsubscr_sec(<?php echo $section->id;?>)">
 								<?php echo JText::_('CUNSUBREC')?>
-								<span class="badge"><?php echo $section->records;?></span>
+								<span class="badge bg-light text-muted border"><?php echo $section->records;?></span>
 							</button>
 							<button class="btn" type="button" <?php echo (($section->records_total && ($section->records_total > $section->records)) ? NULL : 'style="display: none;"');?> id="sub-<?php echo $section->id?>" onclick="Joomcck.ajax_subscr_sec(<?php echo $section->id;?>)" href="javascript:void(0);">
 								<?php echo JText::_('CSUBRECART')?>
-								<span class="badge"><?php echo $section->records_total - $section->records;?></span>
+								<span class="badge bg-light text-muted border"><?php echo $section->records_total - $section->records;?></span>
 							</button>
 						</div>
 						<div id="bro-ba" style="width:50px; display:none;" class="progress progress-striped active float-start">

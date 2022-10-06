@@ -97,7 +97,7 @@ if($this->params->get('params.links_sort', 0))
 
 
 	<?php if($this->params->get('params.link_redirect', 0) && $this->params->get('params.show_hits', 1)): ?>
-		<small><?php echo JText::_('CHITS'); ?> <span class="badge"><?php echo (int)@$val['hits'] ?></span></small>
+		<small><?php echo JText::_('CHITS'); ?> <span class="badge bg-light text-muted border"><?php echo (int)@$val['hits'] ?></span></small>
 	<?php endif; ?>
 
 	<?php if($this->params->get('params.filter_enable')): ?>

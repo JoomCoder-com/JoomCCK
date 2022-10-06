@@ -224,7 +224,7 @@ class JoomcckModelAuditlog extends MModelList
 			foreach($list as $key => $event)
 			{
 				$type     = ItemsStore::getType($event->type_id);
-				$events[] = JHtml::_('select.option', $event->event, JText::_($type->params->get('audit.al' . $event->event . '.msg')) . ' <span class="badge">' . $event->total . '</span>');
+				$events[] = JHtml::_('select.option', $event->event, JText::_($type->params->get('audit.al' . $event->event . '.msg')) . ' <span class="badge bg-light text-muted border">' . $event->total . '</span>');
 			}
 
 			ArrayHelper::clean_r($events);
@@ -282,7 +282,7 @@ class JoomcckModelAuditlog extends MModelList
 
 			foreach($list as $key => $user)
 			{
-				$users[] = JHtml::_('select.option', $user->user_id, sprintf('%s (%s) <span class="badge">%d</span>', $user->name, $user->username ? $user->username : JText::_('CGUEST'), $user->total));
+				$users[] = JHtml::_('select.option', $user->user_id, sprintf('%s (%s) <span class="badge bg-light text-muted border">%d</span>', $user->name, $user->username ? $user->username : JText::_('CGUEST'), $user->total));
 			}
 
 			ArrayHelper::clean_r($users);

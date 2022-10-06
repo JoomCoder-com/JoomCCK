@@ -39,11 +39,6 @@ class JoomcckModelAuditversion extends MModelAdmin
 
 			$data = $db->loadObject();
 
-			if($error = $db->getErrorMsg())
-			{
-				throw new Exception($error);
-			}
-
 
 			if(empty($data))
 			{
@@ -54,16 +49,16 @@ class JoomcckModelAuditversion extends MModelAdmin
 			$data->category = json_decode($data->category_serial);
 			$data->tags     = json_decode($data->tags_serial);
 		}
-		catch(JException $e)
+		catch(RuntimeException $e)
 		{
 			if($e->getCode() == 404)
 			{
 				// Need to go thru the error handler to allow Redirect to work.
-				JError::raiseError(404, $e->getMessage());
+				throw new RuntimeException($e->getMessage(),$e->getCode());
 			}
 			else
 			{
-				$this->setError($e);
+				$this->setError($e->getMessage());
 				$data = FALSE;
 			}
 		}

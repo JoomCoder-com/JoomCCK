@@ -33,7 +33,7 @@ foreach($this->values as $key => $value) :
 			<input type="checkbox" name="filters[<?php echo $this->key;?>][value][]" value="<?php echo htmlspecialchars($value->field_value);?>" 
 				<?php echo (in_array($value->field_value, $default) ? ' checked="checked"' : NULL);?>> 
 			<?php echo $label;?>
-			<span class="badge"><?php echo ($this->params->get('params.filter_show_number', 1) ? $value->num : NULL);?></span>
+			<span class="badge bg-light text-muted border"><?php echo ($this->params->get('params.filter_show_number', 1) ? $value->num : NULL);?></span>
 		</label>
 	</div>
 	<?php if($key % 2 != 0):?>

@@ -660,9 +660,9 @@ class JFormFieldCMultilevelselect extends CFormField
 		{
 			$out[] = '<li id="row'.$row->id.'" class="list-level-'.$row->level.'">';
 			$out[] = '<div class="btn-group btn-ctrl float-end">';
-			$out[] = '<button onclick="mls_input('.($row->level + 1).', '.$row->id.')" class="btn btn-mini">'.JHtml::image($img_add, JText::_('MLS_ADDCHILD'), 'align="absmiddle"');
-			$out[] = '</button><button onclick="mls_edit('.$row->id.')" class="btn btn-mini">'.JHtml::image($img_edit, JText::_('MLS_EDIT'), 'align="absmiddle"');
-			$out[] = '</button><button onclick="mls_delete('.$row->id.')" class="btn btn-mini">'.JHtml::image($img_del, JText::_('MLS_DELETE'), 'align="absmiddle"');
+			$out[] = '<button onclick="mls_input('.($row->level + 1).', '.$row->id.')" class="btn btn-sm btn-light border">'.JHtml::image($img_add, JText::_('MLS_ADDCHILD'), 'align="absmiddle"');
+			$out[] = '</button><button onclick="mls_edit('.$row->id.')" class="btn btn-sm btn-light border">'.JHtml::image($img_edit, JText::_('MLS_EDIT'), 'align="absmiddle"');
+			$out[] = '</button><button onclick="mls_delete('.$row->id.')" class="btn btn-sm btn-light border">'.JHtml::image($img_del, JText::_('MLS_DELETE'), 'align="absmiddle"');
 			$out[] = '</button></div><span id="item'.$row->id.'">'.$row->name.'</span>';
 			$out[] = '<div class="clearfix"></div>';
 			$out[] = '</li>';

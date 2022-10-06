@@ -184,7 +184,7 @@ class HTMLFormatHelper
 		$attr = array('data-original-title' => $alt, 'rel' => 'tooltip', 'id' => 'follow_record_' . $record->id);
 		$out  = JHtml::image($file, $alt, $attr);
 
-		return sprintf('<a class="btn btn-mini btn-co-control" type="button" onclick="Joomcck.followRecord(%d, %d);">%s</a>',
+		return sprintf('<button class="btn btn-sm btn-light" type="button" onclick="Joomcck.followRecord(%d, %d);">%s</button>',
 			$record->id, JFactory::getApplication()->input->getInt('section_id'), $out);
 	}
 
@@ -216,7 +216,7 @@ class HTMLFormatHelper
 		$attr = array('data-original-title' => JText::_('CMSG_COMPARE'), 'rel' => 'tooltip');
 		$img  = JHtml::image($file, JText::_('Compare'), $attr);
 
-		return sprintf('<a class="btn btn-co-control btn-mini%s" id="compare_%d" type="button" onclick="Joomcck.CompareRecord(%d, %d);">%s</a>',
+		return sprintf('<button class="btn btn-co-control btn-sm btn-light %s" id="compare_%d" type="button" onclick="Joomcck.CompareRecord(%d, %d);">%s</button>',
 			$hide, $record->id, $record->id, $app->input->getInt('section_id'), $img);
 
 	}
@@ -267,7 +267,7 @@ class HTMLFormatHelper
 		$attr = array('data-original-title' => $alt, 'rel' => 'tooltip');
 		$img  = JHtml::image($file, $alt, $attr);
 
-		return sprintf('<a class="btn btn-co-control btn-mini" id="repost_%d" type="button" onclick="Joomcck.RepostRecord(%d, %d);">%s</a>',
+		return sprintf('<button class="btn btn-co-control btn-mini" id="repost_%d" type="button" onclick="Joomcck.RepostRecord(%d, %d);">%s</button>',
 			$record->id, $record->id, JFactory::getApplication()->input->getInt('section_id'), $img);
 	}
 
@@ -297,7 +297,7 @@ class HTMLFormatHelper
 		$attr = array('data-original-title' => $alt, 'rel' => 'tooltip', 'id' => 'bookmark_' . $record->id);
 		$out  = JHtml::image($file, $alt, $attr);
 
-		return sprintf('<a class="btn btn-co-control btn-mini" type="button" onclick="Joomcck.bookmarkRecord(%d, \'%s\', %d);">%s</a>',
+		return sprintf('<button class="btn btn-co-control btn-light btn-sm" type="button" onclick="Joomcck.bookmarkRecord(%d, \'%s\', %d);">%s</button>',
 			$record->id, $params->get('tmpl_core.bookmark_icons', 'star'), JFactory::getApplication()->input->getInt('section_id'), $out);
 	}
 

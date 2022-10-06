@@ -132,7 +132,7 @@ $listDirn	= $this->state->get('list.direction');
 					<?php else:?>
 						<?php echo JText::_('CFIELDS');?>
 					<?php endif;?>
-					<span class="badge<?php if($item->fieldnum){echo 'bg-success';}?>"><?php echo $item->fieldnum?></span>
+					<span class="badge<?php if($item->fieldnum){echo ' bg-success';}?>"><?php echo $item->fieldnum?></span>
 				</td>
 				<td class="center">
 					<?php echo $item->language; ?>
