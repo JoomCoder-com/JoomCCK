@@ -116,7 +116,7 @@ $this->_filters = true;
 		<div class="alert alert-warning">
 			<a class="close" data-dismiss="alert" href="#">X</a>
 			<p><?php echo HTMLFormatHelper::icon('exclamation-diamond.png', JText::_('AL_FAPPLIED'));  ?> <?php echo JText::_('AL_FILTERS')?></p>
-			<button type="button" class="btn btn-warning btn-mini" onclick="Joomla.submitbutton('auditlog.reset')"><?php echo JText::_('AL_RESET')?></button>
+			<button type="button" class="btn btn-warning btn-sm" onclick="Joomla.submitbutton('auditlog.reset')"><?php echo JText::_('AL_RESET')?></button>
 		</div>
 	<?php endif;?>
 

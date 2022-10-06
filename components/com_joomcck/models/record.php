@@ -64,12 +64,12 @@ class JoomcckModelRecord extends MModelItem
 			$db->setQuery($query);
 			//echo $query; exit;
 
-			$data = $db->loadObject();
-
-			if($error = $db->getErrorMsg())
-			{
-				throw new Exception($error);
+			try{
+				$data = $db->loadObject();
+			}catch(RuntimeException $e){
+				throw new RuntimeException($e->getMessage(),$e->getCode());
 			}
+
 
 			if(empty($data))
 			{

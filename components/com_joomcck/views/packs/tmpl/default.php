@@ -80,7 +80,7 @@ $listDirn = $this->state->get('list.direction');
 					<span class="badge bg-success">9.<?php echo $item->version; ?></span>
 				</td>
 				<td align="center">
-					<a class="btn btn-primary btn-mini" href="<?php echo JRoute::_('index.php?option=com_joomcck&task=pack.build&pack_id=' . $item->id) ?>"><?php echo JText::_('CBUILD') ?></a><br/>
+					<a class="btn btn-primary btn-sm" href="<?php echo JRoute::_('index.php?option=com_joomcck&task=pack.build&pack_id=' . $item->id) ?>"><?php echo JText::_('CBUILD') ?></a><br/>
 				</td>
 				<td nowrap="nowrap">
 					<small>

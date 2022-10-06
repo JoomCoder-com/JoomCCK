@@ -430,7 +430,7 @@ class JFormFieldCMultilevelselect extends CFormField
 
 		if(in_array($this->params->get('params.canedit'), $user->getAuthorisedViewLevels()) && empty($post['filter']))
 		{
-			$level .= ' <button rel="tooltip" data-original-title="'.JText::_('CEDIT').'" type="button" onclick="'.$mls.$this->id.'.edit(this, '.$post['level'].', '.$post['parent_id'].')" class="btn btn-mini btn-edit"><img src="'.JUri::root(true).'/media/mint/icons/16/pencil.png"></button>';
+			$level .= ' <button rel="tooltip" data-original-title="'.JText::_('CEDIT').'" type="button" onclick="'.$mls.$this->id.'.edit(this, '.$post['level'].', '.$post['parent_id'].')" class="btn btn-sm btn-edit"><img src="'.JUri::root(true).'/media/mint/icons/16/pencil.png"></button>';
 		}
 
 		/*if(isset($post['selected']) && $post['selected'])

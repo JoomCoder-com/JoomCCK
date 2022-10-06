@@ -97,7 +97,7 @@ $current_user = JFactory::getUser($this->input->getInt('user_id', $this->user->g
                                    value="<?php echo htmlentities($this->state->get('records.search'), ENT_COMPAT, 'utf-8');?>" />
 	                    <?php endif;?>
 	                    <?php if(in_array($markup->get('filters.show_more'), $this->user->getAuthorisedViewLevels())):?>
-                            <button type="button" class="btn btn-sm btn-light border" data-toggle="collapse" data-target="#filter-collapse" rel="tooltip" data-original-title="<?php echo JText::_('CMORESEARCHOPTIONS')?>">
+                            <button type="button" class="btn btn-sm btn-light border" data-bs-toggle="collapse" data-bs-target="#filter-collapse" rel="tooltip" data-original-title="<?php echo JText::_('CMORESEARCHOPTIONS')?>">
 			                    <?php echo HTMLFormatHelper::icon('binocular.png');  ?>
                             </button>
 	                    <?php endif;?>
@@ -486,7 +486,7 @@ $current_user = JFactory::getUser($this->input->getInt('user_id', $this->user->g
 							<img src="<?php echo JURI::root(TRUE)?>/media/mint/icons/16/cross-button.png" align="absmiddle" alt="<?php echo JText::_('CRESETFILTERS');?>" />
 							<?php echo JText::_('CRESETFILTERS');?></button>
 					<?php endif;?>
-					<button class="btn" type="button"  data-toggle="collapse" data-target="#filter-collapse">
+					<button class="btn" type="button"  data-bs-toggle="collapse" data-bs-target="#filter-collapse">
 						<img src="<?php echo JURI::root(TRUE)?>/media/mint/icons/16/minus-button.png" align="absmiddle" alt="<?php echo JText::_('CCLOSE');?>" />
 						<?php echo JText::_('CCLOSE');?></button>
 				</div>

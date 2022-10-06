@@ -152,7 +152,7 @@ foreach ($exclude as &$value) {
 									<?php echo HTMLFormatHelper::repost($item, $this->section);?>
 									<?php echo HTMLFormatHelper::compare($item, $this->submission_types[$item->type_id], $this->section);?>
 									<?php if($item->controls):?>
-                                        <button type="button" data-bs-toggle="dropdown" class="dropdown-toggle btn btn-sm bg-light ">
+                                        <button type="button" data-bs-toggle="dropdown" class="dropdown-toggle btn btn-sm bg-light border">
                                         </button>
                                         <ul class="dropdown-menu">
 											<?php echo list_controls($item->controls);?>

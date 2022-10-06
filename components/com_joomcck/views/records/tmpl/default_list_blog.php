@@ -37,7 +37,7 @@ if(!class_exists('CarticleHelper'))
 						<?php echo HTMLFormatHelper::repost($item, $obj->section);?>
 						<?php echo HTMLFormatHelper::compare($item, $obj->submission_types[$item->type_id], $obj->section);?>
 						<?php if($item->controls):?>
-							<a href="#" data-toggle="dropdown" class="dropdown-toggle btn btn-mini">
+							<a href="#" data-toggle="dropdown" class="dropdown-toggle btn btn-sm">
 								<?php echo HTMLFormatHelper::icon('gear.png');  ?>
 							</a>
 							<ul class="dropdown-menu">
@@ -266,7 +266,7 @@ $helper->exclude = $exclude;
 						<?php echo HTMLFormatHelper::repost($item, $this->section);?>
 						<?php echo HTMLFormatHelper::compare($item, $this->submission_types[$item->type_id], $this->section);?>
 						<?php if($item->controls):?>
-							<a href="#" data-toggle="dropdown" class="dropdown-toggle btn btn-mini">
+							<a href="#" data-toggle="dropdown" class="dropdown-toggle btn btn-sm">
 								<?php echo HTMLFormatHelper::icon('gear.png');  ?>
 							</a>
 							<ul class="dropdown-menu">

@@ -189,19 +189,19 @@ class JHTMLMrelements
 		$out[] = '
 			<div class="float-start">
 				<input type="checkbox" class="toggle">
-				<button type="button" class="btn btn-danger btn-mini delete">
+				<button type="button" class="btn btn-danger btn-sm delete">
 					Delete
 				</button>
 			</div>
 			<div class="float-end">
-				<span class="btn btn-success btn-mini fileinput-button">
+				<span class="btn btn-success btn-sm fileinput-button">
 					<span>Add files...</span>
 					<input type="file" name="tmpfileuploader[]" multiple>
 				</span>' . ($options['autostart'] ? NULL : '
-				<button type="button" class="btn btn-mini btn-primary start">
+				<button type="button" class="btn btn-sm btn-primary start">
 					<span>Start upload</span>
 				</button>') . '
-				<button type="reset" class="btn btn-mini btn-warning cancel">
+				<button type="reset" class="btn btn-sm btn-warning cancel">
 					<span>Cancel upload</span>
 				</button>
 				<span class="fileupload-process"></span>
@@ -251,7 +251,7 @@ class JHTMLMrelements
 			        </td>
 			        <td width="1%">' . $file['size'] . '</td>
 			        <td width="1%">
-		                <button class="btn btn-mini btn-link btn-danger" data-type="DELETE" style="width:30px" data-url="' . JRoute::_("index.php?option=com_joomcck&task=files.uploadremove&tmpl=component&filename=" . $file['filename']) . '">
+		                <button class="btn btn-sm btn-link btn-danger" data-type="DELETE" style="width:30px" data-url="' . JRoute::_("index.php?option=com_joomcck&task=files.uploadremove&tmpl=component&filename=" . $file['filename']) . '">
 		                    ' . HTMLFormatHelper::icon('minus-circle.png', JText::_('CDELETE')) . '
 		                </button>
 			        </td>

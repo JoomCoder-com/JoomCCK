@@ -98,8 +98,8 @@ if($params->get('tmpl_core.item_follow_num'))
 					<?php echo HTMLFormatHelper::follow($item, $this->section);?>
 					<?php echo HTMLFormatHelper::repost($item, $this->section);?>
 					<?php if($item->controls):?>
-						<a href="#" data-toggle="dropdown" class="dropdown-toggle btn btn-mini">
-							<?php echo HTMLFormatHelper::icon('gear.png');  ?></a>
+						<button type="button" data-bs-toggle="dropdown" class="dropdown-toggle btn btn-sm btn-light border">
+							<?php echo HTMLFormatHelper::icon('gear.png');  ?></button>
 						<ul class="dropdown-menu">
 							<?php echo list_controls($item->controls);?>
 						</ul>

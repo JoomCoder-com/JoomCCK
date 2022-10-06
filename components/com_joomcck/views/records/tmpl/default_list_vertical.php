@@ -65,7 +65,7 @@ $width = (100 - (int)$params->get('tmpl_params.lbl_width', 15)) / $cols;
 							<?php echo HTMLFormatHelper::follow($items[$i], $this->section);?>
 							<?php echo HTMLFormatHelper::repost($items[$i], $this->section);?>
 							<?php if($items[$i]->controls):?>
-								<a href="#" data-toggle="dropdown" class="dropdown-toggle btn btn-mini">
+								<a href="#" data-toggle="dropdown" class="dropdown-toggle btn btn-sm">
 									<img width="16" height="16" alt="<?php echo JText::_('COPTIONS')?>" src="<?php echo JURI::root(TRUE)?>/media/mint/icons/16/gear.png">
 								</a>
 								<ul class="dropdown-menu">
