@@ -41,9 +41,9 @@ class JFormFieldCckevents extends JFormField
 		foreach($events as $event => $karma)
 		{
 			$access = JHtml::_('access.level', $this->name . "[{$event}][notif]", isset($this->value->$event->notif) ? $this->value->$event->notif : 2,
-				'class="span12"', array(JHtml::_('select.option', '0', JText::_('XML_OPT_NOONE'))));
+				'class="col-md-12"', array(JHtml::_('select.option', '0', JText::_('XML_OPT_NOONE'))));
 			$act = JHtml::_('access.level', $this->name . "[{$event}][activ]", isset($this->value->$event->activ) ? $this->value->$event->activ : 2,
-				'class="span12"', array(JHtml::_('select.option', '0', JText::_('XML_OPT_NOONE'))));
+				'class="col-md-12"', array(JHtml::_('select.option', '0', JText::_('XML_OPT_NOONE'))));
 			$karma1 = sprintf('<input class="input-mini" type="text" size="3" value="%d" name="%s[%s][karma1]">',
 				isset($this->value->$event->karma1) ? $this->value->$event->karma1 : 0, $this->name, $event);
 			$karma2 = sprintf('<input class="input-mini" type="text" size="3" value="%d" name="%s[%s][karma2]">',

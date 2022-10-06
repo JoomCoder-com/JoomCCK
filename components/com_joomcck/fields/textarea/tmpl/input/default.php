@@ -10,7 +10,7 @@
 defined('_JEXEC') or die();
 $params = $this->params;
 
-$class      = ' class="span12 expanding' . $params->get('core.field_class') . ($this->required ? ' required' : NULL) . '"';
+$class      = ' class="col-md-12 expanding' . $params->get('core.field_class') . ($this->required ? ' required' : NULL) . '"';
 $required   = $this->required ? ' required="true" ' : NULL;
 $max_length = (int)$params->get('params.maxlen', 0);
 $js         = '';
@@ -94,7 +94,7 @@ else:
 	$style .= 'height:' . $params->get('params.height', '50px') . ';';
 endif;
 ?>
-	<div class="row-fluid">
+	<div class="row">
 		<textarea name="jform[fields][<?php echo $this->id; ?>]" <?php echo $js . $class . $required; ?>
 				  id="field_<?php echo $this->id; ?>"
 				  style="<?php echo $style; ?>"

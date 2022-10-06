@@ -42,7 +42,7 @@ $api = new JoomcckApi();
 <?php endif;?>
 
 <?php for($i = 0; $i < $rows; $i ++):?>
-	<div class="row-fluid">
+	<div class="row">
 		<?php for($c = 0; $c < $cols; $c++):?>
 			<div class="span<?php echo $span[$cols]?> category-box">
 				<?php if ($ind < count($cats)): ?>

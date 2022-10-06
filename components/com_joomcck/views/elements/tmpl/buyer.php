@@ -32,7 +32,7 @@ $links = $this->pagination->getPagesLinks();
 
 	<div class="controls controls-row">
 		<div class="input-append">
-			<input class="span3" type="text" name="filter_search" id="filter_search" value="<?php echo $this->state->get('filter.search'); ?>"/>
+			<input class="col-md-3" type="text" name="filter_search" id="filter_search" value="<?php echo $this->state->get('filter.search'); ?>"/>
 			<button class="btn" type="submit" rel="tooltip" data-original-title="<?php echo JText::_('JSEARCH_FILTER_SUBMIT'); ?>">
 				<?php echo HTMLFormatHelper::icon('magnifier.png');  ?>
 			</button>

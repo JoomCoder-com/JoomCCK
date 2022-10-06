@@ -100,7 +100,7 @@ class MintPayPaypal extends MintPayAbstract
 
 		if($field->params->get('pay.allow_amount'))
 		{
-			$nonehidden[JText::_('CAMOUNT')] = '<input type="text" onkeyup="Joomcck.formatFloat(this, 2, 11)" class="span2" name="amount" value="' . $pp_amount . '" />';
+			$nonehidden[JText::_('CAMOUNT')] = '<input type="text" onkeyup="Joomcck.formatFloat(this, 2, 11)" class="col-md-2" name="amount" value="' . $pp_amount . '" />';
 			$amount                          = 0;
 			$discount                        = 0;
 			$topay                           = 0;
@@ -112,7 +112,7 @@ class MintPayPaypal extends MintPayAbstract
 
 		if($field->params->get('pay.allow_count'))
 		{
-			$nonehidden[JText::_('PP_QNT')] = '<input type="text" class="span2" onkeyup="Joomcck.formatInt(this)" name="quantity" value="' . $options->get('pay.default_count', 1) . '" />';
+			$nonehidden[JText::_('PP_QNT')] = '<input type="text" class="col-md-2" onkeyup="Joomcck.formatInt(this)" name="quantity" value="' . $options->get('pay.default_count', 1) . '" />';
 		}
 		else
 		{

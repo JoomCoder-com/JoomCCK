@@ -58,7 +58,7 @@ if($this->comment->rate > 10) $bc = 'bg-success';
 ?>
 <a name="comment<?php echo $this->comment->id?>"></a>
 <div style="margin-left: <?php echo $params->get('tmpl_params.comments_indent') * ($this->comment->level - 1)?>px;" id="comment<?php echo $this->comment->id?>-container" class="">
-	<div class="row-fluid">
+	<div class="row">
 		<div class="span<?php echo $this->comment->level > 1 ? 1 : 2; ?>">
 			<?php if($params->get('tmpl_core.comments_author_avatar')): ?>
 				<td width="1%" style="padding-right: 10px;"><img src="<?php echo CCommunityHelper::getAvatar($this->comment->user_id, $width, $height);?>" /></td>

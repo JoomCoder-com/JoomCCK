@@ -49,7 +49,7 @@ class JFormFieldCckAuditEvents extends JFormField
 
 		$msg = '<input style="width:100%" class="input-medium" type="text" value="' . $value . '" name="' . $this->name . '[msg]">';
 
-		$patern = '<div class="row-fluid"><div class="span4">%s</div><div class="span7">%s</div></div>';
+		$patern = '<div class="row"><div class="span4">%s</div><div class="span7">%s</div></div>';
 		return sprintf($patern, implode('', $input), $msg);
 	}
 }

@@ -72,11 +72,11 @@ div.btn-group[data-toggle=buttons-radio] input[type=radio] {
 
 	<legend><?php echo JText::_('CEMAILSETINGS');?></legend>
 	<div class="control-group">
-		<div class="control-label span2"><?php echo $this->form->getLabel('schedule'); ?></div>
+		<div class="control-label col-md-2"><?php echo $this->form->getLabel('schedule'); ?></div>
 		<div class="controls"><?php echo $this->form->getInput('schedule'); ?></div>
 	</div>
 	<div class="control-group">
-		<div class="control-label span2"><?php echo $this->form->getLabel('language'); ?></div>
+		<div class="control-label col-md-2"><?php echo $this->form->getLabel('language'); ?></div>
 		<div class="controls"><?php echo $this->form->getInput('language'); ?></div>
 	</div>
 
@@ -249,7 +249,7 @@ div.btn-group[data-toggle=buttons-radio] input[type=radio] {
 						<div class="tab-pane form-horizontal" id="page-notif">
 						<?php if($this->notyfications['r']):?>
 						 	<legend><?php echo JText::_('CRECNOTIF')?></legend>
-							<div class="row-fluid">
+							<div class="row">
 								<?php foreach ($this->notyfications['r'] AS $type):?>
 									<div class="control-group">
 										<div class="control-label span4"><?php echo ucfirst(JText::sprintf('alert_event_'.$type, strtolower($section->params->get('general.item_label', 'item'))))?></div>
@@ -260,7 +260,7 @@ div.btn-group[data-toggle=buttons-radio] input[type=radio] {
 						<?php endif;?>
 						<?php if($this->notyfications['c']):?>
 							<legend><?php echo JText::_('CCOMNOTIF')?></legend>
-							<div class="row-fluid">
+							<div class="row">
 								<?php foreach ($this->notyfications['c'] AS $type):?>
 									<div class="control-group">
 										<div class="control-label span4"><?php echo JText::_('alert_event_'.$type)?></div>

@@ -94,7 +94,7 @@ $k = 0;
 <br>
 <form name="adminForm" id="adminForm" method="post">
 	<div class="container-fluid">
-		<div id="row-fluid">
+		<div id="row">
 			<div class="float-start input-append">
 
 				<input type="text" name="filter_search2" id="filter_search2" value="<?php echo $this->state->get('records.search2'); ?>" />
@@ -118,7 +118,7 @@ $k = 0;
 
 	<div class="container-fluid">
 	<?php if(JFactory::getApplication()->input->get('mode') == 'form'):?>
-		<div class="row-fluid">
+		<div class="row">
 			<div class="span8">
 
 	<?php endif;?>

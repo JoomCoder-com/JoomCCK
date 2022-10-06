@@ -28,7 +28,7 @@ foreach ($displayData->_filters AS $i => $filter) {
     <div class="input-group">
         <input type="text" class="form-control" aria-label="<?php echo JText::_('CSEARCHPLACEHOLDER'); ?>" placeholder="<?php echo JText::_('CSEARCHPLACEHOLDER'); ?>" name="filter_search" id="filter_search" value="<?php echo $displayData->state->get('filter.search'); ?>"/>
 	    <?php if(!empty($displayData->_filters)): ?>
-            <button type="button" class="btn btn-outline-secondary" data-toggle="collapse" rel="tooltip" data-target="#list-filters-box" data-original-title="<?php echo JText::_('CFILTER'); ?>">
+            <button type="button" class="btn btn-outline-secondary" data-bs-toggle="collapse" rel="tooltip" data-bs-target="#list-filters-box" data-original-title="<?php echo JText::_('CFILTER'); ?>">
 			    <?php echo HTMLFormatHelper::icon('funnel.png'); ?>
             </button>
 	    <?php endif; ?>

@@ -25,7 +25,7 @@ class JHTMLTypes
 		$out[] = '<div class="container-fluid">';
 		foreach($list AS $type)
 		{
-			$out[] = '<div class="span3"><label class="checkbox">';
+			$out[] = '<div class="col-md-3"><label class="checkbox">';
 			$out[] = '<input id="type-' . $type . '" type="checkbox" name="filters[type][]" value="' . $type . '" ' . $stypes[$type]->filter_checked . '>';
 			$out[] = $stypes[$type]->name . '</label></div>';
 		}

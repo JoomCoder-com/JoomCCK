@@ -23,8 +23,8 @@ defined('_JEXEC') or die();
 </ul>
 
 <form action="<?php echo \Joomla\CMS\Uri\Uri::getInstance()->toString(); ?>" method="post" name="adminForm" id="adminForm" class="form-horizontal">
-	<div class="row-fluid">
-		<?php echo JHtml::_('select.genericlist', $this->presets, 'preset', 'class="span12"');?>
+	<div class="row">
+		<?php echo JHtml::_('select.genericlist', $this->presets, 'preset', 'class="col-md-12"');?>
 	</div>
 
 	<div class="hide" id="preset-form">

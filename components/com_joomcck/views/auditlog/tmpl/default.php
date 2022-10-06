@@ -82,11 +82,11 @@ $this->_filters = true;
 				<div class="tab-pane" id="date">
 					<div class="container-fluid">
 						<?php if(@$this->mtime):?>
-							<div class="row-fluid">
+							<div class="row">
 								<p><?php echo JText::sprintf('CALSTARTED', $this->mtime)?></p>
 							</div>
 						<?php endif;?>
-						<div class="row-fluid">
+						<div class="row">
 							<div class="float-start">
 								<label>From</label>
 								<?php echo JHtml::calendar((string)$this->state->get('auditlog.fcs'), 'filter_cal_start', 'fcs')?>
@@ -293,7 +293,7 @@ function _show_list_filters($list, $name, $state)
 			<div class="container-fluid">
 				<?php foreach ($list AS $item): ?>
 					<?php if($i % $cols == 0):?>
-					<div class="row-fluid">
+					<div class="row">
 					<?php endif;?>
 						<div class="span4">
 							<label class="checkbox">

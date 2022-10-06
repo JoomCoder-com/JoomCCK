@@ -264,7 +264,7 @@ class JFormFieldCImage extends CFormField
 	public function onImportForm($heads, $defaults)
 	{
 		$out = $this->_import_fieldlist($heads, $defaults->get('field.' . $this->id . '.fname'), 'fname');
-		$out .= sprintf('<div><small>%s</small></div><input type="text" name="import[field][%d][path]" value="%s" class="span12" >',
+		$out .= sprintf('<div><small>%s</small></div><input type="text" name="import[field][%d][path]" value="%s" class="col-md-12" >',
 			JText::_('IIMPPATH'), $this->id, $defaults->get('field.' . $this->id . '.path', 'images'));
 
 		return $out;

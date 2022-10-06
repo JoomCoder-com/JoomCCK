@@ -59,24 +59,24 @@ $image_url = JURI::root(TRUE).CImgHelper::getThumb(JPATH_ROOT.'/images/usercateg
 		</ul>
 		<div class="tab-content">
 			<div class="tab-pane active" id="page-catfields">
-				<div class="row-fluid">
+				<div class="row">
 					<div class="control-group">
-						<div class="control-label span2"><?php echo $this->form->getLabel('name') ; ?></div>
+						<div class="control-label col-md-2"><?php echo $this->form->getLabel('name') ; ?></div>
 						<div class="controls"><?php echo $this->form->getInput('name') ; ?></div>
 					</div>
 					<div class="control-group">
-						<div class="control-label span2"><?php echo $this->form->getLabel('description') ; ?></div>
+						<div class="control-label col-md-2"><?php echo $this->form->getLabel('description') ; ?></div>
 						<div class="controls"><?php echo $this->form->getInput('description') ; ?></div>
 					</div>
 					<?php if($this->section->params->get('personalize.pcat_icon')):?>
 					<div class="control-group">
-						<div class="control-label span2"><?php echo $this->form->getLabel('icon') ; ?></div>
+						<div class="control-label col-md-2"><?php echo $this->form->getLabel('icon') ; ?></div>
 						<div class="controls"><?php echo $this->form->getInput('icon') ; ?></div>
 					</div>
 					<?php endif;?>
 					<?php if(!empty($this->item->icon)):?>
 						<div class="control-group" id="iconpreview">
-							<div class="control-label span2"><?php echo JText::_('CICONPREVIEW'); ?></div>
+							<div class="control-label col-md-2"><?php echo JText::_('CICONPREVIEW'); ?></div>
 							<div class="controls">
 								<img src="<?php echo $image_url;?>">
 		    					<a href="javascript:void(0);" onclick="Joomcck.ajax_removeUserCategoryIcon('<?php echo $this->item->icon?>', <?php echo $this->item->id?>);"><?php echo JText::_('CREMOVEICON')?></a>
@@ -87,20 +87,20 @@ $image_url = JURI::root(TRUE).CImgHelper::getThumb(JPATH_ROOT.'/images/usercateg
 			</div>
 
 			<div class="tab-pane" id="page-specfields">
-				<div class="row-fluid">
+				<div class="row">
 					<div class="control-group">
-						<div class="control-label span2"><?php echo $this->form->getLabel('published') ; ?></div>
+						<div class="control-label col-md-2"><?php echo $this->form->getLabel('published') ; ?></div>
 						<div class="controls"><?php echo $this->form->getInput('published') ; ?></div>
 					</div>
 					<div class="control-group">
-						<div class="control-label span2"><?php echo $this->form->getLabel('access') ; ?></div>
+						<div class="control-label col-md-2"><?php echo $this->form->getLabel('access') ; ?></div>
 						<div class="controls"><?php echo $this->form->getInput('access') ; ?></div>
 					</div>
 					<?php if(in_array($this->section->params->get('personalize.pcat_meta'), $this->user->getAuthorisedViewLevels())):?>
 		        	<?php $params = $this->form->getFieldset('params');
 		            	foreach ($params as $param):?>
 						<div class="control-group">
-							<div class="control-label span2"><?php echo $param->label;?></div>
+							<div class="control-label col-md-2"><?php echo $param->label;?></div>
 							<div class="controls"> <?php echo $param->input;?></div>
 						</div>
 						<?php endforeach;?>

@@ -977,7 +977,7 @@ class JFormFieldCGeo extends CFormField
 			$out = array_merge($options, $out);
 		}
 
-		$html[] = '<select class="span12" id="f' . $this->id . '_address_country" type="text" name="jform[fields][' . $this->id .
+		$html[] = '<select class="col-md-12" id="f' . $this->id . '_address_country" type="text" name="jform[fields][' . $this->id .
 			'][address][country]">';
 		foreach($out as $id => $name)
 		{

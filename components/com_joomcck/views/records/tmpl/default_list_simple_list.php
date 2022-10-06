@@ -171,9 +171,9 @@ JHtml::_('dropdown.init');
 
 				<div class="well article-info">
 					<div class="container-fluid">
-						<div class="row-fluid">
+						<div class="row">
 							<?php if($params->get('tmpl_core.item_rating')):?>
-								<div class="span3">
+								<div class="col-md-3">
 									<?php echo $item->rating;?>
 								</div>
 							<?php endif;?>
@@ -199,7 +199,7 @@ JHtml::_('dropdown.init');
 								</small>
 							</div>
 							<?php if($params->get('tmpl_core.item_author_avatar')):?>
-								<div class="span2 avatar">
+								<div class="col-md-2 avatar">
 									<img src="<?php echo CCommunityHelper::getAvatar($item->user_id, $params->get('tmpl_core.item_author_avatar_width', 40), $params->get('tmpl_core.item_author_avatar_height', 40));?>" />
 								</div>
 							<?php endif;?>

@@ -20,20 +20,20 @@ JHtml::_('bootstrap.modal');
 
 <div class="page-header"><h1><?php echo JText::_('CADDSALE')?></h1></div>
 <form action="<?php echo JRoute::_('index.php');?>" method="post" name="adminForm" id="adminForm" class="form-horizontal">
-	<div class="row-fluid">
+	<div class="row">
 		<div class="control-group">
-			<div class="control-label span2"><?php echo $this->form->getLabel('gateway_id'); ?></div>
+			<div class="control-label col-md-2"><?php echo $this->form->getLabel('gateway_id'); ?></div>
 			<div class="controls"><?php echo $this->form->getInput('gateway_id'); ?></div>
 		</div>
 
 	<div class="control-group">
-		<div class="control-label span2"><?php echo $this->form->getLabel('user_id'); ?></div>
+		<div class="control-label col-md-2"><?php echo $this->form->getLabel('user_id'); ?></div>
 		<div class="controls"><?php echo $this->form->getInput('user_id'); ?>
 		<img alt="loading..." id="user-name-check" align="absmiddle" src="<?php echo JURI::root(TRUE);?>/components/com_joomcck/images/load.gif" style="display: none;">
 		</div>
 	</div>
 	<div class="control-group">
-		<div class="control-label span2"><?php echo $this->form->getLabel('record_id'); ?></div>
+		<div class="control-label col-md-2"><?php echo $this->form->getLabel('record_id'); ?></div>
 		<div class="controls">
 			<div class="input-append">
 				<?php echo $this->form->getInput('record_id'); ?>
@@ -46,15 +46,15 @@ JHtml::_('bootstrap.modal');
 		</div>
 	</div>
 	<div class="control-group">
-		<div class="control-label span2"><?php echo $this->form->getLabel('amount'); ?></div>
+		<div class="control-label col-md-2"><?php echo $this->form->getLabel('amount'); ?></div>
 		<div class="controls"><?php echo $this->form->getInput('amount'); ?></div>
 	</div>
 	<div class="control-group">
-		<div class="control-label span2"><?php echo $this->form->getLabel('status'); ?></div>
+		<div class="control-label col-md-2"><?php echo $this->form->getLabel('status'); ?></div>
 		<div class="controls"><?php echo $this->form->getInput('status'); ?></div>
 	</div>
 	<div class="control-group">
-		<div class="control-label span2"><?php echo $this->form->getLabel('comment') ; ?></div>
+		<div class="control-label col-md-2"><?php echo $this->form->getLabel('comment') ; ?></div>
 		<div class="controls"><?php echo $this->form->getInput('comment') ; ?></div>
 	</div>
 </div>

@@ -16,10 +16,10 @@ if(empty($displayData->_filters)) return;
 	<div class="filter-container">
 		<?php foreach ($displayData->_filters AS $i => $filter): ?>
 			<?php if($i % 4 == 0): ?>
-				<div class="row-fluid">
+				<div class="row">
 			<?php endif; ?>
-			<div class="span3">
-				<select style="width: 100%" name="<?php echo $filter['id']; ?>" id="<?php echo $filter['id']; ?>" class="span12 small" onchange="this.form.submit()">
+			<div class="col-md-3">
+				<select class="form-control form-control-sm w-100" name="<?php echo $filter['id']; ?>" id="<?php echo $filter['id']; ?>" class="col-md-12 small" onchange="this.form.submit()">
 					<option value=""><?php echo $filter['name']; ?></option>
 					<?php echo $filter['element']; ?>
 				</select>

@@ -27,7 +27,7 @@ class JFormFieldCregister extends CFormField
 			$db  = JFactory::getDbo();
 			$db->setQuery("SELECT id as value, title as text FROM #__usergroups WHERE id IN({$ids})");
 			$list        = $db->loadObjectList();
-			$this->group = JHTML::_('select.genericlist', $list, 'jform[fields][' . $this->id . '][group]', 'class="span12"');
+			$this->group = JHTML::_('select.genericlist', $list, 'jform[fields][' . $this->id . '][group]', 'class="col-md-12"');
 		}
 
 		if(!$user->get('id'))

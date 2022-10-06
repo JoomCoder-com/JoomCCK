@@ -44,10 +44,10 @@ $params = $this->section->params;
 	<div class="clearfix"> </div>
 	<?php endif;?>
 	
-	<div class="row-fluid">
+	<div class="row">
 		<?php if($params->get('personalize.allow_change_header', 1)):?>
 		<div class="control-group">
-			<div class="control-label span2"><?php echo JText::_('CMYHOMEPAGETITLE'); ?></div>
+			<div class="control-label col-md-2"><?php echo JText::_('CMYHOMEPAGETITLE'); ?></div>
 			<div class="controls">
 				<input type="text" name="jform[title]" size="40" value="<?php echo $this->options->get('title');?>">
 			</div>
@@ -55,7 +55,7 @@ $params = $this->section->params;
 		<?php endif; ?>
 		<?php if($params->get('personalize.allow_change_descr', 1)):?>
 		<div class="control-group">
-			<div class="control-label span2"><span rel="tooltip" data-original-title="<?php echo JText::_('CMYHOMEPAGEMSGDESCR');?>"><?php echo JText::_('CMYHOMEPAGEMSG'); ?></span></div>
+			<div class="control-label col-md-2"><span rel="tooltip" data-original-title="<?php echo JText::_('CMYHOMEPAGEMSGDESCR');?>"><?php echo JText::_('CMYHOMEPAGEMSG'); ?></span></div>
 			<div class="controls">
 				<textarea id="jform_description" name="jform[description]" cols="30" rows="4"><?php echo $this->options->get('description');?></textarea>
 			</div>
@@ -64,7 +64,7 @@ $params = $this->section->params;
 
 		<?php if($params->get('personalize.allow_access_control_add', 1) && $this->section->params->get('personalize.post_anywhere')): ?>
 			<div class="control-group">
-				<div class="control-label span2"><?php echo JText::_('CWHOCANPOSTINMYHAMOPAGE'); ?></div>
+				<div class="control-label col-md-2"><?php echo JText::_('CWHOCANPOSTINMYHAMOPAGE'); ?></div>
 				<div class="controls">
 					<select name="jform[who_post]" >
 						<option value="0" <?php if($this->options->get('who_post') == '0') echo 'selected'; ?> ><?php echo JText::_('CONLYAUTHOR');?></option>
@@ -79,7 +79,7 @@ $params = $this->section->params;
 		
 		<?php if($params->get('personalize.allow_access_control', 1) && $this->section->params->get('events.subscribe_user')): ?>
 			<div class="control-group">
-				<div class="control-label span2"><?php echo JText::_('CWHOCANVIEWMYBOOKMARKS'); ?></div>
+				<div class="control-label col-md-2"><?php echo JText::_('CWHOCANVIEWMYBOOKMARKS'); ?></div>
 				<div class="controls">
 					<select name="jform[who_view_bookmarked]" >
 						<option value="all" <?php if($this->options->get('who_view_bookmarked') == 'all') echo 'selected'; ?> ><?php echo JText::_('CEVERYONE');?></option>
@@ -88,7 +88,7 @@ $params = $this->section->params;
 				</div>
 			</div>
 			<div class="control-group">
-				<div class="control-label span2"><?php echo JText::_('CWHOCANVIEWMYRATEDRECORDS'); ?></div>
+				<div class="control-label col-md-2"><?php echo JText::_('CWHOCANVIEWMYRATEDRECORDS'); ?></div>
 				<div class="controls">
 					<select name="jform[who_view_rated]" >
 						<option value="all" <?php if($this->options->get('who_view_rated') == 'all') echo 'selected'; ?> ><?php echo JText::_('CEVERYONE');?></option>
@@ -97,7 +97,7 @@ $params = $this->section->params;
 				</div>
 			</div>
 			<div class="control-group">
-				<div class="control-label span2"><?php echo JText::_('CWHOCANVIEWMYCOMMENTEDRECORDS'); ?></div>
+				<div class="control-label col-md-2"><?php echo JText::_('CWHOCANVIEWMYCOMMENTEDRECORDS'); ?></div>
 				<div class="controls">
 					<select name="jform[who_view_commented]" >
 						<option value="all" <?php if($this->options->get('who_view_commented') == 'all') echo 'selected'; ?> ><?php echo JText::_('CEVERYONE');?></option>
@@ -106,7 +106,7 @@ $params = $this->section->params;
 				</div>
 			</div>
 			<div class="control-group">
-				<div class="control-label span2"><?php echo JText::_('CWHOCANVIEWMYVISITEDRECORDS'); ?></div>
+				<div class="control-label col-md-2"><?php echo JText::_('CWHOCANVIEWMYVISITEDRECORDS'); ?></div>
 				<div class="controls">
 					<select name="jform[who_view_visited]" >
 						<option value="all" <?php if($this->options->get('who_view_visited') == 'all') echo 'selected'; ?> ><?php echo JText::_('CEVERYONE');?></option>
@@ -115,7 +115,7 @@ $params = $this->section->params;
 				</div>
 			</div>
 			<div class="control-group">
-				<div class="control-label span2"><?php echo JText::_('CWHOCANVIEWMYFOLLOWEDRECORDS'); ?></div>
+				<div class="control-label col-md-2"><?php echo JText::_('CWHOCANVIEWMYFOLLOWEDRECORDS'); ?></div>
 				<div class="controls">
 					<select name="jform[who_view_followed]" >
 						<option value="all" <?php if($this->options->get('who_view_followed') == 'all') echo 'selected'; ?> ><?php echo JText::_('CEVERYONE');?></option>

@@ -183,7 +183,7 @@ class JoomcckViewImport extends MViewBase
 			array_unshift($list, JText::_('CIMPORTNOIMPORT'));
 		}
 		
-		return JHtml::_('select.genericlist', $list, 'import[field][' . $name.']', 'class="span12"', 'value', 'text', $default);
+		return JHtml::_('select.genericlist', $list, 'import[field][' . $name.']', 'class="col-md-12"', 'value', 'text', $default);
 	}
 
 }

@@ -26,7 +26,7 @@ foreach($this->values as $key => $value) :
 	$label = $this->_getVal($value->field_value);
 	?>
 	<?php if($key % 2 == 0):?>
-	<div class="row-fluid">
+	<div class="row">
 	<?php endif;?>
 	<div class="span6">
 		<label class="checkbox">

@@ -45,7 +45,7 @@ $span = array(1 => 12, 2 => 6, 3 => 4, 4 => 3, 6 => 2);
 				}
 			?>
 			<?php if($k % $cols == 0):?>
-				<div class="row-fluid">
+				<div class="row">
 			<?php endif;?>
 
 			<div class="span<?php echo $span[$cols]?>">

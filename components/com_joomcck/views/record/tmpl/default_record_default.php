@@ -207,9 +207,9 @@ if($params->get('tmpl_core.item_follow_num'))
 
 	<?php if($category || $author || $details || $params->get('tmpl_core.item_rating')): ?>
 		<div class="well article-info">
-			<div class="row-fluid">
+			<div class="row">
 				<?php if($params->get('tmpl_core.item_rating')):?>
-					<div class="span2">
+					<div class="col-md-2">
 						<?php echo $item->rating;?>
 					</div>
 				<?php endif;?>
@@ -235,7 +235,7 @@ if($params->get('tmpl_core.item_follow_num'))
 					</small>
 				</div>
 				<?php if($params->get('tmpl_core.item_author_avatar')):?>
-					<div class="span2 avatar">
+					<div class="col-md-2 avatar">
 						<img src="<?php echo CCommunityHelper::getAvatar($item->user_id, $params->get('tmpl_core.item_author_avatar_width', 40), $params->get('tmpl_core.item_author_avatar_height', 40));?>" />
 					</div>
 				<?php endif;?>

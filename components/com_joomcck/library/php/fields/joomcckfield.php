@@ -373,7 +373,7 @@ class CFormField extends JFormField
 
 		$add_name = "[$this->id]".($name ? "[$name]" : null);
 
-		return JHtml::_('select.genericlist', $list, 'import[field]' . $add_name, 'class="span12"', 'value', 'text', $default);
+		return JHtml::_('select.genericlist', $list, 'import[field]' . $add_name, 'class="col-md-12"', 'value', 'text', $default);
 	}
 	protected function _find_import_file($path, $file)
 	{

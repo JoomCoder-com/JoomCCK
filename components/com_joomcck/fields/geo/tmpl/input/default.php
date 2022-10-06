@@ -48,7 +48,7 @@ $lang = $lang[0];
 			$adr_list[$name] = $input;
 			?>
 			<?php if($key % 2 == 0):?>
-			<div class="row-fluid">
+			<div class="row">
 			<?php endif;?>
 
 			<div class="span6">
@@ -72,9 +72,9 @@ $lang = $lang[0];
 		<?php endif;?>
 
 		<?php if($this->params->get('params.address.address1.show', 1)):?>
-			<div class="row-fluid">
+			<div class="row">
 				<?php if($this->params->get('params.address.address1.show', 1)):?>
-					<div class="span12">
+					<div class="col-md-12">
 						<small><?php echo $this->_label('address', 'address1', $address['address1']['label']);?></small><br>
 						<?php echo  $this->_input('address', 'address1'); ?>
 					</div>
@@ -82,9 +82,9 @@ $lang = $lang[0];
 			</div>
 		<?php endif;?>
 		<?php if($this->params->get('params.address.address2.show', 1)):?>
-			<div class="row-fluid">
+			<div class="row">
 				<?php if($this->params->get('params.address.address2.show', 1)):?>
-					<div class="span12">
+					<div class="col-md-12">
 						<small><?php echo $this->_label('address', 'address2', $address['address2']['label']);?></small><br>
 						<?php echo  $this->_input('address', 'address2'); ?>
 					</div>
@@ -92,7 +92,7 @@ $lang = $lang[0];
 			</div>
 		<?php endif;?>
 		<?php if($this->params->get('params.address.company.show', 1) || $this->params->get('params.address.person.show', 1)):?>
-			<div class="row-fluid">
+			<div class="row">
 				<?php if($this->params->get('params.address.company.show', 1)):?>
 					<div class="span<?php echo ($this->params->get('params.address.person.show', 1) ? 6 : 12) ?>">
 						<small><?php echo $this->_label('address', 'company', $address['company']['label']);?></small><br>
@@ -151,7 +151,7 @@ $lang = $lang[0];
 	<div id="map_canvas_<?php echo $this->id;?>" style="width:<?php echo $this->params->get('params.map_width', '100%');?>; height:<?php echo $this->params->get('params.map_height', '200px');?>"></div>
 	<small><?php echo JText::_('G_DRAGMARKER');?></small>
 	<?php if(in_array($this->params->get('params.map_manual_position'), $this->user->getAuthorisedViewLevels())):?>
-	<div class="row-fluid">
+	<div class="row">
 		<div class="span6">
 			<small><?php echo JText::_('G_LAT')?></small>
 			<?php echo $this->_input('position', 'lat');?>
@@ -254,7 +254,7 @@ $lang = $lang[0];
 
 <?php if(in_array($this->params->get('params.adr_enter'), $this->user->getAuthorisedViewLevels())):?>
 	<?php
-	$format = '<tr><td nowrap="nowrap" width="1%%">%s %s</td><td><div class="row-fluid">%s</div></td></tr>';
+	$format = '<tr><td nowrap="nowrap" width="1%%">%s %s</td><td><div class="row">%s</div></td></tr>';
 	$contacts = JFormFieldCgeo::getAditionalFields();
 
 	foreach($contacts as $name => $contact)

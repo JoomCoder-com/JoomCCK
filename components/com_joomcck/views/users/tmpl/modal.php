@@ -20,7 +20,7 @@ $listDirn	= $this->escape($this->state->get('list.direction'));
 <form action="<?php echo JUri::getInstance()->toString();?>" method="post" name="adminForm" id="adminForm">
 	<div class="controls">
 		<div class="input-append">
-			<input class="span3" type="text" name="filter_search"	id="filter_search" value="<?php echo $this->state->get('filter.search'); ?>"/>
+			<input class="col-md-3" type="text" name="filter_search"	id="filter_search" value="<?php echo $this->state->get('filter.search'); ?>"/>
 			<button class="btn" type="submit" rel="tooltip" data-original-title="<?php echo JText::_('JSEARCH_FILTER_SUBMIT'); ?>">
 				<?php echo HTMLFormatHelper::icon('magnifier.png');  ?>
 			</button>

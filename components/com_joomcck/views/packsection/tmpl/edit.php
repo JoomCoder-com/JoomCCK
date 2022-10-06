@@ -54,7 +54,7 @@ JHtml::_('script', 'system/tabs.js', false, true);
 		</h1>
 	</div>
 
-	<div class="row-fluid">
+	<div class="row">
 		<div class="span6 form-horizontal">
 			<fieldset class="adminform">
 				<legend><?php echo JText::_('CSECTIONSETTINGS'); ?></legend>

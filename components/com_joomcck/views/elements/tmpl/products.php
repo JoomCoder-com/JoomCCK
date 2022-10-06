@@ -26,12 +26,12 @@ defined('_JEXEC') or die();
 
 <form action="" id="adminForm" name="adminForm" method="post">
 	<div class="float-end controls controls-row">
-		<div class="row-fluid">
+		<div class="row">
 			<input type="text" class="span4" name="filter_search" value="<?php echo $this->state->get('filter.search');?>" />
 			<?php
 				$none_opt = array('id' => '', 'name' => JText::_('CSELECTTYPE'));
 				array_unshift($this->types, $none_opt);
-				echo JHtml::_('select.genericlist', $this->types, 'filter_type', array( 'class' => 'span3', 'onchange' => 'this.form.submit();'), 'id', 'name', $this->state->get('filter.type'), 'ddd');
+				echo JHtml::_('select.genericlist', $this->types, 'filter_type', array( 'class' => 'col-md-3', 'onchange' => 'this.form.submit();'), 'id', 'name', $this->state->get('filter.type'), 'ddd');
 			?>
 		</div>
 	</div>

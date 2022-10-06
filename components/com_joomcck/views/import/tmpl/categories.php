@@ -14,12 +14,12 @@ defined('_JEXEC') or die();
 		<label class="control-label" for="type"><?php echo $col;?>
 		</label>
 		<div class="controls">
-			<div class="row-fluid">
+			<div class="row">
 				<?php if(!empty($this->categories)):?>
-					<?php echo JHtml::_('select.genericlist', $this->categories, 'import[category]['.$col.']', 'class="span12 cat-select"', 'id', 'opt', $this->item->params->get('category.'.$col));?>
+					<?php echo JHtml::_('select.genericlist', $this->categories, 'import[category]['.$col.']', 'class="col-md-12 cat-select"', 'id', 'opt', $this->item->params->get('category.'.$col));?>
 				<?php endif;?>
 				<?php if(!empty($this->usercat)):?>
-					<?php echo JHtml::_('select.genericlist', $this->usercat, 'import[ucat]['.$col.']', 'class="span12 cat-select"', 'value', 'text', $this->item->params->get('ucat.'.$col));?>
+					<?php echo JHtml::_('select.genericlist', $this->usercat, 'import[ucat]['.$col.']', 'class="col-md-12 cat-select"', 'value', 'text', $this->item->params->get('ucat.'.$col));?>
 				<?php endif;?>
 			</div>
 		</div>

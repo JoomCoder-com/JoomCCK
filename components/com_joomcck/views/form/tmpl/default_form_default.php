@@ -127,7 +127,7 @@ $k = 0;
 			</label>
 			<div class="controls">
 				<div id="field-alert-title" class="alert alert-error" style="display:none"></div>
-				<div class="row-fluid">
+				<div class="row">
 					<?php echo $this->form->getInput('title'); ?>
 				</div>
 			</div>
@@ -356,7 +356,7 @@ $k = 0;
 					<?php echo JText::_($label); ?>
 					</label>
 					<div class="controls">
-						<div class="row-fluid">
+						<div class="row">
 							<?php echo $this->form->getInput($meta_name); ?>
 						</div>
 					</div>

@@ -274,7 +274,7 @@ class CFormFieldRelate extends CFormField
 			{
 				$checked = ' checked="checked"';
 			}
-			$ch[] = sprintf($patern, ($i % 2 == 0 ? '<div class="row-fluid">' : NULL), $this->id, $k, $type, $checked, $item->value, $name, $attribs,
+			$ch[] = sprintf($patern, ($i % 2 == 0 ? '<div class="row">' : NULL), $this->id, $k, $type, $checked, $item->value, $name, $attribs,
 				$this->id, $k, htmlspecialchars($item->text, ENT_COMPAT, 'UTF-8'), ($i % 2 != 0 ? '</div>' : NULL));
 			$i++;
 		}

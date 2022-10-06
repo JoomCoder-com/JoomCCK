@@ -33,8 +33,8 @@ defined('_JEXEC') or die('Restricted access');
 </style>
 <form action="<?php echo JRoute::_('index.php');?>" method="post" name="filterform" id="filter-form">
 	<?php if($params->get('filter_search', 1)):?>
-		<div class="row-fluid <?php echo ( $state->get('records.search')? ' active' : NULL)?>">
-			<input type="text" class="span12" name="filter_search" value="<?php echo $state->get('records.search');?>" />
+		<div class="row <?php echo ( $state->get('records.search')? ' active' : NULL)?>">
+			<input type="text" class="col-md-12" name="filter_search" value="<?php echo $state->get('records.search');?>" />
 		</div>
 	<?php endif;?>
 

@@ -10,7 +10,7 @@
 defined('_JEXEC') or die();
 ?>
 <br>
-<div class="row-fluid">
+<div class="row">
 	<div class="span6">
 		<legend><?php echo JText::_('CIMPORTPARAMS')?></legend>
 		<div class="control-group">
@@ -20,8 +20,8 @@ defined('_JEXEC') or die();
 			</label>
 
 			<div class="controls">
-				<div class="row-fluid">
-					<input type="text" class="span12" name="import[name]" id=importname"  value="<?php echo $this->item->params->get('name'); ?>">
+				<div class="row">
+					<input type="text" class="col-md-12" name="import[name]" id=importname"  value="<?php echo $this->item->params->get('name'); ?>">
 				</div>
 			</div>
 		</div>
@@ -32,7 +32,7 @@ defined('_JEXEC') or die();
 			</label>
 
 			<div class="controls">
-				<div class="row-fluid">
+				<div class="row">
 					<?php echo $this->fieldlist('id', $this->item->params->get('field.id'));?>
 					<small><?php echo JText::_('CIMPORTUNIQID')?></small>
 				</div>
@@ -47,7 +47,7 @@ defined('_JEXEC') or die();
 				</label>
 
 				<div class="controls">
-					<div class="row-fluid">
+					<div class="row">
 						<?php echo $this->fieldlist('category', $this->item->params->get('field.category'));?>
 					</div>
 				</div>
@@ -70,7 +70,7 @@ defined('_JEXEC') or die();
 				</label>
 
 				<div class="controls">
-					<div class="row-fluid">
+					<div class="row">
 						<?php echo $this->fieldlist('title', $this->item->params->get('field.title'));?>
 					</div>
 				</div>
@@ -83,7 +83,7 @@ defined('_JEXEC') or die();
 			</label>
 
 			<div class="controls">
-				<div class="row-fluid">
+				<div class="row">
 					<?php echo $this->fieldlist('ctime', $this->item->params->get('field.ctime'));?>
 				</div>
 			</div>
@@ -95,7 +95,7 @@ defined('_JEXEC') or die();
 			</label>
 
 			<div class="controls">
-				<div class="row-fluid">
+				<div class="row">
 					<?php echo $this->fieldlist('mtime', $this->item->params->get('field.mtime'));?>
 				</div>
 			</div>
@@ -112,7 +112,7 @@ defined('_JEXEC') or die();
 				</label>
 
 				<div class="controls">
-					<div class="row-fluid <?php echo ($field->required ? 'required' : null) ?>">
+					<div class="row <?php echo ($field->required ? 'required' : null) ?>">
 						<?php echo $form;?>
 					</div>
 				</div>

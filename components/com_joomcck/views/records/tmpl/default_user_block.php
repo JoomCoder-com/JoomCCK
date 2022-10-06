@@ -325,7 +325,7 @@ Do not show category if it is reted or comemnted.
 	?>
 	<div id="categories" class="categories container-fluid collapse">
 		<?php for ($r=0; $r < $rows; $r++):?>
-			<div class="row-fluid">
+			<div class="row">
 				<?php for ($c=0; $c < $cols; $c++):?>
 					<?php $category = array_shift($this->user_categories);?>
 					<div class="cat-content span<?php echo $spans[$cols];?> <?php if(isset($category->id) && JFactory::getApplication()->input->getInt('ucat_id') == $category->id) echo 'active';?>">

@@ -42,7 +42,7 @@ $app = JFactory::getApplication();
 	<?php endif; ?>
 
 	<div class="content-form" id="page-params">
-		<div class="row-fluid">
+		<div class="row">
 			<?php echo MFormHelper::renderForm($this->form, $this->params->toArray(), array(), MFormHelper::FIELDSET_SEPARATOR_FIELDSET, MFormHelper::STYLE_TABLE, MFormHelper::GROUP_SEPARATOR_TAB);; ?>
 		</div>
 	</div>

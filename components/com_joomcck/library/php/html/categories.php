@@ -93,7 +93,7 @@ class JHTMLCategories
 		foreach ($categories AS $cat)
 		{
 			$chekced = (in_array($cat->id, $default) ? ' checked="checked"' : NULL);
-			if($key % 3 == 0) $li[] = '<div class="row-fluid">';
+			if($key % 3 == 0) $li[] = '<div class="row">';
 			$li[] = sprintf('<div class="span4"><label class="checkbox"><input type="checkbox" id="ccat-%d" class="inputbox" name="filters[cats][]" value="%d"%s />
 			 	<label for="ccat-%d">%s <span class="label">%d<span></label></label></div>',
 				$cat->id, $cat->id, $chekced, $cat->id, $cat->title, $cat->records_num);
