@@ -42,7 +42,9 @@ class JoomcckModelAuditversion extends MModelAdmin
 
 			if(empty($data))
 			{
-				return JError::raiseError(404, JText::_('CERR_VERNOTFOUND') . ': ' . $version);
+
+
+				throw new Exception( JText::_('CERR_VERNOTFOUND') . ': ' . $version,404);
 			}
 
 			$data->record   = json_decode($data->record_serial);

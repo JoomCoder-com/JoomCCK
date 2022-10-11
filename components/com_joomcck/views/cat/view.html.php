@@ -7,6 +7,8 @@
  * @license   GNU/GPL http://www.gnu.org/copyleft/gpl.html
  */
 
+use Joomla\CMS\Factory;
+
 defined('_JEXEC') or die;
 
 jimport('joomla.application.component.view');
@@ -27,7 +29,7 @@ class JoomcckViewCat extends MViewBase
 	public function display($tpl = NULL)
 	{
 		global $app;
-		$this->section = JRequest::getInt('section_id');
+		$this->section = Factory::getApplication()->input->getInt('section_id',0);
 		$this->state   = $this->get('State');
 		$this->item    = $this->get('Item');
 		$this->form    = $this->get('Form');
@@ -40,17 +42,18 @@ class JoomcckViewCat extends MViewBase
 
 		if(!$this->section)
 		{
-			JError::raiseWarning(100, JText::_('C_MSG_SELECTSECTIO'));
-			//$app->redirect('index.php?option=com_joomcck&view=sections');
+			Factory::getApplication()->enqueueMessage(JText::_('C_MSG_SELECTSECTIO'),'warning');
+			Factory::getApplication()->redirect('index.php?option=com_joomcck&view=sections');
+
 
 		}
 
 		// Check for errors.
 		if(count($errors = $this->get('Errors')))
 		{
-			JError::raiseError(500, implode("\n", $errors));
+			throw new Exception( implode("\n", $errors),500);
 
-			return FALSE;
+
 		}
 
 

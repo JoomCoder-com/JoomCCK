@@ -26,9 +26,9 @@ class JoomcckViewComms extends MViewBase
 
 		if(count($errors = $this->get('Errors')))
 		{
-			JError::raiseError(500, implode("\n", $errors));
+			throw new Exception( implode("\n", $errors),500);
 
-			return FALSE;
+
 		}
 
 		$this->addFilter(JText::_('CFILTERRECORDTYPE'), 'filter_type', JHtml::_('select.options', JHtml::_('joomcck.recordtypes'), 'value', 'text', $this->state->get('filter.type')));

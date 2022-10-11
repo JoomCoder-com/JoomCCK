@@ -419,11 +419,13 @@ class JHTMLMrelements
 		$params = new JRegistry();
 		$params->loadArray($options);
 
+
 		settype($default, 'array');
 
         $doc = JFactory::getDocument();
         $doc->addStyleSheet(JURI::root(TRUE) . '/media/mint/vendors/bootstrap-pills/css/style.css');
 		$doc->addScript(JURI::root(TRUE) . '/media/mint/vendors/bootstrap-pills/js/jquery.color.js');
+		$doc->addScript(JURI::root(TRUE) . '/media/mint/vendors/bootstrap-pills/js/bootstrap-typeahead.js');
         $doc->addScript(JURI::root(TRUE) . '/media/mint/vendors/bootstrap-pills/js/bootstrap-tags.js');
 
         ob_start();

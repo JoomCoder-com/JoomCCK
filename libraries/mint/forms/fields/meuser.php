@@ -68,7 +68,7 @@ class JFormFieldMeuser extends JFormField
 
 		// Build the script.
 		$script = array();
-		$script[] = 'window.addEvent("domready", function() {';
+		$script[] = '$(document).addEvent("domready", function() {';
 		$script[] = '	window.jSelectUser_'.$this->id.' = function (id, title) {';
 		$script[] = '		var old_id = document.getElementById("'.$this->id.'_id").value;';
 		$script[] = '		if (old_id != id) {';

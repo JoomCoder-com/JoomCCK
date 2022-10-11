@@ -28,9 +28,9 @@ class JoomcckViewVotes extends MViewBase
 		// Check for errors.
 		if(count($errors = $this->get('Errors')))
 		{
-			JError::raiseError(500, implode("\n", $errors));
+			throw new Exception( implode("\n", $errors),500);
 
-			return FALSE;
+
 		}
 
 		$this->addFilter(JText::_('CFILERVOTETYPE'), 'filter_type', JHtml::_('select.options', JHtml::_('votes.types'), 'value', 'text', $this->state->get('filter.type')));

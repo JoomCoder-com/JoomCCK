@@ -495,7 +495,7 @@ class JoomcckModelRecords extends MModelList
 
 				if(!$res)
 				{
-					JError::raiseWarning(100, JText::sprintf('CERR_NOCATEGORY', $cat));
+					throw new Exception( JText::sprintf('CERR_NOCATEGORY', $cat),100);
 				}
 
 				$cat_sql = "SELECT id FROM `#__js_res_categories`

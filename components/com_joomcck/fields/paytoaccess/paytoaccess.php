@@ -146,7 +146,7 @@ class JFormFieldCPaytoaccess extends CFormField implements CFormFieldCommerce
 			if ($subscr) {
 				$em_api = JPATH_ROOT . '/components/com_emerald/api.php';
 				if (!JFile::exists($em_api)) {
-					JError::raiseError(404, 'File API Emerald not found');
+					throw new Exception( 'File API Emerald not found',404);
 				}
 				include_once($em_api);
 				if ($this->_is_subscribed($subscr, 0)) {

@@ -182,10 +182,7 @@ class JoomcckModelUsers extends MModelList
 			// Load the counts into an array indexed on the user id field.
 			$userGroups = $db->loadObjectList('user_id');
 
-			$error = $db->getErrorMsg();
-			if ($error) {
-				$this->setError($error);
-
+			if (is_null($userGroups)) {
 				return false;
 			}
 

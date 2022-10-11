@@ -309,9 +309,9 @@ class CCommunityHelper
 			$name = 'CCommunity' . ucfirst($component);
 			if(!class_exists($name))
 			{
-				JError::raiseError(404, JText::sprintf('CERR_COMMUNITYCLASSNOTFOUND', $name));
+				throw new Exception( JText::sprintf('CERR_COMMUNITYCLASSNOTFOUND', $name),404);
 
-				return FALSE;
+
 			}
 			$class[$component] = new $name();
 		}

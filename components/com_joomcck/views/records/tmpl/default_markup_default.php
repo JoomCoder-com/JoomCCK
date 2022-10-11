@@ -478,15 +478,15 @@ $current_user = JFactory::getUser($this->input->getInt('user_id', $this->user->g
 		<?php if(in_array($markup->get('filters.show_more'), $this->user->getAuthorisedViewLevels()) && $markup->get('filters.filters')):?>
 			<div class="fade collapse separator-box" id="filter-collapse">
 				<div class="btn-group float-end">
-					<button class="btn btn-primary" onclick="Joomla.submitbutton('records.filters')">
+					<button class="btn btn-sm btn-primary" onclick="Joomla.submitbutton('records.filters')">
 						<img src="<?php echo JURI::root(TRUE)?>/media/mint/icons/16/tick-button.png" align="absmiddle" alt="<?php echo JText::_('CAPPLY');?>" />
 						<?php echo JText::_('CAPPLY');?></button>
 					<?php if(count($this->worns)):?>
-						<button class="btn" type="button" onclick="Joomla.submitbutton('records.cleanall')">
+						<button class="btn btn-light btn-sm border" type="button" onclick="Joomla.submitbutton('records.cleanall')">
 							<img src="<?php echo JURI::root(TRUE)?>/media/mint/icons/16/cross-button.png" align="absmiddle" alt="<?php echo JText::_('CRESETFILTERS');?>" />
 							<?php echo JText::_('CRESETFILTERS');?></button>
 					<?php endif;?>
-					<button class="btn" type="button"  data-bs-toggle="collapse" data-bs-target="#filter-collapse">
+					<button class="btn btn-light btn-sm border" type="button"  data-bs-toggle="collapse" data-bs-target="#filter-collapse">
 						<img src="<?php echo JURI::root(TRUE)?>/media/mint/icons/16/minus-button.png" align="absmiddle" alt="<?php echo JText::_('CCLOSE');?>" />
 						<?php echo JText::_('CCLOSE');?></button>
 				</div>
@@ -497,34 +497,34 @@ $current_user = JFactory::getUser($this->input->getInt('user_id', $this->user->g
 				<div class="clearfix"></div>
 
 
-				<div class="tabbable tabs-left">
-					<ul class="nav nav-tabs" id="vtabs">
+				<div class="d-flex align-items-start">
+					<ul class="nav nav-tabs flex-column me-3" id="vtabs">
 						<?php if(in_array($markup->get('filters.filter_type'), $this->user->getAuthorisedViewLevels()) && (count($this->submission_types) > 1)):?>
-							<li><a href="#tab-types" data-toggle="tab"><?php echo ($markup->get('filters.filter_type_icon') ? HTMLFormatHelper::icon('block.png') : NULL).JText::_($markup->get('filters.type_label', 'Content Type'))?></a></li>
+							<li class="nav-item"><a class="nav-link active" href="#tab-types" data-bs-toggle="tab"><?php echo ($markup->get('filters.filter_type_icon') ? HTMLFormatHelper::icon('block.png') : NULL).JText::_($markup->get('filters.type_label', 'Content Type'))?></a></li>
 						<?php endif;?>
 
 						<?php if(in_array($markup->get('filters.filter_tags'), $this->user->getAuthorisedViewLevels())):?>
-							<li><a href="#tab-tags" data-toggle="tab"><?php echo ($markup->get('filters.filter_tag_icon') ? HTMLFormatHelper::icon('price-tag.png') : NULL).JText::_($markup->get('filters.tag_label', 'CTAGS'))?></a></li>
+							<li class="nav-item"><a class="nav-link" href="#tab-tags" data-bs-toggle="tab"><?php echo ($markup->get('filters.filter_tag_icon') ? HTMLFormatHelper::icon('price-tag.png') : NULL).JText::_($markup->get('filters.tag_label', 'CTAGS'))?></a></li>
 						<?php endif;?>
 
 						<?php if(in_array($markup->get('filters.filter_user'), $this->user->getAuthorisedViewLevels())):?>
-							<li><a href="#tab-users" data-toggle="tab"><?php echo ($markup->get('filters.filter_user_icon') ? HTMLFormatHelper::icon('user.png') : NULL).JText::_($markup->get('filters.user_label', 'CAUTHOR'))?></a></li>
+							<li class="nav-item"><a class="nav-link" href="#tab-users" data-bs-toggle="tab"><?php echo ($markup->get('filters.filter_user_icon') ? HTMLFormatHelper::icon('user.png') : NULL).JText::_($markup->get('filters.user_label', 'CAUTHOR'))?></a></li>
 						<?php endif;?>
 
 						<?php if(in_array($markup->get('filters.filter_cat'), $this->user->getAuthorisedViewLevels()) && $this->section->categories  && ($this->section->params->get('general.filter_mode') == 0)):?>
-							<li><a href="#tab-cats" data-toggle="tab"><?php echo ($markup->get('filters.filter_category_icon') ? HTMLFormatHelper::icon('category.png') : NULL).JText::_($markup->get('filters.category_label', 'CCATEGORY'))?></a></li>
+							<li class="nav-item"><a class="nav-link" href="#tab-cats" data-bs-toggle="tab"><?php echo ($markup->get('filters.filter_category_icon') ? HTMLFormatHelper::icon('category.png') : NULL).JText::_($markup->get('filters.category_label', 'CCATEGORY'))?></a></li>
 						<?php endif;?>
 
 						<?php if(count($this->filters) && $markup->get('filters.filter_fields')):?>
 							<?php foreach ($this->filters AS $filter):?>
 								<?php if($filter->params->get('params.filter_hide')) continue;  ?>
-								<li><a href="#tab-<?php echo $filter->key?>" id="<?php echo $filter->key?>" data-toggle="tab"><?php echo ($markup->get('filters.filter_tag_icon') && $filter->params->get('core.icon') ? HTMLFormatHelper::icon($filter->params->get('core.icon')) : NULL).' '.$filter->label?></a></li>
+								<li class="nav-item"><a class="nav-link" href="#tab-<?php echo $filter->key?>" id="<?php echo $filter->key?>" data-bs-toggle="tab"><?php echo ($markup->get('filters.filter_tag_icon') && $filter->params->get('core.icon') ? HTMLFormatHelper::icon($filter->params->get('core.icon')) : NULL).' '.$filter->label?></a></li>
 							<?php endforeach;?>
 						<?php endif;?>
 					</ul>
 					<div class="tab-content" id="vtabs-content">
 						<?php if(in_array($markup->get('filters.filter_type'), $this->user->getAuthorisedViewLevels()) && (count($this->submission_types) > 1)):?>
-							<div class="tab-pane active" id="tab-types">
+							<div class="tab-pane fade show active" id="tab-types">
 								<?php if($markup->get('filters.filter_type_type') == 1):?>
 									<?php echo JHtml::_('types.checkbox', $this->total_types, $this->submission_types, $this->state->get('records.type'));?>
 								<?php elseif($markup->get('filters.filter_type_type') == 3):?>
@@ -537,7 +537,7 @@ $current_user = JFactory::getUser($this->input->getInt('user_id', $this->user->g
 
 
 						<?php if(in_array($markup->get('filters.filter_tags'), $this->user->getAuthorisedViewLevels())):?>
-							<div class="tab-pane" id="tab-tags">
+							<div class="tab-pane fade" id="tab-tags">
 								<?php if($markup->get('filters.filter_tags_type') == 1):?>
 									<?php echo JHtml::_('tags.tagform', $this->section, $this->state->get('records.tag'));?>
 								<?php elseif($markup->get('filters.filter_tags_type') == 2):?>
@@ -551,7 +551,7 @@ $current_user = JFactory::getUser($this->input->getInt('user_id', $this->user->g
 						<?php endif;?>
 
 						<?php if(in_array($markup->get('filters.filter_user'), $this->user->getAuthorisedViewLevels())):?>
-							<div class="tab-pane" id="tab-users">
+							<div class="tab-pane fade" id="tab-users">
 								<?php if($markup->get('filters.filter_users_type') == 1):?>
 									<?php echo JHtml::_('cusers.form', $this->section, $this->state->get('records.user'));?>
 								<?php elseif($markup->get('filters.filter_users_type') == 2):?>
@@ -563,7 +563,7 @@ $current_user = JFactory::getUser($this->input->getInt('user_id', $this->user->g
 						<?php endif;?>
 
 						<?php if(in_array($markup->get('filters.filter_cat'), $this->user->getAuthorisedViewLevels()) && $this->section->categories && ($this->section->params->get('general.filter_mode') == 0)):?>
-							<div class="tab-pane" id="tab-cats">
+							<div class="tab-pane fade" id="tab-cats">
 								<?php if($markup->get('filters.filter_category_type') == 1):?>
 									<?php echo JHtml::_('categories.form', $this->section, $this->state->get('records.category'));?>
 								<?php elseif($markup->get('filters.filter_category_type') == 2):?>
@@ -580,7 +580,7 @@ $current_user = JFactory::getUser($this->input->getInt('user_id', $this->user->g
 						<?php if(count($this->filters) && $markup->get('filters.filter_fields')):?>
 							<?php foreach ($this->filters AS $filter):?>
 								<?php if($filter->params->get('params.filter_hide')) continue;  ?>
-								<div class="tab-pane" id="tab-<?php echo $filter->key?>">
+								<div class="tab-pane fade" id="tab-<?php echo $filter->key?>">
 									<?php if($filter->params->get('params.filter_descr') && $markup->get('filters.filter_descr')):?>
 										<p><small><?php echo JText::_($filter->params->get('params.filter_descr'));?></small></p>
 									<?php endif;?>

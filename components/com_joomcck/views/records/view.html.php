@@ -98,12 +98,12 @@ class JoomcckViewRecords extends MViewBase
 
 			if(!isset($category->id))
 			{
-				JError::raiseError(404, JText::_('CCATNOTFOUND'));
+				throw new Exception( JText::_('CCATNOTFOUND'),404);
 				$category = $this->models['category']->getEmpty();
 			}
 			if($category->id && ($category->section_id != $section->id))
 			{
-				JError::raiseError(404, JText::_('CCATWRONGSECTION'));
+				throw new Exception( JText::_('CCATWRONGSECTION'),404);
 				$category = $this->models['category']->getEmpty();
 			}
 			if(!in_array($category->access, $user->getAuthorisedViewLevels()))

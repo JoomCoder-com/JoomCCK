@@ -19,7 +19,7 @@ defined('_JEXEC') || die('Restricted access');
     $('#bs-tags-<?php echo $id ?>').tags({
         values: <?php echo json_encode($default) ?>,
         <?php if(!empty($options['suggestion_url'])): ?>
-            suggestion_url: '<?php echo Jroute::_($options['suggestion_url'], false) ?>',
+            suggestion_url: '<?php echo JRoute::_($options['suggestion_url'], false) ?>',
         <?php endif; ?>
         <?php if(count($list) > 0): ?>
         suggestions: <?php echo json_encode($list) ?>,
@@ -55,7 +55,7 @@ defined('_JEXEC') || die('Restricted access');
                 });
             },
         <?php endif; ?>
-        
+
         templates: {
             list: $(document.createElement('ul')).addClass('pills-list'),
             delete_icon: '<?php echo HTMLFormatHelper::icon('cross.png'); ?>',

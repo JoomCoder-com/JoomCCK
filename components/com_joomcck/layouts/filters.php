@@ -13,7 +13,7 @@ if(empty($displayData->_filters)) return;
 ?>
 
 <div id="list-filters-box" class="collapse fade">
-	<div class="filter-container">
+	<div class="filter-container border rounded mb-3 bg-light">
 		<?php foreach ($displayData->_filters AS $i => $filter): ?>
 			<?php if($i % 4 == 0): ?>
 				<div class="row">

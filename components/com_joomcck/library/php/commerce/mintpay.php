@@ -31,8 +31,8 @@ class MintPay
 		$file = JPATH_ROOT . "/components/com_joomcck/gateways/{$provider}/{$provider}.php";
 		if (!JFile::exists($file))
 		{
-			JError::raiseError(500, JText::sprintf('CGATEWAYNOTFOUND', $provider));
-			return;
+			throw new Exception( JText::sprintf('CGATEWAYNOTFOUND', $provider),500);
+
 		}
 		require_once $file;
 		
@@ -40,8 +40,8 @@ class MintPay
 		
 		if (!class_exists($class_name))
 		{
-			JError::raiseError(500, JText::sprintf('CGATEWAYNOTFOUND', $provider));
-			return;
+			throw new Exception( JText::sprintf('CGATEWAYNOTFOUND', $provider),500);
+
 		}	
 		
 		$lang = JFactory::getLanguage();

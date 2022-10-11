@@ -651,9 +651,9 @@ class JoomcckApi
 
 		if(!JFile::exists("{$dir}default_list_{$tmpl}.php"))
 		{
-			JError::raiseError(100, 'TMPL not found');
+			throw new Exception( 'TMPL not found',100);
 
-			return;
+
 		}
 
 		$this->section->params->set('general.tmpl_list', $tpl);

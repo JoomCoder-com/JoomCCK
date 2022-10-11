@@ -18,8 +18,8 @@ class JoomcckViewOptions extends MViewBase
 
 		if(!$user->id)
 		{
-			JError::raiseError(500, JText::_('CNOUSERID'));
-			return;
+			throw new Exception( JText::_('CNOUSERID'),500);
+
 		}
 
 		if($this->getLayout() != 'default')

@@ -46,9 +46,9 @@ class JoomcckViewItems extends MViewBase
 
 		if(count($errors = $this->get('Errors')))
 		{
-			JError::raiseError(500, implode("\n", $errors));
+			throw new Exception( implode("\n", $errors),500);
 
-			return FALSE;
+
 		}
 
 		$this->addFilter(JText::_('JOPTION_SELECT_PUBLISHED'), 'filter_state', JHtml::_('select.options', JHtml::_('jgrid.publishedOptions', array(

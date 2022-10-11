@@ -31,9 +31,9 @@ class JoomcckViewTags extends MViewBase
 		// Check for errors.
 		if(count($errors = $this->get('Errors')))
 		{
-			JError::raiseError(500, implode("\n", $errors));
+			throw new Exception( implode("\n", $errors),500);
 
-			return FALSE;
+
 		}
 
 		$this->addFilter(JText::_('JOPTION_SELECT_LANGUAGE'), 'filter_language', JHtml::_('select.options', JHtml::_('contentlanguage.existing', false, true), 'value', 'text', $this->state->get('filter.language')));

@@ -7,6 +7,8 @@
  * @license GNU/GPL http://www.gnu.org/copyleft/gpl.html
  */
 
+use Joomla\CMS\MVC\View\GenericDataException;
+
 defined('_JEXEC') or die();
 
 /**
@@ -43,8 +45,7 @@ class JoomcckViewForm extends MViewBase
 
 		if (!$app->input->getInt('section_id', @$this->item->section_id))
 		{
-			JError::raiseWarning(403, JText::_('CNOSECTION'));
-			return FALSE;
+			throw new GenericDataException(JText::_('CNOSECTION'), 500);
 		}
 
 		if (!$app->input->getInt('type_id'))

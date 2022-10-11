@@ -801,14 +801,14 @@ class packInstallerScript
                 }
 
                 if (!$menu_table->check()) {
-                    JError::raiseError(400, $menu_table->getError());
+                    throw new Exception( $menu_table->getError(),400);
                 }
                 if (!$menu_table->store()) {
-                    JError::raiseError(400, $menu_table->getError());
+                    throw new Exception( $menu_table->getError(),400);
                 }
 
                 if (!$menu_table->rebuildPath($menu_table->id)) {
-                    JError::raiseError(400, $menu_table->getError());
+                    throw new Exception( $menu_table->getError(),400);
                 }
 
                 $params = new JRegistry($table->params);

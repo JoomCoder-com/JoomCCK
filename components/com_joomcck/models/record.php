@@ -73,7 +73,7 @@ class JoomcckModelRecord extends MModelItem
 
 			if(empty($data))
 			{
-				return JError::raiseError(404, JText::_('CERR_RECNOTFOUND') . ': ' . $pk);
+				throw new Exception( JText::_('CERR_RECNOTFOUND') . ': ' . $pk,404);
 			}
 
 			$this->_item[$pk] = $data;
@@ -83,7 +83,7 @@ class JoomcckModelRecord extends MModelItem
 			if($e->getCode() == 404)
 			{
 				// Need to go thru the error handler to allow Redirect to work.
-				JError::raiseError(404, $e->getMessage());
+				throw new Exception( $e->getMessage(),404);
 			}
 			else
 			{

@@ -169,8 +169,8 @@ class JoomcckViewElements extends MViewBase
 
 		if(! $id)
 		{
-			JError::raiseError(500, JText::_('AJAX_NOFIELDID'));
-			return;
+			throw new Exception( JText::_('AJAX_NOFIELDID'),500);
+
 		}
 
 		JTable::addIncludePath(JPATH_COMPONENT_ADMINISTRATOR . 'tables/field.php');
@@ -179,14 +179,14 @@ class JoomcckViewElements extends MViewBase
 		$field_path =  JPATH_ROOT . '/components/com_joomcck/fields' . DIRECTORY_SEPARATOR . $field_table->field_type . DIRECTORY_SEPARATOR . $field_table->field_type . '.php';
 		if(! JFile::exists($field_path))
 		{
-			JError::raiseError(500, JText::_('AJAX_FIELDNOTFOUND'));
-			return;
+			throw new Exception( JText::_('AJAX_FIELDNOTFOUND'),500);
+
 		}
 
 		if(! $func)
 		{
-			JError::raiseError(500, JText::_('AJAX_NOFUNCNAME'));
-			return;
+			throw new Exception( JText::_('AJAX_NOFUNCNAME'),500);
+
 		}
 
 		require_once $field_path;
@@ -209,16 +209,16 @@ class JoomcckViewElements extends MViewBase
 		$classname = 'JFormFieldC' . ucfirst($field_table->field_type);
 		if(! class_exists($classname))
 		{
-			JError::raiseError(500, JText::_('CCLASSNOTFOUND'));
-			return;
+			throw new Exception( JText::_('CCLASSNOTFOUND'),500);
+
 		}
 
 		$fieldclass = new $classname($field_table, $default);
 
 		if(! method_exists($fieldclass, $func))
 		{
-			JError::raiseError(500, JText::_('AJAX_METHODNOTFOUND').$func);
-			return;
+			throw new Exception( JText::_('AJAX_METHODNOTFOUND').$func,500);
+
 		}
 		$this->context = $fieldclass->$func($record, $section);
 
