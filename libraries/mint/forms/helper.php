@@ -8,6 +8,8 @@
  * @license   GNU/GPL http://www.gnu.org/copyleft/gpl.html
  */
 
+use Joomla\CMS\HTML\HTMLHelper;
+
 defined('JPATH_PLATFORM') or die;
 
 JForm::addFieldPath(JPATH_ROOT . '/libraries/mint/forms/elements');
@@ -73,6 +75,8 @@ class MFormHelper
 	{
 		settype($groups, 'array');
 
+		HTMLHelper::_('bootstrap.framework');
+
 		$out = array();
 		switch($group_separator)
 		{
@@ -80,10 +84,11 @@ class MFormHelper
 				$out[] = '<div class="accordion" id="' . str_replace('.', '_', $form->getName()) . '">';
 				break;
 			case self::GROUP_SEPARATOR_TAB:
-				$out[] = '<ul class="nav nav-tabs" id="' . str_replace('.', '_', $form->getName()) . '">';
+
+				$out[] = '<ul class="nav nav-tabs sticky-top" id="' . str_replace('.', '_', $form->getName()) . '" role="tablist">';
 				foreach($groups as $group)
 				{
-					$out[] = '<li><a href="#' . $group . '" data-toggle="tab">' . JText::_('GROUP_' . strtoupper($group)) . '</a></li>';
+					$out[] = '<li class="nav-item" role="presentation"><a  class="nav-link" href="#' . $group . '" data-bs-toggle="tab">' . JText::_('GROUP_' . strtoupper($group)) . '</button></a></li>';
 				}
 				$out[] = '</ul>';
 				$out[] = '<div class="tab-content">';
@@ -100,7 +105,7 @@ class MFormHelper
 						' . JText::_('GROUP_' . strtoupper($group)) . '</a></div><div id="' . $group . '" class="accordion-body collapse fade"><div class="accordion-inner">';
 					break;
 				case self::GROUP_SEPARATOR_TAB:
-					$out[] = sprintf(' <div class="tab-pane" id="%s">', $group);
+					$out[] = sprintf(' <div class="tab-pane fade" id="%s">', $group);
 					break;
 			}
 
@@ -125,7 +130,7 @@ class MFormHelper
 				break;
 			case self::GROUP_SEPARATOR_TAB:
 				$out[] = '</div>';
-				$out[] = sprintf("<script>jQuery('#%s a:first').tab('show');</script>", str_replace('.', '_', $form->getName()));
+				$out[] = sprintf("<script>jQuery(document).ready(function(){document.querySelector('#%s a:first-child').click()})</script>", str_replace('.', '_', $form->getName()));
 				break;
 		}
 

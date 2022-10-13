@@ -7,6 +7,9 @@
  * @copyright Copyright (C) 2012 JoomBoost (https://www.joomBoost.com). All rights reserved.
  * @license   GNU/GPL http://www.gnu.org/copyleft/gpl.html
  */
+
+use Joomla\CMS\HTML\HTMLHelper;
+
 defined('_JEXEC') or die();
 
 class HTMLFormatHelper
@@ -549,6 +552,9 @@ class HTMLFormatHelper
 
 	public static function loadHead()
 	{
+
+		HTMLHelper::_('bootstrap.framework');
+
 		$document = JFactory::getDocument();
 		if(!JFactory::getApplication()->isClient('administrator'))
 		{

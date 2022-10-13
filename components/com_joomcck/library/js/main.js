@@ -241,7 +241,9 @@ var _gaq = _gaq || [];
 							overlayClose: true,
 							fullscreen: true,
 							closeButton: true,
+							width: '60%',
 							iframe: true,
+							iframeHeight: '600',
 							iframeURL: url,
 							'onClosed': function(){
 								$('#ejbIframeModal').remove();

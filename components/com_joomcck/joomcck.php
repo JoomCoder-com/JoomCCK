@@ -28,6 +28,8 @@ if(is_null($session->get('registry')))
 }
 
 
+
+
 $controller = MControllerBase::getInstance('Joomcck');
 $controller->execute(JFactory::getApplication()->input->get('task'));
 $controller->redirect();
