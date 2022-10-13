@@ -278,12 +278,12 @@ class JoomcckTableCobCategory extends JTableNested
 		$query->where($this->_tbl_key . ' = ' . (int) $pk);
 		$this->_db->setQuery($query);
 
-		// Check for a database error.
-		if (!$this->_db->execute())
-		{
-			$e = new JException(JText::sprintf('JLIB_DATABASE_ERROR_REBUILDPATH_FAILED', get_class($this), $this->_db->getErrorMsg()));
-			$this->setError($e);
-			return false;
+		try{
+			$this->_db->execute();
+		}catch(RuntimeException $e){
+
+			throw new Exception($e->getMessage(),$e->getCode());
+
 		}
 
 		// Update the current record's path to the new one:

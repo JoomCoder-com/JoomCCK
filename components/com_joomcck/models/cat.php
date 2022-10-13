@@ -532,8 +532,10 @@ class JoomcckModelCat extends MModelAdmin
 
 		// If the parent is 0, set it to the ID of the root item in the tree
 		if (empty($parentId)) {
+
+
 			if (!$parentId = $table->getRootId()) {
-				$this->setError($db->getErrorMsg());
+				$this->setError($table->getError());
 				return false;
 			}
 			// Make sure we can create in root
@@ -551,10 +553,12 @@ class JoomcckModelCat extends MModelAdmin
 			'SELECT COUNT(id)' .
 			' FROM #__js_res_categories'
 		);
-		$count = $db->loadResult();
 
-		if ($error = $db->getErrorMsg()) {
-			$this->setError($error);
+		
+		try{
+			$count = $db->loadResult();
+		}catch(RuntimeException $e){
+			$this->setError($e->getMessage());
 			return false;
 		}
 

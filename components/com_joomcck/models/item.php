@@ -120,13 +120,10 @@ class JoomcckModelItem extends MModelAdmin
 				$db->execute();
 			}
 
-			if (!$db->execute()) {
-				throw new Exception($db->getErrorMsg());
-			}
 
-		} catch (Exception $e) {
-			$this->setError($e->getMessage());
-			return false;
+
+		} catch (RuntimeException $e) {
+			throw new Exception($e->getMessage(),$e->getCode());
 		}
 
 		return true;
