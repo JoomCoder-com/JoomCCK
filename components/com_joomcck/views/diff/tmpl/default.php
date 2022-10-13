@@ -55,7 +55,7 @@ td.key {
 						<ul class="dropdown-menu">
 							<?php foreach ($this->versions as $value):?>
 								<li>
-									<a href="<?php echo JRoute::_('index.php?option=com_joomcck&view=diff&record_id='.$this->record->id.'&version='.$value->version.'&return='.$this->input->getBase64('return')); ?>">
+									<a  class="dropdown-item" href="<?php echo JRoute::_('index.php?option=com_joomcck&view=diff&record_id='.$this->record->id.'&version='.$value->version.'&return='.$this->input->getBase64('return')); ?>">
 										<?php echo JText::_('CVERSION');?> v.<?php echo $value->version; ?>
 									</a>
 								</li>

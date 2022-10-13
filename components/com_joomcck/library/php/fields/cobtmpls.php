@@ -26,6 +26,13 @@ class JFormFieldCobtmpls extends JFormFieldList
     
 	protected function getInput()
 	{
+
+		// load iziModal library
+		$document = \Joomla\CMS\Factory::getDocument();
+		$document->addStyleSheet(JUri::root().'media/mint/css/iziModal.min.css');
+		$document->addScript(JUri::root().'media/mint/js/iziModal.min.js');
+
+
 		require_once JPATH_ROOT.'/components/com_joomcck/library/php/helpers/templates.php';
 
 		jimport('joomla.filesystem.folder');

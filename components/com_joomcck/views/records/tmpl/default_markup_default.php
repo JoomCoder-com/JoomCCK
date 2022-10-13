@@ -207,7 +207,7 @@ $current_user = JFactory::getUser($this->input->getInt('user_id', $this->user->g
 										  $tmpl = $tmpl[0];
 									?>
 									<li>
-										<a href="javascript:void(0)" onclick="Joomcck.applyFilter('filter_tpl', '<?php echo $id?>')">
+										<a  class="dropdown-item" href="javascript:void(0)" onclick="Joomcck.applyFilter('filter_tpl', '<?php echo $id?>')">
 										<?php echo ($this->list_template == $tmpl) ? '<strong>' : '';?>
 										<?php echo $template;?>
 										<?php echo ($this->list_template == $tmpl) ? '</strong>' : '';?>
@@ -441,7 +441,7 @@ $current_user = JFactory::getUser($this->input->getInt('user_id', $this->user->g
 										<?php if($markup->get('menu.menu_user_cat_add')):?>
 											<ul class="dropdown-menu">
 												<li>
-													<a tabindex="-1" href="<?php echo JRoute::_(Url::_('category'))?>">
+													<a  class="dropdown-item" tabindex="-1" href="<?php echo JRoute::_(Url::_('category'))?>">
 													<?php if($markup->get('menu.menu_user_cat_add_icon')):?>
 														<img src="<?php echo JURI::root(TRUE);?>/media/mint/icons/16/plus.png" align="absmiddle" />
 													<?php endif;?>

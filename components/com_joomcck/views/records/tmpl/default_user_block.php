@@ -263,7 +263,7 @@ $num = CEventsHelper::showNum('total', 0);
 		    	<ul class="dropdown-menu">
 					<?php if($params->get('menu.menu_user_hidden') && MECAccess::allowUserMenu($user, 'hidden', $this->section)):?>
 						<li <?php if($vw == 'hidden') echo 'class="active"'?>>
-							<a href="<?php echo JRoute::_(Url::user('hidden', $current_user->get('id')));?>">
+							<a  class="dropdown-item" href="<?php echo JRoute::_(Url::user('hidden', $current_user->get('id')));?>">
 								<?php if($params->get('menu.menu_user_hidden_icon')):?>
 									<img src="<?php echo JURI::root(TRUE);?>/media/mint/icons/16/eye-half.png" align="absmiddle" />
 								<?php endif;?>

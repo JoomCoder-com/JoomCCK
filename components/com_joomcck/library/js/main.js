@@ -222,7 +222,7 @@ var _gaq = _gaq || [];
 			var name = this.value.split('.')[0];
 			var btn = $(document.createElement('button'))
 				.attr({
-					'class': 'btn btn-mini',
+					'class': 'btn btn-sm btn-light border',
 					'type':  'button'
 				})
 				.html('<i class="icon-options"></i> ' + name)
@@ -233,15 +233,31 @@ var _gaq = _gaq || [];
 						window.location = url;
 					}
 					else {
-						SqueezeBox.open(this, {
-							'url':     url,
-							'handler': 'iframe',
-							'size':    {x: 950, y: 550}
+
+						$('<div id="ejbIframeModal"></div>').appendTo('body');
+
+						$('#ejbIframeModal').iziModal({
+							title: name,
+							overlayClose: true,
+							fullscreen: true,
+							closeButton: true,
+							iframe: true,
+							iframeURL: url,
+							'onClosed': function(){
+								$('#ejbIframeModal').remove();
+							}
 						});
+
+						$('#ejbIframeModal').iziModal('open');
+
+
 					}
 				});
 
 			el.append(btn);
+
+
+
 			el.append('<br>');
 		});
 	};

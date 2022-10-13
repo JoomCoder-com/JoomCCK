@@ -27,6 +27,12 @@ class JFormFieldMersubtmpls extends JFormFieldList
     
 	protected function getInput()
 	{
+
+		// load iziModal library
+		$document = \Joomla\CMS\Factory::getDocument();
+		$document->addStyleSheet(JUri::root().'media/mint/css/iziModal.min.css');
+		$document->addScript(JUri::root().'media/mint/js/iziModal.min.js');
+
         $old = false;
         if(JFile::exists(JPATH_ROOT.'/components/com_joomcck/library/php/helpers/templates.php'))
         {

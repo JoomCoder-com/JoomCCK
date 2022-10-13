@@ -16,10 +16,10 @@ if(!function_exists('mod_getChildsDrop')) { function mod_getChildsDrop($category
 				if (!$params->get('tmpl_params.subcat_empty', 1) && !$cat->num_current && !$cat->num_all) continue;  ?>
 			<li class="dropdown<?php if($cat->childs_num) echo '-submenu';?><?php /*if(\Joomla\CMS\Factory::getApplication()->input->getInt('cat_id') == $cat->id) echo ' open';*/ ?>">
 				<?php if($params->get('tmpl_params.subcat_limit', 5) <= $i && (count($category->children) > $params->get('tmpl_params.subcat_limit', 5))):?>
-				<a href="<?php echo $category->link;?>"><?php echo JText::_('CMORECATS').'...'?></a></li>
+				<a  class="dropdown-item" href="<?php echo $category->link;?>"><?php echo JText::_('CMORECATS').'...'?></a></li>
 				<?php break;?>
 			<?php else:?>
-				<a href="<?php echo JRoute::_($cat->link)?>">
+				<a  class="dropdown-item" href="<?php echo JRoute::_($cat->link)?>">
 					<?php echo $cat->title;?>
 					<?php if($params->get('tmpl_params.subcat_nums', 0) && $cat->params->get('submission')):?>
 						<span class="small">(<?php echo (int)$cat->records_num; ?>)</span>
@@ -41,7 +41,7 @@ if(!function_exists('mod_getChildsDrop')) { function mod_getChildsDrop($category
 					endif;
 					?>
 					<li class="dropdown">
-						<a href="<?php echo JRoute::_($rec->url)?>">
+						<a  class="dropdown-item" href="<?php echo JRoute::_($rec->url)?>">
 							<?php echo $rec->title;?>
 						</a>
 					</li>
