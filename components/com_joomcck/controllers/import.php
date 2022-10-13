@@ -81,7 +81,7 @@ class JoomcckControllerImport extends MControllerAdmin
 
 			if(!$list)
 			{
-				throw new JException(JText::_('CIMPORTROWSARENOTFOUND'));
+				throw new Exception(JText::_('CIMPORTROWSARENOTFOUND'));
 			}
 
 			require_once JPATH_ROOT . '/components/com_joomcck/models/fields.php';
@@ -309,7 +309,7 @@ class JoomcckControllerImport extends MControllerAdmin
 			JFactory::getApplication()->enqueueMessage(JText::_('CIMPORTSUCCESS'));
 
 		}
-		catch(JException $e)
+		catch(Exception $e)
 		{
 			echo $e->getMessage();
 			JError::raiseWarning(100, $e->getMessage());

@@ -78,7 +78,7 @@ class JoomcckModelRecord extends MModelItem
 
 			$this->_item[$pk] = $data;
 		}
-		catch(JException $e)
+		catch(Exception $e)
 		{
 			if($e->getCode() == 404)
 			{
