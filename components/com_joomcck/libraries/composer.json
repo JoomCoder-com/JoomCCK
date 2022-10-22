@@ -1,0 +1,21 @@
+{
+    "name": "joomboost/joomcck",
+    "type": "library",
+    "version": "1.0",
+    "authors": [
+        {
+            "name": "JoomBoost",
+            "email": "support@joomboost.com"
+        }
+    ],
+    "require": {
+        "php": ">=7.2"
+    },
+    "minimum-stability": "stable",
+    "autoload": {
+        "classmap": [
+            "src/"
+        ],
+        "psr-4": {"Joomcck\\": "src/"}
+    }
+}

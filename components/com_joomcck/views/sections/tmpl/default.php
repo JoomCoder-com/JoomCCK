@@ -7,13 +7,16 @@
  * @license   GNU/GPL http://www.gnu.org/copyleft/gpl.html
  */
 
-defined('_JEXEC') or die('Restricted access'); ?>
+use Joomcck\Html\Helpers\Dropdown;
+
+defined('_JEXEC') or die('Restricted access');
+?>
 <?php
 $user = JFactory::getUser();
 $userId = $user->get('id');
 JHtml::_('dropdown.init');
 JHtml::_('formbehavior.chosen', '.select');
-
+JHTML::_('bootstrap.tooltip', '*[rel^="tooltip"]');
 $listOrder = $this->state->get('list.ordering');
 $listDirn = $this->state->get('list.direction');
 ?>
@@ -86,36 +89,45 @@ $listDirn = $this->state->get('list.direction');
 					<div class="float-start">
 						<?php
 						// Create dropdown items
-						JHtml::_('dropdown.edit', $item->id, 'section.');
-						JHtml::_('dropdown.addCustomItem', JText::_('C_TOOLBAR_DELETE'), 'javascript:void(0)', 'onclick="if(!confirm(\'' . JText::_('C_TOOLBAR_CONFIRMDELET') . '\')){return;}listItemTask(\'cb' . $i . '\',\'sections.delete\')"');
+                        Dropdown::edit($item->id, 'section.');
+
+                        Dropdown::addCustomItem(
+	                        '<i class="fas fa-trash text-danger"></i> '.JText::_('C_TOOLBAR_DELETE'), 'javascript:void(0)',
+                                'onclick="if(!confirm(\'' . JText::_('C_TOOLBAR_CONFIRMDELET') . '\')){return;}listItemTask(\'cb' . $i . '\',\'sections.delete\')"'
+                        );
+
 						if($item->published) :
-							JHtml::_('dropdown.unpublish', 'cb' . $i, 'sections.');
+                            Dropdown::unpublish('cb' . $i, 'sections.');
+
 						else :
-							JHtml::_('dropdown.publish', 'cb' . $i, 'sections.');
+							Dropdown::publish('cb' . $i, 'sections.');
 						endif;
 
 						if($item->checked_out) :
-							JHtml::_('dropdown.divider');
-							JHtml::_('dropdown.checkin', 'cb' . $i, 'sections.');
+                            Dropdown::divider();
+						    Dropdown::checkin('cb' . $i, 'sections.');
 						endif;
 
-						JHtml::_('dropdown.divider');
-						JHtml::_('dropdown.addCustomItem', JText::_('C_OPENSECTION'), JRoute::_(Url::records($item)));
-						JHtml::_('dropdown.divider');
-						JHtml::_('dropdown.addCustomItem', JText::_('C_MANAGE_CATS') . ' <span class="badge' . ($item->categories ? 'bg-success' : ' bg-light text-dark border') . '">' . $item->categories . '</span>', JRoute::_('index.php?option=com_joomcck&view=cats&section_id=' . $item->id));
+						Dropdown::divider();
+                        Dropdown::addCustomItem('<i class="fas fa-eye"></i> '.JText::_('C_OPENSECTION'), JRoute::_(Url::records($item)));
+						Dropdown::divider();
+                        Dropdown::addCustomItem(
+                                '<i class="fas fa-folder-open"></i> '.JText::_('C_MANAGE_CATS') . ' <span class="badge' . ($item->categories ? ' bg-success' : ' bg-light text-dark border') . '">' . $item->categories . '</span>',
+                                JRoute::_('index.php?option=com_joomcck&view=cats&section_id=' . $item->id)
+                        );
 
-						echo JHtml::_('dropdown.render');
+						echo Dropdown::render();
 						?>
 					</div>
 				</td>
 				<td nowrap="nowrap">
-					<a rel="tooltip" data-original-title="<?php echo JText::_('CCATEGOY_MANAGE'); ?>" href="<?php echo JRoute::_('index.php?option=com_joomcck&view=cats&section_id=' . $item->id) ?>">
+					<a rel="tooltip" data-bs-toggle="tooltip" title="<?php echo JText::_('CCATEGOY_MANAGE'); ?>" href="<?php echo JRoute::_('index.php?option=com_joomcck&view=cats&section_id=' . $item->id) ?>">
 						<?php echo JText::_('CCATEGORIES'); ?>
 					</a>
-					<span class="badge<?php echo($item->fieldnum ? 'bg-success' : ' bg-light text-dark border') ?>"><?php echo $item->fieldnum; ?></span>
+					<span class="badge<?php echo($item->fieldnum ? ' bg-success' : ' bg-light text-dark border') ?>"><?php echo $item->fieldnum; ?></span>
 				</td>
 				<td class="center">
-					<span class="badge <?php echo($item->records ? 'bg-info' : ' bg-light text-dark border') ?>"><?php echo $item->records ?></span>
+					<span class="badge <?php echo($item->records ? ' bg-info' : ' bg-light text-dark border') ?>"><?php echo $item->records ?></span>
 				</td>
 				<td class="center">
 					<?php echo $item->language; ?>

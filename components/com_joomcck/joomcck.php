@@ -7,7 +7,13 @@
  * @license   GNU/GPL http://www.gnu.org/copyleft/gpl.html
  */
 defined('_JEXEC') or die();
+
+// load JoomCCK new library
+require_once __DIR__ . '/libraries/vendor/autoload.php';
+
+// load JoomCCK API (will be replaced in future with Joomla API integration
 require_once __DIR__ . '/api.php';
+
 
 $params              = JComponentHelper::getParams('com_joomcck');
 $meta                = array();
