@@ -68,7 +68,7 @@ class JFormFieldMeuser extends JFormField
 
 		// Build the script.
 		$script = array();
-		$script[] = '$(document).addEvent("domready", function() {';
+		$script[] = '$(document).ready(function() {';
 		$script[] = '	window.jSelectUser_'.$this->id.' = function (id, title) {';
 		$script[] = '		var old_id = document.getElementById("'.$this->id.'_id").value;';
 		$script[] = '		if (old_id != id) {';
@@ -106,23 +106,28 @@ class JFormFieldMeuser extends JFormField
 							' href="'.$link.'"' .
 							' rel="{handler: \'iframe\', size: {x: 800, y: 500}}">';
 			$html[] = '			'.JText::_('JLIB_FORM_CHANGE_USER').'</a>';*/
-			$html[] = '<a class="btn btn-primary" href="#usersmodal" data-toggle="modal" role="button">';
+			$html[] = '<a class="btn btn-primary" href="#usersmodal" data-bs-toggle="modal" role="button">';
 			$html[] = '<i class="icon-list icon-white"></i> '.JText::_('CSELECT').'</a>';//.JText::_('JLIB_FORM_CHANGE_USER')
 		}
  		$html[] = '</div>';
 
-		$html[] = '<div style="width:700px;" class="modal hide fade" id="usersmodal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-	  <div class="modal-header">
-	    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-	    <h3 id="myModalLabel">'.JText::_('CFINDUSER').'</h3>
-	  </div>
-	  <div class="modal-body" style="overflow-x: hidden; max-height:500px; padding:0;">
-	    <iframe frameborder="0" width="100%" height="410px" src="'.JRoute::_($link).'"></iframe>
-	  </div>
-	  <div class="modal-footer">
-	    <button class="btn btn-danger" data-dismiss="modal" aria-hidden="true">Close</button>
-	  </div>
-	</div>
+		$html[] = '<div id="usersmodal" class="modal" tabindex="-1">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">'.JText::_('CFINDUSER').'</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <iframe frameborder="0" width="100%" height="410px" src="'.JRoute::_($link).'"></iframe>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
 	';
 
 
