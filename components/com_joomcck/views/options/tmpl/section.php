@@ -25,7 +25,7 @@ $params = $this->section->params;
 </div>
 
 <?php if(!$params->get('personalize.allow_section_set', 1)):?>
-<div class="alert alert-error">
+<div class="alert alert-danger">
    <h4><?php echo JText::_('C_SECTIONNOTALLOWEDTOSET')?></h4>
 </div>
 <?php else :?>

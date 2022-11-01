@@ -126,7 +126,7 @@ $k = 0;
 					<?php echo HTMLFormatHelper::icon('asterisk-small.png');  ?></span>
 			</label>
 			<div class="controls">
-				<div id="field-alert-title" class="alert alert-error" style="display:none"></div>
+				<div id="field-alert-title" class="alert alert-danger" style="display:none"></div>
 				<div class="row">
 					<?php echo $this->form->getInput('title'); ?>
 				</div>
@@ -147,7 +147,7 @@ $k = 0;
 				<span class="float-end" rel="tooltip" data-original-title="<?php echo JText::_('CREQUIRED')?>"><?php echo HTMLFormatHelper::icon('asterisk-small.png');  ?></span>
 			</label>
 			<div class="controls">
-				<div id="field-alert-anywhere" class="alert alert-error" style="display:none"></div>
+				<div id="field-alert-anywhere" class="alert alert-danger" style="display:none"></div>
 				<?php echo JHTML::_('cusers.wheretopost', @$this->item); ?>
 			</div>
 		</div>
@@ -162,7 +162,7 @@ $k = 0;
 				<?php echo JText::_($this->tmpl_params->get('tmpl_core.form_label_anywhere_who', 'Who can repost')) ?>
 			</label>
 			<div class="controls">
-				<div id="field-alert-anywhere" class="alert alert-error" style="display:none"></div>
+				<div id="field-alert-anywhere" class="alert alert-danger" style="display:none"></div>
 				<?php echo $this->form->getInput('whorepost'); ?>
 			</div>
 		</div>
@@ -184,7 +184,7 @@ $k = 0;
 				</label>
 			<?php endif;?>
 			<div class="controls">
-				<div id="field-alert-category" class="alert alert-error" style="display:none"></div>
+				<div id="field-alert-category" class="alert alert-danger" style="display:none"></div>
 				<?php if(!empty($this->allow_multi_msg)): ?>
 					<div class="alert alert-warning">
 						<?php echo JText::_($this->type->params->get('emerald.type_multicat_subscription_msg')); ?>
@@ -208,7 +208,7 @@ $k = 0;
 				<?php endif;?>
 			</label>
 			<div class="controls">
-				<div id="field-alert-category" class="alert alert-error" style="display:none"></div>
+				<div id="field-alert-category" class="alert alert-danger" style="display:none"></div>
 				<?php echo $this->section->name;?> <?php echo $this->category->crumbs; ?>
 			</div>
 		</div>
@@ -227,7 +227,7 @@ $k = 0;
 				<span class="float-end" rel="tooltip" data-original-title="<?php echo JText::_('CREQUIRED')?>"><?php echo HTMLFormatHelper::icon('asterisk-small.png');  ?></span>
 			</label>
 			<div class="controls">
-				<div id="field-alert-ucat" class="alert alert-error" style="display:none"></div>
+				<div id="field-alert-ucat" class="alert alert-danger" style="display:none"></div>
 				<?php echo $this->form->getInput('ucatid'); ?>
 			</div>
 		</div>
@@ -244,7 +244,7 @@ $k = 0;
 				<span class="float-end" rel="tooltip" data-original-title="<?php echo JText::_('CREQUIRED')?>"><?php echo HTMLFormatHelper::icon('asterisk-small.png');  ?></span>
 			</label>
 			<div class="controls">
-				<div id="field-alert-rating" class="alert alert-error" style="display:none"></div>
+				<div id="field-alert-rating" class="alert alert-danger" style="display:none"></div>
 				<?php echo $this->multirating;?>
 			</div>
 		</div>
@@ -280,7 +280,7 @@ $k = 0;
 				<?php endif;?>
 
 				<div class="controls<?php if(in_array($field->params->get('core.label_break'), array(1,3))) echo '-full'; ?><?php echo (in_array($field->params->get('core.label_break'), array(1,3)) ? ' line-brk' : NULL) ?><?php echo $field->fieldclass  ?>">
-					<div id="field-alert-<?php echo $field->id?>" class="alert alert-error" style="display:none"></div>
+					<div id="field-alert-<?php echo $field->id?>" class="alert alert-danger" style="display:none"></div>
 					<?php echo $field->result; ?>
 				</div>
 			</div>
@@ -338,7 +338,7 @@ $k = 0;
 					<?php endif;?>
 
 					<div class="controls<?php if(in_array($field->params->get('core.label_break'), array(1,3))) echo '-full'; ?><?php echo (in_array($field->params->get('core.label_break'), array(1,3)) ? ' line-brk' : NULL) ?><?php echo $field->fieldclass  ?>">
-						<div id="field-alert-<?php echo $field->id?>" class="alert alert-error" style="display:none"></div>
+						<div id="field-alert-<?php echo $field->id?>" class="alert alert-danger" style="display:none"></div>
 						<?php echo $field->result; ?>
 					</div>
 				</div>

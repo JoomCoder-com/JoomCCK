@@ -108,7 +108,7 @@ $app = JFactory::getApplication();
 				<?php echo JText::_('CATTACH');?>
 			</label>
 			<div class="controls">
-			<div id="field-alert-0" class="alert alert-error" style="display:none"></div>
+			<div id="field-alert-0" class="alert alert-danger" style="display:none"></div>
 				<?php echo $this->form->getField('attachment')->getInput(array(
 				'max_size' => $this->type->params->get('comments.comments_attachment_max'),
 				'file_formats' => $this->type->params->get('comments.comments_allowed_formats'),

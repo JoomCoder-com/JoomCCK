@@ -58,7 +58,7 @@ $app = $this->params->get('params.append', NULL);
 </div>
 <div class="clearfix"></div>
 <br />
-<div class="alert alert-error" id="erralert<?php echo $this->id;?>"></div>
+<div class="alert alert-danger" id="erralert<?php echo $this->id;?>"></div>
 
 <script>
 (function($){

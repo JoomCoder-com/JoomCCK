@@ -91,7 +91,7 @@ defined('_JEXEC') or die('Restricted access');
 			<?php if($limit > 0):?>
 				if(this.s_icons_cat.length >= <?php echo $limit;?>)
 				{
-					var html = '<div class="alert alert-error"><button type="button" class="close" data-dismiss="alert">×</button><?php echo htmlentities(JText::_('CCATEGORYREACHMAXLIMIT'), ENT_QUOTES, 'UTF-8')?></div>';
+					var html = '<div class="alert alert-danger"><button type="button" class="close" data-dismiss="alert">×</button><?php echo htmlentities(JText::_('CCATEGORYREACHMAXLIMIT'), ENT_QUOTES, 'UTF-8')?></div>';
 					$('#error-msg').html(html);
 					return;
 				}

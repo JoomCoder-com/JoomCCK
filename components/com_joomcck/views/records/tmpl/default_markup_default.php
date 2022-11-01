@@ -649,7 +649,7 @@ $current_user = JFactory::getUser($this->input->getInt('user_id', $this->user->g
 		</div>
 	<?php endforeach;?>
 	<?php if(count($this->worns) > 1): ?>
-		<button onclick="Joomla.submitbutton('records.cleanall');" class="alert alert-error  float-start">
+		<button onclick="Joomla.submitbutton('records.cleanall');" class="alert alert-danger  float-start">
 			<div><?php echo JText::_('CORESET'); ?></div>
 			<?php echo JText::_('CODELETEALLFILTERS'); ?>
 		</button>

@@ -109,7 +109,7 @@ class JFormFieldCPayvoucher extends CFormField
 		}
 		else 
 		{
-			$out[] = '<div class="alert alert-error">';
+			$out[] = '<div class="alert alert-danger">';
 			$out[] = JText::_('PV_ORDERREFUNDEDORFAILED');
 		}
 		$out[] = '</div>';

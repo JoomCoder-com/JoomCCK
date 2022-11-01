@@ -132,10 +132,14 @@ $app = JFactory::getApplication();
 
 		if(!isValid)
 		{
+
 			jQuery('.btn-submit').removeAttr('disabled');
 			var firsterror = '';
-			Array.each(hfid, function(el, idx){
+			$.each(hfid, function(idx, el){
+
 				if(idx == 0) firsterror = el;
+
+
 				Joomcck.fieldError(el, errorText[idx]);
 			});
 
