@@ -7,11 +7,14 @@
  * @license   GNU/GPL http://www.gnu.org/copyleft/gpl.html
  */
 
+use Joomcck\Html\Helpers\Dropdown;
+
 defined('_JEXEC') or die('Restricted access');
 
 JHtml::addIncludePath(JPATH_COMPONENT . '/helpers/html');
 JHtml::_('dropdown.init');
 JHtml::_('bootstrap.modal', 'a.modal');
+JHTML::_('bootstrap.tooltip', '*[rel^="tooltip"]');
 JHtml::_('formbehavior.chosen', '.select');
 
 $user = JFactory::getUser();
@@ -68,11 +71,11 @@ $listDirn = $this->state->get('list.direction');
 			</td>
 			<td class="center">
 				<div class="btn-group">
-					<a class="btn btn-sm btn-light border" rel="tooltip" data-original-title="<?php echo $item->published ? JText::_('CUNPUB') : JText::_('CPUB'); ?>"
+					<a class="btn btn-sm btn-light border" rel="tooltip" data-bs-toggle="tooltip" title="<?php echo $item->published ? JText::_('CUNPUB') : JText::_('CPUB'); ?>"
 					   href="<?php echo Url::task('records.' . ($item->published ? 'sunpub' : 'spub'), $item->id); ?>">
 						<?php echo HTMLFormatHelper::icon(!$item->published ? 'cross-circle.png' : 'tick.png'); ?>
 					</a>
-					<a class="btn btn-sm btn-light border" rel="tooltip" data-original-title="<?php echo $item->featured ? JText::_('CMAKEUNFEATURE') : JText::_('CMAKEFEATURE'); ?>"
+					<a class="btn btn-sm btn-light border" rel="tooltip" data-bs-toggle="tooltip" title="<?php echo $item->featured ? JText::_('CMAKEUNFEATURE') : JText::_('CMAKEFEATURE'); ?>"
 					   href="<?php echo Url::task('records.' . ($item->featured ? 'sunfeatured' : 'sfeatured'), $item->id); ?>">
 						<?php echo HTMLFormatHelper::icon(!$item->featured ? 'crown-silver.png' : 'crown.png'); ?>
 					</a>
@@ -86,7 +89,7 @@ $listDirn = $this->state->get('list.direction');
 					<div>
 					<small>
 						<?php echo JHtml::_('ip.country', $item->ip); ?>
-						<?php echo JHTML::link('javascript:void(0);', $item->ip, array('rel' => "tooltip", 'data-original-title' => JText::_('CFILTERBYIP'), 'onclick' => 'Joomcck.setAndSubmit(\'filter_search\', \'ip:' . $item->ip . '\');')); ?>
+						<?php echo JHTML::link('javascript:void(0);', $item->ip, array('rel' => "tooltip", 'title' => JText::_('CFILTERBYIP'), 'onclick' => 'Joomcck.setAndSubmit(\'filter_search\', \'ip:' . $item->ip . '\');')); ?>
 					</small>
 					</div>
 				<?php endif; ?>
@@ -95,44 +98,45 @@ $listDirn = $this->state->get('list.direction');
 				<div style="position: absolute; top: 10px; right: 10px;">
 					<?php
 					// Create dropdown items
-					JHtml::_('dropdown.addCustomItem', JText::_('CCOPY'), 'javascript:void(0)', 'onclick="listItemTask(\'cb' . $i . '\',\'records.copy\')"');
-					JHtml::_('dropdown.addCustomItem', $item->featured ? JText::_('CMAKEUNFEATURE') : JText::_('CMAKEFEATURE'), Url::task('records.' . ($item->featured ? 'sunfeatured' : 'sfeatured'), $item->id));
-					JHtml::_('dropdown.addCustomItem', JText::_('CDELETE'), Url::task('records.delete', $item->id));
+					Dropdown::addCustomItem('<i class="fas fa-copy"></i> '.JText::_('CCOPY'), 'javascript:void(0)', 'onclick="listItemTask(\'cb' . $i . '\',\'records.copy\')"');
+					Dropdown::addCustomItem($item->featured ? JText::_('CMAKEUNFEATURE') : JText::_('CMAKEFEATURED'), Url::task('records.' . ($item->featured ? 'sunfeatured' : 'sfeatured'), $item->id));
+					Dropdown::addCustomItem('<i class="fas fa-trash text-danger"></i> '. JText::_('CDELETE'), Url::task('records.delete', $item->id));
 
-					JHtml::_('dropdown.divider');
+					Dropdown::divider();
 
 					if($item->published) :
-						JHtml::_('dropdown.unpublish', 'cb' . $i, 'items.');
+						Dropdown::unpublish( 'cb' . $i, 'items.');
 					else :
-						JHtml::_('dropdown.publish', 'cb' . $i, 'items.');
+						Dropdown::publish(  'cb' . $i, 'items.');
 					endif;
 
 					if($item->checked_out) :
-						JHtml::_('dropdown.divider');
-						JHtml::_('dropdown.checkin', 'cb' . $i, 'records.');
+						Dropdown::divider();
+						Dropdown::checkin( 'cb' . $i, 'records.');
 					endif;
 
-					JHtml::_('dropdown.divider');
+					Dropdown::divider();
 
-					JHtml::_('dropdown.addCustomItem', JText::_('C_TOOLBAR_RESET_CTIME'), 'javascript:void(0)', 'onclick="listItemTask(\'cb' . $i . '\',\'records.reset_ctime\')"');
-					JHtml::_('dropdown.addCustomItem', JText::_('C_TOOLBAR_RESET_MTIME'), 'javascript:void(0)', 'onclick="listItemTask(\'cb' . $i . '\',\'records.reset_mtime\')"');
-					JHtml::_('dropdown.addCustomItem', JText::_('C_TOOLBAR_RESET_EXTIME'), 'javascript:void(0)', 'onclick="listItemTask(\'cb' . $i . '\',\'records.reset_extime\')"');
+					Dropdown::addCustomItem( JText::_('C_TOOLBAR_RESET_CTIME'), 'javascript:void(0)', 'onclick="listItemTask(\'cb' . $i . '\',\'records.reset_ctime\')"');
+					Dropdown::addCustomItem( JText::_('C_TOOLBAR_RESET_MTIME'), 'javascript:void(0)', 'onclick="listItemTask(\'cb' . $i . '\',\'records.reset_mtime\')"');
+					Dropdown::addCustomItem( JText::_('C_TOOLBAR_RESET_EXTIME'), 'javascript:void(0)', 'onclick="listItemTask(\'cb' . $i . '\',\'records.reset_extime\')"');
 
-					JHtml::_('dropdown.divider');
+					Dropdown::divider();
+
 					if($item->hits):
-						JHtml::_('dropdown.addCustomItem', JText::_('C_TOOLBAR_RESET_HITS') . " <span class=\"badge bg-info\">{$item->hits}</span>", 'javascript:void(0)', 'onclick="listItemTask(\'cb' . $i . '\',\'records.reset_hits\')"');
+						Dropdown::addCustomItem( JText::_('C_TOOLBAR_RESET_HITS') . " <span class=\"badge bg-info\">{$item->hits}</span>", 'javascript:void(0)', 'onclick="listItemTask(\'cb' . $i . '\',\'records.reset_hits\')"');
 					endif;
 					if($item->comments):
-						JHtml::_('dropdown.addCustomItem', JText::_('C_TOOLBAR_RESET_COOMENT') . " <span class=\"badge bg-info\">{$item->comments}</span>", 'javascript:void(0)', 'onclick="listItemTask(\'cb' . $i . '\',\'records.reset_com\')"');
+						Dropdown::addCustomItem( JText::_('C_TOOLBAR_RESET_COOMENT') . " <span class=\"badge bg-info\">{$item->comments}</span>", 'javascript:void(0)', 'onclick="listItemTask(\'cb' . $i . '\',\'records.reset_com\')"');
 					endif;
 					if($item->votes):
-						JHtml::_('dropdown.addCustomItem', JText::_('C_TOOLBAR_RESET_RATING') . " <span class=\"badge bg-info\">{$item->votes}</span>", 'javascript:void(0)', 'onclick="listItemTask(\'cb' . $i . '\',\'records.reset_vote\')"');
+						Dropdown::addCustomItem( JText::_('C_TOOLBAR_RESET_RATING') . " <span class=\"badge bg-info\">{$item->votes}</span>", 'javascript:void(0)', 'onclick="listItemTask(\'cb' . $i . '\',\'records.reset_vote\')"');
 					endif;
 					if($item->favorite_num):
-						JHtml::_('dropdown.addCustomItem', JText::_('C_TOOLBAR_RESET_FAVORIT') . " <span class=\"badge bg-info\">{$item->favorite_num}</span>", 'javascript:void(0)', 'onclick="listItemTask(\'cb' . $i . '\',\'records.reset_fav\')"');
+						Dropdown::addCustomItem( JText::_('C_TOOLBAR_RESET_FAVORIT') . " <span class=\"badge bg-info\">{$item->favorite_num}</span>", 'javascript:void(0)', 'onclick="listItemTask(\'cb' . $i . '\',\'records.reset_fav\')"');
 					endif;
 
-					echo JHtml::_('dropdown.render');
+					echo Dropdown::render();
 					?>
 				</div>
 				<div class="float-start">
@@ -145,13 +149,13 @@ $listDirn = $this->state->get('list.direction');
 					<br/>
 					<small>
 						<?php echo JText::_('CTYPE'); ?>:
-						<a href="#" rel="tooltip" data-original-title="<?php echo JText::_('CFILTERBYTYPE'); ?>" onclick="Joomcck.setAndSubmit('filter_type', <?php echo $item->type_id ?>)">
+						<a href="#" rel="tooltip" data-bs-toggle="tooltip" title="<?php echo JText::_('CFILTERBYTYPE'); ?>" onclick="Joomcck.setAndSubmit('filter_type', <?php echo $item->type_id ?>)">
 							<?php echo $this->escape($item->type_name); ?>
 						</a>
 						<span style="color: lightgray">|</span>
 
 						<?php echo JText::_('CSECTION'); ?>:
-						<a href="#" rel="tooltip" data-original-title="<?php echo JText::_('CFILTERBYSECTION'); ?>" onclick="Joomcck.setAndSubmit('filter_section', <?php echo $item->section_id ?>)">
+						<a href="#" rel="tooltip" data-bs-toggle="tooltip" title="<?php echo JText::_('CFILTERBYSECTION'); ?>" onclick="Joomcck.setAndSubmit('filter_section', <?php echo $item->section_id ?>)">
 							<?php echo $this->escape($item->section_name); ?>
 						</a>
 
@@ -159,7 +163,7 @@ $listDirn = $this->state->get('list.direction');
 							<span style="color: lightgray">|</span>
 							<?php echo JText::_('CCATEGORY'); ?>:
 							<?php foreach($item->categories AS $key => $category): ?>
-								<a rel="tooltip" data-original-title="<?php echo JText::_('CFILTERBYCATEGORY'); ?>" href="#" onclick="Joomcck.setAndSubmit('filter_category', <?php echo $key; ?>);"><?php echo $category; ?></a>
+								<a rel="tooltip" data-bs-toggle="tooltip" title="<?php echo JText::_('CFILTERBYCATEGORY'); ?>" href="#" onclick="Joomcck.setAndSubmit('filter_category', <?php echo $key; ?>);"><?php echo $category; ?></a>
 							<?php endforeach; ?>
 						<?php endif; ?>
 
@@ -167,7 +171,7 @@ $listDirn = $this->state->get('list.direction');
 						<?php echo JText::_('CAUTHOR'); ?>:
 						<small>
 							<?php echo JHtml::link('javascript:void(0);', ($item->userlogin ? $item->userlogin : Jtext::_('CANONYMOUS')), array(
-								'rel' => "tooltip", 'data-original-title' => JText::_('CFILTERBYUSER'), 'onclick' => 'Joomcck.setAndSubmit(\'filter_search\', \'user:' . $item->user_id . '\');'
+								'rel' => "tooltip", 'title' => JText::_('CFILTERBYUSER'), 'onclick' => 'Joomcck.setAndSubmit(\'filter_search\', \'user:' . $item->user_id . '\');'
 							)) ?>
 
 						</small>
@@ -178,12 +182,12 @@ $listDirn = $this->state->get('list.direction');
 						<span class="badge bg-light text-muted border"><small><?php echo $this->escape($item->hits); ?></small></span>
 
 						<?php echo JHtml::_('grid.sort', 'CCOMMENTS', 'a.comments', $listDirn, $listOrder); ?>
-						<a rel="tooltip" data-original-title="<?php echo JText::_('CSHOWRECORDCOMMENTS'); ?>" href="<?php echo JRoute::_('index.php?option=com_joomcck&view=comms&filter_search=record:' . $item->id); ?>" class="badge bg-info">
+						<a rel="tooltip" data-bs-toggle="tooltip" title="<?php echo JText::_('CSHOWRECORDCOMMENTS'); ?>" href="<?php echo JRoute::_('index.php?option=com_joomcck&view=comms&filter_search=record:' . $item->id); ?>" class="badge bg-info">
 							<small><?php echo $this->escape($item->comments); ?></small>
 						</a>
 
 						<?php echo JHtml::_('grid.sort', 'CVOTES', 'a.votes', $listDirn, $listOrder); ?>
-						<a rel="tooltip" data-original-title="<?php echo JText::_('CSHOWRECORDVOTES'); ?>" href="<?php echo JRoute::_('index.php?option=com_joomcck&view=votes&filter_search=record:' . $item->id); ?>" class="badge bg-info">
+						<a rel="tooltip" data-bs-toggle="tooltip" title="<?php echo JText::_('CSHOWRECORDVOTES'); ?>" href="<?php echo JRoute::_('index.php?option=com_joomcck&view=votes&filter_search=record:' . $item->id); ?>" class="badge bg-info">
 							<small><?php echo $this->escape($item->votes); ?></small>
 						</a>
 
