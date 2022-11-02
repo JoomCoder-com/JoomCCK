@@ -25,6 +25,8 @@ class JoomcckModelForm extends MModelAdmin
 	protected function loadFormData()
 	{
 		$data = JFactory::getApplication()->getUserState('com_joomcck.edit.form.data', array());
+
+
 		if(empty($data))
 		{
 			$data = $this->getItem();
@@ -59,10 +61,21 @@ class JoomcckModelForm extends MModelAdmin
 	public function getItem($itemId = NULL, $cache = TRUE)
 	{
 		static $data = array();
+		$id = \Joomla\CMS\Factory::getApplication()->input->get('id',0,'int');
 
-		$itemId = (int)($itemId ? $itemId : $this->getState('com_joomcck.edit.form.id'));
+		// id not passed from signature
+		if(is_null($itemId)){
+			if($id > 0){
+				$itemId = $id; // if id exist in request then use it
+			}else{
+				$itemId = (int) $this->getState('com_joomcck.edit.form.id'); // use id saved in user state
+			}
+		}
 
-		if(!$itemId)
+		// $itemId = (int)($itemId ? $itemId : $this->getState('com_joomcck.edit.form.id')); old code
+
+
+		if(!$itemId) // new item
 		{
 
 			$type       = $this->getRecordType(JFactory::getApplication()->input->getInt('type_id'), $itemId);
@@ -89,11 +102,12 @@ class JoomcckModelForm extends MModelAdmin
 			return $out;
 		}
 
-
 		if(isset($data[$itemId]) && $cache)
 		{
 			return $data[$itemId];
 		}
+
+
 
 		$table  = $this->getTable();
 		$return = $table->load($itemId);
