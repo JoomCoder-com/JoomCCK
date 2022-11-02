@@ -64,9 +64,22 @@ foreach($this->values as $key => $line):
 <?php if (in_array($this->params->get('params.add_value', 2), $this->user->getAuthorisedViewLevels()) && !$this->params->get('params.sql_source')):?>
 	<div class="clearfix"></div>
 	<p>
+<?php
+
+\Joomla\CMS\Factory::getDocument()->addScriptOptions('com_joomcck.variant_link_'.$this->id,[
+	'field_type' => $this->type,
+	'id' => $this->id,
+	'inputtype' => 'option',
+	'limit' => 1
+
+])
+
+
+?>
 	<div id="variant_<?php echo $this->id;?>">
 		<a id="show_variant_link_<?php echo $this->id;?>"
-			rel="{field_type:'<?php echo $this->type;?>', id:<?php echo $this->id;?>, inputtype:'option', limit:1}"
-			href="javascript:void(0)" onclick="Joomcck.showAddForm(<?php echo $this->id;?>)"><?php echo JText::_($this->params->get('params.user_value_label', 'Your variant'));?></a>
+			href="javascript:void(0)" onclick="Joomcck.showAddForm(<?php echo $this->id;?>)">
+            <?php echo JText::_($this->params->get('params.user_value_label', 'Your variant'));?>
+        </a>
 	</div></p>
 <?php endif;?>

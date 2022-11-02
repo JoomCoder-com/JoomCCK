@@ -614,7 +614,7 @@ var _gaq = _gaq || [];
 
 	Joomcck.showAddForm = function(id) {
 		var link = $('#show_variant_link_' + id).clone();
-		var data = JSON.decode(link.attr('rel'));
+		var data = Joomla.getOptions('com_joomcck.variant_link_' + id);
 		var container = $('#variant_' + id);
 
 		var input = $(document.createElement('input'))

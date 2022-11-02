@@ -40,7 +40,7 @@ class JFormFieldCpacksections extends JFormField
 			
 			array_unshift($options, JHTML::_('select.option', '', JText::_('CSELECTSECTION')));
 			
-			$html = JHtml::_('select.genericlist', $options, 'jform[section_id]', 'onchange="changeSection(this.value);" class="inputbox required"');
+			$html = JHtml::_('select.genericlist', $options, 'jform[section_id]', 'onchange="changeSection(this.value);" class="form-select required"');
 		}
 		else
 		{

@@ -178,7 +178,7 @@ class RatingHelp
 		if(count($options) > 1)
 		{
 			$doc->addScriptDeclaration("
-				var mr = JSON.decode('" . $record->multirating . "');
+				var mr = JSON.parse('" . $record->multirating . "');
 				function FormItemRatingCallBack(vote, ident, index )
 				{
 					votes_result = 0;

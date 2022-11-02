@@ -41,7 +41,7 @@ else
 	$attr = ' size="'.$this->catsel_params->get('tmpl_params.single_catselect_size', 1).'"';
 }
 $attr .= ' required="true"';
-$attr .= ' class="inputbox required"';
+$attr .= ' class="form-select required"';
 
 if($limit > 1)
 {
