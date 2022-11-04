@@ -127,9 +127,7 @@ $k = 0;
 			</label>
 			<div class="controls">
 				<div id="field-alert-title" class="alert alert-danger" style="display:none"></div>
-				<div class="row">
-					<?php echo $this->form->getInput('title'); ?>
-				</div>
+				<?php echo $this->form->getInput('title'); ?>
 			</div>
 		</div>
 	<?php else :?>

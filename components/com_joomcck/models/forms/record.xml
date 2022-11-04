@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <form>
 
-	<field id="title" name="title" onchange="Joomcck.fieldError('title');" type="text" label="JGLOBAL_TITLE" description="JFIELD_TITLE_DESC" class="span12" size="30" required="true" />
+	<field id="title" name="title" onchange="Joomcck.fieldError('title');" type="text" label="JGLOBAL_TITLE" description="JFIELD_TITLE_DESC" size="30" required="true" />
 
 	<field id="published" name="published" type="list" label="JSTATUS" description="JFIELD_PUBLISHED_DESC" class="inputbox" size="1" default="1">
 		<option value="1">JPUBLISHED</option>
@@ -37,14 +37,14 @@
 
 	<field id="hits" name="hits" type="text" label="JFIELD_HITS_LABEL" description="JFIELD_HITS_DESC" class="inputbox" size="10" />
 	<field id="votes" name="votes" type="text" label="JFIELD_VOTES_LABEL" description="JFIELD_VOTES_DESC" class="inputbox" size="10" />
-	<field id="votes_result" name="votes_result" type="text" label="JFIELD_VOTES_RESULT_LABEL" description="JFIELD_VOTES_RESULT_DESC" class="inputbox" size="10" />
+	<field id="votes_result" name="votes_result" type="text" label="JFIELD_VOTES_RESULT_LABEL" description="JFIELD_VOTES_RESULT_DESC" class="form-control" size="10" />
 
 	<field name="langs" type="language" default="en-GB" label="JFIELD_LANGUAGE_LABEL" description="JFIELD_LANGUAGE_DESC" class="inputbox">
 		<option value="*">JALL</option>
 	</field>
 
-	<field id="meta_key" name="meta_key" type="textarea" label="JFIELD_META_KEYWORDS_LABEL" description="JFIELD_META_KEYWORDS_DESC" class="span12" rows="5" cols="50" />
-	<field id="meta_descr" name="meta_descr" type="textarea" label="JFIELD_META_DESCRIPTION_LABEL" description="JFIELD_META_DESCRIPTION_DESC" class="span12" rows="5" cols="50" />
+	<field id="meta_key" name="meta_key" type="textarea" label="JFIELD_META_KEYWORDS_LABEL" description="JFIELD_META_KEYWORDS_DESC"  rows="5" cols="50" />
+	<field id="meta_descr" name="meta_descr" type="textarea" label="JFIELD_META_DESCRIPTION_LABEL" description="JFIELD_META_DESCRIPTION_DESC"  rows="5" cols="50" />
 	<field id="meta_index" name="meta_index" type="list" label="JFIELD_META_INDEX_LABEL" description="JFIELD_META_INDEX_DESC" class="span12" >
 		<option value="">JGLOBAL_USE_GLOBAL</option>
 		<option value="index, follow">Allow search engines index this article</option>
@@ -56,7 +56,7 @@
 	<field id="access_key" name="access_key" type="text" label="JFIELD_ACCESS_KEY_LABEL" description="JFIELD_ACCESS_KEY_DESC" class="inputbox"  />
 	<field id="categories" name="categories" type="text" label="JFIELD_CATEGORIES_LABEL" description="JFIELD_CATEGORIES_DESC" class="inputbox"  />
 	<field id="fieldsdata" name="fieldsdata" type="text" label="JFIELD_FIELDSDATA_LABEL" description="JFIELD_FIELDSDATA_DESC" class="inputbox"  />
-	<field id="tags" name="tags" type="metags" label="Tags" description="" class="inputbox"  />
+	<field id="tags" name="tags" type="metags" label="Tags" description="" class="form-control"/>
 	<field id="access" name="access" type="accesslevel" label="JFIELD_ACCESS_LABEL" description="JFIELD_ACCESS_DESC" class="inputbox" size="1" />
 	<!-- <field name="captcha" type="captcha" label="Captcha" required="true"/>
 	<field name="hidecaptcha" type="hidden" value="1" /> -->

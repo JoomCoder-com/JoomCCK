@@ -18,9 +18,9 @@ foreach($this->values as $key => $value) :
 	$label = $this->_getVal($value->field_value);
 	?>
 	<?php if($key % 2 == 0):?>
-	<div class="row">
+	<div>
 	<?php endif;?>
-	<div class="span6">
+	<div class="col-md-6">
 		<label class="checkbox">
 			<input type="checkbox" name="filters[<?php echo $this->key;?>][value][]" value="<?php echo htmlspecialchars($value->field_value);?>" 
 				<?php echo (in_array($value->field_value, $default) ? ' checked="checked"' : NULL);?>> 

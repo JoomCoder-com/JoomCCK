@@ -93,8 +93,8 @@ class JFormFieldMeuser extends JFormField
 
 		// Create a dummy text field with the user name.
 
-		$html[] = '<div class="input-append">';
-		$html[] = '	<input type="text" id="'.$this->id.'_name"' .
+		$html[] = '<div class="input-group">';
+		$html[] = '	<input class="form-control" type="text" id="'.$this->id.'_name"' .
 					' value="'.htmlspecialchars($table->username, ENT_COMPAT, 'UTF-8').'"' .
 					' disabled="disabled"'.$attr.' />';
 
@@ -106,8 +106,8 @@ class JFormFieldMeuser extends JFormField
 							' href="'.$link.'"' .
 							' rel="{handler: \'iframe\', size: {x: 800, y: 500}}">';
 			$html[] = '			'.JText::_('JLIB_FORM_CHANGE_USER').'</a>';*/
-			$html[] = '<a class="btn btn-primary" href="#usersmodal" data-bs-toggle="modal" role="button">';
-			$html[] = '<i class="icon-list icon-white"></i> '.JText::_('CSELECT').'</a>';//.JText::_('JLIB_FORM_CHANGE_USER')
+			$html[] = '<a class="btn btn-outline-primary" href="#usersmodal" data-bs-toggle="modal" role="button">';
+			$html[] = '<i class="fas fa-user"></i> '.JText::_('CSELECT').'</a>';//.JText::_('JLIB_FORM_CHANGE_USER')
 		}
  		$html[] = '</div>';
 

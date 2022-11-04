@@ -619,18 +619,19 @@ var _gaq = _gaq || [];
 
 		var input = $(document.createElement('input'))
 			.attr('name', 'your_variant_' + data.id)
-			.attr('type', 'text');
+			.attr('type', 'text')
+			.attr('class', 'form-control form-control-sm d-inline');
 		var ba = $(document.createElement('button'))
 			.attr('type', 'button')
-			.attr('class', 'btn')
+			.attr('class', 'btn btn-sm btn-outline-secondary')
 			.html('<img src="<?php echo JURI::root(TRUE);?>/media/mint/icons/16/plus-button.png" /> <?php echo JText::_("Add");?>');
 		var bc = $(document.createElement('button'))
 			.attr('type', 'button')
-			.attr('class', 'btn')
+			.attr('class', 'btn btn-sm btn-outline-secondary')
 			.html('<img src="<?php echo JURI::root(TRUE);?>/media/mint/icons/16/minus-button.png" /> <?php echo JText::_("Close");?>');
 
 		var bg = $(document.createElement('div'))
-			.attr('class', 'input-append')
+			.attr('class', 'input-group w-50')
 			.append(input).append(ba).append(bc);
 
 		bc.click(function(el) {
