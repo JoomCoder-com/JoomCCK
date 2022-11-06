@@ -106,7 +106,7 @@ $listDirn	= $this->state->get('list.direction');
 						<?php
 							// Create dropdown items
 							JHtml::_('dropdown.edit', $item->id, 'ctype.');
-							JHtml::_('dropdown.addCustomItem', JText::_('C_TOOLBAR_DELETE'), 'javascript:void(0)', 'onclick="if(!confirm(\''.JText::_('C_TOOLBAR_CONFIRMDELET').'\')){return;}listItemTask(\'cb'.$i.'\',\'types.delete\')"');
+							JHtml::_('dropdown.addCustomItem', JText::_('C_TOOLBAR_DELETE'), 'javascript:void(0)', 'onclick="if(!confirm(\''.JText::_('C_TOOLBAR_CONFIRMDELET').'\')){return;}Joomla.listItemTask(\'cb'.$i.'\',\'types.delete\')"');
 							if ($item->published) :
 								JHtml::_('dropdown.unpublish', 'cb' . $i, 'ctypes.');
 							else :

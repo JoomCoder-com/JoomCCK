@@ -93,7 +93,7 @@ $listDirn = $this->state->get('list.direction');
 
                         Dropdown::addCustomItem(
 	                        '<i class="fas fa-trash text-danger"></i> '.JText::_('C_TOOLBAR_DELETE'), 'javascript:void(0)',
-                                'onclick="if(!confirm(\'' . JText::_('C_TOOLBAR_CONFIRMDELET') . '\')){return;}listItemTask(\'cb' . $i . '\',\'sections.delete\')"'
+                                'onclick="if(!confirm(\'' . JText::_('C_TOOLBAR_CONFIRMDELET') . '\')){return;}Joomla.listItemTask(\'cb' . $i . '\',\'sections.delete\')"'
                         );
 
 						if($item->published) :

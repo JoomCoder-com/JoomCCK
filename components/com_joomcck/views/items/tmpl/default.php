@@ -98,7 +98,7 @@ $listDirn = $this->state->get('list.direction');
 				<div style="position: absolute; top: 10px; right: 10px;">
 					<?php
 					// Create dropdown items
-					Dropdown::addCustomItem('<i class="fas fa-copy"></i> '.JText::_('CCOPY'), 'javascript:void(0)', 'onclick="listItemTask(\'cb' . $i . '\',\'records.copy\')"');
+					Dropdown::addCustomItem('<i class="fas fa-copy"></i> '.JText::_('CCOPY'), 'javascript:void(0)', 'onclick="Joomla.listItemTask(\'cb' . $i . '\',\'records.copy\')"');
 					Dropdown::addCustomItem($item->featured ? JText::_('CMAKEUNFEATURE') : JText::_('CMAKEFEATURED'), Url::task('records.' . ($item->featured ? 'sunfeatured' : 'sfeatured'), $item->id));
 					Dropdown::addCustomItem('<i class="fas fa-trash text-danger"></i> '. JText::_('CDELETE'), Url::task('records.delete', $item->id));
 
@@ -117,23 +117,23 @@ $listDirn = $this->state->get('list.direction');
 
 					Dropdown::divider();
 
-					Dropdown::addCustomItem( JText::_('C_TOOLBAR_RESET_CTIME'), 'javascript:void(0)', 'onclick="listItemTask(\'cb' . $i . '\',\'records.reset_ctime\')"');
-					Dropdown::addCustomItem( JText::_('C_TOOLBAR_RESET_MTIME'), 'javascript:void(0)', 'onclick="listItemTask(\'cb' . $i . '\',\'records.reset_mtime\')"');
-					Dropdown::addCustomItem( JText::_('C_TOOLBAR_RESET_EXTIME'), 'javascript:void(0)', 'onclick="listItemTask(\'cb' . $i . '\',\'records.reset_extime\')"');
+					Dropdown::addCustomItem( JText::_('C_TOOLBAR_RESET_CTIME'), 'javascript:void(0)', 'onclick="Joomla.Joomla.listItemTask(\'cb' . $i . '\',\'records.reset_ctime\')"');
+					Dropdown::addCustomItem( JText::_('C_TOOLBAR_RESET_MTIME'), 'javascript:void(0)', 'onclick="Joomla.listItemTask(\'cb' . $i . '\',\'records.reset_mtime\')"');
+					Dropdown::addCustomItem( JText::_('C_TOOLBAR_RESET_EXTIME'), 'javascript:void(0)', 'onclick="Joomla.listItemTask(\'cb' . $i . '\',\'records.reset_extime\')"');
 
 					Dropdown::divider();
 
 					if($item->hits):
-						Dropdown::addCustomItem( JText::_('C_TOOLBAR_RESET_HITS') . " <span class=\"badge bg-info\">{$item->hits}</span>", 'javascript:void(0)', 'onclick="listItemTask(\'cb' . $i . '\',\'records.reset_hits\')"');
+						Dropdown::addCustomItem( JText::_('C_TOOLBAR_RESET_HITS') . " <span class=\"badge bg-info\">{$item->hits}</span>", 'javascript:void(0)', 'onclick="Joomla.listItemTask(\'cb' . $i . '\',\'records.reset_hits\')"');
 					endif;
 					if($item->comments):
-						Dropdown::addCustomItem( JText::_('C_TOOLBAR_RESET_COOMENT') . " <span class=\"badge bg-info\">{$item->comments}</span>", 'javascript:void(0)', 'onclick="listItemTask(\'cb' . $i . '\',\'records.reset_com\')"');
+						Dropdown::addCustomItem( JText::_('C_TOOLBAR_RESET_COOMENT') . " <span class=\"badge bg-info\">{$item->comments}</span>", 'javascript:void(0)', 'onclick="Joomla.listItemTask(\'cb' . $i . '\',\'records.reset_com\')"');
 					endif;
 					if($item->votes):
-						Dropdown::addCustomItem( JText::_('C_TOOLBAR_RESET_RATING') . " <span class=\"badge bg-info\">{$item->votes}</span>", 'javascript:void(0)', 'onclick="listItemTask(\'cb' . $i . '\',\'records.reset_vote\')"');
+						Dropdown::addCustomItem( JText::_('C_TOOLBAR_RESET_RATING') . " <span class=\"badge bg-info\">{$item->votes}</span>", 'javascript:void(0)', 'onclick="Joomla.listItemTask(\'cb' . $i . '\',\'records.reset_vote\')"');
 					endif;
 					if($item->favorite_num):
-						Dropdown::addCustomItem( JText::_('C_TOOLBAR_RESET_FAVORIT') . " <span class=\"badge bg-info\">{$item->favorite_num}</span>", 'javascript:void(0)', 'onclick="listItemTask(\'cb' . $i . '\',\'records.reset_fav\')"');
+						Dropdown::addCustomItem( JText::_('C_TOOLBAR_RESET_FAVORIT') . " <span class=\"badge bg-info\">{$item->favorite_num}</span>", 'javascript:void(0)', 'onclick="Joomla.listItemTask(\'cb' . $i . '\',\'records.reset_fav\')"');
 					endif;
 
 					echo Dropdown::render();
