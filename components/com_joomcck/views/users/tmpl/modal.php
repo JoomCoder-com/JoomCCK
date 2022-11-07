@@ -8,7 +8,7 @@
  */
 defined('_JEXEC') or die();
 
-JHtml::_('bootstrap.tooltip');
+JHtml::_('bootstrap.tooltip','*[rel="tooltip"]');
 
 $field		= JFactory::getApplication()->input->getCmd('field');
 $function	= 'jSelectUser_'.$field;
@@ -16,21 +16,20 @@ $listOrder	= $this->escape($this->state->get('list.ordering'));
 $listDirn	= $this->escape($this->state->get('list.direction'));
 
 ?>
-<br />
-<form action="<?php echo JUri::getInstance()->toString();?>" method="post" name="adminForm" id="adminForm">
-	<div class="controls">
-		<div class="input-append">
-			<input class="col-md-3" type="text" name="filter_search"	id="filter_search" value="<?php echo $this->state->get('filter.search'); ?>"/>
-			<button class="btn" type="submit" rel="tooltip" data-original-title="<?php echo JText::_('JSEARCH_FILTER_SUBMIT'); ?>">
+<form class="m-0" action="<?php echo JUri::getInstance()->toString();?>" method="post" name="adminForm" id="adminForm">
+	<div class="controls mb-3">
+		<div class="input-group">
+			<input class="form-control form-control-sm" type="text" name="filter_search"	id="filter_search" value="<?php echo $this->state->get('filter.search'); ?>"/>
+			<button class="btn btn-outline-dark btn-sm" type="submit" rel="tooltip" data-original-title="<?php echo JText::_('JSEARCH_FILTER_SUBMIT'); ?>">
 				<?php echo HTMLFormatHelper::icon('magnifier.png');  ?>
 			</button>
 			<?php if($this->state->get('filter.search')) :?>
-			<button class="btn<?php echo ($this->state->get('filter.search') ? ' btn-warning' : NULL); ?>" type="button"
+			<button class="btn btn-sm <?php echo ($this->state->get('filter.search') ? ' btn-outline-warning' : 'btn-outline-success'); ?>" type="button"
 				onclick="Joomcck.setAndSubmit('filter_search', '');" rel="tooltip" data-original-title="<?php echo JText::_('JSEARCH_FILTER_CLEAR'); ?>">
 				<?php echo HTMLFormatHelper::icon('eraser.png');  ?>
 			</button>
 			<?php endif; ?>
-			<button class="btn<?php if($this->state->get('filter.group_id')) echo ' btn-warning'; ?>" type="button" data-toggle="collapse" data-target="#filters-block" >
+			<button class="btn btn-sm <?php if($this->state->get('filter.group_id')) echo ' btn-outline-warning'; else echo ' btn-outline-success'; ?>" type="button" data-toggle="collapse" data-target="#filters-block" >
 				<?php echo HTMLFormatHelper::icon('funnel.png');  ?>
 			</button>
 		</div>
