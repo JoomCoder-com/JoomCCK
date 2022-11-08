@@ -67,12 +67,13 @@ $options = $this->getOptions();
                 btn.addClass('btn active ' + (input_val == 0 ? 'btn-danger' : 'btn-success'));
 			} else {
 				btn.removeClass();
-				btn.addClass('btn');
+				btn.addClass('btn bg-white text-muted border');
 			}
 			btn.click(function(){
 				btns.removeClass();
-				btns.addClass('btn');
-				btn.addClass('active ' + (input_val == 0 ? 'btn-danger' : 'btn-success'));
+				btns.addClass('btn bg-white text-muted border');
+                btn.removeClass()
+				btn.addClass('btn active ' + (input_val == 0 ? 'btn-danger' : 'btn-success'));
 				inputs.removeAttr('checked', 'checked');
                 input.attr('checked', 'checked');
                 update_view(input_val);

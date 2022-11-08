@@ -2,7 +2,7 @@
 <form>
 	<field name="id" type="hidden" required="true" label="XFORM_SECNAME" size="40" />
 	<field name="name" type="text" required="true" label="XFORM_SECNAME" size="40" />
-	<field name="menu" type="menu" required="true" label="XFORM_MENU" class="inputbox" />
+	<field name="menu" type="menu" required="true" label="XFORM_MENU" class="form-control" />
 	<field name="type" type="text" required="true" label="XFORM_TYPE" size="40" />
 	<field name="buttonspacer" label="JGLOBAL_ACTION_PERMISSIONS_LABEL" description="JGLOBAL_ACTION_PERMISSIONS_DESCRIPTION" type="spacer" />
 	<field name="checked_out" type="hidden" filter="unset" />

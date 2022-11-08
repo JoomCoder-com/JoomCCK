@@ -51,6 +51,7 @@ class JFormFieldMRadio extends JFormFieldList
 		$prefix = $params->get('tmpl_prefix', 'default');
 
 		$file = __DIR__.'/tmpl/mradio-'.$prefix.'.php';
+
 		if(JFile::exists($file))
 		{
 			return $file;
