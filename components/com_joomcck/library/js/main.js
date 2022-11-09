@@ -222,7 +222,7 @@ var _gaq = _gaq || [];
 			var name = this.value.split('.')[0];
 			var btn = $(document.createElement('button'))
 				.attr({
-					'class': 'btn btn-sm btn-light border',
+					'class': 'ms-2 btn btn-light border',
 					'type':  'button'
 				})
 				.html('<i class="icon-options"></i> ' + name)

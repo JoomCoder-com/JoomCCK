@@ -35,7 +35,7 @@ $app = JFactory::getApplication();
 	    <?php endif; ?>
 	    <?php echo JHtml::_('form.token'); ?>
         <script type="text/javascript">
-            Joomcck.redrawBS();
+                Joomcck.redrawBS();
         </script>
     </div>
 

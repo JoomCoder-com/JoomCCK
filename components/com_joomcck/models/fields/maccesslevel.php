@@ -42,7 +42,7 @@ class JFormFieldMaccessLevel extends JFormFieldList
 		$attr = '';
 		
 		// Initialize some field attributes.
-		$attr .= !empty($this->class) ? ' class="' . $this->class . '"' : '';
+		$attr .= !empty($this->class) ? ' class="form-select ' . $this->class . '"' : 'class="form-select"';
 		$attr .= $this->disabled ? ' disabled' : '';
 		$attr .= !empty($this->size) ? ' size="' . $this->size . '"' : '';
 		$attr .= $this->multiple ? ' multiple' : '';

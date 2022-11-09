@@ -44,7 +44,7 @@ class JFormFieldMertype extends JFormField
 		
 		$html = '';
 		$html	.= JHTML::_('select.genericlist',  $types, 
-            $this->name.($multi ? "[]" : null),  ' class="inputbox" '.$multiselect, 'value', 'text', $this->value);
+            $this->name.($multi ? "[]" : null),  ' class="form-control" '.$multiselect, 'value', 'text', $this->value);
             
 		return $html;
 	}

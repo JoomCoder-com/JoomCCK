@@ -46,6 +46,8 @@ class JFormFieldCobtmpls extends JFormFieldList
 		$noparams     = $this->element['noparams'];
 
 		$options = array();
+
+
 		if((string)$this->element['select'] == '1')
 		{
 			$options[] = JHTML::_('select.option', '', JText::_('CSELECTTEMPLATE'));
@@ -53,6 +55,9 @@ class JFormFieldCobtmpls extends JFormFieldList
 
 		$options = array_merge($options, $this->getTmplObjectList($tmpltype));
 		$options = array_merge($this->getOptions(), $options);
+
+
+
 
 		$multi = $this->element['multi'] ? 'size="5" multiple="multiple"' : NULL;
 
@@ -67,8 +72,8 @@ class JFormFieldCobtmpls extends JFormFieldList
 		}
 
 		$out = sprintf(
-			'<div class="float-start">%s</div><div class="float-start" style="margin-left:10px" id="%s_link">%s</div>', 
-			JHTML::_('select.genericlist', $options, $this->name . ($multi ? '[]' : NULL), $multi . $javascript, 'value', 'text', $this->value, "{$this->id}"),
+			'<div class="d-flex"><div class="">%s</div><div id="%s_link">%s</div></div>',
+			JHTML::_('select.genericlist', $options, $this->name . ($multi ? '[]' : NULL), 'class="form-select" '. $multi . $javascript, 'value', 'text', $this->value, "{$this->id}"),
 			str_replace(array(']', '['), '', $this->id), 
 			$script
 		);

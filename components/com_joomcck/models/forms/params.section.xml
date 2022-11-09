@@ -253,7 +253,7 @@
 			<field name="vip" type="maccesslevel" default="0" condition='{"not0":["params_personalize_novip","params_personalize_glod_amount","params_personalize_vip_gold","params_personalize_vip_silver","params_personalize_vip_gray"]}' label="X_ENABLEVIP">
 				<option value="0">XML_OPT_NOONE</option>
 			</field>
-			<field name="novip" type="accesslevel" default="3" label="X_DONOTCHOW">
+			<field name="novip" type="accesslevel"  default="3" label="X_DONOTCHOW">
 				<option value="0">XML_OPT_NOONE</option>
 			</field>
 
