@@ -84,11 +84,11 @@ function getCategoryOptions($categories, $type, $that, $fc = 0)
 		}
 		else	
 		{
-			$options[] = JHtml::_('select.optgroup', str_repeat('|-- ', ($cat->level - 1 + $fc)).$cat->title, 'id', 'title');
+			$options[] = JHTMLJoomcck::optgroup(str_repeat('|-- ', ($cat->level - 1 + $fc)).$cat->title, 'id', 'title');
 			
 			$close[] = TRUE;
 			$level[] = $cat->level;
-			$title[] = JHtml::_('select.optgroup', str_repeat('|-- ', ($cat->level - 1 + $fc)).$cat->title, 'id', 'title');
+			$title[] = JHTMLJoomcck::optgroup(str_repeat('|-- ', ($cat->level - 1 + $fc)).$cat->title, 'id', 'title');
 		}
 		if(isset($cat->children) && count($cat->children))
 		{

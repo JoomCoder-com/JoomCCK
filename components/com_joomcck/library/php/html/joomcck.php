@@ -71,6 +71,34 @@ class JHTMLJoomcck
 	}
 
 
+	public static function optgroup($text, $optKey = 'value', $optText = 'text')
+	{
+
+
+		// Set initial state
+		static $state = 'open';
+
+		// Toggle between open and close states:
+		switch ($state)
+		{
+			case 'open':
+				$obj = new stdClass;
+				$obj->$optKey = '<OPTGROUP>';
+				$obj->$optText = $text;
+				$state = 'close';
+				break;
+			case 'close':
+				$obj = new stdClass;
+				$obj->$optKey = '</OPTGROUP>';
+				$obj->$optText = $text;
+				$state = 'open';
+				break;
+		}
+
+		return $obj;
+	}
+
+
 	public static function contenttypes()
 	{
 		static $result = null;
@@ -107,14 +135,14 @@ class JHTMLJoomcck
 		}
 		foreach ($fields AS $group_name => $group)
 		{
-			$result[] = JHtml::_('select.optgroup', $group_name);
+			$result[] = self::optgroup( $group_name);
 
 			foreach($group AS $field)
 			{
 				$result[] = JHtml::_('select.option', $field->file_name, $field->name);
 			}
 
-			$result[] = JHtml::_('select.optgroup', $group_name);
+			$result[] = self::optgroup( $group_name);
 		}
 
 		return $result;
@@ -157,7 +185,7 @@ class JHTMLJoomcck
 
 			if(!$fields) continue;
 
-			$out[] = JHtml::_('select.optgroup', $type->name);
+			$out[] = self::optgroup( $type->name);
 			foreach ($fields AS $field)
 			{
 				if($client == 'list')
@@ -167,7 +195,7 @@ class JHTMLJoomcck
 				}
 				$out[] = JHtml::_('select.option', $field->{$key}, $field->label);
 			}
-			$out[] = JHtml::_('select.optgroup', $type->name);
+			$out[] = self::optgroup($type->name);
 		}
 
 		return $out;
