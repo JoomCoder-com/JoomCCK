@@ -7,6 +7,8 @@
  * @license   GNU/GPL http://www.gnu.org/copyleft/gpl.html
  */
 
+use Joomla\CMS\HTML\HTMLHelper;
+
 defined('_JEXEC') or die;
 
 // Include the component HTML helpers.
@@ -40,85 +42,96 @@ $wa->useScript('keepalive')
 		</h1>
 	</div>
 
-	<ul class="nav nav-tabs">
-		<li class="active"><a href="#details" data-toggle="tab"><?php echo JText::_('COM_JOOMCCK_FIELDSET_DETAILS'); ?></a></li>
-		<li><a href="#options" data-toggle="tab"><?php echo JText::_('COM_JOOMCCK_FIELDSET_OPTIONS'); ?></a></li>
-		<li><a href="#relative" data-toggle="tab"><?php echo JText::_('CRELATIVECAT'); ?></a></li>
-		<li><a href="#metadata" data-toggle="tab"><?php echo JText::_('X_SECFSLMETA'); ?></a></li>
-	</ul>
-	<div class="tab-content">
-		<div class="tab-pane active" id="details">
-			<div class="control-group">
-				<div class="control-label">
+
+	<div id="joomcckContainer">
+		<?php echo HTMLHelper::_('uitab.startTabSet', 'myTab', ['active' => 'page-details', 'recall' => true, 'breakpoint' => 768]); ?>
+		<?php echo HTMLHelper::_('uitab.addTab', 'myTab', 'page-details', JText::_('COM_JOOMCCK_FIELDSET_DETAILS')); ?>
+        <div>
+            <div class="control-group">
+                <div class="control-label">
 					<?php echo $this->form->getLabel('title'); ?>
-				</div>
-				<div class="controls">
+                </div>
+                <div class="controls">
 					<?php echo $this->form->getInput('title'); ?>
-				</div>
-			</div>
-			<div class="control-group">
-				<div class="control-label">
+                </div>
+            </div>
+            <div class="control-group">
+                <div class="control-label">
 					<?php echo $this->form->getLabel('alias'); ?>
-				</div>
-				<div class="controls">
+                </div>
+                <div class="controls">
 					<?php echo $this->form->getInput('alias'); ?>
-				</div>
-			</div>
-			<div class="control-group">
-				<div class="control-label">
+                </div>
+            </div>
+            <div class="control-group">
+                <div class="control-label">
 					<?php echo $this->form->getLabel('parent_id'); ?>
-				</div>
-				<div class="controls">
+                </div>
+                <div class="controls">
 					<?php echo $this->form->getInput('parent_id'); ?>
-				</div>
-			</div>
-			<legend><?php echo $this->form->getLabel('description'); ?></legend>
+                </div>
+            </div>
+            <legend><?php echo $this->form->getLabel('description'); ?></legend>
 			<?php echo $this->form->getInput('description'); ?>
 			<?php echo MFormHelper::renderFieldset($this->form, 'general', $this->item->params, 'params', MFormHelper::FIELDSET_SEPARATOR_HEADER); ?>
 			<?php echo MFormHelper::renderFieldset($this->form, 'general_tmpl', $this->item->params, 'params', MFormHelper::FIELDSET_SEPARATOR_HEADER); ?>
-		</div>
-		<div class="tab-pane" id="options">
-			<div class="control-group">
-				<div class="control-label">
+        </div>
+		<?php echo HTMLHelper::_('uitab.endTab'); ?>
+
+		<?php echo HTMLHelper::_('uitab.addTab', 'myTab', 'page-options', JText::_('COM_JOOMCCK_FIELDSET_OPTIONS')); ?>
+        <div>
+            <div class="control-group">
+                <div class="control-label">
 					<?php echo $this->form->getLabel('published'); ?>
-				</div>
-				<div class="controls">
+                </div>
+                <div class="controls">
 					<?php echo $this->form->getInput('published'); ?>
-				</div>
-			</div>
-			<div class="control-group">
-				<div class="control-label">
+                </div>
+            </div>
+            <div class="control-group">
+                <div class="control-label">
 					<?php echo $this->form->getLabel('access'); ?>
-				</div>
-				<div class="controls">
+                </div>
+                <div class="controls">
 					<?php echo $this->form->getInput('access'); ?>
-				</div>
-			</div>
-			<div class="control-group">
-				<div class="control-label">
+                </div>
+            </div>
+            <div class="control-group">
+                <div class="control-label">
 					<?php echo $this->form->getLabel('language'); ?>
-				</div>
-				<div class="controls">
+                </div>
+                <div class="controls">
 					<?php echo $this->form->getInput('language'); ?>
-				</div>
-			</div>
-			<div class="control-group">
-				<div class="control-label">
+                </div>
+            </div>
+            <div class="control-group">
+                <div class="control-label">
 					<?php echo $this->form->getLabel('id'); ?>
-				</div>
-				<div class="controls">
+                </div>
+                <div class="controls">
 					<?php echo $this->form->getInput('id'); ?>
-				</div>
-			</div>
+                </div>
+            </div>
 			<?php echo $this->loadTemplate('options'); ?>
-		</div>
-		<div class="tab-pane" id="relative">
+        </div>
+		<?php echo HTMLHelper::_('uitab.endTab'); ?>
+
+		<?php echo HTMLHelper::_('uitab.addTab', 'myTab', 'page-relative', JText::_('CRELATIVECAT')); ?>
+        <div>
 			<?php echo JHtml::_('mrelements.catselector', 'jform[relative_cats][]', $this->item->section_id, $this->item->relative_cats_ids, 0); ?>
-		</div>
-		<div class="tab-pane" id="metadata">
+        </div>
+		<?php echo HTMLHelper::_('uitab.endTab'); ?>
+
+		<?php echo HTMLHelper::_('uitab.addTab', 'myTab', 'page-metadata', JText::_('X_SECFSLMETA')); ?>
+        <div>
 			<?php echo $this->loadTemplate('metadata'); ?>
-		</div>
-	</div>
+        </div>
+		<?php echo HTMLHelper::_('uitab.endTab'); ?>
+
+
+
+		<?php echo HTMLHelper::_('uitab.endTabSet'); ?>
+    </div>
 
 
 	<div>
