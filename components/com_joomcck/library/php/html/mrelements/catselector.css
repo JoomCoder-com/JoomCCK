@@ -16,8 +16,6 @@ div.select-list ul.nav {
     padding: 0;
 }
 div.select-list ul.nav li a {
-	padding: 3px 3px;
-    margin: 0;
 	text-overflow: ellipsis;
     overflow: hidden;
 	white-space: nowrap;
@@ -25,8 +23,6 @@ div.select-list ul.nav li a {
 div.select-list ul.nav li img {
 	cursor: pointer;
 	position: relative;
-}
-
-#categories_list div{
-	margin-right: 10px;
+	width:16px !important;
+	height:16px !important
 }
