@@ -61,7 +61,7 @@ $app = JFactory::getApplication();
 	<?php if(in_array($this->type->params->get('comments.comments_private'), $this->user->getAuthorisedViewLevels())):?>
 		<div class="control-group">
 			<div class="control-label">
-				<input name="jform_private" id="prv-chk" value="" class="inputbox" type="checkbox" <?php echo ($this->item->private == 1 ? 'checked' : NULL); ?>>
+				<input name="jform_private" id="prv-chk" value="" class="form-control" type="checkbox" <?php echo ($this->item->private == 1 ? 'checked' : NULL); ?>>
 				<input type="hidden" id="jform_private" name="jform[private]" value=""/>
 			</div>
 			<div class="controls">

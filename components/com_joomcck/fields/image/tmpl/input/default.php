@@ -70,7 +70,7 @@ $directory = $this->directory;
 	<div class="form-inline">
 		<label for="imagetitle<?php echo $this->id;?>"><?php echo JText::_('IMAGETITLE');?>:</label>
 		<input id="imagetitle<?php echo $this->id;?>" type="text"  style="width:230px;" name="jform[fields][<?php echo $this->id;?>][image_title]"
-		value="<?php echo (isset($this->value['image_title']) ? stripslashes($this->value['image_title']) : '');?>" class="inputbox"/>
+		value="<?php echo (isset($this->value['image_title']) ? stripslashes($this->value['image_title']) : '');?>" class="form-control"/>
 	</div>
 <?php endif; ?>
 

@@ -284,7 +284,7 @@ class MintPayPaypal extends MintPayAbstract
 
 		$form = $this->load_form('paypal', $field->id);
 
-		$out[JText::_('CPRICE')] = '<input class="inputbox" onkeyup="Joomcck.formatFloat(this, 2, 10)" type="text" size="4" name="jform[fields][' . $field->id . '][pay][amount]" value="' . $default->get('amount') . '"/> ';
+		$out[JText::_('CPRICE')] = '<input class="form-control" onkeyup="Joomcck.formatFloat(this, 2, 10)" type="text" size="4" name="jform[fields][' . $field->id . '][pay][amount]" value="' . $default->get('amount') . '"/> ';
 		if(in_array($params->get('pay.allow_currency'), $user->getAuthorisedViewLevels()))
 		{
 			$out[JText::_('CPRICE')] .= $form->getInput('default_currency', 'pay', $default->get('default_currency', $params->get('pay.default_currency')));

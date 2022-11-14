@@ -68,7 +68,7 @@ class JHTMLUsers
 		{
 			$chekced = (in_array($user->id, $default) ? ' checked="checked"' : NULL);
 			if($key % 4 == 0) $li[] = '<div class="row">';
-			$li[] = sprintf('<div class="col-md-3"><label class="checkbox"><input type="checkbox" id="ctag-%d" class="inputbox" name="filters[tags][]" value="%d"%s /> <label for="ctag-%d">%s</label></label></div>', $user->id, $user->id, $chekced, $user->id, $user->name);
+			$li[] = sprintf('<div class="col-md-3"><label class="checkbox"><input type="checkbox" id="ctag-%d" class="form-control" name="filters[tags][]" value="%d"%s /> <label for="ctag-%d">%s</label></label></div>', $user->id, $user->id, $chekced, $user->id, $user->name);
 			if($key % 4 == 3) $li[] = '</div>';
 			$key++;
 		}

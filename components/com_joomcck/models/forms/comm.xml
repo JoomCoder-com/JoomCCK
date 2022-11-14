@@ -3,14 +3,14 @@
 	<field id="id" name="id" type="text" default="0"
 		label="XFORM_COMMID" readonly="true" class="readonly" />
 	<field id="published" name="published" type="list"
-		label="JSTATUS" class="inputbox" size="1" default="1">
+		label="JSTATUS" class="form-select" size="1" default="1">
 		<option value="1">JPUBLISHED</option>
 		<option value="0">JUNPUBLISHED</option>
 	</field>
 	<field id="access" name="access" type="accesslevel" label="JFIELD_ACCESS_LABEL"
-		description="JFIELD_ACCESS_DESC" class="inputbox" size="1" />
+		description="JFIELD_ACCESS_DESC" class="form-select" size="1" />
 	<field id="comment" name="comment" type="editor" buttons="true"
-		hide="pagebreak,readmore,article,image" class="inputbox" filter="safehtml" />
+		hide="pagebreak,readmore,article,image" class="form-control" filter="safehtml" />
 
 	<field name="name" type="text" label="CNAME" readonly="true"
 		class="readonly" />

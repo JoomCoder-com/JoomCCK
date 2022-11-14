@@ -34,7 +34,7 @@ $listDirn	= $displayData->escape($displayData->state->get('list.direction'));
 					<?php echo JHtml::_('select.options', $displayData->getSortFields(), 'value', 'text', $listOrder); ?>
 				</select>
 			</div>
-			<?php echo str_replace(array('<option value="0">' . JText::_('JALL') . '</option>', 'class="inputbox'), array('', 'class="select'), $displayData->pagination->getLimitBox()); ?>
+			<?php echo str_replace(array('<option value="0">' . JText::_('JALL') . '</option>', 'class="form-control'), array('', 'class="select'), $displayData->pagination->getLimitBox()); ?>
 		</div>
 		<div style="float-start">
 			<small>

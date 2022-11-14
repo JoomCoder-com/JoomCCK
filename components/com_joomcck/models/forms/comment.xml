@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <form>
 	<field id="id" name="id" type="hidden" default="0" label="Comment ID" readonly="true" class="readonly" />
-	<field id="published" name="published" type="list" label="CSTATE" class="inputbox" size="1" default="1">
+	<field id="published" name="published" type="list" label="CSTATE" class="form-select" size="1" default="1">
 		<option value="1">JPUBLISHED</option>
 		<option value="0">JUNPUBLISHED</option>
 	</field>
 
 	<field id="access" name="access" default="1" type="accesslevel" label="X_WHOACCESSCOMENT" description="JFIELD_ACCESS_DESC" labelclass="control-label" size="1" />
 	<field id="comment" name="comment" type="editor" required="true" buttons="false" hide="pagebreak,readmore,article" filter="raw" />
-	<field id="private" name="private" type="checkbox" default="0" class="inputbox" />
-	<field id="subscribe" name="subscribe" type="checkbox" default="1" class="inputbox" />
+	<field id="private" name="private" type="checkbox" default="0" class="form-control" />
+	<field id="subscribe" name="subscribe" type="checkbox" default="1" class="form-control" />
 
 	<field name="name" type="text" label="Name" required="true" labelclass="control-label" />
 	<field name="email" type="text" label="Email" required="true" labelclass="control-label" />

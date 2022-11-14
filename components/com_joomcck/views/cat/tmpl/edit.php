@@ -128,8 +128,6 @@ $wa->useScript('keepalive')
         </div>
 		<?php echo HTMLHelper::_('uitab.endTab'); ?>
 
-
-
 		<?php echo HTMLHelper::_('uitab.endTabSet'); ?>
     </div>
 

@@ -5,22 +5,22 @@
 	<field id="label" name="label" type="text" default="" label="XFORM_FIELDLABEL"
 		required="true" />
 	<field id="published" name="published" type="list" label="JSTATUS"
-		class="inputbox" size="1" default="1">
+		class="form-select" size="1" default="1">
 		<option value="1">JPUBLISHED</option> 
 		<option value="0">JUNPUBLISHED</option>
 	</field>
 	<field id="description" name="description" type="textarea" label="CDESCR"
-		class="inputbox" />
+		class="form-control" />
 	<field id="rules" name="rules" type="rules" component="com_joomcck"
 		filter="rules" label="JCONFIG_PERMISSIONS_LABEL" section="filters"
-		class="inputbox" />
+		class="form-control" />
 	<field id="field_type" name="field_type" onchange="ajax_loadfieldform(this)"
-		type="meresourcesfieldtype" required="true" label="XFORM_FIELDTYPE" class="inputbox" />
+		type="meresourcesfieldtype" required="true" label="XFORM_FIELDTYPE" class="form-select" />
 	<field id="access" name="access" type="accesslevel" label="JFIELD_ACCESS_LABEL"
-		description="JFIELD_ACCESS_DESC" class="inputbox" size="1" />
-	<field id="ordering" name="ordering" type="orderingfields" class="inputbox"
+		description="JFIELD_ACCESS_DESC" class="form-select" size="1" />
+	<field id="ordering" name="ordering" type="orderingfields" class="form-select"
 		label="CORDERING" />
-	<field id="group_id" name="group_id" type="fieldsgroup" class="inputbox"
+	<field id="group_id" name="group_id" type="fieldsgroup" class="form-select"
 		label="CGROUP" />
 
 	<field name="type_id" type="hidden" />

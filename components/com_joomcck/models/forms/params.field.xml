@@ -106,7 +106,7 @@
 		</fieldset>
 
 		<fieldset name="sp4" label="XML_LABEL_F_SUB_RESTRICT_DISPLAY" description="XML_DESKRDISPLAURESTRICTSUBSCR">
-			<field name="field_display_subscription" type="cplanslist" multiple="true" class="inputbox" default="" label="XML_LABEL_SUB_PLANS"/>
+			<field name="field_display_subscription" type="cplanslist" multiple="true" class="form-select" default="" label="XML_LABEL_SUB_PLANS"/>
 			<field name="field_display_subscription_msg" type="text" size="40" default="You can view this field only if article author has subscription." label="XML_LABEL_SUB_MSG" rows="6" cols="30"/>
 			<field name="field_display_subscription_count" type="mradio" class="btn-group" default="0" label="XML_LABEL_SUB_COUNT">
 				<option value="0">CNO</option>
@@ -115,7 +115,7 @@
 		</fieldset>
 
 		<fieldset name="sp2" label="XML_LABEL_F_SUB_RESTRICT_ADD" description="XML_DESCRRESTRADD">
-			<field name="field_submit_subscription" type="cplanslist" multiple="multiple" class="inputbox" default="" label="XML_LABEL_SUB_PLANS"/>
+			<field name="field_submit_subscription" type="cplanslist" multiple="multiple" class="form-select" default="" label="XML_LABEL_SUB_PLANS"/>
 			<field name="field_submit_subscription_msg" type="text" size="40" default="Only our paid members can vew add this field." label="XML_LABEL_SUB_MSG" rows="6" cols="30"/>
 			<field name="field_submit_subscription_count" type="mradio" class="btn-group" default="0" label="XML_LABEL_SUB_COUNT">
 				<option value="0">CNO</option>
@@ -124,7 +124,7 @@
 		</fieldset>
 
 		<fieldset name="sp21" label="XML_LABEL_F_SUB_RESTRICT_EDIT" description="XML_DESCRSUSCREDITRESTRICT">
-			<field name="field_edit_subscription" type="cplanslist" multiple="multiple" class="inputbox" default="" label="XML_LABEL_SUB_PLANS"/>
+			<field name="field_edit_subscription" type="cplanslist" multiple="multiple" class="form-select" default="" label="XML_LABEL_SUB_PLANS"/>
 			<field name="field_edit_subscription_msg" type="text" size="40" default="Only our paid members can edit this field." label="XML_LABEL_SUB_MSG" rows="6" cols="30"/>
 			<field name="field_edit_subscription_count" type="mradio" class="btn-group" default="0" label="XML_LABEL_SUB_COUNT">
 				<option value="0">CNO</option>
@@ -133,7 +133,7 @@
 		</fieldset>
 
 		<fieldset name="sp3" label="XML_LABEL_F_SUB_RESTRICT_EDIT_VIEW" description="XML_DESCSUSRCVIEWRESTRICT">
-			<field name="field_view_subscription" type="cplanslist" multiple="multiple" class="inputbox" default="" label="XML_LABEL_SUB_PLANS"/>
+			<field name="field_view_subscription" type="cplanslist" multiple="multiple" class="form-select" default="" label="XML_LABEL_SUB_PLANS"/>
 			<field name="field_view_subscription_msg" type="text" size="40" default="Only our paid members can view this field." label="XML_LABEL_SUB_MSG" rows="6" cols="30"/>
 			<field name="field_view_subscription_count" type="mradio" class="btn-group" default="0" label="XML_LABEL_SUB_COUNT">
 				<option value="0">CNO</option>

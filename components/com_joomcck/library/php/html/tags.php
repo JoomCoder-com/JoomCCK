@@ -44,7 +44,7 @@ class JHTMLTags
 		{
 			$chekced = (in_array($tag->id, $default) ? ' checked="checked"' : NULL);
 			if($key % 4 == 0) $li[] = '<div class="row">';
-			$li[] = sprintf('<div class="col-md-3"><label class="checkbox"><input type="checkbox" id="ctag-%d" class="inputbox" name="filters[tags][]" value="%d"%s /> <label for="ctag-%d">%s</label></label></div>', $tag->id, $tag->id, $chekced, $tag->id, $tag->tag);
+			$li[] = sprintf('<div class="col-md-3"><label class="checkbox"><input type="checkbox" id="ctag-%d" class="form-control" name="filters[tags][]" value="%d"%s /> <label for="ctag-%d">%s</label></label></div>', $tag->id, $tag->id, $chekced, $tag->id, $tag->tag);
 			if($key % 4 == 3) $li[] = '</div>';
 			$key++;
 		}
@@ -575,7 +575,7 @@ class JHTMLTags
 		$db = JFactory::getDBO();
 		$tabs = JPane::getInstance('tabs');
 
-		$html = '<input type="hidden" class="inputbox" name="tags" value=", '.$tags.'" id="alltags" />';
+		$html = '<input type="hidden" class="form-control" name="tags" value=", '.$tags.'" id="alltags" />';
 
 		$tags = explode(", ", $tags);
 		$escape = array();
@@ -711,7 +711,7 @@ class JHTMLTags
 			}
 
 		}
-		$html .= sprintf('<p style="clear:both"><img id="tag_image" src="%s/components/com_resource/images/tag-icon.png" align="absmiddle"><input onkeyup="getTagSuggestions(this.value);" type="text" name="tag" id="tag_input" class="inputbox" /> <input type="button"  onclick="tag_insert(document.getElementById(\'tag_input\').value);" class="button" value="%s" /> %s <br><span class="small">%s</span></p><p style="clear:both" id="search_tags_result"> </p>', JURI::root(TRUE), JText::_('CADD'), ($alltags ? $link : NULL), JText::_('CENTERSEPARATE'));
+		$html .= sprintf('<p style="clear:both"><img id="tag_image" src="%s/components/com_resource/images/tag-icon.png" align="absmiddle"><input onkeyup="getTagSuggestions(this.value);" type="text" name="tag" id="tag_input" class="form-control" /> <input type="button"  onclick="tag_insert(document.getElementById(\'tag_input\').value);" class="button" value="%s" /> %s <br><span class="small">%s</span></p><p style="clear:both" id="search_tags_result"> </p>', JURI::root(TRUE), JText::_('CADD'), ($alltags ? $link : NULL), JText::_('CENTERSEPARATE'));
 
 		$html .= @$html2;
 
@@ -833,7 +833,7 @@ class JHTMLTags
 
 			$out .= ' <span id="new_tags'.$item->id.'"></span> '.
 				JHTML::image(JURI::root(TRUE).'/components/com_resource/images/load.gif', '', array('id'=>'load_image'.$item->id, 'style' => 'display:none'))
-				.' <span style="display:none" id="atfid'.$item->id.'"><input type="text" class="inputbox" id="new_tag_input'.$item->id.'" /> <input type="button" class="button" value="'. JText::_('CADD') .'" onclick="addTagToRecord('.$item->id.')" /></span>'.JHTML::image(JURI::root(TRUE).'/components/com_resource/images/tag-icon-plus.png', JText::_('CADDTAGS'), array('id'=>'tag_img_id'.$item->id, 'align'=>'absmiddle', 'onclick'=>'document.getElementById(\'atfid'.$item->id.'\').style.display = \'block\';', 'style'=>'cursor:pointer'));
+				.' <span style="display:none" id="atfid'.$item->id.'"><input type="text" class="form-control" id="new_tag_input'.$item->id.'" /> <input type="button" class="button" value="'. JText::_('CADD') .'" onclick="addTagToRecord('.$item->id.')" /></span>'.JHTML::image(JURI::root(TRUE).'/components/com_resource/images/tag-icon-plus.png', JText::_('CADDTAGS'), array('id'=>'tag_img_id'.$item->id, 'align'=>'absmiddle', 'onclick'=>'document.getElementById(\'atfid'.$item->id.'\').style.display = \'block\';', 'style'=>'cursor:pointer'));
 		}
 
 		return $out;

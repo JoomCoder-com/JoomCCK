@@ -13,7 +13,7 @@ if($this->params->get('params.chosen', false))
 	JHtml::_('formbehavior.chosen', '.joomcck-chosen-'.$this->id);
 }
 
-$class = ' class="' . $this->params->get('core.field_class', 'inputbox') . ($this->required ? ' required' : NULL) . '"';
+$class = ' class="' . $this->params->get('core.field_class', 'form-control') . ($this->required ? ' required' : NULL) . '"';
 $required = $this->required ? ' required="true" ' : NULL;
 $style = ' style="max-width: ' . $this->params->get('params.width', '450') . 'px"';
 ?>

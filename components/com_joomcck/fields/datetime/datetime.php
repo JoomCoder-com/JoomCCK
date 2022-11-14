@@ -91,7 +91,7 @@ class JFormFieldCDatetime extends CFormField
             $this->default = $db->loadResult();
         }
 
-        $this->attr = ' class="' . $this->params->get('core.field_class', 'inputbox') . ($this->required ? ' required' : null) . '" ';
+        $this->attr = ' class="' . $this->params->get('core.field_class', 'form-control') . ($this->required ? ' required' : null) . '" ';
         $this->attr .= $this->required ? ' required="true" ' : null;
 
         return $this->_display_input();

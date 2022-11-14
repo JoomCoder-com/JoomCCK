@@ -12,7 +12,7 @@
 				<option value="0">No</option>
 				<option value="1">Yes</option>
 			</field>
-			<field name="authcode" class="inputbox" type="text" description="Authorization code from your account. Required if IPN is turned off" default="" size="40" label="PDT identity token" />
+			<field name="authcode" class="form-control" type="text" description="Authorization code from your account. Required if IPN is turned off" default="" size="40" label="PDT identity token" />
 			<field name="shipping" type="list" default="1" label="Shipping address">
 				<option value="0">Prompt for an address, but do not require one</option>
 				<option value="1">Do not prompt for an address</option>
@@ -22,12 +22,12 @@
 				<option value="0">No</option>
 				<option value="1">Yes</option>
 			</field>
-			<field name="default_count" class="inputbox" type="text" default="1" size="3" label="Default quantity" />
+			<field name="default_count" class="form-control" type="text" default="1" size="3" label="Default quantity" />
 			<field name="allow_amount" type="radio" class="btn-group" default="0" description="Used for donations" label="Buyers can change amount">
 				<option value="0">No</option>
 				<option value="1">Yes</option>
 			</field>
-			<field name="default_amount" class="inputbox" type="text" default="10" description="Used for donations" size="3" label="Default amount" />
+			<field name="default_amount" class="form-control" type="text" default="10" description="Used for donations" size="3" label="Default amount" />
 			
 			<field name="allow_email" type="accesslevel" default="2" label="Who can enter PayPal email">
 				<option value="0">No one</option>
@@ -35,7 +35,7 @@
 			<field name="allow_email" type="accesslevel" default="2" label="Who can enter PayPal email">
 				<option value="0">No one</option>
 			</field>
-			<field name="business" class="inputbox" type="text" default="" size="35" label="PayPal default email" />
+			<field name="business" class="form-control" type="text" default="" size="35" label="PayPal default email" />
 			<field name="allow_currency" type="accesslevel" default="2" label="Who can select currentcy sign">
 				<option value="0">No one</option>
 			</field>
@@ -73,7 +73,7 @@
 				<option value="discount_amount">Flat rate</option>
 				<option value="discount_rate">Percentage</option>
 			</field>
-			<field name="default_discount" class="inputbox" type="text" description="0.001 - 100 for percentage and anything for flat rate but not more than total amount" default="" size="3" label="Default discount" />
+			<field name="default_discount" class="form-control" type="text" description="0.001 - 100 for percentage and anything for flat rate but not more than total amount" default="" size="3" label="Default discount" />
 			
 			<field name="allow_tax_rate" type="accesslevel" default="2" label="Who can set tax">
 				<option value="0">No one</option>
@@ -82,7 +82,7 @@
 				<option value="tax">Flat rate</option>
 				<option value="tax_rate">Percentage</option>
 			</field>
-			<field name="default_tax" class="inputbox" type="text" description="0.001 - 100 for percentage and anything for flat rate but not more than total amount" default="" size="3" label="Default tax" />
+			<field name="default_tax" class="form-control" type="text" description="0.001 - 100 for percentage and anything for flat rate but not more than total amount" default="" size="3" label="Default tax" />
 		</fieldset>
         <fieldset name="adaptive" label="Adaptive Payments" description="">
             <field name="adaptive" type="radio" class="btn-group" default="0" label="Enable adaptive payments">
@@ -94,9 +94,9 @@
                 <option value="2">Changed you are primary receiver</option>
                 <option value="3">Changed seller is primary receiver</option>
             </field>
-			<field name="earn_percent" class="inputbox" type="text" default="15" label="You interest in %" />
-			<field name="earn_trans" class="inputbox" type="text" default="0.2" label="You interest per transaction" />
-			<field name="minimum_amount" class="inputbox" type="text" default="1" label="Minimum purchase amount" description="What should be the minimum purchase amount we start tu use adaptive payment. Sometimes it makes no sense on purchases below 1 USD." />
+			<field name="earn_percent" class="form-control" type="text" default="15" label="You interest in %" />
+			<field name="earn_trans" class="form-control" type="text" default="0.2" label="You interest per transaction" />
+			<field name="minimum_amount" class="form-control" type="text" default="1" label="Minimum purchase amount" description="What should be the minimum purchase amount we start tu use adaptive payment. Sometimes it makes no sense on purchases below 1 USD." />
 
 			<field name="fee_payer" type="list" default="SECONDARYONLY" label="Who pays fees">
 				<option value="SENDER">Sender</option>
@@ -112,11 +112,11 @@
 				<option value="CASHADVANCE">person-to-person payment for a cash advance</option>
             </field>
 
-			<field name="caller_id" class="inputbox" type="text" description="Your PayPal email that will collect % off sales" label="Your PayPal email" />
-			<field name="api_user" class="inputbox" type="text" description="" label="API User Id" />
-			<field name="api_password" class="inputbox" type="text" description="" label="API Password" />
-			<field name="api_signature" class="inputbox" type="text" description="" label="API Signature" />
-			<field name="api_appid" class="inputbox" type="text" description="" label="API Application Id" />
+			<field name="caller_id" class="form-control" type="text" description="Your PayPal email that will collect % off sales" label="Your PayPal email" />
+			<field name="api_user" class="form-control" type="text" description="" label="API User Id" />
+			<field name="api_password" class="form-control" type="text" description="" label="API Password" />
+			<field name="api_signature" class="form-control" type="text" description="" label="API Signature" />
+			<field name="api_appid" class="form-control" type="text" description="" label="API Application Id" />
 		</fieldset>
 	</fields>
 </form>

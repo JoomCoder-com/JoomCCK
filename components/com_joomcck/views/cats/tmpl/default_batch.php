@@ -24,7 +24,7 @@ $section	= $this->escape($this->state->get('filter.section'));
 		<label id="batch-choose-action-lbl" for="batch-category-id">
 			<?php echo JText::_('COM_JOOMCCK_BATCH_CATEGORY_LABEL'); ?>
 		</label>
-		<select name="batch[category_id]" class="inputbox" id="batch-category-id">
+		<select name="batch[category_id]" class="form-control" id="batch-category-id">
 			<option value=""><?php echo JText::_('JSELECT') ?></option>
 			<?php echo JHtml::_('select.options', JHtml::_('category.categories', 'com_joomcck', array('published' => $published)));?>
 		</select>

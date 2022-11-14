@@ -2,7 +2,7 @@
 <form>
 	<field name="id" type="hidden" />
 
-	<field name="user_id" type="meuser" label="CUSER" class="inputbox" />
+	<field name="user_id" type="meuser" label="CUSER" class="form-control" />
 
 	<field name="section_id" type="hidden"/>
 
@@ -75,7 +75,7 @@
 
 
 	<field id="published" name="published" type="list" label="CSTATE"
-		class="inputbox" size="1" default="1">
+		class="form-select" size="1" default="1">
 		<option value="1">JPUBLISHED</option>
 		<option value="0">JUNPUBLISHED</option>
 	</field>
@@ -84,9 +84,9 @@
 		readonly="true" />
 
 	<field name="description" rows="4" cols="50" type="textarea"
-		label="JGLOBAL_DESCRIPTION" class="inputbox" filter="safehtml" />
+		label="JGLOBAL_DESCRIPTION" class="form-control" filter="safehtml" />
 
-	<field name="published" type="list" class="inputbox" default="1"
+	<field name="published" type="list" class="form-select" default="1"
 		size="1" label="JSTATUS" description="JFIELD_PUBLISHED_DESC">
 		<option value="1">JPUBLISHED</option>
 		<option value="0">JUNPUBLISHED</option>

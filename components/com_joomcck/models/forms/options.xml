@@ -4,7 +4,7 @@
 		<option value="1">JYES</option>
 		<option value="0">JNO</option>
 	</field>
-	<field name="schedule" id="schedule" type="list" label="CEMAILSHEDULE" description="" class="inputbox" default="2">
+	<field name="schedule" id="schedule" type="list" label="CEMAILSHEDULE" description="" class="form-select" default="2">
 		<option value="0">C_OPT_SEND_NO</option>
 		<option value="1">C_OPT_SEND_IMMED</option>
 		<option value="2">C_OPT_SEND_DAY</option>
@@ -12,5 +12,5 @@
 		<option value="4">C_OPT_SEND_MONTH</option>
 		<option value="5">C_OPT_SEND_QUOT</option>
 	</field>
-	<field type="language" name="language" label="CALEERTLANG" class="inputbox" default="en-GB" />
+	<field type="language" name="language" label="CALEERTLANG" class="form-select" default="en-GB" />
 </form>

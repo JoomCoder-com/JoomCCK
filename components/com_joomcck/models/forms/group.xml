@@ -4,8 +4,8 @@
 		label="ID" readonly="true" class="readonly" />
 	<field id="title" name="title" type="textarea" default="" label="CTITLE" required="true" filter="safeHtml" />
 	<field id="description" name="description" type="editor" label="CDESCR"
-		class="inputbox" filter="safehtml"/>
-	<field id="ordering" name="ordering" type="orderinggroups" class="inputbox"
+		class="form-control" filter="safehtml"/>
+	<field id="ordering" name="ordering" type="orderinggroups" class="form-select"
 		label="CORDERING" />
 
 	<field name="type_id" type="hidden" />

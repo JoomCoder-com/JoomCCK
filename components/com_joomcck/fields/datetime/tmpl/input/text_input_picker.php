@@ -14,7 +14,7 @@ $doc->addScript(JURI::root(TRUE) . '/media/mint/vendors/jquery.inputmask/dist/mi
 $doc->addScript(JURI::root(TRUE) . '/media/mint/vendors/jquery.inputmask/dist/min/inputmask/inputmask.date.extensions.min.js');
 $doc->addScript(JURI::root(TRUE) . '/media/mint/vendors/jquery.inputmask/dist/min/inputmask/inputmask.numeric.extensions.min.js');
 
-$class    = ' class="' . $this->params->get('core.field_class', 'inputbox') . ($this->required ? ' required' : NULL) . '" ';
+$class    = ' class="' . $this->params->get('core.field_class', 'form-control') . ($this->required ? ' required' : NULL) . '" ';
 $required = $this->required ? 'required="true" ' : NULL;
 
 $mask = $this->params->get('tmpl_text_input_picker.mask', 'd/m/y');

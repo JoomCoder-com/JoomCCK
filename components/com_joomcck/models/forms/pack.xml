@@ -3,18 +3,18 @@
 
 	<field name="id" type="text" default="0" label="ID" description="id" class="readonly" readonly="true" />
 
-	<field name="name" type="text" label="XFORM_PACKNAME" class="inputbox" size="40" required="true"/>
+	<field name="name" type="text" label="XFORM_PACKNAME" class="form-control" size="40" required="true"/>
 
-	<field name="author_email" type="text" label="XFORM_PACKAUTHOREMAIL" class="inputbox" size="40" />
-	<field name="author_url" type="text" label="XFORM_PACKAUTHORURL" class="inputbox" size="40" />
-	<field name="author_name" type="text" label="XFORM_PACKAUTHORNAME" class="inputbox" size="40" />
-	<field name="copyright" type="text" label="XFORM_PACKCOPYRIGHT" class="inputbox" size="40" default="&amp;copy; 2012 - My company. All rights reserved." />
+	<field name="author_email" type="text" label="XFORM_PACKAUTHOREMAIL" class="form-control" size="40" />
+	<field name="author_url" type="text" label="XFORM_PACKAUTHORURL" class="form-control" size="40" />
+	<field name="author_name" type="text" label="XFORM_PACKAUTHORNAME" class="form-control" size="40" />
+	<field name="copyright" type="text" label="XFORM_PACKCOPYRIGHT" class="form-control" size="40" default="&amp;copy; 2012 - My company. All rights reserved." />
 
 	<field name="key" type="text" default="0" label="JGLOBAL_FIELD_KEY_LABEL" description="UNIQUE_PACK_KEY" class="readonly" readonly="true" filter="unset" />
 
 	<field name="version" type="text" default="0" label="JGLOBAL_FIELD_VERSION_LABEL" description="id" class="readonly" readonly="true" />
 
-	<field name="description" type="editor" filter="safehtml" label="CDESCR" class="inputbox" cols="40" rows="5"/>
+	<field name="description" type="editor" filter="safehtml" label="CDESCR" class="form-control" cols="40" rows="5"/>
 
 	<field name="checked_out" type="hidden" filter="unset" />
 

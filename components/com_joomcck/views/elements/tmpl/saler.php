@@ -31,7 +31,7 @@ $alert = JText::_('CMAKESELECTION');
 function status($s, $t, $o)
 {
 	?>
-	<select name="status"  style="max-width:150px;" class="inputbox" onchange="Joomcck.changeStatus(this, <?php echo $o->id?>)">
+	<select name="status"  style="max-width:150px;" class="form-control" onchange="Joomcck.changeStatus(this, <?php echo $o->id?>)">
 		<?php echo JHtml::_('select.options', $t, 'value', 'text', $s, true);?>
 	</select>
 	<div id="bar_<?php echo $o->id; ?>" style="max-width:150px; display:none;" class="progress progress-striped active">

@@ -21,7 +21,7 @@ switch ($params->get('params.to'))
 		$to = $author->get('name') . ($show_emailto ? ' (' . $author->get('email') . ')' : '');
 		break;
 	case 4 :
-		$to = '<input type="text" style="width:99%" required="required" class="inputbox" name="email['.$this->id.'][email_to]" value="'.$data->get('email_to').'" size="'.$params->get('params.size', 40).'">';
+		$to = '<input type="text" style="width:99%" required="required" class="form-control" name="email['.$this->id.'][email_to]" value="'.$data->get('email_to').'" size="'.$params->get('params.size', 40).'">';
 		break;
 	case 5 :
 		if ($show_emailto)
@@ -52,7 +52,7 @@ $key = $record->id.$this->id;
 		<?php if ($params->get('params.change_name_from', 1) || !$user->id):?>
 		<tr>
 			<td width="1%" nowrap="nowrap"><?php echo JText::_('E_YOURNAME');?></td>
-			<td><input required="required" class="inputbox" type="text" name="email[<?php echo $this->id;?>][name]"  value="<?php echo $data->get('name', $user->get('name'));?>"
+			<td><input required="required" class="form-control" type="text" name="email[<?php echo $this->id;?>][name]"  value="<?php echo $data->get('name', $user->get('name'));?>"
 				size="<?php echo $params->get('params.size', 40);?>" /></td>
 		</tr>
 		<?php endif; ?>
@@ -60,7 +60,7 @@ $key = $record->id.$this->id;
 		<?php if ($params->get('params.change_email_from', 1) || !$user->id):?>
 		<tr>
 			<td width="1%" nowrap="nowrap"><?php echo JText::_('E_YOURMAIL');?></td>
-			<td><input required="required" class="inputbox" type="text" name="email[<?php echo $this->id;?>][email_from]"  value="<?php echo $data->get('email_from', $user->get('email'));?>"
+			<td><input required="required" class="form-control" type="text" name="email[<?php echo $this->id;?>][email_from]"  value="<?php echo $data->get('email_from', $user->get('email'));?>"
 				size="<?php echo $params->get('params.size', 40);?>" /></td>
 		</tr>
 		<?php endif; ?>
@@ -70,7 +70,7 @@ $key = $record->id.$this->id;
 				<td width="1%" nowrap="nowrap"></td>
 				<td>
 					<label class="checkbox">
-						<input required="required" class="inputbox" type="checkbox" name="email[<?php echo $this->id;?>][subscr]" value="1" checked>
+						<input required="required" class="form-control" type="checkbox" name="email[<?php echo $this->id;?>][subscr]" value="1" checked>
 						<?php echo JText::_($this->params->get('params.acemail_text')); ?>
 					</label>
 				</td>
@@ -80,7 +80,7 @@ $key = $record->id.$this->id;
 		<?php if ($params->get('params.cc')):?>
 		<tr>
 			<td width="1%" nowrap="nowrap"><?php echo JText::_('E_COPY');?></td>
-			<td><input class="inputbox" type="text" name="email[<?php echo $this->id;?>][cc]"  value="<?php echo $data->get('cc');?>"
+			<td><input class="form-control" type="text" name="email[<?php echo $this->id;?>][cc]"  value="<?php echo $data->get('cc');?>"
 				size="<?php echo $params->get('params.size', 40);?>" /></td>
 		</tr>
 		<?php endif; ?>
@@ -99,7 +99,7 @@ $key = $record->id.$this->id;
 							</select>
 						<?php endif;?>
 					<?php else: ?>
-						<input required="required" class="inputbox" type="text" name="email[<?php echo $this->id;?>][subject]"  value="<?php echo $data->get('subject', $params->get('params.subject'));?>"
+						<input required="required" class="form-control" type="text" name="email[<?php echo $this->id;?>][subject]"  value="<?php echo $data->get('subject', $params->get('params.subject'));?>"
 						size="<?php echo $params->get('params.size', 40);?>" />
 					<?php endif;?>
 				</td>
@@ -115,7 +115,7 @@ $key = $record->id.$this->id;
 		<tr>
 			<td width="1%" nowrap="nowrap"><?php echo JText::_('E_MSG');?></td>
 			<td>
-				<textarea id="email_body<?php echo $this->id;?>" style="<?php echo $style ?>" name="email[<?php echo $this->id;?>][body]" class="inputbox"><?php echo $data->get('body', $params->get('params.body'));?></textarea>
+				<textarea id="email_body<?php echo $this->id;?>" style="<?php echo $style ?>" name="email[<?php echo $this->id;?>][body]" class="form-control"><?php echo $data->get('body', $params->get('params.body'));?></textarea>
 				<script type="text/javascript">
 					new AutoGrow("email_body<?php echo $this->id;?>", {margin:20, minHeight: 70});
 				</script>
@@ -192,13 +192,13 @@ $key = $record->id.$this->id;
 									<?php endforeach;?>
 									</select>
 								<?php else:?>
-									<input class="inputbox" type="<?php echo trim($field_info[0]);?>"
+									<input class="form-control" type="<?php echo trim($field_info[0]);?>"
 											name="email[<?php echo $this->id;?>][add_field][<?php echo trim($field_info[1]);?>][]" <?php echo @$field_info[4];?>
 											value="<?php echo trim(htmlentities($field_info[1], ENT_QUOTES, 'UTF-8'));?>" <?php echo ($data->get('add_field.' . $field_info[1]) ? 'checked' : '');?>><?php echo $field_info[1];?>
 								<?php endif;
 								break;
 							case 'textarea' :?>
-									<textarea class="inputbox" name="email[<?php echo $this->id;?>][add_field][<?php echo $field_info[1];?>]"><?php echo $data->get('add_field.' . $field_info[1]);?></textarea>
+									<textarea class="form-control" name="email[<?php echo $this->id;?>][add_field][<?php echo $field_info[1];?>]"><?php echo $data->get('add_field.' . $field_info[1]);?></textarea>
 									<?php
 								break;
 						endswitch;

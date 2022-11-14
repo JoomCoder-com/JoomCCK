@@ -113,7 +113,7 @@
 		</fieldset>
 
 		<fieldset name="type_subscr15" label="XML_EMERCOMMENT" description="XML_EMEPCOMMENT_DESC" addfieldpath="/administrator/components/com_joomcck/models/fields">
-			<field name="type_comment_subscription" type="emrplanslist" default="" label="XML_LABEL_SUB_PLANS" multiple="multiple" class="inputbox" />
+			<field name="type_comment_subscription" type="emrplanslist" default="" label="XML_LABEL_SUB_PLANS" multiple="multiple" class="form-select" />
 			<field name="type_comment_subscription_count" type="radio" class="btn-group" default="0" label="XML_LABEL_SUB_COUNT">
 				<option value="0">CNO</option>
 				<option value="1">CYES</option>

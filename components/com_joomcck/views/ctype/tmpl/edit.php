@@ -18,8 +18,9 @@ $wa = $this->document->getWebAssetManager();
 $wa->useScript('keepalive')
 	->useScript('form.validate');
 ?>
+
 <script type="text/javascript">
-	<!--
+
 	Joomla.submitbutton = function(task) {
 		if(task == 'ctype.cancel' || document.formvalidator.isValid(document.getElementById('adminForm'))) {
 			Joomla.submitform(task, document.getElementById('adminForm'));
@@ -27,7 +28,7 @@ $wa->useScript('keepalive')
 			alert('<?php echo $this->escape(JText::_('JGLOBAL_VALIDATION_FORM_FAILED'));?>');
 		}
 	}
-	//-->
+	
 </script>
 <div id="joomcckContainer">
     <form action="<?php echo JUri::getInstance()->toString(); ?>" method="post" name="adminForm" id="adminForm" class="form-horizontal">

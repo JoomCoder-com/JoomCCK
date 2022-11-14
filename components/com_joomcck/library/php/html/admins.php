@@ -35,7 +35,7 @@ class JHTMLAdmins
 			$users = $db->loadObjectList();
 		}
 
-		$users = JHTML::_('select.genericlist',   $users, $name, 'class="inputbox" size="1" '. $javascript, 'value', 'text', $active );
+		$users = JHTML::_('select.genericlist',   $users, $name, 'class="form-select" size="1" '. $javascript, 'value', 'text', $active );
 
 		return $users;
 	}

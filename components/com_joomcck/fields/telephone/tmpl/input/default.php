@@ -9,7 +9,7 @@
 defined('_JEXEC') or die();
 
 $params = $this->params;
-$class = ' class="' . $this->params->get('core.field_class', 'inputbox') . ($this->required ? ' required' : NULL) .'"';
+$class = ' class="' . $this->params->get('core.field_class', 'form-control') . ($this->required ? ' required' : NULL) .'"';
 $required = $this->required ? 'required="true" ' : NULL;
 
 $value = $this->value ? $this->value : null;

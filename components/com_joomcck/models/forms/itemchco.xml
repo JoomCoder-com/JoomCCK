@@ -1,20 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <form>
-	<field id="published" name="published" type="list" label="JSTATUS" description="JFIELD_PUBLISHED_DESC" class="inputbox" size="1" default="-1">
+	<field id="published" name="published" type="list" label="JSTATUS" description="JFIELD_PUBLISHED_DESC" class="form-select" size="1" default="-1">
 		<option value="-1">NOCHANGE</option>
 		<option value="1">JPUBLISHED</option>
 		<option value="0">JUNPUBLISHED</option>
 	</field>
-	<field id="featured" name="featured" type="list" label="JGLOBAL_FIELD_FEATURED_LABEL" description="JGLOBAL_FIELD_FEATURED_DESC" class="inputbox" default="-1">
+	<field id="featured" name="featured" type="list" label="JGLOBAL_FIELD_FEATURED_LABEL" description="JGLOBAL_FIELD_FEATURED_DESC" class="form-select" default="-1">
 		<option value="-1">NOCHANGE</option>
 		<option value="0">JNO</option>
 		<option value="1">JYES</option>
 	</field>
 	<field id="ctime" name="ctime" type="calendar" label="CCTIME" filter="user_utc" format="%Y-%m-%d %H:%M:%S"/>
-	<field id="extime" name="extime" type="calendar" label="CEXTIME" description="JGLOBAL_FIELD_PUBLISH_DOWN_DESC" class="inputbox" format="%Y-%m-%d %H:%M:%S" size="22" filter="user_utc" />
-	<field id="ftime" name="ftime" type="calendar" label="CFTIME" description="JGLOBAL_FIELD_FEATURED_DOWN_DESC" class="inputbox" format="%Y-%m-%d %H:%M:%S" size="22" filter="user_utc" />
+	<field id="extime" name="extime" type="calendar" label="CEXTIME" description="JGLOBAL_FIELD_PUBLISH_DOWN_DESC" class="form-control" format="%Y-%m-%d %H:%M:%S" size="22" filter="user_utc" />
+	<field id="ftime" name="ftime" type="calendar" label="CFTIME" description="JGLOBAL_FIELD_FEATURED_DOWN_DESC" class="form-control" format="%Y-%m-%d %H:%M:%S" size="22" filter="user_utc" />
 	<field id="mtime" name="mtime" type="calendar" label="CMTIME" filter="user_utc"/>
-	<field name="langs" type="language" default="-1" label="JFIELD_LANGUAGE_LABEL" description="JFIELD_LANGUAGE_DESC" class="inputbox">
+	<field name="langs" type="language" default="-1" label="JFIELD_LANGUAGE_LABEL" description="JFIELD_LANGUAGE_DESC" class="form-select">
 		<option value="-1">NOCHANGE</option>
 		<option value="*">JALL</option>
 	</field>
@@ -25,7 +25,7 @@
 		<option value="index, follow">Allow search engines index this article</option>
 		<option value="noindex, nofollow">Disallow search engines index this article</option>
 	</field>
-	<field id="access" name="access" type="accesslevel" label="JFIELD_ACCESS_LABEL" description="JFIELD_ACCESS_DESC" class="inputbox" default="-1" size="1">
+	<field id="access" name="access" type="accesslevel" label="JFIELD_ACCESS_LABEL" description="JFIELD_ACCESS_DESC" class="form-select" default="-1" size="1">
 		<option value="-1">NOCHANGE</option>
 	</field>
 	<field id="user_id" label="CUSER" name="user_id" type="meuser"  />

@@ -606,7 +606,7 @@ class JFormFieldCGallery extends CFormFieldUpload
 			$titlebox = sprintf('<div id="titlebox"><span id="titletextspan">%s</span> <a href="javascript:void(0);" onclick="gb' . $this->id . '_' . $this->record->id . '.editTitle()">%s</a></div>', $titlebox,
 				JHtml::image(JURI::root() . 'media/mint/icons/16/sticky-note--pencil.png', JText::_('G_EDIT'), array('align' => 'absmiddle')));
 			$titlebox .= '<div id="titleedit" class="disactiveInput">
-    	    	<input id="savetitletext" class="inputbox" value="">
+    	    	<input id="savetitletext" class="form-control" value="">
         	    <a href="javascript:void(0);" onclick="gb' . $this->id . '_' . $this->record->id . '.saveTitle();">' . JHtml::image(JURI::root() . 'media/mint/icons/16/disk.png', JText::_('G_SAVE'), array('align' => 'absmiddle')) . '</a></div>';
 		}
 		$avatar = '';
@@ -637,7 +637,7 @@ class JFormFieldCGallery extends CFormFieldUpload
 	        	<a href="javascript:void(0);" onclick="Gallerybox.editDescription();">' . JText::_('G_EDIT') . '</a></div>
 
 	        	<div id="descredit" class="disactiveInput">
-    	    		<input id="savedescrtext" class="inputbox" size="40">
+    	    		<input id="savedescrtext" class="form-control" size="40">
         	    	<a href="javascript:void(0);" onclick="Gallerybox.saveDescription();">
         	    		' . JText::_('G_SAVE') . '
         	    	</a>
@@ -711,7 +711,7 @@ class JFormFieldCGallery extends CFormFieldUpload
 	{
 		if(in_array($this->params->get('params.allow_comments'), $this->user->getAuthorisedViewLevels()))
 		{
-			return '<textarea id="savecommenttext" class="inputbox"></textarea>
+			return '<textarea id="savecommenttext" class="form-control"></textarea>
 				<a class="btn btn-sm btn-light border" href="javascript:void(0);" onclick="if($(\'savecommenttext\').value == \'\'){alert(\'' . JText::_('CCOMMENT_EMPTY') . '\');return false;}gb' . $this->id . '_' . $this->record->id . '.saveComment();">
         	    ' . JText::_('G_SAVE') . '</a>';
 		}

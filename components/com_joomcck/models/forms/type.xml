@@ -2,14 +2,14 @@
 <form>
 	<field id="id" name="id" type="text" default="0" label="ID" readonly="true" class="readonly" />
 	<field id="name" name="name" type="text" default="" label="CTYPENAME" required="true" />
-	<field id="published" name="published" type="list" label="XFORM_PUBLISHED" class="inputbox" size="1" default="1">
+	<field id="published" name="published" type="list" label="XFORM_PUBLISHED" class="form-select" size="1" default="1">
 		<option value="1">JPUBLISHED</option>
 		<option value="0">JUNPUBLISHED</option>
 	</field>
-	<field id="description" name="description" rows="3" cols="60" type="textarea" label="CDESCR" class="inputbox" filter="safehtml" description="XFORM_TYPEDESCRDESCR" />
+	<field id="description" name="description" rows="3" cols="60" type="textarea" label="CDESCR" class="form-control" filter="safehtml" description="XFORM_TYPEDESCRDESCR" />
 
 	<field name="rules" type="rules" label="JFIELD_RULES_LABEL" translate_label="false"
-	class="inputbox" filter="rules" component="com_joomcck" section="type" validate="rules" />
+	class="form-select" filter="rules" component="com_joomcck" section="type" validate="rules" />
 
 	<field name="checked_out" type="hidden" filter="unset" />
 	<field name="checked_out_time" type="hidden" filter="unset" />
@@ -20,7 +20,7 @@
 		type="contentlanguage"
 		label="JFIELD_LANGUAGE_LABEL"
 		description="COM_CATEGORIES_FIELD_LANGUAGE_DESC"
-		class="inputbox">
+		class="form-select">
 		<option value="*">JALL</option>
 	</field>
 </form>

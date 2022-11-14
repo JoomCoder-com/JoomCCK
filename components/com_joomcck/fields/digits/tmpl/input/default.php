@@ -8,7 +8,7 @@
  */
 defined('_JEXEC') or die();
 
-$class[] = 'inputbox';
+$class[] = 'form-control';
 $class[] = $this->params->get('core.field_class');
 $required = NULL;
 if($this->required)

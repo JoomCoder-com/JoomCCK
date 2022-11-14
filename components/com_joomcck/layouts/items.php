@@ -13,7 +13,7 @@ $view   = JFactory::getApplication()->input->getCmd('view');
 $single = preg_replace('/s$/iU', '', $view);
 ?>
 
-<div class="float-start">
+<div class="float-start my-3">
 	<img src="<?php echo JUri::root(TRUE); ?>/components/com_joomcck/images/arrow-turn-270-left.png" alt="Select and" class="arrow"/>
 	<?php if(!in_array($view, array('tags', 'votes', 'items'))): ?>
 		<div class="btn-group">
@@ -41,10 +41,12 @@ $single = preg_replace('/s$/iU', '', $view);
         </button>
     </div>
 	<?php if($view == 'tfields'): ?>
-		<a class="btn" href="<?php echo JRoute::_('index.php?option=com_joomcck&view=groups&type_id=' . $displayData->state->get('filter.type')); ?>">
-			<?php echo HTMLFormatHelper::icon('block.png'); ?>
-			<?php echo JText::_('CMANAGEGROUP') ?>
-		</a>
+		<div class="btn-group">
+            <a class="btn btn-outline-dark m" href="<?php echo JRoute::_('index.php?option=com_joomcck&view=groups&type_id=' . $displayData->state->get('filter.type')); ?>">
+				<?php echo HTMLFormatHelper::icon('block.png'); ?>
+				<?php echo JText::_('CMANAGEGROUP') ?>
+            </a>
+        </div>
 	<?php endif; ?>
 
 	<?php if($view == 'items'): ?>
