@@ -22,8 +22,8 @@ $readonly = ($default && $this->params->get('params.label_change')) ? '' : 'read
 
 <div id="url-list<?php echo $this->id; ?>"></div>
 <div class="clearfix"></div>
-<button class="btn" type="button" id="add-url<?php echo $this->id; ?>">
-	<img src="<?php echo JURI::root(TRUE); ?>/media/mint/icons/16/plus-button.png">
+<button class="btn btn-outline-success" type="button" id="add-url<?php echo $this->id; ?>">
+	<i class="fas fa-plus"></i>
 	<?php echo JText::_('U_ADDURL'); ?>
 </button>
 

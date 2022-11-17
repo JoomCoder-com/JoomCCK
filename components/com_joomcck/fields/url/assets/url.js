@@ -81,7 +81,7 @@
 		}
 
 		if(!label.val()) {
-			label.css("background-image", "url('./media/mint/js/mooupload/imgs/load_bg_green.gif')").val('Looking for title...');
+			label.css("background", "url('"+Joomla.getOptions('system.paths').root+"/media/mint/img/loading.gif') no-repeat right/80px").val('Looking for title...');
 			$.ajax({
 				url: Joomcck.field_call_url,
 				type: "POST",
@@ -93,7 +93,7 @@
 					url: value
 				}
 			}).done(function(json) {
-				label.css("background-image", "");
+				label.css("background", "transparent");
 
 				if(!json) {
 					return;
@@ -115,10 +115,10 @@
 		var self = this;
 		var list = $('#url-list' + this.id);
 		var key = this.key;//$('#url-list'+ this.id).children('div.url-item').length;
-		var container = $(document.createElement('div')).attr('class', 'url-item row-fluid').css('margin-bottom', '15px');
+		var container = $(document.createElement('div')).attr('class', 'url-item input-group mb-3');
 		this.values[key] = '';
 
-		$('<button type="button" class="btn pull-right btn-micro btn-danger"><i class="icon-remove"></i></button>').click(function() {
+		$('<button type="button" class="btn btn-outline-danger"><i class="fas fa-times"></i></button>').click(function() {
 			container.slideUp('fast', function() {
 				$(this).remove();
 				self.num--;
@@ -126,10 +126,10 @@
 			});
 		}).appendTo(container);
 
-		container.append('<label for=""><small>' + this.label1 + '</small></label>');
 
 		var input = $(document.createElement('input')).attr({
-			class: "span12",
+			class: "form-control",
+			placeholder: this.label1,
 			type: "text",
 			name: "jform[fields][" + this.id + "][" + key + "][url]",
 			value: url
@@ -151,8 +151,8 @@
 		}
 
 		if(this.label) {
-			container.append('<label for=""><small>' + this.label2 + '</small></label>');
-			container.append('<input ' + (!this.label_change ? 'readonly="readonly"' : '') + ' class="span12" type="text" name="jform[fields][' + this.id + '][' + key + '][label]" value="' + label + '" id="url' + this.id + '-label' + key + '">');
+
+			container.append('<input placeholder="'+this.label2+'" ' + (!this.label_change ? 'readonly="readonly"' : '') + ' class="form-control" type="text" name="jform[fields][' + this.id + '][' + key + '][label]" value="' + label + '" id="url' + this.id + '-label' + key + '">');
 			container.append('<input type="hidden" name="jform[fields][' + this.id + '][' + key + '][hits]" value="' + hits + '">');
 		}
 
