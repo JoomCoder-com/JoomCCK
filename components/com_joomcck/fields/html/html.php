@@ -22,8 +22,11 @@ class JFormFieldCHtml extends CFormField
 
 		$this->editor = JEditor::getInstance($params->get('params.editor', 'tinymce'));
 
-		$buttons = $params->get('params.editor_btn', false);
-		if(count($buttons))
+		$buttons = $params->get('params.editor_btn', []);
+
+
+
+		if(count($buttons) > 0)
 		{
 			settype($buttons, 'array');
 			$db = JFactory::getDbo();
