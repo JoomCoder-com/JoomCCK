@@ -166,7 +166,7 @@
 			val += '/';
 		}
 		if(!val.match(/^(?:http:\/\/)|(?:https:\/\/)/)) {
-			val = 'http://' + val;
+			val = 'https://' + val;
 		}
 		return val;
 	}
