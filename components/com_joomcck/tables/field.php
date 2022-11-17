@@ -76,6 +76,7 @@ class JoomcckTableField extends JTable
 		return 'com_joomcck.field.'.(int) $this->$k;
 	}
 
+
 	protected function _getAssetTitle()
 	{
 		return $this->label;

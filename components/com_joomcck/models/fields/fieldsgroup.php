@@ -27,7 +27,7 @@ class JFormFieldFieldsgroup extends JFormFieldList
 		$db->setQuery($query);
 		$list = $db->loadObjectList();
 		
-		$opt = JHtml::_('select.option', '', JText::_('CUNGROUPED'));
+		$opt = JHtml::_('select.option', 0, JText::_('CUNGROUPED'));
 		
 		array_unshift($list, $opt);
 		
