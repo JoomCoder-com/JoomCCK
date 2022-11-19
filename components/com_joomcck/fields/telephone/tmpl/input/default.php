@@ -8,6 +8,8 @@
  */
 defined('_JEXEC') or die();
 
+
+
 $params = $this->params;
 $class = ' class="' . $this->params->get('core.field_class', 'form-control') . ($this->required ? ' required' : NULL) .'"';
 $required = $this->required ? 'required="true" ' : NULL;
@@ -15,7 +17,7 @@ $required = $this->required ? 'required="true" ' : NULL;
 $value = $this->value ? $this->value : null;
 ?>
 
-<div class="input text">
+<div class="input text position-relative">
 	<table cellpadding="2" cellspacing="2" class="tel_table">
 		<tr>
 			<td>
@@ -28,33 +30,39 @@ $value = $this->value ? $this->value : null;
 				+<br>&nbsp;
 			</td>
 			<td>
-				<input autocomplete="off" class="input-mini" id="field_<?php echo $this->id;?>_cnt" type="text" name="jform[fields][<?php echo $this->id;?>][country]" 
+				<input  class="form-control form-control-sm" id="field_<?php echo $this->id;?>_cnt" type="text" name="jform[fields][<?php echo $this->id;?>][country]"
 					size="3" data-autocompleter-default="<?php echo (isset($value['country']) ? $value['country'] : '');?>"
 					value="<?php echo (isset($value['country']) ? $value['country'] : '');?>"/>
-				<br><small id="field_<?php echo $this->id;?>_cntname"><?php echo JText::_('T_COUNTRY');?></small>
-		       	<script type="text/javascript">
-            	   InitAutocomplete("<?php echo $this->id;?>");
-               	</script>
+				<br><small  class="text-muted"  id="field_<?php echo $this->id;?>_cntname"><?php echo JText::_('T_COUNTRY');?></small>
+
            	</td>
         	<td>
-        	   	<input class="input-mini" id="field_<?php echo $this->id;?>_reg" type="text" name="jform[fields][<?php echo $this->id;?>][region]" onkeyup="Joomcck.formatInt(this)"
+        	   	<input class="form-control form-control-sm" id="field_<?php echo $this->id;?>_reg" type="text" name="jform[fields][<?php echo $this->id;?>][region]" onkeyup="Joomcck.formatInt(this)"
         	   		size="3"  value="<?php echo (isset($value['region']) ? $value['region'] : '');?>"/>      	    
-        	   		<br><small id="field_<?php echo $this->id;?>_cntname"><?php echo JText::_('T_REGION');?></small>
+        	   		<br><small class="text-muted"  id="field_<?php echo $this->id;?>_cntname"><?php echo JText::_('T_REGION');?></small>
         	</td>
         	<td>
-        	  	<input class="input-small" id="field_<?php echo $this->id;?>_tel" type="text" name="jform[fields][<?php echo $this->id;?>][tel]"  onkeyup="Joomcck.formatInt(this)"
+        	  	<input class="form-control form-control-sm" id="field_<?php echo $this->id;?>_tel" type="text" name="jform[fields][<?php echo $this->id;?>][tel]"  onkeyup="Joomcck.formatInt(this)"
         	   		size="7" maxlength="7" value="<?php echo (isset($value['tel']) ? $value['tel'] : '');?>" />
-        	   	<br><small id="field_<?php echo $this->id;?>_cntname"><?php echo JText::_('T_TEL');?></small>      	    
+        	   	<br><small class="text-muted" id="field_<?php echo $this->id;?>_cntname"><?php echo JText::_('T_TEL');?></small>
         	</td>
 		<?php if ($params->get('params.extension')) : ?>
 			<td>#<br>&nbsp;</td>
 			<td>
-        	    <input class="input-mini" id="field_<?php echo $this->id;?>_ext" type="text" name="jform[fields][<?php echo $this->id;?>][ext]"  onkeyup="Joomcck.formatInt(this)"
+        	    <input class="form-control form-control-sm" id="field_<?php echo $this->id;?>_ext" type="text" name="jform[fields][<?php echo $this->id;?>][ext]"  onkeyup="Joomcck.formatInt(this)"
         	    	size="3"  value="<?php echo (isset($value['ext']) ? $value['ext'] : '');?>" />  
-        	    <br><small id="field_<?php echo $this->id;?>_cntname"><?php echo JText::_('T_EXTENSION');?></small>    	    
+        	    <br><small  class="text-muted"  id="field_<?php echo $this->id;?>_cntname"><?php echo JText::_('T_EXTENSION');?></small>
         	</td>
         <?php endif; ?>
 		</tr>
 	</table>
 </div>
+<script type="text/javascript">
+    jQuery(document).ready(function(){
+        telInitAutocomplete("<?php echo $this->id;?>");
+    });
+
+
+
+</script>
 

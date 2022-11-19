@@ -1,7 +1,8 @@
-function InitAutocomplete(id) {
+function telInitAutocomplete(id){
 	var flags = [];
 	var labels = [];
 	var mapped = {};
+
 	jQuery('#field_' + id + '_cnt').typeahead({
 		items: 10,
 		source: function(query, process) {
@@ -49,6 +50,7 @@ function InitAutocomplete(id) {
 		},
 	});
 }
+
 
 function FilterTelephone(id, sid) {
 	jQuery('#flt' + id).typeahead({

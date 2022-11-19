@@ -17,6 +17,7 @@ class JFormFieldCTelephone extends CFormField
 		$document = JFactory::getDocument();
 // 		$document->addScript(JURI::root(TRUE) . '/media/mint/js/autocomplete/mootools-autocompleter-1.2.js');
 // 		$document->addStyleSheet(JURI::root(TRUE) . '/media/mint/js/autocomplete/autocompleter.css');
+		$document->addScript(JURI::root(TRUE) . '/media/mint/vendors/bootstrap-pills/js/bootstrap-typeahead.js');
 		$document->addStyleSheet(JURI::root(TRUE) . '/components/com_joomcck/fields/telephone/telephone.css');
 		$document->addScript(JURI::root(TRUE) . '/components/com_joomcck/fields/telephone/telephone.js');
 
