@@ -69,7 +69,7 @@ if(JoomcckCommentHelper::laded($this->item->id)) {
 	</script>
 
 	<?php if(($this->tmpl_params['comment']->get('tmpl_core.comments_title', 1) || $this->tmpl_params['comment']->get('tmpl_core.comments_rss_button', 1))
-		&& in_array($this->item->params->get('comments.comments_access_post', $this->type->params->get('comments.comments_access_post')), $this->user->getAuthorisedViewLevels())):?>	<h2>
+		&& in_array($this->item->params->get('comments.comments_access_post', $this->type->params->get('comments.comments_access_post')), $this->user->getAuthorisedViewLevels())):?>	<h2 class="mb-3">
 			<?php if($this->tmpl_params['comment']->get('tmpl_core.comments_rss_button', 1)):?>
 				<span class="float-end">
 					<a class="btn btn-micro" href="<?php echo JRoute::_($this->item->url.'&format=feed&type=rss')?>" target="_blank">

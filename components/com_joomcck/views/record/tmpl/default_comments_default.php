@@ -57,14 +57,14 @@ if($this->comment->rate < 0) $bc = 'bg-dark';
 if($this->comment->rate > 10) $bc = 'bg-success';
 ?>
 <a name="comment<?php echo $this->comment->id?>"></a>
-<div style="margin-left: <?php echo $params->get('tmpl_params.comments_indent') * ($this->comment->level - 1)?>px;" id="comment<?php echo $this->comment->id?>-container" class="">
+<div style="margin-left: <?php echo $params->get('tmpl_params.comments_indent') * ($this->comment->level - 1)?>px;" id="comment<?php echo $this->comment->id?>-container" class="border p-2 rounded">
 	<div class="row">
-		<div class="span<?php echo $this->comment->level > 1 ? 1 : 2; ?>">
+		<div class="col-md-<?php echo $this->comment->level > 1 ? 1 : 2; ?>">
 			<?php if($params->get('tmpl_core.comments_author_avatar')): ?>
 				<td width="1%" style="padding-right: 10px;"><img src="<?php echo CCommunityHelper::getAvatar($this->comment->user_id, $width, $height);?>" /></td>
 			<?php endif;?>
 		</div>
-		<div class="span<?php echo $this->comment->level > 1 ? 11 : 10; ?> has-context<?php echo  $this->comment->private ? ' private' : null; echo  !$this->comment->published ? ' published' : null?>">
+		<div class="col-md-<?php echo $this->comment->level > 1 ? 11 : 10; ?> has-context<?php echo  $this->comment->private ? ' private' : null; echo  !$this->comment->published ? ' published' : null?>">
 
 			<?php if(in_array($this->type->params->get('comments.comments_rate_view', 1), $this->user->getAuthorisedViewLevels())):?>
 				<div class="float-end">
@@ -74,7 +74,7 @@ if($this->comment->rate > 10) $bc = 'bg-success';
 								<?php echo HTMLFormatHelper::icon('plus.png');?>
 							</a>
 					<?php endif;?>
-					<big class="badge<?php echo $bc; ?>" rel="tooltip" data-original-title="<?php echo JText::sprintf('TOTAL_VOTES', $this->comment->rate_num);?>" id="comment_rate_value_<?php echo $this->comment->id?>"><?php echo $this->comment->rate?></big>
+					<big class="badge <?php echo $bc; ?>" rel="tooltip" data-original-title="<?php echo JText::sprintf('TOTAL_VOTES', $this->comment->rate_num);?>" id="comment_rate_value_<?php echo $this->comment->id?>"><?php echo $this->comment->rate?></big>
 					<?php if($this->comment->canrate):?>
 							<a href="javascript:void(0);" onclick="ajax_rateComment(<?php echo $this->comment->id?>, 0)">
 								<?php echo HTMLFormatHelper::icon('minus.png');?>
@@ -84,45 +84,48 @@ if($this->comment->rate > 10) $bc = 'bg-success';
 				</div>
 			<?php endif;?>
 			
-			<div class="float-start" style="height: 25px;">
-				<?php if($this->comment->private): ?>
-					<?php echo HTMLFormatHelper::icon('lock.png', JText::_('CCOMMPRIVATE'));  ?>
-				<?php endif;?>
-				
-				<?php if(!$this->comment->published): ?>
-					<?php echo HTMLFormatHelper::icon('minus-circle.png', JText::_('CCOMMPWAIT'));  ?>
-				<?php endif;?>
-				
-				<?php if($params->get('tmpl_core.comments_username')):?>
-					<small><?php echo JText::sprintf('CWRITTENBY', ($this->comment->name ? $this->comment->name : CCommunityHelper::getName($this->comment->user_id, $this->section))); ?></small>
-				<?php endif;?>
-				
-				<?php if($params->get('tmpl_core.comments_date')):?>
-					<small><?php echo JText::sprintf('CONDATE', JHtml::_('date', $this->comment->created, $params->get('tmpl_core.comments_time_format'))); ?></small>
-				<?php endif;?>
-				
+			<div class="float-end">
 				<?php echo CEventsHelper::showNum('comment', $this->comment->id);?>
+				<?php if($menu || $replay):?>
+                    <div class="btn-group float-end" style="display: none;">
+						<?php if(isset($replay)):?>
+							<?php echo $replay; ?>
+						<?php endif;?>
+						<?php if($menu):?>
+                            <a href="#" data-toggle="dropdown" class="dropdown-toggle btn btn-sm">
+                                <i class="icon-cog"></i>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><?php echo implode('</li><li>', $menu);?></li>
+                            </ul>
+						<?php endif;?>
+                    </div>
+				<?php endif;?>
 			</div>
 			
-			<?php if($menu || $replay):?>
-				<div class="btn-group float-start" style="display: none; margin-left: 20px;">
-					<?php if(isset($replay)):?>
-						<?php echo $replay; ?>
-					<?php endif;?>
-					<?php if($menu):?>
-						<a href="#" data-toggle="dropdown" class="dropdown-toggle btn btn-sm">
-							<i class="icon-cog"></i>
-						</a>
-						<ul class="dropdown-menu">
-							<li><?php echo implode('</li><li>', $menu);?></li>
-						</ul>
-					<?php endif;?>
-				</div>
-			<?php endif;?>
+
 			<div class="clearfix"></div>
 			<div>
 				<?php echo $this->comment->comment; ?>
 			</div>
+
+            <div>
+	            <?php if($this->comment->private): ?>
+		            <?php echo HTMLFormatHelper::icon('lock.png', JText::_('CCOMMPRIVATE'));  ?>
+	            <?php endif;?>
+
+	            <?php if(!$this->comment->published): ?>
+		            <?php echo HTMLFormatHelper::icon('minus-circle.png', JText::_('CCOMMPWAIT'));  ?>
+	            <?php endif;?>
+
+	            <?php if($params->get('tmpl_core.comments_username')):?>
+                    <small><?php echo JText::sprintf('CWRITTENBY', ($this->comment->name ? $this->comment->name : CCommunityHelper::getName($this->comment->user_id, $this->section))); ?></small>
+	            <?php endif;?>
+
+	            <?php if($params->get('tmpl_core.comments_date')):?>
+                    <small><?php echo JText::sprintf('CONDATE', JHtml::_('date', $this->comment->created, $params->get('tmpl_core.comments_time_format'))); ?></small>
+	            <?php endif;?>
+            </div>
 			
 			<?php if(!empty($this->comment->attachment)):?>
 				<b><?php echo JText::_('CATTACH')?></b>:

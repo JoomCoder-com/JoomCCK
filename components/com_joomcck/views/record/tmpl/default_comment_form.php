@@ -33,127 +33,131 @@ $this->comment_form->setFieldAttribute('comment','editor', $this->tmpl_params['c
 
 
 <a name="comment-form" id="form-starts"></a>
-<div class="well form-horizontal">
+<div class="card form-horizontal">
 
-	<legend>
-		<?php echo JText::_($this->tmpl_params['comment']->get('tmpl_core.comments_add_title_lbl'));?>
-	</legend>
+	<div class="card-header">
+		<h5 class="m-0"><i class="fas fa-plus"></i> <?php echo JText::_($this->tmpl_params['comment']->get('tmpl_core.comments_add_title_lbl'));?></h5>
+    </div>
 
-	<?php if(!$this->user->get('id')):?>
-		<div class="control-group">
-			<?php echo $this->comment_form->getLabel('name') ; ?>
-			<div class="controls">
-				<?php echo $this->comment_form->getInput('name') ; ?>
-			</div>
-		</div>
-		<div class="control-group">
-			<?php echo $this->comment_form->getLabel('email'); ?>
-			<div class="controls">
-				<?php echo $this->comment_form->getInput('email'); ?>
-			</div>
-		</div>
-	<?php else:?>
-		<input type="hidden" name="jform[name]" value="<?php echo CCommunityHelper::getName($this->user->id, $this->section, array('nohtml' => 1)) ?>" >
-		<input type="hidden" name="jform[email]" value="<?php echo $this->user->email; ?>" >
-	<?php endif;?>
+	<div class="card-body">
+		<?php if(!$this->user->get('id')):?>
+            <div class="control-group">
+				<?php echo $this->comment_form->getLabel('name') ; ?>
+                <div class="controls">
+					<?php echo $this->comment_form->getInput('name') ; ?>
+                </div>
+            </div>
+            <div class="control-group">
+				<?php echo $this->comment_form->getLabel('email'); ?>
+                <div class="controls">
+					<?php echo $this->comment_form->getInput('email'); ?>
+                </div>
+            </div>
+		<?php else:?>
+            <input type="hidden" name="jform[name]" value="<?php echo CCommunityHelper::getName($this->user->id, $this->section, array('nohtml' => 1)) ?>" >
+            <input type="hidden" name="jform[email]" value="<?php echo $this->user->email; ?>" >
+		<?php endif;?>
+		<?php $this->comment_form->setFieldAttribute('comment', 'height', $this->tmpl_params['comment']->get('tmpl_core.textarea_height', 300));?>
+		<?php echo $this->comment_form->getInput('comment'); ?>
 
-	<?php $this->comment_form->setFieldAttribute('comment', 'height', $this->tmpl_params['comment']->get('tmpl_core.textarea_height', 300));?>
-	<?php echo $this->comment_form->getInput('comment'); ?>
+		<?php if($this->tmpl_params['comment']->get('tmpl_core.comments_subscribe', 1) && $this->user->get('id') && in_array($this->section->params->get('events.subscribe_record'), $this->user->getAuthorisedViewLevels())):?>
+            <div class="control-group">
+                <div class="control-label">
+                    <input type="hidden" name="jform[subscribe]" value="0">
+					<?php echo $this->comment_form->getInput('subscribe');?>
+                    <!-- <input checked="checked" id="follow" type="checkbox" name="subscribe" value="1"> -->
+                </div>
+                <div class="controls">
+                    <label for="follow	">
+                        <big><?php echo JText::_('CFOLLOW')?></big>
+                        <br /><small>
+							<?php echo JText::_('COMMENTFOLLOWCHECKBOX')?>
+                        </small>
+                    </label>
+                </div>
+            </div>
+		<?php endif;?>
 
-	<?php if($this->tmpl_params['comment']->get('tmpl_core.comments_subscribe', 1) && $this->user->get('id') && in_array($this->section->params->get('events.subscribe_record'), $this->user->getAuthorisedViewLevels())):?>
-		<div class="control-group">
-			<div class="control-label">
-				<input type="hidden" name="jform[subscribe]" value="0">
-				<?php echo $this->comment_form->getInput('subscribe');?>
-				<!-- <input checked="checked" id="follow" type="checkbox" name="subscribe" value="1"> -->
-			</div>
-			<div class="controls">
-				<label for="follow	">
-					<big><?php echo JText::_('CFOLLOW')?></big>
-					<br /><small>
-						<?php echo JText::_('COMMENTFOLLOWCHECKBOX')?>
-					</small>
-				</label>
-			</div>
-		</div>
-	<?php endif;?>
+		<?php if(in_array($this->type->params->get('comments.comments_private'), $this->user->getAuthorisedViewLevels())):?>
+            <div class="control-group">
+                <div class="control-label">
+                    <input name="jform_private" id="prv-chk" value="" class="form-control" type="checkbox">
+                    <input type="hidden" id="jform_private" name="jform[private]" value=""/>
+                </div>
+                <div class="controls">
+                    <label for="private">
+                        <big><?php echo JText::_('CPRIVATE')?></big>
+                        <br /><small>
+							<?php echo JText::_('COMMENTPRIVATECHECKBOX')?>
+                        </small>
+                    </label>
+                </div>
+            </div>
+            <script type="text/javascript">
+                (function($){
+                    $('#prv-chk').change(function(){
+                        setval(this);
+                    });
 
-	<?php if(in_array($this->type->params->get('comments.comments_private'), $this->user->getAuthorisedViewLevels())):?>
-		<div class="control-group">
-			<div class="control-label">
-				<input name="jform_private" id="prv-chk" value="" class="form-control" type="checkbox">
-				<input type="hidden" id="jform_private" name="jform[private]" value=""/>
-			</div>
-			<div class="controls">
-				<label for="private">
-					<big><?php echo JText::_('CPRIVATE')?></big>
-					<br /><small>
-						<?php echo JText::_('COMMENTPRIVATECHECKBOX')?>
-					</small>
-				</label>
-			</div>
-		</div>
-		<script type="text/javascript">
-			(function($){
-				$('#prv-chk').change(function(){
-					setval(this);
-				});
+                    setval(document.getElementById('prv-chk'));
 
-				setval(document.getElementById('prv-chk'));
+                    function setval(el) {
+                        $('#jform_private').val('-1');
+                        if(el.checked) {
+                            $('#jform_private').val('1');
+                        }
+                    }
+                }(jQuery))
+            </script>
+		<?php endif;?>
 
-				function setval(el) {
-					$('#jform_private').val('-1');
-					if(el.checked) {
-						$('#jform_private').val('1');
-					}
-				}
-			}(jQuery))
-		</script>
-	<?php endif;?>
-
-	<?php if(in_array($this->type->params->get('comments.comments_access_access'), $this->user->getAuthorisedViewLevels())):?>
-		<div class="control-group">
-			<?php echo $this->comment_form->getLabel('access'); ?>
-			<div class="controls">
-				<?php echo $this->comment_form->getInput('access'); ?>
-			</div>
-		</div>
-	<?php endif;?>
-
-
-
-	<?php if(in_array($this->type->params->get('comments.comment_attach'), $this->user->getAuthorisedViewLevels())):?>
-		<div class="control-group">
-			<label class="control-label">
-				<?php echo JText::_('CATTACH');?>
-			</label>
-			<div class="controls">
-				<div id="field-alert-0" class="alert alert-danger" style="display:none"></div>
-				<?php echo $this->comment_form->getField('attachment')->getInput(array(
-				'max_size' => $this->type->params->get('comments.comments_attachment_max'),
-				'file_formats' => $this->type->params->get('comments.comments_allowed_formats'),
-				'max_count' => $this->type->params->get('comments.comments_max_count', 1),
-				'allow_edit_title' => 0,
-				'allow_add_descr' => 0
-				)); ?>
-			</div>
-		</div>
-	<?php endif;?>
+		<?php if(in_array($this->type->params->get('comments.comments_access_access'), $this->user->getAuthorisedViewLevels())):?>
+            <div class="control-group">
+				<?php echo $this->comment_form->getLabel('access'); ?>
+                <div class="controls">
+					<?php echo $this->comment_form->getInput('access'); ?>
+                </div>
+            </div>
+		<?php endif;?>
 
 
 
-	<?php if($this->type->params->get('comments.comment_captcha') && !$this->user->get('id')):?>
-		<div class="formelm">
-			<?php echo $this->comment_form->getInput('captcha'); ?>
-		</div>
-	<?php endif;?>
+		<?php if(in_array($this->type->params->get('comments.comment_attach'), $this->user->getAuthorisedViewLevels())):?>
+            <div class="control-group">
+                <label class="control-label">
+					<?php echo JText::_('CATTACH');?>
+                </label>
+                <div class="controls">
+                    <div id="field-alert-0" class="alert alert-danger" style="display:none"></div>
+					<?php echo $this->comment_form->getField('attachment')->getInput(array(
+						'max_size' => $this->type->params->get('comments.comments_attachment_max'),
+						'file_formats' => $this->type->params->get('comments.comments_allowed_formats'),
+						'max_count' => $this->type->params->get('comments.comments_max_count', 1),
+						'allow_edit_title' => 0,
+						'allow_add_descr' => 0
+					)); ?>
+                </div>
+            </div>
+		<?php endif;?>
 
-	<div class="form-actions">
-		<button type="button" class="btn btn-primary" onclick="Joomla.submitbutton('comment.save')">
-			<?php echo HTMLFormatHelper::icon('balloon--plus.png');  ?>
-			<?php echo JText::_($this->tmpl_params['comment']->get('tmpl_core.comments_button_title_lbl'));?>
-		</button>
-	</div>
+
+
+		<?php if($this->type->params->get('comments.comment_captcha') && !$this->user->get('id')):?>
+            <div class="formelm">
+				<?php echo $this->comment_form->getInput('captcha'); ?>
+            </div>
+		<?php endif;?>
+
+    </div>
+
+    <div class="card-footer">
+        <button type="button" class="btn btn-outline-success btn-sm" onclick="Joomla.submitbutton('comment.save')">
+		    <i class="fas fa-plus"></i>
+		    <?php echo JText::_($this->tmpl_params['comment']->get('tmpl_core.comments_button_title_lbl'));?>
+        </button>
+    </div>
+
+
 </div>
 
 <input type="hidden" name="task" value="">
