@@ -8,22 +8,17 @@
  */
 
 defined('_JEXEC') or die();
-JHtml::_('behavior.keepalive');
+
+$wa = $this->document->getWebAssetManager();
+$wa->useScript('keepalive')
+	->useScript('form.validate');
+
+
 JHtml::_('bootstrap.tooltip');
-JHtml::_('behavior.formvalidation');
+
 $this->comment_form->setFieldAttribute('comment','editor', $this->tmpl_params['comment']->get('tmpl_core.comments_editor', 'tinymce'));
 ?>
 
-<script type="text/javascript">
-Joomla.submitbutton = function(task) {
-	if (task == 'article.cancel' || document.formvalidator.isValid(document.getElementById('adminForm'))) {
-		<?php echo $this->comment_form->getField('comment')->save(); ?>
-		Joomla.submitform(task);
-	} else {
-		alert('<?php echo $this->escape(JText::_('JGLOBAL_VALIDATION_FORM_FAILED'));?>');
-	}
-}
-</script>
 
 <div style="width:900px; margin-left: -450px" class="modal hide fade" id="commentmodal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 	<div class="modal-header">
