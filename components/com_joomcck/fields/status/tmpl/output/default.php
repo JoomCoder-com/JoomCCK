@@ -10,13 +10,13 @@
 use Joomla\Component\Finder\Administrator\Indexer\Parser\Html;
 
 defined('_JEXEC') or die();
-
-JHTML::_('bootstrap.tooltip', '*[rel^="tooltip"]');
 JHTML::_('bootstrap.tooltip', '*[rel="tooltipright"]',
 	array(
 		'placement' => 'right'
 	)
 );
+JHTML::_('bootstrap.tooltip', '*[rel^="tooltip"]');
+
 
 
 $id = $record->id.$this->id;

@@ -6,10 +6,10 @@
 		<option value="0">JUNPUBLISHED</option>
 	</field>
 
-	<field id="access" name="access" default="1" type="accesslevel" label="X_WHOACCESSCOMENT" description="JFIELD_ACCESS_DESC" labelclass="control-label" size="1" />
+	<field id="access" name="access" default="1" type="accesslevel" class="form-select-sm" label="X_WHOACCESSCOMENT" description="JFIELD_ACCESS_DESC" labelclass="control-label" size="1" />
 	<field id="comment" name="comment" type="editor" required="true" buttons="false" hide="pagebreak,readmore,article" filter="raw" />
-	<field id="private" name="private" type="checkbox" default="0" class="form-control" />
-	<field id="subscribe" name="subscribe" type="checkbox" default="1" class="form-control" />
+	<field id="private" name="private" label="CPRIVATE" description="COMMENTPRIVATECHECKBOX" type="checkbox" default="0"  />
+	<field id="subscribe" label="CFOLLOW" description="COMMENTFOLLOWCHECKBOX" name="subscribe" type="checkbox" default="1"/>
 
 	<field name="name" type="text" label="Name" required="true" labelclass="control-label" />
 	<field name="email" type="text" label="Email" required="true" labelclass="control-label" />
