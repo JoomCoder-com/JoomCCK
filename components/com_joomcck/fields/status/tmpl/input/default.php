@@ -9,7 +9,7 @@
 defined('_JEXEC') or die();
 
 $params = $this->params;
-$class = ' class="' .($this->required ? ' required' : NULL) . '"';
+$class = ' class="form-select ' .($this->required ? ' required' : NULL) . '"';
 $required = $this->required ? ' required="true" ' : NULL;
 $style = ' style="max-width: ' . $params->get('params.width', '450') . 'px"';
 ?>

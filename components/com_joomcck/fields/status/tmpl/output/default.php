@@ -6,7 +6,19 @@
  * @copyright Copyright (C) 2012 JoomBoost (https://www.joomBoost.com). All rights reserved.
  * @license GNU/GPL http://www.gnu.org/copyleft/gpl.html
  */
+
+use Joomla\Component\Finder\Administrator\Indexer\Parser\Html;
+
 defined('_JEXEC') or die();
+
+JHTML::_('bootstrap.tooltip', '*[rel^="tooltip"]');
+JHTML::_('bootstrap.tooltip', '*[rel="tooltipright"]',
+	array(
+		'placement' => 'right'
+	)
+);
+
+
 $id = $record->id.$this->id;
 $list = array();
 $params = $this->params;
@@ -22,22 +34,23 @@ foreach($this->statuses as $key => $status)
 	$li_html = $icon . ' ' . $status;
 	if($this->checkStatus($params->get('params.access' . $key, $access[$key]), 'edit'))
 	{
-		$list[] = sprintf('<li rel="tooltipright" data-original-title="%s"><a href="javascript:void(0)" onclick="changeStatus%d(%d, \'%s\')">%s</a></li>',
+		$list[] = sprintf('<li rel="tooltipright" title="%s"><button type="button" class="dropdown-item" onclick="changeStatus%d(%d, \'%s\')">%s</button></li>',
 			htmlentities(JText::sprintf('ST_CLICKTOCHANGE', $status), ENT_QUOTES, 'UTF-8'), $id, $key, $this->clienttype, $li_html);
 	}
 }
 ?>
 
-<span id="field_<?php echo $id;?>" class="float-start"><?php echo $this->out;?></span>
+<span id="field_<?php echo $id;?>"><?php echo $this->out;?></span>
 
 <?php if (count($list)): ?>
-	<div class="btn-group float-start" style="margin-left: 5px;">
-		<a class="dropdown-toggle btn btn-micro" data-toggle="dropdown" rel="tooltip" data-original-title="<?php echo JText::_('ST_CHANGETO');?>"><span class="caret"></span></a>
+	<div class="dropdown d-inline">
+		<button id="field_<?php echo $id;?>_button" type="button" aria-expanded="false" class="dropdown-toggle btn btn-sm btn-outline-dark" data-bs-toggle="dropdown" rel="tooltip" title="<?php echo JText::_('ST_CHANGETO');?>"></button>
 		<ul class="dropdown-menu" ><?php echo implode("\n", $list);?></ul>
 	</div>
 <?php endif; ?>
 <div class="clearfix"></div>
 <script>
+
 function changeStatus<?php echo $id;?>(to, type)
 {
 	if(!to) return;
