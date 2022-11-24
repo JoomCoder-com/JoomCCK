@@ -425,12 +425,12 @@ class JFormFieldCMultilevelselect extends CFormField
 		$name = 'jform[fields]['.$this->id.'][levels][]';
 		if(isset($post['filter']) && $post['filter'])
 			$name = 'filters['.$this->key.'][]';
-		$level .= JHtml::_('select.genericlist', $opt, $name, 'onchange="'.$js.'"'.((empty($post['filter']) && $required && $post['level'] <= $required) ? ' required="true"' : NULL), 'value', 'text',
+		$level .= JHtml::_('select.genericlist', $opt, $name, 'class="form-select" onchange="'.$js.'"'.((empty($post['filter']) && $required && $post['level'] <= $required) ? ' required="true"' : NULL), 'value', 'text',
 			(isset($post['selected']) ? $post['selected'] : ''), 'mls-'.$this->id.'-level'.$post['level']);
 
 		if(in_array($this->params->get('params.canedit'), $user->getAuthorisedViewLevels()) && empty($post['filter']))
 		{
-			$level .= ' <button rel="tooltip" data-original-title="'.JText::_('CEDIT').'" type="button" onclick="'.$mls.$this->id.'.edit(this, '.$post['level'].', '.$post['parent_id'].')" class="btn btn-sm btn-edit"><img src="'.JUri::root(true).'/media/mint/icons/16/pencil.png"></button>';
+			$level .= ' <button rel="tooltip" data-original-title="'.JText::_('CEDIT').'" type="button" onclick="'.$mls.$this->id.'.edit(this, '.$post['level'].', '.$post['parent_id'].')" class="btn btn-outline-primary btn-edit"><i class="fas fa-edit"></i></button>';
 		}
 
 		/*if(isset($post['selected']) && $post['selected'])

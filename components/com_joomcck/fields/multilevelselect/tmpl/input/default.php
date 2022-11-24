@@ -42,6 +42,7 @@ var allowed<?php echo $this->id; ?> = <?php echo $params->get('params.max_levels
 
 		var input = $(document.createElement('input'))
 			.attr({type:'text','rel':select.val()})
+            .addClass('form-control')
 			.val(text)
 			.bind('keyup', function(event){
 				if(event.keyCode == 13){
@@ -54,10 +55,10 @@ var allowed<?php echo $this->id; ?> = <?php echo $params->get('params.max_levels
 
 		$(document.createElement('span'))
 			.attr('id', 'new-form')
-			.addClass('input-append')
+			.addClass('input-group')
 			.append(input)
-			.append('<a class="btn btn-primary" onclick="Mls<?php echo $this->id; ?>.editValue(' + level + ', ' + parent_id + ')"><img src="<?php echo JUri::root(true)?>/media/mint/icons/16/plus.png"></a>')
-			.append('<a class="btn btn-danger" onclick="Mls<?php echo $this->id; ?>.deleteFormEdit('+level+')"><img src="<?php echo JUri::root(true)?>/media/mint/icons/16/minus.png"></a>')
+			.append('<a class="btn btn-outline-primary" onclick="Mls<?php echo $this->id; ?>.editValue(' + level + ', ' + parent_id + ')"><i class="fas fa-plus"></i></a>')
+			.append('<a class="btn btn-outline-danger" onclick="Mls<?php echo $this->id; ?>.deleteFormEdit('+level+')"><i class="fas fa-minus"></i></a>')
 			.appendTo($("#mls-<?php echo $this->id; ?>-container"+level));
 
 		input.focus(function(){
@@ -163,10 +164,11 @@ var allowed<?php echo $this->id; ?> = <?php echo $params->get('params.max_levels
 				});
 
 				var el = $(document.createElement('div'))
-					.attr('class', 'alert alert-info')
-					.html('<a class="close" data-dismiss="alert" href="#">x</a>' +
+					.attr('class', 'alert alert-info alert-dismissible fade show')
+                    .attr('role','alert')
+					.html(
 						title.join('<?php echo $this->params->get('params.separator', ' ');?> ') +
-						'<input type="hidden" name="jform[fields][<?php echo $this->id;?>][]" value="'+added.replace(/"/g, '&quot;')+'">')
+						'<input type="hidden" name="jform[fields][<?php echo $this->id;?>][]" value="'+added.replace(/"/g, '&quot;')+'">'+'<button class="btn-close" data-bs-dismiss="alert" type="button"></button>')
 					.bind('closed', Mls<?php echo $this->id; ?>.checkForm);
 
 				$('#mlsvalues-list<?php echo $this->id; ?>').append(el);
@@ -254,6 +256,7 @@ var allowed<?php echo $this->id; ?> = <?php echo $params->get('params.max_levels
 
 		var input = $(document.createElement('input'))
 			.attr({type:'text'})
+            .addClass('form-control')
 			.bind('keyup', function(event){
 				if(event.keyCode == 13){
 	        		Mls<?php echo $this->id; ?>.addValue(level, parent_id);
@@ -265,10 +268,10 @@ var allowed<?php echo $this->id; ?> = <?php echo $params->get('params.max_levels
 
 		$(document.createElement('span'))
 			.attr('id', 'new-form')
-			.addClass('input-append')
+			.addClass('input-group')
 			.append(input)
-			.append('<a class="btn btn-primary" onclick="Mls<?php echo $this->id; ?>.addValue(' + level + ', ' + parent_id + ')"><img src="<?php echo JUri::root(true)?>/media/mint/icons/16/plus.png"></a>')
-			.append('<a class="btn btn-danger" onclick="Mls<?php echo $this->id; ?>.deleteForm('+level+')"><img src="<?php echo JUri::root(true)?>/media/mint/icons/16/minus.png"></a>')
+			.append('<a class="btn btn-outline-primary" onclick="Mls<?php echo $this->id; ?>.addValue(' + level + ', ' + parent_id + ')"><i class="fas fa-plus"></i></a>')
+			.append('<a class="btn btn-outline-danger" onclick="Mls<?php echo $this->id; ?>.deleteForm('+level+')"><i class="fas fa-minus"></i></a>')
 			.appendTo($("#mls-<?php echo $this->id; ?>-container"+level));
 	}
 
@@ -335,10 +338,13 @@ var allowed<?php echo $this->id; ?> = <?php echo $params->get('params.max_levels
 				$title = implode($params->get('params.separator', ' '), $item);
 				$id = implode('-', array_keys($item));
 			?>
-			<div class="alert alert-info" id="mlsval-<?php echo $id;?>">
-				<a class="close" data-dismiss="alert" href="#">x</a>
+			<div class="alert alert-info alert alert-info alert-dismissible fade show" role="alert" id="mlsval-<?php echo $id;?>">
+
 				<?php echo $title;?>
 				<input type="hidden" name="jform[fields][<?php echo $this->id;?>][]" value="<?php echo htmlentities(json_encode($item), ENT_QUOTES, 'UTF-8');?>">
+
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+
 			</div>
 			<?php endforeach;?>
 		<?php endif; ?>
@@ -348,7 +354,7 @@ var allowed<?php echo $this->id; ?> = <?php echo $params->get('params.max_levels
 
 <div id="mls-<?php echo $this->id;?>-form-box">
 	<?php if($params->get('params.max_values') > 1): ?>
-		<small>
+		<small class="text-muted">
 			<?php echo JText::sprintf('F_OPTIONSLIMIT', $params->get('params.max_values')); ?>
 		</small>
 		<br><br>
@@ -377,9 +383,9 @@ var allowed<?php echo $this->id; ?> = <?php echo $params->get('params.max_levels
 	</div>
 
 	<?php if($params->get('params.max_values') > 1): ?>
-		<input type="button" id="add-button" class="btn btn-sm btn-warning"
-			value="<?php echo JText::_('MLS_ADD');?>"
-			onclick="Mls<?php echo $this->id; ?>.addItem();">
+        <button type="button" id="add-button" class="btn btn-outline-success" onclick="Mls<?php echo $this->id; ?>.addItem();">
+			<i class="fas fa-plus"></i> <?php echo JText::_('MLS_ADD');?>
+        </button>
 	<?php endif;?>
 </div>
 <script type="text/javascript">
