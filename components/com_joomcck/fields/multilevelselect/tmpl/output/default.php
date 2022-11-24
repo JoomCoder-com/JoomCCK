@@ -8,8 +8,9 @@
  */
 defined('_JEXEC') or die();
 $value = array();
+
 ?>
-<?php if(count($this->value)) :?>
+<?php if(is_array($this->value) && count($this->value) > 0 && is_array($this->value[0])) :?>
 	<?php foreach ($this->value as $item) :
 
 		$full = array();
@@ -38,10 +39,12 @@ $value = array();
 		?>
 	<?php endforeach;?>
 <?php endif;?>
-
-<?php if(count($value) == 1):?>
+<?php if(is_array($this->value) && count($value) == 1):?>
 	<?php echo $value[0];?>
-<?php elseif(count($value) > 1):?>
+
+
+
+<?php elseif(is_array($this->value) && count($value) > 1):?>
 	<ul>
 	  <li><?php echo implode('</li><li>', $value);?></li>
 	</ul>
