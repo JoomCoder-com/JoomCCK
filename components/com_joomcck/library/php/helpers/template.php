@@ -20,11 +20,11 @@ class CTmpl
 
 		if(JFile::exists($json1))
 		{
-			$file = JFile::read($json1);
+			$file = file_get_contents($json1);
 		}
 		elseif(JFile::exists($json3))
 		{
-			$file = JFile::read($json3);
+			$file = file_get_contents($json3);
 		}
 		else
 		{
@@ -96,7 +96,9 @@ class CTmpl
 		*/
 		if(JFile::exists($json1))
 		{
-			$file = JFile::read($json1);
+	
+			$file = file_get_contents($json1);
+
 		}
 		elseif(JFile::exists($json3))
 		{

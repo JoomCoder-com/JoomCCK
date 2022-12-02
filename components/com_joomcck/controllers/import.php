@@ -430,7 +430,7 @@ class JoomcckControllerImport extends MControllerAdmin
 
 	private function _load_json($file)
 	{
-		$body = json_decode(JFile::read($file));
+		$body = json_decode(file_get_contents($file));
 		foreach($body AS $row)
 		{
 			$this->_row(json_decode(json_encode($row), TRUE));

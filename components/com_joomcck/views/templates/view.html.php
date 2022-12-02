@@ -70,7 +70,7 @@ class JoomcckViewTemplates extends MViewBase
 
 
 		$config       = JoomcckTmplHelper::getTmplFile($matches[2], $matches[1], TRUE) . '.' . $app->input->get('config') . '.json';
-		$ini          = JFile::exists($config) ? JFile::read($config) : '';
+		$ini          = JFile::exists($config) ? file_get_contents($config) : '';
 		$this->params = new JRegistry($ini);
 		$this->config = $app->input->get('config');
 

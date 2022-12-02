@@ -221,7 +221,7 @@ if(
 		var map<?php echo $record->id.$this->id;?> = new google.maps.Map(document.getElementById("map_canvas_<?php echo $record->id;?>_<?php echo $this->id;?>"), {zoom:<?php echo $params->get('zoom', 15);?>,center:myLatlng, mapTypeId: google.maps.MapTypeId.ROADMAP, draggable:0, scrollwheel:0});
 
 	<?php if($this->params->get('params.map_style')):?>
-		var mapStyle = <?php echo JFile::read(JPATH_ROOT . '/components/com_joomcck/library/js/mapstyles/' . $this->params->get('params.map_style'));?>;
+		var mapStyle = <?php echo file_get_contents(JPATH_ROOT . '/components/com_joomcck/library/js/mapstyles/' . $this->params->get('params.map_style'));?>;
 		map<?php echo $record->id.$this->id;?>.setOptions({styles: mapStyle});
 	<?php endif; ?>
 

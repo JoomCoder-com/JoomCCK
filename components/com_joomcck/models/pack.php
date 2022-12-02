@@ -478,7 +478,7 @@ class JoomcckModelPack extends MModelAdmin
 
         foreach ($configs as $config) {
             if (JFile::exists($src . $config . '.json')) {
-                $cnf = json_decode(JFile::read($src . $config . '.json'), true);
+                $cnf = json_decode(file_get_contents($src . $config . '.json'), true);
                 foreach ($cnf as $key => $val) {
                     foreach ($val as $k => $v) {
                         $keys = explode('_', $k);
@@ -646,7 +646,7 @@ class JoomcckModelPack extends MModelAdmin
 
     private function _generateXml()
     {
-        $install = JFile::read(JPATH_COMPONENT . '/library/php/pack/install.xml');
+        $install = file_get_contents(JPATH_COMPONENT . '/library/php/pack/install.xml');
 
         $install = str_replace('[NAME]', $this->pack->get('name', 'Pack name'), $install);
         $install = str_replace('[AUTHOR_NAME]', $this->pack->get('author_name', 'Author name not set'), $install);

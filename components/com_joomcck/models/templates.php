@@ -178,7 +178,7 @@ function parseXMLTemplateFile($path)
 
 	public function change_name($file, $new_name)
 	{
-		$xml = new SimpleXMLElement(JFile::read($file));
+		$xml = new SimpleXMLElement(file_get_contents($file));
 		$xml->name = $new_name;
 		JFile::write($file, $xml->asXML());
 

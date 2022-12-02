@@ -40,7 +40,7 @@ class packInstallerScript
         if (!JFile::exists(PACKS_PATH . DIRECTORY_SEPARATOR . $this->key . '.json')) {
             $this->isNew = true;
         } else {
-            $ids       = JFile::read(PACKS_PATH . DIRECTORY_SEPARATOR . $this->key . '.json');
+            $ids       = file_get_contents(PACKS_PATH . DIRECTORY_SEPARATOR . $this->key . '.json');
             $this->ids = json_decode($ids, true);
         }
     }
@@ -252,7 +252,7 @@ class packInstallerScript
                 continue;
             }
 
-            $array = json_decode(JFile::read($file), true);
+            $array = json_decode(file_get_contents($file), true);
 
             foreach ($array as $key => $val) {
                 foreach ($val as $k => $v) {
@@ -316,7 +316,7 @@ class packInstallerScript
     {
         $php = $file . '.php';
         if (JFile::exists($php)) {
-            $content = $original = JFile::read($php);
+            $content = $original = file_get_contents($php);
 
             foreach ($this->ids['fields'] as $old_id => $new_id) {
                 $content = str_replace([

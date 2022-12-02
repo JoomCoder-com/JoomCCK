@@ -25,7 +25,7 @@ class JoomcckModelComments extends MModelList
 		$file = JPATH_ROOT . '/components/com_joomcck/views/record/tmpl/default_comments_' . $this->type->params->get('properties.tmpl_comment', 'default') . '.json';
 		if(JFile::exists($file))
 		{
-			$file = JFile::read($file);
+			$file = file_get_contents();
 		}
 		else
 		{
