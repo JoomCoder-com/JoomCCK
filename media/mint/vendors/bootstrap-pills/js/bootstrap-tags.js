@@ -11,8 +11,8 @@
             add_pill: ' <span class="badge bg-success tag-badge">...</span>',
             input_pill: '<span class="badge bg-success tag-badge"></span>',
             number: ' <sup><small>{0}</small></sup>',
-            plus_icon: '<i class="fas fa-plus tag-icon"></i>',
-            delete_icon: '<i class="fas fa-times tag-icon" data-toggle="tooltip" title="Delete"></i>',
+            plus_icon: '<i class="fas fa-plus"></i>',
+            delete_icon: '<i class="fas fa-times tag-icon" data-bs-toggle="tooltip" title="Delete"></i>',
             ok_icon: '<i class="fas fa-check tag-icon"></i>'
         },
 

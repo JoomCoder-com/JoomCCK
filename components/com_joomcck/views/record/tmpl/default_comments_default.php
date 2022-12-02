@@ -16,21 +16,21 @@ $menu = array();
 
 if($this->comment->canedit)
 {
-	$menu[0] = '<a href="#commentmodal" data-toggle="modal" role="button" onclick="Joomcck.editComment('.$this->comment->id.')">' . JText::_('CEDIT') . '</a>';
+	$menu[0] = '<a href="#commentmodal" class="dropdown-item" data-bs-toggle="modal" role="button" onclick="Joomcck.editComment('.$this->comment->id.')">' . JText::_('CEDIT') . '</a>';
 }
 if($this->comment->candelete)
 {
-	$menu[2] = JHtml::link('javascript:void(0);', JText::_('CDELETE'), array('onclick' => "deleteComment({$this->comment->id})"));
+	$menu[2] = JHtml::link('javascript:void(0);', JText::_('CDELETE'), array('class' => 'dropdown-item','onclick' => "deleteComment({$this->comment->id})"));
 }
 if($this->comment->canmoderate)
 {
     if($this->comment->published)
     {
-	    $menu[3] = JHtml::link('javascript:void(0);', JText::_('CUNPUB'), array('onclick' => "publishComment({$this->comment->id}, 'unpublish')"));
+	    $menu[3] = JHtml::link('javascript:void(0);', JText::_('CUNPUB'), array('class' => 'dropdown-item','onclick' => "publishComment({$this->comment->id}, 'unpublish')"));
     }
     else
     {
-	    $menu[3] = JHtml::link('javascript:void(0);', JText::_('CPUB'), array('onclick' => "publishComment({$this->comment->id}, 'publish')"));
+	    $menu[3] = JHtml::link('javascript:void(0);', JText::_('CPUB'), array('class' => 'dropdown-item','onclick' => "publishComment({$this->comment->id}, 'publish')"));
     }
 }
 
@@ -44,8 +44,8 @@ if(!$this->comment->canmoderate && !$this->comment->published)
 {
     return;
 }
-$width = $params->get('tmpl_core.comments_author_avatar_width', 100);
-$height = $params->get('tmpl_core.comments_author_avatar_height', 100);
+$width = $params->get('tmpl_core.comments_author_avatar_width', 60);
+$height = $params->get('tmpl_core.comments_author_avatar_height', 60);
 if($this->comment->level > 1)
 {
 	$width = 50;
@@ -57,14 +57,16 @@ if($this->comment->rate < 0) $bc = 'bg-dark';
 if($this->comment->rate > 10) $bc = 'bg-success';
 ?>
 <a name="comment<?php echo $this->comment->id?>"></a>
-<div style="margin-left: <?php echo $params->get('tmpl_params.comments_indent') * ($this->comment->level - 1)?>px;" id="comment<?php echo $this->comment->id?>-container" class="border p-2 rounded">
-	<div class="row">
-		<div class="col-md-<?php echo $this->comment->level > 1 ? 1 : 2; ?>">
-			<?php if($params->get('tmpl_core.comments_author_avatar')): ?>
-				<td width="1%" style="padding-right: 10px;"><img src="<?php echo CCommunityHelper::getAvatar($this->comment->user_id, $width, $height);?>" /></td>
-			<?php endif;?>
+<div style="margin-left: <?php echo $params->get('tmpl_params.comments_indent') * ($this->comment->level - 1)?>px;" id="comment<?php echo $this->comment->id?>-container">
+	<div class="d-flex mb-2">
+		<?php if($params->get('tmpl_core.comments_author_avatar')): ?>
+		<div class="me-3 col-md-<?php //echo $this->comment->level > 1 ? 1 : 2; ?>">
+
+            <img src="<?php echo CCommunityHelper::getAvatar($this->comment->user_id, $width, $height);?>" />
+
 		</div>
-		<div class="col-md-<?php echo $this->comment->level > 1 ? 11 : 10; ?> has-context<?php echo  $this->comment->private ? ' private' : null; echo  !$this->comment->published ? ' published' : null?>">
+		<?php endif;?>
+		<div class="flex-grow-1 col-md-<?php //echo $this->comment->level > 1 ? 11 : 10; ?> has-context<?php echo  $this->comment->private ? ' private' : null; echo  !$this->comment->published ? ' published' : null?>">
 
 			<?php if(in_array($this->type->params->get('comments.comments_rate_view', 1), $this->user->getAuthorisedViewLevels())):?>
 				<div class="float-end">
@@ -92,8 +94,8 @@ if($this->comment->rate > 10) $bc = 'bg-success';
 							<?php echo $replay; ?>
 						<?php endif;?>
 						<?php if($menu):?>
-                            <a href="#" data-toggle="dropdown" class="dropdown-toggle btn btn-sm">
-                                <i class="icon-cog"></i>
+                            <a href="#" data-bs-toggle="dropdown" class="dropdown-toggle btn btn-sm">
+                                <i class="fas fa-cog"></i>
                             </a>
                             <ul class="dropdown-menu">
                                 <li><?php echo implode('</li><li>', $menu);?></li>
