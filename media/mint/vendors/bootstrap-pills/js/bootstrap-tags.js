@@ -12,7 +12,7 @@
             input_pill: '<span class="badge bg-success tag-badge"></span>',
             number: ' <sup><small>{0}</small></sup>',
             plus_icon: '<i class="fas fa-plus"></i>',
-            delete_icon: '<i class="fas fa-times tag-icon" data-bs-toggle="tooltip" title="Delete"></i>',
+            delete_icon: '<i class="ms-2 fas fa-times tag-icon text-danger" data-bs-toggle="tooltip" title="Delete"></i>',
             ok_icon: '<i class="fas fa-check tag-icon"></i>'
         },
 
@@ -102,7 +102,7 @@
             }
 
             var input = $(document.createElement('input'))
-                .addClass('tag-input')
+                .addClass('tag-input form-control')
                 .attr({"autocomplete": "off", "type": "text"})
                 .css('outline', 'none')
                 .typeahead({
@@ -155,7 +155,7 @@
                 .appendTo(context);
 
             var wait = $($self.options.templates.add_pill)
-                .addClass('add-pill')
+                .addClass('add-pill ms-0 btn btn-outline-success')
                 .css('cursor', 'pointer')
                 .append($(document.createElement('span'))
                     .attr({})
@@ -286,7 +286,7 @@
 
         pills_list.append(tag);
 
-        $('[data-toggle="tooltip"]').tooltip();
+        //$('[data-bs-toggle="tooltip"]').tooltip();
 
         return true;
     }

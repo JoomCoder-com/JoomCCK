@@ -6,6 +6,9 @@
  * @copyright Copyright (C) 2012 JoomBoost (https://www.joomBoost.com). All rights reserved.
  * @license GNU/GPL http://www.gnu.org/copyleft/gpl.html
  */
+
+use Joomla\CMS\Factory;
+
 defined ( '_JEXEC' ) or die ();
 
 class CTmpl
@@ -106,7 +109,9 @@ class CTmpl
 		}
 		else
 		{
-			JError::raiseWarning(100, 'Config not found: '.$json1);
+
+			Factory::getApplication()->enqueueMessage('Config not found: '.$json1,'warning');
+
 			$file = array();
 		}
 		return new JRegistry($file);

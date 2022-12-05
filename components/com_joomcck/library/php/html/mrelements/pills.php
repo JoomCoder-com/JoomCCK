@@ -57,13 +57,11 @@ defined('_JEXEC') || die('Restricted access');
         <?php endif; ?>
 
         templates: {
-            list: $(document.createElement('ul')).addClass('pills-list'),
-            delete_icon: '<?php echo HTMLFormatHelper::icon('cross.png'); ?>',
-            ok_icon: '<button type="button" class="btn btn-link"><?php echo HTMLFormatHelper::icon('tick.png'); ?></button>',
-            plus_icon: '<?php echo HTMLFormatHelper::icon('plus.png'); ?>',
+            list: $(document.createElement('ul')).addClass('pills-list mb-3 p-0'),
+            ok_icon: '<button type="button" class="btn btn btn-outline-success"><i class="fas fa-plus"></i></button>',
             pill: '<li class="active tag-badge">{0}</li>',
             add_pill: ' <button type="button" class=" clearfix btn tag-badge"></button>',
-            input_pill: '<div class="clearfix form-inline tag-badge"></div>',
+            input_pill: '<div class="clearfix input-group tag-badge" style="max-width:400px"></div>',
             number: ' <sup><small>{0}</small></sup>'
         }
     });
