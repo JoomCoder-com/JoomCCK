@@ -6,10 +6,16 @@
  * @copyright Copyright (C) 2012 JoomBoost (https://www.joomBoost.com). All rights reserved.
  * @license   GNU/GPL http://www.gnu.org/copyleft/gpl.html
  */
+
+use Joomcck\Assets\Webassets\Webassets;
+
 defined('_JEXEC') or die();
 
 // load JoomCCK new library
 require_once __DIR__ . '/libraries/vendor/autoload.php';
+
+// init webassets
+Webassets::init();
 
 // load JoomCCK API (will be replaced in future with Joomla API integration
 require_once __DIR__ . '/api.php';

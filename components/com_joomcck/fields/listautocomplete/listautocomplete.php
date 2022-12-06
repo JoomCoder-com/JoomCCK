@@ -32,14 +32,18 @@ class JFormFieldCListautocomplete extends CFormFieldSelectable
             $out = $this->_getPillValues($list);
         }
 
+
 		if($this->isnew && $this->params->get('params.default_val'))
 		{
 			$this->value[] = $this->params->get('params.default_val');
         }
 
+
 		$default = $this->_getPillValues($this->value);
 
+
 		$this->inputvalue = JHtml::_('mrelements.pills', "jform[fields][{$this->id}]", "field_" . $this->id, $default, $out, $options);
+
 		return $this->_display_input();
 	}
 

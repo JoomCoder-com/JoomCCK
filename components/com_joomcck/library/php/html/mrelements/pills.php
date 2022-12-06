@@ -8,6 +8,8 @@
  * @license GNU/GPL http://www.gnu.org/copyleft/gpl.html
  */
 defined('_JEXEC') || die('Restricted access');
+
+
 ?>
 <style>
 

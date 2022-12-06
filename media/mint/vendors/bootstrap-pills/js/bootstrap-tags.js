@@ -52,6 +52,7 @@
             return pill;
         },
         onLoadSuggestions: function(values) {
+
             return values;
         },
         onDuplicate: null,
@@ -248,7 +249,7 @@
         }
 
         if(value.url) {
-            var title = value.title ? ' data-toggle="tooltip" title="' + value.title + '"' : '';
+            var title = value.title ? ' data-bs-toggle="tooltip" title="' + value.title + '"' : '';
             value.text = '<a class="tag-link" ' + title + ' target="' + $self.options.tag_link_target + '" href="' + value.url + '">' + value.text + '</a>';
         }
 
