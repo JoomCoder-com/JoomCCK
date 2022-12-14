@@ -9,14 +9,12 @@
  */
 defined('_JEXEC') || die('Restricted access');
 
-
 ?>
-<style>
 
-</style>
 <div id="bs-tags-<?php echo $id ?>" class="tag-pills"></div>
 
 <script>
+
 (function($){
     $('#bs-tags-<?php echo $id ?>').tags({
         values: <?php echo json_encode($default) ?>,

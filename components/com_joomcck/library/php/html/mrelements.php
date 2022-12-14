@@ -8,6 +8,9 @@
  * @license   GNU/GPL http://www.gnu.org/copyleft/gpl.html
  */
 
+use Joomcck\Assets\Webassets\Webassets;
+use Joomla\CMS\Layout\LayoutHelper;
+
 defined('_JEXEC') or die();
 
 class JHTMLMrelements
@@ -414,24 +417,42 @@ class JHTMLMrelements
 		return $o;
 	}
 
-	public static function pills($name, $id, $default = array(), $list = array(), $options = array())
+	public static function pills($name, $id, $default = array(), $list = array(), $options = array(),$useTomSelect = 0,$params = null)
 	{
-		$params = new JRegistry();
-		$params->loadArray($options);
 
+		//use new layout tomSelect
+		if($useTomSelect){
 
-		settype($default, 'array');
+			$data = [
+			'params' => $params,
+			'default' => $default,
+			'list' => $list,
+			'name' => $name,
+			'id' => $id
+			];
 
-        $doc = JFactory::getDocument();
-        $doc->addStyleSheet(JURI::root(TRUE) . '/media/mint/vendors/bootstrap-pills/css/style.css');
-		$doc->addScript(JURI::root(TRUE) . '/media/mint/vendors/bootstrap-pills/js/jquery.color.js');
-		$doc->addScript(JURI::root(TRUE) . '/media/mint/vendors/bootstrap-pills/js/bootstrap-typeahead.js');
-        $doc->addScript(JURI::root(TRUE) . '/media/mint/vendors/bootstrap-pills/js/bootstrap-tags.js');
+			$out = LayoutHelper::render('core.fields.tomSelect',$data,null,['component' => 'com_joomcck','client' => 'site']);
 
-        ob_start();
-		include 'mrelements/pills.php';
-		$out = ob_get_contents();
-		ob_end_clean();
+		}else{ // use old one
+
+			$params = new JRegistry();
+			$params->loadArray($options);
+
+			settype($default, 'array');
+
+			$doc = JFactory::getDocument();
+			$doc->addStyleSheet(JURI::root(TRUE) . '/media/mint/vendors/bootstrap-pills/css/style.css');
+			$doc->addScript(JURI::root(TRUE) . '/media/mint/vendors/bootstrap-pills/js/jquery.color.js');
+			$doc->addScript(JURI::root(TRUE) . '/media/mint/vendors/bootstrap-pills/js/bootstrap-typeahead.js');
+			$doc->addScript(JURI::root(TRUE) . '/media/mint/vendors/bootstrap-pills/js/bootstrap-tags.js');
+
+			ob_start();
+			include 'mrelements/pills.php';
+			$out = ob_get_contents();
+			ob_end_clean();
+
+		}
+
 
 		return $out;
 	}

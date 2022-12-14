@@ -17,9 +17,8 @@ class JFormFieldCListautocomplete extends CFormFieldSelectable
 
 	public function getInput()
 	{
+
         $options['only_suggestions'] = $this->params->get('params.only_values', 0);
-        $options['can_add'] = 1;
-        $options['can_delete'] = 1;
         $options['suggestion_limit'] = $this->params->get('params.max_result', 10);
         $options['limit'] = $this->params->get('params.max_items', 10);
 
@@ -29,7 +28,9 @@ class JFormFieldCListautocomplete extends CFormFieldSelectable
         } else {
             $list = explode("\n", str_replace("\r", "", $this->params->get('params.values', '')));
             $list = array_values($list);
-            $out = $this->_getPillValues($list);
+            $out = $this->_getPillValues($list,1);
+
+
         }
 
 
@@ -39,10 +40,8 @@ class JFormFieldCListautocomplete extends CFormFieldSelectable
         }
 
 
-		$default = $this->_getPillValues($this->value);
-
-
-		$this->inputvalue = JHtml::_('mrelements.pills', "jform[fields][{$this->id}]", "field_" . $this->id, $default, $out, $options);
+		// we use here tomselect layout
+		$this->inputvalue = JHtml::_('mrelements.pills', "jform[fields][{$this->id}]", "field_" . $this->id, $this->value, $out, $options,1,$this->params);
 
 		return $this->_display_input();
 	}

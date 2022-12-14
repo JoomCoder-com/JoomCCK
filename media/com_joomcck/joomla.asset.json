@@ -6,14 +6,14 @@
   "license": "GPL-2.0-or-later",
   "assets": [
     {
-      "name": "com_joomcck.autocomplete",
+      "name": "com_joomcck.tom-select",
       "type": "script",
-      "uri": "com_joomcck/autoComplete.min.js"
+      "uri": "com_joomcck/tom-select.js"
     },
     {
-      "name": "com_joomcck.autocomplete",
+      "name": "com_joomcck.tom-select",
       "type": "style",
-      "uri": "com_joomcck/autoComplete.min.css"
+      "uri": "com_joomcck/tom-select.css"
     }
   ]
 }

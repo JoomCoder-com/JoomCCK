@@ -24,13 +24,28 @@ class CFormFieldSelectable extends CFormField
             "text" => JText::_($v)
         ];
     }
-    public function _getPillValues($v) {
+
+	public function _getPillObject($v) {
+
+		$object = new stdClass();
+
+		$object->id = $v;
+		$object->text = JText::_($v);
+
+		return $object;
+	}
+
+    public function _getPillValues($v,$asObjects = false) {
         $out = [];
         if(empty($v)){
             return $out;
         } 
         foreach($v AS $val){
-            $out[] = $this->_getPillValue($val);
+
+			if($asObjects)
+				$out[] = $this->_getPillObject($val);
+			else
+                $out[] = $this->_getPillValue($val);
         }
         return $out;
     }

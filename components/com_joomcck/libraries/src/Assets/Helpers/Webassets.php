@@ -9,7 +9,7 @@
 
 namespace Joomcck\Assets\Webassets;
 
-use Joomla\CMS\Language\Text;
+use Joomla\CMS\Factory;
 
 defined('_JEXEC') or die();
 
@@ -25,7 +25,7 @@ Class Webassets{
 
 	public static function init(){
 
-		static::$wa = \Joomla\CMS\Factory::getApplication()->getDocument()->getWebAssetManager();
+		static::$wa = Factory::getApplication()->getDocument()->getWebAssetManager();
 		static::$wa->getRegistry()->addExtensionRegistryFile('com_joomcck');
 		$wr =  static::$wa->getRegistry();
 		$wr->addRegistryFile(JPATH_ROOT.'/media/com_joomcck/joomla.asset.json');
