@@ -13,8 +13,8 @@ defined('_JEXEC') or die();
 
 
 extract($displayData);
-
-// to do suggestion url (sql source)
+// todo default value
+// todo suggestion url (sql source)
 // check here: components/com_joomcck/library/php/html/mrelements/pills.php
 
 $wa = Webassets::$wa;

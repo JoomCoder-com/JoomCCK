@@ -8,9 +8,9 @@
  */
 defined('_JEXEC') or die();
 		
-$class = ' class="' . $this->params->get('core.field_class') . ($this->required ? ' required' : NULL) . '"';
+$class = ' class="form-control ' . $this->params->get('core.field_class') . ($this->required ? ' required' : NULL) . '"';
 $required = $this->required ? ' required="true" ' : NULL;
 ?>
 
-<input type="text" name="jform[fields][<?php echo $this->id; ?>]" id="field_<?php echo $this->id; ?>" <?php echo $class.$required; ?> 
+<input type="email" name="jform[fields][<?php echo $this->id; ?>]" id="field_<?php echo $this->id; ?>" <?php echo $class.$required; ?>
 	value="<?php echo $this->value; ?>">
