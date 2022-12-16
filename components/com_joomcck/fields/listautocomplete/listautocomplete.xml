@@ -49,7 +49,7 @@
 					<option value="1">JYES</option>
 				</field>
 				<field type="text" size="3" name="max_result" default="10" label="F_MAXSUGGESTNUM" description=""/>
-				<field type="text" size="3" name="max_items" default="0" label="F_MAXNUMOFELEMENTS" description="F_MAXNUMOFELEMENTS_DESCR"/>
+				<field type="text" size="3" name="max_items" default="5" label="F_MAXNUMOFELEMENTS" description="F_MAXNUMOFELEMENTS_DESCR"/>
 			</fieldset>
 			<fieldset name="general5" label="FS_FORMAT">
 				<field type="text" size="3" name="list_limit" default="5" label="F_LISTVALUESLIMIT" description=""/>

@@ -11,8 +11,11 @@ use Joomcck\Assets\Webassets\Webassets;
 
 defined('_JEXEC') or die();
 
+
 extract($displayData);
 
+// to do suggestion url (sql source)
+// check here: components/com_joomcck/library/php/html/mrelements/pills.php
 
 $wa = Webassets::$wa;
 
@@ -24,6 +27,9 @@ $list = str_replace(['"id":','"text":'],['id:','text:'],$list);
 
 
 $default = json_encode($default);
+$maxItems = $params->get('params.max_items',5);
+$maxOptions = $params->get('params.max_result',10);
+$cantAdd = $params->get('params.only_values',0) ? 'false' : 'true';
 
 
 ?>
@@ -35,23 +41,21 @@ $default = json_encode($default);
             multiple
             data-placeholder=""
     >
-
-
 	</select>
 </div>
 
 <script>
 
-
-
     new TomSelect("#<?php echo $id ?>",{
         plugins: ['remove_button'],
-        create: true,
+        create: <?php echo $cantAdd ?>,
         valueField: 'id',
         labelField: 'text',
         searchField : 'text',
         options: <?php echo $list ?>,
-        items: <?php echo $default ?>
+        items: <?php echo $default ?>,
+        maxItems: <?php echo $maxItems ?>,
+        maxOptions: <?php echo $maxOptions ?>
     });
 
 </script>
