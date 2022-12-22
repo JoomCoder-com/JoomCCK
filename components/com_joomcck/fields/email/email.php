@@ -7,6 +7,9 @@
  * @copyright Copyright (C) 2012 JoomBoost (https://www.joomBoost.com). All rights reserved.
  * @license   GNU/GPL http://www.gnu.org/copyleft/gpl.html
  */
+
+use Joomla\CMS\Factory;
+
 defined('_JEXEC') or die();
 jimport('mint.recaptchalib');
 jimport('joomla.mail.helper');
@@ -151,7 +154,9 @@ class JFormFieldCEmail extends CFormField
 			$captcha = JCaptcha::getInstance($joomcck_params->get('captcha', 'recaptcha'), array('namespace' => 'email'));
 			if(!$captcha->checkAnswer('code'))
 			{
-				JError::raiseWarning(400, JText::_('E_SECURITYCODEINCORRECT'));
+
+				Factory::getApplication()->enqueueMessage(JText::_('E_SECURITYCODEINCORRECT'),'warning');
+
 
 				return FALSE;
 			}
@@ -175,7 +180,8 @@ class JFormFieldCEmail extends CFormField
 			case 1 :
 				if(!$this->value)
 				{
-					JError::raiseWarning(400, JText::_('E_EMAILNOTENTERED'));
+					Factory::getApplication()->enqueueMessage(JText::_('E_EMAILNOTENTERED'),'warning');
+
 
 					return FALSE;
 				}
@@ -189,7 +195,8 @@ class JFormFieldCEmail extends CFormField
 			case 3 :
 				if(!$record->user_id)
 				{
-					JError::raiseWarning(400, JText::_('E_ARTICLEANONYMOUSE'));
+
+					Factory::getApplication()->enqueueMessage(JText::_('E_ARTICLEANONYMOUSE'),'warning');
 
 					return FALSE;
 				}
@@ -200,7 +207,8 @@ class JFormFieldCEmail extends CFormField
 			case 4 :
 				if(empty($data['email_to']))
 				{
-					JError::raiseWarning(400, JText::_('E_SENDTONOTENTERED'));
+
+					Factory::getApplication()->enqueueMessage(JText::_('E_SENDTONOTENTERED'),'warning');
 
 					return;
 				}
@@ -210,7 +218,8 @@ class JFormFieldCEmail extends CFormField
 				$email = $this->params->get('params.custom');
 				if(empty($email))
 				{
-					JError::raiseWarning(400, JText::_('E_EMAILNOTENTERED'));
+
+					Factory::getApplication()->enqueueMessage(JText::_('E_EMAILNOTENTERED'),'warning');
 
 					return FALSE;
 				}
@@ -221,9 +230,10 @@ class JFormFieldCEmail extends CFormField
 		}
 		if(!JMailHelper::isEmailAddress($email))
 		{
-			JError::raiseWarning(400, JText::_('E_SENDTOINCORRENT'));
 
-			return;
+			Factory::getApplication()->enqueueMessage(JText::_('E_SENDTOINCORRENT'),'warning');
+
+			return false;
 		}
 
 		$mail = JFactory::getMailer();
@@ -243,19 +253,22 @@ class JFormFieldCEmail extends CFormField
 
 		if($data['name'] == '')
 		{
-			JError::raiseWarning(400, JText::_('E_SENDERNAMENOTENTERED'));
+
+			Factory::getApplication()->enqueueMessage(JText::_('E_SENDERNAMENOTENTERED'),'warning');
 
 			return;
 		}
 		if($data['email_from'] == '')
 		{
-			JError::raiseWarning(400, JText::_('E_SENDERMAILNOTENTERED'));
+
+			Factory::getApplication()->enqueueMessage(JText::_('E_SENDERMAILNOTENTERED'),'warning');
 
 			return;
 		}
 		if(!JMailHelper::isEmailAddress($data['email_from']))
 		{
-			JError::raiseWarning(400, JText::_('E_SENDERMAILINCORRENT'));
+
+			Factory::getApplication()->enqueueMessage(JText::_('E_SENDERMAILINCORRENT'),'warning');
 
 			return;
 		}
@@ -280,7 +293,8 @@ class JFormFieldCEmail extends CFormField
 
 		if($this->params->get('params.subject_style', 1) == 1 && $data['subject'] == '')
 		{
-			JError::raiseWarning(400, JText::_('E_SUBJNOTENTERED'));
+
+			Factory::getApplication()->enqueueMessage(JText::_('E_SUBJNOTENTERED'),'warning');
 
 			return;
 		}
@@ -304,7 +318,8 @@ class JFormFieldCEmail extends CFormField
 			ArrayHelper::clean_r($formats);
 			if(!in_array(strtolower($ext), $formats))
 			{
-				JError::raiseWarning(400, JText::_('E_WRONGATTACHEXT'));
+
+				Factory::getApplication()->enqueueMessage(JText::_('E_WRONGATTACHEXT'),'warning');
 
 				return FALSE;
 			}
@@ -349,7 +364,7 @@ class JFormFieldCEmail extends CFormField
 
 		if(!$mail->Send())
 		{
-			JError::raiseWarning(400, JText::_('E_ERRSEND'));
+			Factory::getApplication()->enqueueMessage(JText::_('E_ERRSEND'),'warning');
 
 			return FALSE;
 		}
@@ -382,7 +397,9 @@ class JFormFieldCEmail extends CFormField
 		{
 			if($this->_sendEmail($_POST, $record))
 			{
-				JError::raiseNotice(100, JText::_('E_MAILSENT'));
+
+				Factory::getApplication()->enqueueMessage(JText::_('E_MAILSENT'),'success');
+
 				$js = '<script type="text/javascript">
 					jQuery(document).ready(function(){
 						parent.iframe_loaded(' . $record->id . $this->id . ', jQuery(\'body\').height());
