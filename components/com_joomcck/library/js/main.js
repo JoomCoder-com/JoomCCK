@@ -117,9 +117,17 @@ var _gaq = _gaq || [];
 	};
 
 	Joomcck.redrawBS = function() {
-		$('*[rel^="tooltip"]').tooltip();
+
+		// load tooltips with tooltip rel everywhere
+		var tooltipTriggerList = [].slice.call(document.querySelectorAll('*[rel^="tooltip"]'))
+		var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+			return new bootstrap.Tooltip(tooltipTriggerEl)
+		})
+
+
+		//$('').tooltip();
 		$('*[rel="popover"]').popover();
-		$('.tip-bottom').tooltip({placement: "bottom"});
+		//$('.tip-bottom').tooltip({placement: "bottom"});
 
 		$('.radio.btn-group label').addClass('btn');
 		$(".btn-group label:not(.active)").click(function() {
