@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<form>
+    <field name="copy_to_sender" class="btn-group" type="radio" default="0" label="E_SENDCOPY" description="">
+        <option value="0">CNO</option>
+        <option value="1">CYES</option>
+    </field>
+</form>
+
+

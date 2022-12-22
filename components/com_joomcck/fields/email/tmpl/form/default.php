@@ -7,7 +7,16 @@
  * @license GNU/GPL http://www.gnu.org/copyleft/gpl.html
  */
 defined('_JEXEC') or die();
+
+use Joomla\CMS\Form\Form;
+use Joomla\CMS\Factory;
+
+
 $to = null;
+
+
+
+
 switch ($params->get('params.to'))
 {
 	case 1 :
@@ -227,11 +236,19 @@ $key = $record->id.$this->id;
 			<td><?php echo JText::_('E_SENDCOPY');?></td>
 			<td>
 				<?php
- 					require_once JPATH_ROOT.'/libraries/joomla/form/fields/radio.php';
+
+
+				    $form = Form::getInstance("sample", __DIR__ . "/default.xml");
+                    $form->setFieldAttribute('copy_to_sender','name',"email[$this->id][copy_to_sender]");
+
+                    echo $form->getInput("email['.$this->id.'][copy_to_sender]");
+
+                    /*
+ 					require_once JPATH_ROOT.'/libraries/src/Form/Field/RadioField.php';
 					$radio = new JFormFieldRadio();
 					$xml = new SimpleXMLElement('<field name="email['.$this->id.'][copy_to_sender]" type="radio" class="btn-group" default="0" label="E_SENDCOPY"><option value="0">'.JText::_('No').'</option><option value="1">'.JText::_('Yes').'</option></field>');
 					$radio->setup($xml, 0);
-					echo $radio->getInput();
+					echo $radio->getInput();*/
 				?>
 				<script type="text/javascript">
 				if (typeof(Joomcck.redrawBS) != "undefined") {
