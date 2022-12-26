@@ -45,6 +45,7 @@ var _gaq = _gaq || [];
 	};
 
 	Joomcck.formatFloat = function(obj, decimal, max, val_max, val_min, field_id, msg) {
+
 		if(floatnum[obj.id] == obj.value) {
 			return;
 		}
