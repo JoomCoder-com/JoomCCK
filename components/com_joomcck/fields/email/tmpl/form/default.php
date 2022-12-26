@@ -8,6 +8,7 @@
  */
 defined('_JEXEC') or die();
 
+use Joomla\CMS\Captcha\Captcha;
 use Joomla\CMS\Form\Form;
 use Joomla\CMS\Factory;
 
@@ -101,7 +102,7 @@ $key = $record->id.$this->id;
 					<?php if ($params->get('params.subject_style', 0) == 2) :
 						$pre_subject_values = explode("\n", trim($params->get('params.pre_subject_val')));
 						if (count($pre_subject_values)):?>
-							<select name="email[<?php echo $this->id;?>][subject]" >
+							<select class="form-control" name="email[<?php echo $this->id;?>][subject]" >
 							<?php foreach($pre_subject_values as $value): ?>
 								<option value="<?php echo trim($value);?>" <?php echo ($value == $data->get('subject') ? 'selected="selected"' : "");?>><?php echo $value;?></option>
 							<?php endforeach; ?>
@@ -236,19 +237,8 @@ $key = $record->id.$this->id;
 			<td><?php echo JText::_('E_SENDCOPY');?></td>
 			<td>
 				<?php
-
-
-				    $form = Form::getInstance("sample", __DIR__ . "/default.xml");
-                    $form->setFieldAttribute('copy_to_sender','name',"email[$this->id][copy_to_sender]");
-
-                    echo $form->getInput("email['.$this->id.'][copy_to_sender]");
-
-                    /*
- 					require_once JPATH_ROOT.'/libraries/src/Form/Field/RadioField.php';
-					$radio = new JFormFieldRadio();
-					$xml = new SimpleXMLElement('<field name="email['.$this->id.'][copy_to_sender]" type="radio" class="btn-group" default="0" label="E_SENDCOPY"><option value="0">'.JText::_('No').'</option><option value="1">'.JText::_('Yes').'</option></field>');
-					$radio->setup($xml, 0);
-					echo $radio->getInput();*/
+				    $form = Form::getInstance("emailFormdefault", __DIR__ . "/default.xml",['control' => 'email['.$this->id.']']);
+                    echo $form->getInput("copy_to_sender");
 				?>
 				<script type="text/javascript">
 				if (typeof(Joomcck.redrawBS) != "undefined") {
@@ -264,7 +254,7 @@ $key = $record->id.$this->id;
 		<?php if ($params->get('params.show_captcha', 1) && !$user->id): ?>
 			<?php
 			$joomcck_params = JComponentHelper::getParams('com_joomcck');
-			$captcha = \Joomla\CMS\Captcha\Captcha::getInstance($joomcck_params->get('captcha', 'recaptcha'), array('namespace' => 'email'));
+			$captcha = Captcha::getInstance($joomcck_params->get('captcha', 'recaptcha'), array('namespace' => 'email'));
 			?>
 			<tr valign="top">
 				<td><?php echo JText::_('E_CAPTCHA');?></td>

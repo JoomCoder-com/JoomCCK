@@ -126,7 +126,7 @@ var _gaq = _gaq || [];
 
 
 		//$('').tooltip();
-		$('*[rel="popover"]').popover();
+		// $('*[rel="popover"]').popover();
 		//$('.tip-bottom').tooltip({placement: "bottom"});
 
 		$('.radio.btn-group label').addClass('btn');

@@ -49,19 +49,26 @@ if (in_array($params->get('params.send_mail', 3), $this->user->getAuthorisedView
 	<?php break; ?>
 
 	<?php case 2:?>
-		<a class="btn btn-primary btn-sm" onclick="getEmailIframe('<?php echo $key;?>', '<?php echo $url_form;?>');" href="#emailmodal<?php echo $this->id;?>" data-toggle="modal" role="button">
+		<button class="btn btn-primary btn-sm" onclick="getEmailIframe('<?php echo $key;?>', '<?php echo $url_form;?>');" data-bs-target="#emailmodal<?php echo $this->id;?>" data-bs-toggle="modal" role="button">
 			<?php echo JText::_($this->params->get('params.popup_label', $this->label));?>
-		</a>
+		</button>
 
-		<div style="width:700px;" class="modal hide fade" id="emailmodal<?php echo $this->id;?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-			<div class="modal-header">
-				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-				<h3 id="myModalLabel"><?php echo JText::_('E_SENDMSG');?></h3>
-			</div>
 
-			<div id="email_form<?php echo $key;?>" class="modal-body" style="overflow-x: hidden; max-height:500px; padding:0;">
-			</div>
-		</div>
+        <div class="modal fade" id="emailmodal<?php echo $this->id;?>" tabindex="-1" aria-labelledby="emailmodal<?php echo $this->id;?>Label" aria-hidden="true">
+            <div class="modal-dialog modal-xl">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="exampleModalLabel"><?php echo JText::_('E_SENDMSG');?></h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body" style="max-height:500px; padding:0;">
+                        <div id="email_form<?php echo $key;?>">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
 	<?php break; ?>
 
 	<?php case 3 : ?>
