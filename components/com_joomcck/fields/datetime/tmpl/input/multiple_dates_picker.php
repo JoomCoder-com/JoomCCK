@@ -8,9 +8,9 @@
  */
 defined('_JEXEC') or die();
 ?>
-<ul class="nav nav-pills nav-stacked" id="dates_list<?php echo $this->id; ?>">
+<ul class="list-group mb-3" id="dates_list<?php echo $this->id; ?>">
 <?php foreach($this->value AS $date): ?>
-	<li><a>
+	<li class="list-group-item""><a>
 		<span class="float-end mdp-close" style="cursor:pointer;"><?php echo HTMLFormatHelper::icon('cross.png') ?></span>
 		<span class="mdp-list"><?php echo $date ?></span>
 		<input type="hidden" name="jform[fields][<?php echo $this->id; ?>][]" value="<?php echo $date ?>" /></a>
@@ -20,7 +20,7 @@ defined('_JEXEC') or die();
 
 <div class="input-group date" id="datetimepicker<?php echo $this->id; ?>" style="position:relative;">
 	<input <?php echo $this->attr ?> id="mdpinput<?php echo $this->id; ?>" type="text" class="input" name="bdp_<?php echo $this->id; ?>" value="" />
-	<span class="input-group-addon">
+	<span class="input-group-addon btn btn-outline-success">
 		<span class="glyphicon glyphicon-calendar"><?php echo HTMLFormatHelper::icon('calendar-day.png') ?></span>
 	</span>
 </div>
@@ -40,7 +40,7 @@ defined('_JEXEC') or die();
 			$(this).closest('li').remove();
 		});
 
-		var li = $('<li>').append($.parseHTML(`<a><span class="float-end mdp-close" style="cursor:pointer;"><?php echo HTMLFormatHelper::icon('cross.png') ?></span>
+		var li = $('<li class="list-group-item">').append($.parseHTML(`<a><span class="float-end mdp-close" style="cursor:pointer;"><?php echo HTMLFormatHelper::icon('cross.png') ?></span>
 		<span class="mdp-list"></span>
 		<input type="hidden" name="jform[fields][<?php echo $this->id; ?>][]" value="" /></a>`));
 
@@ -55,7 +55,7 @@ defined('_JEXEC') or die();
 					return;
 				}
 				if(max > 0 && $('#dates_list<?php echo $this->id; ?> li').length >= max) {
-					Joomcck.fieldError(<?php echo $this->id ?>, '<?php  JText::printf('F_ERROR_MAX', $this->params->get('params.max_dates', 0)) ?>');
+					Joomcck.fieldError(<?php echo $this->id ?>, "<?php  JText::printf('F_ERROR_MAX', $this->params->get('params.max_dates', 0)) ?>");
 					return;
 				}
 				
