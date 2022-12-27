@@ -22,53 +22,53 @@ if(!function_exists('dp_get_selected')){
 	}
 }
 ?>
-
-<input type="hidden" id="picker<?php echo $this->id; ?>" class="input" name="jform[fields][<?php echo $this->id; ?>][]" value="<?php echo $this->default ?>" />
-<div id="dp_simple<?php echo $this->id ?>" class="inline-form">
-	<select <?php echo $this->attr ?> class="date_list" style="width:50px" name="dp_day_<?php echo $this->id;?>">
-		<option value="0"><?php echo  JText::_('D_DAY');?></option>
+<div id="dp_simple<?php echo $this->id ?>">
+    <select <?php echo $this->attr ?> class="date_list" style="width:50px" name="dp_day_<?php echo $this->id;?>">
+        <option value="0"><?php echo  JText::_('D_DAY');?></option>
 		<?php for($i = 1; $i <= 31; $i ++):?>
-			<option value="<?php echo $i;?>" <?php echo dp_get_selected($this->default, $i, 'day');?>>
+            <option value="<?php echo $i;?>" <?php echo dp_get_selected($this->default, $i, 'day');?>>
 				<?php echo $i;?>
-			</option>
+            </option>
 		<?php endfor; ?>
-	</select>
-	<select <?php echo $this->attr ?> class="date_list" style="width:100px" name="dp_month_<?php echo $this->id;?>">
-		<option value="0"><?php echo  JText::_('D_MONTH');?></option>
+    </select>
+    <select <?php echo $this->attr ?> class="date_list" style="width:100px" name="dp_month_<?php echo $this->id;?>">
+        <option value="0"><?php echo  JText::_('D_MONTH');?></option>
 		<?php for($i = 1; $i <= 12; $i ++): ?>
-			<option value="<?php echo $i;?>" <?php echo dp_get_selected($this->default, $i, 'month');?>>
+            <option value="<?php echo $i;?>" <?php echo dp_get_selected($this->default, $i, 'month');?>>
 				<?php echo JText::_($m_list[($i - 1)]);?>
-			</option>
+            </option>
 		<?php endfor; ?>
-	</select>
-	<select <?php echo $this->attr ?> class="date_list" style="width:70px" name="dp_year_<?php echo $this->id;?>">
-		<option value="0"><?php echo  JText::_('D_YEAR');?></option>
+    </select>
+    <select <?php echo $this->attr ?> class="date_list" style="width:70px" name="dp_year_<?php echo $this->id;?>">
+        <option value="0"><?php echo  JText::_('D_YEAR');?></option>
 		<?php for($i = (date('Y') + $this->params->get('tmpl_simple_select.year_up', 80)); $i >= date('Y') - $this->params->get('tmpl_simple_select.year_down', 15); $i --):	?>
-		<option value="<?php echo $i;?>" <?php echo dp_get_selected($this->default, $i, 'year');?>>
-			<?php echo $i;?>
-		</option>
+            <option value="<?php echo $i;?>" <?php echo dp_get_selected($this->default, $i, 'year');?>>
+				<?php echo $i;?>
+            </option>
 		<?php endfor; ?>
-	</select>
+    </select>
 	<?php if($this->is_time): ?>
-		<select <?php echo $this->attr ?> class="date_list" style="width:50px" name="dp_hour_<?php echo $this->id;?>">
-			<option value=""><?php echo  JText::_('D_HOUR');?></option>
+        <select <?php echo $this->attr ?> class="date_list" style="width:50px" name="dp_hour_<?php echo $this->id;?>">
+            <option value=""><?php echo  JText::_('D_HOUR');?></option>
 			<?php for($i = 0; $i <= 23; $i ++): ?>
-			<option value="<?php echo $i;?>" <?php echo dp_get_selected($this->default, $i, 'hour');?>>
-				<?php echo str_pad($i, 2, 0, STR_PAD_LEFT);?>
-			</option>
+                <option value="<?php echo $i;?>" <?php echo dp_get_selected($this->default, $i, 'hour');?>>
+					<?php echo str_pad($i, 2, 0, STR_PAD_LEFT);?>
+                </option>
 			<?php endfor; ?>
-		</select>
+        </select>
 
-		<select <?php echo $this->attr ?> class="date_list" style="width:50px" name="dp_min_<?php echo $this->id;?>">
-			<option value=""><?php echo  JText::_('D_MINUTE');?></option>
+        <select <?php echo $this->attr ?> class="date_list" style="width:50px" name="dp_min_<?php echo $this->id;?>">
+            <option value=""><?php echo  JText::_('D_MINUTE');?></option>
 			<?php for($i = 0; $i < 60; $i ++): ?>
-			<option value="<?php echo $i;?>" <?php echo dp_get_selected($this->default, $i, 'minute');?>>
-				<?php echo str_pad($i, 2, 0, STR_PAD_LEFT);?>
-			</option>
+                <option value="<?php echo $i;?>" <?php echo dp_get_selected($this->default, $i, 'minute');?>>
+					<?php echo str_pad($i, 2, 0, STR_PAD_LEFT);?>
+                </option>
 			<?php endfor; ?>
-		</select>
+        </select>
 	<?php endif; ?>
 </div>
+<input type="hidden" id="picker<?php echo $this->id; ?>" class="input" name="jform[fields][<?php echo $this->id; ?>][]" value="<?php echo $this->default ?>" />
+
 <script>
 (function($){
 	$('#dp_simple<?php echo $this->id ?> select').change(function(){
