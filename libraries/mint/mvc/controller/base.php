@@ -276,7 +276,7 @@ class MControllerBase extends JObject
 		}
 
 		// Get the controller class name.
-		$class = ucfirst($prefix) . 'Controller' . ucfirst($type);
+		$class = ucfirst($prefix) . 'Controller' . (isset($type) ? ucfirst($type) : '');
 
 
 		// Include the class if not present.
@@ -706,7 +706,7 @@ class MControllerBase extends JObject
 	{
 		$this->task = $task;
 
-		$task = strtolower($task);
+		$task = !is_null($task) ? strtolower($task) : '';
 		if (isset($this->taskMap[$task]))
 		{
 			$doTask = $this->taskMap[$task];

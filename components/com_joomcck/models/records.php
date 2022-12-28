@@ -95,8 +95,8 @@ class JoomcckModelRecords extends MModelList
 			$config['filter_fields'][] = 'searchresult';
 		}
 
-		$order = $app->input->getString('filter_order');
-		if(substr($order, 0, 6) == 'field^')
+		$order = $app->input->getString('filter_order','');
+		if(!empty($order) && substr($order, 0, 6) == 'field^')
 		{
 			$ordervals = explode('^', $order);
 			if(count($ordervals) == 3)

@@ -14,6 +14,9 @@ class Mint
 {
 	static function _($text, $default = NULL, $jsSafe = FALSE, $interpretBackSlashes = TRUE, $script = FALSE)
 	{
+		// no need to continue if empty
+		if(empty($text))
+			return '';
 
 		$text = JFilterInput::getInstance([], [], 1, 1)->clean(strip_tags($text), 'cmd');
 

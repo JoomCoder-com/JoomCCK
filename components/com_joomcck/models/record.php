@@ -178,7 +178,7 @@ class JoomcckModelRecord extends MModelItem
 		$data->canon  = \Joomla\CMS\Uri\Uri::getInstance()->getScheme() . '://' . \Joomla\CMS\Uri\Uri::getInstance()->getHost() . JRoute::_(Url::record($data, $type, $section, array_shift($cat_ids)));
 		$data->href = \Joomla\CMS\Uri\Uri::getInstance()->getScheme() . '://' . \Joomla\CMS\Uri\Uri::getInstance()->getHost() . JRoute::_($data->url);
 
-		$robots = $type->params->get('submission.robots');
+		$robots = $type->params->get('submission.robots','');
 
 		$data->nofollow = substr_count($robots, 'noindex');
 
@@ -217,6 +217,8 @@ class JoomcckModelRecord extends MModelItem
 			$data->ucatname_link = JHtml::link(JRoute::_(URL::usercategory_records($data->user_id, $section, $data->ucatid . ':' . $data->ucatalias)), $data->ucatname);
 		}
 
+
+		$data->tags = !empty($data->tags) ? $data->tags : '';
 		$data->tags = json_decode($data->tags, TRUE);
 		ArrayHelper::clean_r($data->tags);
 
@@ -299,7 +301,7 @@ class JoomcckModelRecord extends MModelItem
 							$method = 'onRenderList';
 						}
 						$result = $field->$method($data, $type, $section);
-						$result = trim($result);
+						$result = !empty($result) ? trim($result) : '';
 					}
 				}
 			}

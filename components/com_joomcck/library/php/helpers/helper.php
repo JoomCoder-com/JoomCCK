@@ -46,6 +46,10 @@ class JoomcckCommentHelper
 
 class JoomcckFilter {
 	static public function base64($string) {
+
+		if(!$string)
+			return '';
+
 		$b = base64_decode($string);
 		$c = strip_tags($b);
 
@@ -59,6 +63,11 @@ class JoomcckFilter {
 
 	static public function in($string)
 	{
+
+		if(is_null($string))
+			return '';
+
+
 		$string = preg_replace("/[^0-9,]*/iU", "", $string);
 
 		while(strpos($string, ',,') !== FALSE) {

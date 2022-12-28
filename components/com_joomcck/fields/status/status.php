@@ -274,6 +274,9 @@ class JFormFieldCStatus extends CFormField
 		$statuses[6] = $params->get('params.status6');
 		foreach($statuses as $key => $status)
 		{
+
+			$status = !empty($status) ? $status : '';
+
 			$val            = explode('^', $status);
 			$statuses[$key] = JText::_($val[0]);
 			$color[$key]    = isset($val[1]) ? $val[1] : FALSE;
