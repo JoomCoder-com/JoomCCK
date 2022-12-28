@@ -49,7 +49,7 @@ class JFormFieldCHtml extends CFormField
 		$buttons = false;
 
 		$editorParams = null;
-		if ($params->get('params.short', 0) && !$app->isAdmin())
+		if ($params->get('params.short', 0) && !$app->isClient('administrator'))
 		{
 			$editorParams = array('theme' => 'simple');
 			if ($params->get('params.editor', 'tinymce') == 'tinymce')

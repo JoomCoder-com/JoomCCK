@@ -21,7 +21,7 @@ class plgContentGlossary extends JPlugin
 		$app = JFactory::getApplication();
 		$document = JFactory::getDocument();
 
-		if($app->isAdmin())
+		if($app->isClient('administrator'))
 		{
 			return;
 		}
