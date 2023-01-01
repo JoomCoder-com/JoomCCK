@@ -70,7 +70,7 @@ class CCommunityHelper
 
 			if($email && JComponentHelper::getParams('com_joomcck')->get('gravatar'))
 			{
-				$default = str_replace(JPATH_ROOT, JUri::root(), $class->getDefaultAvatar());
+				$default = str_replace(JPATH_ROOT, JUri::root(), (string) $class->getDefaultAvatar());
 				$aurl = "http://www.gravatar.com/avatar/" . md5(strtolower(trim($email))) . "?s=" . $width;
 				$aurl .= '&d=' . ($default ? urldecode($default) : 'identicon');
 				$scheme = JUri::getInstance()->toString(array('scheme'));

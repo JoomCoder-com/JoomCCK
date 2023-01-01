@@ -9,7 +9,7 @@
 defined('_JEXEC') or die();
 $app = JFactory::getApplication();
 $params = $this->params;
-$text = htmlspecialchars(stripslashes($this->value), ENT_QUOTES, 'UTF-8');
+$text = htmlspecialchars(stripslashes( (string) $this->value), ENT_QUOTES, 'UTF-8');
 $height = $params->get('params.height', '300');
 ?>
 

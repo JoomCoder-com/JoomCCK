@@ -120,7 +120,7 @@ class JFormFieldCHtml extends CFormField
 
 	public function onRenderList($record, $type, $section)
 	{
-		$value = $this->_filter($this->value);
+		$value = (string) $this->_filter($this->value);
 		$count1 = strlen($value);
 		$pattern = '#<hr\s+id=("|\')system-readmore("|\')\s*\/*>#i';
 		$tagPos = preg_match($pattern, $value);
