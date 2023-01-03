@@ -50,6 +50,7 @@ class CFormFieldUpload extends CFormField
 
     public function getInput()
     {
+
         $user = JFactory::getUser();
         settype($this->value, 'array');
         $default = [];

@@ -43,6 +43,7 @@ class JoomcckViewTField extends MViewBase
 
 		if($this->item->id)
 		{
+
 			$this->parameters = MModelBase::getInstance('TField', 'JoomcckModel')->getFieldForm($this->item->field_type, $this->item->params);
 		}
 

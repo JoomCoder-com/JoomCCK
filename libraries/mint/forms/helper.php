@@ -142,10 +142,17 @@ class MFormHelper
 		$fieldsets = $form->getFieldsets($group);
 		$out = array();
 
+
 		foreach($fieldsets as $name => $fieldset)
 		{
+
+
 			$out[] = self::renderFieldset($form, $name, $defaults, $group, $separator, $style);
+
+
 		}
+
+
 
 		return implode("\n", $out);
 	}

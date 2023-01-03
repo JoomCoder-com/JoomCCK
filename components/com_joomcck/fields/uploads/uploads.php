@@ -42,6 +42,7 @@ class JFormFieldCUploads extends CFormFieldUpload
 
 	private function _render($client, $limit, $record, $type, $section)
 	{
+
 		$this->record = $record;
 		$hits = in_array($this->params->get('params.show_hit'), array(3, $client));
 		$size = in_array($this->params->get('params.show_size'), array(3, $client));
