@@ -29,15 +29,6 @@
 				</field>
 				<field name="uploader" default="1" type="mlist" condition='{"1":["fieldset-name-flow"],"2":["fieldset-name-mooupload"]}' label="F_UPLOADER">
 					<option value="1">Flow</option>
-					<option value="2">Mooupload</option>
-				</field>
-			</fieldset>
-			<fieldset name="mooupload" label="FS_UPLOAD_MOO">
-				<field name="method" type="list" label="F_UPLOADMETHOD">
-					<option value="auto">XML_OPT_AUTO</option>
-					<option value="html5">XML_OPT_HTML5</option>
-					<option value="html4">XML_OPT_HTML4</option>
-					<option value="flash">XML_OPT_FLASH</option>
 				</field>
 			</fieldset>
 			<fieldset name="flow" label="FS_UPLOAD_FLOW">
