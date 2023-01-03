@@ -149,27 +149,42 @@ if($params->get('tmpl_core.item_follow_num'))
 
 	<?php if(in_array($params->get('tmpl_params.item_grouping_type', 0), array(1)) && count($this->item->fields_by_groups)):?>
 		<div class="clearfix"></div>
+
 		<div class="tabbable <?php echo $params->get('tmpl_params.tabs_position');  ?>">
 			<ul class="nav <?php echo $params->get('tmpl_params.tabs_style', 'nav-tabs');  ?>" id="tabs-list">
 				<?php if(isset($this->item->fields_by_groups)):?>
+
+                    <?php $firstActive = false; $f = 0; ?>
+
 					<?php foreach ($this->item->fields_by_groups as $group_id => $fields) :?>
-						<li>
-							<a href="#tab-<?php echo $o++?>" data-toggle="tab">
+
+                        <?php $active = ($f == 0) ? 'active' : '' ?>
+
+						<li class="nav-item">
+							<a class="nav-link <?php echo $active ?>"  href="#tab-<?php echo $o++?>" data-bs-toggle="tab">
 								<?php if(!empty($item->field_groups[$group_id]['icon']) && $params->get('tmpl_params.show_groupicon', 1)): ?>
 									<?php echo HTMLFormatHelper::icon($item->field_groups[$group_id]['icon']) ?>
 								<?php endif; ?>
 								<?php echo JText::_($group_id)?>
 							</a>
 						</li>
+                    <?php $f++ ?>
 					<?php endforeach;?>
 				<?php endif;?>
 			</ul>
 	<?php endif;?>
 
 	<?php if(isset($this->item->fields_by_groups)):?>
+
+        <?php $j = 0 ?>
+
 		<?php foreach ($this->item->fields_by_groups as $group_name => $fields) :?>
+
+
+
 			<?php $started = true;?>
-			<?php group_start($this, $group_name, 'tab-'.$i++);?>
+
+			<?php group_start($this, $group_name, 'tab-'.$i++,$j);?>
 			<dl class="dl-horizontal fields-list fields-group<?php echo $i;?>">
 				<?php foreach ($fields as $field_id => $field):?>
 					<dt id="<?php echo 'dt-'.$field_id; ?>" class="<?php echo $field->class;?>">
@@ -189,7 +204,13 @@ if($params->get('tmpl_core.item_follow_num'))
 					</dd>
 				<?php endforeach;?>
 			</dl>
+
 			<?php group_end($this);?>
+
+			<?php $j++ ?>
+
+            <?php $active = true; ?>
+
 		<?php endforeach;?>
 	<?php endif;?>
 
@@ -260,7 +281,7 @@ if($params->get('tmpl_core.item_follow_num'))
 
 
 <?php
-function group_start($data, $label, $name)
+function group_start($data, $label, $name,$j = 0)
 {
 	static $start = false;
 	$icon = '';
@@ -273,10 +294,23 @@ function group_start($data, $label, $name)
 		case 1:
 			if(!$start)
 			{
+
+
+
 				echo '<div class="tab-content" id="tabs-box">';
 				$start = TRUE;
 			}
-			echo '<div class="tab-pane" id="'.$name.'">';
+
+            if( $j == 0){
+
+	            echo '<div class="tab-pane show active" id="'.$name.'">';
+
+            }
+
+            else
+	            echo '<div class="tab-pane" id="'.$name.'">';
+
+
 			break;
 		//slider
 		case 2:
