@@ -18,13 +18,13 @@ $can_delete = $field->iscomment ? FALSE : $field->_getDeleteAccess();
         </div>
     <?php endif; ?>
     <?php if($field->params->get('params.flow_file', 1)): ?>
-	    <button type="button" class="btn flow-files-item flow-browse"><?php echo Mint::_('CUP_SELECT_FILE') ?></button>
+	    <button type="button" class="btn btn-light btn-sm flow-files-item flow-browse"><i class="fas fa-file"></i> <?php echo Mint::_('CUP_SELECT_FILE') ?></button>
     <?php endif; ?>
 	<?php if($field->params->get('params.flow_folder', 1) && !$field->iscomment): ?>
-    	<button type="button" class="btn flow-files-item flow-browse-folder"><?php echo Mint::_('CUP_SELECT_FOLDER') ?></button>
+    	<button type="button" class="btn btn-light btn-sm  flow-browse-folder"><i class="fas fa-folder"></i> <?php echo Mint::_('CUP_SELECT_FOLDER') ?></button>
     <?php endif; ?>
 	<?php if($field->params->get('params.flow_img', 1) && !$field->iscomment): ?>
-	    <button type="button" class="btn flow-files-item flow-browse-image"><?php echo Mint::_('CUP_SELECT_IMAGE') ?></button>
+	    <button type="button" class="btn btn-light btn-sm  flow-files-item flow-browse-image"><i class="fas fa-image"></i> <?php echo Mint::_('CUP_SELECT_IMAGE') ?></button>
     <?php endif; ?>
 </div>
 
@@ -47,8 +47,10 @@ $can_delete = $field->iscomment ? FALSE : $field->_getDeleteAccess();
         <?php if($files && !$field->iscomment): ?>
             <?php foreach($files as $f):
                 settype($f, 'array');
-                $f['description'] = htmlentities(@$f['description'], ENT_QUOTES, 'UTF-8');
-                $f['title'] = htmlentities(@$f['title'], ENT_QUOTES, 'UTF-8');
+		        $f['description'] = !isset($f['description']) || empty($f['description']) ? '' : $f['description'];
+                $f['description'] = htmlentities($f['description'], ENT_QUOTES, 'UTF-8');
+		        $f['title'] = !isset($f['title']) || empty($f['title']) ? '' : $f['title'];
+                $f['title'] = htmlentities($f['title'], ENT_QUOTES, 'UTF-8');
                 ?>
             <tr id="flow-file-<?php echo $f['id'] ?>">
                 <td>
