@@ -272,6 +272,13 @@ class MFormHelper
 						$pattern = $tmpl['style-table-classic'];
 					}
 
+					// emerald if not installed
+					if($field->fieldname == 'subscription'){
+
+						$default = '';
+
+					}
+
 
 
 					$row[]    = sprintf($pattern,

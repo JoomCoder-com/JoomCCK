@@ -163,7 +163,7 @@ class JHTMLJoomcck
 
 
 		$model = MModelBase::getInstance('TFields', 'JoomcckModel');
-		$filter = str_replace("'", '"', $filter);
+		$filter = str_replace("'", '"', (string) $filter);
 		$filter = preg_replace("/\"$/iU", '', $filter);
 		$filter = preg_replace("/^\"/iU", '', $filter);
 		$model->getState();

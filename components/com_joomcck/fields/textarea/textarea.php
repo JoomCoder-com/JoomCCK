@@ -8,6 +8,8 @@
  * @license   GNU/GPL http://www.gnu.org/copyleft/gpl.html
  */
 
+use Joomla\String\StringHelper;
+
 defined('_JEXEC') or die();
 require_once JPATH_ROOT . '/components/com_joomcck/library/php/fields/joomcckfield.php';
 
@@ -20,11 +22,11 @@ class JFormFieldCTextarea extends CFormField
 		$doc    = JFactory::getDocument();
 
 		$max_length = (int)$params->get('params.maxlen', 0);
-		$text       = ($this->value ? $this->value : $params->get('params.default_value'));
+		$text       = ($this->value ? $this->value : $params->get('params.default_value',''));
 
 		if($max_length > 0)
 		{
-			$text = \Joomla\String\StringHelper::substr($text, 0, $max_length);
+			$text = StringHelper::substr($text, 0, $max_length);
 		}
 		$text = htmlspecialchars(stripslashes($text), ENT_QUOTES, 'UTF-8');
 
@@ -129,7 +131,7 @@ class JFormFieldCTextarea extends CFormField
 			$value = HTMLFormatHelper::bb2html($value, $this->params->get('params.bbcode_attr'));
 		}
 
-		$text_length = \Joomla\String\StringHelper::strlen(str_replace(array(" ", "\r", "\n", "\t"), '', strip_tags($value)));
+		$text_length = StringHelper::strlen(str_replace(array(" ", "\r", "\n", "\t"), '', strip_tags($value)));
 
 		if($text_length && $this->params->get('params.minlen') && $text_length < $this->params->get('params.minlen'))
 		{
@@ -140,7 +142,7 @@ class JFormFieldCTextarea extends CFormField
 			$this->setError(JText::sprintf("CTOOMUCH", $this->params->get('params.maxlen'), $this->label));
 		}
 
-		$len = \Joomla\String\StringHelper::strlen(str_replace(array('<?php', '?>', '&amp;', '<hr>'), array('&lt;?php', '?&gt;', '&', '<hr />'), $value));
+		$len = StringHelper::strlen(str_replace(array('<?php', '?>', '&amp;', '<hr>'), array('&lt;?php', '?&gt;', '&', '<hr />'), $value));
 
 		if($this->params->get('params.allow_html', 1) == 2)
 		{
@@ -158,7 +160,7 @@ class JFormFieldCTextarea extends CFormField
 			$value = JFilterInput::getInstance($tags, $attr, $tag_mode, $attmode)->clean($value);
 			$value = str_replace(array('^@^', '@^@', '^^^', '@@@'), array('&lt;?php', '?&gt;', '&lt;', '&gt;'), $value);
 
-			$len1 = \Joomla\String\StringHelper::strlen($value);
+			$len1 = StringHelper::strlen($value);
 			if($len != $len1)
 			{
 				$this->setError(JText::sprintf('TA_ENTEREDTAGSATTRSNOTALLOWED', $this->label));

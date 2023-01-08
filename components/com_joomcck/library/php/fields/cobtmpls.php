@@ -100,7 +100,7 @@ class JFormFieldCobtmpls extends JFormFieldList
         }
 
 		$files   = JFolder::files($layouts_path, $tmpl_mask['index_file']);
-		$exclude = explode(',', $this->element['exclude']);
+		$exclude = explode(',', (string) $this->element['exclude']);
 
 		$md5id = $this->_getKey();
 		foreach($files as $key => $file)

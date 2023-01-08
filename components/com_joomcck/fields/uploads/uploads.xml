@@ -100,7 +100,7 @@
 					<option value="0">XML_OPT_NOONE</option>
 				</field>
 			</fieldset>
-			<!--<fieldset name="emerald" label="F_DOWNLOADSUBSCR" description="F_DOWNLOADSUBSCR_DESCR"  addfieldpath="/components/com_emerald/models/fields/">
+			<fieldset name="emerald" label="F_DOWNLOADSUBSCR" description="F_DOWNLOADSUBSCR_DESCR"  addfieldpath="/components/com_emerald/models/fields/">
 				<field name="subscription" type="planslist" condition='{"not0":["params_params_subscr_skip_moderator","params_params_subscription_count","params_params_subscription_msg","params_params_subscription_redirect","params_params_can_select_subscr","params_params_subscr_skip","params_params_subscr_skip_author"]}' default="" multiple="true" label="F_SUBSCR_PLANS" description="" />
 				<field name="subscr_skip" type="accesslevel" default="3" label="F_SUBSCR_SKIPFOR" description="F_SUBSCR_SKIPFORDESCR">
 					<option value="0">XML_OPT_NOONE</option>
@@ -125,7 +125,7 @@
 				<field name="can_select_subscr" type="accesslevel" default="0" label="F_WHOCANSELECTSUBSCR" description="">
 					<option value="0">XML_OPT_NOONE</option>
 				</field>
-			</fieldset>-->
+			</fieldset>
 		</fields>
 
 	</config>
