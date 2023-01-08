@@ -268,7 +268,7 @@ if($params->get('tmpl_core.item_follow_num'))
 <?php if($started):?>
 	<script type="text/javascript">
 		<?php if(in_array($params->get('tmpl_params.item_grouping_type', 0), array(1))):?>
-			jQuery('#tabs-list a:first').tab('show');
+			//jQuery('#tabs-list a:first').tab('show');
 		<?php elseif(in_array($params->get('tmpl_params.item_grouping_type', 0), array(2))):?>
 			jQuery('#tab-main').collapse('show');
 		<?php endif;?>

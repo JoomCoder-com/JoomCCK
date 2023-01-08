@@ -28,7 +28,7 @@
 		<p class="small"><?php echo JText::_('CONLYONE')?></p>
 	<?php endif;?>
 	<?php if($this->upload):?>
-		<div class="video-title" data-toggle="collapse" data-target="#upload-pan<?php echo $this->id ?>"><img src="<?php echo JURI::root(TRUE)?>/media/mint/icons/16/drive-upload.png" align="absmiddle" /> <?php echo JText::_('CUPLOAD')?></div>
+		<div class="video-title" data-bs-toggle="collapse" data-bs-target="#upload-pan<?php echo $this->id ?>"><img src="<?php echo JURI::root(TRUE)?>/media/mint/icons/16/drive-upload.png" align="absmiddle" /> <?php echo JText::_('CUPLOAD')?></div>
 		<div id="upload-pan<?php echo $this->id ?>" class="collapse fade video-pan-<?php echo $this->id; ?>">
 			<div class="well">
 				<?php echo $this->upload;?>
@@ -37,7 +37,7 @@
 	<?php endif;?>
 
 	<?php if(in_array($this->params->get('params.embed', 1), $this->user->getAuthorisedViewLevels())): ?>
-		<div class="video-title" data-toggle="collapse" data-target="#embed-pan<?php echo $this->id ?>"><img src="<?php echo JURI::root(TRUE)?>/media/mint/icons/16/film-cast.png" align="absmiddle" /> <?php echo JText::_('CEMBED')?></div>
+		<div class="video-title" data-bs-toggle="collapse" data-bs-target="#embed-pan<?php echo $this->id ?>"><img src="<?php echo JURI::root(TRUE)?>/media/mint/icons/16/film-cast.png" align="absmiddle" /> <?php echo JText::_('CEMBED')?></div>
 		<div id="embed-pan<?php echo $this->id ?>" class="collapse fade video-pan-<?php echo $this->id; ?>">
 			<div class="well">
 				<div id="input_embeds">
@@ -64,7 +64,7 @@
 	<?php endif;?>
 
 	<?php if(in_array($this->params->get('params.link', 1), $this->user->getAuthorisedViewLevels())): ?>
-		<div class="video-title" data-toggle="collapse" data-target="#link-pan<?php echo $this->id ?>">
+		<div class="video-title" data-bs-toggle="collapse" data-bs-target="#link-pan<?php echo $this->id ?>">
 			<img src="<?php echo JURI::root(TRUE)?>/media/mint/icons/16/chain.png" align="absmiddle" /> <?php echo JText::_('CLINK')?></div>
 
 		<div id="link-pan<?php echo $this->id ?>" class="video-pan-<?php echo $this->id; ?> collapse fade">
@@ -101,7 +101,7 @@
 <script type='text/javascript'>
 !function($)
 {
-	$('.video-pan-<?php echo $this->id; ?>').first().collapse('show');
+	//$('.video-pan-<?php echo $this->id; ?>').first().collapse('show');
 
 	lnk_count = <?php echo (int)count($this->link);?>;
 	emb_count = <?php echo (int)count($this->embed);?>;
