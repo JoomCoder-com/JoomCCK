@@ -697,6 +697,11 @@ class CFormFieldRelate extends CFormField
 
 	private function _getRecordsIds($record_id, $field_id, $view_what)
 	{
+
+        if(empty($field_id) || empty($field_id) || empty($view_what))
+            return [];
+
+
 		$db = JFactory::getDbo();
 		if($view_what == 'show_parents')
 		{
@@ -736,8 +741,13 @@ class CFormFieldRelate extends CFormField
 			return $out[$id];
 		}
 
+        if(empty($id))
+            return false;
+
 		$db  = JFactory::getDbo();
 		$sql = "SELECT params FROM `#__js_res_fields` WHERE id = " . $id;
+
+
 		$db->setQuery($sql);
 		$params = new JRegistry($db->loadResult());
 

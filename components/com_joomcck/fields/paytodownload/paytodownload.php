@@ -209,7 +209,7 @@ class JFormFieldCPaytodownload extends CFormFieldUpload implements CFormFieldCom
 		return parent::onPrepareFullTextSearch(@$value['files'], $record, $type, $section);
 	}
 
-	private function _render($client, $limit = 0, $record, $type, $section)
+	private function _render($client, $limit, $record, $type, $section)
 	{
 		// Necessary to separate field value and pay options
 		$this->pay   = @$this->value['pay'];

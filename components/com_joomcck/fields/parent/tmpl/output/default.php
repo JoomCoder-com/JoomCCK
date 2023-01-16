@@ -11,7 +11,7 @@ $key = $this->id.'-'.$record->id;
 
 echo $this->content['html'];
 
-if($this->show_btn_new)
+if($this->show_btn_new && isset($type->id) && isset($section->id))
 {
 	$url = 'index.php?option=com_joomcck&view=form';
 	$url .= '&section_id='.$section->id;
@@ -24,7 +24,7 @@ if($this->show_btn_new)
 	$links[] = sprintf('<a href="%s" class="btn btn-sm btn-light border">%s</a>', JRoute::_($url), JText::_($this->params->get('params.invite_add_more')));
 }
 
-if($this->show_btn_exist)
+if($this->show_btn_exist && isset($type->id))
 {
 	$doTask = JRoute::_('index.php?option=com_joomcck&view=elements&layout=records&tmpl=component&section_id='.$section->id.
 		'&type_id='.$type->id.

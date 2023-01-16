@@ -146,8 +146,8 @@ class JFormFieldCTextarea extends CFormField
 
 		if($this->params->get('params.allow_html', 1) == 2)
 		{
-			$tags = explode(',', $this->params->get('params.filter_tags'));
-			$attr = explode(',', $this->params->get('params.filter_attr'));
+			$tags = explode(',', $this->params->get('params.filter_tags',''));
+			$attr = explode(',', $this->params->get('params.filter_attr',''));
 			ArrayHelper::trim_r($tags);
 			ArrayHelper::trim_r($attr);
 			ArrayHelper::clean_r($tags);

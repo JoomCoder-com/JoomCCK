@@ -80,7 +80,7 @@ class JFormFieldCPayvoucher extends CFormField
 		// Nesessary to separate field value and pay options
 		$this->pay = @$this->value['pay'];
 		$this->value = @$this->value['vouchers'];
-		$vnum = explode("\n", $this->value);
+		$vnum = explode("\n", (string) $this->value);
 		ArrayHelper::clean_r($vnum);
 		$this->vnum = count($vnum);
 

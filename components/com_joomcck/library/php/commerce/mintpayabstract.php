@@ -53,7 +53,7 @@ class MintPayAbstract
 		{
 			return;
 		}
-		if(!$obj->pay['amount'])
+		if(!isset($obj->pay['amount']) || !$obj->pay['amount'])
 		{
 			return;
 		}

@@ -622,7 +622,9 @@ class JoomcckModelRecords extends MModelList
 			include_once 'components/com_joomcck/library/php/fields/joomcckrelate.php';
 			$params   = CFormFieldRelate::getFieldParams($field_id);
 
-			if($params->get('params.show_relate'))
+
+
+			if($params && $params->get('params.show_relate'))
 			{
 				$apply_access = FALSE;
 
