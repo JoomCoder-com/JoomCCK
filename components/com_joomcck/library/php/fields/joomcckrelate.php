@@ -8,6 +8,8 @@
  * @license   GNU/GPL http://www.gnu.org/copyleft/gpl.html
  */
 
+use Joomla\Registry\Registry;
+
 defined('_JEXEC') or die();
 
 jimport('joomla.html.html');
@@ -37,87 +39,82 @@ class CFormFieldRelate extends CFormField
 		$attribs = $html = $record_id = '';
 		$default = array();
 
+        $list = [];
+
 		settype($types, 'array');
 
-		//if(in_array($type, array(5, 2)))
+		$query = $db->getQuery(TRUE);
+		$query->from('#__js_res_record');
+		if(CStatistics::hasUnPublished($section_id))
 		{
-			$list = array();
+			$query->where('published = 1');
 		}
-		//else
+		$query->where('hidden = 0');
+		$query->where('section_id = ' . (int)$section_id);
+		$query->where("type_id IN(" . implode(',', $types) . ")");
+
+		if($app->input->getInt('id') && $app->input->getCmd('option') == 'com_joomcck' && $app->input->getCmd('view') == 'form')
 		{
-			$query = $db->getQuery(TRUE);
-			$query->from('#__js_res_record');
-			if(CStatistics::hasUnPublished($section_id))
-			{
-				$query->where('published = 1');
-			}
-			$query->where('hidden = 0');
-			$query->where('section_id = ' . (int)$section_id);
-			$query->where("type_id IN(" . implode(',', $types) . ")");
+			$query->where('id != ' . $app->input->getInt('id'));
+		}
+		if(!in_array($section->params->get('general.show_restrict'), $user->getAuthorisedViewLevels()) && !MECAccess::allowRestricted($user, $section))
+		{
+			$query->where("(access IN(" . implode(',', $user->getAuthorisedViewLevels()) . ") OR user_id = " . $user->get('id') . ")");
+		}
 
-			if($app->input->getInt('id') && $app->input->getCmd('option') == 'com_joomcck' && $app->input->getCmd('view') == 'form')
-			{
-				$query->where('id != ' . $app->input->getInt('id'));
-			}
-			if(!in_array($section->params->get('general.show_restrict'), $user->getAuthorisedViewLevels()) && !MECAccess::allowRestricted($user, $section))
-			{
-				$query->where("(access IN(" . implode(',', $user->getAuthorisedViewLevels()) . ") OR user_id = " . $user->get('id') . ")");
-			}
+		if(!in_array($section->params->get('general.show_future_records'), $user->getAuthorisedViewLevels()))
+		{
+			$query->where("ctime < " . $db->quote(JFactory::getDate()->toSql()));
+		}
 
-			if(!in_array($section->params->get('general.show_future_records'), $user->getAuthorisedViewLevels()))
-			{
-				$query->where("ctime < " . $db->quote(JFactory::getDate()->toSql()));
-			}
+		if(!in_array($section->params->get('general.show_past_records'), $user->getAuthorisedViewLevels()))
+		{
+			$query->where("(extime = '0000-00-00 00:00:00' OR extime > '" . JFactory::getDate()->toSql() . "')");
+		}
 
-			if(!in_array($section->params->get('general.show_past_records'), $user->getAuthorisedViewLevels()))
+		if(!in_array($this->params->get('params.strict_to_user'), $user->getAuthorisedViewLevels()) && $this->user_strict)
+		{
+			if($this->params->get('params.strict_to_user_mode') > 1 && $app->input->getInt('id'))
 			{
-				$query->where("(extime = '0000-00-00 00:00:00' OR extime > '" . JFactory::getDate()->toSql() . "')");
-			}
-
-			if(!in_array($this->params->get('params.strict_to_user'), $user->getAuthorisedViewLevels()) && $this->user_strict)
-			{
-				if($this->params->get('params.strict_to_user_mode') > 1 && $app->input->getInt('id'))
-				{
-					$record = JTable::getInstance('Record', 'JoomcckTable');
-					$record->load($app->input->getInt('id'));
-					$user_id = $record->user_id;
-					if(!$user_id && $this->params->get('params.strict_to_user_mode') == 3)
-					{
-						$user_id = $user->get('id');
-					}
-				}
-				else
+				$record = JTable::getInstance('Record', 'JoomcckTable');
+				$record->load($app->input->getInt('id'));
+				$user_id = $record->user_id;
+				if(!$user_id && $this->params->get('params.strict_to_user_mode') == 3)
 				{
 					$user_id = $user->get('id');
 				}
-				$query->where('user_id = ' . ($user_id ? $user_id : 1));
 			}
-
-			if($this->type == 'parent' && !$this->isFilter)
+			else
 			{
-				$table = JTable::getInstance('Field', 'JoomcckTable');
-				$table->load($this->params->get('params.child_field'));
-				$child = new \Joomla\Registry\Registry($table->params);
-
-				if($child->get('params.multi_parent') == 0)
-				{
-					$query->where("id NOT IN(SELECT record_id FROM #__js_res_record_values WHERE field_id = " . $table->id . ")");
-				}
+				$user_id = $user->get('id');
 			}
+			$query->where('user_id = ' . ($user_id ? $user_id : 1));
+		}
 
-			$query->select('id as value, title as text');
-			if($this->params->get('params.input_sort'))
+		if($this->type == 'parent' && !$this->isFilter)
+		{
+			$table = JTable::getInstance('Field', 'JoomcckTable');
+			$table->load($this->params->get('params.child_field'));
+			$child = new Registry($table->params);
+
+			if($child->get('params.multi_parent') == 0)
 			{
-				$query->order($this->params->get('params.input_sort'));
+				$query->where("id NOT IN(SELECT record_id FROM #__js_res_record_values WHERE field_id = " . $table->id . ")");
 			}
+		}
 
-			$db->setQuery($query);
-			$list = $db->loadObjectList();
+		$query->select('id as value, title as text');
+		if($this->params->get('params.input_sort',''))
+		{
+			$query->order($this->params->get('params.input_sort',''));
+		}
 
-			if(count($list) == 0 && empty($this->value))
-			{
-				return NULL;
-			}
+
+		$db->setQuery($query);
+		$list = $db->loadObjectList();
+		if(count($list) == 0 && empty($this->value))
+		{
+			return NULL;
 		}
 
 
@@ -150,6 +147,7 @@ class CFormFieldRelate extends CFormField
 			}
 			if(!empty($default_query))
 			{
+
 				$db->setQuery($default_query);
 				$this->value = $db->loadColumn();
 			}

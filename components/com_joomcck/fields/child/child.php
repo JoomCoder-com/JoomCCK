@@ -24,8 +24,16 @@ class JFormFieldCChild extends CFormFieldRelate
 			$this->params->set('params.input_mode', 10);
 		}
 
-		$this->inputvalue = $this->_render_input($this->params->get('params.input_mode'), $name,
-			$this->params->get('params.parent_section'), $this->params->get('params.parent_type'), $this->params->get('params.multi_parent'));
+		if($this->params->get('params.parent_section',0) && $this->params->get('params.parent_type',0)){
+			$this->inputvalue = $this->_render_input(
+				$this->params->get('params.input_mode',2),
+				$name,
+				$this->params->get('params.parent_section',0),
+				$this->params->get('params.parent_type',0),
+				$this->params->get('params.multi_parent',0)
+			);
+		}
+
 
 		return $this->_display_input();
 	}

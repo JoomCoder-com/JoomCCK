@@ -196,7 +196,7 @@ if($params->get('params.allow_html', 1) == 2)
 	ArrayHelper::clean_r($tags);
 	$li[] = $this->params->get('params.tags_mode', 0) == 0 ? JText::sprintf('TA_FOLLOWINGTAGSALLOWED') . ': ' . htmlspecialchars('<' . implode('>, <', $tags) . '>') : JText::sprintf('TA_FOLLOWINGTAGSNOTALLOWED') . ': ' . htmlspecialchars('<' . implode('>, <', $tags) . '>');
 
-	$attr = explode(',', $params->get('params.filter_attr'));
+	$attr = explode(',', $params->get('params.filter_attr',''));
 	ArrayHelper::trim_r($attr);
 	ArrayHelper::clean_r($attr);
 	if($attr)

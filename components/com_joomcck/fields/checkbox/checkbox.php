@@ -21,7 +21,7 @@ class JFormFieldCCheckbox extends CFormFieldSelectable
         if ($params->get('params.sql_source')) {
             $values = $this->_getSqlValues();
         } else {
-            $values = explode("\n", $params->get('params.values'));
+            $values = explode("\n", $params->get('params.values',''));
             ArrayHelper::clean_r($values);
             settype($this->value, 'array');
             $diff = array_diff($this->value, $values);

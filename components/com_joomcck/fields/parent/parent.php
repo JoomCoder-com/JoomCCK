@@ -25,9 +25,17 @@ class JFormFieldCParent extends CFormFieldRelate
 			$this->params->set('params.input_mode', 10);
 		}
 
+		if($this->params->get('params.child_section',0) && $this->params->get('params.child_field',0)){
+			$this->inputvalue = $this->_render_input(
+				$this->params->get('params.input_mode',2),
+				$name,
+				$this->params->get('params.child_section',0),
+				MModelBase::getInstance('Fields', 'JoomcckModel')->getFieldTypeId($this->params->get('params.child_field',0))
+			);
+		}
 
-		$this->inputvalue = $this->_render_input($this->params->get('params.input_mode'), $name, $this->params->get('params.child_section'),
-			MModelBase::getInstance('Fields', 'JoomcckModel')->getFieldTypeId($this->params->get('params.child_field')));
+
+
 
 		return $this->_display_input();
 	}

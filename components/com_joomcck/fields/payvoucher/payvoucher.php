@@ -25,7 +25,7 @@ class JFormFieldCPayvoucher extends CFormField
 		$this->pay = @$this->value['pay'];
 		$this->value = @$this->value['vouchers'];
 				
-		$this->text = htmlspecialchars(stripslashes($this->value), ENT_QUOTES, 'UTF-8');
+		$this->text = htmlspecialchars(stripslashes( (string) $this->value), ENT_QUOTES, 'UTF-8');
 		
 		if($this->gateway)
 		{
