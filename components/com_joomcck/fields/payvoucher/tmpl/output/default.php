@@ -9,13 +9,15 @@
 defined('_JEXEC') or die();
 ?>
 <?php if($this->vnum == 0):?>
-	<?php echo JText::_('PV_VOUCHERSOUTOFSTOCK');?>
+	<p class="alert alert-danger">
+		<?php echo JText::_('PV_VOUCHERSOUTOFSTOCK');?>
+    </p>
 	<?php return;?>
 <?php endif;?>
 
 
 <?php if($this->params->get('params.all_sales_link') && $this->is_seler && !$this->is_free):?>
-	<a href="index.php?option=com_joomcck&view=elements&layout=saler&filter_section=<?php echo $this->request->getInt('section_id');?>&Itemid=<?php echo $this->params->get('params.all_sales_iid', $this->request->getInt('Itemid'));?>"
+	<a href="<?php echo JUri::root()?>index.php?option=com_joomcck&view=elements&layout=saler&filter_section=<?php echo $this->request->getInt('section_id');?>&Itemid=<?php echo $this->params->get('params.all_sales_iid', $this->request->getInt('Itemid'));?>"
 		class="btn btn-sm btn-light border">
 		<?php echo JText::_($this->params->get('params.all_sales_text', 'All sold files'));?>
 	</a>
