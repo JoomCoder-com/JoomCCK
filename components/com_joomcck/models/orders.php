@@ -168,12 +168,12 @@ class JoomcckModelOrders extends MModelList
 			$uid = JFactory::getUser()->get('id');
 		}
 
-		if(!@$active->params instanceof JRegistry)
+		if(!@$active->getParams() instanceof JRegistry)
 		{
 			return false;
 		}
 
-		$allow_users = $active->params->get('allow_users', false);
+		$allow_users = $active->getParams()->get('allow_users', false);
 		$user_ids = explode(',', $allow_users);
 
 		\Joomla\Utilities\ArrayHelper::toInteger($user_ids);
