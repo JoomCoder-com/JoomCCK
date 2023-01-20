@@ -90,6 +90,10 @@ class JFormFieldCHtml extends CFormField
 	public function onRenderFull($record, $type, $section)
 	{
 		$value = $this->_filter($this->value);
+
+		if(!$value)
+			return false;
+
 		$pattern = '#<hr\s+id=("|\')system-readmore("|\')\s*\/*>#i';
 		$tagPos = preg_match($pattern, $value);
 		if($tagPos)
