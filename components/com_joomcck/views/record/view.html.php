@@ -7,6 +7,8 @@
  * @license   GNU/GPL http://www.gnu.org/copyleft/gpl.html
  */
 
+use Joomla\CMS\Factory;
+
 defined('_JEXEC') or die();
 
 class JoomcckViewRecord extends MViewBase
@@ -41,42 +43,48 @@ class JoomcckViewRecord extends MViewBase
 
 		if($type->published == 0)
 		{
-			JError::raise(E_WARNING, 403, JText::_('CMSG_TYPEUNPUB'));
+
+			Factory::getApplication()->enqueueMessage(JText::_('CMSG_TYPEUNPUB'),'warning');
 
 			return;
 		}
 
 		if($section->published == 0)
 		{
-			JError::raise(E_WARNING, 403, JText::_('CERR_SECTIONUNPUB'));
+
+			Factory::getApplication()->enqueueMessage(JText::_('CERR_SECTIONUNPUB'),'warning');
 
 			return;
 		}
 
 		if(!$section->params->get('general.status', 1))
 		{
-			JError::raise(E_WARNING, 403, JText::_($section->params->get('general.status_msg')));
+
+			Factory::getApplication()->enqueueMessage(JText::_($section->params->get('general.status_msg')),'warning');
+
 
 			return;
 		}
 
 		if(!in_array($section->access, $user->getAuthorisedViewLevels()) && !MECAccess::allowRestricted($user, $section))
 		{
-			JError::raise(E_WARNING, 403, $section->params->get('general.status_msg', JText::_('CERR_NOPAGEACCESS')));
+			Factory::getApplication()->enqueueMessage($section->params->get('general.status_msg', JText::_('CERR_NOPAGEACCESS')),'warning');
 
 			return;
 		}
 
 		if(!$this->_checkCategoryAccess($item, $section))
 		{
-			JError::raise(E_WARNING, 403, $section->params->get('general.status_msg', JText::_('CERR_NOPAGEACCESS')));
+
+			Factory::getApplication()->enqueueMessage($section->params->get('general.status_msg', JText::_('CERR_NOPAGEACCESS')),'warning');
+
 
 			return;
 		}
 
 		if(!CEmeraldHelper::allowType('display', $type, $item->user_id, $section, FALSE, '', $item->user_id))
 		{
-			JError::raise(E_WARNING, 403, JText::_($type->params->get('emerald.type_display_subscription_msg')));
+			Factory::getApplication()->enqueueMessage(JText::_($type->params->get('emerald.type_display_subscription_msg')),'warning');
 
 			return;
 		}
@@ -86,7 +94,8 @@ class JoomcckViewRecord extends MViewBase
 
 		if($type->params->get('comments.comments') == 2 && !$type->params->get('comments.comment_custom_js'))
 		{
-			JError::raise(E_NOTICE, 100, JText::_('CMSGCUSTOMJSCODE'));
+
+			Factory::getApplication()->enqueueMessage(JText::_('CMSGCUSTOMJSCODE'),'info');
 		}
 
 		$dir = JPATH_ROOT . '/components/com_joomcck/views/record/tmpl';
@@ -224,7 +233,8 @@ class JoomcckViewRecord extends MViewBase
 
 			if(JFactory::getApplication()->input->get('cat_id') == $id && $cat->published == 0)
 			{
-				JError::raise(E_NOTICE, 100, 'CNOTICE_THIS_RECORD_INVISIBLE_IN_UNPUBLISHED_CATEGORY');
+
+				Factory::getApplication()->enqueueMessage(JText::_('CNOTICE_THIS_RECORD_INVISIBLE_IN_UNPUBLISHED_CATEGORY'),'info');
 
 				return FALSE;
 			}
@@ -252,7 +262,8 @@ class JoomcckViewRecord extends MViewBase
 				$parent = ItemsStore::getRecord($item->parent_id);
 				if(!($user->get('id') && $user->get('id') == $parent->user_id))
 				{
-					JError::raise(E_WARNING, 403, JText::_('CWARNING_NO_ACCESS_ARTICLE'));
+
+					Factory::getApplication()->enqueueMessage(JText::_('CWARNING_NO_ACCESS_ARTICLE'),'warning');
 					$error = FALSE;
 				}
 			}
@@ -266,7 +277,8 @@ class JoomcckViewRecord extends MViewBase
 
 				if(!$params->get('params.show_relate'))
 				{
-					JError::raise(E_WARNING, 403, JText::_('CWARNING_NO_ACCESS_ARTICLE'));
+
+					Factory::getApplication()->enqueueMessage(JText::_('CWARNING_NO_ACCESS_ARTICLE'),'warning');
 					$error = FALSE;
 				}
 				else
@@ -284,7 +296,8 @@ class JoomcckViewRecord extends MViewBase
 
 					if(!($parent_user && $parent_user == $user->get('id')))
 					{
-						JError::raise(E_WARNING, 403, JText::_('CWARNING_NO_ACCESS_ARTICLE'));
+					;
+						Factory::getApplication()->enqueueMessage(JText::_('CWARNING_NO_ACCESS_ARTICLE'),'warning');
 						$error = FALSE;
 					}
 				}
@@ -292,7 +305,8 @@ class JoomcckViewRecord extends MViewBase
 			else
 			{
 
-				JError::raise(E_WARNING, 403, JText::_('CWARNING_NO_ACCESS_ARTICLE'));
+
+				Factory::getApplication()->enqueueMessage(JText::_('CWARNING_NO_ACCESS_ARTICLE'),'warning');
 				$error = FALSE;
 			}
 		}
@@ -301,18 +315,21 @@ class JoomcckViewRecord extends MViewBase
 		{
 			if($user->get('id') != $item->user_id)
 			{
-				JError::raise(E_WARNING, 401, JText::_('CWARNING_RECORD_HIDDEN_BY_AUTHOR'));
+
+				Factory::getApplication()->enqueueMessage(JText::_('CWARNING_RECORD_HIDDEN_BY_AUTHOR'),'warning');
 				$error = FALSE;
 			}
 			else
 			{
-				JError::raise(E_NOTICE, 409, JText::_('CWARNING_RECORD_HIDDEN_BY_YOU'));
+
+				Factory::getApplication()->enqueueMessage(JText::_('CWARNING_RECORD_HIDDEN_BY_YOU'),'info');
 			}
 		}
 
 		if($item->published == 0 && !MECAccess::allowRestricted($user, $section) && !($user->get('id') == $item->user_id && $item->user_id))
 		{
-			JError::raise(E_WARNING, 403, JText::_('CWARNING_RECORD_UNPUBLISHED'));
+
+			Factory::getApplication()->enqueueMessage(JText::_('CWARNING_RECORD_UNPUBLISHED'),'warning');
 			$error = FALSE;
 		}
 
