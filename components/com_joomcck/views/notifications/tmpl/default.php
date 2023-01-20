@@ -8,11 +8,16 @@
  * @license   GNU/GPL http://www.gnu.org/copyleft/gpl.html
  */
 
+use Joomla\CMS\HTML\HTMLHelper;
+
 defined('_JEXEC') or die();
 if($this->items)
 {
 	$this->_filters = TRUE;
 }
+
+HTMLHelper::_('bootstrap.collapse');
+
 ?>
 	<script type="text/javascript">
 		(function($) {
@@ -152,7 +157,7 @@ if($this->items)
 						<?php echo HTMLFormatHelper::icon('asterisk.png'); ?>
 						<?php echo JText::_("CMARKALLREAD"); ?>
 					</button>
-					<button class="btn" type="button" data-toggle="collapse" data-target="#clear_list_block"
+					<button class="btn" type="button" data-bs-toggle="collapse" data-target="#clear_list_block"
 							rel="{onClose: function() {}}">
 						<?php echo HTMLFormatHelper::icon('cross-button.png'); ?>
 						<?php echo JText::_("CCLEAREVENTS"); ?>
@@ -173,7 +178,7 @@ if($this->items)
 			<div class="tabbable fade collapse" id="clear_list_block">
 				<br>
 				<ul class="nav nav-tabs">
-					<li class="active"><a href="#page-selected" data-toggle="tab"><?php echo JText::_('CCLEARSELECTED') ?></a></li>
+					<li class="active"><a href="#page-selected" data-bs-toggle="tab"><?php echo JText::_('CCLEARSELECTED') ?></a></li>
 					<li><a href="#page-events" data-toggle="tab"><?php echo JText::_('CCLEARBYEVENTTYPES') ?></a></li>
 					<li><a href="#page-sections" data-toggle="tab"><?php echo JText::_('CCLEARBYSECTIONS') ?></a></li>
 					<li><a href="#page-user" data-toggle="tab"><?php echo JText::_('CCLEARBYUSER') ?></a></li>

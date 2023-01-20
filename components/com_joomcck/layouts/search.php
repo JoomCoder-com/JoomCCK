@@ -12,15 +12,19 @@ $filters = [];
 if($displayData->state->get('filter.search')) {
 	$filters['filter.search'] = 'filter.search';
 }
-foreach ($displayData->_filters AS $i => $filter) {
-	// Exclude type filter in fields llist
-	if($displayData->input->get('view') == 'tfields' && $filter['id'] == 'filter_type') {
-		continue;
-	}
-	if($displayData->state->get(str_replace('_', '.', $filter['id']))) {
-		$filters[str_replace('_', '.', $filter['id'])] = $filter['id'];
+
+if(is_array($displayData->_filters)){
+	foreach ($displayData->_filters AS $i => $filter) {
+		// Exclude type filter in fields llist
+		if($displayData->input->get('view') == 'tfields' && $filter['id'] == 'filter_type') {
+			continue;
+		}
+		if($displayData->state->get(str_replace('_', '.', $filter['id']))) {
+			$filters[str_replace('_', '.', $filter['id'])] = $filter['id'];
+		}
 	}
 }
+
 ?>
 
 <div class="float-end search-box">
