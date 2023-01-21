@@ -83,7 +83,7 @@ $doc->addScript(JURI::root() . 'modules/mod_joomcck_notifications/Scrollable/Scr
 					alert(json.error);
 					return;
 				}
-				$("mod_ntf"+id).destroy();
+				$("#mod_ntf"+id).destroy();
 			}
 		}).send();
 	}

@@ -6,9 +6,9 @@
 	<config>
 		<fields name="params">
 			<fieldset name="tmpl">
-				<field type="cobtmpllist" name="template_input" onchange="ajax_load_sub_params(this, '/components/com_joomcck/fields/email/tmpl/input');" filter="php$" hide_none="1" hide_default="1" directory="/components/com_joomcck/fields/email/tmpl/input" label="F_TMPLINPUT" default="default.php" />
-				<field type="cobtmpllist" name="template_output_list" onchange="ajax_load_sub_params(this, '/components/com_joomcck/fields/email/tmpl/output');" filter="php$" hide_none="1" hide_default="1" directory="/components/com_joomcck/fields/email/tmpl/output" label="F_TMPLLIST" default="default.php" />
-				<field type="cobtmpllist" name="template_output_full" onchange="ajax_load_sub_params(this, '/components/com_joomcck/fields/email/tmpl/output');" filter="php$" hide_none="1" hide_default="1" directory="/components/com_joomcck/fields/email/tmpl/output" label="F_TMPLFULL" default="default.php" />
+				<field class="form-select" type="cobtmpllist" name="template_input" onchange="ajax_load_sub_params(this, '/components/com_joomcck/fields/email/tmpl/input');" filter="php$" hide_none="1" hide_default="1" directory="/components/com_joomcck/fields/email/tmpl/input" label="F_TMPLINPUT" default="default.php" />
+				<field class="form-select" type="cobtmpllist" name="template_output_list" onchange="ajax_load_sub_params(this, '/components/com_joomcck/fields/email/tmpl/output');" filter="php$" hide_none="1" hide_default="1" directory="/components/com_joomcck/fields/email/tmpl/output" label="F_TMPLLIST" default="default.php" />
+				<field class="form-select" type="cobtmpllist" name="template_output_full" onchange="ajax_load_sub_params(this, '/components/com_joomcck/fields/email/tmpl/output');" filter="php$" hide_none="1" hide_default="1" directory="/components/com_joomcck/fields/email/tmpl/output" label="F_TMPLFULL" default="default.php" />
 			</fieldset>
 			<fieldset name="core">
 				<field name="sortable" type="radio" class="btn-group" default="0" label="F_SORTABLE">
@@ -21,8 +21,8 @@
 					<option value="0">JNO</option>
 					<option value="1">JYES</option>
 				</field>
-				<field type="cobtmpllist" name="template_filter" onchange="ajax_load_sub_params(this, '/components/com_joomcck/fields/email/tmpl/filter');" filter="php$" hide_none="1" hide_default="1" directory="/components/com_joomcck/fields/email/tmpl/filter" label="F_TMPLFILTER" default="autocomplete.php" />
-				<field type="cobtmpllist" name="template_filter_module" onchange="ajax_load_sub_params(this, '/components/com_joomcck/fields/email/tmpl/filter');" filter="php$" hide_none="1" hide_default="1" directory="/components/com_joomcck/fields/email/tmpl/filter" label="F_TMPLFILTERMODULE" default="autocomplete.php" />
+				<field class="form-select" type="cobtmpllist" name="template_filter" onchange="ajax_load_sub_params(this, '/components/com_joomcck/fields/email/tmpl/filter');" filter="php$" hide_none="1" hide_default="1" directory="/components/com_joomcck/fields/email/tmpl/filter" label="F_TMPLFILTER" default="autocomplete.php" />
+				<field class="form-select" type="cobtmpllist" name="template_filter_module" onchange="ajax_load_sub_params(this, '/components/com_joomcck/fields/email/tmpl/filter');" filter="php$" hide_none="1" hide_default="1" directory="/components/com_joomcck/fields/email/tmpl/filter" label="F_TMPLFILTERMODULE" default="autocomplete.php" />
 				<field name="filter_hide" type="mradio" class="btn-group" default="0" label="F_HIDE" description="F_HIDE_DESCR">
 					<option value="0">JNO</option>
 					<option value="1">JYES</option>
@@ -61,7 +61,7 @@
 			</fieldset>
 
 			<fieldset name="send" label="FS_SENDINGOPT">
-				<field type="cobtmpllist" name="template_body" onchange="ajax_load_sub_params(this, '/components/com_joomcck/fields/email/tmpl/email');" filter="php$" hide_none="1" hide_default="1" directory="/components/com_joomcck/fields/email/tmpl/email" label="F_TMPLBODY" default="default.php" />
+				<field class="form-select" type="cobtmpllist" name="template_body" onchange="ajax_load_sub_params(this, '/components/com_joomcck/fields/email/tmpl/email');" filter="php$" hide_none="1" hide_default="1" directory="/components/com_joomcck/fields/email/tmpl/email" label="F_TMPLBODY" default="default.php" />
 				<field name="send_mail" type="accesslevel" default="3" label="F_SHOWCANSEND">
 					<option value="0">XML_OPT_NOBODY</option>
 				</field>
@@ -131,7 +131,7 @@
 					<option value="2">XML_OPT_POPUP</option>
 					<option value="3">XML_OPT_FIXED</option>
 				</field>
-				<field type="cobtmpllist" name="template_form" onchange="ajax_load_sub_params(this, '/components/com_joomcck/fields/email/tmpl/form');" filter="php$" hide_none="1" hide_default="1" directory="/components/com_joomcck/fields/email/tmpl/form" label="F_TMPLFORM" default="default.php" />
+				<field class="form-select" type="cobtmpllist" name="template_form" onchange="ajax_load_sub_params(this, '/components/com_joomcck/fields/email/tmpl/form');" filter="php$" hide_none="1" hide_default="1" directory="/components/com_joomcck/fields/email/tmpl/form" label="F_TMPLFORM" default="default.php" />
 				<field name="popup_label" type="text" size="40" default="Send e-mail online" label="F_POPUPLABEL" />
 			</fieldset>
 		</fields>

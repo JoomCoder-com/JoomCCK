@@ -10,6 +10,9 @@
 defined('_JEXEC') or die();
 
 jimport('mint.mvc.controller.admin');
+
+require_once JPATH_LIBRARIES.'/mint/forms/formhelper.php';
+
 class JoomcckControllerAjax extends MControllerAdmin
 {
 

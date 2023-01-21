@@ -6,9 +6,9 @@
 	<config>
 		<fields name="params">
 			<fieldset name="tmpl">
-				<field type="cobtmpllist" name="template_input" onchange="ajax_load_sub_params(this, '/components/com_joomcck/fields/paytodownload/tmpl/input');" filter="php$" hide_none="1" hide_default="1" directory="/components/com_joomcck/fields/paytodownload/tmpl/input" label="F_TMPLINPUT" default="default.php" />
-				<field type="cobtmpllist" name="template_output_list" onchange="ajax_load_sub_params(this, '/components/com_joomcck/fields/paytodownload/tmpl/output');" filter="php$" hide_none="1" hide_default="1" directory="/components/com_joomcck/fields/paytodownload/tmpl/output" label="F_TMPLLIST" default="ul_list.php" />
-				<field type="cobtmpllist" name="template_output_full" onchange="ajax_load_sub_params(this, '/components/com_joomcck/fields/paytodownload/tmpl/output');" filter="php$" hide_none="1" hide_default="1" directory="/components/com_joomcck/fields/paytodownload/tmpl/output" label="F_TMPLFULL" default="ul_list.php" />
+				<field class="form-select" type="cobtmpllist" name="template_input" onchange="ajax_load_sub_params(this, '/components/com_joomcck/fields/paytodownload/tmpl/input');" filter="php$" hide_none="1" hide_default="1" directory="/components/com_joomcck/fields/paytodownload/tmpl/input" label="F_TMPLINPUT" default="default.php" />
+				<field class="form-select" type="cobtmpllist" name="template_output_list" onchange="ajax_load_sub_params(this, '/components/com_joomcck/fields/paytodownload/tmpl/output');" filter="php$" hide_none="1" hide_default="1" directory="/components/com_joomcck/fields/paytodownload/tmpl/output" label="F_TMPLLIST" default="ul_list.php" />
+				<field class="form-select" type="cobtmpllist" name="template_output_full" onchange="ajax_load_sub_params(this, '/components/com_joomcck/fields/paytodownload/tmpl/output');" filter="php$" hide_none="1" hide_default="1" directory="/components/com_joomcck/fields/paytodownload/tmpl/output" label="F_TMPLFULL" default="ul_list.php" />
 			</fieldset>
 			<fieldset name="general" label="FS_UPLOAD">
 				<field name="file_formats" size="40" type="text" default="zip, jpg, png, jpeg, gif, txt, md, bmp" label="F_ALLOWEDFORMATS" />
@@ -187,7 +187,7 @@
 				<field name="allow_gateway" type="accesslevel" default="2" label="F_WHOCANCHOOSEGATEWAY">
 					<option value="0">XML_OPT_NOONE</option>
 				</field>
-				<field type="cgateway" name="default_gateway" onchange="ajax_loadpayform(this)" required="required" label="F_DEFAULTGATEWAY" />
+				<field class="form-select" type="cgateway" name="default_gateway" onchange="ajax_loadpayform(this)" required="required" label="F_DEFAULTGATEWAY" />
 			</fieldset>
 		</fields>
 	</config>

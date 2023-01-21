@@ -6,9 +6,9 @@
 	<config>
 		<fields name="params">
 			<fieldset name="tmpl">
-				<field type="cobtmpllist" name="template_input" onchange="ajax_load_sub_params(this, '/components/com_joomcck/fields/paytoaccess/tmpl/input');" filter="php$" hide_none="1" hide_default="1" directory="/components/com_joomcck/fields/paytoaccess/tmpl/input" label="F_TMPLINPUT" default="default.php" />
-				<field type="cobtmpllist" name="template_output_list" onchange="ajax_load_sub_params(this, '/components/com_joomcck/fields/paytoaccess/tmpl/output');" filter="php$" hide_none="1" hide_default="1" directory="/components/com_joomcck/fields/paytoaccess/tmpl/output" label="F_TMPLLIST" default="listview.php" />
-				<field type="cobtmpllist" name="template_output_full" onchange="ajax_load_sub_params(this, '/components/com_joomcck/fields/paytoaccess/tmpl/output');" filter="php$" hide_none="1" hide_default="1" directory="/components/com_joomcck/fields/paytoaccess/tmpl/output" label="F_TMPLFULL" default="fullview.php" />
+				<field class="form-select" type="cobtmpllist" name="template_input" onchange="ajax_load_sub_params(this, '/components/com_joomcck/fields/paytoaccess/tmpl/input');" filter="php$" hide_none="1" hide_default="1" directory="/components/com_joomcck/fields/paytoaccess/tmpl/input" label="F_TMPLINPUT" default="default.php" />
+				<field class="form-select" type="cobtmpllist" name="template_output_list" onchange="ajax_load_sub_params(this, '/components/com_joomcck/fields/paytoaccess/tmpl/output');" filter="php$" hide_none="1" hide_default="1" directory="/components/com_joomcck/fields/paytoaccess/tmpl/output" label="F_TMPLLIST" default="listview.php" />
+				<field class="form-select" type="cobtmpllist" name="template_output_full" onchange="ajax_load_sub_params(this, '/components/com_joomcck/fields/paytoaccess/tmpl/output');" filter="php$" hide_none="1" hide_default="1" directory="/components/com_joomcck/fields/paytoaccess/tmpl/output" label="F_TMPLFULL" default="fullview.php" />
 			</fieldset>
 			<fieldset name="emerald" label="F_ACCESSSUBSCR" description="F_ACCESSSUBSCRDESCR" addfieldpath="/components/com_emerald/models/fields/">
 				<field name="subscription" type="planslist" default="" multiple="true" label="F_SUBSCR_PLANS" description="" />
@@ -77,7 +77,7 @@
 				<field name="allow_gateway" type="accesslevel" default="2" label="F_WHOCANCHOOSEGATEWAY">
 					<option value="0">XML_OPT_NOONE</option>
 				</field>
-				<field type="cgateway" name="default_gateway" onchange="ajax_loadpayform(this)" required="required" label="F_DEFAULTGATEWAY" />
+				<field class="form-select" type="cgateway" name="default_gateway" onchange="ajax_loadpayform(this)" required="required" label="F_DEFAULTGATEWAY" />
 			</fieldset>
 		</fields>
 	</config>

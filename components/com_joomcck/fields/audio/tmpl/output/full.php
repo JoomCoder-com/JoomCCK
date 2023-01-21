@@ -126,17 +126,17 @@ defined('_JEXEC') or die();
 
 	function stop<?php echo $record->id;?>(idx)
 	{
-		$("file_stop_<?php echo $record->id;?>_" + idx).setStyle("display", "none");
-		$("file_play_<?php echo $record->id;?>_" + idx).setStyle("display", "inline-block");
+		$("#file_stop_<?php echo $record->id;?>_" + idx).setStyle("display", "none");
+		$("#file_play_<?php echo $record->id;?>_" + idx).setStyle("display", "inline-block");
 		player<?php echo $record->id;?>.stop();
 	}
 	function play<?php echo $record->id;?>(index)
 	{
 		player<?php echo $record->id;?>.playlistItem(index);
-		$('playlist_table').getElements("a[id^=file_play_<?php echo $record->id;?>_]").setStyle("display", "inline-block");
-		$('playlist_table').getElements("a[id^=file_stop_<?php echo $record->id;?>_]").setStyle("display", "none");
-		$("file_play_<?php echo $record->id;?>_" + index).setStyle("display", "none");
-		$("file_stop_<?php echo $record->id;?>_" + index).setStyle("display", "inline-block");
+		$('#playlist_table').getElements("a[id^=file_play_<?php echo $record->id;?>_]").setStyle("display", "inline-block");
+		$('#playlist_table').getElements("a[id^=file_stop_<?php echo $record->id;?>_]").setStyle("display", "none");
+		$("#file_play_<?php echo $record->id;?>_" + index).setStyle("display", "none");
+		$("#file_stop_<?php echo $record->id;?>_" + index).setStyle("display", "inline-block");
 	}
 </script>
 <?php

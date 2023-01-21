@@ -79,7 +79,7 @@ class JFormMEFieldList extends JFormField
 		if($this->fieldname == 'default_gateway' && $this->value)
 		{
 			$html[] = '<script type="text/javascript">
-			setTimeout(ajax_loadpayform, 500, $("'.$this->id.'"));
+			setTimeout(ajax_loadpayform, 500, $("#'.$this->id.'"));
 			</script>'; 
 		}
 

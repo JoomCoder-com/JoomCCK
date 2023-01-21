@@ -98,7 +98,7 @@ span.hint {
 	{
 		$("#delete_icon").remove();
 
-		$("row"+id).prepend('<img src="<?php echo JURI::root(TRUE) ?>/components/com_joomcck/images/load.gif" align="absmiddle" id="delete_icon">');
+		$("#row"+id).prepend('<img src="<?php echo JURI::root(TRUE) ?>/components/com_joomcck/images/load.gif" align="absmiddle" id="delete_icon">');
 		$.ajax({
 			url: Joomcck.field_call_url,
 			dataType: 'json',

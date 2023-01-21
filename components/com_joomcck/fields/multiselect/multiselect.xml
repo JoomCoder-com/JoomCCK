@@ -6,17 +6,17 @@
 	<config>
 		<fields name="params">
 			<fieldset name="tmpl">
-				<field type="cobtmpllist" name="template_input" onchange="ajax_load_sub_params(this, '/components/com_joomcck/fields/multiselect/tmpl/input');" filter="php$" hide_none="1" hide_default="1" directory="/components/com_joomcck/fields/multiselect/tmpl/input" label="F_TMPLINPUT" default="default.php"/>
-				<field type="cobtmpllist" name="template_output_list" onchange="ajax_load_sub_params(this, '/components/com_joomcck/fields/multiselect/tmpl/output');" filter="php$" hide_none="1" hide_default="1" directory="/components/com_joomcck/fields/multiselect/tmpl/output" label="F_TMPLLIST" default="default.php"/>
-				<field type="cobtmpllist" name="template_output_full" onchange="ajax_load_sub_params(this, '/components/com_joomcck/fields/multiselect/tmpl/output');" filter="php$" hide_none="1" hide_default="1" directory="/components/com_joomcck/fields/multiselect/tmpl/output" label="F_TMPLFULL" default="default.php"/>
+				<field class="form-select" type="cobtmpllist" name="template_input" onchange="ajax_load_sub_params(this, '/components/com_joomcck/fields/multiselect/tmpl/input');" filter="php$" hide_none="1" hide_default="1" directory="/components/com_joomcck/fields/multiselect/tmpl/input" label="F_TMPLINPUT" default="default.php"/>
+				<field class="form-select" type="cobtmpllist" name="template_output_list" onchange="ajax_load_sub_params(this, '/components/com_joomcck/fields/multiselect/tmpl/output');" filter="php$" hide_none="1" hide_default="1" directory="/components/com_joomcck/fields/multiselect/tmpl/output" label="F_TMPLLIST" default="default.php"/>
+				<field class="form-select" type="cobtmpllist" name="template_output_full" onchange="ajax_load_sub_params(this, '/components/com_joomcck/fields/multiselect/tmpl/output');" filter="php$" hide_none="1" hide_default="1" directory="/components/com_joomcck/fields/multiselect/tmpl/output" label="F_TMPLFULL" default="default.php"/>
 			</fieldset>
 			<fieldset name="filter" label="FS_FILTERGEN">
 				<field name="filter_enable" type="mradio" condition='{"1":["params_params_template_filter","params_params_filter_hide","params_params_filter_descr","params_params_template_filter_module","fieldset-name-filter2"]}' class="btn-group" default="0" label="F_ENABLE" description="">
 					<option value="0">JNO</option>
 					<option value="1">JYES</option>
 				</field>
-				<field type="cobtmpllist" name="template_filter" onchange="ajax_load_sub_params(this, '/components/com_joomcck/fields/multiselect/tmpl/filter');" filter="php$" hide_none="1" hide_default="1" directory="/components/com_joomcck/fields/multiselect/tmpl/filter" label="F_TMPLFILTER" default="autocomplete.php" />
-				<field type="cobtmpllist" name="template_filter_module" onchange="ajax_load_sub_params(this, '/components/com_joomcck/fields/multiselect/tmpl/filter');" filter="php$" hide_none="1" hide_default="1" directory="/components/com_joomcck/fields/multiselect/tmpl/filter" label="F_TMPLFILTERMODULE" default="autocomplete.php" />
+				<field class="form-select" type="cobtmpllist" name="template_filter" onchange="ajax_load_sub_params(this, '/components/com_joomcck/fields/multiselect/tmpl/filter');" filter="php$" hide_none="1" hide_default="1" directory="/components/com_joomcck/fields/multiselect/tmpl/filter" label="F_TMPLFILTER" default="autocomplete.php" />
+				<field class="form-select" type="cobtmpllist" name="template_filter_module" onchange="ajax_load_sub_params(this, '/components/com_joomcck/fields/multiselect/tmpl/filter');" filter="php$" hide_none="1" hide_default="1" directory="/components/com_joomcck/fields/multiselect/tmpl/filter" label="F_TMPLFILTERMODULE" default="autocomplete.php" />
 				<field name="filter_hide" type="mradio" class="btn-group" default="0" label="F_HIDE" description="F_HIDE_DESCR">
 					<option value="0">JNO</option>
 					<option value="1">JYES</option>

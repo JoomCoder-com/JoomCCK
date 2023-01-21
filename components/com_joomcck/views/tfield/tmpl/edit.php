@@ -28,18 +28,20 @@ $wa->useScript('keepalive')
 		}
 	}
 	function ajax_load_sub_params(sel, dir) {
-		sel.options[sel.selectedIndex].value;
-		console.log(sel.id);
+
+        let selected = $(sel).find(':selected').val();
+        let selectedId = $(sel).attr('id');
+
 		jQuery.ajax({
 			url: '<?php echo JURI::base(); ?>index.php?option=com_joomcck&task=ajax.loadfieldparams&tmpl=component',
-			context: jQuery('#config_'+ sel.id + ' .modal-body'),
+			context: jQuery('#config_'+ selectedId + ' .modal-body'),
 			dataType: 'html',
-			data:{value: sel.options[sel.selectedIndex].value, dir: dir, fid: <?php echo (int)$this->item->id;?> }
+			data:{value: selected, dir: dir, fid: <?php echo (int)$this->item->id;?> }
 		}).done(function(data) {
 			if(data.length == 0) {
-				jQuery('#tr_'+sel.id+' a.btn').hide();
+				jQuery('#tr_'+selectedId+' a.btn').hide();
 			} else {
-				jQuery('#tr_'+sel.id+' a.btn').show();
+				jQuery('#tr_'+selectedId+' a.btn').show();
 			}
 			jQuery(this).html(data);
 			Joomcck.redrawBS();
@@ -47,11 +49,14 @@ $wa->useScript('keepalive')
 	}
 	function ajax_loadfieldform(sel)
 	{
+
+        let selected = $(sel).find(':selected').val();
+
 		jQuery.ajax({
 			url: '<?php echo JURI::base(); ?>index.php?option=com_joomcck&task=ajax.loadfieldform&tmpl=component',
 			context: jQuery('#additional-form'),
 			dataType: 'html',
-			data:{field: sel.options[sel.selectedIndex].value}
+			data:{field: selected}
 		}).done(function(data) {
 			jQuery(this).html(data);
 			Joomcck.redrawBS();
@@ -59,11 +64,15 @@ $wa->useScript('keepalive')
 	}
 	function ajax_loadpayform(sel)
 	{
+
+        let selected = $(sel).find(':selected').val();
+
+
 		jQuery.ajax({
-			url: '<?php echo JURI::base(); ?>index.php?option=com_joomcck&task=ajax.loadcommerce&tmpl=component',
+			url: '<?php echo JURI::root(); ?>index.php?option=com_joomcck&task=ajax.loadcommerce&tmpl=component',
 			context: jQuery('#additional-pay-form'),
 			dataType: 'html',
-			data:{gateway: sel.options[sel.selectedIndex].value, fid: <?php echo (int)$this->item->id;?> }
+			data:{gateway: selected, fid: <?php echo (int) $this->item->id;?> }
 		}).done(function(data) {
 			jQuery(this).html(data);
 			Joomcck.redrawBS();

@@ -84,39 +84,5 @@
 			</field>
 			<field name="default_tax" class="form-control" type="text" description="0.001 - 100 for percentage and anything for flat rate but not more than total amount" default="" size="3" label="Default tax" />
 		</fieldset>
-        <fieldset name="adaptive" label="Adaptive Payments" description="">
-            <field name="adaptive" type="radio" class="btn-group" default="0" label="Enable adaptive payments">
-                <option value="0">No</option>
-                <option value="1">Yes</option>
-            </field>
-            <field name="adaptive_type" type="list" default="3" label="Adaptive method">
-                <option value="1">Parallel</option>
-                <option value="2">Changed you are primary receiver</option>
-                <option value="3">Changed seller is primary receiver</option>
-            </field>
-			<field name="earn_percent" class="form-control" type="text" default="15" label="You interest in %" />
-			<field name="earn_trans" class="form-control" type="text" default="0.2" label="You interest per transaction" />
-			<field name="minimum_amount" class="form-control" type="text" default="1" label="Minimum purchase amount" description="What should be the minimum purchase amount we start tu use adaptive payment. Sometimes it makes no sense on purchases below 1 USD." />
-
-			<field name="fee_payer" type="list" default="SECONDARYONLY" label="Who pays fees">
-				<option value="SENDER">Sender</option>
-				<option value="PRIMARYRECEIVER">Primary receiver</option>
-				<option value="SECONDARYONLY">Secondary receiver</option>
-				<option value="EACHRECEIVER">All receivers</option>
-			</field>
-			<field name="payment_type" type="list" default="SERVICE" label="Payment type">
-				<option value="GOODS">Non-digital goods</option>
-				<option value="SERVICE">Services</option>
-				<option value="DIGITALGOODS">Digital goods</option>
-				<option value="PERSONAL">person-to-person</option>
-				<option value="CASHADVANCE">person-to-person payment for a cash advance</option>
-            </field>
-
-			<field name="caller_id" class="form-control" type="text" description="Your PayPal email that will collect % off sales" label="Your PayPal email" />
-			<field name="api_user" class="form-control" type="text" description="" label="API User Id" />
-			<field name="api_password" class="form-control" type="text" description="" label="API Password" />
-			<field name="api_signature" class="form-control" type="text" description="" label="API Signature" />
-			<field name="api_appid" class="form-control" type="text" description="" label="API Application Id" />
-		</fieldset>
 	</fields>
 </form>
