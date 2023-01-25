@@ -1370,7 +1370,8 @@ class JoomcckModelRecords extends MModelList
 				$this->worns['tags'] = WornHelper::getItem('filter_tag', JText::_('CTAGS'), $tag, implode(', ', $taglabels));
 			}
 
-			$sql = "SELECT record_id from #__js_res_tags_history WHERE tag_id IN(" . implode(',', $tag) . ") AND section_id = {$this->section->id}";
+			$sql = "SELECT record_id from #__js_res_tags_history WHERE tag_id IN(" . implode(',', $db->quote($tag)) . ") AND section_id = {$this->section->id}";
+
 			$db->setQuery($sql);
 			$ids   = $db->loadColumn();
 			$ids[] = 0;

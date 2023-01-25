@@ -91,7 +91,7 @@ class JHTMLTags
 			$query = $db->getQuery(true);
 			$query->select('tag as text, id');
 			$query->from('#__js_res_tags');
-			$query->where("id IN(".implode(',', $default).")");
+			$query->where("id IN(".implode(',', $db->quote($default)).")");
 
 			$db->setQuery($query);
 			$default = $db->loadObjectList();
