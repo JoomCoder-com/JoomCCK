@@ -7,6 +7,8 @@
  * @license     GNU General Public License version 2 or later; see LICENSE
  */
 
+use Joomla\CMS\HTML\HTMLHelper;
+
 defined('JPATH_PLATFORM') || die;
 
 jimport('joomla.filesystem.folder');
@@ -155,21 +157,32 @@ class JFormFieldCobTmplList extends JFormFieldList
 			$parts = explode('/', $this->directory);
 			$title = JText::sprintf('COB_FIEL_PARAMS', ucfirst($parts[6]));
 
+			HTMLHelper::_('bootstrap.modal');
+
 			$form = MFormHelper::getFieldParams($xml, JFactory::getApplication()->input->get('id'), $this->value ?: $this->default);
 
 			$html[] = <<<EOT
-			<a href="#config_$this->id" role="button" class="btn btn-sm btn-light border" data-toggle="modal">$icon</a>
-			<div id="config_$this->id" class="modal hide" tabindex="-1" role="dialog" aria-labelledby="mtitle_$this->id" aria-hidden="true">
-			<div class="modal-header">
-			  <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-			  <h3 id="mtitle_$this->id">$title</h3>
-			</div>
-			<div class="modal-body" style=" overflow-Y: scroll;">
-			  $form
-			</div>
-			<div class="modal-footer">
-			  <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
-			</div>
+			<button data-bs-target="#config_$this->id" type="button" role="button" class="btn btn-sm btn-light border" data-bs-toggle="modal">$icon</button>
+			
+			<div id="config_$this->id" class="modal fade" data-bs-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="mtitle_$this->id" aria-hidden="true">
+				<div class="modal-dialog">
+					<div class="modal-content">
+							<div class="modal-header">							  
+							  <h3 class="modal-title fs-5" id="mtitle_$this->id">$title</h3>
+							  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+							</div>
+							
+											<div class="modal-body" style="overflow-Y: scroll;">
+							  $form
+							</div>
+							
+							<div class="modal-footer">
+							  <button class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+							</div>
+					</div>
+				
+				</div>
+			
 		  </div>
 EOT;
 		}

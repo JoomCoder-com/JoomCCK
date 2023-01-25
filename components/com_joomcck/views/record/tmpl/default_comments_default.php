@@ -37,7 +37,7 @@ if($this->comment->canmoderate)
 $replay = '';
 if($params->get('tmpl_core.comments_nested') > $this->comment->level)
 {
-	$replay = '<a class="btn btn-sm btn-primary" href="#commentmodal" data-toggle="modal" role="button" onclick="Joomcck.editComment(0, '.$this->comment->id.', '.$this->item->id.')"><i class="icon-comments-2"></i> ' . JText::_('CREPLY') . '</a>';
+	$replay = '<a class="btn btn-sm btn-primary" href="#commentmodal" data-bs-toggle="modal" role="button" onclick="Joomcck.editComment(0, '.$this->comment->id.', '.$this->item->id.')"><i class="icon-comments-2"></i> ' . JText::_('CREPLY') . '</a>';
 }
 
 if(!$this->comment->canmoderate && !$this->comment->published)
