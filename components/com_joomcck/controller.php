@@ -88,11 +88,6 @@ class JoomcckController extends MControllerBase
 
 		$display = parent::display();
 
-		if(JFactory::getApplication()->input->get('tmpl') != 'component' && JComponentHelper::getParams('com_joomcck')->get('general_copyright'))
-		{
-			$html = '<div class="clearfix"></div><center><small style="font-size: 10px;">%s</small></center>';
-			echo sprintf($html, JText::sprintf('CPOWEREDBY', '<a target="_blank" href="https://www.joomBoost.com/joomla-components/joomcck.html">Joomcck</a>'));
-		}
 
 		if($this->input->get('no_html'))
 		{

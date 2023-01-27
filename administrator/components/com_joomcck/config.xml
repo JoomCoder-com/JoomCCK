@@ -20,10 +20,6 @@
 			<option value="0">JOPTION_DO_NOT_USE</option>
 		</field>
 
-		<field name="general_copyright" type="radio" class="btn-group" label="XML_FIELD_LABEL_CNF_SHOWPOWEREDBY" default="1" description="XML_FIELD_DESCR_CNF_SHOWPOWEREDBY">
-			<option value="1">JYES</option>
-			<option value="0">JNO</option>
-		</field>
 		<field name="compatibility" type="radio" class="btn-group" label="XML_FIELD_LABEL_CNF_COMPAT" default="0" description="XML_FIELD_LABEL_CNF_COMPATDESCR">
 			<option value="1">JYES</option>
 			<option value="0">JNO</option>
