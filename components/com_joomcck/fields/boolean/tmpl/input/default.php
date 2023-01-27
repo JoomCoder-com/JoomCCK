@@ -21,14 +21,14 @@ div.btn-group[data-toggle=buttons-radio] input[type=radio] {
 </style>
 
 <div class="btn-group" data-toggle="buttons-radio">
-	<button id="bool-y<?php echo $this->id;?>" type="button" class="btn<?php echo $this->value == 1 ? ' active btn-primary' : NULL ?>">
+	<button id="bool-y<?php echo $this->id;?>" type="button" class="btn <?php echo $this->value == 1 ? ' active btn-primary' : ' btn-light' ?>">
 	 	<?php if(in_array($this->params->get('params.view_what', 'both'), array('both', 'icon'))):?>
 	 		<?php echo HTMLFormatHelper::icon($this->params->get('params.icon_true'))?>
 	 	<?php endif;?>
 		<?php echo JText::_($this->params->get('params.true'))?>
 		<input id="boolyes<?php echo $this->id?>" type="radio" name="jform[fields][<?php echo $this->id?>]" value="1" <?php echo ($this->value == 1 ? ' checked="checked"' : NULL);?> />
 	</button>
-	<button id="bool-n<?php echo $this->id;?>" type="button" class="btn<?php echo $this->value == -1 ? ' active btn-primary' : NULL ?>">
+	<button id="bool-n<?php echo $this->id;?>" type="button" class="btn<?php echo $this->value == -1 ? ' active btn-primary' : ' btn-light' ?>">
 	 	<?php if(in_array($this->params->get('params.view_what', 'both'), array('both', 'icon'))):?>
 	 		<?php echo HTMLFormatHelper::icon($this->params->get('params.icon_false'))?>
 	 	<?php endif;?>

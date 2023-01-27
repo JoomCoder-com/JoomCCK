@@ -176,14 +176,14 @@ var _gaq = _gaq || [];
 		var y = $(yes);
 		var n = $(no);
 		y.on('click', function() {
-			y.addClass('btn-primary');
-			n.removeClass('btn-primary');
+			y.addClass('btn-primary').removeClass('btn-light');
+			n.removeClass('btn-primary').addClass('btn-light');
 			$('input[type="radio"]', n).removeAttr('checked', 'checked');
 			$('input[type="radio"]', y).attr('checked', 'checked');
 		});
 		n.on('click', function() {
-			n.addClass('btn-primary');
-			y.removeClass('btn-primary');
+			n.addClass('btn-primary').removeClass('btn-light');;
+			y.removeClass('btn-primary').addClass('btn-light');
 			$('input[type="radio"]', y).removeAttr('checked', 'checked');
 			$('input[type="radio"]', n).attr('checked', 'checked');
 		});
