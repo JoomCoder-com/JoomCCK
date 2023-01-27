@@ -182,7 +182,7 @@ var _gaq = _gaq || [];
 			$('input[type="radio"]', y).attr('checked', 'checked');
 		});
 		n.on('click', function() {
-			n.addClass('btn-primary').removeClass('btn-light');;
+			n.addClass('btn-primary').removeClass('btn-light');
 			y.removeClass('btn-primary').addClass('btn-light');
 			$('input[type="radio"]', y).removeAttr('checked', 'checked');
 			$('input[type="radio"]', n).attr('checked', 'checked');

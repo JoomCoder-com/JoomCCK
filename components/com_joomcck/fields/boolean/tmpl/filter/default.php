@@ -16,10 +16,10 @@ div.hideinputs{
 </style>
 
 <div class="btn-group" data-toggle="buttons-radio">
-	<button id="fbool-y<?php echo $this->id ?>" type="button" class="btn<?php echo $this->value == 'true' ? ' active btn-primary' : NULL ?>">
+	<button id="fbool-y<?php echo $this->id ?>" type="button" class="btn<?php echo $this->value == 'true' ? ' active btn-primary' : ' btn-light' ?>">
 		<?php echo $this->labelvalue['true']?>
 	</button>
-	<button id="fbool-n<?php echo $this->id ?>" type="button" class="btn<?php echo $this->value == 'false' ? ' active btn-primary' : NULL ?>">
+	<button id="fbool-n<?php echo $this->id ?>" type="button" class="btn<?php echo $this->value == 'false' ? ' active btn-primary' : ' btn-light' ?>">
 
 		<?php echo $this->labelvalue['false'];?>
 	</button>
@@ -35,13 +35,13 @@ div.hideinputs{
 		var y_input = $('#y-input<?php echo $this->id ?>');
 		var n_input = $('#n-input<?php echo $this->id ?>');
 		y.on('click', function(){
-			y.addClass('btn-primary');
-			n.removeClass('btn-primary');
+            y.addClass('btn-primary').removeClass('btn-light');
+            n.removeClass('btn-primary').addClass('btn-light');
 			y_input.click();
 		});
 		n.on('click', function(){
-			n.addClass('btn-primary');
-			y.removeClass('btn-primary');
+            n.addClass('btn-primary').removeClass('btn-light');
+            y.removeClass('btn-primary').addClass('btn-light');
 			n_input.click();
 		});
 	}(jQuery))
