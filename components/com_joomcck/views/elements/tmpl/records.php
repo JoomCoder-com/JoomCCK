@@ -119,7 +119,7 @@ $k = 0;
 	<div class="container-fluid">
 	<?php if(JFactory::getApplication()->input->get('mode') == 'form'):?>
 		<div class="row">
-			<div class="span8">
+			<div class="col-md-8">
 
 	<?php endif;?>
 
@@ -155,7 +155,7 @@ $k = 0;
 
 	<?php if(JFactory::getApplication()->input->get('mode') == 'form'):?>
 			</div>
-			<div class="span4">
+			<div class="col-md-4">
 				<div id="recordslist">
 
 				</div>

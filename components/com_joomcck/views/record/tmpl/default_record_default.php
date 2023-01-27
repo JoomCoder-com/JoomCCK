@@ -234,7 +234,7 @@ if($params->get('tmpl_core.item_follow_num'))
 						<?php echo $item->rating;?>
 					</div>
 				<?php endif;?>
-				<div class="span<?php echo ($params->get('tmpl_core.item_rating') ? 8 : 10);?>">
+				<div class="col-md-<?php echo ($params->get('tmpl_core.item_rating') ? 8 : 10);?>">
 					<small>
 						<dl class="dl-horizontal user-info">
 							<?php if($category):?>

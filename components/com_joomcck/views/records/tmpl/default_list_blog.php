@@ -245,7 +245,7 @@ $helper->exclude = $exclude;
 	<?php for($r = 0; $r < $rows; $r++):?>
 		<div class="row">
 			<?php for($c = 0; $c < $cols; $c++):?>
-				<div class="span<?php echo round((12 / $cols));?>">
+				<div class="col-md-<?php echo round((12 / $cols));?>">
 					<?php echo $helper->display($this);?>
 				</div>
 			<?php endfor;?>

@@ -55,7 +55,7 @@ JHtml::_('script', 'system/tabs.js', false, true);
 	</div>
 
 	<div class="row">
-		<div class="span6 form-horizontal">
+		<div class="col-md-6 form-horizontal">
 			<fieldset class="adminform">
 				<legend><?php echo JText::_('CSECTIONSETTINGS'); ?></legend>
 				<div class="control-group">
@@ -78,7 +78,7 @@ JHtml::_('script', 'system/tabs.js', false, true);
 				<?php echo MFormHelper::renderGroup($this->form, array(), 'params') ?>
 			</fieldset>
 		</div>
-		<div class="span6 form-horizontal">
+		<div class="col-md-6 form-horizontal">
 			<fieldset class="adminform">
 				<legend><?php echo JText::_('CTYPESETTINGS'); ?></legend>
 				<div id="additional-form">

@@ -295,7 +295,7 @@ function _show_list_filters($list, $name, $state)
 					<?php if($i % $cols == 0):?>
 					<div class="row">
 					<?php endif;?>
-						<div class="span4">
+						<div class="col-md-4">
 							<label class="checkbox">
 								<input id="f<?php echo $name.$item->value?>" type="checkbox" <?php echo in_array($item->value, (array)$state->get('auditlog.'.$name.'_id')) ? 'checked="checked"' : NULL;?> name="filter_<?php echo $name?>[]" value="<?php echo $item->value;?>">
 								<?php echo $item->text;?>

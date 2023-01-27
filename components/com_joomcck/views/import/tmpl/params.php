@@ -11,7 +11,7 @@ defined('_JEXEC') or die();
 ?>
 <br>
 <div class="row">
-	<div class="span6">
+	<div class="col-md-6">
 		<legend><?php echo JText::_('CIMPORTPARAMS')?></legend>
 		<div class="control-group">
 			<label class="control-label" for="name"><?php echo JText::_('CNAME');?>
@@ -59,7 +59,7 @@ defined('_JEXEC') or die();
 			</div>
 		<?php endif; ?>
 	</div>
-	<div class="span6">
+	<div class="col-md-6">
 		<legend><?php echo JText::_('CIMPORTFIELDASSOC')?></legend>
 
 		<?php if($this->type->params->get('properties.item_title') == 1): ?>

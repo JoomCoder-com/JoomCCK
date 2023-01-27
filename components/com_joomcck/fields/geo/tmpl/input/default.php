@@ -51,7 +51,7 @@ $lang = $lang[0];
 			<div class="row">
 			<?php endif;?>
 
-			<div class="span6">
+			<div class="col-md-6">
 				<small><?php echo $label;?></small><br>
 
 				<?php if($name == 'country'):?>
@@ -94,13 +94,13 @@ $lang = $lang[0];
 		<?php if($this->params->get('params.address.company.show', 1) || $this->params->get('params.address.person.show', 1)):?>
 			<div class="row">
 				<?php if($this->params->get('params.address.company.show', 1)):?>
-					<div class="span<?php echo ($this->params->get('params.address.person.show', 1) ? 6 : 12) ?>">
+					<div class="col-md-<?php echo ($this->params->get('params.address.person.show', 1) ? 6 : 12) ?>">
 						<small><?php echo $this->_label('address', 'company', $address['company']['label']);?></small><br>
 						<?php echo  $this->_input('address', 'company'); ?>
 					</div>
 				<?php endif;?>
 				<?php if($this->params->get('params.address.person.show', 1)):?>
-					<div class="span<?php echo ($this->params->get('params.address.company.show', 1) ? 6 : 12) ?>">
+					<div class="col-md-<?php echo ($this->params->get('params.address.company.show', 1) ? 6 : 12) ?>">
 						<small><?php echo $this->_label('address', 'person', $address['person']['label']);?></small><br>
 						<?php echo  $this->_input('address', 'person'); ?>
 					</div>
@@ -152,11 +152,11 @@ $lang = $lang[0];
 	<small><?php echo JText::_('G_DRAGMARKER');?></small>
 	<?php if(in_array($this->params->get('params.map_manual_position'), $this->user->getAuthorisedViewLevels())):?>
 	<div class="row">
-		<div class="span6">
+		<div class="col-md-6">
 			<small><?php echo JText::_('G_LAT')?></small>
 			<?php echo $this->_input('position', 'lat');?>
 		</div>
-		<div class="span6">
+		<div class="col-md-6">
 			<small><?php echo JText::_('G_LNG')?></small>
 			<?php echo $this->_input('position', 'lng');?>
 		</div>

@@ -45,12 +45,12 @@
 
 	<field id="meta_key" name="meta_key" type="textarea" label="JFIELD_META_KEYWORDS_LABEL" description="JFIELD_META_KEYWORDS_DESC"  rows="5" cols="50" />
 	<field id="meta_descr" name="meta_descr" type="textarea" label="JFIELD_META_DESCRIPTION_LABEL" description="JFIELD_META_DESCRIPTION_DESC"  rows="5" cols="50" />
-	<field id="meta_index" name="meta_index" type="list" label="JFIELD_META_INDEX_LABEL" description="JFIELD_META_INDEX_DESC" class="span12" >
+	<field id="meta_index" name="meta_index" type="list" label="JFIELD_META_INDEX_LABEL" description="JFIELD_META_INDEX_DESC" class="col-md-12" >
 		<option value="">JGLOBAL_USE_GLOBAL</option>
 		<option value="index, follow">Allow search engines index this article</option>
 		<option value="noindex, nofollow">Disallow search engines index this article</option>
 	</field>
-	<field id="alias" name="alias" type="text" label="JFIELD_ALIAS_LABEL" class="span12"/>
+	<field id="alias" name="alias" type="text" label="JFIELD_ALIAS_LABEL" class="col-md-12"/>
 
 	<field id="exalert" name="exalert" type="text" label="JFIELD_EXALERT_LABEL" description="JFIELD_EXALERT_DESC" class="form-control"  />
 	<field id="access_key" name="access_key" type="text" label="JFIELD_ACCESS_KEY_LABEL" description="JFIELD_ACCESS_KEY_DESC" class="form-control"  />

@@ -59,7 +59,7 @@ $span = array(1 => 12, 2 => 6, 3 => 4, 4 => 3, 6 => 2);
 				<div class="row">
 			<?php endif;?>
 
-			<div class="span<?php echo $span[$cols]?>">
+			<div class="col-md-<?php echo $span[$cols]?>">
 				<label class="<?php echo $s;?>" class="checkbox">
 					<input type="checkbox" value="<?php echo $value;?>" name="jform[fields][<?php echo $this->id;?>][]" id="field_<?php echo $this->id;?>_<?php echo $key;?>"
 						<?php echo $sel;?> onClick="Joomcck.countFieldValues(jQuery(this), <?php echo $this->id;?>, <?php echo $this->params->get('params.total_limit', 0);?>, 'checkbox')"/>

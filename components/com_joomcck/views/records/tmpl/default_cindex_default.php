@@ -44,7 +44,7 @@ $api = new JoomcckApi();
 <?php for($i = 0; $i < $rows; $i ++):?>
 	<div class="row">
 		<?php for($c = 0; $c < $cols; $c++):?>
-			<div class="span<?php echo $span[$cols]?> category-box">
+			<div class="col-md-<?php echo $span[$cols]?> category-box">
 				<?php if ($ind < count($cats)): ?>
 					<?php $category = $cats[$ind]; ?>
 					<div class="<?php echo ($params->get('tmpl_core.well', 1) ? 'well well-small' : NULL)?>">

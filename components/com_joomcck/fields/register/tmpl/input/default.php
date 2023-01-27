@@ -16,7 +16,7 @@ $user_params = JComponentHelper::getParams('com_users');
 }
 </style>
 <div class="row" id="regfiled">
-	<div class="span<?php echo $this->params->get('params.loginform') ? 6 : 12 ?>">
+	<div class="col-md-<?php echo $this->params->get('params.loginform') ? 6 : 12 ?>">
 		<h4><?php echo JText::_('COM_USERS_REGISTRATION')?></h4>
 		<div class="row">
 			<?php if($this->params->get('params.name')):?>
@@ -61,7 +61,7 @@ $user_params = JComponentHelper::getParams('com_users');
 		</div>
 	</div>
 	<?php if($this->params->get('params.loginform')):?>
-		<div class="span6">
+		<div class="col-md-6">
 			<h4><?php echo JText::_('JLOGIN')?></h4>
 			<div class="row">
 				<?php if(!$this->params->get('params.field_id_email')):?>

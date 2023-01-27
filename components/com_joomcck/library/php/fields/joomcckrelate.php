@@ -263,7 +263,7 @@ class CFormFieldRelate extends CFormField
 			$attribs .= ' onchange="Joomcck.countFieldValues(jQuery(this), ' . $this->id . ', ' . $this->params->get('params.multi_limit', 0) . ', \'checkbox\');"';
 		}
 
-		$patern = '%s<div class="span6"><label class="checkbox" for="field_%d_%d"><input type="%s" %s value="%s" name="%s" %s id="field_%d_%d"/> %s</label></div>%s';
+		$patern = '%s<div class="col-md-6"><label class="checkbox" for="field_%d_%d"><input type="%s" %s value="%s" name="%s" %s id="field_%d_%d"/> %s</label></div>%s';
 		$i      = 0;
 		foreach($list AS $k => $item)
 		{

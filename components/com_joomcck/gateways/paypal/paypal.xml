@@ -39,7 +39,7 @@
 			<field name="allow_currency" type="accesslevel" default="2" label="Who can select currentcy sign">
 				<option value="0">No one</option>
 			</field>
-			<field name="default_currency" type="list" class="span4" default="USD" label="Default currency">
+			<field name="default_currency" type="list" class="col-md-4" default="USD" label="Default currency">
 				<option value="AUD">Australian Dollar (AUD)</option>
 				<option value="BRL">Brazilian Real (BRL)</option>
 				<option value="CAD">Canadian Dollar (CAD)</option>

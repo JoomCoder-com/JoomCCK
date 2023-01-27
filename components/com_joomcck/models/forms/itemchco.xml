@@ -18,9 +18,9 @@
 		<option value="-1">NOCHANGE</option>
 		<option value="*">JALL</option>
 	</field>
-	<field id="meta_key" name="meta_key" type="textarea" label="JFIELD_META_KEYWORDS_LABEL" description="JFIELD_META_KEYWORDS_DESC" class="span12" rows="5" cols="50" />
-	<field id="meta_descr" name="meta_descr" type="textarea" label="JFIELD_META_DESCRIPTION_LABEL" description="JFIELD_META_DESCRIPTION_DESC" class="span12" rows="5" cols="50" />
-	<field id="meta_index" name="meta_index" type="list" default="-1" label="JFIELD_META_INDEX_LABEL" description="JFIELD_META_INDEX_DESC" class="span12" >
+	<field id="meta_key" name="meta_key" type="textarea" label="JFIELD_META_KEYWORDS_LABEL" description="JFIELD_META_KEYWORDS_DESC" class="col-md-12" rows="5" cols="50" />
+	<field id="meta_descr" name="meta_descr" type="textarea" label="JFIELD_META_DESCRIPTION_LABEL" description="JFIELD_META_DESCRIPTION_DESC" class="col-md-12" rows="5" cols="50" />
+	<field id="meta_index" name="meta_index" type="list" default="-1" label="JFIELD_META_INDEX_LABEL" description="JFIELD_META_INDEX_DESC" class="col-md-12" >
 		<option value="-1">NOCHANGE</option>
 		<option value="index, follow">Allow search engines index this article</option>
 		<option value="noindex, nofollow">Disallow search engines index this article</option>

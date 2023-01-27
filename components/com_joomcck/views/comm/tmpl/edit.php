@@ -37,10 +37,10 @@ $wa->useScript('keepalive')
 	</div>
 
 	<div class="row">
-		<div class="span8">
+		<div class="col-md-8">
 			<?php echo $this->form->getInput('comment'); ?>
 		</div>
-		<div class="span4">
+		<div class="col-md-4">
 			<div class="control-group">
 				<div class="control-label col-md-2"><?php echo $this->form->getLabel('published'); ?></div>
 				<div class="controls"><?php echo $this->form->getInput('published'); ?></div>
