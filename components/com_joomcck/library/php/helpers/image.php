@@ -64,11 +64,7 @@ class CImgHelper {
 		if(!JFile::exists($img))
 		{
 
-			if(!$resizer)
-			{
-
-				$resizer = new ImageResize($file);
-			}
+			$resizer = new ImageResize($file);
 
 			//$resizer->stretch_if_smaller = $options->get('strache', 1);
 			$resizer->quality_jpg = $options->get('quality', 90);
