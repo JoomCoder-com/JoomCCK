@@ -18,7 +18,7 @@
 			});
 
 			$('#jformfields' + id + 'hiddenimage').val('');
-			$('#imagelib' + id).attr('src', '/media/mint/blank.png');
+			$('#imagelib' + id).attr('src', Joomla.getOptions('system.paths').rootFull+'media/mint/blank.png');
 		});
 
 		$('select[data-image-field-id]').bind('change keyup', function() {
@@ -26,16 +26,15 @@
 			var id = $(this).data('image-field-id');
 			var val = $(this).val();
 			if(!val) {
-				val = 'media/mint/blank.png';
+				val =  Joomla.getOptions('system.paths').rootFull+'media/mint/blank.png';
 			}
-			$('#imagelib' + id).attr('src', '/' + val);
+			$('#imagelib' + id).attr('src', Joomla.getOptions('system.paths').rootFull + val);
 
 		});
 	});
 
 	window.jInsertFieldValue = function(val, id) {
-		console.log(val);
 		$('#jformfields' + id + 'image').val(val);
-		$('#imagelib' + id).attr('src', '/' + val);
+		$('#imagelib' + id).attr('src', Joomla.getOptions('system.paths').rootFull+'/' + val);
 	}
 }(jQuery));
