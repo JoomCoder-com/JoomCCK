@@ -52,11 +52,11 @@
 					<option value="4">XML_OPT_WIDTHBASED</option>
 					<option value="5">XML_OPT_HEIGHTBASED</option>
 				</field>
-				<field name="thumbs_list_stretch" type="radio" class="btn-group" default="0" label="F_STRETCHIFSMALLER" description="">
+				<!--<field name="thumbs_list_stretch" type="radio" class="btn-group" default="0" label="F_STRETCHIFSMALLER" description="">
 					<option value="0">JNO</option>
 					<option value="1">JYES</option>
 				</field>
-				<field name="thumbs_list_bg" type="text" size="5" default="#000000" label="F_THUMBBG" />
+				<field name="thumbs_list_bg" type="text" size="5" default="#000000" label="F_THUMBBG" />-->
 				
 			</fieldset>
 			<fieldset name="thumbs2" label="FS_FULLVIEW" description="">
@@ -81,11 +81,11 @@
 					<option value="4">XML_OPT_WIDTHBASED</option>
 					<option value="5">XML_OPT_HEIGHTBASED</option>
 				</field>
-				<field name="thumbs_stretch" type="radio" class="btn-group" default="0" label="F_FULLSTRETCHIFSMALLER" description="">
+				<!--<field name="thumbs_stretch" type="radio" class="btn-group" default="0" label="F_FULLSTRETCHIFSMALLER" description="">
 					<option value="0">JNO</option>
 					<option value="1">JYES</option>
 				</field>
-				<field name="thumbs_bg" type="text" size="5" default="#000000" label="F_THUMBBG" />
+				<field name="thumbs_bg" type="text" size="5" default="#000000" label="F_THUMBBG" />-->
 			</fieldset>
 		</fields>
 	</config>

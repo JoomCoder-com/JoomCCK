@@ -9,7 +9,8 @@
         }
     ],
     "require": {
-        "php": ">=7.2"
+        "php": ">=7.2",
+        "gumlet/php-image-resize": "2.0.*"
     },
     "minimum-stability": "stable",
     "autoload": {
@@ -17,5 +18,8 @@
             "src/"
         ],
         "psr-4": {"Joomcck\\": "src/"}
+    },
+    "scripts": {
+
     }
 }

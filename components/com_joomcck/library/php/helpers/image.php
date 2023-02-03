@@ -7,6 +7,8 @@
  * @license GNU/GPL http://www.gnu.org/copyleft/gpl.html
  */
 
+use Gumlet\ImageResize;
+
 defined('_JEXEC') or die();
 
 jimport('mint.resizeimage');
@@ -32,12 +34,17 @@ class CImgHelper {
 		{
 			return;
 		}
+
+
+
 		$key = md5($file.$width.$height.implode('-', $options));
 		$options = new JRegistry($options);
 		$index = '';
 		$ext = strtolower(JFile::getExt($file));
 
 		$path = JPATH_ROOT. DIRECTORY_SEPARATOR .'images/joomcck_thumbs'. DIRECTORY_SEPARATOR .$folder.DIRECTORY_SEPARATOR;
+
+
         if(!JFolder::exists($path))
         {
         	JFolder::create($path, 0755);
@@ -45,6 +52,7 @@ class CImgHelper {
         }
 
 		$path .= (int)$user_id.DIRECTORY_SEPARATOR;
+
         if(!JFolder::exists($path))
         {
         	JFolder::create($path, 0755);
@@ -55,39 +63,50 @@ class CImgHelper {
 
 		if(!JFile::exists($img))
 		{
+
 			if(!$resizer)
 			{
-				$resizer = new JS_Image_Resizer();
+
+				$resizer = new ImageResize($file);
 			}
 
-			$resizer->stretch_if_smaller = $options->get('strache', 1);
-			$resizer->quality = $options->get('quality', 90);
-			$resizer->background = $options->get('background', '#000000');
-			$resizer->setImage($file);
+			//$resizer->stretch_if_smaller = $options->get('strache', 1);
+			$resizer->quality_jpg = $options->get('quality', 90);
+			//$resizer->background = $options->get('background', '#000000');
+
 
 			switch ($options->get('mode', self::RESIZE_PROPORTIONAL))
 			{
+
+
 				case 1 :
-					$resizer->resize_crop($width, $height, $img);
+					$resizer->crop($width, $height);
+					$resizer->save($img);
 					break;
 				case 2 :
-					$resizer->resize_fit($width, $height, $img);
+					$resizer->resizeToBestFit($width, $height);
+					$resizer->save($img);
 					break;
 				case 3 :
-					$resizer->resize($width, $height, $img);
+					$resizer->resize($width, $height);
+					$resizer->save($img);
 					break;
 				case 4 :
-					$resizer->resizeByWidth($width, $img);
+					$resizer->resizeToWidth($width);
+					$resizer->save($img);
 					break;
 				case 5 :
-					$resizer->resizeByHeight($height, $img);
+					$resizer->resizeToHeight($height, $img);
+					$resizer->save($img);
 					break;
 				case 7 :
-					$resizer->resize_crop_top($width, $height, $img);
+					$resizer->crop($width, $height, true,ImageResize::CROPTOP);
+					$resizer->save($img);
 					break;
 				case 6 :
 				default:
-					$resizer->resize_limitwh($width, $height, $img);
+					$resizer->resizeToLongSide($width, $height, true);
+					$resizer->save($img);
 					break;
 			}
 		}

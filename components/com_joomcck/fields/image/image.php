@@ -86,7 +86,7 @@ class JFormFieldCImage extends CFormField
 			return FALSE;
 		}
 
-		return parent::validate($check, $record, $type, $section);
+		return parent::validateField($check, $record, $type, $section);
 	}
 
 	public function onStoreValues($validData, $record)

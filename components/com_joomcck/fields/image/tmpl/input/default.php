@@ -32,7 +32,7 @@ $directory = $this->directory;
 			$images,
 			'jform[fields]['.$this->id.'][image]',
 			array(
-				'list.attr' => 'size="1" data-image-field-id="'.$this->id.'"',
+				'list.attr' => 'class="form-select" size="1" data-image-field-id="'.$this->id.'"',
 				'list.select' => @$this->value['image']
 			)
 		);
