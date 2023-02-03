@@ -144,23 +144,10 @@ foreach ($exclude as &$value) {
 			<?php if($params->get('tmpl_core.item_title')):?>
                 <td class="has-context cob-title-td">
                     <div class="relative_ctrls">
-						<?php if($this->user->get('id')):?>
-                            <div class="user-ctrls">
-                                <div class="btn-group" role="group" style="display: none;">
-									<?php echo HTMLFormatHelper::bookmark($item, $this->submission_types[$item->type_id], $params);?>
-									<?php echo HTMLFormatHelper::follow($item, $this->section);?>
-									<?php echo HTMLFormatHelper::repost($item, $this->section);?>
-									<?php echo HTMLFormatHelper::compare($item, $this->submission_types[$item->type_id], $this->section);?>
-									<?php if($item->controls):?>
-                                        <button type="button" data-bs-toggle="dropdown" class="dropdown-toggle btn btn-sm bg-light border">
-                                        </button>
-                                        <ul class="dropdown-menu">
-											<?php echo list_controls($item->controls);?>
-                                        </ul>
-									<?php endif;?>
-                                </div>
-                            </div>
-						<?php endif;?>
+                        <?php echo Joomla\CMS\Layout\LayoutHelper::render(
+                                'core.list.recordParts.buttonsManage',
+                            ['item' => $item,'section' => $this->section, 'submissionTypes' => $this->submission_types, "params" => $params],null,['component' => 'com_joomcck','client' => 'site' ]
+                        ) ?>
 						<?php if($this->submission_types[$item->type_id]->params->get('properties.item_title')):?>
                         <div class="float-start">
                             <<?php echo $params->get('tmpl_core.title_tag', 'h2');?> class="record-title">

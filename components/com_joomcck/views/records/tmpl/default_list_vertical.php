@@ -58,23 +58,10 @@ $width = (100 - (int)$params->get('tmpl_params.lbl_width', 15)) / $cols;
 		<?php for ($i=0; $i< $cols; $i++): ?>
 			<td class="has-context" width="<?php echo $width; ?>%">
 				<div class="relative_ctrls">
-				<?php if($this->user->get('id')):?>
-					<div class="user-ctrls">
-						<div class="btn-group" style="display: none;">
-							<?php echo HTMLFormatHelper::bookmark($items[$i], $this->submission_types[$items[$i]->type_id], $params);?>
-							<?php echo HTMLFormatHelper::follow($items[$i], $this->section);?>
-							<?php echo HTMLFormatHelper::repost($items[$i], $this->section);?>
-							<?php if($items[$i]->controls):?>
-								<a href="#" data-toggle="dropdown" class="dropdown-toggle btn btn-sm">
-									<img width="16" height="16" alt="<?php echo JText::_('COPTIONS')?>" src="<?php echo JURI::root(TRUE)?>/media/mint/icons/16/gear.png">
-								</a>
-								<ul class="dropdown-menu">
-									<?php echo list_controls($items[$i]->controls);?>
-								</ul>
-							<?php endif;?>
-						</div>
-					</div>
-				<?php endif;?>
+					<?php echo Joomla\CMS\Layout\LayoutHelper::render(
+						'core.list.recordParts.buttonsManage',
+						['item' => $item,'disabled' => ['compare'], 'section' => $this->section, 'submissionTypes' => $this->submission_types, "params" => $params],null,['component' => 'com_joomcck','client' => 'site' ]
+					) ?>
 				<?php if($this->submission_types[$items[$i]->type_id]->params->get('properties.item_title')):?>
 					<<?php echo $params->get('tmpl_params.title_tag', 'h2')?>>
 						<?php if($params->get('tmpl_core.item_link')):?>

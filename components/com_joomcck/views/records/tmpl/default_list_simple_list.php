@@ -51,24 +51,10 @@ JHtml::_('dropdown.init');
 		?>
 		<div class="has-context<?php if($item->featured) echo ' success' ?>">
 			<a name="record<?php echo $item->id;?>"></a>
-			<?php if($this->user->get('id')):?>
-				<div class="float-end controls">
-					<div class="btn-group" style="display: none;">
-						<?php echo HTMLFormatHelper::bookmark($item, $this->submission_types[$item->type_id], $params);?>
-						<?php echo HTMLFormatHelper::follow($item, $this->section);?>
-						<?php echo HTMLFormatHelper::repost($item, $this->section);?>
-						<?php echo HTMLFormatHelper::compare($item, $this->submission_types[$item->type_id], $this->section);?>
-						<?php if($item->controls):?>
-							<a href="#" data-toggle="dropdown" class="dropdown-toggle btn btn-sm">
-								<?php echo HTMLFormatHelper::icon('gear.png');  ?>
-							</a>
-							<ul class="dropdown-menu">
-								<?php echo list_controls($item->controls);?>
-							</ul>
-						<?php endif;?>
-					</div>
-				</div>
-			<?php endif;?>
+			<?php echo Joomla\CMS\Layout\LayoutHelper::render(
+				'core.list.recordParts.buttonsManage',
+				['item' => $item,'section' => $this->section, 'submissionTypes' => $this->submission_types, "params" => $params],null,['component' => 'com_joomcck','client' => 'site' ]
+			) ?>
 			<?php if($params->get('tmpl_core.item_title')):?>
 				<?php if($this->submission_types[$item->type_id]->params->get('properties.item_title')):?>
 					<div>

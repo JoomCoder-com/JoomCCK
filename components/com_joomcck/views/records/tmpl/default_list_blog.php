@@ -30,22 +30,10 @@ if(!class_exists('CarticleHelper'))
 			unset($obj->items[$this->k++]);
 			?>
 			<article class="has-context<?php if($item->featured) {echo ' featured';}?>">
-				<div class="float-end controls">
-					<div class="btn-group" style="display: none;">
-						<?php echo HTMLFormatHelper::bookmark($item, $obj->submission_types[$item->type_id], $params);?>
-						<?php echo HTMLFormatHelper::follow($item, $obj->section);?>
-						<?php echo HTMLFormatHelper::repost($item, $obj->section);?>
-						<?php echo HTMLFormatHelper::compare($item, $obj->submission_types[$item->type_id], $obj->section);?>
-						<?php if($item->controls):?>
-							<a href="#" data-toggle="dropdown" class="dropdown-toggle btn btn-sm">
-								<?php echo HTMLFormatHelper::icon('gear.png');  ?>
-							</a>
-							<ul class="dropdown-menu">
-								<?php echo list_controls($item->controls);?>
-							</ul>
-						<?php endif;?>
-					</div>
-				</div>
+				<?php echo Joomla\CMS\Layout\LayoutHelper::render(
+					'core.list.recordParts.buttonsManage',
+					['item' => $item,'section' => $obj->section, 'submissionTypes' => $obj->submission_types, "params" => $params],null,['component' => 'com_joomcck','client' => 'site' ]
+				) ?>
 				<h2>
 					<?php if($params->get('tmpl_core.item_title')):?>
 						<?php if(in_array($params->get('tmpl_core.item_link'), $obj->user->getAuthorisedViewLevels())):?>
