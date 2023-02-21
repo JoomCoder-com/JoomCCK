@@ -808,7 +808,11 @@ class JoomcckModelCat extends MModelAdmin
 
 	public function publish(&$pks, $value = 1)
 	{
-		if(parent::publish($pks, $value))
+
+
+		$result = parent::publish($pks, $value);
+
+		if($result)
 		{
 			$db = JFactory::getDbo();
 			foreach($pks AS $id)

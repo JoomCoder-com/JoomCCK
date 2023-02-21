@@ -86,7 +86,7 @@ $listDirn = $this->state->get('list.direction');
 					<small>
 						<?php echo $item->download; ?>
 						<br/><?php echo JText::_('Size'); ?>: <span class="badge bg-info"><?php echo $item->size; ?></span>
-						<br/><?php echo JText::_('CBTIME'); ?>: <?php echo $item->btime != '0000-00-00 00:00:00' ? JDate::getInstance($item->btime) : JText::_('CNEVER'); ?>
+						<br/><?php echo JText::_('CBTIME'); ?>: <?php echo !in_array($item->btime,[null,'0000-00-00 00:00:00']) ? JDate::getInstance($item->btime) : JText::_('CNEVER'); ?>
 					</small>
 				</td>
 				<td class="center">

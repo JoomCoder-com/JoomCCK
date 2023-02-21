@@ -946,11 +946,14 @@ abstract class MModelAdmin extends MModelForm
 					return false;
 				}
 			}
+
+			$pks[$i] = (int) $pk;
 		}
 
 		// Attempt to change the state of the records.
 		if (!$table->publish($pks, $value, $user->get('id')))
 		{
+
 			$this->setError($table->getError());
 
 			return false;

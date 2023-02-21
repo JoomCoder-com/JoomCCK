@@ -7,6 +7,8 @@
  * @license GNU/GPL http://www.gnu.org/copyleft/gpl.html
  */
 
+use Joomla\CMS\Application\ApplicationHelper;
+
 defined('_JEXEC') or die('Restricted access');
 
 class JoomcckTablePacks extends JTable
@@ -32,7 +34,7 @@ class JoomcckTablePacks extends JTable
 		
 		if (!$this->key)
 		{
-			$this->key = 'pack'.JApplication::getHash($this->name);
+			$this->key = 'pack'. ApplicationHelper::getHash($this->name);
 		}
 		
 		return parent::check();

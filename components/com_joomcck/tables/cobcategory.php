@@ -19,6 +19,8 @@ class JoomcckTableCobCategory extends JTableNested
 
 	public function __construct(&$_db)
 	{
+
+		
 		parent::__construct('#__js_res_categories', 'id', $_db);
 		
 		$this->access = (int)JFactory::getConfig()->get('access');
@@ -153,6 +155,7 @@ class JoomcckTableCobCategory extends JTableNested
 		}
 		return true;
 	}
+
 
 	public function store($updateNulls = false)
 	{

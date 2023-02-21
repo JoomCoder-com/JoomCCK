@@ -26,8 +26,8 @@ class JoomcckModelPack extends MModelAdmin
     public function __construct($config)
     {
         $app = JFactory::getApplication();
-        $app->registerEvent('onContentBeforeDelete', 'ZipRemover');
-        $config['event_before_delete'] = 'deleteZip';
+        //$app->registerEvent('onContentBeforeDelete', [$this, 'onAfterModuleList']);
+        //$config['event_before_delete'] = 'deleteZip';
         $this->option                  = 'com_joomcck';
 
         return parent::__construct($config);
@@ -706,7 +706,7 @@ class JoomcckModelPack extends MModelAdmin
     }
 }
 
-class ZipRemover extends JEvent
+class ZipRemover extends Joomla\Event\Event
 {
     public function deleteZip($context, $table)
     {
