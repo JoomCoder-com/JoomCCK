@@ -8,6 +8,8 @@
  * @license   GNU/GPL http://www.gnu.org/copyleft/gpl.html
  */
 
+use Joomla\CMS\Factory;
+
 defined('_JEXEC') or die();
 
 class MECAccess
@@ -418,7 +420,7 @@ class MECAccess
 			) {
 				return TRUE;
 			} else {
-				JError::raiseWarning(403, JText::_('CNOPERMEDIT'));
+				Factory::getApplication()->enqueueMessage(JText::_('E_ERRSCNOPERMEDITEND'),'warning');
 				$modal = '';
 				if($app->input->getInt('modal', FALSE)) {
 					$modal = '&tmpl=component&modal=1';

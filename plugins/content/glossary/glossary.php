@@ -8,6 +8,8 @@
  * @license   GNU/GPL http://www.gnu.org/copyleft/gpl.html
  */
 
+use Joomla\CMS\Factory;
+
 defined('_JEXEC') or die('Restricted access');
 jimport('joomla.plugin.plugin');
 require_once JPATH_ROOT . '/components/com_joomcck/library/php/helpers/helper.php';
@@ -31,7 +33,7 @@ class plgContentGlossary extends JPlugin
 		$field = $this->params->get('field');
 		if(! $field)
 		{
-			JError::raiseWarning(230, 'Glossary plugin - parameters not set. Edit plugin or unpublish it.');
+			Factory::getApplication()->enqueueMessage('Glossary plugin - parameters not set. Edit plugin or unpublish it.','warning');
 			return;
 		}
 

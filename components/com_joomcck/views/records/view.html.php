@@ -8,6 +8,8 @@
  * @license   GNU/GPL http://www.gnu.org/copyleft/gpl.html
  */
 
+use Joomla\CMS\Factory;
+
 defined('_JEXEC') or die();
 // Check to ensure this file is included in Joomla!
 // 6147, 396584
@@ -50,14 +52,15 @@ class JoomcckViewRecords extends MViewBase
 		}
 		if(!$section->params->get('general.status', 1))
 		{
-			JError::raiseWarning(403, JText::_($section->params->get('general.status_msg')));
+			Factory::getApplication()->enqueueMessage(JText::_($section->params->get('general.status_msg')),'warning');
 			$this->_redirect();
 
 			return;
 		}
 		if(!in_array($section->access, $user->getAuthorisedViewLevels()) && !MECAccess::allowRestricted($user, $section))
 		{
-			JError::raiseWarning(403, JText::_('CERR_NOPAGEACCESS'));
+
+			Factory::getApplication()->enqueueMessage(JText::_('CERR_NOPAGEACCESS'),'warning');
 			$this->_redirect();
 
 			return;
@@ -108,7 +111,7 @@ class JoomcckViewRecords extends MViewBase
 			}
 			if(!in_array($category->access, $user->getAuthorisedViewLevels()))
 			{
-				JError::raise(E_WARNING, 403, JText::_('CWARNING_NO_ACCESS_CATEGORY'));
+				Factory::getApplication()->enqueueMessage(JText::_('CWARNING_NO_ACCESS_CATEGORY'),'warning');
 
 				return;
 			}
@@ -137,7 +140,7 @@ class JoomcckViewRecords extends MViewBase
 			(($user->get('id') && $user->get('id') != $app->input->getInt('user_id')) || !$user->get('id'))
 		)
 		{
-			JError::raiseWarning(403, JText::_('CERR_NOPAGEACCESS'));
+			Factory::getApplication()->enqueueMessage(JText::_('CERR_NOPAGEACCESS'),'warning');
 			$app->redirect(JRoute::_(Url::records($section, $category), FALSE));
 		}
 

@@ -7,6 +7,7 @@
  * @license GNU/GPL http://www.gnu.org/copyleft/gpl.html
  */
 
+use Joomla\CMS\Factory;
 use Joomla\CMS\Language\Text;
 
 defined('_JEXEC') or die();
@@ -41,13 +42,15 @@ class JoomcckViewRecords extends MViewBase
 
 		if ($section->published == 0)
 		{
-			JError::raise(E_WARNING, 403, JText::_('CERR_SECTIONUNPUB'));
+
+			Factory::getApplication()->enqueueMessage( JText::_('CERR_SECTIONUNPUB'),'warning');
 			return;
 		}
 
 		if(!in_array($section->access, $user->getAuthorisedViewLevels()))
 		{
-			JError::raise(E_WARNING, 403, JText::_($section->params->get('general.access_msg')));
+			Factory::getApplication()->enqueueMessage( JText::_($section->params->get('general.access_msg')),'warning');
+
 			return;
 		}
 		$this->section = $section;
@@ -70,7 +73,8 @@ class JoomcckViewRecords extends MViewBase
 			}
 			if($category->id && ($category->section_id != $section->id))
 			{
-				JError::raiseNotice(403, JText::_('CCATWRONGSECTION'));
+
+				Factory::getApplication()->enqueueMessage(JText::_('CCATWRONGSECTION'),'warning');
 				$category = $this->models['category']->getEmpty();
 			}
 			JFactory::getApplication()->input->set('cat_id', $category->id);

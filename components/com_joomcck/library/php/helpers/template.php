@@ -31,7 +31,8 @@ class CTmpl
 		}
 		else
 		{
-			JError::raiseWarning(100, 'Config not found: '.$json1);
+
+			Factory::getApplication()->enqueueMessage('Config not found: '.$json1,'warning');
 			$file = array();
 		}
 		var_dump($json1, $json3);

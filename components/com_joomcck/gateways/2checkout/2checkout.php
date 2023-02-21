@@ -7,6 +7,8 @@
  * @license GNU/GPL http://www.gnu.org/copyleft/gpl.html
  */
 
+use Joomla\CMS\Factory;
+
 defined('_JEXEC') or die();
 
 require_once JPATH_ROOT . '/components/com_joomcck/library/php/commerce/mintpay.php';
@@ -191,14 +193,14 @@ class MintPay2Checkout extends MintPayAbstract
 		if ($check != $key)
 		{
 			$out['status'] = 2;
-			JError::raiseWarning(403, JText::_('P2CO_FAIL'));
+			Factory::getApplication()->enqueueMessage(JText::_('P2CO_FAIL'),'warning');
 		}
 		else
-		$app->enqueueMessage(JText::_('P2CO_ORDERCREATED'));
+		$app->enqueueMessage(JText::_('P2CO_ORDERCREATED'),'warning');
 		if (($accept->get('fraud_status') == 'wait') && $pay->get('default_block', $options->get('pay.default_block', 0)))
 		{
 			$out['status'] = 3;
-			$app->enqueueMessage(JText::_('P2CO_RENDING'));
+			$app->enqueueMessage(JText::_('P2CO_RENDING'),'warning');
 		}
 		
 		if ($accept->get('message_type'))

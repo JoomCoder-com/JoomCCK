@@ -6,6 +6,9 @@
  * @copyright Copyright (C) 2012 JoomBoost (https://www.joomBoost.com). All rights reserved.
  * @license GNU/GPL http://www.gnu.org/copyleft/gpl.html
  */
+
+use Joomla\CMS\Factory;
+
 defined('_JEXEC') or die();
 
 class JoomcckViewModerators extends MViewBase
@@ -18,7 +21,8 @@ class JoomcckViewModerators extends MViewBase
 
 		if(!MECAccess::isModerator($user_id, JFactory::getApplication()->input->getInt('filter_section', $this->state->get('filter.section', 0))))
 		{
-			JError::raise(E_WARNING, 403, JText::_('CERR_NOPAGEACCESS'));
+
+			Factory::getApplication()->enqueueMessage( JText::_('CERR_NOPAGEACCESS'),'warning');
 			return;
 		}
 

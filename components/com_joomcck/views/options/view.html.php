@@ -6,6 +6,9 @@
  * @copyright Copyright (C) 2012 JoomBoost (https://www.joomBoost.com). All rights reserved.
  * @license GNU/GPL http://www.gnu.org/copyleft/gpl.html
  */
+
+use Joomla\CMS\Factory;
+
 defined('_JEXEC') or die();
 
 class JoomcckViewOptions extends MViewBase
@@ -91,7 +94,8 @@ class JoomcckViewOptions extends MViewBase
 		$section_id = JFactory::getApplication()->input->getInt('section_id');
 		if(!$section_id)
 		{
-			JError::raiseWarning(403, JText::_('CERRNOSECTION'));
+
+			Factory::getApplication()->enqueueMessage( JText::_('CERRNOSECTION'),'warning');
 			return;
 		}
 
@@ -99,7 +103,8 @@ class JoomcckViewOptions extends MViewBase
 
 		if(!$this->section->params->get('personalize.personalize'))
 		{
-			JError::raiseWarning(403, JText::_('CERRSECTIONNOTPERSONALIZED'));
+
+			Factory::getApplication()->enqueueMessage( JText::_('CERRSECTIONNOTPERSONALIZED'),'warning');
 			return;
 		}
 		JFactory::getDocument()->setTitle(JText::sprintf('CUSERSECTIONSETTINGS', $this->section->name));

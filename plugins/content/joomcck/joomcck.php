@@ -5,6 +5,8 @@
  */
 
 // No direct access.
+use Joomla\CMS\Factory;
+
 defined('_JEXEC') or die;
 
 jimport('joomla.html.pagination');
@@ -36,7 +38,7 @@ class plgContentJoomcck extends JPlugin
 
         if(! $this->params->get('type_id') || ! $this->params->get('section_id'))
 		{
-			JError::raiseNotice(500, 'Not all parameters set in plugin to display discussions');
+			Factory::getApplication()->enqueueMessage('Not all parameters set in plugin to display discussions','warning');
 			return;
 		}
 

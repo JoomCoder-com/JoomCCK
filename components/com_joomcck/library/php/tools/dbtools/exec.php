@@ -1,5 +1,7 @@
 <?php
 
+use Joomla\CMS\Factory;
+
 $app = JFactory::getApplication();
 
 $tables = $params->get('db_tables');
@@ -9,7 +11,8 @@ $table_line = implode(', ', $tables);
 
 if(!$tables)
 {
-	JError::raiseWarning(400, JText::_('No table selected'));
+
+	Factory::getApplication()->enqueueMessage(JText::_('No table selected'),'warning');
 
 	return;
 }

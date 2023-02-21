@@ -7,6 +7,8 @@
  * @license GNU/GPL http://www.gnu.org/copyleft/gpl.html
  */
 
+use Joomla\CMS\Factory;
+
 defined('_JEXEC') or die();
 
 include_once JPATH_ROOT . DIRECTORY_SEPARATOR . 'components/com_joomcck/library/php/joomcckcomments.php';
@@ -45,7 +47,8 @@ class JoomcckCommentsJoomcck extends JoomcckComments
 
 		if(!$data->params->get('comments.type_id') || !$data->params->get('comments.section_id'))
 		{
-			JError::raiseNotice(500, 'Not all parameters set to display comments');
+
+			Factory::getApplication()->enqueueMessage('Not all parameters set to display comments','warning');
 
 			return;
 		}

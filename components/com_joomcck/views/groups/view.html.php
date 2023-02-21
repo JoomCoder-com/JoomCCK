@@ -7,6 +7,8 @@
  * @license GNU/GPL http://www.gnu.org/copyleft/gpl.html
  */
 
+use Joomla\CMS\Factory;
+
 defined('_JEXEC') or die();
 jimport('joomla.application.component.view');
 /**
@@ -34,7 +36,8 @@ class JoomcckViewGroups extends MViewBase
 
 		if(!$this->type->id)
 		{
-			JError::raiseNotice(100, 'Type not selected');
+
+			Factory::getApplication()->enqueueMessage('Type not selected','warning');
 			$app->redirect('index.php?option=com_joomcck&view=types');
 		}
 

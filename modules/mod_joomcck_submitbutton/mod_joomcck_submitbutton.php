@@ -6,6 +6,9 @@
  * @copyright Copyright (C) 2012 JoomBoost (https://www.joomBoost.com). All rights reserved.
  * @license   GNU/GPL http://www.gnu.org/copyleft/gpl.html
  */
+
+use Joomla\CMS\Factory;
+
 defined('_JEXEC') or die('Restricted access');
 
 include_once JPATH_ROOT . '/components/com_joomcck/library/php/helpers/helper.php';
@@ -17,7 +20,7 @@ $category   = NULL;
 
 if(!$section->id)
 {
-	JError::raiseWarning(100, JText::_('MOD_SB_NOSECTION'));
+	Factory::getApplication()->enqueueMessage(JText::_('MOD_SB_NOSECTION'),'warning');
 
 	return FALSE;
 }
@@ -33,7 +36,7 @@ if(!empty($param_types))
 
 if(!$types)
 {
-	JError::raiseWarning(100, JText::_('MOD_SB_NOTYPE'));
+	Factory::getApplication()->enqueueMessage(JText::_('MOD_SB_NOTYPE'),'warning');
 
 	return FALSE;
 }

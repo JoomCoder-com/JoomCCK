@@ -6,6 +6,9 @@
  * @copyright Copyright (C) 2012 JoomBoost (https://www.joomBoost.com). All rights reserved.
  * @license   GNU/GPL http://www.gnu.org/copyleft/gpl.html
  */
+
+use Joomla\CMS\Factory;
+
 defined('_JEXEC') or die('Restricted access');
 
 class METoolSetUserHelper
@@ -18,7 +21,8 @@ class METoolSetUserHelper
 
 		if(!$from)
 		{
-			JError::raiseWarning(400, 'From what user ID? Please set.');
+
+			Factory::getApplication()->enqueueMessage('From what user ID? Please set.','warning');
 
 			return;
 		}
@@ -28,7 +32,7 @@ class METoolSetUserHelper
 
 		if($action == 2 && !$to)
 		{
-			JError::raiseWarning(400, 'To what user ID? Please set.');
+			Factory::getApplication()->enqueueMessage('To what user ID? Please set.','warning');
 
 			return;
 		}

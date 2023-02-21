@@ -136,7 +136,8 @@ class JoomcckViewForm extends MViewBase
 			if($this->type->params->get('submission.limits_day') > 0 &&
 				($model_section->countUserRecords($section->id, $this->type->id, TRUE) >= $this->type->params->get('submission.limits_day')))
 			{
-				JError::raiseWarning(403, JText::sprintf('CMAXSUBMITREACHEDDAY', $this->type->params->get('submission.limits_day')));
+
+				Factory::getApplication()->enqueueMessage(JText::sprintf('CMAXSUBMITREACHEDDAY', $this->type->params->get('submission.limits_day')),'warning');
 				return FALSE;
 			}
 
@@ -234,7 +235,8 @@ class JoomcckViewForm extends MViewBase
 		// Check for errors.
 		if (count($errors = $this->get('Errors')))
 		{
-			JError::raiseWarning(403, implode("\n", $errors));
+
+			Factory::getApplication()->enqueueMessage(implode("\n", $errors),'warning');
 			return FALSE;
 		}
 

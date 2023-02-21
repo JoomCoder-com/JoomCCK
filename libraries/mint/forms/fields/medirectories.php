@@ -6,6 +6,9 @@
  * @copyright Copyright (C) 2012 JoomBoost (https://www.joomBoost.com). All rights reserved.
  * @license GNU/GPL http://www.gnu.org/copyleft/gpl.html
  */
+
+use Joomla\CMS\Factory;
+
 defined('JPATH_PLATFORM') or die();
 
 jimport('joomla.html.html');
@@ -126,7 +129,7 @@ class JFormFieldMEDirectories extends JFormMEFieldList
 
 		// Is the path a folder?
 		if (!is_dir($path)) {
-			JError::raiseWarning(21, JText::_('Error: Directory element: Path is not a folder').' '.$path);
+			Factory::getApplication()->enqueueMessage(JText::_('Error: Directory element: Path is not a folder').' '.$path,'warning');
 			return false;
 		}
 

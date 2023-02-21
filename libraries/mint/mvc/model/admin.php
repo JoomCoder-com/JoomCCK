@@ -7,6 +7,8 @@
  * @license     GNU General Public License version 2 or later; see LICENSE
  */
 
+use Joomla\CMS\Factory;
+
 defined('JPATH_PLATFORM') or die;
 jimport('mint.mvc.model.form');
 
@@ -1153,7 +1155,10 @@ abstract class MModelAdmin extends MModelForm
 
 		if (empty($pks))
 		{
-			return JError::raiseWarning(500, JText::_($this->text_prefix . '_ERROR_NO_ITEMS_SELECTED'));
+
+			Factory::getApplication()->enqueueMessage(JText::_($this->text_prefix . '_ERROR_NO_ITEMS_SELECTED'),'warning');
+
+			return;
 		}
 
 		// Update ordering values

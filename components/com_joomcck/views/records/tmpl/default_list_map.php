@@ -10,7 +10,8 @@ defined('_JEXEC') or die('Restricted access');
 $params = $this->tmpl_params['list'];
 if(!$params->get('tmpl_params.field_id_geo', 0))
 {
-	JError::raiseNotice(100, JText::_('CERRORNOGEOFIELD'));
+
+	Factory::getApplication()->enqueueMessage( JText::_('CERRORNOGEOFIELD'),'warning');
 
 	return;
 }

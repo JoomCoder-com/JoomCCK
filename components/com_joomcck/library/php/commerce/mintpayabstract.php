@@ -7,6 +7,8 @@
  * @license GNU/GPL http://www.gnu.org/copyleft/gpl.html
  */
 
+use Joomla\CMS\Factory;
+
 defined('_JEXEC') or die();
 
 class MintPayAbstract
@@ -144,7 +146,8 @@ class MintPayAbstract
 
 			if (!$mail->Send())
 			{
-				JError::raiseWarning(400, JText::_('E_ERRSEND'));
+				Factory::getApplication()->enqueueMessage(JText::_('E_ERRSEND'),'warning');
+
 				return false;
 			}
 

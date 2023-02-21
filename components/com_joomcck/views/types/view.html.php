@@ -6,6 +6,9 @@
  * @copyright Copyright (C) 2012 JoomBoost (https://www.joomBoost.com). All rights reserved.
  * @license GNU/GPL http://www.gnu.org/copyleft/gpl.html
  */
+
+use Joomla\CMS\Factory;
+
 defined('_JEXEC') or die();
 
 class JoomcckViewTypes extends MViewBase
@@ -26,8 +29,7 @@ class JoomcckViewTypes extends MViewBase
         
         if($errors = $model->getErrors())
         {
-        	foreach ($errors AS $error)
-        		JError::raiseWarning(403, $error);
+	        Factory::getApplication()->enqueueMessage(implode('<br>',$errors),'warning');
         	return FALSE;
         }
         

@@ -7,6 +7,8 @@
  * @license   GNU/GPL http://www.gnu.org/copyleft/gpl.html
  */
 
+use Joomla\CMS\Factory;
+
 defined('_JEXEC') or die();
 
 require_once JPATH_ROOT . '/components/com_joomcck/library/php/commerce/mintpay.php';
@@ -122,7 +124,8 @@ class MintPayRobokassa extends MintPayAbstract
 		{
 			$this->log('Robokassa: Verification failed', $_POST);
 			$out['status'] = 2;
-			JError::raiseWarning(403, JText::_('RK_FAIL'));
+
+			Factory::getApplication()->enqueueMessage(JText::_('RK_FAIL'),'warning');
 
 			return FALSE;
 		}

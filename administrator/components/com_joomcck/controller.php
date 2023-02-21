@@ -7,6 +7,8 @@
  * @license GNU/GPL http://www.gnu.org/copyleft/gpl.html
  */
 
+use Joomla\CMS\Factory;
+
 defined('_JEXEC') or die();
 
 /**
@@ -41,13 +43,15 @@ class JoomcckController extends MControllerBase
 
 		if(!JComponentHelper::getParams('com_joomcck')->get('general_upload'))
 		{
-			JError::raiseWarning(400, JText::_('CUPLOADREQ'));
+
+			Factory::getApplication()->enqueueMessage(JText::_('CUPLOADREQ'),'warning');
 			$this->setRedirect('index.php?option=com_config&view=component&component=com_joomcck');
 		}
 
 		if(!JFolder::exists(JPATH_ROOT.'/media/mint/js'))
 		{
-			JError::raiseWarning(400, JText::_('CINSTALLMEDIAPACK'));
+			Factory::getApplication()->enqueueMessage(JText::_('CINSTALLMEDIAPACK'),'warning');
+
 			$this->setRedirect('index.php?option=com_installer&view=install');
 		}
 

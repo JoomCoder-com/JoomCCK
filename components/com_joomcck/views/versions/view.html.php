@@ -6,6 +6,9 @@
  * @copyright Copyright (C) 2012 JoomBoost (https://www.joomBoost.com). All rights reserved.
  * @license GNU/GPL http://www.gnu.org/copyleft/gpl.html
  */
+
+use Joomla\CMS\Factory;
+
 defined('_JEXEC') or die();
 
 JHtml::addIncludePath(JPATH_COMPONENT . DIRECTORY_SEPARATOR . 'library/php');
@@ -43,7 +46,8 @@ class JoomcckViewVersions extends MViewBase
 
 		if(!count($items))
 		{
-			JError::raiseWarning(403, JText::_('CERR_NOVERSIONS'));
+
+			Factory::getApplication()->enqueueMessage(JText::_('CERR_NOVERSIONS'),'warning');
 			return;
 		}
 
