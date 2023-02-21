@@ -278,7 +278,6 @@ class MControllerBase extends JObject
 		// Get the controller class name.
 		$class = ucfirst($prefix) . 'Controller' . (isset($type) ? ucfirst($type) : '');
 
-
 		// Include the class if not present.
 		if (!class_exists($class))
 		{

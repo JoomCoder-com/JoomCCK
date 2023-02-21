@@ -25,7 +25,7 @@ $ordering 	= ($listOrder == 'a.lft');
 $saveOrder 	= ($listOrder == 'a.lft' && $listDirn == 'asc');
 if ($saveOrder)
 {
-	$saveOrderingUrl = 'index.php?option=com_joomcck&task=categories.saveOrderAjax&tmpl=component';
+	$saveOrderingUrl = 'index.php?option=com_joomcck&task=cats.saveOrderAjax&tmpl=component';
 	JHtml::_('sortablelist.sortable', 'categoryList', 'adminForm', strtolower($listDirn), $saveOrderingUrl, false, true);
 }
 ?>
@@ -132,12 +132,12 @@ if ($saveOrder)
 						<input type="text" style="display:none"  name="order[]" size="5" value="<?php echo $orderkey + 1;?>" />
 					</td>
 					<td class="center">
-						<?php echo JHtml::_('jgrid.published', $item->published, $i, 'categories.', $canChange);?>
+						<?php echo JHtml::_('jgrid.published', $item->published, $i, 'cats.', $canChange);?>
 					</td>
 					<td>
 						<?php echo str_repeat('<span class="gi">&mdash;</span>', $item->level-1) ?>
 						<?php if ($item->checked_out) : ?>
-							<?php echo JHtml::_('jgrid.checkedout', $i, $item->editor, $item->checked_out_time, 'categories.', $canCheckin); ?>
+							<?php echo JHtml::_('jgrid.checkedout', $i, $item->editor, $item->checked_out_time, 'cats.', $canCheckin); ?>
 						<?php endif; ?>
 						<?php if ($canEdit || $canEditOwn) : ?>
 							<a href="<?php echo JRoute::_('index.php?option=com_joomcck&view=category&task=cat.edit&id='.$item->id.'&section_id='.$section);?>">
