@@ -590,7 +590,7 @@ class JoomcckModelCat extends MModelAdmin
 				' FROM #__js_res_categories' .
 				' WHERE lft > '.(int) $table->lft.' AND rgt < '.(int) $table->rgt
 			);
-			$childIds = $db->loadResultArray();
+			$childIds = $db->loadColumn();
 
 			// Add child ID's to the array only if they aren't already there.
 			foreach ($childIds as $childId)
@@ -737,7 +737,7 @@ class JoomcckModelCat extends MModelAdmin
 					' FROM `#__js_res_categories`' .
 					' WHERE `lft` BETWEEN '.(int) $table->lft.' AND '.(int) $table->rgt
 				);
-				$children = array_merge($children, (array) $db->loadResultArray());
+				$children = array_merge($children, (array) $db->loadColumn());
 			}
 
 			// Store the row.

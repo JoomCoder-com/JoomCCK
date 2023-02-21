@@ -31,7 +31,7 @@ class JFormFieldCpacksections extends JFormField
 			
 			$db->setQuery('SELECT section_id FROM #__js_res_packs_sections WHERE pack_id = '.$pack_id);
 			
-			$ids = $db->loadResultArray();
+			$ids = $db->loadColumn();
 			
 			$ids[] = 0;
 			$db->setQuery('SELECT id as value, name as text FROM #__js_res_sections WHERE published = 1 AND id NOT IN ('.implode(',', $ids).') ORDER BY name ASC');
