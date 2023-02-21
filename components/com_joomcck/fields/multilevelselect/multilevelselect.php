@@ -7,6 +7,8 @@
  * @license GNU/GPL http://www.gnu.org/copyleft/gpl.html
  */
 
+use Joomla\CMS\Factory;
+
 defined('_JEXEC') or die();
 require_once JPATH_ROOT. '/components/com_joomcck/library/php/fields/joomcckfield.php';
 jimport('joomla.database.tablenested');
@@ -563,7 +565,8 @@ class JFormFieldCMultilevelselect extends CFormField
 				$nouploadform = TRUE;
 
 			} catch (Exception $e) {
-				JError::raiseNotice(100, $e->getMessage());
+
+				Factory::getApplication()->enqueueMessage($e->getMessage(),'warning');
 			}
 		}
 

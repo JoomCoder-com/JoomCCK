@@ -7,6 +7,9 @@
  * @copyright Copyright (C) 2012 JoomBoost (https://www.joomBoost.com). All rights reserved.
  * @license   GNU/GPL http://www.gnu.org/copyleft/gpl.html
  */
+
+use Joomla\CMS\Factory;
+
 defined('_JEXEC') or die();
 jimport('mint.mvc.model.list');
 
@@ -1563,7 +1566,7 @@ class JoomcckModelRecords extends MModelList
 		\Joomla\Utilities\ArrayHelper::toInteger($types);
 		if(empty($types))
 		{
-			JError::raiseNotice(100, JText::_('CERRNOTYPESELECTED'));
+			Factory::getApplication()->enqueueMessage(JText::_('CERRNOTYPESELECTED'),'warning');
 		}
 		$types[] = 0;
 

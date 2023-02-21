@@ -8,6 +8,7 @@
  * @license   GNU/GPL http://www.gnu.org/copyleft/gpl.html
  */
 
+use Joomla\CMS\Factory;
 use Joomla\String\StringHelper;
 
 defined('_JEXEC') or die();
@@ -205,7 +206,7 @@ class JFormFieldCTextarea extends CFormField
 
 		if($this->getErrors())
 		{
-			JError::raiseNotice(100, JText::sprintf('CTEXTNOTIMPORT', $this->label));
+			Factory::getApplication()->enqueueMessage(JText::sprintf('CTEXTNOTIMPORT', $this->label),'warning');
 
 			return FALSE;
 		}

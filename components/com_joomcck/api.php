@@ -74,6 +74,7 @@ if(JFile::exists($em_api))
 	require_once $em_api;
 }
 
+use Joomla\CMS\Language\Text;
 use Joomla\CMS\MVC\View\GenericDataException;
 use Joomla\Registry\Registry;
 
@@ -505,7 +506,7 @@ class JoomcckApi
 
 		if(!$this->section->id)
 		{
-			JError::raiseNotice(404, 'Section not found');
+			throw new \Exception(Text::_('COM_JOOMCCK_SECTION_NOT_FOUND'), 404);
 
 			return;
 		}

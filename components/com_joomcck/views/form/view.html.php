@@ -7,6 +7,7 @@
  * @license GNU/GPL http://www.gnu.org/copyleft/gpl.html
  */
 
+use Joomla\CMS\Factory;
 use Joomla\CMS\MVC\View\GenericDataException;
 
 defined('_JEXEC') or die();
@@ -71,11 +72,12 @@ class JoomcckViewForm extends MViewBase
 		{
 			if(!$user->get('id'))
 			{
-				JError::raiseWarning(403, JText::_('CPLEASELOGIN'));
+				Factory::getApplication()->enqueueMessage( JText::_('CPLEASELOGIN'),'warning');
 			}
 			else
 			{
-				JError::raiseWarning(403, JText::_('CNOPERMISION'));
+				Factory::getApplication()->enqueueMessage( JText::_('CNOPERMISION'),'warning');
+
 			}
 			$modal = '';
 			if($app->input->getInt('modal', FALSE))
@@ -88,13 +90,13 @@ class JoomcckViewForm extends MViewBase
 
 		if (empty($section->id))
 		{
-			JError::raiseWarning(403, JText::_('CNOSECTION'));
+			Factory::getApplication()->enqueueMessage( JText::_('CNOSECTION'),'warning');
 			return FALSE;
 		}
 
 		if (!in_array($this->type->id, $section->params->get('general.type')))
 		{
-			JError::raiseWarning(403, JText::_('CERRTYPENOTALLOWED'));
+			Factory::getApplication()->enqueueMessage( JText::_('CERRTYPENOTALLOWED'),'warning');
 			return FALSE;
 		}
 
@@ -104,8 +106,8 @@ class JoomcckViewForm extends MViewBase
 
 		if($parent_id && !empty($this->parent) && $this->parent->published == 0)
 		{
-			JError::raiseWarning(403, JText::_('CNOPERMISION'));
-			return Falsex;
+			Factory::getApplication()->enqueueMessage( JText::_('CNOPERMISION'),'warning');
+			return FALSE;
 		}
 
         if (empty($this->item->id))
@@ -113,13 +115,13 @@ class JoomcckViewForm extends MViewBase
 			if($section->params->get('general.record_submit_limit') > 0 &&
 				($model_section->countUserRecords($section->id) >= $section->params->get('general.record_submit_limit')))
 			{
-				JError::raiseWarning(403, JText::sprintf('CMAXSUBMITREACHED', $section->params->get('general.record_submit_limit')));
+				Factory::getApplication()->enqueueMessage(JText::sprintf('CMAXSUBMITREACHED', $section->params->get('general.record_submit_limit')),'warning');
 				return FALSE;
 			}
 			if($this->type->params->get('submission.limits_total') > 0 &&
 				($model_section->countUserRecords($section->id, $this->type->id) >= $this->type->params->get('submission.limits_total')))
 			{
-				JError::raiseWarning(403, JText::sprintf('CMAXSUBMITREACHED', $this->type->params->get('submission.limits_total')));
+				Factory::getApplication()->enqueueMessage(JText::sprintf('CMAXSUBMITREACHED', $this->type->params->get('submission.limits_total')),'warning');
 				return FALSE;
 			}
 

@@ -8,6 +8,8 @@
  * @license   GNU/GPL http://www.gnu.org/copyleft/gpl.html
  */
 
+use Joomla\CMS\Factory;
+
 defined('_JEXEC') or die('Restricted access');
 
 jimport('joomla.table.table');
@@ -458,13 +460,13 @@ class JoomcckTableRecord extends JTable
 			if($isNew && $type->params->get('submission.autopublish', 1) == 0)
 			{
 				$this->published = 0;
-				JError::raiseNotice(1, JText::_('CNEWARTICLEAPPROVE'));
+				Factory::getApplication()->enqueueMessage( JText::_('CNEWARTICLEAPPROVE'),'warning');
 			}
 
 			if(!$isNew && $type->params->get('submission.edit_autopublish', 1) == 0)
 			{
 				$this->published = 0;
-				JError::raiseNotice(1, JText::_('CEDITARTICLEAPPROVE'));
+				Factory::getApplication()->enqueueMessage( JText::_('CEDITARTICLEAPPROVE'),'warning');
 			}
 
 			if(is_null($this->published))

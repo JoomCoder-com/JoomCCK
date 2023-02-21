@@ -7,23 +7,25 @@
  * @license   GNU/GPL http://www.gnu.org/copyleft/gpl.html
  */
 
+use Joomla\CMS\Factory;
+
 defined('_JEXEC') or die();
 
 require_once JPATH_ROOT . '/components/com_joomcck/library/php/commerce/mintpay.php';
 
 class MintPayPaypal extends MintPayAbstract
 {
-	const ADP_PARALLEL               = 1;
-	const ADP_CHAINED_YOU_PRIMARY    = 2;
+	const ADP_PARALLEL = 1;
+	const ADP_CHAINED_YOU_PRIMARY = 2;
 	const ADP_CHAINED_SELLER_PRIMARY = 3;
 
 	public function button($field)
 	{
-		$pay     = new JRegistry((array)@$field->pay);
+		$pay     = new JRegistry((array) @$field->pay);
 		$options = $field->params;
-		$user        = JFactory::getUser();
+		$user    = JFactory::getUser();
 
-		if(!$pay->get('business', $options->get('pay.business')))
+		if (!$pay->get('business', $options->get('pay.business')))
 		{
 			return 'No email';
 		}
@@ -44,14 +46,14 @@ class MintPayPaypal extends MintPayAbstract
 		$amount   = $this->_price($pp_amount, $pp_cur);;
 		$topay = $amount;
 
-		if($pp_tax)
+		if ($pp_tax)
 		{
 			$tax = ($options->get('pay.tax_type', 'tax_rate') == 'tax_rate' ? $pp_tax . '%' : $this->_price($pp_tax, $pp_cur));
 		}
 
-		if($pp_discount)
+		if ($pp_discount)
 		{
-			if($options->get('pay.discount_type', 'discount_rate') == 'discount_rate')
+			if ($options->get('pay.discount_type', 'discount_rate') == 'discount_rate')
 			{
 				$topay    = $this->_price(($pp_amount - ($pp_amount * ($pp_discount / 100))), $pp_cur);
 				$discount = "$pp_discount%";
@@ -64,7 +66,7 @@ class MintPayPaypal extends MintPayAbstract
 		}
 
 
-		$action = 'https://www.' . ($options->get('pay.sandbox') ? 'sandbox.' : NULL) . 'paypal.com/us/cgi-bin/webscr';
+		$action = 'https://www.' . ($options->get('pay.sandbox') ? 'sandbox.' : null) . 'paypal.com/us/cgi-bin/webscr';
 
 		$hiddenfields[] = $this->_hidden('cmd', '_xclick');
 		$hiddenfields[] = $this->_hidden('charset', 'utf-8');
@@ -86,8 +88,8 @@ class MintPayPaypal extends MintPayAbstract
 		$url->setVar('result', 'cancel');
 		$hiddenfields[] = $this->_hidden('cancel_return', $url->toString());
 
-		$ipn = JRoute::_('index.php?option=com_joomcck&task=field.call&func=onReceivePayment&field_id=' . $field->id . '&record_id=' . $field->record->id, FALSE, -1);
-		if($options->get('pay.ipn'))
+		$ipn = JRoute::_('index.php?option=com_joomcck&task=field.call&func=onReceivePayment&field_id=' . $field->id . '&record_id=' . $field->record->id, false, -1);
+		if ($options->get('pay.ipn'))
 		{
 			$url->setVar('result', 'return');
 			$hiddenfields[] = $this->_hidden('return', $url->toString());
@@ -98,7 +100,7 @@ class MintPayPaypal extends MintPayAbstract
 			$hiddenfields[] = $this->_hidden('return', $ipn);
 		}
 
-		if($field->params->get('pay.allow_amount'))
+		if ($field->params->get('pay.allow_amount'))
 		{
 			$nonehidden[JText::_('CAMOUNT')] = '<input type="text" onkeyup="Joomcck.formatFloat(this, 2, 11)" class="col-md-2" name="amount" value="' . $pp_amount . '" />';
 			$amount                          = 0;
@@ -110,7 +112,7 @@ class MintPayPaypal extends MintPayAbstract
 			$hiddenfields[] = $this->_hidden('amount', $pp_amount);
 		}
 
-		if($field->params->get('pay.allow_count'))
+		if ($field->params->get('pay.allow_count'))
 		{
 			$nonehidden[JText::_('PP_QNT')] = '<input type="text" class="col-md-2" onkeyup="Joomcck.formatInt(this)" name="quantity" value="' . $options->get('pay.default_count', 1) . '" />';
 		}
@@ -121,10 +123,10 @@ class MintPayPaypal extends MintPayAbstract
 
 		$opt = $options->get('options', array());
 		$i   = 0;
-		foreach($opt as $k => $file)
+		foreach ($opt as $k => $file)
 		{
 			// paypal supports not more than 9 options.
-			if($k > 9)
+			if ($k > 9)
 			{
 				break;
 			}
@@ -132,7 +134,7 @@ class MintPayPaypal extends MintPayAbstract
 			$hiddenfields[] = $this->_hidden('os' . $i++, $file);
 		}
 
-		if($field->params->get('pay.adaptive') && $pp_amount > $field->params->get('pay.minimum_amount'))
+		if ($field->params->get('pay.adaptive') && $pp_amount > $field->params->get('pay.minimum_amount'))
 		{
 			$action = JRoute::_('index.php?option=com_joomcck&task=field.call&func=onAdaptivePayment&field_id=' . $field->id . '&record_id=' . $field->record->id);
 		}
@@ -164,7 +166,7 @@ class MintPayPaypal extends MintPayAbstract
 		$form = $this->load_form('paypal', $field->id);
 
 		$out[JText::_('CPRICE')] = '<input class="form-control" onkeyup="Joomcck.formatFloat(this, 2, 10)" type="text" size="4" name="jform[fields][' . $field->id . '][pay][amount]" value="' . $default->get('amount') . '"/> ';
-		if(in_array($params->get('pay.allow_currency'), $user->getAuthorisedViewLevels()))
+		if (in_array($params->get('pay.allow_currency'), $user->getAuthorisedViewLevels()))
 		{
 			$out[JText::_('CPRICE')] .= $form->getInput('default_currency', 'pay', $default->get('default_currency', $params->get('pay.default_currency')));
 		}
@@ -173,18 +175,18 @@ class MintPayPaypal extends MintPayAbstract
 			$out[JText::_('CPRICE')] .= $params->get('pay.default_currency');
 		}
 
-		if(in_array($params->get('pay.allow_email'), $user->getAuthorisedViewLevels()))
+		if (in_array($params->get('pay.allow_email'), $user->getAuthorisedViewLevels()))
 		{
 			$out[JText::_('PP_EMAIL')] = $form->getInput('business', 'pay', $default->get('business', $params->get('pay.business', $user->get('email'))));
 		}
 
-		if(in_array($params->get('pay.allow_discount'), $user->getAuthorisedViewLevels()))
+		if (in_array($params->get('pay.allow_discount'), $user->getAuthorisedViewLevels()))
 		{
 			$out[JText::_('CDISCOUNT')] = $form->getInput('default_discount', 'pay', $default->get('default_discount', $params->get('pay.default_discount')));
 			$out[JText::_('CDISCOUNT')] .= ($params->get('pay.discount_type') == 'discount_rate' ? ' 0.001 - 100 %' : ' Fixed flat amount');
 		}
 
-		if(in_array($params->get('pay.allow_tax_rate'), $user->getAuthorisedViewLevels()))
+		if (in_array($params->get('pay.allow_tax_rate'), $user->getAuthorisedViewLevels()))
 		{
 			$out[JText::_('CTAX')] = $form->getInput('default_tax', 'pay', $default->get('default_tax', $params->get('pay.default_tax')));
 			$out[JText::_('CTAX')] .= ($params->get('pay.tax_type') == 'tax_rate' ? ' 0.001 - 100 %' : ' Fixed flat amount');
@@ -199,34 +201,35 @@ class MintPayPaypal extends MintPayAbstract
 		$this->log('start transaction receive', $post);
 
 		$accept = new JRegistry($this->_decodePayPalIPN());
-		if($field->params->get('pay.ipn'))
+		if ($field->params->get('pay.ipn'))
 		{
 			$this->log('IPN recieved. Start check.');
-			if(!$this->_IPNcheck($field, $post))
+			if (!$this->_IPNcheck($field, $post))
 			{
-				JError::raiseWarning(403, 'cannot verify order');
+
+				Factory::getApplication()->enqueueMessage('cannot verify order', 'warning');
 				$this->log('cannot verify order');
 
-				return FALSE;
+				return false;
 			}
 		}
 		else
 		{
 			$this->log('PDT recieved. Start check.');
-			if(!$field->params->get('pay.authcode'))
+			if (!$field->params->get('pay.authcode'))
 			{
-				JError::raiseWarning(403, 'PDT identity toked is not set');
+				Factory::getApplication()->enqueueMessage('PDT identity toked is not set', 'warning');
 				$this->log('PDT identity toked is not set');
 
-				return FALSE;
+				return false;
 			}
 
-			if(FALSE == ($data = $this->_PDTcheck($field, JFactory::getApplication()->input->get('tx', $accept->get('tx')), $field->params->get('pay.authcode'))))
+			if (false == ($data = $this->_PDTcheck($field, JFactory::getApplication()->input->get('tx', $accept->get('tx')), $field->params->get('pay.authcode'))))
 			{
-				JError::raiseWarning(403, 'cannot verify order');
+				Factory::getApplication()->enqueueMessage('cannot verify order', 'warning');
 				$this->log('cannot verify order');
 
-				return FALSE;
+				return false;
 			}
 			$accept = new JRegistry($data);
 		}
@@ -283,7 +286,7 @@ class MintPayPaypal extends MintPayAbstract
 		// 4 - refund
 		// 5 - completed
 
-		if($accept->get('action_type') == 'PAY')
+		if ($accept->get('action_type') == 'PAY')
 		{
 			list($time, $user_id) = explode('-', $accept->get('tracking_id'));
 
@@ -296,10 +299,10 @@ class MintPayPaypal extends MintPayAbstract
 			$out['amount']   = $amount;
 			$out['currency'] = $currency;
 
-			switch($accept->get('transaction_type'))
+			switch ($accept->get('transaction_type'))
 			{
 				case 'Adaptive Payment PAY':
-					switch($accept->get('status'))
+					switch ($accept->get('status'))
 					{
 						case 'COMPLETED':
 						case 'INCOMPLETE':
@@ -317,9 +320,10 @@ class MintPayPaypal extends MintPayAbstract
 
 						case 'ERROR':
 						case 'REVERSALERROR':
-							JError::raiseWarning(403, JText::_('Transaction Error'));
 
-							return FALSE;
+							Factory::getApplication()->enqueueMessage('Transaction Error', 'warning');
+
+							return false;
 							break;
 
 					}
@@ -331,9 +335,9 @@ class MintPayPaypal extends MintPayAbstract
 					break;
 			}
 
-			if(empty($out['status']))
+			if (empty($out['status']))
 			{
-				return FALSE;
+				return false;
 			}
 
 			$this->log('adaptiive transaction prepared', $out);
@@ -350,19 +354,19 @@ class MintPayPaypal extends MintPayAbstract
 		$out['currency']   = $accept->get('mc_currency');
 		$out['name']       = $accept->get('item_name');
 
-		switch($accept->get('txn_type'))
+		switch ($accept->get('txn_type'))
 		{
 			case "web_accept" :
 
 
-				switch($accept->get('payment_status'))
+				switch ($accept->get('payment_status'))
 				{
 					case 'Denied' :
 					case 'Expired' :
 					case 'Failed' :
 					case 'Voided' :
 						$out['status'] = 2;
-						JError::raiseWarning(403, JText::_('PP_PAYMENTFAIL'));
+						Factory::getApplication()->enqueueMessage(JText::_('PP_PAYMENTFAIL'), 'warning');
 						break;
 
 					case 'Pending' :
@@ -376,7 +380,8 @@ class MintPayPaypal extends MintPayAbstract
 					case 'Refunded' :
 						$out['status']  = 4;
 						$out['comment'] = $reasons[$accept->get('reason_code')];
-						JError::raiseWarning(403, JText::_('PP_REFUND'));
+						Factory::getApplication()->enqueueMessage(JText::_('PP_REFUND'), 'warning');
+
 						break;
 
 					case 'Created' :
@@ -415,15 +420,15 @@ class MintPayPaypal extends MintPayAbstract
 	{
 		$request = curl_init();
 		$options = array(
-			CURLOPT_URL            => 'https://www.' . ($field->params->get('pay.sandbox') ? 'sandbox.' : NULL) . 'paypal.com/cgi-bin/webscr',
-			CURLOPT_POST           => TRUE,
+			CURLOPT_URL            => 'https://www.' . ($field->params->get('pay.sandbox') ? 'sandbox.' : null) . 'paypal.com/cgi-bin/webscr',
+			CURLOPT_POST           => true,
 			CURLOPT_POSTFIELDS     => http_build_query(array(
-															'cmd' => '_notify-synch',
-															'tx'  => $tx, 'at' => $auth
-													   )),
-			CURLOPT_RETURNTRANSFER => TRUE,
-			CURLOPT_HEADER         => FALSE,
-			CURLOPT_SSL_VERIFYPEER => FALSE,
+				'cmd' => '_notify-synch',
+				'tx'  => $tx, 'at' => $auth
+			)),
+			CURLOPT_RETURNTRANSFER => true,
+			CURLOPT_HEADER         => false,
+			CURLOPT_SSL_VERIFYPEER => false,
 			CURLOPT_CAINFO         => 'cacert.pem'
 		);
 		curl_setopt_array($request, $options);
@@ -434,7 +439,7 @@ class MintPayPaypal extends MintPayAbstract
 
 		$this->log('send CURL confirm');
 
-		if($status == 200 and strpos($response, 'SUCCESS') === 0)
+		if ($status == 200 and strpos($response, 'SUCCESS') === 0)
 		{
 			$response = substr($response, 7);
 			$response = urldecode($response);
@@ -443,9 +448,9 @@ class MintPayPaypal extends MintPayAbstract
 			$response = array_combine($m[1], $m[2]);
 
 			// Fix character encoding if different from UTF-8 (in my case)
-			if(isset($response['charset']) and strtoupper($response['charset']) !== 'UTF-8')
+			if (isset($response['charset']) and strtoupper($response['charset']) !== 'UTF-8')
 			{
-				foreach($response as $key => &$value)
+				foreach ($response as $key => &$value)
 				{
 					$value = mb_convert_encoding($value, 'UTF-8', $response['charset']);
 				}
@@ -461,7 +466,7 @@ class MintPayPaypal extends MintPayAbstract
 
 		$this->log('transaction fail', $response);
 
-		return FALSE;
+		return false;
 	}
 
 	private function _IPNcheck($field, $post)
@@ -470,12 +475,12 @@ class MintPayPaypal extends MintPayAbstract
 
 		$request = curl_init();
 		$options = array(
-			CURLOPT_URL            => 'https://www.' . ($field->params->get('pay.sandbox') ? 'sandbox.' : NULL) . 'paypal.com/cgi-bin/webscr',
+			CURLOPT_URL            => 'https://www.' . ($field->params->get('pay.sandbox') ? 'sandbox.' : null) . 'paypal.com/cgi-bin/webscr',
 			CURLOPT_POST           => 1,
 			CURLOPT_POSTFIELDS     => $req,
 			CURLOPT_RETURNTRANSFER => 1,
 			CURLOPT_HEADER         => 0,
-			CURLOPT_SSL_VERIFYPEER => FALSE,
+			CURLOPT_SSL_VERIFYPEER => false,
 			CURLOPT_CAINFO         => 'cacert.pem',
 			CURLOPT_HTTPHEADER     => array(
 				"Content-Type: application/x-www-form-urlencoded",
@@ -491,17 +496,17 @@ class MintPayPaypal extends MintPayAbstract
 		$status   = curl_getinfo($request, CURLINFO_HTTP_CODE);
 		curl_close($request);
 
-		if(strpos($response, "VERIFIED") !== FALSE)
+		if (strpos($response, "VERIFIED") !== false)
 		{
 			$this->log('transaction verified ' . $response . ' - ' . @$post['txn_id']);
 
-			return TRUE;
+			return true;
 		}
 		else
 		{
 			$this->log('transaction verification invalid ' . $response);
 
-			return FALSE;
+			return false;
 		}
 	}
 
@@ -513,7 +518,7 @@ class MintPayPaypal extends MintPayAbstract
 		$post  = array();
 		$pairs = explode('&', $raw);
 
-		foreach($pairs as $pair)
+		foreach ($pairs as $pair)
 		{
 
 			list($key, $value) = explode('=', $pair, 2);
@@ -523,7 +528,7 @@ class MintPayPaypal extends MintPayAbstract
 
 			// This is look for a key as simple as 'return_url' or as complex as 'somekey[x].property'
 			preg_match('/(\w+)(?:\[(\d+)\])?(?:\.(\w+))?/', $key, $key_parts);
-			switch(count($key_parts))
+			switch (count($key_parts))
 			{
 				case 4:
 					// Original key format: somekey[x].property

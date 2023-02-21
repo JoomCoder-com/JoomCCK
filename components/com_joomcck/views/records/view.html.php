@@ -1003,7 +1003,9 @@ class JoomcckViewRecords extends MViewBase
 			$path = JPATH_ROOT . '/components/com_joomcck/views/records/tmpl/default_list_' . $tmpl . '.xml';
 			if(!JFile::exists($path))
 			{
-				JError::raiseNotice(404, 'Template XML file not found: ' . $path);
+
+				\Joomla\CMS\Factory::getApplication()->enqueueMessage('Template XML file not found: ' . $path);
+
 
 				return $out;
 			}

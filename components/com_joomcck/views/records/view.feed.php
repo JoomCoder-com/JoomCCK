@@ -7,6 +7,8 @@
  * @license GNU/GPL http://www.gnu.org/copyleft/gpl.html
  */
 
+use Joomla\CMS\Language\Text;
+
 defined('_JEXEC') or die();
 
 class JoomcckViewRecords extends MViewBase
@@ -61,7 +63,9 @@ class JoomcckViewRecords extends MViewBase
 			$category = $this->models['category']->getItem($app->input->getInt('cat_id'));
 			if(!isset($category->id))
 			{
-				JError::raiseNotice(404, JText::_('CCATNOTFOUND'));
+
+				throw new \Exception(Text::_('CCATNOTFOUND'), 404);
+
 				$category = $this->models['category']->getEmpty();
 			}
 			if($category->id && ($category->section_id != $section->id))

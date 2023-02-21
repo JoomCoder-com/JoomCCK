@@ -9,6 +9,7 @@
  * @license   GNU/GPL http://www.gnu.org/copyleft/gpl.html
  */
 
+use Joomla\CMS\Factory;
 use Joomla\Filesystem\Folder;
 
 defined('_JEXEC') or die();
@@ -62,7 +63,8 @@ class JoomcckControllerFiles extends MControllerAdmin
         $files    = JTable::getInstance('Files', 'JoomcckTable');
         $field_id = $this->input->getInt('fid');
         if (!$field_id) {
-            JError::raiseWarning(403, JText::_('CERRNOFILEID'));
+	        Factory::getApplication()->enqueueMessage(JText::_('CERRNOFILEID'), 'warning');
+
             $this->setRedirect($return);
 
             return;
@@ -72,7 +74,7 @@ class JoomcckControllerFiles extends MControllerAdmin
         $field_table = JTable::getInstance('Field', 'JoomcckTable');
         $field_table->load($field_id);
         if (!$field_table->id) {
-            JError::raiseWarning(403, JText::_('CERRNOFILED'));
+	        Factory::getApplication()->enqueueMessage(JText::_('CERRNOFILEID'), 'warning');
             $this->setRedirect($return);
 
             return;
@@ -80,7 +82,7 @@ class JoomcckControllerFiles extends MControllerAdmin
 
         $field_path = JPATH_ROOT . '/components/com_joomcck/fields' . DIRECTORY_SEPARATOR . $field_table->field_type . DIRECTORY_SEPARATOR . $field_table->field_type . '.php';
         if (!JFile::exists($field_path)) {
-            JError::raiseWarning(403, JText::_('CERRNOFILEDFILE'));
+	        Factory::getApplication()->enqueueMessage(JText::_('CERRNOFILEDFILE'), 'warning');
             $this->setRedirect($return);
 
             return;
@@ -88,7 +90,7 @@ class JoomcckControllerFiles extends MControllerAdmin
 
         $record_id = $this->input->getInt('rid');
         if (!$record_id) {
-            JError::raiseWarning(403, JText::_('CERRNORECORDID'));
+	        Factory::getApplication()->enqueueMessage(JText::_('CERRNORECORDID'), 'warning');
             $this->setRedirect($return);
 
             return;
@@ -97,8 +99,9 @@ class JoomcckControllerFiles extends MControllerAdmin
         $record_model = MModelBase::getInstance('Record', 'JoomcckModel');
         $record       = $record_model->getItem($record_id);
         if (!$record->id) {
-            JError::raiseWarning(403, JText::_('CERRNORECORD'));
-            $this->setRedirect($return);
+
+	        Factory::getApplication()->enqueueMessage(JText::_('CERRNORECORD'), 'warning');
+	        $this->setRedirect($return);
 
             return;
         }
@@ -110,7 +113,7 @@ class JoomcckControllerFiles extends MControllerAdmin
         $classname = 'JFormFieldC' . ucfirst($field_table->field_type);
 
         if (!class_exists($classname)) {
-            JError::raiseWarning(403, JText::_('CCLASSNOTFOUND') . ': ' . $classname);
+	        Factory::getApplication()->enqueueMessage( JText::_('CCLASSNOTFOUND') . ': ' . $classname, 'warning');
             $this->setRedirect($return);
 
             return;
@@ -119,7 +122,7 @@ class JoomcckControllerFiles extends MControllerAdmin
         $fieldclass = new $classname($field_table, $default);
 
         if (!method_exists($fieldclass, 'onBeforeDownload')) {
-            JError::raiseWarning(403, JText::_('CERRCANNOTPROCESSFILE'));
+	        Factory::getApplication()->enqueueMessage( JText::_('CERRCANNOTPROCESSFILE'), 'warning');
             $this->setRedirect($return);
 
             return;
@@ -128,7 +131,7 @@ class JoomcckControllerFiles extends MControllerAdmin
         $fieldclass->onBeforeDownload($record, $this->input->get('fidx', 0), 0);
 
         if ($fieldclass->getErrors()) {
-            JError::raiseWarning(403, implode("</li><li>", $fieldclass->getErrors()));
+	        Factory::getApplication()->enqueueMessage( implode("</li><li>", $fieldclass->getErrors()), 'warning');
             $this->setRedirect($return);
 
             return;
@@ -148,7 +151,8 @@ class JoomcckControllerFiles extends MControllerAdmin
 
             $subfolder = $fieldclass->params->get('params.subfolder', $files->ext);
             if (!JFile::exists(JPATH_ROOT . "/" . $params->get('general_upload') . "/{$subfolder}/{$files->fullpath}")) {
-                JError::raiseWarning(403, JText::_('CERRNOFILEHDD'));
+
+	            Factory::getApplication()->enqueueMessage( JText::_('CERRNOFILEHDD'), 'warning');
                 $this->setRedirect($return);
 
                 return;
@@ -160,7 +164,8 @@ class JoomcckControllerFiles extends MControllerAdmin
             $value     = $fieldclass->__get('value');
             $fileslist = (array) (isset($value['files']) ? $value['files'] : $value);
             if (!$fileslist) {
-                JError::raiseWarning(403, JText::_('CERRNOFILEHDD'));
+	            Factory::getApplication()->enqueueMessage( JText::_('CERRNOFILEHDD'), 'warning');
+
                 $this->setRedirect($return);
 
                 return;
@@ -244,15 +249,13 @@ class JoomcckControllerFiles extends MControllerAdmin
             $files->load($id);
         }
         if (!$files->id) {
-            JError::raiseWarning(403, JText::_('CERRNOFILEID'));
-
+	        Factory::getApplication()->enqueueMessage( JText::_('CERRNOFILEID'), 'warning');
             return;
         }
 
         $download_file = JPATH_ROOT . DIRECTORY_SEPARATOR . $params->get('general_upload') . DS . 'comment'. DS . $files->fullpath;
         if (!JFile::exists($download_file)) {
-            JError::raiseWarning(403, JText::_('CERRNOFILEHDD'));
-
+	        Factory::getApplication()->enqueueMessage( JText::_('CERRNOFILEHDD'), 'warning');
             return;
         }
 

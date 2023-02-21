@@ -7,6 +7,8 @@
  * @license   GNU/GPL http://www.gnu.org/copyleft/gpl.html
  */
 
+use Joomla\CMS\Factory;
+
 defined('_JEXEC') or die();
 jimport('mint.mvc.controller.form');
 class JoomcckControllerForm extends MControllerForm
@@ -91,7 +93,8 @@ class JoomcckControllerForm extends MControllerForm
 		if(!$user->get('id') && $type->params->get('submission.public_edit'))
 		{
 			$url = Url::edit($record_id . '&access_key=' . $record->access_key);
-			JError::raiseNotice(200, JText::sprintf('CEDITRECORDLINKALERT', JHtml::link($url, JText::_('CEDITLINK'))));
+
+			Factory::getApplication()->enqueueMessage( JText::sprintf('CEDITRECORDLINKALERT', JHtml::link($url, JText::_('CEDITLINK'))), 'warning');
 		}
 
 		// Delete values of fields that are deleted.

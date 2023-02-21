@@ -6,6 +6,10 @@
  * @copyright Copyright (C) 2012 JoomBoost (https://www.joomBoost.com). All rights reserved.
  * @license GNU/GPL http://www.gnu.org/copyleft/gpl.html
  */
+
+use Joomla\CMS\Factory;
+use Joomla\CMS\Language\Text;
+
 defined('_JEXEC') or die();
 
 require_once JPATH_ROOT. '/components/com_joomcck/library/php/commerce/mintpay.php';
@@ -46,7 +50,7 @@ class JoomcckViewElements extends MViewBase
 
 		if(!$user->get('id'))
 		{
-			JError::raiseWarning(403, JText::_('CERRNOSALER'));
+			Factory::getApplication()->enqueueMessage( JText::_('CERRNOSALER'),'warning');
 			CCommunityHelper::goToLogin();
 		}
 
@@ -57,7 +61,7 @@ class JoomcckViewElements extends MViewBase
 		$this->form = $model->getForm();
 		$this->form->setFieldAttribute('gateway_id', 'default', strtoupper(substr(md5(time()), 0, 5)));
 
-		JError::raiseNotice(100, JText::_('CNEWORDERNOTICE'));
+		Factory::getApplication()->enqueueMessage( JText::_('CNEWORDERNOTICE'),'warning');
 
 		parent::display($tpl);
 	}
@@ -68,7 +72,7 @@ class JoomcckViewElements extends MViewBase
 
 		if(!$user->get('id'))
 		{
-			JError::raiseWarning(403, JText::_('CERRNOSALER'));
+			Factory::getApplication()->enqueueMessage( JText::_('CERRNOSALER'),'warning');
 			CCommunityHelper::goToLogin();
 		}
 
@@ -85,7 +89,7 @@ class JoomcckViewElements extends MViewBase
 
 		if(!$user->get('id'))
 		{
-			JError::raiseWarning(403, JText::_('CERRNOBUYER'));
+			Factory::getApplication()->enqueueMessage( JText::_('CERRNOBUYER'),'warning');
 			CCommunityHelper::goToLogin();
 		}
 
@@ -101,7 +105,7 @@ class JoomcckViewElements extends MViewBase
 
 		if(!$user->get('id'))
 		{
-			JError::raiseWarning(403, JText::_('CERRNOBUYER'));
+			Factory::getApplication()->enqueueMessage( JText::_('CERRNOBUYER'),'warning');
 			CCommunityHelper::goToLogin();
 		}
 
@@ -255,13 +259,14 @@ class JoomcckViewElements extends MViewBase
 
 		if($section->published == 0)
 		{
-			JError::raise(E_WARNING, 403, JText::_('CERR_SECTIONUNPUB'));
+			Factory::getApplication()->enqueueMessage( JText::_('CERR_SECTIONUNPUB'),'warning');
 			return;
 		}
 
 		if(! in_array($section->access, $user->getAuthorisedViewLevels()) && !MECAccess::allowRestricted($user, $section))
 		{
-			JError::raise(E_WARNING, 403, $section->params->get('general.access_msg'));
+
+			Factory::getApplication()->enqueueMessage( JText::_($section->params->get('general.access_msg')),'warning');
 			return;
 		}
 		$this->section = $section;
@@ -274,12 +279,13 @@ class JoomcckViewElements extends MViewBase
 			$category = $model_category->getItem(JFactory::getApplication()->input->getInt('cat_id'));
 			if(! isset($category->id))
 			{
-				JError::raiseNotice(404, JText::_('CCATNOTFOUND'));
+
+				throw new \Exception(Text::_('CCATNOTFOUND'), 404);
 				$category = $model_category->getEmpty();
 			}
 			if($category->id && ($category->section_id != $section->id))
 			{
-				JError::raiseNotice(403, JText::_('CCATWRONGSECTION'));
+				Factory::getApplication()->enqueueMessage( JText::_('CCATWRONGSECTION'),'warning');
 				$category = $model_category->getEmpty();
 			}
 			JFactory::getApplication()->input->set('cat_id', $category->id);
@@ -360,7 +366,7 @@ class JoomcckViewElements extends MViewBase
 
 		if(!$user->get('id'))
 		{
-			JError::raiseWarning(403, JText::_('CERRNOBUYER'));
+			Factory::getApplication()->enqueueMessage( JText::_('CERRNOBUYER'),'warning');
 			CCommunityHelper::goToLogin();
 		}
 

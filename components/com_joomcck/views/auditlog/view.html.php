@@ -7,6 +7,9 @@
  * @copyright Copyright (C) 2012 JoomBoost (https://www.joomBoost.com). All rights reserved.
  * @license   GNU/GPL http://www.gnu.org/copyleft/gpl.html
  */
+
+use Joomla\CMS\Factory;
+
 defined('_JEXEC') or die();
 
 class JoomcckViewAuditlog extends MViewBase
@@ -35,8 +38,7 @@ class JoomcckViewAuditlog extends MViewBase
 
 		if(!$user->id)
 		{
-			JError::raiseWarning(100, JText::_('CERRMSGALACCESS'));
-
+			Factory::getApplication()->enqueueMessage( JText::_('CERRMSGALACCESS'),'warning');
 			return;
 		}
 

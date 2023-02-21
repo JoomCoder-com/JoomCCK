@@ -7,6 +7,8 @@
  * @license   GNU/GPL http://www.gnu.org/copyleft/gpl.html
  */
 
+use Joomla\CMS\Factory;
+
 defined('_JEXEC') or die();
 require_once JPATH_ROOT . '/components/com_joomcck/library/php/fields/joomcckselectable.php';
 //require_once JPATH_ROOT. '/components/com_joomcck/library/php/fields/joomcckfield.php';
@@ -188,7 +190,8 @@ class JFormFieldCtext extends CFormFieldSelectable
 		{
             if(!preg_match('/^' . $this->params->get('params.regex_val') . '$/iU', $value))
 			{
-                JError::raiseNotice(100, JText::sprintf('CFIELDREGEX', $this->label).': ' . $value);
+
+				Factory::getApplication()->enqueueMessage(JText::sprintf('CFIELDREGEX', $this->label).': ' . $value,'warning');
 				return FALSE;
 			}
         }
@@ -202,7 +205,8 @@ class JFormFieldCtext extends CFormFieldSelectable
                 $db->escape($value), @$record->id, $this->id));
             if($db->loadResult())
             {
-                JError::raiseNotice(100, JText::sprintf('CFIELDUNIQUE', $this->label, $value));
+
+	            Factory::getApplication()->enqueueMessage(JText::sprintf('CFIELDUNIQUE', $this->label, $value),'warning');
                 return FALSE;
             }
         }

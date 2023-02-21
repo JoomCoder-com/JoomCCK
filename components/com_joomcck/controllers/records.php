@@ -8,6 +8,7 @@
  * @license   GNU/GPL http://www.gnu.org/copyleft/gpl.html
  */
 
+use Joomla\CMS\Factory;
 use Joomla\CMS\MVC\View\GenericDataException;
 
 defined('_JEXEC') or die();
@@ -671,7 +672,8 @@ class JoomcckControllerRecords extends MControllerAdmin
 
 		if(!$this->record->id)
 		{
-			JError::raiseWarning(403, JText::_('No record found'));
+
+			Factory::getApplication()->enqueueMessage(JText::_('No record found'),'warning');
 
 			return FALSE;
 		}
@@ -686,8 +688,7 @@ class JoomcckControllerRecords extends MControllerAdmin
 
 		if(!MECAccess::$control($this->record, $this->type, $this->section))
 		{
-			JError::raiseWarning(403, JText::_('CERRNOACTIONACCESS'));
-
+			Factory::getApplication()->enqueueMessage(JText::_('CERRNOACTIONACCESS'),'warning');
 			return FALSE;
 		}
 

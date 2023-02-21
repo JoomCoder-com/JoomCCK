@@ -7,6 +7,8 @@
  * @license GNU/GPL http://www.gnu.org/copyleft/gpl.html
  */
 
+use Joomla\CMS\Factory;
+
 defined('_JEXEC') or die;
 
 jimport('joomla.application.component.view');
@@ -32,7 +34,7 @@ class JoomcckViewCats extends MViewBase
 		$this->pagination	= $this->get('Pagination');
 
 		if (!$this->section) {
-			JError::raiseWarning(100, JText::_('C_MSG_SELECTSECTIO'));
+			Factory::getApplication()->enqueueMessage( JText::_('C_MSG_SELECTSECTIO'),'warning');
 			$app->redirect('index.php?option=com_joomcck&view=sections');
 
 		}

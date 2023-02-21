@@ -8,6 +8,7 @@
  * @license   GNU/GPL http://www.gnu.org/copyleft/gpl.html
  */
 
+use Joomla\CMS\Factory;
 use Joomla\Registry\Registry;
 
 defined('_JEXEC') or die();
@@ -311,8 +312,8 @@ class JoomcckControllerImport extends MControllerAdmin
 		}
 		catch(Exception $e)
 		{
-			echo $e->getMessage();
-			JError::raiseWarning(100, $e->getMessage());
+
+			Factory::getApplication()->enqueueMessage( $e->getMessage(), 'warning');
 		}
 
 		JFactory::getSession()->set('importstat', $stat);

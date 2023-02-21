@@ -8,6 +8,8 @@
  * @license   GNU/GPL http://www.gnu.org/copyleft/gpl.html
  */
 
+use Joomla\CMS\Factory;
+
 defined('_JEXEC') or die();
 
 jimport('mint.mvc.controller.form');
@@ -77,7 +79,8 @@ class JoomcckControllerTemplates extends MControllerForm
 		}
 		if(!$tmpls)
 		{
-			JError::raiseWarning(100, JText::_('C_MSG_CHOSETEMPL'));
+
+			Factory::getApplication()->enqueueMessage(JText::_('C_MSG_CHOSETEMPL'),'warning');
 			$app->redirect($uri->toString());
 
 			return;
@@ -110,7 +113,8 @@ class JoomcckControllerTemplates extends MControllerForm
 
 		if(!$model->$func($tmpls[0], $new_name))
 		{
-			JError::raiseWarning(100, ($func == 'copy' ? JText::_('C_MSG_TMPLCOPYFAIL') : JText::_('C_MSG_TMPLRENAMEFAIL')));
+
+			Factory::getApplication()->enqueueMessage(($func == 'copy' ? JText::_('C_MSG_TMPLCOPYFAIL') : JText::_('C_MSG_TMPLRENAMEFAIL')),'warning');
 			$app->redirect($uri->toString());
 		}
 
@@ -134,7 +138,8 @@ class JoomcckControllerTemplates extends MControllerForm
 		$new_name = $this->input->getString('tmpl_name');
 		if(!$new_name)
 		{
-			JError::raiseWarning(100, JText::_('C_MSG_TMPLNO_NONAMEENTER'));
+
+			Factory::getApplication()->enqueueMessage(JText::_('C_MSG_TMPLNO_NONAMEENTER'),'warning');
 			$app->redirect($uri->toString());
 
 			return;
@@ -145,7 +150,8 @@ class JoomcckControllerTemplates extends MControllerForm
 		$model = $this->getModel();
 		if(!$model->change_name($file, $new_name))
 		{
-			JError::raiseWarning(100, JText::_('C_MSG_TMPLSAVEFAIL'));
+
+			Factory::getApplication()->enqueueMessage(JText::_('C_MSG_TMPLSAVEFAIL'),'warning');
 			$app->redirect($uri->toString());
 
 			return;

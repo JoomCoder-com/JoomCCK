@@ -7,6 +7,8 @@
  * @license   GNU/GPL http://www.gnu.org/copyleft/gpl.html
  */
 
+use Joomla\CMS\Factory;
+
 defined('_JEXEC') or die();
 
 jimport('mint.mvc.controller.form');
@@ -63,7 +65,8 @@ class JoomcckControllerTemplate extends MControllerForm
 
 		if(!JFile::write($filename, $data['source']))
 		{
-			JError::raiseWarning(100, JText::_('CCOULDNOTSAVEFILE'));
+
+			Factory::getApplication()->enqueueMessage(JText::_('CCOULDNOTSAVEFILE'),'warning');
 		}
 
 		$this->setRedirect(Url::view('templates', FALSE));

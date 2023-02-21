@@ -7,6 +7,9 @@
  * @copyright Copyright (C) 2012 JoomBoost (https://www.joomBoost.com). All rights reserved.
  * @license   GNU/GPL http://www.gnu.org/copyleft/gpl.html
  */
+
+use Joomla\CMS\Factory;
+
 defined('_JEXEC') or die;
 require_once JPATH_ROOT . '/components/com_joomcck/library/php/fields/joomcckfield.php';
 require_once JPATH_ROOT . '/components/com_joomcck/api.php';
@@ -77,7 +80,8 @@ class JFormFieldCRecords extends CFormField
 				$in   = $this->params->get('params.field_in');
 				if(!$from || !$in)
 				{
-					JError::raiseNotice(120, JText::_('R_NOTSETFROMANDINFIELDS'));
+
+					Factory::getApplication()->enqueueMessage(JText::_('R_NOTSETFROMANDINFIELDS'),'warning');
 
 					return NULL;
 				}

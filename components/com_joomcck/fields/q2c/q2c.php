@@ -7,6 +7,9 @@
  * @copyright Copyright (C) 2012 JoomBoost (https://www.joomBoost.com). All rights reserved.
  * @license   GNU/GPL http://www.gnu.org/copyleft/gpl.html
  */
+
+use Joomla\CMS\Factory;
+
 defined('_JEXEC') or die();
 require_once JPATH_ROOT . DIRECTORY_SEPARATOR . 'components/com_joomcck/library/php/fields/joomcckfield.php';
 
@@ -16,14 +19,16 @@ class JFormFieldCQ2c extends CFormField
 	{
 		if(!JFile::exists(JPATH_ROOT . '/components/com_quick2cart/quick2cart.php'))
 		{
-			JError::raiseWarning(100, JText::_('CQ2C_NOTFOUND'));
+
+			Factory::getApplication()->enqueueMessage(JText::_('CQ2C_NOTFOUND'),'warning');
 
 			return;
 		}
 
 		if(!JFile::exists(JPATH_ROOT . '/plugins/content/content_quick2cart/content_quick2cart/fields/quick2cart.php'))
 		{
-			JError::raiseWarning(100, JText::_('CQ2C_NOTFOUNDELEM'));
+
+			Factory::getApplication()->enqueueMessage(JText::_('CQ2C_NOTFOUNDELEM'),'warning');
 
 			return;
 		}
@@ -101,7 +106,8 @@ class JFormFieldCQ2c extends CFormField
 	{
 		if(!JFile::exists(JPATH_SITE . '/components/com_quick2cart/quick2cart.php'))
 		{
-			JError::raiseWarning(100, JText::_('CQ2C_NOTFOUND'));
+
+			Factory::getApplication()->enqueueMessage(JText::_('CQ2C_NOTFOUND'),'warning');
 
 			return;
 		}

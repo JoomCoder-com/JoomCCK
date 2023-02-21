@@ -7,6 +7,8 @@
  * @license GNU/GPL http://www.gnu.org/copyleft/gpl.html
  */
 
+use Joomla\CMS\Factory;
+
 defined('_JEXEC') or die();
 
 class JoomcckControllerUsercategory extends MControllerForm
@@ -38,7 +40,8 @@ class JoomcckControllerUsercategory extends MControllerForm
 
 		if($result >= $section->params->get('personalize.pcat_limit') && $section->params->get('personalize.pcat_limit'))
 		{
-			JError::raiseWarning(403, JText::_('CMSG_YOU_REACHMAX') . ' ' . $section->params->get('personalize.pcat_limit'));
+
+			Factory::getApplication()->enqueueMessage(JText::_('CMSG_YOU_REACHMAX') . ' ' . $section->params->get('personalize.pcat_limit'),'warning');
 			$this->setRedirect(JRoute::_('index.php?option=com_joomcck&view=categories&section_id' . $this->input->getInt('section_id')));
 			return;
 		}

@@ -7,6 +7,9 @@
  * @copyright Copyright (C) 2012 JoomBoost (https://www.joomBoost.com). All rights reserved.
  * @license   GNU/GPL http://www.gnu.org/copyleft/gpl.html
  */
+
+use Joomla\CMS\Factory;
+
 defined('_JEXEC') or die();
 require_once JPATH_ROOT . '/components/com_joomcck/library/php/fields/joomcckrelate.php';
 require_once JPATH_ROOT . '/components/com_joomcck/api.php';
@@ -146,7 +149,8 @@ class JFormFieldCDripcontent extends CFormFieldRelate
 			{
 				if(!$user->get('id'))
 				{
-					JError::raiseNotice(100, JText::_($this->text));
+
+					Factory::getApplication()->enqueueMessage(JText::_($this->text),'warning');
 
 					if(!empty($rf->id) && isset($fields[$rf->id]) && $fields[$rf->id] == 1)
 					{
@@ -198,7 +202,7 @@ class JFormFieldCDripcontent extends CFormFieldRelate
 					$this->_is_subscribed($record, $section, $this->subscr, 1);
 				}
 
-				JError::raiseWarning(403, JText::_($this->text));
+				Factory::getApplication()->enqueueMessage(JText::_($this->text),'warning');
 
 				$url = JRoute::_(Url::records($section, $app->input->get('cat_id'), $app->input->get('user_id')), FALSE);
 				if($this->params->get('params.redirect'))

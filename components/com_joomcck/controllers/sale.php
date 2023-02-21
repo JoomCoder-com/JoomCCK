@@ -7,6 +7,8 @@
  * @license GNU/GPL http://www.gnu.org/copyleft/gpl.html
  */
 
+use Joomla\CMS\Factory;
+
 defined('_JEXEC') or die();
 jimport('mint.mvc.controller.form');
 class JoomcckControllerSale extends MControllerForm
@@ -92,7 +94,7 @@ class JoomcckControllerSale extends MControllerForm
 
 		if(!$user->get('id'))
 		{
-			JError::raiseNotice(403, JText::_('AJAX_PLEASELOGIN'));
+			Factory::getApplication()->enqueueMessage(JText::_('AJAX_PLEASELOGIN'),'warning');
 			CCommunityHelper::goToLogin();
 		}
 
@@ -103,13 +105,14 @@ class JoomcckControllerSale extends MControllerForm
 
 		if($table->gateway && $table->gateway != 'CMANUAL')
 		{
-			JError::raiseNotice(403, JText::_('CCANNOTDELETEORDER'));
+
+			Factory::getApplication()->enqueueMessage(JText::_('CCANNOTDELETEORDER'),'warning');
 			return;
 		}
 
 		if(!$this->isSuperUser() && ($user->get('id') != $table->saler_id))
 		{
-			JError::raiseNotice(403, JText::_('CNOPERMISION'));
+			Factory::getApplication()->enqueueMessage(JText::_('CNOPERMISION'),'warning');
 			return;
 		}
 

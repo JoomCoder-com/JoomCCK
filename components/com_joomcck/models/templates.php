@@ -7,6 +7,8 @@
  * @license GNU/GPL http://www.gnu.org/copyleft/gpl.html
  */
 
+use Joomla\CMS\Factory;
+
 defined('_JEXEC') or die();
 jimport('mint.mvc.model.admin');
 
@@ -96,7 +98,7 @@ function parseXMLTemplateFile($path)
 		$tmp_src	= $userfile['tmp_name'];
 
 		if(!JFile::upload( $tmp_src, $tmp_dest ) ) {
-			JError::raiseWarning(100, JText::_('C_MASG_TMPLUPLOADFAIL'));
+			Factory::getApplication()->enqueueMessage(JText::_('C_MASG_TMPLUPLOADFAIL'),'warning');
 			return false;
 		}
 
@@ -109,7 +111,7 @@ function parseXMLTemplateFile($path)
 		$result = JArchive::extract( $archivename, $extractdir);
 
 		if ( $result === false ) {
-			JError::raiseWarning(100, JText::_('C_MASG_TMPLEXTRACTFAIL'));
+			Factory::getApplication()->enqueueMessage(JText::_('C_MASG_TMPLEXTRACTFAIL'),'warning');
 			return false;
 		}
 
@@ -276,7 +278,7 @@ function parseXMLTemplateFile($path)
 				break;
 		}
 		if($matches[1] == 'default' && $func == 'move' ){
-			JError::raiseWarning( 500, JText::_('C_MSG_TMPLRENAMEFAIL') );
+			Factory::getApplication()->enqueueMessage(JText::_('C_MSG_TMPLRENAMEFAIL'),'warning');
 			return false;
 		}
 		if(!$new_name){
@@ -285,7 +287,7 @@ function parseXMLTemplateFile($path)
 				$oi = $i; $i++; $new_name = str_replace("_{$oi}", "_{$i}", $new_name);
 			}
 		} else if( JFile::exists($layouts_path. DIRECTORY_SEPARATOR .sprintf($index_file_name, $new_name)) ) {
-			JError::raiseWarning( 500, JText::_('C_MSG_TMPLEXISTS') );
+			Factory::getApplication()->enqueueMessage(JText::_('C_MSG_TMPLEXISTS'),'warning');
 			return false;
 		}
 

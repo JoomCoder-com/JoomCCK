@@ -7,6 +7,8 @@
  * @license GNU/GPL http://www.gnu.org/copyleft/gpl.html
  */
 
+use Joomla\CMS\Factory;
+
 defined('_JEXEC') or die('Restricted access');
 jimport('mint.mvc.model.list');
 
@@ -136,7 +138,7 @@ class JoomcckModelTfields extends MModelList
 			$file = $fileds . DIRECTORY_SEPARATOR . $folder . DIRECTORY_SEPARATOR . $folder . '.xml';
 			if(!JFile::exists($file))
 			{
-				JError::raiseWarning(100, JText::sprintf('C_MSG_CANNOTLOADFILE', $folder));
+				Factory::getApplication()->enqueueMessage( JText::sprintf('C_MSG_CANNOTLOADFILE', $folder),'warning');
 				continue;
 			}
 			$xml = simplexml_load_file($file);
