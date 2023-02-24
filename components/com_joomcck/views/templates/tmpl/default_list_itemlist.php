@@ -7,20 +7,15 @@
  * @license   GNU/GPL http://www.gnu.org/copyleft/gpl.html
  */
 
-defined('_JEXEC') or die();
-?>
-<style>
-	<!--
-	.tmpl_img {
-		padding: 5px;
-		border: 1px solid #ccc;
-		position: absolute;
-		background: #fff;
-		margin: 10px 0 0 10px;
-	}
+use Joomla\CMS\HTML\HTMLHelper;
 
-	-->
-</style>
+defined('_JEXEC') or die();
+
+HTMLHelper::_('bootstrap.tooltip', '*[rel^="tooltip"]');
+
+
+?>
+
 <script language="javascript" type="text/javascript">
 	<!--
 	function submitbutton2(task) {
@@ -49,19 +44,20 @@ defined('_JEXEC') or die();
 </script>
 
 
-<div class="well">
-	<div class="input-prepend">
-		<span class="add-on">
-			<i class="icon-flag" rel="tooltip" data-original-title="title" title="<?php echo JText::_('CIMPORTANTKNOW') . '<br>' . JText::_('TIP_CHANGE_TEMPLATE_NAME') ?>"></i>
+<div class="row mb-3">
+	<div class="col-md-4">
+        <div class="input-group">
+		<span class="input-group-text">
+			<i class="fas fa-flag" rel="tooltip" title="<?php echo JText::_('CIMPORTANTKNOW') . '<br>' . JText::_('TIP_CHANGE_TEMPLATE_NAME') ?>">
+            </i>
 		</span>
-		<input class="" id="renamecopy_name" type="text" size="40" name="tmpl_name">
+            <input class="form-control" id="renamecopy_name" type="text" size="40" name="tmpl_name">
 
-		<div class="input-append">
-			<button class="btn" type="button" onclick="submitbutton3( 'templates.change_label' )">
+            <button class="btn btn-outline-secondary btn-sm" type="button" onclick="submitbutton3( 'templates.change_label' )">
 				<?php echo JText::_('CCHANGELABEL'); ?>
-			</button>
-		</div>
-	</div>
+            </button>
+        </div>
+    </div>
 </div>
 
 <table class="table table-hover" id="articleList">
