@@ -47,10 +47,6 @@ defined('_JEXEC') or die();
 <?php echo HTMLFormatHelper::layout('navbar'); ?>
 
 <div class="page-header">
-	<a href="http://docs.JoomBoost.com/en/joomcck/custom-templates-general" target="_blank" class="float-end search-box btn btn-sm">
-		<?php echo JText::_('COM_CUSTOMTMPL'); ?>
-	</a>
-
 	<h1>
 		<img src="<?php echo JUri::root(TRUE); ?>/components/com_joomcck/images/icons/tmpl.png">
 		<?php echo JText::_('CTEMPLATMANAGER'); ?>
@@ -64,10 +60,6 @@ defined('_JEXEC') or die();
         <div id="ins_form" class="fade collapse">
             <div class="well">
                 <div class="form-inline">
-					<?php if($this->ftp) : ?>
-						<?php echo $this->loadTemplate('ftp'); ?>
-					<?php endif; ?>
-
                     <label><?php echo JText::_('LUPLOAD'); ?>: </label>
                     <input id="upload-file" type="file" name="install_package">
                     <button id="upload-submit" class="btn btn-primary" type="button" onclick="submitbutton1()">
