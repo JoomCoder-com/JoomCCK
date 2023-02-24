@@ -97,7 +97,7 @@ class JoomcckModelTfield extends MModelAdmin
 			{
 				//echo $item->params;
 				$registry = new JRegistry();
-				$registry->loadString($item->params);
+				$registry->loadString((string)$item->params);
 				$item->params = $registry->toArray();
 			}
 		}

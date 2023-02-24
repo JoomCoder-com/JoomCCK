@@ -46,7 +46,7 @@ class CFormField extends JFormField
 		elseif(is_string($field->params))
 		{
 			$params = new JRegistry();
-			$params->loadString($field->params);
+			$params->loadString((string)$field->params);
 			$field->params = $params;
 		}
 

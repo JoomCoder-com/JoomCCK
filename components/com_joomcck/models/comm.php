@@ -54,7 +54,7 @@ class JoomcckModelComm extends MModelAdmin
 			if(!is_array($item->params))
 			{
 				$registry = new JRegistry;
-				$registry->loadString($item->params);
+				$registry->loadString((string)$item->params);
 				$item->params = $registry->toArray();
 			}
 		}

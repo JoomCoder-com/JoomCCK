@@ -89,7 +89,7 @@ if($saveOrder)
 			$canChange          = $user->authorise('core.edit.state', 'com_joomcck.field.' . $item->id) && $canCheckin;
 
 			$params = new JRegistry();
-			$params->loadString($item->params);
+			$params->loadString((string)$item->params);
 			?>
 			<tr sortable-group-id="<?php echo $item->group_id ?>">
 				<td class="center">

@@ -125,7 +125,7 @@ class JoomcckModelForm extends MModelAdmin
 		$params = new JRegistry();
 		if(!empty($table->params))
 		{
-			$params->loadString($table->params);
+			$params->loadString((string)$table->params);
 		}
 		$table->params = $params;
 
@@ -172,7 +172,7 @@ class JoomcckModelForm extends MModelAdmin
 		$table->name = JText::_($table->name);
 
 		$params = new JRegistry();
-		$params->loadString($table->params);
+		$params->loadString((string)$table->params);
 		$table->params = $params;
 
 

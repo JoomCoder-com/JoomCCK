@@ -231,7 +231,7 @@ class JoomcckModelCats extends MModelList
 		foreach($items as $key => $item)
 		{
 			$params = new JRegistry();
-			$params->loadString($item->params);
+			$params->loadString((string)$item->params);
 
 			$cats[$item->id]         = $item;
 			$cats[$item->id]->params = $params;
@@ -332,7 +332,7 @@ class JoomcckModelCats extends MModelList
 			foreach($items as $key => $item)
 			{
 				$params = new JRegistry();
-				$params->loadString($item->params);
+				$params->loadString((string)$item->params);
 
 				$cats[$item->id]         = $item;
 				$cats[$item->id]->params = $params;

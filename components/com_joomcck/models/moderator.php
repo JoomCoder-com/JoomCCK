@@ -70,7 +70,7 @@ class JoomcckModelModerator extends MModelAdmin
 			if($row->id)
 			{
 				$registry = new JRegistry;
-				$registry->loadString($row->params);
+				$registry->loadString((string)$row->params);
 				$row->params = $registry->toArray();
 			}
 		}
