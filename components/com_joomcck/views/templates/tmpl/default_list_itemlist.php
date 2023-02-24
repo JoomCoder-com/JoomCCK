@@ -46,15 +46,16 @@ HTMLHelper::_('bootstrap.tooltip', '*[rel^="tooltip"]');
 
 <div class="row mb-3">
 	<div class="col-md-4">
+        <p class="text-muted"><?php echo JText::_('CCHANGELABEL'); ?></p>
         <div class="input-group">
 		<span class="input-group-text">
 			<i class="fas fa-flag" rel="tooltip" title="<?php echo JText::_('CIMPORTANTKNOW') . '<br>' . JText::_('TIP_CHANGE_TEMPLATE_NAME') ?>">
             </i>
 		</span>
-            <input class="form-control" id="renamecopy_name" type="text" size="40" name="tmpl_name">
+            <input  class="form-control form-control-sm" id="renamecopy_name" type="text" size="40" name="tmpl_name">
 
             <button class="btn btn-outline-secondary btn-sm" type="button" onclick="submitbutton3( 'templates.change_label' )">
-				<?php echo JText::_('CCHANGELABEL'); ?>
+				<i class="fas fa-check"></i>
             </button>
         </div>
     </div>
@@ -133,3 +134,5 @@ HTMLHelper::_('bootstrap.tooltip', '*[rel^="tooltip"]');
 		</tr>
 	<?php } ?>
 </table>
+
+<p class="alert alert-info"><strong><?php echo JText::_('CIMPORTANTKNOW') . '</strong><br>' . JText::_('TIP_CHANGE_TEMPLATE_NAME') ?></p>
