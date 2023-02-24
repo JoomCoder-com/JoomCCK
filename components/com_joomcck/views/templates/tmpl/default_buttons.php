@@ -10,14 +10,14 @@
 defined('_JEXEC') or die();
 ?>
 
-<div class="btn-toolbar" id="toolbar">
-	<button onclick="if (document.adminForm.boxchecked.value==0){alert('Please first make a selection from the list');}else{ Joomla.submitbutton('templates.uninstall')}" class="btn btn-sm btn-danger float-end">
-		Uninstall
+<div class="my-3" id="toolbar">
+	<button onclick="if (document.adminForm.boxchecked.value==0){alert('Please first make a selection from the list');}else{ Joomla.submitbutton('templates.uninstall')}" class="btn btn-danger float-end">
+		<i class="fas fa-times"></i> Uninstall
 	</button>
-	<button type="button" class="btn-sm btn-light border" data-toggle="collapse" data-target="#ins_form" rel="{onClose: function() {}}">
-		Install
+	<button role="button" type="button" class="btn btn-light border" data-bs-toggle="collapse" data-bs-target="#ins_form">
+        <i class="fas fa-plus"></i> Install
 	</button>
-	<button type="button" class="btn-sm btn-light border" data-toggle="collapse" data-target="#cr_form" rel="{onClose: function() {}}">
-		Copy/Rename
+	<button type="button" class="btn btn-light border" data-bs-toggle="collapse" data-bs-target="#cr_form">
+        <i class="fas fa-copy"></i> Copy/Rename
 	</button>
 </div>

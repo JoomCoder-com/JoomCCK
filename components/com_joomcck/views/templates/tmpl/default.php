@@ -10,6 +10,9 @@
 use Joomla\CMS\HTML\HTMLHelper;
 
 defined('_JEXEC') or die();
+
+HTMLHelper::_('bootstrap.collapse','',['parent' => '#joomcckContainer']);
+
 ?>
 
 <script type="text/javascript">
@@ -42,6 +45,10 @@ defined('_JEXEC') or die();
 	}
 
 	//-->
+
+
+
+
 </script>
 
 <?php echo HTMLFormatHelper::layout('navbar'); ?>
@@ -53,39 +60,56 @@ defined('_JEXEC') or die();
 	</h1>
 </div>
 
-<?php echo $this->loadTemplate('buttons'); ?>
+
 
 <div id="joomcckContainer">
+
+	<?php echo $this->loadTemplate('buttons'); ?>
+
     <form action="<?php echo $this->action; ?>" enctype="multipart/form-data" method="post" name="adminForm1" class="form-horizontal">
-        <div id="ins_form" class="fade collapse">
-            <div class="well">
-                <div class="form-inline">
-                    <label><?php echo JText::_('LUPLOAD'); ?>: </label>
-                    <input id="upload-file" type="file" name="install_package">
-                    <button id="upload-submit" class="btn btn-primary" type="button" onclick="submitbutton1()">
-						<?php echo JText::_('CUPLOAD'); ?> &amp; <?php echo JText::_('CINSTALL'); ?>
-                    </button>
-                    <input type="hidden" name="task" value="templates.install"/>
-					<?php echo JHTML::_('form.token'); ?>
+        <div id="ins_form" class="collapse" data-bs-parent="#joomcckContainer">
+            <div class="card">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <p class="text-muted"><?php echo JText::_('LUPLOAD'); ?></p>
+                            <div class="input-group">
+
+                                <input class="form-control" id="upload-file" type="file" name="install_package">
+                                <button id="upload-submit" class="btn btn-outline-primary" type="button" onclick="submitbutton1()">
+		                            <?php echo JText::_('CUPLOAD'); ?> &amp; <?php echo JText::_('CINSTALL'); ?>
+                                </button>
+
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
+        <input type="hidden" name="task" value="templates.install"/>
+	    <?php echo JHTML::_('form.token'); ?>
     </form>
 
     <div class="clearfix"></div>
     <form action="<?php echo JUri::getInstance()->toString(); ?>" method="post" name="adminForm" id="adminForm" class="form-horizontal">
-        <div id="cr_form" class="fade collapse">
-            <div class="well">
-                <div class="form-inline">
-                    <label><?php echo JText::_('LNEWNAME'); ?></label>
+        <div id="cr_form" class="collapse" data-bs-parent="#joomcckContainer">
+            <div class="card">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <p class="text-muted"><?php echo JText::_('LNEWNAME'); ?></p>
+                            <div class="input-group">
 
-                    <input id="renamecopy_name" type="text" name="tmplname">
-                    <button id="" class="btn" onclick="submitbutton2('templates.rename')">
-						<?php echo JText::_('CRENAME'); ?>
-                    </button>
-                    <button id="" class="btn" onclick="submitbutton2('templates.copy')">
-						<?php echo JText::_('CCOPY'); ?>
-                    </button>
+                                <input id="renamecopy_name" type="text" class="form-control" name="tmplname">
+                                <button id="" class="btn btn-outline-primary" onclick="submitbutton2('templates.rename')">
+			                        <?php echo JText::_('CRENAME'); ?>
+                                </button>
+                                <button id="" class="btn btn-outline-info" onclick="submitbutton2('templates.copy')">
+			                        <?php echo JText::_('CCOPY'); ?>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
