@@ -31,6 +31,8 @@ JoomCCK opens incredible possibilities for constructing websites, and allows you
 - Moderation System
 - Commenting System
 - Notifications System
+- Google Maps Integration
+- Packing System
 - and many many more features.
 
 
