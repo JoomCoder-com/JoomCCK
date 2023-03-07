@@ -116,7 +116,6 @@ JHtml::_('dropdown.init');
 					<?php endforeach; ?>
 				</tbody>
 			</table>
-
 			<div style="text-align: center;">
 				<small>
 					<?php if($this->pagination->getPagesCounter()):?>
@@ -132,14 +131,14 @@ JHtml::_('dropdown.init');
 			<div class="clearfix"></div>
 		<?php else:?>
 			<div class="clearfix"></div>
-			<div class="alert">
+			<div class="alert alert-info">
 				<?php echo JText::_('CADDMODER');?>
 			</div>
 		<?php endif;?>
 
 
 	<?php else:?>
-		<div class="alert clearfix">
+		<div class="alert alert-info">
 			<?php echo JText::_('CPLEASESELECTSECTION');?>
 		</div>
 	<?php endif;?>

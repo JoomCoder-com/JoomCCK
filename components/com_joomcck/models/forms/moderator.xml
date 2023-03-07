@@ -11,7 +11,7 @@
 
 	<fields name="params">
 		<fieldset name="records">
-			<field label="CMODALLOWEDIT" name="allow_edit" type="checkbox"
+			<field label="CMODALLOWEDIT" name="allow_edit" class="form-check-input me-1" type="checkbox"
 				description="" value="1" />
 			<field label="CMODALLOWDELETE" name="allow_delete" type="checkbox"
 				description="" value="1" />

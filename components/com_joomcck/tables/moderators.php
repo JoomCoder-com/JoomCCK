@@ -21,6 +21,9 @@ class JoomcckTableModerators extends JTable
 	
 	public function bind($array, $ignore = '')
 	{
+
+		$array['params'] = (array) $array['params'];
+
 		if(isset($array['allow']))
 		{
 			@$array['params']['allow'] = @$array['allow'];
