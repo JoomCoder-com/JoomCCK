@@ -200,7 +200,7 @@ $listDirn = $this->state->get('list.direction');
 				<small>
 					<?php $data = new JDate($item->ctime);
 					echo $data->format(JText::_('CDATE1')); ?><br/>
-					<?php if($item->extime == '0000-00-00 00:00:00'): ?>
+					<?php if($item->extime == '0000-00-00 00:00:00' || is_null($item->extime)): ?>
 						<span style="color: green"><?php echo JText::_('CNEVER') ?></span>
 					<?php else: ?>
 						<?php $extime = new JDate($item->extime); ?>
