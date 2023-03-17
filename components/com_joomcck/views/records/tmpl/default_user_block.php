@@ -6,7 +6,12 @@
  * @copyright Copyright (C) 2012 JoomBoost (https://www.joomBoost.com). All rights reserved.
  * @license GNU/GPL http://www.gnu.org/copyleft/gpl.html
  */
+
+use Joomla\CMS\HTML\Helpers\Bootstrap;
+
 defined('_JEXEC') or die('Restricted access');
+
+Bootstrap::dropdown();
 
 
 $vw = JFactory::getApplication()->input->get('view_what');
@@ -35,7 +40,7 @@ $num = CEventsHelper::showNum('total', 0);
 					<img src="<?php echo JURI::root(TRUE);?>/media/mint/icons/16/category.png" align="absmiddle" /></a>
 			<?php endif;?>
 			<?php if($params->get('menu.menu_user_moder') && MECAccess::allowModerate(NULL, NULL, $this->section)):?>
-				<a class="btn-sm btn-light border" rel="tooltip" data-original-title="<?php echo JText::_($params->get('menu.menu_user_moder_label', 'Manage Moderators'))?>" href="<?php echo JRoute::_('index.php?option=com_joomcck&view=moderators&filter_section='.$this->section->id.'&return='.Url::back());?>">
+				<a class="btn-sm btn-light border" rel="tooltip" data-bs-original-title="<?php echo JText::_($params->get('menu.menu_user_moder_label', 'Manage Moderators'))?>" href="<?php echo JRoute::_('index.php?option=com_joomcck&view=moderators&filter_section='.$this->section->id.'&return='.Url::back());?>">
 						<img src="<?php echo JURI::root(TRUE);?>/media/mint/icons/16/user-share.png" align="absmiddle" /></a>
 			<?php endif;?>
 
@@ -143,19 +148,19 @@ $num = CEventsHelper::showNum('total', 0);
 		<?php $counts = $this->_getUsermenuCounts($params, $current_user->get('id')); ?>
 		<?php if($params->get('menu.menu_user_my')):?>
 			<?php if(!empty($this->user_categories) && ($vw == 'created' || !$vw)):?>
-				<li <?php if(!$vw || $vw == 'created') echo 'class="active"'?>>
-					<a href="#" class="dropdown-toggle" data-toggle="collapse" data-target="#categories">
+				<li class="nav-item" <?php if(!$vw || $vw == 'created') echo 'class="active"'?>>
+					<button class="dropdown-toggle nav-link" data-bs-toggle="collapse" data-bs-target="#categories">
 						<?php if($params->get('menu.menu_user_my_icon')):?>
 							<?php echo HTMLFormatHelper::icon($this->section->params->get('personalize.text_icon', 'home.png'));?>
 						<?php endif;?>
 						<?php echo JText::_($this->isMe ? $params->get('menu.menu_user_my_label', 'My Home') : $params->get('menu.menu_user_other_label', 'Created'))?>
 						<sup><?php echo $counts->created;?></sup>
 						<b class="caret"></b>
-					</a>
+					</button>
 				</li>
 			<?php else: ?>
-				<li <?php if(!$vw || $vw == 'created') echo 'class="active"'?>>
-					<a href="<?php echo JRoute::_(Url::user('created', $current_user->get('id')));?>">
+				<li class="nav-item" <?php if(!$vw || $vw == 'created') echo 'class="active"'?>>
+					<a class="nav-link" href="<?php echo JRoute::_(Url::user('created', $current_user->get('id')));?>">
 						<?php if($params->get('menu.menu_user_my_icon')):?>
 							<?php echo HTMLFormatHelper::icon($this->section->params->get('personalize.text_icon', 'home.png'));?>
 						<?php endif;?>
@@ -167,8 +172,8 @@ $num = CEventsHelper::showNum('total', 0);
 		<?php endif;?>
 
 		<?php if($params->get('menu.menu_user_followed') && MECAccess::allowUserMenu($user, 'followed', $this->section)):?>
-			<li <?php if($vw == 'follow') echo 'class="active"'?>>
-				<a href="<?php echo JRoute::_(Url::user('follow', $current_user->get('id')));?>">
+			<li class="nav-item" <?php if($vw == 'follow') echo 'class="active"'?>>
+				<a class="nav-link" href="<?php echo JRoute::_(Url::user('follow', $current_user->get('id')));?>">
 					<?php if($params->get('menu.menu_user_follow_icon')):?>
 						<img src="<?php echo JURI::root(TRUE);?>/media/mint/icons/16/follow1.png" align="absmiddle" />
 					<?php endif;?>
@@ -179,8 +184,8 @@ $num = CEventsHelper::showNum('total', 0);
 		<?php endif;?>
 
 		<?php if($params->get('menu.menu_user_favorite') && MECAccess::allowUserMenu($user, 'bookmarked', $this->section)):?>
-			<li <?php if($vw == 'favorited') echo 'class="active"'?>>
-				<a href="<?php echo JRoute::_(Url::user('favorited', $current_user->get('id')));?>">
+			<li class="nav-item" <?php if($vw == 'favorited') echo 'class="active"'?>>
+				<a class="nav-link" href="<?php echo JRoute::_(Url::user('favorited', $current_user->get('id')));?>">
 					<?php if($params->get('menu.menu_user_favorite_icon')):?>
 						<img src="<?php echo JURI::root(TRUE) . '/media/mint/icons/bookmarks/' . $listparams->get('tmpl_core.bookmark_icons', 'star') . '/state1.png';?>" align="absmiddle" />
 					<?php endif;?>
@@ -191,8 +196,8 @@ $num = CEventsHelper::showNum('total', 0);
 		<?php endif;?>
 
 		<?php if($params->get('menu.menu_user_rated') && MECAccess::allowUserMenu($user, 'rated', $this->section)):?>
-			<li <?php if($vw == 'rated') echo 'class="active"'?>>
-				<a href="<?php echo JRoute::_(Url::user('rated', $current_user->get('id')));?>">
+			<li class="nav-item" <?php if($vw == 'rated') echo 'class="active"'?>>
+				<a class="nav-link" href="<?php echo JRoute::_(Url::user('rated', $current_user->get('id')));?>">
 					<?php if($params->get('menu.menu_user_rated_icon')):?>
 						<img src="<?php echo JURI::root(TRUE);?>/media/mint/icons/16/star.png" align="absmiddle" />
 					<?php endif;?>
@@ -203,8 +208,8 @@ $num = CEventsHelper::showNum('total', 0);
 		<?php endif;?>
 
 		<?php if($params->get('menu.menu_user_commented') && MECAccess::allowUserMenu($user, 'commented', $this->section)):?>
-			<li <?php if($vw == 'commented') echo 'class="active"'?>>
-				<a href="<?php echo JRoute::_(Url::user('commented', $current_user->get('id')));?>">
+			<li class="nav-item" <?php if($vw == 'commented') echo 'class="active"'?>>
+				<a class="nav-link" href="<?php echo JRoute::_(Url::user('commented', $current_user->get('id')));?>">
 					<?php if($params->get('menu.menu_user_commented_icon')):?>
 						<img src="<?php echo JURI::root(TRUE);?>/media/mint/icons/16/balloon-left.png" align="absmiddle" />
 					<?php endif;?>
@@ -215,8 +220,8 @@ $num = CEventsHelper::showNum('total', 0);
 		<?php endif;?>
 
 		<?php if($params->get('menu.menu_user_visited') && MECAccess::allowUserMenu($user, 'visited', $this->section)):?>
-			<li <?php if($vw == 'visited') echo 'class="active"'?>>
-				<a href="<?php echo JRoute::_(Url::user('visited', $current_user->get('id')));?>">
+			<li class="nav-item" <?php if($vw == 'visited') echo 'class="active"'?>>
+				<a class="nav-link" href="<?php echo JRoute::_(Url::user('visited', $current_user->get('id')));?>">
 					<?php if($params->get('menu.menu_user_visited_icon')):?>
 						<img src="<?php echo JURI::root(TRUE);?>/media/mint/icons/16/hand-point-090.png" align="absmiddle" />
 					<?php endif;?>
@@ -237,8 +242,8 @@ $num = CEventsHelper::showNum('total', 0);
 		):
 		?>
 			<?php $in_array = in_array($vw, array('hidden', 'expire', 'unpublished'));?>
-			<li class="dropdown <?php if($in_array) echo 'active'?>">
-				<a class="dropdown-toggle" data-toggle="dropdown" href="#">
+			<li class="nav-item dropdown <?php if($in_array) echo 'active'?>">
+				<button class="dropdown-toggle nav-link" data-bs-toggle="dropdown" >
 					<?php if ($in_array):?>
 						<?php switch ($vw):
 								  case 'hidden':?>
@@ -259,7 +264,7 @@ $num = CEventsHelper::showNum('total', 0);
 						<?php endswitch;?>
 					<?php endif;?>
 					<span class="caret"></span>
-		    	</a>
+		    	</button>
 		    	<ul class="dropdown-menu">
 					<?php if($params->get('menu.menu_user_hidden') && MECAccess::allowUserMenu($user, 'hidden', $this->section)):?>
 						<li <?php if($vw == 'hidden') echo 'class="active"'?>>
@@ -274,7 +279,7 @@ $num = CEventsHelper::showNum('total', 0);
 					<?php endif;?>
 					<?php if($params->get('menu.menu_user_expire') && MECAccess::allowUserMenu($user, 'expire', $this->section)):?>
 						<li <?php if($vw == 'expired') echo 'class="active"'?>>
-							<a href="<?php echo JRoute::_(Url::user('expired', $current_user->get('id')));?>">
+							<a class="dropdown-item" href="<?php echo JRoute::_(Url::user('expired', $current_user->get('id')));?>">
 								<?php if($params->get('menu.menu_user_expire_icon')):?>
 									<img src="<?php echo JURI::root(TRUE);?>/media/mint/icons/16/clock--exclamation.png" align="absmiddle" />
 								<?php endif;?>
@@ -285,7 +290,7 @@ $num = CEventsHelper::showNum('total', 0);
 					<?php endif;?>
 					<?php if($params->get('menu.menu_user_unpublished') && MECAccess::allowUserMenu($user, 'unpublished', $this->section)):?>
 						<li <?php if($vw == 'unpublished') echo 'class="active"'?>>
-							<a href="<?php echo JRoute::_(Url::user('unpublished', $current_user->get('id')));?>">
+							<a class="dropdown-item" href="<?php echo JRoute::_(Url::user('unpublished', $current_user->get('id')));?>">
 								<?php if($params->get('menu.menu_user_unpublished_icon')):?>
 									<img src="<?php echo JURI::root(TRUE);?>/media/mint/icons/16/minus-circle.png" align="absmiddle" />
 								<?php endif;?>
