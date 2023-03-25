@@ -1,9 +1,9 @@
 <?php
 /**
- * Onyx by JoomBoost
+ * Onyx by joomcoder
  * a component for Joomla! 3.0 CMS (http://www.joomla.org)
- * Author Website: https://www.joomBoost.com/
- * @copyright Copyright (C) 2012 JoomBoost (https://www.joomBoost.com). All rights reserved.
+ * Author Website: https://www.joomcoder.com/
+ * @copyright Copyright (C) 2012 joomcoder (https://www.joomcoder.com). All rights reserved.
  * @license GNU/GPL http://www.gnu.org/copyleft/gpl.html
  */
 

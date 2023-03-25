@@ -1,9 +1,9 @@
 <?php
 /**
- * Joomcck by JoomBoost
+ * Joomcck by joomcoder
  * a component for Joomla! 1.7 - 2.5 CMS (http://www.joomla.org)
- * Author Website: https://www.joomBoost.com/
- * @copyright Copyright (C) 2012 JoomBoost (https://www.joomBoost.com). All rights reserved.
+ * Author Website: https://www.joomcoder.com/
+ * @copyright Copyright (C) 2012 joomcoder (https://www.joomcoder.com). All rights reserved.
  * @license   GNU/GPL http://www.gnu.org/copyleft/gpl.html
  */
 
@@ -92,7 +92,7 @@ class JoomcckViewCat extends MViewBase
 			}
 		}
 		JToolBarHelper::cancel('category.cancel', 'JTOOLBAR_CANCEL');
-		MRToolBar::helpW('http://help.JoomBoost.com/joomcck/index.html?category.htm', 1000, 500);
+		MRToolBar::helpW('http://help.joomcoder.com/joomcck/index.html?category.htm', 1000, 500);
 		JToolBarHelper::divider();
 
 	}

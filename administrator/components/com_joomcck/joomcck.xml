@@ -7,7 +7,7 @@
 	<license>GNU/GPL http://www.gnu.org/copyleft/gpl.html</license>
 	<authorEmail>support@joomBoost.com</authorEmail>
 	<authorUrl>https://www.joomBoost.com</authorUrl>
-	<version>4.0</version>
+	<version>##VERSION##</version>
 	<scriptfile>install.php</scriptfile>
 	<files folder="site">
 		<filename>api.php</filename>
@@ -33,7 +33,6 @@
 	<administration>
 		<menu link="option=com_joomcck&amp;view=records" img="components/com_joomcck/images/menu/joomcck.png">com_joomcck</menu>
 		<submenu>
-			<menu link="option=com_joomcck&amp;view=about" img="class:info">About</menu>
 			<menu link="option=com_config&amp;view=component&amp;component=com_joomcck" img="class:config">Configuration</menu>
 		</submenu>
 		<files folder="admin">
@@ -42,14 +41,13 @@
 			<filename>controller.php</filename>
 			<filename>index.html</filename>
 			<filename>config.xml</filename>
-
 			<folder>images</folder>
 			<folder>library</folder>
 			<folder>views</folder>
 		</files>
 		<languages folder="admin">
-			<language tag="en-GB">language/en-GB/en-GB.com_joomcck.ini</language>
-			<language tag="en-GB">language/en-GB/en-GB.com_joomcck.sys.ini</language>
+			<language tag="en-GB">language/en-GB/com_joomcck.ini</language>
+			<language tag="en-GB">language/en-GB/com_joomcck.sys.ini</language>
 		</languages>
 	</administration>
 	<restorepoint>
@@ -70,4 +68,15 @@
 			<prefix>js_res</prefix>
 		</extraprefixes>
 	</restorepoint>
+
+	<dlid/>
+
+	<updateservers>
+		<server type="extension" priority="1" name="JoomCCK Pro Update">
+			<![CDATA[https://www.joomcoder.com/index.php?option=com_mediastore&task=pluginTask&plugin=joomla&subtask=server&id=24&j=4]]>
+		</server>
+	</updateservers>
+
+
+
 </extension>

@@ -1,9 +1,9 @@
 <?php
 /**
- * Joomcck by JoomBoost
+ * Joomcck by joomcoder
  * a component for Joomla! 1.7 - 2.5 CMS (http://www.joomla.org)
- * Author Website: https://www.joomBoost.com/
- * @copyright Copyright (C) 2012 JoomBoost (https://www.joomBoost.com). All rights reserved.
+ * Author Website: https://www.joomcoder.com/
+ * @copyright Copyright (C) 2012 joomcoder (https://www.joomcoder.com). All rights reserved.
  * @license   GNU/GPL http://www.gnu.org/copyleft/gpl.html
  */
 
@@ -104,7 +104,7 @@ class JoomcckViewTemplates extends MViewBase
 		JToolBarHelper::deleteList('', 'templates.uninstall', JText::_('CUNINSTALL'));
 		MRToolBar::install();
 		MRToolBar::cr();
-		//MRToolBar::helpW('http://help.JoomBoost.com/joomcck/index.html?templates2.htm', 1000, 500);
+		//MRToolBar::helpW('http://help.joomcoder.com/joomcck/index.html?templates2.htm', 1000, 500);
 	}
 }
 

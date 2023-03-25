@@ -1,9 +1,9 @@
 <?php
 /**
- * Joomcck by JoomBoost
+ * Joomcck by joomcoder
  * a component for Joomla! 1.7 - 2.5 CMS (http://www.joomla.org)
- * Author Website: https://www.joomBoost.com/
- * @copyright Copyright (C) 2012 JoomBoost (https://www.joomBoost.com). All rights reserved.
+ * Author Website: https://www.joomcoder.com/
+ * @copyright Copyright (C) 2012 joomcoder (https://www.joomcoder.com). All rights reserved.
  * @license GNU/GPL http://www.gnu.org/copyleft/gpl.html
  */
 
@@ -38,7 +38,7 @@ class MRToolBar extends JToolBarHelper
 		Sidebar::addEntry(
 			'<img src="'.JUri::root(TRUE).'/media/mint/icons/16/lifebuoy.png" align="absmiddle"> '.
 			JText::_('XML_SUBMENU_SUPPORT'),
-			'https://www.joomBoost.com/support/community-forum/category-items/6-community-forum/48-joomcck-8.html',
+			'https://www.joomcoder.com/support/community-forum/category-items/6-community-forum/48-joomcck-8.html',
 			$vName == 'html'
 		);
 	}

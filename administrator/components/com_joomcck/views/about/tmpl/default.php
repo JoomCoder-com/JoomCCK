@@ -1,9 +1,9 @@
 <?php
 /**
- * Joomcck by JoomBoost
+ * Joomcck by joomcoder
  * a component for Joomla! 1.7 - 2.5 CMS (http://www.joomla.org)
- * Author Website: https://www.joomBoost.com/
- * @copyright Copyright (C) 2012 JoomBoost (https://www.joomBoost.com). All rights reserved.
+ * Author Website: https://www.joomcoder.com/
+ * @copyright Copyright (C) 2012 joomcoder (https://www.joomcoder.com). All rights reserved.
  * @license GNU/GPL http://www.gnu.org/copyleft/gpl.html
  */
 
@@ -14,9 +14,9 @@ defined('_JEXEC') or die('Restricted access'); ?>
 
     <h1>JoomCCK <small><b>Content Construction</b> Kit</small></h1>
     <p>JoomCCK is a great extension to aid in the design of components and content for your site. You can use it to create hundreds of different sections of your site.</p>
-    <div> <a class="btn btn-success" target="_blank" href="<?php echo $this->linkCP ?>"><?php echo JText::_('COB_START') ?></a> <a class="btn btn-light border" href="https://github.com/JoomBoost/JoomCCK/issues" target="_blank">Ideas? Questions? Problems?</a>
-        <!--<a class="btn" href="https://www.joomBoost.com/blog.html">Update log</a>
-        <a class="btn" href="https://www.joomBoost.com/community/depot.html">3d party Packs, Translations, Integrations, ..</a>-->
+    <div> <a class="btn btn-success" target="_blank" href="<?php echo $this->linkCP ?>"><?php echo JText::_('COB_START') ?></a> <a class="btn btn-light border" href="https://github.com/joomcoder/JoomCCK/issues" target="_blank">Ideas? Questions? Problems?</a>
+        <!--<a class="btn" href="https://www.joomcoder.com/blog.html">Update log</a>
+        <a class="btn" href="https://www.joomcoder.com/community/depot.html">3d party Packs, Translations, Integrations, ..</a>-->
     </div>
 
     <table class="table table-bordered table-striped">
@@ -31,7 +31,7 @@ defined('_JEXEC') or die('Restricted access'); ?>
         </tr>
         <tr>
             <td class="key">Support Email</td>
-            <td>support@joomBoost.com</td>
+            <td>support@joomcoder.com</td>
         </tr>
         <tr>
             <td class="key">Pro Support</td>
@@ -39,11 +39,11 @@ defined('_JEXEC') or die('Restricted access'); ?>
         </tr>
         <tr>
             <td class="key">Free Support (Github)</td>
-            <td><a href="https://github.com/JoomBoost/JoomCCK/issues" target="_blank">Click here</a></td>
+            <td><a href="https://github.com/joomcoder/JoomCCK/issues" target="_blank">Click here</a></td>
         </tr>
         <tr>
             <td class="key">Homepage</td>
-            <td><a href="#" target="_blank">JoomBoost</a></td>
+            <td><a href="#" target="_blank">joomcoder</a></td>
         </tr>
         <tr>
             <td class="key">License</td>

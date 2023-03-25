@@ -1,9 +1,9 @@
 <?php
 /**
- * Joomcck by JoomBoost
+ * Joomcck by joomcoder
  * a component for Joomla! 1.7 - 2.5 CMS (http://www.joomla.org)
- * Author Website: https://www.joomBoost.com/
- * @copyright Copyright (C) 2012 JoomBoost (https://www.joomBoost.com). All rights reserved.
+ * Author Website: https://www.joomcoder.com/
+ * @copyright Copyright (C) 2012 joomcoder (https://www.joomcoder.com). All rights reserved.
  * @license GNU/GPL http://www.gnu.org/copyleft/gpl.html
  */
 
@@ -30,7 +30,7 @@ class JFormFieldClinks extends JFormField
 		$req[] = JHtml::_('select.option', '0', JText::_('CNO'));
 		$req[] = JHtml::_('select.option', '1', JText::_('CYES'));
 		
-		$html[] = '<p style="clear:both" class="small"><a href="http://support.JoomBoost.com/en/joomcck-7/questions/How+to+add+aditional+Contact+or+Link+fields+to+Adress+%26+Map+field%3F-1375.html" target="_blank">'.JText::_('How to add custom links').'</a></p>';
+		$html[] = '<p style="clear:both" class="small"><a href="http://support.joomcoder.com/en/joomcck-7/questions/How+to+add+aditional+Contact+or+Link+fields+to+Adress+%26+Map+field%3F-1375.html" target="_blank">'.JText::_('How to add custom links').'</a></p>';
 		$html[] = '<table class="table table-striped">';
 		$html[] = '<thead><tr><th>'.JText::_('CFIELD').'</th>';
 		$html[] = '<th width="1%">'.JText::_('CSHOW').'</th>';

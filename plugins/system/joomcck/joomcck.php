@@ -5,8 +5,8 @@
  * @version    $Id: jq_alphauserpoints.php 2009-11-16 17:30:15
  * @package    Coablt
  * @subpackage joomcck.php
- * @author     JoomBoost Team
- * @Copyright  Copyright (C) JoomBoost, www.JoomBoost.com
+ * @author     joomcoder Team
+ * @Copyright  Copyright (C) joomcoder, www.joomcoder.com
  * @license    GNU/GPL http://www.gnu.org/copyleft/gpl.html
  */
 

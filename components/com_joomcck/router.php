@@ -3,9 +3,9 @@
  * @package     Joomla.site
  * @subpackage  Joomrecipe
  *
- * @copyright   Copyright (C) 2013 - 2018 JoomBoost. All rights reserved.
+ * @copyright   Copyright (C) 2013 - 2018 joomcoder. All rights reserved.
  * @license     GNU General Public License http://www.gnu.org/copyleft/gpl.html
- * @author      JoomBoost
+ * @author      joomcoder
  */
 
 defined('_JEXEC') or die;
@@ -13,7 +13,7 @@ defined('_JEXEC') or die;
 
 /**
  * @package        Joomrecipe
- * @copyright    2013-2017 JoomBoost, https://www.joomboost.com
+ * @copyright    2013-2017 joomcoder, https://www.joomcoder.com
  * @license        GNU/GPL http://www.gnu.org/copyleft/gpl.html
  */
 
