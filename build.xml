@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="com_joomcck" basedir="." default="dist" description="Build package file for JoomCCK Pro version">
+    <target name="dirbuild">
+
+        <!-- Language files component -->
+        <copy file="./language/en-GB/com_joomproject.ini" todir="${releasespath}/build/components/com_joomproject/site/language/en-GB" />
+        <copy file="./administrator/language/en-GB/com_joomproject.ini" todir="${releasespath}/build/components/com_joomproject/admin/language/en-GB" />
+        <copy file="./administrator/language/en-GB/com_joomproject.sys.ini" todir="${releasespath}/build/components/com_joomproject/admin/language/en-GB" />
+
+        <!-- Language files plugins -->
+        <copy file="./administrator/language/en-GB/plg_content_jpcomments.ini" todir="${releasespath}/build/plugins/plg_content_jpcomments/language/en-GB" />
+        <copy file="./administrator/language/en-GB/plg_content_jpcomments.sys.ini" todir="${releasespath}/build/plugins/plg_content_jpcomments/language/en-GB" />
+
+        <!-- Language files modules -->
+        <copy file="./language/en-GB/mod_jp_calendar.ini" todir="${releasespath}/build/modules/mod_jp_calendar/language/en-GB" />
+        <copy file="./language/en-GB/mod_jp_calendar.sys.ini" todir="${releasespath}/build/modules/mod_jp_calendar/language/en-GB" />
+
+
+        <!-- Component files -->
+        <copy todir="${releasespath}/build/components/com_joomproject/admin">
+            <fileset dir="./administrator/components/com_joomproject">
+                <exclude name="script.php"></exclude>
+                <exclude name="joomproject.xml"></exclude>
+            </fileset>
+        </copy>
+        <copy todir="${releasespath}/build/components/com_joomproject/site">
+            <fileset dir="./components/com_joomproject">
+            </fileset>
+        </copy>
+        <copy todir="${releasespath}/build/components/com_joomproject/media">
+            <fileset dir="./media/com_joomproject" defaultexcludes="true">
+                <exclude name="repo/**"/>
+            </fileset>
+        </copy>
+        <copy file="./administrator/components/com_joomproject/joomproject.xml" todir="${releasespath}/build/components/com_joomproject" />
+        <copy file="./administrator/components/com_joomproject/script.php" todir="${releasespath}/build/components/com_joomproject" />
+
+
+        <!-- Modules files -->
+        <copy todir="${releasespath}/build/modules/mod_jp_calendar">
+            <fileset dir="./modules/mod_jp_calendar"></fileset>
+        </copy>
+        <copy todir="${releasespath}/build/modules/mod_jp_calendar/media">
+            <fileset dir="./media/mod_jp_calendar">
+            </fileset>
+        </copy>
+
+
+        <!-- Plugin files -->
+        <copy todir="${releasespath}/build/plugins/plg_content_jpcomments">
+            <fileset dir="./plugins/content/jpcomments"></fileset>
+        </copy>
+
+        <!-- Package files -->
+        <echo msg="7 - Copying Install and main xml files in root" />
+        <copy file="./pkg_joomproject.script.php" todir="${releasespath}/build" />
+        <copy file="./pkg_joomproject.xml" todir="${releasespath}/build" />
+
+    </target>
+    <target name="dist" depends="dirbuild">
+        <!-- update version tag -->
+        <reflexive>
+            <fileset dir="${releasespath}/build/.">
+                <include pattern="*.xml" />
+                <include pattern="*/*.xml" />
+                <include pattern="*/*/*.xml" />
+            </fileset>
+            <filterchain>
+                <replaceregexp>
+                    <regexp pattern="##VERSION##" replace="${version}"/>
+                </replaceregexp>
+            </filterchain>
+        </reflexive>
+
+        <!-- Build Archive -->
+        <delete file="${releasespath}/com_joomproject_v${version}_j4.zip" verbose="true"/>
+        <zip destfile="${releasespath}/com_joomproject_v${version}_j4.zip" basedir="${releasespath}/build"></zip>
+        <echo msg="Files copied and compressed in build directory OK!" />
+        <delete dir="${releasespath}/build" verbose="true" failonerror="true" />
+        <echo msg="Build File removed" />
+    </target>
+</project>

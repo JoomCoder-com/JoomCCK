@@ -28,7 +28,7 @@
 		<folder>src</folder>
 	</files>
 	<languages folder="site">
-		<language tag="en-GB">language/en-GB/en-GB.com_joomcck.ini</language>
+		<language tag="en-GB">language/en-GB/com_joomcck.ini</language>
 	</languages>
 	<administration>
 		<menu link="option=com_joomcck&amp;view=records" img="components/com_joomcck/images/menu/joomcck.png">com_joomcck</menu>
@@ -68,15 +68,5 @@
 			<prefix>js_res</prefix>
 		</extraprefixes>
 	</restorepoint>
-
-	<dlid/>
-
-	<updateservers>
-		<server type="extension" priority="1" name="JoomCCK Pro Update">
-			<![CDATA[https://www.joomcoder.com/index.php?option=com_mediastore&task=pluginTask&plugin=joomla&subtask=server&id=24&j=4]]>
-		</server>
-	</updateservers>
-
-
 
 </extension>
