@@ -45,7 +45,6 @@
             </fileset>
         </copy>
 
-
         <!-- Plugin files -->
         <copy todir="${releasespath}/build/plugins/plg_content_jpcomments">
             <fileset dir="./plugins/content/jpcomments"></fileset>

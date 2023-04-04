@@ -7,7 +7,7 @@
 	<license>GNU/GPL http://www.gnu.org/copyleft/gpl.html</license>
 	<authorEmail>support@joomBoost.com</authorEmail>
 	<authorUrl>https://www.joomBoost.com</authorUrl>
-	<version>8.59</version>
+	<version>##VERSION##</version>
 	<description><![CDATA[ Joomcck - Filters ]]></description>
 	<files>
 		<filename module="mod_joomcck_filters">mod_joomcck_filters.php</filename>

@@ -7,7 +7,7 @@
     <license>GNU/GPL http://www.gnu.org/copyleft/gpl.html</license>
     <authorEmail>support@joomBoost.com</authorEmail>
     <authorUrl>https://www.joomBoost.com</authorUrl>
-	<version>8.38</version>
+	<version>##VERSION##</version>
 	<description>
 	<![CDATA[ INI formatter plugin for Joomcck 8 ]]>
 	</description>

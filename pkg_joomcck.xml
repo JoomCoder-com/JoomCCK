@@ -44,7 +44,7 @@
         <file type="module" id="mod_joomcck_submitbutton" client="site">modules/mod_joomcck_submitbutton</file>
         <file type="module" id="mod_joomcck_tagcloud" client="site">modules/mod_joomcck_tagcloud</file>
         <file type="module" id="mod_joomcck_userstatistics" client="site">modules/mod_joomcck_userstatistics</file>
-        <file type="module" id="mod_joomcck_userstatistics" client="site">modules/mod_joomcck_video</file>
+        <file type="module" id="mod_joomcck_video" client="site">modules/mod_joomcck_video</file>
     </files>
 
     <dlid/>

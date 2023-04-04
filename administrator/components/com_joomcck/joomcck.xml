@@ -50,23 +50,6 @@
 			<language tag="en-GB">language/en-GB/com_joomcck.sys.ini</language>
 		</languages>
 	</administration>
-	<restorepoint>
-		<customdirs>
-			<dir>modules/mod_joomcck_category</dir>
-			<dir>modules/mod_joomcck_sectionstatistics</dir>
-			<dir>modules/mod_joomcck_tagcoud</dir>
-			<dir>plugins/mint</dir>
-			<dir>plugins/search/joomcck</dir>
-			<dir>plugins/content/glossary</dir>
-			<dir>media/mint</dir>
-			<dir>library/mint</dir>
-		</customdirs>
-		<langfiles>
-			<lang></lang>
-		</langfiles>
-		<extraprefixes>
-			<prefix>js_res</prefix>
-		</extraprefixes>
-	</restorepoint>
+
 
 </extension>

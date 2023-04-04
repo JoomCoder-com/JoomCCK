@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <extension version="3.0" type="plugin" group="finder" method="upgrade">
 	<name>Smart Search - Joomcck</name>
-	<author>MightyExtensions</author>
+	<author>JoomCoder</author>
 	<creationDate>Jan 2012</creationDate>
 	<license>http://www.gnu.org/licenses/gpl-2.0.html GNU/GPL</license>
 	<authorEmail>info@mightyextensions.com</authorEmail>
 	<authorUrl>http://www.mightyextensions.com</authorUrl>
-	<version>8.16</version>
-	<copyright>Copyright (C) 2010 MightyExtensions - All rights reserved.</copyright>
+	<version>##VERSION##</version>
+	<copyright>Copyright (C) 2010 JoomCoder - All rights reserved.</copyright>
 	<license>GNU General Public License version 2 or later; see	LICENSE.txt</license>
 	<description>Joomcck smart search plugin.</description>
 	<files>

@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <extension version="3.0" type="plugin" group="content" method="upgrade">
 	<name>Content - Glossary</name>
-	<creationDate>27 July 2011</creationDate>
-	<author>Mighty Extensions</author>
-	<authorEmail>support@mightyextensions.com</authorEmail>
-	<authorUrl>http://www.mightyextensions.com</authorUrl>
-	<copyright>Copyright Mighty Extensions</copyright>
+	<creationDate>04/04/2023</creationDate>
+	<author>JoomCoder</author>
+	<authorEmail>support@joomcoder.com</authorEmail>
+	<authorUrl>https://www.joomcoder.com</authorUrl>
+	<copyright>Copyright JoomCoder</copyright>
 	<license>License, for example GNU/GPL</license>
-	<version>8.19</version>
+	<version>##VERSION##</version>
 	<description>This plugin allow you to turn Mighty resources section
 		into glossary. In Mighty resources you create section and add articles
 		there, that will be glossary list. Then in this plugin you select that

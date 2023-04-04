@@ -7,7 +7,7 @@
 	<license>GNU General Public License version 2 or later; see LICENSE.txt</license>
 	<authorEmail>support@JoomBoost.org</authorEmail>
 	<authorUrl>www.JoomBoost.org</authorUrl>
-	<version>8.31</version>
+	<version>##VERSION##</version>
 	<description><![CDATA[
         Inserts discussions/reviews into core Joomla articles. Use <code>{joomcck-discussion}</code>
         in the text of the article or list categories in <code>In Categories</code> parameter as IDs separated by coma. Eg: <code>3,12,4</code>.
