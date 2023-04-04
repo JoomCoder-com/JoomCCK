@@ -21,12 +21,6 @@
   "require": {
       "php": ">=5.3"
   },
-  "require-dev": {
-    "mikey179/vfsStream": "v1.2.0",
-    "league/phpunit-coverage-listener": "~1.1",
-    "fabpot/php-cs-fixer": "2.2",
-    "phpunit/phpunit": "4.*"
-  },
   "autoload": {
     "psr-0": {
       "Flow": "src"

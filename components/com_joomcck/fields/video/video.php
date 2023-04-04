@@ -73,7 +73,7 @@ class JFormFieldCVideo extends CFormFieldUpload
 		}
 		if(!empty($this->value['files']))
 		{
-			JFactory::getDocument()->addScript(JURI::root(TRUE) . '/media/mint/vendors/jwplayer/jwplayer.js');
+			JFactory::getDocument()->addScript(JURI::root(TRUE) . '/media/com_joomcck/vendors/jwplayer/jwplayer.js');
 		}
 
 		return $this->_display_output($client, $record, $type, $section);

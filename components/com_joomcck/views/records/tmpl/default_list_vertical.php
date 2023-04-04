@@ -51,7 +51,7 @@ $width = (100 - (int)$params->get('tmpl_params.lbl_width', 15)) / $cols;
 	<tr>
 		<th width="<?php echo (int)$params->get('tmpl_params.lbl_width', 15); ?>%">
 			<?php if($params->get('tmpl_params.item_icon_title')):?>
-				<img src="<?php echo JURI::root(TRUE)?>/media/mint/icons/16/<?php echo $params->get('tmpl_params.item_icon_title_icon', 'edit.png')?>" align="absmiddle">
+				<img src="<?php echo JURI::root(TRUE)?>/media/com_joomcck/icons/16/<?php echo $params->get('tmpl_params.item_icon_title_icon', 'edit.png')?>" align="absmiddle">
 			<?php endif; ?>
 			<?php echo  JText::_($params->get('tmpl_params.lbl_title', 'CTITLE')); ?>
 		</th>
@@ -83,7 +83,7 @@ $width = (100 - (int)$params->get('tmpl_params.lbl_width', 15)) / $cols;
 		<tr>
 			<th>
 				<?php if($params->get('tmpl_params.item_icon_author')):?>
-					<img src="<?php echo JURI::root(TRUE);?>/media/mint/icons/16/user.png" align="absmiddle" />
+					<img src="<?php echo JURI::root(TRUE);?>/media/com_joomcck/icons/16/user.png" align="absmiddle" />
 				<?php endif;?>
 				<?php echo JText::_('CAUTHOR');?>
 			</th>
@@ -105,7 +105,7 @@ $width = (100 - (int)$params->get('tmpl_params.lbl_width', 15)) / $cols;
 		<tr>
 			<th>
 				<?php if($params->get('tmpl_params.item_icon_rating')):?>
-					<img src="<?php echo JURI::root(TRUE);?>/media/mint/icons/16/star.png" align="absmiddle" />
+					<img src="<?php echo JURI::root(TRUE);?>/media/com_joomcck/icons/16/star.png" align="absmiddle" />
 				<?php endif;?>
 				<?php echo JText::_('CRATING');?>
 			</th>
@@ -119,7 +119,7 @@ $width = (100 - (int)$params->get('tmpl_params.lbl_width', 15)) / $cols;
 		<tr>
 			<th>
 				<?php if($params->get('tmpl_params.item_icon_type')):?>
-					<img src="<?php echo JURI::root(TRUE);?>/media/mint/icons/16/block.png" align="absmiddle" />
+					<img src="<?php echo JURI::root(TRUE);?>/media/com_joomcck/icons/16/block.png" align="absmiddle" />
 				<?php endif;?>
 				<?php echo JText::_('CTYPE');?>
 			</th>
@@ -138,7 +138,7 @@ $width = (100 - (int)$params->get('tmpl_params.lbl_width', 15)) / $cols;
 		<tr>
 			<th>
 				<?php if($params->get('tmpl_params.item_icon_user_categories')):?>
-					<img src="<?php echo JURI::root(TRUE);?>/media/mint/icons/16/category.png" align="absmiddle" />
+					<img src="<?php echo JURI::root(TRUE);?>/media/com_joomcck/icons/16/category.png" align="absmiddle" />
 				<?php endif;?>
 				<?php echo JText::_($params->get('tmpl_params.lbl_category', 'CCATEGORY'));?>
 			</th>
@@ -154,7 +154,7 @@ $width = (100 - (int)$params->get('tmpl_params.lbl_width', 15)) / $cols;
 		<tr>
 			<th>
 				<?php if($params->get('tmpl_params.item_icon_categories')):?>
-					<img src="<?php echo JURI::root(TRUE);?>/media/mint/icons/16/category.png" align="absmiddle" />
+					<img src="<?php echo JURI::root(TRUE);?>/media/com_joomcck/icons/16/category.png" align="absmiddle" />
 				<?php endif;?>
 				<?php echo JText::_('CCATEGORY');?>
 			</th>
@@ -170,7 +170,7 @@ $width = (100 - (int)$params->get('tmpl_params.lbl_width', 15)) / $cols;
 		<tr>
 			<th>
 				<?php if($params->get('tmpl_params.item_icon_ctime')):?>
-					<img src="<?php echo JURI::root(TRUE);?>/media/mint/icons/16/calendar-day.png" align="absmiddle" />
+					<img src="<?php echo JURI::root(TRUE);?>/media/com_joomcck/icons/16/calendar-day.png" align="absmiddle" />
 				<?php endif;?>
 				<?php echo JText::_('CCREATED');?>
 			</th>
@@ -186,7 +186,7 @@ $width = (100 - (int)$params->get('tmpl_params.lbl_width', 15)) / $cols;
 		<tr>
 			<th>
 				<?php if($params->get('tmpl_params.item_icon_mtime')):?>
-					<img src="<?php echo JURI::root(TRUE);?>/media/mint/icons/16/calendar-day.png" align="absmiddle" />
+					<img src="<?php echo JURI::root(TRUE);?>/media/com_joomcck/icons/16/calendar-day.png" align="absmiddle" />
 				<?php endif;?>
 				<?php echo JText::_('CCHANGED');?>
 			</th>
@@ -202,7 +202,7 @@ $width = (100 - (int)$params->get('tmpl_params.lbl_width', 15)) / $cols;
 		<tr>
 			<th>
 				<?php if($params->get('tmpl_params.item_icon_mtime')):?>
-					<img src="<?php echo JURI::root(TRUE);?>/media/mint/icons/16/calendar-day.png" align="absmiddle" />
+					<img src="<?php echo JURI::root(TRUE);?>/media/com_joomcck/icons/16/calendar-day.png" align="absmiddle" />
 				<?php endif;?>
 				<?php echo JText::_('CEXPIRE');?>
 			</th>
@@ -218,7 +218,7 @@ $width = (100 - (int)$params->get('tmpl_params.lbl_width', 15)) / $cols;
 		<tr>
 			<th>
 				<?php if($params->get('tmpl_params.item_icon_comments_num')):?>
-					<img src="<?php echo JURI::root(TRUE);?>/media/mint/icons/16/balloon-left.png" align="absmiddle" />
+					<img src="<?php echo JURI::root(TRUE);?>/media/com_joomcck/icons/16/balloon-left.png" align="absmiddle" />
 				<?php endif;?>
 				<?php echo JText::_('CCOMMENTS');?>
 			</th>
@@ -234,7 +234,7 @@ $width = (100 - (int)$params->get('tmpl_params.lbl_width', 15)) / $cols;
 		<tr>
 			<th>
 				<?php if($params->get('tmpl_params.item_icon_vote_num')):?>
-					<img src="<?php echo JURI::root(TRUE);?>/media/mint/icons/16/star.png" align="absmiddle" />
+					<img src="<?php echo JURI::root(TRUE);?>/media/com_joomcck/icons/16/star.png" align="absmiddle" />
 				<?php endif;?>
 				<?php echo JText::_('CVOTES');?>
 			</th>
@@ -250,7 +250,7 @@ $width = (100 - (int)$params->get('tmpl_params.lbl_width', 15)) / $cols;
 		<tr>
 			<th>
 				<?php if($params->get('tmpl_params.item_icon_favorite_num')):?>
-					<img src="<?php echo JURI::root(TRUE);?>/media/mint/icons/16/star.png" align="absmiddle" />
+					<img src="<?php echo JURI::root(TRUE);?>/media/com_joomcck/icons/16/star.png" align="absmiddle" />
 				<?php endif;?>
 				<?php echo JText::_('CFAVORITE');?>
 			</th>
@@ -266,7 +266,7 @@ $width = (100 - (int)$params->get('tmpl_params.lbl_width', 15)) / $cols;
 		<tr>
 			<th>
 				<?php if($params->get('tmpl_params.item_icon_follow_num')):?>
-					<img src="<?php echo JURI::root(TRUE);?>/media/mint/icons/16/follow1.png" align="absmiddle" />
+					<img src="<?php echo JURI::root(TRUE);?>/media/com_joomcck/icons/16/follow1.png" align="absmiddle" />
 				<?php endif;?>
 				<?php echo JText::_('CFOLLOWERS');?>
 			</th>
@@ -282,7 +282,7 @@ $width = (100 - (int)$params->get('tmpl_params.lbl_width', 15)) / $cols;
 		<tr>
 			<th>
 				<?php if($params->get('tmpl_params.item_icon_hits')):?>
-					<img src="<?php echo JURI::root(TRUE);?>/media/mint/icons/16/hand-point-090.png" align="absmiddle" />
+					<img src="<?php echo JURI::root(TRUE);?>/media/com_joomcck/icons/16/hand-point-090.png" align="absmiddle" />
 				<?php endif;?>
 				<?php echo JText::_('CHITS');?>
 			</th>
@@ -299,7 +299,7 @@ $width = (100 - (int)$params->get('tmpl_params.lbl_width', 15)) / $cols;
 		<tr>
 			<th>
 				<?php if($field->params->get('core.icon') && $params->get('tmpl_params.item_icon_fields')):?>
-					<img src="<?php echo JURI::root(TRUE);?>/media/mint/icons/16/<?php echo $field->params->get('core.icon');?>" align="absmiddle" />
+					<img src="<?php echo JURI::root(TRUE);?>/media/com_joomcck/icons/16/<?php echo $field->params->get('core.icon');?>" align="absmiddle" />
 				<?php endif;?>
 				<?php echo JText::_($field->label);?>
 			</th>

@@ -16,7 +16,7 @@ if(!MECAccess::isAdmin())
 
 $view = JFactory::getApplication()->input->getCmd('view');
 $disabled = (JFactory::getApplication()->input->getCmd('boxchecked') ? ' disabled' : NULL);
-$img_url = JUri::root(TRUE) . '/media/mint/icons/16/';
+$img_url = JUri::root(TRUE) . '/media/com_joomcck/icons/16/';
 function getActiveClass($view)
 {
 	$disabled = (JFactory::getApplication()->input->getCmd('boxchecked', 0) ? ' disabled' : NULL);

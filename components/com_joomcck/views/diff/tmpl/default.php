@@ -132,7 +132,7 @@ function _drawLine($field_title, $cur, $ver, $field = FALSE)
 					<?php echo HTMLFormatHelper::icon('control-180-small.png');  ?>
 				</span>
 			<?php else:?>
-				<img src="<?php echo JURI::root(TRUE);?>/media/mint/blank.png" width="26" height="16" />
+				<img src="<?php echo JURI::root(TRUE);?>/media/com_joomcck/blank.png" width="26" height="16" />
 			<?php endif;?>
 
 			<?php if($equal):?>
@@ -146,7 +146,7 @@ function _drawLine($field_title, $cur, $ver, $field = FALSE)
 					<?php echo HTMLFormatHelper::icon('control-000-small.png');  ?>
 				</span>
 			<?php else:?>
-				<img src="<?php echo JURI::root(TRUE);?>/media/mint/blank.png" width="26" height="16" />
+				<img src="<?php echo JURI::root(TRUE);?>/media/com_joomcck/blank.png" width="26" height="16" />
 			<?php endif;?>
 		</td>
 		<td><?php echo _renderCol($ver, $field)?></td>

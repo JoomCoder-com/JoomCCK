@@ -124,7 +124,7 @@ $lang = $lang[0];
 		<?php endif; ?>
 
 		<?php if($this->params->get('params.map_require')):?>
-			<?php echo JHtml::image(JURI::root() . 'media/mint/icons/16/asterisk-small.png', 'Required', array('align'=>'absmiddle', 'rel' => 'tooltip', 'data-original-title' => JText::_('CREQUIRED')));?>
+			<?php echo JHtml::image(JURI::root() . 'media/com_joomcck/icons/16/asterisk-small.png', 'Required', array('align'=>'absmiddle', 'rel' => 'tooltip', 'data-original-title' => JText::_('CREQUIRED')));?>
 		<?php endif; ?>
 
 		<?php echo JText::_('G_MAP');?>

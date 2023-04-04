@@ -29,8 +29,8 @@ class JFormFieldCobtmpls extends JFormFieldList
 
 		// load iziModal library
 		$document = \Joomla\CMS\Factory::getDocument();
-		$document->addStyleSheet(JUri::root().'media/mint/css/iziModal.min.css');
-		$document->addScript(JUri::root().'media/mint/js/iziModal.min.js');
+		$document->addStyleSheet(JUri::root().'media/com_joomcck/css/iziModal.min.css');
+		$document->addScript(JUri::root().'media/com_joomcck/js/iziModal.min.js');
 
 
 		require_once JPATH_ROOT.'/components/com_joomcck/library/php/helpers/templates.php';

@@ -48,7 +48,7 @@ class JoomcckController extends MControllerBase
 			$this->setRedirect('index.php?option=com_config&view=component&component=com_joomcck');
 		}
 
-		if(!JFolder::exists(JPATH_ROOT.'/media/mint/js'))
+		if(!JFolder::exists(JPATH_ROOT.'/media/com_joomcck/js'))
 		{
 			Factory::getApplication()->enqueueMessage(JText::_('CINSTALLMEDIAPACK'),'warning');
 

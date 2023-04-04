@@ -130,7 +130,7 @@ defined('_JEXEC') or die('Restricted access');
 		</div>
 		<div id="filter-<?php echo  $filter->key ?>" class="<?php echo ($filter->isFilterActive() ? 'in' : NULL)?> collapse">
 			<?php if($filter->isFilterActive()):?>
-				<!-- <img class="filter-close" onclick="Joomcck.cleanFilter('filter_<?php echo $filter->key?>')" rel="tooltip" data-original-title="<?php echo JText::_('CDELETEFILTER')?>" src="<?php echo JUri::root(true)?>/media/mint/icons/16/cross-circle.png">-->
+				<!-- <img class="filter-close" onclick="Joomcck.cleanFilter('filter_<?php echo $filter->key?>')" rel="tooltip" data-original-title="<?php echo JText::_('CDELETEFILTER')?>" src="<?php echo JUri::root(true)?>/media/com_joomcck/icons/16/cross-circle.png">-->
 			<?php endif;?>
 			<?php echo $filter->onRenderFilter($section, TRUE);?>
 		</div>

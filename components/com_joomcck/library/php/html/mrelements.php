@@ -111,7 +111,7 @@ class JHTMLMrelements
     {
         $app = JFactory::getApplication();
         $doc = JFactory::getDocument();
-		$doc->addScript(JURI::root(TRUE) . '/media/mint/vendors/flow/flow.js');
+		$doc->addScript(JURI::root(TRUE) . '/media/com_joomcck/vendors/flow/flow.js');
 		$doc->addStyleSheet(JURI::root(TRUE) . '/components/com_joomcck/library/php/html/mrelements/flow.css');
         
         $upload_url = JRoute::_("index.php?option=com_joomcck&task=files.upload&tmpl=component&section_id=" . $app->input->getInt('section_id') . "&record_id=" . $app->input->getInt('id') . "&type_id=" . $app->input->getInt('type_id') . "&field_id={$field->id}&key=" . md5($name) ."&iscomment=".(int)@$field->iscomment, false);
@@ -127,10 +127,10 @@ class JHTMLMrelements
 	{
         $app = JFactory::getApplication();
         $doc = JFactory::getDocument();
-        $doc->addStyleSheet(JURI::root(TRUE) . '/media/mint/vendors/blueimp-file-upload/css/all.css');
-        $doc->addScript(JURI::root(TRUE) . '/media/mint/vendors/blueimp-file-upload/js/vendor/jquery.ui.widget.js');
-        $doc->addScript(JURI::root(TRUE) . '/media/mint/vendors/blueimp-file-upload/js/jquery.iframe-transport.js');
-        $doc->addScript(JURI::root(TRUE) . '/media/mint/vendors/blueimp-file-upload/js/jquery.fileupload.js');
+        $doc->addStyleSheet(JURI::root(TRUE) . '/media/com_joomcck/vendors/blueimp-file-upload/css/all.css');
+        $doc->addScript(JURI::root(TRUE) . '/media/com_joomcck/vendors/blueimp-file-upload/js/vendor/jquery.ui.widget.js');
+        $doc->addScript(JURI::root(TRUE) . '/media/com_joomcck/vendors/blueimp-file-upload/js/jquery.iframe-transport.js');
+        $doc->addScript(JURI::root(TRUE) . '/media/com_joomcck/vendors/blueimp-file-upload/js/jquery.fileupload.js');
         
         ob_start();
 		include_once 'mrelements/upload.php';
@@ -139,30 +139,30 @@ class JHTMLMrelements
 
 		return $out;
 
-		$doc->addScript(JURI::root(TRUE) . '/media/mint/js/jqupload/js/tmpl.min.js');
+		$doc->addScript(JURI::root(TRUE) . '/media/com_joomcck/js/jqupload/js/tmpl.min.js');
 
-		require_once JPATH_ROOT . '/media/mint/js/jqupload/js/tmpl.php';
+		require_once JPATH_ROOT . '/media/com_joomcck/js/jqupload/js/tmpl.php';
 
-		$doc->addScript(JURI::root(TRUE) . '/media/mint/js/jqupload/js/load-image.all.min.js');
-		$doc->addScript(JURI::root(TRUE) . '/media/mint/js/jqupload/js/canvas-to-blob.min.js');
-		$doc->addScript(JURI::root(TRUE) . '/media/mint/js/jqupload/js/jquery.blueimp-gallery.min.js');
+		$doc->addScript(JURI::root(TRUE) . '/media/com_joomcck/js/jqupload/js/load-image.all.min.js');
+		$doc->addScript(JURI::root(TRUE) . '/media/com_joomcck/js/jqupload/js/canvas-to-blob.min.js');
+		$doc->addScript(JURI::root(TRUE) . '/media/com_joomcck/js/jqupload/js/jquery.blueimp-gallery.min.js');
 
-		$doc->addScript(JURI::root(TRUE) . '/media/mint/js/jqupload/js/jquery.iframe-transport.js');
-		$doc->addScript(JURI::root(TRUE) . '/media/mint/js/jqupload/js/jquery.fileupload.js');
-		$doc->addScript(JURI::root(TRUE) . '/media/mint/js/jqupload/js/jquery.fileupload-process.js');
-		$doc->addScript(JURI::root(TRUE) . '/media/mint/js/jqupload/js/jquery.fileupload-image.js');
-		$doc->addScript(JURI::root(TRUE) . '/media/mint/js/jqupload/js/jquery.fileupload-audio.js');
-		$doc->addScript(JURI::root(TRUE) . '/media/mint/js/jqupload/js/jquery.fileupload-video.js');
-		$doc->addScript(JURI::root(TRUE) . '/media/mint/js/jqupload/js/jquery.fileupload-validate.js');
-		$doc->addScript(JURI::root(TRUE) . '/media/mint/js/jqupload/js/jquery.fileupload-ui.js');
-		$doc->addScript(JURI::root(TRUE) . '/media/mint/js/jqupload/js/fileupload-cob.js');
+		$doc->addScript(JURI::root(TRUE) . '/media/com_joomcck/js/jqupload/js/jquery.iframe-transport.js');
+		$doc->addScript(JURI::root(TRUE) . '/media/com_joomcck/js/jqupload/js/jquery.fileupload.js');
+		$doc->addScript(JURI::root(TRUE) . '/media/com_joomcck/js/jqupload/js/jquery.fileupload-process.js');
+		$doc->addScript(JURI::root(TRUE) . '/media/com_joomcck/js/jqupload/js/jquery.fileupload-image.js');
+		$doc->addScript(JURI::root(TRUE) . '/media/com_joomcck/js/jqupload/js/jquery.fileupload-audio.js');
+		$doc->addScript(JURI::root(TRUE) . '/media/com_joomcck/js/jqupload/js/jquery.fileupload-video.js');
+		$doc->addScript(JURI::root(TRUE) . '/media/com_joomcck/js/jqupload/js/jquery.fileupload-validate.js');
+		$doc->addScript(JURI::root(TRUE) . '/media/com_joomcck/js/jqupload/js/jquery.fileupload-ui.js');
+		$doc->addScript(JURI::root(TRUE) . '/media/com_joomcck/js/jqupload/js/fileupload-cob.js');
 
 
-		//$doc->addStyleSheet(JURI::root(TRUE) . '/media/mint/js/jqupload/css/blueimp-gallery.min.css');
-		$doc->addStyleSheet(JURI::root(TRUE) . '/media/mint/js/jqupload/css/jquery.fileupload.css');
-		//$doc->addStyleSheet(JURI::root(TRUE) . '/media/mint/js/jqupload/css/jquery.fileupload-ui.css');
-		// 		$doc->addStyleSheet(JURI::root(TRUE) . '/media/mint/js/jqupload/css/jquery.fileupload-noscript.css');
-		// 		$doc->addStyleSheet(JURI::root(TRUE) . '/media/mint/js/jqupload/css/jquery.fileupload-ui-noscript.css');
+		//$doc->addStyleSheet(JURI::root(TRUE) . '/media/com_joomcck/js/jqupload/css/blueimp-gallery.min.css');
+		$doc->addStyleSheet(JURI::root(TRUE) . '/media/com_joomcck/js/jqupload/css/jquery.fileupload.css');
+		//$doc->addStyleSheet(JURI::root(TRUE) . '/media/com_joomcck/js/jqupload/css/jquery.fileupload-ui.css');
+		// 		$doc->addStyleSheet(JURI::root(TRUE) . '/media/com_joomcck/js/jqupload/css/jquery.fileupload-noscript.css');
+		// 		$doc->addStyleSheet(JURI::root(TRUE) . '/media/com_joomcck/js/jqupload/css/jquery.fileupload-ui-noscript.css');
 
 		$tempname = $options['tmpname'];
 
@@ -287,8 +287,8 @@ class JHTMLMrelements
         }
         $app = JFactory::getApplication();
 		$doc = JFactory::getDocument();
-		$doc->addScript(JURI::root(TRUE) . '/media/mint/js/mooupload/MooUpload.js');
-		$doc->addStyleSheet(JURI::root(TRUE) . '/media/mint/js/mooupload/style.css');
+		$doc->addScript(JURI::root(TRUE) . '/media/com_joomcck/js/mooupload/MooUpload.js');
+		$doc->addStyleSheet(JURI::root(TRUE) . '/media/com_joomcck/js/mooupload/style.css');
 
 		$params = new JRegistry();
 		$params->loadArray($options);
@@ -331,7 +331,7 @@ class JHTMLMrelements
 					allowAddDescr: " . $params->get('allow_add_descr', 1) . ",
 					url_root: '" . JURI::root(TRUE) . "',
 					flash: {
-				      movie: '" . JURI::root(TRUE) . "/media/mint/js/mooupload/Moo.Uploader.swf'
+				      movie: '" . JURI::root(TRUE) . "/media/com_joomcck/js/mooupload/Moo.Uploader.swf'
 				    },
 				    texts: {
 					    error      : '" . JText::_('CERROR') . "',
@@ -441,10 +441,10 @@ class JHTMLMrelements
 			settype($default, 'array');
 
 			$doc = JFactory::getDocument();
-			$doc->addStyleSheet(JURI::root(TRUE) . '/media/mint/vendors/bootstrap-pills/css/style.css');
-			$doc->addScript(JURI::root(TRUE) . '/media/mint/vendors/bootstrap-pills/js/jquery.color.js');
-			$doc->addScript(JURI::root(TRUE) . '/media/mint/vendors/bootstrap-pills/js/bootstrap-typeahead.js');
-			$doc->addScript(JURI::root(TRUE) . '/media/mint/vendors/bootstrap-pills/js/bootstrap-tags.js');
+			$doc->addStyleSheet(JURI::root(TRUE) . '/media/com_joomcck/vendors/bootstrap-pills/css/style.css');
+			$doc->addScript(JURI::root(TRUE) . '/media/com_joomcck/vendors/bootstrap-pills/js/jquery.color.js');
+			$doc->addScript(JURI::root(TRUE) . '/media/com_joomcck/vendors/bootstrap-pills/js/bootstrap-typeahead.js');
+			$doc->addScript(JURI::root(TRUE) . '/media/com_joomcck/vendors/bootstrap-pills/js/bootstrap-tags.js');
 
 			ob_start();
 			include 'mrelements/pills.php';
@@ -469,11 +469,11 @@ class JHTMLMrelements
 		}
 
 		$doc = JFactory::getDocument();
-		$doc->addStyleSheet(JURI::root(TRUE) . '/media/mint/js/autocomplete/style.css');
-		$doc->addScript(JURI::root(TRUE) . '/media/mint/js/autocomplete/GrowingInput.js');
-		$doc->addScript(JURI::root(TRUE) . '/media/mint/js/autocomplete/TextboxList.js');
-		$doc->addScript(JURI::root(TRUE) . '/media/mint/js/autocomplete/TextboxList.Autocomplete.js');
-		$doc->addScript(JURI::root(TRUE) . '/media/mint/js/autocomplete/TextboxList.Autocomplete.Binary.js');
+		$doc->addStyleSheet(JURI::root(TRUE) . '/media/com_joomcck/js/autocomplete/style.css');
+		$doc->addScript(JURI::root(TRUE) . '/media/com_joomcck/js/autocomplete/GrowingInput.js');
+		$doc->addScript(JURI::root(TRUE) . '/media/com_joomcck/js/autocomplete/TextboxList.js');
+		$doc->addScript(JURI::root(TRUE) . '/media/com_joomcck/js/autocomplete/TextboxList.Autocomplete.js');
+		$doc->addScript(JURI::root(TRUE) . '/media/com_joomcck/js/autocomplete/TextboxList.Autocomplete.Binary.js');
 
 		$el     = $add = $skip = $a = array();
 		$script = NULL;
@@ -575,7 +575,7 @@ class JHTMLMrelements
 		if($params->get('onRemove', 0))
 		{
 			$html[] = "
-				jQuery(box).css('background-image', 'url(\"" . JURI::root(TRUE) . "/media/mint/js/mooupload/imgs/load_bg_blue.gif\")');
+				jQuery(box).css('background-image', 'url(\"" . JURI::root(TRUE) . "/media/com_joomcck/js/mooupload/imgs/load_bg_blue.gif\")');
 
 				jQuery.ajax({
 					url:'" . JRoute::_($params->get('onRemove'), FALSE) . "',
@@ -627,7 +627,7 @@ class JHTMLMrelements
 		{
 			$html[] = ($params->get('max_items', 0) ? "if(default{$uniq}.length > " . $params->get('max_items', 0) . "){ alert('" . JText::_('CTAGLIMITREACHED') . "'); return;}" : "") . "
 
-				jQuery(box).css('background-image', 'url(\"" . JURI::root(TRUE) . "/media/mint/js/mooupload/imgs/load_bg_blue.gif\")');
+				jQuery(box).css('background-image', 'url(\"" . JURI::root(TRUE) . "/media/com_joomcck/js/mooupload/imgs/load_bg_blue.gif\")');
 
 				jQuery.ajax({
 					url:'" . JRoute::_($params->get('onAdd'), FALSE) . "',

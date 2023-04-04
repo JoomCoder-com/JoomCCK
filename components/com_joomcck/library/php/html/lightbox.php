@@ -15,7 +15,7 @@ class JHTMLLightbox
 	public static function init()
 	{
 		$doc = JFactory::getDocument();
-		$doc->addScript(JUri::root(TRUE) . '/media/mint/vendors/lightbox2/dist/js/lightbox.min.js');
-		$doc->addStyleSheet(JUri::root(TRUE) . '/media/mint/vendors/lightbox2/dist/css/lightbox.min.css');
+		$doc->addScript(JUri::root(TRUE) . '/media/com_joomcck/vendors/lightbox2/dist/js/lightbox.min.js');
+		$doc->addStyleSheet(JUri::root(TRUE) . '/media/com_joomcck/vendors/lightbox2/dist/css/lightbox.min.css');
 	}
 }

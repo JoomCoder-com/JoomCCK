@@ -32,7 +32,7 @@ class HTMLFormatHelper
 		}
 
 		$format = '<a id="followsec-%d" type="button" class="btn btn-light border btn-sm %s" onclick="Joomcck.followSection(%d);" onmouseover="%s" onmouseout="%s">
-		<img id="follow_%d" align="absmiddle" src="%s/media/mint/icons/16/follow%d.png"/>
+		<img id="follow_%d" align="absmiddle" src="%s/media/com_joomcck/icons/16/follow%d.png"/>
 		<span id="followtext_%d">%s</span></a>';
 
 		$data = array(
@@ -77,7 +77,7 @@ class HTMLFormatHelper
 		$stable->load($data);
 
 		$format = '<a id="followcat-%d" type="button" class="btn btn-sm%s" onclick="Joomcck.followCat(%d, %d);" onmouseover="%s" onmouseout="%s">
-		<img id="follow_%d" align="absmiddle" src="%s/media/mint/icons/16/follow%d.png"/>
+		<img id="follow_%d" align="absmiddle" src="%s/media/com_joomcck/icons/16/follow%d.png"/>
 		<span id="followtext_%d">%s</span></a>';
 
 		$table = JTable::getInstance('Subscribecat', 'JoomcckTable');
@@ -131,7 +131,7 @@ class HTMLFormatHelper
 		$stable->load($data);
 
 		$format = '<a id="followuser-%d" type="button" class="btn btn-sm%s" onclick="Joomcck.followUser(%d, %s);" onmouseover="%s" onmouseout="%s">
-		<img id="followuser_%d" align="absmiddle" src="%s/media/mint/icons/16/follow%d.png"/>
+		<img id="followuser_%d" align="absmiddle" src="%s/media/com_joomcck/icons/16/follow%d.png"/>
 		<span id="followtext_%d">%s</span></a>';
 
 		$table = JTable::getInstance('Subscribeuser', 'JoomcckTable');
@@ -182,7 +182,7 @@ class HTMLFormatHelper
 			return NULL;
 		}
 
-		$file = JURI::root() . 'media/mint/icons/16/follow' . (int)($record->subscribed > 0) . '.png';
+		$file = JURI::root() . 'media/com_joomcck/icons/16/follow' . (int)($record->subscribed > 0) . '.png';
 		$alt  = ($record->subscribed ? JText::_('CMSG_CLICKTOUNFOLLOW') : JText::_('CMSG_CLICKTOFOLLOW'));
 		$attr = array('data-original-title' => $alt, 'rel' => 'tooltip', 'id' => 'follow_record_' . $record->id);
 		$out  = JHtml::image($file, $alt, $attr);
@@ -215,7 +215,7 @@ class HTMLFormatHelper
 			$hide = ' hide';
 		}
 
-		$file = JURI::root() . 'media/mint/icons/16/edit-diff.png';
+		$file = JURI::root() . 'media/com_joomcck/icons/16/edit-diff.png';
 		$attr = array('data-original-title' => JText::_('CMSG_COMPARE'), 'rel' => 'tooltip');
 		$img  = JHtml::image($file, JText::_('Compare'), $attr);
 
@@ -265,7 +265,7 @@ class HTMLFormatHelper
 			return NULL;
 		}
 
-		$file = JURI::root() . 'media/mint/icons/16/arrow-retweet.png';
+		$file = JURI::root() . 'media/com_joomcck/icons/16/arrow-retweet.png';
 		$alt  = JText::_('CMSG_REPOST');
 		$attr = array('data-original-title' => $alt, 'rel' => 'tooltip');
 		$img  = JHtml::image($file, $alt, $attr);
@@ -293,7 +293,7 @@ class HTMLFormatHelper
 			return NULL;
 		}
 
-		$file = JURI::root() . 'media/mint/icons/bookmarks/' . $params->get('tmpl_core.bookmark_icons', 'star') . '/state' . (int)($record->bookmarked > 0) . '.png';
+		$file = JURI::root() . 'media/com_joomcck/icons/bookmarks/' . $params->get('tmpl_core.bookmark_icons', 'star') . '/state' . (int)($record->bookmarked > 0) . '.png';
 		$alt  = ($record->bookmarked ?
 			Mint::_('CMSG_REMOVEBOOKMARK_'.$type->id, JText::_('CMSG_REMOVEBOOKMARK')) :
 			Mint::_('CMSG_ADDBOOKMARK_'.$type->id, JText::_('CMSG_ADDBOOKMARK')));
@@ -352,7 +352,7 @@ class HTMLFormatHelper
 			return;
 		}
 
-		return ' <img src="' . JURI::root(TRUE) . '/media/mint/icons/16/' . $name . '" align="absmiddle" ' . ($tip ? 'rel="tooltip" data-original-title="' . htmlentities($tip, ENT_COMPAT, 'UTF-8') . '"' : NULL) . '> ';
+		return ' <img src="' . JURI::root(TRUE) . '/media/com_joomcck/icons/16/' . $name . '" align="absmiddle" ' . ($tip ? 'rel="tooltip" data-original-title="' . htmlentities($tip, ENT_COMPAT, 'UTF-8') . '"' : NULL) . '> ';
 	}
 
 	public static function formatSize($size)
@@ -572,13 +572,13 @@ class HTMLFormatHelper
 			$document->addStyleSheet(JURI::root(TRUE) . '/components/com_joomcck/library/css/style.css');
 		}
 
-		if(JFile::exists(JPATH_ROOT . '/media/mint/css/custom.css'))
+		if(JFile::exists(JPATH_ROOT . '/media/com_joomcck/css/custom.css'))
 		{
-			$document->addStyleSheet(JUri::root(TRUE) . '/media/mint/css/custom.css');
+			$document->addStyleSheet(JUri::root(TRUE) . '/media/com_joomcck/css/custom.css');
 		}
 		else
 		{
-			$document->addStyleSheet(JUri::root(TRUE) . '/media/mint/css/main.css');
+			$document->addStyleSheet(JUri::root(TRUE) . '/media/com_joomcck/css/main.css');
 		}
 
 	}

@@ -46,7 +46,7 @@ class FilterHelper
 
 	public static function filterButton($name, $value, $type, $tip, $section, $icon = 'funnel-small.png')
 	{
-		$img = JHtml::image(JURI::root() . 'media/mint/icons/16/' . $icon, strip_tags($tip), array('border' => 0, 'align' => 'absmiddle'));
+		$img = JHtml::image(JURI::root() . 'media/com_joomcck/icons/16/' . $icon, strip_tags($tip), array('border' => 0, 'align' => 'absmiddle'));
 
 		return self::filterLink($name, $value, $img, $type, $tip, $section);
 	}

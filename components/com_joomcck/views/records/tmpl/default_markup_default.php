@@ -284,7 +284,7 @@ $current_user = JFactory::getUser($this->input->getInt('user_id', $this->user->g
 
 									<?php if (in_array($markup->get('menu.menu_order_favorite_num'), $this->user->getAuthorisedViewLevels())): ?>
                                         <li>
-											<?php echo JHtml::_('mrelements.sort', ($markup->get('menu.menu_order_favorite_num_icon') ? '<img src="' . JURI::root(true) . '/media/mint/icons/bookmarks/' . $listparams->get('tmpl_core.bookmark_icons', 'star') . '/state1.png" > ' : null) . ' ' . JText::_($markup->get('menu.menu_order_favorite_num_label', 'Number of bookmarks')), 'r.favorite_num', $listDirn, $listOrder); ?></li>
+											<?php echo JHtml::_('mrelements.sort', ($markup->get('menu.menu_order_favorite_num_icon') ? '<img src="' . JURI::root(true) . '/media/com_joomcck/icons/bookmarks/' . $listparams->get('tmpl_core.bookmark_icons', 'star') . '/state1.png" > ' : null) . ' ' . JText::_($markup->get('menu.menu_order_favorite_num_label', 'Number of bookmarks')), 'r.favorite_num', $listDirn, $listOrder); ?></li>
 									<?php endif; ?>
 
 									<?php if (in_array($markup->get('menu.menu_order_username'), $this->user->getAuthorisedViewLevels())): ?>
@@ -329,7 +329,7 @@ $current_user = JFactory::getUser($this->input->getInt('user_id', $this->user->g
                                         <li><a class="dropdown-item"
                                                href="<?php echo JRoute::_(Url::user('follow')); ?>">
 												<?php if ($markup->get('menu.menu_user_follow_icon')): ?>
-                                                    <img src="<?php echo JURI::root(true); ?>/media/mint/icons/16/follow1.png"
+                                                    <img src="<?php echo JURI::root(true); ?>/media/com_joomcck/icons/16/follow1.png"
                                                          align="absmiddle"/>
 												<?php endif; ?>
 												<?php echo JText::_($markup->get('menu.menu_user_follow_label', 'Watched')) ?>
@@ -341,7 +341,7 @@ $current_user = JFactory::getUser($this->input->getInt('user_id', $this->user->g
                                         <li><a class="dropdown-item"
                                                href="<?php echo JRoute::_(Url::user('events')); ?>">
 												<?php if ($markup->get('menu.menu_user_events_icon')): ?>
-                                                    <img src="<?php echo JURI::root(true); ?>/media/mint/icons/16/bell.png"
+                                                    <img src="<?php echo JURI::root(true); ?>/media/com_joomcck/icons/16/bell.png"
                                                          align="absmiddle"/>
 												<?php endif; ?>
 												<?php echo JText::_($markup->get('menu.menu_user_events_label', 'With new events')) ?>
@@ -353,7 +353,7 @@ $current_user = JFactory::getUser($this->input->getInt('user_id', $this->user->g
                                         <li><a class="dropdown-item"
                                                href="<?php echo JRoute::_(Url::user('favorited')); ?>">
 												<?php if ($markup->get('menu.menu_user_favorite_icon')): ?>
-                                                    <img src="<?php echo JURI::root(true) . '/media/mint/icons/bookmarks/' . $listparams->get('tmpl_core.bookmark_icons', 'star') . '/state1.png'; ?>"
+                                                    <img src="<?php echo JURI::root(true) . '/media/com_joomcck/icons/bookmarks/' . $listparams->get('tmpl_core.bookmark_icons', 'star') . '/state1.png'; ?>"
                                                          align="absmiddle"/>
 												<?php endif; ?>
 												<?php echo JText::_($markup->get('menu.menu_user_favorite_label', 'Bookmarked')) ?>
@@ -364,7 +364,7 @@ $current_user = JFactory::getUser($this->input->getInt('user_id', $this->user->g
                                         <li><a class="dropdown-item"
                                                href="<?php echo JRoute::_(Url::user('rated')); ?>">
 												<?php if ($markup->get('menu.menu_user_rated_icon')): ?>
-                                                    <img src="<?php echo JURI::root(true); ?>/media/mint/icons/16/star.png"
+                                                    <img src="<?php echo JURI::root(true); ?>/media/com_joomcck/icons/16/star.png"
                                                          align="absmiddle"/>
 												<?php endif; ?>
 												<?php echo JText::_($markup->get('menu.menu_user_rated_label', 'Rated')) ?>
@@ -376,7 +376,7 @@ $current_user = JFactory::getUser($this->input->getInt('user_id', $this->user->g
                                         <li><a class="dropdown-item"
                                                href="<?php echo JRoute::_(Url::user('commented')); ?>">
 												<?php if ($markup->get('menu.menu_user_commented_icon')): ?>
-                                                    <img src="<?php echo JURI::root(true); ?>/media/mint/icons/16/balloon-left.png"
+                                                    <img src="<?php echo JURI::root(true); ?>/media/com_joomcck/icons/16/balloon-left.png"
                                                          align="absmiddle"/>
 												<?php endif; ?>
 												<?php echo JText::_($markup->get('menu.menu_user_commented_label', 'Commented')) ?>
@@ -388,7 +388,7 @@ $current_user = JFactory::getUser($this->input->getInt('user_id', $this->user->g
                                         <li><a class="dropdown-item"
                                                href="<?php echo JRoute::_(Url::user('visited')); ?>">
 												<?php if ($markup->get('menu.menu_user_visited_icon')): ?>
-                                                    <img src="<?php echo JURI::root(true); ?>/media/mint/icons/16/hand-point-090.png"
+                                                    <img src="<?php echo JURI::root(true); ?>/media/com_joomcck/icons/16/hand-point-090.png"
                                                          align="absmiddle"/>
 												<?php endif; ?>
 												<?php echo JText::_($markup->get('menu.menu_user_visited_label', 'Visited')) ?>
@@ -400,7 +400,7 @@ $current_user = JFactory::getUser($this->input->getInt('user_id', $this->user->g
                                         <li><a class="dropdown-item"
                                                href="<?php echo JRoute::_(Url::user('expired')); ?>">
 												<?php if ($markup->get('menu.menu_user_expire_icon')): ?>
-                                                    <img src="<?php echo JURI::root(true); ?>/media/mint/icons/16/clock--exclamation.png"
+                                                    <img src="<?php echo JURI::root(true); ?>/media/com_joomcck/icons/16/clock--exclamation.png"
                                                          align="absmiddle"/>
 												<?php endif; ?>
 												<?php echo JText::_($markup->get('menu.menu_user_expire_label', 'Expired')) ?>
@@ -412,7 +412,7 @@ $current_user = JFactory::getUser($this->input->getInt('user_id', $this->user->g
                                         <li><a class="dropdown-item"
                                                href="<?php echo JRoute::_(Url::user('hidden')); ?>">
 												<?php if ($markup->get('menu.menu_user_hidden_icon')): ?>
-                                                    <img src="<?php echo JURI::root(true); ?>/media/mint/icons/16/eye-half.png"
+                                                    <img src="<?php echo JURI::root(true); ?>/media/com_joomcck/icons/16/eye-half.png"
                                                          align="absmiddle"/>
 												<?php endif; ?>
 												<?php echo JText::_($markup->get('menu.menu_user_hidden_label', 'Hidden')) ?>
@@ -424,7 +424,7 @@ $current_user = JFactory::getUser($this->input->getInt('user_id', $this->user->g
                                         <li><a class="dropdown-item"
                                                href="<?php echo JRoute::_(Url::user('featured')); ?>">
 												<?php if ($markup->get('menu.menu_user_feature_icon')): ?>
-                                                    <img src="<?php echo JURI::root(true); ?>/media/mint/icons/16/arrow-curve-090-left.png"
+                                                    <img src="<?php echo JURI::root(true); ?>/media/com_joomcck/icons/16/arrow-curve-090-left.png"
                                                          align="absmiddle"/>
 												<?php endif; ?>
 												<?php echo JText::_($markup->get('menu.menu_user_feature_label', 'Fetured')) ?>
@@ -436,7 +436,7 @@ $current_user = JFactory::getUser($this->input->getInt('user_id', $this->user->g
                                         <li><a class="dropdown-item"
                                                href="<?php echo JRoute::_(Url::user('unpublished')); ?>">
 												<?php if ($markup->get('menu.menu_user_unpublished_icon')): ?>
-                                                    <img src="<?php echo JURI::root(true); ?>/media/mint/icons/16/minus-circle.png"
+                                                    <img src="<?php echo JURI::root(true); ?>/media/com_joomcck/icons/16/minus-circle.png"
                                                          align="absmiddle"/>
 												<?php endif; ?>
 												<?php echo JText::_($markup->get('menu.menu_user_unpublished_label', 'On Approval')) ?>
@@ -450,7 +450,7 @@ $current_user = JFactory::getUser($this->input->getInt('user_id', $this->user->g
                                         <li><a class="dropdown-item"
                                                href="<?php echo JRoute::_('index.php?option=com_joomcck&view=moderators&filter_section=' . $this->section->id . '&return=' . Url::back()); ?>">
 												<?php if ($markup->get('menu.menu_user_moder_icon')): ?>
-                                                    <img src="<?php echo JURI::root(true); ?>/media/mint/icons/16/user-share.png"
+                                                    <img src="<?php echo JURI::root(true); ?>/media/com_joomcck/icons/16/user-share.png"
                                                          align="absmiddle"/>
 												<?php endif; ?>
 												<?php echo JText::_($markup->get('menu.menu_user_moder_label', 'Moderators')) ?>
@@ -462,7 +462,7 @@ $current_user = JFactory::getUser($this->input->getInt('user_id', $this->user->g
                                         <li>
                                             <a href="<?php echo JRoute::_('index.php?option=com_joomcck&view=options&layout=section&section_id=' . $this->section->id . '&return=' . Url::back()); ?>">
 												<?php if ($markup->get('menu.menu_user_subscribe_icon')): ?>
-                                                    <img src="<?php echo JURI::root(true); ?>/media/mint/icons/16/gear.png"
+                                                    <img src="<?php echo JURI::root(true); ?>/media/com_joomcck/icons/16/gear.png"
                                                          align="absmiddle"/>
 												<?php endif; ?>
 												<?php echo JText::_($markup->get('menu.menu_user_subscribe_label', 'Options')) ?>
@@ -475,7 +475,7 @@ $current_user = JFactory::getUser($this->input->getInt('user_id', $this->user->g
                                             <a tabindex="-1"
                                                href="<?php echo JRoute::_(Url::_('categories') . '&return=' . Url::back()) ?>">
 												<?php if ($markup->get('menu.menu_user_cat_manage_icon')): ?>
-                                                    <img src="<?php echo JURI::root(true); ?>/media/mint/icons/16/category.png"
+                                                    <img src="<?php echo JURI::root(true); ?>/media/com_joomcck/icons/16/category.png"
                                                          align="absmiddle"/>
 												<?php endif; ?>
 												<?php echo JText::_($markup->get('menu.menu_user_cat_manage_label', 'Categories')) ?>
@@ -487,7 +487,7 @@ $current_user = JFactory::getUser($this->input->getInt('user_id', $this->user->g
                                                         <a class="dropdown-item" tabindex="-1"
                                                            href="<?php echo JRoute::_(Url::_('category')) ?>">
 															<?php if ($markup->get('menu.menu_user_cat_add_icon')): ?>
-                                                                <img src="<?php echo JURI::root(true); ?>/media/mint/icons/16/plus.png"
+                                                                <img src="<?php echo JURI::root(true); ?>/media/com_joomcck/icons/16/plus.png"
                                                                      align="absmiddle"/>
 															<?php endif; ?>
 															<?php echo JText::_($markup->get('menu.menu_user_cat_add_label', 'Add new category')) ?>
@@ -524,24 +524,24 @@ $current_user = JFactory::getUser($this->input->getInt('user_id', $this->user->g
         <div class="fade collapse separator-box" id="filter-collapse">
             <div class="btn-group float-end">
                 <button class="btn btn-sm btn-primary" onclick="Joomla.submitbutton('records.filters')">
-                    <img src="<?php echo JURI::root(true) ?>/media/mint/icons/16/tick-button.png" align="absmiddle"
+                    <img src="<?php echo JURI::root(true) ?>/media/com_joomcck/icons/16/tick-button.png" align="absmiddle"
                          alt="<?php echo JText::_('CAPPLY'); ?>"/>
 					<?php echo JText::_('CAPPLY'); ?></button>
 				<?php if (count($this->worns)): ?>
                     <button class="btn btn-light btn-sm border" type="button"
                             onclick="Joomla.submitbutton('records.cleanall')">
-                        <img src="<?php echo JURI::root(true) ?>/media/mint/icons/16/cross-button.png" align="absmiddle"
+                        <img src="<?php echo JURI::root(true) ?>/media/com_joomcck/icons/16/cross-button.png" align="absmiddle"
                              alt="<?php echo JText::_('CRESETFILTERS'); ?>"/>
 						<?php echo JText::_('CRESETFILTERS'); ?></button>
 				<?php endif; ?>
                 <button class="btn btn-light btn-sm border" type="button" data-bs-toggle="collapse"
                         data-bs-target="#filter-collapse">
-                    <img src="<?php echo JURI::root(true) ?>/media/mint/icons/16/minus-button.png" align="absmiddle"
+                    <img src="<?php echo JURI::root(true) ?>/media/com_joomcck/icons/16/minus-button.png" align="absmiddle"
                          alt="<?php echo JText::_('CCLOSE'); ?>"/>
 					<?php echo JText::_('CCLOSE'); ?></button>
             </div>
             <h3>
-                <img src="<?php echo JURI::root(true) ?>/media/mint/icons/16/funnel.png" align="absmiddle"
+                <img src="<?php echo JURI::root(true) ?>/media/com_joomcck/icons/16/funnel.png" align="absmiddle"
                      alt="<?php echo JText::_('CMORESEARCHOPTIONS'); ?>"/>
 				<?php echo JText::_('CMORESEARCHOPTIONS') ?>
             </h3>
@@ -710,7 +710,7 @@ $current_user = JFactory::getUser($this->input->getInt('user_id', $this->user->g
                 <button type="button" class="close btn btn-sm btn-light border" data-dismiss="alert"
                         onclick="Joomcck.cleanFilter('<?php echo $worn->name ?>')" rel="tooltip"
                         data-original-title="<?php echo JText::_('CDELETEFILTER') ?>">
-                    <img alt="X" src="<?php echo JURI::root(true) ?>/media/mint/icons/16/cross.png"></button>
+                    <img alt="X" src="<?php echo JURI::root(true) ?>/media/com_joomcck/icons/16/cross.png"></button>
                 <div><?php echo $worn->label ?></div>
 				<?php echo $worn->text ?>
             </div>

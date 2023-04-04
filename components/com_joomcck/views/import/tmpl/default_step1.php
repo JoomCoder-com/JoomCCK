@@ -36,9 +36,9 @@
 	<li>If you upload <b>.csv</b>, <b>.json</b> without archiving into <b>.zip</b>, and have any files like <b>.jpg</b>, <b>.pdf</b>, ..., you may upload them to the server to any folder. For instance <code>JOOMLA_ROOT/tmp</code></li>
 </ul>
 
-<script src="<?php echo JUri::root(true) ?>/media/mint/vendors/blueimp-file-upload/js/vendor/jquery.ui.widget.js"></script>
-<script src="<?php echo JUri::root(true) ?>/media/mint/vendors/blueimp-file-upload/js/jquery.iframe-transport.js"></script>
-<script src="<?php echo JUri::root(true) ?>/media/mint/vendors/blueimp-file-upload/js/jquery.fileupload.js"></script>
+<script src="<?php echo JUri::root(true) ?>/media/com_joomcck/vendors/blueimp-file-upload/js/vendor/jquery.ui.widget.js"></script>
+<script src="<?php echo JUri::root(true) ?>/media/com_joomcck/vendors/blueimp-file-upload/js/jquery.iframe-transport.js"></script>
+<script src="<?php echo JUri::root(true) ?>/media/com_joomcck/vendors/blueimp-file-upload/js/jquery.fileupload.js"></script>
 
 <style>
 #fileupload {

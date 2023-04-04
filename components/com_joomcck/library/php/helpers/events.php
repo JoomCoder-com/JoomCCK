@@ -260,7 +260,7 @@ class CEventsHelper
 		$msg = JText::_($section->params->get('events.event.' . $event->type . '.msg_pers', 'EVENT_' . strtoupper($event->type) . '_PERS'));
 
 		$filter_pattern = ' <a onclick="Joomcck.setAndSubmit(\'filter_search\', \'%s:%s\')" href="javascript:void(0);"
-			rel="tooltip" data-original-title="%s"><img align="absmiddle" src="' . JURI::root(TRUE) . '/media/mint/icons/16/funnel-small.png" /></a>';
+			rel="tooltip" data-original-title="%s"><img align="absmiddle" src="' . JURI::root(TRUE) . '/media/com_joomcck/icons/16/funnel-small.png" /></a>';
 		$record->link   = Url::record($record, $type, $section);
 		$record_link    = JHtml::link(JRoute::_($record->link), $record->title);
 
@@ -271,7 +271,7 @@ class CEventsHelper
 			$record_link .= sprintf($filter_pattern, 'rid', $record->id, JText::_('CFILTERTIPRECORD'));
 			$event_author .= sprintf($filter_pattern, 'uid', $event->eventer, JText::_('CFILTERTIPUSER'));
 			$section_link .= ' <a onclick="Joomcck.setAndSubmit(\'section_id\', \'' . $section->id . '\');" href="javascript:void(0);"
-			rel="tooltip" data-original-title="' . JText::_('CFILTERTIPSECTION') . '"><img align="absmiddle" src="' . JURI::root(TRUE) . '/media/mint/icons/16/funnel-small.png" /></a>';
+			rel="tooltip" data-original-title="' . JText::_('CFILTERTIPSECTION') . '"><img align="absmiddle" src="' . JURI::root(TRUE) . '/media/com_joomcck/icons/16/funnel-small.png" /></a>';
 		}
 
 		$msg = str_replace(

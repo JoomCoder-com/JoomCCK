@@ -15,9 +15,9 @@ class JFormFieldCTelephone extends CFormField
 	public function getInput()
 	{
 		$document = JFactory::getDocument();
-// 		$document->addScript(JURI::root(TRUE) . '/media/mint/js/autocomplete/mootools-autocompleter-1.2.js');
-// 		$document->addStyleSheet(JURI::root(TRUE) . '/media/mint/js/autocomplete/autocompleter.css');
-		$document->addScript(JURI::root(TRUE) . '/media/mint/vendors/bootstrap-pills/js/bootstrap-typeahead.js');
+// 		$document->addScript(JURI::root(TRUE) . '/media/com_joomcck/js/autocomplete/mootools-autocompleter-1.2.js');
+// 		$document->addStyleSheet(JURI::root(TRUE) . '/media/com_joomcck/js/autocomplete/autocompleter.css');
+		$document->addScript(JURI::root(TRUE) . '/media/com_joomcck/vendors/bootstrap-pills/js/bootstrap-typeahead.js');
 		$document->addStyleSheet(JURI::root(TRUE) . '/components/com_joomcck/fields/telephone/telephone.css');
 		$document->addScript(JURI::root(TRUE) . '/components/com_joomcck/fields/telephone/telephone.js');
 
@@ -215,9 +215,9 @@ class JFormFieldCTelephone extends CFormField
 			$data[$k]->value = $val->phone_code;
 
 			$data[$k]->flag = '';
-			if(JFile::exists(JPATH_ROOT.'/media/mint/icons/flag/16/' . \Joomla\String\StringHelper::strtolower($val->code2) . '.png'))
+			if(JFile::exists(JPATH_ROOT.'/media/com_joomcck/icons/flag/16/' . \Joomla\String\StringHelper::strtolower($val->code2) . '.png'))
 			{
-				$data[$k]->flag = '<img src="' . JURI::root(TRUE) . '/media/mint/icons/flag/16/' . \Joomla\String\StringHelper::strtolower($val->code2) . '.png" border="0" align="absmiddle" alt="' . JText::_($val->name) . '">';
+				$data[$k]->flag = '<img src="' . JURI::root(TRUE) . '/media/com_joomcck/icons/flag/16/' . \Joomla\String\StringHelper::strtolower($val->code2) . '.png" border="0" align="absmiddle" alt="' . JText::_($val->name) . '">';
 			}
 		}
 		return $data;

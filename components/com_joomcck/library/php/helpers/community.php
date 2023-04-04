@@ -279,7 +279,7 @@ class CCommunityHelper
 		{
 			$result = self::isOnline($id);
 
-			$name = '<img src="' . JURI::root(TRUE) . '/media/mint/icons/16/status' . ($result ? NULL : '-offline') . '.png" rel="tooltip" data-original-title="' . ($result ? JText::_('CONLINE') : JText::_('COFFLINE')) . '" align="absmiddle">' . $name;
+			$name = '<img src="' . JURI::root(TRUE) . '/media/com_joomcck/icons/16/status' . ($result ? NULL : '-offline') . '.png" rel="tooltip" data-original-title="' . ($result ? JText::_('CONLINE') : JText::_('COFFLINE')) . '" align="absmiddle">' . $name;
 		}
 
 		$cache[$key] = $name;

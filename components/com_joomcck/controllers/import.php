@@ -10,6 +10,7 @@
 
 use Joomla\CMS\Factory;
 use Joomla\Registry\Registry;
+use uploader\UploadHandler;
 
 defined('_JEXEC') or die();
 jimport('mint.mvc.controller.admin');
@@ -478,7 +479,7 @@ class JoomcckControllerImport extends MControllerAdmin
 
 	public function upload()
 	{
-		require_once JPATH_ROOT . '/media/mint/vendors/blueimp-file-upload/php/UploadHandler.php';
+		require_once JPATH_ROOT . '/media/com_joomcck/vendors/blueimp-file-upload/php/UploadHandler.php';
 
 		$options = array(
 			'accept_file_types' => '/\.(zip|json|csv)$/i',

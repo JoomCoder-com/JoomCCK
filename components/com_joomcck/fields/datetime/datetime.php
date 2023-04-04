@@ -59,16 +59,16 @@ class JFormFieldCDatetime extends CFormField
         $lang       = strtolower(JFactory::getLanguage()->getTag());
         $short_lang = substr($lang, 0, 2);
 
-        $doc->addScript(JUri::root(true) . '/media/mint/vendors/moment/min/moment.min.js');
-        $doc->addScript(JUri::root(true) . '/media/mint/vendors/moment/locale/en-gb.js');
-        if (JFile::exists(JPATH_ROOT . '/media/mint/vendors/moment/locale/' . $lang . '.js')) {
-            $doc->addScript(JUri::root(true) . '/media/mint/vendors/moment/locale/' . $lang . '.js');
+        $doc->addScript(JUri::root(true) . '/media/com_joomcck/vendors/moment/min/moment.min.js');
+        $doc->addScript(JUri::root(true) . '/media/com_joomcck/vendors/moment/locale/en-gb.js');
+        if (JFile::exists(JPATH_ROOT . '/media/com_joomcck/vendors/moment/locale/' . $lang . '.js')) {
+            $doc->addScript(JUri::root(true) . '/media/com_joomcck/vendors/moment/locale/' . $lang . '.js');
         }
-        if (JFile::exists(JPATH_ROOT . '/media/mint/vendors/moment/locale/' . $short_lang . '.js')) {
-            $doc->addScript(JUri::root(true) . '/media/mint/vendors/moment/locale/' . $short_lang . '.js');
+        if (JFile::exists(JPATH_ROOT . '/media/com_joomcck/vendors/moment/locale/' . $short_lang . '.js')) {
+            $doc->addScript(JUri::root(true) . '/media/com_joomcck/vendors/moment/locale/' . $short_lang . '.js');
         }
-        $doc->addScript(JUri::root(true) . '/media/mint/vendors/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js');
-        $doc->addStyleSheet(JUri::root(true) . '/media/mint/vendors/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css');
+        $doc->addScript(JUri::root(true) . '/media/com_joomcck/vendors/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js');
+        $doc->addStyleSheet(JUri::root(true) . '/media/com_joomcck/vendors/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css');
 
         settype($this->value, 'array');
 
@@ -217,16 +217,16 @@ class JFormFieldCDatetime extends CFormField
         $lang       = strtolower(JFactory::getLanguage()->getTag());
         $short_lang = substr($lang, 0, 2);
 
-        $doc->addScript(JUri::root(true) . '/media/mint/vendors/moment/min/moment.min.js');
-        $doc->addScript(JUri::root(true) . '/media/mint/vendors/moment/locale/en-gb.js');
-        if (JFile::exists(JPATH_ROOT . '/media/mint/vendors/moment/locale/' . $lang . '.js')) {
-            $doc->addScript(JUri::root(true) . '/media/mint/vendors/moment/locale/' . $lang . '.js');
+        $doc->addScript(JUri::root(true) . '/media/com_joomcck/vendors/moment/min/moment.min.js');
+        $doc->addScript(JUri::root(true) . '/media/com_joomcck/vendors/moment/locale/en-gb.js');
+        if (JFile::exists(JPATH_ROOT . '/media/com_joomcck/vendors/moment/locale/' . $lang . '.js')) {
+            $doc->addScript(JUri::root(true) . '/media/com_joomcck/vendors/moment/locale/' . $lang . '.js');
         }
-        if (JFile::exists(JPATH_ROOT . '/media/mint/vendors/moment/locale/' . $short_lang . '.js')) {
-            $doc->addScript(JUri::root(true) . '/media/mint/vendors/moment/locale/' . $short_lang . '.js');
+        if (JFile::exists(JPATH_ROOT . '/media/com_joomcck/vendors/moment/locale/' . $short_lang . '.js')) {
+            $doc->addScript(JUri::root(true) . '/media/com_joomcck/vendors/moment/locale/' . $short_lang . '.js');
         }
-        $doc->addScript(JUri::root(true) . '/media/mint/vendors/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js');
-        $doc->addStyleSheet(JUri::root(true) . '/media/mint/vendors/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css');
+        $doc->addScript(JUri::root(true) . '/media/com_joomcck/vendors/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js');
+        $doc->addStyleSheet(JUri::root(true) . '/media/com_joomcck/vendors/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css');
 
         return $this->_display_filter($section, $module);
     }

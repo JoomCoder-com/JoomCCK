@@ -98,7 +98,7 @@ $('jform_user_id').addEvent('blur', function(){
 				$('jform_user_id').addClass('user-alert');
 				return;
 			}
-			$('user-name-check').set('src', '<?php echo JURI::root(TRUE);?>/media/mint/icons/16/tick.png');
+			$('user-name-check').set('src', '<?php echo JURI::root(TRUE);?>/media/com_joomcck/icons/16/tick.png');
 			$('jform_user_id').removeClass('user-alert');
 
 		}.bind(this)

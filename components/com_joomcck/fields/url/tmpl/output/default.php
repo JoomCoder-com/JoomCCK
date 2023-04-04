@@ -81,7 +81,7 @@ if($this->params->get('params.links_sort', 0))
 
 		<img style="cursor: pointer"
 			 onclick="setTimeout(function(){jQuery('#snapimg<?php echo $id . '-' . $i; ?>').attr('src', 'http://mini.s-shot.ru/1280/<?php echo $this->params->get('params.snapshot_width', 200) ?>/jpeg?<?php echo $val['url']; ?>')}, 1000)"
-			 src="<?php echo JURI::root(TRUE) ?>/media/mint/icons/16/document-text-image.png"
+			 src="<?php echo JURI::root(TRUE) ?>/media/com_joomcck/icons/16/document-text-image.png"
 			 rel="popover" data-original-title="<?php echo JText::_('Snapshot'); ?>" data-content="<?php echo $img; ?>">
 
 	<?php endif; ?>
@@ -92,7 +92,7 @@ if($this->params->get('params.links_sort', 0))
 			'class' => 'qr-image',
 			'width' => $this->params->get('params.qr_width', 60) . 'px', 'height' => $this->params->get('params.qr_width', 60) . 'px', 'align' => 'top'
 		)), ENT_QUOTES);?>
-		<img style="cursor: pointer" src="<?php echo JURI::root(TRUE) ?>/media/mint/icons/16/barcode-2d.png" rel="popover" data-original-title="<?php echo JText::_('URL QR'); ?>" data-content="<?php echo $img; ?>">
+		<img style="cursor: pointer" src="<?php echo JURI::root(TRUE) ?>/media/com_joomcck/icons/16/barcode-2d.png" rel="popover" data-original-title="<?php echo JText::_('URL QR'); ?>" data-content="<?php echo $img; ?>">
 	<?php endif; ?>
 
 

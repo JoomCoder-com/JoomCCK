@@ -54,7 +54,7 @@ $doc->addScript(JURI::root() . 'modules/mod_joomcck_notifications/Scrollable/Scr
 		<ul id="mod_ntf_container<?php echo $module->id;?>">
 			<?php foreach ($list as $item) : ?>
 			<li id="mod_ntf<?php echo $item->id;?>">
-				<img class="mod-ntf-icon-del" src="<?php echo JURI::root()?>media/mint/icons/16/cross-small.png" align="absmiddle" onclick="modMarkRead(<?php echo $item->id;?>);">
+				<img class="mod-ntf-icon-del" src="<?php echo JURI::root()?>media/com_joomcck/icons/16/cross-small.png" align="absmiddle" onclick="modMarkRead(<?php echo $item->id;?>);">
 				<span><?php echo $item->html; ?></span>
 			</li>
 			<?php endforeach;?>
@@ -105,7 +105,7 @@ $doc->addScript(JURI::root() . 'modules/mod_joomcck_notifications/Scrollable/Scr
 				}
 				Array.each(json.result, function (item) {
 					var li_el  = new Element('li', {id: 'mod_ntf'+ item.id});
-					var html = '<img class="mod-ntf-icon-del" src="<?php echo JURI::root()?>media/mint/icons/16/cross-small.png" align="absmiddle" onclick="modMarkRead(' + item.id + ');">';
+					var html = '<img class="mod-ntf-icon-del" src="<?php echo JURI::root()?>media/com_joomcck/icons/16/cross-small.png" align="absmiddle" onclick="modMarkRead(' + item.id + ');">';
 					html += '<span>'+item.html+'</span>';
 					li_el.set('html', html);
 					$('mod_ntf_container<?php echo $module->id;?>').grab(li_el, 'top');

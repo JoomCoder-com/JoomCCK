@@ -49,7 +49,7 @@ defined('_JEXEC') or die('Restricted access');
 							<a class="btn btn-outline-dark" href="javascript:void(0);" <?php if($c->children){ echo 'onclick="CatSelector.get_children('.$c->id.', '.$c->section_id.', 1)"';}else{echo ' class="disabled"';}?>>
 								<?php if($c->id != JFactory::getApplication()->input->getInt('id') && $c->params->get('submission', 1)):?>
 									<img class="float-end" id="s_icon<?php echo $c->id;?>"
-										src="<?php echo JURI::root(TRUE);?>/media/mint/icons/16/plus-button.png"
+										src="<?php echo JURI::root(TRUE);?>/media/com_joomcck/icons/16/plus-button.png"
 										onclick="CatSelector.add(<?php echo $c->id;?>, '<?php echo $c->title;?>', '<?php echo $c->path;?>')" />
 								<?php endif;?>
 								<?php echo $c->title?>
@@ -69,8 +69,8 @@ defined('_JEXEC') or die('Restricted access');
 	</div>
 	<small>
 		<?php echo JText::sprintf('CCLICKTOASIGNCATEGORY',
-			JHtml::image(JURI::root().'media/mint/icons/16/plus-button.png', JText::_('CADDCATEGORY'), array('align'=>'absmiddle', 'width' => 12, 'style' => 'float: none')),
-			JHtml::image(JURI::root().'media/mint/icons/16/cross-button.png', JText::_('CDELETECATEGORY'), array('align'=>'absmiddle', 'width' => 12, 'style' => 'float: none')));?>
+			JHtml::image(JURI::root().'media/com_joomcck/icons/16/plus-button.png', JText::_('CADDCATEGORY'), array('align'=>'absmiddle', 'width' => 12, 'style' => 'float: none')),
+			JHtml::image(JURI::root().'media/com_joomcck/icons/16/cross-button.png', JText::_('CDELETECATEGORY'), array('align'=>'absmiddle', 'width' => 12, 'style' => 'float: none')));?>
 	</small>
 </div>
 <div class="clearfix"></div>
@@ -205,7 +205,7 @@ defined('_JEXEC') or die('Restricted access');
 						if(obj.params.submission == "1")
 						{
 							html += '<img id="s_icon' + obj.id +
-								'" src="<?php echo JURI::root(TRUE);?>/media/mint/icons/16/plus-button.png" ' +
+								'" src="<?php echo JURI::root(TRUE);?>/media/com_joomcck/icons/16/plus-button.png" ' +
 								'onclick="CatSelector.add(' + obj.id +', \'' + obj.title +'\', \'' + obj.path +'\')" />';
 						}
 						html += obj.title+'</a>';

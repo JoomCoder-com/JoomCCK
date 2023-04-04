@@ -23,7 +23,7 @@ $value = $this->value ? $this->value : null;
 			<td>
 				<span class="flag_icon" id="flag<?php echo $this->id;?>">
 					<?php if ($this->flag): ?>
-						<img src="<?php echo JURI::root(TRUE);?>/media/mint/<?php echo ($this->flag ? 'icons/flag/16/'.\Joomla\String\StringHelper::strtolower($this->flag->code2) : 'blank');?>.png" border="0" 
+						<img src="<?php echo JURI::root(TRUE);?>/media/com_joomcck/<?php echo ($this->flag ? 'icons/flag/16/'.\Joomla\String\StringHelper::strtolower($this->flag->code2) : 'blank');?>.png" border="0" 
 						align="absmiddle" alt="<?php echo JText::_($this->flag->name);?>" title="<?php echo JText::_($this->flag->name);?>">
 					<?php endif;?>
 				</span> 

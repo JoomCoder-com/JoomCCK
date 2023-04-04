@@ -3,42 +3,78 @@
     <target name="dirbuild">
 
         <!-- Language files component -->
-        <copy file="./language/en-GB/com_joomproject.ini" todir="${releasespath}/build/components/com_joomproject/site/language/en-GB" />
-        <copy file="./administrator/language/en-GB/com_joomproject.ini" todir="${releasespath}/build/components/com_joomproject/admin/language/en-GB" />
-        <copy file="./administrator/language/en-GB/com_joomproject.sys.ini" todir="${releasespath}/build/components/com_joomproject/admin/language/en-GB" />
+        <copy file="./language/en-GB/com_joomcck.ini" todir="${releasespath}/build/components/com_joomcck/site/language/en-GB" />
+        <copy file="./administrator/language/en-GB/com_joomcck.sys.ini" todir="${releasespath}/build/components/com_joomcck/admin/language/en-GB" />
+
+        <!-- Language files fields -->
+        <copy file="./language/en-GB/com_joomcck_field_audio.ini" todir="${releasespath}/build/components/com_joomcck/site/language/en-GB" />
+        <copy file="./language/en-GB/com_joomcck_field_boolean.ini" todir="${releasespath}/build/components/com_joomcck/site/language/en-GB" />
+        <copy file="./language/en-GB/com_joomcck_field_checkbox.ini" todir="${releasespath}/build/components/com_joomcck/site/language/en-GB" />
+        <copy file="./language/en-GB/com_joomcck_field_child.ini" todir="${releasespath}/build/components/com_joomcck/site/language/en-GB" />
+        <copy file="./language/en-GB/com_joomcck_field_datetime.ini" todir="${releasespath}/build/components/com_joomcck/site/language/en-GB" />
+        <copy file="./language/en-GB/com_joomcck_field_digits.ini" todir="${releasespath}/build/components/com_joomcck/site/language/en-GB" />
+        <copy file="./language/en-GB/com_joomcck_field_dripcontent.ini" todir="${releasespath}/build/components/com_joomcck/site/language/en-GB" />
+        <copy file="./language/en-GB/com_joomcck_field_email.ini" todir="${releasespath}/build/components/com_joomcck/site/language/en-GB" />
+        <copy file="./language/en-GB/com_joomcck_field_gallery.ini" todir="${releasespath}/build/components/com_joomcck/site/language/en-GB" />
+        <copy file="./language/en-GB/com_joomcck_field_geo.ini" todir="${releasespath}/build/components/com_joomcck/site/language/en-GB" />
+        <copy file="./language/en-GB/com_joomcck_field_html.ini" todir="${releasespath}/build/components/com_joomcck/site/language/en-GB" />
+        <copy file="./language/en-GB/com_joomcck_field_image.ini" todir="${releasespath}/build/components/com_joomcck/site/language/en-GB" />
+        <copy file="./language/en-GB/com_joomcck_field_j2store.ini" todir="${releasespath}/build/components/com_joomcck/site/language/en-GB" />
+        <copy file="./language/en-GB/com_joomcck_field_listautocomplete.ini" todir="${releasespath}/build/components/com_joomcck/site/language/en-GB" />
+        <copy file="./language/en-GB/com_joomcck_field_multilevelselect.ini" todir="${releasespath}/build/components/com_joomcck/site/language/en-GB" />
+        <copy file="./language/en-GB/com_joomcck_field_multiselect.ini" todir="${releasespath}/build/components/com_joomcck/site/language/en-GB" />
+        <copy file="./language/en-GB/com_joomcck_field_parent.ini" todir="${releasespath}/build/components/com_joomcck/site/language/en-GB" />
+        <copy file="./language/en-GB/com_joomcck_field_passwd.ini" todir="${releasespath}/build/components/com_joomcck/site/language/en-GB" />
+        <copy file="./language/en-GB/com_joomcck_field_paytoaccess.ini" todir="${releasespath}/build/components/com_joomcck/site/language/en-GB" />
+        <copy file="./language/en-GB/com_joomcck_field_paytodownload.ini" todir="${releasespath}/build/components/com_joomcck/site/language/en-GB" />
+        <copy file="./language/en-GB/com_joomcck_field_payvoucher.ini" todir="${releasespath}/build/components/com_joomcck/site/language/en-GB" />
+        <copy file="./language/en-GB/com_joomcck_field_q2c.ini" todir="${releasespath}/build/components/com_joomcck/site/language/en-GB" />
+        <copy file="./language/en-GB/com_joomcck_field_radio.ini" todir="${releasespath}/build/components/com_joomcck/site/language/en-GB" />
+        <copy file="./language/en-GB/com_joomcck_field_readmore.ini" todir="${releasespath}/build/components/com_joomcck/site/language/en-GB" />
+        <copy file="./language/en-GB/com_joomcck_field_records.ini" todir="${releasespath}/build/components/com_joomcck/site/language/en-GB" />
+        <copy file="./language/en-GB/com_joomcck_field_register.ini" todir="${releasespath}/build/components/com_joomcck/site/language/en-GB" />
+        <copy file="./language/en-GB/com_joomcck_field_related_access.ini" todir="${releasespath}/build/components/com_joomcck/site/language/en-GB" />
+        <copy file="./language/en-GB/com_joomcck_field_select.ini" todir="${releasespath}/build/components/com_joomcck/site/language/en-GB" />
+        <copy file="./language/en-GB/com_joomcck_field_status" todir="${releasespath}/build/components/com_joomcck/site/language/en-GB" />
+        <copy file="./language/en-GB/com_joomcck_field_telephone.ini" todir="${releasespath}/build/components/com_joomcck/site/language/en-GB" />
+        <copy file="./language/en-GB/com_joomcck_field_text.ini" todir="${releasespath}/build/components/com_joomcck/site/language/en-GB" />
+        <copy file="./language/en-GB/com_joomcck_field_textarea.ini" todir="${releasespath}/build/components/com_joomcck/site/language/en-GB" />
+        <copy file="./language/en-GB/com_joomcck_field_uploads.ini" todir="${releasespath}/build/components/com_joomcck/site/language/en-GB" />
+        <copy file="./language/en-GB/com_joomcck_field_url.ini" todir="${releasespath}/build/components/com_joomcck/site/language/en-GB" />
+        <copy file="./language/en-GB/com_joomcck_field_video.ini" todir="${releasespath}/build/components/com_joomcck/site/language/en-GB" />
+        <copy file="./language/en-GB/com_joomcck_gateway_paypal.ini" todir="${releasespath}/build/components/com_joomcck/site/language/en-GB" />
+        <copy file="./language/en-GB/com_joomcck_gateway_robokassa.ini.ini" todir="${releasespath}/build/components/com_joomcck/site/language/en-GB" />
 
         <!-- Language files plugins -->
-        <copy file="./administrator/language/en-GB/plg_content_jpcomments.ini" todir="${releasespath}/build/plugins/plg_content_jpcomments/language/en-GB" />
-        <copy file="./administrator/language/en-GB/plg_content_jpcomments.sys.ini" todir="${releasespath}/build/plugins/plg_content_jpcomments/language/en-GB" />
+
 
         <!-- Language files modules -->
-        <copy file="./language/en-GB/mod_jp_calendar.ini" todir="${releasespath}/build/modules/mod_jp_calendar/language/en-GB" />
-        <copy file="./language/en-GB/mod_jp_calendar.sys.ini" todir="${releasespath}/build/modules/mod_jp_calendar/language/en-GB" />
+        <copy file="./language/en-GB/mod_joomcck_submitbutton.ini" todir="${releasespath}/build/modules/mod_joomcck_submitbutton/language/en-GB" />
+        <copy file="./language/en-GB/mod_joomcck_userstatistics.ini" todir="${releasespath}/build/modules/mod_joomcck_userstatistics/language/en-GB" />
 
 
         <!-- Component files -->
-        <copy todir="${releasespath}/build/components/com_joomproject/admin">
-            <fileset dir="./administrator/components/com_joomproject">
-                <exclude name="script.php"></exclude>
-                <exclude name="joomproject.xml"></exclude>
+        <copy todir="${releasespath}/build/components/com_joomcck/admin">
+            <fileset dir="./administrator/components/com_joomcck">
+                <exclude name="install.php"></exclude>
+                <exclude name="joomcck.xml"></exclude>
             </fileset>
         </copy>
-        <copy todir="${releasespath}/build/components/com_joomproject/site">
-            <fileset dir="./components/com_joomproject">
+        <copy todir="${releasespath}/build/components/com_joomcck/site">
+            <fileset dir="./components/com_joomcck">
             </fileset>
         </copy>
-        <copy todir="${releasespath}/build/components/com_joomproject/media">
-            <fileset dir="./media/com_joomproject" defaultexcludes="true">
-                <exclude name="repo/**"/>
+        <copy todir="${releasespath}/build/components/com_joomcck/media">
+            <fileset dir="./media/com_joomcck">
             </fileset>
         </copy>
-        <copy file="./administrator/components/com_joomproject/joomproject.xml" todir="${releasespath}/build/components/com_joomproject" />
-        <copy file="./administrator/components/com_joomproject/script.php" todir="${releasespath}/build/components/com_joomproject" />
+        <copy file="./administrator/components/com_joomcck/joomcck.xml" todir="${releasespath}/build/components/com_joomcck" />
+        <copy file="./administrator/components/com_joomcck/install.php" todir="${releasespath}/build/components/com_joomcck" />
 
 
         <!-- Modules files -->
-        <copy todir="${releasespath}/build/modules/mod_jp_calendar">
-            <fileset dir="./modules/mod_jp_calendar"></fileset>
+        <copy todir="${releasespath}/build/modules/mod_joomcck_category">
+            <fileset dir="./modules/mod_joomcck_category"></fileset>
         </copy>
         <copy todir="${releasespath}/build/modules/mod_jp_calendar/media">
             <fileset dir="./media/mod_jp_calendar">
@@ -72,8 +108,8 @@
         </reflexive>
 
         <!-- Build Archive -->
-        <delete file="${releasespath}/com_joomproject_v${version}_j4.zip" verbose="true"/>
-        <zip destfile="${releasespath}/com_joomproject_v${version}_j4.zip" basedir="${releasespath}/build"></zip>
+        <delete file="${releasespath}/com_joomcck_v${version}_j4.zip" verbose="true"/>
+        <zip destfile="${releasespath}/com_joomcck_v${version}_j4.zip" basedir="${releasespath}/build"></zip>
         <echo msg="Files copied and compressed in build directory OK!" />
         <delete dir="${releasespath}/build" verbose="true" failonerror="true" />
         <echo msg="Build File removed" />

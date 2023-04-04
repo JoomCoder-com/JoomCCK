@@ -141,7 +141,7 @@ defined('_JEXEC') or die('Restricted access');
 			</legend>
 			<div class="well well-small<?php echo ($filter->isFilterActive() ? ' active' : NULL) ?>">
 				<?php if($filter->isFilterActive()): ?>
-					<!-- <img class="filter-close" onclick="Joomcck.cleanFilter('filter_<?php echo $filter->key ?>')" rel="tooltip" data-original-title="<?php echo JText::_('CDELETEFILTER') ?>" src="<?php echo JUri::root(TRUE) ?>/media/mint/icons/16/cross-circle.png">-->
+					<!-- <img class="filter-close" onclick="Joomcck.cleanFilter('filter_<?php echo $filter->key ?>')" rel="tooltip" data-original-title="<?php echo JText::_('CDELETEFILTER') ?>" src="<?php echo JUri::root(TRUE) ?>/media/com_joomcck/icons/16/cross-circle.png">-->
 				<?php endif; ?>
 				<?php echo $f; ?>
 			</div>

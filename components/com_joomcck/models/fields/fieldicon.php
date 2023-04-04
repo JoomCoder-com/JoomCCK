@@ -20,8 +20,8 @@ class JFormFieldFieldicon extends JFormField
 	
 	public function getInput()
 	{
-		$dir = JPATH_ROOT. '/media/mint/icons/16';
-		$path = 'media/mint/icons/16/';
+		$dir = JPATH_ROOT. '/media/com_joomcck/icons/16';
+		$path = 'media/com_joomcck/icons/16/';
 		if($this->element['directory'])
 		{
 			$dir = JPATH_ROOT. DIRECTORY_SEPARATOR .$this->element['directory'];
@@ -50,7 +50,7 @@ class JFormFieldFieldicon extends JFormField
          });})(jQuery);
 		</script>';
 		$html .= '<img id="icon_img'.$this->fieldname.'" align="absmiddle" src="'.JURI::root().
-			($this->value ? $path.$this->value : 'media/mint/blank.png').'"> <span id="icon_name'.$this->fieldname.'" class="icon_name">'.$this->value.'</span>';
+			($this->value ? $path.$this->value : 'media/com_joomcck/blank.png').'"> <span id="icon_name'.$this->fieldname.'" class="icon_name">'.$this->value.'</span>';
 		$html .= ' '.JHTML::link('javascript:void(0)', 'Delete curent icon', $atr);
 		$html .= '<div style="clear:both"></div><div style="height:80px;width:300px;overflow-x:hidden;overflow-y:scroll">';	
 		$html .= "<script type=\"text/javascript\">function mrSetIcon{$this->fieldname}(file){document.getElementById('icon_img".$this->fieldname."').src = '".JURI::root().$path."' + file;	document.getElementById('icon_name".$this->fieldname."').innerHTML = file;	document.getElementById('icon_param".$this->fieldname."').value = file;}</script>";

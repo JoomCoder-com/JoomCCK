@@ -27,7 +27,7 @@ class JFormFieldCBoolean extends CFormField
 
 		$label = JText::_($this->params->get('params.' . $value));
 		$icon  = $this->params->get('params.icon_' . $value, ($value == 'true' ? 'tick.png' : 'cross.png'));
-		$icon  = JHtml::image(JURI::root() . 'media/mint/icons/16/' . $icon, $label, array(
+		$icon  = JHtml::image(JURI::root() . 'media/com_joomcck/icons/16/' . $icon, $label, array(
 			'align' => 'absmiddle'
 		));
 
@@ -88,10 +88,10 @@ class JFormFieldCBoolean extends CFormField
 		$label['true']  = JText::_($this->params->get('params.true'));
 		$label['false'] = JText::_($this->params->get('params.false'));
 		$icon           = array();
-		$icon['true']   = JHtml::image(JURI::root() . 'media/mint/icons/16/' . $this->params->get('params.icon_true', 'tick.png'), $label['true'], array(
+		$icon['true']   = JHtml::image(JURI::root() . 'media/com_joomcck/icons/16/' . $this->params->get('params.icon_true', 'tick.png'), $label['true'], array(
 			'align' => 'absmiddle'
 		));
-		$icon['false']  = JHtml::image(JURI::root() . 'media/mint/icons/16/' . $this->params->get('params.icon_false', 'cross.png'), $label['false'], array(
+		$icon['false']  = JHtml::image(JURI::root() . 'media/com_joomcck/icons/16/' . $this->params->get('params.icon_false', 'cross.png'), $label['false'], array(
 			'align' => 'absmiddle'
 		));
 
@@ -220,7 +220,7 @@ class JFormFieldCBoolean extends CFormField
 		$icon  = $this->params->get('params.icon_' . $value);
 		if($icon)
 		{
-			$icon = JHtml::image(JURI::root() . 'media/mint/icons/16/' . $icon, strip_tags($label),
+			$icon = JHtml::image(JURI::root() . 'media/com_joomcck/icons/16/' . $icon, strip_tags($label),
 				array(
 					'align' => 'absmiddle'
 				));

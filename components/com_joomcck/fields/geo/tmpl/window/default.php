@@ -41,7 +41,7 @@
 				<dt id="<?php echo $field->id;?>-lbl" for="field_<?php echo $field->id;?>" class="<?php echo $field->class;?>" >
 					<?php echo $field->label; ?>
 					<?php if($field->params->get('core.icon')):?>
-						<img alt="<?php strip_tags($field->label)?>" src="<?php echo JURI::root(TRUE)?>/media/mint/icons/16/<?php echo $field->params->get('core.icon');?>" align="absmiddle">
+						<img alt="<?php strip_tags($field->label)?>" src="<?php echo JURI::root(TRUE)?>/media/com_joomcck/icons/16/<?php echo $field->params->get('core.icon');?>" align="absmiddle">
 					<?php endif;?>
 				</dt>
 			<?php endif;?>

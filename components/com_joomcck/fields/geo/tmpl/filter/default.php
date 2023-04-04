@@ -380,7 +380,7 @@ if (in_array($this->params->get('params.filter_distance', 0), $this->user->getAu
 
 		window.currpos<?php echo $this->id  ?> = function()
 		{
-			$('#cur_loc').attr('disabled', 'disabled').css('background', 'url("<?php echo JURI::root(TRUE);?>/media/mint/js/mooupload/imgs/load_bg_blue.gif")');
+			$('#cur_loc').attr('disabled', 'disabled').css('background', 'url("<?php echo JURI::root(TRUE);?>/media/com_joomcck/js/mooupload/imgs/load_bg_blue.gif")');
 			Fgl.getCurrentPosition(displayPosition, displayError);
 		}
 

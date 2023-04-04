@@ -51,9 +51,9 @@ defined('_JEXEC') or die();
 			<td>
 				<a href="javascript:void(0)" id="file_play_<?php echo $record->id;?>_<?php echo $k;?>"
 					onclick="play<?php echo $record->id;?>(<?php echo $k;?>)">
-					<img src="<?php echo JURI::root(TRUE)?>/media/mint/icons/16/control.png" alt="<?php echo JText::_('P_PLAY')?>" align="absmiddle"></a>
+					<img src="<?php echo JURI::root(TRUE)?>/media/com_joomcck/icons/16/control.png" alt="<?php echo JText::_('P_PLAY')?>" align="absmiddle"></a>
 				<a href="javascript:void(0)" id="file_stop_<?php echo $record->id;?>_<?php echo $k;?>" onclick="stop<?php echo $record->id;?>(<?php echo $k;?>)" style="display:none">
-					<img src="<?php echo JURI::root(TRUE)?>/media/mint/icons/16/control-stop-square.png" alt="<?php echo JText::_('P_STOP')?>" align="absmiddle"></a>
+					<img src="<?php echo JURI::root(TRUE)?>/media/com_joomcck/icons/16/control-stop-square.png" alt="<?php echo JText::_('P_STOP')?>" align="absmiddle"></a>
 				<?php echo $file->title ? $file->title : $file->realname;?>
 				<?php if($data->get('comment') && $this->params->get('tmpl_full.show_comment')):?>
 					<?php echo $data->get('comment');?>
@@ -81,7 +81,7 @@ defined('_JEXEC') or die();
 					<?php if(!empty($file->description)): ?>
 					<center>
 						<a href="#lyric<?php echo $file->id;?>" class="modal" rel="{handler:'adopt', size:{x:400,y:500}}">
-							<img src="<?php echo JURI::root(TRUE)?>/media/mint/icons/16/clipboard-list.png" alt="<?php echo JText::_('P_LYRIC')?>" align="absmiddle">
+							<img src="<?php echo JURI::root(TRUE)?>/media/com_joomcck/icons/16/clipboard-list.png" alt="<?php echo JText::_('P_LYRIC')?>" align="absmiddle">
 						</a>
 						<div  style="display: none;">
 							<div id="lyric<?php echo $file->id;?>"><h3><?php echo JText::_('P_LYRIC')?></h3><br /><?php echo nl2br($file->description);?></div>
@@ -95,7 +95,7 @@ defined('_JEXEC') or die();
 					<?php if(in_array($this->params->get('params.allow_download', 0), $this->user->getAuthorisedViewLevels())):?>
 					<center>
 						<a href="<?php echo $file->url?>">
-							<img src="<?php echo JURI::root(TRUE)?>/media/mint/icons/16/disk.png" alt="<?php echo JText::_('CDOWNLOAD')?>" align="absmiddle"></a>
+							<img src="<?php echo JURI::root(TRUE)?>/media/com_joomcck/icons/16/disk.png" alt="<?php echo JText::_('CDOWNLOAD')?>" align="absmiddle"></a>
 						<?php if ($this->params->get('tmpl_full.hits', 0)):?>
 							[<?php echo $file->hits?>]
 						<?php endif;?>

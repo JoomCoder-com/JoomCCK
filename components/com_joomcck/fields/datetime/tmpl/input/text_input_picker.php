@@ -10,9 +10,9 @@
 defined('_JEXEC') or die();
 
 $doc = JFactory::getDocument();
-$doc->addScript(JURI::root(TRUE) . '/media/mint/vendors/jquery.inputmask/dist/min/inputmask/inputmask.min.js');
-$doc->addScript(JURI::root(TRUE) . '/media/mint/vendors/jquery.inputmask/dist/min/inputmask/inputmask.date.extensions.min.js');
-$doc->addScript(JURI::root(TRUE) . '/media/mint/vendors/jquery.inputmask/dist/min/inputmask/inputmask.numeric.extensions.min.js');
+$doc->addScript(JURI::root(TRUE) . '/media/com_joomcck/vendors/jquery.inputmask/dist/min/inputmask/inputmask.min.js');
+$doc->addScript(JURI::root(TRUE) . '/media/com_joomcck/vendors/jquery.inputmask/dist/min/inputmask/inputmask.date.extensions.min.js');
+$doc->addScript(JURI::root(TRUE) . '/media/com_joomcck/vendors/jquery.inputmask/dist/min/inputmask/inputmask.numeric.extensions.min.js');
 
 $class    = ' class="' . $this->params->get('core.field_class', 'form-control') . ($this->required ? ' required' : NULL) . '" ';
 $required = $this->required ? 'required="true" ' : NULL;

@@ -64,7 +64,7 @@ $ind = 0;
 							<div><img style="max-width:<?php echo $params->get('tmpl_params.cat_img_width', 200)?>px;" class="category_icon" alt="<?php echo $category->title; ?>" src="<?php echo JURI::root().$category->image;?>"></div>
 						<?php endif;?>
 						<?php if(count($category->children)):?>
-							<img style="cursor: pointer;" id="iconsubcat<?php echo $category->id;?>" src="<?php echo JURI::root()?>media/mint/icons/16/toggle.png" hspace="5" align="absmiddle" />
+							<img style="cursor: pointer;" id="iconsubcat<?php echo $category->id;?>" src="<?php echo JURI::root()?>media/com_joomcck/icons/16/toggle.png" hspace="5" align="absmiddle" />
 						<?php endif;?>
 						<a href="<?php echo JRoute::_($category->link)?>"><?php echo $category->title; ?></a>
 						<?php if($params->get('tmpl_params.cat_nums') && ($category->params->get('submission') || $category->records_num)):?>
@@ -99,7 +99,7 @@ $$('.subcat').each(function(e){
 		if(!<?php echo $params->get('tmpl_params.cat_unfold') ? 'true' : 'false';?>)
 		{
 			list_element.hide();
-			icon.set('src', '<?php echo JURI::root()?>media/mint/icons/16/toggle-expand.png');
+			icon.set('src', '<?php echo JURI::root()?>media/com_joomcck/icons/16/toggle-expand.png');
 		}
 	}
 	icon.addEvent('click', function(){
@@ -107,12 +107,12 @@ $$('.subcat').each(function(e){
 		if(list_element.from[1] == 0)
 		{
 			Cookie.write('category_state'+e.id, 1, {duration: 30000});
-			icon.set('src', '<?php echo JURI::root()?>media/mint/icons/16/toggle.png');
+			icon.set('src', '<?php echo JURI::root()?>media/com_joomcck/icons/16/toggle.png');
 		}
 		else
 		{
 			Cookie.dispose('category_state'+e.id);
-			icon.set('src', '<?php echo JURI::root()?>media/mint/icons/16/toggle-expand.png');
+			icon.set('src', '<?php echo JURI::root()?>media/com_joomcck/icons/16/toggle-expand.png');
 		}	
 	});
 });

@@ -141,7 +141,7 @@ if($saveOrder)
 						<?php endif; ?>
 
 						<?php if($params->get('core.icon')): ?>
-							<img alt="Icon" src="<?php echo JURI::root(TRUE) ?>/media/mint/icons/16/<?php echo $params->get('core.icon'); ?>" align="absmiddle">
+							<img alt="Icon" src="<?php echo JURI::root(TRUE) ?>/media/com_joomcck/icons/16/<?php echo $params->get('core.icon'); ?>" align="absmiddle">
 						<?php endif; ?>
 
 						<a href="<?php echo JRoute::_('index.php?option=com_joomcck&task=tfield.edit&id=' . (int)$item->id); ?>">
@@ -157,7 +157,7 @@ if($saveOrder)
 					<?php echo $item->group_field_title; ?>
 				</td>
 				<td>
-					<img style="max-width: 16px;" rel="tooltip" data-original-title="<?php echo $item->key; ?>" src="<?php echo JUri::root(TRUE) ?>/media/mint/icons/16/key.png"/>
+					<img style="max-width: 16px;" rel="tooltip" data-original-title="<?php echo $item->key; ?>" src="<?php echo JUri::root(TRUE) ?>/media/com_joomcck/icons/16/key.png"/>
 				</td>
 				<td><?php echo JHtml::_('field.required', $params->get('core.required', 0), $i, 'tfields.', $canChange) ?></td>
 				<td><?php echo JHtml::_('field.searchable', $params->get('core.searchable', 0), $i, 'tfields.', $canChange) ?></td>

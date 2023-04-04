@@ -431,7 +431,7 @@ class JFormFieldCGeo extends CFormField
 	{
 		if($this->params->get("params.{$group}.{$name}.req"))
 		{
-			$out[] = JHtml::image(JURI::root() . 'media/mint/icons/16/asterisk-small.png', 'Required', array(
+			$out[] = JHtml::image(JURI::root() . 'media/com_joomcck/icons/16/asterisk-small.png', 'Required', array(
 				'rel'                 => 'tooltip',
 				'data-original-title' => JText::_('CREQUIRED')
 			));

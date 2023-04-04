@@ -422,7 +422,7 @@ class JFormFieldCMultilevelselect extends CFormField
 		$level = '';
 		if(empty($post['filter']) && $required && $post['level'] <= $required)
 		{
-			$level .= JHtml::image(JURI::root().'media/mint/icons/16/asterisk-small.png', JText::_('MLS_LEVELREQUIRED'), 'align="absmiddle" rel="tooltip" data-original-title="'.JText::_('MLS_LEVELREQUIRED').'"');
+			$level .= JHtml::image(JURI::root().'media/com_joomcck/icons/16/asterisk-small.png', JText::_('MLS_LEVELREQUIRED'), 'align="absmiddle" rel="tooltip" data-original-title="'.JText::_('MLS_LEVELREQUIRED').'"');
 		}
 		$name = 'jform[fields]['.$this->id.'][levels][]';
 		if(isset($post['filter']) && $post['filter'])
@@ -591,9 +591,9 @@ class JFormFieldCMultilevelselect extends CFormField
 		$rows = $this->_sort($rows, 1);
 		$result = $this->_getChilds($rows);
 
-		$img_add = JURI::root().'media/mint/icons/16/plus-button.png';
-		$img_edit = JURI::root().'media/mint/icons/16/pencil.png';
-		$img_del = JURI::root().'media/mint/icons/16/cross-button.png';
+		$img_add = JURI::root().'media/com_joomcck/icons/16/plus-button.png';
+		$img_edit = JURI::root().'media/com_joomcck/icons/16/pencil.png';
+		$img_del = JURI::root().'media/com_joomcck/icons/16/cross-button.png';
 
 		$level = 1;
 		$parent_id = 0;
@@ -655,9 +655,9 @@ class JFormFieldCMultilevelselect extends CFormField
 	private function _getChilds($rows)
 	{
 		$out = array();
-		$img_add = JURI::root().'media/mint/icons/16/plus-button.png';
-		$img_edit = JURI::root().'media/mint/icons/16/pencil.png';
-		$img_del = JURI::root().'media/mint/icons/16/cross-button.png';
+		$img_add = JURI::root().'media/com_joomcck/icons/16/plus-button.png';
+		$img_edit = JURI::root().'media/com_joomcck/icons/16/pencil.png';
+		$img_del = JURI::root().'media/com_joomcck/icons/16/cross-button.png';
 
 		foreach ($rows as $row)
 		{

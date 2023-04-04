@@ -28,7 +28,7 @@ class JFormFieldCtext extends CFormFieldSelectable
 
 		if($mask->mask_type)
 		{
-			JFactory::getDocument()->addScript(JURI::root(TRUE) . '/media/mint/js/mask/masks.js');
+			JFactory::getDocument()->addScript(JURI::root(TRUE) . '/media/com_joomcck/js/mask/masks.js');
 			JFactory::getDocument()->addScript(JURI::root(TRUE) . '/components/com_joomcck/fields/text/text.js');
 			switch($mask->mask_type)
 			{

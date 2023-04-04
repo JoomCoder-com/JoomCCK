@@ -25,7 +25,7 @@ class JFormFieldCAudio extends CFormFieldUpload
 	public function getInput()
 	{
 		$js = "function afterupload(w, s){
-			$$('#'+s.id+' div.result').set('html', '" . addslashes(JText::_('P_CONVERTING')) . "').setStyle('background', 'url(\"" . JURI::root(TRUE) . "/media/mint/js/mooupload/imgs/load_bg_green.gif\")');
+			$$('#'+s.id+' div.result').set('html', '" . addslashes(JText::_('P_CONVERTING')) . "').setStyle('background', 'url(\"" . JURI::root(TRUE) . "/media/com_joomcck/js/mooupload/imgs/load_bg_green.gif\")');
 			new Request.JSON({
 				url: Joomcck.field_call_url,
 	    		method:'post',
@@ -123,7 +123,7 @@ class JFormFieldCAudio extends CFormFieldUpload
 
 	private function _render($client, $record, $type, $section)
 	{
-		JFactory::getDocument()->addScript(JURI::root(TRUE) . '/media/mint/vendors/jwplayer/jwplayer.js');
+		JFactory::getDocument()->addScript(JURI::root(TRUE) . '/media/com_joomcck/vendors/jwplayer/jwplayer.js');
 
 		$browser             = JBrowser::getInstance();
 		$this->user          = JFactory::getUser();

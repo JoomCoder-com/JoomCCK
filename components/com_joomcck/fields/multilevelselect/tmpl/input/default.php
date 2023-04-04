@@ -9,9 +9,9 @@
 defined('_JEXEC') or die();
 
 $params = $this->params;
-$img_add = JURI::root(TRUE).'/media/mint/icons/16/plus-button.png';
-$img_edit = JURI::root(TRUE).'/media/mint/icons/16/pencil.png';
-$img_del = JURI::root(TRUE).'/media/mint/icons/16/cross-button.png';
+$img_add = JURI::root(TRUE).'/media/com_joomcck/icons/16/plus-button.png';
+$img_edit = JURI::root(TRUE).'/media/com_joomcck/icons/16/pencil.png';
+$img_del = JURI::root(TRUE).'/media/com_joomcck/icons/16/cross-button.png';
 ?>
 <style>
 	#mls-<?php echo $this->id; ?>-levels select {

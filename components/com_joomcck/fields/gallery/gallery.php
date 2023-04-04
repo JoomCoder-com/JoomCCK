@@ -604,10 +604,10 @@ class JFormFieldCGallery extends CFormFieldUpload
 		if($this->file->user_id == $this->user->get('id') && $this->params->get('params.allow_edit_title', 0))
 		{
 			$titlebox = sprintf('<div id="titlebox"><span id="titletextspan">%s</span> <a href="javascript:void(0);" onclick="gb' . $this->id . '_' . $this->record->id . '.editTitle()">%s</a></div>', $titlebox,
-				JHtml::image(JURI::root() . 'media/mint/icons/16/sticky-note--pencil.png', JText::_('G_EDIT'), array('align' => 'absmiddle')));
+				JHtml::image(JURI::root() . 'media/com_joomcck/icons/16/sticky-note--pencil.png', JText::_('G_EDIT'), array('align' => 'absmiddle')));
 			$titlebox .= '<div id="titleedit" class="disactiveInput">
     	    	<input id="savetitletext" class="form-control" value="">
-        	    <a href="javascript:void(0);" onclick="gb' . $this->id . '_' . $this->record->id . '.saveTitle();">' . JHtml::image(JURI::root() . 'media/mint/icons/16/disk.png', JText::_('G_SAVE'), array('align' => 'absmiddle')) . '</a></div>';
+        	    <a href="javascript:void(0);" onclick="gb' . $this->id . '_' . $this->record->id . '.saveTitle();">' . JHtml::image(JURI::root() . 'media/com_joomcck/icons/16/disk.png', JText::_('G_SAVE'), array('align' => 'absmiddle')) . '</a></div>';
 		}
 		$avatar = '';
 		if($this->params->get('params.show_avatar', 0))
@@ -858,7 +858,7 @@ class JFormFieldCGallery extends CFormFieldUpload
 			return '';
 		}
 		$link  = $this->getDownloadUrl($this->record, $this->file, 0);
-		$out[] = '<div class="download-button"><img src="' . JURI::root(TRUE) . '/media/mint/icons/16/disk.png" alt="Download" />';
+		$out[] = '<div class="download-button"><img src="' . JURI::root(TRUE) . '/media/com_joomcck/icons/16/disk.png" alt="Download" />';
 		$out[] = '<a href="' . $link . '">' . JText::_('G_DOWNLOAD');
 		$out[] = sprintf('<div>%dx%d (%s)</div>', $this->file->width, $this->file->height, HTMLFormatHelper::formatSize($this->file->size));
 		$out[] = '</a></div>';

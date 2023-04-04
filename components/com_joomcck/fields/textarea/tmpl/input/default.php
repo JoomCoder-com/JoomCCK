@@ -150,9 +150,9 @@ endif;
 <?php endif; ?>
 <?php if($this->params->get('params.mention')): ?>
 	<?php
-	JFactory::getDocument()->addStyleSheet(JUri::root(TRUE) . '/media/mint/vendors/At.js/dist/css/jquery.atwho.min.css');
-	JFactory::getDocument()->addScript(JUri::root(TRUE) . '/media/mint/vendors/At.js/dist/js/jquery.atwho.min.js');
-	JFactory::getDocument()->addScript(JUri::root(TRUE) . '/media/mint/vendors/Caret.js/dist/jquery.caret.min.js');
+	JFactory::getDocument()->addStyleSheet(JUri::root(TRUE) . '/media/com_joomcck/vendors/At.js/dist/css/jquery.atwho.min.css');
+	JFactory::getDocument()->addScript(JUri::root(TRUE) . '/media/com_joomcck/vendors/At.js/dist/js/jquery.atwho.min.js');
+	JFactory::getDocument()->addScript(JUri::root(TRUE) . '/media/com_joomcck/vendors/Caret.js/dist/jquery.caret.min.js');
 	?>
 	<script type="text/javascript">
 		(function($) {

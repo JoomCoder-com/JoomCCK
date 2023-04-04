@@ -19,7 +19,7 @@ class JFormFieldMetags extends JFormField
 
     public function getInput()
     {
-        $new   = JFile::exists(JPATH_ROOT . "/media/mint/vendors/flow/flow.js");
+        $new   = JFile::exists(JPATH_ROOT . "/media/com_joomcck/vendors/flow/flow.js");
         $app   = JFactory::getApplication();
         $model = JModelLegacy::getInstance('Form', 'JoomcckModel');
         $type  = $model->getRecordType($app->input->getInt('type_id'));

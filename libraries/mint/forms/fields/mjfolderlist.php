@@ -24,7 +24,7 @@ class JFormFieldMjfolderList extends JFormFieldList
 		$html = '<span style="float:left;">'.$this->element['directory'].'/</span><br>';
 		$options = $this->getOptions();
 		$html .= JHtml::_('select.genericlist', $options, $this->name.'[dir]', 'class="span5" onchange="updatedefaulticon(false)"', 'value', 'text', !empty($this->value->dir) ? $this->value->dir : 'google', $this->id);
-		$html .= '&nbsp;<img src="'.JUri::root(TRUE).(!empty($this->value->icon) ? '/'.$this->element['directory'].'/'.$this->value->dir.'/'.$this->value->icon : '/media/mint/blank.png').'" id="icon'.$this->fieldname.'" > <span id="label'.$this->fieldname.'">'.@$this->value->icon.'</span>';
+		$html .= '&nbsp;<img src="'.JUri::root(TRUE).(!empty($this->value->icon) ? '/'.$this->element['directory'].'/'.$this->value->dir.'/'.$this->value->icon : '/media/com_joomcck/blank.png').'" id="icon'.$this->fieldname.'" > <span id="label'.$this->fieldname.'">'.@$this->value->icon.'</span>';
 		$html .= '<input type="hidden" name="'.$this->name.'[icon]" readonly="readonly" id="icon_param'.$this->fieldname.'" value="'.@$this->value->icon.'">';
 		$html .= '<p><small>'.JText::_('G_CLICKSELECTDEFAULT').'</small></p>';
 		$html .= '<div id="icons'.$this->fieldname.'" style="width:250px;max-height:150px;overflow-x:hidden;overflow-y:scroll"></div>';
@@ -40,7 +40,7 @@ class JFormFieldMjfolderList extends JFormFieldList
 					if(!first)
 					{
 					 	input.val('');
-					 	$('#icon{$this->fieldname}').attr('src', '".JUri::root(TRUE)."/media/mint/blank.png');
+					 	$('#icon{$this->fieldname}').attr('src', '".JUri::root(TRUE)."/media/com_joomcck/blank.png');
 						$('#label{$this->fieldname}').html();
 					}
 					$.ajax({

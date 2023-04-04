@@ -30,7 +30,7 @@ class JHTMLIp {
 		
 		if($results[$ip])
 		{
-			$file = JURI::root()."media/mint/icons/flag/16/" . strtolower ( $results[$ip]->short_code ) . ".png";
+			$file = JURI::root()."media/com_joomcck/icons/flag/16/" . strtolower ( $results[$ip]->short_code ) . ".png";
 			$options['style'] = 'cursor:pointer';
 			$options['onclick'] = "document.getElementById('filter_search').value='country:" . strtolower ( $results[$ip]->code ) . "'; document.adminForm.submit();";
 			$options['width'] = 16;

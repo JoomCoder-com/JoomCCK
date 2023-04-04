@@ -117,7 +117,7 @@ $key = $record->id.$this->id;
 		<?php endif;?>
 
 		<?php if ($params->get('params.show_body', 1)):
-			JFactory::getDocument()->addScript(JURI::root(TRUE) . '/media/mint/js/AutoGrow.js');
+			JFactory::getDocument()->addScript(JURI::root(TRUE) . '/media/com_joomcck/js/AutoGrow.js');
 			$style = 'max-height:' . $params->get('params.grow_max_height', 200) . 'px;';
 			$style .= ' height:' . $params->get('params.grow_min_height', 50) . 'px;';
 			$style .= ' width: 95%;';

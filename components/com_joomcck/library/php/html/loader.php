@@ -16,14 +16,14 @@ class JHTMLLoader
 		ArrayHelper::clean_r($attr);
 		
 		$options = json_encode($attr);
-		JFactory::getDocument()->addScript(JUri::root(TRUE).'/media/mint/js/bootstrap/clickover/clickover.js');
+		JFactory::getDocument()->addScript(JUri::root(TRUE).'/media/com_joomcck/js/bootstrap/clickover/clickover.js');
 		JFactory::getDocument()->addScriptDeclaration("jQuery(document).ready(function(){
 			jQuery('*[rel=\"{$rel}\"]').clickover({$options});
 		});");
 	}
 	public static function modal()
 	{
-		JFactory::getDocument()->addScript(JUri::root(TRUE).'/media/mint/vendors/jquery-modal/jquery.modal.js');
-		JFactory::getDocument()->addStyleSheet(JUri::root(TRUE).'/media/mint/vendors/jquery-modal/jquery.modal.css');
+		JFactory::getDocument()->addScript(JUri::root(TRUE).'/media/com_joomcck/vendors/jquery-modal/jquery.modal.js');
+		JFactory::getDocument()->addStyleSheet(JUri::root(TRUE).'/media/com_joomcck/vendors/jquery-modal/jquery.modal.css');
 	}
 }

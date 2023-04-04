@@ -375,7 +375,7 @@ class CFormFieldSelectable extends CFormField
 	/*protected function _custom_value($type)
 	{
 		$out = array();
-		JFactory::getDocument()->addScript(JURI::root(TRUE) . '/media/mint/js/GrowingInput.js');
+		JFactory::getDocument()->addScript(JURI::root(TRUE) . '/media/com_joomcck/js/GrowingInput.js');
 		$out[] = '<div style="clear:both"></div>';
 		$out[] = sprintf('<div class="variant-container" id="variant_%d">
 			<a class="small" id="show_variant_link_%d" rel="{field_type:\'%s\', id:%d, inputtype:\'%s\', width:%d, limit:%d, max_size:%d}"

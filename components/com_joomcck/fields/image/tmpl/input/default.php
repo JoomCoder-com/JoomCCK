@@ -62,7 +62,7 @@ $directory = $this->directory;
 <div class="clearfix"></div>
 <br>
 <div class="well">
-	<img src="<?php echo (!empty($this->value['image']) ? JUri::root(TRUE).'/'.$this->value['image'] : JUri::root(TRUE).'/media/mint/blank.png');?>" alt="<?php echo JText::_('I_IMGPREVIEW');?>"
+	<img src="<?php echo (!empty($this->value['image']) ? JUri::root(TRUE).'/'.$this->value['image'] : JUri::root(TRUE).'/media/com_joomcck/blank.png');?>" alt="<?php echo JText::_('I_IMGPREVIEW');?>"
 		 name="imagelib<?php echo $this->id;?>" id="imagelib<?php echo $this->id;?>" style="max-width: 440px; border: 0px solid;" />
 </div>
 
