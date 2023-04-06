@@ -76,20 +76,76 @@
         <copy todir="${releasespath}/build/modules/mod_joomcck_category">
             <fileset dir="./modules/mod_joomcck_category"></fileset>
         </copy>
-        <copy todir="${releasespath}/build/modules/mod_jp_calendar/media">
-            <fileset dir="./media/mod_jp_calendar">
-            </fileset>
+        <copy todir="${releasespath}/build/modules/mod_joomcck_filters">
+            <fileset dir="./modules/mod_joomcck_filters"></fileset>
+        </copy>
+        <copy todir="${releasespath}/build/modules/mod_joomcck_followers">
+            <fileset dir="./modules/mod_joomcck_followers"></fileset>
+        </copy>
+        <copy todir="${releasespath}/build/modules/mod_joomcck_ifollow">
+            <fileset dir="./modules/mod_joomcck_ifollow"></fileset>
+        </copy>
+        <copy todir="${releasespath}/build/modules/mod_joomcck_notifications">
+            <fileset dir="./modules/mod_joomcck_notifications"></fileset>
+        </copy>
+        <copy todir="${releasespath}/build/modules/mod_joomcck_participants">
+            <fileset dir="./modules/mod_joomcck_participants"></fileset>
+        </copy>
+        <copy todir="${releasespath}/build/modules/mod_joomcck_records">
+            <fileset dir="./modules/mod_joomcck_records"></fileset>
+        </copy>
+        <copy todir="${releasespath}/build/modules/mod_joomcck_sectionstatistics">
+            <fileset dir="./modules/mod_joomcck_sectionstatistics"></fileset>
+        </copy>
+        <copy todir="${releasespath}/build/modules/mod_joomcck_submitbutton">
+            <fileset dir="./modules/mod_joomcck_submitbutton"></fileset>
+        </copy>
+        <copy todir="${releasespath}/build/modules/mod_joomcck_tagcloud">
+            <fileset dir="./modules/mod_joomcck_tagcloud"></fileset>
+        </copy>
+        <copy todir="${releasespath}/build/modules/userstatistics">
+            <fileset dir="./modules/userstatistics"></fileset>
+        </copy>
+        <copy todir="${releasespath}/build/modules/mod_joomcck_video">
+            <fileset dir="./modules/mod_joomcck_video"></fileset>
         </copy>
 
         <!-- Plugin files -->
-        <copy todir="${releasespath}/build/plugins/plg_content_jpcomments">
-            <fileset dir="./plugins/content/jpcomments"></fileset>
+        <copy todir="${releasespath}/build/plugins/plg_content_glossary">
+            <fileset dir="./plugins/content/glossary"></fileset>
+        </copy>
+        <copy todir="${releasespath}/build/plugins/plg_content_joomcck">
+            <fileset dir="./plugins/content/joomcck"></fileset>
+        </copy>
+        <copy todir="${releasespath}/build/plugins/plg_system_joomcck">
+            <fileset dir="./plugins/system/joomcck"></fileset>
+        </copy>
+        <copy todir="${releasespath}/build/plugins/plg_search_joomcck">
+            <fileset dir="./plugins/search/joomcck"></fileset>
+        </copy>
+        <copy todir="${releasespath}/build/plugins/plg_finder_joomcck">
+            <fileset dir="./plugins/finder/joomcck"></fileset>
+        </copy>
+        <copy todir="${releasespath}/build/plugins/plg_mint_formatter_csv">
+            <fileset dir="./plugins/mint/formatter_csv"></fileset>
+        </copy>
+        <copy todir="${releasespath}/build/plugins/plg_mint_formatter_ini">
+            <fileset dir="./plugins/mint/formatter_ini"></fileset>
+        </copy>
+        <copy todir="${releasespath}/build/plugins/plg_mint_formatter_joomlaupdate">
+            <fileset dir="./plugins/mint/formatter_joomlaupdate"></fileset>
+        </copy>
+        <copy todir="${releasespath}/build/plugins/plg_mint_formatter_json">
+            <fileset dir="./plugins/mint/formatter_json"></fileset>
+        </copy>
+        <copy todir="${releasespath}/build/plugins/plg_mint_formatter_xml">
+            <fileset dir="./plugins/mint/formatter_xml"></fileset>
         </copy>
 
         <!-- Package files -->
         <echo msg="7 - Copying Install and main xml files in root" />
-        <copy file="./pkg_joomproject.script.php" todir="${releasespath}/build" />
-        <copy file="./pkg_joomproject.xml" todir="${releasespath}/build" />
+        <copy file="./pkg_joomcck.script.php" todir="${releasespath}/build" />
+        <copy file="./pkg_joomcck.xml" todir="${releasespath}/build" />
 
     </target>
     <target name="dist" depends="dirbuild">
