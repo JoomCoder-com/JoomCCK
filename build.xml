@@ -35,7 +35,7 @@
         <copy file="./language/en-GB/com_joomcck_field_register.ini" todir="${releasespath}/build/components/com_joomcck/site/language/en-GB" />
         <copy file="./language/en-GB/com_joomcck_field_related_access.ini" todir="${releasespath}/build/components/com_joomcck/site/language/en-GB" />
         <copy file="./language/en-GB/com_joomcck_field_select.ini" todir="${releasespath}/build/components/com_joomcck/site/language/en-GB" />
-        <copy file="./language/en-GB/com_joomcck_field_status" todir="${releasespath}/build/components/com_joomcck/site/language/en-GB" />
+        <copy file="./language/en-GB/com_joomcck_field_status.ini" todir="${releasespath}/build/components/com_joomcck/site/language/en-GB" />
         <copy file="./language/en-GB/com_joomcck_field_telephone.ini" todir="${releasespath}/build/components/com_joomcck/site/language/en-GB" />
         <copy file="./language/en-GB/com_joomcck_field_text.ini" todir="${releasespath}/build/components/com_joomcck/site/language/en-GB" />
         <copy file="./language/en-GB/com_joomcck_field_textarea.ini" todir="${releasespath}/build/components/com_joomcck/site/language/en-GB" />
@@ -43,7 +43,7 @@
         <copy file="./language/en-GB/com_joomcck_field_url.ini" todir="${releasespath}/build/components/com_joomcck/site/language/en-GB" />
         <copy file="./language/en-GB/com_joomcck_field_video.ini" todir="${releasespath}/build/components/com_joomcck/site/language/en-GB" />
         <copy file="./language/en-GB/com_joomcck_gateway_paypal.ini" todir="${releasespath}/build/components/com_joomcck/site/language/en-GB" />
-        <copy file="./language/en-GB/com_joomcck_gateway_robokassa.ini.ini" todir="${releasespath}/build/components/com_joomcck/site/language/en-GB" />
+        <copy file="./language/en-GB/com_joomcck_gateway_robokassa.ini" todir="${releasespath}/build/components/com_joomcck/site/language/en-GB" />
 
         <!-- Language files plugins -->
 
@@ -103,8 +103,8 @@
         <copy todir="${releasespath}/build/modules/mod_joomcck_tagcloud">
             <fileset dir="./modules/mod_joomcck_tagcloud"></fileset>
         </copy>
-        <copy todir="${releasespath}/build/modules/userstatistics">
-            <fileset dir="./modules/userstatistics"></fileset>
+        <copy todir="${releasespath}/build/modules/mod_joomcck_userstatistics">
+            <fileset dir="./modules/mod_joomcck_userstatistics"></fileset>
         </copy>
         <copy todir="${releasespath}/build/modules/mod_joomcck_video">
             <fileset dir="./modules/mod_joomcck_video"></fileset>
@@ -140,6 +140,11 @@
         </copy>
         <copy todir="${releasespath}/build/plugins/plg_mint_formatter_xml">
             <fileset dir="./plugins/mint/formatter_xml"></fileset>
+        </copy>
+
+        <!-- Library files -->
+        <copy todir="${releasespath}/build/libraries/mint">
+            <fileset dir="./libraries/mint"></fileset>
         </copy>
 
         <!-- Package files -->

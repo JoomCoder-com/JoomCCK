@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension type="library" method="upgrade" version="2.5">
+    <name>JoomCCK</name>
+    <libraryname>Mint</libraryname>
+    <author>JoomCoder</author>
+    <creationDate>04/04/2023</creationDate>
+    <copyright>Copyright (C) 2012 - 2023 JoomCoder. All rights reserved.</copyright>
+    <license>GNU General Public License version 2 or later.</license>
+    <authorEmail>support@joomcoder.com</authorEmail>
+    <authorUrl>https://www.joomcoder.com</authorUrl>
+    <version>##VERSION##</version>
+    <description>Shared classes and tools for JoomCCK. Do not remove!</description>
+    <files>
+        <folder>forms</folder>
+        <folder>image_processing</folder>
+        <folder>Markdown</folder>
+        <folder>mvc</folder>
+        <folder>qrcode</folder>
+        <file>helper.php</file>
+        <file>resizeimage.php</file>
+        <file>mint.xml</file>
+    </files>
+</extension>

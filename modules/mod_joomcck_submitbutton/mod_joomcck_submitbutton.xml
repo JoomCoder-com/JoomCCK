@@ -16,7 +16,7 @@
 		<folder>tmpl/</folder>
 	</files>
 	<languages>
-		<language tag="en-GB">en-GB.mod_joomcck_submitbutton.ini</language>
+		<language tag="en-GB">language/en-GB/mod_joomcck_submitbutton.ini</language>
 	</languages>
 	<config>
 		<fields name="params">

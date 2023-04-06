@@ -17,7 +17,7 @@
 		<folder>tmpl/</folder>
 	</files>
 	<languages>
-		<language tag="en-GB">en-GB.mod_joomcck_userstatistics.ini</language>
+		<language tag="en-GB">language/en-GB/mod_joomcck_userstatistics.ini</language>
 	</languages>
 	<config>
 		<fields name="params">
