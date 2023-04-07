@@ -8,6 +8,7 @@
  * @license   GNU/GPL http://www.gnu.org/copyleft/gpl.html
  */
 
+use Joomla\CMS\Factory;
 use Joomla\CMS\Language\Text;
 
 defined('_JEXEC') or die;
@@ -30,14 +31,19 @@ if(!JFactory::getUser()->authorise('core.manage', 'com_joomcck'))
 
 }
 
+if(!JComponentHelper::getParams('com_joomcck')->get('general_upload'))
+{
+
+	Factory::getApplication()->enqueueMessage(JText::_('CUPLOADREQ'),'warning');
+	$this->setRedirect('index.php?option=com_config&view=component&component=com_joomcck');
+}
+
+
+$input = Factory::getApplication()->input;
+
+$input->set('view', $input->get('view', 'about'));
+
 $controller = MControllerBase::getInstance('Joomcck');
 $controller->execute(JFactory::getApplication()->input->get('task'));
 $controller->redirect();
-?>
-<div style="clear: both;"></div>
-<br/>
-<br/>
-<center>
-	<small>Copyright &copy; 2012 <a target="_blank" href="https://www.joomcoder.com">joomcoder</a>. All rights reserved
-	</small>
-</center>
+

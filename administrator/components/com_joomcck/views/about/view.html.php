@@ -65,7 +65,7 @@ class JoomcckViewAbout extends MViewBase
 
     protected function addToolbar()
     {
-        JToolBarHelper::title(JText::_('XML_TOOLBAR_TITLE_ABOUT'), 'systeminfo.png');
+        JToolBarHelper::title(JText::_('About'));
         MRToolBar::addSubmenu('about');
     }
 }
