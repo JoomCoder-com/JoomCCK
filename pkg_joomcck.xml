@@ -18,10 +18,10 @@
     <files>
 
         <!-- install libraries -->
-        <folder type="library" id="mint">libraries/mint</folder>
+        <file type="library" id="mint">libraries/mint</file>
 
         <!-- Install components -->
-        <folder type="component" id="com_joomcck">components/com_joomcck</folder>
+        <file type="component" id="com_joomcck">components/com_joomcck</file>
 
         <!-- Install plugins -->
         <folder enable="1" type="plugin" id="joomcck" group="system">plugins/plg_system_joomcck</folder>
@@ -36,18 +36,18 @@
         <folder enable="1" type="plugin" id="formatter_json" group="mint">plugins/plg_mint_formatter_json</folder>
 
         <!-- Install modules -->
-        <folder type="module" id="mod_joomcck_category" client="site">modules/mod_joomcck_category</folder>
-        <folder type="module" id="mod_joomcck_filters" client="site">modules/mod_joomcck_filters</folder>
-        <folder type="module" id="mod_joomcck_followers" client="site">modules/mod_joomcck_followers</folder>
-        <folder type="module" id="mod_joomcck_ifollow" client="site">modules/mod_joomcck_ifollow</folder>
-        <folder type="module" id="mod_joomcck_notifications" client="site">modules/mod_joomcck_notifications</folder>
-        <folder type="module" id="mod_joomcck_participants" client="site">modules/mod_joomcck_participants</folder>
-        <folder type="module" id="mod_joomcck_records" client="site">modules/mod_joomcck_records</folder>
-        <folder type="module" id="mod_joomcck_sectionstatistics" client="site">modules/mod_joomcck_sectionstatistics</folder>
-        <folder type="module" id="mod_joomcck_submitbutton" client="site">modules/mod_joomcck_submitbutton</folder>
-        <folder type="module" id="mod_joomcck_tagcloud" client="site">modules/mod_joomcck_tagcloud</folder>
-        <folder type="module" id="mod_joomcck_userstatistics" client="site">modules/mod_joomcck_userstatistics</folder>
-        <folder type="module" id="mod_joomcck_video" client="site">modules/mod_joomcck_video</folder>
+        <file type="module" id="mod_joomcck_category" client="site">modules/mod_joomcck_category</file>
+        <file type="module" id="mod_joomcck_filters" client="site">modules/mod_joomcck_filters</file>
+        <file type="module" id="mod_joomcck_followers" client="site">modules/mod_joomcck_followers</file>
+        <file type="module" id="mod_joomcck_ifollow" client="site">modules/mod_joomcck_ifollow</file>
+        <file type="module" id="mod_joomcck_notifications" client="site">modules/mod_joomcck_notifications</file>
+        <file type="module" id="mod_joomcck_participants" client="site">modules/mod_joomcck_participants</file>
+        <file type="module" id="mod_joomcck_records" client="site">modules/mod_joomcck_records</file>
+        <file type="module" id="mod_joomcck_sectionstatistics" client="site">modules/mod_joomcck_sectionstatistics</file>
+        <file type="module" id="mod_joomcck_submitbutton" client="site">modules/mod_joomcck_submitbutton</file>
+        <file type="module" id="mod_joomcck_tagcloud" client="site">modules/mod_joomcck_tagcloud</file>
+        <file type="module" id="mod_joomcck_userstatistics" client="site">modules/mod_joomcck_userstatistics</file>
+        <file type="module" id="mod_joomcck_video" client="site">modules/mod_joomcck_video</file>
     </files>
 
     <dlid/>

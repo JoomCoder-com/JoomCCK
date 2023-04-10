@@ -25,6 +25,7 @@ use Joomla\CMS\Application\SiteApplication;
 use Joomla\CMS\Categories\CategoryFactoryInterface;
 use Joomla\CMS\Component\Router\RouterView;
 use Joomla\CMS\Menu\AbstractMenu;
+use Joomla\Component\Joomcck\Site\Service\RouterRules;
 use Joomla\Database\DatabaseInterface;
 
 
@@ -80,12 +81,7 @@ class JoomcckRouter extends RouterView
 	public function __construct(SiteApplication $app, AbstractMenu $menu)
 	{
 		parent::__construct($app, $menu);
-		$this->attachRule(new \Joomla\Component\Joomcck\Site\Service\RouterRules($this));
+		$this->attachRule(new RouterRules($this));
 	}
-
-
-
-
-
 
 }

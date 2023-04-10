@@ -42,7 +42,7 @@
 	</fieldset>
 
 	<fieldset name="router" label="XML_FIELD_LABEL_SEF" description="XML_FSETDESC_CNF_SEO">
-		<field label="XML_FIELD_LABEL_CNF_ROUTER" name="sef_router" type="filelist" directory="/components/com_joomcck/routers" hide_none="1" hide_default="1" default="main_router.php" filter=".php" />
+		<field label="XML_FIELD_LABEL_CNF_ROUTER" name="sef_router" type="filelist" directory="/components/com_joomcck/routers" hide_none="1" hide_default="1" default="main_router.php" exclude=".html" />
 		<field label="XML_FIELD_LABEL_CNF_CATEGORYPATH" name="sef_category" type="list" default="0" description="XML_FIELD_DESCR_CNF_CATEGORYPATH">
 			<option value="0">O_CNF_CURCATEGORY</option>
 			<option value="full">O_CNF_FULLCATEGORYPATH</option>

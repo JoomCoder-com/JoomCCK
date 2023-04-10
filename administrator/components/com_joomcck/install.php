@@ -10,7 +10,7 @@
 
 defined('_JEXEC') || die();
 
-include_once JPATH_ROOT.'/components/com_joomcck/api.php';
+
 
 class com_joomcckInstallerScript
 {
@@ -36,9 +36,12 @@ class com_joomcckInstallerScript
 
     public function update($parent)
     {
+
+	    include_once JPATH_ROOT.'/components/com_joomcck/api.php';
+
         $this->_deleteFiles();
         $this->_updateTables();
-        $this->_joomcck();
+        //$this->_joomcck();
         $this->_createLink();
 
         return true;
