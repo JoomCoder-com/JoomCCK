@@ -146,7 +146,7 @@ class JFormFieldCobTmplList extends JFormFieldList
 		//JHtmlSelect::genericlist()
 		$path = $this->directory;
 
-        if (!is_dir($path)) {
+        if (! JoomlaCMSFilesystemFolder::exists($path)) {
             $path = JPATH_ROOT . '/' . $path;
         }
 
@@ -288,7 +288,7 @@ EOT;
 
         $path = $this->directory;
 
-        if (!is_dir($path)) {
+        if (! JoomlaCMSFilesystemFolder::exists($path)) {
             $path = JPATH_ROOT . '/' . $path;
         }
 

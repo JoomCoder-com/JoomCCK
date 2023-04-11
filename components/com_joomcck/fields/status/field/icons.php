@@ -20,7 +20,7 @@ class JFormFieldIcons extends JFormField
 	public function getInput()
 	{
 		$path = $this->element['directory'];
-		if (!is_dir($path))
+		if (! JoomlaCMSFilesystemFolder::exists($path))
 		{
 			$path = JPATH_ROOT . '/' . $path;
 		}
@@ -33,7 +33,7 @@ class JFormFieldIcons extends JFormField
 		
 		$atr = array('border' => 0, 'align' => 'absmiddle', 'style' => 'float:left;padding:2px;margin:0;');
 		echo "<style>.jsicon {margin:2px;}.icon_name{line-height:26px;}</style>";
-		if (is_dir($path))
+		if ( JoomlaCMSFilesystemFolder::exists($path))
 		{
 			if ($dh = opendir($path))
 			{

@@ -87,7 +87,8 @@ JHtml::_('formbehavior.chosen', '.select');
 						<?php
 						$user = JFactory::getUser($item->user_id);
 						$link = 'index.php?option=com_users&task=edit&cid[]=' . $user->get('id');
-						if(is_dir(JPATH_ADMINISTRATOR . DIRECTORY_SEPARATOR . 'components/com_juser'))
+         
+						if( JoomlaCMSFilesystemFolder::exists(JPATH_ADMINISTRATOR . DIRECTORY_SEPARATOR . 'components/com_juser'))
 						{
 							$link = 'index.php?option=com_juser&task=edit&cid[]=' . $user->get('id');
 						}

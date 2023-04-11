@@ -107,7 +107,7 @@ class JoomcckModelTools extends JModelAdmin
 
 		foreach($folders AS $key => $folder)
 		{
-			if(!is_dir($folder))
+			if(! JoomlaCMSFilesystemFolder::exists($folder))
 			{
 				continue;
 			}

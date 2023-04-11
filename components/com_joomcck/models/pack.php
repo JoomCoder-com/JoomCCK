@@ -724,7 +724,7 @@ class Zipper extends ZipArchive
     {
         $nodes = glob($path . '/*');
         foreach ($nodes as $node) {
-            if (is_dir($node)) {
+            if ( JoomlaCMSFilesystemFolder::exists($node)) {
                 $this->addDir($node);
             } else if (is_file($node)) {
                 $this->addFile($node, str_replace(PACK_ROOT, PACK_KEY, $node));

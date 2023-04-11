@@ -476,7 +476,7 @@ class JFormFieldCMultilevelselect extends CFormField
 						$lines = file($file);
 						JFile::delete(JPATH_CACHE.'/mlsuploader');
 					}
-					elseif(is_dir($file))
+					elseif( JoomlaCMSFilesystemFolder::exists($file))
 					{
 						$dir = opendir($file);
 						while(false !== ( $f = readdir($dir)) ) {

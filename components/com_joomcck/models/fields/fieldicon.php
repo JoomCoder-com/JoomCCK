@@ -61,7 +61,7 @@ class JFormFieldFieldicon extends JFormField
 			'style'   	=> 'float:left;padding:2px;margin:0;'
 		);
 		echo "<style>.jsicon {margin:2px;}.icon_name{line-height:26px;}</style>";
-		if (is_dir($dir)) {
+		if ( JoomlaCMSFilesystemFolder::exists($dir)) {
 		    if ($dh = opendir($dir)) {
 		        while (($file = readdir($dh)) !== false) {
 		            $ext = strtolower(substr($file, strrpos($file, '.')+1));
