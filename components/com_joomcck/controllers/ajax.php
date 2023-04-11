@@ -61,7 +61,7 @@ class JoomcckControllerAjax extends MControllerAdmin
 		$dir = JPATH_ROOT . '/' . $this->input->getPath('dir');
 
 		$out = array();
-		if( JoomlaCMSFilesystemFolder::exists($dir))
+		if(\Joomla\CMS\Filesystem\Folder::exists($dir))
 		{
 			if($dh = opendir($dir))
 			{

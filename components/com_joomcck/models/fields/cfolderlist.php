@@ -184,7 +184,7 @@ class JFormFieldCFolderList extends JFormFieldList
 
 		$path = $this->directory;
 
-		if (! JoomlaCMSFilesystemFolder::exists($path))
+		if (!\Joomla\CMS\Filesystem\Folder::exists($path))
 		{
 			$path = JPATH_ROOT . '/' . $path;
 		}

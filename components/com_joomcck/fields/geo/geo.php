@@ -991,7 +991,7 @@ class JFormFieldCGeo extends CFormField
 
 	protected function _listmarkers($dir, &$defaultmarker, $subfolder = NULL)
 	{
-		if( JoomlaCMSFilesystemFolder::exists($dir))
+		if(\Joomla\CMS\Filesystem\Folder::exists($dir))
 		{
 			$w      = 32;
 			$h      = 37;

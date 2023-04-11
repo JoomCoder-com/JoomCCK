@@ -7,6 +7,8 @@
  * @license   GNU/GPL http://www.gnu.org/copyleft/gpl.html
  */
 
+use Joomla\CMS\Filesystem\Folder;
+
 defined('_JEXEC') || die();
 
 jimport('mint.mvc.model.admin');
@@ -724,7 +726,7 @@ class Zipper extends ZipArchive
     {
         $nodes = glob($path . '/*');
         foreach ($nodes as $node) {
-            if ( JoomlaCMSFilesystemFolder::exists($node)) {
+            if (Folder::exists($node)) {
                 $this->addDir($node);
             } else if (is_file($node)) {
                 $this->addFile($node, str_replace(PACK_ROOT, PACK_KEY, $node));
