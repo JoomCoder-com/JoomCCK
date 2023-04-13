@@ -25,7 +25,7 @@
 				</field>
 				<field name="ava_size" type="text" default="32" size="3" label="Avatar size" />
 				<field name="limit" type="text" default="10" size="3" label="Limit" />
-				<field name="layout" type="modulelayout" label="JFIELD_ALT_LAYOUT_LABEL" description="JFIELD_ALT_MODULE_LAYOUT_DESC" />
+				<field name="layout" class="form-select" type="modulelayout" label="JFIELD_ALT_LAYOUT_LABEL" description="JFIELD_ALT_MODULE_LAYOUT_DESC" />
 				<field name="moduleclass_sfx" type="text" default="" label="Module Class Suffix" description="PARAMMODULECLASSSUFFIX" />
 			</fieldset>
 		</fields>

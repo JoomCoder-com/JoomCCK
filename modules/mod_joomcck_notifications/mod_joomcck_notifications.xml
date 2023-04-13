@@ -21,7 +21,7 @@
             <fieldset label="General" name="general" addfieldpath="/libraries/mint/forms/fields/">
                 <field name="section_id" type="meresourcessection" default="" multi="1" label="Select section"
                        description="Select the Home section which will for this module."/>
-                <field name="layout" type="modulelayout" label="JFIELD_ALT_LAYOUT_LABEL"
+                <field name="layout" class="form-select" type="modulelayout" label="JFIELD_ALT_LAYOUT_LABEL"
                        description="JFIELD_ALT_MODULE_LAYOUT_DESC"/>
                 <field name="moduleclass_sfx" type="text" default="" label="Module Class Suffix"
                        description="PARAMMODULECLASSSUFFIX"/>

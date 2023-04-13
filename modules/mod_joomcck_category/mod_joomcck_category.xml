@@ -23,7 +23,7 @@
                 <field name="section_id" type="meresourcessection" default="" label="Select section"
                        description="Select the Home section which will for this module."/>
                 <field name="init_cat" type="text" default="" label="Initial Category"/>
-                <field name="layout" type="modulelayout" label="JFIELD_ALT_LAYOUT_LABEL"
+                <field name="layout" type="modulelayout" class="form-select" label="JFIELD_ALT_LAYOUT_LABEL"
                        description="JFIELD_ALT_MODULE_LAYOUT_DESC"/>
                 <field name="show_section" type="list" default="2" label="Show section title"
                        description="Show section title">

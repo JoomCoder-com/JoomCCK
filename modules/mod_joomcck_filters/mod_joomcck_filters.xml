@@ -64,7 +64,7 @@
 					<option value="3">Select</option>
 					<option value="4">Tag Cloud</option>
 				</field>
-				<field name="layout" type="modulelayout" label="JFIELD_ALT_LAYOUT_LABEL" description="JFIELD_ALT_MODULE_LAYOUT_DESC" />
+				<field name="layout" type="modulelayout" class="form-select" label="JFIELD_ALT_LAYOUT_LABEL" description="JFIELD_ALT_MODULE_LAYOUT_DESC" />
 				<field name="type_label" type="text" size="40" default="Content Type" label="Content type" />
 				<field name="user_label" type="text" size="40" default="Author" label="Users" />
 				<field name="category_label" type="text" size="40" default="Category" label="Categories" />

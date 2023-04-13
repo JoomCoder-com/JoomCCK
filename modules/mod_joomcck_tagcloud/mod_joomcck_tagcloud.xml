@@ -59,7 +59,7 @@
 				</field>
 				<field name="html_tags" type="textarea" cols="20" rows="7" label="HTML Tags" description="This HTML Tags. They showd be listed in relivanse order. Start from highest" default="H1, H2, H3, H4, H5, H6, strong, b, em, big, small" />
 				<field name="limit" type="text" label="Tags limit" description="" value="" default="50" size="5" />
-				<field name="layout" type="modulelayout" label="JFIELD_ALT_LAYOUT_LABEL" description="JFIELD_ALT_MODULE_LAYOUT_DESC" />
+				<field name="layout" class="form-select" type="modulelayout" label="JFIELD_ALT_LAYOUT_LABEL" description="JFIELD_ALT_MODULE_LAYOUT_DESC" />
 				<field name="moduleclass_sfx" type="text" default="" label="Module Class Suffix" description="PARAMMODULECLASSSUFFIX" />
 			</fieldset>
 		</fields>
