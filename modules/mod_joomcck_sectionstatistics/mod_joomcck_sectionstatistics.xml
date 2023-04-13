@@ -19,7 +19,7 @@
 	<config>
 		<fields name="params">
 			<fieldset label="General" name="general" addfieldpath="/libraries/mint/forms/fields/">
-				<field name="section_id" type="meresourcessection" default="" label="Default section" description="Select the Home section which will for this module." />
+				<field name="section_id" class="form-select" type="meresourcessection" default="" label="Default section" description="Select the Home section which will for this module." />
 				<field name="current_section" type="radio" class="btn-group btn-group-yesno" default="0" label="Define section" description="Defines if statistics would be shown for current section or default one. If section is not defined on the page there would be used default section">
 					<option value="0">Static</option>
 					<option value="1">Dinamic</option>

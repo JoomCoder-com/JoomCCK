@@ -19,7 +19,7 @@
 	<config>
 		<fields name="params">
 			<fieldset label="General" name="general" addfieldpath="/libraries/mint/forms/fields/">
-				<field name="section_id" type="meresourcessection" default="" label="Select section" description="Select the Home section which will for this module." />
+				<field name="section_id" class="form-select" type="meresourcessection" default="" label="Select section" description="Select the Home section which will for this module." />
 				<field name="cat_ids" type="text" default="" label="Ids of the categories" />
 				<field name="depends_on_cat" type="radio" default="0" description="Show tags from current category or section. And if not defined show tags from section selected." label="Depends on section">
 					<option value="0">No</option>

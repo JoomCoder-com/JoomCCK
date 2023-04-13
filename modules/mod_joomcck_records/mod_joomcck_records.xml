@@ -17,7 +17,7 @@
     <config>
         <fields name="params">
             <fieldset label="General" name="general" addfieldpath="/libraries/mint/forms/fields/">
-                <field name="section_id" type="meresourcessection" required="true" select="1" type_elem_name="types"
+                <field name="section_id" class="form-select" type="meresourcessection" required="true" select="1" type_elem_name="types"
                        default="" label="Select section"
                        description="Select the Home section which will for this module."/>
                 <field name="types" type="mertype" size="10" default="" multi="1" label="Only following types"/>

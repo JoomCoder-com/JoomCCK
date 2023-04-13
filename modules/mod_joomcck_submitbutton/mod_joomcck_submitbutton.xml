@@ -21,7 +21,7 @@
 	<config>
 		<fields name="params">
 			<fieldset label="General" name="general" addfieldpath="/libraries/mint/forms/fields/">
-				<field name="section_id" type="meresourcessection" default="" label="Default section" description="Select the Home section which will for this module." />
+				<field name="section_id" class="form-select" type="meresourcessection" default="" label="Default section" description="Select the Home section which will for this module." />
 				<field name="types" type="mertype" size="10" default="" multi="1" label="Only following types" description="If not selected all section types will be active"/>
 				<field name="display" type="list" default="0" label="Display mode">
 					<option value="0">Everywhere</option>

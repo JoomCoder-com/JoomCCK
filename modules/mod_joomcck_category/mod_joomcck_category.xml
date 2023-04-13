@@ -20,7 +20,7 @@
     <config>
         <fields name="params">
             <fieldset label="General" name="general" addfieldpath="/libraries/mint/forms/fields/">
-                <field name="section_id" type="meresourcessection" default="" label="Select section"
+                <field name="section_id" class="form-select" type="meresourcessection" default="" label="Select section"
                        description="Select the Home section which will for this module."/>
                 <field name="init_cat" type="text" default="" label="Initial Category"/>
                 <field name="layout" type="modulelayout" class="form-select" label="JFIELD_ALT_LAYOUT_LABEL"
