@@ -54,15 +54,15 @@ if(!function_exists('mod_getChildsDef')) { function mod_getChildsDef($category, 
 	
 	<?php if($cat_id && !$params->get('init_cat')): ?>
 		<p class="<?php echo $params->get('section_class');?>">
-			<ul class="nav menu">
-				<li>
+			<ul class="list-group">
+				<li class="list-group-item">
 					<a href="<?php echo JRoute::_($section->link);?>">
 						<?php echo HTMLFormatHelper::icon($section->params->get('personalize.text_icon', 'home.png'));?>
 						<?php echo $section->name;?></a>
 				</li>
 				<?php $category = ItemsStore::getCategory($cat_id); ?>
 				<?php if($category->parent_id > 1): ?>
-					<li>
+					<li class="list-group-item">
 						<?php $category = ItemsStore::getCategory($category->parent_id); ?>
 						<a href="<?php echo JRoute::_(Url::records($section, $category)); ?>">
 							<?php echo HTMLFormatHelper::icon('arrow-180.png');?>
@@ -73,7 +73,7 @@ if(!function_exists('mod_getChildsDef')) { function mod_getChildsDef($category, 
 		</p>
 	<?php endif; ?>
 		
-	<ul class="nav menu">
+	<ul class="list-group">
 		<?php foreach ($categories as $cat) :
 			if (!$params->get('cat_empty', 1) && !$cat->records_num) continue;
 			$class = array();  
@@ -83,11 +83,11 @@ if(!function_exists('mod_getChildsDef')) { function mod_getChildsDef($category, 
 			if($cat->childs_num)
 				$class[] = 'parent';
 		?>
-		<li class="<?php echo implode(' ', $class);?>">				
+		<li class="list-group-item <?php echo implode(' ', $class);?>">
 			<a href="<?php echo JRoute::_($cat->link)?>">
 				<?php echo JText::_($cat->title);?>
 				<?php if($params->get('cat_nums', 0)):?>
-					<span class="label float-end"><?php echo $cat->records_num; ?></span>
+					<span class="badge bg-<?php echo $cat->records_num > 0 ? 'success' : 'light text-dark border' ?> float-end"><?php echo $cat->records_num; ?></span>
 				<?php endif;?>				
 			</a>			
 			<?php if($cat->childs_num):?>
@@ -103,7 +103,7 @@ if(!function_exists('mod_getChildsDef')) { function mod_getChildsDef($category, 
 					$rec->url = $section->link;
 				endif;
 			?>
-			<li class="<?php echo implode(' ', $class);?>">				
+			<li class="list-group-item <?php echo implode(' ', $class);?>">
 				<a href="<?php echo JRoute::_($rec->url)?>">
 					<?php echo $rec->title;?>								
 				</a>
