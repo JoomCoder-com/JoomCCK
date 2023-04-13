@@ -854,7 +854,7 @@ abstract class MModelAdmin extends MModelForm
 		if (property_exists($item, 'params'))
 		{
 			$registry = new JRegistry;
-			$registry->loadString($item->params);
+			$registry->loadString((string)$item->params);
 			$item->params = $registry->toArray();
 		}
 
