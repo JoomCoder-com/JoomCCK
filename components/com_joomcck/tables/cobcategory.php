@@ -140,14 +140,23 @@ class JoomcckTableCobCategory extends JTableNested
 		if(is_array($this->relative_cats) && count($this->relative_cats))
 		{
 			$rel_cat = JTable::getInstance('CobCategory', 'JoomcckTable');
+
 			$cats = array();
 			foreach($this->relative_cats as $i => $cid)
 			{
+				if(is_null($cid) || !$cid)
+					continue;
+
 				$rel_cat->reset();
 				$rel_cat->load($cid);
+
+				$cats[$i] = new stdClass();
 				$cats[$i]->id = $rel_cat->id;
 				$cats[$i]->title = $rel_cat->title;
 				$cats[$i]->path = $rel_cat->path;
+
+
+
 			}
 			$this->relative_cats = json_encode($cats);
 		} elseif(is_array($this->relative_cats)) {
