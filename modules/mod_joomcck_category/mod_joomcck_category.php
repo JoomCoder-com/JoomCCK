@@ -14,8 +14,8 @@ require_once(dirname(__FILE__) . '/helper.php');
 
 $app = JFactory::getApplication();
 $Itemid = $app->input->getInt('Itemid');
-$headerText = trim($params->get('header_text'));
-$footerText = trim($params->get('footer_text'));
+$headerText = trim($params->get('header_text',''));
+$footerText = trim($params->get('footer_text',''));
 
 JModelLegacy::addIncludePath(JPATH_ROOT . '/components/com_joomcck/models');
 
