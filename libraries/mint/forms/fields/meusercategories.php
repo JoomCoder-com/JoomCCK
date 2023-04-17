@@ -17,6 +17,7 @@ class JFormFieldMEUsercategories extends JFormField
 
     protected function getInput()
     {
+
         $db	= JFactory::getDBO();
         $user = JFactory::getUser(\Joomla\CMS\Factory::getApplication()->input->getInt('cat_user_id',0));
         $section_id = \Joomla\CMS\Factory::getApplication()->input->getInt('section_id',0);

@@ -20,7 +20,7 @@ class JoomcckTableSubscribecat extends JTable
 	
 	public function check()
 	{
-		if ($this->ctime == '' || $this->ctime == '0000-00-00 00:00:00')
+		if ($this->ctime == '' || $this->ctime == '0000-00-00 00:00:00' || is_null($this->ctime))
 		{
 			$this->ctime = JFactory::getDate()->toSql();
 		}

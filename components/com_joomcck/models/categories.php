@@ -65,7 +65,7 @@ class JoomcckModelCategories extends MModelList
 
 			if(!in_array($this->section->params->get('general.show_past_records'), $user->getAuthorisedViewLevels()))
 			{
-				$sql->where("(r.extime = '0000-00-00 00:00:00' OR r.extime > '".JFactory::getDate()->toSql()."')");
+				$sql->where("(r.extime = '0000-00-00 00:00:00' OR ISNULL(r.extime)  OR r.extime > '".JFactory::getDate()->toSql()."')");
 			}
 
 			$query->select("({$sql}) AS comments_num");
@@ -137,7 +137,7 @@ class JoomcckModelCategories extends MModelList
 	
 				if(!in_array($this->section->params->get('general.show_past_records'), $user->getAuthorisedViewLevels()))
 				{
-					$sql2->where("(r.extime = '0000-00-00 00:00:00' OR r.extime > '".JFactory::getDate()->toSql()."')");
+					$sql2->where("(r.extime = '0000-00-00 00:00:00' OR ISNULL(r.extime)  OR r.extime > '".JFactory::getDate()->toSql()."')");
 				}
 	
 				if(!in_array($this->section->params->get('general.show_children'), $user->getAuthorisedViewLevels()))

@@ -69,7 +69,7 @@ class CFormFieldRelate extends CFormField
 
 		if(!in_array($section->params->get('general.show_past_records'), $user->getAuthorisedViewLevels()))
 		{
-			$query->where("(extime = '0000-00-00 00:00:00' OR extime > '" . JFactory::getDate()->toSql() . "')");
+			$query->where("(extime = '0000-00-00 00:00:00' OR ISNULL(extime) OR extime > '" . JFactory::getDate()->toSql() . "')");
 		}
 
 		if(!in_array($this->params->get('params.strict_to_user'), $user->getAuthorisedViewLevels()) && $this->user_strict)

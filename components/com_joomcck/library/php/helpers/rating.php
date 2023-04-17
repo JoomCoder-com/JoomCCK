@@ -115,7 +115,7 @@ class RatingHelp
 		$options = explode("\n", $options);
 		ArrayHelper::clean_r($options);
 
-		$result = json_decode(stripslashes($record->multirating), TRUE);
+		$result = json_decode(stripslashes((string) $record->multirating), TRUE);
 		if(count($options) > 1 && $type->params->get('properties.rate_multirating', false))
 		{
 

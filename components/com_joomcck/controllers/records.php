@@ -397,7 +397,7 @@ class JoomcckControllerRecords extends MControllerAdmin
 		//CEmeraldHelper::allowType('feature', $this->type, $user->id, $this->section, TRUE, $this->record->user_id);
 
 		$this->record->featured = 0;
-		$this->record->ftime    = '0000-00-00 00:00:00';
+		$this->record->ftime    = NULL;
 		$this->record->store();
 
 		$data = $this->record->getProperties();
@@ -441,7 +441,7 @@ class JoomcckControllerRecords extends MControllerAdmin
 			return;
 		}
 
-		if($this->record->pubtime == '0000-00-00 00:00:00')
+		if($this->record->pubtime == '0000-00-00 00:00:00' || $this->record->pubtime == NULL)
 		{
 			CEventsHelper::notify('category', CEventsHelper::_RECORD_NEW, $this->record->id, $this->record->section_id, 0, 0, 0, $this->record->getProperties());
 		}

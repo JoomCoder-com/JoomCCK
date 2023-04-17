@@ -707,7 +707,7 @@ class JoomcckModelRecords extends MModelList
 		}
 		elseif(!in_array($this->section->params->get('general.show_past_records'), $user->getAuthorisedViewLevels()) || $view_what == 'exclude_expired')
 		{
-			$query->where("(r.extime = '0000-00-00 00:00:00' OR r.extime > '" . JFactory::getDate()->toSql() . "')");
+			$query->where("(r.extime = '0000-00-00 00:00:00' OR ISNULL(extime) OR r.extime > '" . JFactory::getDate()->toSql() . "')");
 		}
 
 		if($view_what == 'children')

@@ -110,7 +110,7 @@ class JoomcckModelItem extends MModelAdmin
 					$sql[] = "UPDATE #__js_res_record SET mtime = '{$now}' WHERE id IN ($ids)";
 					break;
 				case 'reset_extime':
-					$sql[] = "UPDATE #__js_res_record SET extime = '0000-00-00 00:00:00' WHERE id IN ($ids)";
+					$sql[] = "UPDATE #__js_res_record SET extime = NULL WHERE id IN ($ids)";
 					break;
 			}
 

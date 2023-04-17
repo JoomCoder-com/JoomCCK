@@ -337,7 +337,7 @@ class JoomcckViewRecord extends MViewBase
 		$expire   = JFactory::getDate($item->extime)->toUnix();
 		$now      = JFactory::getDate()->toUnix();
 
-		if(($now > $expire && ($item->extime != '0000-00-00 00:00:00')) && !in_array($section->params->get('general.show_past_records'), $user->getAuthorisedViewLevels()) && !MECAccess::allowRestricted($user, $section))
+		if(($now > $expire && ($item->extime != '0000-00-00 00:00:00' || !is_null($this->extime))) && !in_array($section->params->get('general.show_past_records'), $user->getAuthorisedViewLevels()) && !MECAccess::allowRestricted($user, $section))
 		{
 			echo JText::_('CWARNING_RECORD_EXPIRED');
 			$error = FALSE;

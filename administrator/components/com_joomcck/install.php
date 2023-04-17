@@ -372,13 +372,13 @@ class com_joomcckInstallerScript
 
         $db->setQuery("SELECT id FROM `#__js_res_categories` WHERE id = 1");
         if (!$db->loadResult()) {
-            $db->setQuery("INSERT INTO `#__js_res_categories` VALUES ('1', '0', '0', '0', '1', '0', '', '0', 'ROOT', 'root', '', '', '', '0', '0', '0000-00-00 00:00:00', '0', '{}', ' ', ' ', ' ', '0', '0000-00-00 00:00:00', '0', '0000-00-00 00:00:00', '0', '*', '0', '0', '{}')");
+            $db->setQuery("INSERT INTO `#__js_res_categories` VALUES ('1', '0', '0', '0', '1', '0', '', '0', 'ROOT', 'root', '', '', '', '0', '0', NULL, '0', '{}', ' ', ' ', ' ', '0', NULL, '0', NULL, '0', '*', '0', '0', '{}')");
             $db->execute();
         }
 
         $db->setQuery("SELECT id FROM `#__js_res_comments` WHERE id = 1");
         if (!$db->loadResult()) {
-            $db->setQuery("INSERT INTO `#__js_res_comments` VALUES ('1', '0', '0', ' ', '0000-00-00 00:00:00', '1', '', '', 'en-GB', '0', '0', '0', '0', '0', '0', ' ', ' ', '0', '', '0', '1', '0', '0', '0', '0')");
+            $db->setQuery("INSERT INTO `#__js_res_comments` VALUES ('1', '0', '0', ' ', NULL, '1', '', '', 'en-GB', '0', '0', '0', '0', '0', '0', ' ', ' ', '0', '', '0', '1', '0', '0', '0', '0')");
 
             $db->execute();
         }

@@ -122,12 +122,12 @@ class JoomcckTableRecord extends JTable
 			$this->langs = $lang->getTag();
 		}
 
-		if($this->ctime == '' || $this->ctime == '0000-00-00 00:00:00')
+		if($this->ctime == '' || $this->ctime == '0000-00-00 00:00:00' || is_null($this->ctime))
 		{
 			$this->ctime = JFactory::getDate()->toSql();
 		}
 
-		if($this->inittime == '' || $this->inittime == '0000-00-00 00:00:00')
+		if($this->inittime == '' || $this->inittime == '0000-00-00 00:00:00' || is_null($this->ctime))
 		{
 			$this->inittime = JFactory::getDate()->toSql();
 		}
@@ -609,12 +609,12 @@ class JoomcckTableRecord extends JTable
 			$this->langs = $lang->getTag();
 		}
 
-		if($this->ctime == '' || $this->ctime == '0000-00-00 00:00:00')
+		if($this->ctime == '' || $this->ctime == '0000-00-00 00:00:00' || is_null($this->ctime))
 		{
 			$this->ctime = JFactory::getDate()->toSql();
 		}
 
-		if($this->inittime == '' || $this->inittime == '0000-00-00 00:00:00')
+		if($this->inittime == '' || $this->inittime == '0000-00-00 00:00:00' || is_null($this->inittime))
 		{
 			$this->inittime = JFactory::getDate()->toSql();
 		}

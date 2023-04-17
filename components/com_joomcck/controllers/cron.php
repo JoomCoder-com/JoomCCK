@@ -38,7 +38,7 @@ class JoomcckControllerCron extends MControllerAdmin
 		$date = JFactory::getDate()->toSql();
 		$db   = JFactory::getDBO();
 		$sql  = "UPDATE #__js_res_record
-			SET checked_out = 0, checked_out_time = '0000-00-00 00:00:00'
+			SET checked_out = 0, checked_out_time = NULL
 			WHERE checked_out > 0
 			AND checked_out_time < '{$date}' - INTERVAL $interval MINUTE";
 		$db->setQuery($sql);

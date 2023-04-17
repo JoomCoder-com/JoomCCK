@@ -183,7 +183,7 @@ class JoomcckModelRecord extends MModelItem
 		$data->nofollow = substr_count($robots, 'noindex');
 
 		$data->expired = FALSE;
-		if($data->extime == '0000-00-00 00:00:00')
+		if($data->extime == '0000-00-00 00:00:00' || is_null($data->extime))
 		{
 			$data->extime = NULL;
 			$data->expire = NULL;
@@ -334,7 +334,7 @@ class JoomcckModelRecord extends MModelItem
 			$data->ftime = JFactory::getDate($data->ftime);
 			if($data->ftime->toUnix() < time())
 			{
-				$sql = "UPDATE #__js_res_record SET featured = 0, ftime = '0000-00-00 00:00:00' WHERE id = " . $data->id;
+				$sql = "UPDATE #__js_res_record SET featured = 0, ftime = NULL WHERE id = " . $data->id;
 				$db->setQuery($sql);
 				$db->execute();
 				CEventsHelper::notify('record', CEventsHelper::_RECORD_FEATURED_EXPIRED, $data->id, $data->section_id, 0, 0, 0, $data);

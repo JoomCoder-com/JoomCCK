@@ -1,4 +1,4 @@
-<?php
+    <?php
 /**
  * Joomcck by joomcoder
  * a component for Joomla! 1.7 - 2.5 CMS (http://www.joomla.org)

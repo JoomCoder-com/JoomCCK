@@ -749,7 +749,7 @@ class JoomcckControllerAjax extends MControllerAdmin
 
 				if(!in_array($section->params->get('general.show_past_records'), $user->getAuthorisedViewLevels()))
 				{
-					$sql2->where("(r.extime = '0000-00-00 00:00:00' OR r.extime > '" . JFactory::getDate()->toSql() . "')");
+					$sql2->where("(r.extime = '0000-00-00 00:00:00' OR ISNULL(extime) OR r.extime > '" . JFactory::getDate()->toSql() . "')");
 				}
 
 				if(!in_array($section->params->get('general.show_children'), $user->getAuthorisedViewLevels()))
@@ -843,7 +843,7 @@ class JoomcckControllerAjax extends MControllerAdmin
 		$sql->where('published = 1');
 		$sql->where('hidden = 0');
 		$sql->where("ctime < " . $db->quote(JFactory::getDate()->toSql()));
-		$sql->where("(extime = '0000-00-00 00:00:00' OR extime > '" . JFactory::getDate()->toSql() . "')");
+		$sql->where("(extime = '0000-00-00 00:00:00' OR ISNULL(extime) OR extime > '" . JFactory::getDate()->toSql() . "')");
 		$sql->where("id IN (SELECT record_id FROM #__js_res_record_category WHERE catid = '{$catid}')");
 		$db->setQuery($sql, 0, ($limit ? $limit + 1 : 0));
 		$items = array();

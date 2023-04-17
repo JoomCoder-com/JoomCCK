@@ -689,7 +689,7 @@ class packInstallerScript
             }
             if (array_key_exists('checked_out', $row)) {
                 $row['checked_out'] = 0;
-                $row['checked_out_time'] = '0000-00-00 00:00:00';
+                $row['checked_out_time'] = NULL;
             }
 
             if ($file == 'files') {

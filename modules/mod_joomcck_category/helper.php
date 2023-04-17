@@ -77,7 +77,7 @@ class modJoomcckCategoriesHelper
 
 		if(! in_array($section->params->get('general.show_past_records'), $user->getAuthorisedViewLevels()))
 		{
-			$sql->where("(extime = '0000-00-00 00:00:00' OR extime > '" . JFactory::getDate()->toSql() . "')");
+			$sql->where("(extime = '0000-00-00 00:00:00' OR ISNULL(extime) OR extime > '" . JFactory::getDate()->toSql() . "')");
 		}
 		$db->setQuery($sql);
 		return $db->loadResult();
@@ -94,7 +94,7 @@ class modJoomcckCategoriesHelper
 		$sql->where('published = 1');
 		$sql->where('hidden = 0');
 		$sql->where("ctime < " . $db->quote(JFactory::getDate()->toSql()));
-		$sql->where("(extime = '0000-00-00 00:00:00' OR extime > '" . JFactory::getDate()->toSql() . "')");
+		$sql->where("(extime = '0000-00-00 00:00:00' OR ISNULL(extime) OR extime > '" . JFactory::getDate()->toSql() . "')");
 		$sql->where("id IN (SELECT record_id FROM #__js_res_record_category WHERE catid = '{$cat_id}')");
 		if($params->get('orderby'))
 		{
@@ -129,7 +129,7 @@ class modJoomcckCategoriesHelper
 		$sql->where('hidden = 0');
 		$sql->where('section_id = ' . $params->get('section_id'));
 		$sql->where("ctime < " . $db->quote(JFactory::getDate()->toSql()));
-		$sql->where("(extime = '0000-00-00 00:00:00' OR extime > '" . JFactory::getDate()->toSql() . "')");
+		$sql->where("(extime = '0000-00-00 00:00:00' OR ISNULL(extime)  OR extime > '" . JFactory::getDate()->toSql() . "')");
 		$sql->where("id NOT IN (SELECT record_id FROM #__js_res_record_category WHERE section_id = '" . $params->get('section_id') . "')");
 		if($params->get('orderby'))
 		{

@@ -35,7 +35,7 @@ class CStatistics
 				$query->where("published = '1'");
 			}
 			$query->where("ctime < NOW()");
-			$query->where("(extime > NOW() OR extime = '0000-00-00 00:00')");
+			$query->where("(extime > NOW() OR extime = '0000-00-00 00:00' OR ISNULL(extime))");
 			$db->setQuery($query);
 			self::$records_num[$section_id] = $db->loadResult();
 		}
@@ -82,7 +82,7 @@ class CStatistics
 				$query->where("published = '1'");
 			}
 			$query->where("ctime < NOW()");
-			$query->where("(extime > NOW() OR extime = '0000-00-00 00:00')");
+			$query->where("(extime > NOW() OR extime = '0000-00-00 00:00' OR ISNULL(extime))");
 			$db->setQuery($query);
 
 			$ids = $db->loadColumn();
@@ -120,7 +120,7 @@ class CStatistics
 				$query->where("published = '1'");
 			}
 			$query->where("ctime < NOW()");
-			$query->where("(extime > NOW() OR extime = '0000-00-00 00:00')");
+			$query->where("(extime > NOW() OR extime = '0000-00-00 00:00' OR ISNULL(extime) )");
 			$db->setQuery($query);
 			$authors = $db->loadColumn();
 
@@ -682,7 +682,7 @@ class CStatistics
 			$query->where("hidden = '0'");
 			$query->where("user_id = '$user_id'");
 			$query->where("ctime < NOW()");
-			$query->where("(extime > NOW() OR extime = '0000-00-00 00:00')");
+			$query->where("(extime > NOW() OR extime = '0000-00-00 00:00' OR ISNULL(extime) )");
 			$db->setQuery($query);
 			self::$user_records["$section_id-$user_id"] = $db->loadColumn();
 		}
@@ -704,7 +704,7 @@ class CStatistics
 		}
 		if (!in_array($section->params->get('general.show_past_records'), $user->getAuthorisedViewLevels()))
 		{
-			$query->where("(extime = '0000-00-00 00:00:00' OR extime > '" . JFactory::getDate()->toSql() . "')");
+			$query->where("(extime = '0000-00-00 00:00:00' OR ISNULL(extime) OR extime > '" . JFactory::getDate()->toSql() . "')");
 		}
 	}
 

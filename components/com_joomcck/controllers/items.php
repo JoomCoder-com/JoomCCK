@@ -57,7 +57,7 @@ class JoomcckControllerItems extends JoomcckControllerRecords
 				continue;
 			}
 			if($value == 'featured') {
-				$form['ftime'] = '0000-00-00 00:00:00';
+				$form['ftime'] = NULL;
 			}
 			$sql[] = sprintf('`%s` = %d', $value, $form[$value]);
 		}
