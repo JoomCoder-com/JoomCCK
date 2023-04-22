@@ -28,6 +28,7 @@
 		<filename>index.html</filename>
 		<filename>router.php</filename>
 		<folder>configs/</folder>
+		<folder>fields</folder>
 		<folder>controllers/</folder>
 		<folder>images/</folder>
 		<folder>layouts/</folder>
