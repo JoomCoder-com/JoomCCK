@@ -1,6 +1,9 @@
 # JoomCCK
 Advanced CCK for Joomla 4+ **(based on Cobalt CCK v9)**
 
+![joomcck-dashboard](https://user-images.githubusercontent.com/6179568/233794958-ab84da42-6ec3-4ceb-90fe-33518795b3df.png)
+
+
 JoomCCK opens incredible possibilities for constructing websites, and allows you to build almost anything. Among others.
 - File Downloads
 - Galleries
