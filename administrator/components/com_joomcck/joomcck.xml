@@ -9,7 +9,16 @@
 	<authorUrl>https://www.joomBoost.com</authorUrl>
 	<version>##VERSION##</version>
 	<scriptfile>install.php</scriptfile>
-
+	<install>
+		<sql>
+			<file driver="mysql" charset="utf8">sql/update.utf8.v.ip2c.sql</file>
+		</sql>
+	</install>
+	<update>
+		<schemas>
+			<schemapath type="mysql">sql/updates/mysql</schemapath>
+		</schemas>
+	</update>
 	<media destination="com_joomcck" folder="media">
 		<folder>css</folder>
 		<folder>icons</folder>
