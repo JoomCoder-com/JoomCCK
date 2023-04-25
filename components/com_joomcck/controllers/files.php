@@ -295,9 +295,10 @@ class JoomcckControllerFiles extends MControllerAdmin
     }
     public function upload()
     {
-        require_once JPATH_ROOT . '/media/com_joomcck/vendors/flow/php/src/Flow/Autoloader.php';
 
-        $loader = new \vendors\flow\php\src\Flow\Autoloader();
+
+
+        $loader = new Flow\Autoloader();
         $loader->autoload('vendors\flow\php\src\Flow\ConfigInterface');
         $loader->autoload('vendors\flow\php\src\Flow\Config');
         $loader->autoload('vendors\flow\php\src\Flow\RequestInterface');
@@ -305,7 +306,7 @@ class JoomcckControllerFiles extends MControllerAdmin
         $loader->autoload('vendors\flow\php\src\Flow\Basic');
         $loader->autoload('vendors\flow\php\src\Flow\File');
 
-        $config = new \vendors\flow\php\src\Flow\Config();
+        $config = new Flow\Config();
         $config->setTempDir(JPATH_ROOT . '/tmp/chunks');
 
         if (!JFolder::exists($config->getTempDir())) {
@@ -333,11 +334,11 @@ class JoomcckControllerFiles extends MControllerAdmin
                 JFactory::getApplication()->close();
                 return;
             }
-            $field->params = new JRegistry($field->params);
+            $field->params = new JRegistry((string)$field->params);
         }
 
 
-        $request = new \vendors\flow\php\src\Flow\Request();
+        $request = new Flow\Request();
 
         $max_upload =  $field->params->get('params.max_size', 2097152);
         $max_post     = $this->_convert_size(ini_get('post_max_size'));
@@ -365,7 +366,7 @@ class JoomcckControllerFiles extends MControllerAdmin
         $time = time();
         $upload_name = $time . "_" . md5($request->getFileName() . $request->getTotalSize()) . "." . $ext;
 
-        if (\vendors\flow\php\src\Flow\Basic::save($src, $config, $request)) {
+        if (Flow\Basic::save($src, $config, $request)) {
             $save = $this->savefile($request->getFileName(), $src, $upload_name, $field);
             if ($save['id']) {
                 JFile::delete($src);
