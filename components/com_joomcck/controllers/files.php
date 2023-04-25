@@ -11,6 +11,7 @@
 
 use Joomla\CMS\Factory;
 use Joomla\Filesystem\Folder;
+use Joomla\String\StringHelper;
 
 defined('_JEXEC') or die();
 define('DS', DIRECTORY_SEPARATOR);
@@ -352,8 +353,9 @@ class JoomcckControllerFiles extends MControllerAdmin
         }
 
         $filename =  $request->getFileName();
-        $ext  = \Joomla\String\StringHelper::strtolower(JFile::getExt($filename));
-        $exts    = explode(',', str_replace(' ', '', $field->params->get('params.file_formats', 'zip, jpg, png, jpeg, gif, txt, md, bmp')));
+        $ext  = StringHelper::strtolower(JFile::getExt($filename));
+		$allowedExts =  StringHelper::strtolower($field->params->get('params.file_formats', 'zip, jpg, png, jpeg, gif, txt, md, bmp'));
+        $exts    = explode(',', str_replace(' ', '', $allowedExts));
 
         if (!in_array($ext, $exts)) {
             echo json_encode(['error' => 1, 'msg' => 'Not allowed extension <b>' . $ext . '</b>: ' . implode(', ', $exts)]);
@@ -410,7 +412,7 @@ class JoomcckControllerFiles extends MControllerAdmin
         if ($response['finish']) {
             $user = JFactory::getUser();
 
-            $ext       = \Joomla\String\StringHelper::strtolower(JFile::getExt($response['upload_name']));
+            $ext       = StringHelper::strtolower(JFile::getExt($response['upload_name']));
             $subfolder = $ext;
             if ($field_id = $this->input->getInt('field_id')) {
                 $field = JTable::getInstance('Field', 'JoomcckTable');
@@ -442,7 +444,7 @@ class JoomcckControllerFiles extends MControllerAdmin
 
         $time = time();
         $date = date($params->get('folder_format', 'Y-m'), $time);
-        $ext  = \Joomla\String\StringHelper::strtolower(JFile::getExt($realname));
+        $ext  = StringHelper::strtolower(JFile::getExt($realname));
         $subfolder     = $field->params->get('params.subfolder', $field->field_type);
 
         $dest  = JPATH_ROOT . DIRECTORY_SEPARATOR . $params->get('general_upload') . DIRECTORY_SEPARATOR . $subfolder . DIRECTORY_SEPARATOR;
