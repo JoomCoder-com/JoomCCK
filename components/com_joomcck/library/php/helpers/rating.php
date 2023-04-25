@@ -111,7 +111,7 @@ class RatingHelp
 		$document = JFactory::getDocument();
 		$document->addScript(JURI::root(TRUE) . '/components/com_joomcck/library/js/felixrating.js');
 
-		$options = $type->params->get('properties.rate_multirating_options');
+		$options = $type->params->get('properties.rate_multirating_options','');
 		$options = explode("\n", $options);
 		ArrayHelper::clean_r($options);
 
