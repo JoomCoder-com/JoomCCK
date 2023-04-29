@@ -11,8 +11,13 @@ function getEmailIframe(key, url)
 	});
 
 	var box = jQuery('#email_form'+key);
-	box.html(ifrm).show();
+
 }
+
+function resizeIframe(iframe) {
+	iframe.height = iframe.contentWindow.document.body.scrollHeight + "px";
+}
+
 
 function iframe_loaded(key, height)
 {

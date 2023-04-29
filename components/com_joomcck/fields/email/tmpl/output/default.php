@@ -6,6 +6,9 @@
  * @copyright Copyright (C) 2012 joomcoder (https://www.joomcoder.com). All rights reserved.
  * @license GNU/GPL http://www.gnu.org/copyleft/gpl.html
  */
+
+use Joomla\CMS\HTML\HTMLHelper;
+
 defined('_JEXEC') or die();
 ?>
 <?php
@@ -39,12 +42,25 @@ if (in_array($params->get('params.send_mail', 3), $this->user->getAuthorisedView
 	switch ($params->get('params.form_style', 1))
 	{
 
-	case 1 :?>
-		<a href="javascript: void(0);" onclick="getEmailIframe('<?php echo $key;?>', '<?php echo $url_form;?>');" data-role="button" class="btn btn-primary btn-sm" data-toggle="collapse" data-target="#email_form<?php echo $record->id;?>">
-			<?php echo JText::_($this->params->get('params.popup_label', $this->label));?>
-		</a>
+	case 1 :
 
-		<div id="email_form<?php echo $key;?>" class="hide"></div>
+		HTMLHelper::_('bootstrap.collapse');
+
+        ?>
+
+        <button class="btn btn-primary btn-sm" type="button" data-bs-toggle="collapse" data-bs-target="#email_form<?php echo $key;?>" aria-expanded="false" aria-controls="collapseExample">
+			<?php echo JText::_($this->params->get('params.popup_label', $this->label));?>
+        </button>
+        <div class="collapse my-3" id="email_form<?php echo $key;?>">
+            <div class="row h-100">
+                <div class="col-md-6">
+                    <div class="card card-body h-100">
+                        <iframe onload="resizeIframe(this)" id="email_frame<?php echo $key;?>" loading="lazy" src="<?php echo $url_form ?>" width="100%" height="99%" frameborder="0"></iframe>
+                    </div>
+                </div>
+            </div>
+        </div>
+
 
 	<?php break; ?>
 

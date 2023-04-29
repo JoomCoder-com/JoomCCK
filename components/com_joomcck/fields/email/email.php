@@ -239,9 +239,12 @@ class JFormFieldCEmail extends CFormField
 		$mail = JFactory::getMailer();
 		$mail->AddAddress($email);
 
-		if($this->params->get('params.copy_to'))
+		if($this->params->get('params.copy_to','') && !empty($this->params->get('params.copy_to','')))
 		{
-			$copy_emails = explode(',', '', str_replace(' ', '', $this->params->get('params.copy_to')));
+
+			$copyTo = str_replace(' ', '', $this->params->get('params.copy_to',''));
+			$copy_emails = explode(',', $copyTo);
+
 			foreach($copy_emails AS $e)
 			{
 				if(filter_var($e, FILTER_VALIDATE_EMAIL))
