@@ -47,7 +47,7 @@
 				<option value="d/m/y">30/12/07</option>
 				<option value="m/d/y">12/30/07</option>
 			</field>
-			<field name="bookmark_icons" label="X_ICONBOOKMARK" type="folderlist" hide_none="1" hide_default="1" default="star" directory="media/mint/icons/bookmarks"/>
+			<field name="bookmark_icons" label="X_ICONBOOKMARK" type="folderlist" hide_none="1" hide_default="1" default="star" directory="media/com_joomcck/icons/bookmarks"/>
 		</fieldset>
 
 		<fieldset name="elements2" label="CLISTELEMENTS">

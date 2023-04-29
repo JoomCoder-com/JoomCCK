@@ -81,7 +81,7 @@
 		}
 
 		if(!label.val()) {
-			label.css("background", "url('"+Joomla.getOptions('system.paths').root+"/media/mint/img/loading.gif') no-repeat right/80px").val('Looking for title...');
+			label.css("background", "url('"+Joomla.getOptions('system.paths').root+"/media/com_joomcck/img/loading.gif') no-repeat right/80px").val('Looking for title...');
 			$.ajax({
 				url: Joomcck.field_call_url,
 				type: "POST",

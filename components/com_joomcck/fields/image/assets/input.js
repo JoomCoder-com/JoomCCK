@@ -18,7 +18,7 @@
 			});
 
 			$('#jformfields' + id + 'hiddenimage').val('');
-			$('#imagelib' + id).attr('src', Joomla.getOptions('system.paths').rootFull+'media/mint/blank.png');
+			$('#imagelib' + id).attr('src', Joomla.getOptions('system.paths').rootFull+'media/com_joomcck/blank.png');
 		});
 
 		$('select[data-image-field-id]').bind('change keyup', function() {
@@ -26,7 +26,7 @@
 			var id = $(this).data('image-field-id');
 			var val = $(this).val();
 			if(!val) {
-				val =  Joomla.getOptions('system.paths').rootFull+'media/mint/blank.png';
+				val =  Joomla.getOptions('system.paths').rootFull+'media/com_joomcck/blank.png';
 			}
 			$('#imagelib' + id).attr('src', Joomla.getOptions('system.paths').rootFull + val);
 

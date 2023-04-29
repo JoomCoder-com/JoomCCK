@@ -319,7 +319,7 @@ var _gaq = _gaq || [];
 				return;
 			}
 
-			$('img', button).attr('src', '<?php echo JURI::root(TRUE);?>/media/mint/icons/16/edit-diff.png');
+			$('img', button).attr('src', '<?php echo JURI::root(TRUE);?>/media/com_joomcck/icons/16/edit-diff.png');
 			$('#compare div.alert').removeClass('alert-warning').addClass('alert-info');
 
 			$('#compare').slideDown('fast', function() {
@@ -389,7 +389,7 @@ var _gaq = _gaq || [];
 				return;
 			}
 			$(this)
-				.attr('src', '<?php echo JURI::root(TRUE);?>/media/mint/icons/16/follow' + json.state + '.png')
+				.attr('src', '<?php echo JURI::root(TRUE);?>/media/com_joomcck/icons/16/follow' + json.state + '.png')
 				.attr('data-original-title', json.title);
 			Joomcck.redrawBS();
 
@@ -418,7 +418,7 @@ var _gaq = _gaq || [];
 				return;
 			}
 			$(this)
-				.attr('src', '<?php echo JURI::root(TRUE);?>/media/mint/icons/bookmarks/' + img + '/state' + json.state + '.png')
+				.attr('src', '<?php echo JURI::root(TRUE);?>/media/com_joomcck/icons/bookmarks/' + img + '/state' + json.state + '.png')
 				.attr('data-original-title', json.title);
 			Joomcck.redrawBS();
 			if(_gaq) {
@@ -446,7 +446,7 @@ var _gaq = _gaq || [];
 				alert(json.error);
 				return;
 			}
-			$('#follow_' + id).attr('src', '<?php echo JURI::root(TRUE);?>/media/mint/icons/16/follow' + (json.state.toInt() ? 0 : 1) + '.png');
+			$('#follow_' + id).attr('src', '<?php echo JURI::root(TRUE);?>/media/com_joomcck/icons/16/follow' + (json.state.toInt() ? 0 : 1) + '.png');
 			$('#followtext_' + id).html(json.title);
 			if(json.state == 0) {
 				$('#followsec-' + id).addClass('btn-primary').bind('mouseleave',function() {
@@ -484,7 +484,7 @@ var _gaq = _gaq || [];
 				alert(json.error);
 				return;
 			}
-			$('#followuser_' + id).attr('src', '<?php echo JURI::root(TRUE);?>/media/mint/icons/16/follow' + (json.state.toInt() ? 0 : 1) + '.png');
+			$('#followuser_' + id).attr('src', '<?php echo JURI::root(TRUE);?>/media/com_joomcck/icons/16/follow' + (json.state.toInt() ? 0 : 1) + '.png');
 			$('#followtext_' + id).html(json.title);
 			if(json.state == 0) {
 				$('#followuser-' + id).addClass('btn-primary').bind('mouseleave',function() {
@@ -523,7 +523,7 @@ var _gaq = _gaq || [];
 				alert(json.error);
 				return;
 			}
-			$('#follow_' + id).attr('src', '<?php echo JURI::root(TRUE);?>/media/mint/icons/16/follow' + (json.state.toInt() ? 0 : 1) + '.png');
+			$('#follow_' + id).attr('src', '<?php echo JURI::root(TRUE);?>/media/com_joomcck/icons/16/follow' + (json.state.toInt() ? 0 : 1) + '.png');
 			$('#followtext_' + id).html(json.title);
 			if(json.state == 0) {
 				$('#followcat-' + id).addClass('btn-primary').bind('mouseleave',function() {
@@ -640,11 +640,11 @@ var _gaq = _gaq || [];
 		var ba = $(document.createElement('button'))
 			.attr('type', 'button')
 			.attr('class', 'btn btn-sm btn-outline-secondary')
-			.html('<img src="<?php echo JURI::root(TRUE);?>/media/mint/icons/16/plus-button.png" /> <?php echo JText::_("Add");?>');
+			.html('<img src="<?php echo JURI::root(TRUE);?>/media/com_joomcck/icons/16/plus-button.png" /> <?php echo JText::_("Add");?>');
 		var bc = $(document.createElement('button'))
 			.attr('type', 'button')
 			.attr('class', 'btn btn-sm btn-outline-secondary')
-			.html('<img src="<?php echo JURI::root(TRUE);?>/media/mint/icons/16/minus-button.png" /> <?php echo JText::_("Close");?>');
+			.html('<img src="<?php echo JURI::root(TRUE);?>/media/com_joomcck/icons/16/minus-button.png" /> <?php echo JText::_("Close");?>');
 
 		var bg = $(document.createElement('div'))
 			.attr('class', 'input-group w-50')

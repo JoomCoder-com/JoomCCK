@@ -18,13 +18,13 @@
 }
 
 #gmbNextLink {
-    background-image: url('../../../../../media/mint/icons/16/navigation-000-white.png');
+    background-image: url('../../../../../media/com_joomcck/icons/16/navigation-000-white.png');
     background-position: 50% 50%;
     background-repeat: no-repeat;
 }
 
 #gmbPrevLink {
-    background-image: url('../../../../../media/mint/icons/16/navigation-180-white.png');
+    background-image: url('../../../../../media/com_joomcck/icons/16/navigation-180-white.png');
     background-position: 50% 50%;
     background-repeat: no-repeat;
 }
@@ -48,7 +48,7 @@
     float: none;
     width: 20px;
     height: 20px;
-    background-image: url('../../../../../media/mint/icons/16/cross.png');
+    background-image: url('../../../../../media/com_joomcck/icons/16/cross.png');
     -webkit-border-radius: 11px;
     -khtml-border-radius: 11px;
     -moz-border-radius: 11px;
@@ -188,7 +188,7 @@ DIV.image-wrapper a {
 }
 
 .delete-comment {
-    background-image: url('../../../../../media/mint/icons/16/cross.png');
+    background-image: url('../../../../../media/com_joomcck/icons/16/cross.png');
     float: right;
     display: block;
     width: 16px;
@@ -197,7 +197,7 @@ DIV.image-wrapper a {
 
 .delete-comment:HOVER {
     text-decoration: none !important;
-    background: url('../../../../../media/mint/icons/16/cross.png') transparent;
+    background: url('../../../../../media/com_joomcck/icons/16/cross.png') transparent;
 }
 
 table.tbl td {

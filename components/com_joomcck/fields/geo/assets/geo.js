@@ -150,7 +150,7 @@
             reset();
             $('#' + name + options.id)
                 .attr('disabled', 'disabled')
-                .css('background', 'url("' + options.root + '/media/mint/js/mooupload/imgs/load_bg_blue.gif")');
+                .css('background', 'url("' + options.root + '/media/com_joomcck/js/mooupload/imgs/load_bg_blue.gif")');
         }
 
         function reset() {
