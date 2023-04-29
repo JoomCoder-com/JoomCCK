@@ -117,6 +117,13 @@ var _gaq = _gaq || [];
 		floatnum[obj.id] = obj.value;
 	};
 
+	Joomcck.closeIframeModal = function(){
+
+
+		parent.document.querySelector('.iziModal-button-close').click();
+
+	}
+
 	Joomcck.redrawBS = function() {
 
 		// load tooltips with tooltip rel everywhere

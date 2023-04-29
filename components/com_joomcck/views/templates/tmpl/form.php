@@ -20,9 +20,6 @@ $app = JFactory::getApplication();
 
 <form method="post" name="adminForm" id="adminForm" class="form-horizontal">
 
-
-
-
     <div class="content-form" id="page-params">
 		<?php echo MFormHelper::renderForm($this->form, $this->params->toArray(), array(), MFormHelper::FIELDSET_SEPARATOR_FIELDSET, MFormHelper::STYLE_TABLE, MFormHelper::GROUP_SEPARATOR_TAB);; ?>
         <input type="hidden" name="task" value=""/>
@@ -44,14 +41,16 @@ $app = JFactory::getApplication();
 
         <div class="fixed-bottom d-flex justify-content-between p-4 bg-white border-top shadow-sm">
             <div>
-                <button class="btn btn-sm btn-light border" type="button" onclick="Joomcck.submitTask('templates.apply')">
+                <button class="btn btn-light border" type="button" onclick="Joomcck.submitTask('templates.apply')">
                     <i class="fas fa-edit"></i> <?php echo JText::_('CSAVE') ?>
                 </button>
-                <button class="btn btn-success btn-sm" type="button" onclick="Joomla.submitbutton('templates.saveclose')">
+                <?php if(JFactory::getApplication()->input->get('inner')): ?>
+                <button class="btn btn-sm" type="button" onclick="Joomla.submitbutton('templates.saveclose')">
                     <i class="fas fa-save"></i> <?php echo JText::_('CSAVECLOSE') ?>
                 </button>
+                <?php endif; ?>
             </div>
-            <button class="btn btn-sm btn-danger" type="button" onclick="<?php echo(!JFactory::getApplication()->input->get('inner') ? 'parent.SqueezeBox.close();' : "javascript:Joomla.submitbutton('templates.cancel')"); ?>"><i
+            <button class="btn btn-danger" type="button" onclick="<?php echo(!JFactory::getApplication()->input->get('inner') ? "Joomcck.closeIframeModal()" : "javascript:Joomla.submitbutton('templates.cancel')"); ?>"><i
                         class="icon-cancel "></i> <?php echo JText::_('CCLOSE') ?></a></button>
         </div>
 	<?php endif; ?>
