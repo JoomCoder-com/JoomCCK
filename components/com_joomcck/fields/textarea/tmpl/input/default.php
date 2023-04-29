@@ -21,7 +21,7 @@ $js         = '';
 	$symbols_left = $symbols_left < 0 ? 0 : $symbols_left;
 	?>
 	<p class="text-success mb-2" id="alert-limit-<?php echo $this->id ?>">
-		<?php echo JText::sprintf($params->get('params.symbols_left_msg', 'TA_SYMBOLSLEFTMSG'), '<b><span id="lim_' . $this->id . '">' . $symbols_left . '</span></b>', $max_length); ?>
+		<small><?php echo JText::sprintf($params->get('params.symbols_left_msg', 'TA_SYMBOLSLEFTMSG'), '<b><span id="lim_' . $this->id . '">' . $symbols_left . '</span></b>', $max_length); ?></small>
 	</p>
 	<script type="text/javascript">
 		function plg_textarea_truncate<?php echo $this->id;?>(elem) {

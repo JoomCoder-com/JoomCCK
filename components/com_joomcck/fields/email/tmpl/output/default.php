@@ -55,7 +55,7 @@ if (in_array($params->get('params.send_mail', 3), $this->user->getAuthorisedView
 
 
         <div class="modal fade" id="emailmodal<?php echo $this->id;?>" tabindex="-1" aria-labelledby="emailmodal<?php echo $this->id;?>Label" aria-hidden="true">
-            <div class="modal-dialog modal-xl">
+            <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
                         <h1 class="modal-title fs-5" id="exampleModalLabel"><?php echo JText::_('E_SENDMSG');?></h1>

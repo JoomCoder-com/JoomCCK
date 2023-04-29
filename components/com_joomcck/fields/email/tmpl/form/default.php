@@ -102,7 +102,7 @@ $key = $record->id.$this->id;
 					<?php if ($params->get('params.subject_style', 0) == 2) :
 						$pre_subject_values = explode("\n", trim($params->get('params.pre_subject_val')));
 						if (count($pre_subject_values)):?>
-							<select class="form-control" name="email[<?php echo $this->id;?>][subject]" >
+							<select class="form-select" name="email[<?php echo $this->id;?>][subject]" >
 							<?php foreach($pre_subject_values as $value): ?>
 								<option value="<?php echo trim($value);?>" <?php echo ($value == $data->get('subject') ? 'selected="selected"' : "");?>><?php echo $value;?></option>
 							<?php endforeach; ?>
@@ -126,10 +126,11 @@ $key = $record->id.$this->id;
 		<tr>
 			<td width="1%" nowrap="nowrap"><?php echo JText::_('E_MSG');?></td>
 			<td>
-				<textarea id="email_body<?php echo $this->id;?>" style="<?php echo $style ?>" name="email[<?php echo $this->id;?>][body]" class="form-control"><?php echo $data->get('body', $params->get('params.body'));?></textarea>
+				<textarea id="email_body<?php echo $this->id;?>" style="<?php echo $style ?>" name="email[<?php echo $this->id;?>][body]" class="form-control w-100">
+                    <?php echo $data->get('body', $params->get('params.body'));?></textarea>
 
                     <script type="text/javascript">
-                        jQuery("#field_<?php echo $this->id;?>").expanding();
+                        jQuery("#email_body<?php echo $this->id;?>").expanding();
                     </script>
 			</td>
 		</tr>
