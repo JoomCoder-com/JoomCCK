@@ -107,7 +107,7 @@
 				<option value="0">CNO</option>
 				<option value="1">CYES</option>
 			</field>
-			<field name="comments_allowed_formats" size="50" type="text" default="pdf, zip, doc, jpg, jpeg, png, gz, tar, docx, xls, xlsx, ppt, pptx" label="DOWN_FORMAT" />
+			<field name="comments_allowed_formats" class="w-100" type="text" default="pdf, zip, doc, jpg, jpeg, png, gz, tar, docx, xls, xlsx, ppt, pptx" label="DOWN_FORMAT" />
 			<field name="comments_attachment_max" type="text" default="2097152" label="DOWN_MAXSIZE" />
 			<field name="comments_max_count" type="text" default="3" size="3" label="DOWN_MAXXNUM" />
 		</fieldset>
@@ -118,7 +118,7 @@
 				<option value="0">CNO</option>
 				<option value="1">CYES</option>
 			</field>
-			<field name="type_comment_msg" type="text" size="50" default="10" label="XML_LABEL_SUB_COUNT" />
+			<field name="type_comment_msg" type="text" class="w-100" default="10" label="XML_LABEL_SUB_COUNT" />
 		</fieldset>
 	</fields>
 </form>

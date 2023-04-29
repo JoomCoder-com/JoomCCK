@@ -27,8 +27,8 @@
 				<option value="0">Automatically fit bounds</option>
 			</field>
 			<field name="map_init_zoom" type="text" size="10" default="2" label="Manual initial Zoom"/>
-			<field name="map_init_lat" type="text" size="50" default="42.293564192170095" label="Manual initial Latitude"/>
-			<field name="map_init_lng" type="text" size="50" default="22.33983659744263" label="Manual initial Longitude"/>
+			<field name="map_init_lat" type="text" class="w-100" default="42.293564192170095" label="Manual initial Latitude"/>
+			<field name="map_init_lng" type="text" class="w-100" default="22.33983659744263" label="Manual initial Longitude"/>
 
 			<field name="map_claster" type="radio" class="btn-group" size="3" default="1" label="Enable clusterer">
 				<option value="1">Yes</option>

@@ -119,7 +119,7 @@
 					<option value="back">XML_OPT_BACK</option>
 					<option value="own">XML_OPT_RECORD</option>
 				</field>
-				<field name="invite_add_more" type="text" size="50" label="F_NEWBUTTONLABEL" default="Add New" description="F_NEWBUTTONLABEL_DESCR" />
+				<field name="invite_add_more" type="text" class="w-100" label="F_NEWBUTTONLABEL" default="Add New" description="F_NEWBUTTONLABEL_DESCR" />
 			</fieldset>
 			<fieldset name="newb" label="FS_ATTACHEXIST">
 				<field name="add_existing" type="maccesslevel" condition='{"not0":["params_params_add_existing_auth","params_params_add_existing_access_list","params_params_add_existing_access_full","params_params_add_existing_width","params_params_add_existing_height","params_params_add_existing_label"]}' label="F_ATTACHEXISTSHOWFOR" default="0">
@@ -140,7 +140,7 @@
 				</field>
 				<field name="add_existing_width" type="text" size="3" default="750" label="F_ATTACHEXISTPOPUPWIDTH" />
 				<field name="add_existing_height" type="text" size="3" default="500" label="F_ATTACHEXISTPOPUPHEIGHT" />
-				<field name="add_existing_label" type="text" size="50" default="Attach Existing" label="F_ATTACHEXISTLABEL" description="F_ATTACHEXISTLABEL_DESCR" />
+				<field name="add_existing_label" type="text" class="w-100" default="Attach Existing" label="F_ATTACHEXISTLABEL" description="F_ATTACHEXISTLABEL_DESCR" />
 			</fieldset>
 
 			<fieldset name="intro" label="FS_SHOWPARENT" description="FS_SHOWPARENT_DESCR">
@@ -172,7 +172,7 @@
 				<field name="show_list_all" type="accesslevel" label="F_SHOWLISTALL" default="2">
 					<option value="0">XML_OPT_NOONE</option>
 				</field>
-				<field name="invite_view_more" type="text" size="50" default="Show All..." label="F_READMORELABEL" description="F_READMORELABEL_DESCR" />
+				<field name="invite_view_more" type="text" class="w-100" default="Show All..." label="F_READMORELABEL" description="F_READMORELABEL_DESCR" />
 			</fieldset>
 			<fieldset name="shall" label="FS_SHOWALL">
 				<field name="show_list_all_full" type="radio" class="btn-group" label="F_SHOWALLINFULL" default="1">

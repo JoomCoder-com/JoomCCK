@@ -356,7 +356,7 @@
 
 		<fieldset name="type_subscr6" label="XML_EMERTARTDISPL" description="XML_EMERDISPLAYRESTRDESCR">
 			<field name="type_display_subscription" type="emrplanslist" default="" label="XML_LABEL_SUB_PLANS" multiple="multiple" class="form-select" />
-			<field name="type_display_subscription_msg" type="text" size="50" default="You cannot see this article because article author subscritpion has expired." label="XML_LABEL_SUB_MSG" />
+			<field name="type_display_subscription_msg" type="text" class="w-100" default="You cannot see this article because article author subscritpion has expired." label="XML_LABEL_SUB_MSG" />
 			<field name="type_display_subscription_count" type="mradio" class="btn-group" default="0" label="XML_LABEL_SUB_COUNT">
 				<option value="0">CNO</option>
 				<option value="1">CYES</option>
@@ -364,7 +364,7 @@
 		</fieldset>
 		<fieldset name="type_subscr13" label="XML_EMERRESTRVIEW" description="XML_EMERVIEWRESTRDESCR">
 			<field name="type_view_subscription" type="emrplanslist" default="" label="XML_LABEL_SUB_PLANS" multiple="multiple" class="form-select" />
-			<field name="type_view_subscription_msg" type="text" size="50" default="You cannot see this article because your subscritpion has expired." label="XML_LABEL_SUB_MSG" />
+			<field name="type_view_subscription_msg" type="text" class="w-100" default="You cannot see this article because your subscritpion has expired." label="XML_LABEL_SUB_MSG" />
 			<field name="type_view_subscription_count" type="mradio" class="btn-group" default="0" label="XML_LABEL_SUB_COUNT">
 				<option value="0">CNO</option>
 				<option value="1">CYES</option>
@@ -372,7 +372,7 @@
 		</fieldset>
 		<fieldset name="type_subscr1" label="XML_EMERRESTRSUBMISION">
 			<field name="type_submit_subscription" type="emrplanslist" default="" multiple="multiple" class="form-select" label="XML_LABEL_SUB_PLANS" />
-			<field name="type_submit_subscription_msg" type="text" size="50" default="To submit you need to be subscribed user and have following subscriptions" label="XML_LABEL_SUB_MSG" />
+			<field name="type_submit_subscription_msg" type="text" class="w-100" default="To submit you need to be subscribed user and have following subscriptions" label="XML_LABEL_SUB_MSG" />
 			<field name="type_submit_subscription_count" type="mradio" class="btn-group" default="" label="XML_LABEL_SUB_COUNT">
 				<option value="0">CNO</option>
 				<option value="1">CYES</option>
@@ -380,7 +380,7 @@
 		</fieldset>
 		<fieldset name="type_subscr2" label="XML_EMERRESTREDIT">
 			<field name="type_edit_subscription" type="emrplanslist" default="" multiple="multiple" class="form-select" label="XML_LABEL_SUB_PLANS" />
-			<field name="type_edit_subscription_msg" type="text" size="50" default="To edit you need to be subscribed user and have folowing subscriptions" label="XML_LABEL_SUB_MSG" />
+			<field name="type_edit_subscription_msg" type="text" class="w-100" default="To edit you need to be subscribed user and have folowing subscriptions" label="XML_LABEL_SUB_MSG" />
 			<field name="type_edit_subscription_count" type="mradio" class="btn-group" default="" label="XML_LABEL_SUB_COUNT">
 				<option value="0">CNO</option>
 				<option value="1">CYES</option>
@@ -388,7 +388,7 @@
 		</fieldset>
 		<fieldset name="type_subscr3" label="XML_EMERRESTRADDCOMENT">
 			<field name="type_comment_subscription" type="emrplanslist" default="" multiple="multiple" class="form-select" label="XML_LABEL_SUB_PLANS" />
-			<field name="type_comment_subscription_msg" type="text" size="50" default="To comment you need to be subscribed user and have folowing subscriptions" label="XML_LABEL_SUB_MSG" />
+			<field name="type_comment_subscription_msg" type="text" class="w-100" default="To comment you need to be subscribed user and have folowing subscriptions" label="XML_LABEL_SUB_MSG" />
 			<field name="type_comment_subscription_count" type="mradio" class="btn-group" default="" label="XML_LABEL_SUB_COUNT">
 				<option value="0">CNO</option>
 				<option value="1">CYES</option>
@@ -396,7 +396,7 @@
 		</fieldset>
 		<fieldset name="type_subscr12" label="XML_EMERRESTRMULTICAT" description="XML_EMERRESTRMULTICAT_DESCR">
 			<field name="type_multicat_subscription" type="emrplanslist" default="" multiple="multiple" class="form-select" label="XML_LABEL_SUB_PLANS" />
-			<field name="type_multicat_subscription_msg" type="text" size="50" default="To submit this item to multiple categories you have to be subscribed member." label="XML_LABEL_SUB_MSG" />
+			<field name="type_multicat_subscription_msg" type="text" class="w-100" default="To submit this item to multiple categories you have to be subscribed member." label="XML_LABEL_SUB_MSG" />
 			<field name="type_multicat_subscription_count" type="mradio" class="btn-group" default="" label="XML_LABEL_SUB_COUNT">
 				<option value="0">CNO</option>
 				<option value="1">CYES</option>
@@ -404,7 +404,7 @@
 		</fieldset>
 		<fieldset name="type_subscr4" label="XML_EMERRESTRMAKEFEATURED">
 			<field name="type_feature_subscription" type="emrplanslist" default="" multiple="multiple" class="form-select" label="XML_LABEL_SUB_PLANS" />
-			<field name="type_feature_subscription_msg" type="text" size="50" default="To make record featured you need to be subscribed user and have folowing subscriptions" label="XML_LABEL_SUB_MSG" />
+			<field name="type_feature_subscription_msg" type="text" class="w-100" default="To make record featured you need to be subscribed user and have folowing subscriptions" label="XML_LABEL_SUB_MSG" />
 			<field name="type_feature_subscription_count" type="mradio" class="btn-group" default="" label="XML_LABEL_SUB_COUNT">
 				<option value="0">CNO</option>
 				<option value="1">CYES</option>
@@ -416,7 +416,7 @@
 		</fieldset>
 		<fieldset name="type_subscr5" label="XML_EMERRESTRPROLONG" description="XML_EMERPROLONGDAYDESCR">
 			<field name="type_extend_subscription" type="emrplanslist" default="" multiple="multiple" class="form-select" label="XML_LABEL_SUB_PLANS" />
-			<field name="type_extend_subscription_msg" type="text" size="50" default="To prolong you need to be subscribed user and have folowing subscriptions" label="XML_LABEL_SUB_MSG" />
+			<field name="type_extend_subscription_msg" type="text" class="w-100" default="To prolong you need to be subscribed user and have folowing subscriptions" label="XML_LABEL_SUB_MSG" />
 			<field name="type_extend_subscription_count" type="mradio" class="btn-group" default="0" label="XML_LABEL_SUB_COUNT">
 				<option value="0">CNO</option>
 				<option value="1">CYES</option>
@@ -428,7 +428,7 @@
 				<option value="0">CNO</option>
 				<option value="1">CYES</option>
 			</field>
-			<field name="type_ulimit_count" type="text" size="50" default="10" label="XML_EMEPERDAY_COUNT" />
+			<field name="type_ulimit_count" type="text" class="w-100" default="10" label="XML_EMEPERDAY_COUNT" />
 		</fieldset>
 		<fieldset name="type_subscr15" label="XML_EMERPUBLISH" description="XML_EMEPPUBLISH_DESC">
 			<field name="type_publish_subscription" type="emrplanslist" default="" label="XML_LABEL_SUB_PLANS" multiple="multiple" class="form-select" />
@@ -436,7 +436,7 @@
 				<option value="0">CNO</option>
 				<option value="1">CYES</option>
 			</field>
-			<field name="type_publish_count" type="text" size="50" default="10" label="XML_LABEL_SUB_COUNT" />
+			<field name="type_publish_count" type="text" class="w-100" default="10" label="XML_LABEL_SUB_COUNT" />
 		</fieldset>
 	</fields>
 	<fields name="category_limit">

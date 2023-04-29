@@ -63,7 +63,7 @@
 				<field name="canedit" type="accesslevel" default="3" label="F_WHOEDIT">
 					<option value="0">XML_OPT_NOONE</option>
 				</field>
-				<field name="user_value_label" type="text" size="50" default="Your variant" label="F_USERVALUELABEL" description="" />
+				<field name="user_value_label" type="text" class="w-100" default="Your variant" label="F_USERVALUELABEL" description="" />
 				<field name="max_levels" type="text" size="2" default="3" label="F_MAXLEVELS" description="F_MAXLEVELS_DESCR" />
 			</fieldset>
 

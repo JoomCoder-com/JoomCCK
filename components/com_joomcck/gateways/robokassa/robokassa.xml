@@ -4,9 +4,9 @@
 		<fieldset name="settings" label="Settings">
 			<field name="url2" type="creturnurl" processor="robokassa" label="Success Url" description="Set this url in robokassa account"/>
 			<field name="url" type="cipnurl" processor="robokassa" label="Result Url" description="Set this url in robokassa account"/>
-			<field name="shopid" size="50" type="text" default="" label="Идентификатор магазина"/>
-			<field name="merpas1" size="50" type="password" default="" label="Пароль #1"/>
-			<field name="merpas2" size="50" type="password" default="" label="Пароль #2"/>
+			<field name="shopid" class="w-100" type="text" default="" label="Идентификатор магазина"/>
+			<field name="merpas1" class="w-100" type="password" default="" label="Пароль #1"/>
+			<field name="merpas2" class="w-100" type="password" default="" label="Пароль #2"/>
 			<field name="lang" type="radio" class="btn-group" label="Язык" default="en">
 				<option value="en">EN</option>
 				<option value="ru">RU</option>

@@ -72,7 +72,7 @@
 					<option value="0">JNO</option>
 					<option value="1">JYES</option>
 				</field>
-				<field name="user_value_label" type="text" size="50" default="Your variant" label="F_USERVALUELABEL" description=""/>
+				<field name="user_value_label" type="text" class="w-100" default="Your variant" label="F_USERVALUELABEL" description=""/>
 			</fieldset>
 			<fieldset name="values" label="X_SQLSOURCE" description="X_SQLSOURCE_DESCR">
 				<field name="sql_source" type="mradio" condition='{"1":["params_params_sql","params_params_sql_label","params_params_sql_link","params_params_sql_link_target","params_params_sql_ext_db","params_params_sql_ext_driver","params_params_sql_db_host","params_params_sql_db_port","params_params_sql_db_user","params_params_sql_db_pass","params_params_sql_db_name"]}' class="btn-group" default="0" label="F_SQLQUERYLIST">

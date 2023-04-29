@@ -182,7 +182,7 @@
 					<option value="2">XML_OPT_EMAILFIELD</option>
 					<option value="3">XML_OPT_EMAILCUSTOM</option>
 				</field>
-				<field type="text" name="custom_email" label="F_CUSTOMEMAIL" size="50" default="" />
+				<field type="text" name="custom_email" label="F_CUSTOMEMAIL" class="w-100" default="" />
 				<field type="text" name="email_subject" label="F_EMAILSUBJECT" default="Email Alert - Status Change" />
 				<field type="textarea" name="emailbody1" label="F_EMAILBODY1" cols="30" />
 				<field type="textarea" name="emailbody2" label="F_EMAILBODY2" cols="30" />

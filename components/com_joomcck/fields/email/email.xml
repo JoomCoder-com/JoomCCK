@@ -80,7 +80,7 @@
 					<option value="0">JNO</option>
 					<option value="1">JYES</option>
 				</field>
-				<field name="custom" type="text" size="50" default="" label="F_CUSTOM" />
+				<field name="custom" type="text" class="w-100" default="" label="F_CUSTOM" />
 				<field name="copy_to" type="text" class="btn-group" default="" label="F_SENDCOPYEMAIL" description="F_SENDCOPYEMAILDESCR" />
 				<field name="change_name_from" type="radio" class="btn-group" default="1" label="F_ALLOWCHANGESENDERNAME">
 					<option value="0">JNO</option>
@@ -100,7 +100,7 @@
 					<option value="2">XML_OPT_SELECT</option>
 				</field>
 				<field name="pre_subject_val" type="textarea" cols="35" rows="5" default="" label="F_PREDEFSUBJVALUES" description="F_PREDEFSUBJVALUES_DESCR" />
-				<field name="subject" type="text" size="50" default="" label="F_DEFAULTSUBJ" />
+				<field name="subject" type="text" class="w-100" default="" label="F_DEFAULTSUBJ" />
 				<field name="show_body" type="radio" class="btn-group" default="1" label="F_ALLOWENTERMSG">
 					<option value="0">JNO</option>
 					<option value="1">JYES</option>
@@ -110,9 +110,9 @@
 					<option value="0">JNO</option>
 					<option value="1">JYES</option>
 				</field>
-				<field name="formats" type="text" size="50" default="zip, tar, rar, txt, jpeg, jpg, pdf, gif, doc, xls" label="F_ATTACHFORMATS" />
+				<field name="formats" type="text" class="w-100" default="zip, tar, rar, txt, jpeg, jpg, pdf, gif, doc, xls" label="F_ATTACHFORMATS" />
 				<field name="attach_num" type="text" size="3" default="1" label="F_ATTACHNUM" />
-				<field name="button" type="text" size="50" default="Send" label="F_SUTTONLABEL" />
+				<field name="button" type="text" class="w-100" default="Send" label="F_SUTTONLABEL" />
 				<field name="copy_to_sender" type="radio" class="btn-group" default="1" label="F_ALLOWSENDCOPY">
 					<option value="0">JNO</option>
 					<option value="1">JYES</option>

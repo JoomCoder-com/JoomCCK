@@ -147,7 +147,7 @@
 				<field name="image_border" type="text" default="2" size="3" label="F_BORDER" description="" />
 				<field name="image_border_color" type="text" default="#e0e0e0" size="10" label="F_BORDERCOLOR" description="" />
 				<field name="image_border_radius" type="text" default="5" size="3" label="F_BORDERRADIUS" description="" />
-				<field name="image_shadow" type="text" default="inset 0px 0px 10px 5px rgba(0, 0, 0, 0.3)" size="50" label="F_SHADOW" description="F_SHADOW_DESCR" />
+				<field name="image_shadow" type="text" default="inset 0px 0px 10px 5px rgba(0, 0, 0, 0.3)" class="w-100" label="F_SHADOW" description="F_SHADOW_DESCR" />
 			</fieldset>
 			<fieldset name="thumbs2" label="FS_RECORDFULLVIEWMODECUSTOM" description="FS_RECORDFULLVIEWMODECUSTOM_DESCR">
 				<field name="thumbs_width" type="text" default="100" size="3" label="F_CUSTOMWIDTH" description="" />
