@@ -6,7 +6,12 @@
  * @copyright Copyright (C) 2012 joomcoder (https://www.joomcoder.com). All rights reserved.
  * @license   GNU/GPL http://www.gnu.org/copyleft/gpl.html
  */
+
+use Joomla\CMS\HTML\HTMLHelper;
+
 defined('_JEXEC') or die;
+
+HTMLHelper::_('bootstrap.popover', '.hasPopover');
 
 $value = $this->value;
 $options = $this->params->get('params.open_url', 1) ? ' target="_blank"' : '';
@@ -82,17 +87,23 @@ if($this->params->get('params.links_sort', 0))
 		<img style="cursor: pointer"
 			 onclick="setTimeout(function(){jQuery('#snapimg<?php echo $id . '-' . $i; ?>').attr('src', 'http://mini.s-shot.ru/1280/<?php echo $this->params->get('params.snapshot_width', 200) ?>/jpeg?<?php echo $val['url']; ?>')}, 1000)"
 			 src="<?php echo JURI::root(TRUE) ?>/media/com_joomcck/icons/16/document-text-image.png"
-			 rel="popover" data-original-title="<?php echo JText::_('Snapshot'); ?>" data-content="<?php echo $img; ?>">
+			 class="hasPopover" data-bs-original-title="<?php echo JText::_('Snapshot'); ?>" data-bs-content="<?php echo $img; ?>">
 
 	<?php endif; ?>
 
-	<?php if($this->params->get('params.qr_code', 0)): ?>
-		<?php $img = htmlentities(JHtml::image('http://chart.apis.google.com/chart?chs=' . $this->params->get('params.qr_width', 80) . 'x' . $this->params->get('params.qr_width', 80) . '&cht=qr&chld=L|0&chl=' . urlencode($url), JText::_('URL QR'),
-			array(
-			'class' => 'qr-image',
-			'width' => $this->params->get('params.qr_width', 60) . 'px', 'height' => $this->params->get('params.qr_width', 60) . 'px', 'align' => 'top'
-		)), ENT_QUOTES);?>
-		<img style="cursor: pointer" src="<?php echo JURI::root(TRUE) ?>/media/com_joomcck/icons/16/barcode-2d.png" rel="popover" data-original-title="<?php echo JText::_('URL QR'); ?>" data-content="<?php echo $img; ?>">
+	<?php
+
+        if($this->params->get('params.qr_code', 0)):
+		$qrImagePath = 'https://chart.apis.google.com/chart?chs=' . $this->params->get('params.qr_width', 80) . 'x' . $this->params->get('params.qr_width', 80) . '&cht=qr&chld=L|0&chl=' . urlencode($url);
+
+        ?>
+
+		<img
+            style="cursor: pointer"
+            class="hasPopover"
+            src="<?php echo JURI::root(TRUE) ?>/media/com_joomcck/icons/16/barcode-2d.png"
+            data-bs-original-title="<?php echo JText::_('URL QR'); ?>"
+            data-bs-content='<img src="<?php echo $qrImagePath ?>" title="<?php echo JText::_('URL QR') ?>" height="<?php echo $this->params->get('params.qr_width', 60) . 'px' ?>" width="<?php echo $this->params->get('params.qr_width', 60) . 'px' ?>" />'>
 	<?php endif; ?>
 
 
