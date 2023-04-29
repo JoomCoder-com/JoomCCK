@@ -117,18 +117,20 @@ $key = $record->id.$this->id;
 		<?php endif;?>
 
 		<?php if ($params->get('params.show_body', 1)):
-			JFactory::getDocument()->addScript(JURI::root(TRUE) . '/media/com_joomcck/js/AutoGrow.js');
-			$style = 'max-height:' . $params->get('params.grow_max_height', 200) . 'px;';
-			$style .= ' height:' . $params->get('params.grow_min_height', 50) . 'px;';
-			$style .= ' width: 95%;';
+
+			JFactory::getDocument()->addScript(JURI::root(TRUE) . '/components/com_joomcck/fields/textarea/assets/grow.js');
+			$style = 'box-sizing: border-box;';
+			$style .= 'max-height:' . $params->get('params.grow_max_height', 350) . 'px;';
+			$style .= 'height:' . $params->get('params.grow_min_height', 50) . 'px;';
 		?>
 		<tr>
 			<td width="1%" nowrap="nowrap"><?php echo JText::_('E_MSG');?></td>
 			<td>
 				<textarea id="email_body<?php echo $this->id;?>" style="<?php echo $style ?>" name="email[<?php echo $this->id;?>][body]" class="form-control"><?php echo $data->get('body', $params->get('params.body'));?></textarea>
-				<script type="text/javascript">
-					new AutoGrow("email_body<?php echo $this->id;?>", {margin:20, minHeight: 70});
-				</script>
+
+                    <script type="text/javascript">
+                        jQuery("#field_<?php echo $this->id;?>").expanding();
+                    </script>
 			</td>
 		</tr>
 		<?php endif; ?>

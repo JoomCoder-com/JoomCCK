@@ -20,22 +20,24 @@ $js         = '';
 	$symbols_left = $max_length - \Joomla\String\StringHelper::strlen($this->value);
 	$symbols_left = $symbols_left < 0 ? 0 : $symbols_left;
 	?>
-	<div class="alert alert-warning" id="alert-limit-<?php echo $this->id ?>">
+	<p class="text-success mb-2" id="alert-limit-<?php echo $this->id ?>">
 		<?php echo JText::sprintf($params->get('params.symbols_left_msg', 'TA_SYMBOLSLEFTMSG'), '<b><span id="lim_' . $this->id . '">' . $symbols_left . '</span></b>', $max_length); ?>
-	</div>
+	</p>
 	<script type="text/javascript">
 		function plg_textarea_truncate<?php echo $this->id;?>(elem) {
+
+
 			var maxSize = <?php echo $max_length?>;
 			if(elem.value.length > maxSize) {
 				elem.value = elem.value.substr(0, maxSize);
-				jQuery('#alert-limit-<?php echo $this->id ?>').removeClass('alert-warning').addClass('alert-error');
+				jQuery('#alert-limit-<?php echo $this->id ?>').removeClass('text-success').addClass('text-danger');
 			}
 			else {
-				jQuery('#alert-limit-<?php echo $this->id ?>').removeClass('alert-error').addClass('alert-warning');
+				jQuery('#alert-limit-<?php echo $this->id ?>').removeClass('text-danger').addClass('text-success');
 			}
 			var symbolsLeft = maxSize - elem.value.length;
 			symbolsLeft = symbolsLeft < 0 ? 0 : symbolsLeft;
-			$('lim_<?php echo $this->id; ?>').set('html', symbolsLeft);
+			jQuery('#lim_<?php echo $this->id; ?>').html(symbolsLeft)
 		}
 	</script>
 	<?php
