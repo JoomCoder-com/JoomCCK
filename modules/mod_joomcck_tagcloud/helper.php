@@ -3,19 +3,19 @@
 class modJoomcckTagcloudHelper
 {
 
-	public function getSection($id)
+	public static function getSection($id)
 	{
 		$model = JModelLegacy::getInstance('Section', 'JoomcckModel');
 		return $model->getItem($id);
 	}
 
-	public function getCategory($id)
+	public static function getCategory($id)
 	{
 		$model = JModelLegacy::getInstance('Category', 'JoomcckModel');
 		return $model->getItem($id);
 	}
 
-	function getTags($section, $params, $cat_id)
+	public static function getTags($section, $params, $cat_id)
 	{
 		$db = JFactory::getDBO();
 		

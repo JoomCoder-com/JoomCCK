@@ -11,9 +11,9 @@ defined('_JEXEC') or die();
 
 ?>
 
-<input type="password" name="jform[fields][<?php echo $this->id; ?>]" value="<?php echo $this->encrypt; ?>" autocomplete="off"/>
+<input class="form-control" type="password" name="jform[fields][<?php echo $this->id; ?>]" value="<?php echo $this->encrypt; ?>" autocomplete="off"/>
 
 <!-- Hack for Chrome autocomplete. -->
 <div style="display: none;">
-	<input type="text" id="PreventChromeAutocomplete" name="PreventChromeAutocomplete" autocomplete="address-level4"/>
+	<input type="text"  id="PreventChromeAutocomplete" name="PreventChromeAutocomplete" autocomplete="address-level4"/>
 </div>
