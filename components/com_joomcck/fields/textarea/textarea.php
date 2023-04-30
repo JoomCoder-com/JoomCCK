@@ -84,14 +84,14 @@ class JFormFieldCTextarea extends CFormField
 
 	public function onRenderList($record, $type, $section)
 	{
-		$value = $this->value;
+		$value = (string) $this->value;
 		if($this->params->get('params.intro', 0) > 0)
 		{
 			$value = HTMLFormatHelper::substrHTML($this->value, $this->params->get('params.intro'));
 		}
 		$out = $this->_filter($value, $section);
 
-		if(trim($this->params->get('params.seemore')) && strlen($this->value) > strlen($value))
+		if(trim($this->params->get('params.seemore','')) && strlen((string)$this->value) > strlen($value))
 		{
 			$out .= $this->params->get('params.seemore');
 		}
@@ -103,10 +103,9 @@ class JFormFieldCTextarea extends CFormField
 
 	private function _filter($value, $section)
 	{
-		if(is_array($value))
-		{
-			$value = implode(' ', $value);
-		}
+
+		$value = is_array($value) ? trim(implode(' ', $value)) : trim( (string)$value );
+
 		$value = trim($value);
 		if($this->params->get('params.allow_html', 0) == 0)
 		{

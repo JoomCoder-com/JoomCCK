@@ -286,7 +286,7 @@ class JFormFieldCMultilevelselect extends CFormField
 
 	private function _getValues($client, $record, $type, $section)
 	{
-		$labels = explode("\n", $this->params->get('params.labels'));
+		$labels = explode("\n", $this->params->get('params.labels',''));
 		ArrayHelper::clean_r($labels);
 
 		$this->labels = $labels;
