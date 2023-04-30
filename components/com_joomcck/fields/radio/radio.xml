@@ -56,13 +56,6 @@
 					<option value="^">^</option>
 					<option value="|">|</option>
 				</field>
-				<field name="columns" type="list" default="2" label="F_COLUMNS">
-					<option value="1">1</option>
-					<option value="2">2</option>
-					<option value="3">3</option>
-					<option value="4">4</option>
-					<option value="6">6</option>
-				</field>
 			</fieldset>
 			<fieldset name="users" label="FS_USERSVALUE">
 				<field name="add_value" type="maccesslevel" condition='{"not0":["params_params_user_value_label","params_params_save_new"]}' default="0" label="F_WHOCANADD" description="F_WHOCANADD_DESCR">

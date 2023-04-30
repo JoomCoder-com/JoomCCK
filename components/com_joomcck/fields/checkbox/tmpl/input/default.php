@@ -21,7 +21,13 @@ $span = array(1 => 12, 2 => 6, 3 => 4, 4 => 3, 6 => 2);
 <?php endif; ?>
 
 <div id="elements-list-<?php echo $this->id; ?>">
-<?php if ($this->values): ?>
+    <?php if ($this->values): ?>
+
+
+	<?php if ($layout == 'columns'): ?>
+        <div class="row">
+	<?php endif; ?>
+
 	<?php foreach ($this->values as $key => $line): ?>
 		<?php
 		if (is_string($line))
@@ -53,9 +59,7 @@ $span = array(1 => 12, 2 => 6, 3 => 4, 4 => 3, 6 => 2);
 			$text  = $val[0];
 		}
 		?>
-		<?php if ($k % $cols == 0 && $layout == 'columns'): ?>
-            <div class="row">
-		<?php endif; ?>
+
 
         <?php if($layout == 'columns'): ?>
             <div class="col-md-<?php echo $span[$cols] ?>">
@@ -97,18 +101,15 @@ $span = array(1 => 12, 2 => 6, 3 => 4, 4 => 3, 6 => 2);
         </div>
         <?php endif; ?>
 
-		<?php if ($k % $cols == ($cols - 1)  && $layout == 'columns'): ?>
-            </div>
-		<?php endif;
-		$k++; ?>
+		<?php $k++; ?>
 	<?php endforeach; ?>
 
-
-	<?php if ($k % $cols != 0): ?>
+	<?php if($layout == 'columns'): ?>
         </div>
 	<?php endif; ?>
-<?php endif; ?>
-    </div>
+
+    <?php endif; ?>
+</div>
 
 <?php if (in_array($this->params->get('params.add_value', 2), $this->user->getAuthorisedViewLevels()) && !$this->params->get('params.sql_source')): ?>
     <div class="clearfix"></div>

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<fieldparams>
+    <form>
+        <fields name="tmpl_default">
+            <fieldset name="general" label="FS_GENERAL">
+				<field name="type" type="list" default="standard" label="Type">
+					<option value="standard">Standard</option>
+				</field>
+				<field name="layout" type="list" default="stacked" label="Layout">
+					<option value="stacked">Stacked</option>
+					<option value="inline">Inline</option>
+					<option value="columns">Columns</option>
+				</field>
+				<field name="columns" showon="layout:columns" type="list" default="2" label="F_COLUMNS">
+					<option value="1">1</option>
+					<option value="2">2</option>
+					<option value="3">3</option>
+					<option value="4">4</option>
+					<option value="6">6</option>
+				</field>
+			</fieldset>
+        </fields>
+    </form>
+</fieldparams>
