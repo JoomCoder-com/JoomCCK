@@ -59,7 +59,7 @@ $size = ' size="' . (count($options) > $params->get('params.list_limit', 5) ? $p
 <?php endif; ?>
 
 <select onchange="Joomcck.countFieldValues(this, <?php echo $this->id;?>, <?php echo $params->get('params.total_limit');?>, 'select')" multiple="multiple"
-name="jform[fields][<?php echo $this->id;?>][]" class="elements-list joomcck-chosen-<?php echo $this->id; ?>" id="form_field_list_<?php echo $this->id;?>" <?php echo $required . $style . $size;?>>
+name="jform[fields][<?php echo $this->id;?>][]" class="w-100 form-control elements-list joomcck-chosen-<?php echo $this->id; ?>" id="form_field_list_<?php echo $this->id;?>" <?php echo $required . $style . $size;?>>
 	<?php echo implode("\n", $options);?>
 </select>
 
