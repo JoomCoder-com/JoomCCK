@@ -3,6 +3,11 @@
     <form>
         <fields name="tmpl_default">
             <fieldset name="general" label="FS_GENERAL">
+				<field name="type" type="list" default="standard" label="Type">
+					<option value="standard">Standard</option>
+					<option value="switches">Switches</option>
+					<option value="buttons">Toggle Buttons</option>
+				</field>
 				<field name="columns" type="list" default="2" label="F_COLUMNS">
 					<option value="1">1</option>
 					<option value="2">2</option>
