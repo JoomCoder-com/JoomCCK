@@ -28,6 +28,8 @@ $layout = $this->params->get('tmpl_default.layout', 'stacked');
 
 		<?php foreach ($this->values as $key => $line): ?>
 			<?php
+
+
 			if (is_string($line))
 				$val = explode($this->params->get('params.color_separator', "^"), $line);
 			$sel = '';
@@ -37,7 +39,7 @@ $layout = $this->params->get('tmpl_default.layout', 'stacked');
 				$s .= $val[1];
 			}
 			$text = is_string($line) ? $line : $line->text;
-			if ($this->value && in_array($text, $this->value))
+			if ($this->value && in_array($text, (array) $this->value))
 			{
 				$sel = ' checked="checked"';
 			}

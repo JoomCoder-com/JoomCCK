@@ -39,7 +39,7 @@ $span = array(1 => 12, 2 => 6, 3 => 4, 4 => 3, 6 => 2);
 			$s .= $val[1];
 		}
 		$text = is_string($line) ? $line : $line->text;
-		if ($this->value && in_array($text, $this->value))
+		if ($this->value && in_array($text, (array) $this->value))
 		{
 			$sel = ' checked="checked"';
 		}
