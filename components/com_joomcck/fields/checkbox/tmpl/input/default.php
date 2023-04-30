@@ -8,8 +8,11 @@
  */
 defined('_JEXEC') or die();
 $k    = 0;
+
+// template params
 $cols = $this->params->get('tmpl_default.columns', 2);
 $type = $this->params->get('tmpl_default.type', 'standard');
+$layout = $this->params->get('tmpl_default.layout', 'stacked');
 $span = array(1 => 12, 2 => 6, 3 => 4, 4 => 3, 6 => 2);
 ?>
 <?php if ($this->params->get('params.total_limit')): ?>
@@ -50,15 +53,17 @@ $span = array(1 => 12, 2 => 6, 3 => 4, 4 => 3, 6 => 2);
 			$text  = $val[0];
 		}
 		?>
-		<?php if ($k % $cols == 0): ?>
+		<?php if ($k % $cols == 0 && $layout == 'columns'): ?>
             <div class="row">
 		<?php endif; ?>
 
-        <div class="col-md-<?php echo $span[$cols] ?>">
+        <?php if($layout == 'columns'): ?>
+            <div class="col-md-<?php echo $span[$cols] ?>">
+        <?php endif; ?>
 
 
-			<?php if ($type == 'buttons'): ?>
-                <div class="<?php echo $s; ?>">
+			<?php if (in_array($type,['buttons','buttonsoutlined'])): ?>
+                <div class="<?php echo $s; ?> <?php echo $layout == 'inline' ? 'form-check-inline' : 'mb-2' ?>">
                     <input
                             onClick="Joomcck.countFieldValues(jQuery(this), <?php echo $this->id; ?>, <?php echo $this->params->get('params.total_limit', 0); ?>, 'checkbox')"
                             class="btn-check"
@@ -68,12 +73,12 @@ $span = array(1 => 12, 2 => 6, 3 => 4, 4 => 3, 6 => 2);
                             name="jform[fields][<?php echo $this->id; ?>][]"
 		                <?php echo $sel; ?>
                     >
-                    <label class="btn btn-outline-primary" for="field_<?php echo $this->id; ?>_<?php echo $key; ?>">
+                    <label class="btn <?php echo $type == 'buttons' ? 'btn-primary' : 'btn-outline-primary' ?>" for="field_<?php echo $this->id; ?>_<?php echo $key; ?>">
 		                <?php echo JText::_($text); ?>
                     </label>
                 </div>
 			<?php else: ?>
-                <div class="form-check <?php echo $s; ?> <?php echo $type == 'switches' ? 'form-switch' : '' ?>">
+                <div class="form-check <?php echo $layout == 'inline' ? 'form-check-inline' : '' ?> <?php echo $s; ?> <?php echo $type == 'switches' ? 'form-switch' : '' ?>">
                     <input
                             onClick="Joomcck.countFieldValues(jQuery(this), <?php echo $this->id; ?>, <?php echo $this->params->get('params.total_limit', 0); ?>, 'checkbox')"
                             class="form-check-input"
@@ -88,9 +93,11 @@ $span = array(1 => 12, 2 => 6, 3 => 4, 4 => 3, 6 => 2);
                 </div>
 			<?php endif; ?>
 
+		<?php if($layout == 'columns'): ?>
         </div>
+        <?php endif; ?>
 
-		<?php if ($k % $cols == ($cols - 1)): ?>
+		<?php if ($k % $cols == ($cols - 1)  && $layout == 'columns'): ?>
             </div>
 		<?php endif;
 		$k++; ?>

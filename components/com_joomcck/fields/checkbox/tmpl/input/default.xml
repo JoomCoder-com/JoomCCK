@@ -7,8 +7,14 @@
 					<option value="standard">Standard</option>
 					<option value="switches">Switches</option>
 					<option value="buttons">Toggle Buttons</option>
+					<option value="buttonsoutlined">Outlined Toggle Buttons</option>
 				</field>
-				<field name="columns" type="list" default="2" label="F_COLUMNS">
+				<field name="layout" type="list" default="stacked" label="Layout">
+					<option value="stacked">Stacked</option>
+					<option value="inline">Inline</option>
+					<option value="columns">Columns</option>
+				</field>
+				<field name="columns" showon="layout:columns" type="list" default="2" label="F_COLUMNS">
 					<option value="1">1</option>
 					<option value="2">2</option>
 					<option value="3">3</option>
