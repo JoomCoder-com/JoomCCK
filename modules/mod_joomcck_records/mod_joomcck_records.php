@@ -160,7 +160,7 @@ if($params->get('view_what', 'all') == 'last_created')
 	$params->set('view_what', 'all');
 }
 
-if(in_array(array('show_children', 'show_parents'),$params->get('view_what', 'all')))
+if(in_array(array('show_children', 'show_parents'),array($params->get('view_what', 'all'))))
 {
 	if (!$app->input->getInt('id'))
 	{
