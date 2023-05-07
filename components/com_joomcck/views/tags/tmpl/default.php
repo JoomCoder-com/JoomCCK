@@ -30,10 +30,10 @@ $listDirn	= $this->state->get('list.direction');
 			linkView = container.innerHTML;
 			var tag = link.innerHTML;
 
-			container.innerHTML = '<div class="input-append float-start">' +
-				'<input type="text" style="margin-left: 5px;" name="tag" value="' + tag + '" />' +
-				'<button rel="tooltip" class="btn" type="button" onclick="submitbutton(\'tags.save\');"><i class="icon-save"></i></button> ' +
-				'<button rel="tooltip" class="btn" type="button" onclick="cancelForm();"><i class="icon-cancel"></i></button>' +
+			container.innerHTML = '<div class="input-group">' +
+				'<input type="text" class="form-control form-control-sm" style="margin-left: 5px;" name="tag" value="' + tag + '" />' +
+				'<button rel="tooltip" class="btn btn-outline-success btn-sm" type="button" onclick="Joomla.submitbutton(\'tags.save\');"><i class="icon-save"></i></button> ' +
+				'<button rel="tooltip" class="btn btn-outline-danger btn-sm" type="button" onclick="cancelForm();"><i class="icon-cancel"></i></button>' +
 				'<input type="hidden" name="id" value="' + id + '" />' +
 				'</div>';
 		} else {
