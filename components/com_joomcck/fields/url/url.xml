@@ -6,9 +6,9 @@
 	<config>
 		<fields name="params">
 			<fieldset name="tmpl">
-				<field class="form-select" type="cobtmpllist" name="template_input" onchange="ajax_load_sub_params(this, '/components/com_joomcck/fields/url/tmpl/input');" filter="php$" hide_none="1" hide_default="1" directory="components/com_joomcck/fields/url/tmpl/input" label="F_TMPLINPUT" default="default.php" />
-				<field class="form-select" type="cobtmpllist" name="template_output_list" onchange="ajax_load_sub_params(this, '/components/com_joomcck/fields/url/tmpl/output');" filter="php$" hide_none="1" hide_default="1" directory="components/com_joomcck/fields/url/tmpl/output" label="F_TMPLLIST" default="default.php" />
-				<field class="form-select" type="cobtmpllist" name="template_output_full" onchange="ajax_load_sub_params(this, '/components/com_joomcck/fields/url/tmpl/output');" filter="php$" hide_none="1" hide_default="1" directory="components/com_joomcck/fields/url/tmpl/output" label="F_TMPLFULL" default="default.php" />
+				<field class="form-select" type="cobtmpllist" name="template_input" onchange="ajax_load_sub_params(this, 'components/com_joomcck/fields/url/tmpl/input');" filter="php$" hide_none="1" hide_default="1" directory="components/com_joomcck/fields/url/tmpl/input" label="F_TMPLINPUT" default="default.php" />
+				<field class="form-select" type="cobtmpllist" name="template_output_list" onchange="ajax_load_sub_params(this, 'components/com_joomcck/fields/url/tmpl/output');" filter="php$" hide_none="1" hide_default="1" directory="components/com_joomcck/fields/url/tmpl/output" label="F_TMPLLIST" default="default.php" />
+				<field class="form-select" type="cobtmpllist" name="template_output_full" onchange="ajax_load_sub_params(this, 'components/com_joomcck/fields/url/tmpl/output');" filter="php$" hide_none="1" hide_default="1" directory="components/com_joomcck/fields/url/tmpl/output" label="F_TMPLFULL" default="default.php" />
 			</fieldset>
 			<fieldset name="core">
 				<field name="sortable" type="radio" class="btn-group" default="0" label="F_SORTABLE" description="">
@@ -21,8 +21,8 @@
 					<option value="0">JNO</option>
 					<option value="1">JYES</option>
 				</field>
-				<field class="form-select" type="cobtmpllist" name="template_filter" onchange="ajax_load_sub_params(this, '/components/com_joomcck/fields/url/tmpl/filter');" filter="php$" hide_none="1" hide_default="1" directory="components/com_joomcck/fields/url/tmpl/filter" label="F_TMPLFILTER" default="autocomplete.php" />
-				<field class="form-select" type="cobtmpllist" name="template_filter_module" onchange="ajax_load_sub_params(this, '/components/com_joomcck/fields/url/tmpl/filter');" filter="php$" hide_none="1" hide_default="1" directory="components/com_joomcck/fields/url/tmpl/filter" label="F_TMPLFILTERMODULE" default="autocomplete.php" />
+				<field class="form-select" type="cobtmpllist" name="template_filter" onchange="ajax_load_sub_params(this, 'components/com_joomcck/fields/url/tmpl/filter');" filter="php$" hide_none="1" hide_default="1" directory="components/com_joomcck/fields/url/tmpl/filter" label="F_TMPLFILTER" default="autocomplete.php" />
+				<field class="form-select" type="cobtmpllist" name="template_filter_module" onchange="ajax_load_sub_params(this, 'components/com_joomcck/fields/url/tmpl/filter');" filter="php$" hide_none="1" hide_default="1" directory="components/com_joomcck/fields/url/tmpl/filter" label="F_TMPLFILTERMODULE" default="autocomplete.php" />
 				<field name="filter_hide" type="mradio" class="btn-group" default="0" label="F_HIDE" description="F_HIDE_DESCR">
 					<option value="0">JNO</option>
 					<option value="1">JYES</option>

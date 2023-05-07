@@ -5,7 +5,7 @@
 
 	<config><fields name="params">
 			<fieldset name="tmpl">
-				<field class="form-select" type="cobtmpllist" name="template_output_full" onchange="ajax_load_sub_params(this, '/components/com_joomcck/fields/records/tmpl/output');" filter="php$" hide_none="1" hide_default="1" directory="/components/com_joomcck/fields/records/tmpl/output" label="F_TMPLFULL" default="default.php" />
+				<field class="form-select" type="cobtmpllist" name="template_output_full" onchange="ajax_load_sub_params(this, 'components/com_joomcck/fields/records/tmpl/output');" filter="php$" hide_none="1" hide_default="1" directory="components/com_joomcck/fields/records/tmpl/output" label="F_TMPLFULL" default="default.php" />
 			</fieldset>
 		<fieldset name="general2" label="FS_WHATTOSHOW">
 			<field name="list_type" type="list" default="" label="F_WHATTOSHOW" description="">

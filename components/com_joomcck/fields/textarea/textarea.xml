@@ -5,9 +5,9 @@
 
 	<config><fields name="params">
 		<fieldset name="tmpl">
-			<field class="form-select" type="cobtmpllist" name="template_input" onchange="ajax_load_sub_params(this, '/components/com_joomcck/fields/textarea/tmpl/input');" filter="php$" hide_none="1" hide_default="1" directory="/components/com_joomcck/fields/textarea/tmpl/input" label="F_TMPLINPUT" default="default.php" />
-			<field class="form-select" type="cobtmpllist" name="template_output_list" onchange="ajax_load_sub_params(this, '/components/com_joomcck/fields/textarea/tmpl/output');" filter="php$" hide_none="1" hide_default="1" directory="/components/com_joomcck/fields/textarea/tmpl/output" label="F_TMPLLIST" default="default.php" />
-			<field class="form-select" type="cobtmpllist" name="template_output_full" onchange="ajax_load_sub_params(this, '/components/com_joomcck/fields/textarea/tmpl/output');" filter="php$" hide_none="1" hide_default="1" directory="/components/com_joomcck/fields/textarea/tmpl/output" label="F_TMPLFULL" default="default.php" />
+			<field class="form-select" type="cobtmpllist" name="template_input" onchange="ajax_load_sub_params(this, 'components/com_joomcck/fields/textarea/tmpl/input');" filter="php$" hide_none="1" hide_default="1" directory="components/com_joomcck/fields/textarea/tmpl/input" label="F_TMPLINPUT" default="default.php" />
+			<field class="form-select" type="cobtmpllist" name="template_output_list" onchange="ajax_load_sub_params(this, 'components/com_joomcck/fields/textarea/tmpl/output');" filter="php$" hide_none="1" hide_default="1" directory="components/com_joomcck/fields/textarea/tmpl/output" label="F_TMPLLIST" default="default.php" />
+			<field class="form-select" type="cobtmpllist" name="template_output_full" onchange="ajax_load_sub_params(this, 'components/com_joomcck/fields/textarea/tmpl/output');" filter="php$" hide_none="1" hide_default="1" directory="components/com_joomcck/fields/textarea/tmpl/output" label="F_TMPLFULL" default="default.php" />
 		</fieldset>
 		<fieldset name="core">
 			<field name="sortable" type="radio" class="btn-group" default="0" label="F_SORTABLE" description="">

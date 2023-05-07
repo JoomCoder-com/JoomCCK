@@ -6,9 +6,9 @@
 	<config>
 		<fields name="params">
 			<fieldset name="tmpl">
-				<field class="form-select" type="cobtmpllist" name="template_input" onchange="ajax_load_sub_params(this, '/components/com_joomcck/fields/uploads/tmpl/input');" filter="php$" hide_none="1" hide_default="1" directory="/components/com_joomcck/fields/uploads/tmpl/input" label="F_TMPLINPUT" default="default.php" />
-				<field class="form-select" type="cobtmpllist" name="template_output_list" onchange="ajax_load_sub_params(this, '/components/com_joomcck/fields/uploads/tmpl/output');" filter="php$" hide_none="1" hide_default="1" directory="/components/com_joomcck/fields/uploads/tmpl/output" label="F_TMPLLIST" default="default.php" />
-				<field class="form-select" type="cobtmpllist" name="template_output_full" onchange="ajax_load_sub_params(this, '/components/com_joomcck/fields/uploads/tmpl/output');" filter="php$" hide_none="1" hide_default="1" directory="/components/com_joomcck/fields/uploads/tmpl/output" label="F_TMPLFULL" default="default.php" />
+				<field class="form-select" type="cobtmpllist" name="template_input" onchange="ajax_load_sub_params(this, 'components/com_joomcck/fields/uploads/tmpl/input');" filter="php$" hide_none="1" hide_default="1" directory="components/com_joomcck/fields/uploads/tmpl/input" label="F_TMPLINPUT" default="default.php" />
+				<field class="form-select" type="cobtmpllist" name="template_output_list" onchange="ajax_load_sub_params(this, 'components/com_joomcck/fields/uploads/tmpl/output');" filter="php$" hide_none="1" hide_default="1" directory="components/com_joomcck/fields/uploads/tmpl/output" label="F_TMPLLIST" default="default.php" />
+				<field class="form-select" type="cobtmpllist" name="template_output_full" onchange="ajax_load_sub_params(this, 'components/com_joomcck/fields/uploads/tmpl/output');" filter="php$" hide_none="1" hide_default="1" directory="components/com_joomcck/fields/uploads/tmpl/output" label="F_TMPLFULL" default="default.php" />
 			</fieldset>
 			<fieldset name="general" label="FS_UPLOAD">
 				<field name="file_formats" size="40" type="text" default="zip, jpg, png, jpeg, gif, txt, md, bmp" label="F_ALLOWEDFORMATS" />

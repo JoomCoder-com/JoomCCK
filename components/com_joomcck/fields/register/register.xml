@@ -5,7 +5,7 @@
 	<config>
 		<fields name="params">
 			<fieldset name="tmpl">
-				<field class="form-select" type="cobtmpllist" name="template_input" onchange="ajax_load_sub_params(this, '/components/com_joomcck/fields/register/tmpl/input');" filter="php$" hide_none="1" hide_default="1" directory="/components/com_joomcck/fields/register/tmpl/input" label="F_TMPLINPUT" default="default.php" />
+				<field class="form-select" type="cobtmpllist" name="template_input" onchange="ajax_load_sub_params(this, 'components/com_joomcck/fields/register/tmpl/input');" filter="php$" hide_none="1" hide_default="1" directory="components/com_joomcck/fields/register/tmpl/input" label="F_TMPLINPUT" default="default.php" />
 			</fieldset>
 			<fieldset name="GEN" label="FS_GENERAL">
 				<field name="field_id_email" key="id" type="meresourcesfields" size="1" multiple="false" default="" label="CR_EMAILFIELD" filters="'email','text'" description="CR_EMAILFIELDDESCR" />

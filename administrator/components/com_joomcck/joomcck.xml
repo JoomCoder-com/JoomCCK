@@ -2,11 +2,11 @@
 <extension type="component" version="3.0" method="upgrade">
 	<name>com_joomcck</name>
 	<author>JoomBoost</author>
-	<creationDate>21/09/2022</creationDate>
-	<copyright><![CDATA[ (c) 2013-2022 JoomBoost]]></copyright>
+	<creationDate>21/09/2023</creationDate>
+	<copyright><![CDATA[ (c) 2013-2023 JoomCoder]]></copyright>
 	<license>GNU/GPL http://www.gnu.org/copyleft/gpl.html</license>
-	<authorEmail>support@joomBoost.com</authorEmail>
-	<authorUrl>https://www.joomBoost.com</authorUrl>
+	<authorEmail>support@joomcoder.com</authorEmail>
+	<authorUrl>https://www.joomcoder.com</authorUrl>
 	<version>##VERSION##</version>
 	<scriptfile>install.php</scriptfile>
 	<install>
@@ -101,6 +101,7 @@
 			<filename>index.html</filename>
 			<filename>config.xml</filename>
 			<folder>images</folder>
+			<folder>sql</folder>
 			<folder>library</folder>
 			<folder>views</folder>
 		</files>

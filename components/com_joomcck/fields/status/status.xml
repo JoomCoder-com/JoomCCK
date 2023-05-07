@@ -6,9 +6,9 @@
 	<config>
 		<fields name="params">
 			<fieldset name="tmpl">
-				<field class="form-select" type="cobtmpllist" name="template_input" onchange="ajax_load_sub_params(this, '/components/com_joomcck/fields/status/tmpl/input');" filter="php$" hide_none="1" hide_default="1" directory="components/com_joomcck/fields/status/tmpl/input" label="F_TMPLINPUT" default="default.php" />
-				<field class="form-select" type="cobtmpllist" name="template_output_list" onchange="ajax_load_sub_params(this, '/components/com_joomcck/fields/status/tmpl/output');" filter="php$" hide_none="1" hide_default="1" directory="components/com_joomcck/fields/status/tmpl/output" label="F_TMPLLIST" default="default.php" />
-				<field class="form-select" type="cobtmpllist" name="template_output_full" onchange="ajax_load_sub_params(this, '/components/com_joomcck/fields/status/tmpl/output');" filter="php$" hide_none="1" hide_default="1" directory="components/com_joomcck/fields/status/tmpl/output" label="F_TMPLFULL" default="default.php" />
+				<field class="form-select" type="cobtmpllist" name="template_input" onchange="ajax_load_sub_params(this, 'components/com_joomcck/fields/status/tmpl/input');" filter="php$" hide_none="1" hide_default="1" directory="components/com_joomcck/fields/status/tmpl/input" label="F_TMPLINPUT" default="default.php" />
+				<field class="form-select" type="cobtmpllist" name="template_output_list" onchange="ajax_load_sub_params(this, 'components/com_joomcck/fields/status/tmpl/output');" filter="php$" hide_none="1" hide_default="1" directory="components/com_joomcck/fields/status/tmpl/output" label="F_TMPLLIST" default="default.php" />
+				<field class="form-select" type="cobtmpllist" name="template_output_full" onchange="ajax_load_sub_params(this, 'components/com_joomcck/fields/status/tmpl/output');" filter="php$" hide_none="1" hide_default="1" directory="components/com_joomcck/fields/status/tmpl/output" label="F_TMPLFULL" default="default.php" />
 			</fieldset>
 			<fieldset name="core">
 				<field name="sortable" type="radio" class="btn-group" default="0" label="F_SORTABLE" description="">
@@ -21,8 +21,8 @@
 					<option value="0">JNO</option>
 					<option value="1">JYES</option>
 				</field>
-				<field class="form-select" type="cobtmpllist" name="template_filter" onchange="ajax_load_sub_params(this, '/components/com_joomcck/fields/status/tmpl/filter');" filter="php$" hide_none="1" hide_default="1" directory="components/com_joomcck/fields/status/tmpl/filter" label="F_TMPLFILTER" default="autocomplete.php" />
-				<field class="form-select" type="cobtmpllist" name="template_filter_module" onchange="ajax_load_sub_params(this, '/components/com_joomcck/fields/status/tmpl/filter');" filter="php$" hide_none="1" hide_default="1" directory="components/com_joomcck/fields/status/tmpl/filter" label="F_TMPLFILTERMODULE" default="autocomplete.php" />
+				<field class="form-select" type="cobtmpllist" name="template_filter" onchange="ajax_load_sub_params(this, 'components/com_joomcck/fields/status/tmpl/filter');" filter="php$" hide_none="1" hide_default="1" directory="components/com_joomcck/fields/status/tmpl/filter" label="F_TMPLFILTER" default="autocomplete.php" />
+				<field class="form-select" type="cobtmpllist" name="template_filter_module" onchange="ajax_load_sub_params(this, 'components/com_joomcck/fields/status/tmpl/filter');" filter="php$" hide_none="1" hide_default="1" directory="components/com_joomcck/fields/status/tmpl/filter" label="F_TMPLFILTERMODULE" default="autocomplete.php" />
 				<field name="filter_hide" type="mradio" class="btn-group" default="0" label="F_HIDE" description="F_HIDE_DESCR">
 					<option value="0">JNO</option>
 					<option value="1">JYES</option>
@@ -167,7 +167,7 @@
 				<field type="text" name="status5" label="F_STATUS5" size="40" default="Closed" description="" />
 				<field type="text" name="status6" label="F_STATUS6" size="40" default="" description="" />
 			</fieldset>
-			<fieldset name=" s" label="FS_STATUSICONS" description="FS_STATUSICONS_DESCR" addfieldpath="/components/com_joomcck/fields/status/field">
+			<fieldset name=" s" label="FS_STATUSICONS" description="FS_STATUSICONS_DESCR" addfieldpath="components/com_joomcck/fields/status/field">
 				<field type="icons" directory="components/com_joomcck/fields/status/icons" name="icon1" label="F_ICON1" default="clock-frame.png" />
 				<field type="icons" directory="components/com_joomcck/fields/status/icons" name="icon2" label="F_ICON2" default="eye.png" />
 				<field type="icons" directory="components/com_joomcck/fields/status/icons" name="icon3" label="F_ICON3" default="tick.png" />
