@@ -354,7 +354,7 @@ class JFormFieldCMultilevelselect extends CFormField
 		$items = $this->_getList($post);
 
 		$user = JFactory::getUser();
-		$labels = explode("\n", $this->params->get('params.labels'));
+		$labels = explode("\n", $this->params->get('params.labels',''));
 		ArrayHelper::clean_r($labels);
 		$required = $this->params->get('params.min_levels_req');
 

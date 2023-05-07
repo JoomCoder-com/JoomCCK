@@ -6,9 +6,9 @@
 	<config>
 		<fields name="params">
 			<fieldset name="tmpl">
-				<field class="form-select" type="cobtmpllist" name="template_input" onchange="ajax_load_sub_params(this, '/components/com_joomcck/fields/image/tmpl/input');" filter="php$" hide_none="1" hide_default="1" directory="/components/com_joomcck/fields/image/tmpl/input" label="F_TMPLINPUT" default="default.php" />
-				<field class="form-select" type="cobtmpllist" name="template_output_list" onchange="ajax_load_sub_params(this, '/components/com_joomcck/fields/image/tmpl/output');" filter="php$" hide_none="1" hide_default="1" directory="/components/com_joomcck/fields/image/tmpl/output" label="F_TMPLLIST" default="list.php" />
-				<field class="form-select" type="cobtmpllist" name="template_output_full" onchange="ajax_load_sub_params(this, '/components/com_joomcck/fields/image/tmpl/output');" filter="php$" hide_none="1" hide_default="1" directory="/components/com_joomcck/fields/image/tmpl/output" label="F_TMPLFULL" default="full.php" />
+				<field class="form-select" type="cobtmpllist" name="template_input" onchange="ajax_load_sub_params(this, '/components/com_joomcck/fields/image/tmpl/input');" filter="php$" hide_none="1" hide_default="1" directory="components/com_joomcck/fields/image/tmpl/input" label="F_TMPLINPUT" default="default.php" />
+				<field class="form-select" type="cobtmpllist" name="template_output_list" onchange="ajax_load_sub_params(this, '/components/com_joomcck/fields/image/tmpl/output');" filter="php$" hide_none="1" hide_default="1" directory="components/com_joomcck/fields/image/tmpl/output" label="F_TMPLLIST" default="list.php" />
+				<field class="form-select" type="cobtmpllist" name="template_output_full" onchange="ajax_load_sub_params(this, '/components/com_joomcck/fields/image/tmpl/output');" filter="php$" hide_none="1" hide_default="1" directory="components/com_joomcck/fields/image/tmpl/output" label="F_TMPLFULL" default="full.php" />
 			</fieldset>
 			<fieldset name="general" label="FS_GENERAL">
 				<field name="select_type" type="list" default="0" label="F_IMGSOURCE" description="F_IMGTYPE_DESCR">

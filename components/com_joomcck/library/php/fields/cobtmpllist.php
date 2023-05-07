@@ -152,10 +152,15 @@ class JFormFieldCobTmplList extends JFormFieldList
 
 		$path = JPath::clean($path);
 		$xml = $path.DIRECTORY_SEPARATOR.str_replace('.php', '.xml', $this->value ?: $this->default);
+
+
 		if(JFile::exists($xml)) {
 			$icon = HTMLFormatHelper::icon('gear.png');
 			$parts = explode('/', $this->directory);
-			$title = JText::sprintf('COB_FIEL_PARAMS', ucfirst($parts[6]));
+
+
+			$title = JText::sprintf('COB_FIEL_PARAMS', ucfirst($parts[5]));
+
 
 			HTMLHelper::_('bootstrap.modal');
 

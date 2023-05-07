@@ -7,17 +7,17 @@
 		<fields name="params" addfieldpath="/administrator/components/com_joomcck/models/fields/">
 
 			<fieldset name="tmpl">
-				<field class="form-select" type="cobtmpllist" name="template_input" onchange="ajax_load_sub_params(this, '/components/com_joomcck/fields/geo/tmpl/input');" filter="php$" hide_none="1" hide_default="1" directory="/components/com_joomcck/fields/geo/tmpl/input" label="F_TMPLINPUT" default="default.php" />
-				<field class="form-select" type="cobtmpllist" name="template_output_list" onchange="ajax_load_sub_params(this, '/components/com_joomcck/fields/geo/tmpl/output');" filter="php$" hide_none="1" hide_default="1" directory="/components/com_joomcck/fields/geo/tmpl/output" label="F_TMPLLIST" default="default.php" />
-				<field class="form-select" type="cobtmpllist" name="template_output_full" onchange="ajax_load_sub_params(this, '/components/com_joomcck/fields/geo/tmpl/output');" filter="php$" hide_none="1" hide_default="1" directory="/components/com_joomcck/fields/geo/tmpl/output" label="F_TMPLFULL" default="default.php" />
+				<field class="form-select" type="cobtmpllist" name="template_input" onchange="ajax_load_sub_params(this, '/components/com_joomcck/fields/geo/tmpl/input');" filter="php$" hide_none="1" hide_default="1" directory="components/com_joomcck/fields/geo/tmpl/input" label="F_TMPLINPUT" default="default.php" />
+				<field class="form-select" type="cobtmpllist" name="template_output_list" onchange="ajax_load_sub_params(this, '/components/com_joomcck/fields/geo/tmpl/output');" filter="php$" hide_none="1" hide_default="1" directory="components/com_joomcck/fields/geo/tmpl/output" label="F_TMPLLIST" default="default.php" />
+				<field class="form-select" type="cobtmpllist" name="template_output_full" onchange="ajax_load_sub_params(this, '/components/com_joomcck/fields/geo/tmpl/output');" filter="php$" hide_none="1" hide_default="1" directory="components/com_joomcck/fields/geo/tmpl/output" label="F_TMPLFULL" default="default.php" />
 			</fieldset>
 			<fieldset name="filter" label="FS_FILTERGEN">
 				<field name="filter_enable" type="mradio" condition='{"1":["params_params_template_filter","params_params_filter_hide","params_params_filter_descr","params_params_template_filter_module","fieldset-name-filter2"]}' class="btn-group" default="0" label="F_ENABLE" description="">
 					<option value="0">JNO</option>
 					<option value="1">JYES</option>
 				</field>
-				<field class="form-select" type="cobtmpllist" name="template_filter" onchange="ajax_load_sub_params(this, '/components/com_joomcck/fields/geo/tmpl/filter');" filter="php$" hide_none="1" hide_default="1" directory="/components/com_joomcck/fields/geo/tmpl/filter" label="F_TMPLFILTER" default="autocomplete.php" />
-				<field class="form-select" type="cobtmpllist" name="template_filter_module" onchange="ajax_load_sub_params(this, '/components/com_joomcck/fields/geo/tmpl/filter');" filter="php$" hide_none="1" hide_default="1" directory="/components/com_joomcck/fields/geo/tmpl/filter" label="F_TMPLFILTERMODULE" default="autocomplete.php" />
+				<field class="form-select" type="cobtmpllist" name="template_filter" onchange="ajax_load_sub_params(this, '/components/com_joomcck/fields/geo/tmpl/filter');" filter="php$" hide_none="1" hide_default="1" directory="components/com_joomcck/fields/geo/tmpl/filter" label="F_TMPLFILTER" default="autocomplete.php" />
+				<field class="form-select" type="cobtmpllist" name="template_filter_module" onchange="ajax_load_sub_params(this, '/components/com_joomcck/fields/geo/tmpl/filter');" filter="php$" hide_none="1" hide_default="1" directory="components/com_joomcck/fields/geo/tmpl/filter" label="F_TMPLFILTERMODULE" default="autocomplete.php" />
 				<field name="filter_hide" type="mradio" class="btn-group" default="0" label="F_HIDE" description="F_HIDE_DESCR">
 					<option value="0">JNO</option>
 					<option value="1">JYES</option>
@@ -92,7 +92,7 @@
 					<option value="0">JNo</option>
 					<option value="1">JYes</option>
 				</field>
-				<field name="map_style" type="filelist" directory="/components/com_joomcck/library/js/mapstyles" hide_none="1" hide_default="0" filter="json$" default="" label="F_MAPSTYLE" />
+				<field name="map_style" type="filelist" directory="components/com_joomcck/library/js/mapstyles" hide_none="1" hide_default="0" filter="json$" default="" label="F_MAPSTYLE" />
 				<field name="map_width" type="text" default="100%" size="5" label="F_MAPWIDTH" />
 				<field name="map_height" type="text" default="300px" size="5" label="F_MAPHEIGHT" />
 				<field name="map_lat" type="text" default="42.293564192170095" size="40" label="F_DEFAULTLAT" />
@@ -110,7 +110,7 @@
 				</field>
 				<field name="map_icon_src" type="mjfolderlist" onchange="updatedefaulticon()" hide_none="1" directory="components/com_joomcck/fields/geo/markers" label="F_ICONSRC" default="custom" />
 
-				<field class="form-select" type="cobtmpllist" name="template_marker" onchange="ajax_load_sub_params(this, '/components/com_joomcck/fields/geo/tmpl/marker_list');" filter="php$" hide_none="1" hide_default="1" directory="/components/com_joomcck/fields/geo/tmpl/markers_list" label="F_MARKERLIST" default="default.php" />
+				<field class="form-select" type="cobtmpllist" name="template_marker" onchange="ajax_load_sub_params(this, '/components/com_joomcck/fields/geo/tmpl/marker_list');" filter="php$" hide_none="1" hide_default="1" directory="components/com_joomcck/fields/geo/tmpl/markers_list" label="F_MARKERLIST" default="default.php" />
 			</fieldset>
 
 			<fieldset name="map2" label="FS_MAP">
@@ -142,7 +142,7 @@
 				</field>
 			</fieldset>
 			<fieldset name="window" label="FS_WINDOW">
-				<field class="form-select" type="cobtmpllist" name="template_window" onchange="ajax_load_sub_params(this, '/components/com_joomcck/fields/geo/tmpl/window');" filter="php$" hide_none="1" hide_default="1" directory="/components/com_joomcck/fields/geo/tmpl/window" label="F_TMPLWINDOW" default="default.php" />
+				<field class="form-select" type="cobtmpllist" name="template_window" onchange="ajax_load_sub_params(this, '/components/com_joomcck/fields/geo/tmpl/window');" filter="php$" hide_none="1" hide_default="1" directory="components/com_joomcck/fields/geo/tmpl/window" label="F_TMPLWINDOW" default="default.php" />
 				<field name="field_id_exclude" client="list" key="id" type="meresourcesfields" size="15" multiple="true" default="" label="Fields to exclude" description="" />
 			</fieldset>
 		</fields>

@@ -40,8 +40,8 @@
 					<option value="3.[012345]">Joomal 3.x</option>
 				</field>
 
-				<field name="list_tpl" label="CLISTTEMPLATE" filter="php" hide_none="1" hide_default="1" type="filelist" directory="/plugins/mint/formatter_joomlaupdate/tmpl/list/" />
-				<field name="record_tpl" label="CRECORDTEMPLATE" filter="php" hide_none="1" hide_default="1" type="filelist" directory="/plugins/mint/formatter_joomlaupdate/tmpl/record/" />
+				<field name="list_tpl" label="CLISTTEMPLATE" filter="php" hide_none="1" hide_default="1" type="filelist" directory="plugins/mint/formatter_joomlaupdate/tmpl/list/" />
+				<field name="record_tpl" label="CRECORDTEMPLATE" filter="php" hide_none="1" hide_default="1" type="filelist" directory="plugins/mint/formatter_joomlaupdate/tmpl/record/" />
 
 			</fieldset>
 		</fields>

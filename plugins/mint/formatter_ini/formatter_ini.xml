@@ -18,8 +18,8 @@
     <config>
         <fields name="params">
             <fieldset name="general" label="General">
-                <field type="filelist" name="tmpl_list" filter="php$" hide_none="1" hide_default="1" directory="/plugins/mint/formatter_xml/tmpl/list" label="List template" default="xml.php" />
-                <field type="filelist" name="tmpl_full" filter="php$" hide_none="1" hide_default="1" directory="/plugins/mint/formatter_xml/tmpl/record" label="Full template" default="xml.php" />
+                <field type="filelist" name="tmpl_list" filter="php$" hide_none="1" hide_default="1" directory="plugins/mint/formatter_xml/tmpl/list" label="List template" default="xml.php" />
+                <field type="filelist" name="tmpl_full" filter="php$" hide_none="1" hide_default="1" directory="plugins/mint/formatter_xml/tmpl/record" label="Full template" default="xml.php" />
             </fieldset>
         </fields>
     </config>

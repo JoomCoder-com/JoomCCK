@@ -31,7 +31,7 @@
 				</field>
 				<!-- >field name="relevance_mode" type="list" default="0" label="Relevance Mode" description="How to set HTML tags"> <option value="0">Do not use relevance</option> <option value="1">Based on tag hits</option> <option value="2">Based on tag usage 
 					count</option> </field -->
-				<field type="filelist" name="tmpl" filter="php$" hide_none="1" hide_default="1" directory="/modules/mod_joomcck_tagcloud/tmpl" label="Template" default="default.php" />
+				<field type="filelist" name="tmpl" filter="php$" hide_none="1" hide_default="1" directory="modules/mod_joomcck_tagcloud/tmpl" label="Template" default="default.php" />
 				<field name="ordering" type="list" default="RAND()" label="Relevance mode" description="">
 					<option value="tag ASC">Based on tags name ASC</option>
 					<option value="tag DESC">Based on tags name DESC</option>

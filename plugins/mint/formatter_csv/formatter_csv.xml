@@ -33,8 +33,8 @@
 					<option value="1">JSON</option>
 				</field>
 				<field name="field_glue" size="10" type="text" default=", " label="Fields value glue" />
-                <field type="filelist" name="tmpl_list" filter="php$" hide_none="1" hide_default="1" directory="/plugins/mint/formatter_csv/tmpl/list" label="List template" default="csv.php" />
-                <field type="filelist" name="tmpl_full" filter="php$" hide_none="1" hide_default="1" directory="/plugins/mint/formatter_csv/tmpl/record" label="Full template" default="csv.php" />
+                <field type="filelist" name="tmpl_list" filter="php$" hide_none="1" hide_default="1" directory="plugins/mint/formatter_csv/tmpl/list" label="List template" default="csv.php" />
+                <field type="filelist" name="tmpl_full" filter="php$" hide_none="1" hide_default="1" directory="plugins/mint/formatter_csv/tmpl/record" label="Full template" default="csv.php" />
 			</fieldset>
 		</fields>
 	</config>

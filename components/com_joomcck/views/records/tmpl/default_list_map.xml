@@ -18,7 +18,7 @@
 				<option value="0">No</option>
 			</field>
 			<field name="map_style" type="filelist" hide_none="1"
-				   directory="/components/com_joomcck/library/js/mapstyles" filters=".json$" default="" label="Map Style"/>
+				   directory="components/com_joomcck/library/js/mapstyles" filters=".json$" default="" label="Map Style"/>
 			<field name="map_width" type="text" size="7" default="100%" label="Map Width"/>
 			<field name="map_height" type="text" size="7" default="500px" label="Map Height"/>
 
