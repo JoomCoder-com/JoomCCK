@@ -44,7 +44,7 @@
 			</field>
 		</fieldset>
 		<fieldset name="title" label="CFTITLEPARAMS">
-			<field name="item_title" type="mlist" condition='{"1":["params_properties_item_title_unique"],"2":["params_properties_item_title_limit","params_properties_item_title_composite"]}' default="1" label="CRECORDTITLEMODE">
+			<field name="item_title" type="mlist" class="form-select" condition='{"1":["params_properties_item_title_unique"],"2":["params_properties_item_title_limit","params_properties_item_title_composite"]}' default="1" label="CRECORDTITLEMODE">
 				<option value="0">CRETTITLEMOD_1</option>
 				<option value="1">CRETTITLEMOD_2</option>
 				<option value="2">CRETTITLEMOD_3</option>
