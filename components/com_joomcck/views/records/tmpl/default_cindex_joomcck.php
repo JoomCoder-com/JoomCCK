@@ -34,7 +34,10 @@ $rows = ceil($rows);
 $width = round(100 / $cols);
 $ind = 0;
 
-//var_dump($parent_id); exit;
+// load js cookie js library
+\Joomla\CMS\Factory::getDocument()->addScript(\Joomla\CMS\Uri\Uri::root().'/media/com_joomcck/js/js-cookie.js');
+
+
 ?>
 
 <?php if($params->get('tmpl_params.highlight')):?>
@@ -90,33 +93,43 @@ $ind = 0;
 	</div>
 <?php endif; ?>
 <script type="text/javascript">
-<!--
-$$('.subcat').each(function(e){
-	var list_element = new Fx.Slide(e.id)
-	var icon = $('icon' + e.id);
-	if(!Cookie.read('category_state'+e.id))
+
+$('.categories-list .subcat').each(function(e){
+
+	var list_element = $(this);
+	var icon = $('#icon' + $(this).attr('id'));
+
+	if(!Cookies.get('category_state'+e.id))
 	{	
 		if(!<?php echo $params->get('tmpl_params.cat_unfold') ? 'true' : 'false';?>)
 		{
 			list_element.hide();
-			icon.set('src', '<?php echo JURI::root()?>media/com_joomcck/icons/16/toggle-expand.png');
+			icon.attr('src', '<?php echo JURI::root()?>media/com_joomcck/icons/16/toggle-expand.png');
 		}
 	}
-	icon.addEvent('click', function(){
-		list_element.toggle();
-		if(list_element.from[1] == 0)
-		{
-			Cookie.write('category_state'+e.id, 1, {duration: 30000});
-			icon.set('src', '<?php echo JURI::root()?>media/com_joomcck/icons/16/toggle.png');
-		}
-		else
-		{
-			Cookie.dispose('category_state'+e.id);
-			icon.set('src', '<?php echo JURI::root()?>media/com_joomcck/icons/16/toggle-expand.png');
-		}	
-	});
+
+
+    icon.on('click',function(e){
+
+        e.preventDefault();
+
+        list_element.toggle();
+
+        if(list_element.css('display') == 'block')
+        {
+            Cookies.set('category_state'+e.id, 1, {expires: 7});
+            icon.attr('src', '<?php echo JURI::root()?>media/com_joomcck/icons/16/toggle.png');
+        }
+        else
+        {
+            Cookies.remove('category_state'+e.id);
+            icon.attr('src', '<?php echo JURI::root()?>media/com_joomcck/icons/16/toggle-expand.png');
+        }
+
+    })
+
 });
-//-->
+
 </script>
 <?php function getChilds($category, $params, $k = 1) { ?>
 	<ul>

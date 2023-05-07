@@ -64,9 +64,9 @@ class JFormFieldCCheckbox extends CFormFieldSelectable
 
     public function validateField($value, $record, $type, $section)
     {
-        if ($this->params->get('params.total_limit')) {
-            if (count($value) > $this->params->get('params.total_limit')) {
-                $this->setError(JText::sprintf('F_VALUESLIMIT', $this->params->get('params.total_limit'), $this->label));
+        if ($this->params->get('params.total_limit',0)) {
+            if (count((array)$value) > $this->params->get('params.total_limit',0)) {
+                $this->setError(JText::sprintf('F_VALUESLIMIT', $this->params->get('params.total_limit',0), $this->label));
             }
         }
 
