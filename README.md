@@ -22,7 +22,7 @@ JoomCCK opens incredible possibilities for constructing websites, and allows you
 - Relations
 - Multiple Type
 - Compare Items
-- Tagging and Categorization[README.md](README.md)
+- Tagging and Categorization
 - SEO/SEF
 - Ecommerce
 - Responsive
