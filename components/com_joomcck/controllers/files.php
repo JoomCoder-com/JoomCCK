@@ -429,9 +429,10 @@ class JoomcckControllerFiles extends MControllerAdmin
             }
         }
 
-        JResponse::setHeader('Cache-Control', 'no-cache, must-revalidate');
-        JResponse::setHeader('Expires', 'Mon, 26 Jul 1997 05:00:00 GMT');
-        JResponse::setHeader('Content-type', 'application/json');
+
+        header('Cache-Control', 'no-cache, must-revalidate');
+	    header('Expires', 'Mon, 26 Jul 1997 05:00:00 GMT');
+	    header('Content-type', 'application/json');
 
         echo json_encode($response);
 
@@ -661,8 +662,9 @@ class JoomcckControllerFiles extends MControllerAdmin
         if (strtolower($files->ext) == 'jpg') {
             $files->ext = 'jpeg';
         }
-        JResponse::clearHeaders();
-        header("Content-Type: image/" . strtolower($files->ext));
+
+		header_remove();
+	    header("Content-Type: image/" . strtolower($files->ext));
         header('Expires: ' . gmdate('D, d M Y H:i:s', time() + 200000) . ' GMT');
         header("Pragma: public"); // required
         header("Cache-Control: must-revalidate, post-check=0, pre-check=0");

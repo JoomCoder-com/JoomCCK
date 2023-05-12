@@ -35,7 +35,6 @@ class plgMintFormatter_joomlaupdate extends JPlugin
 
 	function sendHeader()
 	{
-		JResponse::setHeader('Content-type', 'text/xml');
-		//header('Content-Type: text/xml');
+		header('Content-Type: text/xml');
 	}
 }
