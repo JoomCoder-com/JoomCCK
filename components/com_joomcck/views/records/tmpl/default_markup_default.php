@@ -157,22 +157,22 @@ $current_user = JFactory::getUser($this->input->getInt('user_id', $this->user->g
 									$o = array();
 									if (in_array($type->params->get('submission.submission'), $this->user->getAuthorisedViewLevels()) || MECAccess::allowNew($type, $this->section))
 									{
-										$o[] = '<a class="btn btn-light border btn-sm" href="' . Url::add($this->section, $type, $this->category) . '">' . JText::_($type->name) . '</a>';
+										$o[] = '<a class="dropdown-item" href="' . Url::add($this->section, $type, $this->category) . '">' . JText::_($type->name) . '</a>';
 									}
 									else
 									{
-										$o[] = '<a  class="btn btn-light border btn-sm" class="disabled" rel="tooltipright" data-original-title="' . JText::sprintf($markup->get('menu.menu_user_register', 'Register or login to submit %s'), JText::_($type->name)) . '">' . JText::_($type->name) . '</a>';
+										$o[] = '<a  class="dropdown-item" class="disabled" rel="tooltipright" data-original-title="' . JText::sprintf($markup->get('menu.menu_user_register', 'Register or login to submit %s'), JText::_($type->name)) . '">' . JText::_($type->name) . '</a>';
 									}
 									if ($o)
 									{
-										$l[] = '<li class="me-2">' . implode('', $o) . '</li>';
+										$l[] = '<li>' . implode('', $o) . '</li>';
 									}
 								}
 								?>
 								<?php if ($l): ?>
                                     <li class="dropdown me-2">
                                         <a href="#" class="dropdown-toggle btn btn-light border btn-sm"
-                                           data-toggle="dropdown">
+                                           data-bs-toggle="dropdown">
 											<?php if ($markup->get('menu.menu_newrecord_icon')): ?>
 												<?php echo HTMLFormatHelper::icon('plus.png'); ?>
 											<?php endif; ?>
@@ -207,7 +207,7 @@ $current_user = JFactory::getUser($this->input->getInt('user_id', $this->user->g
 
 						<?php if (count($this->list_templates) > 1 && in_array($markup->get('menu.menu_templates'), $this->user->getAuthorisedViewLevels()) && $this->items): ?>
                             <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                <a href="#" class="dropdown-toggle" data-bs-toggle="dropdown">
 									<?php if ($markup->get('menu.menu_templates_icon')): ?>
 										<?php echo HTMLFormatHelper::icon('zones.png'); ?>
 									<?php endif; ?>

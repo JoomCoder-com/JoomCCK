@@ -6,6 +6,9 @@
  * @copyright Copyright (C) 2012 joomcoder (https://www.joomcoder.com). All rights reserved.
  * @license   GNU/GPL http://www.gnu.org/copyleft/gpl.html
  */
+
+use Joomla\CMS\HTML\HTMLHelper;
+
 defined('_JEXEC') or die();
 ?>
 
@@ -23,6 +26,9 @@ $listOrder = $this->state->get('list.ordering');
 $listDirn  = $this->state->get('list.direction');
 $alert     = JText::_('CMAKESELECTION');
 $links     = $this->pagination->getPagesLinks();
+
+HTMLHelper::_('bootstrap.collapse');
+
 ?>
 
 
@@ -48,7 +54,7 @@ $links     = $this->pagination->getPagesLinks();
                 </button>
 			<?php endif; ?>
             <button class="btn<?php if ($this->state->get('filter.section') || $this->state->get('filter.status')) echo ' btn-warning'; ?>"
-                    type="button" data-toggle="collapse" data-target="#filters-block">
+                    type="button" data-bs-toggle="collapse" data-bs-target="#filters-block">
 				<?php echo HTMLFormatHelper::icon('funnel.png'); ?>
             </button>
         </div>

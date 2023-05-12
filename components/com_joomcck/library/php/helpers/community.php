@@ -213,7 +213,7 @@ class CCommunityHelper
 			}
 			elseif(count($links) > 1)
 			{
-				$out = '<span class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">' . $name . '</a>
+				$out = '<span class="dropdown"><a class="dropdown-toggle" data-bs-toggle="dropdown" href="#">' . $name . '</a>
 				<ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">';
 				foreach($links as $link)
 				{

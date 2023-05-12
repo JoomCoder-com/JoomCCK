@@ -40,7 +40,7 @@ class MFormHelper
 			'separator2'          => '<h3>%s</h3>%s%s',
 			'separator1'          => '<fieldset><legend>%s</legend>%s%s</fieldset>',
 			'separator0'          => '%2$s%3$s',
-			'label'               => '<label id="%s-lbl" for="%s" class="%s" data-toggle="tooltip" title="%s">%s</label>',
+			'label'               => '<label id="%s-lbl" for="%s" class="%s" data-bs-toggle="tooltip" title="%s">%s</label>',
 			'wrap'                => '<section class="%s" id="fieldset-name-%s">%s</section>',
 		],
 		'warp' => [
@@ -76,6 +76,7 @@ class MFormHelper
 		settype($groups, 'array');
 
 		HTMLHelper::_('bootstrap.framework');
+		JHTML::_('bootstrap.tooltip');
 
 		$out = array();
 		switch($group_separator)

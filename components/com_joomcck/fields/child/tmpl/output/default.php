@@ -6,6 +6,9 @@
  * @copyright Copyright (C) 2012 joomcoder (https://www.joomcoder.com). All rights reserved.
  * @license GNU/GPL http://www.gnu.org/copyleft/gpl.html
  */
+
+use Joomla\CMS\HTML\HTMLHelper;
+
 defined('_JEXEC') or die();
 $key = $this->id.'-'.$record->id;
 
@@ -33,29 +36,30 @@ if($this->show_btn_exist && isset($type->id))
 	'&field_id='.$this->id.
 	'&excludes='.implode(',', $this->content['ids']);
 
-	$links[] = "<a data-toggle=\"modal\" role=\"button\" class=\"btn btn-sm btn-light border\" href=\"#modal_".$key."\">\n".JText::_($this->params->get('params.add_existing_label'))."</a>\n";
+	HTMLHelper::_('bootstrap.modal');
+
+	$links[] = "<a data-bs-toggle=\"modal\" role=\"button\" class=\"btn btn-sm btn-light border\" href=\"#modal_".$key."\">\n".JText::_($this->params->get('params.add_existing_label'))."</a>\n";
 	?>
-		<div style="width:770px;" class="modal hide fade" id="modal_<?php echo $key;?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-			<div class="modal-header">
-				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-				<h3 id="myModalLabel"><?php echo JText::_('FS_ATTACHEXIST');?></h3>
-			</div>
 
-			<div class="modal-body" style="overflow-x: hidden; max-height:500px; padding:0;">
-				<iframe frameborder="0" width="100%" height="410px"></iframe>
-			</div>
 
-			<div class="modal-footer">
-				<button class="btn btn-danger" data-dismiss="modal" aria-hidden="true">Close</button>
-			</div>
-		</div>
-		<script>
-		(function($){
-			$('#modal_<?php echo $key;?>').on('show', function(){
-				$("iframe", this).attr('src', '<?php echo $doTask;?>');
-			});
-		}(jQuery));
-		</script>
+    <div class="modal fade" id="modal_<?php echo $key;?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 class="modal-title fs-5" id="exampleModalLabel"><?php echo JText::_('FS_ATTACHEXIST');?></h3>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <iframe src="<?php echo $doTask ?>" frameborder="0" width="100%" height="410px"></iframe>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
 	<?php
 }
 

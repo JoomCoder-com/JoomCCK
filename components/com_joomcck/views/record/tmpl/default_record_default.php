@@ -7,6 +7,8 @@
  * @license GNU/GPL http://www.gnu.org/copyleft/gpl.html
  */
 
+use Joomla\CMS\HTML\HTMLHelper;
+
 defined('_JEXEC') or die();
 
 $item = $this->item;
@@ -314,6 +316,9 @@ function group_start($data, $label, $name,$j = 0)
 			break;
 		//slider
 		case 2:
+
+			HTMLHelper::_('bootstrap.collapse');
+
 			if(!$start)
 			{
 				echo '<div class="accordion" id="accordion2">';
@@ -321,7 +326,7 @@ function group_start($data, $label, $name,$j = 0)
 			}
 			echo '<div class="accordion-group">
 				<div class="accordion-heading">
-					<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#'.$name.'">
+					<a class="accordion-toggle" data-bs-toggle="collapse" data-bs-parent="#accordion2" href="#'.$name.'">
 					     '.$icon. ' '. $label.'
 					</a>
 				</div>

@@ -39,7 +39,7 @@ defined('_JEXEC') or die('Restricted access');
 	<?php endif;?>
 
 	<?php if(count($f_types) > 1):?>
-		<div data-toggle="collapse" data-target="#filter-types" class="filter-label <?php echo ( !!$state->get('records.type') ? NULL : 'collapsed')?>">
+		<div data-bs-toggle="collapse" data-bs-target="#filter-types" class="filter-label <?php echo ( !!$state->get('records.type') ? NULL : 'collapsed')?>">
 			<?php if($params->get('show_icons', 1)):?>
 				<span class="filter-icon"><?php echo HTMLFormatHelper::icon('block.png');?></span>
 			<?php endif;?>
@@ -60,7 +60,7 @@ defined('_JEXEC') or die('Restricted access');
 	<?php endif;?>
 
 	<?php if($params->get('filter_tags_type')):?>
-		<div data-toggle="collapse" data-target="#filter-tags" class="filter-label <?php echo ( !!$state->get('records.tag') ? NULL : 'collapsed')?>">
+		<div data-bs-toggle="collapse" data-bs-target="#filter-tags" class="filter-label <?php echo ( !!$state->get('records.tag') ? NULL : 'collapsed')?>">
 			<?php if($params->get('show_icons', 1)):?>
 				<span class="filter-icon"><?php echo HTMLFormatHelper::icon('price-tag.png');?></span>
 			<?php endif;?>
@@ -80,7 +80,7 @@ defined('_JEXEC') or die('Restricted access');
 	<?php endif;?>
 
 	<?php if($params->get('filter_users_type')):?>
-		<div data-toggle="collapse" data-target="#filter-users" class="filter-label <?php echo ( !!$state->get('records.user') ? NULL : 'collapsed')?>">
+		<div data-bs-toggle="collapse" data-bs-target="#filter-users" class="filter-label <?php echo ( !!$state->get('records.user') ? NULL : 'collapsed')?>">
 			<?php if($params->get('show_icons', 1)):?>
 				<span class="filter-icon"><?php echo HTMLFormatHelper::icon('user.png');?></span>
 			<?php endif;?>
@@ -98,7 +98,7 @@ defined('_JEXEC') or die('Restricted access');
 	<?php endif;?>
 
 	<?php if($params->get('filter_category_type')):?>
-		<div data-toggle="collapse" data-target="#filter-cats" class="filter-label <?php echo ( !!$state->get('records.category') ? NULL : 'collapsed')?>">
+		<div data-bs-toggle="collapse" data-bs-target="#filter-cats" class="filter-label <?php echo ( !!$state->get('records.category') ? NULL : 'collapsed')?>">
 			<?php if($params->get('show_icons', 1)):?>
 				<span class="filter-icon"><?php echo HTMLFormatHelper::icon('category.png');?></span>
 			<?php endif;?>
@@ -119,7 +119,7 @@ defined('_JEXEC') or die('Restricted access');
 
 	<?php foreach ($filters AS  $filter):?>
 		<?php if(in_array($filter->id, (array)$params->get('field_id_exclude', array()))) continue;?>
-		<div data-toggle="collapse" data-target="#filter-<?php echo  $filter->key ?>" class="filter-label <?php echo ($filter->isFilterActive() ? NULL : 'collapsed')?>">
+		<div data-bs-toggle="collapse" data-target="#filter-<?php echo  $filter->key ?>" class="filter-label <?php echo ($filter->isFilterActive() ? NULL : 'collapsed')?>">
 			<?php if($params->get('show_icons', 1) && $filter->params->get('core.icon')):?>
 				<span class="filter-icon"><?php echo HTMLFormatHelper::icon($filter->params->get('core.icon'));?></span>
 			<?php endif;?>
