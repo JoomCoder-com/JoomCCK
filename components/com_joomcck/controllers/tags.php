@@ -25,8 +25,9 @@ class JoomcckControllerTags extends MControllerBase
 			$this->input = JFactory::getApplication()->input;
 		}
 	}
-	function remove()
+	function delete()
 	{
+
 		$model = $this->getModel('tags', 'JoomcckModel');
 		$model->_deleteTag();
 
