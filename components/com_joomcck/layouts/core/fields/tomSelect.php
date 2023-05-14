@@ -11,7 +11,6 @@ use Joomcck\Assets\Webassets\Webassets;
 
 defined('_JEXEC') or die();
 
-
 extract($displayData);
 // todo default value
 // todo suggestion url (sql source)
@@ -56,7 +55,7 @@ $fieldId = (int) rand(1,2000);
         items: <?php echo $list ?>,
         maxItems: <?php echo $options['maxItems'] ?>,
         maxOptions: <?php echo $options['maxOptions'] ?>,
-	    <?php if(!empty($options['suggestion_url'])): ?>
+        <?php if(!empty($options['suggestion_url'])): ?>
         load: function(query, callback) {
 
             var url = '<?php echo JUri::root().$options['suggestion_url'] ?>';

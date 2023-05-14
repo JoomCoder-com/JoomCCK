@@ -435,7 +435,7 @@ class JHTMLMrelements
 		if(isset($options['limit']))
 			$options['maxOptions'] = $options['suggestion_limit'];
 		else
-			$options['maxItems'] = $params->get('params.max_result',10);
+			$options['maxOptions'] = $params->get('params.max_result',10);
 
 		// allow user to add
 		if(isset($options['can_add']))
@@ -447,9 +447,13 @@ class JHTMLMrelements
 		$options['canDelete'] = $options['can_delete'];
 
 
+
+
 		// if list not used use default as list (to display selected items in dropdown
 		if(empty($list)){
+
 			foreach ($default as $iKey => $iValue){
+				$iValue = (array) $iValue;
 				$list[] = $iValue['id'];
 			}
 		}

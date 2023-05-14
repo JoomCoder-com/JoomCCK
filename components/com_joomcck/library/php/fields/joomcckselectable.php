@@ -232,7 +232,7 @@ class CFormFieldSelectable extends CFormField
 
 		if($this->params->get('params.template_filter') == 'autocomplete.php' && !is_array($value))
 		{
-			$value = explode(',', $value);
+			$value = explode(',', (string) $value);
 		}
 
 		if($this->type == 'listautocomplete' && !is_array($value))

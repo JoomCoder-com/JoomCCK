@@ -706,13 +706,14 @@ $current_user = JFactory::getUser($this->input->getInt('user_id', $this->user->g
 <?php if ($markup->get('filters.worns') && count($this->worns)): ?>
     <div class="filter-worns">
 		<?php foreach ($this->worns as $worn): ?>
-            <div class="alert alert-info float-start">
-                <button type="button" class="close btn btn-sm btn-light border" data-dismiss="alert"
+            <div class="alert alert-info alert-dismissible fade show float-start" role="alert">
+
+                <div><i class="fas fa-filter"></i> <?php echo $worn->label ?></div>
+				<?php echo $worn->text ?>
+                <button type="button" class="btn-close" data-bs-dismiss="alert"  aria-label="Close"
                         onclick="Joomcck.cleanFilter('<?php echo $worn->name ?>')" rel="tooltip"
                         data-original-title="<?php echo JText::_('CDELETEFILTER') ?>">
-                    <img alt="X" src="<?php echo JURI::root(true) ?>/media/com_joomcck/icons/16/cross.png"></button>
-                <div><?php echo $worn->label ?></div>
-				<?php echo $worn->text ?>
+                </button>
             </div>
 		<?php endforeach; ?>
 		<?php if (count($this->worns) > 1): ?>
