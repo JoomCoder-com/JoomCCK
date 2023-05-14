@@ -420,41 +420,53 @@ class JHTMLMrelements
 	public static function pills($name, $id, $default = array(), $list = array(), $options = array(),$useTomSelect = 0,$params = null)
 	{
 
-		//use new layout tomSelect
-		if($useTomSelect){
 
-			$data = [
+		if(is_null($params))
+			$params = new \Joomla\Registry\Registry();
+
+
+		// max items user can add
+		if(isset($options['limit']))
+			$options['maxItems'] = $options['limit'];
+		else
+			$options['maxItems'] = $params->get('params.max_items',5);
+
+		// suggestion limit
+		if(isset($options['limit']))
+			$options['maxOptions'] = $options['suggestion_limit'];
+		else
+			$options['maxItems'] = $params->get('params.max_result',10);
+
+		// allow user to add
+		if(isset($options['can_add']))
+			$options['canAdd'] = $options['can_add'];
+		else
+			$options['canAdd'] = $params->get('params.only_values',0) ? 'false' : 'true';
+
+
+		$options['canDelete'] = $options['can_delete'];
+
+
+		// if list not used use default as list (to display selected items in dropdown
+		if(empty($list)){
+			foreach ($default as $iKey => $iValue){
+				$list[] = $iValue['id'];
+			}
+		}
+
+
+		$data = [
+			'options' => $options,
 			'params' => $params,
 			'default' => $default,
 			'list' => $list,
 			'name' => $name,
 			'id' => $id
-			];
+		];
 
-			$out = LayoutHelper::render('core.fields.tomSelect',$data,null,['component' => 'com_joomcck','client' => 'site']);
+		//use new layout tomSelect
+		return LayoutHelper::render('core.fields.tomSelect',$data,null,['component' => 'com_joomcck','client' => 'site']);
 
-		}else{ // use old one
-
-			$params = new JRegistry();
-			$params->loadArray($options);
-
-			settype($default, 'array');
-
-			$doc = JFactory::getDocument();
-			$doc->addStyleSheet(JURI::root(TRUE) . '/media/com_joomcck/vendors/bootstrap-pills/css/style.css');
-			$doc->addScript(JURI::root(TRUE) . '/media/com_joomcck/vendors/bootstrap-pills/js/jquery.color.js');
-			$doc->addScript(JURI::root(TRUE) . '/media/com_joomcck/vendors/bootstrap-pills/js/bootstrap-typeahead.js');
-			$doc->addScript(JURI::root(TRUE) . '/media/com_joomcck/vendors/bootstrap-pills/js/bootstrap-tags.js');
-
-			ob_start();
-			include 'mrelements/pills.php';
-			$out = ob_get_contents();
-			ob_end_clean();
-
-		}
-
-
-		return $out;
 	}
 	public static function listautocomplete($name, $id, $default = array(), $list = array(), $options = array())
 	{

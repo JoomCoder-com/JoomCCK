@@ -11,7 +11,6 @@ defined('_JEXEC') || die('Restricted access');
 
 ?>
 
-<div id="bs-tags-<?php echo $id ?>" class="tag-pills"></div>
 
 <script>
 

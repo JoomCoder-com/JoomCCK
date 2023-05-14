@@ -43,7 +43,7 @@ $default = str_replace(['"id":','"text":'],['id:','text:'],json_encode($default)
 <script>
 
     new TomSelect("#<?php echo $id ?>",{
-        plugins: ['remove_button'], // add remove options feature
+        plugins: ['remove_button','clear_button'], // add remove options feature
         maxItems: <?php echo $options['max_items'] ?>, // max options user can select
         maxOptions: <?php echo $options['suggestion_limit'] ?>, // max options to display in dropdown
         create: <?php echo $cantAdd ?>, // allow user to add new ones

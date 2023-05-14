@@ -41,8 +41,6 @@ class JFormFieldMetags extends JFormField
 		$options['can_delete']       = 1;
 		$options['only_suggestions'] = 0;
 		$options['suggestion_limit'] = 10;
-		$options['max_width']        = $this->params->get('params.max_width', 500);
-		$options['min_width']        = $this->params->get('params.min_width', 400);
 		$options['max_items']        = $type->params->get('general.item_tags_max', 25);
 		$options['limit']            = $type->params->get('general.item_tags_max', 25);
 		$options['suggestion_url']   = JUri::root().'index.php?option=com_joomcck&task=ajax.tags_list&tmpl=component';

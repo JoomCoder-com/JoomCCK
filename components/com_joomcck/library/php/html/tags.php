@@ -519,7 +519,7 @@ class JHTMLTags
 			//$tag =  JHtml::link(JRoute::_($link.'&filter_val[0]='.$id), $tag, ($nums ? $nums[$id] : NULL));
 			$out[] = array(
 				'id' => $id,
-				'attr' => ($nums ? $nums[$id] : NULL),
+				'attr' => ($nums && isset($nums[$id]) ? $nums[$id] : NULL),
 				'tag' => $list[$id],
 				'link' => JRoute::_($link.'&filter_val[0]='.$id)
 			);

@@ -888,6 +888,12 @@ class JoomcckControllerAjax extends MControllerAdmin
 	public function remove_tag()
 	{
 		$tag_id = $this->input->getInt('tid');
+
+		// don't allow null keys removing
+		if(!$tag_id)
+			die('Error');
+
+
 		$table  = JTable::getInstance('Taghistory', 'JoomcckTable');
 		$table->load(array(
 			'tag_id'    => $tag_id,
@@ -919,8 +925,9 @@ class JoomcckControllerAjax extends MControllerAdmin
         
 		$tag_id  = $this->input->get('tid');
         $tag_text  = $this->input->get('text');
-        
-        if(!preg_match("/^[0-9]*$/", $tag_id))
+
+
+        if(!preg_match("/^[0-9]*$/", $tag_id) || empty($tag_id))
         {
             $tag_table->reset();
             $tag_table->id = NULL;

@@ -24,12 +24,12 @@ $wa->useStyle('com_joomcck.tom-select');
 
 $list = json_encode($list);
 $list = str_replace(['"id":','"text":'],['id:','text:'],$list);
-
-
 $default = json_encode($default);
-$maxItems = $params->get('params.max_items',5);
-$maxOptions = $params->get('params.max_result',10);
-$cantAdd = $params->get('params.only_values',0) ? 'false' : 'true';
+
+$fieldId = (int) rand(1,2000);
+
+
+
 
 
 ?>
@@ -46,17 +46,117 @@ $cantAdd = $params->get('params.only_values',0) ? 'false' : 'true';
 
 <script>
 
-    new TomSelect("#<?php echo $id ?>",{
-        plugins: ['remove_button'],
-        create: <?php echo $cantAdd ?>,
+    let tomSelected<?php echo $fieldId ?> = new TomSelect("#<?php echo $id ?>",{
+        plugins: <?php echo $options['canDelete'] ? "['remove_button']" : "[]"; ?>,
+        create: <?php echo $options['canAdd'] ?>,
         valueField: 'id',
         labelField: 'text',
         searchField : 'text',
-        options: <?php echo $list ?>,
-        items: <?php echo $default ?>,
-        maxItems: <?php echo $maxItems ?>,
-        maxOptions: <?php echo $maxOptions ?>
+        options: <?php echo $default ?>,
+        items: <?php echo $list ?>,
+        maxItems: <?php echo $options['maxItems'] ?>,
+        maxOptions: <?php echo $options['maxOptions'] ?>,
+	    <?php if(!empty($options['suggestion_url'])): ?>
+        load: function(query, callback) {
+
+            var url = '<?php echo JUri::root().$options['suggestion_url'] ?>';
+            fetch(url)
+                .then(response => response.json())
+                .then(json => {
+                    callback(json.result);
+                }).catch(()=>{
+                callback();
+            });
+
+        },
+        <?php endif; ?>
     });
+
+
+
+
+    // on add new item, select new item
+    <?php if(!empty($options['onAdd'])): ?>
+
+
+
+    // on create new one
+    tomSelected<?php echo $fieldId ?>.on('item_add',function(value,data){
+
+        // some inits
+        const selectedOption = this.getOption(value);
+        let id = null;
+        let text = '';
+
+
+        if($.isNumeric(value)){ // selected existing one
+
+
+            text = $(selectedOption).text(); // get text of option
+            id = value;
+
+        }else{ // add new one
+
+            let optionsList =  Object.entries(this.options);
+
+            let itemsNumber = optionsList.length;
+            let itemsBreak = 1;
+
+            // if added option already existed, remove it no need to be added
+            optionsList.forEach(([key, option]) => {
+
+                // skip last added one
+                if(itemsBreak == itemsNumber)
+                    return;
+
+                // don't add already existing option
+                if(option.text == value){
+                    this.removeOption(value);
+                    return false;
+
+                }
+
+                itemsBreak++;
+
+            });
+
+            text = value;
+
+        }
+
+
+        $.ajax({
+            dataType: 'json',
+            type: 'get', async: false,
+            url: '<?php echo JUri::root().$options['onAdd'] ?>',
+            data: {tid: id, text: text}
+        }).done(function(json) {
+            console.log(json);
+        });
+
+
+
+
+
+    });
+    <?php endif; ?>
+
+    // remove ajax tag
+    <?php if(!empty($options['onRemove'])): ?>
+    tomSelected<?php echo $fieldId ?>.on('item_remove',function(value,item){
+
+
+        $.ajax({
+            dataType: 'json',
+            type: 'get', async: false,
+            url: '<?php echo JUri::root().$options['onRemove'] ?>',
+            data: {tid: value}
+        }).done(function(json) {
+            //console.log(1);
+        });
+
+    });
+    <?php endif; ?>
 
 </script>
 
