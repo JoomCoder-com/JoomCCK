@@ -737,6 +737,7 @@ var _gaq = _gaq || [];
 				}
 			});
 		}
+		// todo: check getSelected if still works, cuz i think used by mootools not jquery of vanilla
 		if(type == 'select') {
 			selected = val.getSelected().length;
 		}
@@ -752,6 +753,7 @@ var _gaq = _gaq || [];
 			else if(type == 'option') {
 				val.removeAttr('selected', '');
 			}
+			// todo: check getSelected if still works, cuz i think used by mootools not jquery of vanilla
 			else if(type == 'select') {
 				$.each(val.getSelected(), function(k, v) {
 					if(k + 1 > limit) {

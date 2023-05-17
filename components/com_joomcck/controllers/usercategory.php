@@ -48,7 +48,7 @@ class JoomcckControllerUsercategory extends MControllerForm
 		parent::add();
 	}
 
-	protected function allowSave($data = array())
+	protected function allowSave($data = [], $key = 'id')
 	{
 		return TRUE;
 	}
