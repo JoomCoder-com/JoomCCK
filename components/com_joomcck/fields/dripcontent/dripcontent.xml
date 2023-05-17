@@ -2,12 +2,12 @@
 <extension version="1.6" type="file" method="upgrade">
 	<name>Content Dripping</name>
 	<group>Relation Form Elements</group>
-	<author>JoomBoost</author>
-	<authorEmail>support@joomBoost.com</authorEmail>
-	<authorUrl>https://www.joomBoost.com</authorUrl>
+	<author>JoomCoder</author>
+	<authorEmail>support@JoomCoder.com</authorEmail>
+	<authorUrl>https://www.JoomCoder.com</authorUrl>
 	<license>GPL (Commercial)</license>
 	<creationDate>1 March 2012</creationDate>
-	<copyright>(c) 2012 JoomBoost</copyright>
+	<copyright>(c) 2012 JoomCoder</copyright>
 	<version>7.0</version>
 	<description>
 		<![CDATA[This fied allo to give access to artilces on step by step scheme.]]></description>

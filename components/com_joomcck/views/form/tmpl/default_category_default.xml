@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <form>
 	<name>Default</name>
-	<author>JoomBoost</author>
+	<author>JoomCoder</author>
 	<creationDate>Febrary 2012</creationDate>
-	<copyright>Copyright (C) 2005 - 2012 JoomBoost. All rights reserved.
+	<copyright>Copyright (C) 2005 - 2012 JoomCoder. All rights reserved.
 	</copyright>
-	<license>Commercial (https://www.joomBoost.com/commercial-license)
+	<license>Commercial (https://www.JoomCoder.com/commercial-license)
 	</license>
-	<authorEmail>support@joomBoost.com</authorEmail>
-	<authorUrl>www.JoomBoost.com</authorUrl>
+	<authorEmail>support@JoomCoder.com</authorEmail>
+	<authorUrl>www.JoomCoder.com</authorUrl>
 	<version>8.21</version>
 	<description>Template Category select</description>
 

@@ -1,11 +1,11 @@
 {
-    "name": "joomboost/joomcck",
+    "name": "JoomCoder/joomcck",
     "type": "library",
     "version": "1.0",
     "authors": [
         {
-            "name": "JoomBoost",
-            "email": "support@joomboost.com"
+            "name": "JoomCoder",
+            "email": "support@JoomCoder.com"
         }
     ],
     "require": {

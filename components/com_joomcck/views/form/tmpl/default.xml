@@ -3,7 +3,7 @@
 	<layout title="CURLSUBMITARTICLE">
 		<message>CURLSUBMITDESCR</message>
 	</layout>
-	<fields name="request" addfieldpath="/libraries/JoomBoost/forms/fields">
+	<fields name="request" addfieldpath="/libraries/JoomCoder/forms/fields">
 		<fieldset name="request">
 			<field name="type_id" type="meresourcestype" default="0" required="true" label="CURLTYPEID"/>
 			<field name="section_id" type="meresourcessection" default="0" required="true" label="CURLSECTIONID"/>

@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <extension type="module" version="3.0" client="site" method="upgrade">
     <name>Joomcck - Module - Categories</name>
-    <author>JoomBoost</author>
+    <author>JoomCoder</author>
     <creationDate>March 2012</creationDate>
-    <copyright>Copyright (C) 2005 - 2012 JoomBoost (https://www.joomBoost.com). All rights reserved.</copyright>
+    <copyright>Copyright (C) 2005 - 2012 JoomCoder (https://www.JoomCoder.com). All rights reserved.</copyright>
     <license>GNU/GPL http://www.gnu.org/copyleft/gpl.html</license>
-    <authorEmail>support@joomBoost.com</authorEmail>
-    <authorUrl>https://www.joomBoost.com</authorUrl>
+    <authorEmail>support@JoomCoder.com</authorEmail>
+    <authorUrl>https://www.JoomCoder.com</authorUrl>
 	<version>##VERSION##</version>
 
     <description><![CDATA[ Joomcck Categories Module ]]></description>

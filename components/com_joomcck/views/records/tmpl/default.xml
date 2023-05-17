@@ -5,7 +5,7 @@
 	</layout>
 	<fields name="request">
 		<fieldset name="request" label="CURLGP" addfieldpath="/libraries/mint/forms/fields"	>
-			<field name="section_id" type="meresourcessection" default="" alias="1" label="CURLHCAT" global="0" append="To create link to category please read the article &lt;a href='http://support.JoomBoost.com/en/joomcck-7/questions/How+to+create+link+to+category-1698.html' target='_blank'&gt;How to create link to category&lt;/a&gt;" />
+			<field name="section_id" type="meresourcessection" default="" alias="1" label="CURLHCAT" global="0" append="To create link to category please read the article &lt;a href='http://support.JoomCoder.com/en/joomcck-7/questions/How+to+create+link+to+category-1698.html' target='_blank'&gt;How to create link to category&lt;/a&gt;" />
 		</fieldset>
 	</fields>
 	<fields name="params">

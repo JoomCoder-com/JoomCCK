@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <extension type="component" version="3.0" method="upgrade">
 	<name>com_joomcck</name>
-	<author>JoomBoost</author>
+	<author>JoomCoder</author>
 	<creationDate>21/09/2023</creationDate>
 	<copyright><![CDATA[ (c) 2013-2023 JoomCoder]]></copyright>
 	<license>GNU/GPL http://www.gnu.org/copyleft/gpl.html</license>

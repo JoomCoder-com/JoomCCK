@@ -20,7 +20,7 @@
 		<filename plugin="glossary">glossary.php</filename>
 	</files>
 	<updateservers>
-		<server type="extension" priority="2" name="JoomBoost Update Server">http://JoomBoost.com/updates/glossary.xml</server>
+		<server type="extension" priority="2" name="JoomCoder Update Server">http://JoomCoder.com/updates/glossary.xml</server>
 	</updateservers>
 	<config>
 		<fields name="params">

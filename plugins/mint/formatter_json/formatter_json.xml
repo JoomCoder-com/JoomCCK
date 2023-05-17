@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <extension version="3.0" type="plugin" group="mint" method="upgrade">
 	<name>Joomcck - Plugin - Formatter - JSON</name>
-    <author>JoomBoost</author>
+    <author>JoomCoder</author>
     <creationDate>October 15 2012</creationDate>
-    <copyright>JoomBoost</copyright>
+    <copyright>JoomCoder</copyright>
     <license>GNU/GPL http://www.gnu.org/copyleft/gpl.html</license>
-    <authorEmail>support@joomBoost.com</authorEmail>
-    <authorUrl>https://www.joomBoost.com</authorUrl>
+    <authorEmail>support@JoomCoder.com</authorEmail>
+    <authorUrl>https://www.JoomCoder.com</authorUrl>
 	<version>##VERSION##</version>
 	<description>
 	<![CDATA[ Json formatter plugin for Joomcck 8 ]]>

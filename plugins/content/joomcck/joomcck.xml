@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <extension version="3.0" type="plugin" group="content" method="upgrade">
 	<name>Content - Plugin - Review/Discuss with Joomcck 8</name>
-	<author>JoomBoost</author>
+	<author>JoomCoder</author>
 	<creationDate>October 2012</creationDate>
-	<copyright>Copyright (C) 2005 - 2012 JoomBoost. All rights reserved.</copyright>
+	<copyright>Copyright (C) 2005 - 2012 JoomCoder. All rights reserved.</copyright>
 	<license>GNU General Public License version 2 or later; see LICENSE.txt</license>
-	<authorEmail>support@JoomBoost.org</authorEmail>
-	<authorUrl>www.JoomBoost.org</authorUrl>
+	<authorEmail>support@JoomCoder.org</authorEmail>
+	<authorUrl>www.JoomCoder.org</authorUrl>
 	<version>##VERSION##</version>
 	<description><![CDATA[
         Inserts discussions/reviews into core Joomla articles. Use <code>{joomcck-discussion}</code>
