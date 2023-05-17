@@ -54,7 +54,7 @@ $app = JFactory::getApplication();
 		<?php if($this->section->params->get('personalize.personalize', 0) &&
 			in_array($this->section->params->get('personalize.pcat_submit', 0), $this->user->getAuthorisedViewLevels()) &&
 			(!$this->item->id && $this->item->user_id || $this->item->id && $this->user->get('id'))): ?>
-			if(!document.getElementById('jform_ucatid').getSelected().length)
+			if(jQuery('#jform_ucatid :selected').text() == '')
 			{
 				isValid = false;
 				errorText.push('<?php echo JText::_('CUSERCATSELECT');?>');
