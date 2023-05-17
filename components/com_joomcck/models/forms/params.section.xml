@@ -97,7 +97,7 @@
 				<option value="0">X_OPTCOUNTTFAST</option>
 				<option value="1">X_OPTCOUNTSMART</option>
 			</field>
-			<field name="can_display" type="usergroup" default="0" label="X_WHOCANDISPLAY" description="X_WHOCANDISPLAYDESCR">
+			<field name="can_display" type="usergrouplist" default="0" label="X_WHOCANDISPLAY" description="X_WHOCANDISPLAYDESCR">
 				<option value="0">- Select Group -</option>
 			</field>
 			<field name="featured_first" type="mradio" class="btn-group" default="0" label="X_SEC_FEATUREFIRST" description="X_SECFEATUREFORSTDECR">

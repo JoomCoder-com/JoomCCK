@@ -9,7 +9,7 @@
 			</fieldset>
 			<fieldset name="GEN" label="FS_GENERAL">
 				<field name="field_id_email" key="id" type="meresourcesfields" size="1" multiple="false" default="" label="CR_EMAILFIELD" filters="'email','text'" description="CR_EMAILFIELDDESCR" />
-				<field name="new_usertype" type="usergroup" default="" multiple="true" label="CR_USERGROUP" description="CR_USERGROUPDESCR">
+				<field name="new_usertype" type="usergrouplist" default="" multiple="true" label="CR_USERGROUP" description="CR_USERGROUPDESCR">
 				</field>
 			</fieldset>
 			<fieldset name="reg" label="FS_REG">
