@@ -229,14 +229,14 @@ if($params->get('tmpl_core.item_follow_num'))
 	<?php echo $this->loadTemplate('tags');?>
 
 	<?php if($category || $author || $details || $params->get('tmpl_core.item_rating')): ?>
-		<div class="well article-info">
+		<div class="card article-info p-4">
 			<div class="row">
 				<?php if($params->get('tmpl_core.item_rating')):?>
-					<div class="col-md-2">
+					<div class="col-md-4">
 						<?php echo $item->rating;?>
 					</div>
 				<?php endif;?>
-				<div class="col-md-<?php echo ($params->get('tmpl_core.item_rating') ? 8 : 10);?>">
+				<div class="col-md-<?php echo ($params->get('tmpl_core.item_rating') ? 7 : 11);?>">
 					<small>
 						<dl class="dl-horizontal user-info">
 							<?php if($category):?>
@@ -258,7 +258,7 @@ if($params->get('tmpl_core.item_follow_num'))
 					</small>
 				</div>
 				<?php if($params->get('tmpl_core.item_author_avatar')):?>
-					<div class="col-md-2 avatar">
+					<div class="col-md-1 avatar">
 						<img src="<?php echo CCommunityHelper::getAvatar($item->user_id, $params->get('tmpl_core.item_author_avatar_width', 40), $params->get('tmpl_core.item_author_avatar_height', 40));?>" />
 					</div>
 				<?php endif;?>
