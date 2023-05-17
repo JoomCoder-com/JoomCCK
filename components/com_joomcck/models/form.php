@@ -148,11 +148,14 @@ class JoomcckModelForm extends MModelAdmin
 			$typeId = JFactory::getApplication()->input->getInt('type_id');
 		}
 
+
 		if(!$typeId && $itemId)
 		{
 			$item   = $this->getItem();
 			$typeId = $item->type_id;
 		}
+		
+
 
 		if(!$typeId)
 		{

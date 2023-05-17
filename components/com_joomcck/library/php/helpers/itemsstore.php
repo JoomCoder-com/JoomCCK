@@ -56,6 +56,9 @@ class ItemsStore
 
 	static public function getType($type_id)
 	{
+
+
+
 		if(! isset(self::$types[$type_id]))
 		{
 			self::$types[$type_id] = MModelBase::getInstance('Form', 'JoomcckModel')->getRecordType($type_id);

@@ -34,10 +34,13 @@ class JoomcckViewRecord extends MViewBase
 
 		$app->input->set('section_id', $item->section_id);
 
+
 		if(!$this->_checkItemAccess($item, $section))
 		{
 			return;
 		}
+
+
 
 		$type = ItemsStore::getType($item->type_id);
 
@@ -49,6 +52,8 @@ class JoomcckViewRecord extends MViewBase
 			return;
 		}
 
+
+
 		if($section->published == 0)
 		{
 
@@ -56,6 +61,7 @@ class JoomcckViewRecord extends MViewBase
 
 			return;
 		}
+
 
 		if(!$section->params->get('general.status', 1))
 		{
@@ -65,6 +71,8 @@ class JoomcckViewRecord extends MViewBase
 
 			return;
 		}
+
+
 
 		if(!in_array($section->access, $user->getAuthorisedViewLevels()) && !MECAccess::allowRestricted($user, $section))
 		{
@@ -110,6 +118,8 @@ class JoomcckViewRecord extends MViewBase
 			$this->tmpl_params['record'] = CTmpl::prepareTemplate('default_record_', 'properties.tmpl_article', $type->params);
 		}
 
+
+
 		$item                    = $model->_prepareItem($item, 'full');
 		$this->fields_keys_by_id = MModelBase::getInstance('Records', 'JoomcckModel')->getKeys($section);
 
@@ -150,6 +160,8 @@ class JoomcckViewRecord extends MViewBase
 			}
 		}
 
+
+
 		$cat_id = $app->input->getInt('cat_id', @$item->category_id);
 		if($cat_id)
 		{
@@ -187,6 +199,8 @@ class JoomcckViewRecord extends MViewBase
 				JFactory::getApplication()->enqueueMessage(JText::sprintf('CFORMATERNOTFOUND', $formatter),'warning');
 			}
 		}
+
+
 
 		$model->hit($item, $section->id);
 		ATlog::log((int)$this->item->id, ATlog::REC_VIEW);
@@ -333,11 +347,21 @@ class JoomcckViewRecord extends MViewBase
 			$error = FALSE;
 		}
 
+
+
 		$ctreated = JFactory::getDate($item->ctime)->toUnix();
-		$expire   = JFactory::getDate($item->extime)->toUnix();
+		$expire   = !is_null($item->extime) ? JFactory::getDate($item->extime)->toUnix() : null;
 		$now      = JFactory::getDate()->toUnix();
 
-		if(($now > $expire && ($item->extime != '0000-00-00 00:00:00' || !is_null($this->extime))) && !in_array($section->params->get('general.show_past_records'), $user->getAuthorisedViewLevels()) && !MECAccess::allowRestricted($user, $section))
+
+		if( !is_null($expire) &&
+			(
+				($item->extime != '0000-00-00 00:00:00' || !is_null($this->extime)) &&
+				$now > $expire
+			) &&
+			!in_array($section->params->get('general.show_past_records'), $user->getAuthorisedViewLevels()) &&
+			!MECAccess::allowRestricted($user, $section)
+		)
 		{
 			echo JText::_('CWARNING_RECORD_EXPIRED');
 			$error = FALSE;

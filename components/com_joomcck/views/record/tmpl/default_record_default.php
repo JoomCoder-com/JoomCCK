@@ -20,19 +20,7 @@ $details = array();
 $started = FALSE;
 $i = $o = 0;
 
-?>
-<style>
-	.dl-horizontal dd {
-		margin-bottom: 10px;
-	}
 
-.line-brk {
-	margin-left: 0px !important;
-}
-<?php echo $params->get('tmpl_params.css');?>
-</style>
-
-<?php
 if($params->get('tmpl_core.item_categories') && $item->categories_links)
 {
 	$category[] = sprintf('<dt>%s<dt> <dd>%s<dd>', (count($item->categories_links) > 1 ? JText::_('CCATEGORIES') : JText::_('CCATEGORY')), implode(', ', $item->categories_links));
@@ -84,8 +72,19 @@ if($params->get('tmpl_core.item_follow_num'))
 {
 	$details[] = sprintf('%s: %s', JText::_('CFOLLOWERS'), $item->subscriptions_num);
 }
-?>
 
+
+?>
+<style>
+	.dl-horizontal dd {
+		margin-bottom: 10px;
+	}
+
+.line-brk {
+	margin-left: 0px !important;
+}
+<?php echo $params->get('tmpl_params.css');?>
+</style>
 <article class="<?php echo $this->appParams->get('pageclass_sfx')?><?php if($item->featured) echo ' article-featured' ?>">
 	<?php if(!$this->print):?>
 		<div class="float-end controls">
@@ -116,7 +115,7 @@ if($params->get('tmpl_core.item_follow_num'))
 	<?php endif;?>
 	<?php if($params->get('tmpl_core.item_title')):?>
 		<?php if($this->type->params->get('properties.item_title')):?>
-			<div class="page-header">
+			<div class="page-header mb-3">
 				<<?php echo $params->get('tmpl_params.title_tag', 'h1')?>>
 					<?php echo $item->title?>
 					<?php echo CEventsHelper::showNum('record', $item->id);?>
