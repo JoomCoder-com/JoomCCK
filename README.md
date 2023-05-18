@@ -2,6 +2,8 @@
   <img src="https://github.com/JoomCoder-com/JoomCCK/assets/6179568/c1f4e96d-41d2-4a14-8471-57a4462cc731" alt="JoomCCK is a Content Construction Kit for Joomla CMS"/>
 </p>
 
+<p align="center"><img  alt="Supported PHP version" src="https://img.shields.io/badge/PHP-v8.1%2B-green"/> <img  alt="Supported PHP version" src="https://img.shields.io/badge/Joomla!-v4.2%2B-blue"/> <img  alt="Supported Bootstrap version" src="https://img.shields.io/badge/Bootstrap-v5+-blue"/> <img alt="GitHub all releases downloads" src="https://img.shields.io/github/downloads/JoomCoder-com/JoomCCK/total"> <img alt="GitHub issues" src="https://img.shields.io/github/issues/joomCoder-com/JoomCCK"></p>
+
 Advanced CCK for Joomla 4+ **(based on Cobalt CCK v9)**
 
 ![joomcck-dashboard](https://user-images.githubusercontent.com/6179568/233794958-ab84da42-6ec3-4ceb-90fe-33518795b3df.png)
