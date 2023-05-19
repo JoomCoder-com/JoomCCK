@@ -22,6 +22,7 @@ $res    = $lang->load('com_joomcck', JPATH_ROOT . '/components/com_joomcck');
 $section->id  = $params->get('depends_on_cat', 0) ? $app->input->getInt('section_id') : $params->get('section_id');
 $category->id = $app->input->getInt('cat_id');
 
+
 if($params->get('show_section_name'))
 {
 	JModelLegacy::addIncludePath(JPATH_ROOT . '/components/com_joomcck/models');
@@ -31,6 +32,7 @@ if($params->get('show_section_name'))
 }
 
 $list = modJoomcckTagcloudHelper::getTags($section, $params, $category->id);
+
 
 if(!$list)
 {
