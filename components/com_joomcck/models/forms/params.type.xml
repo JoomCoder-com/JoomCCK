@@ -335,7 +335,7 @@
 	</fields>
 	<fields name="comments">
 		<fieldset name="comments" label="X_COMMPROVIDER" description="X_COMMPROVIDERDESCR">
-			<field name="comments" type="cckcomments" default="1" label="X_COMMPROV" />
+			<field name="comments" type="cckcomments" class="form-select" default="1" label="X_COMMPROV" />
 		</fieldset>
 	</fields>
 	<fields name="emerald" addfieldpath="/components/com_emerald/models/fields/">
