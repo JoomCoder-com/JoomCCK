@@ -8,6 +8,9 @@
  */
 
 defined('_JEXEC') or die('Restricted access');
+
+JHTML::_('bootstrap.tooltip', '*[rel^="tooltip"]');
+
 $filters = [];
 if($displayData->state->get('filter.search')) {
 	$filters['filter.search'] = 'filter.search';
@@ -32,12 +35,12 @@ if(is_array($displayData->_filters)){
     <div class="input-group">
         <input type="text" class="form-control" aria-label="<?php echo JText::_('CSEARCHPLACEHOLDER'); ?>" placeholder="<?php echo JText::_('CSEARCHPLACEHOLDER'); ?>" name="filter_search" id="filter_search" value="<?php echo $displayData->state->get('filter.search'); ?>"/>
 	    <?php if(!empty($displayData->_filters)): ?>
-            <button type="button" class="btn btn-outline-secondary" data-bs-toggle="collapse" rel="tooltip" data-bs-target="#list-filters-box" data-original-title="<?php echo JText::_('CFILTER'); ?>">
+            <button type="button" class="btn btn-outline-secondary" data-bs-toggle="collapse" rel="tooltip" data-bs-target="#list-filters-box" data-bs-title="<?php echo JText::_('CFILTER'); ?>">
 			    <?php echo HTMLFormatHelper::icon('funnel.png'); ?>
             </button>
 	    <?php endif; ?>
 	    <?php if($filters): ?>
-            <button rel="tooltip" class="btn btn-outline-warning" type="button" id="cob-filters-reset" data-original-title="<?php echo JText::_('JSEARCH_FILTER_CLEAR'); ?>">
+            <button rel="tooltip" class="btn btn-outline-warning" type="button" id="cob-filters-reset" data-bs-title="<?php echo JText::_('JSEARCH_FILTER_CLEAR'); ?>">
 			    <?php echo HTMLFormatHelper::icon('cross.png'); ?>
             </button>
 	    <?php endif; ?>

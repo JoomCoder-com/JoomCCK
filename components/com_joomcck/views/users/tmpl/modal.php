@@ -20,12 +20,12 @@ $listDirn	= $this->escape($this->state->get('list.direction'));
 	<div class="controls mb-3">
 		<div class="input-group">
 			<input class="form-control form-control-sm" type="text" name="filter_search"	id="filter_search" value="<?php echo $this->state->get('filter.search'); ?>"/>
-			<button class="btn btn-outline-dark btn-sm" type="submit" rel="tooltip" data-original-title="<?php echo JText::_('JSEARCH_FILTER_SUBMIT'); ?>">
+			<button class="btn btn-outline-dark btn-sm" type="submit" rel="tooltip" data-bs-title="<?php echo JText::_('JSEARCH_FILTER_SUBMIT'); ?>">
 				<?php echo HTMLFormatHelper::icon('magnifier.png');  ?>
 			</button>
 			<?php if($this->state->get('filter.search')) :?>
 			<button class="btn btn-sm <?php echo ($this->state->get('filter.search') ? ' btn-outline-warning' : 'btn-outline-success'); ?>" type="button"
-				onclick="Joomcck.setAndSubmit('filter_search', '');" rel="tooltip" data-original-title="<?php echo JText::_('JSEARCH_FILTER_CLEAR'); ?>">
+				onclick="Joomcck.setAndSubmit('filter_search', '');" rel="tooltip" data-bs-title="<?php echo JText::_('JSEARCH_FILTER_CLEAR'); ?>">
 				<?php echo HTMLFormatHelper::icon('eraser.png');  ?>
 			</button>
 			<?php endif; ?>

@@ -8,6 +8,8 @@
  */
 defined('_JEXEC') or die('Restricted access');
 
+JHTML::_('bootstrap.tooltip', '*[rel^="tooltip"]');
+
 $user = JFactory::getUser();
 $userId = $user->get('id');
 
@@ -64,20 +66,20 @@ $listDirn = $this->escape($this->state->get('list.direction'));
 				<td><?php echo JHTML::_('grid.id', $i, $item->id); ?></td>
 				<td>
 					<small>
-						<a href="#" rel="tooltip" data-original-title="<?php echo JText::_('CFILTERBYVOTE'); ?>" onclick="Joomcck.setAndSubmit('filter_votes', '<?php echo $item->vote ?>')">
+						<a href="#" rel="tooltip" data-bs-title="<?php echo JText::_('CFILTERBYVOTE'); ?>" onclick="Joomcck.setAndSubmit('filter_votes', '<?php echo $item->vote ?>')">
 							<?php echo $this->escape($item->vote); ?>
 						</a>
 					</small>
 				</td>
 				<td>
 					<small>
-						<a href="#" rel="tooltip" data-original-title="<?php echo JText::_('CFILTERBYVOTETYPE'); ?>" onclick="Joomcck.setAndSubmit('filter_type', '<?php echo $item->ref_type ?>')">
+						<a href="#" rel="tooltip" data-bs-title="<?php echo JText::_('CFILTERBYVOTETYPE'); ?>" onclick="Joomcck.setAndSubmit('filter_type', '<?php echo $item->ref_type ?>')">
 							<?php echo $this->escape($item->ref_type); ?>
 						</a>
 					</small>
 				</td>
 				<td>
-					<a href="javascript:void(0);" rel="tooltip" data-original-title="<?php echo JText::_('CFILTERBYRECORD'); ?>"
+					<a href="javascript:void(0);" rel="tooltip" data-bs-title="<?php echo JText::_('CFILTERBYRECORD'); ?>"
 					   onclick="document.getElementById('filter_search').value='record:<?php echo $item->record_id; ?>'; document.adminForm.submit();">
 						<?php echo $item->record ?>
 					</a>
@@ -94,18 +96,18 @@ $listDirn = $this->escape($this->state->get('list.direction'));
 						?>
 						<?php if($user->get('username')): ?>
 							<?php echo JHtml::link('javascript:void(0);', $user->get('username'), array(
-								'rel' => "tooltip", 'data-original-title' => JText::_('CFILTERBYUSER'), 'onclick' => 'document.getElementById(\'filter_search\').value=\'user:' . $item->user_id . '\'; document.adminForm.submit();'
+								'rel' => "tooltip", 'data-bs-title' => JText::_('CFILTERBYUSER'), 'onclick' => 'document.getElementById(\'filter_search\').value=\'user:' . $item->user_id . '\'; document.adminForm.submit();'
 							)) ?>
 							<?php //echo JHtml::_('ip.block_user', $item->user_id, $item->id);?>
 						<?php else: ?>
-							<?php echo $item->username ? $item->username . " (<a href=\"javascript:void(0);\" rel=\"tooltip\" data-original-title=\"" . JText::_('CFILTEREMAIL') . "\" onclick=\"document.getElementById('filter_search').value='email:{$item->useremail}'; document.adminForm.submit();\">{$item->useremail}</a>) " : Jtext::_('CANONYMOUS') ?>
+							<?php echo $item->username ? $item->username . " (<a href=\"javascript:void(0);\" rel=\"tooltip\" data-bs-title=\"" . JText::_('CFILTEREMAIL') . "\" onclick=\"document.getElementById('filter_search').value='email:{$item->useremail}'; document.adminForm.submit();\">{$item->useremail}</a>) " : Jtext::_('CANONYMOUS') ?>
 						<?php endif; ?>
 
 						<?php if($item->ip): ?>
 							<div>
 								<?php echo JHtml::_('ip.country', $item->ip); ?>
 								<?php echo JHTML::link('javascript:void(0);', $item->ip, array(
-									'rel' => "tooltip", 'data-original-title' => JText::_('CFILTERBYIP'), 'onclick' => 'document.getElementById(\'filter_search\').value=\'ip:' . $item->ip . '\'; document.adminForm.submit();'
+									'rel' => "tooltip", 'data-bs-title' => JText::_('CFILTERBYIP'), 'onclick' => 'document.getElementById(\'filter_search\').value=\'ip:' . $item->ip . '\'; document.adminForm.submit();'
 								)); ?>
 								<?php //echo JHtml::_('ip.block_ip', $item->ip, $item->id);?>
 							</div>

@@ -85,7 +85,7 @@ if(in_array($this->params->get('params.adr_view'), $this->user->getAuthorisedVie
 			{
 				$text = str_replace(array('[VALUE]', '[NAME]'), array($contact,	JText::_($contacts[$name]['label'])), $contacts[$name]['patern']);
 			}
-			$c[] = '<abbr title="'.JText::_($contacts[$name]['label']).'" rel="tooltip" data-original-title="'.JText::_($contacts[$name]['label']).'">
+			$c[] = '<abbr title="'.JText::_($contacts[$name]['label']).'" rel="tooltip" data-bs-title="'.JText::_($contacts[$name]['label']).'">
 				<img src="'.str_replace(array('[VALUE]', '[NAME]'), array($contact, JText::_($contacts[$name]['label'])), $contacts[$name]['icon']).'">
 				 '.\Joomla\String\StringHelper::substr(JText::_($contacts[$name]['label']), 0, 1).':</abbr> '.$text;
 		}
@@ -99,7 +99,7 @@ if(in_array($this->params->get('params.adr_view'), $this->user->getAuthorisedVie
 				continue;
 			if(in_array(trim($link), array('http://', 'http:')))
 				continue;
-			$l[] = '<abbr title="'.JText::_($links[$name]['label']).'" rel="tooltip" data-original-title="'.JText::_($links[$name]['label']).'">
+			$l[] = '<abbr title="'.JText::_($links[$name]['label']).'" rel="tooltip" data-bs-title="'.JText::_($links[$name]['label']).'">
 				<img src="'.$links[$name]['icon'].'">'.\Joomla\String\StringHelper::substr(JText::_($links[$name]['label']), 0, 1).':</abbr>
 				<a rel="nofollow" target="_blank" href="'.$link.'">'.($this->params->get('params.links_labels') ?  $link : JText::_($links[$name]['label'])).'</a>';
 		}

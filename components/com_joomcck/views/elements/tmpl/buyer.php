@@ -10,6 +10,9 @@
 use Joomla\CMS\HTML\HTMLHelper;
 
 defined('_JEXEC') or die();
+
+JHTML::_('bootstrap.tooltip', '*[rel^="tooltip"]');
+
 ?>
 
 <?php
@@ -42,14 +45,14 @@ HTMLHelper::_('bootstrap.collapse');
             <input class="col-md-3" type="text" name="filter_search" id="filter_search"
                    value="<?php echo $this->state->get('filter.search'); ?>"/>
             <button class="btn" type="submit" rel="tooltip"
-                    data-original-title="<?php echo JText::_('JSEARCH_FILTER_SUBMIT'); ?>">
+                    data-bs-title="<?php echo JText::_('JSEARCH_FILTER_SUBMIT'); ?>">
 				<?php echo HTMLFormatHelper::icon('magnifier.png'); ?>
             </button>
 			<?php if ($this->state->get('filter.search')) : ?>
                 <button class="btn<?php echo($this->state->get('filter.search') ? ' btn-warning' : null); ?>"
                         type="button"
                         onclick="Joomcck.setAndSubmit('filter_search', '');" rel="tooltip"
-                        data-original-title="<?php echo JText::_('JSEARCH_FILTER_CLEAR'); ?>">
+                        data-bs-title="<?php echo JText::_('JSEARCH_FILTER_CLEAR'); ?>">
 					<?php echo HTMLFormatHelper::icon('eraser.png'); ?>
                 </button>
 			<?php endif; ?>

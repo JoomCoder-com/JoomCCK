@@ -7,6 +7,9 @@
  * @license GNU/GPL http://www.gnu.org/copyleft/gpl.html
  */
 defined('_JEXEC') or die('Restricted access');
+
+JHTML::_('bootstrap.tooltip', '*[rel^="tooltip"]');
+
 $started = false;
 $params = $this->tmpl_params;
 if($params->get('tmpl_params.form_grouping_type', 0))
@@ -122,7 +125,7 @@ $k = 0;
 				<?php endif;?>
 
 				<?php echo JText::_($this->tmpl_params->get('tmpl_core.form_label_title', 'Title')) ?>
-				<span class="float-end" rel="tooltip" data-original-title="<?php echo JText::_('CREQUIRED')?>">
+				<span class="float-end" rel="tooltip" data-bs-title="<?php echo JText::_('CREQUIRED')?>">
 					<?php echo HTMLFormatHelper::icon('asterisk-small.png');  ?></span>
 			</label>
 			<div class="controls">
@@ -142,7 +145,7 @@ $k = 0;
 				<?php endif;?>
 
 				<?php echo JText::_($this->tmpl_params->get('tmpl_core.form_label_anywhere', 'Where to post')) ?>
-				<span class="float-end" rel="tooltip" data-original-title="<?php echo JText::_('CREQUIRED')?>"><?php echo HTMLFormatHelper::icon('asterisk-small.png');  ?></span>
+				<span class="float-end" rel="tooltip" data-bs-title="<?php echo JText::_('CREQUIRED')?>"><?php echo HTMLFormatHelper::icon('asterisk-small.png');  ?></span>
 			</label>
 			<div class="controls">
 				<div id="field-alert-anywhere" class="alert alert-danger" style="display:none"></div>
@@ -177,7 +180,7 @@ $k = 0;
 					<?php echo JText::_($this->tmpl_params->get('tmpl_core.form_label_category', 'Category')) ?>
 
 					<?php if(!$this->type->params->get('submission.first_category', 0) && in_array($this->type->params->get('submission.allow_category', 1), $this->user->getAuthorisedViewLevels())) : ?>
-						<span class="float-end" rel="tooltip" data-original-title="<?php echo JText::_('CREQUIRED')?>"><?php echo HTMLFormatHelper::icon('asterisk-small.png');  ?></span>
+						<span class="float-end" rel="tooltip" data-bs-title="<?php echo JText::_('CREQUIRED')?>"><?php echo HTMLFormatHelper::icon('asterisk-small.png');  ?></span>
 					<?php endif;?>
 				</label>
 			<?php endif;?>
@@ -202,7 +205,7 @@ $k = 0;
 				<?php echo JText::_($this->tmpl_params->get('tmpl_core.form_label_category', 'Category')) ?>
 
 				<?php if(!$this->type->params->get('submission.first_category', 0) && in_array($this->type->params->get('submission.allow_category', 1), $this->user->getAuthorisedViewLevels())) : ?>
-					<span class="float-end" rel="tooltip" data-original-title="<?php echo JText::_('CREQUIRED')?>"><?php echo HTMLFormatHelper::icon('asterisk-small.png');  ?></span>
+					<span class="float-end" rel="tooltip" data-bs-title="<?php echo JText::_('CREQUIRED')?>"><?php echo HTMLFormatHelper::icon('asterisk-small.png');  ?></span>
 				<?php endif;?>
 			</label>
 			<div class="controls">
@@ -222,7 +225,7 @@ $k = 0;
 
 				<?php echo JText::_($this->tmpl_params->get('tmpl_core.form_label_ucategory', 'Category')) ?>
 
-				<span class="float-end" rel="tooltip" data-original-title="<?php echo JText::_('CREQUIRED')?>"><?php echo HTMLFormatHelper::icon('asterisk-small.png');  ?></span>
+				<span class="float-end" rel="tooltip" data-bs-title="<?php echo JText::_('CREQUIRED')?>"><?php echo HTMLFormatHelper::icon('asterisk-small.png');  ?></span>
 			</label>
 			<div class="controls">
 				<div id="field-alert-ucat" class="alert alert-danger" style="display:none"></div>
@@ -239,7 +242,7 @@ $k = 0;
 		<div class="control-group odd<?php echo $k = 1 - $k ?>">
 			<label id="jform_multirating-lbl" class="control-label" for="jform_multirating" >
 				<?php echo strip_tags($this->form->getLabel('multirating'));?>
-				<span class="float-end" rel="tooltip" data-original-title="<?php echo JText::_('CREQUIRED')?>"><?php echo HTMLFormatHelper::icon('asterisk-small.png');  ?></span>
+				<span class="float-end" rel="tooltip" data-bs-title="<?php echo JText::_('CREQUIRED')?>"><?php echo HTMLFormatHelper::icon('asterisk-small.png');  ?></span>
 			</label>
 			<div class="controls">
 				<div id="field-alert-rating" class="alert alert-danger" style="display:none"></div>
@@ -260,11 +263,11 @@ $k = 0;
 							
 						
 						<?php if ($field->required): ?>
-							<span class="float-end" rel="tooltip" data-original-title="<?php echo JText::_('CREQUIRED')?>"><?php echo HTMLFormatHelper::icon('asterisk-small.png');  ?></span>
+							<span class="float-end" rel="tooltip" data-bs-title="<?php echo JText::_('CREQUIRED')?>"><?php echo HTMLFormatHelper::icon('asterisk-small.png');  ?></span>
 						<?php endif;?>
 
 						<?php if ($field->description):?>
-							<span class="float-end" rel="tooltip" style="cursor: help;"  data-original-title="<?php echo htmlentities(($field->translateDescription ? JText::_($field->description) : $field->description), ENT_COMPAT, 'UTF-8');?>">
+							<span class="float-end" rel="tooltip" style="cursor: help;"  data-bs-title="<?php echo htmlentities(($field->translateDescription ? JText::_($field->description) : $field->description), ENT_COMPAT, 'UTF-8');?>">
 								<?php echo HTMLFormatHelper::icon('question-small-white.png');  ?>
 							</span>
 						<?php endif;?>
@@ -320,11 +323,11 @@ $k = 0;
 								<?php echo HTMLFormatHelper::icon($field->params->get('core.icon'));  ?>
 							<?php endif;?>
 							<?php if ($field->required): ?>
-								<span class="float-end" rel="tooltip" data-original-title="<?php echo JText::_('CREQUIRED')?>"><?php echo HTMLFormatHelper::icon('asterisk-small.png');  ?></span>
+								<span class="float-end" rel="tooltip" data-bs-title="<?php echo JText::_('CREQUIRED')?>"><?php echo HTMLFormatHelper::icon('asterisk-small.png');  ?></span>
 							<?php endif;?>
 
 							<?php if ($field->description):?>
-								<span class="float-end" rel="tooltip" style="cursor: help;" data-original-title="<?php echo htmlspecialchars(($field->translateDescription ? JText::_($field->description) : $field->description), ENT_COMPAT, 'UTF-8');?>">
+								<span class="float-end" rel="tooltip" style="cursor: help;" data-bs-title="<?php echo htmlspecialchars(($field->translateDescription ? JText::_($field->description) : $field->description), ENT_COMPAT, 'UTF-8');?>">
 									<?php echo HTMLFormatHelper::icon('question-small-white.png');  ?>
 								</span>
 							<?php endif;?>

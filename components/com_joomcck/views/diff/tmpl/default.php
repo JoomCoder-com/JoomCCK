@@ -7,6 +7,9 @@
  * @license GNU/GPL http://www.gnu.org/copyleft/gpl.html
  */
 defined('_JEXEC') or die();
+JHTML::_('bootstrap.tooltip', '*[rel^="tooltip"]');
+
+
 include_once JPATH_COMPONENT. DIRECTORY_SEPARATOR .'api.php';
 $back = NULL;
 $user = JFactory::getUser();
@@ -128,7 +131,7 @@ function _drawLine($field_title, $cur, $ver, $field = FALSE)
 		<td><?php echo _renderCol($cur, $field)?></td>
 		<td align="center" class="middlerow" nowrap="nowrap">
 			<?php if($cur):?>
-				<span class="btn btn-micro" rel="popover-left" data-original-title="<?php echo JText::_('CROAWDATA')?>" data-content="<?php echo str_replace('    ', '&nbsp;&nbsp;&nbsp;&nbsp;', nl2br(htmlspecialchars(print_r($cur, TRUE), ENT_COMPAT, 'UTF-8')));?>">
+				<span class="btn btn-micro" rel="popover-left" data-bs-title="<?php echo JText::_('CROAWDATA')?>" data-content="<?php echo str_replace('    ', '&nbsp;&nbsp;&nbsp;&nbsp;', nl2br(htmlspecialchars(print_r($cur, TRUE), ENT_COMPAT, 'UTF-8')));?>">
 					<?php echo HTMLFormatHelper::icon('control-180-small.png');  ?>
 				</span>
 			<?php else:?>
@@ -142,7 +145,7 @@ function _drawLine($field_title, $cur, $ver, $field = FALSE)
 			<?php endif;?>
 
 			<?php if($ver):?>
-				<span class="btn btn-micro" rel="popover-right" data-original-title="<?php echo JText::_('CROAWDATA')?>" data-content="<?php echo str_replace('    ', '&nbsp;&nbsp;&nbsp;&nbsp;', nl2br(htmlspecialchars(print_r($ver, TRUE), ENT_COMPAT, 'UTF-8')));?>">
+				<span class="btn btn-micro" rel="popover-right" data-bs-title="<?php echo JText::_('CROAWDATA')?>" data-content="<?php echo str_replace('    ', '&nbsp;&nbsp;&nbsp;&nbsp;', nl2br(htmlspecialchars(print_r($ver, TRUE), ENT_COMPAT, 'UTF-8')));?>">
 					<?php echo HTMLFormatHelper::icon('control-000-small.png');  ?>
 				</span>
 			<?php else:?>

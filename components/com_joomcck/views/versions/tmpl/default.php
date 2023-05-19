@@ -7,6 +7,9 @@
  * @license GNU/GPL http://www.gnu.org/copyleft/gpl.html
  */
 defined('_JEXEC') or die();
+
+JHTML::_('bootstrap.tooltip', '*[rel^="tooltip"]');
+
 $user = JFactory::getUser();
 $listOrder	= $this->state->get('list.ordering');
 $listDirn	= $this->state->get('list.direction');
@@ -68,9 +71,9 @@ if(!$back)
 						<?php echo $item->username;?>
 					</td>
 					<td>
-						<a rel="tooltip" data-original-title="Compare v.<?php echo $item->version;?>" href="<?php echo $url = JRoute::_('index.php?option=com_joomcck&view=diff&record_id=' . $item->record_id . '&version=' .$item->version.'&return=' . Url::back()); ?>">
+						<a rel="tooltip" data-bs-title="Compare v.<?php echo $item->version;?>" href="<?php echo $url = JRoute::_('index.php?option=com_joomcck&view=diff&record_id=' . $item->record_id . '&version=' .$item->version.'&return=' . Url::back()); ?>">
 							<?php echo trim(HTMLFormatHelper::icon('edit-diff.png'));?></a>
-						<a rel="tooltip" data-original-title="Rollback v.<?php echo $item->version;?>" href="<?php echo Url::task('records.rollback', $item->record_id.'&version='.$item->version); ?>">
+						<a rel="tooltip" data-bs-title="Rollback v.<?php echo $item->version;?>" href="<?php echo Url::task('records.rollback', $item->record_id.'&version='.$item->version); ?>">
 							<?php echo trim(HTMLFormatHelper::icon('arrow-merge-180-left.png'));?></a>
 					</td>
 				</tr>

@@ -1,4 +1,12 @@
-<?php defined('_JEXEC') or die(); 
+<?php
+/**
+ * Joomcck by joomcoder
+ * a component for Joomla! (http://www.joomla.org)
+ * Author Website: https://www.joomcoder.com/
+ * @copyright Copyright (C) 2020 joomcoder (https://www.joomcoder.com). All rights reserved.
+ * @license   GNU/GPL http://www.gnu.org/copyleft/gpl.html
+ */
+defined('_JEXEC') or die();
 $document = JFactory::getDocument();
 $document->addStyleSheet(JURI::root().'components/com_joomcck/library/css/style.css');
 ?>

@@ -1,4 +1,13 @@
 <?php
+/**
+ * Joomcck by joomcoder
+ * a component for Joomla! (http://www.joomla.org)
+ * Author Website: https://www.joomcoder.com/
+ * @copyright Copyright (C) 2020 joomcoder (https://www.joomcoder.com). All rights reserved.
+ * @license   GNU/GPL http://www.gnu.org/copyleft/gpl.html
+ */
+defined('_JEXEC') or die('Restricted access');
+JHTML::_('bootstrap.tooltip', '*[rel^="tooltip"]');
 
 class modJoomcckTagcloudHelper
 {
@@ -103,13 +112,13 @@ class modJoomcckTagcloudHelper
 			switch($params->get('item_tag_num', 0))
 			{
 				case '1':
-					$nums[$val->id] = array('rel' => "tooltip", 'data-original-title' => JText::_('CTAGHITS') . ': ' . $val->hits);
+					$nums[$val->id] = array('rel' => "tooltip", 'data-bs-title' => JText::_('CTAGHITS') . ': ' . $val->hits);
 				break;
 				case '2':
-					$nums[$val->id] = array('rel' => "tooltip", 'data-original-title' => JText::_('CTAGUSAGE') . ': ' . $val->r_usage);
+					$nums[$val->id] = array('rel' => "tooltip", 'data-bs-title' => JText::_('CTAGUSAGE') . ': ' . $val->r_usage);
 				break;
 				case '3':
-					$nums[$val->id] = array('rel' => "tooltip", 'data-original-title' => JText::_('CTAGHITS') . ': ' . $val->hits . ', ' . JText::_('CTAGUSAGE') . ': ' . $val->r_usage);
+					$nums[$val->id] = array('rel' => "tooltip", 'data-bs-title' => JText::_('CTAGHITS') . ': ' . $val->hits . ', ' . JText::_('CTAGUSAGE') . ': ' . $val->r_usage);
 				break;
 			}
 		}

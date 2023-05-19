@@ -7,6 +7,9 @@
  * @license GNU/GPL http://www.gnu.org/copyleft/gpl.html
  */
 defined('_JEXEC') or die();
+
+JHTML::_('bootstrap.tooltip', '*[rel^="tooltip"]');
+
 $back = NULL;
 $user = JFactory::getUser();
 if(JFactory::getApplication()->input->getBase64('return'))
@@ -55,7 +58,7 @@ $params = $this->section->params;
 		<?php endif; ?>
 		<?php if($params->get('personalize.allow_change_descr', 1)):?>
 		<div class="control-group">
-			<div class="control-label col-md-2"><span rel="tooltip" data-original-title="<?php echo JText::_('CMYHOMEPAGEMSGDESCR');?>"><?php echo JText::_('CMYHOMEPAGEMSG'); ?></span></div>
+			<div class="control-label col-md-2"><span rel="tooltip" data-bs-title="<?php echo JText::_('CMYHOMEPAGEMSGDESCR');?>"><?php echo JText::_('CMYHOMEPAGEMSG'); ?></span></div>
 			<div class="controls">
 				<textarea id="jform_description" name="jform[description]" cols="30" rows="4"><?php echo $this->options->get('description');?></textarea>
 			</div>

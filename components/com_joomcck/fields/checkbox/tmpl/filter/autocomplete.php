@@ -7,11 +7,14 @@
  * @license GNU/GPL http://www.gnu.org/copyleft/gpl.html
  */
 defined('_JEXEC') or die();
+
+JHTML::_('bootstrap.tooltip', '*[rel^="tooltip"]');
+
 $default = $this->default;
 ?>
 
 <?php if($this->params->get('params.total_limit') != 1):?>
-<select name="filters[<?php echo $this->key;?>][by]" data-original-title="<?php echo JText::_('CSELECTFILTERCONDITION')?>" rel="tooltip">
+<select name="filters[<?php echo $this->key;?>][by]" data-bs-title="<?php echo JText::_('CSELECTFILTERCONDITION')?>" rel="tooltip">
 	<option value="any" <?php if(isset($this->value['by']) && $this->value['by'] == 'any') echo 'selected="selected"';?>><?php echo JText::_('CRECORDHASANYVALUE')?></option>
 	<option value="all" <?php if(isset($this->value['by']) && $this->value['by'] == 'all') echo 'selected="selected"';?>><?php echo JText::_('CRECORDHASALLVALUES')?></option>
 </select>

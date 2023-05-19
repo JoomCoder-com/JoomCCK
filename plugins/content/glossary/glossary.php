@@ -11,6 +11,9 @@
 use Joomla\CMS\Factory;
 
 defined('_JEXEC') or die('Restricted access');
+
+JHTML::_('bootstrap.tooltip', '*[rel^="tooltip"]');
+
 jimport('joomla.plugin.plugin');
 require_once JPATH_ROOT . '/components/com_joomcck/library/php/helpers/helper.php';
 
@@ -92,12 +95,12 @@ class plgContentGlossary extends JPlugin
 					$lang->load('com_joomcck', JPATH_ROOT. DIRECTORY_SEPARATOR .'components'. DIRECTORY_SEPARATOR .'com_joomcck');
 					$nums = " (".JText::_('CHITS').': '.$num[$vall->title].")";
 				}
-				$string = sprintf('<a href="%s"><span data-placement="top" rel="popover" data-original-title="%s" data-content="%s" class="hasTooltip glossarydef">%s</span></a>', 
+				$string = sprintf('<a href="%s"><span data-placement="top" rel="popover" data-bs-title="%s" data-content="%s" class="hasTooltip glossarydef">%s</span></a>',
 					$link, htmlspecialchars($vall->field_value, ENT_COMPAT, 'UTF-8'), htmlspecialchars($vall->field_value, ENT_COMPAT, 'UTF-8'), $title);
 			}
 			else
 			{
-				$string = sprintf('<span data-placement="top" rel="popover" data-original-title="%s" data-content="%s" class="hasTooltip glossarydef">\\1</span>', 
+				$string = sprintf('<span data-placement="top" rel="popover" data-bs-title="%s" data-content="%s" class="hasTooltip glossarydef">\\1</span>',
 					htmlspecialchars($vall->field_value, ENT_COMPAT, 'UTF-8'), 
 					htmlspecialchars($vall->field_value, ENT_COMPAT, 'UTF-8')
 				);

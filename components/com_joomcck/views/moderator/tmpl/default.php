@@ -7,6 +7,9 @@
  * @license GNU/GPL http://www.gnu.org/copyleft/gpl.html
  */
 defined('_JEXEC') or die();
+
+JHTML::_('bootstrap.tooltip', '*[rel^="tooltip"]');
+
 ?>
 <h1><?php echo isset($this->item->id) ? JText::_('CEDITMODER') : JText::_('CADDMODER');?></h1>
 
@@ -110,7 +113,7 @@ defined('_JEXEC') or die();
                                 <li class="list-group-item">
                                     <input class="form-check-input me-1" id="<?php echo $field->id ?>" type="checkbox" value="<?php echo $field->value ?>" name="<?php echo $field->name ?>">
 
-                                    <label class="form-check-label" for="<?php echo $field->id ?>"><?php echo $field->description ? 'rel="tooltip" data-original-title="'.htmlentities(JText::_($field->description), ENT_QUOTES, 'UTF-8').'"' : NULL; ?><?php echo strip_tags($field->label); ?></label>
+                                    <label class="form-check-label" for="<?php echo $field->id ?>"><?php echo $field->description ? 'rel="tooltip" data-bs-title="'.htmlentities(JText::_($field->description), ENT_QUOTES, 'UTF-8').'"' : NULL; ?><?php echo strip_tags($field->label); ?></label>
                                 </li>
 	                        <?php endforeach; ?>
                         </ul>

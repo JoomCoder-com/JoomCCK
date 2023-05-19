@@ -8,6 +8,7 @@
  * @license   GNU/GPL http://www.gnu.org/copyleft/gpl.html
  */
 defined('_JEXEC') or die('Restricted access');
+JHTML::_('bootstrap.tooltip', '*[rel^="tooltip"]');
 ?>
 <style>
 	.filter-icon {
@@ -136,12 +137,12 @@ defined('_JEXEC') or die('Restricted access');
 				<?php endif; ?>
 				<?php echo $filter->label; ?>
 				<?php if($filter->params->get('params.filter_descr')): ?>
-					<small rel="tooltip" data-original-title="<?php echo JText::_($filter->params->get('params.filter_descr')); ?>"><i class="icon-help"></i></small>
+					<small rel="tooltip" data-bs-title="<?php echo JText::_($filter->params->get('params.filter_descr')); ?>"><i class="icon-help"></i></small>
 				<?php endif; ?>
 			</legend>
 			<div class="well well-small<?php echo ($filter->isFilterActive() ? ' active' : NULL) ?>">
 				<?php if($filter->isFilterActive()): ?>
-					<!-- <img class="filter-close" onclick="Joomcck.cleanFilter('filter_<?php echo $filter->key ?>')" rel="tooltip" data-original-title="<?php echo JText::_('CDELETEFILTER') ?>" src="<?php echo JUri::root(TRUE) ?>/media/com_joomcck/icons/16/cross-circle.png">-->
+					<!-- <img class="filter-close" onclick="Joomcck.cleanFilter('filter_<?php echo $filter->key ?>')" rel="tooltip" data-bs-title="<?php echo JText::_('CDELETEFILTER') ?>" src="<?php echo JUri::root(TRUE) ?>/media/com_joomcck/icons/16/cross-circle.png">-->
 				<?php endif; ?>
 				<?php echo $f; ?>
 			</div>

@@ -7,6 +7,9 @@
  * @license GNU/GPL http://www.gnu.org/copyleft/gpl.html
  */
 defined('_JEXEC') or die();
+
+JHTML::_('bootstrap.tooltip', '*[rel^="tooltip"]');
+
 $default = new JRegistry($this->value);
 $contacts = $links = $link_list = $contact_list = $adr_list = array();
 $defaultmarker = $default->get('position.marker', $this->params->get('params.map_icon_src.icon'));
@@ -124,7 +127,7 @@ $lang = $lang[0];
 		<?php endif; ?>
 
 		<?php if($this->params->get('params.map_require')):?>
-			<?php echo JHtml::image(JURI::root() . 'media/com_joomcck/icons/16/asterisk-small.png', 'Required', array('align'=>'absmiddle', 'rel' => 'tooltip', 'data-original-title' => JText::_('CREQUIRED')));?>
+			<?php echo JHtml::image(JURI::root() . 'media/com_joomcck/icons/16/asterisk-small.png', 'Required', array('align'=>'absmiddle', 'rel' => 'tooltip', 'data-bs-title' => JText::_('CREQUIRED')));?>
 		<?php endif; ?>
 
 		<?php echo JText::_('G_MAP');?>

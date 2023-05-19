@@ -8,6 +8,9 @@
  */
 
 defined('_JEXEC') or die();
+
+JHTML::_('bootstrap.tooltip', '*[rel^="tooltip"]');
+
 JHtml::_('dropdown.init');
 ?>
 <br />
@@ -16,13 +19,13 @@ JHtml::_('dropdown.init');
 		<table class="float-end">
 			<tr>
 				<td width="20px">
-					<div class="alert alert-info" style="margin-bottom: 0px;" rel="tipbottom" data-original-title="<?php echo JText::_('CPOSTAUTHOR')?>"></div>
+					<div class="alert alert-info" style="margin-bottom: 0px;" rel="tipbottom" data-bs-title="<?php echo JText::_('CPOSTAUTHOR')?>"></div>
 				</td>
 				<td width="20px">
-					<div class="alert alert-success" style="margin-bottom: 0px;" rel="tipbottom" data-original-title="<?php echo JText::_('CPOSTSUBSCR')?>"></div>
+					<div class="alert alert-success" style="margin-bottom: 0px;" rel="tipbottom" data-bs-title="<?php echo JText::_('CPOSTSUBSCR')?>"></div>
 				</td>
 				<td width="20px">
-					<div class="alert alert-success" style="margin-bottom: 0px; background-color: #fff; border-color: #cccccc" rel="tipbottom" data-original-title="<?php echo JText::_('CPOSTEVERYONE')?>"></div>
+					<div class="alert alert-success" style="margin-bottom: 0px; background-color: #fff; border-color: #cccccc" rel="tipbottom" data-bs-title="<?php echo JText::_('CPOSTEVERYONE')?>"></div>
 				</td>
 			</tr>
 		</table>

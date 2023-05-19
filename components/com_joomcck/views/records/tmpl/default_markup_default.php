@@ -7,6 +7,9 @@
  * @license   GNU/GPL http://www.gnu.org/copyleft/gpl.html
  */
 defined('_JEXEC') or die('Restricted access');
+
+JHTML::_('bootstrap.tooltip', '*[rel^="tooltip"]');
+
 $user_id = $this->input->getInt('user_id', 0);
 $app     = JFactory::getApplication();
 
@@ -106,7 +109,7 @@ $current_user = JFactory::getUser($this->input->getInt('user_id', $this->user->g
 							<?php if (in_array($markup->get('filters.show_more'), $this->user->getAuthorisedViewLevels())): ?>
                                 <button type="button" class="btn btn-sm btn-light border" data-bs-toggle="collapse"
                                         data-bs-target="#filter-collapse" rel="tooltip"
-                                        data-original-title="<?php echo JText::_('CMORESEARCHOPTIONS') ?>">
+                                        data-bs-title="<?php echo JText::_('CMORESEARCHOPTIONS') ?>">
 									<?php echo HTMLFormatHelper::icon('binocular.png'); ?>
                                 </button>
 							<?php endif; ?>
@@ -161,7 +164,7 @@ $current_user = JFactory::getUser($this->input->getInt('user_id', $this->user->g
 									}
 									else
 									{
-										$o[] = '<a  class="dropdown-item" class="disabled" rel="tooltipright" data-original-title="' . JText::sprintf($markup->get('menu.menu_user_register', 'Register or login to submit %s'), JText::_($type->name)) . '">' . JText::_($type->name) . '</a>';
+										$o[] = '<a  class="dropdown-item" class="disabled" rel="tooltipright" data-bs-title="' . JText::sprintf($markup->get('menu.menu_user_register', 'Register or login to submit %s'), JText::_($type->name)) . '">' . JText::_($type->name) . '</a>';
 									}
 									if ($o)
 									{
@@ -191,7 +194,7 @@ $current_user = JFactory::getUser($this->input->getInt('user_id', $this->user->g
                                     <a
 										<?php if (!(in_array($submit->params->get('submission.submission'), $this->user->getAuthorisedViewLevels()) || MECAccess::allowNew($submit, $this->section))): ?>
                                             class="disabled tip-bottom  btn btn-light border btn-sm" rel="tooltip" href="#"
-                                            data-original-title="<?php echo JText::sprintf($markup->get('menu.menu_user_register', 'Register or login to submit <b>%s</b>'), JText::_($submit->name)) ?>"
+                                            data-bs-title="<?php echo JText::sprintf($markup->get('menu.menu_user_register', 'Register or login to submit <b>%s</b>'), JText::_($submit->name)) ?>"
 										<?php else: ?>
                                             class="btn btn-light border btn-sm" href="<?php echo Url::add($this->section, $submit, $this->category); ?>"
 										<?php endif; ?>
@@ -688,7 +691,7 @@ $current_user = JFactory::getUser($this->input->getInt('user_id', $this->user->g
 					<?php if (in_array($alpha, $this->alpha_list)): ?>
                         <span class="badge bg-warning"
                               onclick="Joomcck.applyFilter('filter_alpha', '<?php echo $alpha ?>')"
-							<?php echo $markup->get('main.alpha_num') ? 'rel="tooltip" data-original-title="' . JText::plural('CXNRECFOUND',
+							<?php echo $markup->get('main.alpha_num') ? 'rel="tooltip" data-bs-title="' . JText::plural('CXNRECFOUND',
 									@$this->alpha_totals[$alpha]) . '"' : null; ?>><?php echo $alpha; ?></span>
 					<?php else: ?>
                         <span class="badge bg-light text-muted border"><?php echo $alpha; ?></span>
@@ -712,7 +715,7 @@ $current_user = JFactory::getUser($this->input->getInt('user_id', $this->user->g
 				<?php echo $worn->text ?>
                 <button type="button" class="btn-close" data-bs-dismiss="alert"  aria-label="Close"
                         onclick="Joomcck.cleanFilter('<?php echo $worn->name ?>')" rel="tooltip"
-                        data-original-title="<?php echo JText::_('CDELETEFILTER') ?>">
+                        data-bs-title="<?php echo JText::_('CDELETEFILTER') ?>">
                 </button>
             </div>
 		<?php endforeach; ?>

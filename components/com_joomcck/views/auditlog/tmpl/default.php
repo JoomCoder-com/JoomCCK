@@ -7,6 +7,9 @@
  * @license GNU/GPL http://www.gnu.org/copyleft/gpl.html
  */
 defined ( '_JEXEC' ) or die ();
+
+JHTML::_('bootstrap.tooltip', '*[rel^="tooltip"]');
+
 $listOrder = $this->state->get('list.ordering');
 $listDirn = $this->state->get('list.direction');
 JHtml::_('dropdown.init');
@@ -154,7 +157,7 @@ $this->_filters = true;
 				<!-- <td class="center"><?php echo JHtml::_('grid.id', $i, $item->id); ?></td>-->
 				<td nowrap="nowrap">
 					<?php echo JText::_($this->type_objects[$item->type_id]->params->get('audit.al'.$item->event.'.msg', 'CAUDLOG'.$item->event));?>
-					<a onclick="Joomcck.checkAndSubmit('#fevent<?php echo $item->event; ?>', <?php echo $item->section_id; ?>)" href="javascript:void(0);" rel="tooltip" data-original-title="<?php echo JText::_('CFILTERTIPEVENTS')?>">
+					<a onclick="Joomcck.checkAndSubmit('#fevent<?php echo $item->event; ?>', <?php echo $item->section_id; ?>)" href="javascript:void(0);" rel="tooltip" data-bs-title="<?php echo JText::_('CFILTERTIPEVENTS')?>">
 						<?php echo HTMLFormatHelper::icon('funnel-small.png');  ?></a>
 
 					<?php IF($item->event == ATlog::REC_TAGNEW || $item->event == ATlog::REC_TAGDELETE):?>
@@ -176,31 +179,31 @@ $this->_filters = true;
 					<?php ob_start ();?>
 
 					<?php IF($item->event == ATlog::REC_FILE_DELETED):?>
-						<a class="btn btn-sm btn-light border" rel="tooltip" data-original-title="<?php echo JText::_('CRESTOREFILLE');?>" href="<?php echo Url::task('records.rectorefile', $item->record_id.'&fid='.$params->file->id.'&field_id='.$params->file->field_id)?>">
+						<a class="btn btn-sm btn-light border" rel="tooltip" data-bs-title="<?php echo JText::_('CRESTOREFILLE');?>" href="<?php echo Url::task('records.rectorefile', $item->record_id.'&fid='.$params->file->id.'&field_id='.$params->file->field_id)?>">
 							<?php echo HTMLFormatHelper::icon('universal.png');  ?></a>
 					<?php endif;?>
 					<?php IF($item->event == ATlog::REC_NEW):?>
-						<a class="btn btn-sm btn-light border" rel="tooltip" data-original-title="<?php echo JText::_('CDELETE');?>" href="<?php echo Url::task('records.delete', $item->record_id)?>">
+						<a class="btn btn-sm btn-light border" rel="tooltip" data-bs-title="<?php echo JText::_('CDELETE');?>" href="<?php echo Url::task('records.delete', $item->record_id)?>">
 							<?php echo HTMLFormatHelper::icon('cross-button.png');  ?></a>
 					<?php endif;?>
 					<?php IF($item->event == ATlog::REC_PUBLISHED || ($item->event == ATlog::REC_NEW && @$params->published == 1)):?>
-						<a class="btn btn-sm btn-light border" rel="tooltip" data-original-title="<?php echo JText::_('CUNPUB');?>" href="<?php echo Url::task('records.sunpub', $item->record_id); ?>">
+						<a class="btn btn-sm btn-light border" rel="tooltip" data-bs-title="<?php echo JText::_('CUNPUB');?>" href="<?php echo Url::task('records.sunpub', $item->record_id); ?>">
 							<?php echo HTMLFormatHelper::icon('cross-circle.png');  ?></a>
 					<?php endif;?>
 					<?php IF($item->event == ATlog::REC_UNPUBLISHED || ($item->event == ATlog::REC_NEW && @$params->published == 0)):?>
-						<a class="btn btn-sm btn-light border" rel="tooltip" data-original-title="<?php echo JText::_('CPUB');?>" href="<?php echo Url::task('records.spub', $item->record_id); ?>">
+						<a class="btn btn-sm btn-light border" rel="tooltip" data-bs-title="<?php echo JText::_('CPUB');?>" href="<?php echo Url::task('records.spub', $item->record_id); ?>">
 							<?php echo HTMLFormatHelper::icon('tick.png');  ?></a>
 					<?php endif;?>
 					<?php IF($item->event == ATlog::REC_EDIT && $this->type_objects[$item->type_id]->params->get('audit.versioning')):?>
-						<a class="btn btn-sm btn-light border" rel="tooltip" data-original-title="<?php echo JText::_('CCOMPAREVERSION');?>"
+						<a class="btn btn-sm btn-light border" rel="tooltip" data-bs-title="<?php echo JText::_('CCOMPAREVERSION');?>"
 							href="<?php echo $url = 'index.php?option=com_joomcck&view=diff&record_id=' . $item->record_id . '&version=' . ($params->version) . '&return=' . Url::back(); ?>">
 							<?php echo HTMLFormatHelper::icon('edit-diff.png');  ?></a>
-						<a class="btn btn-sm btn-light border" rel="tooltip" data-original-title="<?php echo JText::sprintf('CROLLBACKVERSION', ($params->version - 1));?>"
+						<a class="btn btn-sm btn-light border" rel="tooltip" data-bs-title="<?php echo JText::sprintf('CROLLBACKVERSION', ($params->version - 1));?>"
 							href="<?php echo Url::task('records.rollback', $item->record_id.'&version='.($params->version - 1)); ?>">
 							<?php echo HTMLFormatHelper::icon('arrow-merge-180-left.png');  ?></a>
 					<?php endif;?>
 					<?php IF(!$item->isrecord):?>
-						<a class="btn btn-sm btn-light border" rel="tooltip" data-original-title="<?php echo JText::_('CRESTORE');?>" href="<?php echo Url::task('records.restore', $item->record_id)?>">
+						<a class="btn btn-sm btn-light border" rel="tooltip" data-bs-title="<?php echo JText::_('CRESTORE');?>" href="<?php echo Url::task('records.restore', $item->record_id)?>">
 							<?php echo HTMLFormatHelper::icon('universal.png');  ?></a>
 					<?php endif;?>
 					<?php $controls = ob_get_contents ();?>
@@ -223,17 +226,17 @@ $this->_filters = true;
 						<?php echo $params->title;?>
 					<?php endif;?>
 
-					<a onclick="Joomcck.setAndSubmit('filter_search', 'rid:<?php echo $item->record_id;?>');" href="javascript:void(0);" rel="tooltip" data-original-title="<?php echo JText::_('CFILTERTIPRECORD')?>;">
+					<a onclick="Joomcck.setAndSubmit('filter_search', 'rid:<?php echo $item->record_id;?>');" href="javascript:void(0);" rel="tooltip" data-bs-title="<?php echo JText::_('CFILTERTIPRECORD')?>;">
 						<?php echo HTMLFormatHelper::icon('funnel-small.png');  ?></a>
 					<div>
 						<small>
 							<?php echo JText::_('CTYPE'); ?>:
-							<a href="#" rel="tooltip" data-original-title="<?php echo JText::_('CFILTERTIPETYPE');?>"
+							<a href="#" rel="tooltip" data-bs-title="<?php echo JText::_('CFILTERTIPETYPE');?>"
 									onclick="Joomcck.checkAndSubmit('#ftype<?php echo $item->type_id; ?>', <?php echo $item->type_id; ?>)">
 								<?php echo @$params->type_name;?></a> |
 
 							<?php echo JText::_('CSECTION'); ?>:
-							<a href="#" rel="tooltip" data-original-title="<?php echo JText::_('CFILTERTIPSECTION');?>"
+							<a href="#" rel="tooltip" data-bs-title="<?php echo JText::_('CFILTERTIPSECTION');?>"
 									onclick="Joomcck.checkAndSubmit('#fsection<?php echo $item->section_id; ?>', <?php echo $item->section_id; ?>)">
 								<?php echo @$params->section_name;?></a>
 
@@ -249,7 +252,7 @@ $this->_filters = true;
 				<td nowrap><?php echo $item->date;?></td>
 				<td nowrap>
 					<?php echo $item->username;?>
-					<a onclick="Joomcck.checkAndSubmit('#fuser<?php echo $item->user_id; ?>', <?php echo $item->section_id; ?>)" href="javascript:void(0);" rel="tooltip" data-original-title="<?php echo JText::_('CFILTERTIPUSER')?>">
+					<a onclick="Joomcck.checkAndSubmit('#fuser<?php echo $item->user_id; ?>', <?php echo $item->section_id; ?>)" href="javascript:void(0);" rel="tooltip" data-bs-title="<?php echo JText::_('CFILTERTIPUSER')?>">
 						<?php echo HTMLFormatHelper::icon('funnel-small.png');  ?></a>
 				</td>
 			</tr>

@@ -7,6 +7,9 @@
  * @license GNU/GPL http://www.gnu.org/copyleft/gpl.html
  */
 defined('_JEXEC') or die();
+
+JHTML::_('bootstrap.tooltip', '*[rel^="tooltip"]');
+
 ?>
 <?php
 $user	= JFactory::getUser();
@@ -97,7 +100,7 @@ function status($s, $t, $o)
 			</button>
 			<?php if($this->state->get('filter.search')) :?>
 			<button class="btn<?php echo ($this->state->get('filter.search') ? ' btn-warning' : NULL); ?>" type="button"
-				onclick="Joomcck.setAndSubmit('filter_search', '');" rel="tooltip" data-original-title="<?php echo JText::_('JSEARCH_FILTER_CLEAR'); ?>">
+				onclick="Joomcck.setAndSubmit('filter_search', '');" rel="tooltip" data-bs-title="<?php echo JText::_('JSEARCH_FILTER_CLEAR'); ?>">
 				<?php echo HTMLFormatHelper::icon('eraser.png');  ?>
 			</button>
 			<?php endif; ?>
@@ -164,7 +167,7 @@ function status($s, $t, $o)
 
 					<a href="<?php echo Url::record($order->record_id)?>">
 						<?php echo $order->name?></a>
-					<a onclick="Joomcck.setAndSubmit('filter_search', 'pid:<?php echo $order->record_id;?>');" href="javascript:void(0);" rel="tooltip" data-original-title="<?php echo JText::_('CORDERSPRODFILTER')?>">
+					<a onclick="Joomcck.setAndSubmit('filter_search', 'pid:<?php echo $order->record_id;?>');" href="javascript:void(0);" rel="tooltip" data-bs-title="<?php echo JText::_('CORDERSPRODFILTER')?>">
 						<?php echo HTMLFormatHelper::icon('funnel-small.png');  ?></a>
 					<?php echo CEventsHelper::showNum('record', $order->record_id);?>
 
@@ -177,7 +180,7 @@ function status($s, $t, $o)
 								<tr>
 									<td><?php echo JText::_('CSELLER')?>:</td>
 									<td><?php echo CCommunityHelper::getName($order->saler_id, $order->section_id)?>
-										<a onclick="Joomcck.setAndSubmit('filter_search', 'sid:<?php echo $order->saler_id;?>');" href="javascript:void(0);" rel="tooltip" data-original-title="<?php echo JText::_('CORDERSSALERFILTER')?>">
+										<a onclick="Joomcck.setAndSubmit('filter_search', 'sid:<?php echo $order->saler_id;?>');" href="javascript:void(0);" rel="tooltip" data-bs-title="<?php echo JText::_('CORDERSSALERFILTER')?>">
 											<?php echo HTMLFormatHelper::icon('funnel-small.png');  ?></a>
 									</td>
 								</tr>
@@ -185,7 +188,7 @@ function status($s, $t, $o)
 							<tr>
 								<td><?php echo JText::_('CBUYER')?>:</td>
 								<td><?php echo CCommunityHelper::getName($order->user_id, $order->section_id)?>
-									<a onclick="Joomcck.setAndSubmit('filter_search', 'bid:<?php echo $order->user_id;?>');" href="javascript:void(0);" rel="tooltip" data-original-title="<?php echo JText::_('CORDERSBUYERFILTER')?>">
+									<a onclick="Joomcck.setAndSubmit('filter_search', 'bid:<?php echo $order->user_id;?>');" href="javascript:void(0);" rel="tooltip" data-bs-title="<?php echo JText::_('CORDERSBUYERFILTER')?>">
 										<?php echo HTMLFormatHelper::icon('funnel-small.png');  ?></a>
 								</td>
 							</tr>

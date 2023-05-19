@@ -13,6 +13,8 @@ defined('_JEXEC') or die();
 require_once JPATH_ROOT. '/components/com_joomcck/library/php/fields/joomcckfield.php';
 jimport('joomla.database.tablenested');
 
+JHTML::_('bootstrap.tooltip', '*[rel^="tooltip"]');
+
 class JFormFieldCMultilevelselect extends CFormField
 {
 
@@ -422,7 +424,7 @@ class JFormFieldCMultilevelselect extends CFormField
 		$level = '';
 		if(empty($post['filter']) && $required && $post['level'] <= $required)
 		{
-			$level .= JHtml::image(JURI::root().'media/com_joomcck/icons/16/asterisk-small.png', JText::_('MLS_LEVELREQUIRED'), 'align="absmiddle" rel="tooltip" data-original-title="'.JText::_('MLS_LEVELREQUIRED').'"');
+			$level .= JHtml::image(JURI::root().'media/com_joomcck/icons/16/asterisk-small.png', JText::_('MLS_LEVELREQUIRED'), 'align="absmiddle" rel="tooltip" data-bs-title="'.JText::_('MLS_LEVELREQUIRED').'"');
 		}
 		$name = 'jform[fields]['.$this->id.'][levels][]';
 		if(isset($post['filter']) && $post['filter'])
@@ -432,7 +434,7 @@ class JFormFieldCMultilevelselect extends CFormField
 
 		if(in_array($this->params->get('params.canedit'), $user->getAuthorisedViewLevels()) && empty($post['filter']))
 		{
-			$level .= ' <button rel="tooltip" data-original-title="'.JText::_('CEDIT').'" type="button" onclick="'.$mls.$this->id.'.edit(this, '.$post['level'].', '.$post['parent_id'].')" class="btn btn-outline-primary btn-edit"><i class="fas fa-edit"></i></button>';
+			$level .= ' <button rel="tooltip" data-bs-title="'.JText::_('CEDIT').'" type="button" onclick="'.$mls.$this->id.'.edit(this, '.$post['level'].', '.$post['parent_id'].')" class="btn btn-outline-primary btn-edit"><i class="fas fa-edit"></i></button>';
 		}
 
 		/*if(isset($post['selected']) && $post['selected'])

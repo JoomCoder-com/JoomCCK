@@ -7,6 +7,9 @@
  * @license GNU/GPL http://www.gnu.org/copyleft/gpl.html
  */
 defined('_JEXEC') or die;
+
+JHTML::_('bootstrap.tooltip', '*[rel^="tooltip"]');
+
 ?>
 <ul class="unstyled">
 	<?php foreach ($this->files AS $file):?>
@@ -45,7 +48,7 @@ defined('_JEXEC') or die;
 				}
 			?>
 			<?php if($this->descr && $file->description):?>
-				rel="tooltip" data-original-title="<?php echo $file->description;?>"
+				rel="tooltip" data-bs-title="<?php echo $file->description;?>"
 			<?php endif;?>
 			>
 			<?php echo ($this->params->get('params.allow_edit_title', 0) && $file->title ? $file->title : $file->realname);?>

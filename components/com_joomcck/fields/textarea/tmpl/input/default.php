@@ -10,6 +10,8 @@
 defined('_JEXEC') or die();
 $params = $this->params;
 
+JHTML::_('bootstrap.tooltip', '*[rel^="tooltip"]');
+
 $class      = ' class="form-control expanding' . $params->get('core.field_class') . ($this->required ? ' required' : NULL) . '"';
 $required   = $this->required ? ' required="true" ' : NULL;
 $max_length = (int)$params->get('params.maxlen', 0);
@@ -54,11 +56,11 @@ $js         = '';
 			<button type="button" class="btn btn-sm btn-light border"><?php echo JText::_("TA_BBCODEITALIC"); ?></button>
 			<button type="button" class="btn btn-sm btn-light border"><?php echo JText::_("TA_BBCODEUNDERLINE"); ?></button>
 
-			<button type="button" rel="tooltip" data-original-title="<?php echo JText::_("TA_BBCODEURL"); ?>"
+			<button type="button" rel="tooltip" data-bs-title="<?php echo JText::_("TA_BBCODEURL"); ?>"
 					class="btn btn-sm btn-light border"><i class="icon-out-2"></i></button>
-			<button type="button" rel="tooltip" data-original-title="<?php echo JText::_("TA_BBCODEIMG"); ?>"
+			<button type="button" rel="tooltip" data-bs-title="<?php echo JText::_("TA_BBCODEIMG"); ?>"
 					class="btn btn-sm btn-light border"><i class="icon-picture"></i></button>
-			<button type="button" rel="tooltip" data-original-title="<?php echo JText::_("TA_BBCODECODE"); ?>"
+			<button type="button" rel="tooltip" data-bs-title="<?php echo JText::_("TA_BBCODECODE"); ?>"
 					class="btn btn-sm btn-light border"><i class="icon-tools"></i></button>
 		</div>
 		<div class="float-end form-inline">

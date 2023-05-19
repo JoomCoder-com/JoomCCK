@@ -7,6 +7,9 @@
  * @license   GNU/GPL http://www.gnu.org/copyleft/gpl.html
  */
 defined('_JEXEC') or die('Restricted access');
+
+JHTML::_('bootstrap.tooltip', '*[rel^="tooltip"]');
+
 ?>
 <?php foreach($types AS $type): ?>
 	<?php
@@ -16,7 +19,7 @@ defined('_JEXEC') or die('Restricted access');
 		if(!JFactory::getUser()->get('id'))
 		{
 			$url = JRoute::_('index.php?option=com_users&view=login&return=' . Url::back());
-			$attr = ' rel="tooltip" data-original-title="'.JText::sprintf('MOD_SB_REGISTER', $type->name).'" ';
+			$attr = ' rel="tooltip" data-bs-title="'.JText::sprintf('MOD_SB_REGISTER', $type->name).'" ';
 		}
 		else
 		{

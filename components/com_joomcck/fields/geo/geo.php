@@ -10,6 +10,8 @@
 defined('_JEXEC') or die();
 require_once JPATH_ROOT . '/components/com_joomcck/library/php/fields/joomcckfield.php';
 
+JHTML::_('bootstrap.tooltip', '*[rel^="tooltip"]');
+
 class JFormFieldCGeo extends CFormField
 {
 
@@ -433,7 +435,7 @@ class JFormFieldCGeo extends CFormField
 		{
 			$out[] = JHtml::image(JURI::root() . 'media/com_joomcck/icons/16/asterisk-small.png', 'Required', array(
 				'rel'                 => 'tooltip',
-				'data-original-title' => JText::_('CREQUIRED')
+				'data-bs-title' => JText::_('CREQUIRED')
 			));
 		}
 		$out[] = JText::_($label);

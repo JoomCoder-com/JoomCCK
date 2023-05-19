@@ -8,6 +8,8 @@
  */
 defined('_JEXEC') or die;
 
+JHTML::_('bootstrap.tooltip', '*[rel^="tooltip"]');
+
 		
 ?>
 <?php foreach ($this->files AS $i => $file):?>
@@ -21,7 +23,7 @@ defined('_JEXEC') or die;
 	<?php if($this->descr && $file->description):?>
 		<?php $tip[] ='<p>'.$file->description.'</p>'; ?>
 	<?php endif;?>
-	<a <?php if($tip) {echo 'rel="tooltip" data-original-title="'.htmlspecialchars(implode('<br />', $tip), ENT_COMPAT, 'UTF-8').'"';}?>
+	<a <?php if($tip) {echo 'rel="tooltip" data-bs-title="'.htmlspecialchars(implode('<br />', $tip), ENT_COMPAT, 'UTF-8').'"';}?>
 	<?php 
 		$class = '';
 		if($this->params->get('params.show_in_browser', 0))
