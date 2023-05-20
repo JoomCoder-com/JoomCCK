@@ -9,6 +9,14 @@
  */
 defined('_JEXEC') or die('Restricted access');
 
+use Joomcck\Assets\Webassets\Webassets;
+
+// load JoomCCK new library
+require_once JPATH_ROOT . '/components/com_joomcck/libraries/vendor/autoload.php';
+
+// init webassets
+Webassets::init();
+
 
 include_once JPATH_ROOT . DIRECTORY_SEPARATOR . 'components' . DIRECTORY_SEPARATOR . 'com_joomcck' . DIRECTORY_SEPARATOR . 'api.php';
 $app = JFactory::getApplication();

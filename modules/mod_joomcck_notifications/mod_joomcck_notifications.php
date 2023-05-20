@@ -8,6 +8,14 @@
  */
 defined('_JEXEC') or die('Restricted access');
 
+use Joomcck\Assets\Webassets\Webassets;
+
+// load JoomCCK new library
+require_once JPATH_ROOT . '/components/com_joomcck/libraries/vendor/autoload.php';
+
+// init webassets
+Webassets::init();
+
 // Include the syndicate functions only once
 require_once (dirname(__FILE__) . DIRECTORY_SEPARATOR . 'helper.php');
 $Itemid = \Joomla\CMS\Factory::getApplication()->input->getInt('Itemid');

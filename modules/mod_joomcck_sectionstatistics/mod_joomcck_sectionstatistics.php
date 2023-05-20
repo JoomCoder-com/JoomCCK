@@ -8,6 +8,14 @@
  */
 defined('_JEXEC') || die('Restricted access');
 
+use Joomcck\Assets\Webassets\Webassets;
+
+// load JoomCCK new library
+require_once JPATH_ROOT . '/components/com_joomcck/libraries/vendor/autoload.php';
+
+// init webassets
+Webassets::init();
+
 require_once dirname(__FILE__) . '/helper.php';
 include_once JPATH_ROOT . '/components/com_joomcck/library/php/helpers/helper.php';
 

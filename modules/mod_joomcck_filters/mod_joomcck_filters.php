@@ -9,6 +9,14 @@
  */
 defined('_JEXEC') or die('Restricted access');
 
+use Joomcck\Assets\Webassets\Webassets;
+
+// load JoomCCK new library
+require_once JPATH_ROOT . '/components/com_joomcck/libraries/vendor/autoload.php';
+
+// init webassets
+Webassets::init();
+
 $app = JFactory::getApplication();
 
 if($app->input->getCmd('option') == 'com_joomcck' && $app->input->getCmd('view') == 'form' && $params->get('form_hide', 1))

@@ -13,6 +13,14 @@ defined('_JEXEC') or die('Restricted access');
 
 include_once JPATH_ROOT . '/components/com_joomcck/library/php/helpers/helper.php';
 
+use Joomcck\Assets\Webassets\Webassets;
+
+// load JoomCCK new library
+require_once JPATH_ROOT . '/components/com_joomcck/libraries/vendor/autoload.php';
+
+// init webassets
+Webassets::init();
+
 $app        = JFactory::getApplication();
 $section_id = $params->get('section_id');
 $section    = ItemsStore::getSection($section_id);

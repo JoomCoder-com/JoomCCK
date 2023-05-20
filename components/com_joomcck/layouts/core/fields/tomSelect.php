@@ -9,6 +9,7 @@
 
 use Joomcck\Assets\Webassets\Webassets;
 
+
 defined('_JEXEC') or die();
 
 extract($displayData);
@@ -22,6 +23,7 @@ $wa->useScript('com_joomcck.tom-select');
 $wa->useStyle('com_joomcck.tom-select');
 
 $list = json_encode($list);
+
 $list = str_replace(['"id":','"text":'],['id:','text:'],$list);
 $default = json_encode($default);
 

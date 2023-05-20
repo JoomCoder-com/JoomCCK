@@ -2,6 +2,14 @@
 
 defined('_JEXEC') or die('Restricted access');
 
+use Joomcck\Assets\Webassets\Webassets;
+
+// load JoomCCK new library
+require_once JPATH_ROOT . '/components/com_joomcck/libraries/vendor/autoload.php';
+
+// init webassets
+Webassets::init();
+
 $joomcck = JPATH_ROOT . '/components/com_joomcck/api.php';
 if(!file_exists($joomcck))
 {

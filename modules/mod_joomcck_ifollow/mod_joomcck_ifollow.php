@@ -9,6 +9,14 @@
 defined('_JEXEC') or die('Restricted access');
 $app = JFactory::getApplication();
 
+use Joomcck\Assets\Webassets\Webassets;
+
+// load JoomCCK new library
+require_once JPATH_ROOT . '/components/com_joomcck/libraries/vendor/autoload.php';
+
+// init webassets
+Webassets::init();
+
 
 if($app->input->getCmd('option') != 'com_joomcck') return;
 if($app->input->getCmd('view') != 'records') return;
