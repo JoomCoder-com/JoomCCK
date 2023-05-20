@@ -21,6 +21,8 @@ class JoomcckViewAuditlog extends MViewBase
 		$user = JFactory::getUser();
 		$app  = JFactory::getApplication();
 
+
+
 		$model = MModelBase::getInstance('Auditlog', 'JoomcckModel');
 		$this->state = $this->get('State');
 
@@ -42,6 +44,8 @@ class JoomcckViewAuditlog extends MViewBase
 			return;
 		}
 
+
+
 		$this->sections = $this->types = array();
 
 		$sections = $this->get('Sections');
@@ -56,7 +60,12 @@ class JoomcckViewAuditlog extends MViewBase
 			}
 		}
 
+
+
 		$types = $this->get('Types');
+
+
+
 		unset($types[0]);
 		if(count($types) > 0)
 		{
@@ -66,9 +75,18 @@ class JoomcckViewAuditlog extends MViewBase
 			}
 		}
 
+
+
 		$this->type_objects = $types;
+
+
+
 		$this->events       = $this->get('Events');
+
+
 		$this->users        = $this->get('Users');
+
+
 
 		$format = 'd M Y h:i:s';
 		if($items)
@@ -82,6 +100,9 @@ class JoomcckViewAuditlog extends MViewBase
 				$items[$k]->categories = (empty($item->categories) ? NULL : json_decode($item->categories));
 			}
 		}
+
+
+
 
 		$db = JFactory::getDbo();
 		$db->setQuery("SELECT MIN(ctime) FROM #__js_res_audit_log");

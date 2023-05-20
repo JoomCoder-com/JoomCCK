@@ -43,7 +43,7 @@ class plgContentGlossary extends JPlugin
 		$where = array();
 		$sections = $this->params->get('categories');
 		ArrayHelper::clean_r($sections);
-		\Joomla\Utilities\ArrayHelper::toInteger($sections);
+		$sections = \Joomla\Utilities\ArrayHelper::toInteger($sections);
 		$sections[] = 0;
 
 		$query = $db->getQuery(true);

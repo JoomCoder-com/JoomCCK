@@ -219,7 +219,7 @@ class CEventsHelper
 
 		$list = array_unique($list);
 		ArrayHelper::clean_r($list);
-		\Joomla\Utilities\ArrayHelper::toInteger($list);
+		$list = \Joomla\Utilities\ArrayHelper::toInteger($list);
 
 		if(!$list)
 		{

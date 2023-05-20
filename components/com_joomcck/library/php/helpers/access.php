@@ -506,7 +506,7 @@ class MECAccess
 
 		$cats = $moder->category;
 		ArrayHelper::clean_r($cats, TRUE);
-		\Joomla\Utilities\ArrayHelper::toInteger($cats);
+		$cats = \Joomla\Utilities\ArrayHelper::toInteger($cats);
 
 
 		if(!$cats) {
@@ -537,7 +537,7 @@ class MECAccess
 		$cat_id = array_keys($cat_id);
 
 		ArrayHelper::clean_r($cat_id, TRUE);
-		\Joomla\Utilities\ArrayHelper::toInteger($cat_id);
+		$cat_id = \Joomla\Utilities\ArrayHelper::toInteger($cat_id);
 
 		if(!$cat_id) {
 			return FALSE;
@@ -573,7 +573,7 @@ class MECAccess
 		$db->setQuery($sql);
 		$cats = $db->loadColumn();
 		ArrayHelper::clean_r($cats);
-		\Joomla\Utilities\ArrayHelper::toInteger($cats);
+		$cats = \Joomla\Utilities\ArrayHelper::toInteger($cats);
 
 		$out[$key] = $cats;
 
@@ -611,7 +611,7 @@ class MECAccess
 		$cats = array_unique($cats);
 
 		ArrayHelper::clean_r($cats);
-		\Joomla\Utilities\ArrayHelper::toInteger($cats);
+		$cats = \Joomla\Utilities\ArrayHelper::toInteger($cats);
 
 		$out[$key] = $cats;
 

@@ -61,7 +61,7 @@ class JoomcckTableType extends JTable
 			$records = $this->_db->loadColumn();
 
 			ArrayHelper::clean_r($records);
-			\Joomla\Utilities\ArrayHelper::toInteger($records);
+			$records = \Joomla\Utilities\ArrayHelper::toInteger($records);
 
 			if($records)
 			{

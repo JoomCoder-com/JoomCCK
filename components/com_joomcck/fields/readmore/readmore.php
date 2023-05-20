@@ -86,7 +86,7 @@ class JFormFieldCReadmore extends CFormFieldRelate
 		$types = $this->params->get('params.type');
 		$types[] = MModelBase::getInstance('Fields', 'JoomcckModel')->getFieldTypeId($this->id);
 		ArrayHelper::clean_r($types);
-		\Joomla\Utilities\ArrayHelper::toInteger($types);
+		$types = \Joomla\Utilities\ArrayHelper::toInteger($types);
 
 		return $types;
 	}

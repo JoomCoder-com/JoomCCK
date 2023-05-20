@@ -176,7 +176,7 @@ class JFormFieldCDripcontent extends CFormFieldRelate
 							$fields       = json_decode($this->parent->fields, TRUE);
 
 							$plans = array_keys($fields[$p_params->get('params.field_plans')]);
-							\Joomla\Utilities\ArrayHelper::toInteger($plans);
+							$plans = \Joomla\Utilities\ArrayHelper::toInteger($plans);
 
 							$em_api = JPATH_ROOT . '/components/com_emerald/api.php';
 

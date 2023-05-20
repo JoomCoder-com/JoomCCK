@@ -772,7 +772,7 @@ class JoomcckControllerRecords extends MControllerAdmin
 			$tags = explode(',', $tags);
 
 			ArrayHelper::clean_r($tags);
-			\Joomla\Utilities\ArrayHelper::toInteger($tags);
+			$tags = \Joomla\Utilities\ArrayHelper::toInteger($tags);
 		}
 		$app->setUserState('com_joomcck.section' . $key . '.filter_tag', $tags);
 
@@ -783,7 +783,7 @@ class JoomcckControllerRecords extends MControllerAdmin
 			$users = explode(',', $users);
 
 			ArrayHelper::clean_r($users);
-			\Joomla\Utilities\ArrayHelper::toInteger($users);
+			$users = \Joomla\Utilities\ArrayHelper::toInteger($users);
 		}
 		$app->setUserState('com_joomcck.section' . $key . '.filter_user', $users);
 
@@ -794,7 +794,7 @@ class JoomcckControllerRecords extends MControllerAdmin
 			$cats = explode(',', $cats);
 
 			ArrayHelper::clean_r($cats);
-			\Joomla\Utilities\ArrayHelper::toInteger($cats);
+			$cats = \Joomla\Utilities\ArrayHelper::toInteger($cats);
 		}
 		$app->setUserState('com_joomcck.section' . $key . '.filter_cat', $cats);
 

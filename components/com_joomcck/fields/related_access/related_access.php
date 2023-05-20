@@ -127,7 +127,7 @@ class JFormFieldCRelated_access extends CFormField
 		if(!empty($fields[$this->params->get('params.field_plans')]))
 		{
 			$plans = array_keys($fields[$this->params->get('params.field_plans')]);
-			\Joomla\Utilities\ArrayHelper::toInteger($plans);
+			$plans = \Joomla\Utilities\ArrayHelper::toInteger($plans);
 			$this->plans = $plans;
 		}
 	}

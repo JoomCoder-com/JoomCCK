@@ -176,7 +176,7 @@ class JoomcckModelOrders extends MModelList
 		$allow_users = $active->getParams()->get('allow_users', false);
 		$user_ids = explode(',', $allow_users);
 
-		\Joomla\Utilities\ArrayHelper::toInteger($user_ids);
+		$user_ids = \Joomla\Utilities\ArrayHelper::toInteger($user_ids);
 		ArrayHelper::clean_r($user_ids);
 
 		return (in_array($uid, $user_ids));

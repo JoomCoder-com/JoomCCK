@@ -201,24 +201,32 @@ class JoomcckModelAuditlog extends MModelList
 				$query->where('a.type_id IN (' . implode(',', $keys) . ')');
 			}
 
-			$section_id = $this->state->get('auditlog.section_id');
+			$section_id = $this->state->get('auditlog.section_id','int',0);
 			ArrayHelper::clean_r($section_id, TRUE);
-			\Joomla\Utilities\ArrayHelper::toInteger($section_id);
+			$section_id = \Joomla\Utilities\ArrayHelper::toInteger($section_id);
+
 			$section_id = implode(',', $section_id);
+
 			if(!empty($section_id))
 			{
+
+
 				$query->where('a.section_id IN (' . $section_id . ')');
 			}
 			else
 			{
 				$sections = $this->getSections();
+
+
 				$keys     = array_keys($sections);
 				$query->where('a.section_id IN (' . implode(',', $keys) . ')');
 			}
 
+
 			$db->setQuery($query);
 
 			$list = $db->loadObjectList();
+
 
 
 			foreach($list as $key => $event)
@@ -264,7 +272,7 @@ class JoomcckModelAuditlog extends MModelList
 			}
 
 			$section_id = $this->state->get('auditlog.section_id');
-			\Joomla\Utilities\ArrayHelper::toInteger($section_id);
+			$section_id = \Joomla\Utilities\ArrayHelper::toInteger($section_id);
 			if($section_id)
 			{
 				$query->where('a.section_id IN (' . implode(',', $section_id) . ')');
@@ -310,6 +318,8 @@ class JoomcckModelAuditlog extends MModelList
 
 			$list = $db->loadObjectList();
 
+
+
 			foreach($list as $key => $section)
 			{
 				$section->params = new JRegistry($section->params);
@@ -319,9 +329,11 @@ class JoomcckModelAuditlog extends MModelList
 				}
 			}
 
+
 			ArrayHelper::clean_r($sections);
 			$sections[0] = new stdClass();
 		}
+
 
 		return $sections;
 	}

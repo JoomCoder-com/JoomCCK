@@ -119,7 +119,7 @@ class JFormFieldCMultilevelselect extends CFormField
 		{
 			if('levels' === $key)
 			{
-				\Joomla\Utilities\ArrayHelper::toInteger($item);
+				$item = \Joomla\Utilities\ArrayHelper::toInteger($item);
 				$ids = implode(',', $item);
 				if(!$ids)
 				{
@@ -163,7 +163,7 @@ class JFormFieldCMultilevelselect extends CFormField
 					continue;
 				}
 
-				\Joomla\Utilities\ArrayHelper::toInteger($item);
+				$item = \Joomla\Utilities\ArrayHelper::toInteger($item);
 				$ids = implode(',', $item);
 				if(!$ids)
 				{

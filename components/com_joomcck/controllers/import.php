@@ -233,7 +233,7 @@ class JoomcckControllerImport extends MControllerAdmin
 			// ==============================
 
 			$crossids[] = 0;
-			\Joomla\Utilities\ArrayHelper::toInteger($crossids);
+			$crossids = \Joomla\Utilities\ArrayHelper::toInteger($crossids);
 			$sql = "SELECT id, fields, title, type_id, section_id, user_id FROM #__js_res_record WHERE id IN(" . implode(',', $crossids) . ")";
 			$db->setQuery($sql);
 			$list = $db->loadObjectList();

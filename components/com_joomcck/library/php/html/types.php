@@ -42,7 +42,7 @@ class JHTMLTypes
 		}
 
 		ArrayHelper::clean_r($default);
-		\Joomla\Utilities\ArrayHelper::toInteger($default);
+		$default = \Joomla\Utilities\ArrayHelper::toInteger($default);
 
 
 		foreach($list as $id => &$type)

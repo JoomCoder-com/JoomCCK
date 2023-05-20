@@ -31,7 +31,7 @@ class JHTMLCategories
 		$reg->loadArray($params);
 
 		ArrayHelper::clean_r($default);
-		\Joomla\Utilities\ArrayHelper::toInteger($default);
+		$default = \Joomla\Utilities\ArrayHelper::toInteger($default);
 		if($default)
 		{
 			$db = JFactory::getDbo();
@@ -61,7 +61,7 @@ class JHTMLCategories
 		{
 			$default = explode(',', $default);
 		}
-		\Joomla\Utilities\ArrayHelper::toInteger($default);
+		$default = \Joomla\Utilities\ArrayHelper::toInteger($default);
 		ArrayHelper::clean_r($default);
 
 		$reg = new JRegistry();
@@ -135,7 +135,7 @@ class JHTMLCategories
 		{
 			$default = explode(',', $default);
 		}
-		\Joomla\Utilities\ArrayHelper::toInteger($default);
+		$default = \Joomla\Utilities\ArrayHelper::toInteger($default);
 		ArrayHelper::clean_r($default);
 
 		$reg = new JRegistry();

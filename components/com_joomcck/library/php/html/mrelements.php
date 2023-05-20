@@ -84,7 +84,7 @@ class JHTMLMrelements
 		}
 
 		ArrayHelper::clean_r($default);
-		\Joomla\Utilities\ArrayHelper::toInteger($default);
+		$default = \Joomla\Utilities\ArrayHelper::toInteger($default);
 
 		if($default)
 		{

@@ -44,8 +44,8 @@ class JoomcckControllerTfields extends MControllerAdmin
 		$order = $this->input->post->get('order', array(), 'array');
 
 		// Sanitize the input
-		\Joomla\Utilities\ArrayHelper::toInteger($pks);
-		\Joomla\Utilities\ArrayHelper::toInteger($order);
+		$pks = \Joomla\Utilities\ArrayHelper::toInteger($pks);
+		$order = \Joomla\Utilities\ArrayHelper::toInteger($order);
 
 		// Get the model
 		$model = $this->getModel();
@@ -88,7 +88,7 @@ class JoomcckControllerTfields extends MControllerAdmin
 			$model = $this->getModel();
 
 			// Make sure the item ids are integers
-			\Joomla\Utilities\ArrayHelper::toInteger($cid);
+			$cid = \Joomla\Utilities\ArrayHelper::toInteger($cid);
 
 			// Publish the items.
 			if (!$model->changeState($task, $cid, $value))

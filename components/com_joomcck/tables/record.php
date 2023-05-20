@@ -259,7 +259,7 @@ class JoomcckTableRecord extends JTable
 
 
 			ArrayHelper::clean_r($categories, TRUE);
-			\Joomla\Utilities\ArrayHelper::toInteger($categories);
+			$categories = \Joomla\Utilities\ArrayHelper::toInteger($categories);
 
 			if($section->categories && !$categories && !$type->params->get('submission.first_category', 0))
 			{

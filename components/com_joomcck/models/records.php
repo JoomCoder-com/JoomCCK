@@ -60,23 +60,23 @@ class JoomcckModelRecords extends MModelList
 			$type = explode(',', $type[0]);
 		}
 		ArrayHelper::clean_r($type);
-		\Joomla\Utilities\ArrayHelper::toInteger($type);
+		$type = \Joomla\Utilities\ArrayHelper::toInteger($type);
 		$this->setState('records.type', $type);
 
 		$user = $app->getUserStateFromRequest('com_joomcck.section' . $key . '.filter_user', 'filter_user', '', 'array');
 		ArrayHelper::clean_r($user);
-		\Joomla\Utilities\ArrayHelper::toInteger($user);
+		$user = \Joomla\Utilities\ArrayHelper::toInteger($user);
 		$this->setState('records.user', $user);
 
 		$tag = $app->getUserStateFromRequest('com_joomcck.section' . $key . '.filter_tag', 'filter_tag', '', 'array');
 		ArrayHelper::clean_r($tag);
-		\Joomla\Utilities\ArrayHelper::toInteger($tag);
+		$tag = \Joomla\Utilities\ArrayHelper::toInteger($tag);
 		$this->setState('records.tag', $tag);
 
 		$cat = $app->getUserStateFromRequest('com_joomcck.section' . $key . '.filter_cat', 'filter_cat', '', 'array');
 		settype($cat, 'array');
 		ArrayHelper::clean_r($cat);
-		\Joomla\Utilities\ArrayHelper::toInteger($cat);
+		$cat = \Joomla\Utilities\ArrayHelper::toInteger($cat);
 		$this->setState('records.category', $cat);
 
 		$config['filter_fields'] = array(
@@ -727,13 +727,13 @@ class JoomcckModelRecords extends MModelList
 
 		if(is_array($this->_ids) && !empty($this->_ids))
 		{
-			\Joomla\Utilities\ArrayHelper::toInteger($this->_ids);
+			$this->_ids = \Joomla\Utilities\ArrayHelper::toInteger($this->_ids);
 			$query->where('r.id IN(' . implode(',', $this->_ids) . ')');
 		}
 
 		if(!empty($this->_id_limit) && is_array($this->_id_limit))
 		{
-			\Joomla\Utilities\ArrayHelper::toInteger($this->_id_limit);
+			$this->_id_limit = \Joomla\Utilities\ArrayHelper::toInteger($this->_id_limit);
 			$query->where('r.id IN(' . implode(',', $this->_id_limit) . ')');
 		}
 
@@ -1182,7 +1182,7 @@ class JoomcckModelRecords extends MModelList
 			$filters = FALSE;
 			$list    = $app->getUserState("compare.set{$this->section->id}");
 			ArrayHelper::clean_r($list);
-			\Joomla\Utilities\ArrayHelper::toInteger($list);
+			$list = \Joomla\Utilities\ArrayHelper::toInteger($list);
 			$list[] = 0;
 			$query->where('r.id IN (' . implode(',', $list) . ')');
 		}
@@ -1425,7 +1425,7 @@ class JoomcckModelRecords extends MModelList
 		$db  = JFactory::getDbo();
 		$db->setQuery($sql);
 		$ids = $db->loadColumn();
-		\Joomla\Utilities\ArrayHelper::toInteger($ids);
+		$ids = \Joomla\Utilities\ArrayHelper::toInteger($ids);
 		$ids = array_unique($ids);
 
 		if(in_array((int)$app->getUserState('com_joomcck.skip_record'), $ids))
@@ -1442,7 +1442,7 @@ class JoomcckModelRecords extends MModelList
 		$types = $this->section->params->get('general.type');
 		settype($types, 'array');
 		ArrayHelper::clean_r($types);
-		\Joomla\Utilities\ArrayHelper::toInteger($types);
+		$types = \Joomla\Utilities\ArrayHelper::toInteger($types);
 
 		$query = $this->_db->getQuery(TRUE);
 		$query->select('f.*');
@@ -1563,7 +1563,7 @@ class JoomcckModelRecords extends MModelList
 		settype($types, 'array');
 
 		ArrayHelper::clean_r($types);
-		\Joomla\Utilities\ArrayHelper::toInteger($types);
+		$types = \Joomla\Utilities\ArrayHelper::toInteger($types);
 		if(empty($types))
 		{
 			Factory::getApplication()->enqueueMessage(JText::_('CERRNOTYPESELECTED'),'warning');
@@ -1612,7 +1612,7 @@ class JoomcckModelRecords extends MModelList
 		settype($types, 'array');
 
 		ArrayHelper::clean_r($types);
-		\Joomla\Utilities\ArrayHelper::toInteger($types);
+		$types = \Joomla\Utilities\ArrayHelper::toInteger($types);
 
 		if(count($types) == 1)
 		{
@@ -1628,7 +1628,7 @@ class JoomcckModelRecords extends MModelList
 		}
 
 		ArrayHelper::clean_r($cache[$this->section->id]);
-		\Joomla\Utilities\ArrayHelper::toInteger($cache[$this->section->id]);
+		$cache[$this->section->id] = \Joomla\Utilities\ArrayHelper::toInteger($cache[$this->section->id]);
 
 		$cache[$this->section->id] = array_unique($cache[$this->section->id]);
 

@@ -757,7 +757,7 @@ class JoomcckModelCat extends MModelAdmin
 		if (!empty($children)) {
 			// Remove any duplicates and sanitize ids.
 			$children = array_unique($children);
-			\Joomla\Utilities\ArrayHelper::toInteger($children);
+			$children = \Joomla\Utilities\ArrayHelper::toInteger($children);
 
 		}
 
