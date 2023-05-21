@@ -13,6 +13,8 @@ use Joomcck\Assets\Webassets\Webassets;
 defined('_JEXEC') or die();
 
 extract($displayData);
+
+
 // todo default value
 // todo suggestion url (sql source)
 // check here: components/com_joomcck/library/php/html/mrelements/pills.php
@@ -37,7 +39,8 @@ $fieldId = (int) rand(1,2000);
 
 <div id="select-tags-<?php echo $id ?>-container">
 	<select
-            id="<?php echo $id ?>"
+            id="<?php echo $id ?>-<?php echo $fieldId ?>"
+
             name="<?php echo $name ?>[]"
             multiple
             data-placeholder=""
@@ -47,7 +50,7 @@ $fieldId = (int) rand(1,2000);
 
 <script>
 
-    let tomSelected<?php echo $fieldId ?> = new TomSelect("#<?php echo $id ?>",{
+    let tomSelected<?php echo $fieldId ?> = new TomSelect("#<?php echo $id ?>-<?php echo $fieldId ?>",{
         plugins: <?php echo $options['canDelete'] ? "['remove_button']" : "[]"; ?>,
         create: <?php echo $options['canAdd'] ?>,
         valueField: 'id',
