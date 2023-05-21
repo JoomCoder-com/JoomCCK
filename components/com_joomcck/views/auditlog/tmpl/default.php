@@ -133,12 +133,15 @@ $this->_filters = true;
 		<?php if ($this->state->get('auditlog.section_id') || $this->state->get('auditlog.type_id')
 			|| $this->state->get('auditlog.event_id') || $this->state->get('auditlog.user_id')
 			|| ($this->state->get('auditlog.fce') && $this->state->get('auditlog.fcs'))): ?>
-            <div class="alert alert-warning">
-                <a class="close" data-dismiss="alert" href="#">X</a>
-                <p><?php echo HTMLFormatHelper::icon('exclamation-diamond.png', JText::_('AL_FAPPLIED')); ?><?php echo JText::_('AL_FILTERS') ?></p>
-                <button type="button" class="btn btn-warning btn-sm"
-                        onclick="Joomla.submitbutton('auditlog.reset')"><?php echo JText::_('AL_RESET') ?></button>
+
+
+            <div class="alert alert-warning alert-dismissible fade show" role="alert">
+	            <p><?php echo HTMLFormatHelper::icon('exclamation-diamond.png', JText::_('AL_FAPPLIED')); ?><?php echo JText::_('AL_FILTERS') ?></p>
+                <p><button type="button" class="btn btn-warning btn-sm"
+                           onclick="Joomla.submitbutton('auditlog.reset')"><?php echo JText::_('AL_RESET') ?></button></p>
+                <button type="button" class="btn-close"  data-bs-dismiss="alert" aria-label="Close"></button>
             </div>
+
 		<?php endif; ?>
 
 
