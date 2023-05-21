@@ -20,7 +20,7 @@ class JHTMLEmerald
 
 		if(!JFolder::exists(JPATH_ADMINISTRATOR . DIRECTORY_SEPARATOR . 'components/com_emerald'))
 		{
-			return '<b>' . JText::_('Please install Emerald extension') . '</b>';
+			return '<b>' . JText::_('Please install JoomSubscription extension') . '</b>';
 		}
 
 		$db = JFactory::getDBO();

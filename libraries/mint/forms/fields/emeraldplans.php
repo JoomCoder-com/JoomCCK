@@ -26,7 +26,7 @@ class JFormFieldEmeraldplans extends JFormFieldGroupedList
 
 		if(!JFolder::exists(JPATH_ADMINISTRATOR . DIRECTORY_SEPARATOR . 'components' . DIRECTORY_SEPARATOR . 'com_emerald') || !JComponentHelper::isEnabled('com_emerald'))
 		{
-			return '<b>' . JText::_('Please install Emerald extension') . '</b>';
+			return '<b>' . JText::_('Please install JoomSubscription extension') . '</b>';
 		}
 
 		if($this->multiple)

@@ -40,6 +40,6 @@ class JFormFieldCPlanslist extends JFormFieldList
 			return $element->getInput();
 		}
 
-		return '<b>'.JText::_('Please install Emerald').'</b>';
+		return '<b>'.JText::_('Please install JoomSubscription').'</b>';
 	}
 }
