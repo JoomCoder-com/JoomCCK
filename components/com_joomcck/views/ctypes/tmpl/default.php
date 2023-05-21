@@ -116,8 +116,9 @@ $listDirn  = $this->state->get('list.direction');
 							Dropdown::checkin('cb' . $i, 'ctypes.');
 						endif;
 
+
 						Dropdown::divider();
-						Dropdown::addCustomItem(JText::_('C_MANAGE_FIELDS') . ' <span class="badge ' . ($item->fieldnum ? 'bg-success' : ' bg-light text-dark border') . '">' . $item->fieldnum . '</span>', JRoute::_('index.php?option=com_joomcck&view=tfields&filter_type=' . $item->id));
+						Dropdown::addCustomItem(JText::_('C_MANAGE_FIELDS') . ' <span class="badge ' . ($item->fieldnum ? ' bg-success' : ' bg-light text-dark border') . '">' . $item->fieldnum . '</span>', JRoute::_('index.php?option=com_joomcck&view=tfields&filter_type=' . $item->id));
 
 						echo Dropdown::render();
 						?>
@@ -130,9 +131,7 @@ $listDirn  = $this->state->get('list.direction');
 					<?php else: ?>
 						<?php echo JText::_('CFIELDS'); ?>
 					<?php endif; ?>
-                    <span class="badge<?php if ($item->fieldnum) {
-						echo ' bg-success';
-					} ?>"><?php echo $item->fieldnum ?></span>
+                    <span class="badge <?php echo $item->fieldnum ? ' bg-success' : 'bg-light text-dark border' ?>"><?php echo $item->fieldnum ?></span>
                 </td>
                 <td class="center">
 					<?php echo $item->language; ?>
