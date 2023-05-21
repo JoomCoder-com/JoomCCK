@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <form>
-	<field id="id" name="id" type="text" default="0" label="ID" readonly="true" class="readonly" />
+	<field id="id" name="id" type="hidden" default="0" label="ID" readonly="true" class="readonly" />
 	<field id="name" name="name" type="text" default="" label="CTYPENAME" required="true" />
 	<field id="published" name="published" type="list" label="XFORM_PUBLISHED" class="form-select" size="1" default="1">
 		<option value="1">JPUBLISHED</option>
