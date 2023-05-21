@@ -173,11 +173,12 @@ $app = JFactory::getApplication();
 			<?php if($this->tmpl_params->get('tmpl_core.form_heading_text')):?>
 				<?php echo $this->tmpl_params->get('tmpl_core.form_heading_text'); ?>
 			<?php else: ?>
-				<?php if($this->item->id):?>
-					<?php echo JText::sprintf('CTEDIT', $this->escape($this->type->name), $this->item->title); ?>
-				<?php else: ?>
-					<?php echo JText::sprintf('CTSUBMIT', $this->escape($this->type->name)); ?>
-				<?php endif; ?>
+
+                    <?php if($this->item->id):?>
+	                    <span class="text-muted"><?php echo JText::sprintf('CTEDIT', $this->escape($this->type->name)); ?></span> <?php echo $this->item->title ?>
+                    <?php else: ?>
+	                    <?php echo JText::sprintf('CTSUBMIT', $this->escape($this->type->name)); ?>
+                    <?php endif; ?>
 
 				<?php if(!empty($this->parent->title)):?>
 					- <?php echo $this->parent->title; ?>
@@ -190,8 +191,11 @@ $app = JFactory::getApplication();
 <div class="alert alert-warning" style="display:none" id="form-error"></div>
 
 <?php if($this->type->description):?>
+
+<div class="my-4">
 	<?php echo $this->type->description;?>
-	<br />
+</div>
+
 <?php endif; ?>
 
 <?php if(!$this->user->get('id') && $this->type->params->get('submission.public_alert') && ($this->type->params->get('submission.public_edit') == 0)):?>

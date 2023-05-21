@@ -179,7 +179,7 @@ class JoomcckModelForm extends MModelAdmin
 		$table->params = $params;
 
 
-		$table->description = JHtml::_('content.prepare', Mint::markdown(Mint::_($table->description)));
+		$table->description = JHtml::_('content.prepare', $table->description);
 
 		if(!$table->id)
 		{
