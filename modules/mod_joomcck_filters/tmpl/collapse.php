@@ -36,8 +36,8 @@ JHTML::_('bootstrap.tooltip', '*[rel^="tooltip"]');
 </style>
 <form action="<?php echo JRoute::_('index.php');?>" method="post" name="filterform" id="filter-form">
 	<?php if($params->get('filter_search', 1)):?>
-		<div class="row <?php echo ( $state->get('records.search')? ' active' : NULL)?>">
-			<input type="text" class="col-md-12" name="filter_search" value="<?php echo $state->get('records.search');?>" />
+		<div class="<?php echo ( $state->get('records.search')? ' active' : NULL)?>">
+			<input type="text" placeholder="<?php echo JText::_('CSEARCHPLACEHOLDER') ?>" class="form-control" name="filter_search" value="<?php echo $state->get('records.search');?>" />
 		</div>
 	<?php endif;?>
 
@@ -150,9 +150,9 @@ JHTML::_('bootstrap.tooltip', '*[rel^="tooltip"]');
 	<input type="hidden" name="view_what" value="<?php echo $vw;?>">
 	<input type="hidden" name="task" value="records.filters">
 	<input type="hidden" name="limitstart" value="0">
-	<div class="form-actions">
-	<button type="submit" class="btn btn-primary btn-large">
-		<?php echo JText::_('CSEARCH');?>
+	<div class="form-actions mt-3">
+	<button type="submit" class="btn btn-outline-success">
+		<i class="fas fa-search"></i> <?php echo JText::_('CSEARCH');?>
 	</button>
 	</div>
 </form>
