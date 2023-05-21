@@ -95,7 +95,7 @@ class JoomcckControllerRate extends MControllerAdmin
 
 		switch ($type->params->get('properties.rate_mode'))
 		{
-			case 2 :
+			case 2 : // bayesian rating
 				$sql1 = "SELECT COUNT(*) AS count FROM #__js_res_vote AS v
 				WHERE v.ref_type = 'record' AND v.section_id = {$record->section_id} AND idx = {$index} GROUP BY v.ref_id";
 
@@ -111,10 +111,11 @@ class JoomcckControllerRate extends MControllerAdmin
 
 				$sql = "SELECT COUNT(*) AS total, ((" . $avg['num_vote'] . " * " . $avg['vote'] . ") + (COUNT(vote) * AVG(vote))) / (" . $avg['num_vote'] . " + COUNT(vote)) AS rating FROM #__js_res_vote WHERE ref_type = 'record' AND ref_id = {$record->id} AND idx = {$index} GROUP BY ref_id";
 				break;
-			case 3 :
+			case 3 : // smart rating
 				$sql = "SELECT COUNT(*) AS total, if(count(id) >= " . $type->params->get('properties.rate_smart_minimum') . ", sum(vote) / count(id), 0) AS rating FROM " . "#__js_res_vote WHERE ref_type = 'record' AND ref_id = {$record->id} AND ctime > '" . JFactory::getDate()->toSql() . "' - INTERVAL " . $type->params->get('properties.rate_smart_before') . " DAY AND idx = {$index} GROUP BY ref_id";
+
 				break;
-			default :
+			default : // plain rating
 				$sql = "SELECT COUNT(*) AS total, SUM(vote) / COUNT(*) AS rating FROM " . "#__js_res_vote WHERE ref_type = 'record' AND ref_id = {$record->id} AND idx = {$index} GROUP BY ref_id";
 				break;
 		}
@@ -128,7 +129,7 @@ class JoomcckControllerRate extends MControllerAdmin
 		$out = array('success' => 1);
 		if(count($options) > 1 && $type->params->get('properties.rate_multirating', false))
 		{
-			$ratings = json_decode($record->multirating, true);
+			$ratings = json_decode((string)$record->multirating, true);
 			@$ratings[$index]['sum'] = $rating->rating;
 			@$ratings[$index]['num'] = $rating->total;
 			$total = $total_num = 0;

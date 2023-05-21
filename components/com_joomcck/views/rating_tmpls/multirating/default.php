@@ -7,7 +7,10 @@
  * @license GNU/GPL http://www.gnu.org/copyleft/gpl.html
  */
 
-defined('_JEXEC') or die(); ?>
+defined('_JEXEC') or die();
+
+
+?>
 <table class="table-rating table table-hover table-bordered table-condensed">
 	<thead>
 		<tr>
@@ -20,13 +23,19 @@ defined('_JEXEC') or die(); ?>
 	</thead>
 	<tbody>
 		<?php foreach($options as $key => $option): ?>
-			<?php $parts = explode('::', $option); ?>
+			<?php
+
+
+            $parts = explode('::', $option);
+			$canRate = self::canRate('record', $record->user_id, $record->id, $type->params->get('properties.rate_access'), $key, $type->params->get('properties.rate_access_author', 0));
+
+            ?>
 			<tr>
 				<th width="1%" nowrap="nowrap" style="vertical-align: top;"><?php echo JText::_($parts[0]); ?></th>
 				<td width="1%" nowrap="nowrap" valign="top">
 					<?php echo RatingHelp::loadRating(isset($parts[1]) ? $parts[1] : $type->params->get('properties.tmpl_rating'),
 						round((int)@$result[$key]['sum']), $record->id, $key, 'Joomcck.ItemRatingCallBackMulti',
-						self::canRate('record', $record->user_id, $record->id, $type->params->get('properties.rate_access'), $key, $type->params->get('properties.rate_access_author', 0)));?>
+						$canRate);?>
 				</td>
 			</tr>
 		<?php endforeach;?>

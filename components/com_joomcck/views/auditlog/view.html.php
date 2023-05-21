@@ -78,12 +78,7 @@ class JoomcckViewAuditlog extends MViewBase
 
 
 		$this->type_objects = $types;
-
-
-
 		$this->events       = $this->get('Events');
-
-
 		$this->users        = $this->get('Users');
 
 

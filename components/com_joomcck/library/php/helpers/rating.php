@@ -30,6 +30,8 @@ class RatingHelp
 
 	public static function canRate($type, $user_id, $id, $accessLevel = 1, $index = 0, $author_can = 0)
 	{
+
+
 		$user = JFactory::getUser();
 		$isAuthor = $user_id == $user->get('id');
 
@@ -47,18 +49,28 @@ class RatingHelp
 		}
 		else
 		{
+
+
+
 			if(!in_array($accessLevel, $user->getAuthorisedViewLevels()))
 			{
 				return FALSE;
 			}
+
+
 
 			if($user->get('id') && $isAuthor && $author_can == 0)
 			{
 				return FALSE;
 			}
 
+
+
+
 			if($user->get('id') && JFactory::getApplication()->input->cookie->get("{$type}_rate_{$id}_{$index}", 0, 'INT'))
 			{
+
+
 				return FALSE;
 			}
 
@@ -91,6 +103,7 @@ class RatingHelp
 		$vars->prod_id          = $prod_id;
 		$vars->index            = $index;
 		$vars->rid              = $prod_id;
+
 		ob_start();
 
 		include(JPATH_ROOT . '/components/com_joomcck/views/rating_tmpls/rating_' . $tmpl_name . '.php');
