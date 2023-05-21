@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <form>
-	<field name="id" type="text" default="0" label="ID" description="JGLOBAL_FIELD_ID_DESC" class="readonly" readonly="true" />
+	<field name="id" type="hidden" default="0" label="ID" description="JGLOBAL_FIELD_ID_DESC" class="readonly" readonly="true" />
 
 	<field name="asset_id" type="hidden" filter="unset" />
 

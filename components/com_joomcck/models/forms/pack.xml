@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <form>
 
-	<field name="id" type="text" default="0" label="ID" description="id" class="readonly" readonly="true" />
+	<field name="id" type="hidden" default="0" label="ID" description="id" class="readonly" readonly="true" />
 
 	<field name="name" type="text" label="XFORM_PACKNAME" class="form-control" size="40" required="true"/>
 

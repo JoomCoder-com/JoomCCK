@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <form>
-	<field id="id" name="id" type="text" default="0"
+	<field id="id" name="id" type="hidden" default="0"
 		label="XFORM_COMMID" readonly="true" class="readonly" />
 	<field id="published" name="published" type="list"
 		label="JSTATUS" class="form-select" size="1" default="1">

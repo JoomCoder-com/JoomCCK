@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <form>
-	<field id="id" name="id" type="text" default="0"
+	<field id="id" name="id" type="hidden" default="0"
 		label="ID" readonly="true" class="readonly" />
 	<field id="title" name="title" type="textarea" default="" label="CTITLE" required="true" filter="safeHtml" />
 	<field id="description" name="description" type="editor" label="CDESCR"
