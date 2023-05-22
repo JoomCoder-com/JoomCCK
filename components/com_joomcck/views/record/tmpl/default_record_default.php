@@ -8,6 +8,7 @@
  */
 
 use Joomla\CMS\HTML\HTMLHelper;
+use Joomla\CMS\Layout\LayoutHelper;
 
 defined('_JEXEC') or die();
 
@@ -86,43 +87,10 @@ if($params->get('tmpl_core.item_follow_num'))
 <?php echo $params->get('tmpl_params.css');?>
 </style>
 <article class="<?php echo $this->appParams->get('pageclass_sfx')?><?php if($item->featured) echo ' article-featured' ?>">
-	<?php if(!$this->print):?>
-		<div class="float-end controls">
-			<div class="btn-group">
-				<?php if($params->get('tmpl_core.item_print')):?>
-					<a class="btn btn-sm btn-light border" onclick="window.open('<?php echo JRoute::_($this->item->url.'&tmpl=component&print=1');?>','win2','status=no,toolbar=no,scrollbars=yes,titlebar=no,menubar=no,resizable=yes,width=640,height=480,directories=no,location=no'); return false;">
-						<?php echo HTMLFormatHelper::icon('printer.png', JText::_('CPRINT'));  ?></a>
-				<?php endif;?>
 
-				<?php if($this->user->get('id')):?>
-					<?php echo HTMLFormatHelper::bookmark($item, $this->type, $params);?>
-					<?php echo HTMLFormatHelper::follow($item, $this->section);?>
-					<?php echo HTMLFormatHelper::repost($item, $this->section);?>
-					<?php if($item->controls):?>
-						<button type="button" data-bs-toggle="dropdown" class="dropdown-toggle btn btn-sm btn-light border">
-							<?php echo HTMLFormatHelper::icon('gear.png');  ?></button>
-						<ul class="dropdown-menu">
-							<?php echo list_controls($item->controls);?>
-						</ul>
-					<?php endif;?>
-				<?php endif;?>
-			</div>
-		</div>
-	<?php else:?>
-		<div class="float-end controls">
-			<a href="#" class="btn btn-sm btn-light border" onclick="window.print();return false;"><?php echo HTMLFormatHelper::icon('printer.png', JText::_('CPRINT'));  ?></a>
-		</div>
-	<?php endif;?>
-	<?php if($params->get('tmpl_core.item_title')):?>
-		<?php if($this->type->params->get('properties.item_title')):?>
-			<div class="page-header mb-3">
-				<<?php echo $params->get('tmpl_params.title_tag', 'h1')?>>
-					<?php echo $item->title?>
-					<?php echo CEventsHelper::showNum('record', $item->id);?>
-				</<?php echo $params->get('tmpl_params.title_tag', 'h1')?>>
-			</div>
-		<?php endif;?>
-	<?php endif;?>
+    <?php echo LayoutHelper::render('core.single.recordParts.buttonsManage',['current' => $this]) ?>
+	<?php echo LayoutHelper::render('core.single.recordParts.title',['current' => $this]) ?>
+
 	<div class="clearfix"></div>
 
 	<?php if(isset($this->item->fields_by_groups[null])):?>
