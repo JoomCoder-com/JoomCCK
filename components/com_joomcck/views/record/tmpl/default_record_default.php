@@ -88,8 +88,8 @@ if($params->get('tmpl_core.item_follow_num'))
 </style>
 <article class="<?php echo $this->appParams->get('pageclass_sfx')?><?php if($item->featured) echo ' article-featured' ?>">
 
-    <?php echo LayoutHelper::render('core.single.recordParts.buttonsManage',['current' => $this]) ?>
-	<?php echo LayoutHelper::render('core.single.recordParts.title',['current' => $this]) ?>
+    <?php echo LayoutHelper::render('core.single.recordParts.buttonsManage',['current' => $this],null,['component' => 'com_joomcck','client' => 'site'] ) ?>
+	<?php echo LayoutHelper::render('core.single.recordParts.title',['current' => $this],null,['component' => 'com_joomcck','client' => 'site'] ) ?>
 
 	<div class="clearfix"></div>
 
