@@ -1,4 +1,6 @@
 <?php
+defined('_JEXEC') or die();
+
 $app = JFactory::getApplication();
 
 if(!$params->get('field_id_geo'))

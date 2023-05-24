@@ -1,4 +1,7 @@
 <?php
+
+defined('_JEXEC') or die();
+
 $app = JFactory::getApplication();
 $file = new JInputFiles();
 $db = JFactory::getDBO();

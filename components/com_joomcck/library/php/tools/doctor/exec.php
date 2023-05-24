@@ -1,4 +1,5 @@
 <?php
+defined('_JEXEC') or die();
 
 $app = JFactory::getApplication();
 $db  = JFactory::getDBO();

@@ -1,5 +1,5 @@
 <?php
-
+defined('_JEXEC') or die();
 $migration = new Kunena2Joomcck();
 $migration->migrate($params);
 

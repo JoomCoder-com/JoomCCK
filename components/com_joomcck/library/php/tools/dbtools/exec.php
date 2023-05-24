@@ -1,5 +1,7 @@
 <?php
 
+defined('_JEXEC') or die();
+
 use Joomla\CMS\Factory;
 
 $app = JFactory::getApplication();

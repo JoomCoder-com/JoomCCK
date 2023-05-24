@@ -1,4 +1,7 @@
 <?php
+
+defined('_JEXEC') or die();
+
 $types = $params->get('types', FALSE);
 set_time_limit(0);
 ini_set('max_execution_time', 0);

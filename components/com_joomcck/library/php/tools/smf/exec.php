@@ -1,4 +1,5 @@
 <?php
+defined('_JEXEC') or die();
 
 $migration = new SMF2Joomcck();
 $migration->migrate($params);

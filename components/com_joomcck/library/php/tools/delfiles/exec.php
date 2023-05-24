@@ -1,5 +1,7 @@
 <?php
 
+defined('_JEXEC') or die();
+
 $app         = JFactory::getApplication();
 $cp          = JComponentHelper::getParams('com_joomcck');
 $db          = JFactory::getDBO();

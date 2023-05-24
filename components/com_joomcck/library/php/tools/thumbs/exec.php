@@ -1,4 +1,7 @@
 <?php
+
+defined('_JEXEC') or die();
+
 $app    = JFactory::getApplication();
 $folder = JPATH_ROOT . DIRECTORY_SEPARATOR . JComponentHelper::getParams('com_joomcck')->get('general_upload') . DIRECTORY_SEPARATOR . 'thumbs_cache';
 if(JFolder::exists($folder))
