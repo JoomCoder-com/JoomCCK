@@ -455,7 +455,7 @@ class JoomcckModelRecord extends MModelItem
 			if($lognums[$record->id])
 			{
 				$url   = 'index.php?option=com_joomcck&view=auditlog&record_id=' . $record->id . '&Itemid=' . $type->params->get('audit.itemid', $app->input->getInt('Itemid')) . '&return=' . Url::back();
-				$out[] = sprintf($pattern, 'audit', JRoute::_($url), 'calendar-list.png', JText::_('CAUDITLOG'), JText::_('CAUDITLOG') . " ({$lognums[$record->id]})");
+				$out[] = sprintf($pattern, 'audit', JRoute::_($url), 'calendar-list.png', JText::_('CAUDITLOG'), JText::_('CAUDITLOG') . " <span class='badge bg-light border text-dark'>{$lognums[$record->id]}</span>");
 			}
 		}
 		if(MECAccess::allowRollback($record, $type, $section) || MECAccess::allowCompare($record, $type, $section))
