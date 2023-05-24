@@ -6,6 +6,8 @@ $db          = JFactory::getDBO();
 $size        = $lost_files        = 0;
 $files_ids[] = 0;
 
+if(!defined('DS')) define('DS',DIRECTORY_SEPARATOR);
+
 if ($params->get('deleted_articles')) {
     $sql = "SELECT `id` FROM `#__js_res_fields` WHERE `field_type` IN('uploads','video','audio','gallery','paytodownload','image')";
     $db->setQuery($sql);
