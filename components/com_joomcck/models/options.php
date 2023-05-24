@@ -81,7 +81,7 @@ class JoomcckModelOptions extends MModelAdmin
 		$table = JTable::getInstance('Useropt', 'JoomcckTable');
 		$table->load(array('user_id' => $me->get('id')));
 
-		$out = json_decode($table->params, TRUE);
+		$out = json_decode((string)$table->params, TRUE);
 
 		return $out;
 	}
