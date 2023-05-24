@@ -362,6 +362,7 @@ class JoomcckModelRecord extends MModelItem
 			$pattern        = '<a class="dropdown-item joomcck-control-item joomcck-control-item-%s" href="%s"><img border="0" src="' . JURI::root(TRUE) . '/media/com_joomcck/icons/16/%s" alt="%s" align="absmiddle" title="%s" /></a>';
 			$confirm_patern = '<a class="dropdown-item joomcck-control-item joomcck-control-item-%s" href="%s" onclick="javascript:if(!confirm(\'%s\')){return false;}"><img border="0" src="' . JURI::root(TRUE) . '/media/com_joomcck/icons/16/%s" alt="%s" align="absmiddle" title="%s" /></a>';
 		}
+
 		else
 		{
 			$pattern        = '<a class="dropdown-item joomcck-control-item joomcck-control-item-%s" href="%s"><img border="0" src="' . JURI::root(TRUE) . '/media/com_joomcck/icons/16/%s" alt="%s" align="absmiddle" /> %s</a>';
@@ -465,28 +466,64 @@ class JoomcckModelRecord extends MModelItem
 				$vernums[$record->id] = $db->loadObjectList();
 			}
 
+			// todo: needs to be simplified
 			if($vernums[$record->id])
 			{
-				$label   = sprintf($pattern, 'rollback',  'javascript:void(0);', 'arrow-split-090.png', JText::_('CVERCONTRL'), JText::_('CVERCONTRL') . ' - v.' . $record->version);
+
+				$attributeId = 'versionControl-'.$record->id;
+
+				$labelpattern       = '<a data-bs-toggle="modal" data-bs-target="#%s" class="dropdown-item joomcck-control-item joomcck-control-item-%s" href="%s"><img border="0" src="' . JURI::root(TRUE) . '/media/com_joomcck/icons/16/%s" alt="%s" align="absmiddle" /> %s</a>';
+
+				$label   = sprintf($labelpattern, $attributeId,'rollback',  'javascript:void(0);', 'arrow-split-090.png', JText::_('CVERCONTRL'), JText::_('CVERCONTRL') . ' <span class="badge bg-light border text-dark">v.' . $record->version.'</span>');
 				$vpatern = "<a>v.%d - by %s on %s</a>";
 				foreach($vernums[$record->id] AS $version)
 				{
+
 					$ver = sprintf($vpatern, $version->version, CCommunityHelper::getName($version->user_id, $section, TRUE), JFactory::getDate($version->ctime)->format($type->params->get('audit.audit_date_format', $type->params->get('audit.audit_date_custom'))));
 
 					if(MECAccess::allowRollback($record, $type, $section))
 					{
-						$out[$label][$ver][] = sprintf($pattern, 'version',  Url::task('records.rollback', $record->id . '&version=' . $version->version), 'arrow-merge-180-left.png', JText::_('CROLLBACK'), JText::_('CROLLBACK'));
+						$modalContent[$label][$ver][] = sprintf($pattern, 'version',  Url::task('records.rollback', $record->id . '&version=' . $version->version), 'arrow-merge-180-left.png', JText::_('CROLLBACK'), JText::_('CROLLBACK'));
 					}
 
 					if(MECAccess::allowCompare($record, $type, $section))
 					{
 						$url                 = 'index.php?option=com_joomcck&view=diff&record_id=' . $record->id . '&version=' . $version->version . '&return=' . Url::back();
-						$out[$label][$ver][] = sprintf($pattern, 'compare',  $url, 'blue-document-view-book.png', JText::_('CCOMPARECUR'), JText::_('CCOMPARECUR'));
+						$modalContent[$label][$ver][] = sprintf($pattern, 'compare',  $url, 'blue-document-view-book.png', JText::_('CCOMPARECUR'), JText::_('CCOMPARECUR'));
 					}
 				}
 
 				$url           = 'index.php?option=com_joomcck&view=versions&record_id=' . $record->id . '&return=' . Url::back();
-				$out[$label][] = sprintf($pattern, 'versions',  $url, 'drawer.png', JText::_('CVERSIONSMANAGE'), JText::_('CVERSIONSMANAGE'));
+				$modalContent[$label][] = sprintf($pattern, 'versions',  $url, 'drawer.png', JText::_('CVERSIONSMANAGE'), JText::_('CVERSIONSMANAGE'));
+
+
+				// rebuild as listgroup
+				$listgroup = [];
+				foreach ($modalContent[$label] as $mkey => $mvalue){
+
+					$item = [];
+
+					$mvalue = is_array($mvalue) ? implode(' ',$mvalue) : $mvalue;
+					$mkey = $mkey == 0 ? '' : $mkey;
+
+					$item['text'] = $mkey . $mvalue;
+					$listgroup['items'][] =  $item;
+
+				}
+
+				$listLayout =  \Joomla\CMS\Layout\LayoutHelper::render('core.bootstrap.listGroup',$listgroup,null,['client' => 'site','component' => 'com_joomcck']);
+
+				$data = [
+					'body' => $listLayout,
+					'id' => $attributeId,
+					'title' => strip_tags($label)
+				];
+
+				$out[] = $label;
+
+				// add modal content
+				echo \Joomla\CMS\Layout\LayoutHelper::render('core.bootstrap.modal',$data,null,['client' => 'site','component' => 'com_joomcck']);
+
 			}
 		}
 

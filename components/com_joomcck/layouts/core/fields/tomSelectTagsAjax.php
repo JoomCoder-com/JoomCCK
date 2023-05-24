@@ -6,7 +6,7 @@
  * @copyright Copyright (C) 2007-2014 joomcoder (https://www.joomcoder.com). All rights reserved.
  * @license   GNU/GPL http://www.gnu.org/copyleft/gpl.html
  */
-
+defined('_JEXEC') or die('Restricted access');
 use Joomcck\Assets\Webassets\Webassets;
 use Joomla\CMS\Language\Text;
 
