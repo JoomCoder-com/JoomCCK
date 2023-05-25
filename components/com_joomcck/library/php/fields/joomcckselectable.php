@@ -208,9 +208,10 @@ class CFormFieldSelectable extends CFormField
 	public function onFilterWornLabel($section)
 	{
 		$value = $this->_getvalue();
+
 		foreach($value as $val)
 		{
-			$label[] = $this->_getVal($c);
+			$label[] = $this->_getVal($val);
 		}
 		$value = implode(JText::_('CFILTERWORNSEPARATOR'), $label);
 
