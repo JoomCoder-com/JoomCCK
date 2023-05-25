@@ -43,7 +43,7 @@ $fieldId = (int) rand(1,2000);
 
             name="<?php echo $name ?>[]"
             multiple
-            data-placeholder=""
+            data-placeholder="<?php echo \Joomla\CMS\Language\Text::_('CTYPETOSELECT') ?>"
     >
 	</select>
 </div>
