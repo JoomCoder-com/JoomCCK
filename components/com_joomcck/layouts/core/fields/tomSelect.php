@@ -37,10 +37,9 @@ $fieldId = (int) rand(1,2000);
 
 ?>
 
-<div id="select-tags-<?php echo $id ?>-container">
+<div id="select-items-<?php echo $id ?>-container">
 	<select
             id="<?php echo $id ?>-<?php echo $fieldId ?>"
-
             name="<?php echo $name ?>[]"
             multiple
             data-placeholder="<?php echo \Joomla\CMS\Language\Text::_('CTYPETOSELECT') ?>"
@@ -72,9 +71,14 @@ $fieldId = (int) rand(1,2000);
                 callback();
             });
 
-        },
+
+        }
         <?php endif; ?>
+
     });
+
+
+    jQuery('#<?php echo $id ?>-<?php echo $fieldId ?>').parent().find('.ts-control').addClass('form-control').find('input').addClass('w-100'); // bootstrap the field
 
 
 

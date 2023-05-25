@@ -66,6 +66,8 @@ $default = str_replace(['"id":','"text":'],['id:','text:'],json_encode($default)
         },
     });
 
+    jQuery('#<?php echo $id ?>').parent().find('.ts-control').addClass('form-control').find('input').addClass('w-100'); // bootstrap the field
+
 </script>
 
 
