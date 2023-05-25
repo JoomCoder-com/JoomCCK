@@ -9,19 +9,20 @@
 defined('_JEXEC') or die();
 
 JHTML::_('bootstrap.tooltip', '*[rel^="tooltip"]');
-
 if(!$this->values) return;
 $default = $this->default;
+$hidden = array();
 ?>
-
 <?php if($this->params->get('params.total_limit') != 1):?>
-<select class="form-select mb-3" name="filters[<?php echo $this->key;?>][by]" title="<?php echo JText::_('CSELECTFILTERCONDITION')?>" rel="tooltip">
+<select class="form-select mb-3" name="filters[<?php echo $this->key;?>][by]" data-bs-title="<?php echo JText::_('CSELECTFILTERCONDITION')?>" rel="tooltip">
 	<option value="any" <?php if($this->value && $this->value['by'] == 'any') echo 'selected="selected"';?>><?php echo JText::_('CRECORDHASANYVALUE')?></option>
 	<option value="all" <?php if($this->value && $this->value['by'] == 'all') echo 'selected="selected"';?>><?php echo JText::_('CRECORDHASALLVALUES')?></option>
 </select>
 
 <?php endif;?>
+<div class="toggleButtonsContainer d-flex">
 
+</div>
 <?php
 foreach($this->values as $key => $value) :
 	if (!$value->field_value)
@@ -30,9 +31,9 @@ foreach($this->values as $key => $value) :
 	?>
 
 
-    <div class="form-check form-check-inline">
-        <input name="filters[<?php echo $this->key;?>][value][]" class="form-check-input" type="checkbox" id="filterInlineCheckbox<?php echo $this->key;?>-<?php echo $key ?>" value="<?php echo htmlspecialchars($value->field_value);?>" <?php echo (in_array($value->field_value, $default) ? ' checked="checked"' : NULL);?>>
-        <label class="form-check-label" for="filterInlineCheckbox<?php echo $this->key;?>-<?php echo $key ?>"><?php echo $label;?> <span class="badge bg-light text-muted border"><?php echo ($this->params->get('params.filter_show_number', 1) ? $value->num : NULL);?></span></label>
+    <div class="d-inline">
+        <input class="btn-check" autocomplete="off" name="filters[<?php echo $this->key;?>][value][]" type="checkbox" id="filterInlineCheckbox<?php echo $this->key;?>-<?php echo $key ?>" value="<?php echo htmlspecialchars($value->field_value);?>" <?php echo (in_array($value->field_value, $default) ? ' checked="checked"' : NULL);?>>
+        <label class="btn btn-outline-success" for="filterInlineCheckbox<?php echo $this->key;?>-<?php echo $key ?>"><?php echo $label;?> <span class="badge bg-light text-muted border"><?php echo ($this->params->get('params.filter_show_number', 1) ? $value->num : NULL);?></span></label>
     </div>
 
 
