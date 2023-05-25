@@ -587,7 +587,7 @@ $current_user = JFactory::getUser($this->input->getInt('user_id', $this->user->g
 						<?php endforeach; ?>
 					<?php endif; ?>
                 </ul>
-                <div class="tab-content" id="vtabs-content">
+                <div class="tab-content flex-grow-1 align-self-stretch" id="vtabs-content">
 					<?php if (in_array($markup->get('filters.filter_type'), $this->user->getAuthorisedViewLevels()) && (count($this->submission_types) > 1)): ?>
                         <div class="tab-pane fade show active" id="tab-types">
 							<?php if ($markup->get('filters.filter_type_type') == 1): ?>
