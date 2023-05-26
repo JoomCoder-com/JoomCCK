@@ -66,6 +66,7 @@ $fieldId = (int) rand(1,2000);
             fetch(url)
                 .then(response => response.json())
                 .then(json => {
+
                     callback(json.result);
                 }).catch(()=>{
                 callback();

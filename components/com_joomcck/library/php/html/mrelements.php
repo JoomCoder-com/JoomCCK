@@ -417,14 +417,10 @@ class JHTMLMrelements
 		return $o;
 	}
 
-	public static function pills($name, $id, $default = array(), $list = array(), $options = array(),$useTomSelect = 0,$params = null)
+	public static function pills($name, $id, $default = array(), $list = array(), $options = array(),$params = null)
 	{
-
-
 		if(is_null($params))
 			$params = new \Joomla\Registry\Registry();
-
-
 		// max items user can add
 		if(isset($options['limit']))
 			$options['maxItems'] = $options['limit'];
@@ -447,8 +443,6 @@ class JHTMLMrelements
 		$options['canDelete'] = $options['can_delete'];
 
 
-
-
 		// if list not used use default as list (to display selected items in dropdown
 		if(empty($list)){
 
@@ -457,8 +451,6 @@ class JHTMLMrelements
 				$list[] = $iValue['id'];
 			}
 		}
-
-
 		$data = [
 			'options' => $options,
 			'params' => $params,

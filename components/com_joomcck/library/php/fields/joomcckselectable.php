@@ -412,6 +412,7 @@ class CFormFieldSelectable extends CFormField
 		$db->setQuery($query);
 
 		$list = $db->loadObjectList();
+
 		foreach($list as $k => $item)
 		{
 			$c = explode('^', $item->text);
