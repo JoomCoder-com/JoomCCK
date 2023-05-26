@@ -74,7 +74,7 @@ class CFormField extends JFormField
 		$this->class .= ' ' . $this->params->get('core.lable_class', '');
 		$this->fieldclass .= ' ' . $this->params->get('core.field_class', '');
 		$this->group_title = !empty($field->group_title) ? Mint::_($field->group_title) : null;
-		$this->group_descr = !empty($field->group_descr) ? Mint::_($field->group_descr) : null;
+		$this->group_descr = !empty($field->group_descr) ? $field->group_descr : null;
 		$this->group_id = $field->group_id;
 		$this->group_icon = @$field->group_icon;
 		$this->ordering = $field->ordering;

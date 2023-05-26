@@ -32,7 +32,7 @@ $default = $this->default;
     </div>
 	<?php if ($this->params->get('params.total_limit') != 1): ?>
 
-        <div class="col-md-6">
+        <div class="col-md-6 mt-sm-3 mt-md-0">
             <select class="form-select" name="filters[<?php echo $this->key; ?>][by]"
                     title="<?php echo JText::_('CFILTERCONDITION') ?>" rel="tooltip">
                 <option value="any" <?php if (isset($this->value['by']) && $this->value['by'] == 'any') echo 'selected="selected"'; ?>><?php echo JText::_('CRECORDHASANYVALUE') ?></option>
