@@ -16,22 +16,24 @@
 	</files>
 	<config>
 		<fields name="params">
-			<fieldset label="General" name="general" addfieldpath="/libraries/mint/forms/fields/">
+			<fieldset name="basic" addfieldpath="/libraries/mint/forms/fields/">
 				<field name="section_id" class="form-select" type="meresourcessection" default="" label="Select section" description="Select the Home section which will for this module." />
-				<field name="show_icons" type="radio" class="btn-group" default="1" label="Show field icons">
+				<field name="show_icons" type="radio" layout="joomla.form.field.radio.switcher" filter="integer" class="btn-group" default="1" label="Show field icons">
 					<option value="0">No</option>
 					<option value="1">Yes</option>
 				</field>
-				<field name="form_hide" type="radio" class="btn-group" default="1" label="Hide on new article form">
+				<field name="form_hide" type="radio" layout="joomla.form.field.radio.switcher" filter="integer" default="1" label="Hide on new article form">
 					<option value="0">No</option>
 					<option value="1">Yes</option>
 				</field>
-				<field name="field_id_exclude" type="meresourcesfields" key="id" size="15" multiple="true" default="" label="Fields to exclude" />
+				<field
+						class="form-select" name="field_id_exclude" type="meresourcesfields" key="id" size="15" multiple="true" default="" label="Fields to exclude" />
+
 				<field name="filter_fields_template" type="radio" class="btn-group" default="module" label="Choose fields template" description="Each Type Field has a Section and a Module template setting. Choose either for this module.">
 					<option value="module">Module</option>
 					<option value="section">Section (non module)</option>
 				</field>
-				<field name="filter_search" type="radio" class="btn-group" default="1" label="text search">
+				<field name="filter_search" type="radio" layout="joomla.form.field.radio.switcher" filter="integer" default="1" label="text search">
 					<option value="0">No</option>
 					<option value="1">Yes</option>
 				</field>
@@ -53,7 +55,7 @@
 					<option value="3">Select</option>
 					<option value="4">Multiple Select</option>
 				</field>
-				<field name="filter_empty_cats" type="radio" class="btn-group" default="1" label="Show empty categories" description="If No can reduce performance!">
+				<field name="filter_empty_cats" type="radio" layout="joomla.form.field.radio.switcher" filter="integer" default="1" label="Show empty categories" description="If No can reduce performance!">
 					<option value="0">No</option>
 					<option value="1">Yes</option>
 				</field>
@@ -64,16 +66,54 @@
 					<option value="3">Select</option>
 					<option value="4">Tag Cloud</option>
 				</field>
-				<field name="layout" type="modulelayout" class="form-select" label="JFIELD_ALT_LAYOUT_LABEL" description="JFIELD_ALT_MODULE_LAYOUT_DESC" />
 				<field name="type_label" type="text" size="40" default="Content Type" label="Content type" />
 				<field name="user_label" type="text" size="40" default="Author" label="Users" />
 				<field name="category_label" type="text" size="40" default="Category" label="Categories" />
 				<field name="tag_label" type="text" size="40" default="Tags" label="Tags" />
 			</fieldset>
 			<fieldset name="advanced">
-				<field name="moduleclass_sfx" type="text" label="COM_MODULES_FIELD_MODULECLASS_SFX_LABEL" description="COM_MODULES_FIELD_MODULECLASS_SFX_DESC" />
-				<field name="cache" type="list" default="0" label="COM_MODULES_FIELD_CACHING_LABEL" description="COM_MODULES_FIELD_CACHING_DESC">
+				<field
+						name="layout"
+						type="modulelayout"
+						label="JFIELD_ALT_LAYOUT_LABEL"
+						class="form-select"
+						validate="moduleLayout"
+				/>
+
+				<field
+						name="moduleclass_sfx"
+						type="textarea"
+						label="COM_MODULES_FIELD_MODULECLASS_SFX_LABEL"
+						rows="3"
+						validate="CssIdentifier"
+				/>
+
+				<field
+						name="cache"
+						type="list"
+						label="COM_MODULES_FIELD_CACHING_LABEL"
+						default="1"
+						filter="integer"
+						validate="options"
+				>
+					<option value="1">JGLOBAL_USE_GLOBAL</option>
 					<option value="0">COM_MODULES_FIELD_VALUE_NOCACHING</option>
+				</field>
+
+				<field
+						name="cache_time"
+						type="number"
+						label="COM_MODULES_FIELD_CACHE_TIME_LABEL"
+						default="900"
+						filter="integer"
+				/>
+
+				<field
+						name="cachemode"
+						type="hidden"
+						default="itemid"
+				>
+					<option value="itemid"></option>
 				</field>
 			</fieldset>
 		</fields>
