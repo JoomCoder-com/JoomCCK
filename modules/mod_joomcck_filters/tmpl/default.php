@@ -42,8 +42,8 @@ JHTML::_('bootstrap.tooltip', '*[rel^="tooltip"]');
 </style>
 <form action="<?php echo JRoute::_('index.php'); ?>" method="post" name="filterform" id="filter-form">
 	<?php if($params->get('filter_search', 1)): ?>
-		<div class="row <?php echo($state->get('records.search') ? ' active' : NULL) ?>">
-			<input type="text" class="col-md-12" name="filter_search" value="<?php echo $state->get('records.search'); ?>"/>
+		<div class="mb-3 <?php echo($state->get('records.search') ? ' active' : NULL) ?>">
+			<input type="text" placeholder="<?php echo JText::_($params->get('search_placeholder','Add your keyword here...')) ?>" class="form-control" name="filter_search" value="<?php echo $state->get('records.search'); ?>"/>
 		</div>
 	<?php endif; ?>
 

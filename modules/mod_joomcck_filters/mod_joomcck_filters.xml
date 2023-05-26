@@ -66,10 +66,11 @@
 					<option value="3">Select</option>
 					<option value="4">Tag Cloud</option>
 				</field>
-				<field name="type_label" type="text" size="40" default="Content Type" label="Content type" />
-				<field name="user_label" type="text" size="40" default="Author" label="Users" />
-				<field name="category_label" type="text" size="40" default="Category" label="Categories" />
-				<field name="tag_label" type="text" size="40" default="Tags" label="Tags" />
+				<field name="search_placeholder" type="text" size="40" default="Add your keyword here..." label="Search Placeholder Label" />
+				<field name="type_label" type="text" size="40" default="Content Type" label="Content type Label" />
+				<field name="user_label" type="text" size="40" default="Author" label="Users Label" />
+				<field name="category_label" type="text" size="40" default="Category" label="Categories Label" />
+				<field name="tag_label" type="text" size="40" default="Tags" label="Tags Label" />
 			</fieldset>
 			<fieldset name="advanced">
 				<field
