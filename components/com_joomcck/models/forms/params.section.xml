@@ -290,7 +290,7 @@
 				<option value="0">CNO</option>
 				<option value="1">CYES</option>
 			</field>
-			<field name="home_text" type="text" default="See all artilces" size="3" label="X_HOMETEXT"/>
+			<field name="home_text" type="text" default="See all articles" size="3" label="X_HOMETEXT"/>
 			<field name="text_icon" type="fieldicon" default="home.png" size="3" label="X_TEXTICON"/>
 			<field name="onlinestatus" type="mradio" class="btn-group" default="1" description="XX_ONLINESTATUSDESCR" label="X_ONLINESTATUS">
 				<option value="0">CNO</option>
