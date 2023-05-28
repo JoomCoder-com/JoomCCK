@@ -17,24 +17,31 @@ class JHTMLTypes
 		if(!$list)
 			return;
 
-		return JHtml::_('select.genericlist', $list, 'filters[type]', NULL, 'id', 'name', $default);
+		return JHtml::_('select.genericlist', $list, 'filters[type]', 'class="form-select"', 'id', 'name', $default);
 	}
 
 	public static function checkbox($list, $stypes, $default)
 	{
-		$out[] = '<div class="container-fluid">';
+
+		if(!$list)
+		{
+			return;
+		}
+
+
+		$out[] = '<div class="mb-3">';
 		foreach($list AS $type)
 		{
-			$out[] = '<div class="col-md-3"><label class="checkbox">';
-			$out[] = '<input id="type-' . $type . '" type="checkbox" name="filters[type][]" value="' . $type . '" ' . $stypes[$type]->filter_checked . '>';
-			$out[] = $stypes[$type]->name . '</label></div>';
+			$out[] = '<div class="form-check">';
+			$out[] = '<input class="form-check-input" id="type-' . $type . '" type="checkbox" name="filters[type][]" value="' . $type . '" ' . $stypes[$type]->filter_checked . '>';
+			$out[] = '<label class="form-check-label" for="type-' . $type . '">'.$stypes[$type]->name . '</label></div>';
 		}
 		$out[] = '</div>';
 
 		return implode("\n", $out);
 	}
 
-	public static function toggle($list, $stype, $default)
+	public static function toggle($list, $stypes, $default)
 	{
 		if(!$list)
 		{
@@ -45,36 +52,16 @@ class JHTMLTypes
 		$default = \Joomla\Utilities\ArrayHelper::toInteger($default);
 
 
-		foreach($list as $id => &$type)
+		$out[] = '<div>';
+		foreach($list AS $type)
 		{
-			$value = (in_array($type, $default) ? $type : NULL);
-			$out[] = '<li id="type-' . $type . '" ' . ($value ? 'class="active"' : NULL) . '><a href="javascript:void(0);" rel="' . $type . '">' . $stype[$type]->name . '<input type="hidden" name="filters[type][]" id="ftp-' . $type . '"
-			value="' . $value . '"></a></li>';
+			$out[] = '<div class="mb-2"><input class="btn-check" id="type-' . $type . '" autocomplete="off" type="checkbox" name="filters[type][]" value="' . $type . '" ' . $stypes[$type]->filter_checked . '>';
+			$out[] = '<label class="btn btn-outline-success" for="type-' . $type . '">'.$stypes[$type]->name . '</label></div>';
 		}
+		$out[] = '</div>';
 
-		$html = '<ul id="types-list-filters" class="nav nav-pills">' . implode(' ', $out) . '</ul>';
+		return implode("\n", $out);
 
-		$html .= "<script>
-		(function($){
-			$.each($('#types-list-filters').children('li'), function(k, v) {
-				$(this).bind('click', function() {
-					var a = $('a', this)
-					var id = a.attr('rel');
-					var hf = $('#ftp-' + id);
-					if(hf.val()) {
-						$(this).removeClass('active');
-						hf.val('');
-					}
-					else {
-						$(this).addClass('active');
-						hf.val(id);
-					}
-				});
-			});
-		}(jQuery));
-		</script>";
-
-
-		return $html;
+		return implode(' ', $out);
 	}
 }
