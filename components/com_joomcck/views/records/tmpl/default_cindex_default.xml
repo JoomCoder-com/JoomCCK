@@ -21,7 +21,7 @@
 		</fieldset>
 		<fieldset name="prms" label="FS_PARAMETERS">
 			<field name="tag" type="text" size="3" default="h4" label="CCTNAMETAG" />
-			<field name="well" type="radio" class="btn-group" default="0" label="X_CATWELL">
+			<field name="well" type="radio" class="btn-group" default="1" label="X_CATWELL">
 				<option value="0">CNO</option>
 				<option value="1">CYES</option>
 			</field>

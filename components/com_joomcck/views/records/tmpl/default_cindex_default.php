@@ -47,43 +47,49 @@ $api = new JoomcckApi();
 			<div class="col-md-<?php echo $span[$cols]?> category-box">
 				<?php if ($ind < count($cats)): ?>
 					<?php $category = $cats[$ind]; ?>
-					<div class="<?php echo ($params->get('tmpl_core.well', 1) ? 'well well-small' : NULL)?>">
+					<div class="<?php echo ($params->get('tmpl_core.well', 1) ? 'card' : '')?>">
 						<?php if($params->get('tmpl_params.cat_img', 1) && $category->image):?>
-							<div style="text-align: center;">
+							<div>
 								<?php
 
                                 $url = CImgHelper::getThumb(JPATH_ROOT.DIRECTORY_SEPARATOR.$category->image, $params->get('tmpl_params.cat_img_width', 200), $params->get('tmpl_params.cat_img_height', 200), 'catindex');
 
                                 ?>
-								<img class="category_icon" alt="<?php echo $category->title; ?>" src="<?php echo $url;?>">
+								<img class="<?php echo ($params->get('tmpl_core.well', 1) ? 'card-img-top' : NULL)?>" alt="<?php echo $category->title; ?>" src="<?php echo $url;?>">
 							</div>
 							<br>
 						<?php endif;?>
 
-						<<?php echo $params->get('tmpl_core.tag', 'h4')?>>
-							<a href="<?php echo JRoute::_($category->link)?>">
-								<?php if($category->id == JFactory::getApplication()->input->getInt('cat_id')):?>
-									<b><?php echo $category->title; ?></b>
-								<?php else:?>
-									<?php echo $category->title; ?>
-								<?php endif;?>
-							</a>
-							<?php if($params->get('tmpl_params.cat_nums') && ($category->params->get('submission') || $category->records_num)):?>
-								<span class="badge bg-info"><?php echo $category->records_num;?></span>
-							<?php endif;?>
-						</<?php echo $params->get('tmpl_core.tag', 'h4')?>>
+                        <div class="<?php echo ($params->get('tmpl_core.well', 1) ? 'card-body' : NULL)?>"">
+
+                            <<?php echo $params->get('tmpl_core.tag', 'h4')?>>
+                            <a href="<?php echo JRoute::_($category->link)?>">
+		                        <?php if($category->id == JFactory::getApplication()->input->getInt('cat_id')):?>
+                                    <b><?php echo $category->title; ?></b>
+		                        <?php else:?>
+			                        <?php echo $category->title; ?>
+		                        <?php endif;?>
+                            </a>
+	                        <?php if($params->get('tmpl_params.cat_nums') && ($category->params->get('submission') || $category->records_num)):?>
+                                <span class="badge bg-info"><?php echo $category->records_num;?></span>
+	                        <?php endif;?>
+                        </<?php echo $params->get('tmpl_core.tag', 'h4')?>>
 
 						<?php if($params->get('tmpl_params.cat_descr', 0) && $category->description):?>
-							<small>
+                            <small>
 								<?php echo strip_tags($category->{'descr_'.$params->get('tmpl_params.cat_descr')});?>
-							</small>
+                            </small>
 						<?php endif;?>
 
 						<?php if(count($category->children)):?>
-							<div class="subcat" id="subcat<?php echo $category->id;?>">
+                            <div class="subcat" id="subcat<?php echo $category->id;?>">
 								<?php getChilds($category, $params);?>
-							</div>
+                            </div>
 						<?php endif;?>
+
+                        </div>
+
+
 					</div>
 					<?php $ind++?>
 				<?php endif;?>
