@@ -123,8 +123,8 @@ $current_user = JFactory::getUser($this->input->getInt('user_id', $this->user->g
 				<?php if ($markup->get('menu.menu')): ?>
                     <ul class="nav mt-3">
 						<?php if (($app->input->getString('view_what') || $app->input->getInt('user_id') || $app->input->getInt('ucat_id') || $back) && $markup->get('menu.menu_all')): ?>
-                            <li>
-                                <a href="<?php echo $back ? $back : JRoute::_(Url::records($this->section)) ?>">
+                            <li class="dropdown me-2">
+                                <a class="btn btn-light btn-sm border" href="<?php echo $back ? $back : JRoute::_(Url::records($this->section)) ?>">
 									<?php if ($markup->get('menu.menu_all_records_icon')): ?>
 										<?php echo HTMLFormatHelper::icon('navigation-180.png'); ?>
 									<?php endif; ?>
@@ -134,8 +134,8 @@ $current_user = JFactory::getUser($this->input->getInt('user_id', $this->user->g
 						<?php endif; ?>
 
 						<?php if ($app->input->getString('cat_id') && $markup->get('menu.menu_home_button')): ?>
-                            <li>
-                                <a href="<?php echo Url::records($this->section) ?>">
+                            <li class="dropdown me-2">
+                                <a class="btn btn-light btn-sm border" href="<?php echo Url::records($this->section) ?>">
 									<?php if ($markup->get('menu.menu_home_icon')): ?>
 										<?php echo HTMLFormatHelper::icon($this->section->get('personalize.text_icon', 'home.png')); ?>
 									<?php endif; ?>
@@ -145,8 +145,8 @@ $current_user = JFactory::getUser($this->input->getInt('user_id', $this->user->g
 						<?php endif; ?>
 
 						<?php if (!empty($this->category->parent_id) && ($this->category->parent_id > 1) && $markup->get('menu.menu_up')): ?>
-                            <li>
-                                <a href="<?php echo Url::records($this->section, $this->category->parent_id) ?>">
+                            <li  class="dropdown me-2">
+                                <a class="btn btn-light btn-sm border" href="<?php echo Url::records($this->section, $this->category->parent_id) ?>">
 									<?php if ($markup->get('menu.menu_up_icon')): ?>
 										<?php echo HTMLFormatHelper::icon('arrow-curve-090-left.png'); ?>
 									<?php endif; ?>
