@@ -43,6 +43,12 @@ class JoomcckModelCategory extends MModelAdmin
 		$category->link         = 'index.php?option=com_joomcck&view=records&section_id=' . $category->section_id . '&cat_id=' . $category->id . ':' . $category->alias;
 		$category->crumbs       = $this->getCatCrumbs($category);
 
+		if(!empty($category->image)){
+			$category->image = \Joomla\CMS\HTML\HTMLHelper::cleanImageURL($category->image);
+			$category->image = $category->image->url;
+		}
+
+
 		return $category;
 	}
 

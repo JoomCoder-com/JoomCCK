@@ -193,6 +193,11 @@ class JoomcckModelCategories extends MModelList
 			$cats[$item->id]->descr_full = implode($descr);
 			$cats[$item->id]->title = JText::_($item->title);
 
+			if(!empty($cats[$item->id]->image)){
+				$cats[$item->id]->image = \Joomla\CMS\HTML\HTMLHelper::cleanImageURL($cats[$item->id]->image);
+				$cats[$item->id]->image = $cats[$item->id]->image->url;
+			}
+
 			$byparent[$item->parent_id][] = $cats[$item->id];
 
 		}

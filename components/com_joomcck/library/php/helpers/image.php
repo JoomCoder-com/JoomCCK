@@ -45,6 +45,8 @@ class CImgHelper {
 		$path = JPATH_ROOT. DIRECTORY_SEPARATOR .'images/joomcck_thumbs'. DIRECTORY_SEPARATOR .$folder.DIRECTORY_SEPARATOR;
 
 
+
+
         if(!JFolder::exists($path))
         {
         	JFolder::create($path, 0755);

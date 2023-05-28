@@ -50,7 +50,11 @@ $api = new JoomcckApi();
 					<div class="<?php echo ($params->get('tmpl_core.well', 1) ? 'well well-small' : NULL)?>">
 						<?php if($params->get('tmpl_params.cat_img', 1) && $category->image):?>
 							<div style="text-align: center;">
-								<?php $url = CImgHelper::getThumb(JPATH_ROOT.DIRECTORY_SEPARATOR.$category->image, $params->get('tmpl_params.cat_img_width', 200), $params->get('tmpl_params.cat_img_height', 200), 'catindex');?>
+								<?php
+
+                                $url = CImgHelper::getThumb(JPATH_ROOT.DIRECTORY_SEPARATOR.$category->image, $params->get('tmpl_params.cat_img_width', 200), $params->get('tmpl_params.cat_img_height', 200), 'catindex');
+
+                                ?>
 								<img class="category_icon" alt="<?php echo $category->title; ?>" src="<?php echo $url;?>">
 							</div>
 							<br>
