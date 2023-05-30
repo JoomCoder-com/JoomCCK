@@ -166,12 +166,25 @@ class JHTMLTags
 		$query->order('tag');
 
 		$db->setQuery($query);
+
+		// get tags list
 		$list = $db->loadObjectList();
 
+		// no need to continue if empty
 		if(!$list) return;
 
+		// prepare layout data
+		$data = [
+			'items' => $list,
+			'default' => $default,
+			'display' => 'inline',
+			'idPrefix' => 'fht',
+			'name' => 'filters[tags][]',
+			'textProperty' => 'tag'
+		];
 
-		return Joomcck\Layout\Helpers\Layout::render('core.bootstrap.toggleButtons',['items' => $list,'default' => $default,'display' => 'inline']);
+
+		return Joomcck\Layout\Helpers\Layout::render('core.bootstrap.toggleButtons',$data);
     }
     
 	public static function tagcloud($section, $html_tags, $relevance)

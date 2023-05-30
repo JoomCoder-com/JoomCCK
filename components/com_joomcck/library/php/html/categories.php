@@ -76,6 +76,7 @@ class JHTMLCategories
 		$cats_model->all = 1;
 		$cats_model->nums = 1;
 		$categories = $cats_model->getItems();
+
 		if(!$reg->get('empty_cats', 1))
 		{
 			foreach ($categories as $k => $cat)
@@ -87,44 +88,22 @@ class JHTMLCategories
 			}
 		}
 
-		$key = 0;
-		$li = array();
-
-		foreach ($categories AS $cat)
-		{
-			$chekced = (in_array($cat->id, $default) ? ' checked="checked"' : NULL);
-			if($key % 3 == 0) $li[] = '<div class="row">';
-			$li[] = sprintf('<div class="col-md-4"><label class="checkbox"><input type="checkbox" id="ccat-%d" class="form-control" name="filters[cats][]" value="%d"%s />
-			 	<label for="ccat-%d">%s <span class="label">%d<span></label></label></div>',
-				$cat->id, $cat->id, $chekced, $cat->id, $cat->title, $cat->records_num);
-			if($key % 3 == 2) $li[] = '</div>';
-			$key++;
-		}
-		if($key % 3 != 0) $li[] = '</div>';
-
-		return '<div class="container-fluid">'.implode(' ', $li).'</div>';
+		// prepare layout data
+		$data = [
+			'items' => $categories,
+			'default' => $default,
+			'display' => 'inline',
+			'idPrefix' => 'ccat',
+			'name' => 'filters[cats][]',
+			'textProperty' => 'title',
+			'countProperty' => 'records_num'
+		];
 
 
-		$list = array();
-		$out = '';
-		$j = 0;
-		if ($categories)
-		{
-			$out = '<table class="category_filter_checkboxes"><tr>';
-			foreach ($categories as $i => $cat)
-			{
-				if($j == $columns)
-				{
-					$j = 0;
-					$out .= '</tr><tr>';
-				}
-				$out .= '<td><input name="filters[cats][]" type="checkbox" value="'.$cat->id.'" '.(in_array($cat->id, $default) ? 'checked="checked"' : '').' />'.$cat->title.'</td>';
-				$j++;
-			}
-			$out .= '</tr></table>';
-		}
+		return Joomcck\Layout\Helpers\Layout::render('core.bootstrap.checkBoxes',$data);
 
-		return $out;
+
+
 	}
 
 	public static function select($section, $default = array(), $params = array())
@@ -167,11 +146,15 @@ class JHTMLCategories
 		}
 		$out = '';
 		$attr = array();
+		$attr['class'] = 'form-select';
 		if($multiple)
 		{
 			$attr['multiple'] = 'multiple';
 			$attr['size'] = count($categories) > $reg->get('size', 25) ? $reg->get('size', 25) : count($categories);
 		}
+
+
+
 		if ($categories)
 		{
 			$df = new stdClass();
