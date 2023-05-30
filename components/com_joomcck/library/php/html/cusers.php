@@ -91,7 +91,7 @@ class JHTMLCUsers
 		if(!$list) return;
 		array_unshift($list, JHtml::_('select.option', '', JText::_('CSELECTAUTH')));
 
-		return JHtml::_('select.genericlist', $list, 'filters[users][]', null, 'value', 'text', $default);
+		return JHtml::_('select.genericlist', $list, 'filters[users][]', 'class="form-select"', 'value', 'text', $default);
 	}
 
 	public static function form($section, $default = array(), $params = array())

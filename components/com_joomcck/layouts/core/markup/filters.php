@@ -104,7 +104,7 @@ if(!in_array($markup->get('filters.show_more'), $current->user->getAuthorisedVie
 						<?php elseif ($markup->get('filters.filter_tags_type') == 3): ?>
 							<?php echo JHtml::_('tags.tagselect', $current->section, $current->state->get('records.tag')); ?>
 						<?php elseif ($markup->get('filters.filter_tags_type') == 4): ?>
-							<?php echo JHtml::_('tags.tagpills', $current->section, $current->state->get('records.tag')); ?>
+							<?php echo JHtml::_('tags.tagtoggle', $current->section, $current->state->get('records.tag')); ?>
 						<?php endif; ?>
                     </div>
 				<?php endif; ?>

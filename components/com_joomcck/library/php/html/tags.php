@@ -69,7 +69,7 @@ class JHTMLTags
 		array_unshift($list, JHtml::_('select.option', '', '- '.JText::_('CSELECTTAG').' -'));
 
 
-		return JHtml::_('select.genericlist', $list, 'filters[tags][]', null, 'value', 'text', $default);
+		return JHtml::_('select.genericlist', $list, 'filters[tags][]', 'class="form-select"', 'value', 'text', $default);
 	}
 
 	public static function tagform($section, $default = array(), $params = array(), $name = 'filters[tags]')
@@ -152,7 +152,7 @@ class JHTMLTags
 		return JHtml::_('mrelements.listautocomplete', $name, $id, $default, array(), $options);
 	}
 
-	public static function tagpills($section, $default)
+	public static function tagtoggle($section, $default)
 	{
 		ArrayHelper::clean_r($default);
 		$default = \Joomla\Utilities\ArrayHelper::toInteger($default);
@@ -170,38 +170,8 @@ class JHTMLTags
 
 		if(!$list) return;
 
-		foreach ( $list as $id => &$tag )
-		{
-			$value = (in_array($tag->id, $default) ? $tag->id : NULL);
-			$out[] = '<li id="tag-' . $tag->id . '" '.($value ? 'class="active"' : NULL).'><a href="javascript:void(0);" rel="' . $tag->id . '">' .$tag->tag. '<input type="hidden" name="filters[tags][]" id="fht-'.$tag->id.'" value="'.$value.'"></a></li>';
-		}
 
-		$html = '<ul id="tag-list-filters" class="nav nav-pills">'.implode(' ', $out).'</ul>';
-
-		$html .= "<script>
-		(function($){
-			$.each($('#tag-list-filters').children('li'), function(k, v){
-				$(this).bind('click', function(){
-					var a = $('a', this)
-					var id = a.attr('rel');
-					var hf = $('#fht-'+id);
-					if(hf.val())
-					{
-						$(this).removeClass('active');
-						hf.val('');
-					}
-					else
-					{
-						$(this).addClass('active');
-						hf.val(id);
-					}
-				});
-			});
-		}(jQuery));
-		</script>";
-
-
-		return $html;
+		return Joomcck\Layout\Helpers\Layout::render('core.bootstrap.toggleButtons',['items' => $list,'default' => $default,'display' => 'inline']);
     }
     
 	public static function tagcloud($section, $html_tags, $relevance)

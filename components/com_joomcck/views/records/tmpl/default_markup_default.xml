@@ -80,7 +80,7 @@
 				<option value="1">CAUTOCOMPLETE</option>
 				<option value="2">CCHECKBOXES</option>
 				<option value="3">CSELECT</option>
-				<option value="4">CCLOUD</option>
+				<option value="4">CTOGGLE</option>
 			</field>
 		</fieldset>
 		<fieldset name="f3" label="CFILTERICONS">
