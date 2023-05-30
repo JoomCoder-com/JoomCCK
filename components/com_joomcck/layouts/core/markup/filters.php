@@ -132,7 +132,7 @@ if(!in_array($markup->get('filters.show_more'), $current->user->getAuthorisedVie
 						<?php elseif ($markup->get('filters.filter_category_type') == 4): ?>
 							<?php echo JHtml::_('categories.select', $current->section, $current->state->get('records.category'), array('multiple' => 1, 'size' => 25)); ?>
 						<?php elseif ($markup->get('filters.filter_category_type') == 5): ?>
-							<?php echo JHtml::_('mrelements.catselector', "filters[cats][]", $current->section->id, $current->state->get('records.category')); ?>
+                                <?php echo JHtml::_('mrelements.catselector', "filters[cats][]", $current->section->id, $current->state->get('records.category')); ?>
 						<?php endif; ?>
                     </div>
 				<?php endif; ?>

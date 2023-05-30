@@ -52,16 +52,20 @@ class JHTMLTypes
 		$default = \Joomla\Utilities\ArrayHelper::toInteger($default);
 
 
-		$out[] = '<div>';
-		foreach($list AS $type)
-		{
-			$out[] = '<div class="mb-2"><input class="btn-check" id="type-' . $type . '" autocomplete="off" type="checkbox" name="filters[type][]" value="' . $type . '" ' . $stypes[$type]->filter_checked . '>';
-			$out[] = '<label class="btn btn-outline-success" for="type-' . $type . '">'.$stypes[$type]->name . '</label></div>';
-		}
-		$out[] = '</div>';
 
-		return implode("\n", $out);
 
-		return implode(' ', $out);
+		// prepare layout data
+		$data = [
+			'items' => $stypes,
+			'default' => $default,
+			'display' => 'inline',
+			'idPrefix' => 'type',
+			'name' => 'filters[type][]',
+			'textProperty' => 'name'
+		];
+
+
+		return Joomcck\Layout\Helpers\Layout::render('core.bootstrap.toggleButtons',$data);
+
 	}
 }
