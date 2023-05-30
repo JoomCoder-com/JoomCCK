@@ -10,6 +10,7 @@
 namespace Joomcck\Assets\Webassets;
 
 use Joomla\CMS\Factory;
+use Joomla\CMS\HTML\HTMLHelper;
 
 defined('_JEXEC') or die();
 
@@ -24,6 +25,7 @@ Class Webassets{
 	static $wa;
 
 	public static function init(){
+
 
 		static::$wa = Factory::getApplication()->getDocument()->getWebAssetManager();
 		static::$wa->getRegistry()->addExtensionRegistryFile('com_joomcck');

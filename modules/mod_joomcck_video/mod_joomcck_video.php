@@ -7,6 +7,9 @@
  * @license GNU/GPL http://www.gnu.org/copyleft/gpl.html
  */
 defined('_JEXEC') or die('Restricted access');
+use Joomla\CMS\HTML\HTMLHelper;
+
+HTMLHelper::_('jquery.framework');
 
 include_once JPATH_ROOT. DIRECTORY_SEPARATOR .'components'. DIRECTORY_SEPARATOR .'com_joomcck'. DIRECTORY_SEPARATOR .'api.php';
 
@@ -14,4 +17,3 @@ $api = new JoomcckApi();
 $result = $api->records($params->def('section_id'), 'all', $params->get('tmpl_core.orderby', 'r.ctime DESC'), NULL, NULL, 0, $params->get('tmpl_core.limit', 5), $params->def('tmpl'));
 
 require JModuleHelper::getLayoutPath('mod_joomcck_video', $params->get('layout', 'default'));
-?>

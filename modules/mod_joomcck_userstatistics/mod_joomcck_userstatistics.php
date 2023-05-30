@@ -8,6 +8,10 @@
  */
 defined('_JEXEC') or die('Restricted access');
 
+use Joomla\CMS\HTML\HTMLHelper;
+
+HTMLHelper::_('jquery.framework');
+
 if(!JFactory::getUser()->id) return;
 
 // Include the syndicate functions only once

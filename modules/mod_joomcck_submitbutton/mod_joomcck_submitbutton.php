@@ -14,6 +14,9 @@ defined('_JEXEC') or die('Restricted access');
 include_once JPATH_ROOT . '/components/com_joomcck/library/php/helpers/helper.php';
 
 use Joomcck\Assets\Webassets\Webassets;
+use Joomla\CMS\HTML\HTMLHelper;
+
+HTMLHelper::_('jquery.framework');
 
 // load JoomCCK new library
 require_once JPATH_ROOT . '/components/com_joomcck/libraries/vendor/autoload.php';
