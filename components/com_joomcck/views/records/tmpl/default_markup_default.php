@@ -7,6 +7,7 @@
  * @license   GNU/GPL http://www.gnu.org/copyleft/gpl.html
  */
 
+use Joomcck\Layout\Helpers\Layout;
 use Joomla\CMS\Layout\LayoutHelper;
 
 defined('_JEXEC') or die('Restricted access');
@@ -606,27 +607,7 @@ $current_user = JFactory::getUser($this->input->getInt('user_id', $this->user->g
 
 	<?php echo $this->loadTemplate('list_' . $this->list_template); ?>
 
-	<?php if ($this->tmpl_params['list']->def('tmpl_core.item_pagination', 1)) : ?>
-        <form method="post">
-            <div style="text-align: center;">
-                <small>
-					<?php if ($this->pagination->getPagesCounter()): ?>
-						<?php echo $this->pagination->getPagesCounter(); ?>
-					<?php endif; ?>
-					<?php if ($this->tmpl_params['list']->def('tmpl_core.item_limit_box', 0)) : ?>
-						<?php echo str_replace('<option value="0">' . JText::_('JALL') . '</option>', '', $this->pagination->getLimitBox()); ?>
-					<?php endif; ?>
-					<?php echo $this->pagination->getResultsCounter(); ?>
-                </small>
-            </div>
-			<?php if ($this->pagination->getPagesLinks()): ?>
-                <div style="text-align: center;" class="pagination">
-					<?php echo str_replace('<ul>', '<ul class="pagination-list">', $this->pagination->getPagesLinks()); ?>
-                </div>
-                <div class="clearfix"></div>
-			<?php endif; ?>
-        </form>
-	<?php endif; ?>
+	<?php echo Layout::render('core.list.pagination',['params' => $this->tmpl_params['list'],'pagination' => $this->pagination]) ?>
 
 <?php elseif ($this->worns): ?>
     <h4 align="center"><?php echo JText::_('CNORECFOUNDSEARCH'); ?></h4>
