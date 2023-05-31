@@ -15,8 +15,8 @@ defined('_JEXEC') or die();
 extract($displayData);
 
 // params
-$showPagination = $params->def('tmpl_core.item_pagination', 1);
-$showLimitBox = $params->def('tmpl_core.item_limit_box', 0);
+$showPagination = $params->get('tmpl_core.item_pagination', 1);
+$showLimitBox = $params->get('tmpl_core.item_limit_box', 0);
 
 // no need to continue if pagination disabled
 if(!$showPagination)
