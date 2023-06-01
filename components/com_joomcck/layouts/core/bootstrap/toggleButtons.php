@@ -22,6 +22,7 @@ extract($displayData);
 
 
 $display = isset($display) && $display == 'inline' ? 'd-inline' : 'mb-3';
+$idProperty = isset($idProperty) ? $idProperty : 'id';
 
 
 ?>
@@ -30,15 +31,16 @@ $display = isset($display) && $display == 'inline' ? 'd-inline' : 'mb-3';
 <?php foreach ($items as $id => &$item): ?>
 
 	<?php
-    $isChecked = in_array($item->id, $default) ? true : false; // is checked ?
+	$isChecked = in_array($item->{$idProperty}, $default) ? true : false; // is checked ?
 	$checked = $isChecked ? "checked" : ''; // add checked attr
-	$id    = "$idPrefix-$item->id"; // build id
+	$id    = "$idPrefix-".$item->{$idProperty}; // build id
+	$countClass = isset($countProperty) && $countProperty > 0 ? 'success' : 'light border text-dark';
 	?>
 
     <div class="<?php echo $display ?>">
-        <input <?php echo $checked ?> id="<?php echo $id ?>" type="checkbox" name="<?php echo $name ?>" class="btn-check" autocomplete="off" value="<?php echo $item->id ?>">
+        <input <?php echo $checked ?> id="<?php echo $id ?>" type="checkbox" name="<?php echo $name ?>" class="btn-check" autocomplete="off" value="<?php echo htmlspecialchars($item->{$idProperty}) ?>">
         <label class="btn btn-outline-success" for="<?php echo $id ?>">
-            <?php echo $isChecked ? '<i class="fas fa-check"></i> ' : ''  ?><?php echo $item->{$textProperty} ?>
+            <?php echo $isChecked ? '<i class="fas fa-check"></i> ' : ''  ?> <?php echo $item->{$textProperty} ?> <?php echo isset($countProperty) ? '<span class="badge bg-'.$countClass.'">'.$item->{$countProperty}.'</span>' : '' ?>
         </label>
     </div>
 

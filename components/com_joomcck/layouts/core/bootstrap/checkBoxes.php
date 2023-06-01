@@ -22,8 +22,7 @@ extract($displayData);
 
 
 $display = isset($display) && $display == 'inline' ? 'form-check-inline' : '';
-
-
+$idProperty = isset($idProperty) ? $idProperty : 'id';
 
 ?>
 
@@ -31,14 +30,16 @@ $display = isset($display) && $display == 'inline' ? 'form-check-inline' : '';
 <?php foreach ($items as $id => &$item): ?>
 
 	<?php
-	$isChecked = in_array($item->id, $default) ? true : false; // is checked ?
+	$isChecked = in_array($item->{$idProperty}, $default) ? true : false; // is checked ?
 	$checked = $isChecked ? "checked" : ''; // add checked attr
-	$id    = "$idPrefix-$item->id"; // build id
+	$id    = "$idPrefix-".$item->{$idProperty}; // build id
+    $countClass = isset($countProperty) && $countProperty > 0 ? 'success' : 'light border text-dark';
+
 	?>
 
     <div class="form-check <?php echo $display ?>">
-        <input <?php echo $checked ?> name="<?php echo $name ?>" class="form-check-input" type="checkbox" id="<?php echo $id ?>" value="<?php echo $item->id ?>">
-        <label class="form-check-label" for="<?php echo $id ?>"><?php echo $item->{$textProperty} ?> <?php echo isset($countProperty) ? '<span class="badge badge-success">'.$item->{$countProperty}.'</span>' : '' ?></label>
+        <input <?php echo $checked ?> name="<?php echo $name ?>" class="form-check-input" type="checkbox" id="<?php echo $id ?>" value="<?php echo htmlspecialchars($item->{$idProperty}) ?>">
+        <label class="form-check-label" for="<?php echo $id ?>"><?php echo $item->{$textProperty} ?> <?php echo isset($countProperty) ? '<span class="badge bg-'.$countClass.'">'.$item->{$countProperty}.'</span>' : '' ?></label>
     </div>
 
 <?php endforeach; ?>

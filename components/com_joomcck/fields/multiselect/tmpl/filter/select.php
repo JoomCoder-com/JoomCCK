@@ -29,5 +29,4 @@ foreach($this->values as $k => $value)
 
 array_unshift($list, JHtml::_('select.option', '', JText::sprintf('CCSELETFIELD', $this->label)));
 
-echo JHtml::_('select.genericlist', $list, "filters[{$this->key}][value]", null, 'value', 'text', $default);
-?>
+echo JHtml::_('select.genericlist', $list, "filters[{$this->key}][value]", "class='form-select'", 'value', 'text', $default);

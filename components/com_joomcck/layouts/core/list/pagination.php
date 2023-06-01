@@ -23,7 +23,7 @@ if(!$showPagination)
     return;
 
 
-// all items option, + small input
+// remove "all" items option, + small select input
 if($showLimitBox){
     $limitBox = str_replace('<option value="0">' . JText::_('JALL') . '</option>', '', $pagination->getLimitBox());
 	$limitBox = str_replace('class="form-select"', 'class="form-select form-select-sm"', $pagination->getLimitBox());
@@ -53,8 +53,5 @@ if($showLimitBox){
                 <small><?php echo $pagination->getResultsCounter(); ?></small>
             </div>
 		<?php endif; ?>
-
-
     </div>
-
 </form>

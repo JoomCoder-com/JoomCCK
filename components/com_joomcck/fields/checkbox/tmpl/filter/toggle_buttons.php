@@ -20,9 +20,6 @@ $hidden = array();
 </select>
 
 <?php endif;?>
-<div class="toggleButtonsContainer d-flex">
-
-</div>
 <?php
 foreach($this->values as $key => $value) :
 	if (!$value->field_value)

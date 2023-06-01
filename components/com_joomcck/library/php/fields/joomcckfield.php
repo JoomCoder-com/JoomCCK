@@ -89,12 +89,20 @@ class CFormField extends JFormField
 		$module = $module ? '_module' : '';
 		ob_start();
 
+		$layoutName = $this->params->get('params.template_filter'.$module,  'default.php');
+
+		// b/c break of toggle_links
+		$layoutName = $layoutName == 'toggle_links.php' ? 'toggle_buttons.php' : $layoutName;
+
 		$template = JFactory::getApplication()->getTemplate();
-		$tpath = JPATH_THEMES . '/' . $template . '/html/com_joomcck/fields/'.$this->type.'/filter/' . $this->params->get('params.template_filter'.$module,  'default.php');
+		$tpath = JPATH_THEMES . '/' . $template . '/html/com_joomcck/fields/'.$this->type.'/filter/' . $layoutName;
+
+
 		if(!JFile::exists($tpath))
 		{
-			$tpath = JPATH_ROOT. '/components/com_joomcck/fields'. DIRECTORY_SEPARATOR .$this->type. DIRECTORY_SEPARATOR .'tmpl/filter'. DIRECTORY_SEPARATOR .$this->params->get('params.template_filter'.$module,  'default.php');
+			$tpath = JPATH_ROOT. '/components/com_joomcck/fields'. DIRECTORY_SEPARATOR .$this->type. DIRECTORY_SEPARATOR .'tmpl/filter'. DIRECTORY_SEPARATOR .$layoutName;
 		}
+
 
 		include $tpath;
 
