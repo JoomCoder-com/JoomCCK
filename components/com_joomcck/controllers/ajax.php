@@ -1046,15 +1046,24 @@ class JoomcckControllerAjax extends MControllerAdmin
 			AjaxHelper::error(JText::_($fieldclass->getError()));
 		}
 
-		$autoCompleteResult = [];
-		// adapt to autocomplete
-		foreach ($result as $item){
 
-			$autoCompleteResult[] = ['id' => $item, 'text' => $item];
+		// adapt to autocomplete
+		if(is_array($result)){
+
+			$autoCompleteResult = [];
+
+			foreach ($result as $item){
+
+				$autoCompleteResult[] = ['id' => $item, 'text' => $item];
+
+			}
+
+			$result = $autoCompleteResult;
 
 		}
 
-		AjaxHelper::send($autoCompleteResult);
+
+		AjaxHelper::send($result);
 
 		JFactory::getApplication()->close();
 	}
