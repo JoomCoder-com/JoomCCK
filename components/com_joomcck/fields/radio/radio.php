@@ -26,7 +26,7 @@ class JFormFieldCRadio extends CFormFieldSelectable
 		}
 		else
 		{
-			$values = explode("\n", $params->get('params.values'));
+			$values = explode("\n", $params->get('params.values',''));
 			ArrayHelper::clean_r($values);
 
 			if(is_array($this->value))
