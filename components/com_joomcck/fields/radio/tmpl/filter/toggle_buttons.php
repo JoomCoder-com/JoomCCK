@@ -7,11 +7,11 @@
  * @license GNU/GPL http://www.gnu.org/copyleft/gpl.html
  */
 defined('_JEXEC') or die();
+// no need to continue if there is no value
+if (!$this->values) return;
 
-// no need to continue
-if(!$this->values) return;
 
-foreach($this->values as $key => $value)
+foreach ($this->values as $key => $value)
 {
 	// remove empty values
 	if (!$value->field_value)
@@ -25,20 +25,19 @@ foreach($this->values as $key => $value)
 
 // prepare checkboxes layout data
 $data = [
-	'items' => $this->values,
-	'default' => $this->default,
-	'display' => 'inline',
-	'idPrefix' => 'ccat',
-	'name' => "filters[$this->key][value][]",
+	'items'        => $this->values,
+	'default'      => $this->default,
+	'display'      => 'inline',
+	'idPrefix'     => 'multiSelect',
+	'name'         => "filters[$this->key][value][]",
 	'textProperty' => 'label',
-	'idProperty' => 'field_value',
+	'idProperty'   => 'field_value',
 
 ];
 
-if($this->params->get('params.filter_show_number', 1))
+if ($this->params->get('params.filter_show_number', 1))
 	$data['countProperty'] = 'num';
-
 
 ?>
 
-<?php echo  Joomcck\Layout\Helpers\Layout::render('core.bootstrap.checkBoxes',$data) ?>
+<?php echo Joomcck\Layout\Helpers\Layout::render('core.bootstrap.toggleButtons', $data) ?>

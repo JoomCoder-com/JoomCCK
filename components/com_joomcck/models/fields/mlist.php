@@ -218,7 +218,7 @@ class JFormFieldMlist extends JFormField
 					'value'    => $value,
 					'text'     => JText::alt($text, $fieldname),
 					'disable'  => $disabled,
-					'class'    => (string) $class,
+					'class'    => (string) $option['class'],
 					'selected' => ($checked || $selected),
 					'checked'  => ($checked || $selected),
 			);
