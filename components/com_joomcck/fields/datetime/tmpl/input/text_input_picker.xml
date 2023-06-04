@@ -3,7 +3,7 @@
 	<form>
 		<fields name="tmpl_text_input_picker">
 			<fieldset name="input" label="FS_INPUT">
-				<field name="mask" type="mlist" label="F_FORMAT" condition='{"100":["params_tmpl_text_input_custom"]}' default="d/m/y">
+				<field name="mask" type="mlist" class="form-select" label="F_FORMAT" condition='{"100":["params_tmpl_text_input_custom"]}' default="d/m/y">
 					<option value="d/m/y">31/01/2007</option>
 					<option value="m/d/y">01/31/2007</option>
 					<option value="d-m-y">31-01-2007</option>

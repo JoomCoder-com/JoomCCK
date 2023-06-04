@@ -79,7 +79,7 @@
 			</fieldset>
 
 			<fieldset name="ctrl" label="FS_FORMCONTROL">
-				<field name="input_mode" type="mlist" condition='{"2":["params_params_max_result"],"5":["params_params_control_label","params_params_control_height","params_params_control_width"]}' required="true" default="2" label="F_CHOOSECHILDREN">
+				<field name="input_mode" type="mlist" class="form-select" condition='{"2":["params_params_max_result"],"5":["params_params_control_label","params_params_control_height","params_params_control_width"]}' required="true" default="2" label="F_CHOOSECHILDREN">
 					<option value="2">XML_OPT_AUTOCOMPLETEAJAX</option>
 					<option value="3">XML_OPT_CHECKBOXES</option>
 					<option value="4">XML_OPT_MULTISELECT</option>

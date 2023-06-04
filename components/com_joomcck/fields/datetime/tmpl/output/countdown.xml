@@ -7,7 +7,7 @@
 					<option value="0">JNO</option>
 					<option value="1">JYES</option>
 				</field>
-				<field name="cd_format" type="mlist" condition='{"100":["params_tmpl_countdown_cd_custom"]}' class="input" label="F_CD_FORMAT" default="" description="">
+				<field name="cd_format" type="mlist" condition='{"100":["params_tmpl_countdown_cd_custom"]}'  class="form-select" label="F_CD_FORMAT" default="" description="">
 					<option value="%d days %H hr %M min %S sec">%d days %H hr %M min %S sec</option>
 					<option value="%d days %H:%M:%S">%d days %H:%M:%S</option>
 					<option value="%H:%M:%S">%H:%M:%S</option>

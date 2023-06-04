@@ -30,7 +30,7 @@
 				<field name="filter_descr" type="text" default="" size="40" label="F_DESCR" description="" />
 			</fieldset>
 			<fieldset name="filter2" label="FS_FILTERFIELDSPEC">
-				<field name="filter_linkage" type="mlist" condition='{"not0":["params_params_filter_icon","params_params_filter_tip", "params_params_filter_show_number"]}' default="0" label="F_VALUELINKAGE" description="F_VALUELINKAGE_DESCR">
+				<field name="filter_linkage" type="mlist"  class="form-select" condition='{"not0":["params_params_filter_icon","params_params_filter_tip", "params_params_filter_show_number"]}' default="0" label="F_VALUELINKAGE" description="F_VALUELINKAGE_DESCR">
 					<option value="0">XML_OPT_NOFILTERLINK</option>
 					<option value="1">XML_OPT_VALUEASFLINK</option>
 					<option value="2">XML_OPT_SMALICONASFLINK</option>

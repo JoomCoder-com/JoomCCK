@@ -40,7 +40,7 @@ class JFormFieldMlist extends JFormField
 		$attr = '';
 
 		// Initialize some field attributes.
-		$attr .= !empty($this->class) ? ' class="' . $this->class . '"' : '';
+		$attr .= !empty($this->class) ? ' class="' . $this->class . '"' : 'form-select';
 		$attr .= !empty($this->size) ? ' size="' . $this->size . '"' : '';
 		$attr .= $this->multiple ? ' multiple' : '';
 		$attr .= $this->required ? ' required aria-required="true"' : '';
@@ -218,7 +218,7 @@ class JFormFieldMlist extends JFormField
 					'value'    => $value,
 					'text'     => JText::alt($text, $fieldname),
 					'disable'  => $disabled,
-					'class'    => (string) $option['class'],
+					'class'    => (string) $class,
 					'selected' => ($checked || $selected),
 					'checked'  => ($checked || $selected),
 			);

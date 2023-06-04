@@ -27,7 +27,7 @@
 					<option value="0">JNO</option>
 					<option value="1">JYES</option>
 				</field>
-				<field name="uploader" default="1" type="mlist" condition='{"1":["fieldset-name-flow"],"2":["fieldset-name-mooupload"]}' label="F_UPLOADER">
+				<field name="uploader" default="1" type="mlist" class="form-select"  condition='{"1":["fieldset-name-flow"],"2":["fieldset-name-mooupload"]}' label="F_UPLOADER">
 					<option value="1">Flow</option>
 				</field>
 			</fieldset>
