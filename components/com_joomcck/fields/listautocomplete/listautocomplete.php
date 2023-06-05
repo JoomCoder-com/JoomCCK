@@ -41,7 +41,7 @@ class JFormFieldCListautocomplete extends CFormFieldSelectable
 
 
 		// we use here tomselect layout
-		$this->inputvalue = JHtml::_('mrelements.pills', "jform[fields][{$this->id}]", "field_" . $this->id, $this->value, $out, $options,1,$this->params);
+		$this->inputvalue = JHtml::_('mrelements.pills', "jform[fields][{$this->id}]", "field_" . $this->id, $this->value, $out, $options,$this->params);
 
 		return $this->_display_input();
 	}

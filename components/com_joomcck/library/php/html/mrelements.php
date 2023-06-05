@@ -419,6 +419,7 @@ class JHTMLMrelements
 
 	public static function pills($name, $id, $default = array(), $list = array(), $options = array(),$params = null)
 	{
+
 		if(is_null($params))
 			$params = new \Joomla\Registry\Registry();
 		// max items user can add
@@ -433,6 +434,8 @@ class JHTMLMrelements
 		else
 			$options['maxOptions'] = $params->get('params.max_result',10);
 
+
+
 		// allow user to add
 		if(isset($options['can_add']))
 			$options['canAdd'] = $options['can_add'];
@@ -440,7 +443,7 @@ class JHTMLMrelements
 			$options['canAdd'] = $params->get('params.only_values',0) ? 'false' : 'true';
 
 
-		$options['canDelete'] = $options['can_delete'];
+		$options['canDelete'] = isset($options['can_delete']) ? $options['can_delete'] : 'false';
 
 
 		// if list not used use default as list (to display selected items in dropdown
@@ -451,6 +454,9 @@ class JHTMLMrelements
 				$list[] = $iValue['id'];
 			}
 		}
+
+
+
 		$data = [
 			'options' => $options,
 			'params' => $params,
