@@ -104,7 +104,7 @@ class JFormFieldCParent extends CFormFieldRelate
 
 		$this->filter = $this->_render_input($this->params->get('params.filter_style'),  $name,
 			$this->params->get('params.child_section'),
-			MModelBase::getInstance('TFields', 'JoomcckModel')->getFieldTypeId($this->params->get('params.child_field')));
+			MModelBase::getInstance('Tfields', 'JoomcckModel')->getFieldTypeId($this->params->get('params.child_field')));
 
 		return $this->_display_filter($section, $module);
 	}

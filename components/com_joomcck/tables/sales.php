@@ -82,7 +82,7 @@ class JoomcckTableSales extends JTable
 			return FALSE;
 		}
 		
-		$fields_model = MModelBase::getInstance('TFields', 'JoomcckModel');
+		$fields_model = MModelBase::getInstance('Tfields', 'JoomcckModel');
 		$fields = $fields_model->getRecordFields($record);
 		$field_id = $item_name = 0;
 		foreach ($fields AS $field)

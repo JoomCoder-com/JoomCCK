@@ -162,7 +162,7 @@ class JHTMLJoomcck
 		$types = $tmodel->getItems();
 
 
-		$model = MModelBase::getInstance('TFields', 'JoomcckModel');
+		$model = MModelBase::getInstance('Tfields', 'JoomcckModel');
 		$filter = str_replace("'", '"', (string) $filter);
 		$filter = preg_replace("/\"$/iU", '', $filter);
 		$filter = preg_replace("/^\"/iU", '', $filter);

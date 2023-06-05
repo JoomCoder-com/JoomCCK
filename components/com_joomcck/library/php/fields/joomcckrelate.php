@@ -664,7 +664,7 @@ class CFormFieldRelate extends CFormField
 		$save['user_id'] 	= JFactory::getUser()->get('id');
 		$save['section_id'] = $this->_getChildSectionId($save['field_id']);
 		$save['type_id'] 	= ($params['field'] == 'child' ?
-			$this->type_id : MModelBase::getInstance('TFields', 'JoomcckModel')->getFieldTypeId($save['field_id']));
+			$this->type_id : MModelBase::getInstance('Tfields', 'JoomcckModel')->getFieldTypeId($save['field_id']));
 
 		if(!$table->save($save))
 		{

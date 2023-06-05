@@ -525,7 +525,7 @@ class JFormFieldCStatus extends CFormField
 				$emails[] = JFactory::getUser($this->record->user_id)->get('email');
 				break;
 			case 2:
-				$fields_model = MModelBase::getInstance('TFields', 'JoomcckModel');
+				$fields_model = MModelBase::getInstance('Tfields', 'JoomcckModel');
 				$fields       = $fields_model->getRecordFields($this->record);
 				foreach($fields as $id => $field)
 				{

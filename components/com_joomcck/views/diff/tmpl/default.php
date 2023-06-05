@@ -39,7 +39,7 @@ td.key {
 }
 </style>
 
-<button type="button" class="btn" onclick="location.href = '<?php echo $back;?>'">
+<button type="button" class="btn btn-light border" onclick="location.href = '<?php echo $back;?>'">
 	<?php echo HTMLFormatHelper::icon('arrow-180.png');  ?>
 	<?php echo JText::_('CGOBACK'); ?>
 </button>
@@ -74,7 +74,7 @@ td.key {
 		_drawLine(JText::_('CTITLE'), $this->record->title, $this->item->record->title);
 		_drawLine(JText::_('CALIAS'), $this->record->alias, $this->item->record->alias);
 		_drawLine(JText::_('CCATEGORIES'), json_decode($this->record->categories, TRUE), json_decode($this->item->record->categories, TRUE));
-		_drawLine(JText::_('CTAGS'), json_decode($this->record->tags, TRUE), json_decode($this->item->record->tags, TRUE));
+		_drawLine(JText::_('CTAGS'), json_decode((string)$this->record->tags, TRUE), json_decode((string)$this->item->record->tags, TRUE));
 
 		if(!empty($this->all_field_keys))
 		{
@@ -102,7 +102,7 @@ function _getValMd5($val)
 		$val = json_encode($val);
 	}
 
-	return md5($val);
+	return md5((string)$val);
 }
 function _renderCol($var, $field)
 {

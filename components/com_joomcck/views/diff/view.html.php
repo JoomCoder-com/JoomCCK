@@ -63,7 +63,7 @@ class JoomcckViewDiff extends MViewBase
 		
 		$this->all_field_keys = array_unique(array_merge($current_field_keys, $version_field_keys));
 		
-		$field_model = MModelBase::getInstance('TFields', 'JoomcckModel');
+		$field_model = MModelBase::getInstance('Fields', 'JoomcckModel');
 		$this->fields = $field_model->getFormFields($this->record->type_id, $this->record->id);
 		
 		$this->_prepareDocument();

@@ -29,7 +29,7 @@ class JoomcckViewRecords extends MViewBase
 		$this->models['categories'] = MModelBase::getInstance('Categories', 'JoomcckModel');
 		$this->models['section'] 	= MModelBase::getInstance('Section', 'JoomcckModel');
 		$this->models['record'] 	= MModelBase::getInstance('Record', 'JoomcckModel');
-		$fields_model = MModelBase::getInstance('TFields', 'JoomcckModel');
+		$fields_model = MModelBase::getInstance('Tfields', 'JoomcckModel');
 
 		if(!$app->input->getInt('section_id'))
 		{
