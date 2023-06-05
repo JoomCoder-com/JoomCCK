@@ -137,8 +137,8 @@ JHTML::_('bootstrap.tooltip', '*[rel^="tooltip"]');
 	<?php foreach($filters AS $filter): ?>
 		<?php if(in_array($filter->id, (array)$params->get('field_id_exclude', array())))
 			continue; ?>
-		<?php $f = $filter->onRenderFilter($section, ($params->get('filter_fields_template') == 'section' ? FALSE : TRUE)) ?>
-		<?php if(trim($f)): ?>
+		<?php $f = trim((string) $filter->onRenderFilter($section, ($params->get('filter_fields_template') == 'section' ? FALSE : TRUE))) ?>
+		<?php if($f): ?>
 			<div class="mb-3">
                 <label class="form-label">
 					<?php if($params->get('show_icons', 1) && $filter->params->get('core.icon')): ?>

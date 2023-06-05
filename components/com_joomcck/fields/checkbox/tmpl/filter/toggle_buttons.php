@@ -18,8 +18,8 @@ $hidden = array();
 	<option value="any" <?php if($this->value && $this->value['by'] == 'any') echo 'selected="selected"';?>><?php echo JText::_('CRECORDHASANYVALUE')?></option>
 	<option value="all" <?php if($this->value && $this->value['by'] == 'all') echo 'selected="selected"';?>><?php echo JText::_('CRECORDHASALLVALUES')?></option>
 </select>
-
 <?php endif;?>
+
 <?php
 foreach($this->values as $key => $value) :
 	if (!$value->field_value)
