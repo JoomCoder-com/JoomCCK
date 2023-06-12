@@ -238,7 +238,7 @@ class CFormFieldSelectable extends CFormField
 
 		if($this->type == 'listautocomplete' && !is_array($value))
 		{
-			$value = explode(',', $value);
+			$value = explode(',', (string) $value);
 		}
 
 		ArrayHelper::clean_r($value);
