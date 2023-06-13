@@ -20,7 +20,6 @@ div.hideinputs{
 		<?php echo $this->labelvalue['true']?>
 	</button>
 	<button id="fbool-n<?php echo $this->id ?>" type="button" class="btn<?php echo $this->value == 'false' ? ' active btn-primary' : ' btn-light' ?>">
-
 		<?php echo $this->labelvalue['false'];?>
 	</button>
 </div>

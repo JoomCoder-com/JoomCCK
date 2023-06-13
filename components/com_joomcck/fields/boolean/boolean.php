@@ -120,7 +120,10 @@ class JFormFieldCBoolean extends CFormField
 			$db->setQuery($q1);
 			if($nums[1] = $db->loadResult())
 			{
-				$label['true'] .= "  <span class=badge>{$nums[1]}</span>";
+
+				$badgeClass = $nums[1] > 0 ? 'bg-success' : 'bg-light border text-dark';
+
+				$label['true'] .= " <span class='badge $badgeClass'>{$nums[1]}</span>";
 			}
 
 			if($this->params->get('params.no_value') == 0)
@@ -153,7 +156,9 @@ class JFormFieldCBoolean extends CFormField
 			$db->setQuery($q0);
 			if($nums[0] = $db->loadResult())
 			{
-				$label['false'] .= "  <span class=badge>{$nums[0]}</span>";
+				$badgeClass = $nums[0] > 0 ? 'bg-success' : 'bg-light border text-dark';
+
+				$label['true'] .= " <span class='badge $badgeClass'>{$nums[0]}</span>";
 			}
 		}
 
