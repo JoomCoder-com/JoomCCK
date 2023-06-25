@@ -14,6 +14,12 @@ require_once JPATH_ROOT . '/components/com_joomcck/library/php/fields/joomcckfie
 class CFormFieldUpload extends CFormField
 {
 
+	public $options;
+	public $upload;
+	public $subscriptions;
+	public $url;
+	public $descr;
+	public $download_type;
     public function __construct($field, $default)
     {
         $root      = JPath::clean(JComponentHelper::getParams('com_joomcck')->get('general_upload'));

@@ -22,6 +22,13 @@ require_once JPATH_ROOT . '/components/com_joomcck/library/php/fields/joomcckupl
  */
 class JFormFieldCAudio extends CFormFieldUpload
 {
+
+
+	public $tracks;
+	public $el;
+
+
+
 	public function getInput()
 	{
 		$js = "function afterupload(w, s){
