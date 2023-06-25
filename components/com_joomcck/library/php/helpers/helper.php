@@ -448,9 +448,9 @@ class CensorHelper
 		if(!self::$params)
 		{
 			self::$params    = JComponentHelper::getParams('com_joomcck');
-			self::$bad_words = explode(',', self::$params->get('censor_words'));
+			self::$bad_words = explode(',', self::$params->get('censor_words',''));
 			ArrayHelper::trim_r(self::$bad_words);
-			self::$replacer = JText::_(trim(self::$params->get('censor_replace')));
+			self::$replacer = JText::_(trim(self::$params->get('censor_replace','')));
 		}
 		if(!self::$params->get('censor'))
 		{

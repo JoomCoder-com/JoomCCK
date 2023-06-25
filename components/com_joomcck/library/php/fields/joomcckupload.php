@@ -512,8 +512,8 @@ class CFormFieldUpload extends CFormField
 
                 foreach ($files as &$file) {
                     if ($file['id'] == $id) {
-                        $file['title']       = htmlentities($title, ENT_QUOTES, 'UTF-8');
-                        $file['description'] = htmlentities($description, ENT_QUOTES, 'UTF-8');
+                        $file['title']       = htmlentities((string) strip_tags($title), ENT_QUOTES, 'UTF-8');
+                        $file['description'] = htmlentities((string) strip_tags($description), ENT_QUOTES, 'UTF-8');
                         break;
                     }
                 }

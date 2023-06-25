@@ -7,13 +7,21 @@
  * @copyright Copyright (C) 2012 joomcoder (https://www.joomcoder.com). All rights reserved.
  * @license GNU/GPL http://www.gnu.org/copyleft/gpl.html
  */
+
+use Joomla\CMS\HTML\HTMLHelper;
+
 defined('_JEXEC') || die('Restricted access');
 $can_delete = $field->iscomment ? FALSE : $field->_getDeleteAccess();
+
+HTMLHelper::_('bootstrap.tooltip', '.hasTooltip');
+HTMLHelper::_('bootstrap.modal');
+
+
 ?>
 
 <div id="flow-files<?php echo $field->id; ?>" class="flow-files">
     <?php if($field->params->get('params.flow_drop', 1)): ?>
-    <div class="flow-files-item flow-drop" ondragenter="jQuery(this).addClass('flow-dragover');" ondragend="jQuery(this).removeClass('flow-dragover');" ondrop="jQuery(this).removeClass('flow-dragover');">
+    <div class="flow-files-item flow-drop me-2" ondragenter="jQuery(this).addClass('flow-dragover');" ondragend="jQuery(this).removeClass('flow-dragover');" ondrop="jQuery(this).removeClass('flow-dragover');">
             <?php echo Mint::_('CUP_DROP_FILE_HERE'); ?>
         </div>
     <?php endif; ?>
@@ -21,10 +29,10 @@ $can_delete = $field->iscomment ? FALSE : $field->_getDeleteAccess();
 	    <button type="button" class="btn btn-light btn-sm flow-files-item flow-browse"><i class="fas fa-file"></i> <?php echo Mint::_('CUP_SELECT_FILE') ?></button>
     <?php endif; ?>
 	<?php if($field->params->get('params.flow_folder', 1) && !$field->iscomment): ?>
-    	<button type="button" class="btn btn-light btn-sm  flow-browse-folder"><i class="fas fa-folder"></i> <?php echo Mint::_('CUP_SELECT_FOLDER') ?></button>
+    	<button type="button" class="btn btn-light btn-sm  flow-browse-folder ms-2"><i class="fas fa-folder"></i> <?php echo Mint::_('CUP_SELECT_FOLDER') ?></button>
     <?php endif; ?>
 	<?php if($field->params->get('params.flow_img', 1) && !$field->iscomment): ?>
-	    <button type="button" class="btn btn-light btn-sm  flow-files-item flow-browse-image"><i class="fas fa-image"></i> <?php echo Mint::_('CUP_SELECT_IMAGE') ?></button>
+	    <button type="button" class="btn btn-light btn-sm  flow-files-item flow-browse-image ms-2"><i class="fas fa-image"></i> <?php echo Mint::_('CUP_SELECT_IMAGE') ?></button>
     <?php endif; ?>
 </div>
 
@@ -57,20 +65,21 @@ $can_delete = $field->iscomment ? FALSE : $field->_getDeleteAccess();
                     <?php if(!$field->iscomment): ?>
                         <div class="float-end" id="flow-menu<?php echo $field->id; ?>">
                             <?php if($can_delete): ?>
-                                <a href="javascript:void(0);" class="btn-delete" data-id="<?php echo $f['id'] ?>">
-                                    <?php echo HTMLFormatHelper::icon('cross-button.png') ?></a>
+                                <a href="javascript:void(0);" class="btn-delete text-danger" data-id="<?php echo $f['id'] ?>"><i class="fas fa-times"></i></a>
                             <?php endif; ?>
                             <?php if($field->params->get('params.allow_edit_title') || $field->params->get('params.allow_add_descr')): ?>
-                                <a href="javascript:void(0);" class="btn-edit"  data-id="<?php echo $f['id'] ?>" data-json='<?php echo json_encode($f) ?>'>
-                                <?php echo HTMLFormatHelper::icon('edit.png') ?></a>
+                                <a href="javascript:void(0);" class="btn-edit text-primary"  data-id="<?php echo $f['id'] ?>" data-json='<?php echo json_encode($f) ?>'><i class="fas fa-edit"></i></a>
                             <?php endif; ?>
                             <?php if($field->params->get('params.flow_default', 1)): ?>
-                                <a href="javascript:void(0);" class="hasTooltip btn-make-default" data-title="<?php echo JText::_('FF_MAKEDEFAULT') ?>" data-id="<?php echo $f['id'] ?>">
-                                <?php echo HTMLFormatHelper::icon((@$f['default'] ? 'status-away' : 'status-offline').'.png') ?></a>
+                                <a href="javascript:void(0);" class="hasTooltip btn-make-default" title="<?php echo JText::_('FF_MAKEDEFAULT') ?>" data-id="<?php echo $f['id'] ?>"><?php echo HTMLFormatHelper::icon((@$f['default'] ? 'status-away' : 'status-offline').'.png') ?></a>
                             <?php endif; ?>
                         </div>
+
+
+
+
                     <?php endif; ?>
-                    <span class="flow-has-descr hasTooltip<?php echo $f['description'] ? '' : ' hide' ?>" data-title="<?php echo strlen($f['description']) > 100 ? (substr($f['description'], 0, 100)).' ...' : $f['description'] ?>"><?php echo HTMLFormatHelper::icon('blue-document.png') ?></span>
+                    <span class="flow-has-descr hasTooltip<?php echo $f['description'] ? '' : ' hide' ?>" title="<?php echo strlen($f['description']) > 100 ? (substr($f['description'], 0, 100)).' ...' : $f['description'] ?>"><i class="fas fa-file-alt"></i></span>
 
                     <span class="flow-file-name"><?php echo !empty($f['title']) ? html_entity_decode($f['title']) : $f['realname']; ?></span>
                     <input type="hidden" name="<?php echo $name ?>[]" value="<?php echo $f['filename'] ?>">
@@ -131,23 +140,39 @@ $can_delete = $field->iscomment ? FALSE : $field->_getDeleteAccess();
             });
         });
 
-        var title_input = $("#text<?php echo $field->id; ?>");
-        var descr_input = $("#description<?php echo $field->id; ?>");
-        var btn_save = $('#myModal<?php echo $field->id; ?> .btn-save-modal');
+
+
+
         $(document).on("click", "#flow-menu<?php echo $field->id; ?> a.btn-edit" , function() {
             var tbtn = $(this);
             var json = tbtn.data('json');
             var id = tbtn.data('id');
-            console.log(json);
-            title_input.val($("<div/>").html(json.title ? json.title: json.realname).text());
-            descr_input.val($("<div/>").html(json.description ? json.description : '').text());
 
-            $('#myModal<?php echo $field->id; ?>').modal();
-            btn_save.off('click');
-            btn_save.click(function(){
+
+            var title_input = $("#text<?php echo $field->id; ?>");
+            var descr_input = $("#description<?php echo $field->id; ?>");
+
+
+            const modalId = "#myModal<?php echo $field->id; ?>";
+
+            let jsonTitle = json.title ? json.title: json.realname;
+            let jsonDesc = json.description ? json.description : '';
+
+            title_input.val(jsonTitle);
+            descr_input.val(jsonDesc);
+            const myModal = new bootstrap.Modal(modalId);
+
+
+            myModal.show();
+
+
+            $(document).on("click",'#myModal<?php echo $field->id; ?> .btn-save-modal',function(){
+
+                console.log('im here');
+
                 $.ajax({
-                    dataType: 'json', 
-                    type: 'get', async: false, 
+                    dataType: 'json',
+                    type: 'get', async: false,
                     url: Joomcck.field_call_url,
                     data: {
                         field_id: <?php echo $field->id ?>,
@@ -166,16 +191,22 @@ $can_delete = $field->iscomment ? FALSE : $field->_getDeleteAccess();
 
                         $("#flow-file-" + id + " td .flow-file-name").text(title_input.val());
                         if(json.description) {
-                            $("#flow-file-" + id + " td .flow-has-descr").data('original-title', json.description).show();
+                            $("#flow-file-" + id + " td .flow-has-descr").attr('title',json.description).css('display','inline');
                         } else {
                             $("#flow-file-" + id + " td .flow-has-descr").hide();
                         }
                     } else {
                         Joomcck.fieldError(<?php echo $field->id ?>, '<?php echo Mint::_('CUP_CANNOTSAVEDETA') ?>');
                     }
-                    $('#myModal<?php echo $field->id; ?>').modal('hide');
+
+                    myModal.hide();
+
+
+
                 });
             });
+
+
         });
         <?php endif; ?>
 
@@ -207,24 +238,22 @@ $can_delete = $field->iscomment ? FALSE : $field->_getDeleteAccess();
 
         flow.on('fileAdded', function(file, event) {
             $('#flow-list<?php echo $field->id; ?> tbody').append($.parseHTML(`<tr class="flow-file" id="flow-file-${file.uniqueIdentifier}">
-                <td style="position:relative">
+                <td>
                     <?php if(!$field->iscomment): ?>
                         <div class="float-end" id="flow-menu<?php echo $field->id; ?>">
                             <?php if($can_delete): ?>
-                                <a href="javascript:void(0);" class="btn-delete" data-id="${file.uniqueIdentifier}"><?php echo HTMLFormatHelper::icon('cross-button.png') ?></a>
+                                <a href="javascript:void(0);" class="text-danger" data-id="${file.uniqueIdentifier}"><i class="fas fa-times"></i></a>
                             <?php endif; ?>
                             <?php if($app->input->getInt('id') && ($field->params->get('params.allow_edit_title') || $field->params->get('params.allow_add_descr'))): ?>
-                                <a href="javascript:void(0);" class="btn-edit hide"  data-id="" data-json="">
-                                    <?php echo HTMLFormatHelper::icon('edit.png') ?></a>
+                                <a href="javascript:void(0);" class="btn-edit hide text-primary"  data-id="" data-json=""><i class="fas fa-edit"></i></a>
                             <?php endif; ?>
                             <?php if($field->params->get('params.flow_default', 1)): ?>
-                                <a href="javascript:void(0);" class="hasTooltip btn-make-default" data-title="<?php echo JText::_('FF_MAKEDEFAULT') ?>" data-id="">
-                                <?php echo HTMLFormatHelper::icon('status-offline.png') ?></a>
+                                <a href="javascript:void(0);" class="hasTooltip btn-make-default" title="<?php echo JText::_('FF_MAKEDEFAULT') ?>" data-id=""><?php echo HTMLFormatHelper::icon('status-offline.png') ?></a>
                             <?php endif; ?>
                         </div>
                     <?php endif; ?>
 
-                    <span class="flow-has-descr hasTooltip hide" data-title=""><?php echo HTMLFormatHelper::icon('blue-document.png') ?></span>
+                    <span class="flow-has-descr hasTooltip hide" title=""><i class="fas fa-file-alt"></i></span>
                     <span class="flow-file-name">${file.name}</span>
                     <span id="upload_input_<?php echo $field->id; ?>_${file.uniqueIdentifier}"></span>
                     <div class="flow-info hide"></div>
@@ -248,7 +277,7 @@ $can_delete = $field->iscomment ? FALSE : $field->_getDeleteAccess();
         flow.on('fileSuccess', function(file, data) {
             data = JSON.parse(data);
             var row = $("#flow-file-"+ file.uniqueIdentifier);
-            row.find('td a.btn-edit').show().data('id', data.id).data('json', data);
+            row.find('td a.btn-edit').css('display','inline').data('id', data.id).data('json', data);
             row.find('td .flow-info').hide();
             row.find('td a.btn-delete').data('id', data.id);
             row.find('td a.btn-make-default').data('id', data.id);
@@ -317,26 +346,28 @@ $can_delete = $field->iscomment ? FALSE : $field->_getDeleteAccess();
 </script>
 
 <?php if(($field->params->get('params.allow_edit_title') || $field->params->get('params.allow_add_descr')) && !$field->iscomment): ?>
-<div id="myModal<?php echo $field->id; ?>" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel<?php echo $field->id; ?>" aria-hidden="true">
-    <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><?php echo HTMLFormatHelper::icon('cross-button.png') ?></button>
-        <h3 id="myModalLabel<?php echo $field->id; ?>"><?php echo Mint::_('CUP_EDIT_FILE') ?></h3>
-    </div>
-    <div class="modal-body">
-        <div class="form-horizontal">
-            <div class="control-group <?php echo ($field->params->get('params.allow_edit_title') ? '' : 'hide') ?>">
-                <div class="control-label"><?php echo Mint::_('CUP_FTITLE'); ?></div>
-                <div class="controls"><input name="text" id="text<?php echo $field->id; ?>" type="text"></div>
+<div id="myModal<?php echo $field->id; ?>" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel<?php echo $field->id; ?>" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header py-2">
+                <h4 class="m-0" id="myModalLabel<?php echo $field->id; ?>"><?php echo Jtext::_('CUP_EDIT_FILE') ?></h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <div class="control-group <?php echo ($field->params->get('params.allow_add_descr') ? '' : 'hide') ?>">
-                <div class="control-label"><?php echo Mint::_('CUP_FDESCR'); ?></div>
-                <div class="controls"><textarea name="description" id="description<?php echo $field->id; ?>" cols="30" rows="10"></textarea></div>
+            <div class="modal-body">
+                <div class="mb-2 <?php echo ($field->params->get('params.allow_edit_title') ? '' : 'hide') ?>">
+                    <label for="text<?php echo $field->id; ?>"><?php echo Mint::_('CUP_FTITLE'); ?></label>
+                    <input name="text" class="form-control" id="text<?php echo $field->id; ?>" type="text">
+                </div>
+                <div class="<?php echo ($field->params->get('params.allow_add_descr') ? '' : 'hide') ?>">
+                    <label for="description<?php echo $field->id; ?>"><?php echo Mint::_('CUP_FDESCR'); ?></label>
+                    <textarea class="form-control" name="description" id="description<?php echo $field->id; ?>" cols="30" rows="10"></textarea>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button id="closeUploadModal" type="button" class="btn btn-secondary" data-bs-dismiss="modal"><?php echo Mint::_("CCLOSE") ?></button>
+                <button type="button" class="btn btn-primary btn-save-modal"><?php echo Mint::_('CSAVE') ?></button>
             </div>
         </div>
-    </div>
-    <div class="modal-footer">
-        <button type="button" class="btn" data-dismiss="modal" aria-hidden="true"><?php echo Mint::_("CCLOSE") ?></button>
-        <button type="button" class="btn btn-primary btn-save-modal"><?php echo Mint::_('CSAVE') ?></button>
     </div>
 </div>
 <?php endif; ?>
