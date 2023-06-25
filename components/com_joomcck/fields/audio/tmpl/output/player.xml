@@ -9,7 +9,7 @@
 			</fieldset>
 			<fieldset name="playerfull" label="F_PLAYERFULL">
 				<field name="width" type="text" size="3" label="F_PLAYERWIDTH" default="350" description="" />
-				<field name="height" type="text" size="3" label="F_PLAYERHEIGHT" default="27" />
+				<field name="height" type="text" size="3" label="F_PLAYERHEIGHT" default="27" description="" />
 				<field name="hits" label="F_DONTLOADHITS" type="radio" class="btn-group" default="0">
 					<option value="1">JYES</option>
 					<option value="0">JNO</option>
