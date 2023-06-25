@@ -11,6 +11,11 @@ require_once JPATH_ROOT. '/components/com_joomcck/library/php/fields/joomcckfiel
 
 class JFormFieldCHtml extends CFormField
 {
+
+	public $editor;
+	public $buttons;
+	public $editorParams;
+
 	public function getInput()
 	{
 		$app = JFactory::getApplication();

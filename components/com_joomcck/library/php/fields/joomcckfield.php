@@ -15,6 +15,31 @@ jimport('joomla.form.formfield');
 class CFormField extends JFormField
 {
 
+	public $label_orig;
+
+	public $group_title;
+
+	public $group_descr;
+	public $access;
+	public $published;
+	public $type_id;
+	public $key;
+	public $fieldclass;
+	public $group_id;
+	public $group_icon;
+	public $ordering;
+	public $group_order;
+	public $record;
+	public $values;
+	public $result;
+	public $print;
+	public  $sortby;
+	public $isnew;
+	public $js;
+	public $inputvalue;
+	public $labelvalue;
+
+
 	/**
 	 * @var JRegistry
 	 */

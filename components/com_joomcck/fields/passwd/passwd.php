@@ -13,6 +13,8 @@ require_once JPATH_ROOT . '/components/com_joomcck/library/php/fields/joomcckfie
 class JFormFieldCPasswd extends CFormField
 {
 
+	public $encrypt;
+
 	public function getInput()
 	{
 		$params = $this->params;

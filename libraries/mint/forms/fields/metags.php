@@ -18,6 +18,7 @@ jimport('joomla.form.formfield');
 class JFormFieldMetags extends JFormField
 {
 	public $type = 'Metags';
+	public $params;
 
 	public function getInput()
 	{
