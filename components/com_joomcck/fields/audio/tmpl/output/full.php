@@ -10,7 +10,8 @@
 defined('_JEXEC') or die();
 ?>
 
-<span style="display: block"><div id="mediaplayer<?php echo $record->id;?>"></div></span>
+<div style="display: block"><div id="mediaplayer<?php echo $record->id;?>"></div></div>
+<div class="clearfix"></div>
 <table class="table table-condensed" id="playlist_table">
 	<thead>
 		<tr>
@@ -111,8 +112,7 @@ defined('_JEXEC') or die();
 <script type="text/javascript">
 	var player<?php echo $record->id;?> = jwplayer("mediaplayer<?php echo $record->id;?>").setup({
 		"width": "<?php echo $this->params->get('tmpl_full.width');?>",
-		"height": "<?php echo $this->params->get('tmpl_full.height');?>",
-		"controlbar": "bottom",
+		"controlbar": "top",
 		"repeat": "true",
 		"playlist": [<?php echo implode(',', $tracks)?>]
 		<?php if ($this->params->get('tmpl_full.listbar', false)):?>
