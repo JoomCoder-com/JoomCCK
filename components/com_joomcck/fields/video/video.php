@@ -4,6 +4,11 @@ require_once JPATH_ROOT . '/components/com_joomcck/library/php/fields/joomcckupl
 
 class JFormFieldCVideo extends CFormFieldUpload
 {
+
+    public $link;
+    public $embed;
+    public $only_one;
+
 	public function __construct($field, $default)
 	{
 		parent::__construct($field, $default);
@@ -221,7 +226,7 @@ JWP;
 
 			foreach($value['files'] as $val)
 			{
-				$val->duration = 0;
+				$val['duration'] = 0;
 				ob_start();
 				passthru($this->params->get('params.command', 'ffmpeg') . " -i \"" . JPATH_ROOT . DIRECTORY_SEPARATOR . $params->get('general_upload') . DIRECTORY_SEPARATOR . $this->params->get('params.subfolder') . DIRECTORY_SEPARATOR . $val->fullpath . "\" 2>&1");
 				$duration = ob_get_contents();
@@ -232,7 +237,7 @@ JWP;
 					$duration       = $matches[1];
 					$duration_array = explode(':', $duration);
 					$duration       = $duration_array[0] * 3600 + $duration_array[1] * 60 + $duration_array[2];
-					$val->duration  = $duration;
+					$val['duration']  = $duration;
 				}
 			}
 		}

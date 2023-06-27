@@ -43,7 +43,7 @@
 				<div id="input_embeds">
 					<?php foreach ($this->embed AS $embed):?>
 						<div class="element-box">
-							<textarea style="" name="jform[fields][<?php echo $this->id; ?>][embed][]" cols="50" rows="5"
+							<textarea class="form-control" style="" name="jform[fields][<?php echo $this->id; ?>][embed][]" cols="50" rows="5"
 							id="<?php echo $this->formControl.$this->name;?>" ><?php echo $embed;?></textarea>
 							<img align="absmiddle" src="<?php echo JURI::root(TRUE)?>/media/com_joomcck/icons/16/cross-button.png"
 							class="link_delete" onclick="Joomcck.deleteFormElement<?php echo $this->id; ?>('embed', this);">
@@ -80,7 +80,7 @@
 				<div id="input_links">
 					<?php foreach ($this->link AS $link):?>
 						<div class="element-box">
-							<input name="jform[fields][<?php echo $this->id;?>][link][]" type="text" value="<?php echo $link; ?>"  id="<?php echo $this->formControl.$this->name;?>" /><img align="absmiddle" src="<?php echo JURI::root(TRUE)?>/media/com_joomcck/icons/16/cross-button.png" class="link_delete" onclick="Joomcck.deleteFormElement<?php echo $this->id; ?>('link', this);">
+							<input class="form-control" name="jform[fields][<?php echo $this->id;?>][link][]" type="text" value="<?php echo $link; ?>"  id="<?php echo $this->formControl.$this->name;?>" /><img align="absmiddle" src="<?php echo JURI::root(TRUE)?>/media/com_joomcck/icons/16/cross-button.png" class="link_delete" onclick="Joomcck.deleteFormElement<?php echo $this->id; ?>('link', this);">
 						</div>
 					<?php endforeach;?>
 				</div>
