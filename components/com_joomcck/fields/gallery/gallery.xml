@@ -130,7 +130,6 @@
 					<option value="0">JNO</option>
 					<option value="1">JYES</option>
 				</field>
-				<field name="thumbs_list_theme" type="filelist" default="default" directory="components/com_joomcck/fields/gallery/gallerybox/thumb-themes" filter="css$" hide_none="1" hide_default="1" label="F_THEMES" description="" />
 			</fieldset>
 
 			<fieldset name="thumbs" label="FS_RECORDFULLVIEWMODE">
@@ -169,64 +168,9 @@
 			</fieldset>
 
 			<fieldset name="popup" label="FS_POPUP" description="">
-				<field name="show_mode" type="list" default="gallerybox" label="F_SHOWMODE" description="">
-					<option value="gallerybox">XML_OPT_GALLERYBOX</option>
+				<field name="show_mode" type="list" default="lightbox" label="F_SHOWMODE" description="">
 					<option value="lightbox">XML_OPT_LIGHTBOX</option>
 					<option value="rokbox">XML_OPT_ROCKBOX</option>
-				</field>
-			</fieldset>
-			<fieldset name="gallery" label="FS_POPUP_GALLERY" description="">
-				<field name="theme" type="list" default="Dark" label="F_THEME" description="">
-					<option value="Dark">XML_OPT_DARK</option>
-					<option value="Light">XML_OPT_LIGHT</option>
-					<option value="Minimal">XML_OPT_MINIMAL</option>
-					<option value="Smooth">XML_OPT_SMOOTH</option>
-				</field>
-				<field name="rate_access" type="accesslevel" default="1" label="F_WHOCANRATE">
-					<option value="0">XML_OPT_NOONE</option>
-				</field>
-				<field name="tmpl_rating" label="F_RATINGTMPL" type="cobtmpls" default="default" tmpltype="rating" />
-				<field name="allow_comments" type="accesslevel" default="2" label="F_WHOCANCOMMENT" description="">
-					<option value="0">XML_OPT_NOONE</option>
-				</field>
-				<field name="allow_info" type="accesslevel" default="2" label="F_WHOCANVIEWINFO" description="">
-					<option value="0">XML_OPT_NOONE</option>
-				</field>
-				<field name="show_avatar" type="radio" class="btn-group" default="1" label="F_SHOWAVATAR" description="">
-					<option value="0">JNO</option>
-					<option value="1">JYES</option>
-				</field>
-				<field name="avatar_width" type="text" default="40" label="F_AVATARWIDTH" description="" />
-				<field name="avatar_height" type="text" default="40" label="F_AVATARHEIGHT" description="" />
-				<field name="show_comment_avatar" type="radio" class="btn-group" default="1" label="F_SHOWCOMMENTAVATAR" description="">
-					<option value="0">JNO</option>
-					<option value="1">JYES</option>
-				</field>
-				<field name="comment_avatar_width" type="text" default="20" label="F_COMMENTAVATARWIDTH" description="" />
-				<field name="comment_avatar_height" type="text" default="20" label="F_COMMENTAVATARHEIGHT" description="" />
-				<field name="show_username" type="list" default="1" label="F_SHOWUSERNAME" description="">
-					<option value="0">XML_OPT_NOONE</option>
-					<option value="name">XML_OPT_NAME</option>
-					<option value="username">XML_OPT_USERNAME</option>
-				</field>
-				<field name="comment_author" type="radio" class="btn-group" default="1" label="F_AUTHORCANDELETECOMMENT" description="">
-					<option value="0">JNO</option>
-					<option value="1">JYES</option>
-				</field>
-				<field name="record_author" type="radio" class="btn-group" default="1" label="F_RAUTHORCANMODERATECOMMENTS" description="">
-					<option value="0">JNO</option>
-					<option value="1">JYES</option>
-				</field>
-				<field name="allow_download" type="accesslevel" default="1" label="F_ALLOWDOWNLOADORIGINAL" description="">
-					<option value="0">XML_OPT_NOONE</option>
-				</field>
-				<field name="count_views" type="radio" class="btn-group" default="1" label="F_COUNTVIEWS" description="">
-					<option value="0">JNO</option>
-					<option value="1">JYES</option>
-				</field>
-				<field name="show_location" type="radio" class="btn-group" default="1" label="F_SHOWGOOGLEMAPIFPOSSIBLE" description="">
-					<option value="0">JNO</option>
-					<option value="1">JYES</option>
 				</field>
 			</fieldset>
 			<fieldset name="emerald" label="F_DOWNLOADSUBSCR" description="F_DOWNLOADSUBSCR_DESCR" addfieldpath="/components/com_emerald/models/fields/">

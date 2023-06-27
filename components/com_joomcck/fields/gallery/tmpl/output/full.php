@@ -13,11 +13,9 @@ if(empty($this->value))
 	return null;
 }
 
-?>
-
-<?php
 $this->record = $record;
 $this->_init();
+
 ?>
 
 <?php if ($this->params->get('params.thumbs_resize_mode', 1) == 1): ?>
@@ -28,7 +26,9 @@ $this->_init();
 
 <?php if ($this->params->get('params.download_all', 0) == 1): ?>
 <div class="clearfix"></div>
-<a class="btn btn-success" href="<?php echo Url::task('files.download&fid='.$this->id . '&rid=' . $record->id, 0);?>">
-	<?php echo JText::_('CDOWNLOADALL')?>
-</a>
+<div class="my-2">
+    <a class="btn btn-outline-success btn-sm" href="<?php echo Url::task('files.download&fid='.$this->id . '&rid=' . $record->id, 0);?>">
+		<span class="fas fa-download"></span> <?php echo JText::_('CDOWNLOADALL')?>
+    </a>
+</div>
 <?php endif;?>

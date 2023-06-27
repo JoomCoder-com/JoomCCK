@@ -11,6 +11,10 @@ require_once JPATH_ROOT . '/components/com_joomcck/library/php/fields/joomcckupl
 
 class JFormFieldCGallery extends CFormFieldUpload
 {
+
+	public $resizer;
+	public $path;
+
 	public function getInput()
 	{
 		$params['width']  = $this->params->get('params.original_width', 1024);
@@ -885,7 +889,7 @@ class JFormFieldCGallery extends CFormFieldUpload
 				JFactory::getDocument()->addStyleSheet(JURI::root(TRUE) . '/components/com_joomcck/fields/gallery/gallerybox/gallerybox.css');
 				JFactory::getDocument()->addStyleSheet(JURI::root(TRUE) . '/components/com_joomcck/fields/gallery/gallerybox/gallerybox-' . $this->params->get('params.theme', 'Dark') . '.css');
 				JFactory::getDocument()->addScriptDeclaration('
-	    	    	window.addEvent("domready", function(){
+	    	    	jQuery(document).ready(function(){
 		    	    	gb' . $this->id . '_' . $this->record->id . ' = new Gallerybox(
 		    	    		{
 	    	    				field_id:' . $this->id . ',
