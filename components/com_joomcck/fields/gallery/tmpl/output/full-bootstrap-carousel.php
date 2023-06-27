@@ -70,7 +70,7 @@ $dir = JComponentHelper::getParams('com_joomcck')->get('general_upload') . DIREC
 	<div class="clearfix"></div>
 	<div class="my-2">
         <a class="btn btn-outline-success btn-sm" href="<?php echo Url::task('files.download&fid=' . $this->id . '&rid=' . $record->id, 0); ?>">
-			<?php echo JText::_('CDOWNLOADALL') ?>
+            <span class="fas fa-download"></span> <?php echo JText::_('CDOWNLOADALL') ?>
         </a>
     </div>
 <?php endif; ?>
