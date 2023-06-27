@@ -90,9 +90,11 @@
 		<language tag="en-GB">language/en-GB/com_joomcck_gateway_robokassa.ini</language>
 	</languages>
 	<administration>
-		<menu link="option=com_joomcck&amp;view=records" img="components/com_joomcck/images/menu/joomcck.png">com_joomcck</menu>
+		<menu link="option=com_joomcck&amp;view=start">com_joomcck</menu>
 		<submenu>
-			<menu link="option=com_config&amp;view=component&amp;component=com_joomcck" img="class:config">Configuration</menu>
+			<menu link="option=com_joomcck&amp;view=start">Start</menu>
+			<menu link="option=com_config&amp;view=component&amp;component=com_joomcck">Configuration</menu>
+			<menu link="option=com_config&amp;view=component&amp;component=com_joomcck">About Us</menu>
 		</submenu>
 		<files folder="admin">
 			<filename>access.xml</filename>

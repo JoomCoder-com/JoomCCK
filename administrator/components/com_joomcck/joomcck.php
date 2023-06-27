@@ -31,6 +31,7 @@ if(!JFactory::getUser()->authorise('core.manage', 'com_joomcck'))
 
 }
 
+// check if config already set
 if(!JComponentHelper::getParams('com_joomcck')->get('general_upload'))
 {
 

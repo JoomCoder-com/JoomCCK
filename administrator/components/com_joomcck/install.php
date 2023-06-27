@@ -97,17 +97,18 @@ class com_joomcckInstallerScript
 
         if (!$menu_table->id) {
             $menu_table->save([
-                "title"        => "Joomcck CP",
+                "title"        => "Joomcck Admin Dashboard",
                 "alias"        => "joomcck-cp",
                 "menutype"     => $menu_type,
                 "path"         => "joomcck-cp",
                 "link"         => "index.php?option=com_joomcck&view=cpanel",
                 "type"         => "component",
                 "published"    => 1,
+				'language'     => '*',
                 "level"        => 1,
                 "parent_id"    => 1,
                 "component_id" => $et->extension_id,
-                "access"       => $access ?: 6,
+                "access"       => 6, // super users
                 "client_id"    => 0,
                 "params"       => '{"menu-anchor_title":"","menu-anchor_css":"","menu_image":"","menu_image_css":"","menu_text":1,"menu_show":1,"page_title":"","show_page_heading":"","page_heading":"","pageclass_sfx":"","menu-meta_description":"","menu-meta_keywords":"","robots":"","secure":0}'
             ]);
