@@ -14,6 +14,8 @@ require_once JPATH_ROOT . '/components/com_joomcck/library/php/fields/joomcckfie
 class JFormFieldCImage extends CFormField
 {
 	public static $loaded = FALSE;
+	public $directory;
+	public $script_loaded;
 
 	public function getInput()
 	{
