@@ -66,7 +66,7 @@ if($rel)
 
 <?php if($rel):  ?>
 	<a href="<?php echo $url_orig;  ?>" <?php echo $rel  ?> id="<?php echo $index;  ?>">
-		<img src="<?php echo $url;  ?>" class="img-polaroid">
+		<img src="<?php echo $url;  ?>" class="img-thumbnail">
 	</a>
 	<div style="display:none;">
 		<?php foreach($this->value as $picture_index => $file):  ?>
@@ -84,6 +84,6 @@ if($rel)
 	</div>
 <?php else:  ?>
 	<a href="<?php echo $record->url  ?>">
-		<img src="<?php echo $url;  ?>" class="img-polaroid">
+		<img src="<?php echo $url;  ?>" class="img-thumbnail">
 	</a>
 <?php endif;  ?>
