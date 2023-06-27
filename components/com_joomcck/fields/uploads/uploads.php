@@ -12,6 +12,10 @@ require_once JPATH_ROOT. '/components/com_joomcck/library/php/fields/joomcckuplo
 
 class JFormFieldCUploads extends CFormFieldUpload
 {
+
+	public $files;
+	public $hits;
+
 	public function getInput()
 	{
 		$params['width'] = $this->params->get('params.width', 0);
