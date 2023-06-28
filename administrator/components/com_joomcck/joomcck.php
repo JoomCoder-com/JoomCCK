@@ -42,7 +42,7 @@ if(!JComponentHelper::getParams('com_joomcck')->get('general_upload'))
 
 $input = Factory::getApplication()->input;
 
-$input->set('view', $input->get('view', 'about'));
+$input->set('view', $input->get('view', 'start'));
 
 $controller = MControllerBase::getInstance('Joomcck');
 $controller->execute(JFactory::getApplication()->input->get('task'));
