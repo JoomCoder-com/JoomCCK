@@ -65,7 +65,7 @@ class JoomcckControllerForm extends MControllerForm
 			$app->setUserState('com_joomcck.edit.form.id', $record['id']);
 		}
 
-		$dispatcher = \Joomla\CMS\Factory::getApplication();
+		$dispatcher = Factory::getApplication();
 		JPluginHelper::importPlugin('mint');
 		$dispatcher->triggerEvent('onBeforeArticleSaved', array(($record['id'] == 0), $record, $section, $type));
 
@@ -413,7 +413,7 @@ class JoomcckControllerForm extends MControllerForm
 		CEmeraldHelper::countLimit('type', $method, $type, $record);
 		CSubscriptionsHelper::subscribe_record($record);
 
-		$dispatcher = \Joomla\CMS\Factory::getApplication();
+		$dispatcher = Factory::getApplication();
 		JPluginHelper::importPlugin('mint');
 		$dispatcher->triggerEvent('onAfterArticleSaved', array($isnew, $record, $fields, $section, $type));
 

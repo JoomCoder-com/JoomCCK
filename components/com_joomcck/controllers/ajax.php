@@ -1054,7 +1054,13 @@ class JoomcckControllerAjax extends MControllerAdmin
 
 			foreach ($result as $item){
 
-				$autoCompleteResult[] = ['id' => $item, 'text' => $item];
+				if(is_array($item)){
+					$autoCompleteResult[] = ['id' => $item['id'], 'text' => $item['title']];
+				}else{
+					$autoCompleteResult[] = ['id' => $item, 'text' => $item];
+				}
+
+
 
 			}
 

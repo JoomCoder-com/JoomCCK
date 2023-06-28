@@ -172,6 +172,6 @@ class JFormFieldCChild extends CFormFieldRelate
 
 		$db->setQuery($query);
 
-		return $db->loadRowList();
+		return $db->loadAssocList();
 	}
 }
