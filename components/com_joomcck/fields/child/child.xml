@@ -46,9 +46,9 @@
 			</fieldset>
 
 			<fieldset name="advanced" label="FS_RELATYION">
-				<field name="parent_field" type="meresourcesfields" size="1" key="id" filters="'parent'" label="F_PARENTFIELD" />
+				<field name="parent_field" type="meresourcesfields" class="form-select" size="1" key="id" filters="'parent'" label="F_PARENTFIELD" />
 				<field name="parent_type" type="mertype" label="F_PARENTTYPE" required="1" default="" description="F_PARENTTYPE_DESCR" />
-				<field name="parent_section" type="meresourcessection" required="1" label="F_PARENTTYPESECTION" default="" description="F_PARENTTYPESECTION_DESCR" />
+				<field name="parent_section" type="meresourcessection" class="form-select" required="1" label="F_PARENTTYPESECTION" default="" description="F_PARENTTYPESECTION_DESCR" />
 				<field name="strict_to_user" type="accesslevel" label="F_NOUSERSTRICTFOR" default="0" description="F_USERNOTSTRICTFOR_DESCR">
 					<option value="0">XML_OPT_NOONE</option>
 				</field>
