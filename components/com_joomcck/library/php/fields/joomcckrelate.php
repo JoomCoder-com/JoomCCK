@@ -51,6 +51,10 @@ class CFormFieldRelate extends CFormField
 		}
 		$query->where('hidden = 0');
 		$query->where('section_id = ' . (int)$section_id);
+
+        if(empty($types))
+            return null;
+
 		$query->where("type_id IN(" . implode(',', $types) . ")");
 
 		if($app->input->getInt('id') && $app->input->getCmd('option') == 'com_joomcck' && $app->input->getCmd('view') == 'form')
@@ -108,6 +112,11 @@ class CFormFieldRelate extends CFormField
 		{
 			$query->order($this->params->get('params.input_sort',''));
 		}
+
+        echo '<pre>';
+        var_dump($query->dump());
+        echo '<pre/>';
+        die;
 
 
 		$db->setQuery($query);
