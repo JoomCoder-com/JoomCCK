@@ -26,6 +26,7 @@ class CFormFieldRelate extends CFormField
 
 	public function __construct($field, $default)
 	{
+
 		parent::__construct($field, $default);
 	}
 
@@ -95,6 +96,8 @@ class CFormFieldRelate extends CFormField
 			$query->where('user_id = ' . ($user_id ? $user_id : 1));
 		}
 
+
+
 		if($this->type == 'parent' && !$this->isFilter)
 		{
 			$table = JTable::getInstance('Field', 'JoomcckTable');
@@ -112,12 +115,6 @@ class CFormFieldRelate extends CFormField
 		{
 			$query->order($this->params->get('params.input_sort',''));
 		}
-
-        echo '<pre>';
-        var_dump($query->dump());
-        echo '<pre/>';
-        die;
-
 
 		$db->setQuery($query);
 		$list = $db->loadObjectList();
@@ -161,7 +158,7 @@ class CFormFieldRelate extends CFormField
 				$this->value = $db->loadColumn();
 			}
 		}
-        
+
         switch($type)
 		{
 			case 2:
@@ -249,6 +246,8 @@ class CFormFieldRelate extends CFormField
 	protected function _render_autocomplete($multi, $list, $default, $limit, $name)
 	{
         $app = JFactory::getApplication();
+
+
 
         $options['only_suggestions'] = 1;
         $options['can_add'] = 1;

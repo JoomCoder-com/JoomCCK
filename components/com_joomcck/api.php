@@ -80,6 +80,22 @@ use Joomla\Registry\Registry;
 
 class JoomcckApi
 {
+
+	public $section;
+	public $appParams;
+	public $input;
+	public $total_fields_keys;
+	public $items;
+	public $user;
+	public $category;
+	public $submission_types;
+	public $fields_keys_by_id;
+	public $list_template;
+	public $tmpl_params;
+	public $total_types;
+	public $content;
+
+
 	const FIELD_FULL = 'full';
 	const FIELD_LIST = 'list';
 

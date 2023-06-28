@@ -13,6 +13,13 @@ require_once JPATH_ROOT . '/components/com_joomcck/api.php';
 
 class JFormFieldCChild extends CFormFieldRelate
 {
+
+	public $show_btn_all;
+	public $show_btn_exist;
+	public $show_btn_new;
+
+	public $content;
+
 	public function getInput()
 	{
 		$name = "jform[fields][$this->id]";
@@ -111,7 +118,7 @@ class JFormFieldCChild extends CFormFieldRelate
 		$user = JFactory::getUser();
 
 		$query = $db->getQuery(TRUE);
-		$query->select('id, title, null, title');
+		$query->select('id, title');
 		$query->from('#__js_res_record');
 		if(CStatistics::hasUnPublished($this->params->get('params.parent_section')))
 		{
