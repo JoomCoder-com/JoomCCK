@@ -91,29 +91,21 @@ $k = 0;
 }(jQuery));
 </script>
 
-<br>
 <form name="adminForm" id="adminForm" method="post">
-	<div class="container-fluid">
-		<div id="row">
-			<div class="float-start input-append">
-
-				<input type="text" name="filter_search2" id="filter_search2" value="<?php echo $this->state->get('records.search2'); ?>" />
-				<button class="btn" type="submit">
-					<?php echo HTMLFormatHelper::icon('document-search-result.png');  ?>
-				<?php echo JText::_('JSEARCH_FILTER_SUBMIT'); ?></button>
-				<button class="btn" type="button" onclick="document.getElementById('filter_search2').value='';this.form.submit();">
-					<?php echo HTMLFormatHelper::icon('eraser.png');  ?>
-				<?php echo JText::_('JSEARCH_FILTER_CLEAR'); ?></button>
-			</div>
-			<?php if(JFactory::getApplication()->input->get('mode') == 'form'):?>
-			<div class="float-end">
-				<button type="button" class="btn" onclick="closeWindow()">
-					<?php echo HTMLFormatHelper::icon('tick-button.png');  ?>
+    <div class="input-group">
+        <input type="text" class="form-control form-control-sm" name="filter_search2" id="filter_search2" value="<?php echo $this->state->get('records.search2'); ?>" />
+        <button class="btn btn-sm btn-outline-success" type="submit">
+            <span class="fas fa-search"></span> <?php echo JText::_('JSEARCH_FILTER_SUBMIT'); ?>
+        </button>
+        <button class="btn btn-sm btn-outline-danger btn-sm" type="button" onclick="document.getElementById('filter_search2').value='';this.form.submit();">
+            <span class="fas fa-eraser"></span> <?php echo JText::_('JSEARCH_FILTER_CLEAR'); ?>
+        </button>
+		<?php if(JFactory::getApplication()->input->get('mode') == 'form'):?>
+            <button type="button" class="btn btn-sm btn-outline-success" onclick="closeWindow()">
+                <span class="fas fa-check"></span>
 				<?php echo JText::_('CAPPLY');?></button>
-				<?php endif;?>
-			</div>
-		</div>
-	</div>
+		<?php endif;?>
+    </div>
 	<div class="clearfix"></div>
 
 	<div class="container-fluid">
