@@ -14,6 +14,10 @@ require_once JPATH_ROOT . '/components/com_joomcck/api.php';
 
 class JFormFieldCReadmore extends CFormFieldRelate
 {
+
+	public $content;
+
+
 	public function getInput()
 	{
         $name = "jform[fields][$this->id]";
