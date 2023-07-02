@@ -67,7 +67,7 @@ class JFormFieldCReadmore extends CFormFieldRelate
 		$section_id = $this->request->getInt('section_id');
 
 		$query = $db->getQuery(TRUE);
-		$query->select('id, title as text');
+		$query->select('id, title');
 		$query->from('#__js_res_record');
 		if(CStatistics::hasUnPublished($section_id))
 		{
@@ -82,7 +82,7 @@ class JFormFieldCReadmore extends CFormFieldRelate
 			$query->where('user_id = ' . ($user_id ? $user_id : 1));
 		}
 		$db->setQuery($query);
-		return $db->loadObjectList();
+		return $db->loadAssocList();
 	}
 
 	private function _getTypes()
