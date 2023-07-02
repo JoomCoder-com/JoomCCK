@@ -232,6 +232,9 @@ class AttachmentHelper
 class FieldHelper
 {
 
+	public $fields;
+	public $keys;
+
 	public function __construct($keys, $fields)
 	{
 		$this->keys   = $keys;
