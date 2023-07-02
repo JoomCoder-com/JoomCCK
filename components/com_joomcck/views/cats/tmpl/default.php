@@ -32,7 +32,7 @@ if ($saveOrder)
 
 <?php echo HTMLFormatHelper::layout('navbar'); ?>
 
-<form action="<?php echo JRoute::_('index.php?option=com_joomcck&view=categories&section_id='.$section);?>" method="post" name="adminForm" id="adminForm">
+<form action="<?php echo JRoute::_('index.php?option=com_joomcck&view=cats&section_id='.$section);?>" method="post" name="adminForm" id="adminForm">
 	<?php echo HTMLFormatHelper::layout('search', $this); ?>
 
 	<div class="page-header">

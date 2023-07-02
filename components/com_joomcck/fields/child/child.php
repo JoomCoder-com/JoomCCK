@@ -14,6 +14,8 @@ require_once JPATH_ROOT . '/components/com_joomcck/api.php';
 class JFormFieldCChild extends CFormFieldRelate
 {
 
+	public $filter;
+
 	public $show_btn_all;
 	public $show_btn_exist;
 	public $show_btn_new;
