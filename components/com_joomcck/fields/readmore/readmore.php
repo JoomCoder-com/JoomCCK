@@ -8,8 +8,8 @@
  * @license   GNU/GPL http://www.gnu.org/copyleft/gpl.html
  */
 defined('_JEXEC') or die;
-require_once JPATH_ROOT . '/components/com_joomcck/library/php/fields/joomcckrelate.php';
 
+require_once JPATH_ROOT . '/components/com_joomcck/library/php/fields/joomcckrelate.php';
 require_once JPATH_ROOT . '/components/com_joomcck/api.php';
 
 class JFormFieldCReadmore extends CFormFieldRelate

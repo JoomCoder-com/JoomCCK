@@ -90,12 +90,12 @@ function explodeUrlParam($param)
 {
 	$s = S;
 
-	if(preg_match('/^[0-9]*\:/', $param))
+	if(preg_match('/^[0-9]*\:/', (string) $param))
 	{
 		$s = ':';
 	}
 
-	$array = explode($s, $param);
+	$array = explode($s, (string) $param);
 
 	$out[0] = $array[0];
 
