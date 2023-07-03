@@ -8,6 +8,7 @@
  * @license   GNU/GPL http://www.gnu.org/copyleft/gpl.html
  */
 
+use Joomla\CMS\Factory;
 use Joomla\Registry\Registry;
 
 defined('_JEXEC') or die();
@@ -19,7 +20,7 @@ JHtml::_('bootstrap.modal');
 require_once JPATH_ROOT . '/components/com_joomcck/library/php/fields/joomcckfield.php';
 require_once JPATH_ROOT . '/components/com_joomcck/api.php';
 
-class CFormFieldRelate extends CFormField
+class  CFormFieldRelate extends CFormField
 {
 	public $isFilter = FALSE;
 	public $user_strict = TRUE;
@@ -417,13 +418,18 @@ class CFormFieldRelate extends CFormField
 		if($multi)
 		{
 			$name .= '[]';
-			$attribs .= ' class="elements-list"';
+			$attribs .= ' class="elements-list form-select"';
 			$attribs .= ' multiple="true"';
 			$attribs .= ' onchange="Joomcck.countFieldValues(this, ' . $this->id . ', ' . $this->params->get('params.multi_limit', 0) . ', \'select\');"';
 			$attribs .= ' size="' . (count($list) > 20 ? 20 : count($list)) . '"';
 		}
-
+		$html[] = '<joomla-field-fancy-select>';
 		$html[] = JHtml::_('select.genericlist', $list, $name, $attribs, 'value', 'text', $default);
+		$html[] = '</joomla-field-fancy-select>';
+
+		Factory::getApplication()->getDocument()->getWebAssetManager()
+			->usePreset('choicesjs')
+			->useScript('webcomponent.field-fancy-select');
 
 		return implode("\n", $html);
 	}
