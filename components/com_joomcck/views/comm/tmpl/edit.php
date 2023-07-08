@@ -19,7 +19,6 @@ $wa->useScript('keepalive')
 	function submitbutton(task)
 	{
 		if (task == 'filter.cancel' || document.formvalidator.isValid(document.getElementById('adminForm'))) {
-			<?php echo $this->form->getField('comment')->save(); ?>
 			Joomla.submitform(task);
 		}
 		else {

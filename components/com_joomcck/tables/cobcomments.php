@@ -7,13 +7,15 @@
  * @license   GNU/GPL http://www.gnu.org/copyleft/gpl.html
  */
 
+use Joomla\CMS\Table\Nested;
+
 defined('_JEXEC') or die('Restricted access');
 
 jimport('joomla.database.tablenested');
 
-class JoomcckTableCobcomments extends JTableNested
+class JoomcckTableCobcomments extends Nested
 {
-	public static $root_id = 0;
+	protected static $root_id = 0;
 
 	public function __construct(&$_db)
 	{
