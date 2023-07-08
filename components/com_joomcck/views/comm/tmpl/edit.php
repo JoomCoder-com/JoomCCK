@@ -35,7 +35,7 @@ $wa->useScript('keepalive')
 		</h1>
 	</div>
 
-	<div class="row">
+	<div class="row w-100">
 		<div class="col-md-8">
 			<?php echo $this->form->getInput('comment'); ?>
 		</div>
