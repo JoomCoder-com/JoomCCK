@@ -16,6 +16,9 @@ require_once JPATH_ROOT . '/components/com_joomcck/api.php';
 
 class JFormFieldCRecords extends CFormField
 {
+
+	public $content;
+
 	public function getInput()
 	{
 
