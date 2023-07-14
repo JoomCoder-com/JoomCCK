@@ -33,16 +33,16 @@
 				<option value="user_field_data">XML_OPT_USERFIELDDATA</option>
 				<option value="distance">XML_OPT_DISTANCE</option>
 			</field>
-			<field name="section_id" type="meresourcessection" label="CSECTION" description="" />
+			<field name="section_id" type="meresourcessection" class="form-select" label="CSECTION" description="" />
 			<field name="type" type="mertype" default="" multi="1" label="F_ONLYFOLLOWINGTYPES" />
-			<field name="field_from" type="meresourcesfields" default="" label="F_SEARCHFROMFIELD" type_strict="1" filters="'text','radio','select','checkbox','multiselect','multilevelselect','boolean','email','telephone','listautocomplete','datetime','image','status'" description="You can choose only 'text', 'radiobutton', 'select_simple', 'checkbox', 'multiselect', 'multilevelselect', 'select_relate' field type." />
-			<field name="field_in" type="meresourcesfields" default="" label="F_SEARCHINFIELD" filters="'text','radio','select','checkbox','multiselect','multilevelselect','boolean','email','telephone','listautocomplete','datetime','image','status'" description="You can choose only 'text', 'radiobutton', 'select_simple', 'checkbox', 'multiselect', 'multilevelselect', 'select_relate' field type." />
+			<field name="field_from" type="meresourcesfields" class="form-select" default="" label="F_SEARCHFROMFIELD" type_strict="1" filters="'text','radio','select','checkbox','multiselect','multilevelselect','boolean','email','telephone','listautocomplete','datetime','image','status'" description="You can choose only 'text', 'radiobutton', 'select_simple', 'checkbox', 'multiselect', 'multilevelselect', 'select_relate' field type." />
+			<field name="field_in" type="meresourcesfields" class="form-select" default="" label="F_SEARCHINFIELD" filters="'text','radio','select','checkbox','multiselect','multilevelselect','boolean','email','telephone','listautocomplete','datetime','image','status'" description="You can choose only 'text', 'radiobutton', 'select_simple', 'checkbox', 'multiselect', 'multilevelselect', 'select_relate' field type." />
 			<field name="category_affect" type="radio" class="btn-group" default="0" label="F_CATAFFECT" description="F_CATAFECTDESC">
 				<option value="0">JNO</option>
 				<option value="1">JYES</option>
 			</field>
 			<field name="distance" type="text" default="5" label="F_DISTANCE" description="F_DISTANCEDESCR" />
-			<field name="field_distance" type="meresourcesfields" key="id" default="" label="F_DISTANCEFIELD" filters="'geo'" description="" />
+			<field name="field_distance" type="meresourcesfields"  class="form-select" key="id" default="" label="F_DISTANCEFIELD" filters="'geo'" description="" />
 		</fieldset>
 		<fieldset name="general3" label="FS_HOWTOSHOW">
 			<field name="limit" type="text" size="3" default="5" label="CLIMIT" description="" />
