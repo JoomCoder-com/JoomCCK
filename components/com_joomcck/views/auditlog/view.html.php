@@ -14,14 +14,15 @@ defined('_JEXEC') or die();
 
 class JoomcckViewAuditlog extends MViewBase
 {
+	public $params;
+
 
 	function display($tpl = NULL)
 	{
 		$doc  = JFactory::getDocument();
 		$user = JFactory::getUser();
 		$app  = JFactory::getApplication();
-
-
+		$this->params = Factory::getApplication()->getMenu()->getActive()->getParams();
 
 		$model = MModelBase::getInstance('Auditlog', 'JoomcckModel');
 		$this->state = $this->get('State');

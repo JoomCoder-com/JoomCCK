@@ -6,6 +6,9 @@
  * @copyright Copyright (C) 2012 joomcoder (https://www.joomcoder.com). All rights reserved.
  * @license   GNU/GPL http://www.gnu.org/copyleft/gpl.html
  */
+
+use Joomcck\Layout\Helpers\Layout;
+
 defined('_JEXEC') or die ();
 
 JHTML::_('bootstrap.tooltip', '*[rel^="tooltip"]');
@@ -304,18 +307,8 @@ $this->_filters = true;
             <div class="alert alert-warning"><?php echo JText::_('CERR_NOLOG') ?></div>
 		<?php endif; ?>
 
-        <div style="text-align: center;">
-            <small>
-				<?php if ($this->pagination->getPagesCounter()): ?>
-					<?php echo $this->pagination->getPagesCounter(); ?>
-				<?php endif; ?>
-				<?php echo str_replace('<option value="0">' . JText::_('JALL') . '</option>', '', $this->pagination->getLimitBox()); ?>
-				<?php echo $this->pagination->getResultsCounter(); ?>
-            </small>
-        </div>
-        <div style="text-align: center;" class="pagination">
-			<?php echo str_replace('<ul>', '<ul class="pagination-list">', $this->pagination->getPagesLinks()); ?>
-        </div>
+
+	    <?php echo Layout::render('core.list.pagination',['params' => $this->params,'pagination' => $this->pagination]) ?>
 
 
         <input type="hidden" name="task" value=""/>
