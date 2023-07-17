@@ -21,9 +21,9 @@ class JFormFieldCregister extends CFormField
 		$user        = JFactory::getUser();
 		$this->group = NULL;
 
-		if(count($this->params->get('params.new_usertype')) > 1)
+		if(count((array) $this->params->get('params.new_usertype','')) > 1)
 		{
-			$ids = implode(',', $this->params->get('params.new_usertype'));
+			$ids = implode(',', $this->params->get('params.new_usertype',''));
 			$db  = JFactory::getDbo();
 			$db->setQuery("SELECT id as value, title as text FROM #__usergroups WHERE id IN({$ids})");
 			$list        = $db->loadObjectList();
