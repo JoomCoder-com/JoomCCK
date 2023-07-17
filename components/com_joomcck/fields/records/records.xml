@@ -15,18 +15,15 @@
 				<option value="author_rated">XML_OPT_AUTHORRATED</option>
 				<option value="author_commented">XML_OPT_AUTHORCOMMENTED</option>
 				<option value="author_visited">XML_OPT_AUTHORVISITED</option>
-
 				<option value="visitor_created">XML_OPT_VISITORCREATED</option>
 				<option value="visitor_favorited">XML_OPT_VISITORFAVORITED</option>
 				<option value="visitor_rated">XML_OPT_VISITORRATED</option>
 				<option value="visitor_commented">XML_OPT_VISITORCOMMENTED</option>
 				<option value="visitor_visited">XML_OPT_VISITORVISITED</option>
-
 				<option value="who_comment">XML_OPT_WHOCOMMENT</option>
 				<option value="who_rate">XML_OPT_WHORATE</option>
 				<option value="who_visit">XML_OPT_WHOVISIT</option>
 				<option value="who_favorite">XML_OPT_WHOFAVORITE</option>
-
 				<option value="tag_related">XML_OPT_TAGRELATED</option>
 				<option value="author_tag_related">XML_OPT_AUTHORTAGRELATED</option>
 				<option value="field_data">XML_OPT_FIELDDATA</option>
