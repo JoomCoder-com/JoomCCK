@@ -17,7 +17,6 @@ class JoomcckViewPacksection extends MViewBase
 		$this->item = $this->get('Item');
 
 		$doc = JFactory::getDocument();
-		$doc->addStyleSheet(JURI::root(TRUE) . '/libraries/mint/forms/style.css');
 
 		$this->form = $this->get('Form');
 

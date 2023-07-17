@@ -163,7 +163,6 @@ class MEFormHelper
 		$fields = $form->getFieldset($name);
 		$defaultGetName = empty($group) ? '%2$s' : '%s.%s';
 		$doc = JFactory::getDocument();
-		$doc->addStyleSheet(JURI::root() . 'libraries/mint/forms/style.css');
 		$out = '';
 		switch($type)
 		{
