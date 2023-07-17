@@ -70,14 +70,18 @@ if ($params->get('unlinked')) {
     $db->setQuery($sql);
     $files_in_db = $db->loadColumn();
     $file_names = [];
+
+
+
+
     foreach ($files_in_folder as $file) {
-        $file_names[JFile::getName($file)] = JFile::getName($file);
-        if (!in_array(JFile::getName($file), $files_in_db)) {
+        $file_names[basename($file)] = basename($file);
+        if (!in_array(basename($file), $files_in_db)) {
             $temp_size = filesize($file);
             if (JFile::delete($file)) {
                 $size += $temp_size;
                 $lost_files++;
-                unset($file_names[JFile::getName($file)]);
+                unset($file_names[basename($file)]);
             }
         }
     }
