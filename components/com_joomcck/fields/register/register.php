@@ -30,6 +30,7 @@ class JFormFieldCregister extends CFormField
 			$this->group = JHTML::_('select.genericlist', $list, 'jform[fields][' . $this->id . '][group]', 'class="col-md-12"');
 		}
 
+
 		if(!$user->get('id'))
 		{
 			return $this->_display_input();
@@ -71,7 +72,7 @@ class JFormFieldCregister extends CFormField
 
 				return FALSE;
 			}
-			if($this->params->get('params.field_id_email') && !JMailHelper::isEmailAddress($record['fields'][$this->params->get('params.field_id_email')]))
+			if($this->params->get('params.field_id_email') && !JMailHelper::isEmailAddress((string)$record['fields'][$this->params->get('params.field_id_email')]))
 			{
 				$this->setError(JText::_('CR_ENTEREDINCORRECT'));
 

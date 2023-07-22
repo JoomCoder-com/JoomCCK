@@ -9,29 +9,29 @@
 defined('_JEXEC') or die();
 $default = new JRegistry($this->value);
 $user_params = JComponentHelper::getParams('com_users');
+
+
+
 ?>
-<style>
-#regfiled h4 {
-	margin-top: 0;
-}
-</style>
-<div class="row" id="regfiled">
+
+
+<div class="row g-4" id="regfiled">
 	<div class="col-md-<?php echo $this->params->get('params.loginform') ? 6 : 12 ?>">
 		<h4><?php echo JText::_('COM_USERS_REGISTRATION')?></h4>
-		<div class="row">
+		<div class="border rounded p-3">
 			<?php if($this->params->get('params.name')):?>
 			<label><?php echo JText::_('COM_USERS_REGISTER_NAME_LABEL')?></label>
-			<input class="col-md-12" type="text" name="jform[fields][<?php echo $this->id; ?>][name]" id="field_name_<?php echo $this->id; ?>" value="<?php echo $default->get('name')?>">
+			<input class="form-control" type="text" name="jform[fields][<?php echo $this->id; ?>][name]" id="field_name_<?php echo $this->id; ?>" value="<?php echo $default->get('name')?>">
 			<?php endif;?>
 
 			<?php if($this->params->get('params.loginname')):?>
 			<label><?php echo JText::_('COM_USERS_REGISTER_USERNAME_LABEL')?></label>
-			<input class="col-md-12" type="text" name="jform[fields][<?php echo $this->id; ?>][username]" id="field_username_<?php echo $this->id; ?>" value="<?php echo $default->get('username')?>">
+			<input class="form-control" type="text" name="jform[fields][<?php echo $this->id; ?>][username]" id="field_username_<?php echo $this->id; ?>" value="<?php echo $default->get('username')?>">
 			<?php endif;?>
 
 			<?php if(!$this->params->get('params.field_id_email')):?>
 			<label><?php echo JText::_('COM_USERS_REGISTER_EMAIL1_LABEL')?></label>
-			<input class="col-md-12" type="text" name="jform[fields][<?php echo $this->id; ?>][email]" id="field_email_<?php echo $this->id; ?>" value="<?php echo $default->get('email')?>">
+			<input class="form-control" type="text" name="jform[fields][<?php echo $this->id; ?>][email]" id="field_email_<?php echo $this->id; ?>" value="<?php echo $default->get('email')?>">
 			<?php endif;?>
 
 			<?php if($this->group):?>
@@ -39,9 +39,9 @@ $user_params = JComponentHelper::getParams('com_users');
 			<?php echo $this->group;?>
 			<?php endif;?>
 
-			<label><?php echo JText::_('COM_USERS_REGISTER_PASSWORD1_LABEL')?></label>
-			<input class="col-md-12" type="password" name="jform[fields][<?php echo $this->id; ?>][pass]" id="field_pass_<?php echo $this->id; ?>" value="<?php echo $default->get('pass')?>">
-			<div class="small">
+			<label><?php echo JText::_('COM_USERS_PROFILE_PASSWORD1_LABEL')?></label>
+			<input class="form-control" type="password" name="jform[fields][<?php echo $this->id; ?>][pass]" id="field_pass_<?php echo $this->id; ?>" value="<?php echo $default->get('pass')?>">
+			<div class="text-muted">
 				<?php if($user_params->get('minimum_integers')): ?>
 					<?php echo JText::plural('CR_PASS_INT_N', $user_params->get('minimum_integers')); ?>
 				<?php endif;?>
@@ -56,23 +56,23 @@ $user_params = JComponentHelper::getParams('com_users');
 				<?php endif;?>
 			</div>
 
-			<label><?php echo JText::_('COM_USERS_REGISTER_PASSWORD2_LABEL')?></label>
-			<input class="col-md-12" type="password" name="jform[fields][<?php echo $this->id; ?>][pass2]" id="field_pass_2<?php echo $this->id; ?>" value="<?php echo $default->get('pass2')?>">
+			<label><?php echo JText::_('COM_USERS_PROFILE_PASSWORD2_LABEL')?></label>
+			<input class="form-control" type="password" name="jform[fields][<?php echo $this->id; ?>][pass2]" id="field_pass_2<?php echo $this->id; ?>" value="<?php echo $default->get('pass2')?>">
 		</div>
 	</div>
 	<?php if($this->params->get('params.loginform')):?>
 		<div class="col-md-6">
 			<h4><?php echo JText::_('JLOGIN')?></h4>
-			<div class="row">
+			<div class="border rounded p-3">
 				<?php if(!$this->params->get('params.field_id_email')):?>
 				<label><?php echo JText::_('CR_LOGIN')?></label>
-				<input class="col-md-12" type="text" name="jform[fields][<?php echo $this->id; ?>][login]" id="field_login_<?php echo $this->id; ?>" value="<?php echo $default->get('login')?>">
+				<input class="form-control" type="text" name="jform[fields][<?php echo $this->id; ?>][login]" id="field_login_<?php echo $this->id; ?>" value="<?php echo $default->get('login')?>">
 				<?php else:?>
 					<p><?php echo JText::sprintf('CR_EMAILASLOGIN', '<span class="label" id="regloginemail'.$this->id.'"></span>')?></p>
 				<?php endif;?>
 
-				<label><?php echo JText::_('COM_USERS_REGISTER_PASSWORD1_LABEL')?></label>
-				<input class="col-md-12" type="password" name="jform[fields][<?php echo $this->id; ?>][pass3]" id="field_pass_3<?php echo $this->id; ?>" value="<?php echo $default->get('pass3')?>">
+				<label><?php echo JText::_('COM_USERS_PROFILE_PASSWORD1_LABEL')?></label>
+				<input class="form-control" type="password" name="jform[fields][<?php echo $this->id; ?>][pass3]" id="field_pass_3<?php echo $this->id; ?>" value="<?php echo $default->get('pass3')?>">
 			</div>
 		</div>
 	<?php endif;?>
