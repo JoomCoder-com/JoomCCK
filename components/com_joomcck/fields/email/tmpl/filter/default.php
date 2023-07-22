@@ -10,7 +10,7 @@ defined('_JEXEC') or die();
 ?>
 
 <div class="input text" id="flt_div<?php echo $this->id;?>">
-<input autocomplete="off" id="flt<?php echo $module.$this->id;?>" type="text" name="filters[<?php echo $this->key;?>]"
+<input class="form-control" autocomplete="off" id="flt<?php echo $module.$this->id;?>" type="text" name="filters[<?php echo $this->key;?>]"
 	data-autocompleter-default="<?php echo $this->value;?>"
 	value="<?php echo $this->value;?>"></div>
 
