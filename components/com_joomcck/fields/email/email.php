@@ -18,6 +18,10 @@ require_once JPATH_ROOT . '/components/com_joomcck/library/php/fields/joomcckfie
 class JFormFieldCEmail extends CFormField
 {
 
+	public $author;
+	public $url;
+
+
 	public function getInput()
 	{
 		$document = JFactory::getDocument();
