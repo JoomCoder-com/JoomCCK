@@ -512,37 +512,10 @@ class JFormFieldCGeo extends CFormField
 				'icon'   => JURI::root() . 'components/com_joomcck/fields/geo/icons/fax.png',
 				'preg'   => '[0-9\(\)\. \-\+\#]*'
 			),
-			'icq'    => array(
-				'label'  => JText::_('G_ICQ'),
-				'patern' => '<a href="http://www.icq.com/people/[VALUE]#pager">[VALUE]</a>',
-				'icon'   => JURI::root() . 'components/com_joomcck/fields/geo/icons/icq.png',
-				'preg'   => '[0-9]*'
-			),
 			'skype'  => array(
 				'label'  => JText::_('G_SKYPE'),
 				'patern' => '<a href="skype:[VALUE]?call">[VALUE]</a>',
 				'icon'   => 'http://mystatus.skype.com/smallicon/[VALUE]'
-			),
-			'google' => array(
-				'label'  => JText::_('G_GTALK'),
-				'patern' => '[VALUE]',
-				'icon'   => JURI::root() . 'components/com_joomcck/fields/geo/icons/google.png'
-			),
-			'yahoo'  => array(
-				'label'  => JText::_('G_YAHOOMSG'),
-				'patern' => '<a href="ymsgr:sendim?[VALUE]">[VALUE]</a>',
-				'icon'   => JURI::root() . 'components/com_joomcck/fields/geo/icons/yahoo.png'
-			),
-			'msn'    => array(
-				'label'  => JText::_('G_MSN'),
-				'patern' => '<a href="msnim:chat?contact=[VALUE]">[VALUE]</a>',
-				'icon'   => JURI::root() . 'components/com_joomcck/fields/geo/icons/msn.png',
-				'filter' => FILTER_VALIDATE_EMAIL
-			),
-			'aol'    => array(
-				'label'  => JText::_('G_AOL'),
-				'patern' => '<a href="aim:goim?screenname=[VALUE]">[VALUE]</a>',
-				'icon'   => JURI::root() . 'components/com_joomcck/fields/geo/icons/aol.png'
 			)
 		);
 
