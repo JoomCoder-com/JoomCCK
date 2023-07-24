@@ -30,10 +30,18 @@
 
 	<field id="ucatid" name="ucatid" type="meusercategories" required="true" label="JFIELD_USERCATEGORIES_LABEL"  />
 
-	<field id="ctime" name="ctime" type="calendar" filter="user_utc" format="%Y-%m-%d %H:%M:%S"/>
-	<field id="extime" name="extime" type="calendar" label="JGLOBAL_FIELD_PUBLISH_DOWN_LABEL" description="JGLOBAL_FIELD_PUBLISH_DOWN_DESC" class="form-control" format="%Y-%m-%d %H:%M:%S" size="22" filter="user_utc" />
-	<field id="ftime" name="ftime" type="calendar" label="JGLOBAL_FIELD_FEATURED_DOWN_LABEL" description="JGLOBAL_FIELD_FEATURED_DOWN_DESC" class="form-control" format="%Y-%m-%d %H:%M:%S" size="22" filter="user_utc" />
-	<field id="mtime" name="mtime" type="calendar" filter="user_utc"/>
+	<field id="ctime" name="ctime" type="calendar" translateformat="true"
+		   showtime="true"
+		   filter="user_utc"/>
+	<field id="extime" name="extime" type="calendar" label="JGLOBAL_FIELD_PUBLISH_DOWN_LABEL" description="JGLOBAL_FIELD_PUBLISH_DOWN_DESC" class="form-control" translateformat="true"
+		   showtime="true"
+		   filter="user_utc"/>
+	<field id="ftime" name="ftime" type="calendar" label="JGLOBAL_FIELD_FEATURED_DOWN_LABEL" description="JGLOBAL_FIELD_FEATURED_DOWN_DESC" class="form-control" translateformat="true"
+		   showtime="true"
+		   filter="user_utc"/>
+	<field id="mtime" name="mtime" type="calendar" translateformat="true"
+		   showtime="true"
+		   filter="user_utc"/>
 
 	<field id="hits" name="hits" type="text" label="JFIELD_HITS_LABEL" description="JFIELD_HITS_DESC" class="form-control" size="10" />
 	<field id="votes" name="votes" type="text" label="JFIELD_VOTES_LABEL" description="JFIELD_VOTES_DESC" class="form-control" size="10" />

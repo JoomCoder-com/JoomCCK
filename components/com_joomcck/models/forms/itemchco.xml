@@ -10,10 +10,18 @@
 		<option value="0">JNO</option>
 		<option value="1">JYES</option>
 	</field>
-	<field id="ctime" name="ctime" type="calendar" label="CCTIME" filter="user_utc" format="%Y-%m-%d %H:%M:%S"/>
-	<field id="extime" name="extime" type="calendar" label="CEXTIME" description="JGLOBAL_FIELD_PUBLISH_DOWN_DESC" class="form-control" format="%Y-%m-%d %H:%M:%S" size="22" filter="user_utc" />
-	<field id="ftime" name="ftime" type="calendar" label="CFTIME" description="JGLOBAL_FIELD_FEATURED_DOWN_DESC" class="form-control" format="%Y-%m-%d %H:%M:%S" size="22" filter="user_utc" />
-	<field id="mtime" name="mtime" type="calendar" label="CMTIME" filter="user_utc"/>
+	<field id="ctime" name="ctime" type="calendar" label="CCTIME" translateformat="true"
+		   showtime="true"
+		   filter="user_utc"/>
+	<field id="extime" name="extime" type="calendar" label="CEXTIME" description="JGLOBAL_FIELD_PUBLISH_DOWN_DESC" translateformat="true"
+		   showtime="true"
+		   filter="user_utc"/>
+	<field id="ftime" name="ftime" type="calendar" label="CFTIME" description="JGLOBAL_FIELD_FEATURED_DOWN_DESC" class="form-control" translateformat="true"
+		   showtime="true"
+		   filter="user_utc"/>
+	<field id="mtime" name="mtime" type="calendar" label="CMTIME" translateformat="true"
+		   showtime="true"
+		   filter="user_utc"/>
 	<field name="langs" type="language" default="-1" label="JFIELD_LANGUAGE_LABEL" description="JFIELD_LANGUAGE_DESC" class="form-select">
 		<option value="-1">NOCHANGE</option>
 		<option value="*">JALL</option>
