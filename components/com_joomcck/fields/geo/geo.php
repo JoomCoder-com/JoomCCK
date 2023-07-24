@@ -17,6 +17,8 @@ class JFormFieldCGeo extends CFormField
 
 	public $map_key;
 	public $email;
+	public $markers;
+	public $section_id;
 
 
 	public function getInput()
