@@ -579,10 +579,6 @@ class JFormFieldCGeo extends CFormField
 				'label' => JText::_('G_LINKIN'),
 				'icon'  => JURI::root() . 'components/com_joomcck/fields/geo/icons/linkedin.png'
 			),
-			'google'      => array(
-				'label' => JText::_('G_GOOGLEPLUS'),
-				'icon'  => JURI::root() . 'components/com_joomcck/fields/geo/icons/google-plus.png'
-			),
 			'youtube'     => array(
 				'label' => JText::_('G_YOUTUBE'),
 				'icon'  => JURI::root() . 'components/com_joomcck/fields/geo/icons/youtube.png'
