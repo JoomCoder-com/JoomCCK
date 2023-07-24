@@ -206,7 +206,7 @@ $lang = $lang[0];
 	<script type="text/javascript">
 		<?php
 		$style = 'null';
-		if(substr($this->params->get('params.map_style'), -5) == '.json')
+		if(substr($this->params->get('params.map_style',''), -5) == '.json')
 		{
 			$style = file_get_contents(JPATH_ROOT . '/components/com_joomcck/library/js/mapstyles/' . $this->params->get('params.map_style'));
 		}

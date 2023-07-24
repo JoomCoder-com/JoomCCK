@@ -15,6 +15,10 @@ JHTML::_('bootstrap.tooltip', '*[rel^="tooltip"]');
 class JFormFieldCGeo extends CFormField
 {
 
+	public $map_key;
+	public $email;
+
+
 	public function getInput()
 	{
 		if(in_array($this->params->get('params.map_marker'), $this->user->getAuthorisedViewLevels()))
