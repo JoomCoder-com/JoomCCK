@@ -174,9 +174,11 @@ if(in_array($this->params->get('params.qr_code_address'), array($client, 3))):
 	}
 
 	if(!empty($mecard)) :
-		$url = 'http://chart.apis.google.com/chart?cht=qr&chs=' . $w . 'x' . $w . '&chl=MECARD:' . implode(';', $mecard) . ';;';
+		$url = 'https://chart.apis.google.com/chart?cht=qr&chs=' . $w . 'x' . $w . '&chl=MECARD:' . implode(';', $mecard) . ';;';
 		?>
-		<div class="qr-image qr-image-address"><?php echo JHtml::image($url, JText::_('G_ADDRESSQR'), array('width' => $w, 'height' => $w));?></div>
+		<div class="qr-image qr-image-address">
+            <img src="<?php echo $url ?>" title="<?php echo JText::_('G_ADDRESSQR') ?>" alt="<?php echo JText::_('G_ADDRESSQR') ?>" />
+        </div>
 	<?php endif;?>
 <?php endif;
 
@@ -277,7 +279,9 @@ if(
 
 if(in_array($this->params->get('params.qr_code_geo'), array($client, 3)) && isset($this->value['position']['lat']) && isset($this->value['position']['lng']) && $this->value['position']['lat'] && $this->value['position']['lng']):
 	$w = $this->params->get('params.qr_width_geo', 120);
-	$url = 'http://chart.apis.google.com/chart?cht=qr&chs=' . $w . 'x' . $w . '&chl=geo:' . $this->value['position']['lat'] . ',' . $this->value['position']['lng'];
+	$url = 'https://chart.apis.google.com/chart?cht=qr&chs=' . $w . 'x' . $w . '&chl=geo:' . $this->value['position']['lat'] . ',' . $this->value['position']['lng'];
 	?>
-	<div class="qr-image qr-image-geo"><?php echo JHtml::image($url, JText::_('G_LOCATIONQR'), array('width' => $w, 'height' => $w));?></div>
+	<div class="qr-image qr-image-geo">
+        <img src="<?php echo $url ?>" title="<?php echo JText::_('G_LOCATIONQR') ?>" alt="<?php echo JText::_('G_LOCATIONQR') ?>" />
+    </div>
 <?php endif;
