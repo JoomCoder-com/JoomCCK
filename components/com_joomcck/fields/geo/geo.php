@@ -423,7 +423,7 @@ class JFormFieldCGeo extends CFormField
 
 	public function _input($group, $name, $type = 'text', $span = 12)
 	{
-		return sprintf('<input class="col-md-%d" id="f%d_%s_%s" type="%s" name="jform[fields][%d][%s][%s]" value="%s" %s />',
+		return sprintf('<input class="form-control col-md-%d" id="f%d_%s_%s" type="%s" name="jform[fields][%d][%s][%s]" value="%s" %s />',
 			$span, $this->id, $group, $name, $type, $this->id, $group, $name,
 			(isset($this->value[$group][$name]) ? $this->value[$group][$name] : ($group == 'links' ? 'http://' : '')),
 			($this->params->get("params.{$group}.{$name}.req") ? ' class="required" required="required"' : NULL));

@@ -78,7 +78,7 @@ $lang = $lang[0];
 			<div class="row">
 				<?php if($this->params->get('params.address.address1.show', 1)):?>
 					<div class="col-md-12">
-						<small><?php echo $this->_label('address', 'address1', $address['address1']['label']);?></small><br>
+						<small><?php echo $this->_label('address', 'address1', $address['address1']['label']);?></small>
 						<?php echo  $this->_input('address', 'address1'); ?>
 					</div>
 				<?php endif;?>
@@ -88,7 +88,7 @@ $lang = $lang[0];
 			<div class="row">
 				<?php if($this->params->get('params.address.address2.show', 1)):?>
 					<div class="col-md-12">
-						<small><?php echo $this->_label('address', 'address2', $address['address2']['label']);?></small><br>
+						<small><?php echo $this->_label('address', 'address2', $address['address2']['label']);?></small>
 						<?php echo  $this->_input('address', 'address2'); ?>
 					</div>
 				<?php endif;?>
@@ -98,20 +98,20 @@ $lang = $lang[0];
 			<div class="row">
 				<?php if($this->params->get('params.address.company.show', 1)):?>
 					<div class="col-md-<?php echo ($this->params->get('params.address.person.show', 1) ? 6 : 12) ?>">
-						<small><?php echo $this->_label('address', 'company', $address['company']['label']);?></small><br>
+						<small><?php echo $this->_label('address', 'company', $address['company']['label']);?></small>
 						<?php echo  $this->_input('address', 'company'); ?>
 					</div>
 				<?php endif;?>
 				<?php if($this->params->get('params.address.person.show', 1)):?>
 					<div class="col-md-<?php echo ($this->params->get('params.address.company.show', 1) ? 6 : 12) ?>">
-						<small><?php echo $this->_label('address', 'person', $address['person']['label']);?></small><br>
+						<small><?php echo $this->_label('address', 'person', $address['person']['label']);?></small>
 						<?php echo  $this->_input('address', 'person'); ?>
 					</div>
 				<?php endif;?>
 			</div>
 		<?php endif;?>
 		<?php if(in_array($this->params->get('params.map_marker'), $this->user->getAuthorisedViewLevels())):?>
-			<br/>
+
 			<button class="btn btn- btn-light border" type="button" id="toadr_loc<?php echo $this->id; ?>"><?php echo JText::_('G_ADDRESSFROMMARKER');?></button>
 
 			<button class="btn btn-sm btn-light border" type="button" id="adr_loc<?php echo $this->id; ?>"><?php echo JText::_('G_MARKERFROMADDRESS');?></button>
@@ -121,7 +121,7 @@ $lang = $lang[0];
 <?php endif;?>
 
 <?php if(in_array($this->params->get('params.map_marker'), $this->user->getAuthorisedViewLevels())):?>
-	<h5>
+	<h5 class="mt-2">
 		<?php if(!$this->params->get('params.map_require')):?>
 		<button class="btn btn-sm btn-danger float-end hide" id="rmp<?php echo $this->id?>" type="button"><?php echo JText::_('G_REMOVEPOSITION');?></button>
 		<?php endif; ?>
@@ -144,11 +144,13 @@ $lang = $lang[0];
 	</style>
 	<div style="margin-bottom: 15px; position: relative;">
 		<div id="locationField">
-			<input id="autocomplete<?php echo $this->id; ?>" placeholder="<?php echo JText::_('G_ENTERCITY'); ?>" type="text" />
+			<input class="form-control" id="autocomplete<?php echo $this->id; ?>" placeholder="<?php echo JText::_('G_ENTERCITY'); ?>" type="text" />
 		</div>
 		<span style="margin-left: 298px">
-			<b>OR</b>
-			<button class="btn" type="button" id="cur_loc<?php echo $this->id; ?>""><?php echo JText::_('G_MARKERCURRENTLOCATION');?></button>
+			<b class="me-3">OR</b>
+			<button class="btn btn-light border" type="button" id="cur_loc<?php echo $this->id; ?>">
+            <?php echo JText::_('G_MARKERCURRENTLOCATION');?>
+            </button>
 		</span>
 	</div>
 	<div id="map_canvas_<?php echo $this->id;?>" style="width:<?php echo $this->params->get('params.map_width', '100%');?>; height:<?php echo $this->params->get('params.map_height', '200px');?>"></div>
