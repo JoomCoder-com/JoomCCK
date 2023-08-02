@@ -106,9 +106,6 @@
         <copy todir="${releasespath}/build/modules/mod_joomcck_userstatistics">
             <fileset dir="./modules/mod_joomcck_userstatistics"></fileset>
         </copy>
-        <copy todir="${releasespath}/build/modules/mod_joomcck_video">
-            <fileset dir="./modules/mod_joomcck_video"></fileset>
-        </copy>
 
         <!-- Plugin files -->
         <copy todir="${releasespath}/build/plugins/plg_content_glossary">
