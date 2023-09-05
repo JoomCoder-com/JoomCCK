@@ -12,7 +12,7 @@ defined('_JEXEC') or die();
 
 <?php echo HTMLFormatHelper::layout('navbar'); ?>
 
-<div class="page-header">
+<div class="page-header mb-3">
 	<h1>
 		<img src="<?php echo JUri::root(TRUE); ?>/components/com_joomcck/images/icons/import.png">
 		<?php echo JText::_('CIMPORT'); ?>

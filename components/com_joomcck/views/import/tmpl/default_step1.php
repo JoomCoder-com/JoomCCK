@@ -9,11 +9,25 @@
 
     defined('_JEXEC') || die();
 ?>
+
+<div class="alert alert-info mb-3">
+    <p>Import is a very sensitive and complicated process. Read carefully.</p>
+
+    <ul>
+        <li>Allowed formats are <b>.csv</b>, <b>.json</b> or compress it with <b>.zip</b></li>
+        <li><b>.csv</b> format is not stable, because no hard standard for CSV files. Try it. We recommend <b>.json</b> files for stable imports.</li>
+        <li>You may compress <b>.csv</b> or <b>.json</b> into <b>.zip</b> archive before upload.</li>
+        <li>You may include all the media files like <b>.jpg</b>, <b>.pdf</b>, ... in the same archive.</li>
+        <li>Only archive single <b>.csv</b> or <b>.json</b> files and only in root of archive not in a subfolder.</li>
+        <li>If you upload <b>.csv</b>, <b>.json</b> without archiving into <b>.zip</b>, and have any files like <b>.jpg</b>, <b>.pdf</b>, ..., you may upload them to the server to any folder. For instance <code>JOOMLA_ROOT/tmp</code></li>
+    </ul>
+</div>
+
 <?php $jsoncode = time();?>
 <ul class="nav nav-pills">
-	<li class="active"><a><?php echo JText::_('CIMPORTUPLOAD') ?></a></li>
-	<li><a><?php echo JText::_('CIMPORTCONFIG') ?></a></li>
-	<li><a><?php echo JText::_('CIMPORTFINISH') ?></a></li>
+	<li class="nav-item"><a class="nav-link active">1. <?php echo JText::_('CIMPORTUPLOAD') ?></a></li>
+	<li class="nav-item"><a class="nav-link">2. <?php echo JText::_('CIMPORTCONFIG') ?></a></li>
+	<li class="nav-item"><a class="nav-link">3. <?php echo JText::_('CIMPORTFINISH') ?></a></li>
 </ul>
 
 <div id="progress" class="progress progress-striped hide">
@@ -23,18 +37,8 @@
 	<div class="bar" style="width: 0%;"></div>
 </div>
 
-<hr>
 
-<p>Import is a very sensitive and complicated process. Read carefully.</p>
 
-<ul>
-    <li>Allowed formats are <b>.csv</b>, <b>.json</b> or compress it with <b>.zip</b></li>
-    <li><b>.csv</b> format is not stable, because no hard standard for CSV files. Try it. We recommend <b>.json</b> files for stable imports.</li>
-    <li>You may compress <b>.csv</b> or <b>.json</b> into <b>.zip</b> archive before upload.</li>
-    <li>You may include all the media files like <b>.jpg</b>, <b>.pdf</b>, ... in the same archive.</li>
-    <li>Only archive single <b>.csv</b> or <b>.json</b> files and only in root of archive not in a subfolder.</li>
-	<li>If you upload <b>.csv</b>, <b>.json</b> without archiving into <b>.zip</b>, and have any files like <b>.jpg</b>, <b>.pdf</b>, ..., you may upload them to the server to any folder. For instance <code>JOOMLA_ROOT/tmp</code></li>
-</ul>
 
 <script src="<?php echo JUri::root(true) ?>/media/com_joomcck/vendors/blueimp-file-upload/js/vendor/jquery.ui.widget.js"></script>
 <script src="<?php echo JUri::root(true) ?>/media/com_joomcck/vendors/blueimp-file-upload/js/jquery.iframe-transport.js"></script>
@@ -56,7 +60,7 @@
         <div class="control-group">
             <label class="control-label" for="type"><?php echo JText::_('CSECTION') ?></label>
             <div class="controls">
-                <select name="section_id">
+                <select name="section_id" class="form-select">
                     <?php echo JHtml::_('select.options', $this->sections, 'value', 'text', 0, true); ?>
                 </select>
             </div>
@@ -64,7 +68,7 @@
         <div class="control-group">
             <label class="control-label" for="type"><?php echo JText::_('CTYPE') ?></label>
             <div class="controls">
-                <select name="type_id">
+                <select name="type_id"  class="form-select">
                     <?php echo JHtml::_('select.options', $this->types, 'value', 'text', 0, true); ?>
                 </select>
             </div>
@@ -72,7 +76,7 @@
     <div class="control-group">
 		<label class="control-label" for="type"><?php echo JText::_('CCSVDELIMITER') ?></label>
 		<div class="controls">
-			<select name="delimiter">
+			<select name="delimiter"  class="form-select">
 				<option value=","><?php echo JText::_('CIMPORTDELCOMA') ?></option>
 				<option value=";"><?php echo JText::_('CIMPORTDELSEMI') ?></option>
 			</select>
@@ -90,9 +94,10 @@
 	</div>
 
 
-	<div class="form-actions">
-		<button class="float-end btn btn-primary" id="next-step" disabled="disabled"><?php echo JText::_('CNEXT') ?></button>
+	<div class="form-actions border rounded p-3 mb-4 d-flex justify-content-end">
+		<button class=" btn btn-primary" id="next-step" disabled="disabled"><?php echo JText::_('CNEXT') ?></button>
 	</div>
+    <div class="clearfix"></div>
 	<input type="hidden" name="key" value="<?php echo $jsoncode ?>">
 	<input type="hidden" name="step" value="2">
 </form>
