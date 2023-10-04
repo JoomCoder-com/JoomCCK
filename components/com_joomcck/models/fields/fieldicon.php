@@ -27,12 +27,13 @@ class JFormFieldFieldicon extends JFormField
 			$dir = JPATH_ROOT. DIRECTORY_SEPARATOR .$this->element['directory'];
 			$path = $this->element['directory'].'/';
 		}
-		$atr['onclick'] = "mrSetIcon{$this->fieldname}('')";
-		$html  = '<input type="hidden" name="'.$this->name.'" id="icon_param'.$this->fieldname.'" value="'.$this->value.'">';
-		$html .= '<div class="input-prepend clearfix">
-            <span class="add-on">'.JText::_('LTFILTERS').':</span>
-              <input id="icon_param_search" type="text" value="" >
-            </div><br>';
+
+		$html = '<div class="border p-3 rounded">';
+		$html  .= '<input type="hidden" name="'.$this->name.'" id="icon_param'.$this->fieldname.'" value="'.$this->value.'">';
+		$html .= '<div class="input-group mb-3">
+            <span class="input-group-text"><i class="fas fa-filter"></i> '.JText::_('LTFILTERS').'</span>
+              <input id="icon_param_search" class="form-control form-control-sm" type="text" value="" >
+            </div>';
 		$html .= '<script type="text/javascript">
          (function($){$(document).ready(function() {
            $("#icon_param_search").on("input", function (){
@@ -51,8 +52,8 @@ class JFormFieldFieldicon extends JFormField
 		</script>';
 		$html .= '<img id="icon_img'.$this->fieldname.'" align="absmiddle" src="'.JURI::root().
 			($this->value ? $path.$this->value : 'media/com_joomcck/blank.png').'"> <span id="icon_name'.$this->fieldname.'" class="icon_name">'.$this->value.'</span>';
-		$html .= ' '.JHTML::link('javascript:void(0)', 'Delete curent icon', $atr);
-		$html .= '<div style="clear:both"></div><div style="height:80px;width:300px;overflow-x:hidden;overflow-y:scroll">';	
+		$html .= ' <a class="btn btn-sm border bg-light" href="javascript:void(0)" title="Delete curent icon" onclick="mrSetIcon'.$this->fieldname.'(\'\')"><i class="fas fa-times"></i></a>';
+		$html .= '<div class="mt-3" style="clear:both"></div><div style="height:58px;width:100%;overflow-x:hidden;overflow-y:scroll">';
 		$html .= "<script type=\"text/javascript\">function mrSetIcon{$this->fieldname}(file){document.getElementById('icon_img".$this->fieldname."').src = '".JURI::root().$path."' + file;	document.getElementById('icon_name".$this->fieldname."').innerHTML = file;	document.getElementById('icon_param".$this->fieldname."').value = file;}</script>";
 		
 		$atr = array(
@@ -76,7 +77,8 @@ class JFormFieldFieldicon extends JFormField
 		    }
 		}
 		
-		$html .= '</div>';    
+		$html .= '</div>';
+		$html .= '</div>';
 		return $html;
 	}
 }
