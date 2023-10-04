@@ -27,14 +27,61 @@ $listDirn = $this->state->get('list.direction');
 
 	<?php echo HTMLFormatHelper::layout('search', $this); ?>
 
-	<div class="page-header">
+	<div class="mb-4 border-bottom pb-3">
 		<h1>
-			<img src="<?php echo JUri::root(TRUE); ?>/components/com_joomcck/images/icons/sections.png">
-			<?php echo JText::_('COB_SECTIONMANAGER'); ?>
+			<i class="fas fa-shapes text-muted"></i>
+			<?php echo JText::_('COB_APPS_MANAGER'); ?>
 		</h1>
+		<?php echo HTMLFormatHelper::layout('filters', $this); ?>
 	</div>
 
-	<?php echo HTMLFormatHelper::layout('filters', $this); ?>
+
+
+    <div id="joomscckAppsContainer ">
+
+	    <div class="row">
+		    <?php foreach($this->items as $i => $item) :
+			    $ordering   = ($listOrder == 'f.ordering');
+			    $canCheckin = $user->authorise('core.manage', 'com_checkin') || $item->checked_out == $user->get('id') || $item->checked_out == 0;
+			    $canChange  = TRUE;
+			    $item->params = new JRegistry($item->params);
+			    ?>
+
+            <div class="col-md-3 mb-3">
+
+                <div class="card shadow">
+
+                    <div class="card-body text-center">
+                        <h3>
+                            <a class="link-underline link-underline-opacity-0" href="<?php echo JRoute::_('index.php?option=com_joomcck&task=section.edit&id=' . (int)$item->id); ?>">
+                                <?php echo $this->escape($item->name); ?>
+                            </a>
+                            <small class="badge <?php echo($item->records ? ' border-color-primary' : ' bg-light text-dark border') ?>">
+                                <?php echo $item->records ?>
+                            </small>
+                        </h3>
+                    </div>
+
+                    <div class="card-footer">
+	                    <?php echo JHtml::_('jgrid.published', $item->published, $i, 'sections.', $canChange); ?>
+	                    <?php if($item->checked_out) : ?>
+		                    <?php echo JHtml::_('jgrid.checkedout', $i, $item->checked_out, $item->checked_out_time, 'sections.', $canCheckin); ?>
+	                    <?php endif; ?>
+                    </div>
+
+                </div>
+
+
+            </div>
+
+
+
+		    <?php endforeach; ?>
+        </div>
+
+
+    </div>
+
 
 	<?php echo HTMLFormatHelper::layout('items'); ?>
 
@@ -79,9 +126,7 @@ $listDirn = $this->state->get('list.direction');
 				</td>
 				<td class="has-context">
 					<div class="float-start">
-						<?php if($item->checked_out) : ?>
-							<?php echo JHtml::_('jgrid.checkedout', $i, $item->checked_out, $item->checked_out_time, 'sections.', $canCheckin); ?>
-						<?php endif; ?>
+
 						<a href="<?php echo JRoute::_('index.php?option=com_joomcck&task=section.edit&id=' . (int)$item->id); ?>">
 							<?php echo $this->escape($item->name); ?>
 						</a>
