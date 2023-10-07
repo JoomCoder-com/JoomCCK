@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <config>
 	<fieldset name="global" label="XML_FSETLBL_CNF_GLOBAL" description="XML_FSETDESC_CNF_GLOBAL" addfieldpath="/libraries/mint/forms/fields">
-		<field class="form-select" name="general_upload" type="medirectories" label="XML_FIELD_LABEL_CNF_GENERAL_UPLOAD" required="true" default="uploads" description="XML_FIELD_DESCR_CNF_GENERAL_UPLOAD" hide_default="1" directory="" relative_path="1"
-			relative_path_value="root" levels="1" invite_label="Select Secure Dir" exclude="administrator|media|.svn|.settings|CVS|tmp|cache|components|libraries|plugins|templates|includes|languge|modules|xmlrpc|language|logs" />
+		<field class="form-control" name="general_upload" type="text" label="XML_FIELD_LABEL_CNF_GENERAL_UPLOAD" required="true" default="media/com_joomcck/uploads" description="XML_FIELD_DESCR_CNF_GENERAL_UPLOAD" />
 		<field name="folder_format" label="XML_FIELD_LABEL_CNF_FOLDERFORMAT" type="list" default="Y-m" description="XML_FIELD_DESCR_CNF_FOLDERFORMATDESCR">
 			<option value="Y">YYYY</option>
 			<option value="Y-m">YYYY-MM</option>
