@@ -1,5 +1,5 @@
 {
-    "name": "JoomCoder/joomcck",
+    "name": "joomcoder/joomcck",
     "type": "library",
     "version": "1.0",
     "authors": [
@@ -19,8 +19,5 @@
             "src/"
         ],
         "psr-4": {"Joomcck\\": "src/"}
-    },
-    "scripts": {
-
     }
 }
