@@ -18,7 +18,7 @@ class Mint
 		if(empty($text))
 			return '';
 
-		$text = JFilterInput::getInstance([], [], 1, 1)->clean(strip_tags($text), 'cmd');
+		$text = JFilterInput::getInstance([], [], 1, 1)->clean(strip_tags($text), 'string');
 
 		$key   = strtoupper($text);
 		$trans = JText::_($key, $jsSafe, $interpretBackSlashes, $script);
