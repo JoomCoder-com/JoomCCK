@@ -64,7 +64,7 @@ $fieldId = (int) rand(1,2000);
         <?php if(!empty($options['suggestion_url'])): ?>
         load: function(query, callback) {
 
-            var url = '<?php echo JUri::root().$options['suggestion_url'] ?>';
+            var url = '<?php echo \Joomla\CMS\Uri\Uri::root().$options['suggestion_url'] ?>';
             fetch(url)
                 .then(response => response.json())
                 .then(json => {
@@ -139,7 +139,7 @@ $fieldId = (int) rand(1,2000);
         $.ajax({
             dataType: 'json',
             type: 'get', async: false,
-            url: '<?php echo JUri::root().$options['onAdd'] ?>',
+            url: '<?php echo \Joomla\CMS\Uri\Uri::root().$options['onAdd'] ?>',
             data: {tid: id, text: text}
         }).done(function(json) {
             console.log(json);
@@ -160,7 +160,7 @@ $fieldId = (int) rand(1,2000);
         $.ajax({
             dataType: 'json',
             type: 'get', async: false,
-            url: '<?php echo JUri::root().$options['onRemove'] ?>',
+            url: '<?php echo \Joomla\CMS\Uri\Uri::root().$options['onRemove'] ?>',
             data: {tid: value}
         }).done(function(json) {
             //console.log(1);

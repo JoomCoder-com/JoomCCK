@@ -62,7 +62,7 @@ class JFormFieldMEPictureresize extends JFormFieldList
 					' value="'.htmlspecialchars($option->value, ENT_COMPAT, 'UTF-8').'"'
 					.$checked.$class.$onclick.$disabled.'/>';
 
-			$html[] = '<label for="'.$this->id.$i.'"'.$class.'>'.JText::alt($option->text, preg_replace('/[^a-zA-Z0-9_\-]/', '_', $this->fieldname)).'</label>';
+			$html[] = '<label for="'.$this->id.$i.'"'.$class.'>'.\Joomla\CMS\Language\Text::alt($option->text, preg_replace('/[^a-zA-Z0-9_\-]/', '_', $this->fieldname)).'</label>';
 		}
 
 		// End the radio field output.
@@ -90,7 +90,7 @@ class JFormFieldMEPictureresize extends JFormFieldList
 			}
 
 			// Create a new option object based on the <option /> element.
-			$tmp = JHtml::_('select.option', (string) $option['value'], JText::_(trim((string) $option)), 'value', 'text', ((string) $option['disabled']=='true'));
+			$tmp = \Joomla\CMS\HTML\HTMLHelper::_('select.option', (string) $option['value'], \Joomla\CMS\Language\Text::_(trim((string) $option)), 'value', 'text', ((string) $option['disabled']=='true'));
 
 			// Set some option attributes.
 			$tmp->class = (string) $option['class'];

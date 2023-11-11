@@ -17,7 +17,7 @@ $categories = $cats_model->getItems();
 $options = array();
 if($this->params->get('submission.first_category', 0))
 {
-	$options[] = JHtml::_('select.option', 0, $this->section->name, 'id', 'title');
+	$options[] = \Joomla\CMS\HTML\HTMLHelper::_('select.option', 0, $this->section->name, 'id', 'title');
 }
 
 $limit = $this->allow_multi ? $this->type->params->get('submission.multi_max_num', 1) : 1;
@@ -26,7 +26,7 @@ $options = array_merge($options, getCategoryOptions($categories, $this->type, $t
 
 if(!$options)
 {
-	echo JText::_('CSECTIONNOCATEGORIES');
+	echo \Joomla\CMS\Language\Text::_('CSECTIONNOCATEGORIES');
 	return;
 }
 
@@ -45,16 +45,16 @@ $attr .= ' class="form-select required"';
 
 if($limit > 1)
 {
-	echo '<div><small>'.JText::sprintf('CSELECTLIMIT', $limit).'</small></div>';
+	echo '<div><small>'.\Joomla\CMS\Language\Text::sprintf('CSELECTLIMIT', $limit).'</small></div>';
 }	
 
 if(!$this->default_categories) $this->default_categories = 0;
 
 if($this->catsel_params->get('tmpl_params.first_element')) {
-	array_unshift($options, JHtml::_('select.option', '', JText::_($this->catsel_params->get('tmpl_params.first_element')), 'id', 'title'));
+	array_unshift($options, \Joomla\CMS\HTML\HTMLHelper::_('select.option', '', \Joomla\CMS\Language\Text::_($this->catsel_params->get('tmpl_params.first_element')), 'id', 'title'));
 }
 
-echo  JHtml::_('select.genericlist', $options, 'jform[category][]', $attr, 'id', 'title', $this->default_categories);
+echo  \Joomla\CMS\HTML\HTMLHelper::_('select.genericlist', $options, 'jform[category][]', $attr, 'id', 'title', $this->default_categories);
 
 
 function getCategoryOptions($categories, $type, $that, $fc = 0)
@@ -80,7 +80,7 @@ function getCategoryOptions($categories, $type, $that, $fc = 0)
 		if($cat->params->get('submission', 1))
 		{
 			$disabled = in_array($cat->id, $that->not_allow_cats) && $type->params->get('category_limit.show_restricted') ? true : false;
-			$options[] = JHtml::_('select.option', $cat->id, str_repeat('|-- ', ($cat->level - 1 + $fc)).$cat->title, 'id', 'title', $disabled);
+			$options[] = \Joomla\CMS\HTML\HTMLHelper::_('select.option', $cat->id, str_repeat('|-- ', ($cat->level - 1 + $fc)).$cat->title, 'id', 'title', $disabled);
 		}
 		else	
 		{

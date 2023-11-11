@@ -21,11 +21,11 @@ class CTmpl
 		$json1 = $config . $prefix . $template[0] . '.' .@$template[1] .  '.json';
 		$json3 = $config . $prefix . $template[0] . '.json';
 
-		if(JFile::exists($json1))
+		if(\Joomla\CMS\Filesystem\File::exists($json1))
 		{
 			$file = file_get_contents($json1);
 		}
-		elseif(JFile::exists($json3))
+		elseif(\Joomla\CMS\Filesystem\File::exists($json3))
 		{
 			$file = file_get_contents($json3);
 		}
@@ -36,7 +36,7 @@ class CTmpl
 			$file = array();
 		}
 		var_dump($json1, $json3);
-		return new JRegistry($file);
+		return new \Joomla\Registry\Registry($file);
 	}
 	static public function prepareTemplate($type, $name, &$params)
 	{
@@ -44,7 +44,7 @@ class CTmpl
 
 		if(!$template)
 		{
-			JFactory::getApplication()->enqueueMessage(JText::_('CTEMPLATENOTFOUND').': '.$name,'warning');
+			\Joomla\CMS\Factory::getApplication()->enqueueMessage(\Joomla\CMS\Language\Text::_('CTEMPLATENOTFOUND').': '.$name,'warning');
 		}
 
 		$template = explode('.', $template);
@@ -73,15 +73,15 @@ class CTmpl
 		}
 
 		$url = str_replace(array(JPATH_ROOT, DIRECTORY_SEPARATOR), array(JURI::root(TRUE), '/'), $dir);
-		$doc = JFactory::getDocument();
+		$doc = \Joomla\CMS\Factory::getDocument();
 		$css = $dir.$type.$template[0].'.css';
-		if(JFile::exists($css))
+		if(\Joomla\CMS\Filesystem\File::exists($css))
 		{
 			$doc->addStyleSheet($url.$type. $template[0] . '.css');
 		}
 
 		$js = $dir . $type . $template[0] . '.js';
-		if(JFile::exists($js))
+		if(\Joomla\CMS\Filesystem\File::exists($js))
 		{
 			$doc->addScript($url.$type. $template[0] . '.js');
 		}
@@ -98,13 +98,13 @@ class CTmpl
 		echo $json3.'<br>';
 		echo $json4.'<br>';
 		*/
-		if(JFile::exists($json1))
+		if(\Joomla\CMS\Filesystem\File::exists($json1))
 		{
 	
 			$file = file_get_contents($json1);
 
 		}
-		elseif(JFile::exists($json3))
+		elseif(\Joomla\CMS\Filesystem\File::exists($json3))
 		{
 			$file = file_get_contents($json3);
 		}
@@ -115,6 +115,6 @@ class CTmpl
 
 			$file = array();
 		}
-		return new JRegistry($file);
+		return new \Joomla\Registry\Registry($file);
 	}
 }

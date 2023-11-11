@@ -10,7 +10,7 @@
 defined( '_JEXEC' ) or die( 'Restricted access');
 jimport('joomla.table.table');
 
-class JoomcckTableUsercategory extends JTable
+class JoomcckTableUsercategory extends \Joomla\CMS\Table\Table
 {
 	public function __construct( &$_db ) {
 		parent::__construct( '#__js_res_category_user', 'id', $_db );
@@ -23,7 +23,7 @@ class JoomcckTableUsercategory extends JTable
 			if (key_exists('params', $array )) {
 				if(is_array($array['params']))
 				{
-					$registry = new JRegistry();
+					$registry = new \Joomla\Registry\Registry();
 					$registry->loadArray($array['params']);
 					$array['params'] = (string) $registry;
 				}
@@ -35,8 +35,8 @@ class JoomcckTableUsercategory extends JTable
     
 	public function check()
 	{
-		$this->user_id = JFactory::getUser()->get('id');
-        $date = JFactory::getDate()->toSql();
+		$this->user_id = \Joomla\CMS\Factory::getUser()->get('id');
+        $date = \Joomla\CMS\Factory::getDate()->toSql();
 
 		if($this->ctime <= 0){
 		    $this->ctime = $date;

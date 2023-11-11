@@ -24,7 +24,7 @@ class JoomcckModelPacksections extends MModelList
 
 	protected function populateState($ordering = null, $direction = null)
 	{
-		$app = JFactory::getApplication('administrator');
+		$app = \Joomla\CMS\Factory::getApplication('administrator');
 		$pack = $app->getUserStateFromRequest($this->context . '.pack', 'filter_pack', '', 'int');
 		$this->setState('pack', $pack);
 
@@ -78,7 +78,7 @@ class JoomcckModelPacksections extends MModelList
 		$result = $db->loadObjectList('section_id');
 
 		foreach ($result as &$res) {
-			$res->params = new JRegistry($res->params);
+			$res->params = new \Joomla\Registry\Registry($res->params);
 		}
 
 		return $result;

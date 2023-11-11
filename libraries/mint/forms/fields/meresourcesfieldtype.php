@@ -19,8 +19,8 @@ class JFormFieldMeresourcesfieldtype extends JFormMEFieldList
 	
 	protected function getOptions()
 	{
-		JHtml::addIncludePath(JPATH_ROOT. DIRECTORY_SEPARATOR .'administrator'. DIRECTORY_SEPARATOR .'components'. DIRECTORY_SEPARATOR .'com_joomcck'. DIRECTORY_SEPARATOR .'library'. DIRECTORY_SEPARATOR .'php'. DIRECTORY_SEPARATOR .'html');
-		$sections = JHtml::_('joomcck.fieldtypes', true);
+		\Joomla\CMS\HTML\HTMLHelper::addIncludePath(JPATH_ROOT. DIRECTORY_SEPARATOR .'administrator'. DIRECTORY_SEPARATOR .'components'. DIRECTORY_SEPARATOR .'com_joomcck'. DIRECTORY_SEPARATOR .'library'. DIRECTORY_SEPARATOR .'php'. DIRECTORY_SEPARATOR .'html');
+		$sections = \Joomla\CMS\HTML\HTMLHelper::_('joomcck.fieldtypes', true);
 		
 		return $sections;
 	}

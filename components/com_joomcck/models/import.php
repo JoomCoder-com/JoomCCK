@@ -14,14 +14,14 @@ class JoomcckModelImport extends MModelList
 	public function getPresets()
 	{
 		$this->_db->setQuery("SELECT id as value, name as text FROM #__js_res_import WHERE section_id = " .
-			JFactory::getApplication()->input->get('section_id') . " AND user_id = " . JFactory::getUser()->get('id', 0));
+			\Joomla\CMS\Factory::getApplication()->input->get('section_id') . " AND user_id = " . \Joomla\CMS\Factory::getUser()->get('id', 0));
 
 		return $this->_db->loadObjectList();
 	}
 
 	public function getPreset()
 	{
-		$this->_db->setQuery("SELECT * FROM #__js_res_import WHERE id = " . (int)JFactory::getApplication()->input->get('preset'));
+		$this->_db->setQuery("SELECT * FROM #__js_res_import WHERE id = " . (int)\Joomla\CMS\Factory::getApplication()->input->get('preset'));
 		$preset = $this->_db->loadObject();
 
 		if(!@preset)
@@ -29,7 +29,7 @@ class JoomcckModelImport extends MModelList
 			return NULL;
 		}
 
-		@$preset->params = new JRegistry(@$preset->params);
+		@$preset->params = new \Joomla\Registry\Registry(@$preset->params);
 
 		return $preset;
 	}

@@ -18,7 +18,7 @@ class JoomcckControllerPay extends MControllerAdmin
 
 		if(!$this->input)
 		{
-			$this->input = JFactory::getApplication()->input;
+			$this->input = \Joomla\CMS\Factory::getApplication()->input;
 		}
 	}
 
@@ -69,7 +69,7 @@ class JoomcckControllerPay extends MControllerAdmin
         $record_id = $gateway->getRecordId($this->input);
 
         $url = Url::record($record_id);
-        $this->setRedirect($url, JText::_('RESULT_'.strtoupper($result)));
+        $this->setRedirect($url, \Joomla\CMS\Language\Text::_('RESULT_'.strtoupper($result)));
         $this->redirect();
     }
 }

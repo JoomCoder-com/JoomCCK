@@ -17,7 +17,7 @@ class JoomcckControllerComments extends MControllerAdmin
 		
 		if(!$this->input)
 		{
-			$this->input = JFactory::getApplication()->input;
+			$this->input = \Joomla\CMS\Factory::getApplication()->input;
 		}
 	}
 	public function getModel($type = 'Comment', $prefix = 'JoomcckModel', $config = array())
@@ -67,7 +67,7 @@ class JoomcckControllerComments extends MControllerAdmin
             $url = 'index.php?option=com_joomcck&view=record';
             $url .= $this->getRedirectToListAppend();
         }
-        $this->setRedirect(JRoute::_($url, FALSE));
+        $this->setRedirect(\Joomla\CMS\Router\Route::_($url, FALSE));
 		
 		$task 	= $this->getTask();
 		

@@ -24,7 +24,7 @@ class com_joomcckInstallerScript
 
     public function uninstall($parent)
     {
-        $db = JFactory::getDbo();
+        $db = \Joomla\CMS\Factory::getDbo();
         $db->setQuery("SHOW TABLES lIKE '%_js_res_%'");
         $list = $db->loadColumn();
 
@@ -55,7 +55,7 @@ class com_joomcckInstallerScript
 
     private function _createLink()
     {
-        $db = JFactory::getDbo();
+        $db = \Joomla\CMS\Factory::getDbo();
 
         $sql = "SELECT menutype FROM `#__menu_types` ORDER BY id ASC";
         $db->setQuery($sql);
@@ -74,7 +74,7 @@ class com_joomcckInstallerScript
 
         $params = json_decode(($et->params ?: '{}'));
         if (empty($params->moderator)) {
-            $params->moderator = JFactory::getUser()->get('id');
+            $params->moderator = \Joomla\CMS\Factory::getUser()->get('id');
         }
         if (empty($params->general_upload)) {
             $params->general_upload = 'uploads';
@@ -121,7 +121,7 @@ class com_joomcckInstallerScript
     }
     private function _get_default($field)
     {
-        $db      = JFactory::getDbo();
+        $db      = \Joomla\CMS\Factory::getDbo();
         $default = 'DEFAULT ' . $db->q($field->default);
 
         if ($field->default === null && $field->null == 'YES') {
@@ -139,36 +139,36 @@ class com_joomcckInstallerScript
     {
         define('CDIR', JPATH_ROOT . '/administrator/components/com_joomcck/');
 
-        if (JFolder::exists(CDIR . 'controllers')) {
-            JFolder::delete(CDIR . 'controllers');
+        if (\Joomla\CMS\Filesystem\Folder::exists(CDIR . 'controllers')) {
+            \Joomla\CMS\Filesystem\Folder::delete(CDIR . 'controllers');
         }
 
-        if (JFolder::exists(CDIR . 'helpers')) {
-            JFolder::delete(CDIR . 'helpers');
+        if (\Joomla\CMS\Filesystem\Folder::exists(CDIR . 'helpers')) {
+            \Joomla\CMS\Filesystem\Folder::delete(CDIR . 'helpers');
         }
 
-        if (JFolder::exists(CDIR . 'tables')) {
-            JFolder::delete(CDIR . 'tables');
+        if (\Joomla\CMS\Filesystem\Folder::exists(CDIR . 'tables')) {
+            \Joomla\CMS\Filesystem\Folder::delete(CDIR . 'tables');
         }
 
-        if (JFolder::exists(CDIR . 'models')) {
-            JFolder::delete(CDIR . 'models');
+        if (\Joomla\CMS\Filesystem\Folder::exists(CDIR . 'models')) {
+            \Joomla\CMS\Filesystem\Folder::delete(CDIR . 'models');
         }
 
-        if (JFolder::exists(CDIR . 'xml')) {
-            JFolder::delete(CDIR . 'xml');
+        if (\Joomla\CMS\Filesystem\Folder::exists(CDIR . 'xml')) {
+            \Joomla\CMS\Filesystem\Folder::delete(CDIR . 'xml');
         }
 
-        if (JFolder::exists(CDIR . 'library/css')) {
-            JFolder::delete(CDIR . 'library/css');
+        if (\Joomla\CMS\Filesystem\Folder::exists(CDIR . 'library/css')) {
+            \Joomla\CMS\Filesystem\Folder::delete(CDIR . 'library/css');
         }
 
-        if (JFolder::exists(CDIR . 'library/js')) {
-            JFolder::delete(CDIR . 'library/js');
+        if (\Joomla\CMS\Filesystem\Folder::exists(CDIR . 'library/js')) {
+            \Joomla\CMS\Filesystem\Folder::delete(CDIR . 'library/js');
         }
 
-        if (JFolder::exists(CDIR . 'library/php')) {
-            JFolder::delete(CDIR . 'library/php');
+        if (\Joomla\CMS\Filesystem\Folder::exists(CDIR . 'library/php')) {
+            \Joomla\CMS\Filesystem\Folder::delete(CDIR . 'library/php');
         }
 
     }
@@ -180,13 +180,13 @@ class com_joomcckInstallerScript
      */
     public function _updateTables($update = true)
     {
-        $prefix = JFactory::getApplication()->getCfg('dbprefix');
-        $db     = JFactory::getDbo();
+        $prefix = \Joomla\CMS\Factory::getApplication()->getCfg('dbprefix');
+        $db     = \Joomla\CMS\Factory::getDbo();
 
         $db->setQuery("SHOW TABLES lIKE '%_js_res_%'");
         $list = $db->loadColumn();
 
-        $tables = JFolder::files(JPATH_ROOT . '/administrator/components/com_joomcck/library/db', '\.json$');
+        $tables = \Joomla\CMS\Filesystem\Folder::files(JPATH_ROOT . '/administrator/components/com_joomcck/library/db', '\.json$');
 
 
         foreach ($tables as $file) {
@@ -235,7 +235,7 @@ class com_joomcckInstallerScript
 
                     if ($sql) {
                         if ($update) {
-                            JFactory::getApplication()->enqueueMessage("Table update: " . $sql);
+                            \Joomla\CMS\Factory::getApplication()->enqueueMessage("Table update: " . $sql);
                         }
 
                         $db->setQuery($sql);
@@ -255,7 +255,7 @@ class com_joomcckInstallerScript
                     $db->setQuery($sql);
                     $db->execute();
                     if ($update) {
-                        JFactory::getApplication()->enqueueMessage("Column drop: " . $sql);
+                        \Joomla\CMS\Factory::getApplication()->enqueueMessage("Column drop: " . $sql);
                     }
 
                 }
@@ -282,7 +282,7 @@ class com_joomcckInstallerScript
                             $db->setQuery($sql);
                             $db->execute();
                             if ($update) {
-                                JFactory::getApplication()->enqueueMessage("Index update: " . $sql);
+                                \Joomla\CMS\Factory::getApplication()->enqueueMessage("Index update: " . $sql);
                             }
 
                         }
@@ -300,7 +300,7 @@ class com_joomcckInstallerScript
                     $db->setQuery($sql);
                     $db->execute();
                     if ($update) {
-                        JFactory::getApplication()->enqueueMessage("Index drop: " . $sql);
+                        \Joomla\CMS\Factory::getApplication()->enqueueMessage("Index drop: " . $sql);
                     }
 
                 }
@@ -312,7 +312,7 @@ class com_joomcckInstallerScript
                     $db->setQuery("ALTER TABLE `{$table}` ENGINE = {$source->engine}");
                     $db->execute();
                     if ($update) {
-                        JFactory::getApplication()->enqueueMessage("Engine changed: " . $source->engine);
+                        \Joomla\CMS\Factory::getApplication()->enqueueMessage("Engine changed: " . $source->engine);
                     }
 
                 }
@@ -362,7 +362,7 @@ class com_joomcckInstallerScript
                 $db->setQuery($query);
                 $db->execute();
                 if ($update && $file != 'js_ip_2_country.json') {
-                    JFactory::getApplication()->enqueueMessage("Table created: " . $query);
+                    \Joomla\CMS\Factory::getApplication()->enqueueMessage("Table created: " . $query);
                 }
 
             }
@@ -548,8 +548,8 @@ class com_joomcckInstallerScript
         ];
 
         foreach ($files as $file) {
-            if (JFile::exists(JPATH_ROOT . $file)) {
-                JFile::delete(JPATH_ROOT . $file);
+            if (\Joomla\CMS\Filesystem\File::exists(JPATH_ROOT . $file)) {
+                \Joomla\CMS\Filesystem\File::delete(JPATH_ROOT . $file);
             }
         }
     }

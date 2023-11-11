@@ -27,13 +27,13 @@ $key = $vars->index.'_'.$vars->rid;
 
 <script  type="text/javascript" language="javascript">
   newRating<?php echo $key?> = felixRating.newRating( '<?php echo $vars->rating_ident; ?>_rateBox', <?php echo $vars->rating_active; ?> );
-  newRating<?php echo $key;?>.setStars( { "14"  : '<?php echo JText::_("VOTE_AUWFL")?>',
-                        "28"  : '<?php echo JText::_("VOTE_BAD")?>',
-                        "42"  : '<?php echo JText::_("VOTE_NOTGOOD")?>',
-                        "57"  : '<?php echo JText::_("VOTE_FAIR")?>',
-                        "71"  : '<?php echo JText::_("VOTE_GOOD")?>',
-                        "85"  : '<?php echo JText::_("VOTE_FERYGOOD")?>',
-                        "100" : '<?php echo JText::_("VOTE_EXEL")?>' } );
+  newRating<?php echo $key;?>.setStars( { "14"  : '<?php echo \Joomla\CMS\Language\Text::_("VOTE_AUWFL")?>',
+                        "28"  : '<?php echo \Joomla\CMS\Language\Text::_("VOTE_BAD")?>',
+                        "42"  : '<?php echo \Joomla\CMS\Language\Text::_("VOTE_NOTGOOD")?>',
+                        "57"  : '<?php echo \Joomla\CMS\Language\Text::_("VOTE_FAIR")?>',
+                        "71"  : '<?php echo \Joomla\CMS\Language\Text::_("VOTE_GOOD")?>',
+                        "85"  : '<?php echo \Joomla\CMS\Language\Text::_("VOTE_FERYGOOD")?>',
+                        "100" : '<?php echo \Joomla\CMS\Language\Text::_("VOTE_EXEL")?>' } );
   newRating<?php echo $key;?>.setCurrentStar( "<?php echo $vars->rating_current; ?>" );
   newRating<?php echo $key;?>.setIndex(<?php echo $vars->index?>);
   <?php if( $vars->callbackfunction ){ ?>

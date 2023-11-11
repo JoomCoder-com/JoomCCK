@@ -23,13 +23,13 @@ class JFormFieldCtext extends CFormFieldSelectable
 
 		if(!$this->request->getInt('id') && $this->params->get('params.default_val') && !$this->value)
 		{
-			$this->value = JText::_($this->params->get('params.default_val'));
+			$this->value = \Joomla\CMS\Language\Text::_($this->params->get('params.default_val'));
 		}
 
 		if($mask->mask_type)
 		{
-			JFactory::getDocument()->addScript(JURI::root(TRUE) . '/media/com_joomcck/js/mask/masks.js');
-			JFactory::getDocument()->addScript(JURI::root(TRUE) . '/components/com_joomcck/fields/text/text.js');
+			\Joomla\CMS\Factory::getDocument()->addScript(JURI::root(TRUE) . '/media/com_joomcck/js/mask/masks.js');
+			\Joomla\CMS\Factory::getDocument()->addScript(JURI::root(TRUE) . '/components/com_joomcck/fields/text/text.js');
 			switch($mask->mask_type)
 			{
 				case '(###) ### #######' :
@@ -63,11 +63,11 @@ class JFormFieldCtext extends CFormFieldSelectable
 		$js = "\n\t\tvar txt{$this->id} = jQuery('[name^=\"jform\\\\[fields\\\\]\\\\[$this->id\\\\]\"]').val();";
 		if($this->required)
 		{
-			$js .= "\n\t\tif(!txt{$this->id}){hfid.push({$this->id}); isValid = false; errorText.push('" . addslashes(JText::sprintf("CFIELDREQUIRED", $this->label)) . "');}";
+			$js .= "\n\t\tif(!txt{$this->id}){hfid.push({$this->id}); isValid = false; errorText.push('" . addslashes(\Joomla\CMS\Language\Text::sprintf("CFIELDREQUIRED", $this->label)) . "');}";
 		}
 		if($this->params->get('params.regex_val'))
 		{
-			$js .= "\n\t\tif(txt{$this->id} && !txt{$this->id}.match(/^" . $this->params->get('params.regex_val') . "$/g)){hfid.push({$this->id}); isValid = false; errorText.push('" . addslashes(JText::sprintf("CFIELDREGEX", $this->label)) . "');}";
+			$js .= "\n\t\tif(txt{$this->id} && !txt{$this->id}.match(/^" . $this->params->get('params.regex_val') . "$/g)){hfid.push({$this->id}); isValid = false; errorText.push('" . addslashes(\Joomla\CMS\Language\Text::sprintf("CFIELDREGEX", $this->label)) . "');}";
 		}
 
 		return $js;
@@ -87,21 +87,21 @@ class JFormFieldCtext extends CFormFieldSelectable
 		{
 			if(!preg_match('/^' . $this->params->get('params.regex_val') . '$/iU', $value))
 			{
-				$this->setError(JText::sprintf('CFIELDREGEX', $this->label));
+				$this->setError(\Joomla\CMS\Language\Text::sprintf('CFIELDREGEX', $this->label));
 
 				return FALSE;
 			}
 		}
 		if($value && $this->params->get('params.is_unique') && !$type['id'])
 		{
-			$db = JFactory::getDbo();
+			$db = \Joomla\CMS\Factory::getDbo();
 
 			$db->setQuery(sprintf("SELECT id FROM `#__js_res_record_values` 
 				WHERE field_value = '%s' AND record_id != %d AND field_id = %d", 
 				$db->escape($value), @$record->id, $this->id));
 			if($db->loadResult())
 			{
-				$this->setError(JText::sprintf('CFIELDUNIQUE', $this->label, $value));
+				$this->setError(\Joomla\CMS\Language\Text::sprintf('CFIELDUNIQUE', $this->label, $value));
 
 				return FALSE;
 			}
@@ -147,12 +147,12 @@ class JFormFieldCtext extends CFormFieldSelectable
 		if($view == 'list' && $this->params->get('params.length', 0) > 0)
 		{
 			$this->value = HTMLFormatHelper::substrHTML($this->value, $this->params->get('params.length'));
-			$readmore    = JHtml::link($record->url, $this->params->get('params.seemore', '>>>'), array('title' => JText::_('TEXT_READMORE')));
+			$readmore    = \Joomla\CMS\HTML\HTMLHelper::link($record->url, $this->params->get('params.seemore', '>>>'), array('title' => \Joomla\CMS\Language\Text::_('TEXT_READMORE')));
 		}
 		$value = $this->value;
 		if($this->params->get('params.filter_enable'))
 		{
-			$tip = ($this->params->get('params.filter_tip') ? JText::sprintf($this->params->get('params.filter_tip'), '<b>' . $this->label . '</b>', '<b>' . $value . '</b>') : NULL);
+			$tip = ($this->params->get('params.filter_tip') ? \Joomla\CMS\Language\Text::sprintf($this->params->get('params.filter_tip'), '<b>' . $this->label . '</b>', '<b>' . $value . '</b>') : NULL);
 
 			switch($this->params->get('params.filter_linkage'))
 			{
@@ -191,14 +191,14 @@ class JFormFieldCtext extends CFormFieldSelectable
             if(!preg_match('/^' . $this->params->get('params.regex_val') . '$/iU', $value))
 			{
 
-				Factory::getApplication()->enqueueMessage(JText::sprintf('CFIELDREGEX', $this->label).': ' . $value,'warning');
+				Factory::getApplication()->enqueueMessage(\Joomla\CMS\Language\Text::sprintf('CFIELDREGEX', $this->label).': ' . $value,'warning');
 				return FALSE;
 			}
         }
         
         if($this->params->get('params.is_unique'))
         {
-            $db = JFactory::getDbo();
+            $db = \Joomla\CMS\Factory::getDbo();
 
             $db->setQuery(sprintf("SELECT id FROM `#__js_res_record_values` 
                 WHERE field_value = '%s' AND record_id != %d AND field_id = %d", 
@@ -206,7 +206,7 @@ class JFormFieldCtext extends CFormFieldSelectable
             if($db->loadResult())
             {
 
-	            Factory::getApplication()->enqueueMessage(JText::sprintf('CFIELDUNIQUE', $this->label, $value),'warning');
+	            Factory::getApplication()->enqueueMessage(\Joomla\CMS\Language\Text::sprintf('CFIELDUNIQUE', $this->label, $value),'warning');
                 return FALSE;
             }
         }

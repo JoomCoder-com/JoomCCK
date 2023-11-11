@@ -19,7 +19,7 @@ class JoomcckControllerField extends MControllerAdmin
 		
 		if(!$this->input)
 		{
-			$this->input = JFactory::getApplication()->input;
+			$this->input = \Joomla\CMS\Factory::getApplication()->input;
 		}
 	}
 
@@ -32,7 +32,7 @@ class JoomcckControllerField extends MControllerAdmin
 		if(!$field_id)
 		{
 
-			throw new GenericDataException(JText::_('CERRNOFILEID'), 500);
+			throw new GenericDataException(\Joomla\CMS\Language\Text::_('CERRNOFILEID'), 500);
 
 			return;
 		}
@@ -43,23 +43,23 @@ class JoomcckControllerField extends MControllerAdmin
 
 		if(!$field_table->id)
 		{
-			throw new GenericDataException(JText::_('CERRNOFILEID'), 500);
+			throw new GenericDataException(\Joomla\CMS\Language\Text::_('CERRNOFILEID'), 500);
 
 			return;
 		}
 
 
 		$field_path =  JPATH_ROOT . '/components/com_joomcck/fields' . DIRECTORY_SEPARATOR . $field_table->field_type . DIRECTORY_SEPARATOR . $field_table->field_type . '.php';
-		if(!JFile::exists($field_path))
+		if(!\Joomla\CMS\Filesystem\File::exists($field_path))
 		{
-			throw new GenericDataException(JText::_('CERRNOFILEHDD'), 500);
+			throw new GenericDataException(\Joomla\CMS\Language\Text::_('CERRNOFILEHDD'), 500);
 
 			return;
 		}
 
 		if(!$func)
 		{
-			throw new GenericDataException(JText::_('AJAX_NOFUNCNAME'), 500);
+			throw new GenericDataException(\Joomla\CMS\Language\Text::_('AJAX_NOFUNCNAME'), 500);
 			return;
 		}
 
@@ -79,7 +79,7 @@ class JoomcckControllerField extends MControllerAdmin
 		$classname = 'JFormFieldC' . ucfirst($field_table->field_type);
 		if(!class_exists($classname))
 		{
-			throw new GenericDataException(JText::_('CCLASSNOTFOUND'), 500);
+			throw new GenericDataException(\Joomla\CMS\Language\Text::_('CCLASSNOTFOUND'), 500);
 			return ;
 		}
 
@@ -87,7 +87,7 @@ class JoomcckControllerField extends MControllerAdmin
 
 		if(!method_exists($fieldclass, $func))
 		{
-			throw new GenericDataException(JText::_('AJAX_METHODNOTFOUND'), 500);
+			throw new GenericDataException(\Joomla\CMS\Language\Text::_('AJAX_METHODNOTFOUND'), 500);
 			return ;
 		}
 		$result = $fieldclass->$func($_POST, $record, $this, (count($_POST) ? null : $_GET) );

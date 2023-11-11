@@ -14,13 +14,13 @@ class JoomcckModelModerator extends MModelAdmin
 
 	function getTable($name = 'Moderators', $prefix = 'JoomcckTable', $options = array())
 	{
-		return JTable::getInstance($name, $prefix, $options);
+		return \Joomla\CMS\Table\Table::getInstance($name, $prefix, $options);
 
 	}
 
 	public function getForm($data = array(), $loadData = TRUE)
 	{
-		$app = JFactory::getApplication();
+		$app = \Joomla\CMS\Factory::getApplication();
 
 		$form = $this->loadForm('com_joomcck.moderator', 'moderator', array('control' => 'jform', 'load_data' => $loadData));
 		if(empty($form))
@@ -33,7 +33,7 @@ class JoomcckModelModerator extends MModelAdmin
 
 	public function loadFormData()
 	{
-		$data = JFactory::getApplication()->getUserState('com_joomcck.edit.moderator.data', array());
+		$data = \Joomla\CMS\Factory::getApplication()->getUserState('com_joomcck.edit.moderator.data', array());
 		if(empty($data))
 		{
 			$data = $this->getItem();
@@ -45,14 +45,14 @@ class JoomcckModelModerator extends MModelAdmin
 	protected function populateState($ordering = NULL, $direction = NULL)
 	{
 		// Load state from the request.
-		$pk = JFactory::getApplication()->input->getInt('id');
-		JFactory::getApplication()->setUserState('com_joomcck.edit.moderator.id', $pk);
+		$pk = \Joomla\CMS\Factory::getApplication()->input->getInt('id');
+		\Joomla\CMS\Factory::getApplication()->setUserState('com_joomcck.edit.moderator.id', $pk);
 		$this->setState('com_joomcck.edit.moderator.id', $pk);
 	}
 
 	public function getItem($id = NULL)
 	{
-		$id  = JFactory::getApplication()->input->getInt('id', FALSE);
+		$id  = \Joomla\CMS\Factory::getApplication()->input->getInt('id', FALSE);
 		$row = NULL;
 		if($id)
 		{
@@ -66,10 +66,10 @@ class JoomcckModelModerator extends MModelAdmin
 		if(!$row)
 		{
 			$row = $this->getTable();
-			$row->load(array('user_id' => JFactory::getApplication()->input->getInt('user_id'), 'section_id' => JFactory::getApplication()->input->getInt('section_id')));
+			$row->load(array('user_id' => \Joomla\CMS\Factory::getApplication()->input->getInt('user_id'), 'section_id' => \Joomla\CMS\Factory::getApplication()->input->getInt('section_id')));
 			if($row->id)
 			{
-				$registry = new JRegistry;
+				$registry = new \Joomla\Registry\Registry;
 				$registry->loadString((string)$row->params);
 				$row->params = $registry->toArray();
 			}
@@ -78,19 +78,19 @@ class JoomcckModelModerator extends MModelAdmin
 		{
 			$row             = new stdClass();
 			$row->id         = NULL;
-			$row->user       = JFactory::getUser(JFactory::getApplication()->input->getInt('user_id'));
+			$row->user       = \Joomla\CMS\Factory::getUser(\Joomla\CMS\Factory::getApplication()->input->getInt('user_id'));
 			$row->user_id    = $row->user->get('id');
-			$row->section_id = JFactory::getApplication()->input->getInt('section_id');
+			$row->section_id = \Joomla\CMS\Factory::getApplication()->input->getInt('section_id');
 			$row->params     = array();
 		}
 		else
 		{
-			$row->user = JFactory::getUser($row->user_id);
+			$row->user = \Joomla\CMS\Factory::getUser($row->user_id);
 		}
 
 		if(!$id)
 		{
-			JFactory::getApplication()->input->set('id', $row->id);
+			\Joomla\CMS\Factory::getApplication()->input->set('id', $row->id);
 			$this->populateState($ordering = NULL, $direction = NULL);
 		}
 

@@ -8,7 +8,7 @@
  */
 defined('_JEXEC') or die();
 
-$fid = JFactory::getApplication()->input->getInt('field_id');
+$fid = \Joomla\CMS\Factory::getApplication()->input->getInt('field_id');
 $k = 0;
 ?>
 <style>
@@ -32,7 +32,7 @@ $k = 0;
 	{
 		var id = el.attr('rel');
 		var title = el.children('span').text();
-		<?php if(JFactory::getApplication()->input->get('mode') == 'form'):?>
+		<?php if(\Joomla\CMS\Factory::getApplication()->input->get('mode') == 'form'):?>
 			var multi = parent['multi<?php echo $fid; ?>'];
 			var limit = parent['limit<?php echo $fid; ?>'];
 			var inputname = parent['name<?php echo $fid; ?>'];
@@ -46,13 +46,13 @@ $k = 0;
 			{
 				lis = list.children('div.alert');
 				if(lis.length >= limit) {
-					alert('<?php echo JText::_("CERRJSMOREOPTIONS");?>');
+					alert('<?php echo \Joomla\CMS\Language\Text::_("CERRJSMOREOPTIONS");?>');
 					return false;
 				}
 				error = 0;
 				$.each(lis, function(k, v){
 					if($(v).attr('rel') == id){
-						alert('<?php echo JText::_('CALREADYSELECTED');?>');
+						alert('<?php echo \Joomla\CMS\Language\Text::_('CALREADYSELECTED');?>');
 						error = 1;
 					}
 				});
@@ -71,10 +71,10 @@ $k = 0;
 				dataType: 'json',
 				type: 'POST',
 				data:{
-					field_id: <?php echo JFactory::getApplication()->input->getInt('field_id');?>,
+					field_id: <?php echo \Joomla\CMS\Factory::getApplication()->input->getInt('field_id');?>,
 					func:'onAttachExisting',
-					field:'<?php echo JFactory::getApplication()->input->get('type');?>',
-					record_id:<?php echo JFactory::getApplication()->input->getInt('record_id');?>,
+					field:'<?php echo \Joomla\CMS\Factory::getApplication()->input->get('type');?>',
+					record_id:<?php echo \Joomla\CMS\Factory::getApplication()->input->getInt('record_id');?>,
 					attach:id
 				}
 			}).done(function(json) {
@@ -95,21 +95,21 @@ $k = 0;
     <div class="input-group">
         <input type="text" class="form-control form-control-sm" name="filter_search2" id="filter_search2" value="<?php echo $this->state->get('records.search2'); ?>" />
         <button class="btn btn-sm btn-outline-success" type="submit">
-            <span class="fas fa-search"></span> <?php echo JText::_('JSEARCH_FILTER_SUBMIT'); ?>
+            <span class="fas fa-search"></span> <?php echo \Joomla\CMS\Language\Text::_('JSEARCH_FILTER_SUBMIT'); ?>
         </button>
         <button class="btn btn-sm btn-outline-danger btn-sm" type="button" onclick="document.getElementById('filter_search2').value='';this.form.submit();">
-            <span class="fas fa-eraser"></span> <?php echo JText::_('JSEARCH_FILTER_CLEAR'); ?>
+            <span class="fas fa-eraser"></span> <?php echo \Joomla\CMS\Language\Text::_('JSEARCH_FILTER_CLEAR'); ?>
         </button>
-		<?php if(JFactory::getApplication()->input->get('mode') == 'form'):?>
+		<?php if(\Joomla\CMS\Factory::getApplication()->input->get('mode') == 'form'):?>
             <button type="button" class="btn btn-sm btn-outline-success" onclick="closeWindow()">
                 <span class="fas fa-check"></span>
-				<?php echo JText::_('CAPPLY');?></button>
+				<?php echo \Joomla\CMS\Language\Text::_('CAPPLY');?></button>
 		<?php endif;?>
     </div>
 	<div class="clearfix"></div>
 
 	<div class="container-fluid">
-	<?php if(JFactory::getApplication()->input->get('mode') == 'form'):?>
+	<?php if(\Joomla\CMS\Factory::getApplication()->input->get('mode') == 'form'):?>
 		<div class="row">
 			<div class="col-md-8">
 
@@ -118,10 +118,10 @@ $k = 0;
 		<table class="table">
 			<thead>
 				<th width="1%">
-					<?php echo JText::_('CNUM'); ?>
+					<?php echo \Joomla\CMS\Language\Text::_('CNUM'); ?>
 				</th>
 				<th>
-					<?php echo JText::_('CTITLE')?>
+					<?php echo \Joomla\CMS\Language\Text::_('CTITLE')?>
 				</th>
 			</thead>
 			<tbody>
@@ -145,7 +145,7 @@ $k = 0;
 			}(jQuery))
 		</script>
 
-	<?php if(JFactory::getApplication()->input->get('mode') == 'form'):?>
+	<?php if(\Joomla\CMS\Factory::getApplication()->input->get('mode') == 'form'):?>
 			</div>
 			<div class="col-md-4">
 				<div id="recordslist">
@@ -155,7 +155,7 @@ $k = 0;
 		</div>
 		<script type="text/javascript">
 			(function($){
-				var listofselected = $(parent['elementslist<?php echo JFactory::getApplication()->input->getInt('field_id')?>'])
+				var listofselected = $(parent['elementslist<?php echo \Joomla\CMS\Factory::getApplication()->input->getInt('field_id')?>'])
 				.children('div.alert')
 				.each(function(){
 					attachRecord($(this));
@@ -167,8 +167,8 @@ $k = 0;
 
 
 	<input type="hidden" name="option" value="com_joomcck" />
-	<input type="hidden" name="section_id" value="<?php echo JFactory::getApplication()->input->getInt('section_id')?>" />
+	<input type="hidden" name="section_id" value="<?php echo \Joomla\CMS\Factory::getApplication()->input->getInt('section_id')?>" />
 	<input type="hidden" name="task" value="" />
 	<input type="hidden" name="limitstart" value="0" />
-	<?php echo JHtml::_( 'form.token' ); ?>
+	<?php echo \Joomla\CMS\HTML\HTMLHelper::_( 'form.token' ); ?>
 </form>

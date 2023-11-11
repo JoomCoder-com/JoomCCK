@@ -42,7 +42,7 @@ class JoomcckModelItems extends MModelList
 
 	protected function populateState($ordering = null, $direction = null)
 	{
-		$app = JFactory::getApplication('administrator');
+		$app = \Joomla\CMS\Factory::getApplication('administrator');
 
 		$search = $app->getUserStateFromRequest($this->context . '.filter.search', 'filter_search');
 		$this->setState('filter.search', $search);
@@ -165,7 +165,7 @@ class JoomcckModelItems extends MModelList
         
 		foreach($sections AS $section)
 		{
-            $params = new JRegistry($section->params);
+            $params = new \Joomla\Registry\Registry($section->params);
             
 		}
 	}

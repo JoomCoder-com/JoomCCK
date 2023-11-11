@@ -16,11 +16,11 @@ class JoomcckViewRecord extends MViewBase
 
 	function display($tpl = NULL)
 	{
-		JHtml::_('dropdown.init');
+		\Joomla\CMS\HTML\HTMLHelper::_('dropdown.init');
 
-		$app  = JFactory::getApplication();
-		$doc  = JFactory::getDocument();
-		$user = JFactory::getUser();
+		$app  = \Joomla\CMS\Factory::getApplication();
+		$doc  = \Joomla\CMS\Factory::getDocument();
+		$user = \Joomla\CMS\Factory::getUser();
 
 		$tmpl_params = array();
 		$category    = NULL;
@@ -28,7 +28,7 @@ class JoomcckViewRecord extends MViewBase
 		$item    = $this->get('Item');
 		$model   = $this->getModel();
 		$section = ItemsStore::getSection($item->section_id);
-		$db      = JFactory::getDbo();
+		$db      = \Joomla\CMS\Factory::getDbo();
 
 		$this->menu_params = $app->getMenu()->getParams($app->input->get('Itemid'));
 
@@ -47,7 +47,7 @@ class JoomcckViewRecord extends MViewBase
 		if($type->published == 0)
 		{
 
-			Factory::getApplication()->enqueueMessage(JText::_('CMSG_TYPEUNPUB'),'warning');
+			Factory::getApplication()->enqueueMessage(\Joomla\CMS\Language\Text::_('CMSG_TYPEUNPUB'),'warning');
 
 			return;
 		}
@@ -57,7 +57,7 @@ class JoomcckViewRecord extends MViewBase
 		if($section->published == 0)
 		{
 
-			Factory::getApplication()->enqueueMessage(JText::_('CERR_SECTIONUNPUB'),'warning');
+			Factory::getApplication()->enqueueMessage(\Joomla\CMS\Language\Text::_('CERR_SECTIONUNPUB'),'warning');
 
 			return;
 		}
@@ -66,7 +66,7 @@ class JoomcckViewRecord extends MViewBase
 		if(!$section->params->get('general.status', 1))
 		{
 
-			Factory::getApplication()->enqueueMessage(JText::_($section->params->get('general.status_msg')),'warning');
+			Factory::getApplication()->enqueueMessage(\Joomla\CMS\Language\Text::_($section->params->get('general.status_msg')),'warning');
 
 
 			return;
@@ -76,7 +76,7 @@ class JoomcckViewRecord extends MViewBase
 
 		if(!in_array($section->access, $user->getAuthorisedViewLevels()) && !MECAccess::allowRestricted($user, $section))
 		{
-			Factory::getApplication()->enqueueMessage($section->params->get('general.status_msg', JText::_('CERR_NOPAGEACCESS')),'warning');
+			Factory::getApplication()->enqueueMessage($section->params->get('general.status_msg', \Joomla\CMS\Language\Text::_('CERR_NOPAGEACCESS')),'warning');
 
 			return;
 		}
@@ -84,7 +84,7 @@ class JoomcckViewRecord extends MViewBase
 		if(!$this->_checkCategoryAccess($item, $section))
 		{
 
-			Factory::getApplication()->enqueueMessage($section->params->get('general.status_msg', JText::_('CERR_NOPAGEACCESS')),'warning');
+			Factory::getApplication()->enqueueMessage($section->params->get('general.status_msg', \Joomla\CMS\Language\Text::_('CERR_NOPAGEACCESS')),'warning');
 
 
 			return;
@@ -92,7 +92,7 @@ class JoomcckViewRecord extends MViewBase
 
 		if(!CEmeraldHelper::allowType('display', $type, $item->user_id, $section, FALSE, '', $item->user_id))
 		{
-			Factory::getApplication()->enqueueMessage(JText::_($type->params->get('emerald.type_display_subscription_msg')),'warning');
+			Factory::getApplication()->enqueueMessage(\Joomla\CMS\Language\Text::_($type->params->get('emerald.type_display_subscription_msg')),'warning');
 
 			return;
 		}
@@ -103,7 +103,7 @@ class JoomcckViewRecord extends MViewBase
 		if($type->params->get('comments.comments') == 2 && !$type->params->get('comments.comment_custom_js'))
 		{
 
-			Factory::getApplication()->enqueueMessage(JText::_('CMSGCUSTOMJSCODE'),'info');
+			Factory::getApplication()->enqueueMessage(\Joomla\CMS\Language\Text::_('CMSGCUSTOMJSCODE'),'info');
 		}
 
 		$dir = JPATH_ROOT . '/components/com_joomcck/views/record/tmpl';
@@ -151,12 +151,12 @@ class JoomcckViewRecord extends MViewBase
 					'type'  => 'application/rss+xml',
 					'title' => 'RSS 2.0'
 				);
-				$this->document->addHeadLink(JRoute::_($link . '&type=rss'), 'alternate', 'rel', $attribs);
+				$this->document->addHeadLink(\Joomla\CMS\Router\Route::_($link . '&type=rss'), 'alternate', 'rel', $attribs);
 				$attribs = array(
 					'type'  => 'application/atom+xml',
 					'title' => 'Atom 1.0'
 				);
-				$this->document->addHeadLink(JRoute::_($link . '&type=atom'), 'alternate', 'rel', $attribs);
+				$this->document->addHeadLink(\Joomla\CMS\Router\Route::_($link . '&type=atom'), 'alternate', 'rel', $attribs);
 			}
 		}
 
@@ -186,17 +186,17 @@ class JoomcckViewRecord extends MViewBase
 			$plg = JPluginHelper::importPlugin('mint', 'formatter_' . strtolower($formatter));
 			if($plg)
 			{
-				$dispatcher = JFactory::getApplication();
+				$dispatcher = \Joomla\CMS\Factory::getApplication();
 				$dispatcher->triggerEvent('onRecordFormat', array(
 					$this
 				));
 
-				$app = JFactory::getApplication();
+				$app = \Joomla\CMS\Factory::getApplication();
 				$app->close();
 			}
 			else
 			{
-				JFactory::getApplication()->enqueueMessage(JText::sprintf('CFORMATERNOTFOUND', $formatter),'warning');
+				\Joomla\CMS\Factory::getApplication()->enqueueMessage(\Joomla\CMS\Language\Text::sprintf('CFORMATERNOTFOUND', $formatter),'warning');
 			}
 		}
 
@@ -219,7 +219,7 @@ class JoomcckViewRecord extends MViewBase
 		{
 			return TRUE;
 		}
-		$user = JFactory::getUser();
+		$user = \Joomla\CMS\Factory::getUser();
 
 		if(MECAccess::allowRestricted($user, $section))
 		{
@@ -245,10 +245,10 @@ class JoomcckViewRecord extends MViewBase
 				return FALSE;
 			}
 
-			if(JFactory::getApplication()->input->get('cat_id') == $id && $cat->published == 0)
+			if(\Joomla\CMS\Factory::getApplication()->input->get('cat_id') == $id && $cat->published == 0)
 			{
 
-				Factory::getApplication()->enqueueMessage(JText::_('CNOTICE_THIS_RECORD_INVISIBLE_IN_UNPUBLISHED_CATEGORY'),'info');
+				Factory::getApplication()->enqueueMessage(\Joomla\CMS\Language\Text::_('CNOTICE_THIS_RECORD_INVISIBLE_IN_UNPUBLISHED_CATEGORY'),'info');
 
 				return FALSE;
 			}
@@ -259,10 +259,10 @@ class JoomcckViewRecord extends MViewBase
 
 	private function _checkItemAccess($item, $section)
 	{
-		$user  = JFactory::getUser();
+		$user  = \Joomla\CMS\Factory::getUser();
 		$error = TRUE;
-		$app   = JFactory::getApplication();
-		$db    = JFactory::getDbo();
+		$app   = \Joomla\CMS\Factory::getApplication();
+		$db    = \Joomla\CMS\Factory::getDbo();
 
 		if(
 			!in_array($item->access, $user->getAuthorisedViewLevels()) &&
@@ -277,7 +277,7 @@ class JoomcckViewRecord extends MViewBase
 				if(!($user->get('id') && $user->get('id') == $parent->user_id))
 				{
 
-					Factory::getApplication()->enqueueMessage(JText::_('CWARNING_NO_ACCESS_ARTICLE'),'warning');
+					Factory::getApplication()->enqueueMessage(\Joomla\CMS\Language\Text::_('CWARNING_NO_ACCESS_ARTICLE'),'warning');
 					$error = FALSE;
 				}
 			}
@@ -287,12 +287,12 @@ class JoomcckViewRecord extends MViewBase
 
 				$sql = "SELECT params from `#__js_res_fields` WHERE id = " . $ids[0];
 				$db->setQuery($sql);
-				$params = new JRegistry($db->loadResult());
+				$params = new \Joomla\Registry\Registry($db->loadResult());
 
 				if(!$params->get('params.show_relate'))
 				{
 
-					Factory::getApplication()->enqueueMessage(JText::_('CWARNING_NO_ACCESS_ARTICLE'),'warning');
+					Factory::getApplication()->enqueueMessage(\Joomla\CMS\Language\Text::_('CWARNING_NO_ACCESS_ARTICLE'),'warning');
 					$error = FALSE;
 				}
 				else
@@ -311,7 +311,7 @@ class JoomcckViewRecord extends MViewBase
 					if(!($parent_user && $parent_user == $user->get('id')))
 					{
 					;
-						Factory::getApplication()->enqueueMessage(JText::_('CWARNING_NO_ACCESS_ARTICLE'),'warning');
+						Factory::getApplication()->enqueueMessage(\Joomla\CMS\Language\Text::_('CWARNING_NO_ACCESS_ARTICLE'),'warning');
 						$error = FALSE;
 					}
 				}
@@ -320,7 +320,7 @@ class JoomcckViewRecord extends MViewBase
 			{
 
 
-				Factory::getApplication()->enqueueMessage(JText::_('CWARNING_NO_ACCESS_ARTICLE'),'warning');
+				Factory::getApplication()->enqueueMessage(\Joomla\CMS\Language\Text::_('CWARNING_NO_ACCESS_ARTICLE'),'warning');
 				$error = FALSE;
 			}
 		}
@@ -330,28 +330,28 @@ class JoomcckViewRecord extends MViewBase
 			if($user->get('id') != $item->user_id)
 			{
 
-				Factory::getApplication()->enqueueMessage(JText::_('CWARNING_RECORD_HIDDEN_BY_AUTHOR'),'warning');
+				Factory::getApplication()->enqueueMessage(\Joomla\CMS\Language\Text::_('CWARNING_RECORD_HIDDEN_BY_AUTHOR'),'warning');
 				$error = FALSE;
 			}
 			else
 			{
 
-				Factory::getApplication()->enqueueMessage(JText::_('CWARNING_RECORD_HIDDEN_BY_YOU'),'info');
+				Factory::getApplication()->enqueueMessage(\Joomla\CMS\Language\Text::_('CWARNING_RECORD_HIDDEN_BY_YOU'),'info');
 			}
 		}
 
 		if($item->published == 0 && !MECAccess::allowRestricted($user, $section) && !($user->get('id') == $item->user_id && $item->user_id))
 		{
 
-			Factory::getApplication()->enqueueMessage(JText::_('CWARNING_RECORD_UNPUBLISHED'),'warning');
+			Factory::getApplication()->enqueueMessage(\Joomla\CMS\Language\Text::_('CWARNING_RECORD_UNPUBLISHED'),'warning');
 			$error = FALSE;
 		}
 
 
 
-		$ctreated = JFactory::getDate($item->ctime)->toUnix();
-		$expire   = !is_null($item->extime) ? JFactory::getDate($item->extime)->toUnix() : null;
-		$now      = JFactory::getDate()->toUnix();
+		$ctreated = \Joomla\CMS\Factory::getDate($item->ctime)->toUnix();
+		$expire   = !is_null($item->extime) ? \Joomla\CMS\Factory::getDate($item->extime)->toUnix() : null;
+		$now      = \Joomla\CMS\Factory::getDate()->toUnix();
 
 
 		if( !is_null($expire) &&
@@ -363,13 +363,13 @@ class JoomcckViewRecord extends MViewBase
 			!MECAccess::allowRestricted($user, $section)
 		)
 		{
-			echo JText::_('CWARNING_RECORD_EXPIRED');
+			echo \Joomla\CMS\Language\Text::_('CWARNING_RECORD_EXPIRED');
 			$error = FALSE;
 		}
 
 		if(($now < $ctreated) && !in_array($section->params->get('general.show_future_records'), $user->getAuthorisedViewLevels()) && !MECAccess::allowRestricted($user, $section))
 		{
-			echo JText::_('CWARNING_RECORD_NOT_YET_PUBLISHED');
+			echo \Joomla\CMS\Language\Text::_('CWARNING_RECORD_NOT_YET_PUBLISHED');
 			$error = FALSE;
 		}
 
@@ -378,7 +378,7 @@ class JoomcckViewRecord extends MViewBase
 
 	protected function _prepareDocument()
 	{
-		$app             = JFactory::getApplication();
+		$app             = \Joomla\CMS\Factory::getApplication();
 		$menus           = $app->getMenu();
 		$pathway         = $app->getPathway();
 		$title           = NULL;
@@ -397,7 +397,7 @@ class JoomcckViewRecord extends MViewBase
 		{
 			$path[] = array(
 				'title' => $this->section->name,
-				'link'  => JRoute::_(Url::records($this->section))
+				'link'  => \Joomla\CMS\Router\Route::_(Url::records($this->section))
 			);
 		}
 
@@ -413,8 +413,8 @@ class JoomcckViewRecord extends MViewBase
 				$title .= ' - ' . $this->item->ucatname;
 			}
 
-			$user   = JFactory::getUser($this->item->user_id);
-			$name   = $user->get($this->section->params->get('personalize.author_mode'), JText::_('CGUEST'));
+			$user   = \Joomla\CMS\Factory::getUser($this->item->user_id);
+			$name   = $user->get($this->section->params->get('personalize.author_mode'), \Joomla\CMS\Language\Text::_('CGUEST'));
 			$path[] = array(
 				'title' => $name,
 				'link'  => Url::user('created', $this->item->user_id, $this->section->id)
@@ -431,8 +431,8 @@ class JoomcckViewRecord extends MViewBase
 				if($this->category->parent_id == 1)
 				{
 					$path[] = array(
-						'title' => JText::_($this->category->title),
-						'link'  => JRoute::_(Url::records($this->section, $this->category))
+						'title' => \Joomla\CMS\Language\Text::_($this->category->title),
+						'link'  => \Joomla\CMS\Router\Route::_(Url::records($this->section, $this->category))
 					);
 				}
 				else
@@ -441,7 +441,7 @@ class JoomcckViewRecord extends MViewBase
 					foreach($categories as $cat)
 					{
 						$path[] = array(
-							'title' => JText::_($cat->title),
+							'title' => \Joomla\CMS\Language\Text::_($cat->title),
 							'link'  => Url::records($this->section, $cat)
 						);
 					}
@@ -480,11 +480,11 @@ class JoomcckViewRecord extends MViewBase
 		}
 		elseif($app->getCfg('sitename_pagetitles', 0) == 1)
 		{
-			$title = JText::sprintf('JPAGETITLE', $app->getCfg('sitename'), $title);
+			$title = \Joomla\CMS\Language\Text::sprintf('JPAGETITLE', $app->getCfg('sitename'), $title);
 		}
 		elseif($app->getCfg('sitename_pagetitles', 0) == 2)
 		{
-			$title = JText::sprintf('JPAGETITLE', $title, $app->getCfg('sitename'));
+			$title = \Joomla\CMS\Language\Text::sprintf('JPAGETITLE', $title, $app->getCfg('sitename'));
 		}
 		if(empty($title))
 		{
@@ -576,7 +576,7 @@ class JoomcckViewRecord extends MViewBase
 		if(!empty($this->item->page_title))
 		{
 			$this->item->title = $this->item->title . ' - ' . $this->item->page_title;
-			$this->document->setTitle($this->item->page_title . ' - ' . JText::sprintf('PLG_CONTENT_PAGEBREAK_PAGE_NUM', $this->state->get('list.offset') + 1));
+			$this->document->setTitle($this->item->page_title . ' - ' . \Joomla\CMS\Language\Text::sprintf('PLG_CONTENT_PAGEBREAK_PAGE_NUM', $this->state->get('list.offset') + 1));
 		}
 	}
 }

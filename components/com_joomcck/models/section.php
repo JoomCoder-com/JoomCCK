@@ -19,13 +19,13 @@ class JoomcckModelSection extends MModelAdmin
 
 	public function getTable($type = 'Section', $prefix = 'JoomcckTable', $config = array())
 	{
-		return JTable::getInstance($type, $prefix, $config);
+		return \Joomla\CMS\Table\Table::getInstance($type, $prefix, $config);
 	}
 
 
 	public function getForm($data = array(), $loadData = true)
 	{
-		$app = JFactory::getApplication();
+		$app = \Joomla\CMS\Factory::getApplication();
 
 		$form = $this->loadForm('com_joomcck.section', 'section', array('control' => 'jform', 'load_data' => $loadData));
 		if(empty($form))
@@ -38,7 +38,7 @@ class JoomcckModelSection extends MModelAdmin
 
 	public function getFormQs($data = array(), $loadData = true)
 	{
-		$app = JFactory::getApplication();
+		$app = \Joomla\CMS\Factory::getApplication();
 
 		$form = $this->loadForm('com_joomcck.section-qs', 'section-qs', array('control' => 'jform', 'load_data' => $loadData));
 		if(empty($form))
@@ -51,7 +51,7 @@ class JoomcckModelSection extends MModelAdmin
 
 	protected function loadFormData()
 	{
-		$data = JFactory::getApplication()->getUserState('com_joomcck.section.edit.'.$this->getName().'.data', array());
+		$data = \Joomla\CMS\Factory::getApplication()->getUserState('com_joomcck.section.edit.'.$this->getName().'.data', array());
 
 		if(empty($data))
 		{
@@ -68,14 +68,14 @@ class JoomcckModelSection extends MModelAdmin
 
 	protected function canDelete($record)
 	{
-		$user = JFactory::getUser();
+		$user = \Joomla\CMS\Factory::getUser();
 
 		return $user->authorise('core.delete', 'com_joomcck.section.' . (int)$record->id);
 	}
 
 	protected function canEditState($record)
 	{
-		$user = JFactory::getUser();
+		$user = \Joomla\CMS\Factory::getUser();
 
 		return $user->authorise('core.edit.state', 'com_joomcck.section.' . (int)$record->id);
 	}
@@ -86,7 +86,7 @@ class JoomcckModelSection extends MModelAdmin
 
 		if(!$id)
 		{
-			$id = JFactory::getApplication()->input->getInt('section_id');
+			$id = \Joomla\CMS\Factory::getApplication()->input->getInt('section_id');
 		}
 
 		if(isset($cache[$id]))
@@ -97,7 +97,7 @@ class JoomcckModelSection extends MModelAdmin
 		$section = parent::getItem($id);
 		if($section)
 		{
-			$section->params = new JRegistry($section->params);
+			$section->params = new \Joomla\Registry\Registry($section->params);
 
 			if($section->params->get('personalize.personalize') && $section->params->get('events.subscribe_user'))
 			{
@@ -109,14 +109,14 @@ class JoomcckModelSection extends MModelAdmin
 				$section->params->set('events.subscribe_category', 0);
 			}
 
-			$descr                 = JText::_($section->description);
-			$descr                 = (!empty($section->description) ? JHtml::_('content.prepare', $descr) : '');
+			$descr                 = \Joomla\CMS\Language\Text::_($section->description);
+			$descr                 = (!empty($section->description) ? \Joomla\CMS\HTML\HTMLHelper::_('content.prepare', $descr) : '');
 			$descr                 = preg_split('#<hr\s+id=("|\')system-readmore("|\')\s*\/*>#i', $descr, 2);
 			$section->descr_before = @$descr[0];
 			$section->descr_after  = @$descr[1];
 			$section->descr_full   = implode($descr);
 			$section->link         = Url::records($section);
-			$section->name         = JText::_($section->name);
+			$section->name         = \Joomla\CMS\Language\Text::_($section->name);
 		}
 		$cache[$id] = $section;
 
@@ -125,7 +125,7 @@ class JoomcckModelSection extends MModelAdmin
 
 	public function countUserRecords($section_id, $type_id = NULL, $byday = FALSE)
 	{
-		$user = JFactory::getUser();
+		$user = \Joomla\CMS\Factory::getUser();
 
 		$query = $this->_db->getQuery(TRUE);
 

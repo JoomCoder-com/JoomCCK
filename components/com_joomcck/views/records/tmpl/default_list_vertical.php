@@ -13,7 +13,7 @@ $items = $this->items;
 $r = 0;
 $params = $this->tmpl_params['list'];
 $column = array();
-JHtml::_('dropdown.init');
+\Joomla\CMS\HTML\HTMLHelper::_('dropdown.init');
 $exclude = $params->get('tmpl_params.field_id_exclude');
 settype($exclude, 'array');
 foreach ($exclude as &$value) {
@@ -38,7 +38,7 @@ $width = (100 - (int)$params->get('tmpl_params.lbl_width', 15)) / $cols;
 }
 </style>
 <?php if($params->get('tmpl_core.show_title_index')):?>
-	<h2><?php echo JText::_('CONTHISPAGE')?></h2>
+	<h2><?php echo \Joomla\CMS\Language\Text::_('CONTHISPAGE')?></h2>
 	<ul>
 		<?php foreach ($this->items AS $item):?>
 			<li><a href="#record<?php echo $item->id?>"><?php echo $item->title?></a></li>
@@ -53,7 +53,7 @@ $width = (100 - (int)$params->get('tmpl_params.lbl_width', 15)) / $cols;
 			<?php if($params->get('tmpl_params.item_icon_title')):?>
 				<img src="<?php echo JURI::root(TRUE)?>/media/com_joomcck/icons/16/<?php echo $params->get('tmpl_params.item_icon_title_icon', 'edit.png')?>" align="absmiddle">
 			<?php endif; ?>
-			<?php echo  JText::_($params->get('tmpl_params.lbl_title', 'CTITLE')); ?>
+			<?php echo  \Joomla\CMS\Language\Text::_($params->get('tmpl_params.lbl_title', 'CTITLE')); ?>
 		</th>
 		<?php for ($i=0; $i< $cols; $i++): ?>
 			<td class="has-context" width="<?php echo $width; ?>%">
@@ -65,7 +65,7 @@ $width = (100 - (int)$params->get('tmpl_params.lbl_width', 15)) / $cols;
 				<?php if($this->submission_types[$items[$i]->type_id]->params->get('properties.item_title')):?>
 					<<?php echo $params->get('tmpl_params.title_tag', 'h2')?>>
 						<?php if($params->get('tmpl_core.item_link')):?>
-							<a <?php echo $items[$i]->nofollow ? 'rel="nofollow"' : '';?> href="<?php echo JRoute::_($items[$i]->url);?>">
+							<a <?php echo $items[$i]->nofollow ? 'rel="nofollow"' : '';?> href="<?php echo \Joomla\CMS\Router\Route::_($items[$i]->url);?>">
 								<?php echo $items[$i]->title?>
 							</a>
 						<?php else :?>
@@ -85,7 +85,7 @@ $width = (100 - (int)$params->get('tmpl_params.lbl_width', 15)) / $cols;
 				<?php if($params->get('tmpl_params.item_icon_author')):?>
 					<img src="<?php echo JURI::root(TRUE);?>/media/com_joomcck/icons/16/user.png" align="absmiddle" />
 				<?php endif;?>
-				<?php echo JText::_('CAUTHOR');?>
+				<?php echo \Joomla\CMS\Language\Text::_('CAUTHOR');?>
 			</th>
 			<?php for ($i=0; $i < $cols; $i++): ?>
 				<td valign="middle">
@@ -94,7 +94,7 @@ $width = (100 - (int)$params->get('tmpl_params.lbl_width', 15)) / $cols;
 					<?php endif;?>
 					<?php echo CCommunityHelper::getName($items[$i]->user_id, $this->section);?>
 					<?php if($params->get('tmpl_core.item_author_filter') && $items[$i]->user_id):?>
-						<?php echo FilterHelper::filterButton('filter_user', $items[$i]->user_id, NULL, JText::sprintf('CSHOWALLUSERREC', CCommunityHelper::getName($items[$i]->user_id, $this->section, array('nohtml' => 1))), $this->section);?>
+						<?php echo FilterHelper::filterButton('filter_user', $items[$i]->user_id, NULL, \Joomla\CMS\Language\Text::sprintf('CSHOWALLUSERREC', CCommunityHelper::getName($items[$i]->user_id, $this->section, array('nohtml' => 1))), $this->section);?>
 					<?php endif;?>
 				</td>
 			<?php endfor; ?>
@@ -107,7 +107,7 @@ $width = (100 - (int)$params->get('tmpl_params.lbl_width', 15)) / $cols;
 				<?php if($params->get('tmpl_params.item_icon_rating')):?>
 					<img src="<?php echo JURI::root(TRUE);?>/media/com_joomcck/icons/16/star.png" align="absmiddle" />
 				<?php endif;?>
-				<?php echo JText::_('CRATING');?>
+				<?php echo \Joomla\CMS\Language\Text::_('CRATING');?>
 			</th>
 			<?php for ($i=0; $i < $cols; $i++): ?>
 				<td nowrap="nowrap"><?php echo $items[$i]->rating;?></td>
@@ -121,13 +121,13 @@ $width = (100 - (int)$params->get('tmpl_params.lbl_width', 15)) / $cols;
 				<?php if($params->get('tmpl_params.item_icon_type')):?>
 					<img src="<?php echo JURI::root(TRUE);?>/media/com_joomcck/icons/16/block.png" align="absmiddle" />
 				<?php endif;?>
-				<?php echo JText::_('CTYPE');?>
+				<?php echo \Joomla\CMS\Language\Text::_('CTYPE');?>
 			</th>
 			<?php for ($i=0; $i < $cols; $i++): ?>
 				<td nowrap="nowrap">
 					<?php echo $items[$i]->type_name;?>
 					<?php if($params->get('tmpl_core.item_type_filter')):?>
-						<?php echo FilterHelper::filterButton('filter_type', $items[$i]->type_id, NULL, JText::sprintf('CSHOWALLTYPEREC', $items[$i]->type_name), $this->section);?>
+						<?php echo FilterHelper::filterButton('filter_type', $items[$i]->type_id, NULL, \Joomla\CMS\Language\Text::sprintf('CSHOWALLTYPEREC', $items[$i]->type_name), $this->section);?>
 					<?php endif;?>
 				</td>
 			<?php endfor; ?>
@@ -140,7 +140,7 @@ $width = (100 - (int)$params->get('tmpl_params.lbl_width', 15)) / $cols;
 				<?php if($params->get('tmpl_params.item_icon_user_categories')):?>
 					<img src="<?php echo JURI::root(TRUE);?>/media/com_joomcck/icons/16/category.png" align="absmiddle" />
 				<?php endif;?>
-				<?php echo JText::_($params->get('tmpl_params.lbl_category', 'CCATEGORY'));?>
+				<?php echo \Joomla\CMS\Language\Text::_($params->get('tmpl_params.lbl_category', 'CCATEGORY'));?>
 			</th>
 			<?php for ($i=0; $i < $cols; $i++): ?>
 				<td nowrap="nowrap">
@@ -156,7 +156,7 @@ $width = (100 - (int)$params->get('tmpl_params.lbl_width', 15)) / $cols;
 				<?php if($params->get('tmpl_params.item_icon_categories')):?>
 					<img src="<?php echo JURI::root(TRUE);?>/media/com_joomcck/icons/16/category.png" align="absmiddle" />
 				<?php endif;?>
-				<?php echo JText::_('CCATEGORY');?>
+				<?php echo \Joomla\CMS\Language\Text::_('CCATEGORY');?>
 			</th>
 			<?php for ($i=0; $i < $cols; $i++): ?>
 				<td>
@@ -172,11 +172,11 @@ $width = (100 - (int)$params->get('tmpl_params.lbl_width', 15)) / $cols;
 				<?php if($params->get('tmpl_params.item_icon_ctime')):?>
 					<img src="<?php echo JURI::root(TRUE);?>/media/com_joomcck/icons/16/calendar-day.png" align="absmiddle" />
 				<?php endif;?>
-				<?php echo JText::_('CCREATED');?>
+				<?php echo \Joomla\CMS\Language\Text::_('CCREATED');?>
 			</th>
 			<?php for ($i=0; $i < $cols; $i++): ?>
 				<td nowrap="nowrap">
-					<?php echo JHtml::_('date', $items[$i]->created, $params->get('tmpl_core.item_time_format'));?>
+					<?php echo \Joomla\CMS\HTML\HTMLHelper::_('date', $items[$i]->created, $params->get('tmpl_core.item_time_format'));?>
 				</td>
 			<?php endfor; ?>
 		</TR>
@@ -188,11 +188,11 @@ $width = (100 - (int)$params->get('tmpl_params.lbl_width', 15)) / $cols;
 				<?php if($params->get('tmpl_params.item_icon_mtime')):?>
 					<img src="<?php echo JURI::root(TRUE);?>/media/com_joomcck/icons/16/calendar-day.png" align="absmiddle" />
 				<?php endif;?>
-				<?php echo JText::_('CCHANGED');?>
+				<?php echo \Joomla\CMS\Language\Text::_('CCHANGED');?>
 			</th>
 			<?php for ($i=0; $i < $cols; $i++): ?>
 				<td nowrap="nowrap">
-					<?php echo JHtml::_('date', $items[$i]->modify, $params->get('tmpl_core.item_time_format'));?>
+					<?php echo \Joomla\CMS\HTML\HTMLHelper::_('date', $items[$i]->modify, $params->get('tmpl_core.item_time_format'));?>
 				</td>
 			<?php endfor; ?>
 		</TR>
@@ -204,11 +204,11 @@ $width = (100 - (int)$params->get('tmpl_params.lbl_width', 15)) / $cols;
 				<?php if($params->get('tmpl_params.item_icon_mtime')):?>
 					<img src="<?php echo JURI::root(TRUE);?>/media/com_joomcck/icons/16/calendar-day.png" align="absmiddle" />
 				<?php endif;?>
-				<?php echo JText::_('CEXPIRE');?>
+				<?php echo \Joomla\CMS\Language\Text::_('CEXPIRE');?>
 			</th>
 			<?php for ($i=0; $i < $cols; $i++): ?>
 				<td nowrap="nowrap">
-					<?php echo ( $items[$i]->expire ? JHtml::_('date', $items[$i]->expire, $params->get('tmpl_core.item_time_format')) : JText::_('CNEVER'));?>
+					<?php echo ( $items[$i]->expire ? \Joomla\CMS\HTML\HTMLHelper::_('date', $items[$i]->expire, $params->get('tmpl_core.item_time_format')) : \Joomla\CMS\Language\Text::_('CNEVER'));?>
 				</td>
 			<?php endfor; ?>
 		</TR>
@@ -220,7 +220,7 @@ $width = (100 - (int)$params->get('tmpl_params.lbl_width', 15)) / $cols;
 				<?php if($params->get('tmpl_params.item_icon_comments_num')):?>
 					<img src="<?php echo JURI::root(TRUE);?>/media/com_joomcck/icons/16/balloon-left.png" align="absmiddle" />
 				<?php endif;?>
-				<?php echo JText::_('CCOMMENTS');?>
+				<?php echo \Joomla\CMS\Language\Text::_('CCOMMENTS');?>
 			</th>
 			<?php for ($i=0; $i < $cols; $i++): ?>
 				<td nowrap="nowrap" align="center">
@@ -236,7 +236,7 @@ $width = (100 - (int)$params->get('tmpl_params.lbl_width', 15)) / $cols;
 				<?php if($params->get('tmpl_params.item_icon_vote_num')):?>
 					<img src="<?php echo JURI::root(TRUE);?>/media/com_joomcck/icons/16/star.png" align="absmiddle" />
 				<?php endif;?>
-				<?php echo JText::_('CVOTES');?>
+				<?php echo \Joomla\CMS\Language\Text::_('CVOTES');?>
 			</th>
 			<?php for ($i=0; $i < $cols; $i++): ?>
 				<td nowrap="nowrap" align="center">
@@ -252,7 +252,7 @@ $width = (100 - (int)$params->get('tmpl_params.lbl_width', 15)) / $cols;
 				<?php if($params->get('tmpl_params.item_icon_favorite_num')):?>
 					<img src="<?php echo JURI::root(TRUE);?>/media/com_joomcck/icons/16/star.png" align="absmiddle" />
 				<?php endif;?>
-				<?php echo JText::_('CFAVORITE');?>
+				<?php echo \Joomla\CMS\Language\Text::_('CFAVORITE');?>
 			</th>
 			<?php for ($i=0; $i < $cols; $i++): ?>
 				<td nowrap="nowrap" align="center">
@@ -268,7 +268,7 @@ $width = (100 - (int)$params->get('tmpl_params.lbl_width', 15)) / $cols;
 				<?php if($params->get('tmpl_params.item_icon_follow_num')):?>
 					<img src="<?php echo JURI::root(TRUE);?>/media/com_joomcck/icons/16/follow1.png" align="absmiddle" />
 				<?php endif;?>
-				<?php echo JText::_('CFOLLOWERS');?>
+				<?php echo \Joomla\CMS\Language\Text::_('CFOLLOWERS');?>
 			</th>
 			<?php for ($i=0; $i < $cols; $i++): ?>
 				<td nowrap="nowrap" align="center">
@@ -284,7 +284,7 @@ $width = (100 - (int)$params->get('tmpl_params.lbl_width', 15)) / $cols;
 				<?php if($params->get('tmpl_params.item_icon_hits')):?>
 					<img src="<?php echo JURI::root(TRUE);?>/media/com_joomcck/icons/16/hand-point-090.png" align="absmiddle" />
 				<?php endif;?>
-				<?php echo JText::_('CHITS');?>
+				<?php echo \Joomla\CMS\Language\Text::_('CHITS');?>
 			</th>
 			<?php for ($i=0; $i < $cols; $i++): ?>
 				<td nowrap="nowrap" align="center">
@@ -301,7 +301,7 @@ $width = (100 - (int)$params->get('tmpl_params.lbl_width', 15)) / $cols;
 				<?php if($field->params->get('core.icon') && $params->get('tmpl_params.item_icon_fields')):?>
 					<img src="<?php echo JURI::root(TRUE);?>/media/com_joomcck/icons/16/<?php echo $field->params->get('core.icon');?>" align="absmiddle" />
 				<?php endif;?>
-				<?php echo JText::_($field->label);?>
+				<?php echo \Joomla\CMS\Language\Text::_($field->label);?>
 			</th>
 			<?php for ($i=0; $i < $cols; $i++): ?>
 				<?php if(isset($items[$i]->fields_by_key[$key])):?>

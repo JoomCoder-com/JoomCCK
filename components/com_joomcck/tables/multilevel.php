@@ -11,7 +11,7 @@ defined('_JEXEC') or die('Restricted access');
 
 jimport('joomla.database.tablenested');
 
-class JoomcckTableMultilevel extends JTableNested
+class JoomcckTableMultilevel extends \Joomla\CMS\Table\Nested
 {
 
 	public function __construct(&$_db)

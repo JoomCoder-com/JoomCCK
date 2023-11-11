@@ -10,7 +10,7 @@
 defined( '_JEXEC' ) or die( 'Restricted access');
 jimport('joomla.table.table');
 
-class JoomcckTableReposts extends JTable
+class JoomcckTableReposts extends \Joomla\CMS\Table\Table
 {
 	public function __construct( &$_db ) {
 		parent::__construct( '#__js_res_record_repost', 'id', $_db );

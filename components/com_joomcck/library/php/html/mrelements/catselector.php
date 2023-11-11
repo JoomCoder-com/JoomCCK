@@ -9,7 +9,7 @@
 defined('_JEXEC') or die('Restricted access');
 ?>
 <?php if($limit > 0):?>
-	<small><?php echo JText::sprintf('CSELECTLIMIT', $limit)?></small>
+	<small><?php echo \Joomla\CMS\Language\Text::sprintf('CSELECTLIMIT', $limit)?></small>
 	<br />
 	<br />
 <?php endif;?>
@@ -47,7 +47,7 @@ defined('_JEXEC') or die('Restricted access');
 						<?php if(in_array($c->id, $ignore)) { continue;} ?>
 						<li id="category-<?php echo $c->section_id; ?>-<?php echo $c->id; ?>">
 							<a class="btn btn-outline-dark" href="javascript:void(0);" <?php if($c->children){ echo 'onclick="CatSelector.get_children('.$c->id.', '.$c->section_id.', 1)"';}else{echo ' class="disabled"';}?>>
-								<?php if($c->id != JFactory::getApplication()->input->getInt('id') && $c->params->get('submission', 1)):?>
+								<?php if($c->id != \Joomla\CMS\Factory::getApplication()->input->getInt('id') && $c->params->get('submission', 1)):?>
 									<img class="float-end" id="s_icon<?php echo $c->id;?>"
 										src="<?php echo JURI::root(TRUE);?>/media/com_joomcck/icons/16/plus-button.png"
 										onclick="CatSelector.add(<?php echo $c->id;?>, '<?php echo $c->title;?>', '<?php echo $c->path;?>')" />
@@ -60,7 +60,7 @@ defined('_JEXEC') or die('Restricted access');
 			</div>
 		</div>
 	<?php else:?>
-		<h2><?php echo JText::_('CNOSECTIONS')?></h2>
+		<h2><?php echo \Joomla\CMS\Language\Text::_('CNOSECTIONS')?></h2>
 	<?php endif;?>
 
 	<div class="clearfix"></div>
@@ -68,9 +68,9 @@ defined('_JEXEC') or die('Restricted access');
 		<div class="bar" style="width: 100%;"></div>
 	</div>
 	<small>
-		<?php echo JText::sprintf('CCLICKTOASIGNCATEGORY',
-			JHtml::image(JURI::root().'media/com_joomcck/icons/16/plus-button.png', JText::_('CADDCATEGORY'), array('align'=>'absmiddle', 'width' => 12, 'style' => 'float: none')),
-			JHtml::image(JURI::root().'media/com_joomcck/icons/16/cross-button.png', JText::_('CDELETECATEGORY'), array('align'=>'absmiddle', 'width' => 12, 'style' => 'float: none')));?>
+		<?php echo \Joomla\CMS\Language\Text::sprintf('CCLICKTOASIGNCATEGORY',
+			\Joomla\CMS\HTML\HTMLHelper::image(JURI::root().'media/com_joomcck/icons/16/plus-button.png', \Joomla\CMS\Language\Text::_('CADDCATEGORY'), array('align'=>'absmiddle', 'width' => 12, 'style' => 'float: none')),
+			\Joomla\CMS\HTML\HTMLHelper::image(JURI::root().'media/com_joomcck/icons/16/cross-button.png', \Joomla\CMS\Language\Text::_('CDELETECATEGORY'), array('align'=>'absmiddle', 'width' => 12, 'style' => 'float: none')));?>
 	</small>
 </div>
 <div class="clearfix"></div>
@@ -93,7 +93,7 @@ defined('_JEXEC') or die('Restricted access');
 					var html = '<div class="float-start alert alert-warning alert-dismissible fade show" role="alert">' +
                         '<button type="button" data-bs-dismiss="alert" aria-label="Close" class="btn-close">' +
                         '</button>
-                        <?php echo htmlentities(JText::_('CCATEGORYREACHMAXLIMIT'), ENT_QUOTES, 'UTF-8')?>
+                        <?php echo htmlentities(\Joomla\CMS\Language\Text::_('CCATEGORYREACHMAXLIMIT'), ENT_QUOTES, 'UTF-8')?>
                         </div>';
 					$('#error-msg').html(html);
 					return;
@@ -156,8 +156,8 @@ defined('_JEXEC') or die('Restricted access');
 			$('#bro-ba').slideDown('slow', function(){
 				$.ajax({
 					url: '<?php
-							$url = JRoute::_("index.php?option=com_joomcck&task=ajax.category_children&tmpl=component", FALSE);
-							if(JFactory::getApplication()->isClient('administrator'))
+							$url = \Joomla\CMS\Router\Route::_("index.php?option=com_joomcck&task=ajax.category_children&tmpl=component", FALSE);
+							if(\Joomla\CMS\Factory::getApplication()->isClient('administrator'))
 							{
 								$url = str_replace('/administrator', '', $url);
 							}

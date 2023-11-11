@@ -8,11 +8,11 @@
  */
 defined('_JEXEC') or die();
 
-JFactory::getDocument()->addScript(JURI::root(TRUE) . '/media/com_joomcck/vendors/jquery.countdown/dist/jquery.countdown.min.js');
+\Joomla\CMS\Factory::getDocument()->addScript(JURI::root(TRUE) . '/media/com_joomcck/vendors/jquery.countdown/dist/jquery.countdown.min.js');
 
 $val = $this->value[0];
 $date = '<span class="countdown_date">'.$this->dates[0].'</span>';
-$text = (strtotime($val) > time()) ? JText::sprintf('D_LEFT', $date) : JText::sprintf('D_PAST', $date);
+$text = (strtotime($val) > time()) ? \Joomla\CMS\Language\Text::sprintf('D_LEFT', $date) : \Joomla\CMS\Language\Text::sprintf('D_PAST', $date);
 
 $format = $this->params->get('tmpl_countdown.cd_format', '%d days %H hr %M min %S sec');
 if((int)$format == 100) {

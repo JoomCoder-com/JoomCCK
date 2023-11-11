@@ -12,12 +12,12 @@ defined('_JEXEC') or die('Restricted access');
 
 <?php echo HTMLFormatHelper::layout('navbar'); ?>
 
-<form action="<?php echo JUri::getInstance()->toString() ?>" method="post" id="adminForm" name="adminForm" class="form-horizontal">
+<form action="<?php echo \Joomla\CMS\Uri\Uri::getInstance()->toString() ?>" method="post" id="adminForm" name="adminForm" class="form-horizontal">
     <?php echo HTMLFormatHelper::layout('item', ['nosave' => 1, 'task_ext' => 'chco']); ?>
     <div class="page-header">
         <h1>
-            <img src="<?php echo JUri::root(TRUE); ?>/components/com_joomcck/images/icons/items.png">
-            <?php echo JText::_('C_MASS_CORE_FIELDS'); ?>
+            <img src="<?php echo \Joomla\CMS\Uri\Uri::root(TRUE); ?>/components/com_joomcck/images/icons/items.png">
+            <?php echo \Joomla\CMS\Language\Text::_('C_MASS_CORE_FIELDS'); ?>
         </h1>
     </div>
 
@@ -74,5 +74,5 @@ defined('_JEXEC') or die('Restricted access');
         <input type="hidden" name="cid[]" value="<?php echo $id ?>"/>
     <?php endforeach; ?>
     <input type="hidden" name="task" value=""/>
-    <?php echo JHtml::_('form.token'); ?>
+    <?php echo \Joomla\CMS\HTML\HTMLHelper::_('form.token'); ?>
 </form>

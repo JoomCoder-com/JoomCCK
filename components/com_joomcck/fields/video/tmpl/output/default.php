@@ -10,14 +10,14 @@ defined('_JEXEC') or die();
 if($vw = $this->request->get('view_what'))
 	$client = $vw;
 $key = $client.$this->id.$record->id;
-JFactory::getDocument()->addScript(JUri::root(true).'/components/com_joomcck/fields/video/assets/video.js');
+\Joomla\CMS\Factory::getDocument()->addScript(\Joomla\CMS\Uri\Uri::root(true).'/components/com_joomcck/fields/video/assets/video.js');
 ?>
 
 <div id="video-block<?php echo $key;?>">
 	<div id="destr<?php echo $key;?>" class="video-block" style="display: none;"><div id="mediaplayer<?php echo $key;?>"></div></div>
 	<div id="htmlplayer<?php echo $key;?>">
 		<div class="progress progress-success progress-striped">
-			<div class="bar" style="width: 100%"><?php echo JText::_('V_LOADING');?></div>
+			<div class="bar" style="width: 100%"><?php echo \Joomla\CMS\Language\Text::_('V_LOADING');?></div>
 		</div>
 	</div>
 </div>

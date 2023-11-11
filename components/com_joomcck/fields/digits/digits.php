@@ -16,7 +16,7 @@ class JFormFieldCDigits extends CFormField
 
 	public function getInput()
 	{
-		$document = JFactory::getDocument();
+		$document = \Joomla\CMS\Factory::getDocument();
 		$document->addScript(JURI::root(TRUE).'/components/com_joomcck/fields/digits/assets/digits.js');
 
 		return $this->_display_input();
@@ -24,11 +24,11 @@ class JFormFieldCDigits extends CFormField
 
 	public function onJSValidate()
 	{
-		$text = htmlentities(JText::sprintf('F_FORMATINCORRECT', $this->label), ENT_QUOTES, 'UTF-8');
+		$text = htmlentities(\Joomla\CMS\Language\Text::sprintf('F_FORMATINCORRECT', $this->label), ENT_QUOTES, 'UTF-8');
 		$js = '';
 		if ($this->required)
 		{
-			$js .= "\n\t\tif(jQuery('#field_{$this->id}').val() == ''){hfid.push({$this->id}); isValid = false; errorText.push('" . addslashes(JText::sprintf('CFIELDREQUIRED', $this->label)) . "');}";
+			$js .= "\n\t\tif(jQuery('#field_{$this->id}').val() == ''){hfid.push({$this->id}); isValid = false; errorText.push('" . addslashes(\Joomla\CMS\Language\Text::sprintf('CFIELDREQUIRED', $this->label)) . "');}";
 		}
 
 		return $js .= "\n\t\tif(!jQuery('#field_{$this->id}').val().match(/^[-\+]?[\d\.]*$/)){isValid = false; errorText.push('{$text}'); hfid.push({$this->id});}";
@@ -39,7 +39,7 @@ class JFormFieldCDigits extends CFormField
 		{
 			if(is_numeric($value) && ($value > $this->params->get('params.val_max', 0) || $value < $this->params->get('params.val_min', 0)))
 			{
-				$this->setError(JText::sprintf('D_MINMAX_ERROR', $this->label, $this->params->get('params.val_min', 0), $this->params->get('params.val_max', 0)));
+				$this->setError(\Joomla\CMS\Language\Text::sprintf('D_MINMAX_ERROR', $this->label, $this->params->get('params.val_min', 0), $this->params->get('params.val_max', 0)));
 				return false;
 			}
 		}
@@ -55,7 +55,7 @@ class JFormFieldCDigits extends CFormField
 	{
 		$value = $this->value;
 		settype($value, 'array');
-		return  JText::sprintf($this->params->get('params.filter_worn', 'P_BETWEEN'),
+		return  \Joomla\CMS\Language\Text::sprintf($this->params->get('params.filter_worn', 'P_BETWEEN'),
 			'<b>'.$this->params->get('params.prepend').number_format($value['min'], $this->params->get('params.decimals_num', 0), $this->params->get('params.dseparator', '.'), $this->params->get('params.separator', ',')).$this->params->get('params.append').'</b>',
 			'<b>'.$this->params->get('params.prepend').number_format($value['max'], $this->params->get('params.decimals_num', 0), $this->params->get('params.dseparator', '.'), $this->params->get('params.separator', ',')).$this->params->get('params.append').'</b>');
 	}
@@ -97,7 +97,7 @@ class JFormFieldCDigits extends CFormField
 
 		if(!array_key_exists($this->id, $out))
 		{
-			$db = JFactory::getDbo();
+			$db = \Joomla\CMS\Factory::getDbo();
 			$query = $db->getQuery(TRUE);
 			$query->select('MAX(field_value + 0) as max, MIN(field_value + 0) as min');
 			$query->from('#__js_res_record_values');
@@ -115,7 +115,7 @@ class JFormFieldCDigits extends CFormField
 	public function onRenderFilter($section, $module = false)
 	{
 
-		$this->value = new JRegistry($this->value);
+		$this->value = new \Joomla\Registry\Registry($this->value);
 
 		$this->data = $this->_get_min_max($section);
 
@@ -146,7 +146,7 @@ class JFormFieldCDigits extends CFormField
 		$value = $this->value;
 		if(is_array($value))
 		{
-			$value = new JRegistry($value);
+			$value = new \Joomla\Registry\Registry($value);
 		}
 
 		$min = $value->get('min');

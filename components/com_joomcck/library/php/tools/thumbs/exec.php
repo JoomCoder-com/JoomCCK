@@ -2,25 +2,25 @@
 
 defined('_JEXEC') or die();
 
-$app    = JFactory::getApplication();
-$folder = JPATH_ROOT . DIRECTORY_SEPARATOR . JComponentHelper::getParams('com_joomcck')->get('general_upload') . DIRECTORY_SEPARATOR . 'thumbs_cache';
-if(JFolder::exists($folder))
+$app    = \Joomla\CMS\Factory::getApplication();
+$folder = JPATH_ROOT . DIRECTORY_SEPARATOR . \Joomla\CMS\Component\ComponentHelper::getParams('com_joomcck')->get('general_upload') . DIRECTORY_SEPARATOR . 'thumbs_cache';
+if(\Joomla\CMS\Filesystem\Folder::exists($folder))
 {
-	JFolder::delete($folder);
-	$app->enqueueMessage(JText::_('Uploads folder thumbnail cache deleted'));
+	\Joomla\CMS\Filesystem\Folder::delete($folder);
+	$app->enqueueMessage(\Joomla\CMS\Language\Text::_('Uploads folder thumbnail cache deleted'));
 }
 else
 {
-	$app->enqueueMessage(JText::_('No thumbnail in uploads folder'));
+	$app->enqueueMessage(\Joomla\CMS\Language\Text::_('No thumbnail in uploads folder'));
 }
 
 $folder = JPATH_ROOT . '/images/joomcck_thumbs';
-if(JFolder::exists($folder))
+if(\Joomla\CMS\Filesystem\Folder::exists($folder))
 {
-	JFolder::delete($folder);
-	$app->enqueueMessage(JText::_('Cache folder thumbnail cache deleted'));
+	\Joomla\CMS\Filesystem\Folder::delete($folder);
+	$app->enqueueMessage(\Joomla\CMS\Language\Text::_('Cache folder thumbnail cache deleted'));
 }
 else
 {
-	$app->enqueueMessage(JText::_('No thumbnail in cache folder'));
+	$app->enqueueMessage(\Joomla\CMS\Language\Text::_('No thumbnail in cache folder'));
 }

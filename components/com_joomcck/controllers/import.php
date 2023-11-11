@@ -22,15 +22,15 @@ class JoomcckControllerImport extends MControllerAdmin
 
 		if(!$this->input)
 		{
-			$this->input = JFactory::getApplication()->input;
+			$this->input = \Joomla\CMS\Factory::getApplication()->input;
 		}
 	}
 
 
 	public function import()
 	{
-		$user   = JFactory::getUser();
-		$app    = JFactory::getApplication();
+		$user   = \Joomla\CMS\Factory::getUser();
+		$app    = \Joomla\CMS\Factory::getApplication();
 		$params = $this->input->get('import', array(), 'array');
 
 		$imports = JTable::getInstance('Import', 'JoomcckTable');
@@ -54,7 +54,7 @@ class JoomcckControllerImport extends MControllerAdmin
 			$imports->store();
 		}
 
-		$db = JFactory::getDbo();
+		$db = \Joomla\CMS\Factory::getDbo();
 
 
 		try
@@ -72,7 +72,7 @@ class JoomcckControllerImport extends MControllerAdmin
 			$params     = new Registry($imports->params);
 			$conversion = new Registry($imports->crossids);
 			$crossids   = json_decode($imports->crossids, TRUE);
-			$import_key = JFactory::getSession()->get('key', NULL, 'import');
+			$import_key = \Joomla\CMS\Factory::getSession()->get('key', NULL, 'import');
 			$type       = ItemsStore::getType($this->input->getInt('type_id'));
 			$section    = ItemsStore::getSection($this->input->getInt('section_id'));
 
@@ -82,7 +82,7 @@ class JoomcckControllerImport extends MControllerAdmin
 
 			if(!$list)
 			{
-				throw new Exception(JText::_('CIMPORTROWSARENOTFOUND'));
+				throw new Exception(\Joomla\CMS\Language\Text::_('CIMPORTROWSARENOTFOUND'));
 			}
 
 			require_once JPATH_ROOT . '/components/com_joomcck/models/fields.php';
@@ -152,7 +152,7 @@ class JoomcckControllerImport extends MControllerAdmin
 
 				if($row->get($params->get('field.ctime')) || $isNew) $data['ctime']   = JDate::getInstance($row->get($params->get('field.ctime', 'now')))->toSql();
 				if($row->get($params->get('field.mtime')) || $isNew) $data['mtime']   = JDate::getInstance($row->get($params->get('field.mtime', 'now')))->toSql();
-				if($row->get($params->get('field.user_id')) || $isNew) $data['user_id'] = $row->get($params->get('field.user_id'), JFactory::getUser()->get('id'));
+				if($row->get($params->get('field.user_id')) || $isNew) $data['user_id'] = $row->get($params->get('field.user_id'), \Joomla\CMS\Factory::getUser()->get('id'));
 				if($row->get($params->get('field.access')) || $isNew) $data['access']  = $row->get($params->get('field.access'));
 				if($row->get($params->get('field.extime')) || $isNew) $data['extime']  = $row->get($params->get('field.extime'));
 
@@ -277,7 +277,7 @@ class JoomcckControllerImport extends MControllerAdmin
 					}
 				}
 
-				$user = JFactory::getUser($item->user_id);
+				$user = \Joomla\CMS\Factory::getUser($item->user_id);
 
 				if($section->params->get('more.search_title'))
 				{
@@ -307,7 +307,7 @@ class JoomcckControllerImport extends MControllerAdmin
 				unset($fulltext, $user);
 			}
 
-			JFactory::getApplication()->enqueueMessage(JText::_('CIMPORTSUCCESS'));
+			\Joomla\CMS\Factory::getApplication()->enqueueMessage(\Joomla\CMS\Language\Text::_('CIMPORTSUCCESS'));
 
 		}
 		catch(Exception $e)
@@ -316,8 +316,8 @@ class JoomcckControllerImport extends MControllerAdmin
 			Factory::getApplication()->enqueueMessage( $e->getMessage(), 'warning');
 		}
 
-		JFactory::getSession()->set('importstat', $stat);
-		JFactory::getApplication()->redirect(JRoute::_('index.php?option=com_joomcck&view=import&step=3&section_id=' . $imports->section_id, FALSE));
+		\Joomla\CMS\Factory::getSession()->set('importstat', $stat);
+		\Joomla\CMS\Factory::getApplication()->redirect(\Joomla\CMS\Router\Route::_('index.php?option=com_joomcck&view=import&step=3&section_id=' . $imports->section_id, FALSE));
 	}
 
 	private function _get_cat($id)
@@ -326,7 +326,7 @@ class JoomcckControllerImport extends MControllerAdmin
 
 		if(!array_key_exists($id, $categories))
 		{
-			$db = JFactory::getDbo();
+			$db = \Joomla\CMS\Factory::getDbo();
 			$db->setQuery("SELECT id, title FROM #__js_res_categories WHERE id = {$id}");
 
 			$categories[$id] = json_encode($db->loadAssocList('id', 'title'));
@@ -340,12 +340,12 @@ class JoomcckControllerImport extends MControllerAdmin
 		$this->key = $this->input->get('json');
 		$file      = $this->input->getString('file');
 
-		$ext        = strtolower(JFile::getExt($file));
+		$ext        = strtolower(\Joomla\CMS\Filesystem\File::getExt($file));
 		$this->json = JPATH_ROOT . '/tmp/' . $this->key . '.json';
 
 		$upload = JPATH_ROOT . '/tmp/import_uploads/' . urldecode($file);
 
-		if(!JFile::exists($upload))
+		if(!\Joomla\CMS\Filesystem\File::exists($upload))
 		{
 			$this->_error('CIMPORTCANNOTFINDFILE');
 		}
@@ -368,9 +368,9 @@ class JoomcckControllerImport extends MControllerAdmin
 			$dir       = JPATH_ROOT . '/tmp/import_extract/' . $this->key;
 			$this->dir = $dir;
 
-			if(!JFolder::exists($dir))
+			if(!\Joomla\CMS\Filesystem\Folder::exists($dir))
 			{
-				JFolder::create($dir);
+				\Joomla\CMS\Filesystem\Folder::create($dir);
 			}
 
 			if(!JArchive::extract($upload, $dir))
@@ -378,7 +378,7 @@ class JoomcckControllerImport extends MControllerAdmin
 				$this->_error('CIMPORTCANNOTEXTRACT');
 			}
 
-			$files = JFolder::files($dir, '\.(csv|json)$', TRUE, TRUE);
+			$files = \Joomla\CMS\Filesystem\Folder::files($dir, '\.(csv|json)$', TRUE, TRUE);
 			if(count($files) == 0)
 			{
 				$this->_error('CIMPORTNOFOUND');
@@ -392,18 +392,18 @@ class JoomcckControllerImport extends MControllerAdmin
 		}
 
 		$this->_msg(20, 'CIMPORTPARCE');
-		if(!JFile::exists($upload))
+		if(!\Joomla\CMS\Filesystem\File::exists($upload))
 		{
 			$this->_error('CIMPORTCANNOTFINDFILE');
 		}
 
-		$this->db    = JFactory::getDbo();
+		$this->db    = \Joomla\CMS\Factory::getDbo();
 		$this->heads = array();
 
 		$this->db->setQuery("DELETE FROM `#__js_res_import_rows` WHERE `ctime` < NOW() - INTERVAL 1 DAY OR `import` = {$this->key}");
 		$this->db->execute();
 
-		$ext = strtolower(JFile::getExt($upload));
+		$ext = strtolower(\Joomla\CMS\Filesystem\File::getExt($upload));
 		if($ext == 'csv')
 		{
 			$this->_load_csv($upload, $this->input->get('delimiter', ','));
@@ -421,12 +421,12 @@ class JoomcckControllerImport extends MControllerAdmin
 			}
 		}
 
-		JFactory::getSession()->set('headers', $this->heads, 'import');
-		JFactory::getSession()->set('key', $this->key, 'import');
+		\Joomla\CMS\Factory::getSession()->set('headers', $this->heads, 'import');
+		\Joomla\CMS\Factory::getSession()->set('key', $this->key, 'import');
 
 		$this->_msg(100, 'CIMPORTPARCE');
 
-		JFactory::getApplication()->close();
+		\Joomla\CMS\Factory::getApplication()->close();
 	}
 
 	private function _load_json($file)
@@ -485,35 +485,35 @@ class JoomcckControllerImport extends MControllerAdmin
 			'upload_dir'        => JPATH_ROOT . '/tmp/import_uploads/'
 		);
 
-		JFactory::getSession()->set('importprocess', 0);
+		\Joomla\CMS\Factory::getSession()->set('importprocess', 0);
 
-		if(!JFolder::exists($options['upload_dir']))
+		if(!\Joomla\CMS\Filesystem\Folder::exists($options['upload_dir']))
 		{
-			JFolder::create($options['upload_dir']);
+			\Joomla\CMS\Filesystem\Folder::create($options['upload_dir']);
 		}
 
 		$upload = new UploadHandler($options);
 
-		JFactory::getApplication()->close();
+		\Joomla\CMS\Factory::getApplication()->close();
 	}
 
 	private function _error($msg)
 	{
 		if(!empty($this->dir))
 		{
-			JFolder::delete($this->dir);
+			\Joomla\CMS\Filesystem\Folder::delete($this->dir);
 		}
-		JFile::write($this->json, json_encode(array(
-			'error' => JText::_($msg)
+		\Joomla\CMS\Filesystem\File::write($this->json, json_encode(array(
+			'error' => \Joomla\CMS\Language\Text::_($msg)
 		)));
-		JFactory::getApplication()->close();
+		\Joomla\CMS\Factory::getApplication()->close();
 	}
 
 	private function _msg($stat, $msg)
 	{
-		JFile::write($this->json, json_encode(array(
+		\Joomla\CMS\Filesystem\File::write($this->json, json_encode(array(
 			'status' => $stat,
-			'msg'    => JText::_($msg)
+			'msg'    => \Joomla\CMS\Language\Text::_($msg)
 		)));
 	}
 }

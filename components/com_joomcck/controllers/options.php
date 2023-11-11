@@ -18,7 +18,7 @@ class JoomcckControllerOptions extends MControllerAdmin
 		
 		if(!$this->input)
 		{
-			$this->input = JFactory::getApplication()->input;
+			$this->input = \Joomla\CMS\Factory::getApplication()->input;
 		}
 	}
 	public function saveoptionsclose()
@@ -45,7 +45,7 @@ class JoomcckControllerOptions extends MControllerAdmin
 	}
 	public function saveoptions()
 	{
-		$me = JFactory::getUser();
+		$me = \Joomla\CMS\Factory::getUser();
 		
 
 		if(! $me->id)
@@ -53,7 +53,7 @@ class JoomcckControllerOptions extends MControllerAdmin
 			return;
 		}
 
-		$app = JFactory::getApplication();
+		$app = \Joomla\CMS\Factory::getApplication();
 		$data = $this->input->get('jform', array(), 'array');
 
 		$table = JTable::getInstance('Useropt', 'JoomcckTable');
@@ -87,11 +87,11 @@ class JoomcckControllerOptions extends MControllerAdmin
 
 		if(empty($table->lastsend))
 		{
-			$table->lastsend = JFactory::getDate()->toSql();
+			$table->lastsend = \Joomla\CMS\Factory::getDate()->toSql();
 		}
 		$table->store();
 
-		$db = JFactory::getDbo();
+		$db = \Joomla\CMS\Factory::getDbo();
 		$sql = "DELETE FROM #__js_res_user_options_autofollow WHERE user_id = ".$me->get('id');
 		$db->setQuery($sql);
 		$db->execute();
@@ -107,13 +107,13 @@ class JoomcckControllerOptions extends MControllerAdmin
 			}
 		}
 
-		$app->enqueueMessage(JText::_('CMSGOPTIONSSAVED'));
+		$app->enqueueMessage(\Joomla\CMS\Language\Text::_('CMSGOPTIONSSAVED'));
 		$this->setRedirect(\Joomla\CMS\Uri\Uri::getInstance()->toString());
 	}
 
 	public function savesectionoptions()
 	{
-		$me = JFactory::getUser();
+		$me = \Joomla\CMS\Factory::getUser();
 		
 
 		if(! $me->id)
@@ -125,7 +125,7 @@ class JoomcckControllerOptions extends MControllerAdmin
 		if(!$section_id)
 			return;
 
-		$app = JFactory::getApplication();
+		$app = \Joomla\CMS\Factory::getApplication();
 		$data = $this->input->get('jform', array(), 'array');
 
 		$table = JTable::getInstance('Useropt', 'JoomcckTable');
@@ -153,7 +153,7 @@ class JoomcckControllerOptions extends MControllerAdmin
 
 		if(empty($table->lastsend))
 		{
-			$table->lastsend = JFactory::getDate()->toSql();
+			$table->lastsend = \Joomla\CMS\Factory::getDate()->toSql();
 		}
 		$table->store();
 
@@ -170,7 +170,7 @@ class JoomcckControllerOptions extends MControllerAdmin
 
 
 
-		$app->enqueueMessage(JText::_('CMSGSECTIONOPTIONSSAVED'));
+		$app->enqueueMessage(\Joomla\CMS\Language\Text::_('CMSGSECTIONOPTIONSSAVED'));
 		$this->setRedirect(\Joomla\CMS\Uri\Uri::getInstance()->toString());
 	}
 

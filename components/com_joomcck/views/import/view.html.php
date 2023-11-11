@@ -20,8 +20,8 @@ class JoomcckViewImport extends MViewBase
 
 	public function display($tpl = null)
 	{
-		$app = JFactory::getApplication();
-		$this->user = JFactory::getUser();
+		$app = \Joomla\CMS\Factory::getApplication();
+		$this->user = \Joomla\CMS\Factory::getUser();
 		
 		$section = ItemsStore::getSection($app->input->get('section_id'));
 		$this->section = $section;
@@ -81,7 +81,7 @@ class JoomcckViewImport extends MViewBase
 
 				if(!$this->types && !$this->type)
 				{
-					$app->enqueueMessage(JText::_('IMP_TYPENOTSET'));
+					$app->enqueueMessage(\Joomla\CMS\Language\Text::_('IMP_TYPENOTSET'));
 					return;
 				}*/
 			
@@ -91,18 +91,18 @@ class JoomcckViewImport extends MViewBase
 				$type = ItemsStore::getType($app->input->get('type'));
 				$this->type = $type;
 
-				$this->heads = JFactory::getSession()->get('headers', array(), 'import');
+				$this->heads = \Joomla\CMS\Factory::getSession()->get('headers', array(), 'import');
 
 				$options = $this->get('presets');
-				array_unshift($options, JHtml::_('select.option', 'new', JText::_('CIMPORTNEWIMSET')));
-				array_unshift($options, JHtml::_('select.option', '', JText::_('CIMPORTSELECTPRESET')));
+				array_unshift($options, \Joomla\CMS\HTML\HTMLHelper::_('select.option', 'new', \Joomla\CMS\Language\Text::_('CIMPORTNEWIMSET')));
+				array_unshift($options, \Joomla\CMS\HTML\HTMLHelper::_('select.option', '', \Joomla\CMS\Language\Text::_('CIMPORTSELECTPRESET')));
 				$this->presets = $options;
 
 				$this->fields = MModelBase::getInstance('Fields', 'JoomcckModel')->getFormFields($type->id);
 			break;
 
 			case 3:
-				$this->statistic = new JRegistry(JFactory::getSession()->get('importstat'));
+				$this->statistic = new \Joomla\Registry\Registry(\Joomla\CMS\Factory::getSession()->get('importstat'));
 
 				break;
 		}
@@ -112,24 +112,24 @@ class JoomcckViewImport extends MViewBase
 
 	public function _params($tpl)
 	{
-		$app = JFactory::getApplication();
+		$app = \Joomla\CMS\Factory::getApplication();
 		$type = ItemsStore::getType($app->input->get('type_id'));
 		$this->type = $type;
-		$this->heads = JFactory::getSession()->get('headers', array(), 'import');
+		$this->heads = \Joomla\CMS\Factory::getSession()->get('headers', array(), 'import');
 		$this->fields = MModelBase::getInstance('Fields', 'JoomcckModel')->getFormFields($type->id);
 		$this->item = $this->get('Preset');
 
 		//var_dump($this->item);
 
 		parent::display($tpl);
-		JFactory::getApplication()->close();
+		\Joomla\CMS\Factory::getApplication()->close();
 	}
 	public function _cats($tpl)
 	{
-		$app = JFactory::getApplication();
+		$app = \Joomla\CMS\Factory::getApplication();
 		
-		$db = JFactory::getDbo();
-		$sql = "SELECT `text` FROM #__js_res_import_rows WHERE `import` = " . JFactory::getSession()->get('key', 0, 'import');
+		$db = \Joomla\CMS\Factory::getDbo();
+		$sql = "SELECT `text` FROM #__js_res_import_rows WHERE `import` = " . \Joomla\CMS\Factory::getSession()->get('key', 0, 'import');
 		$db->setQuery($sql);
 		$list = $db->loadColumn();
 		
@@ -152,7 +152,7 @@ class JoomcckViewImport extends MViewBase
 			$cats_model->all = 1;
 			$cats_model->hidesubmision = 1;
 			$categories = $cats_model->getItems();
-			array_unshift($categories, JHtml::_('select.option', '', ' - '.JText::_('CPLEASESELECTCAT').' - ', 'id', 'opt'));
+			array_unshift($categories, \Joomla\CMS\HTML\HTMLHelper::_('select.option', '', ' - '.\Joomla\CMS\Language\Text::_('CPLEASESELECTCAT').' - ', 'id', 'opt'));
 			
 			$this->categories = $categories;
 		}
@@ -168,7 +168,7 @@ class JoomcckViewImport extends MViewBase
 
 		$this->item = $this->get('Preset');
 		parent::display($tpl);
-		JFactory::getApplication()->close();
+		\Joomla\CMS\Factory::getApplication()->close();
 	}
 
 	public function fieldlist($name, $default)
@@ -180,10 +180,10 @@ class JoomcckViewImport extends MViewBase
 			foreach($this->heads as $head)
 				$list[$head] = $head;
 			ArrayHelper::clean_r($list);
-			array_unshift($list, JText::_('CIMPORTNOIMPORT'));
+			array_unshift($list, \Joomla\CMS\Language\Text::_('CIMPORTNOIMPORT'));
 		}
 		
-		return JHtml::_('select.genericlist', $list, 'import[field][' . $name.']', 'class="col-md-12"', 'value', 'text', $default);
+		return \Joomla\CMS\HTML\HTMLHelper::_('select.genericlist', $list, 'import[field][' . $name.']', 'class="col-md-12"', 'value', 'text', $default);
 	}
 
 }

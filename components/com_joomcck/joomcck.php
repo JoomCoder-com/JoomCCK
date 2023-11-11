@@ -21,7 +21,7 @@ Webassets::init();
 require_once __DIR__ . '/api.php';
 
 
-$params              = JComponentHelper::getParams('com_joomcck');
+$params              = \Joomla\CMS\Component\ComponentHelper::getParams('com_joomcck');
 $meta                = array();
 $meta['description'] = $params->get('metadesc');
 $meta['keywords']    = $params->get('metakey');
@@ -31,17 +31,17 @@ $meta['copyright']   = $params->get('rights');
 
 MetaHelper::setMeta($meta);
 HTMLFormatHelper::loadHead();
-JFactory::getApplication()->setUserState('skipers.all', array());
+\Joomla\CMS\Factory::getApplication()->setUserState('skipers.all', array());
 
-$session = JFactory::getSession();
+$session = \Joomla\CMS\Factory::getSession();
 if(is_null($session->get('registry')))
 {
-	$session->set('registry', new JRegistry('session'));
+	$session->set('registry', new \Joomla\Registry\Registry('session'));
 }
 
 
 
 
 $controller = MControllerBase::getInstance('Joomcck');
-$controller->execute(JFactory::getApplication()->input->get('task'));
+$controller->execute(\Joomla\CMS\Factory::getApplication()->input->get('task'));
 $controller->redirect();

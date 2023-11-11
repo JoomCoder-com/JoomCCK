@@ -30,7 +30,7 @@ class JoomcckModelVotes extends MModelList
 	}
 
 	protected function populateState($ordering = null, $direction = null) {
-		$app = JFactory::getApplication ( 'administrator' );
+		$app = \Joomla\CMS\Factory::getApplication ( 'administrator' );
 
 		$search = $app->getUserStateFromRequest ( $this->context . '.filter.search', 'filter_search' );
 		$this->setState ( 'filter.search', $search );

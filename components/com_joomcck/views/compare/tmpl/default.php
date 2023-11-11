@@ -8,17 +8,17 @@
  */
 
 defined('_JEXEC') or die(); ?>
-<h1 class="title"><?php echo JText::_('CCOMPAREVIEW') ?></h1>
+<h1 class="title"><?php echo \Joomla\CMS\Language\Text::_('CCOMPAREVIEW') ?></h1>
 
 <div class="controls controls-row">
 	<div class="float-end">
 		<button class="btn" onclick="Joomcck.CleanCompare('<?php echo $this->back;?>', '<?php echo @$this->section->id ?>')">
-			<?php echo JText::_('CCLEANCOMPARE') ?>
+			<?php echo \Joomla\CMS\Language\Text::_('CCLEANCOMPARE') ?>
 		</button>
 	</div>
 	<a href="<?php echo $this->back;?>" class="btn btn-primary">
 		<?php echo HTMLFormatHelper::icon('arrow-180.png');  ?>
-		<?php echo JText::_('CGOBACK') ?>
+		<?php echo \Joomla\CMS\Language\Text::_('CGOBACK') ?>
 	</a>
 </div>
 <div class="clearfix"></div>

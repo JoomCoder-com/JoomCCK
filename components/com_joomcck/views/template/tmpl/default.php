@@ -9,7 +9,7 @@
 
 defined('_JEXEC') or die('Restricted access');
 
-JHtml::_('bootstrap.tooltip');
+\Joomla\CMS\HTML\HTMLHelper::_('bootstrap.tooltip');
 /** @var Joomla\CMS\WebAsset\WebAssetManager $wa */
 $wa = $this->document->getWebAssetManager();
 $wa->useScript('keepalive')
@@ -20,16 +20,16 @@ $wa->useScript('keepalive')
 		if(task == 'ctype.cancel' || document.formvalidator.isValid(document.getElementById('adminForm'))) {
 			Joomla.submitform(task, document.getElementById('adminForm'));
 		} else {
-			alert('<?php echo $this->escape(JText::_('JGLOBAL_VALIDATION_FORM_FAILED'));?>');
+			alert('<?php echo $this->escape(\Joomla\CMS\Language\Text::_('JGLOBAL_VALIDATION_FORM_FAILED'));?>');
 		}
 	}
 </script>
 
-<form action="<?php echo JUri::getInstance()->toString(); ?>" method="post" name="adminForm" id="adminForm" class="form-horizontal">
+<form action="<?php echo \Joomla\CMS\Uri\Uri::getInstance()->toString(); ?>" method="post" name="adminForm" id="adminForm" class="form-horizontal">
 	<?php echo HTMLFormatHelper::layout('item', $this); ?>
 	<div class="page-header">
 		<h1>
-			<?php echo JText::_('CNEWSECTION'); ?>
+			<?php echo \Joomla\CMS\Language\Text::_('CNEWSECTION'); ?>
 		</h1>
 	</div>
 
@@ -37,5 +37,5 @@ $wa->useScript('keepalive')
 	<div class=""><?php echo $this->form->getInput('source'); ?></div>
 	<input type="hidden" name="task" value=""/>
 	<?php echo $this->form->getInput('ident'); ?>
-	<?php echo JHtml::_('form.token'); ?>
+	<?php echo \Joomla\CMS\HTML\HTMLHelper::_('form.token'); ?>
 </form>

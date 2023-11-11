@@ -71,7 +71,7 @@ HTMLHelper::_('bootstrap.modal');
                                 <a href="javascript:void(0);" class="btn-edit text-primary"  data-id="<?php echo $f['id'] ?>" data-json='<?php echo json_encode($f) ?>'><i class="fas fa-edit"></i></a>
                             <?php endif; ?>
                             <?php if($field->params->get('params.flow_default', 1)): ?>
-                                <a href="javascript:void(0);" class="hasTooltip btn-make-default" title="<?php echo JText::_('FF_MAKEDEFAULT') ?>" data-id="<?php echo $f['id'] ?>"><?php echo HTMLFormatHelper::icon((@$f['default'] ? 'status-away' : 'status-offline').'.png') ?></a>
+                                <a href="javascript:void(0);" class="hasTooltip btn-make-default" title="<?php echo \Joomla\CMS\Language\Text::_('FF_MAKEDEFAULT') ?>" data-id="<?php echo $f['id'] ?>"><?php echo HTMLFormatHelper::icon((@$f['default'] ? 'status-away' : 'status-offline').'.png') ?></a>
                             <?php endif; ?>
                         </div>
 
@@ -91,8 +91,8 @@ HTMLHelper::_('bootstrap.modal');
     </tbody>
 </table>
 
-<small><ul><li><?php echo JText::_('CER_ONLYFORMATS') ?>: <b><?php echo $field->params->get('params.file_formats'); ?></b></li></small>
-<small><li><?php echo JText::_('CNSG_MAXSIZEPERFILE') ?>: <b><?php echo $field->params->get('params.max_size'); ?> Byte</b></li></ul></small>
+<small><ul><li><?php echo \Joomla\CMS\Language\Text::_('CER_ONLYFORMATS') ?>: <b><?php echo $field->params->get('params.file_formats'); ?></b></li></small>
+<small><li><?php echo \Joomla\CMS\Language\Text::_('CNSG_MAXSIZEPERFILE') ?>: <b><?php echo $field->params->get('params.max_size'); ?> Byte</b></li></ul></small>
 
 <script>
     (function($) {
@@ -106,7 +106,7 @@ HTMLHelper::_('bootstrap.modal');
         });
 
         if (!flow.support) {
-            Joomcck.fieldError(<?php echo $field->id ?>, '<?php echo JText::_('Upload is not supported') ?>');
+            Joomcck.fieldError(<?php echo $field->id ?>, '<?php echo \Joomla\CMS\Language\Text::_('Upload is not supported') ?>');
             return;
         }
 
@@ -248,7 +248,7 @@ HTMLHelper::_('bootstrap.modal');
                                 <a href="javascript:void(0);" class="btn-edit hide text-primary"  data-id="" data-json=""><i class="fas fa-edit"></i></a>
                             <?php endif; ?>
                             <?php if($field->params->get('params.flow_default', 1)): ?>
-                                <a href="javascript:void(0);" class="hasTooltip btn-make-default" title="<?php echo JText::_('FF_MAKEDEFAULT') ?>" data-id=""><?php echo HTMLFormatHelper::icon('status-offline.png') ?></a>
+                                <a href="javascript:void(0);" class="hasTooltip btn-make-default" title="<?php echo \Joomla\CMS\Language\Text::_('FF_MAKEDEFAULT') ?>" data-id=""><?php echo HTMLFormatHelper::icon('status-offline.png') ?></a>
                             <?php endif; ?>
                         </div>
                     <?php endif; ?>
@@ -299,7 +299,7 @@ HTMLHelper::_('bootstrap.modal');
 
         flow.on('fileError', function(file, message) {
             Joomcck.fieldError(<?php echo $field->id; ?>,
-                '<?php echo JText::_('Upload error: ') ?>' + message);
+                '<?php echo \Joomla\CMS\Language\Text::_('Upload error: ') ?>' + message);
         });
 
         flow.on('fileProgress', function(file) {

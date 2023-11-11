@@ -22,7 +22,7 @@ class JoomcckControllerCats extends MControllerAdmin
 
 		if(!$this->input)
 		{
-			$this->input = JFactory::getApplication()->input;
+			$this->input = \Joomla\CMS\Factory::getApplication()->input;
 		}
 		$this->view_list .= '&section_id='.$this->input->getInt('section_id');
 	}
@@ -34,7 +34,7 @@ class JoomcckControllerCats extends MControllerAdmin
 		$section = JTable::getInstance('Section', 'JoomcckTable');
 		$section->load($this->input->getInt('section_id'));
 
-		$db = JFactory::getDbo();
+		$db = \Joomla\CMS\Factory::getDbo();
 		$db->setQuery("SELECT COUNT(*) FROM #__js_res_categories WHERE section_id = ".$this->input->getInt('section_id'));
 
 		$section->categories = $db->loadResult();
@@ -55,21 +55,21 @@ class JoomcckControllerCats extends MControllerAdmin
 	 */
 	public function rebuild()
 	{
-		$this->input->checkToken() or jexit(JText::_('JINVALID_TOKEN'));
+		$this->input->checkToken() or jexit(\Joomla\CMS\Language\Text::_('JINVALID_TOKEN'));
 
 		$section = $this->input->getInt('section_id');
-		$this->setRedirect(JRoute::_('index.php?option=com_joomcck&view=categories&section_id='.$section, false));
+		$this->setRedirect(\Joomla\CMS\Router\Route::_('index.php?option=com_joomcck&view=categories&section_id='.$section, false));
 
 		// Initialise variables.
 		$model = $this->getModel();
 
 		if ($model->rebuild()) {
 			// Rebuild succeeded.
-			$this->setMessage(JText::_('COM_JOOMCCK_REBUILD_SUCCESS'));
+			$this->setMessage(\Joomla\CMS\Language\Text::_('COM_JOOMCCK_REBUILD_SUCCESS'));
 			return true;
 		} else {
 			// Rebuild failed.
-			$this->setMessage(JText::_('COM_JOOMCCK_REBUILD_FAILURE'));
+			$this->setMessage(\Joomla\CMS\Language\Text::_('COM_JOOMCCK_REBUILD_FAILURE'));
 			return false;
 		}
 	}
@@ -82,7 +82,7 @@ class JoomcckControllerCats extends MControllerAdmin
 	 */
 	public function saveorder()
 	{
-		$this->input->checkToken() or jexit(JText::_('JINVALID_TOKEN'));
+		$this->input->checkToken() or jexit(\Joomla\CMS\Language\Text::_('JINVALID_TOKEN'));
 
 		// Get the arrays from the Request
 		$order	= $this->input->get('order', array(), 'array');
@@ -93,14 +93,14 @@ class JoomcckControllerCats extends MControllerAdmin
 			parent::saveorder();
 		} else {
 			// Nothing to reorder
-			$this->setRedirect(JRoute::_('index.php?option='.$this->option.'&view='.$this->view_list, false));
+			$this->setRedirect(\Joomla\CMS\Router\Route::_('index.php?option='.$this->option.'&view='.$this->view_list, false));
 			return true;
 		}
 	}
 
 	public function saveOrderAjax()
 	{
-		JSession::checkToken() or jexit(JText::_('JINVALID_TOKEN'));
+		JSession::checkToken() or jexit(\Joomla\CMS\Language\Text::_('JINVALID_TOKEN'));
 
 		// Get the arrays from the Request
 		$pks   = $this->input->post->get('cid', null, 'array');
@@ -119,12 +119,12 @@ class JoomcckControllerCats extends MControllerAdmin
 			}
 		}
 		// Close the application
-		JFactory::getApplication()->close();
+		\Joomla\CMS\Factory::getApplication()->close();
 
 	}
 
 	public function close()
 	{
-		$this->setRedirect(JRoute::_('index.php?option='.$this->option.'&view=sections', false));
+		$this->setRedirect(\Joomla\CMS\Router\Route::_('index.php?option='.$this->option.'&view=sections', false));
 	}
 }

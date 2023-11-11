@@ -1,8 +1,8 @@
 <?php
 defined('_JEXEC') or die();
 
-$app = JFactory::getApplication();
-$db  = JFactory::getDBO();
+$app = \Joomla\CMS\Factory::getApplication();
+$db  = \Joomla\CMS\Factory::getDBO();
 $msg = array();
 
 $sql = "SELECT user_id, ref_id, count(id) AS num

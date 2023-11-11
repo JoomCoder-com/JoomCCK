@@ -17,10 +17,10 @@ class JoomcckViewTfields extends MViewBase
 
 	public function display($tpl = NULL)
 	{
-		JHtml::_('bootstrap.tooltip');
+		\Joomla\CMS\HTML\HTMLHelper::_('bootstrap.tooltip');
 
-		$app          = JFactory::getApplication();
-		$uri          = JUri::getInstance();
+		$app          = \Joomla\CMS\Factory::getApplication();
+		$uri          = \Joomla\CMS\Uri\Uri::getInstance();
 		$this->action = $uri->toString();
 
 		$this->state      = $this->get('State');
@@ -53,16 +53,16 @@ class JoomcckViewTfields extends MViewBase
 
 		}
 
-		$this->addFilter(JText::_('CFILTERTYPE'), 'filter_type', JHtml::_('select.options', JHtml::_('joomcck.contenttypes'), 'value', 'text', $this->state->get('filter.type'), TRUE));
+		$this->addFilter(\Joomla\CMS\Language\Text::_('CFILTERTYPE'), 'filter_type', \Joomla\CMS\HTML\HTMLHelper::_('select.options', \Joomla\CMS\HTML\HTMLHelper::_('joomcck.contenttypes'), 'value', 'text', $this->state->get('filter.type'), TRUE));
 
-		$this->addFilter(JText::_('JOPTION_SELECT_PUBLISHED'), 'filter_state', JHtml::_('select.options', JHtml::_('jgrid.publishedOptions', array(
+		$this->addFilter(\Joomla\CMS\Language\Text::_('JOPTION_SELECT_PUBLISHED'), 'filter_state', \Joomla\CMS\HTML\HTMLHelper::_('select.options', \Joomla\CMS\HTML\HTMLHelper::_('jgrid.publishedOptions', array(
 			'trash'    => 0,
 			'archived' => 0,
 			'all'      => 0
 		)), 'value', 'text', $this->state->get('filter.state'), TRUE));
 
-		$this->addFilter(JText::_('CFILTERFILTERTYPE'), 'filter_ftype', JHtml::_('select.options', JHtml::_('joomcck.fieldtypes'), 'value', 'text', $this->state->get('filter.ftype'), TRUE));
-		$this->addFilter(JText::_('JOPTION_SELECT_ACCESS'), 'filter_access', JHtml::_('select.options', JHtml::_('access.assetgroups'), 'value', 'text', $this->state->get('filter.access'), TRUE));
+		$this->addFilter(\Joomla\CMS\Language\Text::_('CFILTERFILTERTYPE'), 'filter_ftype', \Joomla\CMS\HTML\HTMLHelper::_('select.options', \Joomla\CMS\HTML\HTMLHelper::_('joomcck.fieldtypes'), 'value', 'text', $this->state->get('filter.ftype'), TRUE));
+		$this->addFilter(\Joomla\CMS\Language\Text::_('JOPTION_SELECT_ACCESS'), 'filter_access', \Joomla\CMS\HTML\HTMLHelper::_('select.options', \Joomla\CMS\HTML\HTMLHelper::_('access.assetgroups'), 'value', 'text', $this->state->get('filter.access'), TRUE));
 
 		parent::display($tpl);
 	}
@@ -70,13 +70,13 @@ class JoomcckViewTfields extends MViewBase
 	public function getSortFields()
 	{
 		return array(
-			'f.field_type' => JText::_('CTYPE'),
-			'f.label'      => JText::_('CFIELDLABEL'),
-			'g.title'      => JText::_('CGROUPNAME'),
-			'f.ordering'   => JText::_('JGRID_HEADING_ORDERING'),
-			'f.published'  => JText::_('CSTATE'),
-			'f.access'     => JText::_('CACCESS'),
-			't.id'         => JText::_('ID'),
+			'f.field_type' => \Joomla\CMS\Language\Text::_('CTYPE'),
+			'f.label'      => \Joomla\CMS\Language\Text::_('CFIELDLABEL'),
+			'g.title'      => \Joomla\CMS\Language\Text::_('CGROUPNAME'),
+			'f.ordering'   => \Joomla\CMS\Language\Text::_('JGRID_HEADING_ORDERING'),
+			'f.published'  => \Joomla\CMS\Language\Text::_('CSTATE'),
+			'f.access'     => \Joomla\CMS\Language\Text::_('CACCESS'),
+			't.id'         => \Joomla\CMS\Language\Text::_('ID'),
 		);
 	}
 }

@@ -29,7 +29,7 @@ class JoomcckModelCat extends MModelAdmin
 	 */
 	protected function canDelete($record)
 	{
-		$user = JFactory::getUser();
+		$user = \Joomla\CMS\Factory::getUser();
 
 		return $user->authorise('core.delete', 'com_joomcck.cat.'.(int) $record->id);
 	}
@@ -43,7 +43,7 @@ class JoomcckModelCat extends MModelAdmin
 	 */
 	protected function canEditState($record)
 	{
-		$user = JFactory::getUser();
+		$user = \Joomla\CMS\Factory::getUser();
 
 		// Check for existing cat.
 		if (!empty($record->id)) {
@@ -65,12 +65,12 @@ class JoomcckModelCat extends MModelAdmin
 	 * @param	type	The table type to instantiate
 	 * @param	string	A prefix for the table class name. Optional.
 	 * @param	array	Configuration array for model. Optional.
-	 * @return	JTable	A database object
+	 * @return	\Joomla\CMS\Table\Table	A database object
 	 * @since	1.6
 	*/
 	public function getTable($type = 'CobCategory', $prefix = 'JoomcckTable', $config = array())
 	{
-		return JTable::getInstance($type, $prefix, $config);
+		return \Joomla\CMS\Table\Table::getInstance($type, $prefix, $config);
 	}
 
 	/**
@@ -82,7 +82,7 @@ class JoomcckModelCat extends MModelAdmin
 	 */
 	protected function populateState($ordering = null, $direction = null)
 	{
-		$app = JFactory::getApplication('administrator');
+		$app = \Joomla\CMS\Factory::getApplication('administrator');
 
 		$parentId = Factory::getApplication()->input->getInt('parent_id');
 		$this->setState('cat.parent_id', $parentId);
@@ -102,7 +102,7 @@ class JoomcckModelCat extends MModelAdmin
 		$this->setState('cat.section', (count($parts)>1)?$parts[1]:null);
 
 		// Load the parameters.
-		$params	= JComponentHelper::getParams('com_joomcck');
+		$params	= \Joomla\CMS\Component\ComponentHelper::getParams('com_joomcck');
 		$this->setState('params', $params);
 	}
 	/**
@@ -136,13 +136,13 @@ class JoomcckModelCat extends MModelAdmin
 			}
 
 			// Convert the metadata field to an array.
-			$registry = new JRegistry();
+			$registry = new \Joomla\Registry\Registry();
 			$registry->loadString((string)$result->metadata);
 			$result->metadata = $registry->toArray();
 
 			// Convert the created and modified dates to local user time for display in the form.
 			jimport('joomla.utilities.date');
-			$tz	= new DateTimeZone(JFactory::getApplication()->getCfg('offset'));
+			$tz	= new DateTimeZone(\Joomla\CMS\Factory::getApplication()->getCfg('offset'));
 
 			if (intval($result->created_time)) {
 				$date = new JDate($result->created_time);
@@ -171,7 +171,7 @@ class JoomcckModelCat extends MModelAdmin
 		$o = new stdClass();
 		$o->id = 0;
 		$o->title = NULL;
-		$o->params = new JRegistry();
+		$o->params = new \Joomla\Registry\Registry();
 
 		return $o;
 	}
@@ -187,7 +187,7 @@ class JoomcckModelCat extends MModelAdmin
 	public function getForm($data = array(), $loadData = true)
 	{
 		// Initialise variables.
-		$section	= JFactory::getApplication()->input->getInt('section_id', $this->getState('filter.section'));
+		$section	= \Joomla\CMS\Factory::getApplication()->input->getInt('section_id', $this->getState('filter.section'));
 
 		// A workaround to get the section into the model for save requests.
 		if (empty($section) && isset($data['section'])) {
@@ -248,7 +248,7 @@ class JoomcckModelCat extends MModelAdmin
 	protected function loadFormData()
 	{
 		// Check the session for previously entered form data.
-		$data = JFactory::getApplication()->getUserState('com_joomcck.cat.edit.'.$this->getName().'.data', array());
+		$data = \Joomla\CMS\Factory::getApplication()->getUserState('com_joomcck.cat.edit.'.$this->getName().'.data', array());
 
 		if (empty($data)) {
 			$data = $this->getItem();
@@ -268,7 +268,7 @@ class JoomcckModelCat extends MModelAdmin
 		jimport('joomla.filesystem.path');
 
 		// Initialise variables.
-		$lang		= JFactory::getLanguage();
+		$lang		= \Joomla\CMS\Factory::getLanguage();
 		$section	= $this->getState('cat.section');
 		echo $component	= $this->getState('cat.component');
 
@@ -289,7 +289,7 @@ class JoomcckModelCat extends MModelAdmin
 			$lang->load($component, JPATH_BASE, $lang->getDefault(), false, false);
 
 			if (!$form->loadFile($path, false)) {
-				throw new Exception(JText::_('JERROR_LOADFILE_FAILED'));
+				throw new Exception(\Joomla\CMS\Language\Text::_('JERROR_LOADFILE_FAILED'));
 			}
 		}
 
@@ -463,12 +463,12 @@ class JoomcckModelCat extends MModelAdmin
 	{
 		// Check that user has edit permission for every category being changed
 		// Note that the entire batch operation fails if any category lacks edit permission
-		$user	= JFactory::getUser();
+		$user	= \Joomla\CMS\Factory::getUser();
 		$section = \Joomla\CMS\Factory::getApplication()->input->getInt('section_id',0);
 		foreach ($pks as $pk) {
 			if (!$user->authorise('core.edit', 'com_joomcck.cat.'.$pk)) {
 				// Error since user cannot edit this category
-				$this->setError(JText::_('C_MSG_BATCH_CANNOT_EDIT'));
+				$this->setError(\Joomla\CMS\Language\Text::_('C_MSG_BATCH_CANNOT_EDIT'));
 				return false;
 			}
 		}
@@ -503,7 +503,7 @@ class JoomcckModelCat extends MModelAdmin
 
 		$table	= $this->getTable();
 		$db		= $this->getDbo();
-		$user	= JFactory::getUser();
+		$user	= \Joomla\CMS\Factory::getUser();
 		$section = \Joomla\CMS\Factory::getApplication()->input->getInt('section_id',0);
 
 		// Check that the parent exists
@@ -516,7 +516,7 @@ class JoomcckModelCat extends MModelAdmin
 				}
 				else {
 					// Non-fatal error
-					$this->setError(JText::_('JGLOBAL_BATCH_MOVE_PARENT_NOT_FOUND'));
+					$this->setError(\Joomla\CMS\Language\Text::_('JGLOBAL_BATCH_MOVE_PARENT_NOT_FOUND'));
 					$parentId = 0;
 				}
 			}
@@ -525,7 +525,7 @@ class JoomcckModelCat extends MModelAdmin
 				$user->authorise('core.create', 'com_joomcck.cat.'.$parentId);
 			if (!$canCreate) {
 				// Error since user cannot create in parent category
-				$this->setError(JText::_('C_MSG_CATBATCHCREATEFAIL'));
+				$this->setError(\Joomla\CMS\Language\Text::_('C_MSG_CATBATCHCREATEFAIL'));
 				return false;
 			}
 		}
@@ -540,7 +540,7 @@ class JoomcckModelCat extends MModelAdmin
 			}
 			// Make sure we can create in root
 			elseif (!$user->authorise('core.create', $section)) {
-				$this->setError(JText::_('C_MSG_CATBATCHCREATEFAIL'));
+				$this->setError(\Joomla\CMS\Language\Text::_('C_MSG_CATBATCHCREATEFAIL'));
 				return false;
 			}
 		}
@@ -579,7 +579,7 @@ class JoomcckModelCat extends MModelAdmin
 				}
 				else {
 					// Not fatal error
-					$this->setError(JText::sprintf('JGLOBAL_BATCH_MOVE_ROW_NOT_FOUND', $pk));
+					$this->setError(\Joomla\CMS\Language\Text::sprintf('JGLOBAL_BATCH_MOVE_ROW_NOT_FOUND', $pk));
 					continue;
 				}
 			}
@@ -667,7 +667,7 @@ class JoomcckModelCat extends MModelAdmin
 
 		$table	= $this->getTable();
 		$db		= $this->getDbo();
-		$user	= JFactory::getUser();
+		$user	= \Joomla\CMS\Factory::getUser();
 		$section = \Joomla\CMS\Factory::getApplication()->input->getInt('section_id',0);
 
 		// Check that the parent exists.
@@ -681,7 +681,7 @@ class JoomcckModelCat extends MModelAdmin
 				}
 				else {
 					// Non-fatal error
-					$this->setError(JText::_('JGLOBAL_BATCH_MOVE_PARENT_NOT_FOUND'));
+					$this->setError(\Joomla\CMS\Language\Text::_('JGLOBAL_BATCH_MOVE_PARENT_NOT_FOUND'));
 					$parentId = 0;
 				}
 			}
@@ -690,7 +690,7 @@ class JoomcckModelCat extends MModelAdmin
 				$user->authorise('core.create', 'com_joomcck.cat.'.$parentId);
 			if (!$canCreate) {
 				// Error since user cannot create in parent category
-				$this->setError(JText::_('C_MSG_CATBATCHCREATEFAIL'));
+				$this->setError(\Joomla\CMS\Language\Text::_('C_MSG_CATBATCHCREATEFAIL'));
 				return false;
 			}
 
@@ -699,7 +699,7 @@ class JoomcckModelCat extends MModelAdmin
 			foreach ($pks as $pk) {
 				if (!$user->authorise('core.edit', 'com_joomcck.cat.'.$pk)) {
 					// Error since user cannot edit this category
-					$this->setError(JText::_('C_MSG_CATBATCHEDITFAIL'));
+					$this->setError(\Joomla\CMS\Language\Text::_('C_MSG_CATBATCHEDITFAIL'));
 					return false;
 				}
 			}
@@ -721,7 +721,7 @@ class JoomcckModelCat extends MModelAdmin
 				}
 				else {
 					// Not fatal error
-					$this->setError(JText::sprintf('JGLOBAL_BATCH_MOVE_ROW_NOT_FOUND', $pk));
+					$this->setError(\Joomla\CMS\Language\Text::sprintf('JGLOBAL_BATCH_MOVE_ROW_NOT_FOUND', $pk));
 					continue;
 				}
 			}
@@ -788,7 +788,7 @@ class JoomcckModelCat extends MModelAdmin
 	function generateNewTitle($parent_id, $alias, $title)
 	{
 		// Alter the title & alias
-		$catTable = JTable::getInstance('CobCategory', 'JoomcckTable');
+		$catTable = \Joomla\CMS\Table\Table::getInstance('CobCategory', 'JoomcckTable');
 		while ($catTable->load(array('alias'=>$alias, 'parent_id'=>$parent_id))) {
 			$m = null;
 			if (preg_match('#-(\d+)$#', $alias, $m)) {
@@ -814,7 +814,7 @@ class JoomcckModelCat extends MModelAdmin
 
 		if($result)
 		{
-			$db = JFactory::getDbo();
+			$db = \Joomla\CMS\Factory::getDbo();
 			foreach($pks AS $id)
 			{
 				$db->setQuery("UPDATE `#__js_res_record_category` SET published = '{$value}' WHERE catid = {$id}");

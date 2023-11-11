@@ -18,7 +18,7 @@ class JFormFieldMeupload extends JFormField
 
 	public function getInput($params = array())
 	{
-		$html = JHtml::_('mrelements.mooupload', $this->name, $this->_getDefault(), $params);
+		$html = \Joomla\CMS\HTML\HTMLHelper::_('mrelements.mooupload', $this->name, $this->_getDefault(), $params);
 		return $html;
 
 	}
@@ -32,7 +32,7 @@ class JFormFieldMeupload extends JFormField
 
 		if (is_string($this->value[0]))
 		{
-			$files = JTable::getInstance('Files', 'JoomcckTable');
+			$files = \Joomla\CMS\Table\Table::getInstance('Files', 'JoomcckTable');
 			return $files->getFiles($this->value, 'filename');
 		}
 

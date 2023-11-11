@@ -24,54 +24,54 @@ $i = $o = 0;
 
 if($params->get('tmpl_core.item_categories') && $item->categories_links)
 {
-	$category[] = sprintf('<dt>%s<dt> <dd>%s<dd>', (count($item->categories_links) > 1 ? JText::_('CCATEGORIES') : JText::_('CCATEGORY')), implode(', ', $item->categories_links));
+	$category[] = sprintf('<dt>%s<dt> <dd>%s<dd>', (count($item->categories_links) > 1 ? \Joomla\CMS\Language\Text::_('CCATEGORIES') : \Joomla\CMS\Language\Text::_('CCATEGORY')), implode(', ', $item->categories_links));
 }
 if($params->get('tmpl_core.item_user_categories') && $item->ucatid)
 {
-	$category[] = sprintf('<dt>%s<dt> <dd>%s<dd>', JText::_('CUCAT'), $item->ucatname_link);
+	$category[] = sprintf('<dt>%s<dt> <dd>%s<dd>', \Joomla\CMS\Language\Text::_('CUCAT'), $item->ucatname_link);
 }
 if($params->get('tmpl_core.item_author') && $item->user_id)
 {
-	$a[] = JText::sprintf('CWRITTENBY', CCommunityHelper::getName($item->user_id, $this->section));
+	$a[] = \Joomla\CMS\Language\Text::sprintf('CWRITTENBY', CCommunityHelper::getName($item->user_id, $this->section));
 	if($params->get('tmpl_core.item_author_filter'))
 	{
-		$a[] = FilterHelper::filterButton('filter_user', $item->user_id, NULL, JText::sprintf('CSHOWALLUSERREC', CCommunityHelper::getName($item->user_id, $this->section, array('nohtml' => 1))), $this->section);
+		$a[] = FilterHelper::filterButton('filter_user', $item->user_id, NULL, \Joomla\CMS\Language\Text::sprintf('CSHOWALLUSERREC', CCommunityHelper::getName($item->user_id, $this->section, array('nohtml' => 1))), $this->section);
 	}
 	$author[] = implode(' ', $a);
 }
 if($params->get('tmpl_core.item_ctime'))
 {
-	$author[] = JText::sprintf('CONDATE', JHtml::_('date', $item->created, $params->get('tmpl_core.item_time_format')));
+	$author[] = \Joomla\CMS\Language\Text::sprintf('CONDATE', \Joomla\CMS\HTML\HTMLHelper::_('date', $item->created, $params->get('tmpl_core.item_time_format')));
 }
 
 if($params->get('tmpl_core.item_mtime'))
 {
-	$author[] = JText::_('CMTIME').': '.JHtml::_('date', $item->modify, $params->get('tmpl_core.item_time_format'));
+	$author[] = \Joomla\CMS\Language\Text::_('CMTIME').': '.\Joomla\CMS\HTML\HTMLHelper::_('date', $item->modify, $params->get('tmpl_core.item_time_format'));
 }
 if($params->get('tmpl_core.item_extime'))
 {
-	$author[] = JText::_('CEXTIME').': '.($item->expire ? JHtml::_('date', $item->expire, $params->get('tmpl_core.item_time_format')) : JText::_('CNEVER'));
+	$author[] = \Joomla\CMS\Language\Text::_('CEXTIME').': '.($item->expire ? \Joomla\CMS\HTML\HTMLHelper::_('date', $item->expire, $params->get('tmpl_core.item_time_format')) : \Joomla\CMS\Language\Text::_('CNEVER'));
 }
 
 if($params->get('tmpl_core.item_type'))
 {
-	$details[] = sprintf('%s: %s %s', JText::_('CTYPE'), $this->type->name, ($params->get('tmpl_core.item_type_filter') ? FilterHelper::filterButton('filter_type', $item->type_id, NULL, JText::sprintf('CSHOWALLTYPEREC', $this->type->name), $this->section) : NULL));
+	$details[] = sprintf('%s: %s %s', \Joomla\CMS\Language\Text::_('CTYPE'), $this->type->name, ($params->get('tmpl_core.item_type_filter') ? FilterHelper::filterButton('filter_type', $item->type_id, NULL, \Joomla\CMS\Language\Text::sprintf('CSHOWALLTYPEREC', $this->type->name), $this->section) : NULL));
 }
 if($params->get('tmpl_core.item_hits'))
 {
-	$details[] = sprintf('%s: %s', JText::_('CHITS'), $item->hits);
+	$details[] = sprintf('%s: %s', \Joomla\CMS\Language\Text::_('CHITS'), $item->hits);
 }
 if($params->get('tmpl_core.item_comments_num'))
 {
-	$details[] = sprintf('%s: %s', JText::_('CCOMMENTS'), CommentHelper::numComments($this->type, $this->item));
+	$details[] = sprintf('%s: %s', \Joomla\CMS\Language\Text::_('CCOMMENTS'), CommentHelper::numComments($this->type, $this->item));
 }
 if($params->get('tmpl_core.item_favorite_num'))
 {
-	$details[] = sprintf('%s: %s', JText::_('CFAVORITED'), $item->favorite_num);
+	$details[] = sprintf('%s: %s', \Joomla\CMS\Language\Text::_('CFAVORITED'), $item->favorite_num);
 }
 if($params->get('tmpl_core.item_follow_num'))
 {
-	$details[] = sprintf('%s: %s', JText::_('CFOLLOWERS'), $item->subscriptions_num);
+	$details[] = sprintf('%s: %s', \Joomla\CMS\Language\Text::_('CFOLLOWERS'), $item->subscriptions_num);
 }
 
 
@@ -134,7 +134,7 @@ if($params->get('tmpl_core.item_follow_num'))
 								<?php if(!empty($item->field_groups[$group_id]['icon']) && $params->get('tmpl_params.show_groupicon', 1)): ?>
 									<?php echo HTMLFormatHelper::icon($item->field_groups[$group_id]['icon']) ?>
 								<?php endif; ?>
-								<?php echo JText::_($group_id)?>
+								<?php echo \Joomla\CMS\Language\Text::_($group_id)?>
 							</a>
 						</li>
                     <?php $f++ ?>
@@ -210,7 +210,7 @@ if($params->get('tmpl_core.item_follow_num'))
 								<?php echo implode(' ', $category);?>
 							<?php endif;?>
 							<?php if($author):?>
-								<dt><?php echo JText::_('Posted');?></dt>
+								<dt><?php echo \Joomla\CMS\Language\Text::_('Posted');?></dt>
 								<dd>
 									<?php echo implode(', ', $author);?>
 								</dd>

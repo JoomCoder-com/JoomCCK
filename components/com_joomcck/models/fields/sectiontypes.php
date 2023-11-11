@@ -20,14 +20,14 @@ class JFormFieldSectiontypes extends JFormFieldList
 
 	protected function getOptions()
 	{
-		$options[] = JHtml::_('select.option', '', JText::_('CINHERIT'));
-		$options[] = JHtml::_('select.option', 'none', JText::_('CDONOTSHOWPOSTBUTTON'));
+		$options[] = \Joomla\CMS\HTML\HTMLHelper::_('select.option', '', \Joomla\CMS\Language\Text::_('CINHERIT'));
+		$options[] = \Joomla\CMS\HTML\HTMLHelper::_('select.option', 'none', \Joomla\CMS\Language\Text::_('CDONOTSHOWPOSTBUTTON'));
 		
-		$app = JFactory::getApplication();
-		$db = JFactory::getDbo();
+		$app = \Joomla\CMS\Factory::getApplication();
+		$db = \Joomla\CMS\Factory::getDbo();
 		
 		$section = ItemsStore::getSection($app->input->get('section_id'));
-		$section->params =  new JRegistry($section->params);
+		$section->params =  new \Joomla\Registry\Registry($section->params);
 		$types = $section->params->get('general.type');
 		
 		ArrayHelper::clean_r($types);
@@ -46,7 +46,7 @@ class JFormFieldSectiontypes extends JFormFieldList
 		
 		foreach ($types AS $type)
 		{
-			$options[] = JHtml::_('select.option', $type->id, $type->name);
+			$options[] = \Joomla\CMS\HTML\HTMLHelper::_('select.option', $type->id, $type->name);
 		}
 
 		return $options;

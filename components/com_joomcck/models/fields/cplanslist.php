@@ -32,7 +32,7 @@ class JFormFieldCPlanslist extends JFormFieldList
 	protected function getInput()
 	{
 		$file = JPATH_ROOT.'/components/com_emerald/models/fields/planslist.php';
-		if(JFile::exists($file) && JComponentHelper::isEnabled('com_emerald'))
+		if(\Joomla\CMS\Filesystem\File::exists($file) && \Joomla\CMS\Component\ComponentHelper::isEnabled('com_emerald'))
 		{
 			include_once $file;
 			$element = new JFormFieldPlanslist($this->form);
@@ -40,6 +40,6 @@ class JFormFieldCPlanslist extends JFormFieldList
 			return $element->getInput();
 		}
 
-		return '<b>'.JText::_('Please install JoomSubscription').'</b>';
+		return '<b>'.\Joomla\CMS\Language\Text::_('Please install JoomSubscription').'</b>';
 	}
 }

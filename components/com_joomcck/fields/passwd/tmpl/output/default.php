@@ -11,7 +11,7 @@ defined('_JEXEC') or die();
 
 <span id="field_val<?php echo $this->id;?>">
 	<?php echo $this->value;?>
-	<a href="javascript:void(0);" onclick="ajax_getPasswd<?php echo $this->id;?>();"><?php echo $this->params->get('params.show_label', JText::_('P_SHOWPASW'));?></a>
+	<a href="javascript:void(0);" onclick="ajax_getPasswd<?php echo $this->id;?>();"><?php echo $this->params->get('params.show_label', \Joomla\CMS\Language\Text::_('P_SHOWPASW'));?></a>
 </span>
 <script type="text/javascript">
 function ajax_getPasswd<?php echo $this->id;?>()

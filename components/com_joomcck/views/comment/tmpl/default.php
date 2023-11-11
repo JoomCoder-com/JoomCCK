@@ -8,11 +8,11 @@
  */
 defined('_JEXEC') or die();
 
-JHtml::_('behavior.keepalive');
-JHtml::_('bootstrap.tooltip');
-JHtml::_('behavior.formvalidation');
+\Joomla\CMS\HTML\HTMLHelper::_('behavior.keepalive');
+\Joomla\CMS\HTML\HTMLHelper::_('bootstrap.tooltip');
+\Joomla\CMS\HTML\HTMLHelper::_('behavior.formvalidation');
 
-$app = JFactory::getApplication();
+$app = \Joomla\CMS\Factory::getApplication();
 
 ?>
 
@@ -49,9 +49,9 @@ $app = JFactory::getApplication();
 			</div>
 			<div class="controls">
 				<label for="follow	">
-					<big><?php echo JText::_('CFOLLOW')?></big>
+					<big><?php echo \Joomla\CMS\Language\Text::_('CFOLLOW')?></big>
 					<br /><small>
-						<?php echo JText::_('COMMENTFOLLOWCHECKBOX')?>
+						<?php echo \Joomla\CMS\Language\Text::_('COMMENTFOLLOWCHECKBOX')?>
 					</small>
 				</label>
 			</div>
@@ -66,9 +66,9 @@ $app = JFactory::getApplication();
 			</div>
 			<div class="controls">
 				<label for="private">
-					<big><?php echo JText::_('CPRIVATE')?></big>
+					<big><?php echo \Joomla\CMS\Language\Text::_('CPRIVATE')?></big>
 					<br /><small>
-						<?php echo JText::_('COMMENTPRIVATECHECKBOX')?>
+						<?php echo \Joomla\CMS\Language\Text::_('COMMENTPRIVATECHECKBOX')?>
 					</small>
 				</label>
 			</div>
@@ -105,7 +105,7 @@ $app = JFactory::getApplication();
 	<?php if(in_array($this->type->params->get('comments.comment_attach'), $this->user->getAuthorisedViewLevels())):?>
 		<div class="control-group">
 			<label class="control-label">
-				<?php echo JText::_('CATTACH');?>
+				<?php echo \Joomla\CMS\Language\Text::_('CATTACH');?>
 			</label>
 			<div class="controls">
 			<div id="field-alert-0" class="alert alert-danger" style="display:none"></div>
@@ -131,7 +131,7 @@ $app = JFactory::getApplication();
 	<div class="form-actions">
 		<button type="button" class="btn btn-primary" onclick="Joomla.submitbutton('comment.save')">
 			<?php echo HTMLFormatHelper::icon('balloon--plus.png');  ?>
-			<?php echo !empty($this->item->id) ? JText::_('CSAVE') : JText::_($this->tmpl_params['comment']->get('tmpl_core.comments_button_title_lbl'));?>
+			<?php echo !empty($this->item->id) ? \Joomla\CMS\Language\Text::_('CSAVE') : \Joomla\CMS\Language\Text::_($this->tmpl_params['comment']->get('tmpl_core.comments_button_title_lbl'));?>
 		</button>
 	</div>
 
@@ -151,7 +151,7 @@ $app = JFactory::getApplication();
 	<?php if ($app->input->getInt('id')) : ?>
 	<input type="hidden" name="is_edited" value="1" />
 	<?php endif; ?>
-	<?php echo JHtml::_( 'form.token' ); ?>
+	<?php echo \Joomla\CMS\HTML\HTMLHelper::_( 'form.token' ); ?>
 
 </form>
 

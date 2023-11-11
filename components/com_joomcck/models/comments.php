@@ -15,15 +15,15 @@ class JoomcckModelComments extends MModelList
 
 	public function getTable($type = 'Comments', $prefix = 'JoomcckTable', $config = array())
 	{
-		return JTable::getInstance($type, $prefix, $config);
+		return \Joomla\CMS\Table\Table::getInstance($type, $prefix, $config);
 	}
 
 	protected function populateState($ordering = NULL, $direction = NULL)
 	{
-		$app = JFactory::getApplication();
+		$app = \Joomla\CMS\Factory::getApplication();
 
 		$file = JPATH_ROOT . '/components/com_joomcck/views/record/tmpl/default_comments_' . $this->type->params->get('properties.tmpl_comment', 'default') . '.json';
-		if(JFile::exists($file))
+		if(\Joomla\CMS\Filesystem\File::exists($file))
 		{
 			$file = file_get_contents();
 		}
@@ -31,7 +31,7 @@ class JoomcckModelComments extends MModelList
 		{
 			$file = array();
 		}
-		$tmpl_params = new JRegistry($file);
+		$tmpl_params = new \Joomla\Registry\Registry($file);
 
 		$order = explode(' ', $tmpl_params->get('tmpl_core.comments_sort', 'ctime ASC'));
 		$this->setState('list.ordering', 'c.' . $order[0]);
@@ -53,8 +53,8 @@ class JoomcckModelComments extends MModelList
 			return $cache[$record_id];
 		}
 
-		$app  = JFactory::getApplication();
-		$user = JFactory::getUser();
+		$app  = \Joomla\CMS\Factory::getApplication();
+		$user = \Joomla\CMS\Factory::getUser();
 		$type = $this->type;
 
 		$value = $app->getUserStateFromRequest('com_joomcck.comments.list.limit', 'limit', $this->getState('comments.limit'));
@@ -123,7 +123,7 @@ class JoomcckModelComments extends MModelList
 
 	private function _prepareComent($comment, $type, $user)
 	{
-		$comment->created = JFactory::getDate($comment->ctime);
+		$comment->created = \Joomla\CMS\Factory::getDate($comment->ctime);
 
 		$comment->attachment = AttachmentHelper::getAttachments($comment->attachment, $type->params->get('comments.comments_attachment_hit', 0));
 
@@ -143,7 +143,7 @@ class JoomcckModelComments extends MModelList
 		$comment->candelete   = NULL;
 		$comment->canmoderate = NULL;
 		$comment->canedit     = NULL;
-		$comment->comment = JHtml::_('content.prepare', $comment->comment, null, 'com_joomcck.comment');
+		$comment->comment = \Joomla\CMS\HTML\HTMLHelper::_('content.prepare', $comment->comment, null, 'com_joomcck.comment');
 		$comment->comment = JFilterInput::getInstance([], [], 1, 1, 1)->clean($comment->comment, 'html');
 		$comment->private = (boolean)($comment->private == 1);
 
@@ -197,13 +197,13 @@ class JoomcckModelComments extends MModelList
 		$record_id = $item->id;
 		if(!$record_id)
 		{
-			$this->setError(JText::_('CCOMMRECNOTSET'));
+			$this->setError(\Joomla\CMS\Language\Text::_('CCOMMRECNOTSET'));
 
 			return FALSE;
 		}
 		$type = $this->type;
 
-		$user  = JFactory::getUser();
+		$user  = \Joomla\CMS\Factory::getUser();
 		$db    = $this->getDbo();
 		$query = $db->getQuery(TRUE);
 
@@ -224,7 +224,7 @@ class JoomcckModelComments extends MModelList
 
 		if($type->params->get('comments.comments_lang_mode'))
 		{
-			$query->where('langs = ' . $db->quote(JFactory::getLanguage()->getTag()));
+			$query->where('langs = ' . $db->quote(\Joomla\CMS\Factory::getLanguage()->getTag()));
 		}
 
 		$private = 'FALSE';

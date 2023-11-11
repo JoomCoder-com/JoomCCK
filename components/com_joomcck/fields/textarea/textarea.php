@@ -20,7 +20,7 @@ class JFormFieldCTextarea extends CFormField
 	public function getInput()
 	{
 		$params = $this->params;
-		$doc    = JFactory::getDocument();
+		$doc    = \Joomla\CMS\Factory::getDocument();
 
 		$max_length = (int)$params->get('params.maxlen', 0);
 		$text       = ($this->value ? $this->value : $params->get('params.default_value',''));
@@ -44,15 +44,15 @@ class JFormFieldCTextarea extends CFormField
 
 		if($this->required)
 		{
-			$js .= "\n\t\tif(!textarea{$this->id}.length){hfid.push({$this->id}); isValid = false; errorText.push('" . addslashes(JText::sprintf("CFIELDREQUIRED", $this->label)) . "');}";
+			$js .= "\n\t\tif(!textarea{$this->id}.length){hfid.push({$this->id}); isValid = false; errorText.push('" . addslashes(\Joomla\CMS\Language\Text::sprintf("CFIELDREQUIRED", $this->label)) . "');}";
 		}
 		if($this->params->get('params.minlen'))
 		{
-			$js .= "\n\t\tif(textarea{$this->id}.length && textarea{$this->id}.length < " . $this->params->get('params.minlen') . "){hfid.push({$this->id}); isValid = false; errorText.push('" . addslashes(JText::sprintf("CNOTENOUGH", $this->params->get('params.minlen'), $this->label)) . "');}";
+			$js .= "\n\t\tif(textarea{$this->id}.length && textarea{$this->id}.length < " . $this->params->get('params.minlen') . "){hfid.push({$this->id}); isValid = false; errorText.push('" . addslashes(\Joomla\CMS\Language\Text::sprintf("CNOTENOUGH", $this->params->get('params.minlen'), $this->label)) . "');}";
 		}
 		if($this->params->get('params.maxlen'))
 		{
-			$js .= "\n\t\tif(textarea{$this->id}.length && textarea{$this->id}.length > " . $this->params->get('params.maxlen') . "){hfid.push({$this->id}); isValid = false; errorText.push('" . addslashes(JText::sprintf("CTOOMUCH", $this->params->get('params.maxlen'), $this->label)) . "');}";
+			$js .= "\n\t\tif(textarea{$this->id}.length && textarea{$this->id}.length > " . $this->params->get('params.maxlen') . "){hfid.push({$this->id}); isValid = false; errorText.push('" . addslashes(\Joomla\CMS\Language\Text::sprintf("CTOOMUCH", $this->params->get('params.maxlen'), $this->label)) . "');}";
 		}
 
 		return $js;
@@ -135,11 +135,11 @@ class JFormFieldCTextarea extends CFormField
 
 		if($text_length && $this->params->get('params.minlen') && $text_length < $this->params->get('params.minlen'))
 		{
-			$this->setError(JText::sprintf("CNOTENOUGH", $this->params->get('params.minlen'), $this->label));
+			$this->setError(\Joomla\CMS\Language\Text::sprintf("CNOTENOUGH", $this->params->get('params.minlen'), $this->label));
 		}
 		if($text_length && $this->params->get('params.maxlen') && $text_length > $this->params->get('params.maxlen'))
 		{
-			$this->setError(JText::sprintf("CTOOMUCH", $this->params->get('params.maxlen'), $this->label));
+			$this->setError(\Joomla\CMS\Language\Text::sprintf("CTOOMUCH", $this->params->get('params.maxlen'), $this->label));
 		}
 
 		$len = StringHelper::strlen(str_replace(array('<?php', '?>', '&amp;', '<hr>'), array('&lt;?php', '?&gt;', '&', '<hr />'), $value));
@@ -163,7 +163,7 @@ class JFormFieldCTextarea extends CFormField
 			$len1 = StringHelper::strlen($value);
 			if($len != $len1)
 			{
-				$this->setError(JText::sprintf('TA_ENTEREDTAGSATTRSNOTALLOWED', $this->label));
+				$this->setError(\Joomla\CMS\Language\Text::sprintf('TA_ENTEREDTAGSATTRSNOTALLOWED', $this->label));
 			}
 		}
 
@@ -174,12 +174,12 @@ class JFormFieldCTextarea extends CFormField
 				$names = array_map(
 					function ($val)
 					{
-						return strip_tags(trim(JFactory::getDbo()->escape($val)));
+						return strip_tags(trim(\Joomla\CMS\Factory::getDbo()->escape($val)));
 					}, $matches[1]
 				);
 				$names = implode("','", $names);
 
-				$db = JFactory::getDbo();
+				$db = \Joomla\CMS\Factory::getDbo();
 				$db->setQuery("SELECT username, id FROM #__users WHERE username IN ('{$names}')");
 				$users = $db->loadObjectList();
 
@@ -192,7 +192,7 @@ class JFormFieldCTextarea extends CFormField
 
 		if($this->params->get('params.prepare', 1))
 		{
-			$value = JHtml::_('content.prepare', $value);
+			$value = \Joomla\CMS\HTML\HTMLHelper::_('content.prepare', $value);
 		}
 
 		return $value;
@@ -200,12 +200,12 @@ class JFormFieldCTextarea extends CFormField
 
 	public function onImport($value, $params, $record = NULL)
 	{
-		$section = ItemsStore::getSection(JFactory::getApplication()->input->get('section_id'));
+		$section = ItemsStore::getSection(\Joomla\CMS\Factory::getApplication()->input->get('section_id'));
 		$this->_filter($value, $section);
 
 		if($this->getErrors())
 		{
-			Factory::getApplication()->enqueueMessage(JText::sprintf('CTEXTNOTIMPORT', $this->label),'warning');
+			Factory::getApplication()->enqueueMessage(\Joomla\CMS\Language\Text::sprintf('CTEXTNOTIMPORT', $this->label),'warning');
 
 			return FALSE;
 		}

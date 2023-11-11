@@ -20,7 +20,7 @@ class JoomcckControllerSale extends MControllerForm
 		
 		if(!$this->input)
 		{
-			$this->input = JFactory::getApplication()->input;
+			$this->input = \Joomla\CMS\Factory::getApplication()->input;
 		}
 		$this->view_item = 'elements';
 		$this->view_list = 'elements';
@@ -42,7 +42,7 @@ class JoomcckControllerSale extends MControllerForm
 
 		$field = JTable::getInstance('Field', 'JoomcckTable');
 		$field->load($order->field_id);
-		$field->params = new JRegistry($field->params);
+		$field->params = new \Joomla\Registry\Registry($field->params);
 
 		if($field->params->get('params.new_sale_manual'))
 		{
@@ -59,7 +59,7 @@ class JoomcckControllerSale extends MControllerForm
 
 	protected function allowAdd($data = array(), $key = 'id')
 	{
-		$user = JFactory::getUser();
+		$user = \Joomla\CMS\Factory::getUser();
 		$allow = $user->authorise('core.create', 'com_joomcck.sale');
 
 		if($allow === null)
@@ -74,7 +74,7 @@ class JoomcckControllerSale extends MControllerForm
 
 	protected function allowEdit($data = array(), $key = 'id')
 	{
-		return JFactory::getUser()->authorise('core.edit', 'com_joomcck.sale');
+		return \Joomla\CMS\Factory::getUser()->authorise('core.edit', 'com_joomcck.sale');
 	}
 
 	protected function getRedirectToItemAppend($recordId = null, $urlVar = 'id')
@@ -88,13 +88,13 @@ class JoomcckControllerSale extends MControllerForm
 
 	public function delete()
 	{
-		$this->setRedirect(JRoute::_('index.php?option=com_joomcck&view=elements&layout=saler', FALSE));
+		$this->setRedirect(\Joomla\CMS\Router\Route::_('index.php?option=com_joomcck&view=elements&layout=saler', FALSE));
 
-		$user = JFactory::getUser();
+		$user = \Joomla\CMS\Factory::getUser();
 
 		if(!$user->get('id'))
 		{
-			Factory::getApplication()->enqueueMessage(JText::_('AJAX_PLEASELOGIN'),'warning');
+			Factory::getApplication()->enqueueMessage(\Joomla\CMS\Language\Text::_('AJAX_PLEASELOGIN'),'warning');
 			CCommunityHelper::goToLogin();
 		}
 
@@ -106,20 +106,20 @@ class JoomcckControllerSale extends MControllerForm
 		if($table->gateway && $table->gateway != 'CMANUAL')
 		{
 
-			Factory::getApplication()->enqueueMessage(JText::_('CCANNOTDELETEORDER'),'warning');
+			Factory::getApplication()->enqueueMessage(\Joomla\CMS\Language\Text::_('CCANNOTDELETEORDER'),'warning');
 			return;
 		}
 
 		if(!$this->isSuperUser() && ($user->get('id') != $table->saler_id))
 		{
-			Factory::getApplication()->enqueueMessage(JText::_('CNOPERMISION'),'warning');
+			Factory::getApplication()->enqueueMessage(\Joomla\CMS\Language\Text::_('CNOPERMISION'),'warning');
 			return;
 		}
 
 		$table->delete();
 
-		$app = JFactory::getApplication();
-		$app->enqueueMessage(JText::_('CORDERDELETEDSUCCESS'));
+		$app = \Joomla\CMS\Factory::getApplication();
+		$app->enqueueMessage(\Joomla\CMS\Language\Text::_('CORDERDELETEDSUCCESS'));
 	}
 
 
@@ -129,7 +129,7 @@ class JoomcckControllerSale extends MControllerForm
 
 		$return = $this->input->get('return', null);
 
-		if(empty($return) || ! JUri::isInternal(JoomcckFilter::base64($return)))
+		if(empty($return) || ! \Joomla\CMS\Uri\Uri::isInternal(JoomcckFilter::base64($return)))
 		{
 			return JURI::base();
 		}
@@ -141,7 +141,7 @@ class JoomcckControllerSale extends MControllerForm
 
 	private  function isSuperUser()
 	{
-		$app = JFactory::getApplication();
+		$app = \Joomla\CMS\Factory::getApplication();
 		$menu = $app->getMenu();
 		$active = $menu->getActive();
 		$allow_users = $active->params->get('allow_users', false);
@@ -150,12 +150,12 @@ class JoomcckControllerSale extends MControllerForm
 		$user_ids = \Joomla\Utilities\ArrayHelper::toInteger($user_ids);
 		ArrayHelper::clean_r($user_ids);
 
-		return (in_array(JFactory::getUser()->get('id'), $user_ids));
+		return (in_array(\Joomla\CMS\Factory::getUser()->get('id'), $user_ids));
 	}
 
 	public function clean()
 	{
-		$app = JFactory::getApplication();
+		$app = \Joomla\CMS\Factory::getApplication();
 		$clean = $this->input->get('clean', array(), 'array');
 		foreach($clean as $name => $val)
 		{
@@ -167,6 +167,6 @@ class JoomcckControllerSale extends MControllerForm
 		}
 
 		$url = 'index.php?option=com_joomcck&view=elements&layout=products&tmpl=component';
-		$this->setRedirect(JRoute::_($url, FALSE));
+		$this->setRedirect(\Joomla\CMS\Router\Route::_($url, FALSE));
 	}
 }

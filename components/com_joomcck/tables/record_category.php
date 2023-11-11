@@ -10,11 +10,11 @@
 defined( '_JEXEC' ) or die( 'Restricted access');
 jimport('joomla.table.table');
 
-class  JoomcckTableRecord_category extends JTable
+class  JoomcckTableRecord_category extends \Joomla\CMS\Table\Table
 {
 	public function __construct( &$_db ) {
 		parent::__construct( '#__js_res_record_category', 'id', $_db );
-		$this->otime = JFactory::getDate()->toSql();
+		$this->otime = \Joomla\CMS\Factory::getDate()->toSql();
 	}
     
 }

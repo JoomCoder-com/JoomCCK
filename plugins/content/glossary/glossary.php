@@ -22,9 +22,9 @@ class plgContentGlossary extends JPlugin
 
 	function onContentPrepare($context, &$article, &$params, $page = 0)
 	{
-		$db = JFactory::getDBO();
-		$app = JFactory::getApplication();
-		$document = JFactory::getDocument();
+		$db = \Joomla\CMS\Factory::getDBO();
+		$app = \Joomla\CMS\Factory::getApplication();
+		$document = \Joomla\CMS\Factory::getDocument();
 
 		if($app->isClient('administrator'))
 		{
@@ -91,9 +91,9 @@ class plgContentGlossary extends JPlugin
 						$db->setQuery($query);
 						$num[$vall->title] = $db->loadResult();
 					}
-					$lang = JFactory::getLanguage();
+					$lang = \Joomla\CMS\Factory::getLanguage();
 					$lang->load('com_joomcck', JPATH_ROOT. DIRECTORY_SEPARATOR .'components'. DIRECTORY_SEPARATOR .'com_joomcck');
-					$nums = " (".JText::_('CHITS').': '.$num[$vall->title].")";
+					$nums = " (".\Joomla\CMS\Language\Text::_('CHITS').': '.$num[$vall->title].")";
 				}
 				$string = sprintf('<a href="%s"><span data-placement="top" rel="popover" data-bs-title="%s" data-content="%s" class="hasTooltip glossarydef">%s</span></a>',
 					$link, htmlspecialchars($vall->field_value, ENT_COMPAT, 'UTF-8'), htmlspecialchars($vall->field_value, ENT_COMPAT, 'UTF-8'), $title);

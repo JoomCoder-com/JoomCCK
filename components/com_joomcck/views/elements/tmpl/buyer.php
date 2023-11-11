@@ -16,7 +16,7 @@ JHTML::_('bootstrap.tooltip', '*[rel^="tooltip"]');
 ?>
 
 <?php
-$user      = JFactory::getUser();
+$user      = \Joomla\CMS\Factory::getUser();
 $userId    = $user->get('id');
 $colors    = array(
 	1 => '721111',
@@ -27,7 +27,7 @@ $colors    = array(
 );
 $listOrder = $this->state->get('list.ordering');
 $listDirn  = $this->state->get('list.direction');
-$alert     = JText::_('CMAKESELECTION');
+$alert     = \Joomla\CMS\Language\Text::_('CMAKESELECTION');
 $links     = $this->pagination->getPagesLinks();
 
 HTMLHelper::_('bootstrap.collapse');
@@ -35,9 +35,9 @@ HTMLHelper::_('bootstrap.collapse');
 ?>
 
 
-<div class="page-header"><h1><?php echo JText::_('CMYORDERHIST') ?></h1></div>
+<div class="page-header"><h1><?php echo \Joomla\CMS\Language\Text::_('CMYORDERHIST') ?></h1></div>
 
-<form action="<?php echo JRoute::_('index.php?option=com_joomcck&view=elements&layout=buyer'); ?>" method="post"
+<form action="<?php echo \Joomla\CMS\Router\Route::_('index.php?option=com_joomcck&view=elements&layout=buyer'); ?>" method="post"
       name="adminForm">
 
     <div class="controls controls-row">
@@ -45,14 +45,14 @@ HTMLHelper::_('bootstrap.collapse');
             <input class="col-md-3" type="text" name="filter_search" id="filter_search"
                    value="<?php echo $this->state->get('filter.search'); ?>"/>
             <button class="btn" type="submit" rel="tooltip"
-                    data-bs-title="<?php echo JText::_('JSEARCH_FILTER_SUBMIT'); ?>">
+                    data-bs-title="<?php echo \Joomla\CMS\Language\Text::_('JSEARCH_FILTER_SUBMIT'); ?>">
 				<?php echo HTMLFormatHelper::icon('magnifier.png'); ?>
             </button>
 			<?php if ($this->state->get('filter.search')) : ?>
                 <button class="btn<?php echo($this->state->get('filter.search') ? ' btn-warning' : null); ?>"
                         type="button"
                         onclick="Joomcck.setAndSubmit('filter_search', '');" rel="tooltip"
-                        data-bs-title="<?php echo JText::_('JSEARCH_FILTER_CLEAR'); ?>">
+                        data-bs-title="<?php echo \Joomla\CMS\Language\Text::_('JSEARCH_FILTER_CLEAR'); ?>">
 					<?php echo HTMLFormatHelper::icon('eraser.png'); ?>
                 </button>
 			<?php endif; ?>
@@ -67,14 +67,14 @@ HTMLHelper::_('bootstrap.collapse');
     <div class="collapse btn-toolbar" id="filters-block">
         <div class="well well-small">
             <select name="filter_status" style="max-width:150px;" onchange="this.form.submit()">
-                <option value=""><?php echo JText::_('JOPTION_SELECT_PUBLISHED'); ?></option>
-				<?php echo JHtml::_('select.options', $this->statuses, 'value', 'text', $this->state->get('filter.status'), true); ?>
+                <option value=""><?php echo \Joomla\CMS\Language\Text::_('JOPTION_SELECT_PUBLISHED'); ?></option>
+				<?php echo \Joomla\CMS\HTML\HTMLHelper::_('select.options', $this->statuses, 'value', 'text', $this->state->get('filter.status'), true); ?>
             </select>
 
 			<?php if (count($this->filter_sections) > 1): ?>
                 <select name="filter_section" style="max-width:150px;" onchange="this.form.submit()">
-                    <option value=""><?php echo JText::_('CSELECTSECTION'); ?></option>
-					<?php echo JHtml::_('select.options', $this->filter_sections, 'value', 'text', $this->state->get('filter.section'), true); ?>
+                    <option value=""><?php echo \Joomla\CMS\Language\Text::_('CSELECTSECTION'); ?></option>
+					<?php echo \Joomla\CMS\HTML\HTMLHelper::_('select.options', $this->filter_sections, 'value', 'text', $this->state->get('filter.section'), true); ?>
                 </select>
 			<?php endif; ?>
         </div>
@@ -88,23 +88,23 @@ HTMLHelper::_('bootstrap.collapse');
 				onclick="checkAll(this)" /></th>
 			</th>
 			<th width="1%">
-				<?php echo JHtml::_('grid.sort', 'ID', 'o.id', $listDirn, $listOrder); ?>
+				<?php echo \Joomla\CMS\HTML\HTMLHelper::_('grid.sort', 'ID', 'o.id', $listDirn, $listOrder); ?>
 			</th>
 			 -->
         <th>
-			<?php echo JHtml::_('grid.sort', 'CONAME', 'o.name', $listDirn, $listOrder); ?>
+			<?php echo \Joomla\CMS\HTML\HTMLHelper::_('grid.sort', 'CONAME', 'o.name', $listDirn, $listOrder); ?>
         </th>
         <th nowrap="nowrap" width="1%">
-			<?php echo JHtml::_('grid.sort', 'CAMOUNT', 'section', $listDirn, $listOrder); ?>
+			<?php echo \Joomla\CMS\HTML\HTMLHelper::_('grid.sort', 'CAMOUNT', 'section', $listDirn, $listOrder); ?>
         </th>
         <th width="1%" nowrap="nowrap">
-			<?php echo JHtml::_('grid.sort', 'CCREATED', 'o.ctime', $listDirn, $listOrder); ?>
+			<?php echo \Joomla\CMS\HTML\HTMLHelper::_('grid.sort', 'CCREATED', 'o.ctime', $listDirn, $listOrder); ?>
         </th>
         <th width="1%" nowrap="nowrap">
-			<?php echo JHtml::_('grid.sort', 'CMODIFIED', 'o.mtime', $listDirn, $listOrder); ?>
+			<?php echo \Joomla\CMS\HTML\HTMLHelper::_('grid.sort', 'CMODIFIED', 'o.mtime', $listDirn, $listOrder); ?>
         </th>
         <th width="1%" nowrap="nowrap">
-			<?php echo JHtml::_('grid.sort', 'CSTATUS', 'o.status', $listDirn, $listOrder); ?>
+			<?php echo \Joomla\CMS\HTML\HTMLHelper::_('grid.sort', 'CSTATUS', 'o.status', $listDirn, $listOrder); ?>
         </th>
         </thead>
         <tbody>
@@ -127,9 +127,9 @@ HTMLHelper::_('bootstrap.collapse');
 
 
                     <small>
-                        <span><?php echo JText::_('ID') ?>: <?php echo $order->id ?> | </span>
+                        <span><?php echo \Joomla\CMS\Language\Text::_('ID') ?>: <?php echo $order->id ?> | </span>
                         <span><?php echo $order->gateway; ?>: <?php echo $order->gateway_id ?> | </span>
-                        <span><?php echo JText::_('CSECTION') ?>: <?php echo $order->section ?> </span>
+                        <span><?php echo \Joomla\CMS\Language\Text::_('CSECTION') ?>: <?php echo $order->section ?> </span>
                     </small>
 
 					<?php if ($order->comment): ?>
@@ -143,8 +143,8 @@ HTMLHelper::_('bootstrap.collapse');
                 </td>
 
                 <td nowrap="nowrap"><strong><?php echo $order->amount ?><?php echo $order->currency ?></strong></td>
-                <td><?php echo JHtml::_('date', $order->ctime, 'Y/m/d'); ?></td>
-                <td><?php echo JHtml::_('date', $order->mtime, 'Y/m/d'); ?></td>
+                <td><?php echo \Joomla\CMS\HTML\HTMLHelper::_('date', $order->ctime, 'Y/m/d'); ?></td>
+                <td><?php echo \Joomla\CMS\HTML\HTMLHelper::_('date', $order->mtime, 'Y/m/d'); ?></td>
                 <td style="color:#<?php echo $colors[$order->status] ?>"><?php echo $this->stat[$order->status]; ?></td>
             </tr>
 		<?php endforeach; ?>
@@ -164,5 +164,5 @@ HTMLHelper::_('bootstrap.collapse');
     <input type="hidden" name="boxchecked" value="0"/>
     <input type="hidden" name="filter_order" value="<?php echo $listOrder; ?>"/>
     <input type="hidden" name="filter_order_Dir" value="<?php echo $listDirn; ?>"/>
-	<?php echo JHtml::_('form.token'); ?>
+	<?php echo \Joomla\CMS\HTML\HTMLHelper::_('form.token'); ?>
 </form>

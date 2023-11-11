@@ -35,12 +35,12 @@ class JoomcckViewComm extends MViewBase
 	 */
 	protected function addToolbar()
 	{
-		JFactory::getApplication()->input->set('hidemainmenu', true);
+		\Joomla\CMS\Factory::getApplication()->input->set('hidemainmenu', true);
 		
-		$user		= JFactory::getUser();
+		$user		= \Joomla\CMS\Factory::getUser();
 		$isNew		= ($this->item->id == 0);
 		
-		JToolBarHelper::title(JText::_('CEDITCOMMENT'), 'comments.png');
+		JToolBarHelper::title(\Joomla\CMS\Language\Text::_('CEDITCOMMENT'), 'comments.png');
 		
 		JToolBarHelper::apply('comment.apply', 'JTOOLBAR_APPLY');
 		JToolBarHelper::save('comment.save', 'JTOOLBAR_SAVE');

@@ -18,13 +18,13 @@ class JFormFieldFlowupload extends JFormField
 
 	public function getInput($params = array())
 	{
-        $app = JFactory::getApplication();
+        $app = \Joomla\CMS\Factory::getApplication();
         $record = ItemsStore::getRecord($app->input->getInt('id'));
         $type = ItemsStore::getType($record->type_id);
 
         $field = new stdClass();
         $field->id = $app->input->getInt('id');
-        $field->params = new JRegistry([
+        $field->params = new \Joomla\Registry\Registry([
             "params" => [
                 "file_formats" => $type->params->get('comments.comments_allowed_formats'),
                 "max_size" => $type->params->get('comments.comments_attachment_max')
@@ -32,7 +32,7 @@ class JFormFieldFlowupload extends JFormField
         ]);
         $field->iscomment = true;
 
-		$html = JHtml::_('mrelements.flow', $this->name, $this->_getDefault(), $params, $field);
+		$html = \Joomla\CMS\HTML\HTMLHelper::_('mrelements.flow', $this->name, $this->_getDefault(), $params, $field);
 		return $html;
 
 	}
@@ -46,7 +46,7 @@ class JFormFieldFlowupload extends JFormField
 
 		if (is_string($this->value[0]))
 		{
-			$files = JTable::getInstance('Files', 'JoomcckTable');
+			$files = \Joomla\CMS\Table\Table::getInstance('Files', 'JoomcckTable');
 			return $files->getFiles($this->value, 'filename');
 		}
 

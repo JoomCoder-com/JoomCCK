@@ -21,7 +21,7 @@ class JoomcckModelFields extends MModelList
 		$this->setState('list.start', 0);
 		$this->setState('list.limit', 1009);
 
-		$typeId = $this->getState('fields.type_id', JFactory::getApplication()->input->getInt('type_id'));
+		$typeId = $this->getState('fields.type_id', \Joomla\CMS\Factory::getApplication()->input->getInt('type_id'));
 
 		if(!$typeId)
 		{
@@ -48,7 +48,7 @@ class JoomcckModelFields extends MModelList
 		$query->where('f.type_id = '.$typeId);
 		$query->where('f.published = 1');
 
-		if($module_field = JFactory::getApplication()->input->get('module_video'))
+		if($module_field = \Joomla\CMS\Factory::getApplication()->input->get('module_video'))
 		{
 			settype($module_field, 'array');
 			$query->where("f.id IN (".implode(',', $module_field).")");
@@ -83,16 +83,16 @@ class JoomcckModelFields extends MModelList
 	{
 		/*if(!$id)
 		{
-			$id	.= ':'.implode(',', JFactory::getApplication()->getUserStateFromRequest('com_joomcck.fields.skipers', 'skip_fields', '', 'array'));
+			$id	.= ':'.implode(',', \Joomla\CMS\Factory::getApplication()->getUserStateFromRequest('com_joomcck.fields.skipers', 'skip_fields', '', 'array'));
 		}*/
 
 		$id .= ':'.$this->getState('fields.type_id');
 		$id	.= ':'.$this->getState('list.start');
 		$id	.= ':'.$this->getState('list.ordering');
 		$id	.= ':'.$this->getState('list.direction');
-		if(JFactory::getApplication()->input->get('skipfield'))
+		if(\Joomla\CMS\Factory::getApplication()->input->get('skipfield'))
 		{
-			$id	.= ':'.JJFactory::getApplication()->input->get('skipfield');
+			$id	.= ':'.J\Joomla\CMS\Factory::getApplication()->input->get('skipfield');
 		}
 
 
@@ -117,22 +117,22 @@ class JoomcckModelFields extends MModelList
 
 		if($itemId && !$fields)
 		{
-			$db = JFactory::getDbo();
+			$db = \Joomla\CMS\Factory::getDbo();
 			$db->setQuery("SELECT `fields` FROM `#__js_res_record` WHERE `id` = {$itemId}");
 			$json = $db->loadResult();
 			$fields = json_decode($json, true);
 		}
 		
-		$data = JFactory::getApplication()->getUserState('com_joomcck.edit.form.data', array());
+		$data = \Joomla\CMS\Factory::getApplication()->getUserState('com_joomcck.edit.form.data', array());
 
 		if(!empty($items))
 		{
 			foreach ($items as $key => $item)
 			{
 				$file = JPATH_ROOT. '/components/com_joomcck/fields/'.$item->field_type.'/'.$item->field_type.'.php';
-				if(!JFile::exists($file))
+				if(!\Joomla\CMS\Filesystem\File::exists($file))
 				{
-					JFactory::getApplication()->enqueueMessage(JText::sprintf("CFIELDNOTFOUND", $item->field_type),'warning');
+					\Joomla\CMS\Factory::getApplication()->enqueueMessage(\Joomla\CMS\Language\Text::sprintf("CFIELDNOTFOUND", $item->field_type),'warning');
 					continue;
 				}
 				require_once $file;
@@ -188,16 +188,16 @@ class JoomcckModelFields extends MModelList
 			//echo $item->group_icon;
 			if(!isset($params[$field->id]))
 			{
-				$params[$field->id] = new JRegistry($field->params);
+				$params[$field->id] = new \Joomla\Registry\Registry($field->params);
 			}
 			if($client == 'feed' && !$params[$field->id]->get('core.show_feed', 0)) continue;
 			if($client == 'full' && !$params[$field->id]->get('core.show_full', 0)) continue;
 			if($client == 'list' && !$params[$field->id]->get('core.show_intro', 0)) continue;
 
 			$file = JPATH_ROOT. '/components/com_joomcck/fields/'.$field->field_type.'/'.$field->field_type.'.php';
-			if(!JFile::exists($file))
+			if(!\Joomla\CMS\Filesystem\File::exists($file))
 			{
-				JFactory::getApplication()->enqueueMessage(JText::sprintf("CFIELDNOTFOUND", $field->field_type),'warning');
+				\Joomla\CMS\Factory::getApplication()->enqueueMessage(\Joomla\CMS\Language\Text::sprintf("CFIELDNOTFOUND", $field->field_type),'warning');
 				continue;
 			}
 			require_once $file;

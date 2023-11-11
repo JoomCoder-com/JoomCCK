@@ -128,7 +128,7 @@ abstract class MModelBase extends JObject
 	 */
 	public static function addTablePath($path)
 	{
-		JTable::addIncludePath($path);
+		\Joomla\CMS\Table\Table::addIncludePath($path);
 	}
 
 	/**
@@ -184,7 +184,7 @@ abstract class MModelBase extends JObject
 
 				if (!class_exists($modelClass))
 				{
-					JLog::add(JText::sprintf('JLIB_APPLICATION_ERROR_MODELCLASS_NOT_FOUND', $modelClass), JLog::WARNING, 'jerror');
+					JLog::add(\Joomla\CMS\Language\Text::sprintf('JLIB_APPLICATION_ERROR_MODELCLASS_NOT_FOUND', $modelClass), JLog::WARNING, 'jerror');
 					return false;
 				}
 			}
@@ -214,7 +214,7 @@ abstract class MModelBase extends JObject
 
 			if (!preg_match('/(.*)Model/i', get_class($this), $r))
 			{
-				throw new Exception(JText::_('JLIB_APPLICATION_ERROR_MODEL_GET_NAME'), 500);
+				throw new Exception(\Joomla\CMS\Language\Text::_('JLIB_APPLICATION_ERROR_MODEL_GET_NAME'), 500);
 			}
 
 			$this->option = 'com_' . strtolower($r[1]);
@@ -250,7 +250,7 @@ abstract class MModelBase extends JObject
 		}
 		else
 		{
-			$this->_db = JFactory::getDbo();
+			$this->_db = \Joomla\CMS\Factory::getDbo();
 		}
 
 		// Set the default view search path
@@ -338,12 +338,12 @@ abstract class MModelBase extends JObject
 	 *
 	 * @param   string  $name    The name of the view
 	 * @param   string  $prefix  The class prefix. Optional.
-	 * @param   array   $config  Configuration settings to pass to JTable::getInstance
+	 * @param   array   $config  Configuration settings to pass to \Joomla\CMS\Table\Table::getInstance
 	 *
 	 * @return  mixed  Model object or boolean false if failed
 	 *
 	 * @since   12.2
-	 * @see     JTable::getInstance()
+	 * @see     \Joomla\CMS\Table\Table::getInstance()
 	 */
 	protected function _createTable($name, $prefix = 'Table', $config = array())
 	{
@@ -357,7 +357,7 @@ abstract class MModelBase extends JObject
 			$config['dbo'] = $this->getDbo();
 		}
 
-		return JTable::getInstance($name, $prefix, $config);
+		return \Joomla\CMS\Table\Table::getInstance($name, $prefix, $config);
 	}
 
 	/**
@@ -388,7 +388,7 @@ abstract class MModelBase extends JObject
 			$r = null;
 			if (!preg_match('/Model(.*)/i', get_class($this), $r))
 			{
-				throw new Exception(JText::_('JLIB_APPLICATION_ERROR_MODEL_GET_NAME'), 500);
+				throw new Exception(\Joomla\CMS\Language\Text::_('JLIB_APPLICATION_ERROR_MODEL_GET_NAME'), 500);
 			}
 			$this->name = strtolower($r[1]);
 		}
@@ -427,7 +427,7 @@ abstract class MModelBase extends JObject
 	 * @param   string  $prefix   The class prefix. Optional.
 	 * @param   array   $options  Configuration array for model. Optional.
 	 *
-	 * @return  JTable  A JTable object
+	 * @return  \Joomla\CMS\Table\Table  A \Joomla\CMS\Table\Table object
 	 *
 	 * @since   12.2
 	 * @throws  Exception
@@ -444,28 +444,28 @@ abstract class MModelBase extends JObject
 			return $table;
 		}
 
-		throw new Exception(JText::sprintf('JLIB_APPLICATION_ERROR_TABLE_NAME_NOT_SUPPORTED', $name), 0);
+		throw new Exception(\Joomla\CMS\Language\Text::sprintf('JLIB_APPLICATION_ERROR_TABLE_NAME_NOT_SUPPORTED', $name), 0);
 	}
 
 	/**
 	 * Method to load a row for editing from the version history table.
 	 *
 	 * @param   integer  $version_id  Key to the version history table.
-	 * @param   JTable   &$table      Content table object being loaded.
+	 * @param   \Joomla\CMS\Table\Table   &$table      Content table object being loaded.
 	 *
 	 * @return  boolean  False on failure or error, true otherwise.
 	 *
 	 * @since   12.2
 	 */
-	public function loadHistory($version_id, JTable &$table)
+	public function loadHistory($version_id, \Joomla\CMS\Table\Table &$table)
 	{
 		// Only attempt to check the row in if it exists.
 		if ($version_id)
 		{
-			$user = JFactory::getUser();
+			$user = \Joomla\CMS\Factory::getUser();
 
 			// Get an instance of the row to checkout.
-			$historyTable = JTable::getInstance('Contenthistory');
+			$historyTable = \Joomla\CMS\Table\Table::getInstance('Contenthistory');
 
 			if (!$historyTable->load($version_id))
 			{
@@ -476,11 +476,11 @@ abstract class MModelBase extends JObject
 
 			$rowArray = \Joomla\Utilities\ArrayHelper::fromObject(json_decode($historyTable->version_data));
 
-			$typeId = JTable::getInstance('Contenttype')->getTypeId($this->typeAlias);
+			$typeId = \Joomla\CMS\Table\Table::getInstance('Contenttype')->getTypeId($this->typeAlias);
 
 			if ($historyTable->ucm_type_id != $typeId)
 			{
-				$this->setError(JText::_('JLIB_APPLICATION_ERROR_HISTORY_ID_MISMATCH'));
+				$this->setError(\Joomla\CMS\Language\Text::_('JLIB_APPLICATION_ERROR_HISTORY_ID_MISMATCH'));
 				$key = $table->getKeyName();
 
 				if (isset($rowArray[$key]))
@@ -555,11 +555,11 @@ abstract class MModelBase extends JObject
 	 */
 	protected function cleanCache($group = null, $client_id = 0)
 	{
-		$conf = JFactory::getConfig();
-		$dispatcher = JFactory::getApplication();
+		$conf = \Joomla\CMS\Factory::getConfig();
+		$dispatcher = \Joomla\CMS\Factory::getApplication();
 
 		$options = array(
-			'defaultgroup' => ($group) ? $group : (isset($this->option) ? $this->option : JFactory::getApplication()->input->get('option')),
+			'defaultgroup' => ($group) ? $group : (isset($this->option) ? $this->option : \Joomla\CMS\Factory::getApplication()->input->get('option')),
 			'cachebase' => ($client_id) ? JPATH_ADMINISTRATOR . '/cache' : $conf->get('cache_path', JPATH_SITE . '/cache'));
 
 		$cache = JCache::getInstance('callback', $options);

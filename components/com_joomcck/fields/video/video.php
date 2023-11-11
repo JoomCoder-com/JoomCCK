@@ -78,7 +78,7 @@ class JFormFieldCVideo extends CFormFieldUpload
 		}
 		if(!empty($this->value['files']))
 		{
-			JFactory::getDocument()->addScript(JURI::root(TRUE) . '/media/com_joomcck/vendors/jwplayer/jwplayer.js');
+			\Joomla\CMS\Factory::getDocument()->addScript(JURI::root(TRUE) . '/media/com_joomcck/vendors/jwplayer/jwplayer.js');
 		}
 
 		return $this->_display_output($client, $record, $type, $section);
@@ -222,7 +222,7 @@ JWP;
 		if(isset($value['files']))
 		{
 			$value['files'] = $this->_getPrepared($value['files']);
-			$params         = JComponentHelper::getParams('com_joomcck');
+			$params         = \Joomla\CMS\Component\ComponentHelper::getParams('com_joomcck');
 
 			foreach($value['files'] as $val)
 			{
@@ -272,7 +272,7 @@ JWP;
 
 			if($this->params->get('params.link_max_count', 0) && (count($value['link']) > $this->params->get('params.link_max_count', 0)))
 			{
-				$this->setError(JText::_('CERRORMAXLINKS'));
+				$this->setError(\Joomla\CMS\Language\Text::_('CERRORMAXLINKS'));
 			}
 		}
 		if(isset($value['embed']))
@@ -282,13 +282,13 @@ JWP;
 
 			if($this->params->get('params.embed_max_count', 0) && (count($value['embed']) > $this->params->get('params.embed_max_count', 0)))
 			{
-				$this->setError(JText::_('CERRORMAXEMBEDS'));
+				$this->setError(\Joomla\CMS\Language\Text::_('CERRORMAXEMBEDS'));
 			}
 		}
 
 		if($this->params->get('params.only_one', 0) && $total > 1)
 		{
-			$this->setError(JText::_('CERRORMORETHANONE'));
+			$this->setError(\Joomla\CMS\Language\Text::_('CERRORMORETHANONE'));
 		}
 	}
 
@@ -303,7 +303,7 @@ JWP;
 			$saved[] = $file['filename'];
 		}
 
-		$files = JTable::getInstance('Files', 'JoomcckTable');
+		$files = \Joomla\CMS\Table\Table::getInstance('Files', 'JoomcckTable');
 		$files->markSaved($saved, $validData, $this->id);
 
 		return $out;
@@ -316,7 +316,7 @@ JWP;
 
 	public function _getVideoThumb($file)
 	{
-		$params = JComponentHelper::getParams('com_joomcck');
+		$params = \Joomla\CMS\Component\ComponentHelper::getParams('com_joomcck');
 		$root   = JPath::clean($params->get('general_upload'));
 		$url    = str_replace(JPATH_ROOT, '', $root);
 		$url    = str_replace("\\", '/', $url);
@@ -327,19 +327,19 @@ JWP;
 		$date  = date($params->get('folder_format', 'Y-m'), (int)$parts[0]);
 
 		$thumb_path = JPATH_ROOT . DIRECTORY_SEPARATOR . $params->get('general_upload') . DIRECTORY_SEPARATOR . 'thumbs_cache' . DIRECTORY_SEPARATOR . $this->params->get('params.subfolder') . DIRECTORY_SEPARATOR . $date;
-		if(JFile::exists($thumb_path . DIRECTORY_SEPARATOR . $file->filename . '.jpg'))
+		if(\Joomla\CMS\Filesystem\File::exists($thumb_path . DIRECTORY_SEPARATOR . $file->filename . '.jpg'))
 		{
 			return $url . '/thumbs_cache/' . $this->params->get('params.subfolder') . '/' . $date . '/' . $file->filename . '.jpg';
 		}
 
-		if(!JFolder::exists($thumb_path))
+		if(!\Joomla\CMS\Filesystem\Folder::exists($thumb_path))
 		{
-			JFolder::create($thumb_path);
+			\Joomla\CMS\Filesystem\Folder::create($thumb_path);
 		}
 
 		passthru($this->params->get('params.command', 'ffmpeg') . " -i \"" . JPATH_ROOT . DIRECTORY_SEPARATOR . $params->get('general_upload') . DIRECTORY_SEPARATOR . $this->params->get('params.subfolder') . DIRECTORY_SEPARATOR . $file->fullpath . "\" -ss  00:00:03 -s qcif  " . $thumb_path . DIRECTORY_SEPARATOR . $file->filename . '.jpg');
 
-		if(JFile::exists($thumb_path . DIRECTORY_SEPARATOR . $file->filename . '.jpg'))
+		if(\Joomla\CMS\Filesystem\File::exists($thumb_path . DIRECTORY_SEPARATOR . $file->filename . '.jpg'))
 		{
 			return $url . '/thumbs_cache/' . $this->params->get('params.subfolder') . '/' . $date . '/' . $file->filename . '.jpg';
 		}

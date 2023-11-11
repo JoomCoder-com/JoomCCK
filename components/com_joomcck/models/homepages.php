@@ -28,8 +28,8 @@ class JoomcckModelHomepages extends MModelList
 
 	public function _getauthor()
 	{
-		$app = JFactory::getApplication();
-		$user = JFactory::getUser();
+		$app = \Joomla\CMS\Factory::getApplication();
+		$user = \Joomla\CMS\Factory::getUser();
 		
 		$id = $app->input->getInt('record_id');
 
@@ -45,8 +45,8 @@ class JoomcckModelHomepages extends MModelList
 	}
 	public function getAll()
 	{
-		$app = JFactory::getApplication();
-		$user = JFactory::getUser();
+		$app = \Joomla\CMS\Factory::getApplication();
+		$user = \Joomla\CMS\Factory::getUser();
 		
 		$author = $this->_getauthor();
 
@@ -92,8 +92,8 @@ class JoomcckModelHomepages extends MModelList
 	}
 	public function getListQuery()
 	{
-		$app = JFactory::getApplication();
-		$user = JFactory::getUser();
+		$app = \Joomla\CMS\Factory::getApplication();
+		$user = \Joomla\CMS\Factory::getUser();
 		$author = $this->_getauthor();
 
 		$db = $this->getDbo();
@@ -145,7 +145,7 @@ class JoomcckModelHomepages extends MModelList
 
 	protected function populateState($ordering = null, $direction = null)
 	{
-		$app = JFactory::getApplication();
+		$app = \Joomla\CMS\Factory::getApplication();
 
 		$search = $app->getUserStateFromRequest($this->context . '.filter.search', 'filter_search');
 		$this->setState('filter.search', $search);

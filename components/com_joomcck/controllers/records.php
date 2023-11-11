@@ -22,7 +22,7 @@ class JoomcckControllerRecords extends MControllerAdmin
 
 		if(!$this->input)
 		{
-			$this->input = JFactory::getApplication()->input;
+			$this->input = \Joomla\CMS\Factory::getApplication()->input;
 		}
 	}
 
@@ -38,7 +38,7 @@ class JoomcckControllerRecords extends MControllerAdmin
 			return;
 		}
 
-		$db = JFactory::getDbo();
+		$db = \Joomla\CMS\Factory::getDbo();
 		$db->setQuery("UPDATE `#__js_res_files` SET saved = 1 WHERE id = " . $this->input->get('fid'));
 		$db->execute();
 
@@ -48,7 +48,7 @@ class JoomcckControllerRecords extends MControllerAdmin
 
 		if(!$file)
 		{
-			$this->_finish(JText::_('CMSG_CANNOTRESTOREFILE'));
+			$this->_finish(\Joomla\CMS\Language\Text::_('CMSG_CANNOTRESTOREFILE'));
 
 			return;
 		}
@@ -59,7 +59,7 @@ class JoomcckControllerRecords extends MControllerAdmin
 		{
 			if($f['id'] == $this->input->get('fid'))
 			{
-				$this->_finish(JText::_('CMSG_FILERESTORED'));
+				$this->_finish(\Joomla\CMS\Language\Text::_('CMSG_FILERESTORED'));
 
 				return;
 			}
@@ -72,7 +72,7 @@ class JoomcckControllerRecords extends MControllerAdmin
 		$this->record->file = $file;
 		ATlog::log($this->record, ATlog::REC_FILE_RESTORED);
 
-		$this->_finish(JText::_('CMSG_FILERESTORED'));
+		$this->_finish(\Joomla\CMS\Language\Text::_('CMSG_FILERESTORED'));
 
 	}
 
@@ -83,13 +83,13 @@ class JoomcckControllerRecords extends MControllerAdmin
 			return;
 		}
 
-		$params = new JRegistry($this->record->params);
+		$params = new \Joomla\Registry\Registry($this->record->params);
 		$params->set('comments.comments_access_post', 0);
 
 		$this->record->params = $params->toString();
 		$this->record->store();
 
-		$this->_finish(JText::_('CMSG_COMMENTDISAB'));
+		$this->_finish(\Joomla\CMS\Language\Text::_('CMSG_COMMENTDISAB'));
 	}
 
 	public function commentsenable()
@@ -101,13 +101,13 @@ class JoomcckControllerRecords extends MControllerAdmin
 			return;
 		}
 
-		$params = new JRegistry($this->record->params);
+		$params = new \Joomla\Registry\Registry($this->record->params);
 		$params->set('comments.comments_access_post', $this->type->params->get('comments.comments_access_post'));
 
 		$this->record->params = $params->toString();
 		$this->record->store();
 
-		$this->_finish(JText::_('CMSG_COMMMENAD'));
+		$this->_finish(\Joomla\CMS\Language\Text::_('CMSG_COMMMENAD'));
 	}
 
 	public function depost()
@@ -117,23 +117,23 @@ class JoomcckControllerRecords extends MControllerAdmin
 			return;
 		}
 
-		$db = JFactory::getDbo();
-		$db->setQuery("DELETE FROM `#__js_res_record_repost` WHERE record_id = {$this->record->id} AND host_id = " . JFactory::getUser()->get('id'));
+		$db = \Joomla\CMS\Factory::getDbo();
+		$db->setQuery("DELETE FROM `#__js_res_record_repost` WHERE record_id = {$this->record->id} AND host_id = " . \Joomla\CMS\Factory::getUser()->get('id'));
 		$db->execute();
 
 		$this->record->onRepost();
 
-		$this->_finish(JText::_('CMSG_DEPOSTED'));
+		$this->_finish(\Joomla\CMS\Language\Text::_('CMSG_DEPOSTED'));
 	}
 
 	public function restore()
 	{
-		$db = JFactory::getDbo();
+		$db = \Joomla\CMS\Factory::getDbo();
 		$db->setQuery("SELECT params FROM #__js_res_audit_log WHERE record_id = " . $this->input->getInt('id'));
 		$record = $db->loadResult();
 		if(!$record)
 		{
-			$this->_finish(JText::_('CERRRECNOTFOUND'), TRUE);
+			$this->_finish(\Joomla\CMS\Language\Text::_('CERRRECNOTFOUND'), TRUE);
 
 			return;
 		}
@@ -142,7 +142,7 @@ class JoomcckControllerRecords extends MControllerAdmin
 
 		if(!MECAccess::allowRestore($record))
 		{
-			$this->_finish(JText::_('CERRNOACTIONACCESS'), TRUE);
+			$this->_finish(\Joomla\CMS\Language\Text::_('CERRNOACTIONACCESS'), TRUE);
 		}
 
 		$db->setQuery("SELECT * FROM #__js_res_audit_restore WHERE record_id = " . $this->input->getInt('id'));
@@ -150,7 +150,7 @@ class JoomcckControllerRecords extends MControllerAdmin
 
 		if(!$restore)
 		{
-			$this->_finish(JText::_('CERRRESTORENOTFOUND'), TRUE);
+			$this->_finish(\Joomla\CMS\Language\Text::_('CERRRESTORENOTFOUND'), TRUE);
 
 			return;
 		}
@@ -160,7 +160,7 @@ class JoomcckControllerRecords extends MControllerAdmin
 
 		if(!$lastversion)
 		{
-			$this->_finish(JText::_('CERRRESTORENOTFOUND'), TRUE);
+			$this->_finish(\Joomla\CMS\Language\Text::_('CERRRESTORENOTFOUND'), TRUE);
 
 			return;
 		}
@@ -198,7 +198,7 @@ class JoomcckControllerRecords extends MControllerAdmin
 		$db->execute();
 
 		ATlog::log($this->record, ATlog::REC_RESTORED);
-		$this->_finish(JText::_('CMSG_RESTORED'));
+		$this->_finish(\Joomla\CMS\Language\Text::_('CMSG_RESTORED'));
 	}
 
 	public function rollback()
@@ -212,18 +212,18 @@ class JoomcckControllerRecords extends MControllerAdmin
 
 		if(!$version)
 		{
-			$this->_finish(JText::_('CNOTICEVERNOTSET'), TRUE);
+			$this->_finish(\Joomla\CMS\Language\Text::_('CNOTICEVERNOTSET'), TRUE);
 
 			return;
 		}
 
-		$db = JFactory::getDbo();
+		$db = \Joomla\CMS\Factory::getDbo();
 		$db->setQuery("SELECT * FROM #__js_res_audit_versions WHERE `version` = {$version} AND record_id = {$this->record->id}");
 		$restore = $db->loadObject();
 
 		if(!$restore)
 		{
-			$this->_finish(JText::sprintf('CNOTICEVERSNOTFUOND', $version), TRUE);
+			$this->_finish(\Joomla\CMS\Language\Text::sprintf('CNOTICEVERSNOTFUOND', $version), TRUE);
 
 			return;
 		}
@@ -232,12 +232,12 @@ class JoomcckControllerRecords extends MControllerAdmin
 
 		ATlog::log($this->record, ATlog::REC_ROLLEDBACK);
 
-		$this->_finish(JText::sprintf('CMSG_ROLLBACKSUCCESS', $this->record->title, $version));
+		$this->_finish(\Joomla\CMS\Language\Text::sprintf('CMSG_ROLLBACKSUCCESS', $this->record->title, $version));
 	}
 
 	private function _rollback($restore)
 	{
-		$db = JFactory::getDbo();
+		$db = \Joomla\CMS\Factory::getDbo();
 
 		$record = json_decode($restore->record_serial, TRUE);
 
@@ -267,7 +267,7 @@ class JoomcckControllerRecords extends MControllerAdmin
 			return;
 		}
 
-		$db  = JFactory::getDbo();
+		$db  = \Joomla\CMS\Factory::getDbo();
 		$sql = "DELETE FROM {$name} WHERE {$ref} = " . $this->record->id;
 		if($table_class == 'Votes')
 		{
@@ -298,10 +298,10 @@ class JoomcckControllerRecords extends MControllerAdmin
 		{
 			return;
 		}
-		$user = JFactory::getUser();
+		$user = \Joomla\CMS\Factory::getUser();
 		CEmeraldHelper::allowType('extend', $this->type, $user->id, $this->section, TRUE, '', $this->record->user_id);
 
-		$this->record->extime  = JFactory::getDate("+" . $this->type->params->get('properties.default_extend', 10) . ' day')->toSql();
+		$this->record->extime  = \Joomla\CMS\Factory::getDate("+" . $this->type->params->get('properties.default_extend', 10) . ' day')->toSql();
 		$this->record->exalert = 0;
 
 		$type = ItemsStore::getType($this->record->type_id);
@@ -315,14 +315,14 @@ class JoomcckControllerRecords extends MControllerAdmin
 		$data = $this->record->getProperties();
 		CEventsHelper::notify('record', CEventsHelper::_RECORD_EXTENDED, $this->record->id, $this->record->section_id, 0, 0, 0, $data);
 
-		$db = JFactory::getDbo();
+		$db = \Joomla\CMS\Factory::getDbo();
 		$db->setQuery("DELETE FROM #__js_res_notifications WHERE `type` = 'record_expired' AND ref_1 = {$this->record->id}");
 		$db->execute();
 		//CEmeraldHelper::countLimit('type', 'extend', $this->type, $user->id);
 
 		ATlog::log($this->record, ATlog::REC_PROLONGED);
 
-		$this->_finish(JText::sprintf('CMSG_RECEXTENDED', $this->type->params->get('properties.default_extend', 10)));
+		$this->_finish(\Joomla\CMS\Language\Text::sprintf('CMSG_RECEXTENDED', $this->type->params->get('properties.default_extend', 10)));
 	}
 
 	public function shide()
@@ -339,7 +339,7 @@ class JoomcckControllerRecords extends MControllerAdmin
 
 		ATlog::log($this->record, ATlog::REC_HIDDEN);
 
-		$this->_finish(JText::_('CMSG_RECHIDDEN'));
+		$this->_finish(\Joomla\CMS\Language\Text::_('CMSG_RECHIDDEN'));
 	}
 
 	public function sunhide()
@@ -356,7 +356,7 @@ class JoomcckControllerRecords extends MControllerAdmin
 
 		ATlog::log($this->record, ATlog::REC_UNHIDDEN);
 
-		$this->_finish(JText::_('CMSG_RECUNHIDDEN'));
+		$this->_finish(\Joomla\CMS\Language\Text::_('CMSG_RECUNHIDDEN'));
 	}
 
 	public function sfeatured()
@@ -366,12 +366,12 @@ class JoomcckControllerRecords extends MControllerAdmin
 			return;
 		}
 
-		$user = JFactory::getUser();
+		$user = \Joomla\CMS\Factory::getUser();
 
 		CEmeraldHelper::allowType('feature', $this->type, $user->id, $this->section, TRUE, NULL, $this->record->user_id);
 
 		$this->record->featured = 1;
-		$this->record->ftime    = JFactory::getDate("+" . $this->type->params->get('emerald.type_feature_subscription_time', 10) . ' day')->toSql();
+		$this->record->ftime    = \Joomla\CMS\Factory::getDate("+" . $this->type->params->get('emerald.type_feature_subscription_time', 10) . ' day')->toSql();
 		$this->record->store();
 
 		$data = $this->record->getProperties();
@@ -382,7 +382,7 @@ class JoomcckControllerRecords extends MControllerAdmin
 		ATlog::log($this->record, ATlog::REC_FEATURED);
 
 
-		$this->_finish(JText::sprintf('CMSG_RECFEATUREDOK', $this->type->params->get('emerald.type_feature_subscription_time', 10)));
+		$this->_finish(\Joomla\CMS\Language\Text::sprintf('CMSG_RECFEATUREDOK', $this->type->params->get('emerald.type_feature_subscription_time', 10)));
 
 	}
 
@@ -392,7 +392,7 @@ class JoomcckControllerRecords extends MControllerAdmin
 		{
 			return;
 		}
-		$user = JFactory::getUser();
+		$user = \Joomla\CMS\Factory::getUser();
 
 		//CEmeraldHelper::allowType('feature', $this->type, $user->id, $this->section, TRUE, $this->record->user_id);
 
@@ -407,7 +407,7 @@ class JoomcckControllerRecords extends MControllerAdmin
 		ATlog::log($this->record, ATlog::REC_UNFEATURED);
 
 
-		$this->_finish(JText::_('CMSG_RECUNFEATUREDOK'));
+		$this->_finish(\Joomla\CMS\Language\Text::_('CMSG_RECUNFEATUREDOK'));
 
 	}
 
@@ -431,7 +431,7 @@ class JoomcckControllerRecords extends MControllerAdmin
 
 		ATlog::log($this->record, ATlog::REC_UNPUBLISHED);
 
-		$this->_finish(JText::_('CMSG_RECUNPUBOK'));
+		$this->_finish(\Joomla\CMS\Language\Text::_('CMSG_RECUNPUBOK'));
 	}
 
 	public function spub()
@@ -447,7 +447,7 @@ class JoomcckControllerRecords extends MControllerAdmin
 		}
 
 		$this->record->published = 1;
-		$this->record->pubtime   = JFactory::getDate()->toSql();
+		$this->record->pubtime   = \Joomla\CMS\Factory::getDate()->toSql();
 		$this->record->store();
 
 		if($this->record->user_id)
@@ -458,7 +458,7 @@ class JoomcckControllerRecords extends MControllerAdmin
 
 		ATlog::log($this->record, ATlog::REC_PUBLISHED);
 
-		$this->_finish(JText::_('CMSG_RECPUBOK'));
+		$this->_finish(\Joomla\CMS\Language\Text::_('CMSG_RECPUBOK'));
 	}
 
 	public function sarchive()
@@ -476,7 +476,7 @@ class JoomcckControllerRecords extends MControllerAdmin
 		ATlog::log($this->record, ATlog::REC_ARCHIVE);
 
 
-		$this->_finish(JText::_('CMSG_RECARCHIVEOK'));
+		$this->_finish(\Joomla\CMS\Language\Text::_('CMSG_RECARCHIVEOK'));
 
 	}
 
@@ -505,7 +505,7 @@ class JoomcckControllerRecords extends MControllerAdmin
 			return;
 		}
 
-		$db = JFactory::getDbo();
+		$db = \Joomla\CMS\Factory::getDbo();
 
 		$db->setQuery("DELETE FROM #__js_res_record_category WHERE record_id = " . $this->input->getInt('id'));
 		$db->execute();
@@ -523,19 +523,19 @@ class JoomcckControllerRecords extends MControllerAdmin
 		if(!empty($files) && !$type->params->get('audit.versioning'))
 		{
 			$field_table   = JTable::getInstance('Field', 'JoomcckTable');
-			$joomcck_params = JComponentHelper::getParams('com_joomcck');
+			$joomcck_params = \Joomla\CMS\Component\ComponentHelper::getParams('com_joomcck');
 
 			foreach($files AS $file)
 			{
 				$field_table->load($file->field_id);
-				$field_params = new JRegistry($field_table->params);
+				$field_params = new \Joomla\Registry\Registry($field_table->params);
 				$subfolder    = $field_params->get('params.subfolder', $field_table->field_type);
-				if(JFile::exists(JPATH_ROOT . DIRECTORY_SEPARATOR . $joomcck_params->get('general_upload') . DIRECTORY_SEPARATOR . $subfolder . DIRECTORY_SEPARATOR . $file->fullpath))
+				if(\Joomla\CMS\Filesystem\File::exists(JPATH_ROOT . DIRECTORY_SEPARATOR . $joomcck_params->get('general_upload') . DIRECTORY_SEPARATOR . $subfolder . DIRECTORY_SEPARATOR . $file->fullpath))
 				{
 					unlink(JPATH_ROOT . DIRECTORY_SEPARATOR . $joomcck_params->get('general_upload') . DIRECTORY_SEPARATOR . $subfolder . DIRECTORY_SEPARATOR . $file->fullpath);
 				}
 				// deleting image field files
-				elseif(JFile::exists(JPATH_ROOT . DIRECTORY_SEPARATOR . $file->fullpath))
+				elseif(\Joomla\CMS\Filesystem\File::exists(JPATH_ROOT . DIRECTORY_SEPARATOR . $file->fullpath))
 				{
 					unlink(JPATH_ROOT . DIRECTORY_SEPARATOR . $file->fullpath);
 				}
@@ -554,7 +554,7 @@ class JoomcckControllerRecords extends MControllerAdmin
 		{
 			$restore['files']     = json_encode($files);
 			$restore['record_id'] = $this->input->getInt('id');
-			$restore['dtime']     = JFactory::getDate()->toSql();
+			$restore['dtime']     = \Joomla\CMS\Factory::getDate()->toSql();
 
 			$db->setQuery("SELECT * FROM #__js_res_comments WHERE record_id = " . $this->input->getInt('id'));
 			$restore['comments'] = json_encode($db->loadAssocList());
@@ -610,10 +610,10 @@ class JoomcckControllerRecords extends MControllerAdmin
 		}
 
 		ATlog::log($this->record, ATlog::REC_DELETE);
-		$this->_finish(JText::_('CMSG_RECDELETEDOK'));
+		$this->_finish(\Joomla\CMS\Language\Text::_('CMSG_RECDELETEDOK'));
 
 		JPluginHelper::importPlugin('mint');
-		$dispatcher = JFactory::getApplication();
+		$dispatcher = \Joomla\CMS\Factory::getApplication();
 		$dispatcher->triggerEvent('onRecordDelete', array($this->record));
 
 		$this->setRedirect(JoomcckFilter::base64($this->input->getBase64('return')));
@@ -623,14 +623,14 @@ class JoomcckControllerRecords extends MControllerAdmin
 
 	public function markread()
 	{
-		$app  = JFactory::getApplication();
-		$user = JFactory::getUser();
+		$app  = \Joomla\CMS\Factory::getApplication();
+		$user = \Joomla\CMS\Factory::getUser();
 
-		$db = JFactory::getDbo();
+		$db = \Joomla\CMS\Factory::getDbo();
 		$db->setQuery("UPDATE #__js_res_notifications SET state_new = 0, notified = 1 WHERE user_id = " . $user->get('id') . ' AND ref_2 = ' . $this->input->getInt('section_id'));
 		$db->execute();
 
-		$app->enqueueMessage(JText::_('EVENT_CLEAR'));
+		$app->enqueueMessage(\Joomla\CMS\Language\Text::_('EVENT_CLEAR'));
 
 		if($this->input->getInt('section_id'))
 		{
@@ -641,7 +641,7 @@ class JoomcckControllerRecords extends MControllerAdmin
 		{
 			$url = $this->_getUrl();
 		}
-		$this->setRedirect(JRoute::_($url, FALSE));
+		$this->setRedirect(\Joomla\CMS\Router\Route::_($url, FALSE));
 	}
 
 	protected function _finish($msg, $err = FALSE)
@@ -655,12 +655,12 @@ class JoomcckControllerRecords extends MControllerAdmin
 		{
 			if($msg)
 			{
-				$app = JFactory::getApplication();
+				$app = \Joomla\CMS\Factory::getApplication();
 				$app->enqueueMessage($msg);
 			}
 		}
 		$url = Url::get_back('return');
-		$this->setRedirect(JRoute::_($url, FALSE));
+		$this->setRedirect(\Joomla\CMS\Router\Route::_($url, FALSE));
 	}
 
 	protected function _checkAccess($control, $id)
@@ -673,12 +673,12 @@ class JoomcckControllerRecords extends MControllerAdmin
 		if(!$this->record->id)
 		{
 
-			Factory::getApplication()->enqueueMessage(JText::_('No record found'),'warning');
+			Factory::getApplication()->enqueueMessage(\Joomla\CMS\Language\Text::_('No record found'),'warning');
 
 			return FALSE;
 		}
 
-		$params               = new JRegistry($this->record->params);
+		$params               = new \Joomla\Registry\Registry($this->record->params);
 		$this->record->params = $params;
 
 		$this->type    = MModelBase::getInstance('Form', 'JoomcckModel')->getRecordType($this->record->type_id);
@@ -688,7 +688,7 @@ class JoomcckControllerRecords extends MControllerAdmin
 
 		if(!MECAccess::$control($this->record, $this->type, $this->section))
 		{
-			Factory::getApplication()->enqueueMessage(JText::_('CERRNOACTIONACCESS'),'warning');
+			Factory::getApplication()->enqueueMessage(\Joomla\CMS\Language\Text::_('CERRNOACTIONACCESS'),'warning');
 			return FALSE;
 		}
 
@@ -699,15 +699,15 @@ class JoomcckControllerRecords extends MControllerAdmin
 	public function cleanall()
 	{
 		$this->_clean();
-		$app = JFactory::getApplication();
-		$app->enqueueMessage(JText::_('CMSG_FILTERCLEANALL'));
+		$app = \Joomla\CMS\Factory::getApplication();
+		$app->enqueueMessage(\Joomla\CMS\Language\Text::_('CMSG_FILTERCLEANALL'));
 		$url = $this->_getUrl();
-		$this->setRedirect(JRoute::_($url, FALSE));
+		$this->setRedirect(\Joomla\CMS\Router\Route::_($url, FALSE));
 	}
 
 	private function _clean()
 	{
-		$app = JFactory::getApplication();
+		$app = \Joomla\CMS\Factory::getApplication();
 		$key = FilterHelper::key();
 
 		$sec_model = MModelBase::getInstance('Section', 'JoomcckModel');
@@ -733,7 +733,7 @@ class JoomcckControllerRecords extends MControllerAdmin
 	public function clean()
 	{
 		$key   = FilterHelper::key();
-		$app   = JFactory::getApplication();
+		$app   = \Joomla\CMS\Factory::getApplication();
 		$clean = $this->input->get('clean', array(), 'array');
 
 		foreach($clean as $name => $val)
@@ -745,14 +745,14 @@ class JoomcckControllerRecords extends MControllerAdmin
 		}
 
 		$url = $this->_getUrl();
-		$this->setRedirect(JRoute::_($url, FALSE));
+		$this->setRedirect(\Joomla\CMS\Router\Route::_($url, FALSE));
 	}
 
 	public function filters()
 	{
 		$key     = FilterHelper::key();
-		$db      = JFactory::getDbo();
-		$app     = JFactory::getApplication();
+		$db      = \Joomla\CMS\Factory::getDbo();
+		$app     = \Joomla\CMS\Factory::getApplication();
 		$filters = $this->input->get('filters', array(), 'array');
 
 		$sec_model = MModelBase::getInstance('Section', 'JoomcckModel');
@@ -814,7 +814,7 @@ class JoomcckControllerRecords extends MControllerAdmin
 		}
 
 		$url = $this->_getUrl();
-		$this->setRedirect(JRoute::_($url, FALSE));
+		$this->setRedirect(\Joomla\CMS\Router\Route::_($url, FALSE));
 	}
 
 	public function filter()
@@ -845,29 +845,29 @@ class JoomcckControllerRecords extends MControllerAdmin
 					}
 				}
 
-				$oldname = JFactory::getApplication()->getUserState('com_joomcck.section' . $key . '.filter_tpl', 'default');
+				$oldname = \Joomla\CMS\Factory::getApplication()->getUserState('com_joomcck.section' . $key . '.filter_tpl', 'default');
 				if($oldname != $vals[$k])
 				{
 					$section = ItemsStore::getSection($this->input->getInt('section_id'));
 					$section->params->set('general.tmpl_list', $vals[$k]);
 					$lparams = CTmpl::prepareTemplate('default_list_', 'general.tmpl_list', $section->params);
 
-					JFactory::getApplication()->setUserState('global.list.limit', $lparams->get('tmpl_core.item_limit_default', 20));
+					\Joomla\CMS\Factory::getApplication()->setUserState('global.list.limit', $lparams->get('tmpl_core.item_limit_default', 20));
 				}
 			}
 			preg_match('/^filter_([0-9]*)$/iU', $name, $match);
 			if(!empty($match[1]))
 			{
-				$db = JFactory::getDbo();
+				$db = \Joomla\CMS\Factory::getDbo();
 				$db->setQuery("SELECT `key` FROM #__js_res_fields WHERE id = " . $match[1]);
 				$name = 'filter_' . $db->loadResult();
 			}
 
-			JFactory::getApplication()->setUserState('com_joomcck.section' . $key . '.' . $name, $vals[$k]);
+			\Joomla\CMS\Factory::getApplication()->setUserState('com_joomcck.section' . $key . '.' . $name, $vals[$k]);
 		}
 
 		$url = $this->_getUrl();
-		$this->setRedirect(JRoute::_($url, FALSE));
+		$this->setRedirect(\Joomla\CMS\Router\Route::_($url, FALSE));
 	}
 
 	public function copy()
@@ -876,7 +876,7 @@ class JoomcckControllerRecords extends MControllerAdmin
 
 		if(empty($ids))
 		{
-			throw new GenericDataException(JText::_('JERROR_NO_ITEMS_SELECTED'), 500);
+			throw new GenericDataException(\Joomla\CMS\Language\Text::_('JERROR_NO_ITEMS_SELECTED'), 500);
 		}
 		else
 		{
@@ -888,13 +888,13 @@ class JoomcckControllerRecords extends MControllerAdmin
 			}
 		}
 
-		if(JFactory::getApplication()->input->getCmd('view') == 'items')
+		if(\Joomla\CMS\Factory::getApplication()->input->getCmd('view') == 'items')
 		{
 			$url = Url::view('items', FALSE);
 		}
 		else
 		{
-			$url = JRoute::_(Url::get_back('return'), FALSE);
+			$url = \Joomla\CMS\Router\Route::_(Url::get_back('return'), FALSE);
 		}
 
 		$this->setRedirect($url);
@@ -902,27 +902,27 @@ class JoomcckControllerRecords extends MControllerAdmin
 
 	public function checkin()
 	{
-		$ids = JFactory::getApplication()->input->get('cid', array(), 'array');
+		$ids = \Joomla\CMS\Factory::getApplication()->input->get('cid', array(), 'array');
 
 		$model = MModelBase::getInstance('Item', 'JoomcckModel');
 
 		$return = $model->checkin($ids);
 		if($return === FALSE)
 		{
-			$message = JText::sprintf('JLIB_APPLICATION_ERROR_CHECKIN_FAILED', $model->getError());
+			$message = \Joomla\CMS\Language\Text::sprintf('JLIB_APPLICATION_ERROR_CHECKIN_FAILED', $model->getError());
 		}
 		else
 		{
-			$message = JText::plural($this->text_prefix . '_N_ITEMS_CHECKED_IN', count($ids));
+			$message = \Joomla\CMS\Language\Text::plural($this->text_prefix . '_N_ITEMS_CHECKED_IN', count($ids));
 		}
 
-		if(JFactory::getApplication()->input->getCmd('view') == 'items')
+		if(\Joomla\CMS\Factory::getApplication()->input->getCmd('view') == 'items')
 		{
 			$url = Url::view('items', FALSE);
 		}
 		else
 		{
-			$url = JRoute::_(Url::get_back('return'), FALSE);
+			$url = \Joomla\CMS\Router\Route::_(Url::get_back('return'), FALSE);
 		}
 
 		$this->setRedirect($url, $message);
@@ -969,7 +969,7 @@ class JoomcckControllerRecords extends MControllerAdmin
 		$ids    = $this->input->get('cid', array(), '', 'array');
 		if(empty($ids))
 		{
-			throw new GenericDataException(JText::_('JERROR_NO_ITEMS_SELECTED'), 500);
+			throw new GenericDataException(\Joomla\CMS\Language\Text::_('JERROR_NO_ITEMS_SELECTED'), 500);
 		}
 		else
 		{

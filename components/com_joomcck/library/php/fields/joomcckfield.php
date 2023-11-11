@@ -41,7 +41,7 @@ class CFormField extends JFormField
 
 
 	/**
-	 * @var JRegistry
+	 * @var \Joomla\Registry\Registry
 	 */
 	public $params;
 
@@ -64,20 +64,20 @@ class CFormField extends JFormField
 
 		if(is_array($field->params))
 		{
-			$params = new JRegistry();
+			$params = new \Joomla\Registry\Registry();
 			$params->loadArray($field->params);
 			$field->params = $params;
 		}
 		elseif(is_string($field->params))
 		{
-			$params = new JRegistry();
+			$params = new \Joomla\Registry\Registry();
 			$params->loadString((string)$field->params);
 			$field->params = $params;
 		}
 
 		$this->params = $field->params;
 
-		if($field->params instanceof JRegistry)
+		if($field->params instanceof \Joomla\Registry\Registry)
 		{
 			$this->element = $field->params->toArray();
 		}
@@ -85,7 +85,7 @@ class CFormField extends JFormField
 		$this->label = Mint::_($field->label);
 		$this->label_orig = $field->label;
 		$this->element['label'] = $this->label;
-		$this->request = JFactory::getApplication()->input;
+		$this->request = \Joomla\CMS\Factory::getApplication()->input;
 		$this->value = $default;
 		$this->description = Mint::_($field->params->get('core.description'));
 		$this->required = (boolean)$field->params->get('core.required');
@@ -106,7 +106,7 @@ class CFormField extends JFormField
 		$this->group_order = @$field->gordering;
 
 		FieldHelper::loadLang($this->type);
-		$this->user = JFactory::getUser();
+		$this->user = \Joomla\CMS\Factory::getUser();
 	}
 
 	protected  function _display_filter($section, $module = false)
@@ -119,11 +119,11 @@ class CFormField extends JFormField
 		// b/c break of toggle_links
 		$layoutName = $layoutName == 'toggle_links.php' ? 'toggle_buttons.php' : $layoutName;
 
-		$template = JFactory::getApplication()->getTemplate();
+		$template = \Joomla\CMS\Factory::getApplication()->getTemplate();
 		$tpath = JPATH_THEMES . '/' . $template . '/html/com_joomcck/fields/'.$this->type.'/filter/' . $layoutName;
 
 
-		if(!JFile::exists($tpath))
+		if(!\Joomla\CMS\Filesystem\File::exists($tpath))
 		{
 			$tpath = JPATH_ROOT. '/components/com_joomcck/fields'. DIRECTORY_SEPARATOR .$this->type. DIRECTORY_SEPARATOR .'tmpl/filter'. DIRECTORY_SEPARATOR .$layoutName;
 		}
@@ -139,9 +139,9 @@ class CFormField extends JFormField
 	protected  function _display_input()
 	{
 		ob_start();
-		$template = JFactory::getApplication()->getTemplate();
+		$template = \Joomla\CMS\Factory::getApplication()->getTemplate();
 		$tpath = JPATH_THEMES . '/' . $template . '/html/com_joomcck/fields/'.$this->type.'/input/' . $this->params->get('params.template_input',  'default.php');
-		if(!JFile::exists($tpath))
+		if(!\Joomla\CMS\Filesystem\File::exists($tpath))
 		{
 			$tpath = JPATH_ROOT. '/components/com_joomcck/fields'. DIRECTORY_SEPARATOR .$this->type. DIRECTORY_SEPARATOR .'tmpl/input'. DIRECTORY_SEPARATOR .$this->params->get('params.template_input',  'default.php');
 		}
@@ -155,9 +155,9 @@ class CFormField extends JFormField
 	{
 		ob_start();
 
-		$template = JFactory::getApplication()->getTemplate();
+		$template = \Joomla\CMS\Factory::getApplication()->getTemplate();
 		$tpath = JPATH_THEMES . '/' . $template . '/html/com_joomcck/fields/'.$this->type.'/output/' . $this->params->get('params.template_output_'.$client,  'default.php');
-		if(!JFile::exists($tpath))
+		if(!\Joomla\CMS\Filesystem\File::exists($tpath))
 		{
 			$tpath = JPATH_ROOT. '/components/com_joomcck/fields'. DIRECTORY_SEPARATOR .$this->type. DIRECTORY_SEPARATOR .'tmpl/output'. DIRECTORY_SEPARATOR .$this->params->get('params.template_output_'.$client,  'default.php');
 		}
@@ -223,7 +223,7 @@ class CFormField extends JFormField
 	 * This method returns text to bee added for text search indexing.
 	 * Will be triggered only for fields that are searchabe.
 	 * @param mixed $value
-	 * @param JTable $record
+	 * @param \Joomla\CMS\Table\Table $record
 	 * @return string|json If it is array, it should be converted to string anyway.
 	 */
 	public function onPrepareFullTextSearch($value, $record, $type, $section)
@@ -247,7 +247,7 @@ class CFormField extends JFormField
 
 	public function validateField($value, $record, $type, $section)
 	{
-		$user = JFactory::getUser();
+		$user = \Joomla\CMS\Factory::getUser();
 		$jform = $this->request->get('jform', array(), 'array');
 		$submission = TRUE;
 
@@ -284,7 +284,7 @@ class CFormField extends JFormField
 					return;
 				}
 			}
-			$this->setError(JText::sprintf('CFIELDREQUIRED', $this->label));
+			$this->setError(\Joomla\CMS\Language\Text::sprintf('CFIELDREQUIRED', $this->label));
 		}
 	}
 
@@ -314,7 +314,7 @@ class CFormField extends JFormField
 
 		If(! $db)
 		{
-			$db = JFactory::getDbo();
+			$db = \Joomla\CMS\Factory::getDbo();
 		}
 		if(! isset($ids[md5($sql)]))
 		{
@@ -343,18 +343,18 @@ class CFormField extends JFormField
 	{
 		if(is_string($event->params) || is_array($event->params))
 		{
-			$event->params = new JRegistry($event->params);
+			$event->params = new \Joomla\Registry\Registry($event->params);
 		}
 
 		$s = (int)$event->params->get('status');
 		if($s <= 5 && $s > 0)
 		{
 			$stat = array(
-				1 => JText::_('STAT_CANCEL'),
-				2 => JText::_('STAT_FAIL'),
-				3 => JText::_('STAT_WAIT'),
-				4 => JText::_('STAT_REFUND'),
-				5 => JText::_('STAT_CONFIRM')
+				1 => \Joomla\CMS\Language\Text::_('STAT_CANCEL'),
+				2 => \Joomla\CMS\Language\Text::_('STAT_FAIL'),
+				3 => \Joomla\CMS\Language\Text::_('STAT_WAIT'),
+				4 => \Joomla\CMS\Language\Text::_('STAT_REFUND'),
+				5 => \Joomla\CMS\Language\Text::_('STAT_CONFIRM')
 			);
 			$text = str_replace('[STATUS]', "<b>{$stat[$s]}</b>", $text);
 		}
@@ -401,12 +401,12 @@ class CFormField extends JFormField
 			foreach($heads as $head)
 				$list[$head] = $head;
 			ArrayHelper::clean_r($list);
-			array_unshift($list, JText::_('CIMPORTNOIMPORT'));
+			array_unshift($list, \Joomla\CMS\Language\Text::_('CIMPORTNOIMPORT'));
 		}
 
 		$add_name = "[$this->id]".($name ? "[$name]" : null);
 
-		return JHtml::_('select.genericlist', $list, 'import[field]' . $add_name, 'class="col-md-12"', 'value', 'text', $default);
+		return \Joomla\CMS\HTML\HTMLHelper::_('select.genericlist', $list, 'import[field]' . $add_name, 'class="col-md-12"', 'value', 'text', $default);
 	}
 	protected function _find_import_file($path, $file)
 	{
@@ -419,7 +419,7 @@ class CFormField extends JFormField
 
 		if(!array_key_exists($path, $lists))
 		{
-			$lists[$path] = JFolder::files($path, '.', true, true);
+			$lists[$path] = \Joomla\CMS\Filesystem\Folder::files($path, '.', true, true);
 		}
 
 		foreach($lists[$path] AS $f)
@@ -442,7 +442,7 @@ class CFormField extends JFormField
 
 		if(!preg_match('/^[0-9,\.]*$/', $c[0]) && !$this->params->get('params.mask'))
 		{
-			$label = JText::_($label);
+			$label = \Joomla\CMS\Language\Text::_($label);
 		}
 
 		if($html && isset($c[1]))

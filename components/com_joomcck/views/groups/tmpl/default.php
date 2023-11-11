@@ -9,7 +9,7 @@
 
 defined('_JEXEC') or die('Restricted access'); ?>
 <?php
-$user	= JFactory::getUser();
+$user	= \Joomla\CMS\Factory::getUser();
 $userId	= $user->get('id');
 
 $listOrder	= $this->state->get('list.ordering');
@@ -19,7 +19,7 @@ $saveOrder	= $listOrder == 'g.ordering';
 if ($saveOrder)
 {
 	$saveOrderingUrl = 'index.php?option=com_joomcck&task=groups.ordersave&tmpl=component';
-	JHtml::_('sortablelist.sortable', 'groupsList', 'adminForm', strtolower($listDirn), $saveOrderingUrl);
+	\Joomla\CMS\HTML\HTMLHelper::_('sortablelist.sortable', 'groupsList', 'adminForm', strtolower($listDirn), $saveOrderingUrl);
 }
 ?>
 
@@ -27,15 +27,15 @@ if ($saveOrder)
 
 <a class="btn btn-primary" href="index.php?option=com_joomcck&view=tfields&filter_type=<?php echo $this->state->get('groups.type'); ?>">
 	<?php echo HTMLFormatHelper::icon('arrow-180.png'); ?>
-	<?php JText::printf('CBACKTOFIELD', $this->type->name);?>
+	<?php \Joomla\CMS\Language\Text::printf('CBACKTOFIELD', $this->type->name);?>
 </a>
 
-<form action="<?php echo JUri::getInstance()->toString(); ?>" method="post" name="adminForm" id="adminForm">
+<form action="<?php echo \Joomla\CMS\Uri\Uri::getInstance()->toString(); ?>" method="post" name="adminForm" id="adminForm">
 
 	<div class="page-header">
 		<h1>
-			<img src="<?php echo JUri::root(TRUE); ?>/components/com_joomcck/images/icons/sections.png">
-			<?php echo JText::sprintf('COB_FIELD_GROPMANAGER', $this->type->name); ?>
+			<img src="<?php echo \Joomla\CMS\Uri\Uri::root(TRUE); ?>/components/com_joomcck/images/icons/sections.png">
+			<?php echo \Joomla\CMS\Language\Text::sprintf('COB_FIELD_GROPMANAGER', $this->type->name); ?>
 		</h1>
 	</div>
 
@@ -50,10 +50,10 @@ if ($saveOrder)
 				<input type="checkbox" name="checkall-toggle" value="" onclick="Joomla.checkAll(this)" />
 			</th>
 			<th class="title">
-				<?php echo JText::_('CTITLE'); ?>
+				<?php echo \Joomla\CMS\Language\Text::_('CTITLE'); ?>
 			</th>
 			<th width="1%">
-				<?php echo JText::_('ID'); ?>
+				<?php echo \Joomla\CMS\Language\Text::_('ID'); ?>
 			</th>
 		</thead>
 		<?php echo HTMLFormatHelper::layout('pagenav', $this); ?>
@@ -72,7 +72,7 @@ if ($saveOrder)
 						$disabledLabel	  = '';
 
 						if (!$saveOrder) :
-							$disabledLabel    = JText::_('JORDERINGDISABLED');
+							$disabledLabel    = \Joomla\CMS\Language\Text::_('JORDERINGDISABLED');
 							$disableClassName = 'inactive tip-top';
 						endif; ?>
 						<span class="sortable-handler <?php echo $disableClassName?>" title="<?php echo $disabledLabel?>" rel="tooltip">
@@ -86,14 +86,14 @@ if ($saveOrder)
 					<?php endif; ?>
 				</td>
 				<td width="1%">
-					<?php echo JHtml::_('grid.id', $i, $item->id); ?>
+					<?php echo \Joomla\CMS\HTML\HTMLHelper::_('grid.id', $i, $item->id); ?>
 				</td>
 				<td >
 					<?php if ($item->checked_out) : ?>
-						<?php echo JHtml::_('jgrid.checkedout', $i, $item->checked_out, $item->checked_out_time, 'groups.', $canCheckin); ?>
+						<?php echo \Joomla\CMS\HTML\HTMLHelper::_('jgrid.checkedout', $i, $item->checked_out, $item->checked_out_time, 'groups.', $canCheckin); ?>
 					<?php endif; ?>
 
-					<a href="<?php echo JRoute::_('index.php?option=com_joomcck&task=group.edit&id='.(int) $item->id);?>">
+					<a href="<?php echo \Joomla\CMS\Router\Route::_('index.php?option=com_joomcck&task=group.edit&id='.(int) $item->id);?>">
 						<?php echo $item->title; ?>
 					</a>
 
@@ -111,5 +111,5 @@ if ($saveOrder)
 	<input type="hidden" name="boxchecked" value="0" />
 	<input type="hidden" name="filter_order" value="<?php echo $listOrder; ?>" />
 	<input type="hidden" name="filter_order_Dir" value="<?php echo $listDirn; ?>" />
-	<?php echo JHtml::_('form.token'); ?>
+	<?php echo \Joomla\CMS\HTML\HTMLHelper::_('form.token'); ?>
 </form>

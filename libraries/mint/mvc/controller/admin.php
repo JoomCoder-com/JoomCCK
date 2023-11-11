@@ -80,7 +80,7 @@ class MControllerAdmin extends MControllerBase
 			$this->option = 'com_' . strtolower($this->getName());
 		}
 
-		// Guess the JText message prefix. Defaults to the option.
+		// Guess the \Joomla\CMS\Language\Text message prefix. Defaults to the option.
 		if (empty($this->text_prefix))
 		{
 			$this->text_prefix = strtoupper($this->option);
@@ -92,7 +92,7 @@ class MControllerAdmin extends MControllerBase
 			$r = null;
 			if (!preg_match('/(.*)Controller(.*)/i', get_class($this), $r))
 			{
-				throw new Exception(JText::_('JLIB_APPLICATION_ERROR_CONTROLLER_GET_NAME'), 500);
+				throw new Exception(\Joomla\CMS\Language\Text::_('JLIB_APPLICATION_ERROR_CONTROLLER_GET_NAME'), 500);
 			}
 			$this->view_list = strtolower($r[2]);
 		}
@@ -108,14 +108,14 @@ class MControllerAdmin extends MControllerBase
 	public function delete()
 	{
 		// Check for request forgeries
-		JSession::checkToken() or die(JText::_('JINVALID_TOKEN'));
+		JSession::checkToken() or die(\Joomla\CMS\Language\Text::_('JINVALID_TOKEN'));
 
 		// Get items to remove from the request.
-		$cid = JFactory::getApplication()->input->get('cid', array(), 'array');
+		$cid = \Joomla\CMS\Factory::getApplication()->input->get('cid', array(), 'array');
 
 		if (!is_array($cid) || count($cid) < 1)
 		{
-			JLog::add(JText::_($this->text_prefix . '_NO_ITEM_SELECTED'), JLog::WARNING, 'jerror');
+			JLog::add(\Joomla\CMS\Language\Text::_($this->text_prefix . '_NO_ITEM_SELECTED'), JLog::WARNING, 'jerror');
 		}
 		else
 		{
@@ -129,7 +129,7 @@ class MControllerAdmin extends MControllerBase
 			// Remove the items.
 			if ($model->delete($cid))
 			{
-				$this->setMessage(JText::plural($this->text_prefix . '_N_ITEMS_DELETED', count($cid)));
+				$this->setMessage(\Joomla\CMS\Language\Text::plural($this->text_prefix . '_N_ITEMS_DELETED', count($cid)));
 			}
 			else
 			{
@@ -139,7 +139,7 @@ class MControllerAdmin extends MControllerBase
 		// Invoke the postDelete method to allow for the child class to access the model.
 		$this->postDeleteHook($model, $cid);
 
-		$this->setRedirect(JRoute::_('index.php?option=' . $this->option . '&view=' . $this->view_list, false));
+		$this->setRedirect(\Joomla\CMS\Router\Route::_('index.php?option=' . $this->option . '&view=' . $this->view_list, false));
 	}
 
 	/**
@@ -182,17 +182,17 @@ class MControllerAdmin extends MControllerBase
 	public function publish()
 	{
 		// Check for request forgeries
-		JSession::checkToken() or die(JText::_('JINVALID_TOKEN'));
+		JSession::checkToken() or die(\Joomla\CMS\Language\Text::_('JINVALID_TOKEN'));
 
 		// Get items to publish from the request.
-		$cid = JFactory::getApplication()->input->get('cid', array(), 'array');
+		$cid = \Joomla\CMS\Factory::getApplication()->input->get('cid', array(), 'array');
 		$data = array('publish' => 1, 'unpublish' => 0, 'archive' => 2, 'trash' => -2, 'report' => -3);
 		$task = $this->getTask();
 		$value = \Joomla\Utilities\ArrayHelper::getValue($data, $task, 0, 'int');
 
 		if (empty($cid))
 		{
-			JLog::add(JText::_($this->text_prefix . '_NO_ITEM_SELECTED'), JLog::WARNING, 'jerror');
+			JLog::add(\Joomla\CMS\Language\Text::_($this->text_prefix . '_NO_ITEM_SELECTED'), JLog::WARNING, 'jerror');
 		}
 		else
 		{
@@ -223,17 +223,17 @@ class MControllerAdmin extends MControllerBase
 				{
 					$ntext = $this->text_prefix . '_N_ITEMS_TRASHED';
 				}
-				$this->setMessage(JText::plural($ntext, count($cid)));
+				$this->setMessage(\Joomla\CMS\Language\Text::plural($ntext, count($cid)));
 			}
 			catch (Exception $e)
 			{
-				$this->setMessage(JText::_('JLIB_DATABASE_ERROR_ANCESTOR_NODES_LOWER_STATE'), 'error');
+				$this->setMessage(\Joomla\CMS\Language\Text::_('JLIB_DATABASE_ERROR_ANCESTOR_NODES_LOWER_STATE'), 'error');
 			}
 
 		}
 		$extension = $this->input->get('extension');
 		$extensionURL = ($extension) ? '&extension=' . $extension : '';
-		$this->setRedirect(JRoute::_('index.php?option=' . $this->option . '&view=' . $this->view_list . $extensionURL, false));
+		$this->setRedirect(\Joomla\CMS\Router\Route::_('index.php?option=' . $this->option . '&view=' . $this->view_list . $extensionURL, false));
 	}
 
 	/**
@@ -246,9 +246,9 @@ class MControllerAdmin extends MControllerBase
 	public function reorder()
 	{
 		// Check for request forgeries.
-		JSession::checkToken() or jexit(JText::_('JINVALID_TOKEN'));
+		JSession::checkToken() or jexit(\Joomla\CMS\Language\Text::_('JINVALID_TOKEN'));
 
-		$ids = JFactory::getApplication()->input->post->get('cid', array(), 'array');
+		$ids = \Joomla\CMS\Factory::getApplication()->input->post->get('cid', array(), 'array');
 		$inc = ($this->getTask() == 'orderup') ? -1 : 1;
 
 		$model = $this->getModel();
@@ -256,15 +256,15 @@ class MControllerAdmin extends MControllerBase
 		if ($return === false)
 		{
 			// Reorder failed.
-			$message = JText::sprintf('JLIB_APPLICATION_ERROR_REORDER_FAILED', $model->getError());
-			$this->setRedirect(JRoute::_('index.php?option=' . $this->option . '&view=' . $this->view_list, false), $message, 'error');
+			$message = \Joomla\CMS\Language\Text::sprintf('JLIB_APPLICATION_ERROR_REORDER_FAILED', $model->getError());
+			$this->setRedirect(\Joomla\CMS\Router\Route::_('index.php?option=' . $this->option . '&view=' . $this->view_list, false), $message, 'error');
 			return false;
 		}
 		else
 		{
 			// Reorder succeeded.
-			$message = JText::_('JLIB_APPLICATION_SUCCESS_ITEM_REORDERED');
-			$this->setRedirect(JRoute::_('index.php?option=' . $this->option . '&view=' . $this->view_list, false), $message);
+			$message = \Joomla\CMS\Language\Text::_('JLIB_APPLICATION_SUCCESS_ITEM_REORDERED');
+			$this->setRedirect(\Joomla\CMS\Router\Route::_('index.php?option=' . $this->option . '&view=' . $this->view_list, false), $message);
 			return true;
 		}
 	}
@@ -279,7 +279,7 @@ class MControllerAdmin extends MControllerBase
 	public function saveorder()
 	{
 		// Check for request forgeries.
-		JSession::checkToken() or jexit(JText::_('JINVALID_TOKEN'));
+		JSession::checkToken() or jexit(\Joomla\CMS\Language\Text::_('JINVALID_TOKEN'));
 
 		// Get the input
 		$pks = $this->input->post->get('cid', array(), 'array');
@@ -298,15 +298,15 @@ class MControllerAdmin extends MControllerBase
 		if ($return === false)
 		{
 			// Reorder failed
-			$message = JText::sprintf('JLIB_APPLICATION_ERROR_REORDER_FAILED', $model->getError());
-			$this->setRedirect(JRoute::_('index.php?option=' . $this->option . '&view=' . $this->view_list, false), $message, 'error');
+			$message = \Joomla\CMS\Language\Text::sprintf('JLIB_APPLICATION_ERROR_REORDER_FAILED', $model->getError());
+			$this->setRedirect(\Joomla\CMS\Router\Route::_('index.php?option=' . $this->option . '&view=' . $this->view_list, false), $message, 'error');
 			return false;
 		}
 		else
 		{
 			// Reorder succeeded.
-			$this->setMessage(JText::_('JLIB_APPLICATION_SUCCESS_ORDERING_SAVED'));
-			$this->setRedirect(JRoute::_('index.php?option=' . $this->option . '&view=' . $this->view_list, false));
+			$this->setMessage(\Joomla\CMS\Language\Text::_('JLIB_APPLICATION_SUCCESS_ORDERING_SAVED'));
+			$this->setRedirect(\Joomla\CMS\Router\Route::_('index.php?option=' . $this->option . '&view=' . $this->view_list, false));
 			return true;
 		}
 	}
@@ -321,24 +321,24 @@ class MControllerAdmin extends MControllerBase
 	public function checkin()
 	{
 		// Check for request forgeries.
-		JSession::checkToken() or jexit(JText::_('JINVALID_TOKEN'));
+		JSession::checkToken() or jexit(\Joomla\CMS\Language\Text::_('JINVALID_TOKEN'));
 
-		$ids = JFactory::getApplication()->input->post->get('cid', array(), 'array');
+		$ids = \Joomla\CMS\Factory::getApplication()->input->post->get('cid', array(), 'array');
 
 		$model = $this->getModel();
 		$return = $model->checkin($ids);
 		if ($return === false)
 		{
 			// Checkin failed.
-			$message = JText::sprintf('JLIB_APPLICATION_ERROR_CHECKIN_FAILED', $model->getError());
-			$this->setRedirect(JRoute::_('index.php?option=' . $this->option . '&view=' . $this->view_list, false), $message, 'error');
+			$message = \Joomla\CMS\Language\Text::sprintf('JLIB_APPLICATION_ERROR_CHECKIN_FAILED', $model->getError());
+			$this->setRedirect(\Joomla\CMS\Router\Route::_('index.php?option=' . $this->option . '&view=' . $this->view_list, false), $message, 'error');
 			return false;
 		}
 		else
 		{
 			// Checkin succeeded.
-			$message = JText::plural($this->text_prefix . '_N_ITEMS_CHECKED_IN', count($ids));
-			$this->setRedirect(JRoute::_('index.php?option=' . $this->option . '&view=' . $this->view_list, false), $message);
+			$message = \Joomla\CMS\Language\Text::plural($this->text_prefix . '_N_ITEMS_CHECKED_IN', count($ids));
+			$this->setRedirect(\Joomla\CMS\Router\Route::_('index.php?option=' . $this->option . '&view=' . $this->view_list, false), $message);
 			return true;
 		}
 	}
@@ -372,6 +372,6 @@ class MControllerAdmin extends MControllerBase
 		}
 
 		// Close the application
-		JFactory::getApplication()->close();
+		\Joomla\CMS\Factory::getApplication()->close();
 	}
 }

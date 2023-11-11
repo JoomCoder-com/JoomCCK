@@ -14,8 +14,8 @@ class JHTMLLightbox
 {
 	public static function init()
 	{
-		$doc = JFactory::getDocument();
-		$doc->addScript(JUri::root(TRUE) . '/media/com_joomcck/vendors/lightbox2/dist/js/lightbox.min.js');
-		$doc->addStyleSheet(JUri::root(TRUE) . '/media/com_joomcck/vendors/lightbox2/dist/css/lightbox.min.css');
+		$doc = \Joomla\CMS\Factory::getDocument();
+		$doc->addScript(\Joomla\CMS\Uri\Uri::root(TRUE) . '/media/com_joomcck/vendors/lightbox2/dist/js/lightbox.min.js');
+		$doc->addStyleSheet(\Joomla\CMS\Uri\Uri::root(TRUE) . '/media/com_joomcck/vendors/lightbox2/dist/css/lightbox.min.css');
 	}
 }

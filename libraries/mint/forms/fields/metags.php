@@ -23,14 +23,14 @@ class JFormFieldMetags extends JFormField
 	public function getInput()
 	{
 
-		$app   = JFactory::getApplication();
+		$app   = \Joomla\CMS\Factory::getApplication();
 		$model = JModelLegacy::getInstance('Form', 'JoomcckModel');
 		$type  = $model->getRecordType($app->input->getInt('type_id'));
 
 		$default = $this->getDefault();
 		$selected = $this->getSelected();
 
-		$this->params = new JRegistry();
+		$this->params = new \Joomla\Registry\Registry();
 
 		$options['coma_separate']    = 0;
 		$options['only_values']      = 0;
@@ -44,7 +44,7 @@ class JFormFieldMetags extends JFormField
 		$options['suggestion_limit'] = 10;
 		$options['max_items']        = $type->params->get('general.item_tags_max', 25);
 		$options['limit']            = $type->params->get('general.item_tags_max', 25);
-		$options['suggestion_url']   = JUri::root().'index.php?option=com_joomcck&task=ajax.tags_list&tmpl=component';
+		$options['suggestion_url']   = \Joomla\CMS\Uri\Uri::root().'index.php?option=com_joomcck&task=ajax.tags_list&tmpl=component';
 
 		$data = [
 			'options' => $options,

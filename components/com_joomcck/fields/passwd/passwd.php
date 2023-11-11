@@ -18,7 +18,7 @@ class JFormFieldCPasswd extends CFormField
 	public function getInput()
 	{
 		$params = $this->params;
-		$user   = JFactory::getUser();
+		$user   = \Joomla\CMS\Factory::getUser();
 		$value  = '';
 		if($this->value && ($params->get('params.show_edit', 0) || in_array($params->get('params.allow_view', 0), $user->getAuthorisedViewLevels())))
 		{
@@ -29,7 +29,7 @@ class JFormFieldCPasswd extends CFormField
 			}
 			else
 			{
-				$config = JFactory::getConfig();
+				$config = \Joomla\CMS\Factory::getConfig();
 				$pass   = $config->getValue('config.secret');
 			}
 			$value = $this->_md5_decrypt($this->value, $pass);
@@ -59,7 +59,7 @@ class JFormFieldCPasswd extends CFormField
 			}
 			else
 			{
-				$config = JFactory::getConfig();
+				$config = \Joomla\CMS\Factory::getConfig();
 				$pass   = $config->getValue('config.secret');
 			}
 			$value = $this->_md5_encrypt($value, $pass);
@@ -80,7 +80,7 @@ class JFormFieldCPasswd extends CFormField
 
 	private function _render($client, $record, $type, $section)
 	{
-		$user = JFactory::getUser();
+		$user = \Joomla\CMS\Factory::getUser();
 		if(!$this->value)
 		{
 			return;
@@ -97,7 +97,7 @@ class JFormFieldCPasswd extends CFormField
 		}
 		else
 		{
-			$config = JFactory::getConfig();
+			$config = \Joomla\CMS\Factory::getConfig();
 			$pass   = $config->getValue('config.secret');
 		}
 		$this->value = str_repeat('*', strlen($this->_md5_decrypt($this->value, $pass)));
@@ -149,7 +149,7 @@ class JFormFieldCPasswd extends CFormField
 		}
 		else
 		{
-			$config = JFactory::getConfig();
+			$config = \Joomla\CMS\Factory::getConfig();
 			$pass   = $config->getValue('config.secret');
 		}
 		$enc_text   = JoomcckFilter::base64($this->value);

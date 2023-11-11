@@ -18,9 +18,9 @@ class JFormFieldCHtml extends CFormField
 
 	public function getInput()
 	{
-		$app = JFactory::getApplication();
-		$doc = JFactory::getDocument();
-		$this->user = JFactory::getUser();
+		$app = \Joomla\CMS\Factory::getApplication();
+		$doc = \Joomla\CMS\Factory::getDocument();
+		$this->user = \Joomla\CMS\Factory::getUser();
 		$params = $this->params;
 
 		$this->value = ($this->value ? $this->value : $params->get('params.default_value'));
@@ -34,7 +34,7 @@ class JFormFieldCHtml extends CFormField
 		if(count($buttons) > 0)
 		{
 			settype($buttons, 'array');
-			$db = JFactory::getDbo();
+			$db = \Joomla\CMS\Factory::getDbo();
 
 			$query = $db->getQuery(true);
 			$query->select('element');
@@ -123,7 +123,7 @@ class JFormFieldCHtml extends CFormField
 		$this->value = $this->prepare($value);
 
 
-		//$this->value =  JHtml::_('content.prepare', $this->value);
+		//$this->value =  \Joomla\CMS\HTML\HTMLHelper::_('content.prepare', $this->value);
 		return $this->_display_output('full', $record, $type, $section);
 	}
 
@@ -150,12 +150,12 @@ class JFormFieldCHtml extends CFormField
 			$value = $v;
 		}
 
-		$value =  JHtml::_('content.prepare', $value);
+		$value =  \Joomla\CMS\HTML\HTMLHelper::_('content.prepare', $value);
 
 		$count2 = strlen($value);
 		if($count2 < $count1 && $this->params->get('params.readmore'))
 		{
-			$value .= '<p>'.JHtml::link($record->url, JText::_($this->params->get('params.readmore_lbl','H_READMORE')), array('class' => 'btn btn-primary btn-sm')).'</p>';
+			$value .= '<p>'.\Joomla\CMS\HTML\HTMLHelper::link($record->url, \Joomla\CMS\Language\Text::_($this->params->get('params.readmore_lbl','H_READMORE')), array('class' => 'btn btn-primary btn-sm')).'</p>';
 		}
 
 		$this->value = $value;
@@ -186,7 +186,7 @@ class JFormFieldCHtml extends CFormField
 	}
 	private function _filter($value)
 	{
-		$user = JFactory::getUser();
+		$user = \Joomla\CMS\Factory::getUser();
 		if (!in_array($this->params->get('params.allow_html', 3), $user->getAuthorisedViewLevels()))
 		{
 			$len = \Joomla\String\StringHelper::strlen($value);
@@ -202,7 +202,7 @@ class JFormFieldCHtml extends CFormField
 			$len1 = \Joomla\String\StringHelper::strlen($value);
 			if ($len != $len1)
 			{
-				$this->setError(JText::sprintf("H_ENTEREDTAGSATTRSNOTALLOWEDMSG", $this->label));
+				$this->setError(\Joomla\CMS\Language\Text::sprintf("H_ENTEREDTAGSATTRSNOTALLOWEDMSG", $this->label));
 			}
 		}
 

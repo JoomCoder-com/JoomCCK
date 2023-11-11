@@ -18,7 +18,7 @@ $this->record = $record;
 $key = $this->id . '-' . $record->id;
 $this->_init();
 
-$dir = JComponentHelper::getParams('com_joomcck')->get('general_upload') . DIRECTORY_SEPARATOR . $this->params->get('params.subfolder', $this->field_type) . DIRECTORY_SEPARATOR;
+$dir = \Joomla\CMS\Component\ComponentHelper::getParams('com_joomcck')->get('general_upload') . DIRECTORY_SEPARATOR . $this->params->get('params.subfolder', $this->field_type) . DIRECTORY_SEPARATOR;
 
 $ids = array_keys($this->value);
 if ($this->params->get('params.thumbs_list_random', 1))

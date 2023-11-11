@@ -9,7 +9,7 @@
 
 defined('_JEXEC') or die('Restricted access');
 
-class JoomcckTableGeo extends JTable
+class JoomcckTableGeo extends \Joomla\CMS\Table\Table
 {
 	public function __construct(&$_db)
 	{

@@ -22,7 +22,7 @@ class JoomcckControllerCType extends MControllerForm
 
 		if(!$this->input)
 		{
-			$this->input = JFactory::getApplication()->input;
+			$this->input = \Joomla\CMS\Factory::getApplication()->input;
 		}
 	}
 
@@ -33,7 +33,7 @@ class JoomcckControllerCType extends MControllerForm
 
 	protected function allowAdd($data = array())
 	{
-		$user  = JFactory::getUser();
+		$user  = \Joomla\CMS\Factory::getUser();
 		$allow = $user->authorise('core.create', 'com_joomcck.ctypes');
 
 		if($allow === NULL)
@@ -48,7 +48,7 @@ class JoomcckControllerCType extends MControllerForm
 
 	protected function allowEdit($data = array(), $key = 'id')
 	{
-		return JFactory::getUser()->authorise('core.edit', 'com_joomcck.ctypes');
+		return \Joomla\CMS\Factory::getUser()->authorise('core.edit', 'com_joomcck.ctypes');
 	}
 
 	public function postSaveHook(MModelBase $model, $validData = array())
@@ -71,7 +71,7 @@ class JoomcckControllerCType extends MControllerForm
 			$new = JTable::getInstance('Type', 'JoomcckTable');
 			$new->load($new_id);
 
-			$params = new JRegistry($new->params);
+			$params = new \Joomla\Registry\Registry($new->params);
 			$key    = md5(time() . '-' . $new_id);
 
 			$this->_moveTmpl($params, 'article', 'record', $key);
@@ -82,7 +82,7 @@ class JoomcckControllerCType extends MControllerForm
 			$new->params = $params->toString();
 			$new->store();
 
-			$db = JFactory::getDbo();
+			$db = \Joomla\CMS\Factory::getDbo();
 			$db->setQuery("INSERT INTO #__js_res_fields (`key`, label, type_id, field_type, params, published, ordering, access, group_id, asset_id, filter, user_id)
 					SELECT `key`, label, $new_id, field_type, params, published, ordering, access, group_id, asset_id, filter, user_id
 					FROM #__js_res_fields
@@ -93,7 +93,7 @@ class JoomcckControllerCType extends MControllerForm
 			$db->setQuery("SELECT * FROM #__js_res_fields_group WHERE type_id = " . $old_id);
 			$groups = $db->loadObjectList();
 
-			$db = JFactory::getDbo();
+			$db = \Joomla\CMS\Factory::getDbo();
 			include_once __DIR__ . '/../tables/group.php';
 			$gt = new JoomcckTableGroup($db);
 			foreach($groups AS $group)
@@ -119,11 +119,11 @@ class JoomcckControllerCType extends MControllerForm
 
 		$file = JPATH_ROOT . "/components/com_joomcck/configs/default_{$name}_{$tmpl_name}.json";
 
-		if(JFile::exists($file))
+		if(\Joomla\CMS\Filesystem\File::exists($file))
 		{
 			$tmpl = explode('.', $tmpl_name);
 			$dest = JPATH_ROOT . "/components/com_joomcck/configs/default_{$name}_{$tmpl[0]}.{$key}.json";
-			JFile::copy($file, $dest);
+			\Joomla\CMS\Filesystem\File::copy($file, $dest);
 
 			$params->set('properties.tmpl_' . $name, $tmpl[0] . '.' . $key);
 		}

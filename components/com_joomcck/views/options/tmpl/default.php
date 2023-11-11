@@ -8,8 +8,8 @@
  */
 defined('_JEXEC') or die();
 $back = null;
-$user = JFactory::getUser();
-$app  = JFactory::getApplication();
+$user = \Joomla\CMS\Factory::getUser();
+$app  = \Joomla\CMS\Factory::getApplication();
 if ($app->input->getString('return'))
 {
 	$back = Url::get_back('return');
@@ -35,15 +35,15 @@ $section = $this->section;
 
 <div class="page-header">
     <button class="btn btn-light border float-end" type="button"
-            onclick="window.location = '<?php echo JRoute::_('index.php?option=com_joomcck&view=notifications') ?>'">
+            onclick="window.location = '<?php echo \Joomla\CMS\Router\Route::_('index.php?option=com_joomcck&view=notifications') ?>'">
 		<?php echo HTMLFormatHelper::icon('bell.png'); ?>
-		<?php echo JText::_('CNOTCENTR'); ?>
+		<?php echo \Joomla\CMS\Language\Text::_('CNOTCENTR'); ?>
 		<?php if ($num): ?>
 			<?php echo $num ?>
 		<?php endif; ?>
     </button>
     <h1 class="title">
-		<?php echo JText::sprintf('CNOTCENTERCONF'); ?>
+		<?php echo \Joomla\CMS\Language\Text::sprintf('CNOTCENTERCONF'); ?>
     </h1>
 </div>
 
@@ -53,14 +53,14 @@ $section = $this->section;
         <div class="float-end">
             <button class="btn btn-primary" onclick="Joomla.submitbutton('options.saveoptions')">
 				<?php echo HTMLFormatHelper::icon('disk.png'); ?>
-				<?php echo JText::_('CSAVE'); ?>
+				<?php echo \Joomla\CMS\Language\Text::_('CSAVE'); ?>
             </button>
 
 			<?php if ($back): ?>
                 <button class="btn btn-light border" type="button"
                         onclick="Joomla.submitbutton('options.saveoptionsclose')">
 					<?php echo HTMLFormatHelper::icon('disk--minus.png'); ?>
-					<?php echo JText::_('CSAVECLOSE'); ?>
+					<?php echo \Joomla\CMS\Language\Text::_('CSAVECLOSE'); ?>
                 </button>
 			<?php endif; ?>
         </div>
@@ -69,13 +69,13 @@ $section = $this->section;
             <button type="button" class="btn btn-light border float-start"
                     onclick="location.href = '<?php echo $back; ?>'">
 				<?php echo HTMLFormatHelper::icon('arrow-180.png'); ?>
-				<?php echo JText::_('CBACKTOSECTION'); ?>
+				<?php echo \Joomla\CMS\Language\Text::_('CBACKTOSECTION'); ?>
             </button>
 		<?php endif; ?>
     </div>
 
 
-    <legend><?php echo JText::_('CEMAILSETINGS'); ?></legend>
+    <legend><?php echo \Joomla\CMS\Language\Text::_('CEMAILSETINGS'); ?></legend>
     <div class="control-group">
         <div class="control-label col-md-2"><?php echo $this->form->getLabel('schedule'); ?></div>
         <div class="controls"><?php echo $this->form->getInput('schedule'); ?></div>
@@ -86,13 +86,13 @@ $section = $this->section;
     </div>
 
 
-    <legend><?php echo JText::_('CSECTIONS'); ?></legend>
+    <legend><?php echo \Joomla\CMS\Language\Text::_('CSECTIONS'); ?></legend>
     <div>
         <ul class="nav nav-tabs" id="nav-tab" role="tablist">
 			<?php foreach ($this->usub as $k => $s): ?>
                 <li class="nav-item">
                     <a class="nav-link <?php echo($s->id == $app->input->getInt('section_id') ? 'active' : null) ?>"
-                       href="<?php echo JRoute::_('index.php?option=com_joomcck&view=options&section_id=' . $s->id . '&return=' . $app->input->getString('return')); ?>"><?php echo $s->name; ?></a>
+                       href="<?php echo \Joomla\CMS\Router\Route::_('index.php?option=com_joomcck&view=options&section_id=' . $s->id . '&return=' . $app->input->getString('return')); ?>"><?php echo $s->name; ?></a>
                 </li>
 			<?php endforeach; ?>
         </ul>
@@ -114,7 +114,7 @@ $section = $this->section;
 						} ?>
                                 type="checkbox" name="jform[autofollow][<?php echo $section->id ?>]"
                                 value="<?php echo $section->id ?>"/>
-						<?php echo JText::_('CAUTSUBDESC') ?>
+						<?php echo \Joomla\CMS\Language\Text::_('CAUTSUBDESC') ?>
                     </label>
                     <div class="clearfix"></div>
                 </div>
@@ -122,7 +122,7 @@ $section = $this->section;
 
                 <div class="card mb-3">
                     <div class="card-body">
-                        <h5><?php echo JText::_('CARTFOOLOWS') ?></h5>
+                        <h5><?php echo \Joomla\CMS\Language\Text::_('CARTFOOLOWS') ?></h5>
                         <div class="alert alert-info" id="rec-msg" style="display: none;">
 
                         </div>
@@ -131,7 +131,7 @@ $section = $this->section;
                             <button type="button" <?php echo($section->records ? null : 'style="display: none;"'); ?>
                                     class="btn" id="unsub-<?php echo $section->id ?>"
                                     onclick="Joomcck.ajax_unsubscr_sec(<?php echo $section->id; ?>)">
-								<?php echo JText::_('CUNSUBREC') ?>
+								<?php echo \Joomla\CMS\Language\Text::_('CUNSUBREC') ?>
                                 <span class="badge bg-light text-muted border"><?php echo $section->records; ?></span>
                             </button>
                             <button class="btn"
@@ -139,7 +139,7 @@ $section = $this->section;
                                     id="sub-<?php echo $section->id ?>"
                                     onclick="Joomcck.ajax_subscr_sec(<?php echo $section->id; ?>)"
                                     href="javascript:void(0);">
-								<?php echo JText::_('CSUBRECART') ?>
+								<?php echo \Joomla\CMS\Language\Text::_('CSUBRECART') ?>
                                 <span class="badge bg-light text-muted border"><?php echo $section->records_total - $section->records; ?></span>
                             </button>
                         </div>
@@ -153,8 +153,8 @@ $section = $this->section;
                             <table class="table table-striped" id="table-recs">
                                 <thead>
                                 <th width="1%">#</th>
-                                <th><?php echo JText::_('CTITLE') ?></th>
-                                <th width="1%"><?php echo JText::_('CACTION') ?></th>
+                                <th><?php echo \Joomla\CMS\Language\Text::_('CTITLE') ?></th>
+                                <th width="1%"><?php echo \Joomla\CMS\Language\Text::_('CACTION') ?></th>
                                 </thead>
                                 <tbody>
 								<?php foreach ($this->articles as $k => $record): ?>
@@ -174,7 +174,7 @@ $section = $this->section;
 								<?php echo $this->pag->getPagesLinks(); ?>
                             </div>
 						<?php else: ?>
-                            <div class="alert alert-warning" id="no-recs"><?php echo JText::_('CYODONOTFOLLOW') ?></div>
+                            <div class="alert alert-warning" id="no-recs"><?php echo \Joomla\CMS\Language\Text::_('CYODONOTFOLLOW') ?></div>
 						<?php endif; ?>
                     </div>
                 </div>
@@ -183,24 +183,24 @@ $section = $this->section;
 
                 <div class="card mb-3">
                     <div class="card-body">
-                        <h5><?php echo JText::_('CNOTIFICATIONS') ?></h5>
+                        <h5><?php echo \Joomla\CMS\Language\Text::_('CNOTIFICATIONS') ?></h5>
 						<?php if ($this->notyfications['r']): ?>
-                            <legend><?php echo JText::_('CRECNOTIF') ?></legend>
+                            <legend><?php echo \Joomla\CMS\Language\Text::_('CRECNOTIF') ?></legend>
                             <div class="row">
 								<?php foreach ($this->notyfications['r'] as $type): ?>
                                     <div class="col-md-3">
-                                        <div class="control-label"><?php echo ucfirst(JText::sprintf('alert_event_' . $type, strtolower($section->params->get('general.item_label', 'item')))) ?></div>
+                                        <div class="control-label"><?php echo ucfirst(\Joomla\CMS\Language\Text::sprintf('alert_event_' . $type, strtolower($section->params->get('general.item_label', 'item')))) ?></div>
                                         <div class="controls"><?php yesnobutton($type, $section->id, $this->data); ?></div>
                                     </div>
 								<?php endforeach; ?>
                             </div>
 						<?php endif; ?>
 						<?php if ($this->notyfications['c']): ?>
-                            <legend><?php echo JText::_('CCOMNOTIF') ?></legend>
+                            <legend><?php echo \Joomla\CMS\Language\Text::_('CCOMNOTIF') ?></legend>
                             <div class="row">
 								<?php foreach ($this->notyfications['c'] as $type): ?>
                                     <div class="col-md-3">
-                                        <div class="control-label"><?php echo JText::_('alert_event_' . $type) ?></div>
+                                        <div class="control-label"><?php echo \Joomla\CMS\Language\Text::_('alert_event_' . $type) ?></div>
                                         <div class="controls"><?php yesnobutton($type, $section->id, $this->data); ?></div>
                                     </div>
 								<?php endforeach; ?>
@@ -215,24 +215,24 @@ $section = $this->section;
 
                 <div class="card mb-3">
                     <div class="card-body">
-                        <h5><?php echo JText::_('CUSERFOOLOWS') ?></h5>
+                        <h5><?php echo \Joomla\CMS\Language\Text::_('CUSERFOOLOWS') ?></h5>
                         <div>
 							<?php if ($this->section->follow == 1): ?>
-                                <p><?php echo JText::_('CYOUFOLLOWALLUSR') ?></p>
+                                <p><?php echo \Joomla\CMS\Language\Text::_('CYOUFOLLOWALLUSR') ?></p>
 								<?php if ($this->users): ?>
-                                    <p><?php echo JText::_('CYOUFOLLOWALLUSREXP') ?></p>
+                                    <p><?php echo \Joomla\CMS\Language\Text::_('CYOUFOLLOWALLUSREXP') ?></p>
 								<?php endif; ?>
 							<?php else: ?>
 								<?php if (!$this->users): ?>
-                                    <p><?php echo JText::_('CYOUFOLLOWALLUSRNO') ?></p>
+                                    <p><?php echo \Joomla\CMS\Language\Text::_('CYOUFOLLOWALLUSRNO') ?></p>
 								<?php endif; ?>
 							<?php endif; ?>
 							<?php if (count($this->users)): ?>
                                 <table class="table table-striped">
                                     <thead>
                                     <th width="1%">#</th>
-                                    <th><?php echo JText::_('CTITLE') ?></th>
-                                    <th width="1%"><?php echo JText::_('CACTION') ?></th>
+                                    <th><?php echo \Joomla\CMS\Language\Text::_('CTITLE') ?></th>
+                                    <th width="1%"><?php echo \Joomla\CMS\Language\Text::_('CACTION') ?></th>
                                     </thead>
                                     <tbody>
 									<?php foreach ($this->users as $k => $u): ?>
@@ -256,31 +256,31 @@ $section = $this->section;
 
                 <div class="card mb-3">
                     <div class="card-body">
-                        <h5><?php echo JText::_('CCATFOOLOWS') ?></h5>
+                        <h5><?php echo \Joomla\CMS\Language\Text::_('CCATFOOLOWS') ?></h5>
                         <div>
 							<?php if ($this->section->follow == 1): ?>
-                                <p><?php echo JText::_('CYOUFOLLOWALLCAT') ?></p>
+                                <p><?php echo \Joomla\CMS\Language\Text::_('CYOUFOLLOWALLCAT') ?></p>
 								<?php if ($this->cats): ?>
-                                    <p><?php echo JText::_('CYOUFOLLOWALLCATEXP') ?></p>
+                                    <p><?php echo \Joomla\CMS\Language\Text::_('CYOUFOLLOWALLCATEXP') ?></p>
 								<?php endif; ?>
 							<?php else: ?>
 								<?php if (!$this->cats): ?>
-                                    <p><?php echo JText::_('CYOUFOLLOWALLCATNO') ?></p>
+                                    <p><?php echo \Joomla\CMS\Language\Text::_('CYOUFOLLOWALLCATNO') ?></p>
 								<?php endif; ?>
 							<?php endif; ?>
 							<?php if ($this->cats): ?>
                                 <table class="table table-striped">
                                     <thead>
                                     <th width="1%">#</th>
-                                    <th><?php echo JText::_('CTITLE') ?></th>
-                                    <th width="1%"><?php echo JText::_('CACTION') ?></th>
+                                    <th><?php echo \Joomla\CMS\Language\Text::_('CTITLE') ?></th>
+                                    <th width="1%"><?php echo \Joomla\CMS\Language\Text::_('CACTION') ?></th>
                                     </thead>
                                     <tbody>
 									<?php foreach ($this->cats as $k => $cat): ?>
                                         <tr class="list-row cat-list-row<?php echo $r = 1 - $r; ?>">
                                             <td><?php echo $k; ?></td>
                                             <td>
-                                                <a href="<?php echo JRoute::_(Url::records($section, $cat)); ?>"><?php echo $cat->title; ?></a>
+                                                <a href="<?php echo \Joomla\CMS\Router\Route::_(Url::records($section, $cat)); ?>"><?php echo $cat->title; ?></a>
                                             </td>
                                             <td nowrap="nowrap"><?php echo HTMLFormatHelper::followcat($cat->id, $section); ?></td>
                                         </tr>
@@ -319,14 +319,14 @@ $section = $this->section;
                 </script>
 
 			<?php else: ?>
-                <div class="alert alert-warning"><?php echo JText::_('CPLEASESELECTSECTION'); ?></div>
+                <div class="alert alert-warning"><?php echo \Joomla\CMS\Language\Text::_('CPLEASESELECTSECTION'); ?></div>
 			<?php endif; ?>
         </div>
     </div>
     <input type="hidden" name="task" value=""/>
     <input type="hidden" name="limitstart" value="0"/>
     <input type="hidden" name="boxchecked" value="0"/>
-	<?php echo JHtml::_('form.token'); ?>
+	<?php echo \Joomla\CMS\HTML\HTMLHelper::_('form.token'); ?>
 </form>
 
 <?php
@@ -336,13 +336,13 @@ function yesnobutton($type, $section_id, $default)
 	?>
     <div class="mt-1 btn-group btn-notify" data-toggle="buttons-radio">
 		<span class="btn-sm btn-yes btn<?php echo $yes ? ' active btn-success' : ' btn-light border' ?>">
-			<?php echo JText::_('JYES') ?>
+			<?php echo \Joomla\CMS\Language\Text::_('JYES') ?>
 			<input <?php echo($yes ? ' checked="checked"' : null); ?> type="radio"
                                                                       name="jform[notification][<?php echo $section_id ?>][<?php echo $type ?>]"
                                                                       value="1"/>
 		</span>
         <span class="btn-sm btn-no btn<?php echo !$yes ? ' active btn-danger' : ' btn-light border' ?>">
-			<?php echo JText::_('JNO') ?>
+			<?php echo \Joomla\CMS\Language\Text::_('JNO') ?>
 			<input <?php echo(!$yes ? ' checked="checked"' : null); ?> type="radio"
                                                                        name="jform[notification][<?php echo $section_id ?>][<?php echo $type ?>]"
                                                                        value="0"/>
@@ -355,10 +355,10 @@ function yesnobutton($type, $section_id, $default)
 <script>
     !function ($) {
         Joomcck.ajax_unsubscr_sec = function (id) {
-            if (!confirm('<?php echo JText::_('CSURE')?>')) return;
+            if (!confirm('<?php echo \Joomla\CMS\Language\Text::_('CSURE')?>')) return;
             $('#bro-ba').slideDown('quick', function () {
                 $.ajax({
-                    url: '<?php echo JRoute::_('index.php?option=com_joomcck&task=ajax.unfollowallsection&tmpl=component', false); ?>',
+                    url: '<?php echo \Joomla\CMS\Router\Route::_('index.php?option=com_joomcck&task=ajax.unfollowallsection&tmpl=component', false); ?>',
                     dataType: 'json',
                     type: 'POST',
                     data: {
@@ -379,7 +379,7 @@ function yesnobutton($type, $section_id, $default)
 
                     // empty all records
                     // alert message
-                    $('#rec-msg').addClass('alert-info').html('<?php echo JText::sprintf('CUNFOLLOEDOK', "' + data.rows + '")?>')
+                    $('#rec-msg').addClass('alert-info').html('<?php echo \Joomla\CMS\Language\Text::sprintf('CUNFOLLOEDOK', "' + data.rows + '")?>')
                         .slideDown('slow');
 
                     setTimeout(function () {
@@ -395,7 +395,7 @@ function yesnobutton($type, $section_id, $default)
         Joomcck.ajax_subscr_sec = function (id) {
             $('#bro-ba').slideDown('quick', function () {
                 $.ajax({
-                    url: '<?php echo JRoute::_('index.php?option=com_joomcck&task=ajax.followallsection&tmpl=component', false); ?>',
+                    url: '<?php echo \Joomla\CMS\Router\Route::_('index.php?option=com_joomcck&task=ajax.followallsection&tmpl=component', false); ?>',
                     dataType: 'json',
                     type: 'POST',
                     data: {
@@ -416,7 +416,7 @@ function yesnobutton($type, $section_id, $default)
 
                     // empty all records
                     // alert message
-                    $('#rec-msg').addClass('alert-info').html('<?php echo JText::sprintf('CFOLLOEDOK', "' + data.rows + '")?>')
+                    $('#rec-msg').addClass('alert-info').html('<?php echo \Joomla\CMS\Language\Text::sprintf('CFOLLOEDOK', "' + data.rows + '")?>')
                         .slideDown('slow');
 
                     setTimeout(function () {

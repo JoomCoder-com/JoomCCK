@@ -21,7 +21,7 @@ class Mint
 		$text = JFilterInput::getInstance([], [], 1, 1)->clean(strip_tags($text), 'string');
 
 		$key   = strtoupper($text);
-		$trans = JText::_($key, $jsSafe, $interpretBackSlashes, $script);
+		$trans = \Joomla\CMS\Language\Text::_($key, $jsSafe, $interpretBackSlashes, $script);
 
 		if($key === $trans)
 		{
@@ -66,7 +66,7 @@ class Mint
 	static public function loadLayout($name, $path)
 	{
 		$options = array();
-		$params  = JComponentHelper::getParams('com_emerald');
+		$params  = \Joomla\CMS\Component\ComponentHelper::getParams('com_emerald');
 
 		if($params->get('tmpl_prefix'))
 		{

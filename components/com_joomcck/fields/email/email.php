@@ -24,13 +24,13 @@ class JFormFieldCEmail extends CFormField
 
 	public function getInput()
 	{
-		$document = JFactory::getDocument();
+		$document = \Joomla\CMS\Factory::getDocument();
 		$document->addScript(JURI::root(TRUE) . '/components/com_joomcck/fields/email/email.js');
-		$user = JFactory::getUser();
+		$user = \Joomla\CMS\Factory::getUser();
 
 		if($this->params->get('params.enter_mail', 1) && in_array($this->params->get('params.enter_mail', 1), $user->getAuthorisedViewLevels()))
 		{
-			if(!$this->value && $user->get('id') && $this->params->get('params.dafault_user_email', 1) && JFactory::getApplication()->input->get('id'))
+			if(!$this->value && $user->get('id') && $this->params->get('params.dafault_user_email', 1) && \Joomla\CMS\Factory::getApplication()->input->get('id'))
 			{
 				$this->value = $user->get('email');
 			}
@@ -45,9 +45,9 @@ class JFormFieldCEmail extends CFormField
 		efield = efield[0]";
 		if($this->required)
 		{
-			$js .= "\n\t\tif(efield.value == ''){hfid.push({$this->id}); isValid = false; errorText.push('" . addslashes(JText::sprintf('CFIELDREQUIRED', $this->label)) . "');}";
+			$js .= "\n\t\tif(efield.value == ''){hfid.push({$this->id}); isValid = false; errorText.push('" . addslashes(\Joomla\CMS\Language\Text::sprintf('CFIELDREQUIRED', $this->label)) . "');}";
 		}
-		$js .= "\n\t\t if( efield.value != '' && !EmailCheck(efield.value) ) {hfid.push({$this->id}); isValid = false; errorText.push('" . addslashes(JText::sprintf('E_ENTEREDINCORRECT', $this->label)) . "');}";
+		$js .= "\n\t\t if( efield.value != '' && !EmailCheck(efield.value) ) {hfid.push({$this->id}); isValid = false; errorText.push('" . addslashes(\Joomla\CMS\Language\Text::sprintf('E_ENTEREDINCORRECT', $this->label)) . "');}";
 
 		return $js;
 	}
@@ -56,7 +56,7 @@ class JFormFieldCEmail extends CFormField
 	{
 		if($value && !JMailHelper::isEmailAddress($value))
 		{
-			$this->setError(JText::sprintf('E_ENTEREDINCORRECT', $this->label));
+			$this->setError(\Joomla\CMS\Language\Text::sprintf('E_ENTEREDINCORRECT', $this->label));
 
 			return FALSE;
 		}
@@ -80,7 +80,7 @@ class JFormFieldCEmail extends CFormField
 
 	public function onFilterWornLabel($section)
 	{
-		return JHtml::_('content.prepare', $this->value);
+		return \Joomla\CMS\HTML\HTMLHelper::_('content.prepare', $this->value);
 	}
 
 	public function onFilterWhere($section, &$query)
@@ -93,7 +93,7 @@ class JFormFieldCEmail extends CFormField
 	public function onRenderFilter($section, $module = FALSE)
 	{
 
-		$document = JFactory::getDocument();
+		$document = \Joomla\CMS\Factory::getDocument();
 		$document->addScript(JURI::root(TRUE) . '/components/com_joomcck/fields/email/email.js');
 
 		return $this->_display_filter($section, $module);
@@ -117,11 +117,11 @@ class JFormFieldCEmail extends CFormField
 	private function _render($client, $record, $type, $section)
 	{
 		$params   = $this->params;
-		$document = JFactory::getDocument();
+		$document = \Joomla\CMS\Factory::getDocument();
 		$uri      = \Joomla\CMS\Uri\Uri::getInstance();
 
-		$this->author = JFactory::getUser($record->user_id);
-		$this->user   = JFactory::getUser();
+		$this->author = \Joomla\CMS\Factory::getUser($record->user_id);
+		$this->user   = \Joomla\CMS\Factory::getUser();
 		$this->url    = $uri->toString();
 
 		return $this->_display_output($client, $record, $type, $section);
@@ -130,9 +130,9 @@ class JFormFieldCEmail extends CFormField
 
 	public function _sendEmail($post, $record)
 	{
-		$user   = JFactory::getUser();
-		$app    = JFactory::getApplication();
-		$config = JFactory::getConfig();
+		$user   = \Joomla\CMS\Factory::getUser();
+		$app    = \Joomla\CMS\Factory::getApplication();
+		$config = \Joomla\CMS\Factory::getConfig();
 
 		$_from = $app->getCfg('mailfrom');
 		$_name = $app->getCfg('fromname');
@@ -153,13 +153,13 @@ class JFormFieldCEmail extends CFormField
 
 		if(!$user->id && $this->params->get('params.show_captcha', 1))
 		{
-			$joomcck_params = JComponentHelper::getParams('com_joomcck');
+			$joomcck_params = \Joomla\CMS\Component\ComponentHelper::getParams('com_joomcck');
 			jimport('mint.recaptchalib');
 			$captcha = JCaptcha::getInstance($joomcck_params->get('captcha', 'recaptcha'), array('namespace' => 'email'));
 			if(!$captcha->checkAnswer('code'))
 			{
 
-				Factory::getApplication()->enqueueMessage(JText::_('E_SECURITYCODEINCORRECT'),'warning');
+				Factory::getApplication()->enqueueMessage(\Joomla\CMS\Language\Text::_('E_SECURITYCODEINCORRECT'),'warning');
 
 
 				return FALSE;
@@ -169,8 +169,8 @@ class JFormFieldCEmail extends CFormField
 		//$schema = explode("\n", str_replace("\r", '', trim($this->params->get('params.additional_fields', ''))));
 
 		ob_start();
-		$tpath = JPATH_THEMES . '/' . JFactory::getApplication()->getTemplate() . '/html/com_joomcck/fields/email/email/' . $this->params->get('params.template_body', 'default.php');
-		if(!JFile::exists($tpath))
+		$tpath = JPATH_THEMES . '/' . \Joomla\CMS\Factory::getApplication()->getTemplate() . '/html/com_joomcck/fields/email/email/' . $this->params->get('params.template_body', 'default.php');
+		if(!\Joomla\CMS\Filesystem\File::exists($tpath))
 		{
 			$tpath = JPATH_ROOT . '/components/com_joomcck/fields/email/tmpl/email/' . $this->params->get('params.template_body', 'default.php');
 		}
@@ -184,7 +184,7 @@ class JFormFieldCEmail extends CFormField
 			case 1 :
 				if(!$this->value)
 				{
-					Factory::getApplication()->enqueueMessage(JText::_('E_EMAILNOTENTERED'),'warning');
+					Factory::getApplication()->enqueueMessage(\Joomla\CMS\Language\Text::_('E_EMAILNOTENTERED'),'warning');
 
 
 					return FALSE;
@@ -200,11 +200,11 @@ class JFormFieldCEmail extends CFormField
 				if(!$record->user_id)
 				{
 
-					Factory::getApplication()->enqueueMessage(JText::_('E_ARTICLEANONYMOUSE'),'warning');
+					Factory::getApplication()->enqueueMessage(\Joomla\CMS\Language\Text::_('E_ARTICLEANONYMOUSE'),'warning');
 
 					return FALSE;
 				}
-				$author = JFactory::getUser($record->user_id);
+				$author = \Joomla\CMS\Factory::getUser($record->user_id);
 				$email  = $author->get('email');
 				$name   = $author->get('name');
 				break;
@@ -212,7 +212,7 @@ class JFormFieldCEmail extends CFormField
 				if(empty($data['email_to']))
 				{
 
-					Factory::getApplication()->enqueueMessage(JText::_('E_SENDTONOTENTERED'),'warning');
+					Factory::getApplication()->enqueueMessage(\Joomla\CMS\Language\Text::_('E_SENDTONOTENTERED'),'warning');
 
 					return;
 				}
@@ -223,7 +223,7 @@ class JFormFieldCEmail extends CFormField
 				if(empty($email))
 				{
 
-					Factory::getApplication()->enqueueMessage(JText::_('E_EMAILNOTENTERED'),'warning');
+					Factory::getApplication()->enqueueMessage(\Joomla\CMS\Language\Text::_('E_EMAILNOTENTERED'),'warning');
 
 					return FALSE;
 				}
@@ -235,12 +235,12 @@ class JFormFieldCEmail extends CFormField
 		if(!JMailHelper::isEmailAddress($email))
 		{
 
-			Factory::getApplication()->enqueueMessage(JText::_('E_SENDTOINCORRENT'),'warning');
+			Factory::getApplication()->enqueueMessage(\Joomla\CMS\Language\Text::_('E_SENDTOINCORRENT'),'warning');
 
 			return false;
 		}
 
-		$mail = JFactory::getMailer();
+		$mail = \Joomla\CMS\Factory::getMailer();
 		$mail->AddAddress($email);
 
 		if($this->params->get('params.copy_to','') && !empty($this->params->get('params.copy_to','')))
@@ -261,21 +261,21 @@ class JFormFieldCEmail extends CFormField
 		if($data['name'] == '')
 		{
 
-			Factory::getApplication()->enqueueMessage(JText::_('E_SENDERNAMENOTENTERED'),'warning');
+			Factory::getApplication()->enqueueMessage(\Joomla\CMS\Language\Text::_('E_SENDERNAMENOTENTERED'),'warning');
 
 			return;
 		}
 		if($data['email_from'] == '')
 		{
 
-			Factory::getApplication()->enqueueMessage(JText::_('E_SENDERMAILNOTENTERED'),'warning');
+			Factory::getApplication()->enqueueMessage(\Joomla\CMS\Language\Text::_('E_SENDERMAILNOTENTERED'),'warning');
 
 			return;
 		}
 		if(!JMailHelper::isEmailAddress($data['email_from']))
 		{
 
-			Factory::getApplication()->enqueueMessage(JText::_('E_SENDERMAILINCORRENT'),'warning');
+			Factory::getApplication()->enqueueMessage(\Joomla\CMS\Language\Text::_('E_SENDERMAILINCORRENT'),'warning');
 
 			return;
 		}
@@ -301,13 +301,13 @@ class JFormFieldCEmail extends CFormField
 		if($this->params->get('params.subject_style', 1) == 1 && $data['subject'] == '')
 		{
 
-			Factory::getApplication()->enqueueMessage(JText::_('E_SUBJNOTENTERED'),'warning');
+			Factory::getApplication()->enqueueMessage(\Joomla\CMS\Language\Text::_('E_SUBJNOTENTERED'),'warning');
 
 			return;
 		}
 		elseif($this->params->get('params.subject_style', 1) == 0)
 		{
-			$data['subject'] = JText::_($this->params->get('params.subject', 'No subject set in email field'));
+			$data['subject'] = \Joomla\CMS\Language\Text::_($this->params->get('params.subject', 'No subject set in email field'));
 		}
 
 		$files = new JInputFiles();
@@ -321,18 +321,18 @@ class JFormFieldCEmail extends CFormField
 			{
 				continue;
 			}
-			$ext = JFile::getExt($file['name']);
+			$ext = \Joomla\CMS\Filesystem\File::getExt($file['name']);
 			ArrayHelper::clean_r($formats);
 			if(!in_array(strtolower($ext), $formats))
 			{
 
-				Factory::getApplication()->enqueueMessage(JText::_('E_WRONGATTACHEXT'),'warning');
+				Factory::getApplication()->enqueueMessage(\Joomla\CMS\Language\Text::_('E_WRONGATTACHEXT'),'warning');
 
 				return FALSE;
 			}
-			if(JFile::exists($file['tmp_name']))
+			if(\Joomla\CMS\Filesystem\File::exists($file['tmp_name']))
 			{
-				JFile::copy($file['tmp_name'], JPATH_CACHE . DIRECTORY_SEPARATOR . $file['name']);
+				\Joomla\CMS\Filesystem\File::copy($file['tmp_name'], JPATH_CACHE . DIRECTORY_SEPARATOR . $file['name']);
 				$mail->addAttachment(JPATH_CACHE . DIRECTORY_SEPARATOR . $file['name']);
 			}
 		}
@@ -371,14 +371,14 @@ class JFormFieldCEmail extends CFormField
 
 		if(!$mail->Send())
 		{
-			Factory::getApplication()->enqueueMessage(JText::_('E_ERRSEND'),'warning');
+			Factory::getApplication()->enqueueMessage(\Joomla\CMS\Language\Text::_('E_ERRSEND'),'warning');
 
 			return FALSE;
 		}
 
 		$acemail = JPATH_ADMINISTRATOR . '/components/com_acymailing/helpers/helper.php';
 
-		if($this->params->get('params.acemail') && JFile::exists($acemail))
+		if($this->params->get('params.acemail') && \Joomla\CMS\Filesystem\File::exists($acemail))
 		{
 			include_once $acemail;
 			$myUser          = new stdClass();
@@ -393,19 +393,19 @@ class JFormFieldCEmail extends CFormField
 
 	public function _getForm($record, $section)
 	{
-		$document = JFactory::getDocument();
+		$document = \Joomla\CMS\Factory::getDocument();
 		$document->addScript(JURI::root(TRUE) . '/components/com_joomcck/fields/email/email.js');
-		$author = JFactory::getUser($record->user_id);
-		$user   = JFactory::getUser();
+		$author = \Joomla\CMS\Factory::getUser($record->user_id);
+		$user   = \Joomla\CMS\Factory::getUser();
 		$params = $this->params;
-		$app    = JFactory::getApplication();
+		$app    = \Joomla\CMS\Factory::getApplication();
 
 		if($app->input->post->count())
 		{
 			if($this->_sendEmail($_POST, $record))
 			{
 
-				Factory::getApplication()->enqueueMessage(JText::_('E_MAILSENT'),'success');
+				Factory::getApplication()->enqueueMessage(\Joomla\CMS\Language\Text::_('E_MAILSENT'),'success');
 
 				$js = '<script type="text/javascript">
 					jQuery(document).ready(function(){
@@ -419,7 +419,7 @@ class JFormFieldCEmail extends CFormField
 			$default = @$_POST['email'][$this->id];
 		}
 		settype($default, 'array');
-		$data = new JRegistry();
+		$data = new \Joomla\Registry\Registry();
 		$data->loadArray($default);
 
 		$show_emailto = in_array($this->params->get('params.view_mail', 1), $user->getAuthorisedViewLevels());
@@ -436,7 +436,7 @@ class JFormFieldCEmail extends CFormField
 
 	public function onFilterData()
 	{
-		$db = JFactory::getDbo();
+		$db = \Joomla\CMS\Factory::getDbo();
 
 		$q = $this->request->get('q');
 		$q = $db->escape($q);

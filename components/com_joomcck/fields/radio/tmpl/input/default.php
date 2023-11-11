@@ -75,7 +75,7 @@ $layout = $this->params->get('tmpl_default.layout', 'stacked');
 					<?php echo $sel; ?>
                 >
                 <label class="form-check-label" for="field_<?php echo $this->id; ?>_<?php echo $key; ?>">
-					<?php echo JText::_($text); ?>
+					<?php echo \Joomla\CMS\Language\Text::_($text); ?>
                 </label>
             </div>
 
@@ -111,6 +111,6 @@ $layout = $this->params->get('tmpl_default.layout', 'stacked');
 ?>
 	<div id="variant_<?php echo $this->id;?>">
 		<a id="show_variant_link_<?php echo $this->id;?>"
-			href="javascript:void(0)" onclick="Joomcck.showAddForm(<?php echo $this->id;?>)"><?php echo JText::_($this->params->get('params.user_value_label', 'Your variant'));?></a>
+			href="javascript:void(0)" onclick="Joomcck.showAddForm(<?php echo $this->id;?>)"><?php echo \Joomla\CMS\Language\Text::_($this->params->get('params.user_value_label', 'Your variant'));?></a>
 	</div></p>
 <?php endif;?>

@@ -11,7 +11,7 @@ defined('_JEXEC') or die('Restricted access');
 
 jimport('joomla.database.table');
 
-class JoomcckTableFavorites extends JTable
+class JoomcckTableFavorites extends \Joomla\CMS\Table\Table
 {
 
 	public function __construct(&$_db)
@@ -22,7 +22,7 @@ class JoomcckTableFavorites extends JTable
 	{
 		if ($this->ctime == '' || $this->ctime == '0000-00-00 00:00:00' || is_null($this->ctime))
 		{
-			$this->ctime = JFactory::getDate()->toSql();
+			$this->ctime = \Joomla\CMS\Factory::getDate()->toSql();
 		}
 		return true;
 	}

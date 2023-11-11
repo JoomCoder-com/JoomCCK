@@ -15,7 +15,7 @@ class JFormFieldShopList extends JFormFieldList
 
 	protected function getOptions()
 	{
-		$db = JFactory::getDBO();
+		$db = \Joomla\CMS\Factory::getDBO();
 
 		$query = $db->getQuery(true);
 		$query->select('id as value, label as text');

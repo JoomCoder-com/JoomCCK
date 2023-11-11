@@ -10,8 +10,8 @@ namespace Joomla\Component\Joomcck\Site\Service;
 
 \defined('JPATH_PLATFORM') or die;
 
-use JComponentHelper;
-use JFactory;
+use \Joomla\CMS\Component\ComponentHelper;
+use \Joomla\CMS\Factory;
 use Joomla\CMS\Component\ComponentHelper;
 use Joomla\CMS\Component\Router\RouterView;
 use Joomla\CMS\Component\Router\Rules\RulesInterface;
@@ -22,10 +22,10 @@ use Joomla\Database\DatabaseDriver;
 
 jimport('joomla.filesystem.file');
 
-$params = JComponentHelper::getParams('com_joomcck');
+$params = \Joomla\CMS\Component\ComponentHelper::getParams('com_joomcck');
 $router = $params->get('sef_router', 'main_router.php');
 
-$lang = JFactory::getLanguage();
+$lang = \Joomla\CMS\Factory::getLanguage();
 $lang->load('com_joomcck');
 $lang->load();
 

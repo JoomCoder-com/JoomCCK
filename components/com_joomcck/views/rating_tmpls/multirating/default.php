@@ -14,10 +14,10 @@ defined('_JEXEC') or die();
 <table class="table-rating table table-hover table-bordered table-condensed">
 	<thead>
 		<tr>
-			<th width="1%" nowrap="nowrap" style="vertical-align: top;"><?php echo JText::_('CTOTALRATING'); ?></th>
+			<th width="1%" nowrap="nowrap" style="vertical-align: top;"><?php echo \Joomla\CMS\Language\Text::_('CTOTALRATING'); ?></th>
 			<td width="1%" nowrap="nowrap" valign="top">
 				<?php echo RatingHelp::loadRating($type->params->get('properties.tmpl_rating'), round(@$record->votes_result), $record->id, 500, 'Joomcck.ItemRatingCallBack', false, $record->id);?>
-				<small id="rating-text-<?php echo $record->id;?>"><?php echo JText::sprintf('CRAINGDATA', $record->votes_result, $record->votes); ?></small>
+				<small id="rating-text-<?php echo $record->id;?>"><?php echo \Joomla\CMS\Language\Text::sprintf('CRAINGDATA', $record->votes_result, $record->votes); ?></small>
 			</td>
 		</tr>
 	</thead>
@@ -31,7 +31,7 @@ defined('_JEXEC') or die();
 
             ?>
 			<tr>
-				<th width="1%" nowrap="nowrap" style="vertical-align: top;"><?php echo JText::_($parts[0]); ?></th>
+				<th width="1%" nowrap="nowrap" style="vertical-align: top;"><?php echo \Joomla\CMS\Language\Text::_($parts[0]); ?></th>
 				<td width="1%" nowrap="nowrap" valign="top">
 					<?php echo RatingHelp::loadRating(isset($parts[1]) ? $parts[1] : $type->params->get('properties.tmpl_rating'),
 						round((int)@$result[$key]['sum']), $record->id, $key, 'Joomcck.ItemRatingCallBackMulti',

@@ -24,7 +24,7 @@ class JFormFieldCPaytodownload extends CFormFieldUpload implements CFormFieldCom
 	public function getInput()
 	{
 		/*
-		 * if(!$this->gateway) { return JText::sprintf('CGATEWAYNOTFOUND', '');
+		 * if(!$this->gateway) { return \Joomla\CMS\Language\Text::sprintf('CGATEWAYNOTFOUND', '');
 		 * }
 		 */
 		$this->pay   = @$this->value['pay'];
@@ -36,7 +36,7 @@ class JFormFieldCPaytodownload extends CFormFieldUpload implements CFormFieldCom
 		}
 		else
 		{
-			$this->gateway_form = JText::sprintf('CGATEWAYNOTFOUND', '');
+			$this->gateway_form = \Joomla\CMS\Language\Text::sprintf('CGATEWAYNOTFOUND', '');
 		}
 
 		$params['width']  = $this->params->get('params.width', 0);
@@ -64,12 +64,12 @@ class JFormFieldCPaytodownload extends CFormFieldUpload implements CFormFieldCom
 			return;
 		}
 		$payment = $this->gateway->receive($this, $post, $record);
-		$controller->setRedirect(JRoute::_(Url::record($record), FALSE));
+		$controller->setRedirect(\Joomla\CMS\Router\Route::_(Url::record($record), FALSE));
 	}
 
 	public function onBeforeDownload($record, $file_index, $file_id, $return = TRUE)
 	{
-		$user = JFactory::getUser();
+		$user = \Joomla\CMS\Factory::getUser();
 
 		if(empty($this->value['pay']['amount']))
 		{
@@ -79,7 +79,7 @@ class JFormFieldCPaytodownload extends CFormFieldUpload implements CFormFieldCom
 
 		if(!$user->get('id'))
 		{
-			$this->setError(JText::_('P_LOGINTODOWNLOADMSG'));
+			$this->setError(\Joomla\CMS\Language\Text::_('P_LOGINTODOWNLOADMSG'));
 
 			return FALSE;
 		}
@@ -96,7 +96,7 @@ class JFormFieldCPaytodownload extends CFormFieldUpload implements CFormFieldCom
 
 		if(!in_array($this->params->get('params.allow_download', 1), $user->getAuthorisedViewLevels()))
 		{
-			$this->setError(JText::_("CNORIGHTSDOWNLOAD"));
+			$this->setError(\Joomla\CMS\Language\Text::_("CNORIGHTSDOWNLOAD"));
 
 			return FALSE;
 		}
@@ -109,23 +109,23 @@ class JFormFieldCPaytodownload extends CFormFieldUpload implements CFormFieldCom
 
 		if(empty($result->id))
 		{
-			$this->setError(JText::_('P_PURCHASETODOWNLOAD'));
+			$this->setError(\Joomla\CMS\Language\Text::_('P_PURCHASETODOWNLOAD'));
 		}
 		else
 		{
 			switch($result->status)
 			{
 				case 1:
-					$this->setError(JText::_('P_PURCHASECANCELED'));
+					$this->setError(\Joomla\CMS\Language\Text::_('P_PURCHASECANCELED'));
 					break;
 				case 2:
-					$this->setError(JText::_('P_PURCHASEFAILED'));
+					$this->setError(\Joomla\CMS\Language\Text::_('P_PURCHASEFAILED'));
 					break;
 				case 3:
-					$this->setError(JText::_('P_PURCHASEPENDING'));
+					$this->setError(\Joomla\CMS\Language\Text::_('P_PURCHASEPENDING'));
 					break;
 				case 4:
-					$this->setError(JText::_('P_PURCHASEREFUNDED'));
+					$this->setError(\Joomla\CMS\Language\Text::_('P_PURCHASEREFUNDED'));
 					break;
 			}
 		}
@@ -174,7 +174,7 @@ class JFormFieldCPaytodownload extends CFormFieldUpload implements CFormFieldCom
 			$saved[] = $file['id'];
 		}
 
-		$files = JTable::getInstance('Files', 'JoomcckTable');
+		$files = \Joomla\CMS\Table\Table::getInstance('Files', 'JoomcckTable');
 		$files->markSaved($saved, $validData, $this->id);
 
 		return $out;
@@ -219,7 +219,7 @@ class JFormFieldCPaytodownload extends CFormFieldUpload implements CFormFieldCom
 		$options = array();
 		foreach($this->value as $k => $file)
 		{
-			$options[JText::_('CFILE') . ' ' . ($k + 1)] = $file['realname'];
+			$options[\Joomla\CMS\Language\Text::_('CFILE') . ' ' . ($k + 1)] = $file['realname'];
 		}
 		$this->params->set('options', $options);
 		$this->subscr = $this->_ajast_subscr($record);

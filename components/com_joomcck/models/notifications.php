@@ -14,7 +14,7 @@ class JoomcckModelnotifications extends MModelList
 
 	protected function populateState($ordering = null, $direction = null)
 	{
-		$app = JFactory::getApplication();
+		$app = \Joomla\CMS\Factory::getApplication();
 	
 		$show_new = $app->getUserStateFromRequest($this->context.'.notifications.show_new', 'show_new', $app->input->getInt('show_new'), 'int');
 		$this->setState('notifications.show_new', $show_new);			
@@ -33,12 +33,12 @@ class JoomcckModelnotifications extends MModelList
 
 	public function getTable($type = 'Notification', $prefix = 'JoomcckTable', $config = array())
 	{
-		return JTable::getInstance($type, $prefix, $config);
+		return \Joomla\CMS\Table\Table::getInstance($type, $prefix, $config);
 	}
 
 	public function getListQuery()
 	{
-		$user = JFactory::getUser();
+		$user = \Joomla\CMS\Factory::getUser();
 		$db = $this->getDbo();
 		
 		$section_id = $this->state->get('notifications.section_id');

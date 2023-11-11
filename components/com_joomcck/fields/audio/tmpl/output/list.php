@@ -17,29 +17,29 @@ defined('_JEXEC') or die();
     <table class="table table-condensed" id="playlist_table">
         <thead>
         <tr>
-            <th><?php echo JText::_('CNAME'); ?></th>
+            <th><?php echo \Joomla\CMS\Language\Text::_('CNAME'); ?></th>
 
 			<?php if ($this->params->get('tmpl_list.show_year')): ?>
-                <th width="1%"><?php echo JText::_('CYEAR') ?></th>
+                <th width="1%"><?php echo \Joomla\CMS\Language\Text::_('CYEAR') ?></th>
 			<?php endif; ?>
 
 			<?php if ($this->params->get('tmpl_list.show_genre')): ?>
-                <th width="1%"><?php echo JText::_('P_GENRE') ?></th>
+                <th width="1%"><?php echo \Joomla\CMS\Language\Text::_('P_GENRE') ?></th>
 			<?php endif; ?>
 
 			<?php if ($this->params->get('tmpl_list.show_album')): ?>
-                <th width="8%" style="max-width: 120px;"><?php echo JText::_('P_ALNUM') ?></th>
+                <th width="8%" style="max-width: 120px;"><?php echo \Joomla\CMS\Language\Text::_('P_ALNUM') ?></th>
 			<?php endif; ?>
 
 			<?php if ($this->params->get('tmpl_list.show_artist')): ?>
-                <th width="1%"><?php echo JText::_('P_ARTIST') ?></th>
+                <th width="1%"><?php echo \Joomla\CMS\Language\Text::_('P_ARTIST') ?></th>
 			<?php endif; ?>
 
 			<?php if ($this->descr): ?>
-                <th width="1%"><?php echo JText::_('P_LYRIC'); ?></th>
+                <th width="1%"><?php echo \Joomla\CMS\Language\Text::_('P_LYRIC'); ?></th>
 			<?php endif; ?>
 			<?php if (in_array($this->params->get('tmpl_list.show_download', 0), $this->user->getAuthorisedViewLevels())): ?>
-                <th width="1%"><?php echo JText::_('CSAVE'); ?></th>
+                <th width="1%"><?php echo \Joomla\CMS\Language\Text::_('CSAVE'); ?></th>
 			<?php endif; ?>
         </tr>
         </thead>
@@ -48,18 +48,18 @@ defined('_JEXEC') or die();
 
 			<?php
 			$tracks[] = "{sources:[{'file':'" . $this->getFileUrl($file) . "', 'title':'" . ($file->title ? $file->title : $file->realname) . "'}]}";
-			$data     = new JRegistry($file->params);
+			$data     = new \Joomla\Registry\Registry($file->params);
 			?>
             <tr valign="middle">
                 <td>
                     <a href="javascript:void(0)" id="file_play_<?php echo $record->id; ?>_<?php echo $k; ?>"
                        onclick="play<?php echo $record->id; ?>(<?php echo $k; ?>)">
                         <img src="<?php echo JURI::root(true) ?>/media/com_joomcck/icons/16/control.png"
-                             alt="<?php echo JText::_('P_PLAY') ?>" align="absmiddle"></a>
+                             alt="<?php echo \Joomla\CMS\Language\Text::_('P_PLAY') ?>" align="absmiddle"></a>
                     <a href="javascript:void(0)" id="file_stop_<?php echo $record->id; ?>_<?php echo $k; ?>"
                        onclick="stop<?php echo $record->id; ?>(<?php echo $k; ?>)" style="display:none">
                         <img src="<?php echo JURI::root(true) ?>/media/com_joomcck/icons/16/control-stop-square.png"
-                             alt="<?php echo JText::_('P_STOP') ?>" align="absmiddle"></a>
+                             alt="<?php echo \Joomla\CMS\Language\Text::_('P_STOP') ?>" align="absmiddle"></a>
 					<?php echo $file->title ? $file->title : $file->realname; ?>
 					<?php if ($data->get('comment') && $this->params->get('tmpl_list.show_comment')): ?>
 						<?php echo $data->get('comment'); ?>
@@ -89,10 +89,10 @@ defined('_JEXEC') or die();
                                 <a href="#lyric<?php echo $file->id; ?>" class="modal"
                                    rel="{handler:'adopt', size:{x:400,y:500}}">
                                     <img src="<?php echo JURI::root(true) ?>/media/com_joomcck/icons/16/clipboard-list.png"
-                                         alt="<?php echo JText::_('P_LYRIC') ?>" align="absmiddle">
+                                         alt="<?php echo \Joomla\CMS\Language\Text::_('P_LYRIC') ?>" align="absmiddle">
                                 </a>
                                 <div style="display: none;">
-                                    <div id="lyric<?php echo $file->id; ?>"><h3><?php echo JText::_('P_LYRIC') ?></h3>
+                                    <div id="lyric<?php echo $file->id; ?>"><h3><?php echo \Joomla\CMS\Language\Text::_('P_LYRIC') ?></h3>
                                         <br/><?php echo nl2br($file->description); ?></div>
                                 </div>
                             </center>
@@ -105,7 +105,7 @@ defined('_JEXEC') or die();
                             <center>
                                 <a href="<?php echo $file->url ?>">
                                     <img src="<?php echo JURI::root(true) ?>/media/com_joomcck/icons/16/disk.png"
-                                         alt="<?php echo JText::_('CDOWNLOAD') ?>" align="absmiddle"></a>
+                                         alt="<?php echo \Joomla\CMS\Language\Text::_('CDOWNLOAD') ?>" align="absmiddle"></a>
 								<?php if ($this->params->get('tmpl_list.hits', 0)): ?>
                                     [<?php echo $file->hits ?>]
 								<?php endif; ?>

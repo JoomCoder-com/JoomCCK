@@ -15,8 +15,8 @@ class JoomcckModelProducts extends MModelList
     
 	public function getListQuery()
 	{
-		$user = JFactory::getUser();
-		$db = JFactory::getDbo();
+		$user = \Joomla\CMS\Factory::getUser();
+		$db = \Joomla\CMS\Factory::getDbo();
 		$orders_model = MModelBase::getInstance('Orders', 'JoomcckModel');
 		
 		$db->setQuery('SELECT t.* FROM #__js_res_types AS t WHERE t.published = 1 AND t.id IN(SELECT type_id FROM #__js_res_fields WHERE published = 1 AND field_type LIKE "pay%")');
@@ -25,7 +25,7 @@ class JoomcckModelProducts extends MModelList
 		
 		foreach ($types AS $type)
 		{
-			$type->params = new JRegistry($type->params);
+			$type->params = new \Joomla\Registry\Registry($type->params);
 			if(!in_array($type->params->get('submission.submission'), $user->getAuthorisedViewLevels()) && !$orders_model->isSuperUser($user->get('id')))
 			{
 				continue;
@@ -73,7 +73,7 @@ class JoomcckModelProducts extends MModelList
 	}
 	
 	public function getTable($name = '', $prefix = 'Table', $options = array()){
-		return JTable::getInstance('Sales', 'JoomcckTable');
+		return \Joomla\CMS\Table\Table::getInstance('Sales', 'JoomcckTable');
 	}
 	
 	public function getStoreId($id = NULL)
@@ -88,7 +88,7 @@ class JoomcckModelProducts extends MModelList
 	
     protected function populateState($ordering = null, $direction = null)
 	{
-		$app = JFactory::getApplication();
+		$app = \Joomla\CMS\Factory::getApplication();
 		
 		$search = $app->getUserStateFromRequest ( $this->context . '.filter.search', 'filter_search' );
 		$this->setState ( 'filter.search', $search );

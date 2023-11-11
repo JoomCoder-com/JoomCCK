@@ -138,7 +138,7 @@ class JS_Image_Resizer
 
 	function getDate($imgFile)
 	{
-		$params = JComponentHelper::getParams('com_joomcck');
+		$params = \Joomla\CMS\Component\ComponentHelper::getParams('com_joomcck');
 		$parts  = explode('_', $imgFile);
 		$date   = date($params->get('folder_format', 'Y-m'), (int)$parts[0]);
 
@@ -434,11 +434,11 @@ class JS_Image_Resizer
 		require_once $libDir . DIRECTORY_SEPARATOR . 'gifresizer.php';
 
 		$path = JPATH_ROOT . DIRECTORY_SEPARATOR . 'images/joomcck_thumbs' . DIRECTORY_SEPARATOR . 'gif_frames' . DIRECTORY_SEPARATOR;
-		if(!JFolder::exists($path))
+		if(!\Joomla\CMS\Filesystem\Folder::exists($path))
 		{
 			$a = '';
-			JFolder::create($path, 0777);
-			JFile::write($path . DIRECTORY_SEPARATOR . 'index.html', $a);
+			\Joomla\CMS\Filesystem\Folder::create($path, 0777);
+			\Joomla\CMS\Filesystem\File::write($path . DIRECTORY_SEPARATOR . 'index.html', $a);
 		}
 
 		$gr           = new GifResizer;    //New Instance Of GIFResizer
@@ -452,7 +452,7 @@ class JS_Image_Resizer
 		require_once $libDir . DIRECTORY_SEPARATOR . 'GIFEncoder.class.php';
 
 		// Create gif decoder.
-		// $gifDecoder = new GIFDecoder(JFile::read($this->imgFile));
+		// $gifDecoder = new GIFDecoder(\Joomla\CMS\Filesystem\File::read($this->imgFile));
 		$gifDecoder = new GIFDecoder(file_get_contents($this->imgFile));
 
 		// Write the frames to disk.
@@ -520,7 +520,7 @@ class JS_Image_Resizer
 
 		if(!empty($newfile))
 		{
-			//JFile::write($newfile, $gifEncoder->getAnimation());
+			//\Joomla\CMS\Filesystem\File::write($newfile, $gifEncoder->getAnimation());
 			file_put_contents($newfile, $gifEncoder->getAnimation());
 		}
 		else
@@ -557,7 +557,7 @@ class JS_Image_Resizer
 					@imagepng($newimg, $tmpname);
 					break;
 			}
-			JFile::move($tmpname, $newfile);
+			\Joomla\CMS\Filesystem\File::move($tmpname, $newfile);
 		}
 		else
 		{

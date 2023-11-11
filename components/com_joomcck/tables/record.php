@@ -17,7 +17,7 @@ jimport('legacy.access.rules');
 jimport('joomla.access.rules');
 jimport('joomla.filter.input');
 
-class JoomcckTableRecord extends JTable
+class JoomcckTableRecord extends \Joomla\CMS\Table\Table
 {
 	public function __construct(&$db)
 	{
@@ -95,18 +95,18 @@ class JoomcckTableRecord extends JTable
 	public function check()
 	{
 		$isNew = (boolean)empty($this->id);
-		$user  = JFactory::getUser();
-		$app   = JFactory::getApplication();
+		$user  = \Joomla\CMS\Factory::getUser();
+		$app   = \Joomla\CMS\Factory::getApplication();
 
 		if($this->checked_out && $user->get('id') != $this->checked_out)
 		{
-			$this->setError(JText::sprintf('CANNOTEDITCHECKOUT', CCommunityHelper::getName($this->checked_out, $this->section_id), CCommunityHelper::getName($this->checked_out, $this->section_id)));
+			$this->setError(\Joomla\CMS\Language\Text::sprintf('CANNOTEDITCHECKOUT', CCommunityHelper::getName($this->checked_out, $this->section_id), CCommunityHelper::getName($this->checked_out, $this->section_id)));
 
 			return FALSE;
 		}
 		if(trim($this->title) == '')
 		{
-			$this->setError(JText::_('MUSTCONTAINTITLE'));
+			$this->setError(\Joomla\CMS\Language\Text::_('MUSTCONTAINTITLE'));
 
 			return FALSE;
 		}
@@ -118,21 +118,21 @@ class JoomcckTableRecord extends JTable
 
 		if(!$this->langs)
 		{
-			$lang        = JFactory::getLanguage();
+			$lang        = \Joomla\CMS\Factory::getLanguage();
 			$this->langs = $lang->getTag();
 		}
 
 		if($this->ctime == '' || $this->ctime == '0000-00-00 00:00:00' || is_null($this->ctime))
 		{
-			$this->ctime = JFactory::getDate()->toSql();
+			$this->ctime = \Joomla\CMS\Factory::getDate()->toSql();
 		}
 
 		if($this->inittime == '' || $this->inittime == '0000-00-00 00:00:00' || is_null($this->ctime))
 		{
-			$this->inittime = JFactory::getDate()->toSql();
+			$this->inittime = \Joomla\CMS\Factory::getDate()->toSql();
 		}
 
-		$this->mtime = JFactory::getDate()->toSql();
+		$this->mtime = \Joomla\CMS\Factory::getDate()->toSql();
 
 
 		if(!$this->user_id && $isNew)
@@ -158,7 +158,7 @@ class JoomcckTableRecord extends JTable
 		$out = array();
 		if($this->id)
 		{
-			$record = JTable::getInstance('Record', 'JoomcckTable');
+			$record = \Joomla\CMS\Table\Table::getInstance('Record', 'JoomcckTable');
 			$record->load($this->id);
 			$out = json_decode($record->fields, TRUE);
 		}
@@ -216,7 +216,7 @@ class JoomcckTableRecord extends JTable
 
 			if(empty($post['extime']) && $type->params->get('submission.default_expire', 0) > 0)
 			{
-				$this->extime = JFactory::getDate('+ ' . $type->params->get('submission.default_expire') . ' DAY')->toSql();
+				$this->extime = \Joomla\CMS\Factory::getDate('+ ' . $type->params->get('submission.default_expire') . ' DAY')->toSql();
 			}
 		}
 		else
@@ -263,14 +263,14 @@ class JoomcckTableRecord extends JTable
 
 			if($section->categories && !$categories && !$type->params->get('submission.first_category', 0))
 			{
-				$this->setError(JText::_('C_MSG_SELECTCATEGORY'));
+				$this->setError(\Joomla\CMS\Language\Text::_('C_MSG_SELECTCATEGORY'));
 
 				return FALSE;
 			}
 
 			if($type->params->get('submission.multi_max_num', 0) > 0 && count($categories) > $type->params->get('submission.multi_max_num', 0))
 			{
-				$this->setError(JText::plural('C_MSG_CATEGORYLIMIT', $type->params->get('submission.multi_max_num', 0)));
+				$this->setError(\Joomla\CMS\Language\Text::plural('C_MSG_CATEGORYLIMIT', $type->params->get('submission.multi_max_num', 0)));
 
 				return FALSE;
 			}
@@ -306,7 +306,7 @@ class JoomcckTableRecord extends JTable
 				{
 					unset($categories[$k]);
 
-					$this->setError(JText::_('C_MSG_CAT_NOTALLOW'));
+					$this->setError(\Joomla\CMS\Language\Text::_('C_MSG_CAT_NOTALLOW'));
 
 					return FALSE;
 				}
@@ -314,7 +314,7 @@ class JoomcckTableRecord extends JTable
 
 			if($categories)
 			{
-				$db = JFactory::getDbo();
+				$db = \Joomla\CMS\Factory::getDbo();
 
 				$sql = "SELECT id, title, params, access FROM #__js_res_categories WHERE id IN (" . implode(',', $categories) . ")";
 				$db->setQuery($sql);
@@ -327,7 +327,7 @@ class JoomcckTableRecord extends JTable
 					$categories[$cat->id] = $cat->title;
 					if($isNew && empty($post['access']))
 					{
-						$catparams = new JRegistry($cat->params);
+						$catparams = new \Joomla\Registry\Registry($cat->params);
 						if($catparams->get('access_level'))
 						{
 							$this->access = $cat->access;
@@ -345,7 +345,7 @@ class JoomcckTableRecord extends JTable
 		{
 			$title = $type->params->get('properties.item_title_composite', 'Please set composite title mask in type parameters');
 
-			$field_vals = new JRegistry($out);
+			$field_vals = new \Joomla\Registry\Registry($out);
 
 			foreach($out as $id => $value)
 			{
@@ -387,7 +387,7 @@ class JoomcckTableRecord extends JTable
 
 			if(preg_match('/\[RND::([0-9\:]*)\]/iU', $title, $matches))
 			{
-				$data = new JRegistry(explode('::', $matches[1]));
+				$data = new \Joomla\Registry\Registry(explode('::', $matches[1]));
 
 				if($data->get('1', 1) && $data->get('2', 1))
 				{
@@ -429,7 +429,7 @@ class JoomcckTableRecord extends JTable
 		{
 			if(\Joomla\String\StringHelper::strlen($this->title) > $type->params->get('properties.item_title_limit', 0))
 			{
-				$this->setError(JText::sprintf('C_MSG_TITLETOLONG', $type->params->get('properties.item_title_limit', 0)));
+				$this->setError(\Joomla\CMS\Language\Text::sprintf('C_MSG_TITLETOLONG', $type->params->get('properties.item_title_limit', 0)));
 
 				return FALSE;
 			}
@@ -444,7 +444,7 @@ class JoomcckTableRecord extends JTable
 			$this->_db->setQuery($sql);
 			if($this->_db->loadResult())
 			{
-				$this->setError(JText::_('C_MSG_TITLEEXISTS'));
+				$this->setError(\Joomla\CMS\Language\Text::_('C_MSG_TITLEEXISTS'));
 
 				return FALSE;
 			}
@@ -460,13 +460,13 @@ class JoomcckTableRecord extends JTable
 			if($isNew && $type->params->get('submission.autopublish', 1) == 0)
 			{
 				$this->published = 0;
-				Factory::getApplication()->enqueueMessage( JText::_('CNEWARTICLEAPPROVE'),'warning');
+				Factory::getApplication()->enqueueMessage( \Joomla\CMS\Language\Text::_('CNEWARTICLEAPPROVE'),'warning');
 			}
 
 			if(!$isNew && $type->params->get('submission.edit_autopublish', 1) == 0)
 			{
 				$this->published = 0;
-				Factory::getApplication()->enqueueMessage( JText::_('CEDITARTICLEAPPROVE'),'warning');
+				Factory::getApplication()->enqueueMessage( \Joomla\CMS\Language\Text::_('CEDITARTICLEAPPROVE'),'warning');
 			}
 
 			if(is_null($this->published))
@@ -478,7 +478,7 @@ class JoomcckTableRecord extends JTable
 			if(
 				$this->published === 0 &&
 				$type->params->get('emerald.type_publish_subscription') &&
-				JFile::exists($em_api)
+				\Joomla\CMS\Filesystem\File::exists($em_api)
 			)
 			{
 				require_once $em_api;
@@ -507,7 +507,7 @@ class JoomcckTableRecord extends JTable
 
 		if(!$this->alias)
 		{
-			$this->alias = JFactory::getDate()->format('Y-m-d-H-i-s');
+			$this->alias = \Joomla\CMS\Factory::getDate()->format('Y-m-d-H-i-s');
 		}
 
 		$this->alias = \Joomla\CMS\Application\ApplicationHelper::stringURLSafe(strip_tags(CensorHelper::cleanText($this->alias)));
@@ -556,12 +556,12 @@ class JoomcckTableRecord extends JTable
 		}
 		if($section->params->get('more.search_name'))
 		{
-			$fieldsdata[] = JFactory::getUser($this->user_id)->get('name');
-			$fieldsdata[] = JFactory::getUser($this->user_id)->get('username');
+			$fieldsdata[] = \Joomla\CMS\Factory::getUser($this->user_id)->get('name');
+			$fieldsdata[] = \Joomla\CMS\Factory::getUser($this->user_id)->get('username');
 		}
 		if($section->params->get('more.search_email'))
 		{
-			$fieldsdata[] = JFactory::getUser($this->user_id)->get('email');
+			$fieldsdata[] = \Joomla\CMS\Factory::getUser($this->user_id)->get('email');
 		}
 		if($section->params->get('more.search_category') && $this->categories != '[]')
 		{
@@ -583,17 +583,17 @@ class JoomcckTableRecord extends JTable
 	public function check_cli()
 	{
 		$isNew = (boolean)empty($this->id);
-		$user  = JFactory::getUser();
+		$user  = \Joomla\CMS\Factory::getUser();
 
 		if($this->checked_out && $user->get('id') != $this->checked_out)
 		{
-			$this->setError(JText::sprintf('CANNOTEDITCHECKOUT', CCommunityHelper::getName($this->checked_out, $this->section_id), CCommunityHelper::getName($this->checked_out, $this->section_id)));
+			$this->setError(\Joomla\CMS\Language\Text::sprintf('CANNOTEDITCHECKOUT', CCommunityHelper::getName($this->checked_out, $this->section_id), CCommunityHelper::getName($this->checked_out, $this->section_id)));
 
 			return FALSE;
 		}
 		if(trim($this->title) == '')
 		{
-			$this->setError(JText::_('MUSTCONTAINTITLE'));
+			$this->setError(\Joomla\CMS\Language\Text::_('MUSTCONTAINTITLE'));
 
 			return FALSE;
 		}
@@ -605,21 +605,21 @@ class JoomcckTableRecord extends JTable
 
 		if(!$this->langs)
 		{
-			$lang        = JFactory::getLanguage();
+			$lang        = \Joomla\CMS\Factory::getLanguage();
 			$this->langs = $lang->getTag();
 		}
 
 		if($this->ctime == '' || $this->ctime == '0000-00-00 00:00:00' || is_null($this->ctime))
 		{
-			$this->ctime = JFactory::getDate()->toSql();
+			$this->ctime = \Joomla\CMS\Factory::getDate()->toSql();
 		}
 
 		if($this->inittime == '' || $this->inittime == '0000-00-00 00:00:00' || is_null($this->inittime))
 		{
-			$this->inittime = JFactory::getDate()->toSql();
+			$this->inittime = \Joomla\CMS\Factory::getDate()->toSql();
 		}
 
-		$this->mtime = JFactory::getDate()->toSql();
+		$this->mtime = \Joomla\CMS\Factory::getDate()->toSql();
 
 
 		if(!$this->user_id && $isNew)
@@ -643,7 +643,7 @@ class JoomcckTableRecord extends JTable
 
 		if(!$this->alias)
 		{
-			$this->alias = JFactory::getDate()->format('Y-m-d-H-i-s');
+			$this->alias = \Joomla\CMS\Factory::getDate()->format('Y-m-d-H-i-s');
 		}
 
 		$this->alias = \Joomla\CMS\Application\ApplicationHelper::stringURLSafe(strip_tags($this->alias));

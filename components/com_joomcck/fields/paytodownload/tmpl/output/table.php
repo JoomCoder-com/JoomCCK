@@ -18,14 +18,14 @@ $descr = in_array($this->params->get('params.show_descr'), array( 3,  $this->cli
 	<thead>
 		<tr>
 			<th>#</th>
-			<th><?php echo JText::_('P_FILE')?></th>
+			<th><?php echo \Joomla\CMS\Language\Text::_('P_FILE')?></th>
 			
 			<?php if($hits):?>
-				<th><?php echo JText::_('CHITS')?></th>
+				<th><?php echo \Joomla\CMS\Language\Text::_('CHITS')?></th>
 			<?php endif;?>
 
 			<?php if($size):?>
-				<th><?php echo JText::_('CSIZE')?></th>
+				<th><?php echo \Joomla\CMS\Language\Text::_('CSIZE')?></th>
 			<?php endif;?>
 		</tr>
 	</thead>
@@ -55,23 +55,23 @@ $descr = in_array($this->params->get('params.show_descr'), array( 3,  $this->cli
 <?php if($this->params->get('params.all_sales_link') && $this->is_seler && !$this->is_free):?>
 	<a href="index.php?option=com_joomcck&view=elements&layout=saler&filter_section=<?php echo $this->request->getInt('section_id');?>&Itemid=<?php echo $this->params->get('params.all_sales_iid', $this->request->getInt('Itemid'));?>"
 		class="btn btn-sm btn-light border">
-		<?php echo JText::_($this->params->get('params.all_sales_text', 'All sold files'));?>
+		<?php echo \Joomla\CMS\Language\Text::_($this->params->get('params.all_sales_text', 'All sold files'));?>
 	</a>
 <?php endif; ?>
 <?php if($this->is_seler){return;}?>
 
 <?php if($this->is_free):?>
-	<div class="alert alert-success"><?php echo JText::_('P_FREEDOWN');?></div>
+	<div class="alert alert-success"><?php echo \Joomla\CMS\Language\Text::_('P_FREEDOWN');?></div>
 <?php else:?>
 	<?php if($this->is_paid):?>
 		<?php if($this->order->id):?>
 			<div class="alert alert-success">
 				<p>
-					<?php echo JText::_($this->params->get('params.purchase_title', 'You have already purchased this product'));?>
+					<?php echo \Joomla\CMS\Language\Text::_($this->params->get('params.purchase_title', 'You have already purchased this product'));?>
 				</p>
 				<?php if($this->params->get('params.all_orders_link')):?>
-					<a class="btn btn-sm btn-success" href="<?php echo JRoute::_('index.php?option=com_joomcck&view=elements&layout=buyer&filter_section='.$this->request->getInt('section_id').'&Itemid='.$this->params->get('params.all_orders_iid', $this->request->getInt('Itemid')));?>">
-						<?php echo JText::_($this->params->get('params.all_orders_text', 'My all purchases'));?></a>
+					<a class="btn btn-sm btn-success" href="<?php echo \Joomla\CMS\Router\Route::_('index.php?option=com_joomcck&view=elements&layout=buyer&filter_section='.$this->request->getInt('section_id').'&Itemid='.$this->params->get('params.all_orders_iid', $this->request->getInt('Itemid')));?>">
+						<?php echo \Joomla\CMS\Language\Text::_($this->params->get('params.all_orders_text', 'My all purchases'));?></a>
 				<?php endif; ?>
 			</div>
 			<?php echo $this->order->table;?>

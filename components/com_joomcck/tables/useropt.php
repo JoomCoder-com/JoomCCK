@@ -11,7 +11,7 @@ defined( '_JEXEC' ) or die( 'Restricted access');
 
 jimport('joomla.table.table');
 
-class JoomcckTableUseropt extends JTable
+class JoomcckTableUseropt extends \Joomla\CMS\Table\Table
 {
 	public function __construct( &$_db ) {
 		parent::__construct( '#__js_res_user_options', 'id', $_db );

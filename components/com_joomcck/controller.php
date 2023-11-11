@@ -34,16 +34,16 @@ class JoomcckController extends MControllerBase
 	public function display($cachable = FALSE, $urlparams = FALSE)
 	{
 
-		$app = JFactory::getApplication();
+		$app = \Joomla\CMS\Factory::getApplication();
 
 		HTMLHelper::_('jquery.framework');
 
 
-		if(!JComponentHelper::getParams('com_joomcck')->get('general_upload'))
+		if(!\Joomla\CMS\Component\ComponentHelper::getParams('com_joomcck')->get('general_upload'))
 		{
 
 
-			\Joomla\CMS\Factory::getApplication()->enqueueMessage(JText::_('CUPLOADREQ'),'error');
+			\Joomla\CMS\Factory::getApplication()->enqueueMessage(\Joomla\CMS\Language\Text::_('CUPLOADREQ'),'error');
 
 			return;
 		}
@@ -55,32 +55,32 @@ class JoomcckController extends MControllerBase
                     'cats','auditlog','notifications','import'))
 		)
 		{
-			if(!JFactory::getUser()->get('id'))
+			if(!\Joomla\CMS\Factory::getUser()->get('id'))
 			{
-				$app->enqueueMessage(JText::_('CPLEASELOGIN'),'warning');
+				$app->enqueueMessage(\Joomla\CMS\Language\Text::_('CPLEASELOGIN'),'warning');
 				$app->setHeader('status', 403, true);
-				$app->redirect(JRoute::_('index.php?option=com_users&view=login&return='.base64_encode(JUri::getInstance()->toString()), false));
+				$app->redirect(\Joomla\CMS\Router\Route::_('index.php?option=com_users&view=login&return='.base64_encode(\Joomla\CMS\Uri\Uri::getInstance()->toString()), false));
 			}
 			if(!MECAccess::isAdmin())
 			{
-				$app->enqueueMessage(JText::_('CCANNOTACCESSADMINAREA'),'warning');
+				$app->enqueueMessage(\Joomla\CMS\Language\Text::_('CCANNOTACCESSADMINAREA'),'warning');
 				$app->setHeader('status', 403, true);
-				$app->redirect(JRoute::_('/'));
+				$app->redirect(\Joomla\CMS\Router\Route::_('/'));
 			}
 
-			if(JComponentHelper::getParams('com_joomcck')->get('tmpl_full'))
+			if(\Joomla\CMS\Component\ComponentHelper::getParams('com_joomcck')->get('tmpl_full'))
 			{
 				$this->input->set('tmpl', 'component');
 			}
 		}
 
-		$prefix = JComponentHelper::getParams('com_joomcck')->get('tmpl_prefix');
+		$prefix = \Joomla\CMS\Component\ComponentHelper::getParams('com_joomcck')->get('tmpl_prefix');
 		if($prefix)
 		{
 			$view   = $this->input->getCmd('view', 'default');
 			$layout = $this->input->getCmd('layout', 'default');
 
-			if(JFile::exists(JPATH_ROOT . "/components/com_joomcck/views/{$view}/tmpl/{$prefix}-{$layout}.php"))
+			if(\Joomla\CMS\Filesystem\File::exists(JPATH_ROOT . "/components/com_joomcck/views/{$view}/tmpl/{$prefix}-{$layout}.php"))
 			{
 				$this->input->set('layout', $prefix.'-'.$layout);
 			}
@@ -91,7 +91,7 @@ class JoomcckController extends MControllerBase
 
 		if($this->input->get('no_html'))
 		{
-			JFactory::getApplication()->close();
+			\Joomla\CMS\Factory::getApplication()->close();
 		}
 
 		return $display;

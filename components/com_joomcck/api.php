@@ -21,7 +21,7 @@ jimport('mint.mvc.view.base');
 jimport('mint.forms.helper');
 jimport('mint.helper');
 
-JHtml::_('bootstrap.framework');
+\Joomla\CMS\HTML\HTMLHelper::_('bootstrap.framework');
 
 JLoader::discover('MModel', JPATH_LIBRARIES.'/mint/mvc/model');
 JLoader::discover('MView', JPATH_LIBRARIES.'/mint/mvc/view');
@@ -29,23 +29,23 @@ JLoader::discover('MController', JPATH_LIBRARIES.'/mint/mvc/controller');
 
 JLoader::registerPrefix('Joomcck', JPATH_ROOT . '/components/com_joomcck');
 
-JTable::addIncludePath(JPATH_ROOT . '/components/com_joomcck/tables');
+\Joomla\CMS\Table\Table::addIncludePath(JPATH_ROOT . '/components/com_joomcck/tables');
 MModelBase::addIncludePath(JPATH_ROOT . '/components/com_joomcck/models', 'JoomcckModel');
 
-JForm::addFieldPath(JPATH_ROOT . '/libraries/mint/forms/fields');
-JHtml::addIncludePath(JPATH_ROOT . '/components/com_joomcck/library/php/html');
-JHtml::addIncludePath(JPATH_ROOT . '/components/com_joomcck/library/php');
+\Joomla\CMS\Form\Form::addFieldPath(JPATH_ROOT . '/libraries/mint/forms/fields');
+\Joomla\CMS\HTML\HTMLHelper::addIncludePath(JPATH_ROOT . '/components/com_joomcck/library/php/html');
+\Joomla\CMS\HTML\HTMLHelper::addIncludePath(JPATH_ROOT . '/components/com_joomcck/library/php');
 
 foreach (glob(JPATH_ROOT.'/components/com_joomcck/library/php/helpers/*.php') as $filename)
 {
 	require_once $filename;
 }
 
-JFactory::getLanguage()->load('com_joomcck', JPATH_ROOT);
+\Joomla\CMS\Factory::getLanguage()->load('com_joomcck', JPATH_ROOT);
 
-if(JComponentHelper::getParams('com_joomcck')->get('compatibility'))
+if(\Joomla\CMS\Component\ComponentHelper::getParams('com_joomcck')->get('compatibility'))
 {
-	JHtml::_('bootstrap.loadCss');
+	\Joomla\CMS\HTML\HTMLHelper::_('bootstrap.loadCss');
 }
 
 JHTML::_('bootstrap.tooltip');
@@ -69,7 +69,7 @@ JHTML::_('bootstrap.tooltip', '*[rel="tooltipbottom"]',
 );
 
 $em_api = JPATH_ROOT . '/components/com_emerald/api.php';
-if(JFile::exists($em_api))
+if(\Joomla\CMS\Filesystem\File::exists($em_api))
 {
 	require_once $em_api;
 }
@@ -102,9 +102,9 @@ class JoomcckApi
 	public static function getArticleLink($record_id)
 	{
 		$record = ItemsStore::getRecord($record_id);
-		$url    = JRoute::_(Url::record($record));
+		$url    = \Joomla\CMS\Router\Route::_(Url::record($record));
 
-		return JHtml::link($url, $record->title);
+		return \Joomla\CMS\HTML\HTMLHelper::link($url, $record->title);
 	}
 
 	/**
@@ -117,7 +117,7 @@ class JoomcckApi
 		$type    = ItemsStore::getType($type_id);
 		$section = ItemsStore::getSection($section_id);
 
-		$db    = JFactory::getDbo();
+		$db    = \Joomla\CMS\Factory::getDbo();
 		$query = $db->getQuery(TRUE);
 
 		$query->select('r.votes, r.votes_result, r.multirating');
@@ -198,8 +198,8 @@ class JoomcckApi
 
 	public static function getField($field_id, $record, $default = NULL, $bykey = FALSE)
 	{
-		JTable::addIncludePath(JPATH_ROOT . '/components/com_joomcck/tables/');
-		$field_table = JTable::getInstance('Field', 'JoomcckTable');
+		\Joomla\CMS\Table\Table::addIncludePath(JPATH_ROOT . '/components/com_joomcck/tables/');
+		$field_table = \Joomla\CMS\Table\Table::getInstance('Field', 'JoomcckTable');
 		if($bykey)
 		{
 			$field_table->load(array('key' => $field_id));
@@ -212,15 +212,15 @@ class JoomcckApi
 		if(!$field_table->id)
 		{
 
-			throw new GenericDataException(JText::_('CERRNOFILED'), 500);
+			throw new GenericDataException(\Joomla\CMS\Language\Text::_('CERRNOFILED'), 500);
 			return;
 		}
 
 		$field_path = JPATH_ROOT . "/components/com_joomcck/fields/{$field_table->field_type}/{$field_table->field_type}.php";
-		if(!JFile::exists($field_path))
+		if(!\Joomla\CMS\Filesystem\File::exists($field_path))
 		{
 
-			throw new GenericDataException(implode(JText::_('CERRNOFILEHDD')), 500);
+			throw new GenericDataException(implode(\Joomla\CMS\Language\Text::_('CERRNOFILEHDD')), 500);
 
 
 			return;
@@ -241,7 +241,7 @@ class JoomcckApi
 		$classname = 'JFormFieldC' . ucfirst($field_table->field_type);
 		if(!class_exists($classname))
 		{
-			throw new GenericDataException(implode(JText::_('CCLASSNOTFOUND')), 500);
+			throw new GenericDataException(implode(\Joomla\CMS\Language\Text::_('CCLASSNOTFOUND')), 500);
 
 			return;
 		}
@@ -272,7 +272,7 @@ class JoomcckApi
 
 		if(!method_exists($fieldclass, $func))
 		{
-			throw new GenericDataException(implode(JText::_('AJAX_METHODNOTFOUND')), 500);
+			throw new GenericDataException(implode(\Joomla\CMS\Language\Text::_('AJAX_METHODNOTFOUND')), 500);
 
 			return;
 		}
@@ -303,7 +303,7 @@ class JoomcckApi
 	static public function updateRecord($record_id, $data, $fields = array(),
 		$categories = array(), $tags = array())
 	{
-		$record = JTable::getInstance('Record', 'JoomcckTable');
+		$record = \Joomla\CMS\Table\Table::getInstance('Record', 'JoomcckTable');
 
 		if(is_int($record_id))
 		{
@@ -328,11 +328,11 @@ class JoomcckApi
 		$obj->def('ctime', JDate::getInstance()->toSql());
 		$obj->def('mtime', JDate::getInstance()->toSql());
 		$obj->def('title', 'NO: ' . time());
-		$obj->def('user_id', JFactory::getUser()->id);
+		$obj->def('user_id', \Joomla\CMS\Factory::getUser()->id);
 		$obj->def('section_id', $section_id);
 		$obj->def('type_id', $type_id);
 
-		$record = JTable::getInstance('Record', 'JoomcckTable');
+		$record = \Joomla\CMS\Table\Table::getInstance('Record', 'JoomcckTable');
 		$record->save($obj->toArray());
 
 		return self::_touchRecord($record, $fields, $categories, $tags);
@@ -345,9 +345,9 @@ class JoomcckApi
 			/**
 			 * @return JoomcckTableRecord_values
 			 */
-			$table  = JTable::getInstance('Record_values', 'JoomcckTable');
+			$table  = \Joomla\CMS\Table\Table::getInstance('Record_values', 'JoomcckTable');
 			$type   = ItemsStore::getType($record->type_id);
-			$db     = JFactory::getDbo();
+			$db     = \Joomla\CMS\Factory::getDbo();
 
 
 			if($fields)
@@ -356,7 +356,7 @@ class JoomcckApi
 
 				$_POST['jform']['fields'] = $fields;
 
-				JFactory::getApplication()->setUserState('com_joomcck.edit.form.data', array('fields' => $fields));
+				\Joomla\CMS\Factory::getApplication()->setUserState('com_joomcck.edit.form.data', array('fields' => $fields));
 				$table->clean($record->id, $field_ids);
 
 				$fileds_model = JModelLegacy::getInstance('Fields', 'JoomcckModel');
@@ -387,8 +387,8 @@ class JoomcckApi
 
 			if($categories)
 			{
-				$table_cat      = JTable::getInstance('CobCategory', 'JoomcckTable');
-				$table_category = JTable::getInstance('Record_category', 'JoomcckTable');
+				$table_cat      = \Joomla\CMS\Table\Table::getInstance('CobCategory', 'JoomcckTable');
+				$table_category = \Joomla\CMS\Table\Table::getInstance('Record_category', 'JoomcckTable');
 
 				$cids = array();
 				foreach($categories as $key)
@@ -437,8 +437,8 @@ class JoomcckApi
 
 			if($tags)
 			{
-				$tag_table     = JTable::getInstance('Tags', 'JoomcckTable');
-				$taghist_table = JTable::getInstance('Taghistory', 'JoomcckTable');
+				$tag_table     = \Joomla\CMS\Table\Table::getInstance('Tags', 'JoomcckTable');
+				$taghist_table = \Joomla\CMS\Table\Table::getInstance('Taghistory', 'JoomcckTable');
 
 				$tag_ids = $tdata = $rtags = array();
 
@@ -527,8 +527,8 @@ class JoomcckApi
 			return;
 		}
 
-		$app             = JFactory::getApplication();
-		$this->appParams = new JRegistry(array());
+		$app             = \Joomla\CMS\Factory::getApplication();
+		$this->appParams = new \Joomla\Registry\Registry(array());
 		if(method_exists($app, 'getParams'))
 		{
 			$this->appParams = $app->getParams();
@@ -592,7 +592,7 @@ class JoomcckApi
 		$view                    = new JoomcckViewRecords();
 		$this->total_fields_keys = $view->_fieldsSummary($items);
 		$this->items             = $items;
-		$this->user              = JFactory::getUser();
+		$this->user              = \Joomla\CMS\Factory::getUser();
 		$this->input             = $app->input;
 
 		require_once JPATH_ROOT . '/components/com_joomcck/models/category.php';
@@ -666,7 +666,7 @@ class JoomcckApi
 		$tmpl = explode('.', $tpl);
 		$tmpl = $tmpl[0];
 
-		if(!JFile::exists("{$dir}default_list_{$tmpl}.php"))
+		if(!\Joomla\CMS\Filesystem\File::exists("{$dir}default_list_{$tmpl}.php"))
 		{
 			throw new Exception( 'TMPL not found',100);
 

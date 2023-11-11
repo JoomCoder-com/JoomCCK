@@ -67,7 +67,7 @@ class CEventsHelper
 	{
 		$user_opt = CUsrHelper::getOptions();
 		$section  = ItemsStore::getSection($section_id);
-		$user     = JFactory::getUser();
+		$user     = \Joomla\CMS\Factory::getUser();
 
 		if($record_id)
 		{
@@ -132,7 +132,7 @@ class CEventsHelper
 			$user_id = $only_user;
 		}
 
-		if($user->id && in_array($section->params->get('events.event.' . $event . '.activ'), JFactory::getUser()->getAuthorisedViewLevels()))
+		if($user->id && in_array($section->params->get('events.event.' . $event . '.activ'), \Joomla\CMS\Factory::getUser()->getAuthorisedViewLevels()))
 		{
 			$array['new_vote'] = @$params['new_vote'];
 			$array['status']   = @$params['status'];
@@ -173,7 +173,7 @@ class CEventsHelper
 		}
 		else
 		{
-			$db    = JFactory::getDbo();
+			$db    = \Joomla\CMS\Factory::getDbo();
 			$query = $db->getQuery(TRUE);
 			$query->select('user_id');
 			$query->from('#__js_res_subscribe');
@@ -228,7 +228,7 @@ class CEventsHelper
 
 		foreach($list as $uid)
 		{
-			$senduser = JFactory::getUser($uid);
+			$senduser = \Joomla\CMS\Factory::getUser($uid);
 			if(!in_array($section->params->get('events.event.' . $event . '.notif', $who), $senduser->getAuthorisedViewLevels()) && !($record->user_id && $senduser->get('id') == $record->user_id))
 			{
 				continue;
@@ -257,21 +257,21 @@ class CEventsHelper
 
 		$event_author = CCommunityHelper::getName($event->eventer, $section);
 
-		$msg = JText::_($section->params->get('events.event.' . $event->type . '.msg_pers', 'EVENT_' . strtoupper($event->type) . '_PERS'));
+		$msg = \Joomla\CMS\Language\Text::_($section->params->get('events.event.' . $event->type . '.msg_pers', 'EVENT_' . strtoupper($event->type) . '_PERS'));
 
 		$filter_pattern = ' <a onclick="Joomcck.setAndSubmit(\'filter_search\', \'%s:%s\')" href="javascript:void(0);"
 			rel="tooltip" data-original-title="%s"><img align="absmiddle" src="' . JURI::root(TRUE) . '/media/com_joomcck/icons/16/funnel-small.png" /></a>';
 		$record->link   = Url::record($record, $type, $section);
-		$record_link    = JHtml::link(JRoute::_($record->link), $record->title);
+		$record_link    = \Joomla\CMS\HTML\HTMLHelper::link(\Joomla\CMS\Router\Route::_($record->link), $record->title);
 
-		$section_link = JHtml::link(JRoute::_(Url::records($section)), $section->name);
+		$section_link = \Joomla\CMS\HTML\HTMLHelper::link(\Joomla\CMS\Router\Route::_(Url::records($section)), $section->name);
 
 		if($filter)
 		{
-			$record_link .= sprintf($filter_pattern, 'rid', $record->id, JText::_('CFILTERTIPRECORD'));
-			$event_author .= sprintf($filter_pattern, 'uid', $event->eventer, JText::_('CFILTERTIPUSER'));
+			$record_link .= sprintf($filter_pattern, 'rid', $record->id, \Joomla\CMS\Language\Text::_('CFILTERTIPRECORD'));
+			$event_author .= sprintf($filter_pattern, 'uid', $event->eventer, \Joomla\CMS\Language\Text::_('CFILTERTIPUSER'));
 			$section_link .= ' <a onclick="Joomcck.setAndSubmit(\'section_id\', \'' . $section->id . '\');" href="javascript:void(0);"
-			rel="tooltip" data-original-title="' . JText::_('CFILTERTIPSECTION') . '"><img align="absmiddle" src="' . JURI::root(TRUE) . '/media/com_joomcck/icons/16/funnel-small.png" /></a>';
+			rel="tooltip" data-original-title="' . \Joomla\CMS\Language\Text::_('CFILTERTIPSECTION') . '"><img align="absmiddle" src="' . JURI::root(TRUE) . '/media/com_joomcck/icons/16/funnel-small.png" /></a>';
 		}
 
 		$msg = str_replace(
@@ -299,7 +299,7 @@ class CEventsHelper
 			$msg);
 
 		$fields     = json_decode($record->fields, TRUE);
-		$field_vals = new JRegistry($fields);
+		$field_vals = new \Joomla\Registry\Registry($fields);
 
 		settype($fields, 'array');
 
@@ -342,11 +342,11 @@ class CEventsHelper
 
 		if($item->ref_5)
 		{
-			$db = JFactory::getDbo();
+			$db = \Joomla\CMS\Factory::getDbo();
 			include_once JPATH_ROOT . '/components/com_joomcck/tables/field.php';
 			$field = new JoomcckTableField($db);
 			$field->load($item->ref_5);
-			$field->params = new JRegistry($field->params);
+			$field->params = new \Joomla\Registry\Registry($field->params);
 
 			include_once JPATH_ROOT . '/components/com_joomcck/fields' . DIRECTORY_SEPARATOR . $field->field_type . DIRECTORY_SEPARATOR . $field->field_type . '.php';
 
@@ -363,7 +363,7 @@ class CEventsHelper
 	static public function cleanRecord($id)
 	{
 		$db = Jfactory::getDbo();
-		$db->setQuery("DELETE FROM #__js_res_notifications WHERE ref_1 = " . $id . ' AND user_id = ' . JFactory::getUser()->get('id') . ' AND ref_2 = ' . JFactory::getApplication()->input->getInt('section_id'));
+		$db->setQuery("DELETE FROM #__js_res_notifications WHERE ref_1 = " . $id . ' AND user_id = ' . \Joomla\CMS\Factory::getUser()->get('id') . ' AND ref_2 = ' . \Joomla\CMS\Factory::getApplication()->input->getInt('section_id'));
 		$db->execute();
 	}
 
@@ -371,13 +371,13 @@ class CEventsHelper
 	{
 		$db = Jfactory::getDbo();
 
-		$db->setQuery("UPDATE #__js_res_notifications SET state_new = 0, notified = 1 WHERE ref_1 = " . $record->id . ' AND user_id = ' . JFactory::getUser()->get('id') . ' AND ref_2 = ' . $record->section_id);
+		$db->setQuery("UPDATE #__js_res_notifications SET state_new = 0, notified = 1 WHERE ref_1 = " . $record->id . ' AND user_id = ' . \Joomla\CMS\Factory::getUser()->get('id') . ' AND ref_2 = ' . $record->section_id);
 		$db->execute();
 	}
 
 	static public function getNum($type, $id = 0, $key = 'num')
 	{
-		$user = JFactory::getUser();
+		$user = \Joomla\CMS\Factory::getUser();
 		if(!$user->get('id'))
 		{
 			return;
@@ -389,7 +389,7 @@ class CEventsHelper
 		{
 			$events = array();
 
-			$db  = JFactory::getDbo();
+			$db  = \Joomla\CMS\Factory::getDbo();
 			$sql = "SELECT `ref_1`, `ref_2`, `ref_3`, `ref_4`, `ref_5`, `type`, `eventer`, `ctime`  FROM #__js_res_notifications WHERE state_new = 1 AND user_id = " . $user->get('id');
 			$db->setQuery($sql);
 			$list = $db->loadObjectList();
@@ -406,9 +406,9 @@ class CEventsHelper
 						),
 						array(
 							CCommunityHelper::getName($event->eventer, NULL, array('nohtml' => 1)),
-							JHtml::_('date', $event->ctime, 'd F Y')
+							\Joomla\CMS\HTML\HTMLHelper::_('date', $event->ctime, 'd F Y')
 						),
-						JText::_($section->params->get('events.event.' . $event->type . '.msg', 'event_' . $event->type))
+						\Joomla\CMS\Language\Text::_($section->params->get('events.event.' . $event->type . '.msg', 'event_' . $event->type))
 					);
 					@$events['total'][0]['num']++;
 					@$events['record'][$event->ref_1]['num']++;
@@ -453,7 +453,7 @@ class CEventsHelper
 
 		if($url)
 		{
-			$out = '<a href="' . JRoute::_(Url::user('events')) . '">' . $out . '</a>';
+			$out = '<a href="' . \Joomla\CMS\Router\Route::_(Url::user('events')) . '">' . $out . '</a>';
 		}
 
 		return $out;
@@ -462,39 +462,39 @@ class CEventsHelper
 	static public function getEventsList()
 	{
 		$events                            = array();
-		$events['record_new']              = JText::_('EVENT_TYPE_RECORD_NEW');
-		$events['record_view']             = JText::_('EVENT_TYPE_RECORD_VIEW');
-		$events['record_expired']          = JText::_('EVENT_TYPE_RECORD_EXPIRED');
-		$events['record_featured_expired'] = JText::_('EVENT_TYPE_RECORD_FEATURED_EXPIRED');
-		$events['record_tagged']           = JText::_('EVENT_TYPE_RECORD_TAGGED');
-		$events['record_bookmarked']       = JText::_('EVENT_TYPE_RECORD_BOOKMARKED');
-		$events['record_rated']            = JText::_('EVENT_TYPE_RECORD_RATED');
-		$events['record_wait_approve']     = JText::_('EVENT_TYPE_RECORD_WAIT_APPROVE');
-		$events['record_approved']         = JText::_('EVENT_TYPE_RECORD_APPROVED');
-		$events['record_unpublished']      = JText::_('EVENT_TYPE_RECORD_UNPUBLISHED');
-		$events['record_featured']         = JText::_('EVENT_TYPE_RECORD_FEATURED');
-		$events['record_extended']         = JText::_('EVENT_TYPE_RECORD_EXTENDED');
-		$events['record_deleted']          = JText::_('EVENT_TYPE_RECORD_DELETED');
-		$events['record_edited']           = JText::_('EVENT_TYPE_RECORD_EDITED');
-		//$events['record_imported']           = JText::_('EVENT_TYPE_RECORD_IMPORTED');
-		//$events['record_import_update']           = JText::_('EVENT_TYPE_RECORD_IMPORT_UPDATE');
+		$events['record_new']              = \Joomla\CMS\Language\Text::_('EVENT_TYPE_RECORD_NEW');
+		$events['record_view']             = \Joomla\CMS\Language\Text::_('EVENT_TYPE_RECORD_VIEW');
+		$events['record_expired']          = \Joomla\CMS\Language\Text::_('EVENT_TYPE_RECORD_EXPIRED');
+		$events['record_featured_expired'] = \Joomla\CMS\Language\Text::_('EVENT_TYPE_RECORD_FEATURED_EXPIRED');
+		$events['record_tagged']           = \Joomla\CMS\Language\Text::_('EVENT_TYPE_RECORD_TAGGED');
+		$events['record_bookmarked']       = \Joomla\CMS\Language\Text::_('EVENT_TYPE_RECORD_BOOKMARKED');
+		$events['record_rated']            = \Joomla\CMS\Language\Text::_('EVENT_TYPE_RECORD_RATED');
+		$events['record_wait_approve']     = \Joomla\CMS\Language\Text::_('EVENT_TYPE_RECORD_WAIT_APPROVE');
+		$events['record_approved']         = \Joomla\CMS\Language\Text::_('EVENT_TYPE_RECORD_APPROVED');
+		$events['record_unpublished']      = \Joomla\CMS\Language\Text::_('EVENT_TYPE_RECORD_UNPUBLISHED');
+		$events['record_featured']         = \Joomla\CMS\Language\Text::_('EVENT_TYPE_RECORD_FEATURED');
+		$events['record_extended']         = \Joomla\CMS\Language\Text::_('EVENT_TYPE_RECORD_EXTENDED');
+		$events['record_deleted']          = \Joomla\CMS\Language\Text::_('EVENT_TYPE_RECORD_DELETED');
+		$events['record_edited']           = \Joomla\CMS\Language\Text::_('EVENT_TYPE_RECORD_EDITED');
+		//$events['record_imported']           = \Joomla\CMS\Language\Text::_('EVENT_TYPE_RECORD_IMPORTED');
+		//$events['record_import_update']           = \Joomla\CMS\Language\Text::_('EVENT_TYPE_RECORD_IMPORT_UPDATE');
 
-		$events['comment_new']         = JText::_('EVENT_TYPE_COMMENT_NEW');
-		$events['comment_rated']       = JText::_('EVENT_TYPE_COMMENT_RATED');
-		$events['comment_deleted']     = JText::_('EVENT_TYPE_COMMENT_DELETED');
-		$events['comment_approved']    = JText::_('EVENT_TYPE_COMMENT_APPROVED');
-		$events['comment_reply']       = JText::_('EVENT_TYPE_COMMENT_REPLY');
-		$events['comment_unpublished'] = JText::_('EVENT_TYPE_COMMENT_UNPUBLISHED');
-		$events['comment_edited']      = JText::_('EVENT_TYPE_COMMENT_EDITED');
+		$events['comment_new']         = \Joomla\CMS\Language\Text::_('EVENT_TYPE_COMMENT_NEW');
+		$events['comment_rated']       = \Joomla\CMS\Language\Text::_('EVENT_TYPE_COMMENT_RATED');
+		$events['comment_deleted']     = \Joomla\CMS\Language\Text::_('EVENT_TYPE_COMMENT_DELETED');
+		$events['comment_approved']    = \Joomla\CMS\Language\Text::_('EVENT_TYPE_COMMENT_APPROVED');
+		$events['comment_reply']       = \Joomla\CMS\Language\Text::_('EVENT_TYPE_COMMENT_REPLY');
+		$events['comment_unpublished'] = \Joomla\CMS\Language\Text::_('EVENT_TYPE_COMMENT_UNPUBLISHED');
+		$events['comment_edited']      = \Joomla\CMS\Language\Text::_('EVENT_TYPE_COMMENT_EDITED');
 
-		$events['status_changed']  = JText::_('EVENT_TYPE_STATUS_CHANGED');
-		$events['parent_new']      = JText::_('EVENT_TYPE_PARENT_NEW');
-		$events['child_new']       = JText::_('EVENT_TYPE_CHILD_NEW');
-		$events['parent_attached'] = JText::_('EVENT_TYPE_PARENT_ATTACHED');
-		$events['child_attached']  = JText::_('EVENT_TYPE_CHILD_ATTACHED');
-		$events['order_updated']   = JText::_('EVENT_TYPE_ORDER_UPDATED');
-		$events['new_sale']        = JText::_('EVENT_TYPE_NEW_SALE');
-		$events['new_sale_manual'] = JText::_('EVENT_TYPE_NEW_SALE_MANUAL');
+		$events['status_changed']  = \Joomla\CMS\Language\Text::_('EVENT_TYPE_STATUS_CHANGED');
+		$events['parent_new']      = \Joomla\CMS\Language\Text::_('EVENT_TYPE_PARENT_NEW');
+		$events['child_new']       = \Joomla\CMS\Language\Text::_('EVENT_TYPE_CHILD_NEW');
+		$events['parent_attached'] = \Joomla\CMS\Language\Text::_('EVENT_TYPE_PARENT_ATTACHED');
+		$events['child_attached']  = \Joomla\CMS\Language\Text::_('EVENT_TYPE_CHILD_ATTACHED');
+		$events['order_updated']   = \Joomla\CMS\Language\Text::_('EVENT_TYPE_ORDER_UPDATED');
+		$events['new_sale']        = \Joomla\CMS\Language\Text::_('EVENT_TYPE_NEW_SALE');
+		$events['new_sale_manual'] = \Joomla\CMS\Language\Text::_('EVENT_TYPE_NEW_SALE_MANUAL');
 
 		return $events;
 	}

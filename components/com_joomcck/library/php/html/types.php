@@ -17,7 +17,7 @@ class JHTMLTypes
 		if(!$list)
 			return;
 
-		return JHtml::_('select.genericlist', $list, 'filters[type]', 'class="form-select"', 'id', 'name', $default);
+		return \Joomla\CMS\HTML\HTMLHelper::_('select.genericlist', $list, 'filters[type]', 'class="form-select"', 'id', 'name', $default);
 	}
 
 	public static function checkbox($list, $stypes, $default)

@@ -16,12 +16,12 @@ class JoomcckViewOptions extends MViewBase
 
 	function display($tpl = null)
 	{
-		$app = JFactory::getApplication();
-		$user = JFactory::getUser();
+		$app = \Joomla\CMS\Factory::getApplication();
+		$user = \Joomla\CMS\Factory::getUser();
 
 		if(!$user->id)
 		{
-			throw new Exception( JText::_('CNOUSERID'),500);
+			throw new Exception( \Joomla\CMS\Language\Text::_('CNOUSERID'),500);
 
 		}
 
@@ -91,11 +91,11 @@ class JoomcckViewOptions extends MViewBase
 
 	public function display_section($tpl)
 	{
-		$section_id = JFactory::getApplication()->input->getInt('section_id');
+		$section_id = \Joomla\CMS\Factory::getApplication()->input->getInt('section_id');
 		if(!$section_id)
 		{
 
-			Factory::getApplication()->enqueueMessage( JText::_('CERRNOSECTION'),'warning');
+			Factory::getApplication()->enqueueMessage( \Joomla\CMS\Language\Text::_('CERRNOSECTION'),'warning');
 			return;
 		}
 
@@ -104,18 +104,18 @@ class JoomcckViewOptions extends MViewBase
 		if(!$this->section->params->get('personalize.personalize'))
 		{
 
-			Factory::getApplication()->enqueueMessage( JText::_('CERRSECTIONNOTPERSONALIZED'),'warning');
+			Factory::getApplication()->enqueueMessage( \Joomla\CMS\Language\Text::_('CERRSECTIONNOTPERSONALIZED'),'warning');
 			return;
 		}
-		JFactory::getDocument()->setTitle(JText::sprintf('CUSERSECTIONSETTINGS', $this->section->name));
+		\Joomla\CMS\Factory::getDocument()->setTitle(\Joomla\CMS\Language\Text::sprintf('CUSERSECTIONSETTINGS', $this->section->name));
 
 		$data = $this->get('Options');
 
 		if(!isset($data['sections'][$section_id]))
-		$options = new JRegistry();
+		$options = new \Joomla\Registry\Registry();
 		else
 		{
-			$options = new JRegistry($data['sections'][$section_id]);
+			$options = new \Joomla\Registry\Registry($data['sections'][$section_id]);
 		}
 		$this->options = $options;
 		parent::display($tpl);

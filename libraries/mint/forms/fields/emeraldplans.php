@@ -24,9 +24,9 @@ class JFormFieldEmeraldplans extends JFormFieldGroupedList
 	{
 		$this->multiple = true;
 
-		if(!JFolder::exists(JPATH_ADMINISTRATOR . DIRECTORY_SEPARATOR . 'components' . DIRECTORY_SEPARATOR . 'com_emerald') || !JComponentHelper::isEnabled('com_emerald'))
+		if(!\Joomla\CMS\Filesystem\Folder::exists(JPATH_ADMINISTRATOR . DIRECTORY_SEPARATOR . 'components' . DIRECTORY_SEPARATOR . 'com_emerald') || !\Joomla\CMS\Component\ComponentHelper::isEnabled('com_emerald'))
 		{
-			return '<b>' . JText::_('Please install JoomSubscription extension') . '</b>';
+			return '<b>' . \Joomla\CMS\Language\Text::_('Please install JoomSubscription extension') . '</b>';
 		}
 
 		if($this->multiple)
@@ -53,7 +53,7 @@ class JFormFieldEmeraldplans extends JFormFieldGroupedList
 
 		if(empty($groups))
 		{
-			$db = JFactory::getDBO();
+			$db = \Joomla\CMS\Factory::getDBO();
 
 			$query = "SELECT sp.id AS value,
 						 sp.name AS text,
@@ -70,7 +70,7 @@ class JFormFieldEmeraldplans extends JFormFieldGroupedList
 
 			foreach($plans as $plan)
 			{
-				$groups[$plan->cat_title][] = JHtml::_('select.option', $plan->value, $plan->text, 'value', 'text');
+				$groups[$plan->cat_title][] = \Joomla\CMS\HTML\HTMLHelper::_('select.option', $plan->value, $plan->text, 'value', 'text');
 				$nums ++;
 			}
 			$nums += count($groups);

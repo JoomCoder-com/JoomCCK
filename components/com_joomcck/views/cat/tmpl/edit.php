@@ -12,10 +12,10 @@ use Joomla\CMS\HTML\HTMLHelper;
 defined('_JEXEC') or die;
 
 // Include the component HTML helpers.
-JHtml::addIncludePath(JPATH_COMPONENT . '/helpers/html');
+\Joomla\CMS\HTML\HTMLHelper::addIncludePath(JPATH_COMPONENT . '/helpers/html');
 
 // Load the tooltip behavior.
-JHtml::_('bootstrap.tooltip');
+\Joomla\CMS\HTML\HTMLHelper::_('bootstrap.tooltip');
 /** @var Joomla\CMS\WebAsset\WebAssetManager $wa */
 $wa = $this->document->getWebAssetManager();
 $wa->useScript('keepalive')
@@ -28,24 +28,24 @@ $wa->useScript('keepalive')
 
 			Joomla.submitform(task, document.getElementById('item-form'));
 		} else {
-			alert('<?php echo $this->escape(JText::_('JGLOBAL_VALIDATION_FORM_FAILED'));?>');
+			alert('<?php echo $this->escape(\Joomla\CMS\Language\Text::_('JGLOBAL_VALIDATION_FORM_FAILED'));?>');
 		}
 	}
 </script>
 
-<form action="<?php echo JRoute::_('index.php?option=com_joomcck&view=category&section_id=' . \Joomla\CMS\Factory::getApplication()->input->getInt('section_id',0) . '&layout=edit&id=' . (int)$this->item->id); ?>" method="post" name="adminForm" id="item-form"
+<form action="<?php echo \Joomla\CMS\Router\Route::_('index.php?option=com_joomcck&view=category&section_id=' . \Joomla\CMS\Factory::getApplication()->input->getInt('section_id',0) . '&layout=edit&id=' . (int)$this->item->id); ?>" method="post" name="adminForm" id="item-form"
 	  class="form-validate form-horizontal">
 	<?php echo HTMLFormatHelper::layout('item', $this); ?>
 	<div class="page-header">
 		<h1>
-			<?php echo empty($this->item->id) ? JText::_('CNEWCATEGORY') : JText::sprintf('CEDITCATEGORYS', $this->item->title); ?>
+			<?php echo empty($this->item->id) ? \Joomla\CMS\Language\Text::_('CNEWCATEGORY') : \Joomla\CMS\Language\Text::sprintf('CEDITCATEGORYS', $this->item->title); ?>
 		</h1>
 	</div>
 
 
 	<div id="joomcckContainer">
 		<?php echo HTMLHelper::_('uitab.startTabSet', 'myTab', ['active' => 'page-details', 'recall' => true, 'breakpoint' => 768]); ?>
-		<?php echo HTMLHelper::_('uitab.addTab', 'myTab', 'page-details', JText::_('COM_JOOMCCK_FIELDSET_DETAILS')); ?>
+		<?php echo HTMLHelper::_('uitab.addTab', 'myTab', 'page-details', \Joomla\CMS\Language\Text::_('COM_JOOMCCK_FIELDSET_DETAILS')); ?>
         <div>
             <div class="control-group">
                 <div class="control-label">
@@ -78,7 +78,7 @@ $wa->useScript('keepalive')
         </div>
 		<?php echo HTMLHelper::_('uitab.endTab'); ?>
 
-		<?php echo HTMLHelper::_('uitab.addTab', 'myTab', 'page-options', JText::_('COM_JOOMCCK_FIELDSET_OPTIONS')); ?>
+		<?php echo HTMLHelper::_('uitab.addTab', 'myTab', 'page-options', \Joomla\CMS\Language\Text::_('COM_JOOMCCK_FIELDSET_OPTIONS')); ?>
         <div>
             <div class="control-group">
                 <div class="control-label">
@@ -116,13 +116,13 @@ $wa->useScript('keepalive')
         </div>
 		<?php echo HTMLHelper::_('uitab.endTab'); ?>
 
-		<?php echo HTMLHelper::_('uitab.addTab', 'myTab', 'page-relative', JText::_('CRELATIVECAT')); ?>
+		<?php echo HTMLHelper::_('uitab.addTab', 'myTab', 'page-relative', \Joomla\CMS\Language\Text::_('CRELATIVECAT')); ?>
         <div>
-			<?php echo JHtml::_('mrelements.catselector', 'jform[relative_cats][]', $this->item->section_id, $this->item->relative_cats_ids, 0); ?>
+			<?php echo \Joomla\CMS\HTML\HTMLHelper::_('mrelements.catselector', 'jform[relative_cats][]', $this->item->section_id, $this->item->relative_cats_ids, 0); ?>
         </div>
 		<?php echo HTMLHelper::_('uitab.endTab'); ?>
 
-		<?php echo HTMLHelper::_('uitab.addTab', 'myTab', 'page-metadata', JText::_('X_SECFSLMETA')); ?>
+		<?php echo HTMLHelper::_('uitab.addTab', 'myTab', 'page-metadata', \Joomla\CMS\Language\Text::_('X_SECFSLMETA')); ?>
         <div>
 			<?php echo $this->loadTemplate('metadata'); ?>
         </div>
@@ -135,6 +135,6 @@ $wa->useScript('keepalive')
 	<div>
 		<?php echo $this->form->getInput('section_id'); ?>
 		<input type="hidden" name="task" value=""/>
-		<?php echo JHtml::_('form.token'); ?>
+		<?php echo \Joomla\CMS\HTML\HTMLHelper::_('form.token'); ?>
 	</div>
 </form>

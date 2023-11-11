@@ -17,7 +17,7 @@ class JHTMLIp {
 		
 		if(empty($results[$ip]))
 		{
-			$db = JFactory::getDBO ();
+			$db = \Joomla\CMS\Factory::getDBO ();
 			
 			$query = $db->getQuery ( true );
 			$query->select ( 'code, short_code, country' );
@@ -38,7 +38,7 @@ class JHTMLIp {
 			$options['align'] = 'absmiddle';
 			$options['title'] = $results[$ip]->country . " " . Jtext::_ ( 'CCLICKTOFILTER' ) ;
 			
-			return JHtml::image($file, $results[$ip]->country, $options);
+			return \Joomla\CMS\HTML\HTMLHelper::image($file, $results[$ip]->country, $options);
 		}
 	}
 	
@@ -49,7 +49,7 @@ class JHTMLIp {
 		{
 			$atr['onclick'] = "document.getElementById('icondefend{$id}').src = '".JURI::root()."administrator/components/com_joomcck/images/load.gif'; xajax_jsrBlockIP('$ip', {$id});";
 			$sql = "SELECT COUNT(*) FROM #__jdefender_block_list WHERE type = 'ip' AND `value` = '$ip'";
-			$db =JFactory::getDBO();
+			$db =\Joomla\CMS\Factory::getDBO();
 			$db->setQuery($sql);
 			$res = $db->loadResult();
 		}
@@ -83,7 +83,7 @@ class JHTMLIp {
 		{
 			$atr['onclick'] = "document.getElementById('icondefend2{$user}{$id}').src = '".JURI::root()."administrator/components/com_joomcck/images/load.gif'; xajax_jsrBlockUser('$user', {$id});";
 			$sql = "SELECT COUNT(*) FROM #__jdefender_block_list WHERE type = 'user' AND `value` = '$user'";
-			$db =JFactory::getDBO();
+			$db =\Joomla\CMS\Factory::getDBO();
 			$db->setQuery($sql);
 			$res = $db->loadResult();
 		}
@@ -98,7 +98,7 @@ class JHTMLIp {
 		$atr['border'] = 0;
 
 
-		$user = JFactory::getUser($user);
+		$user = \Joomla\CMS\Factory::getUser($user);
 		$user = $user->get('username');
 
 

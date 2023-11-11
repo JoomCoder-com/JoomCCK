@@ -26,8 +26,8 @@ class JoomcckModelFollows extends MModelList
 
 	public function getCats($section)
 	{
-		$user = JFactory::getUser();
-		$db = JFactory::getDbo();
+		$user = \Joomla\CMS\Factory::getUser();
+		$db = \Joomla\CMS\Factory::getDbo();
 		$db->setQuery("SELECT cat.id, cat.title, cat.alias, cat.params, cat.path FROM #__js_res_subscribe_cat AS c
 		LEFT JOIN #__js_res_categories AS cat ON cat.id = c.cat_id
 		WHERE c.section_id = {$section->id} AND c.exclude = {$section->follow} AND c.user_id = {$user->id}");
@@ -35,21 +35,21 @@ class JoomcckModelFollows extends MModelList
 		$list = $db->loadObjectList();
 		foreach ($list AS &$cat)
 		{
-			$cat->params = new JRegistry($cat->params);
+			$cat->params = new \Joomla\Registry\Registry($cat->params);
 		}
 
 		return $list;
 	}
 	public function getUsers($section)
 	{
-		$user = JFactory::getUser();
-		$db = JFactory::getDbo();
+		$user = \Joomla\CMS\Factory::getUser();
+		$db = \Joomla\CMS\Factory::getDbo();
 		$db->setQuery("SELECT u_id as id FROM #__js_res_subscribe_user WHERE section_id = {$section->id} AND exclude = ".(int)$section->follow." AND user_id = {$user->id}");
 
 		$list = $db->loadObjectList();
 		foreach ($list AS &$cat)
 		{
-			//$cat->params = new JRegistry($cat->params);
+			//$cat->params = new \Joomla\Registry\Registry($cat->params);
 		}
 
 		return $list;
@@ -57,21 +57,21 @@ class JoomcckModelFollows extends MModelList
 
 	public function getTotalRecords($section_id)
 	{
-		$user = JFactory::getUser();
-		$db = JFactory::getDbo();
+		$user = \Joomla\CMS\Factory::getUser();
+		$db = \Joomla\CMS\Factory::getDbo();
 		$db->setQuery("SELECT count(*) FROM #__js_res_record WHERE section_id = {$section_id} AND (user_id = " . $user->get('id') . " OR access IN(".implode(',', $user->getAuthorisedViewLevels())."))");
 		return (int)$db->loadResult();
 	}
 	public function getSubRecords($section_id)
 	{
-		$user = JFactory::getUser();
-		$db = JFactory::getDbo();
+		$user = \Joomla\CMS\Factory::getUser();
+		$db = \Joomla\CMS\Factory::getDbo();
 		$db->setQuery("SELECT count(*) FROM #__js_res_subscribe WHERE `type` = 'record' AND section_id = {$section_id} AND user_id = {$user->id}");
 		return (int)$db->loadResult();
 	}
 	public function getListQuery()
 	{
-		$user = JFactory::getUser();
+		$user = \Joomla\CMS\Factory::getUser();
 
 		//var_dump( MECAccess::allowSales($user));
 
@@ -84,7 +84,7 @@ class JoomcckModelFollows extends MModelList
 		$query->leftJoin('#__js_res_record AS r ON r.id = s.ref_id');
 		$query->where("`type` = 'record'");
 		$query->where('s.user_id = '.$user->id);
-		$query->where('s.section_id = '.JFactory::getApplication()->input->getInt('section_id', 0));
+		$query->where('s.section_id = '.\Joomla\CMS\Factory::getApplication()->input->getInt('section_id', 0));
 
 
 		$orderCol = $this->state->get('list.ordering');
@@ -106,7 +106,7 @@ class JoomcckModelFollows extends MModelList
 
 	protected function populateState($ordering = null, $direction = null)
 	{
-		$app = JFactory::getApplication();
+		$app = \Joomla\CMS\Factory::getApplication();
 
 		$search = $app->getUserStateFromRequest($this->context . '.filter.search', 'filter_search');
 		$this->setState('filter.search', $search);

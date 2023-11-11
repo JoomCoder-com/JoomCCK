@@ -13,7 +13,7 @@ defined('_JEXEC') or die('Restricted access'); ?>
 $wa = $this->document->getWebAssetManager();
 $wa->useScript('keepalive')
 	->useScript('form.validate');
-JHtml::_('script', 'system/tabs.js', false, true);
+\Joomla\CMS\HTML\HTMLHelper::_('script', 'system/tabs.js', false, true);
 ?>
 
 <script type="text/javascript">
@@ -24,7 +24,7 @@ JHtml::_('script', 'system/tabs.js', false, true);
 			Joomla.submitform(task, document.getElementById('item-form'));
 		}
 		else {
-			alert('<?php echo $this->escape(JText::_('JGLOBAL_VALIDATION_FORM_FAILED'));?>');
+			alert('<?php echo $this->escape(\Joomla\CMS\Language\Text::_('JGLOBAL_VALIDATION_FORM_FAILED'));?>');
 		}
 	}
 
@@ -33,7 +33,7 @@ JHtml::_('script', 'system/tabs.js', false, true);
 		if(sid)
 		{
 			jQuery.ajax({
-				url: '<?php echo JUri::base(TRUE);?>/index.php?option=com_joomcck&task=ajax.loadpacksection&tmpl=component',
+				url: '<?php echo \Joomla\CMS\Uri\Uri::base(TRUE);?>/index.php?option=com_joomcck&task=ajax.loadpacksection&tmpl=component',
 				context: jQuery("#additional-form"),
 				dataType: 'html',
 				data:{id: sid}
@@ -46,18 +46,18 @@ JHtml::_('script', 'system/tabs.js', false, true);
 
 </script>
 
-<form action="<?php echo JUri::getInstance()->toString(); ?>" method="post" name="adminForm" id="item-form" class="form-validate">
+<form action="<?php echo \Joomla\CMS\Uri\Uri::getInstance()->toString(); ?>" method="post" name="adminForm" id="item-form" class="form-validate">
 	<?php echo HTMLFormatHelper::layout('item', $this); ?>
 	<div class="page-header">
 		<h1>
-			<?php echo empty($this->item->id) ? JText::_('CNEWPACKSECTION') : JText::_('CEDITPACKSECTION'); ?>
+			<?php echo empty($this->item->id) ? \Joomla\CMS\Language\Text::_('CNEWPACKSECTION') : \Joomla\CMS\Language\Text::_('CEDITPACKSECTION'); ?>
 		</h1>
 	</div>
 
 	<div class="row">
 		<div class="col-md-6 form-horizontal">
 			<fieldset class="adminform">
-				<legend><?php echo JText::_('CSECTIONSETTINGS'); ?></legend>
+				<legend><?php echo \Joomla\CMS\Language\Text::_('CSECTIONSETTINGS'); ?></legend>
 				<div class="control-group">
 					<div class="control-label inline">
 						<?php echo $this->form->getLabel('id'); ?>
@@ -80,7 +80,7 @@ JHtml::_('script', 'system/tabs.js', false, true);
 		</div>
 		<div class="col-md-6 form-horizontal">
 			<fieldset class="adminform">
-				<legend><?php echo JText::_('CTYPESETTINGS'); ?></legend>
+				<legend><?php echo \Joomla\CMS\Language\Text::_('CTYPESETTINGS'); ?></legend>
 				<div id="additional-form">
 					<?php echo @$this->parameters?>
 				</div>
@@ -91,5 +91,5 @@ JHtml::_('script', 'system/tabs.js', false, true);
 	<input type="hidden" id="jform_pack_id" name="jform[pack_id]" value="<?php echo $this->state->get('pack');?>" />
 	<input type="hidden" name="task" value="" />
 	<input type="hidden" name="return" value="<?php echo $this->state->get('groups.return');?>" />
-	<?php echo JHtml::_('form.token'); ?>
+	<?php echo \Joomla\CMS\HTML\HTMLHelper::_('form.token'); ?>
 </form>

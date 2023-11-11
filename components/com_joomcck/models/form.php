@@ -24,7 +24,7 @@ class JoomcckModelForm extends MModelAdmin
 
 	protected function loadFormData()
 	{
-		$data = JFactory::getApplication()->getUserState('com_joomcck.edit.form.data', array());
+		$data = \Joomla\CMS\Factory::getApplication()->getUserState('com_joomcck.edit.form.data', array());
 
 
 		if(empty($data))
@@ -40,7 +40,7 @@ class JoomcckModelForm extends MModelAdmin
 		$app = Joomla\CMS\Application\CMSApplication::getInstance('Site');
 
 		$pk = $app->input->getInt('id');
-		JFactory::getApplication()->setUserState('com_joomcck.edit.form.id', $pk);
+		\Joomla\CMS\Factory::getApplication()->setUserState('com_joomcck.edit.form.id', $pk);
 		$this->setState('com_joomcck.edit.form.id', $pk);
 
 		$return = $app->input->get('return');
@@ -55,7 +55,7 @@ class JoomcckModelForm extends MModelAdmin
 
 	public function getTable($name = '', $prefix = 'Table', $options = array())
 	{
-		return JTable::getInstance('Record', 'JoomcckTable');
+		return \Joomla\CMS\Table\Table::getInstance('Record', 'JoomcckTable');
 	}
 
 	public function getItem($itemId = NULL, $cache = TRUE)
@@ -78,17 +78,17 @@ class JoomcckModelForm extends MModelAdmin
 		if(!$itemId) // new item
 		{
 
-			$type       = $this->getRecordType(JFactory::getApplication()->input->getInt('type_id'), $itemId);
-			$section_id = JFactory::getApplication()->input->getInt('section_id');
+			$type       = $this->getRecordType(\Joomla\CMS\Factory::getApplication()->input->getInt('type_id'), $itemId);
+			$section_id = \Joomla\CMS\Factory::getApplication()->input->getInt('section_id');
 
-			$user            = JFactory::getUser();
+			$user            = \Joomla\CMS\Factory::getUser();
 			$out             = new stdClass();
 			$out->id         = NULL;
-			$out->type_id    = JFactory::getApplication()->input->getInt('type_id');
+			$out->type_id    = \Joomla\CMS\Factory::getApplication()->input->getInt('type_id');
 			$out->section_id = $section_id;
 			$out->published  = $type->params->get('submission.autopublish', 1);
-			$out->ctime      = JFactory::getDate()->toSql();
-			$out->mtime      = JFactory::getDate()->toSql();
+			$out->ctime      = \Joomla\CMS\Factory::getDate()->toSql();
+			$out->mtime      = \Joomla\CMS\Factory::getDate()->toSql();
 			$out->access     = $type->params->get('submission.access', 1);
 			$out->fields     = '[{}]';
 			$out->categories = array();
@@ -96,7 +96,7 @@ class JoomcckModelForm extends MModelAdmin
 
 			if($type->params->get('submission.default_expire', 0) > 0)
 			{
-				$out->extime = JFactory::getDate('+ ' . $type->params->get('submission.default_expire') . ' DAY')->toSql();
+				$out->extime = \Joomla\CMS\Factory::getDate('+ ' . $type->params->get('submission.default_expire') . ' DAY')->toSql();
 			}
 
 			return $out;
@@ -119,10 +119,10 @@ class JoomcckModelForm extends MModelAdmin
 			return FALSE;
 		}
 
-		JFactory::getApplication()->input->set('type_id', $table->type_id);
-		JFactory::getApplication()->input->set('section_id', $table->section_id);
+		\Joomla\CMS\Factory::getApplication()->input->set('type_id', $table->type_id);
+		\Joomla\CMS\Factory::getApplication()->input->set('section_id', $table->section_id);
 
-		$params = new JRegistry();
+		$params = new \Joomla\Registry\Registry();
 		if(!empty($table->params))
 		{
 			$params->loadString((string)$table->params);
@@ -145,7 +145,7 @@ class JoomcckModelForm extends MModelAdmin
 
 		if(!$typeId)
 		{
-			$typeId = JFactory::getApplication()->input->getInt('type_id');
+			$typeId = \Joomla\CMS\Factory::getApplication()->input->getInt('type_id');
 		}
 
 
@@ -161,7 +161,7 @@ class JoomcckModelForm extends MModelAdmin
 		{
 			$this->setError('Type not set');
 			$out         = new stdClass();
-			$out->params = new JRegistry();
+			$out->params = new \Joomla\Registry\Registry();
 
 			return $out;
 		}
@@ -170,16 +170,16 @@ class JoomcckModelForm extends MModelAdmin
 			return $data[$typeId];
 		}
 
-		$table = JTable::getInstance('Type', 'JoomcckTable');
+		$table = \Joomla\CMS\Table\Table::getInstance('Type', 'JoomcckTable');
 		$table->load($typeId);
-		$table->name = JText::_($table->name);
+		$table->name = \Joomla\CMS\Language\Text::_($table->name);
 
-		$params = new JRegistry();
+		$params = new \Joomla\Registry\Registry();
 		$params->loadString((string)$table->params);
 		$table->params = $params;
 
 
-		$table->description = JHtml::_('content.prepare', $table->description);
+		$table->description = \Joomla\CMS\HTML\HTMLHelper::_('content.prepare', $table->description);
 
 		if(!$table->id)
 		{
@@ -194,7 +194,7 @@ class JoomcckModelForm extends MModelAdmin
 
 	public function validate($form, $data, $group = NULL)
 	{
-		$app = JFactory::getApplication();
+		$app = \Joomla\CMS\Factory::getApplication();
 
 		$fields = @$data['fields'];
 		settype($fields, 'array');
@@ -204,7 +204,7 @@ class JoomcckModelForm extends MModelAdmin
 		$fields_list = MModelBase::getInstance('Fields', 'JoomcckModel')->getFormFields($data['type_id']);
 
 		$tmpl_params = CTmpl::prepareTemplate('default_form_', 'properties.tmpl_articleform', $type->params);
-		if(JFactory::getUser()->get('id') || $tmpl_params->get('tmpl_core.form_captcha', 0) == 0)
+		if(\Joomla\CMS\Factory::getUser()->get('id') || $tmpl_params->get('tmpl_core.form_captcha', 0) == 0)
 		{
 			$form->removeField('captcha');
 		}
@@ -231,7 +231,7 @@ class JoomcckModelForm extends MModelAdmin
 		// highlight fields with errors
 		if($fields_highlights)
 		{
-			JFactory::getApplication()->setUserState('com_joomcck.fieldhighlights', $fields_highlights);
+			\Joomla\CMS\Factory::getApplication()->setUserState('com_joomcck.fieldhighlights', $fields_highlights);
 		}
 
 		$return = parent::validate($form, $data, $group);

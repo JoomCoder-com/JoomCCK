@@ -21,8 +21,8 @@ class JFormFieldCckAuditEvents extends JFormField
 	{
 
 		$options   = array();
-		$options[] = JHtml::_('select.option', '0', 'JNO', 'value', 'text');
-		$options[] = JHtml::_('select.option', '1', 'JYES', 'value', 'text');
+		$options[] = \Joomla\CMS\HTML\HTMLHelper::_('select.option', '0', 'JNO', 'value', 'text');
+		$options[] = \Joomla\CMS\HTML\HTMLHelper::_('select.option', '1', 'JYES', 'value', 'text');
 
 		$index = (int)$this->element->attributes()->index;
 
@@ -39,7 +39,7 @@ class JFormFieldCckAuditEvents extends JFormField
 				. htmlspecialchars($option->value, ENT_COMPAT, 'UTF-8') . '"' . $checked . ' />';
 
 			$input[] = '<label for="' . $this->id . $i . '" >'
-				. JText::alt($option->text, preg_replace('/[^a-zA-Z0-9_\-]/', '_', $this->fieldname)) . '</label>';
+				. \Joomla\CMS\Language\Text::alt($option->text, preg_replace('/[^a-zA-Z0-9_\-]/', '_', $this->fieldname)) . '</label>';
 
 			$required = '';
 		}

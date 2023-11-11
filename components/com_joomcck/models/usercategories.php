@@ -45,10 +45,10 @@ class JoomcckModelUsercategories extends MModelList
 		
 		if(!$section_id)
 		{
-			$this->setError(JText::_('CNOSECTION'));
+			$this->setError(\Joomla\CMS\Language\Text::_('CNOSECTION'));
 			return FALSE;
 		}
-		$user = JFactory::getUser();
+		$user = \Joomla\CMS\Factory::getUser();
 		
 		$db = $this->getDbo();
 		$query = $db->getQuery(true);
@@ -80,7 +80,7 @@ class JoomcckModelUsercategories extends MModelList
 	
     protected function populateState($ordering = null, $direction = null)
 	{
-		$app = JFactory::getApplication();
+		$app = \Joomla\CMS\Factory::getApplication();
 		
 		$section = $app->getUserStateFromRequest($this->context.'.usercategories.section_id', 'section_id', null, 'int');
 		$this->setState('usercategories.section_id', $section);

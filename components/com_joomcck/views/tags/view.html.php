@@ -22,7 +22,7 @@ class JoomcckViewTags extends MViewBase
 
 	function display($tpl = NULL)
 	{
-		JHtml::_('bootstrap.tooltip');
+		\Joomla\CMS\HTML\HTMLHelper::_('bootstrap.tooltip');
 
 		$this->state      = $this->get('State');
 		$this->items      = $this->get('Items');
@@ -36,8 +36,8 @@ class JoomcckViewTags extends MViewBase
 
 		}
 
-		$this->addFilter(JText::_('JOPTION_SELECT_LANGUAGE'), 'filter_language', JHtml::_('select.options', JHtml::_('contentlanguage.existing', false, true), 'value', 'text', $this->state->get('filter.language')));
-		$this->addFilter(JText::_('CFILTERSECTION'), 'filter_category', JHtml::_('select.options', JHtml::_('joomcck.sections'), 'value', 'text', $this->state->get('filter.category')));
+		$this->addFilter(\Joomla\CMS\Language\Text::_('JOPTION_SELECT_LANGUAGE'), 'filter_language', \Joomla\CMS\HTML\HTMLHelper::_('select.options', \Joomla\CMS\HTML\HTMLHelper::_('contentlanguage.existing', false, true), 'value', 'text', $this->state->get('filter.language')));
+		$this->addFilter(\Joomla\CMS\Language\Text::_('CFILTERSECTION'), 'filter_category', \Joomla\CMS\HTML\HTMLHelper::_('select.options', \Joomla\CMS\HTML\HTMLHelper::_('joomcck.sections'), 'value', 'text', $this->state->get('filter.category')));
 
 		parent::display($tpl);
 	}
@@ -45,9 +45,9 @@ class JoomcckViewTags extends MViewBase
 	public function getSortFields()
 	{
 		return array(
-			't.tag'   => JText::_('CTAGNAME'),
-			't.id'    => JText::_('ID'),
-			't.ctime' => JText::_('CCREATED')
+			't.tag'   => \Joomla\CMS\Language\Text::_('CTAGNAME'),
+			't.id'    => \Joomla\CMS\Language\Text::_('ID'),
+			't.ctime' => \Joomla\CMS\Language\Text::_('CCREATED')
 		);
 	}
 }

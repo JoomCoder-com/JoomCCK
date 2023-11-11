@@ -16,4 +16,4 @@ defined('_JEXEC') or die();
 	<?php echo $this->value?>
 </div>
 <a href="javascript:void(0);"
-	onclick="jQuery( '#shorttext<?php echo $this->id . "-" . $record->id?>, #hiddentext<?php echo $this->id . "-" . $record->id?>' ).slideToggle();"><?php echo JText::_($this->params->get('params.readmore_lbl','H_READMORE'));?></a>
+	onclick="jQuery( '#shorttext<?php echo $this->id . "-" . $record->id?>, #hiddentext<?php echo $this->id . "-" . $record->id?>' ).slideToggle();"><?php echo \Joomla\CMS\Language\Text::_($this->params->get('params.readmore_lbl','H_READMORE'));?></a>

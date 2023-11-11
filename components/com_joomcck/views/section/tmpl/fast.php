@@ -9,10 +9,10 @@
      */
 
 defined('_JEXEC') || die('Restricted access');
-$view = JFactory::getApplication()->input->getCmd('view');
-JHtml::_('behavior.formvalidator');
-JHtml::_('behavior.keepalive');
-JHtml::_('bootstrap.modal');
+$view = \Joomla\CMS\Factory::getApplication()->input->getCmd('view');
+\Joomla\CMS\HTML\HTMLHelper::_('behavior.formvalidator');
+\Joomla\CMS\HTML\HTMLHelper::_('behavior.keepalive');
+\Joomla\CMS\HTML\HTMLHelper::_('bootstrap.modal');
 ?>
 <script type="text/javascript">
 
@@ -21,28 +21,28 @@ JHtml::_('bootstrap.modal');
 			Joomla.submitform(task, document.getElementById('item-form'));
 		}
 		else {
-			alert('<?php echo $this->escape(JText::_('JGLOBAL_VALIDATION_FORM_FAILED'));?>');
+			alert('<?php echo $this->escape(\Joomla\CMS\Language\Text::_('JGLOBAL_VALIDATION_FORM_FAILED'));?>');
 		}
 	}
 </script>
 
 <?php echo HTMLFormatHelper::layout('navbar'); ?>
 
-<form action="<?php echo JUri::getInstance()->toString(); ?>" method="post" name="adminForm" id="adminForm" class="form-horizontal">
+<form action="<?php echo \Joomla\CMS\Uri\Uri::getInstance()->toString(); ?>" method="post" name="adminForm" id="adminForm" class="form-horizontal">
 	<div class="float-end search-box">
 		<div class="form-inline">
 			<button type="button" class="btn btn-danger float-end" onclick="Joomla.submitbutton('<?php echo $view; ?>.cancel')">
-				<?php echo JText::_('CCANCEL'); ?>
+				<?php echo \Joomla\CMS\Language\Text::_('CCANCEL'); ?>
 			</button>
 			<button type="button" class="btn btn-primary" onclick="Joomla.submitbutton('<?php echo $view; ?>.save')">
-				<?php echo JText::_('CSAVE'); ?>
+				<?php echo \Joomla\CMS\Language\Text::_('CSAVE'); ?>
 			</button>
 		</div>
 	</div>
 	<div class="page-header">
 		<h1>
-			<img src="<?php echo JUri::root(true); ?>/components/com_joomcck/images/icons/fast.png">
-			<?php echo JText::_('CNEWSECTIONFAST'); ?>
+			<img src="<?php echo \Joomla\CMS\Uri\Uri::root(true); ?>/components/com_joomcck/images/icons/fast.png">
+			<?php echo \Joomla\CMS\Language\Text::_('CNEWSECTIONFAST'); ?>
 		</h1>
 	</div>
 
@@ -65,5 +65,5 @@ JHtml::_('bootstrap.modal');
 	
 	<input type="hidden" name="qs" value="1"/>
 	<input type="hidden" name="task" value=""/>
-	<?php echo JHtml::_('form.token'); ?>
+	<?php echo \Joomla\CMS\HTML\HTMLHelper::_('form.token'); ?>
 </form>

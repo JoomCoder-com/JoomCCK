@@ -15,10 +15,10 @@ JHTML::_('bootstrap.tooltip', '*[rel^="tooltip"]');
 <?php foreach ($this->files AS $i => $file):?>
 	<?php $tip = array();?>
 	<?php if($this->hits):?>
-		<?php $tip[] = JText::_('CHITS').': <span style="color:purple">'.(int)$file->hits.'</span></b>'; ?>
+		<?php $tip[] = \Joomla\CMS\Language\Text::_('CHITS').': <span style="color:purple">'.(int)$file->hits.'</span></b>'; ?>
 	<?php endif;?>
 	<?php if($this->size):?>
-		<?php $tip[] = JText::_('CSIZE').': <span style="color:green">'.HTMLFormatHelper::formatSize($file->size).'</span></b>'; ?>
+		<?php $tip[] = \Joomla\CMS\Language\Text::_('CSIZE').': <span style="color:green">'.HTMLFormatHelper::formatSize($file->size).'</span></b>'; ?>
 	<?php endif;?>
 	<?php if($this->descr && $file->description):?>
 		<?php $tip[] ='<p>'.$file->description.'</p>'; ?>

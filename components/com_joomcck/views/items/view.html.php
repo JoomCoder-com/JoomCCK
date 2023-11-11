@@ -26,7 +26,7 @@ class JoomcckViewItems extends MViewBase
 	}
 
 	private function _default() {
-		JHtml::_('bootstrap.tooltip');
+		\Joomla\CMS\HTML\HTMLHelper::_('bootstrap.tooltip');
 
 		$this->state      = $this->get('State');
 		$this->items      = $this->get('Items');
@@ -51,32 +51,32 @@ class JoomcckViewItems extends MViewBase
 
 		}
 
-		$this->addFilter(JText::_('JOPTION_SELECT_PUBLISHED'), 'filter_state', JHtml::_('select.options', JHtml::_('jgrid.publishedOptions', array(
+		$this->addFilter(\Joomla\CMS\Language\Text::_('JOPTION_SELECT_PUBLISHED'), 'filter_state', \Joomla\CMS\HTML\HTMLHelper::_('select.options', \Joomla\CMS\HTML\HTMLHelper::_('jgrid.publishedOptions', array(
 			'trash' => 0,
 			'archived' => 0,
 			'all'   => 0
 		)), 'value', 'text', $this->state->get('filter.state'), TRUE));
-		$this->addFilter(JText::_('CFILTERSECTION'), 'filter_section', JHtml::_('select.options', $this->sections, 'value', 'text', $this->state->get('filter.section'), TRUE));
-		$this->addFilter(JText::_('CCELECTFIELDTYPE'), 'filter_type', JHtml::_('select.options', $this->types, 'value', 'text', $this->state->get('filter.type'), TRUE));
+		$this->addFilter(\Joomla\CMS\Language\Text::_('CFILTERSECTION'), 'filter_section', \Joomla\CMS\HTML\HTMLHelper::_('select.options', $this->sections, 'value', 'text', $this->state->get('filter.section'), TRUE));
+		$this->addFilter(\Joomla\CMS\Language\Text::_('CCELECTFIELDTYPE'), 'filter_type', \Joomla\CMS\HTML\HTMLHelper::_('select.options', $this->types, 'value', 'text', $this->state->get('filter.type'), TRUE));
 	}
 
 	public function getSortFields()
 	{
 		return array(
-			'a.title'        => JText::_('CTITLE'),
-			'a.ctime'        => JText::_('CCREATED'),
-			'a.extime'       => JText::_('CEXPIRE'),
-			'a.mtime'        => JText::_('CMODIFIED'),
-			'a.id'           => JText::_('ID'),
-			'a.hits'         => JText::_('CHITS'),
-			'a.comments'     => JText::_('CCOMMENTS'),
-			'a.votes'        => JText::_('CVOTES'),
-			'a.favorite_num' => JText::_('CFAVORITED'),
-			'a.published'    => JText::_('JSTATUS'),
-			'a.access'       => JText::_('CACCESS'),
-			't.name'         => JText::_('CTYPE'),
-			's.name'         => JText::_('CSECTION'),
-			'username'       => JText::_('CAUTHOR'),
+			'a.title'        => \Joomla\CMS\Language\Text::_('CTITLE'),
+			'a.ctime'        => \Joomla\CMS\Language\Text::_('CCREATED'),
+			'a.extime'       => \Joomla\CMS\Language\Text::_('CEXPIRE'),
+			'a.mtime'        => \Joomla\CMS\Language\Text::_('CMODIFIED'),
+			'a.id'           => \Joomla\CMS\Language\Text::_('ID'),
+			'a.hits'         => \Joomla\CMS\Language\Text::_('CHITS'),
+			'a.comments'     => \Joomla\CMS\Language\Text::_('CCOMMENTS'),
+			'a.votes'        => \Joomla\CMS\Language\Text::_('CVOTES'),
+			'a.favorite_num' => \Joomla\CMS\Language\Text::_('CFAVORITED'),
+			'a.published'    => \Joomla\CMS\Language\Text::_('JSTATUS'),
+			'a.access'       => \Joomla\CMS\Language\Text::_('CACCESS'),
+			't.name'         => \Joomla\CMS\Language\Text::_('CTYPE'),
+			's.name'         => \Joomla\CMS\Language\Text::_('CSECTION'),
+			'username'       => \Joomla\CMS\Language\Text::_('CAUTHOR'),
 		);
 	}
 }

@@ -29,7 +29,7 @@ class MintPayAbstract
 
 	public function prepare_output(&$obj, $client, $record, $type, $section)
 	{
-		$obj->user = JFactory::getUser();
+		$obj->user = \Joomla\CMS\Factory::getUser();
 		$obj->record = $record;
 		$obj->section = $section;
 
@@ -60,7 +60,7 @@ class MintPayAbstract
 			return;
 		}
 
-		$user = JFactory::getUser();
+		$user = \Joomla\CMS\Factory::getUser();
 		if(in_array($obj->params->get('params.skip_for'), $user->getAuthorisedViewLevels()))
 		{
 			return;
@@ -68,7 +68,7 @@ class MintPayAbstract
 
 		/*if (!$user->get('id'))
 		{
-			$obj->button = sprintf('<button type="button" class="btn btn-warning" onclick="alert(\'%s\')">%s</button>', JText::_('SSI_LOGINTOBUY'), JText::_('SSI_BUYNOW'));
+			$obj->button = sprintf('<button type="button" class="btn btn-warning" onclick="alert(\'%s\')">%s</button>', \Joomla\CMS\Language\Text::_('SSI_LOGINTOBUY'), \Joomla\CMS\Language\Text::_('SSI_BUYNOW'));
 			return;
 		}*/
 
@@ -91,9 +91,9 @@ class MintPayAbstract
 	public function load_form($provider, $id)
 	{
 		$xml = JPATH_COMPONENT. DIRECTORY_SEPARATOR .'gateways'. DIRECTORY_SEPARATOR .$provider. DIRECTORY_SEPARATOR .$provider.'.xml';
-		if(!JFile::exists($xml))
+		if(!\Joomla\CMS\Filesystem\File::exists($xml))
 		{
-			echo JText::_('CFILENOTFOUND').": {$xml}";
+			echo \Joomla\CMS\Language\Text::_('CFILENOTFOUND').": {$xml}";
 		}
 		$out = array();
 
@@ -114,24 +114,24 @@ class MintPayAbstract
 	{
 		if($field->params->get('params.send_mail'))
 		{
-			$user = JFactory::getUser();
-			$config = JFactory::getConfig();
+			$user = \Joomla\CMS\Factory::getUser();
+			$config = \Joomla\CMS\Factory::getConfig();
 
 			$_from = $config->get('config.mailfrom');
 			$_name = $config->get('config.fromname');
 
 			$body = $field->params->get('params.mail_msg');
 			$body = str_replace('[USER]', $user->name, $body);
-			$body = str_replace('[PRODUCT]', JHtml::link($record->link, $record->title), $body);
-			$author = JFactory::getUser($record->user_id);
+			$body = str_replace('[PRODUCT]', \Joomla\CMS\HTML\HTMLHelper::link($record->link, $record->title), $body);
+			$author = \Joomla\CMS\Factory::getUser($record->user_id);
 			$body = str_replace('[SALER]', $author->name, $body);
-			$body = str_replace('[ORDERS]', JHtml::link(JUri::root().'index.php?option=com_joomcck&view=elements&layout=buyer', JText::_('CORDERHIST')), $body);
+			$body = str_replace('[ORDERS]', \Joomla\CMS\HTML\HTMLHelper::link(\Joomla\CMS\Uri\Uri::root().'index.php?option=com_joomcck&view=elements&layout=buyer', \Joomla\CMS\Language\Text::_('CORDERHIST')), $body);
 			$body = str_replace('[SITE_NAME]', $_name, $body);
-			$body = str_replace('[SITE_URL]', JUri::root(), $body);
+			$body = str_replace('[SITE_URL]', \Joomla\CMS\Uri\Uri::root(), $body);
 
-			$subject = JText::sprintf('CORDERSUBJECT', $_name, JUri::root());
+			$subject = \Joomla\CMS\Language\Text::sprintf('CORDERSUBJECT', $_name, \Joomla\CMS\Uri\Uri::root());
 
-			$mail = JFactory::getMailer();
+			$mail = \Joomla\CMS\Factory::getMailer();
 			$mail->AddAddress($user->email);
 
 			$sender[0] = $_from;
@@ -146,7 +146,7 @@ class MintPayAbstract
 
 			if (!$mail->Send())
 			{
-				Factory::getApplication()->enqueueMessage(JText::_('E_ERRSEND'),'warning');
+				Factory::getApplication()->enqueueMessage(\Joomla\CMS\Language\Text::_('E_ERRSEND'),'warning');
 
 				return false;
 			}
@@ -166,10 +166,10 @@ class MintPayAbstract
 
 		$folder = JPATH_ROOT. '/logs'. DIRECTORY_SEPARATOR .$this->provider;
 
-		if(!JFolder::exists($folder))
+		if(!\Joomla\CMS\Filesystem\Folder::exists($folder))
 		{
-			JFolder::create($folder, 0755);
-			JFile::write($folder. DIRECTORY_SEPARATOR .'index.html', $index = ' ');
+			\Joomla\CMS\Filesystem\Folder::create($folder, 0755);
+			\Joomla\CMS\Filesystem\File::write($folder. DIRECTORY_SEPARATOR .'index.html', $index = ' ');
 		}
 		if(is_array($add))
 		{
@@ -177,7 +177,7 @@ class MintPayAbstract
 		}
 
 
-		$line = sprintf("[%s]: %s %s\n", JFactory::getDate()->toISO8601(), $msg, ($add ? "\n{$add}" : NULL));
+		$line = sprintf("[%s]: %s %s\n", \Joomla\CMS\Factory::getDate()->toISO8601(), $msg, ($add ? "\n{$add}" : NULL));
 
 		error_log($line, 3, $folder. DIRECTORY_SEPARATOR .'log.txt');
 
@@ -186,8 +186,8 @@ class MintPayAbstract
 	public function new_order($data, $record, $field)
 	{
 		if(!$data['gateway_id']) return ;
-		$data['ctime'] = JFactory::getDate()->toSql();
-		$data['mtime'] = JFactory::getDate()->toSql();
+		$data['ctime'] = \Joomla\CMS\Factory::getDate()->toSql();
+		$data['mtime'] = \Joomla\CMS\Factory::getDate()->toSql();
 		$data['record_id'] = $record->id;
 		$data['saler_id'] = $record->user_id;
 		$data['section_id'] = $record->section_id;
@@ -206,7 +206,7 @@ class MintPayAbstract
 			return;
 		}
 
-		$this->table->mtime = JFactory::getDate()->toSql();
+		$this->table->mtime = \Joomla\CMS\Factory::getDate()->toSql();
 		if($this->table->status != $data['status'])
 		{
 			$this->table->status = $data['status'];
@@ -225,7 +225,7 @@ class MintPayAbstract
 	}
 	public function get_order($user_id, $record_id, $field_id)
 	{
-		$db = JFactory::getDbo();
+		$db = \Joomla\CMS\Factory::getDbo();
 		$query = $db->getQuery(true);
 		$query->select('*');
 		$query->from('#__js_res_sales');
@@ -250,7 +250,7 @@ class MintPayAbstract
 
 		$this->table->reset();
 		$this->table->load($array);
-		$data['mtime'] = JFactory::getDate()->toSql();
+		$data['mtime'] = \Joomla\CMS\Factory::getDate()->toSql();
 
 		if(!$this->table->id)
 		{
@@ -269,7 +269,7 @@ class MintPayAbstract
 
 	public function order_render($client, $order, $field)
 	{
-		$app = JFactory::getApplication();
+		$app = \Joomla\CMS\Factory::getApplication();
 
 		if(empty($order->id))
 		{
@@ -290,23 +290,23 @@ class MintPayAbstract
 		$out[] = '<tr>';
 
 		$out[] = '<th>';
-		$out[] = JText::_('ID');
+		$out[] = \Joomla\CMS\Language\Text::_('ID');
 		$out[] = '</th>';
 
 		$out[] = '<th>';
-		$out[] = JText::_('CNAME');
+		$out[] = \Joomla\CMS\Language\Text::_('CNAME');
 		$out[] = '</th>';
 
 		$out[] = '<th>';
-		$out[] = JText::_('CDATE');
+		$out[] = \Joomla\CMS\Language\Text::_('CDATE');
 		$out[] = '</th>';
 
 		$out[] = '<th>';
-		$out[] = JText::_('CSTATUS');
+		$out[] = \Joomla\CMS\Language\Text::_('CSTATUS');
 		$out[] = '</th>';
 
 		$out[] = '<th>';
-		$out[] = JText::_('CAMOUNT');
+		$out[] = \Joomla\CMS\Language\Text::_('CAMOUNT');
 		$out[] = '</th>';
 
 		$out[] = '</tr>';
@@ -329,7 +329,7 @@ class MintPayAbstract
 		$out[] = '</td>';
 
 		$out[] = '<td>';
-		$out[] = JFactory::getDate($order->ctime)->format(JText::_('CDATE1'));
+		$out[] = \Joomla\CMS\Factory::getDate($order->ctime)->format(\Joomla\CMS\Language\Text::_('CDATE1'));
 		$out[] = '</td>';
 
 		$out[] = '<td>';
@@ -352,16 +352,16 @@ class MintPayAbstract
 	public function get_statuses()
 	{
 		return  array(
-			1 => JText::_('STAT_CANCEL'),
-			2 => JText::_('STAT_FAIL'),
-			3 => JText::_('STAT_WAIT'),
-			4 => JText::_('STAT_REFUND'),
-			5 => JText::_('STAT_CONFIRM'),
+			1 => \Joomla\CMS\Language\Text::_('STAT_CANCEL'),
+			2 => \Joomla\CMS\Language\Text::_('STAT_FAIL'),
+			3 => \Joomla\CMS\Language\Text::_('STAT_WAIT'),
+			4 => \Joomla\CMS\Language\Text::_('STAT_REFUND'),
+			5 => \Joomla\CMS\Language\Text::_('STAT_CONFIRM'),
 		);
 	}
 	public function count($order_id)
 	{
-		$db = JFactory::getDbo();
+		$db = \Joomla\CMS\Factory::getDbo();
 		$db->setQuery("UPDATE #__js_res_sales SET `num` = `num` + 1 WHERE id = {$order_id}");
 		$db->execute();
 	}

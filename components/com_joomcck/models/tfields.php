@@ -35,7 +35,7 @@ class JoomcckModelTfields extends MModelList
 
 	protected function populateState($ordering = null, $direction = null)
 	{
-		$app = JFactory::getApplication('administrator');
+		$app = \Joomla\CMS\Factory::getApplication('administrator');
 
 		$search = $app->getUserStateFromRequest($this->context . '.filter.search', 'filter_search');
 		$this->setState('filter.search', $search);
@@ -131,14 +131,14 @@ class JoomcckModelTfields extends MModelList
 	public function getFields()
 	{
 		$fileds = JPATH_ROOT . '/components/com_joomcck/fields' ;
-		$folders = JFolder::folders($fileds);
+		$folders = \Joomla\CMS\Filesystem\Folder::folders($fileds);
 		$out = array();
 		foreach($folders as $folder)
 		{
 			$file = $fileds . DIRECTORY_SEPARATOR . $folder . DIRECTORY_SEPARATOR . $folder . '.xml';
-			if(!JFile::exists($file))
+			if(!\Joomla\CMS\Filesystem\File::exists($file))
 			{
-				Factory::getApplication()->enqueueMessage( JText::sprintf('C_MSG_CANNOTLOADFILE', $folder),'warning');
+				Factory::getApplication()->enqueueMessage( \Joomla\CMS\Language\Text::sprintf('C_MSG_CANNOTLOADFILE', $folder),'warning');
 				continue;
 			}
 			$xml = simplexml_load_file($file);
@@ -156,11 +156,11 @@ class JoomcckModelTfields extends MModelList
 			$field->url = (string)$xml->authorUrl;
 			$field->description = (string)$xml->description;
 			$field->description_full = (string)$field->description;
-			$field->description_full .= sprintf('<table><tr><td><b>%s</b></td><td>%s</td></tr> <tr><td><b>%s</b></td><td>%s</td></tr> <tr><td><b>%s</b></td><td>%s</td></tr> <tr><td><b>%s</b></td><td>%s</td></tr></table>', JText::_('JAUTHOR'), (string)$field->author, JText::_('JSITE'), (string)$field->url,
-				JText::_('JGLOBAL_EMAIL'), (string)$field->email, JText::_('CLICENSE'), (string)$field->license);
+			$field->description_full .= sprintf('<table><tr><td><b>%s</b></td><td>%s</td></tr> <tr><td><b>%s</b></td><td>%s</td></tr> <tr><td><b>%s</b></td><td>%s</td></tr> <tr><td><b>%s</b></td><td>%s</td></tr></table>', \Joomla\CMS\Language\Text::_('JAUTHOR'), (string)$field->author, \Joomla\CMS\Language\Text::_('JSITE'), (string)$field->url,
+				\Joomla\CMS\Language\Text::_('JGLOBAL_EMAIL'), (string)$field->email, \Joomla\CMS\Language\Text::_('CLICENSE'), (string)$field->license);
 
 			$field->icon = JURI::root(TRUE) . '/libraries/mint/forms/fields/joomcck';
-			if(JFile::exists($fileds . DIRECTORY_SEPARATOR . $folder . DIRECTORY_SEPARATOR . $folder . '.png'))
+			if(\Joomla\CMS\Filesystem\File::exists($fileds . DIRECTORY_SEPARATOR . $folder . DIRECTORY_SEPARATOR . $folder . '.png'))
 			{
 				$field->icon .= "/{$folder}/{$folder}.png";
 			}

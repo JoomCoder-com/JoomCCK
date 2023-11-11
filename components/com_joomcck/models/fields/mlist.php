@@ -61,7 +61,7 @@ class JFormFieldMlist extends JFormField
 		// Create a read-only list (no name) with hidden input(s) to store the value(s).
 		if ((string) $this->readonly == '1' || (string) $this->readonly == 'true')
 		{
-			$html[] = JHtml::_('select.genericlist', $options, '', trim($attr), 'value', 'text', $this->value, $this->id);
+			$html[] = \Joomla\CMS\HTML\HTMLHelper::_('select.genericlist', $options, '', trim($attr), 'value', 'text', $this->value, $this->id);
 
 			// E.g. form field type tag sends $this->value as array
 			if ($this->multiple && is_array($this->value))
@@ -93,7 +93,7 @@ class JFormFieldMlist extends JFormField
 			$listoptions['option.attr'] = 'optionattr';
 			$listoptions['list.attr'] = trim($attr);
 
-			$html[] = JHtml::_('select.genericlist', $options, $this->name, $listoptions);
+			$html[] = \Joomla\CMS\HTML\HTMLHelper::_('select.genericlist', $options, $this->name, $listoptions);
 			if($condition != '[]') {
 
 				$html[] = "
@@ -216,7 +216,7 @@ class JFormFieldMlist extends JFormField
 
 			$tmp = array(
 					'value'    => $value,
-					'text'     => JText::alt($text, $fieldname),
+					'text'     => \Joomla\CMS\Language\Text::alt($text, $fieldname),
 					'disable'  => $disabled,
 					'class'    => (string) $option['class'],
 					'selected' => ($checked || $selected),
@@ -243,30 +243,30 @@ class JFormFieldMlist extends JFormField
 		{
 			$tmp        = new stdClass;
 			$tmp->value = '';
-			$tmp->text  = JText::_('JGLOBAL_USE_GLOBAL');
-			$component  = JFactory::getApplication()->input->getCmd('option');
+			$tmp->text  = \Joomla\CMS\Language\Text::_('JGLOBAL_USE_GLOBAL');
+			$component  = \Joomla\CMS\Factory::getApplication()->input->getCmd('option');
 
 			// Get correct component for menu items
 			if ($component == 'com_menus')
 			{
 				$link      = $this->form->getData()->get('link');
-				$uri       = new JUri($link);
+				$uri       = new \Joomla\CMS\Uri\Uri($link);
 				$component = $uri->getVar('option', 'com_menus');
 			}
 
-			$params = JComponentHelper::getParams($component);
+			$params = \Joomla\CMS\Component\ComponentHelper::getParams($component);
 			$value  = $params->get($this->fieldname);
 
 			// Try with global configuration
 			if (is_null($value))
 			{
-				$value = JFactory::getConfig()->get($this->fieldname);
+				$value = \Joomla\CMS\Factory::getConfig()->get($this->fieldname);
 			}
 
 			// Try with menu configuration
-			if (is_null($value) && JFactory::getApplication()->input->getCmd('option') == 'com_menus')
+			if (is_null($value) && \Joomla\CMS\Factory::getApplication()->input->getCmd('option') == 'com_menus')
 			{
-				$value = JComponentHelper::getParams('com_menus')->get($this->fieldname);
+				$value = \Joomla\CMS\Component\ComponentHelper::getParams('com_menus')->get($this->fieldname);
 			}
 
 			if (!is_null($value))
@@ -283,7 +283,7 @@ class JFormFieldMlist extends JFormField
 					}
 				}
 
-				$tmp->text = JText::sprintf('JGLOBAL_USE_GLOBAL_VALUE', $value);
+				$tmp->text = \Joomla\CMS\Language\Text::sprintf('JGLOBAL_USE_GLOBAL_VALUE', $value);
 			}
 
 			array_unshift($options, $tmp);

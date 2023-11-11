@@ -32,7 +32,7 @@ class JFormFieldEmrplanslist extends JFormFieldList
 	{
 		// Initialise variables.
 		$options = array();
-		$app_input = JFactory::getApplication()->input;
+		$app_input = \Joomla\CMS\Factory::getApplication()->input;
 		$exclude_id = false;
 
 		if(
@@ -46,11 +46,11 @@ class JFormFieldEmrplanslist extends JFormFieldList
 			$exclude_id = $app_input->getInt('id');
 		}
 
-		$db = JFactory::getDbo();
+		$db = \Joomla\CMS\Factory::getDbo();
 		$db->setQuery('SHOW TABLES LIKE "%_emerald_plans"');
 		if(!$db->loadResult())
 		{
-			return array(JHtml::_('select.option', '', JText::_('C_EM_NT_INSTALLED')));
+			return array(\Joomla\CMS\HTML\HTMLHelper::_('select.option', '', \Joomla\CMS\Language\Text::_('C_EM_NT_INSTALLED')));
 		}
 
 		$query = $db->getQuery(true);
@@ -77,13 +77,13 @@ class JFormFieldEmrplanslist extends JFormFieldList
 		{
 			if($this->extend)
 			{
-				$params = new JRegistry($plan->params);
+				$params = new \Joomla\Registry\Registry($plan->params);
 				$text = EmeraldApi::getPrice($params->get('properties.price'), $params);
-				$text .= " ".JText::_($plan->name);
+				$text .= " ".\Joomla\CMS\Language\Text::_($plan->name);
 
 				$plan->name = $text;
 			}
-			$options[JText::_($plan->group_name)][] = JHtml::_('select.option', $plan->id, JText::_($plan->name));
+			$options[\Joomla\CMS\Language\Text::_($plan->group_name)][] = \Joomla\CMS\HTML\HTMLHelper::_('select.option', $plan->id, \Joomla\CMS\Language\Text::_($plan->name));
 		}
 
 		// Merge any additional options in the XML definition.
@@ -124,7 +124,7 @@ class JFormFieldEmrplanslist extends JFormFieldList
 		// Create a read-only list (no name) with a hidden input to store the value.
 		if((string)$this->element['readonly'] == 'true')
 		{
-			$html[] = JHtml::_('select.groupedlist', $groups, null, array(
+			$html[] = \Joomla\CMS\HTML\HTMLHelper::_('select.groupedlist', $groups, null, array(
 				'list.attr' => $attr,
 				'id' => $this->id,
 				'list.select' => $this->value,
@@ -137,7 +137,7 @@ class JFormFieldEmrplanslist extends JFormFieldList
 		// Create a regular list.
 		else
 		{
-			$html[] = JHtml::_('select.groupedlist', $groups, $this->name, array(
+			$html[] = \Joomla\CMS\HTML\HTMLHelper::_('select.groupedlist', $groups, $this->name, array(
 				'list.attr' => $attr,
 				'id' => $this->id,
 				'list.select' => $this->value,

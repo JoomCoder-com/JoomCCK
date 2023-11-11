@@ -15,7 +15,7 @@ defined('_JEXEC') or die('Restricted access');
 JHTML::_('bootstrap.tooltip', '*[rel^="tooltip"]');
 
 $user_id = $this->input->getInt('user_id', 0);
-$app     = JFactory::getApplication();
+$app     = \Joomla\CMS\Factory::getApplication();
 
 $markup     = $this->tmpl_params['markup'];
 $listparams = $this->tmpl_params['list'];
@@ -30,7 +30,7 @@ if ($this->input->getString('return'))
 }
 
 $isMe         = $this->isMe;
-$current_user = JFactory::getUser($this->input->getInt('user_id', $this->user->get('id')));
+$current_user = \Joomla\CMS\Factory::getUser($this->input->getInt('user_id', $this->user->get('id')));
 
 
 ?>
@@ -80,12 +80,12 @@ $current_user = JFactory::getUser($this->input->getInt('user_id', $this->user->g
 
 <div id="compare" <?php echo !$this->compare ? 'class="hide"' : ''; ?>>
     <div class="alert alert-info alert-block">
-        <h4><?php echo JText::sprintf('CCOMPAREMSG', $this->compare) ?></h4>
+        <h4><?php echo \Joomla\CMS\Language\Text::sprintf('CCOMPAREMSG', $this->compare) ?></h4>
         <br><a rel="nofollow"
-               href="<?php echo JRoute::_('index.php?option=com_joomcck&view=compare&section_id=' . $this->section->id . '&return=' . Url::back()); ?>"
-               class="btn btn-primary"><?php echo JText::_('CCOMPAREVIEW'); ?></a>
+               href="<?php echo \Joomla\CMS\Router\Route::_('index.php?option=com_joomcck&view=compare&section_id=' . $this->section->id . '&return=' . Url::back()); ?>"
+               class="btn btn-primary"><?php echo \Joomla\CMS\Language\Text::_('CCOMPAREVIEW'); ?></a>
         <button onclick="Joomcck.CleanCompare(null, '<?php echo @$this->section->id ?>')"
-                class="btn"><?php echo JText::_('CCLEANCOMPARE'); ?></button>
+                class="btn"><?php echo \Joomla\CMS\Language\Text::_('CCLEANCOMPARE'); ?></button>
     </div>
 </div>
 
@@ -107,13 +107,13 @@ $current_user = JFactory::getUser($this->input->getInt('user_id', $this->user->g
 							<?php if (in_array($markup->get('filters.show_search'), $this->user->getAuthorisedViewLevels())): ?>
                                 <input class="form-control form-control-sm" type="text"
                                        style="max-width: 100px; min-width: 50px;"
-                                       placeholder="<?php echo JText::_('CSEARCHPLACEHOLDER'); ?>" name="filter_search"
+                                       placeholder="<?php echo \Joomla\CMS\Language\Text::_('CSEARCHPLACEHOLDER'); ?>" name="filter_search"
                                        value="<?php echo htmlentities($this->state->get('records.search'), ENT_COMPAT, 'utf-8'); ?>"/>
 							<?php endif; ?>
 							<?php if (in_array($markup->get('filters.show_more'), $this->user->getAuthorisedViewLevels())): ?>
                                 <button type="button" class="btn btn-sm btn-light border" data-bs-toggle="collapse"
                                         data-bs-target="#filter-collapse" rel="tooltip"
-                                        data-bs-title="<?php echo JText::_('CMORESEARCHOPTIONS') ?>">
+                                        data-bs-title="<?php echo \Joomla\CMS\Language\Text::_('CMORESEARCHOPTIONS') ?>">
 									<?php echo HTMLFormatHelper::icon('binocular.png'); ?>
                                 </button>
 							<?php endif; ?>
@@ -125,11 +125,11 @@ $current_user = JFactory::getUser($this->input->getInt('user_id', $this->user->g
                     <ul class="nav mt-3">
 						<?php if (($app->input->getString('view_what') || $app->input->getInt('user_id') || $app->input->getInt('ucat_id') || $back) && $markup->get('menu.menu_all')): ?>
                             <li class="dropdown me-2">
-                                <a class="btn btn-light btn-sm border" href="<?php echo $back ? $back : JRoute::_(Url::records($this->section)) ?>">
+                                <a class="btn btn-light btn-sm border" href="<?php echo $back ? $back : \Joomla\CMS\Router\Route::_(Url::records($this->section)) ?>">
 									<?php if ($markup->get('menu.menu_all_records_icon')): ?>
 										<?php echo HTMLFormatHelper::icon('navigation-180.png'); ?>
 									<?php endif; ?>
-									<?php echo $back ? JText::_('CGOBACK') : JText::_($markup->get('menu.menu_all_records', 'All Records')); ?>
+									<?php echo $back ? \Joomla\CMS\Language\Text::_('CGOBACK') : \Joomla\CMS\Language\Text::_($markup->get('menu.menu_all_records', 'All Records')); ?>
                                 </a>
                             </li>
 						<?php endif; ?>
@@ -140,7 +140,7 @@ $current_user = JFactory::getUser($this->input->getInt('user_id', $this->user->g
 									<?php if ($markup->get('menu.menu_home_icon')): ?>
 										<?php echo HTMLFormatHelper::icon($this->section->get('personalize.text_icon', 'home.png')); ?>
 									<?php endif; ?>
-									<?php echo JText::_($markup->get('menu.menu_home_label', 'Home')); ?>
+									<?php echo \Joomla\CMS\Language\Text::_($markup->get('menu.menu_home_label', 'Home')); ?>
                                 </a>
                             </li>
 						<?php endif; ?>
@@ -151,7 +151,7 @@ $current_user = JFactory::getUser($this->input->getInt('user_id', $this->user->g
 									<?php if ($markup->get('menu.menu_up_icon')): ?>
 										<?php echo HTMLFormatHelper::icon('arrow-curve-090-left.png'); ?>
 									<?php endif; ?>
-									<?php echo JText::_($markup->get('menu.menu_up_label', 'Up')); ?>
+									<?php echo \Joomla\CMS\Language\Text::_($markup->get('menu.menu_up_label', 'Up')); ?>
                                 </a>
                             </li>
 						<?php endif; ?>
@@ -164,11 +164,11 @@ $current_user = JFactory::getUser($this->input->getInt('user_id', $this->user->g
 									$o = array();
 									if (in_array($type->params->get('submission.submission'), $this->user->getAuthorisedViewLevels()) || MECAccess::allowNew($type, $this->section))
 									{
-										$o[] = '<a class="dropdown-item" href="' . Url::add($this->section, $type, $this->category) . '">' . JText::_($type->name) . '</a>';
+										$o[] = '<a class="dropdown-item" href="' . Url::add($this->section, $type, $this->category) . '">' . \Joomla\CMS\Language\Text::_($type->name) . '</a>';
 									}
 									else
 									{
-										$o[] = '<a  class="dropdown-item" class="disabled" rel="tooltipright" data-bs-title="' . JText::sprintf($markup->get('menu.menu_user_register', 'Register or login to submit %s'), JText::_($type->name)) . '">' . JText::_($type->name) . '</a>';
+										$o[] = '<a  class="dropdown-item" class="disabled" rel="tooltipright" data-bs-title="' . \Joomla\CMS\Language\Text::sprintf($markup->get('menu.menu_user_register', 'Register or login to submit %s'), \Joomla\CMS\Language\Text::_($type->name)) . '">' . \Joomla\CMS\Language\Text::_($type->name) . '</a>';
 									}
 									if ($o)
 									{
@@ -183,7 +183,7 @@ $current_user = JFactory::getUser($this->input->getInt('user_id', $this->user->g
 											<?php if ($markup->get('menu.menu_newrecord_icon')): ?>
 												<?php echo HTMLFormatHelper::icon('plus.png'); ?>
 											<?php endif; ?>
-											<?php echo JText::_($markup->get('menu.menu_newrecord_label', 'Post here')) ?>
+											<?php echo \Joomla\CMS\Language\Text::_($markup->get('menu.menu_newrecord_label', 'Post here')) ?>
                                             <b class="caret"></b>
                                         </a>
                                         <ul class="dropdown-menu">
@@ -198,7 +198,7 @@ $current_user = JFactory::getUser($this->input->getInt('user_id', $this->user->g
                                     <a
 										<?php if (!(in_array($submit->params->get('submission.submission'), $this->user->getAuthorisedViewLevels()) || MECAccess::allowNew($submit, $this->section))): ?>
                                             class="disabled tip-bottom  btn btn-light border btn-sm" rel="tooltip" href="#"
-                                            data-bs-title="<?php echo JText::sprintf($markup->get('menu.menu_user_register', 'Register or login to submit <b>%s</b>'), JText::_($submit->name)) ?>"
+                                            data-bs-title="<?php echo \Joomla\CMS\Language\Text::sprintf($markup->get('menu.menu_user_register', 'Register or login to submit <b>%s</b>'), \Joomla\CMS\Language\Text::_($submit->name)) ?>"
 										<?php else: ?>
                                             class="btn btn-light border btn-sm" href="<?php echo Url::add($this->section, $submit, $this->category); ?>"
 										<?php endif; ?>
@@ -206,7 +206,7 @@ $current_user = JFactory::getUser($this->input->getInt('user_id', $this->user->g
 										<?php if ($markup->get('menu.menu_newrecord_icon')): ?>
 											<?php echo HTMLFormatHelper::icon('plus.png'); ?>
 										<?php endif; ?>
-										<?php echo JText::sprintf($markup->get('menu.menu_user_single', 'Post %s here'), JText::_($submit->name)); ?>
+										<?php echo \Joomla\CMS\Language\Text::sprintf($markup->get('menu.menu_user_single', 'Post %s here'), \Joomla\CMS\Language\Text::_($submit->name)); ?>
                                     </a>
                                 </li>
 							<?php endif; ?>
@@ -218,7 +218,7 @@ $current_user = JFactory::getUser($this->input->getInt('user_id', $this->user->g
 									<?php if ($markup->get('menu.menu_templates_icon')): ?>
 										<?php echo HTMLFormatHelper::icon('zones.png'); ?>
 									<?php endif; ?>
-									<?php echo JText::_($markup->get('menu.menu_templates_label', 'Switch view')) ?>
+									<?php echo \Joomla\CMS\Language\Text::_($markup->get('menu.menu_templates_label', 'Switch view')) ?>
                                     <b class="caret"></b>
                                 </a>
                                 <ul class="dropdown-menu">
@@ -246,63 +246,63 @@ $current_user = JFactory::getUser($this->input->getInt('user_id', $this->user->g
 									<?php if ($markup->get('menu.menu_ordering_icon')): ?>
 										<?php echo HTMLFormatHelper::icon('sort.png'); ?>
 									<?php endif; ?>
-									<?php echo JText::_($markup->get('menu.menu_ordering_label', 'Sort By')) ?>
+									<?php echo \Joomla\CMS\Language\Text::_($markup->get('menu.menu_ordering_label', 'Sort By')) ?>
                                     <b class="caret"></b>
                                 </a>
                                 <ul class="dropdown-menu">
 									<?php if (@$this->items[0]->searchresult): ?>
                                         <li>
-											<?php echo JHtml::_('mrelements.sort', ($markup->get('menu.menu_order_ctime_icon') ? HTMLFormatHelper::icon('document-search-result.png') : null) . ' ' . JText::_('CORDERRELEVANCE'), 'searchresult', $listDirn, $listOrder); ?></li>
+											<?php echo \Joomla\CMS\HTML\HTMLHelper::_('mrelements.sort', ($markup->get('menu.menu_order_ctime_icon') ? HTMLFormatHelper::icon('document-search-result.png') : null) . ' ' . \Joomla\CMS\Language\Text::_('CORDERRELEVANCE'), 'searchresult', $listDirn, $listOrder); ?></li>
 									<?php endif; ?>
 
 									<?php if (in_array($markup->get('menu.menu_order_ctime'), $this->user->getAuthorisedViewLevels())): ?>
                                         <li>
-											<?php echo JHtml::_('mrelements.sort', ($markup->get('menu.menu_order_ctime_icon') ? HTMLFormatHelper::icon('core-ctime.png') : null) . ' ' . JText::_($markup->get('menu.menu_order_ctime_label', 'Created')), 'r.ctime', $listDirn, $listOrder); ?></li>
+											<?php echo \Joomla\CMS\HTML\HTMLHelper::_('mrelements.sort', ($markup->get('menu.menu_order_ctime_icon') ? HTMLFormatHelper::icon('core-ctime.png') : null) . ' ' . \Joomla\CMS\Language\Text::_($markup->get('menu.menu_order_ctime_label', 'Created')), 'r.ctime', $listDirn, $listOrder); ?></li>
 									<?php endif; ?>
 
 									<?php if (in_array($markup->get('menu.menu_order_mtime'), $this->user->getAuthorisedViewLevels())): ?>
                                         <li>
-											<?php echo JHtml::_('mrelements.sort', ($markup->get('menu.menu_order_mtime_icon') ? HTMLFormatHelper::icon('core-ctime.png') : null) . ' ' . JText::_($markup->get('menu.menu_order_mtime_label', 'Modified')), 'r.mtime', $listDirn, $listOrder); ?></li>
+											<?php echo \Joomla\CMS\HTML\HTMLHelper::_('mrelements.sort', ($markup->get('menu.menu_order_mtime_icon') ? HTMLFormatHelper::icon('core-ctime.png') : null) . ' ' . \Joomla\CMS\Language\Text::_($markup->get('menu.menu_order_mtime_label', 'Modified')), 'r.mtime', $listDirn, $listOrder); ?></li>
 									<?php endif; ?>
 									<?php if (in_array($markup->get('menu.menu_order_extime'), $this->user->getAuthorisedViewLevels())): ?>
                                         <li>
-											<?php echo JHtml::_('mrelements.sort', ($markup->get('menu.menu_order_extime_icon') ? HTMLFormatHelper::icon('core-ctime.png') : null) . ' ' . JText::_($markup->get('menu.menu_order_extime_label', 'Expire')), 'r.extime', $listDirn, $listOrder); ?></li>
+											<?php echo \Joomla\CMS\HTML\HTMLHelper::_('mrelements.sort', ($markup->get('menu.menu_order_extime_icon') ? HTMLFormatHelper::icon('core-ctime.png') : null) . ' ' . \Joomla\CMS\Language\Text::_($markup->get('menu.menu_order_extime_label', 'Expire')), 'r.extime', $listDirn, $listOrder); ?></li>
 									<?php endif; ?>
 
 									<?php if (in_array($markup->get('menu.menu_order_title'), $this->user->getAuthorisedViewLevels())): ?>
                                         <li>
-											<?php echo JHtml::_('mrelements.sort', ($markup->get('menu.menu_order_title_icon') ? HTMLFormatHelper::icon('edit.png') : null) . ' ' . JText::_($markup->get('menu.menu_order_title_label', 'Title')), 'r.title', $listDirn, $listOrder); ?></li>
+											<?php echo \Joomla\CMS\HTML\HTMLHelper::_('mrelements.sort', ($markup->get('menu.menu_order_title_icon') ? HTMLFormatHelper::icon('edit.png') : null) . ' ' . \Joomla\CMS\Language\Text::_($markup->get('menu.menu_order_title_label', 'Title')), 'r.title', $listDirn, $listOrder); ?></li>
 									<?php endif; ?>
 
 									<?php if (in_array($markup->get('menu.menu_order_hits'), $this->user->getAuthorisedViewLevels())): ?>
                                         <li>
-											<?php echo JHtml::_('mrelements.sort', ($markup->get('menu.menu_order_hits_icon') ? HTMLFormatHelper::icon('hand-point-090.png') : null) . ' ' . JText::_($markup->get('menu.menu_order_hits_label', 'Hist')), 'r.hits', $listDirn, $listOrder); ?></li>
+											<?php echo \Joomla\CMS\HTML\HTMLHelper::_('mrelements.sort', ($markup->get('menu.menu_order_hits_icon') ? HTMLFormatHelper::icon('hand-point-090.png') : null) . ' ' . \Joomla\CMS\Language\Text::_($markup->get('menu.menu_order_hits_label', 'Hist')), 'r.hits', $listDirn, $listOrder); ?></li>
 									<?php endif; ?>
 
 									<?php if (in_array($markup->get('menu.menu_order_votes_result'), $this->user->getAuthorisedViewLevels())): ?>
                                         <li>
-											<?php echo JHtml::_('mrelements.sort', ($markup->get('menu.menu_order_votes_result_icon') ? HTMLFormatHelper::icon('star.png') : null) . ' ' . JText::_($markup->get('menu.menu_order_votes_result_label', 'Votes')), 'r.votes_result', $listDirn, $listOrder); ?></li>
+											<?php echo \Joomla\CMS\HTML\HTMLHelper::_('mrelements.sort', ($markup->get('menu.menu_order_votes_result_icon') ? HTMLFormatHelper::icon('star.png') : null) . ' ' . \Joomla\CMS\Language\Text::_($markup->get('menu.menu_order_votes_result_label', 'Votes')), 'r.votes_result', $listDirn, $listOrder); ?></li>
 									<?php endif; ?>
 
 									<?php if (in_array($markup->get('menu.menu_order_comments'), $this->user->getAuthorisedViewLevels())): ?>
                                         <li>
-											<?php echo JHtml::_('mrelements.sort', ($markup->get('menu.menu_order_comments_icon') ? HTMLFormatHelper::icon('balloon-left.png') : null) . ' ' . JText::_($markup->get('menu.menu_order_comments_label', 'Comments')), 'r.comments', $listDirn, $listOrder); ?></li>
+											<?php echo \Joomla\CMS\HTML\HTMLHelper::_('mrelements.sort', ($markup->get('menu.menu_order_comments_icon') ? HTMLFormatHelper::icon('balloon-left.png') : null) . ' ' . \Joomla\CMS\Language\Text::_($markup->get('menu.menu_order_comments_label', 'Comments')), 'r.comments', $listDirn, $listOrder); ?></li>
 									<?php endif; ?>
 
 									<?php if (in_array($markup->get('menu.menu_order_favorite_num'), $this->user->getAuthorisedViewLevels())): ?>
                                         <li>
-											<?php echo JHtml::_('mrelements.sort', ($markup->get('menu.menu_order_favorite_num_icon') ? '<img src="' . JURI::root(true) . '/media/com_joomcck/icons/bookmarks/' . $listparams->get('tmpl_core.bookmark_icons', 'star') . '/state1.png" > ' : null) . ' ' . JText::_($markup->get('menu.menu_order_favorite_num_label', 'Number of bookmarks')), 'r.favorite_num', $listDirn, $listOrder); ?></li>
+											<?php echo \Joomla\CMS\HTML\HTMLHelper::_('mrelements.sort', ($markup->get('menu.menu_order_favorite_num_icon') ? '<img src="' . JURI::root(true) . '/media/com_joomcck/icons/bookmarks/' . $listparams->get('tmpl_core.bookmark_icons', 'star') . '/state1.png" > ' : null) . ' ' . \Joomla\CMS\Language\Text::_($markup->get('menu.menu_order_favorite_num_label', 'Number of bookmarks')), 'r.favorite_num', $listDirn, $listOrder); ?></li>
 									<?php endif; ?>
 
 									<?php if (in_array($markup->get('menu.menu_order_username'), $this->user->getAuthorisedViewLevels())): ?>
                                         <li>
-											<?php echo JHtml::_('mrelements.sort', ($markup->get('menu.menu_order_username_icon') ? HTMLFormatHelper::icon('user.png') : null) . ' ' . JText::_($markup->get('menu.menu_order_username_label', 'user name')), $this->section->params->get('personalize.author_mode'), $listDirn, $listOrder); ?></li>
+											<?php echo \Joomla\CMS\HTML\HTMLHelper::_('mrelements.sort', ($markup->get('menu.menu_order_username_icon') ? HTMLFormatHelper::icon('user.png') : null) . ' ' . \Joomla\CMS\Language\Text::_($markup->get('menu.menu_order_username_label', 'user name')), $this->section->params->get('personalize.author_mode'), $listDirn, $listOrder); ?></li>
 									<?php endif; ?>
 
 									<?php if (in_array($markup->get('menu.menu_order_fields'), $this->user->getAuthorisedViewLevels())): ?>
 										<?php foreach ($this->sortable as $field): ?>
                                             <li>
-												<?php echo JHtml::_('mrelements.sort', ($markup->get('menu.menu_order_fields_icon') && ($icon = $field->params->get('core.icon')) ? HTMLFormatHelper::icon($icon) : null) . ' ' . JText::_($field->label), FieldHelper::sortName($field), $listDirn, $listOrder); ?></li>
+												<?php echo \Joomla\CMS\HTML\HTMLHelper::_('mrelements.sort', ($markup->get('menu.menu_order_fields_icon') && ($icon = $field->params->get('core.icon')) ? HTMLFormatHelper::icon($icon) : null) . ' ' . \Joomla\CMS\Language\Text::_($field->label), FieldHelper::sortName($field), $listDirn, $listOrder); ?></li>
 										<?php endforeach; ?>
 									<?php endif; ?>
                                 </ul>
@@ -317,136 +317,136 @@ $current_user = JFactory::getUser($this->input->getInt('user_id', $this->user->g
 									<?php if ($markup->get('menu.menu_user_icon')): ?>
 										<?php echo HTMLFormatHelper::icon('user.png'); ?>
 									<?php endif; ?>
-									<?php echo JText::_($markup->get('menu.menu_user_label', 'My Menu')) ?>
+									<?php echo \Joomla\CMS\Language\Text::_($markup->get('menu.menu_user_label', 'My Menu')) ?>
                                     <b class="caret"></b>
                                 </a>
                                 <ul class="dropdown-menu">
 									<?php if ($markup->get('menu.menu_user_my')): ?>
                                         <li><a class="dropdown-item"
-                                               href="<?php echo JRoute::_(Url::user('created')); ?>">
+                                               href="<?php echo \Joomla\CMS\Router\Route::_(Url::user('created')); ?>">
 												<?php if ($markup->get('menu.menu_user_my_icon')): ?>
 													<?php echo HTMLFormatHelper::icon($this->section->params->get('personalize.text_icon', 'home.png')); ?>
 												<?php endif; ?>
-												<?php echo JText::_($markup->get('menu.menu_user_my_label', 'My Homepage')) ?>
+												<?php echo \Joomla\CMS\Language\Text::_($markup->get('menu.menu_user_my_label', 'My Homepage')) ?>
                                                 <span class="badge bg-light text-muted border"><?php echo $counts->created; ?></span>
                                             </a></li>
 									<?php endif; ?>
 
 									<?php if ($markup->get('menu.menu_user_followed') && $counts->followed): ?>
                                         <li><a class="dropdown-item"
-                                               href="<?php echo JRoute::_(Url::user('follow')); ?>">
+                                               href="<?php echo \Joomla\CMS\Router\Route::_(Url::user('follow')); ?>">
 												<?php if ($markup->get('menu.menu_user_follow_icon')): ?>
                                                     <img src="<?php echo JURI::root(true); ?>/media/com_joomcck/icons/16/follow1.png"
                                                          align="absmiddle"/>
 												<?php endif; ?>
-												<?php echo JText::_($markup->get('menu.menu_user_follow_label', 'Watched')) ?>
+												<?php echo \Joomla\CMS\Language\Text::_($markup->get('menu.menu_user_follow_label', 'Watched')) ?>
                                                 <span class="badge bg-light text-muted border"><?php echo $counts->followed; ?></span>
                                             </a></li>
 									<?php endif; ?>
 
 									<?php if ($markup->get('menu.menu_user_evented') && CEventsHelper::getNum('section', $this->section->id)): ?>
                                         <li><a class="dropdown-item"
-                                               href="<?php echo JRoute::_(Url::user('events')); ?>">
+                                               href="<?php echo \Joomla\CMS\Router\Route::_(Url::user('events')); ?>">
 												<?php if ($markup->get('menu.menu_user_events_icon')): ?>
                                                     <img src="<?php echo JURI::root(true); ?>/media/com_joomcck/icons/16/bell.png"
                                                          align="absmiddle"/>
 												<?php endif; ?>
-												<?php echo JText::_($markup->get('menu.menu_user_events_label', 'With new events')) ?>
+												<?php echo \Joomla\CMS\Language\Text::_($markup->get('menu.menu_user_events_label', 'With new events')) ?>
 												<?php echo CEventsHelper::showNum('section', $this->section->id) ?>
                                             </a></li>
 									<?php endif; ?>
 
 									<?php if ($markup->get('menu.menu_user_favorite') && $counts->favorited): ?>
                                         <li><a class="dropdown-item"
-                                               href="<?php echo JRoute::_(Url::user('favorited')); ?>">
+                                               href="<?php echo \Joomla\CMS\Router\Route::_(Url::user('favorited')); ?>">
 												<?php if ($markup->get('menu.menu_user_favorite_icon')): ?>
                                                     <img src="<?php echo JURI::root(true) . '/media/com_joomcck/icons/bookmarks/' . $listparams->get('tmpl_core.bookmark_icons', 'star') . '/state1.png'; ?>"
                                                          align="absmiddle"/>
 												<?php endif; ?>
-												<?php echo JText::_($markup->get('menu.menu_user_favorite_label', 'Bookmarked')) ?>
+												<?php echo \Joomla\CMS\Language\Text::_($markup->get('menu.menu_user_favorite_label', 'Bookmarked')) ?>
                                                 <span class="badge bg-light text-muted border"><?php echo $counts->favorited; ?></span>
                                             </a></li>
 									<?php endif; ?>
 									<?php if ($markup->get('menu.menu_user_rated') && $counts->rated): ?>
                                         <li><a class="dropdown-item"
-                                               href="<?php echo JRoute::_(Url::user('rated')); ?>">
+                                               href="<?php echo \Joomla\CMS\Router\Route::_(Url::user('rated')); ?>">
 												<?php if ($markup->get('menu.menu_user_rated_icon')): ?>
                                                     <img src="<?php echo JURI::root(true); ?>/media/com_joomcck/icons/16/star.png"
                                                          align="absmiddle"/>
 												<?php endif; ?>
-												<?php echo JText::_($markup->get('menu.menu_user_rated_label', 'Rated')) ?>
+												<?php echo \Joomla\CMS\Language\Text::_($markup->get('menu.menu_user_rated_label', 'Rated')) ?>
                                                 <span class="badge bg-light text-muted border"><?php echo $counts->rated; ?></span>
                                             </a></li>
 									<?php endif; ?>
 
 									<?php if ($markup->get('menu.menu_user_commented') && $counts->commented): ?>
                                         <li><a class="dropdown-item"
-                                               href="<?php echo JRoute::_(Url::user('commented')); ?>">
+                                               href="<?php echo \Joomla\CMS\Router\Route::_(Url::user('commented')); ?>">
 												<?php if ($markup->get('menu.menu_user_commented_icon')): ?>
                                                     <img src="<?php echo JURI::root(true); ?>/media/com_joomcck/icons/16/balloon-left.png"
                                                          align="absmiddle"/>
 												<?php endif; ?>
-												<?php echo JText::_($markup->get('menu.menu_user_commented_label', 'Commented')) ?>
+												<?php echo \Joomla\CMS\Language\Text::_($markup->get('menu.menu_user_commented_label', 'Commented')) ?>
                                                 <span class="badge bg-light text-muted border"><?php echo $counts->commented; ?></span>
                                             </a></li>
 									<?php endif; ?>
 
 									<?php if ($markup->get('menu.menu_user_visited') && $counts->visited): ?>
                                         <li><a class="dropdown-item"
-                                               href="<?php echo JRoute::_(Url::user('visited')); ?>">
+                                               href="<?php echo \Joomla\CMS\Router\Route::_(Url::user('visited')); ?>">
 												<?php if ($markup->get('menu.menu_user_visited_icon')): ?>
                                                     <img src="<?php echo JURI::root(true); ?>/media/com_joomcck/icons/16/hand-point-090.png"
                                                          align="absmiddle"/>
 												<?php endif; ?>
-												<?php echo JText::_($markup->get('menu.menu_user_visited_label', 'Visited')) ?>
+												<?php echo \Joomla\CMS\Language\Text::_($markup->get('menu.menu_user_visited_label', 'Visited')) ?>
                                                 <span class="badge bg-light text-muted border"><?php echo $counts->visited; ?></span>
                                             </a></li>
 									<?php endif; ?>
 
 									<?php if ($markup->get('menu.menu_user_expire') && $counts->expired): ?>
                                         <li><a class="dropdown-item"
-                                               href="<?php echo JRoute::_(Url::user('expired')); ?>">
+                                               href="<?php echo \Joomla\CMS\Router\Route::_(Url::user('expired')); ?>">
 												<?php if ($markup->get('menu.menu_user_expire_icon')): ?>
                                                     <img src="<?php echo JURI::root(true); ?>/media/com_joomcck/icons/16/clock--exclamation.png"
                                                          align="absmiddle"/>
 												<?php endif; ?>
-												<?php echo JText::_($markup->get('menu.menu_user_expire_label', 'Expired')) ?>
+												<?php echo \Joomla\CMS\Language\Text::_($markup->get('menu.menu_user_expire_label', 'Expired')) ?>
                                                 <span class="badge bg-light text-muted border"><?php echo $counts->expired; ?></span>
                                             </a></li>
 									<?php endif; ?>
 
 									<?php if ($markup->get('menu.menu_user_hidden') && $counts->hidden): ?>
                                         <li><a class="dropdown-item"
-                                               href="<?php echo JRoute::_(Url::user('hidden')); ?>">
+                                               href="<?php echo \Joomla\CMS\Router\Route::_(Url::user('hidden')); ?>">
 												<?php if ($markup->get('menu.menu_user_hidden_icon')): ?>
                                                     <img src="<?php echo JURI::root(true); ?>/media/com_joomcck/icons/16/eye-half.png"
                                                          align="absmiddle"/>
 												<?php endif; ?>
-												<?php echo JText::_($markup->get('menu.menu_user_hidden_label', 'Hidden')) ?>
+												<?php echo \Joomla\CMS\Language\Text::_($markup->get('menu.menu_user_hidden_label', 'Hidden')) ?>
                                                 <span class="badge bg-light text-muted border"><?php echo $counts->hidden; ?></span>
                                             </a></li>
 									<?php endif; ?>
 
 									<?php if ($markup->get('menu.menu_user_feature') && $counts->featured): ?>
                                         <li><a class="dropdown-item"
-                                               href="<?php echo JRoute::_(Url::user('featured')); ?>">
+                                               href="<?php echo \Joomla\CMS\Router\Route::_(Url::user('featured')); ?>">
 												<?php if ($markup->get('menu.menu_user_feature_icon')): ?>
                                                     <img src="<?php echo JURI::root(true); ?>/media/com_joomcck/icons/16/arrow-curve-090-left.png"
                                                          align="absmiddle"/>
 												<?php endif; ?>
-												<?php echo JText::_($markup->get('menu.menu_user_feature_label', 'Fetured')) ?>
+												<?php echo \Joomla\CMS\Language\Text::_($markup->get('menu.menu_user_feature_label', 'Fetured')) ?>
                                                 <span class="badge bg-light text-muted border"><?php echo $counts->featured; ?></span>
                                             </a></li>
 									<?php endif; ?>
 
 									<?php if ($markup->get('menu.menu_user_unpublished') && $counts->unpublished): ?>
                                         <li><a class="dropdown-item"
-                                               href="<?php echo JRoute::_(Url::user('unpublished')); ?>">
+                                               href="<?php echo \Joomla\CMS\Router\Route::_(Url::user('unpublished')); ?>">
 												<?php if ($markup->get('menu.menu_user_unpublished_icon')): ?>
                                                     <img src="<?php echo JURI::root(true); ?>/media/com_joomcck/icons/16/minus-circle.png"
                                                          align="absmiddle"/>
 												<?php endif; ?>
-												<?php echo JText::_($markup->get('menu.menu_user_unpublished_label', 'On Approval')) ?>
+												<?php echo \Joomla\CMS\Language\Text::_($markup->get('menu.menu_user_unpublished_label', 'On Approval')) ?>
                                                 <span class="badge bg-light text-muted border"><?php echo $counts->unpublished; ?></span>
                                             </a></li>
 									<?php endif; ?>
@@ -455,24 +455,24 @@ $current_user = JFactory::getUser($this->input->getInt('user_id', $this->user->g
 									<?php if ($markup->get('menu.menu_user_moder') && MECAccess::allowModerate(null, null, $this->section)): ?>
                                         <li class="divider"></li>
                                         <li><a class="dropdown-item"
-                                               href="<?php echo JRoute::_('index.php?option=com_joomcck&view=moderators&filter_section=' . $this->section->id . '&return=' . Url::back()); ?>">
+                                               href="<?php echo \Joomla\CMS\Router\Route::_('index.php?option=com_joomcck&view=moderators&filter_section=' . $this->section->id . '&return=' . Url::back()); ?>">
 												<?php if ($markup->get('menu.menu_user_moder_icon')): ?>
                                                     <img src="<?php echo JURI::root(true); ?>/media/com_joomcck/icons/16/user-share.png"
                                                          align="absmiddle"/>
 												<?php endif; ?>
-												<?php echo JText::_($markup->get('menu.menu_user_moder_label', 'Moderators')) ?>
+												<?php echo \Joomla\CMS\Language\Text::_($markup->get('menu.menu_user_moder_label', 'Moderators')) ?>
                                             </a></li>
 									<?php endif; ?>
 
 									<?php if ($this->section->params->get('personalize.personalize') && $this->section->params->get('personalize.allow_section_set')): ?>
                                         <li class="divider"></li>
                                         <li>
-                                            <a href="<?php echo JRoute::_('index.php?option=com_joomcck&view=options&layout=section&section_id=' . $this->section->id . '&return=' . Url::back()); ?>">
+                                            <a href="<?php echo \Joomla\CMS\Router\Route::_('index.php?option=com_joomcck&view=options&layout=section&section_id=' . $this->section->id . '&return=' . Url::back()); ?>">
 												<?php if ($markup->get('menu.menu_user_subscribe_icon')): ?>
                                                     <img src="<?php echo JURI::root(true); ?>/media/com_joomcck/icons/16/gear.png"
                                                          align="absmiddle"/>
 												<?php endif; ?>
-												<?php echo JText::_($markup->get('menu.menu_user_subscribe_label', 'Options')) ?>
+												<?php echo \Joomla\CMS\Language\Text::_($markup->get('menu.menu_user_subscribe_label', 'Options')) ?>
                                             </a></li>
 									<?php endif; ?>
 
@@ -480,24 +480,24 @@ $current_user = JFactory::getUser($this->input->getInt('user_id', $this->user->g
                                         <li class="divider"></li>
                                         <li class="dropdown-submenu">
                                             <a tabindex="-1"
-                                               href="<?php echo JRoute::_(Url::_('categories') . '&return=' . Url::back()) ?>">
+                                               href="<?php echo \Joomla\CMS\Router\Route::_(Url::_('categories') . '&return=' . Url::back()) ?>">
 												<?php if ($markup->get('menu.menu_user_cat_manage_icon')): ?>
                                                     <img src="<?php echo JURI::root(true); ?>/media/com_joomcck/icons/16/category.png"
                                                          align="absmiddle"/>
 												<?php endif; ?>
-												<?php echo JText::_($markup->get('menu.menu_user_cat_manage_label', 'Categories')) ?>
+												<?php echo \Joomla\CMS\Language\Text::_($markup->get('menu.menu_user_cat_manage_label', 'Categories')) ?>
                                                 <span class="badge bg-light text-muted border"><?php echo $counts->categories; ?></span>
                                             </a>
 											<?php if ($markup->get('menu.menu_user_cat_add')): ?>
                                                 <ul class="dropdown-menu">
                                                     <li>
                                                         <a class="dropdown-item" tabindex="-1"
-                                                           href="<?php echo JRoute::_(Url::_('category')) ?>">
+                                                           href="<?php echo \Joomla\CMS\Router\Route::_(Url::_('category')) ?>">
 															<?php if ($markup->get('menu.menu_user_cat_add_icon')): ?>
                                                                 <img src="<?php echo JURI::root(true); ?>/media/com_joomcck/icons/16/plus.png"
                                                                      align="absmiddle"/>
 															<?php endif; ?>
-															<?php echo JText::_($markup->get('menu.menu_user_cat_add_label', 'Add new category')) ?>
+															<?php echo \Joomla\CMS\Language\Text::_($markup->get('menu.menu_user_cat_add_label', 'Add new category')) ?>
                                                         </a>
                                                     </li>
                                                 </ul>
@@ -538,7 +538,7 @@ $current_user = JFactory::getUser($this->input->getInt('user_id', $this->user->g
     <input type="hidden" name="limitstart" value="0">
     <input type="hidden" name="filter_order" value="<?php //echo $this->ordering; ?>">
     <input type="hidden" name="filter_order_Dir" value="<?php //echo $this->ordering_dir; ?>">
-	<?php echo JHtml::_('form.token'); ?>
+	<?php echo \Joomla\CMS\HTML\HTMLHelper::_('form.token'); ?>
 	<?php if ($this->worns): ?>
 		<?php foreach ($this->worns as $worn): ?>
             <input type="hidden" name="clean[<?php echo $worn->name; ?>]" id="<?php echo $worn->name; ?>" value="">
@@ -560,7 +560,7 @@ $current_user = JFactory::getUser($this->input->getInt('user_id', $this->user->g
 					<?php if (in_array($alpha, $this->alpha_list)): ?>
                         <span class="badge bg-warning"
                               onclick="Joomcck.applyFilter('filter_alpha', '<?php echo $alpha ?>')"
-							<?php echo $markup->get('main.alpha_num') ? 'rel="tooltip" data-bs-title="' . JText::plural('CXNRECFOUND',
+							<?php echo $markup->get('main.alpha_num') ? 'rel="tooltip" data-bs-title="' . \Joomla\CMS\Language\Text::plural('CXNRECFOUND',
 									@$this->alpha_totals[$alpha]) . '"' : null; ?>><?php echo $alpha; ?></span>
 					<?php else: ?>
                         <span class="badge bg-light text-muted border"><?php echo $alpha; ?></span>
@@ -584,14 +584,14 @@ $current_user = JFactory::getUser($this->input->getInt('user_id', $this->user->g
 				<?php echo $worn->text ?>
                 <button type="button" class="btn-close" data-bs-dismiss="alert"  aria-label="Close"
                         onclick="Joomcck.cleanFilter('<?php echo $worn->name ?>')" rel="tooltip"
-                        data-bs-title="<?php echo JText::_('CDELETEFILTER') ?>">
+                        data-bs-title="<?php echo \Joomla\CMS\Language\Text::_('CDELETEFILTER') ?>">
                 </button>
             </div>
 		<?php endforeach; ?>
 		<?php if (count($this->worns) > 1): ?>
             <button onclick="Joomla.submitbutton('records.cleanall');" class="alert alert-danger  float-start">
-                <div><?php echo JText::_('CORESET'); ?></div>
-				<?php echo JText::_('CODELETEALLFILTERS'); ?>
+                <div><?php echo \Joomla\CMS\Language\Text::_('CORESET'); ?></div>
+				<?php echo \Joomla\CMS\Language\Text::_('CODELETEALLFILTERS'); ?>
             </button>
 		<?php endif; ?>
 
@@ -610,10 +610,10 @@ $current_user = JFactory::getUser($this->input->getInt('user_id', $this->user->g
 	<?php echo Layout::render('core.list.pagination',['params' => $this->tmpl_params['list'],'pagination' => $this->pagination]) ?>
 
 <?php elseif ($this->worns): ?>
-    <h4 align="center"><?php echo JText::_('CNORECFOUNDSEARCH'); ?></h4>
+    <h4 align="center"><?php echo \Joomla\CMS\Language\Text::_('CNORECFOUNDSEARCH'); ?></h4>
 <?php else: ?>
 	<?php if (((!empty($this->category->id) && $this->category->params->get('submission')) || (empty($this->category->id) && $this->section->params->get('general.section_home_items'))) && !$this->input->get('view_what')): ?>
         <h4 align="center" class="no-records"
-            id="no-records<?php echo $this->section->id; ?>"><?php echo JText::_('CNOARTICLESHERE'); ?></h4>
+            id="no-records<?php echo $this->section->id; ?>"><?php echo \Joomla\CMS\Language\Text::_('CNOARTICLESHERE'); ?></h4>
 	<?php endif; ?>
 <?php endif; ?>

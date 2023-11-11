@@ -7,11 +7,11 @@
  * @license GNU/GPL http://www.gnu.org/copyleft/gpl.html
  */
 defined('_JEXEC') || die();
-$start = JFactory::getDate($this->value[0]);
+$start = \Joomla\CMS\Factory::getDate($this->value[0]);
 if (count($this->value) == 2) {
-    $end   = JFactory::getDate($this->value[1]);
+    $end   = \Joomla\CMS\Factory::getDate($this->value[1]);
 } else {
-    $end   = JFactory::getDate();
+    $end   = \Joomla\CMS\Factory::getDate();
 }
 $age   = $start->diff($end)->y;
-JText::printf('F_YEARS_AGE', $age);
+\Joomla\CMS\Language\Text::printf('F_YEARS_AGE', $age);

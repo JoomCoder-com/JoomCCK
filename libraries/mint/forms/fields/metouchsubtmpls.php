@@ -44,7 +44,7 @@ class JFormFieldMEtouchsubtmpls extends JFormMEFieldList
 		$options = array();
 		$options = $this->getTmplObjectList( $tmpltype );
 		if($paramtype != 'global' ){
-			array_unshift($options, JHTML::_('select.option', '', '- '.JText::_('Use global').' -'));
+			array_unshift($options, JHTML::_('select.option', '', '- '.\Joomla\CMS\Language\Text::_('Use global').' -'));
 		}
 
 		return $options;
@@ -57,7 +57,7 @@ class JFormFieldMEtouchsubtmpls extends JFormMEFieldList
 		$layouts_path = CommunitySubTemplate::getTmplPath( $type );
 		$tmpl_mask    = CommunitySubTemplate::getTmplMask( $type );
 
-		$files = JFolder::files( $layouts_path, $tmpl_mask['index_file'] );
+		$files = \Joomla\CMS\Filesystem\Folder::files( $layouts_path, $tmpl_mask['index_file'] );
 
 		foreach( $files as $key => $file ){
 			$tmplname = preg_replace ( $tmpl_mask['ident'], '', $file );

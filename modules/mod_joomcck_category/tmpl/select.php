@@ -8,8 +8,8 @@
  */
 defined('_JEXEC') or die('Restricted access');
 
-$app = JFactory::getApplication();
-$document = JFactory::getDocument();
+$app = \Joomla\CMS\Factory::getApplication();
+$document = \Joomla\CMS\Factory::getDocument();
 $document->addStyleDeclaration('
 .catselect{
 	width:' . $params->get('select_width') . 'px;
@@ -40,7 +40,7 @@ $max_level = count($levels);
 				return;
 			}
 			$.ajax({
-				url:      '<?php echo JRoute::_('index.php?option=com_joomcck&task=ajax.category_childs&tmpl=component', FALSE);?>',
+				url:      '<?php echo \Joomla\CMS\Router\Route::_('index.php?option=com_joomcck&task=ajax.category_childs&tmpl=component', FALSE);?>',
 				dataType: 'json',
 				type:     'POST',
 				data:     {cat_id: el.value, section_id: <?php echo $section->id; ?>}
@@ -61,7 +61,7 @@ $max_level = count($levels);
 						var opt = $(document.createElement("option")).attr({
 							value: ''
 						});
-						opt.text('<?php echo JText::_('CSELECTMODULE');?>');
+						opt.text('<?php echo \Joomla\CMS\Language\Text::_('CSELECTMODULE');?>');
 						opt.appendTo(select);
 						$.each(json.result, function(index, item) {
 							if(<?php echo $params->get('cat_empty', 1);?> == 1 || (<?php echo $params->get('cat_empty', 1);?> == 0 && (item.num_current > 0 || item.num_all > 0 )))
@@ -95,7 +95,7 @@ $max_level = count($levels);
 						var opt = $(document.createElement("option")).attr({
 							value: ''
 						});
-						opt.text('<?php echo JText::_('CEMPTYMODULE');?>');
+						opt.text('<?php echo \Joomla\CMS\Language\Text::_('CEMPTYMODULE');?>');
 						opt.appendTo(select);
 						if(!populate)
 							window.redirectToCategory(el.value);
@@ -114,7 +114,7 @@ $max_level = count($levels);
 	<?php if($params->get('show_section', 1)) : ?>
 		<div <?php echo $params->get('section_class') ? 'class="' . $params->get('section_class') . '"' : ''; ?>>
 			<?php if($params->get('show_section', 1) == 2) : ?>
-				<a href="<?php echo JRoute::_($section->link); ?>"><?php echo $section->name; ?></a>
+				<a href="<?php echo \Joomla\CMS\Router\Route::_($section->link); ?>"><?php echo $section->name; ?></a>
 			<?php
 			else :
 				echo $section->name;
@@ -141,7 +141,7 @@ $max_level = count($levels);
 
 				$options   = array();
 				$selected = null;
-				$options[] = JHtml::_('select.option', '', JText::_('CSELECTMODULE'));
+				$options[] = \Joomla\CMS\HTML\HTMLHelper::_('select.option', '', \Joomla\CMS\Language\Text::_('CSELECTMODULE'));
 				if($i == 1):
 
 					foreach($categories as $cat)
@@ -154,7 +154,7 @@ $max_level = count($levels);
 						{
 							$cat->title .= ' (' . ($params->get('cat_nums', 'current') == 'current' ? modJoomcckCategoriesHelper::getRecordsNum($section, $cat->id) : $cat->records_num) . ')';
 						}
-						$options[] = JHtml::_('select.option', $cat->id, $cat->title);
+						$options[] = \Joomla\CMS\HTML\HTMLHelper::_('select.option', $cat->id, $cat->title);
 						if(in_array($cat->id, $parents))
 						{
 							$selected = $cat->id;
@@ -167,14 +167,14 @@ $max_level = count($levels);
 					}
 					?>
 					<div>
-						<?php echo JText::_($level); ?><br/>
-						<?php echo JHtml::_('select.genericlist', $options, 'category_select1', 'class="catselect" onchange="' . $function . '"', 'value', 'text', $selected); ?>
+						<?php echo \Joomla\CMS\Language\Text::_($level); ?><br/>
+						<?php echo \Joomla\CMS\HTML\HTMLHelper::_('select.genericlist', $options, 'category_select1', 'class="catselect" onchange="' . $function . '"', 'value', 'text', $selected); ?>
 					</div>
 
 				<?php else: ?>
 					<div>
-						<?php echo JText::_($level); ?><br/>
-						<?php echo JHtml::_('select.genericlist', $options, 'category_select' . $i, ' class="catselect" onchange="' . $function . '"'); ?>
+						<?php echo \Joomla\CMS\Language\Text::_($level); ?><br/>
+						<?php echo \Joomla\CMS\HTML\HTMLHelper::_('select.genericlist', $options, 'category_select' . $i, ' class="catselect" onchange="' . $function . '"'); ?>
 					</div>
 				<?php endif; ?>
 				<?php $i++; ?>

@@ -11,7 +11,7 @@ defined('_JEXEC') or die('Restricted access');
 
 jimport('legacy.access.rules');
 
-class JoomcckTableField extends JTable
+class JoomcckTableField extends \Joomla\CMS\Table\Table
 {
 
 	public function __construct(&$_db )
@@ -24,7 +24,7 @@ class JoomcckTableField extends JTable
 		$params =\Joomla\CMS\Factory::getApplication()->input->post->get('params', array(), 'array');
 		if($params)
 		{
-			$registry = new JRegistry();
+			$registry = new \Joomla\Registry\Registry();
 			$registry->loadArray($params);
 			$this->filter = $registry->get('params.filter_enable', 0);
 			$array['params'] = (string)$registry;
@@ -58,12 +58,12 @@ class JoomcckTableField extends JTable
 	{
 		if(trim($this->label) == '')
 		{
-			$this->setError(JText::_('CNOLABEL'));
+			$this->setError(\Joomla\CMS\Language\Text::_('CNOLABEL'));
 			return false;
 		}
 
 		if(trim($this->user_id) == '') {
-			$this->user_id = (int)JFactory::getUser()->get('id');
+			$this->user_id = (int)\Joomla\CMS\Factory::getUser()->get('id');
 		}
 
 		settype($this->ordering, 'integer');

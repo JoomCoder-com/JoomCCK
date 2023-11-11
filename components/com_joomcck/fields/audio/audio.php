@@ -32,7 +32,7 @@ class JFormFieldCAudio extends CFormFieldUpload
 	public function getInput()
 	{
 		$js = "function afterupload(w, s){
-			$$('#'+s.id+' div.result').set('html', '" . addslashes(JText::_('P_CONVERTING')) . "').setStyle('background', 'url(\"" . JURI::root(TRUE) . "/media/com_joomcck/js/mooupload/imgs/load_bg_green.gif\")');
+			$$('#'+s.id+' div.result').set('html', '" . addslashes(\Joomla\CMS\Language\Text::_('P_CONVERTING')) . "').setStyle('background', 'url(\"" . JURI::root(TRUE) . "/media/com_joomcck/js/mooupload/imgs/load_bg_green.gif\")');
 			new Request.JSON({
 				url: Joomcck.field_call_url,
 	    		method:'post',
@@ -54,12 +54,12 @@ class JFormFieldCAudio extends CFormFieldUpload
 	    				alert(json.error);
 	    				return;
 	    			}
-	    			$$('#'+s.id+' div.result').set('html', '" . addslashes(JText::_('P_FINISHED')) . "').setStyle('background', 'none');
+	    			$$('#'+s.id+' div.result').set('html', '" . addslashes(\Joomla\CMS\Language\Text::_('P_FINISHED')) . "').setStyle('background', 'none');
 	    		}
 			}).send();
 		}";
 
-		JFactory::getDocument()->addScriptDeclaration($js);
+		\Joomla\CMS\Factory::getDocument()->addScriptDeclaration($js);
 
 		$params['width']  = $this->params->get('params.width', 0);
 		$params['height'] = $this->params->get('params.height', 0);
@@ -84,9 +84,9 @@ class JFormFieldCAudio extends CFormFieldUpload
 	public function onConvert($params)
 	{
 		$name   = $params['file']['upload_name'];
-		$ext    = JFile::getExt($name);
+		$ext    = \Joomla\CMS\Filesystem\File::getExt($name);
 		$parts  = explode("_", $name);
-		$params = JComponentHelper::getParams('com_joomcck');
+		$params = \Joomla\CMS\Component\ComponentHelper::getParams('com_joomcck');
 		$root   = JPath::clean(JPATH_ROOT . DIRECTORY_SEPARATOR . $params->get('general_upload'));
 
 		$dir  = $root . DIRECTORY_SEPARATOR . $ext . DIRECTORY_SEPARATOR . date($params->get('folder_format'), $parts[0]) . DIRECTORY_SEPARATOR;
@@ -110,11 +110,11 @@ class JFormFieldCAudio extends CFormFieldUpload
 	{
 		$descriptorspec = array(0 => array("file", JPATH_ROOT . '/logs/convertion_in.txt', "a"), 1 => array("file", JPATH_ROOT . '/logs/convertion_out.txt', "a"), 2 => array("file", JPATH_ROOT . '/logs/convertion_err.txt', "a"));
 
-		$_ext    = JFile::getExt($src);
+		$_ext    = \Joomla\CMS\Filesystem\File::getExt($src);
 		$command = sprintf('%s -i "%s" %s "%s"',
 			$this->params->get('params.command', 'ffmpeg'), $src, $codec, str_replace('.' . $_ext, '.' . $ext, $src));
 
-		$p = proc_open($command, $descriptorspec, $pipes, JPath::clean(JPATH_ROOT . DIRECTORY_SEPARATOR . JComponentHelper::getParams('com_joomcck')->get('general_upload')));
+		$p = proc_open($command, $descriptorspec, $pipes, JPath::clean(JPATH_ROOT . DIRECTORY_SEPARATOR . \Joomla\CMS\Component\ComponentHelper::getParams('com_joomcck')->get('general_upload')));
 		proc_close($p);
 	}
 
@@ -130,10 +130,10 @@ class JFormFieldCAudio extends CFormFieldUpload
 
 	private function _render($client, $record, $type, $section)
 	{
-		JFactory::getDocument()->addScript(JURI::root(TRUE) . '/media/com_joomcck/vendors/jwplayer/jwplayer.js');
+		\Joomla\CMS\Factory::getDocument()->addScript(JURI::root(TRUE) . '/media/com_joomcck/vendors/jwplayer/jwplayer.js');
 
 		$browser             = JBrowser::getInstance();
-		$this->user          = JFactory::getUser();
+		$this->user          = \Joomla\CMS\Factory::getUser();
 		$this->descr         = $this->params->get('params.allow_add_descr', 0);
 		$this->download_type = '[{type: "download"}]';
 

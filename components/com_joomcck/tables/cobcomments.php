@@ -20,16 +20,16 @@ class JoomcckTableCobcomments extends Nested
 	public function __construct(&$_db)
 	{
 		parent::__construct('#__js_res_comments', 'id', $_db);
-		$this->ctime = JFactory::getDate()->toSql();
+		$this->ctime = \Joomla\CMS\Factory::getDate()->toSql();
 		parent::$root_id = 1;
 	}
 
 	public function check()
 	{
-		$app = JFactory::getApplication();
+		$app = \Joomla\CMS\Factory::getApplication();
 
 		$post = $app->input->get('jform', array(), 'array');
-		$user = JFactory::getUser();
+		$user = \Joomla\CMS\Factory::getUser();
 
 		if(@$post['parent_id'] != 0 && !$this->id)
 		{
@@ -45,7 +45,7 @@ class JoomcckTableCobcomments extends Nested
 
 		if(!$this->langs)
 		{
-			$lang        = JFactory::getLanguage();
+			$lang        = \Joomla\CMS\Factory::getLanguage();
 			$this->langs = $lang->getTag();
 		}
 		if(!$this->user_id && !$this->name)
@@ -77,7 +77,7 @@ class JoomcckTableCobcomments extends Nested
 
 		$this->type_id = $item->type_id;
 
-		$files_table = JTable::getInstance('Files', 'JoomcckTable');
+		$files_table = \Joomla\CMS\Table\Table::getInstance('Files', 'JoomcckTable');
 
 		$this->attachment = $files_table->prepareSave($this->attachment);
 
@@ -100,7 +100,7 @@ class JoomcckTableCobcomments extends Nested
 		if(
 			$this->published == 0 &&
 			$type->params->get('comments.type_comment_subscription') &&
-			JFile::exists($em_api)
+			\Joomla\CMS\Filesystem\File::exists($em_api)
 		)
 		{
 			require_once $em_api;
@@ -132,7 +132,7 @@ class JoomcckTableCobcomments extends Nested
 			{
 				$saved[] = $file['id'];
 			}
-			$files_table = JTable::getInstance('Files', 'JoomcckTable');
+			$files_table = \Joomla\CMS\Table\Table::getInstance('Files', 'JoomcckTable');
 			$files_table->markSaved($saved, array('id' => $this->record_id));
 		}
 

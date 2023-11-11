@@ -13,10 +13,10 @@ class JoomcckViewRecord extends MViewBase
 {
 	function display($tpl = null)
 	{
-		$app = JFactory::getApplication();
-		$doc = JFactory::getDocument();
+		$app = \Joomla\CMS\Factory::getApplication();
+		$doc = \Joomla\CMS\Factory::getDocument();
 
-		JFactory::getApplication()->input->set('limit', $app->getCfg('feed_limit'));
+		\Joomla\CMS\Factory::getApplication()->input->set('limit', $app->getCfg('feed_limit'));
 		$feedEmail	= (@$app->getCfg('feed_email')) ? $app->getCfg('feed_email') : 'author';
 
 		$record = $this->get('Item');
@@ -37,9 +37,9 @@ class JoomcckViewRecord extends MViewBase
 		$comments = $model_comments->getItems($record->id, $type, 20);
 
 		$link = JURI::root(TRUE).'/index.php?option=com_joomcck&view=record&id='.$record->id;
-		$doc->link = $this->escape(JRoute::_($link));
+		$doc->link = $this->escape(\Joomla\CMS\Router\Route::_($link));
 		$doc->title = $record->title;
-		$doc->description = JText::sprintf('CRSSFEEDCOMMENT', $record->title);
+		$doc->description = \Joomla\CMS\Language\Text::sprintf('CRSSFEEDCOMMENT', $record->title);
 
 		foreach ($comments as $row)
 		{

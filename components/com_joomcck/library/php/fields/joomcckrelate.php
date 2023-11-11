@@ -15,7 +15,7 @@ defined('_JEXEC') or die();
 
 jimport('joomla.html.html');
 
-JHtml::_('bootstrap.modal');
+\Joomla\CMS\HTML\HTMLHelper::_('bootstrap.modal');
 
 require_once JPATH_ROOT . '/components/com_joomcck/library/php/fields/joomcckfield.php';
 require_once JPATH_ROOT . '/components/com_joomcck/api.php';
@@ -33,9 +33,9 @@ class  CFormFieldRelate extends CFormField
 
 	protected function _render_input($type, $name, $section_id, $types, $multi = TRUE)
 	{
-		$db      = JFactory::getDbo();
-		$user    = JFactory::getUser();
-		$app     = JFactory::getApplication();
+		$db      = \Joomla\CMS\Factory::getDbo();
+		$user    = \Joomla\CMS\Factory::getUser();
+		$app     = \Joomla\CMS\Factory::getApplication();
 		$section = ItemsStore::getSection($section_id);
 
 		$attribs = $html = $record_id = '';
@@ -70,12 +70,12 @@ class  CFormFieldRelate extends CFormField
 
 		if(!in_array($section->params->get('general.show_future_records'), $user->getAuthorisedViewLevels()))
 		{
-			$query->where("ctime < " . $db->quote(JFactory::getDate()->toSql()));
+			$query->where("ctime < " . $db->quote(\Joomla\CMS\Factory::getDate()->toSql()));
 		}
 
 		if(!in_array($section->params->get('general.show_past_records'), $user->getAuthorisedViewLevels()))
 		{
-			$query->where("(extime = '0000-00-00 00:00:00' OR ISNULL(extime) OR extime > '" . JFactory::getDate()->toSql() . "')");
+			$query->where("(extime = '0000-00-00 00:00:00' OR ISNULL(extime) OR extime > '" . \Joomla\CMS\Factory::getDate()->toSql() . "')");
 		}
 
 		if(!in_array($this->params->get('params.strict_to_user'), $user->getAuthorisedViewLevels()) && $this->user_strict)
@@ -133,7 +133,7 @@ class  CFormFieldRelate extends CFormField
 
 		if($this->params->get('params.multi_limit') && $this->params->get('params.multi_parent', 1) && $type != 10)
 		{
-			$html .= '<p><small>' . JText::sprintf('CSELECTLIMIT', $this->params->get('params.multi_limit')) . '</small></p>';
+			$html .= '<p><small>' . \Joomla\CMS\Language\Text::sprintf('CSELECTLIMIT', $this->params->get('params.multi_limit')) . '</small></p>';
 		}
 
 		if($multi == FALSE)
@@ -186,7 +186,7 @@ class  CFormFieldRelate extends CFormField
 			case 4:
 				if(!$this->required)
 				{
-					array_unshift($list, JHtml::_('select.option', '', JText::_('P_SELECT_ITEM')));
+					array_unshift($list, \Joomla\CMS\HTML\HTMLHelper::_('select.option', '', \Joomla\CMS\Language\Text::_('P_SELECT_ITEM')));
 				}
 				$html .= $this->_render_select($multi, $list, $this->value, $name);
 				break;
@@ -246,7 +246,7 @@ class  CFormFieldRelate extends CFormField
 
 	protected function _render_autocomplete($multi, $list, $default, $limit, $name)
 	{
-        $app = JFactory::getApplication();
+        $app = \Joomla\CMS\Factory::getApplication();
 
 
 
@@ -257,7 +257,7 @@ class  CFormFieldRelate extends CFormField
         $options['limit'] = $limit;
         $options['suggestion_url'] =  "index.php?option=com_joomcck&task=ajax.field_call&tmpl=component&field_id={$this->id}&func=onGetList&field={$this->type}&record_id=" . ($app->input->getCmd('option') == 'com_joomcck' ? $app->input->getInt('id', 0) : 0) . "&section_id=" . $app->input->getInt('section_id');
         
-		return JHtml::_('mrelements.pills', $name, "field_" . $this->id, $default, $list, $options);
+		return \Joomla\CMS\HTML\HTMLHelper::_('mrelements.pills', $name, "field_" . $this->id, $default, $list, $options);
 	}
 
 	protected function _render_checkbox($multi, $list, $default, $name)
@@ -294,7 +294,7 @@ class  CFormFieldRelate extends CFormField
 	{
 		$name .= ($multi ? '[]' : NULL);
 		$ids = array();
-		$app = JFactory::getApplication();
+		$app = \Joomla\CMS\Factory::getApplication();
 
 		foreach($default as $item)
 		{
@@ -304,9 +304,9 @@ class  CFormFieldRelate extends CFormField
 
 		$doTask = JURI::root(TRUE) . '/index.php?option=com_joomcck&view=elements&layout=records&tmpl=component&section_id=' .
 			$section_id . '&filter_type=' . $type_id . '&mode=form&field_id=' . $this->id;
-		if(!in_array($this->params->get('params.strict_to_user'), JFactory::getUser()->getAuthorisedViewLevels()))
+		if(!in_array($this->params->get('params.strict_to_user'), \Joomla\CMS\Factory::getUser()->getAuthorisedViewLevels()))
 		{
-			$doTask .= '&user_id=' . JFactory::getUser()->get('id', 1);
+			$doTask .= '&user_id=' . \Joomla\CMS\Factory::getUser()->get('id', 1);
 		}
 		ob_start();
 		?>
@@ -317,13 +317,13 @@ class  CFormFieldRelate extends CFormField
 		</style>
 		<div id="parent_list<?php echo $this->id; ?>"></div>
 		<a data-toggle="modal" role="button" class="btn btn-sm btn-warning"
-		   href="#modal<?php echo $this->id; ?>"><?php echo JText::_($this->params->get('params.control_label')) ?></a>
+		   href="#modal<?php echo $this->id; ?>"><?php echo \Joomla\CMS\Language\Text::_($this->params->get('params.control_label')) ?></a>
 
 		<div style="width:770px;" class="modal hide fade" id="modal<?php echo $this->id; ?>" tabindex="-1"
 			 role="dialog">
 			<div class="modal-header">
 				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-				<h3 id="myModalLabel"><?php echo $app->input->get('view') == 'records' ? JText::_('Select Children') : JText::_('FS_ATTACHEXIST'); ?></h3>
+				<h3 id="myModalLabel"><?php echo $app->input->get('view') == 'records' ? \Joomla\CMS\Language\Text::_('Select Children') : \Joomla\CMS\Language\Text::_('FS_ATTACHEXIST'); ?></h3>
 			</div>
 
 			<div class="modal-body" style="overflow-x: hidden; max-height:650px; padding:0;">
@@ -364,13 +364,13 @@ class  CFormFieldRelate extends CFormField
 					<?php else: ?>
 					lis = elementslist<?php echo $this->id; ?>.children('div.alert');
 					if (lis.length >= limit<?php echo $this->id; ?>) {
-						alert('<?php echo JText::sprintf('CSELECTLIMIT', $this->params->get('params.multi_limit'));?>');
+						alert('<?php echo \Joomla\CMS\Language\Text::sprintf('CSELECTLIMIT', $this->params->get('params.multi_limit'));?>');
 						return false;
 					}
 					error = 0;
 					$.each(lis, function (k, v) {
 						if ($(v).attr('rel') == id) {
-							alert('<?php echo JText::_('CALREADYSELECTED');?>');
+							alert('<?php echo \Joomla\CMS\Language\Text::_('CALREADYSELECTED');?>');
 							error = 1;
 						}
 					});
@@ -424,7 +424,7 @@ class  CFormFieldRelate extends CFormField
 			$attribs .= ' size="' . (count($list) > 20 ? 20 : count($list)) . '"';
 		}
 		$html[] = '<joomla-field-fancy-select>';
-		$html[] = JHtml::_('select.genericlist', $list, $name, $attribs, 'value', 'text', $default);
+		$html[] = \Joomla\CMS\HTML\HTMLHelper::_('select.genericlist', $list, $name, $attribs, 'value', 'text', $default);
 		$html[] = '</joomla-field-fancy-select>';
 
 		Factory::getApplication()->getDocument()->getWebAssetManager()
@@ -437,7 +437,7 @@ class  CFormFieldRelate extends CFormField
 	protected function _render($client, $record, $field_id, $type_id, $section_id, $view_what)
 	{
 		$html = $links = array();
-		$app  = JFactory::getApplication();
+		$app  = \Joomla\CMS\Factory::getApplication();
 
 		if(in_array($record->id, $this->_get_skiper()))
 		{
@@ -459,15 +459,15 @@ class  CFormFieldRelate extends CFormField
 
 		$this->show_btn_new = $this->show_btn_exist = $this->show_btn_all = NULL;
 
-		if(in_array($this->params->get('params.add_more_access'), JFactory::getUser()->getAuthorisedViewLevels()))
+		if(in_array($this->params->get('params.add_more_access'), \Joomla\CMS\Factory::getUser()->getAuthorisedViewLevels()))
 		{
 			$this->show_btn_new = TRUE;
 		}
-		if($this->params->get('params.add_more_access_auth') && (JFactory::getUser()->get('id') == $record->user_id && $record->user_id))
+		if($this->params->get('params.add_more_access_auth') && (\Joomla\CMS\Factory::getUser()->get('id') == $record->user_id && $record->user_id))
 		{
 			$this->show_btn_new = TRUE;
 		}
-		if($this->params->get('params.add_more_access') == '-1' && JFactory::getUser()->get('id') == $record->user_id && $record->user_id)
+		if($this->params->get('params.add_more_access') == '-1' && \Joomla\CMS\Factory::getUser()->get('id') == $record->user_id && $record->user_id)
 		{
 			$this->show_btn_new = TRUE;
 		}
@@ -476,15 +476,15 @@ class  CFormFieldRelate extends CFormField
 			$this->show_btn_new = NULL;
 		}
 
-		if(in_array($this->params->get('params.add_existing'), JFactory::getUser()->getAuthorisedViewLevels()))
+		if(in_array($this->params->get('params.add_existing'), \Joomla\CMS\Factory::getUser()->getAuthorisedViewLevels()))
 		{
 			$this->show_btn_exist = TRUE;
 		}
-		if($this->params->get('params.add_existing_auth') && (JFactory::getUser()->get('id') == $record->user_id && $record->user_id))
+		if($this->params->get('params.add_existing_auth') && (\Joomla\CMS\Factory::getUser()->get('id') == $record->user_id && $record->user_id))
 		{
 			$this->show_btn_exist = TRUE;
 		}
-		if($this->params->get('params.add_existing') == '-1' && JFactory::getUser()->get('id') == $record->user_id && $record->user_id)
+		if($this->params->get('params.add_existing') == '-1' && \Joomla\CMS\Factory::getUser()->get('id') == $record->user_id && $record->user_id)
 		{
 			$this->show_btn_exist = TRUE;
 		}
@@ -512,12 +512,12 @@ class  CFormFieldRelate extends CFormField
 		}
 
 
-		if($this->content['html'] && ($this->content['total'] >= $this->params->get('params.limit_' . $client, 10)) && in_array($this->params->get('params.show_list_all'), JFactory::getUser()->getAuthorisedViewLevels()) && $this->params->get('params.show_list_all_' . $client))
+		if($this->content['html'] && ($this->content['total'] >= $this->params->get('params.limit_' . $client, 10)) && in_array($this->params->get('params.show_list_all'), \Joomla\CMS\Factory::getUser()->getAuthorisedViewLevels()) && $this->params->get('params.show_list_all_' . $client))
 		{
 			// comparability with easysocial
 			$file = JPATH_ADMINISTRATOR . '/components/com_joomcck/tables/field.php';
 			require_once $file;
-			$db    = JFactory::getDbo();
+			$db    = \Joomla\CMS\Factory::getDbo();
 			$field = new JoomcckTableField($db);
 			$field->load($this->params->get('params.' . ($this->type == 'parent' ? 'child' : 'parent') . '_field'));
 			$this->field_key = $field->key;
@@ -558,7 +558,7 @@ class  CFormFieldRelate extends CFormField
 		{
 			if(is_array($value) && count($value) > $this->params->get('params.multi_limit'))
 			{
-				$this->setError(JText::sprintf('CSELECTLIMITF', $this->params->get('params.multi_limit'), $this->label));
+				$this->setError(\Joomla\CMS\Language\Text::sprintf('CSELECTLIMITF', $this->params->get('params.multi_limit'), $this->label));
 			}
 		}
 
@@ -594,11 +594,11 @@ class  CFormFieldRelate extends CFormField
 		}
 		if($this->required)
 		{
-			$js .= "\n\t\tif(!selected{$this->id}){hfid.push({$this->id}); isValid = false; errorText.push('" . addslashes(JText::sprintf('CFIELDREQUIRED', $this->label)) . "');}";
+			$js .= "\n\t\tif(!selected{$this->id}){hfid.push({$this->id}); isValid = false; errorText.push('" . addslashes(\Joomla\CMS\Language\Text::sprintf('CFIELDREQUIRED', $this->label)) . "');}";
 		}
 		if($this->params->get('params.multi_limit'))
 		{
-			$js .= "\n\t\tif(selected{$this->id} > " . $this->params->get('params.multi_limit') . ") {hfid.push({$this->id}); isValid = false; errorText.push('" . addslashes(JText::sprintf('CSELECTLIMIT', $this->params->get('params.multi_limit'))) . "');}";
+			$js .= "\n\t\tif(selected{$this->id} > " . $this->params->get('params.multi_limit') . ") {hfid.push({$this->id}); isValid = false; errorText.push('" . addslashes(\Joomla\CMS\Language\Text::sprintf('CSELECTLIMIT', $this->params->get('params.multi_limit'))) . "');}";
 		}
 
 		return $js;
@@ -613,7 +613,7 @@ class  CFormFieldRelate extends CFormField
 			settype($value, 'array');
 			$value[] = 0;
 
-			$db  = JFactory::getDbo();
+			$db  = \Joomla\CMS\Factory::getDbo();
 			$sql = "SELECT title FROM #__js_res_record WHERE id IN(" . implode(',', $value) . ")";
 			$db->setQuery($sql);
 
@@ -630,7 +630,7 @@ class  CFormFieldRelate extends CFormField
 
 	public function onAttachExisting($params, $record)
 	{
-		$db = JFactory::getDbo();
+		$db = \Joomla\CMS\Factory::getDbo();
 
 		$table = JTable::getInstance('Record_values', 'JoomcckTable');
 
@@ -675,7 +675,7 @@ class  CFormFieldRelate extends CFormField
 
 		$save['field_label'] = $field->label;
 		$save['field_key'] 	= $field->key;
-		$save['user_id'] 	= JFactory::getUser()->get('id');
+		$save['user_id'] 	= \Joomla\CMS\Factory::getUser()->get('id');
 		$save['section_id'] = $this->_getChildSectionId($save['field_id']);
 		$save['type_id'] 	= ($params['field'] == 'child' ?
 			$this->type_id : MModelBase::getInstance('Tfields', 'JoomcckModel')->getFieldTypeId($save['field_id']));
@@ -694,7 +694,7 @@ class  CFormFieldRelate extends CFormField
 
 	private function _getChildSectionId($field_id)
 	{
-		$db = JFactory::getDbo();
+		$db = \Joomla\CMS\Factory::getDbo();
 		$db->setQuery("SELECT section_id from #__js_res_record_values WHERE field_id = {$field_id} AND field_type = 'child'");
 
 		return $db->loadResult();
@@ -702,7 +702,7 @@ class  CFormFieldRelate extends CFormField
 
 	public function _get_skiper()
 	{
-		$app = JFactory::getApplication();
+		$app = \Joomla\CMS\Factory::getApplication();
 
 		return $app->getUserState('skipers.all', array());
 	}
@@ -714,7 +714,7 @@ class  CFormFieldRelate extends CFormField
             return [];
 
 
-		$db = JFactory::getDbo();
+		$db = \Joomla\CMS\Factory::getDbo();
 		if($view_what == 'show_parents')
 		{
 			$db->setQuery("SELECT field_value FROM #__js_res_record_values WHERE record_id = {$record_id} AND field_id = {$field_id}");
@@ -756,12 +756,12 @@ class  CFormFieldRelate extends CFormField
         if(empty($id))
             return false;
 
-		$db  = JFactory::getDbo();
+		$db  = \Joomla\CMS\Factory::getDbo();
 		$sql = "SELECT params FROM `#__js_res_fields` WHERE id = " . $id;
 
 
 		$db->setQuery($sql);
-		$params = new JRegistry($db->loadResult());
+		$params = new \Joomla\Registry\Registry($db->loadResult());
 
 		$out[$id] = $params;
 

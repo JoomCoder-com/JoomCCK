@@ -19,9 +19,9 @@ class JoomcckViewAuditlog extends MViewBase
 
 	function display($tpl = NULL)
 	{
-		$doc  = JFactory::getDocument();
-		$user = JFactory::getUser();
-		$app  = JFactory::getApplication();
+		$doc  = \Joomla\CMS\Factory::getDocument();
+		$user = \Joomla\CMS\Factory::getUser();
+		$app  = \Joomla\CMS\Factory::getApplication();
 		$this->params = Factory::getApplication()->getMenu()->getActive()->getParams();
 
 		$model = MModelBase::getInstance('Auditlog', 'JoomcckModel');
@@ -29,11 +29,11 @@ class JoomcckViewAuditlog extends MViewBase
 
 		$record = $sections = $types = NULL;
 
-		$record_id = JFactory::getApplication()->input->getInt('record_id');
+		$record_id = \Joomla\CMS\Factory::getApplication()->input->getInt('record_id');
 		if($record_id)
 		{
 			$app->setUserState('com_joomcck.auditlog.filter.search', 'rid:' . $record_id);
-			$app->redirect(JRoute::_('index.php?option=com_joomcck&view=auditlog', FALSE));
+			$app->redirect(\Joomla\CMS\Router\Route::_('index.php?option=com_joomcck&view=auditlog', FALSE));
 		}
 
 
@@ -41,7 +41,7 @@ class JoomcckViewAuditlog extends MViewBase
 
 		if(!$user->id)
 		{
-			Factory::getApplication()->enqueueMessage( JText::_('CERRMSGALACCESS'),'warning');
+			Factory::getApplication()->enqueueMessage( \Joomla\CMS\Language\Text::_('CERRMSGALACCESS'),'warning');
 			return;
 		}
 
@@ -56,7 +56,7 @@ class JoomcckViewAuditlog extends MViewBase
 			foreach($sections as $name)
 			{
 				$this->sections[] = JHTML::_('select.option', $name->id, $name->name . ' <span class="badge bg-light text-muted border">' . $name->total . '</span>');
-				$s_params = new JRegistry($name->params);
+				$s_params = new \Joomla\Registry\Registry($name->params);
 				$this->versions[$name->id] = $s_params->get('audit.versioning');
 			}
 		}
@@ -92,7 +92,7 @@ class JoomcckViewAuditlog extends MViewBase
 				$type = $types[$item->type_id];
 
 				$format                = $type->params->get('audit.audit_date_format', $type->params->get('audit.audit_date_custom', 'd M Y h:i:s'));
-				$items[$k]->date       = JHtml::_('date', $item->ctime, $format);
+				$items[$k]->date       = \Joomla\CMS\HTML\HTMLHelper::_('date', $item->ctime, $format);
 				$items[$k]->categories = (empty($item->categories) ? NULL : json_decode($item->categories));
 			}
 		}
@@ -100,11 +100,11 @@ class JoomcckViewAuditlog extends MViewBase
 
 
 
-		$db = JFactory::getDbo();
+		$db = \Joomla\CMS\Factory::getDbo();
 		$db->setQuery("SELECT MIN(ctime) FROM #__js_res_audit_log");
 		$mtime = $db->loadResult();
 		if($mtime)
-			$this->mtime = JHtml::_('date', $mtime, $format);
+			$this->mtime = \Joomla\CMS\HTML\HTMLHelper::_('date', $mtime, $format);
 
 		$this->items      = $items;
 		$this->pagination = $model->getPagination();

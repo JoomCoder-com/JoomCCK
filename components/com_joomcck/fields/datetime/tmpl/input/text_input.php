@@ -9,7 +9,7 @@
  */
 defined('_JEXEC') or die();
 
-$doc = JFactory::getDocument();
+$doc = \Joomla\CMS\Factory::getDocument();
 $doc->addScript(JURI::root(TRUE) . '/media/com_joomcck/vendors/jquery.inputmask/dist/min/inputmask/inputmask.min.js');
 $doc->addScript(JURI::root(TRUE) . '/media/com_joomcck/vendors/jquery.inputmask/dist/min/inputmask/inputmask.date.extensions.min.js');
 $doc->addScript(JURI::root(TRUE) . '/media/com_joomcck/vendors/jquery.inputmask/dist/min/inputmask/inputmask.numeric.extensions.min.js');
@@ -29,7 +29,7 @@ $default = $this->default ? date($php_format, strtotime($this->default)) : '';
 ?>
 
 <input type="text" value="<?php echo $default; ?>" name="dp_text_<?php echo $this->id; ?>" <?php echo $class . $required; ?> id="dp_text_field_<?php echo $this->id; ?>" data-inputmask="'mask': '<?php echo $mask ?>'"/>
-<p><small><?php echo JText::_('F_FORMAT') ?>: <?php echo $comment_format ?></small></p>
+<p><small><?php echo \Joomla\CMS\Language\Text::_('F_FORMAT') ?>: <?php echo $comment_format ?></small></p>
 
 <input type="hidden" id="picker<?php echo $this->id; ?>" class="input" name="jform[fields][<?php echo $this->id; ?>][]" value="<?php echo $this->default ?>" />
 

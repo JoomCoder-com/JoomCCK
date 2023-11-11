@@ -14,7 +14,7 @@ class JFormFieldCTelephone extends CFormField
 {
 	public function getInput()
 	{
-		$document = JFactory::getDocument();
+		$document = \Joomla\CMS\Factory::getDocument();
 // 		$document->addScript(JURI::root(TRUE) . '/media/com_joomcck/js/autocomplete/mootools-autocompleter-1.2.js');
 // 		$document->addStyleSheet(JURI::root(TRUE) . '/media/com_joomcck/js/autocomplete/autocompleter.css');
 		$document->addScript(JURI::root(TRUE) . '/media/com_joomcck/vendors/bootstrap-pills/js/bootstrap-typeahead.js');
@@ -37,11 +37,11 @@ class JFormFieldCTelephone extends CFormField
 
 		if ($this->required)
 		{
-			$js .= "\n\t\tif(c == '' ||  t == ''){ hfid.push({$this->id}); isValid = false; errorText.push('" . addslashes(JText::sprintf('CFIELDREQUIRED', $this->label)) . "');}";
+			$js .= "\n\t\tif(c == '' ||  t == ''){ hfid.push({$this->id}); isValid = false; errorText.push('" . addslashes(\Joomla\CMS\Language\Text::sprintf('CFIELDREQUIRED', $this->label)) . "');}";
 		}
 
 		$js .= "\n\t\t
-		if( ((c!='' || r!='') && t=='') || (t!='' && (c=='')) ) {hfid.push({$this->id}); isValid = false; errorText.push('" . addslashes(JText::sprintf('CFIELDINCORRECT', $this->label)) . "');}";
+		if( ((c!='' || r!='') && t=='') || (t!='' && (c=='')) ) {hfid.push({$this->id}); isValid = false; errorText.push('" . addslashes(\Joomla\CMS\Language\Text::sprintf('CFIELDINCORRECT', $this->label)) . "');}";
 		return $js;
 	}
 
@@ -49,12 +49,12 @@ class JFormFieldCTelephone extends CFormField
 	{
 		if($this->required && ($value['country'] == '' && $value['region'] == '' && $value['tel'] == ''))
 		{
-				$this->setError(JText::sprintf('CFIELDREQUIRED', $this->label));
+				$this->setError(\Joomla\CMS\Language\Text::sprintf('CFIELDREQUIRED', $this->label));
 				return FALSE;
 		}
 		if ( (($value['country'] == '' || $value['region'] == '') && $value['tel'] != '') || ( ($value['country'] != '' || $value['region'] != '') && $value['tel'] == '' ) )
 		{
-			$this->setError(JText::sprintf('CFIELDINCORRECT', $this->label));
+			$this->setError(\Joomla\CMS\Language\Text::sprintf('CFIELDINCORRECT', $this->label));
 			return FALSE;
 		}
 		return parent::validateField($value, $record, $type, $section);
@@ -99,7 +99,7 @@ class JFormFieldCTelephone extends CFormField
 
 	public function onRenderFilter($section, $module = false)
 	{
-		$document = JFactory::getDocument();
+		$document = \Joomla\CMS\Factory::getDocument();
 		$document->addStyleSheet(JURI::root(TRUE) . '/components/com_joomcck/fields/telephone/telephone.css');
 		$document->addScript(JURI::root(TRUE) . '/components/com_joomcck/fields/telephone/telephone.js');
 
@@ -140,7 +140,7 @@ class JFormFieldCTelephone extends CFormField
 	private function _render($client, $record, $type, $section )
 	{
 		if(!$this->value) return ;
-		JFactory::getDocument()->addStyleSheet(JURI::root(TRUE) . '/components/com_joomcck/fields/telephone/telephone.css');
+		\Joomla\CMS\Factory::getDocument()->addStyleSheet(JURI::root(TRUE) . '/components/com_joomcck/fields/telephone/telephone.css');
 
 		$value = $this->value;
 		$f_value = '';
@@ -148,13 +148,13 @@ class JFormFieldCTelephone extends CFormField
 		{
 			$f_value = implode('.', $value);
 
-			$this->qrvalue = urlencode(JText::sprintf('+%d%d%d%s', $value['country'], $value['region'], $value['tel'], isset($value['ext']) ? $value['ext'] : ''));
+			$this->qrvalue = urlencode(\Joomla\CMS\Language\Text::sprintf('+%d%d%d%s', $value['country'], $value['region'], $value['tel'], isset($value['ext']) ? $value['ext'] : ''));
 
 			$value = $this->_getFormated($value);
 		}
 		if ($this->params->get('params.filter_enable'))
 		{
-			$tip = ($this->params->get('params.filter_tip') ? JText::sprintf($this->params->get('params.filter_tip'), '<b>' . $this->label . '</b>', '<b>' . $value . '</b>') : NULL);
+			$tip = ($this->params->get('params.filter_tip') ? \Joomla\CMS\Language\Text::sprintf($this->params->get('params.filter_tip'), '<b>' . $this->label . '</b>', '<b>' . $value . '</b>') : NULL);
 
 			switch ($this->params->get('params.filter_linkage'))
 			{
@@ -177,7 +177,7 @@ class JFormFieldCTelephone extends CFormField
 	{
 		if (!$value)
 			return;
-		$db = JFactory::getDbo();
+		$db = \Joomla\CMS\Factory::getDbo();
 		$code1 = $value['country'] . '-' . $value['region'];
 		$code2 = $value['country'];
 		$sql = "SELECT * FROM `#__js_res_field_telephone` where phone_code = '$code1'";
@@ -193,14 +193,14 @@ class JFormFieldCTelephone extends CFormField
 
 	public function onGetCountriesCode($post)
 	{
-		$db = JFactory::getDbo();
+		$db = \Joomla\CMS\Factory::getDbo();
 		$word = $this->request->getWord('q');
 		$code = $this->request->getInt('q');
 		if ($code)
 			$where[] = "phone_code like '$code%'";
 		if ($word)
 			$where[] = "name like '%$word%'";
-		$db = JFactory::getDbo();
+		$db = \Joomla\CMS\Factory::getDbo();
 		$query = $db->getQuery(true);
 		$query->select("*");
 		$query->from('#__js_res_field_telephone');
@@ -211,13 +211,13 @@ class JFormFieldCTelephone extends CFormField
 		foreach($result as $k => $val)
 		{
 			$data[$k] = new stdClass();
-			$data[$k]->label = JText::_($val->name).' (+' . JText::_($val->phone_code) . ')';//$val->phone_code;
+			$data[$k]->label = \Joomla\CMS\Language\Text::_($val->name).' (+' . \Joomla\CMS\Language\Text::_($val->phone_code) . ')';//$val->phone_code;
 			$data[$k]->value = $val->phone_code;
 
 			$data[$k]->flag = '';
-			if(JFile::exists(JPATH_ROOT.'/media/com_joomcck/icons/flag/16/' . \Joomla\String\StringHelper::strtolower($val->code2) . '.png'))
+			if(\Joomla\CMS\Filesystem\File::exists(JPATH_ROOT.'/media/com_joomcck/icons/flag/16/' . \Joomla\String\StringHelper::strtolower($val->code2) . '.png'))
 			{
-				$data[$k]->flag = '<img src="' . JURI::root(TRUE) . '/media/com_joomcck/icons/flag/16/' . \Joomla\String\StringHelper::strtolower($val->code2) . '.png" border="0" align="absmiddle" alt="' . JText::_($val->name) . '">';
+				$data[$k]->flag = '<img src="' . JURI::root(TRUE) . '/media/com_joomcck/icons/flag/16/' . \Joomla\String\StringHelper::strtolower($val->code2) . '.png" border="0" align="absmiddle" alt="' . \Joomla\CMS\Language\Text::_($val->name) . '">';
 			}
 		}
 		return $data;
@@ -225,7 +225,7 @@ class JFormFieldCTelephone extends CFormField
 
 	public function onFilterData($post, $record)
 	{
-		$db = JFactory::getDbo();
+		$db = \Joomla\CMS\Factory::getDbo();
 		$q = $this->request->get('q');
 		$q = $db->escape($q);
 

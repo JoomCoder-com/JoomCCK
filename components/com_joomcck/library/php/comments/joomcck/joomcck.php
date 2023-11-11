@@ -25,7 +25,7 @@ class JoomcckCommentsJoomcck extends JoomcckComments
 			return $out[$item->id];
 		}
 
-		$db    = JFactory::getDbo();
+		$db    = \Joomla\CMS\Factory::getDbo();
 		$query = $db->getQuery(TRUE);
 		$query->select("count(*)");
 		$query->from("#__js_res_record");
@@ -53,14 +53,14 @@ class JoomcckCommentsJoomcck extends JoomcckComments
 			return;
 		}
 
-		$data->user   = JFactory::getUser();
+		$data->user   = \Joomla\CMS\Factory::getUser();
 		if(!in_array($data->params->get('comments.access', 1), $data->user->getAuthorisedViewLevels()))
 		{
 			return;
 		}
 
 		$data->item    = $item;
-		$data->app     = JFactory::getApplication();
+		$data->app     = \Joomla\CMS\Factory::getApplication();
 		$data->stype   = ItemsStore::getType($data->params->get('comments.type_id'));
 		$data->section = ItemsStore::getSection($data->params->get('comments.section_id'));
 
@@ -108,14 +108,14 @@ class JoomcckCommentsJoomcck extends JoomcckComments
 			$data->url_all .= '&parent_id=' . $data->item->id;
 			$data->url_all .= '&parent=' . $data->app->input->get('option');
 			$data->url_all .= '&view_what=children';
-			$data->url_all .= '&page_title=' . urlencode(base64_encode(JText::sprintf($data->params->get('comments.title2', 'All discussions of %s'), $data->item->title)));
+			$data->url_all .= '&page_title=' . urlencode(base64_encode(\Joomla\CMS\Language\Text::sprintf($data->params->get('comments.title2', 'All discussions of %s'), $data->item->title)));
 			$data->url_all .= '&Itemid=' . $data->section->params->get('general.category_itemid');
 			$data->url_all .= '&return=' . Url::back();
 		}
 
 		if($data->params->get('comments.rating') && $data->records['total'])
 		{
-			$db    = JFactory::getDbo();
+			$db    = \Joomla\CMS\Factory::getDbo();
 			$query = $db->getQuery(TRUE);
 			$query->select("AVG(votes_result)");
 			$query->from("#__js_res_record");
@@ -147,7 +147,7 @@ class JoomcckCommentsJoomcck extends JoomcckComments
 
 	public function getIndex($type, $item)
 	{
-		$db = JFactory::getDbo();
+		$db = \Joomla\CMS\Factory::getDbo();
 
 		$db->setQuery("SELECT fieldsdata FROM #__js_res_record WHERE published = 1 AND hidden = 0 AND parent_id = {$item->id} AND parent = 'com_joomcck'");
 		$list = $db->loadColumn();

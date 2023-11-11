@@ -39,14 +39,14 @@ class JFormFieldMeuser extends JFormField
 		// Initialize variables.
 		$html = array();
 
-// 		$params = JComponentHelper::getParams('com_joomcck');
-// 		if($params->get('moderator', -1) != JFactory::getUser()->get('id'))
+// 		$params = \Joomla\CMS\Component\ComponentHelper::getParams('com_joomcck');
+// 		if($params->get('moderator', -1) != \Joomla\CMS\Factory::getUser()->get('id'))
 // 		{
-// 			$user = JFactory::getUser(\Joomla\CMS\Factory::getApplication()->input->getInt('user_id'));
+// 			$user = \Joomla\CMS\Factory::getUser(\Joomla\CMS\Factory::getApplication()->input->getInt('user_id'));
 // 			$html[] =
 // 		}
-		$section_id = JFactory::getApplication()->input->getInt('section_id', 0);
-		$type_id = JFactory::getApplication()->input->getInt('type_id', '');
+		$section_id = \Joomla\CMS\Factory::getApplication()->input->getInt('section_id', 0);
+		$type_id = \Joomla\CMS\Factory::getApplication()->input->getInt('type_id', '');
 		if($type_id)
 		{
 			$type_id = '&amp;type_id='.$type_id;
@@ -64,7 +64,7 @@ class JFormFieldMeuser extends JFormField
 		$onchange = (string) $this->element['onchange'];
 
 		// Load the modal behavior script.
-		JHtml::_('bootstrap.modal');
+		\Joomla\CMS\HTML\HTMLHelper::_('bootstrap.modal');
 
 		// Build the script.
 		$script = array();
@@ -81,14 +81,14 @@ class JFormFieldMeuser extends JFormField
 		$script[] = '});';
 
 		// Add the script to the document head.
-		JFactory::getDocument()->addScriptDeclaration(implode("\n", $script));
+		\Joomla\CMS\Factory::getDocument()->addScriptDeclaration(implode("\n", $script));
 
 		// Load the current username if available.
-		$table = JTable::getInstance('user');
+		$table = \Joomla\CMS\Table\Table::getInstance('user');
 		if ($this->value) {
 			$table->load($this->value);
 		} else {
-			$table->username = JText::_('JLIB_FORM_SELECT_USER');
+			$table->username = \Joomla\CMS\Language\Text::_('JLIB_FORM_SELECT_USER');
 		}
 
 		// Create a dummy text field with the user name.
@@ -102,12 +102,12 @@ class JFormFieldMeuser extends JFormField
 		// Create the user select button.
 		if ($this->element['readonly'] != 'true')
 		{
-			/*$html[] = '		<a class="modal_'.$this->id.' memodal-button" title="'.JText::_('JLIB_FORM_CHANGE_USER').'"' .
+			/*$html[] = '		<a class="modal_'.$this->id.' memodal-button" title="'.\Joomla\CMS\Language\Text::_('JLIB_FORM_CHANGE_USER').'"' .
 							' href="'.$link.'"' .
 							' rel="{handler: \'iframe\', size: {x: 800, y: 500}}">';
-			$html[] = '			'.JText::_('JLIB_FORM_CHANGE_USER').'</a>';*/
+			$html[] = '			'.\Joomla\CMS\Language\Text::_('JLIB_FORM_CHANGE_USER').'</a>';*/
 			$html[] = '<a class="btn btn-outline-primary" href="#usersmodal" data-bs-toggle="modal" role="button">';
-			$html[] = '<i class="fas fa-user"></i> '.JText::_('CSELECT').'</a>';//.JText::_('JLIB_FORM_CHANGE_USER')
+			$html[] = '<i class="fas fa-user"></i> '.\Joomla\CMS\Language\Text::_('CSELECT').'</a>';//.\Joomla\CMS\Language\Text::_('JLIB_FORM_CHANGE_USER')
 		}
  		$html[] = '</div>';
 
@@ -115,11 +115,11 @@ class JFormFieldMeuser extends JFormField
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title">'.JText::_('CFINDUSER').'</h5>
+        <h5 class="modal-title">'.\Joomla\CMS\Language\Text::_('CFINDUSER').'</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <iframe frameborder="0" width="100%" height="410px" src="'.JRoute::_($link).'"></iframe>
+        <iframe frameborder="0" width="100%" height="410px" src="'.\Joomla\CMS\Router\Route::_($link).'"></iframe>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>

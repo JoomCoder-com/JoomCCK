@@ -18,12 +18,12 @@ $data = $displayData;
 <?php endif; ?>
 
 <?php if($data->item->params->get('comments.comments_access_post', 1) === 0 && $data->records['total']): ?>
-	<div class="alert alert-warning"><?php echo JText::_('CMSG_COMMENTSDISABLED') ?></div>
+	<div class="alert alert-warning"><?php echo \Joomla\CMS\Language\Text::_('CMSG_COMMENTSDISABLED') ?></div>
 <?php endif; ?>
 
 <?php if(!empty($data->rating)): ?>
 	<div id="rating-block" class="float-end">
-		<?php echo JText::_('CTOTALRATING') ?>:
+		<?php echo \Joomla\CMS\Language\Text::_('CTOTALRATING') ?>:
 		<?php echo RatingHelp::loadRating($data->params->get('comments.tmpl_rating', 'default'), $data->rating, 0, 0, 'Joomcck.ItemRatingCallBack', 0, 0) ?>
 	</div>
 <?php endif; ?>
@@ -34,7 +34,7 @@ $data = $displayData;
 	))
 ): ?>
 	<a class="<?php echo $data->params->get('comments.new_class', 'btn btn-primary btn-large') ?>"
-	   href="<?php echo JRoute::_($data->url_new) ?>">
+	   href="<?php echo \Joomla\CMS\Router\Route::_($data->url_new) ?>">
 		<?php echo $data->params->get('comments.button') ?>
 	</a>
 <?php endif; ?>
@@ -49,13 +49,13 @@ $data = $displayData;
 	))
 ): ?>
 	<a class="<?php echo $data->params->get('comments.new_class', 'btn btn-primary btn-large') ?>"
-	   href="<?php echo JRoute::_($data->url_new) ?>">
+	   href="<?php echo \Joomla\CMS\Router\Route::_($data->url_new) ?>">
 		<?php echo $data->params->get('comments.button') ?>
 	</a>
 <?php endif; ?>
 
 <?php if(!empty($data->url_all)): ?>
-	<a class="btn btn-large" href="<?php echo JRoute::_($data->url_all) ?>">
+	<a class="btn btn-large" href="<?php echo \Joomla\CMS\Router\Route::_($data->url_all) ?>">
 		<?php echo $data->params->get('comments.button2') ?>
 	</a>
 <?php endif; ?>

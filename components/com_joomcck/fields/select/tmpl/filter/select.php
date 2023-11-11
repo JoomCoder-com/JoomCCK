@@ -16,7 +16,7 @@ foreach($this->values as $k => $value)
 		continue;
 	$c = explode('^', $value->field_value);
 	ArrayHelper::clean_r($c);
-	$label = JText::_(strip_tags($c[0]));
+	$label = \Joomla\CMS\Language\Text::_(strip_tags($c[0]));
 
 	$list[$k] = new stdClass();
 	$list[$k]->text = $label;
@@ -27,6 +27,6 @@ foreach($this->values as $k => $value)
 	$list[$k]->value = $value->field_value;
 }
 
-array_unshift($list, JHtml::_('select.option', '', JText::_($this->params->get('params.'.($this->params->get('params.sql_source') ? "sql_" : null).'label', JText::sprintf('CCSELETFIELD', $this->label)))));
+array_unshift($list, \Joomla\CMS\HTML\HTMLHelper::_('select.option', '', \Joomla\CMS\Language\Text::_($this->params->get('params.'.($this->params->get('params.sql_source') ? "sql_" : null).'label', \Joomla\CMS\Language\Text::sprintf('CCSELETFIELD', $this->label)))));
 
-echo JHtml::_('select.genericlist', $list, "filters[{$this->key}][value]", "class='form-select'", 'value', 'text', $default);
+echo \Joomla\CMS\HTML\HTMLHelper::_('select.genericlist', $list, "filters[{$this->key}][value]", "class='form-select'", 'value', 'text', $default);

@@ -54,10 +54,10 @@ JHTML::_('bootstrap.tooltip', '*[rel^="tooltip"]');
 			<?php echo ($this->params->get('params.allow_edit_title', 0) && $file->title ? $file->title : $file->realname);?>
 			</a>
 			<?php if($this->hits):?>
-				<small><?php echo JText::_('CHITS');?>: <span style="color:purple"><?php echo (int)$file->hits?></span></small>
+				<small><?php echo \Joomla\CMS\Language\Text::_('CHITS');?>: <span style="color:purple"><?php echo (int)$file->hits?></span></small>
 			<?php endif;?>
 			<?php if($this->size):?>
-				<small><?php echo JText::_('CSIZE');?>: <span style="color:green"><?php echo HTMLFormatHelper::formatSize($file->size);?></span></small>
+				<small><?php echo \Joomla\CMS\Language\Text::_('CSIZE');?>: <span style="color:green"><?php echo HTMLFormatHelper::formatSize($file->size);?></span></small>
 			<?php endif;?>
 			
 		</li>

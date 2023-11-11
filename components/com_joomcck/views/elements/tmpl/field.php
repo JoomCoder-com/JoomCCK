@@ -8,11 +8,11 @@
  */
 defined('_JEXEC') or die();
 ?>
-<?php if(JFactory::getApplication()->input->getInt('width')):?>
+<?php if(\Joomla\CMS\Factory::getApplication()->input->getInt('width')):?>
 <style>
 <!--
 body, body div {
-	max-width:<?php echo JFactory::getApplication()->input->getInt('width');?>px !important;
+	max-width:<?php echo \Joomla\CMS\Factory::getApplication()->input->getInt('width');?>px !important;
     overflow-y: auto !important;
 }
 -->

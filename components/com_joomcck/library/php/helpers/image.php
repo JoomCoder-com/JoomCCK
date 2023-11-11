@@ -30,7 +30,7 @@ class CImgHelper {
 	{
 		static $resizer = null;
 
-		if(!JFile::exists($file))
+		if(!\Joomla\CMS\Filesystem\File::exists($file))
 		{
 			return;
 		}
@@ -38,32 +38,32 @@ class CImgHelper {
 
 
 		$key = md5($file.$width.$height.implode('-', $options));
-		$options = new JRegistry($options);
+		$options = new \Joomla\Registry\Registry($options);
 		$index = '';
-		$ext = strtolower(JFile::getExt($file));
+		$ext = strtolower(\Joomla\CMS\Filesystem\File::getExt($file));
 
 		$path = JPATH_ROOT. DIRECTORY_SEPARATOR .'images/joomcck_thumbs'. DIRECTORY_SEPARATOR .$folder.DIRECTORY_SEPARATOR;
 
 
 
 
-        if(!JFolder::exists($path))
+        if(!\Joomla\CMS\Filesystem\Folder::exists($path))
         {
-        	JFolder::create($path, 0755);
-        	JFile::write($path. DIRECTORY_SEPARATOR .'index.html', $index);
+        	\Joomla\CMS\Filesystem\Folder::create($path, 0755);
+        	\Joomla\CMS\Filesystem\File::write($path. DIRECTORY_SEPARATOR .'index.html', $index);
         }
 
 		$path .= (int)$user_id.DIRECTORY_SEPARATOR;
 
-        if(!JFolder::exists($path))
+        if(!\Joomla\CMS\Filesystem\Folder::exists($path))
         {
-        	JFolder::create($path, 0755);
-        	JFile::write($path. DIRECTORY_SEPARATOR .'index.html', $index);
+        	\Joomla\CMS\Filesystem\Folder::create($path, 0755);
+        	\Joomla\CMS\Filesystem\File::write($path. DIRECTORY_SEPARATOR .'index.html', $index);
         }
 
         $img = $path.$key.'.'.$ext;
 
-		if(!JFile::exists($img))
+		if(!\Joomla\CMS\Filesystem\File::exists($img))
 		{
 
 			$resizer = new ImageResize($file);

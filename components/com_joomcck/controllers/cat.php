@@ -26,13 +26,13 @@ class JoomcckControllerCat extends MControllerForm
 
 	public function postSaveHook(MModelBase $model, $validData = array())
 	{
-		$app = JFactory::getApplication();
+		$app = \Joomla\CMS\Factory::getApplication();
 		$section = JTable::getInstance('Section', 'JoomcckTable');
 		$section->load($app->input->getInt('section_id'));
 
 		$id = (int)$model->getState($this->context.'.id');
 
-		$db = JFactory::getDbo();
+		$db = \Joomla\CMS\Factory::getDbo();
 
 		$db->setQuery("SELECT id, categories FROM `#__js_res_record` WHERE id IN (SELECT record_id FROM `#__js_res_record_category` WHERE catid = {$id})");
 		$list = $db->loadObjectList();
@@ -65,7 +65,7 @@ class JoomcckControllerCat extends MControllerForm
 	{
 		parent::__construct($config);
 
-		$app = JFactory::getApplication();
+		$app = \Joomla\CMS\Factory::getApplication();
 		if(!$this->input)
 		{
 			$this->input = $app->input;
@@ -87,7 +87,7 @@ class JoomcckControllerCat extends MControllerForm
 	 */
 	protected function allowAdd($data = array())
 	{
-		return JFactory::getUser()->authorise('core.create', 'com_joomcck.category');
+		return \Joomla\CMS\Factory::getUser()->authorise('core.create', 'com_joomcck.category');
 	}
 
 	/**
@@ -105,7 +105,7 @@ class JoomcckControllerCat extends MControllerForm
 	{
 		// Initialise variables.
 		$recordId	= (int) isset($data[$key]) ? $data[$key] : 0;
-		$user		= JFactory::getUser();
+		$user		= \Joomla\CMS\Factory::getUser();
 		$userId		= $user->get('id');
 
 		// Check general edit permission first.
@@ -149,7 +149,7 @@ class JoomcckControllerCat extends MControllerForm
 	 */
 	public function batch($model)
 	{
-		$this->input->checkToken() or jexit(JText::_('JINVALID_TOKEN'));
+		$this->input->checkToken() or jexit(\Joomla\CMS\Language\Text::_('JINVALID_TOKEN'));
 
 		// Set the model
 		$model	= $this->getModel('Category');

@@ -87,7 +87,7 @@ class ItemsStore
 		$model       = new JoomcckModelCategory();
 		self::$categories[$category_id] = $model->getItem($category_id);
 
-		/*$db = JFactory::getDbo();
+		/*$db = \Joomla\CMS\Factory::getDbo();
 		 if(! empty(self::$record_ids))
 		 {
 		$sql = "SELECT id,alias,params,path,access,published FROM #__js_res_categories WHERE id IN (SELECT catid FROM #__js_res_record_category WHERE record_id IN (" . implode(',', self::$record_ids) . ")) OR id = " . (int)$category_id;
@@ -103,7 +103,7 @@ class ItemsStore
 
 		foreach($result as $key => $cat)
 		{
-		$cat->params = new JRegistry($cat->params);
+		$cat->params = new \Joomla\Registry\Registry($cat->params);
 		$cat->path = str_replace('root/', '', $cat->path);
 		self::$categories[$key] = $cat;
 		}*/

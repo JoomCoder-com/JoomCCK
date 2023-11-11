@@ -42,7 +42,7 @@ class JoomcckViewCat extends MViewBase
 
 		if(!$this->section)
 		{
-			Factory::getApplication()->enqueueMessage(JText::_('C_MSG_SELECTSECTIO'),'warning');
+			Factory::getApplication()->enqueueMessage(\Joomla\CMS\Language\Text::_('C_MSG_SELECTSECTIO'),'warning');
 			Factory::getApplication()->redirect('index.php?option=com_joomcck&view=sections');
 
 
@@ -73,13 +73,13 @@ class JoomcckViewCat extends MViewBase
 		{
 			return;
 		}
-		JFactory::getApplication()->input->set('hidemainmenu', TRUE);
+		\Joomla\CMS\Factory::getApplication()->input->set('hidemainmenu', TRUE);
 
-		$user       = JFactory::getUser();
+		$user       = \Joomla\CMS\Factory::getUser();
 		$isNew      = ($this->item->id == 0);
 		$checkedOut = !($this->item->checked_out == 0 || $this->item->checked_out == $user->get('id'));
 
-		JToolBarHelper::title(($isNew ? JText::_('CNEWCATEGORY') : JText::_('CEDITCATEGORY')), ($isNew ? 'category-add.png' : 'categories.png'));
+		JToolBarHelper::title(($isNew ? \Joomla\CMS\Language\Text::_('CNEWCATEGORY') : \Joomla\CMS\Language\Text::_('CEDITCATEGORY')), ($isNew ? 'category-add.png' : 'categories.png'));
 
 		if(!$checkedOut)
 		{

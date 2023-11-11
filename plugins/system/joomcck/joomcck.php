@@ -23,7 +23,7 @@ class plgSystemJoomcck extends JPlugin
 		{
 			return;
 		}
-		$db = JFactory::getDbo();
+		$db = \Joomla\CMS\Factory::getDbo();
 		$db->setQuery("SELECT record_id, field_id FROM #__js_res_record_values WHERE value_index = 'quiz' AND field_value = {$params['quiz_id']} AND field_type = 'dripcontent' GROUP BY record_id");
 		$ids = $db->loadObjectList();
 
@@ -32,10 +32,10 @@ class plgSystemJoomcck extends JPlugin
 			return;
 		}
 
-		$user = JFactory::getUser();
+		$user = \Joomla\CMS\Factory::getUser();
 
-		JTable::addIncludePath(JPATH_ROOT . '/components/com_joomcck/fields/dripcontent/tables');
-		$table = JTable::getInstance('Stepaccess', 'JoomcckTable');
+		\Joomla\CMS\Table\Table::addIncludePath(JPATH_ROOT . '/components/com_joomcck/fields/dripcontent/tables');
+		$table = \Joomla\CMS\Table\Table::getInstance('Stepaccess', 'JoomcckTable');
 
 		foreach($ids AS $id)
 		{
@@ -49,7 +49,7 @@ class plgSystemJoomcck extends JPlugin
 			if(!$table->id)
 			{
 				$data['id']    = NULL;
-				$data['ctime'] = JFactory::getDate()->toSql();
+				$data['ctime'] = \Joomla\CMS\Factory::getDate()->toSql();
 				$table->bind($data);
 				$table->store();
 			}
@@ -68,7 +68,7 @@ class plgSystemJoomcck extends JPlugin
 		}
 
 		include_once JPATH_ROOT . '/components/com_joomcck/api.php';
-		$record = JTable::getInstance('Record', 'JoomcckTable');
+		$record = \Joomla\CMS\Table\Table::getInstance('Record', 'JoomcckTable');
 		$record->load($product->product_source_id);
 
 		if(!$record->id)
@@ -78,15 +78,15 @@ class plgSystemJoomcck extends JPlugin
 
 		$product->source           = $record;
 		$product->product_name     = $record->title;
-		$product->product_edit_url = str_replace('administrator/', '', JRoute::_(Url::edit($record->id), TRUE, -1));
-		$product->product_view_url = str_replace('administrator/', '', JRoute::_(Url::record($record), TRUE, -1));
+		$product->product_edit_url = str_replace('administrator/', '', \Joomla\CMS\Router\Route::_(Url::edit($record->id), TRUE, -1));
+		$product->product_view_url = str_replace('administrator/', '', \Joomla\CMS\Router\Route::_(Url::record($record), TRUE, -1));
 		$product->exists           = $record->published;
 	}
 
 	function onJ2StoreAfterGetCartItems(&$items)
 	{
 		include_once JPATH_ROOT . '/components/com_joomcck/api.php';
-		$record = JTable::getInstance('Record', 'JoomcckTable');
+		$record = \Joomla\CMS\Table\Table::getInstance('Record', 'JoomcckTable');
 
 		foreach($items as $key => $item)
 		{
@@ -103,7 +103,7 @@ class plgSystemJoomcck extends JPlugin
 
 	public function onJ2StoreAfterProductListQuery(&$query, &$model)
 	{
-		/*$db = JFactory::getDbo();
+		/*$db = \Joomla\CMS\Factory::getDbo();
 		$query->select('cob.title as product_name, 0 as catid');
 		$query->join('LEFT OUTER', '#__js_res_record AS cob ON #__j2store_products.product_source_id=cob.id AND #__j2store_products.product_source=' . $db->q('com_joomcck'));
 
@@ -120,7 +120,7 @@ class plgSystemJoomcck extends JPlugin
 		{
 			return;
 		}
-		if(!defined('F0F_INCLUDED') && JFile::exists(JPATH_LIBRARIES . '/f0f/include.php'))
+		if(!defined('F0F_INCLUDED') && \Joomla\CMS\Filesystem\File::exists(JPATH_LIBRARIES . '/f0f/include.php'))
 		{
 			require_once JPATH_LIBRARIES . '/f0f/include.php';
 		}
@@ -141,7 +141,7 @@ class plgSystemJoomcck extends JPlugin
 
 	public function onUserAfterDelete($user, $success, $msg)
 	{
-		$this->db = JFactory::getDbo();
+		$this->db = \Joomla\CMS\Factory::getDbo();
 
 		$this->db->setQuery("SELECT id FROM `#__js_res_record` WHERE user_id = " . $user['id']);
 		$records   = $this->db->loadColumn();

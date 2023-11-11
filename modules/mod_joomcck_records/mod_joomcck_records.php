@@ -22,12 +22,12 @@ Webassets::init();
 
 
 include_once JPATH_ROOT . DIRECTORY_SEPARATOR . 'components' . DIRECTORY_SEPARATOR . 'com_joomcck' . DIRECTORY_SEPARATOR . 'api.php';
-$app = JFactory::getApplication();
+$app = \Joomla\CMS\Factory::getApplication();
 
 $section_id = $app->input->getInt('section_id');
 
 $user_id = $cat_id = NULL;
-$user    = JFactory::getUser();
+$user    = \Joomla\CMS\Factory::getUser();
 
 $author = $app->input->get('user_id');
 if(!$author && $app->input->get('option') == 'com_joomcck' && $app->input->getCmd('view') == 'record' && $app->input->getInt('id'))
@@ -68,7 +68,7 @@ if(in_array($params->get('view_what', 'all'), $user_require) && !$user_id)
 	return;
 }
 
-$db     = JFactory::getDbo();
+$db     = \Joomla\CMS\Factory::getDbo();
 $cat_id = ($section_id == $params->get('section_id') && $params->get('cat_restrict') > 0 ? $app->input->getInt('cat_id', 0) : 0);
 
 if($params->get('catids'))
@@ -179,7 +179,7 @@ if(in_array(array('show_children', 'show_parents'),array($params->get('view_what
 	}
 	if (!$params->get('field_src'))
 	{
-		$app->enqueueMessage(JText::_('COB_MOD_RECORDS_ERR_PARAM1'), 'warning');
+		$app->enqueueMessage(\Joomla\CMS\Language\Text::_('COB_MOD_RECORDS_ERR_PARAM1'), 'warning');
 		return;
 	}
 
@@ -210,7 +210,7 @@ if($result['total'] == 0)
 {
 	if($params->get('norecords'))
 	{
-		echo '<div class="no-rec-msg">' . JText::_($params->get('norecords')) . '</div>';
+		echo '<div class="no-rec-msg">' . \Joomla\CMS\Language\Text::_($params->get('norecords')) . '</div>';
 	}
 
 	return;

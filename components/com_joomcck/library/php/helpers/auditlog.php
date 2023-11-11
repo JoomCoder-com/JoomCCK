@@ -103,9 +103,9 @@ class ATlog {
 			'section_id' => $record['section_id'],
 			'comment_id' => $comment_id,
 			'field_id' => $field_id,
-			'ctime' => JFactory::getDate()->toSql(),
+			'ctime' => \Joomla\CMS\Factory::getDate()->toSql(),
 			'ip' => $_SERVER['REMOTE_ADDR'],
-			'user_id' => JFactory::getUser()->get('id', 0),
+			'user_id' => \Joomla\CMS\Factory::getUser()->get('id', 0),
 			'event' => $event,
 			'params' => json_encode($record)
 		);

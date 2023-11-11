@@ -24,7 +24,7 @@ $value = $this->value ? $this->value : null;
 				<span class="flag_icon" id="flag<?php echo $this->id;?>">
 					<?php if ($this->flag): ?>
 						<img src="<?php echo JURI::root(TRUE);?>/media/com_joomcck/<?php echo ($this->flag ? 'icons/flag/16/'.\Joomla\String\StringHelper::strtolower($this->flag->code2) : 'blank');?>.png" border="0" 
-						align="absmiddle" alt="<?php echo JText::_($this->flag->name);?>" title="<?php echo JText::_($this->flag->name);?>">
+						align="absmiddle" alt="<?php echo \Joomla\CMS\Language\Text::_($this->flag->name);?>" title="<?php echo \Joomla\CMS\Language\Text::_($this->flag->name);?>">
 					<?php endif;?>
 				</span> 
 				+<br>&nbsp;
@@ -33,25 +33,25 @@ $value = $this->value ? $this->value : null;
 				<input  class="form-control form-control-sm" id="field_<?php echo $this->id;?>_cnt" type="text" name="jform[fields][<?php echo $this->id;?>][country]"
 					size="3" data-autocompleter-default="<?php echo (isset($value['country']) ? $value['country'] : '');?>"
 					value="<?php echo (isset($value['country']) ? $value['country'] : '');?>"/>
-				<br><small  class="text-muted"  id="field_<?php echo $this->id;?>_cntname"><?php echo JText::_('T_COUNTRY');?></small>
+				<br><small  class="text-muted"  id="field_<?php echo $this->id;?>_cntname"><?php echo \Joomla\CMS\Language\Text::_('T_COUNTRY');?></small>
 
            	</td>
         	<td>
         	   	<input class="form-control form-control-sm" id="field_<?php echo $this->id;?>_reg" type="text" name="jform[fields][<?php echo $this->id;?>][region]" onkeyup="Joomcck.formatInt(this)"
         	   		size="3"  value="<?php echo (isset($value['region']) ? $value['region'] : '');?>"/>      	    
-        	   		<br><small class="text-muted"  id="field_<?php echo $this->id;?>_cntname"><?php echo JText::_('T_REGION');?></small>
+        	   		<br><small class="text-muted"  id="field_<?php echo $this->id;?>_cntname"><?php echo \Joomla\CMS\Language\Text::_('T_REGION');?></small>
         	</td>
         	<td>
         	  	<input class="form-control form-control-sm" id="field_<?php echo $this->id;?>_tel" type="text" name="jform[fields][<?php echo $this->id;?>][tel]"  onkeyup="Joomcck.formatInt(this)"
         	   		size="7" maxlength="7" value="<?php echo (isset($value['tel']) ? $value['tel'] : '');?>" />
-        	   	<br><small class="text-muted" id="field_<?php echo $this->id;?>_cntname"><?php echo JText::_('T_TEL');?></small>
+        	   	<br><small class="text-muted" id="field_<?php echo $this->id;?>_cntname"><?php echo \Joomla\CMS\Language\Text::_('T_TEL');?></small>
         	</td>
 		<?php if ($params->get('params.extension')) : ?>
 			<td>#<br>&nbsp;</td>
 			<td>
         	    <input class="form-control form-control-sm" id="field_<?php echo $this->id;?>_ext" type="text" name="jform[fields][<?php echo $this->id;?>][ext]"  onkeyup="Joomcck.formatInt(this)"
         	    	size="3"  value="<?php echo (isset($value['ext']) ? $value['ext'] : '');?>" />  
-        	    <br><small  class="text-muted"  id="field_<?php echo $this->id;?>_cntname"><?php echo JText::_('T_EXTENSION');?></small>
+        	    <br><small  class="text-muted"  id="field_<?php echo $this->id;?>_cntname"><?php echo \Joomla\CMS\Language\Text::_('T_EXTENSION');?></small>
         	</td>
         <?php endif; ?>
 		</tr>

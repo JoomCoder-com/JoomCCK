@@ -9,7 +9,7 @@
 
 defined( '_JEXEC' ) or die( 'Restricted access');
 
-class JoomcckTablehits extends JTable
+class JoomcckTablehits extends \Joomla\CMS\Table\Table
 {
 	public function __construct( &$_db ) {
 		parent::__construct( '#__js_res_hits', 'id', $_db );
@@ -17,9 +17,9 @@ class JoomcckTablehits extends JTable
 	
 	public function check()
 	{
-		$user = JFactory::getUser();
+		$user = \Joomla\CMS\Factory::getUser();
 		
-		$this->ctime = JFactory::getDate()->toSql();
+		$this->ctime = \Joomla\CMS\Factory::getDate()->toSql();
 		$this->ip = $_SERVER['REMOTE_ADDR'];
 		$this->user_id = $user->get('id');
 		

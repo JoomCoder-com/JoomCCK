@@ -8,10 +8,10 @@
  */
 defined('_JEXEC') or die();
 
-JHtml::_('behavior.keepalive');
-JHtml::_('bootstrap.tooltip');
+\Joomla\CMS\HTML\HTMLHelper::_('behavior.keepalive');
+\Joomla\CMS\HTML\HTMLHelper::_('bootstrap.tooltip');
 
-$app = JFactory::getApplication();
+$app = \Joomla\CMS\Factory::getApplication();
 
 // Create shortcut to parameters.
 //$params = $this->state->get('params');
@@ -38,14 +38,14 @@ $app = JFactory::getApplication();
 			if(!document.getElementById('jform_title').value)
 			{
 				isValid = false;
-				errorText.push('<?php echo JText::_('CPLEASESELECTTITEL');?>');
+				errorText.push('<?php echo \Joomla\CMS\Language\Text::_('CPLEASESELECTTITEL');?>');
 				hfid.push('title');
 			}
 			<?php if($this->type->params->get('properties.item_title_limit')):?>
 				if(document.getElementById('jform_title').value.length > <?php echo $this->type->params->get('properties.item_title_limit')?>)
 				{
 					isValid = false;
-					errorText.push('<?php echo JText::sprintf('C_MSG_TITLETOLONG', $this->type->params->get('properties.item_title_limit', 0));?>');
+					errorText.push('<?php echo \Joomla\CMS\Language\Text::sprintf('C_MSG_TITLETOLONG', $this->type->params->get('properties.item_title_limit', 0));?>');
 					hfid.push('title');
 				}
 			<?php endif; ?>
@@ -57,7 +57,7 @@ $app = JFactory::getApplication();
 			if(jQuery('#jform_ucatid :selected').text() == '')
 			{
 				isValid = false;
-				errorText.push('<?php echo JText::_('CUSERCATSELECT');?>');
+				errorText.push('<?php echo \Joomla\CMS\Language\Text::_('CUSERCATSELECT');?>');
 				hfid.push('ucat');
 			}
 		<?php endif; ?>
@@ -83,7 +83,7 @@ $app = JFactory::getApplication();
 			if(catlength <= 0 )
 			{
 				isValid = false;
-				errorText.push('<?php echo JText::_('CPLEASESELECTCAT');?>');
+				errorText.push('<?php echo \Joomla\CMS\Language\Text::_('CPLEASESELECTCAT');?>');
 				hfid.push('category');
 			}
 
@@ -91,7 +91,7 @@ $app = JFactory::getApplication();
 				if(catlength > <?php echo  $this->params->get('submission.multi_max_num', 3) ?>)
 				{
 					isValid = false;
-					errorText.push('<?php echo JText::_('CCATEGORYREACHMAXLIMIT');?>');
+					errorText.push('<?php echo \Joomla\CMS\Language\Text::_('CCATEGORYREACHMAXLIMIT');?>');
 					hfid.push('category');
 				}
 			<?php endif;?>
@@ -102,7 +102,7 @@ $app = JFactory::getApplication();
 			if(jQuery('#posts-list').children('div.alert').length <= 0 )
 			{
 				isValid = false;
-				errorText.push('<?php echo JText::_('PPLEASEWHERETOPOST');?>');
+				errorText.push('<?php echo \Joomla\CMS\Language\Text::_('PPLEASEWHERETOPOST');?>');
 				hfid.push('anywhere');
 			}
 		<?php endif;?>
@@ -111,7 +111,7 @@ $app = JFactory::getApplication();
 			var ratings = jQuery.parseJSON(jQuery('#multirating').val());
 			if(ratings.length < <?php echo $this->rate_prop ?>) {
 				isValid = false;
-				errorText.push('<?php echo JText::_('CRATINGREQUIRED');?>');
+				errorText.push('<?php echo \Joomla\CMS\Language\Text::_('CRATINGREQUIRED');?>');
 				hfid.push('rating');
 			}
 		<?php endif;?>
@@ -119,7 +119,7 @@ $app = JFactory::getApplication();
 		<?php if($this->multirating && $this->rate_prop == 0):?>
 			if(!jQuery('#jform_votes').val()) {
 				isValid = false;
-				errorText.push('<?php echo JText::_('CRATINGREQUIRED');?>');
+				errorText.push('<?php echo \Joomla\CMS\Language\Text::_('CRATINGREQUIRED');?>');
 				hfid.push('rating');
 			}
 		<?php endif;?>
@@ -160,7 +160,7 @@ $app = JFactory::getApplication();
 					}, 500);
 			}
 
-			//alert('<?php echo $this->escape(JText::_('JGLOBAL_VALIDATION_FORM_FAILED'));?>');
+			//alert('<?php echo $this->escape(\Joomla\CMS\Language\Text::_('JGLOBAL_VALIDATION_FORM_FAILED'));?>');
 			return;
 		}
 
@@ -175,9 +175,9 @@ $app = JFactory::getApplication();
 			<?php else: ?>
 
                     <?php if($this->item->id):?>
-	                    <span class="text-muted"><?php echo JText::sprintf('CTEDIT', $this->escape($this->type->name)); ?></span> <?php echo $this->item->title ?>
+	                    <span class="text-muted"><?php echo \Joomla\CMS\Language\Text::sprintf('CTEDIT', $this->escape($this->type->name)); ?></span> <?php echo $this->item->title ?>
                     <?php else: ?>
-	                    <?php echo JText::sprintf('CTSUBMIT', $this->escape($this->type->name)); ?>
+	                    <?php echo \Joomla\CMS\Language\Text::sprintf('CTSUBMIT', $this->escape($this->type->name)); ?>
                     <?php endif; ?>
 
 				<?php if(!empty($this->parent->title)):?>
@@ -199,11 +199,11 @@ $app = JFactory::getApplication();
 <?php endif; ?>
 
 <?php if(!$this->user->get('id') && $this->type->params->get('submission.public_alert') && ($this->type->params->get('submission.public_edit') == 0)):?>
-	<div class="alert alert-warning"><?php echo $this->tmpl_params->get('tmpl_core.form_public_alert', JText::_('CNOTREGISTERED'));?></div>
+	<div class="alert alert-warning"><?php echo $this->tmpl_params->get('tmpl_core.form_public_alert', \Joomla\CMS\Language\Text::_('CNOTREGISTERED'));?></div>
 	<br />
 <?php endif;?>
 
-<form method="post" action="<?php echo JUri::getInstance()->toString()?>" name="adminForm" id="adminForm" class="form-validate" enctype="multipart/form-data">
+<form method="post" action="<?php echo \Joomla\CMS\Uri\Uri::getInstance()->toString()?>" name="adminForm" id="adminForm" class="form-validate" enctype="multipart/form-data">
 	<?php if(in_array($this->tmpl_params->get('tmpl_core.form_button_position', 1), array(1,3))):?>
 		<div class="clearfix mb-3">
 			<?php echo $this->loadTemplate('buttons');?>
@@ -235,7 +235,7 @@ $app = JFactory::getApplication();
 	<input type="hidden" name="id" value="<?php echo $app->input->getInt('id', 0);?>" />
 	<input type="hidden" name="Itemid" value="<?php echo $app->input->getInt('Itemid');?>" />
 	<input type="hidden" name="return" value="<?php echo $app->input->getBase64('return');?>" />
-	<?php echo JHtml::_( 'form.token' ); ?>
+	<?php echo \Joomla\CMS\HTML\HTMLHelper::_( 'form.token' ); ?>
 </form>
 
 

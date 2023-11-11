@@ -23,7 +23,7 @@ class JoomcckControllerTemplates extends MControllerForm
 
 		if(!$this->input)
 		{
-			$this->input = JFactory::getApplication()->input;
+			$this->input = \Joomla\CMS\Factory::getApplication()->input;
 		}
 		$this->registerTask('saveclose', 'save');
 	}
@@ -37,9 +37,9 @@ class JoomcckControllerTemplates extends MControllerForm
 
 	public function install()
 	{
-		JSession::checkToken() or jexit(JText::_('JINVALID_TOKEN'));
+		JSession::checkToken() or jexit(\Joomla\CMS\Language\Text::_('JINVALID_TOKEN'));
 
-		$app = JFactory::getApplication();
+		$app = \Joomla\CMS\Factory::getApplication();
 		$uri = \Joomla\CMS\Uri\Uri::getInstance();
 		$uri->setVar('tab', $this->input->get('tab'));
 
@@ -47,10 +47,10 @@ class JoomcckControllerTemplates extends MControllerForm
 
 		if($model->install())
 		{
-			$cache = JFactory::getCache('mod_menu');
+			$cache = \Joomla\CMS\Factory::getCache('mod_menu');
 			$cache->clean();
 
-			$app->enqueueMessage(JText::_('C_MSG_TMPLINSTALLOK'));
+			$app->enqueueMessage(\Joomla\CMS\Language\Text::_('C_MSG_TMPLINSTALLOK'));
 		}
 
 		$app->redirect($uri->toString());
@@ -58,10 +58,10 @@ class JoomcckControllerTemplates extends MControllerForm
 
 	public function uninstall()
 	{
-		JSession::checkToken() or jexit(JText::_('JINVALID_TOKEN'));
+		JSession::checkToken() or jexit(\Joomla\CMS\Language\Text::_('JINVALID_TOKEN'));
 
-		$app = JFactory::getApplication();
-		$uri = JUri::getInstance();
+		$app = \Joomla\CMS\Factory::getApplication();
+		$uri = \Joomla\CMS\Uri\Uri::getInstance();
 		$uri->setVar('tab', $this->input->get('tab'));
 
 		$tmpls = $this->input->get('cid', array(), 'array');
@@ -73,14 +73,14 @@ class JoomcckControllerTemplates extends MControllerForm
 
 			if($matches[1] == 'default')
 			{
-				throw new GenericDataException(JText::_('C_MSG_DEAFULEUNINSTALL'), 500);
+				throw new GenericDataException(\Joomla\CMS\Language\Text::_('C_MSG_DEAFULEUNINSTALL'), 500);
 				unset($tmpls[$k]);
 			}
 		}
 		if(!$tmpls)
 		{
 
-			Factory::getApplication()->enqueueMessage(JText::_('C_MSG_CHOSETEMPL'),'warning');
+			Factory::getApplication()->enqueueMessage(\Joomla\CMS\Language\Text::_('C_MSG_CHOSETEMPL'),'warning');
 			$app->redirect($uri->toString());
 
 			return;
@@ -89,7 +89,7 @@ class JoomcckControllerTemplates extends MControllerForm
 		$model = $this->getModel();
 		$model->uninstall($tmpls);
 
-		$this->setRedirect($uri->toString(), JText::_('C_MSG_TMPLUNINSTALLOK'));
+		$this->setRedirect($uri->toString(), \Joomla\CMS\Language\Text::_('C_MSG_TMPLUNINSTALLOK'));
 		$this->redirect();
 	}
 
@@ -100,9 +100,9 @@ class JoomcckControllerTemplates extends MControllerForm
 
 	public function copy($func = 'copy')
 	{
-		JSession::checkToken() or jexit(JText::_('JINVALID_TOKEN'));
+		JSession::checkToken() or jexit(\Joomla\CMS\Language\Text::_('JINVALID_TOKEN'));
 
-		$app = JFactory::getApplication();
+		$app = \Joomla\CMS\Factory::getApplication();
 		$uri = \Joomla\CMS\Uri\Uri::getInstance();
 		$uri->setVar('tab', $this->input->get('tab'));
 
@@ -114,23 +114,23 @@ class JoomcckControllerTemplates extends MControllerForm
 		if(!$model->$func($tmpls[0], $new_name))
 		{
 
-			Factory::getApplication()->enqueueMessage(($func == 'copy' ? JText::_('C_MSG_TMPLCOPYFAIL') : JText::_('C_MSG_TMPLRENAMEFAIL')),'warning');
+			Factory::getApplication()->enqueueMessage(($func == 'copy' ? \Joomla\CMS\Language\Text::_('C_MSG_TMPLCOPYFAIL') : \Joomla\CMS\Language\Text::_('C_MSG_TMPLRENAMEFAIL')),'warning');
 			$app->redirect($uri->toString());
 		}
 
-		$this->setRedirect($uri->toString(), ($func == 'copy' ? JText::_('C_MSG_TMPLCOPYOK') : JText::_('C_MSG_TMPLRENAMEOK')));
+		$this->setRedirect($uri->toString(), ($func == 'copy' ? \Joomla\CMS\Language\Text::_('C_MSG_TMPLCOPYOK') : \Joomla\CMS\Language\Text::_('C_MSG_TMPLRENAMEOK')));
 		$this->redirect();
 	}
 
 
 	public function change_label()
 	{
-		JSession::checkToken() or jexit(JText::_('JINVALID_TOKEN'));
+		JSession::checkToken() or jexit(\Joomla\CMS\Language\Text::_('JINVALID_TOKEN'));
 
 		$tmpls = $this->input->get('cid', array(), 'array');
 		$uri   = \Joomla\CMS\Uri\Uri::getInstance();
 		$uri->setVar('tab', $this->input->get('tab'));
-		$app = JFactory::getApplication();
+		$app = \Joomla\CMS\Factory::getApplication();
 
 		$matches = Array();
 		preg_match("/^\[(.*)\]\,\[(.*)\]$/i", $tmpls[0], $matches);
@@ -139,7 +139,7 @@ class JoomcckControllerTemplates extends MControllerForm
 		if(!$new_name)
 		{
 
-			Factory::getApplication()->enqueueMessage(JText::_('C_MSG_TMPLNO_NONAMEENTER'),'warning');
+			Factory::getApplication()->enqueueMessage(\Joomla\CMS\Language\Text::_('C_MSG_TMPLNO_NONAMEENTER'),'warning');
 			$app->redirect($uri->toString());
 
 			return;
@@ -151,33 +151,33 @@ class JoomcckControllerTemplates extends MControllerForm
 		if(!$model->change_name($file, $new_name))
 		{
 
-			Factory::getApplication()->enqueueMessage(JText::_('C_MSG_TMPLSAVEFAIL'),'warning');
+			Factory::getApplication()->enqueueMessage(\Joomla\CMS\Language\Text::_('C_MSG_TMPLSAVEFAIL'),'warning');
 			$app->redirect($uri->toString());
 
 			return;
 		}
-		$app->enqueueMessage(JText::_('C_MSG_TMPLLABELCHANGEOK'));
+		$app->enqueueMessage(\Joomla\CMS\Language\Text::_('C_MSG_TMPLLABELCHANGEOK'));
 		$app->redirect($uri->toString());
 	}
 
 	public function save($key = NULL, $urlVar = NULL)
 	{
 		$uri    = \Joomla\CMS\Uri\Uri::getInstance();
-		$app    = JFactory::getApplication();
+		$app    = \Joomla\CMS\Factory::getApplication();
 		$task   = $this->input->getCmd('task');
 		$type   = $this->input->get('type');
 		$name   = $this->input->get('name');
 		$config = $this->input->get('config');
 
-		$regestry = new JRegistry();
+		$regestry = new \Joomla\Registry\Registry();
 		$regestry->loadArray($this->input->get('jform', array(), 'array'));
 
 		$file = JoomcckTmplHelper::getTmplFile($type, $name, TRUE) . '.' . $config . '.json';
 
 		$reg_string = $regestry->toString();
-		JFile::write($file, $reg_string);
+		\Joomla\CMS\Filesystem\File::write($file, $reg_string);
 
-		$msg = JText::_('C_MSG_TMPLPARAMS_SAVEOK');
+		$msg = \Joomla\CMS\Language\Text::_('C_MSG_TMPLPARAMS_SAVEOK');
 		switch($task)
 		{
 			case 'saveclose':
@@ -213,7 +213,7 @@ class JoomcckControllerTemplates extends MControllerForm
 			$url = base64_decode($this->input->getBase64('return'));
 		}
 
-		$this->setRedirect($url, JText::_('C_MSG_TMPLEDITCANCEL'));
+		$this->setRedirect($url, \Joomla\CMS\Language\Text::_('C_MSG_TMPLEDITCANCEL'));
 		$this->redirect();
 	}
 }

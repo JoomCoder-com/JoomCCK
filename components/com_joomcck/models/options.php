@@ -24,7 +24,7 @@ class JoomcckModelOptions extends MModelAdmin
 
 	protected function loadFormData()
 	{
-		$data = JFactory::getApplication()->getUserState('com_joomcck.edit.options.data', array());
+		$data = \Joomla\CMS\Factory::getApplication()->getUserState('com_joomcck.edit.options.data', array());
 
 		if(empty($data))
 		{
@@ -36,9 +36,9 @@ class JoomcckModelOptions extends MModelAdmin
 
 	public function getSub()
 	{
-		$user = JFactory::getUser();
+		$user = \Joomla\CMS\Factory::getUser();
 
-		$db = JFactory::getDbo();
+		$db = \Joomla\CMS\Factory::getDbo();
 
 		$db->setQuery("SELECT
 			  `s`.`id`,
@@ -51,7 +51,7 @@ class JoomcckModelOptions extends MModelAdmin
 
 		foreach($list AS $k => &$section)
 		{
-			$params = new JRegistry($section->params);
+			$params = new \Joomla\Registry\Registry($section->params);
 			if(!in_array($params->get('events.subscribe_category'), $user->getAuthorisedViewLevels())
 				&& !in_array($params->get('events.subscribe_user'), $user->getAuthorisedViewLevels())
 				&& !in_array($params->get('events.subscribe_category'), $user->getAuthorisedViewLevels())
@@ -76,9 +76,9 @@ class JoomcckModelOptions extends MModelAdmin
 			return $out;
 		}
 
-		$me = JFactory::getUser();
+		$me = \Joomla\CMS\Factory::getUser();
 
-		$table = JTable::getInstance('Useropt', 'JoomcckTable');
+		$table = \Joomla\CMS\Table\Table::getInstance('Useropt', 'JoomcckTable');
 		$table->load(array('user_id' => $me->get('id')));
 
 		$out = json_decode((string)$table->params, TRUE);

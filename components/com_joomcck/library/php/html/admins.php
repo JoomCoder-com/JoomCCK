@@ -13,7 +13,7 @@ class JHTMLAdmins
 {
 	public static function select($name, $active)
 	{
-		$db =JFactory::getDBO();
+		$db =\Joomla\CMS\Factory::getDBO();
 
 		$and = '';
 		if ( $reg ) {
@@ -29,7 +29,7 @@ class JHTMLAdmins
 		;
 		$db->setQuery( $query );
 		if ( $nouser ) {
-			$users[] = JHTML::_('select.option',  '0', '- '. JText::_( 'CNOUSER' ) .' -' );
+			$users[] = JHTML::_('select.option',  '0', '- '. \Joomla\CMS\Language\Text::_( 'CNOUSER' ) .' -' );
 			$users = array_merge( $users, $db->loadObjectList() );
 		} else {
 			$users = $db->loadObjectList();

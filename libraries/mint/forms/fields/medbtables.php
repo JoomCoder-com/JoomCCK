@@ -18,7 +18,7 @@ class JFormFieldMedbtables extends JFormMEFieldList
 	
 	protected function getOptions()
 	{
-		$db	= JFactory::getDBO();
+		$db	= \Joomla\CMS\Factory::getDBO();
 		
 		$sql = "SHOW tables";
 		$db->setQuery($sql);

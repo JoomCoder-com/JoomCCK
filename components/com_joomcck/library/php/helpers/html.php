@@ -17,7 +17,7 @@ class HTMLFormatHelper
 
 	public static function followsection(&$section)
 	{
-		$user = JFactory::getUser();
+		$user = \Joomla\CMS\Factory::getUser();
 
 		if(!$user->get('id'))
 		{
@@ -46,20 +46,20 @@ class HTMLFormatHelper
 		{
 			$section->follow = 1;
 
-			return sprintf($format, $section->id, ' btn-primary', $section->id, "jQuery(this).addClass('btn-danger').removeClass('btn-primary').children('span').html('" . JText::_('CSECUNFOLLOW') . "');", "jQuery(this).addClass('btn-primary').removeClass('btn-danger').children('span').html('" . JText::_('CFOLLOWINGSECION') . "');", $section->id, JURI::root(TRUE), 1, $section->id, JText::_('CFOLLOWINGSECION'));
+			return sprintf($format, $section->id, ' btn-primary', $section->id, "jQuery(this).addClass('btn-danger').removeClass('btn-primary').children('span').html('" . \Joomla\CMS\Language\Text::_('CSECUNFOLLOW') . "');", "jQuery(this).addClass('btn-primary').removeClass('btn-danger').children('span').html('" . \Joomla\CMS\Language\Text::_('CFOLLOWINGSECION') . "');", $section->id, JURI::root(TRUE), 1, $section->id, \Joomla\CMS\Language\Text::_('CFOLLOWINGSECION'));
 		}
 		else
 		{
 			$section->follow = 0;
 
-			return sprintf($format, $section->id, ' ', $section->id, '', '', $section->id, JURI::root(TRUE), 0, $section->id, JText::_('CSECFOLLOW'));
+			return sprintf($format, $section->id, ' ', $section->id, '', '', $section->id, JURI::root(TRUE), 0, $section->id, \Joomla\CMS\Language\Text::_('CSECFOLLOW'));
 		}
 
 	}
 
 	public static function followcat($cat_id, $section)
 	{
-		$user = JFactory::getUser();
+		$user = \Joomla\CMS\Factory::getUser();
 
 		if(!$user->get('id'))
 		{
@@ -101,17 +101,17 @@ class HTMLFormatHelper
 
 		if($state)
 		{
-			return sprintf($format, $cat_id, ' btn-primary', $cat_id, $section->id, "jQuery(this).addClass('btn-danger').removeClass('btn-primary').children('span').html('" . JText::_('CCATUNFOLLOW') . "');", "jQuery(this).addClass('btn-primary').removeClass('btn-danger').children('span').html('" . JText::_('CCATFOLLOWING') . "');", $cat_id, JURI::root(TRUE), 1, $cat_id, JText::_('CCATFOLLOWING'));
+			return sprintf($format, $cat_id, ' btn-primary', $cat_id, $section->id, "jQuery(this).addClass('btn-danger').removeClass('btn-primary').children('span').html('" . \Joomla\CMS\Language\Text::_('CCATUNFOLLOW') . "');", "jQuery(this).addClass('btn-primary').removeClass('btn-danger').children('span').html('" . \Joomla\CMS\Language\Text::_('CCATFOLLOWING') . "');", $cat_id, JURI::root(TRUE), 1, $cat_id, \Joomla\CMS\Language\Text::_('CCATFOLLOWING'));
 		}
 		else
 		{
-			return sprintf($format, $cat_id, '', $cat_id, $section->id, '', '', $cat_id, JURI::root(TRUE), 0, $cat_id, JText::_('CCATFOLLOW'));
+			return sprintf($format, $cat_id, '', $cat_id, $section->id, '', '', $cat_id, JURI::root(TRUE), 0, $cat_id, \Joomla\CMS\Language\Text::_('CCATFOLLOW'));
 		}
 	}
 
 	public static function followuser($user_id, $section)
 	{
-		$user = JFactory::getUser();
+		$user = \Joomla\CMS\Factory::getUser();
 
 		if(!$user->get('id'))
 		{
@@ -155,17 +155,17 @@ class HTMLFormatHelper
 
 		if($state)
 		{
-			return sprintf($format, $user_id, ' btn-primary', $user_id, $section->id, "jQuery(this).addClass('btn-danger').removeClass('btn-primary').children('span').html('" . JText::sprintf('CUSERUNFOLLOW', CCommunityHelper::getName($user_id, $section->id, array('nohtml' => 1))) . "');", "jQuery(this).addClass('btn-primary').removeClass('btn-danger').children('span').html('" . JText::sprintf('CUSERFOLLOWING', CCommunityHelper::getName($user_id, $section->id, array('nohtml' => 1))) . "');", $user_id, JURI::root(TRUE), 1, $user_id, JText::sprintf('CUSERFOLLOWING', CCommunityHelper::getName($user_id, $section->id, array('nohtml' => 1))));
+			return sprintf($format, $user_id, ' btn-primary', $user_id, $section->id, "jQuery(this).addClass('btn-danger').removeClass('btn-primary').children('span').html('" . \Joomla\CMS\Language\Text::sprintf('CUSERUNFOLLOW', CCommunityHelper::getName($user_id, $section->id, array('nohtml' => 1))) . "');", "jQuery(this).addClass('btn-primary').removeClass('btn-danger').children('span').html('" . \Joomla\CMS\Language\Text::sprintf('CUSERFOLLOWING', CCommunityHelper::getName($user_id, $section->id, array('nohtml' => 1))) . "');", $user_id, JURI::root(TRUE), 1, $user_id, \Joomla\CMS\Language\Text::sprintf('CUSERFOLLOWING', CCommunityHelper::getName($user_id, $section->id, array('nohtml' => 1))));
 		}
 		else
 		{
-			return sprintf($format, $user_id, ' ', $user_id, $section->id, '', '', $user_id, JURI::root(TRUE), 0, $user_id, JText::sprintf('CUSERFOLLOW', CCommunityHelper::getName($user_id, $section->id, array('nohtml' => 1))));
+			return sprintf($format, $user_id, ' ', $user_id, $section->id, '', '', $user_id, JURI::root(TRUE), 0, $user_id, \Joomla\CMS\Language\Text::sprintf('CUSERFOLLOW', CCommunityHelper::getName($user_id, $section->id, array('nohtml' => 1))));
 		}
 	}
 
 	public static function follow($record, $section)
 	{
-		$user = JFactory::getUser();
+		$user = \Joomla\CMS\Factory::getUser();
 
 		if(!$user->get('id'))
 		{
@@ -183,12 +183,12 @@ class HTMLFormatHelper
 		}
 
 		$file = JURI::root() . 'media/com_joomcck/icons/16/follow' . (int)($record->subscribed > 0) . '.png';
-		$alt  = ($record->subscribed ? JText::_('CMSG_CLICKTOUNFOLLOW') : JText::_('CMSG_CLICKTOFOLLOW'));
+		$alt  = ($record->subscribed ? \Joomla\CMS\Language\Text::_('CMSG_CLICKTOUNFOLLOW') : \Joomla\CMS\Language\Text::_('CMSG_CLICKTOFOLLOW'));
 		$attr = array('data-original-title' => $alt, 'rel' => 'tooltip', 'id' => 'follow_record_' . $record->id);
-		$out  = JHtml::image($file, $alt, $attr);
+		$out  = \Joomla\CMS\HTML\HTMLHelper::image($file, $alt, $attr);
 
 		return sprintf('<button class="btn btn-sm btn-light border" type="button" onclick="Joomcck.followRecord(%d, %d);">%s</button>',
-			$record->id, JFactory::getApplication()->input->getInt('section_id'), $out);
+			$record->id, \Joomla\CMS\Factory::getApplication()->input->getInt('section_id'), $out);
 	}
 
 	public static function compare($record, $type, $section)
@@ -199,7 +199,7 @@ class HTMLFormatHelper
 			return NULL;
 		}
 
-		$app = JFactory::getApplication();
+		$app = \Joomla\CMS\Factory::getApplication();
 
 		if($app->input->get('api') == 1)
 		{
@@ -216,8 +216,8 @@ class HTMLFormatHelper
 		}
 
 		$file = JURI::root() . 'media/com_joomcck/icons/16/edit-diff.png';
-		$attr = array('data-original-title' => JText::_('CMSG_COMPARE'), 'rel' => 'tooltip');
-		$img  = JHtml::image($file, JText::_('Compare'), $attr);
+		$attr = array('data-original-title' => \Joomla\CMS\Language\Text::_('CMSG_COMPARE'), 'rel' => 'tooltip');
+		$img  = \Joomla\CMS\HTML\HTMLHelper::image($file, \Joomla\CMS\Language\Text::_('Compare'), $attr);
 
 		return sprintf('<button class="btn border btn-sm btn-light %s" id="compare_%d" type="button" onclick="Joomcck.CompareRecord(%d, %d);">%s</button>',
 			$hide, $record->id, $record->id, $app->input->getInt('section_id'), $img);
@@ -226,7 +226,7 @@ class HTMLFormatHelper
 
 	public static function repost($record, $section)
 	{
-		$user = JFactory::getUser();
+		$user = \Joomla\CMS\Factory::getUser();
 
 		if(!$user->get('id'))
 		{
@@ -266,17 +266,17 @@ class HTMLFormatHelper
 		}
 
 		$file = JURI::root() . 'media/com_joomcck/icons/16/arrow-retweet.png';
-		$alt  = JText::_('CMSG_REPOST');
+		$alt  = \Joomla\CMS\Language\Text::_('CMSG_REPOST');
 		$attr = array('data-original-title' => $alt, 'rel' => 'tooltip');
-		$img  = JHtml::image($file, $alt, $attr);
+		$img  = \Joomla\CMS\HTML\HTMLHelper::image($file, $alt, $attr);
 
 		return sprintf('<button class="btn btn-co-control btn-sm" id="repost_%d" type="button" onclick="Joomcck.RepostRecord(%d, %d);">%s</button>',
-			$record->id, $record->id, JFactory::getApplication()->input->getInt('section_id'), $img);
+			$record->id, $record->id, \Joomla\CMS\Factory::getApplication()->input->getInt('section_id'), $img);
 	}
 
 	public static function bookmark($record, $type, $params)
 	{
-		$user = JFactory::getUser();
+		$user = \Joomla\CMS\Factory::getUser();
 
 		if(!$user->get('id'))
 		{
@@ -295,13 +295,13 @@ class HTMLFormatHelper
 
 		$file = JURI::root() . 'media/com_joomcck/icons/bookmarks/' . $params->get('tmpl_core.bookmark_icons', 'star') . '/state' . (int)($record->bookmarked > 0) . '.png';
 		$alt  = ($record->bookmarked ?
-			Mint::_('CMSG_REMOVEBOOKMARK_'.$type->id, JText::_('CMSG_REMOVEBOOKMARK')) :
-			Mint::_('CMSG_ADDBOOKMARK_'.$type->id, JText::_('CMSG_ADDBOOKMARK')));
+			Mint::_('CMSG_REMOVEBOOKMARK_'.$type->id, \Joomla\CMS\Language\Text::_('CMSG_REMOVEBOOKMARK')) :
+			Mint::_('CMSG_ADDBOOKMARK_'.$type->id, \Joomla\CMS\Language\Text::_('CMSG_ADDBOOKMARK')));
 		$attr = array('data-original-title' => $alt, 'rel' => 'tooltip', 'id' => 'bookmark_' . $record->id);
-		$out  = JHtml::image($file, $alt, $attr);
+		$out  = \Joomla\CMS\HTML\HTMLHelper::image($file, $alt, $attr);
 
 		return sprintf('<button class="btn border btn-light btn-sm" type="button" onclick="Joomcck.bookmarkRecord(%d, \'%s\', %d);">%s</button>',
-			$record->id, $params->get('tmpl_core.bookmark_icons', 'star'), JFactory::getApplication()->input->getInt('section_id'), $out);
+			$record->id, $params->get('tmpl_core.bookmark_icons', 'star'), \Joomla\CMS\Factory::getApplication()->input->getInt('section_id'), $out);
 	}
 
 	public static function bb2html($text, $attr = NULL)
@@ -333,9 +333,9 @@ class HTMLFormatHelper
 
 	public static function layout($name, $data = NULL)
 	{
-		$prefix = JComponentHelper::getParams('com_joomcck')->get('tmpl_prefix');
+		$prefix = \Joomla\CMS\Component\ComponentHelper::getParams('com_joomcck')->get('tmpl_prefix');
 
-		if($prefix && JFile::exists(JPATH_COMPONENT . '/layouts/' . $prefix . '-' . $name . '.php'))
+		if($prefix && \Joomla\CMS\Filesystem\File::exists(JPATH_COMPONENT . '/layouts/' . $prefix . '-' . $name . '.php'))
 		{
 			$name = $prefix . '-' . $name;
 		}
@@ -547,7 +547,7 @@ class HTMLFormatHelper
 
 	public static function initJsURLroot()
 	{
-		JFactory::getDocument()->addScriptDeclaration("URL_ROOT = '" . JURI::root(TRUE) . "/';");
+		\Joomla\CMS\Factory::getDocument()->addScriptDeclaration("URL_ROOT = '" . JURI::root(TRUE) . "/';");
 	}
 
 	public static function loadHead()
@@ -555,15 +555,15 @@ class HTMLFormatHelper
 
 		HTMLHelper::_('bootstrap.framework');
 
-		$document = JFactory::getDocument();
-		if(!JFactory::getApplication()->isClient('administrator'))
+		$document = \Joomla\CMS\Factory::getDocument();
+		if(!\Joomla\CMS\Factory::getApplication()->isClient('administrator'))
 		{
-			$document->addScript(JRoute::_('index.php?option=com_joomcck&task=ajax.mainJS&Itemid=1'));
+			$document->addScript(\Joomla\CMS\Router\Route::_('index.php?option=com_joomcck&task=ajax.mainJS&Itemid=1'));
 		}
 
 		$document->addScript(JURI::root(TRUE) . '/components/com_joomcck/library/js/felixrating.js');
 
-		if(JFile::exists(JPATH_ROOT . '/components/com_joomcck/library/css/custom.css'))
+		if(\Joomla\CMS\Filesystem\File::exists(JPATH_ROOT . '/components/com_joomcck/library/css/custom.css'))
 		{
 			$document->addStyleSheet(JURI::root(TRUE) . '/components/com_joomcck/library/css/custom.css');
 		}
@@ -572,13 +572,13 @@ class HTMLFormatHelper
 			$document->addStyleSheet(JURI::root(TRUE) . '/components/com_joomcck/library/css/style.css');
 		}
 
-		if(JFile::exists(JPATH_ROOT . '/media/com_joomcck/css/custom.css'))
+		if(\Joomla\CMS\Filesystem\File::exists(JPATH_ROOT . '/media/com_joomcck/css/custom.css'))
 		{
-			$document->addStyleSheet(JUri::root(TRUE) . '/media/com_joomcck/css/custom.css');
+			$document->addStyleSheet(\Joomla\CMS\Uri\Uri::root(TRUE) . '/media/com_joomcck/css/custom.css');
 		}
 		else
 		{
-			$document->addStyleSheet(JUri::root(TRUE) . '/media/com_joomcck/css/main.css');
+			$document->addStyleSheet(\Joomla\CMS\Uri\Uri::root(TRUE) . '/media/com_joomcck/css/main.css');
 		}
 
 	}

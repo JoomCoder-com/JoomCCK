@@ -54,21 +54,21 @@ class JFormFieldCDatetime extends CFormField
 
     public function getInput()
     {
-        $db         = JFactory::getDbo();
-        $doc        = JFactory::getDocument();
-        $lang       = strtolower(JFactory::getLanguage()->getTag());
+        $db         = \Joomla\CMS\Factory::getDbo();
+        $doc        = \Joomla\CMS\Factory::getDocument();
+        $lang       = strtolower(\Joomla\CMS\Factory::getLanguage()->getTag());
         $short_lang = substr($lang, 0, 2);
 
-        $doc->addScript(JUri::root(true) . '/media/com_joomcck/vendors/moment/min/moment.min.js');
-        $doc->addScript(JUri::root(true) . '/media/com_joomcck/vendors/moment/locale/en-gb.js');
-        if (JFile::exists(JPATH_ROOT . '/media/com_joomcck/vendors/moment/locale/' . $lang . '.js')) {
-            $doc->addScript(JUri::root(true) . '/media/com_joomcck/vendors/moment/locale/' . $lang . '.js');
+        $doc->addScript(\Joomla\CMS\Uri\Uri::root(true) . '/media/com_joomcck/vendors/moment/min/moment.min.js');
+        $doc->addScript(\Joomla\CMS\Uri\Uri::root(true) . '/media/com_joomcck/vendors/moment/locale/en-gb.js');
+        if (\Joomla\CMS\Filesystem\File::exists(JPATH_ROOT . '/media/com_joomcck/vendors/moment/locale/' . $lang . '.js')) {
+            $doc->addScript(\Joomla\CMS\Uri\Uri::root(true) . '/media/com_joomcck/vendors/moment/locale/' . $lang . '.js');
         }
-        if (JFile::exists(JPATH_ROOT . '/media/com_joomcck/vendors/moment/locale/' . $short_lang . '.js')) {
-            $doc->addScript(JUri::root(true) . '/media/com_joomcck/vendors/moment/locale/' . $short_lang . '.js');
+        if (\Joomla\CMS\Filesystem\File::exists(JPATH_ROOT . '/media/com_joomcck/vendors/moment/locale/' . $short_lang . '.js')) {
+            $doc->addScript(\Joomla\CMS\Uri\Uri::root(true) . '/media/com_joomcck/vendors/moment/locale/' . $short_lang . '.js');
         }
-        $doc->addScript(JUri::root(true) . '/media/com_joomcck/vendors/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js');
-        $doc->addStyleSheet(JUri::root(true) . '/media/com_joomcck/vendors/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css');
+        $doc->addScript(\Joomla\CMS\Uri\Uri::root(true) . '/media/com_joomcck/vendors/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js');
+        $doc->addStyleSheet(\Joomla\CMS\Uri\Uri::root(true) . '/media/com_joomcck/vendors/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css');
 
         settype($this->value, 'array');
 
@@ -100,10 +100,10 @@ class JFormFieldCDatetime extends CFormField
     public function validateField($value, $record, $type, $section)
     {
         if ($this->params->get('params.max_dates', 0) > 0 && count($value) > $this->params->get('params.max_dates', 0)) {
-            $this->setError(JText::sprintf('F_ERROR_MAX', $this->params->get('params.max_dates', 0)));
+            $this->setError(\Joomla\CMS\Language\Text::sprintf('F_ERROR_MAX', $this->params->get('params.max_dates', 0)));
         }
         if ($this->params->get('params.min_dates', 0) > 0 && count($value) < $this->params->get('params.min_dates', 0)) {
-            $this->setError(JText::sprintf('F_ERROR_MIN', $this->params->get('params.min_dates', 0)));
+            $this->setError(\Joomla\CMS\Language\Text::sprintf('F_ERROR_MIN', $this->params->get('params.min_dates', 0)));
         }
         parent::validateField($value, $record, $type, $section);
     }
@@ -115,15 +115,15 @@ class JFormFieldCDatetime extends CFormField
         $js .= "\n\t\tvar dat{$this->id} = jQuery('[name^=\"jform\\\\[fields\\\\]\\\\[{$this->id}\\\\]\"]').val();";
         $js .= "\n\t\tvar datlength{$this->id} =  jQuery('[name^=\"jform\\\\[fields\\\\]\\\\[{$this->id}\\\\]\"]').length";
         if ($this->params->get('params.max_dates', 0) > 0) {
-            $js .= "\n\t\tif(datlength{$this->id} > " . $this->params->get('params.max_dates', 0) . "){hfid.push({$this->id}); isValid = false; errorText.push('" . JText::sprintf('F_ERROR_MAX', $this->params->get('params.max_dates', 0)) . "');}";
+            $js .= "\n\t\tif(datlength{$this->id} > " . $this->params->get('params.max_dates', 0) . "){hfid.push({$this->id}); isValid = false; errorText.push('" . \Joomla\CMS\Language\Text::sprintf('F_ERROR_MAX', $this->params->get('params.max_dates', 0)) . "');}";
         }
         if ($this->params->get('params.min_dates', 0) > 0) {
-            $js .= "\n\t\tif(datlength{$this->id} < " . $this->params->get('params.min_dates', 0) . "){hfid.push({$this->id}); isValid = false; errorText.push('" . JText::sprintf('F_ERROR_MIN', $this->params->get('params.min_dates', 0)) . "');}";
+            $js .= "\n\t\tif(datlength{$this->id} < " . $this->params->get('params.min_dates', 0) . "){hfid.push({$this->id}); isValid = false; errorText.push('" . \Joomla\CMS\Language\Text::sprintf('F_ERROR_MIN', $this->params->get('params.min_dates', 0)) . "');}";
         }
 
         $js .= "\nconsole.log(jQuery('[name^=\"jform\\\\[fields\\\\]\\\\[{$this->id}\\\\]\"]'));";
         if ($this->required) {
-            $js .= "\n\t\tif(!dat{$this->id}){hfid.push({$this->id}); isValid = false; errorText.push('" . JText::sprintf('CFIELDREQUIRED', $this->label) . "');}";
+            $js .= "\n\t\tif(!dat{$this->id}){hfid.push({$this->id}); isValid = false; errorText.push('" . \Joomla\CMS\Language\Text::sprintf('CFIELDREQUIRED', $this->label) . "');}";
         }
 
         return $js;
@@ -141,13 +141,13 @@ class JFormFieldCDatetime extends CFormField
                 $out = $out[0];
                 break;
             case 1:
-                $out = JText::sprintf('F_WORN_AFTER', $out[0]);
+                $out = \Joomla\CMS\Language\Text::sprintf('F_WORN_AFTER', $out[0]);
                 break;
             case 2:
-                $out = JText::sprintf('F_WORN_BEFORE', $out[0]);
+                $out = \Joomla\CMS\Language\Text::sprintf('F_WORN_BEFORE', $out[0]);
                 break;
             case 3:
-                $out = JText::sprintf('F_WORN_BETWEEN', $out[0], @$out[1]);
+                $out = \Joomla\CMS\Language\Text::sprintf('F_WORN_BETWEEN', $out[0], @$out[1]);
                 break;
         }
 
@@ -159,7 +159,7 @@ class JFormFieldCDatetime extends CFormField
         if (!$this->value) {
             return;
         }
-        $db  = JFactory::getDbo();
+        $db  = \Joomla\CMS\Factory::getDbo();
         $sql = $db->getQuery(true);
 
         $sql->select('v.record_id');
@@ -197,7 +197,7 @@ class JFormFieldCDatetime extends CFormField
 
     protected function _get_d($val = null)
     {
-        $db = JFactory::getDbo();
+        $db = \Joomla\CMS\Factory::getDbo();
         if ($val === null) {
             $val = 'v.field_value';
         } else {
@@ -212,21 +212,21 @@ class JFormFieldCDatetime extends CFormField
 
     public function onRenderFilter($section, $module = false)
     {
-        $db         = JFactory::getDbo();
-        $doc        = JFactory::getDocument();
-        $lang       = strtolower(JFactory::getLanguage()->getTag());
+        $db         = \Joomla\CMS\Factory::getDbo();
+        $doc        = \Joomla\CMS\Factory::getDocument();
+        $lang       = strtolower(\Joomla\CMS\Factory::getLanguage()->getTag());
         $short_lang = substr($lang, 0, 2);
 
-        $doc->addScript(JUri::root(true) . '/media/com_joomcck/vendors/moment/min/moment.min.js');
-        $doc->addScript(JUri::root(true) . '/media/com_joomcck/vendors/moment/locale/en-gb.js');
-        if (JFile::exists(JPATH_ROOT . '/media/com_joomcck/vendors/moment/locale/' . $lang . '.js')) {
-            $doc->addScript(JUri::root(true) . '/media/com_joomcck/vendors/moment/locale/' . $lang . '.js');
+        $doc->addScript(\Joomla\CMS\Uri\Uri::root(true) . '/media/com_joomcck/vendors/moment/min/moment.min.js');
+        $doc->addScript(\Joomla\CMS\Uri\Uri::root(true) . '/media/com_joomcck/vendors/moment/locale/en-gb.js');
+        if (\Joomla\CMS\Filesystem\File::exists(JPATH_ROOT . '/media/com_joomcck/vendors/moment/locale/' . $lang . '.js')) {
+            $doc->addScript(\Joomla\CMS\Uri\Uri::root(true) . '/media/com_joomcck/vendors/moment/locale/' . $lang . '.js');
         }
-        if (JFile::exists(JPATH_ROOT . '/media/com_joomcck/vendors/moment/locale/' . $short_lang . '.js')) {
-            $doc->addScript(JUri::root(true) . '/media/com_joomcck/vendors/moment/locale/' . $short_lang . '.js');
+        if (\Joomla\CMS\Filesystem\File::exists(JPATH_ROOT . '/media/com_joomcck/vendors/moment/locale/' . $short_lang . '.js')) {
+            $doc->addScript(\Joomla\CMS\Uri\Uri::root(true) . '/media/com_joomcck/vendors/moment/locale/' . $short_lang . '.js');
         }
-        $doc->addScript(JUri::root(true) . '/media/com_joomcck/vendors/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js');
-        $doc->addStyleSheet(JUri::root(true) . '/media/com_joomcck/vendors/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css');
+        $doc->addScript(\Joomla\CMS\Uri\Uri::root(true) . '/media/com_joomcck/vendors/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js');
+        $doc->addStyleSheet(\Joomla\CMS\Uri\Uri::root(true) . '/media/com_joomcck/vendors/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css');
 
         return $this->_display_filter($section, $module);
     }
@@ -270,7 +270,7 @@ class JFormFieldCDatetime extends CFormField
                 $value_date = $value[0];
             }
 
-            $cdate = JFactory::getDate($value_date);
+            $cdate = \Joomla\CMS\Factory::getDate($value_date);
 
             if ($this->params->get('params.ctime_add', false)) {
                 $cdate->add(DateInterval::createFromDateString($this->params->get('params.ctime_add')));
@@ -287,7 +287,7 @@ class JFormFieldCDatetime extends CFormField
                 $value_date = $this->value[1];
             }
 
-            $exdate = JFactory::getDate($value_date);
+            $exdate = \Joomla\CMS\Factory::getDate($value_date);
 
             if ($this->params->get('params.extime_add', false)) {
                 $exdate->add(DateInterval::createFromDateString($this->params->get('params.extime_add')));
@@ -325,7 +325,7 @@ class JFormFieldCDatetime extends CFormField
         foreach ($this->value as $value) {
             $date = $this->formatDate($value);
             if ($this->params->get('params.filter_enable')) {
-                $tip = ($this->params->get('params.filter_tip') ? JText::sprintf($this->params->get('params.filter_tip'), '<b>' . $this->label . '</b>', '<b>' . $date . '</b>') : null);
+                $tip = ($this->params->get('params.filter_tip') ? \Joomla\CMS\Language\Text::sprintf($this->params->get('params.filter_tip'), '<b>' . $this->label . '</b>', '<b>' . $date . '</b>') : null);
 
                 switch ($this->params->get('params.filter_linkage')) {
                     case 1:
@@ -444,8 +444,8 @@ class JFormFieldCDatetime extends CFormField
     // private function _getDate($date)
     // {
     //     $style = $this->params->get('params.date_style');
-    //     $out   = JText::sprintf('%s %s %s', JText::_($this->params->get('params.date_before', '')), $date, JText::_($this->params->get('params.date_after', '')));
-    //     $out   = JText::sprintf('<%s %s>%s</%s>', $this->params->get('params.' . $this->date_type . '_style', $style), $this->_getColor($this->date_type . '_color'), $out, $this->params->get('params.' . $this->date_type . '_style', $style));
+    //     $out   = \Joomla\CMS\Language\Text::sprintf('%s %s %s', \Joomla\CMS\Language\Text::_($this->params->get('params.date_before', '')), $date, \Joomla\CMS\Language\Text::_($this->params->get('params.date_after', '')));
+    //     $out   = \Joomla\CMS\Language\Text::sprintf('<%s %s>%s</%s>', $this->params->get('params.' . $this->date_type . '_style', $style), $this->_getColor($this->date_type . '_color'), $out, $this->params->get('params.' . $this->date_type . '_style', $style));
 
     //     return $out;
     // }
@@ -453,19 +453,19 @@ class JFormFieldCDatetime extends CFormField
     // private function _getDay($days)
     // {
     //     $style = $this->params->get('params.date_style');
-    //     $out   = JText::sprintf('%s %s %s', JText::_($this->params->get('params.' . $this->date_type . '_before')), $days, JText::_($this->params->get('params.' . $this->date_type . '_after')));
+    //     $out   = \Joomla\CMS\Language\Text::sprintf('%s %s %s', \Joomla\CMS\Language\Text::_($this->params->get('params.' . $this->date_type . '_before')), $days, \Joomla\CMS\Language\Text::_($this->params->get('params.' . $this->date_type . '_after')));
     //     if ($days == 1 && $this->date_type == 'notify') {
     //         $out .= ' (' . $this->params->get('params.notify_msg') . ')';
     //     }
-    //     $out = JText::sprintf('<%s %s>%s</%s>', $this->params->get('params.' . $this->date_type . '_style', $style), $this->_getColor($this->date_type . '_color'), $out, $this->params->get('params.' . $this->date_type . '_style', $style));
+    //     $out = \Joomla\CMS\Language\Text::sprintf('<%s %s>%s</%s>', $this->params->get('params.' . $this->date_type . '_style', $style), $this->_getColor($this->date_type . '_color'), $out, $this->params->get('params.' . $this->date_type . '_style', $style));
 
     //     return $out;
     // }
 
     // private function _getAge($date, $value)
     // {
-    //     $now    = JFactory::getDate();
-    //     $b_date = JFactory::getDate($value);
+    //     $now    = \Joomla\CMS\Factory::getDate();
+    //     $b_date = \Joomla\CMS\Factory::getDate($value);
     //     $age    = $b_date->diff($now)->y;
 
     //     $age_notify = $this->params->get('params.age_notify', false);
@@ -481,8 +481,8 @@ class JFormFieldCDatetime extends CFormField
     //     }
 
     //     $style = $this->params->get('params.age_style');
-    //     $age   = JText::sprintf('%s %s %s', JText::_($this->params->get('params.age_before', '')), $age, JText::_($this->params->get('params.age_after', '')));
-    //     $age   = JText::sprintf('<%s %s>%s</%s>', $this->params->get('params.' . $this->date_type . '_style', $style), $this->_getColor($this->date_type . '_color'), $age, $this->params->get('params.' . $this->date_type . '_style', $style));
+    //     $age   = \Joomla\CMS\Language\Text::sprintf('%s %s %s', \Joomla\CMS\Language\Text::_($this->params->get('params.age_before', '')), $age, \Joomla\CMS\Language\Text::_($this->params->get('params.age_after', '')));
+    //     $age   = \Joomla\CMS\Language\Text::sprintf('<%s %s>%s</%s>', $this->params->get('params.' . $this->date_type . '_style', $style), $this->_getColor($this->date_type . '_color'), $age, $this->params->get('params.' . $this->date_type . '_style', $style));
 
     //     switch ($this->params->get('params.age_format', '1')) {
     //         case '1':
@@ -498,7 +498,7 @@ class JFormFieldCDatetime extends CFormField
     //             $format = $this->params->get('params.age_custom', '[AGE], [DATE]');
     //             $date   = $this->_getDate($date);
 
-    //             $result = str_replace(['[AGE]', '[DATE]'], [$age, $date], JText::_($format));
+    //             $result = str_replace(['[AGE]', '[DATE]'], [$age, $date], \Joomla\CMS\Language\Text::_($format));
 
     //             break;
     //     }
@@ -508,11 +508,11 @@ class JFormFieldCDatetime extends CFormField
 
     public function getCalendarEvents($post)
     {
-        $app   = JFactory::getApplication();
+        $app   = \Joomla\CMS\Factory::getApplication();
         $start = date('Y-m-d', ($app->input->get('from') / 1000));
         $end   = date('Y-m-d', ($app->input->get('to') / 1000));
 
-        $db    = JFactory::getDbo();
+        $db    = \Joomla\CMS\Factory::getDbo();
         $query = $db->getQuery(true);
         if ($this->params->get('params.type', 'single') == 'range') {
 
@@ -565,7 +565,7 @@ class JFormFieldCDatetime extends CFormField
         $fields_ids = $db->loadColumn();
 
         foreach ($list as &$event) {
-            $event['url'] = JRoute::_(Url::record($event['id']));
+            $event['url'] = \Joomla\CMS\Router\Route::_(Url::record($event['id']));
             $fields       = json_decode($event['fields'], true);
 
             $class = @$fields[$this->params->get('params.field_id_type')];

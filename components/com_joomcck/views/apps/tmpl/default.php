@@ -12,10 +12,10 @@ use Joomcck\Html\Helpers\Dropdown;
 defined('_JEXEC') or die('Restricted access');
 ?>
 <?php
-$user = JFactory::getUser();
+$user = \Joomla\CMS\Factory::getUser();
 $userId = $user->get('id');
-JHtml::_('dropdown.init');
-JHtml::_('formbehavior.chosen', '.select');
+\Joomla\CMS\HTML\HTMLHelper::_('dropdown.init');
+\Joomla\CMS\HTML\HTMLHelper::_('formbehavior.chosen', '.select');
 JHTML::_('bootstrap.tooltip', '*[rel^="tooltip"]');
 $listOrder = $this->state->get('list.ordering');
 $listDirn = $this->state->get('list.direction');
@@ -30,7 +30,7 @@ $listDirn = $this->state->get('list.direction');
 	<div class="mb-4 border-bottom pb-3">
 		<h1>
 			<i class="fas fa-shapes text-muted"></i>
-			<?php echo JText::_('COB_APPS_MANAGER'); ?>
+			<?php echo \Joomla\CMS\Language\Text::_('COB_APPS_MANAGER'); ?>
 		</h1>
 		<?php echo HTMLFormatHelper::layout('filters', $this); ?>
 	</div>
@@ -44,7 +44,7 @@ $listDirn = $this->state->get('list.direction');
 			    $ordering   = ($listOrder == 'f.ordering');
 			    $canCheckin = $user->authorise('core.manage', 'com_checkin') || $item->checked_out == $user->get('id') || $item->checked_out == 0;
 			    $canChange  = TRUE;
-			    $item->params = new JRegistry($item->params);
+			    $item->params = new \Joomla\Registry\Registry($item->params);
 			    ?>
 
             <div class="col-md-3 mb-3">
@@ -53,7 +53,7 @@ $listDirn = $this->state->get('list.direction');
 
                     <div class="card-body text-center">
                         <h3>
-                            <a class="link-underline link-underline-opacity-0" href="<?php echo JRoute::_('index.php?option=com_joomcck&task=section.edit&id=' . (int)$item->id); ?>">
+                            <a class="link-underline link-underline-opacity-0" href="<?php echo \Joomla\CMS\Router\Route::_('index.php?option=com_joomcck&task=section.edit&id=' . (int)$item->id); ?>">
                                 <?php echo $this->escape($item->name); ?>
                             </a>
                             <small class="badge <?php echo($item->records ? ' border-color-primary' : ' bg-light text-dark border') ?>">
@@ -63,9 +63,9 @@ $listDirn = $this->state->get('list.direction');
                     </div>
 
                     <div class="card-footer">
-	                    <?php echo JHtml::_('jgrid.published', $item->published, $i, 'sections.', $canChange); ?>
+	                    <?php echo \Joomla\CMS\HTML\HTMLHelper::_('jgrid.published', $item->published, $i, 'sections.', $canChange); ?>
 	                    <?php if($item->checked_out) : ?>
-		                    <?php echo JHtml::_('jgrid.checkedout', $i, $item->checked_out, $item->checked_out_time, 'sections.', $canCheckin); ?>
+		                    <?php echo \Joomla\CMS\HTML\HTMLHelper::_('jgrid.checkedout', $i, $item->checked_out, $item->checked_out_time, 'sections.', $canCheckin); ?>
 	                    <?php endif; ?>
                     </div>
 
@@ -92,20 +92,20 @@ $listDirn = $this->state->get('list.direction');
 				<input type="checkbox" name="checkall-toggle" value="" onclick="Joomla.checkAll(this);"/>
 			</th>
 			<th width="1%" class="nowrap">
-				<?php echo JHtml::_('grid.sort', 'JSTATUS', 'a.published', $listDirn, $listOrder); ?>
+				<?php echo \Joomla\CMS\HTML\HTMLHelper::_('grid.sort', 'JSTATUS', 'a.published', $listDirn, $listOrder); ?>
 			</th>
 			<th>
-				<?php echo JHtml::_('grid.sort', 'CSECTIONNAME', 'a.name', $listDirn, $listOrder); ?>
+				<?php echo \Joomla\CMS\HTML\HTMLHelper::_('grid.sort', 'CSECTIONNAME', 'a.name', $listDirn, $listOrder); ?>
 			</th>
 			<th width="1%"></th>
 			<th width="5%">
-				<?php echo JText::_('CRECORDS'); ?>
+				<?php echo \Joomla\CMS\Language\Text::_('CRECORDS'); ?>
 			</th>
 			<th width="10%">
-				<?php echo JHtml::_('grid.sort', 'JGRID_HEADING_LANGUAGE', 'a.language', $listDirn, $listOrder); ?>
+				<?php echo \Joomla\CMS\HTML\HTMLHelper::_('grid.sort', 'JGRID_HEADING_LANGUAGE', 'a.language', $listDirn, $listOrder); ?>
 			</th>
 			<th width="1%" class="nowrap">
-				<?php echo JHtml::_('grid.sort', 'ID', 'a.id', $listDirn, $listOrder); ?>
+				<?php echo \Joomla\CMS\HTML\HTMLHelper::_('grid.sort', 'ID', 'a.id', $listDirn, $listOrder); ?>
 			</th>
 		</tr>
 		</thead>
@@ -115,19 +115,19 @@ $listDirn = $this->state->get('list.direction');
 			$ordering   = ($listOrder == 'f.ordering');
 			$canCheckin = $user->authorise('core.manage', 'com_checkin') || $item->checked_out == $user->get('id') || $item->checked_out == 0;
 			$canChange  = TRUE;
-			$item->params = new JRegistry($item->params);
+			$item->params = new \Joomla\Registry\Registry($item->params);
 			?>
 			<tr>
 				<td class="center">
-					<?php echo JHtml::_('grid.id', $i, $item->id); ?>
+					<?php echo \Joomla\CMS\HTML\HTMLHelper::_('grid.id', $i, $item->id); ?>
 				</td>
 				<td class="center">
-					<?php echo JHtml::_('jgrid.published', $item->published, $i, 'sections.', $canChange); ?>
+					<?php echo \Joomla\CMS\HTML\HTMLHelper::_('jgrid.published', $item->published, $i, 'sections.', $canChange); ?>
 				</td>
 				<td class="has-context">
 					<div class="float-start">
 
-						<a href="<?php echo JRoute::_('index.php?option=com_joomcck&task=section.edit&id=' . (int)$item->id); ?>">
+						<a href="<?php echo \Joomla\CMS\Router\Route::_('index.php?option=com_joomcck&task=section.edit&id=' . (int)$item->id); ?>">
 							<?php echo $this->escape($item->name); ?>
 						</a>
 					</div>
@@ -137,8 +137,8 @@ $listDirn = $this->state->get('list.direction');
                         Dropdown::edit($item->id, 'section.');
 
                         Dropdown::addCustomItem(
-	                        '<i class="fas fa-trash text-danger"></i> '.JText::_('C_TOOLBAR_DELETE'), 'javascript:void(0)',
-                                'onclick="if(!confirm(\'' . JText::_('C_TOOLBAR_CONFIRMDELET') . '\')){return;}Joomla.listItemTask(\'cb' . $i . '\',\'sections.delete\')"'
+	                        '<i class="fas fa-trash text-danger"></i> '.\Joomla\CMS\Language\Text::_('C_TOOLBAR_DELETE'), 'javascript:void(0)',
+                                'onclick="if(!confirm(\'' . \Joomla\CMS\Language\Text::_('C_TOOLBAR_CONFIRMDELET') . '\')){return;}Joomla.listItemTask(\'cb' . $i . '\',\'sections.delete\')"'
                         );
 
 						if($item->published) :
@@ -154,11 +154,11 @@ $listDirn = $this->state->get('list.direction');
 						endif;
 
 						Dropdown::divider();
-                        Dropdown::addCustomItem('<i class="fas fa-eye"></i> '.JText::_('C_OPENSECTION'), JRoute::_(Url::records($item)));
+                        Dropdown::addCustomItem('<i class="fas fa-eye"></i> '.\Joomla\CMS\Language\Text::_('C_OPENSECTION'), \Joomla\CMS\Router\Route::_(Url::records($item)));
 						Dropdown::divider();
                         Dropdown::addCustomItem(
-                                '<i class="fas fa-folder-open"></i> '.JText::_('C_MANAGE_CATS') . ' <span class="badge' . ($item->categories ? ' bg-success' : ' bg-light text-dark border') . '">' . $item->categories . '</span>',
-                                JRoute::_('index.php?option=com_joomcck&view=cats&section_id=' . $item->id)
+                                '<i class="fas fa-folder-open"></i> '.\Joomla\CMS\Language\Text::_('C_MANAGE_CATS') . ' <span class="badge' . ($item->categories ? ' bg-success' : ' bg-light text-dark border') . '">' . $item->categories . '</span>',
+                                \Joomla\CMS\Router\Route::_('index.php?option=com_joomcck&view=cats&section_id=' . $item->id)
                         );
 
 						echo Dropdown::render();
@@ -166,8 +166,8 @@ $listDirn = $this->state->get('list.direction');
 					</div>
 				</td>
 				<td nowrap="nowrap">
-					<a rel="tooltip" data-bs-toggle="tooltip" title="<?php echo JText::_('CCATEGOY_MANAGE'); ?>" href="<?php echo JRoute::_('index.php?option=com_joomcck&view=cats&section_id=' . $item->id) ?>">
-						<?php echo JText::_('CCATEGORIES'); ?>
+					<a rel="tooltip" data-bs-toggle="tooltip" title="<?php echo \Joomla\CMS\Language\Text::_('CCATEGOY_MANAGE'); ?>" href="<?php echo \Joomla\CMS\Router\Route::_('index.php?option=com_joomcck&view=cats&section_id=' . $item->id) ?>">
+						<?php echo \Joomla\CMS\Language\Text::_('CCATEGORIES'); ?>
 					</a>
 					<span class="badge<?php echo($item->fieldnum ? ' bg-success' : ' bg-light text-dark border') ?>"><?php echo $item->fieldnum; ?></span>
 				</td>
@@ -189,5 +189,5 @@ $listDirn = $this->state->get('list.direction');
 	<input type="hidden" name="boxchecked" value="0"/>
 	<input type="hidden" name="filter_order" value="<?php echo $listOrder; ?>"/>
 	<input type="hidden" name="filter_order_Dir" value="<?php echo $listDirn; ?>"/>
-	<?php echo JHtml::_('form.token'); ?>
+	<?php echo \Joomla\CMS\HTML\HTMLHelper::_('form.token'); ?>
 </form>

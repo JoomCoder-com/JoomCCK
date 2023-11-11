@@ -15,7 +15,7 @@ class JoomcckViewCategories extends MViewBase
         
         $model = MModelBase::getInstance('Usercategories', 'JoomcckModel');
         
-        $app = JFactory::getApplication();
+        $app = \Joomla\CMS\Factory::getApplication();
 		$this->section_id = $app->getUserStateFromRequest('com_joomcck.usercategories.section_id', 'section_id', null, 'int');
         $this->section = ItemsStore::getSection($this->section_id);
         $this->items = $model->getItems();

@@ -19,7 +19,7 @@ class JFormFieldFieldsgroup extends JFormFieldList
 
 	protected function getOptions()
 	{
-		$db = JFactory::getDbo();
+		$db = \Joomla\CMS\Factory::getDbo();
 		$query = 'SELECT id AS value, title AS text' .
 				' FROM #__js_res_fields_group' .
 				' WHERE type_id = ' . \Joomla\CMS\Factory::getApplication()->input->getInt('type_id',0);
@@ -27,7 +27,7 @@ class JFormFieldFieldsgroup extends JFormFieldList
 		$db->setQuery($query);
 		$list = $db->loadObjectList();
 		
-		$opt = JHtml::_('select.option', 0, JText::_('CUNGROUPED'));
+		$opt = \Joomla\CMS\HTML\HTMLHelper::_('select.option', 0, \Joomla\CMS\Language\Text::_('CUNGROUPED'));
 		
 		array_unshift($list, $opt);
 		

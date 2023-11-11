@@ -23,7 +23,7 @@ class JoomcckModelTags extends MModelList
 
 	protected function populateState($ordering = null, $direction = null)
 	{
-		$app = JFactory::getApplication('administrator');
+		$app = \Joomla\CMS\Factory::getApplication('administrator');
 
 		$search = $app->getUserStateFromRequest($this->context . '.filter.search', 'filter_search');
 		$this->setState('filter.search', $search);
@@ -88,7 +88,7 @@ class JoomcckModelTags extends MModelList
 	public function _deleteTag()
 	{
 		$db = $this->getDbo();
-		$app = JFactory::getApplication();
+		$app = \Joomla\CMS\Factory::getApplication();
 
 		$cid = $app->input->get('cid', array(), 'post', 'array');
 
@@ -134,8 +134,8 @@ class JoomcckModelTags extends MModelList
 
 	public function _saveTag()
 	{
-		$db = JFactory::getDBO();
-		$app = JFactory::getApplication();
+		$db = \Joomla\CMS\Factory::getDBO();
+		$app = \Joomla\CMS\Factory::getApplication();
 
 		$id = $app->input->getInt('id');
 		$tag = $app->input->getString('tag');
@@ -145,7 +145,7 @@ class JoomcckModelTags extends MModelList
 
 		if(count($exist_item) > 1 || (count($exist_item) == 1 && $exist_item[0]->id != $id))
 		{
-			$this->_error_msg = JText::_("C_MSG_TAGEXISTS");
+			$this->_error_msg = \Joomla\CMS\Language\Text::_("C_MSG_TAGEXISTS");
 			return false;
 		}
 

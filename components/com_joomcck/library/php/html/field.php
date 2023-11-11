@@ -18,7 +18,7 @@ class JHTMLField {
 			0 => array('publish', 'JUNPUBLISHED', 'JLIB_HTML_PUBLISH_ITEM', 'JUNPUBLISHED', true, 'unpublish', 'unpublish')
 		);
 		
-		return JHtml::_('jgrid.state', $states, $value, $i, $prefix, $enabled);
+		return \Joomla\CMS\HTML\HTMLHelper::_('jgrid.state', $states, $value, $i, $prefix, $enabled);
 	}
 	
 	public static function required($value, $i, $prefix = '', $enabled = true)
@@ -28,7 +28,7 @@ class JHTMLField {
 			0 => array('required', '', 'XML_LABEL_F_REQ', 'XML_LABEL_F_NOTREQ', true, 'unpublish', 'unpublish')
 		);
 		
-		return JHtml::_('jgrid.state', $states, $value, $i, $prefix, $enabled);
+		return \Joomla\CMS\HTML\HTMLHelper::_('jgrid.state', $states, $value, $i, $prefix, $enabled);
 	}
 	
 	public static function searchable($value, $i, $prefix = '', $enabled = true)
@@ -38,7 +38,7 @@ class JHTMLField {
 		0 => array('searchable', '', 'XML_LABEL_F_SEARCHABLE2', 'XML_LABEL_F_NOTSEARCHABLE', true, 'unpublish', 'unpublish')
 		);
 	
-		return JHtml::_('jgrid.state', $states, $value, $i, $prefix, $enabled);
+		return \Joomla\CMS\HTML\HTMLHelper::_('jgrid.state', $states, $value, $i, $prefix, $enabled);
 	}
 	
 	public static function show_intro($value, $i, $prefix = '', $enabled = true)
@@ -48,7 +48,7 @@ class JHTMLField {
 		0 => array('show_intro', '', 'XML_LABEL_F_SHOW_INTRO', 'XML_LABEL_F_NOT_SHOW_INTRO', true, 'unpublish', 'unpublish')
 		);
 	
-		return JHtml::_('jgrid.state', $states, $value, $i, $prefix, $enabled);
+		return \Joomla\CMS\HTML\HTMLHelper::_('jgrid.state', $states, $value, $i, $prefix, $enabled);
 	}
 	
 	public static function show_full($value, $i, $prefix = '', $enabled = true)
@@ -58,6 +58,6 @@ class JHTMLField {
 		0 => array('show_full', '', 'XML_LABEL_F_SHOW_FULL', 'XML_LABEL_F_NOT_SHOW_FULL', true, 'unpublish', 'unpublish')
 		);
 	
-		return JHtml::_('jgrid.state', $states, $value, $i, $prefix, $enabled);
+		return \Joomla\CMS\HTML\HTMLHelper::_('jgrid.state', $states, $value, $i, $prefix, $enabled);
 	}
 }

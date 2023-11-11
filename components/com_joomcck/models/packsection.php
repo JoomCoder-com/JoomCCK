@@ -20,13 +20,13 @@ class JoomcckModelPacksection extends MModelAdmin
 
 	public function getTable($type = 'Packs_sections', $prefix = 'JoomcckTable', $config = array())
 	{
-		return JTable::getInstance($type, $prefix, $config);
+		return \Joomla\CMS\Table\Table::getInstance($type, $prefix, $config);
 	}
 
 
 	public function getForm($data = array(), $loadData = TRUE)
 	{
-		$app = JFactory::getApplication();
+		$app = \Joomla\CMS\Factory::getApplication();
 
 		$form = $this->loadForm('com_joomcck.packsection', 'packsection', array('control' => 'jform', 'load_data' => $loadData));
 		if(empty($form))
@@ -39,7 +39,7 @@ class JoomcckModelPacksection extends MModelAdmin
 
 	protected function loadFormData()
 	{
-		$data = JFactory::getApplication()->getUserState('com_joomcck.edit.' . $this->getName() . '.data', array());
+		$data = \Joomla\CMS\Factory::getApplication()->getUserState('com_joomcck.edit.' . $this->getName() . '.data', array());
 
 		if(empty($data))
 		{
@@ -56,21 +56,21 @@ class JoomcckModelPacksection extends MModelAdmin
 
 	protected function canDelete($record)
 	{
-		$user = JFactory::getUser();
+		$user = \Joomla\CMS\Factory::getUser();
 
 		return $user->authorise('core.delete', 'com_joomcck.packsection.' . (int)$record->id);
 	}
 
 	protected function canEditState($record)
 	{
-		$user = JFactory::getUser();
+		$user = \Joomla\CMS\Factory::getUser();
 
 		return $user->authorise('core.edit.state', 'com_joomcck.packsection.' . (int)$record->id);
 	}
 
 	public function populateState($ordering = NULL, $direction = NULL)
 	{
-		$app = JFactory::getApplication('administrator');
+		$app = \Joomla\CMS\Factory::getApplication('administrator');
 
 		$pack = $app->getUserStateFromRequest('com_joomcck.packsections.pack', 'pack_id', 0, 'int');
 		$this->setState('pack', $pack);
@@ -82,7 +82,7 @@ class JoomcckModelPacksection extends MModelAdmin
 	{
 		MModelBase::addIncludePath(JPATH_ROOT . '/components/com_joomcck/models');
 		$file = JPATH_COMPONENT. '/models/forms/packtype.xml';
-		if(!JFile::exists($file))
+		if(!\Joomla\CMS\Filesystem\File::exists($file))
 		{
 			echo "File not found: {$file}";
 		}
@@ -90,7 +90,7 @@ class JoomcckModelPacksection extends MModelAdmin
 
 		if(!is_object($section->params))
 		{
-			$section->params = new JRegistry($section->params);
+			$section->params = new \Joomla\Registry\Registry($section->params);
 		}
 
 		$types = $section->params->get('general.type');
@@ -98,10 +98,10 @@ class JoomcckModelPacksection extends MModelAdmin
 
 		if(!count($types))
 		{
-			return JText::_('CNOTYPES');
+			return \Joomla\CMS\Language\Text::_('CNOTYPES');
 		}
 
-		$active = JHtml::_('bootstrap.startPane', 'typetabs', array('active' => 'type' . $types[0]));
+		$active = \Joomla\CMS\HTML\HTMLHelper::_('bootstrap.startPane', 'typetabs', array('active' => 'type' . $types[0]));
 
 		$i   = 0;
 		$li_out = $out = $divs = [];
@@ -126,11 +126,11 @@ class JoomcckModelPacksection extends MModelAdmin
 
 			$form->setField($f, 'list_tmpl');
 			$div   = array();
-			$div[] = JHtml::_('bootstrap.addPanel', 'typetabs', 'type' . $type_id); //'<div class="tab-pane'.($i == 0 ? ' active' : '').'" id="type'.$type->id.'">';
+			$div[] = \Joomla\CMS\HTML\HTMLHelper::_('bootstrap.addPanel', 'typetabs', 'type' . $type_id); //'<div class="tab-pane'.($i == 0 ? ' active' : '').'" id="type'.$type->id.'">';
 			$div[] = MFormHelper::renderFieldset($form, 'sp_type_templates', $def, NULL);
 			$div[] = MFormHelper::renderFieldset($form, 'sp_type_content', $def, NULL);
 			$div[] = MFormHelper::renderFieldset($form, 'sp_type_fields', $def, NULL);
-			$div[] = JHtml::_('bootstrap.endPanel');
+			$div[] = \Joomla\CMS\HTML\HTMLHelper::_('bootstrap.endPanel');
 
 			$divs[] = implode('', $div);
 			$i++;
@@ -140,7 +140,7 @@ class JoomcckModelPacksection extends MModelAdmin
 		$out[] = '</ul>';
 		$out[] = $active;
 		$out[] = implode('', $divs);
-		$out[] = JHtml::_('bootstrap.endPane', 'typetabs');
+		$out[] = \Joomla\CMS\HTML\HTMLHelper::_('bootstrap.endPane', 'typetabs');
 
 
 		return implode('', $out);
@@ -153,7 +153,7 @@ class JoomcckModelPacksection extends MModelAdmin
 			return array();
 		}
 
-		$db    = JFactory::getDbo();
+		$db    = \Joomla\CMS\Factory::getDbo();
 		$query = 'SELECT label FROM #__js_res_fields WHERE type_id = ' . $type_id;
 		$db->setQuery($query);
 

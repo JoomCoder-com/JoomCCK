@@ -16,8 +16,8 @@ class JFormFieldCMultiselect extends CFormFieldSelectable
 	public function getInput()
 	{
 		$params     = $this->params;
-		$doc        = JFactory::getDocument();
-		$this->user = JFactory::getUser();
+		$doc        = \Joomla\CMS\Factory::getDocument();
+		$this->user = \Joomla\CMS\Factory::getUser();
 
 		$values = array();
 		if($params->get('params.sql_source'))
@@ -58,11 +58,11 @@ class JFormFieldCMultiselect extends CFormFieldSelectable
 		$js .= "\n\t\tif(ms{$this->id}) {ms{$this->id} = ms{$this->id}.length};";
 		if($this->required)
 		{
-			$js .= "\n\t\tif(!ms{$this->id}){hfid.push({$this->id}); isValid = false; errorText.push('" . addslashes(JText::sprintf("CFIELDREQUIRED", $this->label)) . "');}";
+			$js .= "\n\t\tif(!ms{$this->id}){hfid.push({$this->id}); isValid = false; errorText.push('" . addslashes(\Joomla\CMS\Language\Text::sprintf("CFIELDREQUIRED", $this->label)) . "');}";
 		}
 		if($this->params->get('params.total_limit'))
 		{
-			$js .= "\n\t\tif(ms{$this->id} > " . $this->params->get('params.total_limit') . ") {hfid.push({$this->id}); isValid = false; errorText.push('" . addslashes(JText::sprintf("F_OPTIONSLIMIT", $this->params->get('params.total_limit'))) . "');}";
+			$js .= "\n\t\tif(ms{$this->id} > " . $this->params->get('params.total_limit') . ") {hfid.push({$this->id}); isValid = false; errorText.push('" . addslashes(\Joomla\CMS\Language\Text::sprintf("F_OPTIONSLIMIT", $this->params->get('params.total_limit'))) . "');}";
 		}
 
 		return $js;
@@ -74,7 +74,7 @@ class JFormFieldCMultiselect extends CFormFieldSelectable
 		{
 			if(count($value) > $this->params->get('params.total_limit'))
 			{
-				$this->setError(JText::sprintf("F_VALUESLIMIT", $this->params->get('params.total_limit'), $this->label));
+				$this->setError(\Joomla\CMS\Language\Text::sprintf("F_VALUESLIMIT", $this->params->get('params.total_limit'), $this->label));
 			}
 		}
 
@@ -98,7 +98,7 @@ class JFormFieldCMultiselect extends CFormFieldSelectable
 	{
 		$out = $this->_import_fieldlist($heads, $defaults->get('field.' . $this->id . '.fname'), 'fname');
 		$out .= sprintf('<div><small>%s</small></div><input type="text" name="import[field][%d][separator]" value="%s" class="col-md-2" >',
-			JText::_('CMULTIVALFIELDSEPARATOR'), $this->id, $defaults->get('field.' . $this->id . '.separator', ','));
+			\Joomla\CMS\Language\Text::_('CMULTIVALFIELDSEPARATOR'), $this->id, $defaults->get('field.' . $this->id . '.separator', ','));
 
 		return $out;
 	}

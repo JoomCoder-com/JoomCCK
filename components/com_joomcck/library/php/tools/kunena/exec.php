@@ -6,15 +6,15 @@ $migration->migrate($params);
 class Kunena2Joomcck {
 	public function migrate($params)
 	{
-		JTable::addIncludePath(JPATH_ROOT . '/administrator/components/com_joomcck/tables');
+		\Joomla\CMS\Table\Table::addIncludePath(JPATH_ROOT . '/administrator/components/com_joomcck/tables');
 		JModelLegacy::addIncludePath(JPATH_ROOT . '/components/com_joomcck/models');
 
-		$this->record   = JTable::getInstance('Record', 'JoomcckTable');
-		$this->category = JTable::getInstance('Record_category', 'JoomcckTable');
-		$this->comments = JTable::getInstance('Cobcomments', 'JoomcckTable');
+		$this->record   = \Joomla\CMS\Table\Table::getInstance('Record', 'JoomcckTable');
+		$this->category = \Joomla\CMS\Table\Table::getInstance('Record_category', 'JoomcckTable');
+		$this->comments = \Joomla\CMS\Table\Table::getInstance('Cobcomments', 'JoomcckTable');
 		$this->fields   = $this->getFields($params->get('type_id'));
-		$this->values   = JTable::getInstance('Record_values', 'JoomcckTable');
-		$this->follow   = JTable::getInstance('Subscribe', 'JoomcckTable');
+		$this->values   = \Joomla\CMS\Table\Table::getInstance('Record_values', 'JoomcckTable');
+		$this->follow   = \Joomla\CMS\Table\Table::getInstance('Subscribe', 'JoomcckTable');
 
 		$this->type    = $this->getType($params->get('type_id'));
 		$this->section = $this->getSection($params->get('section_id'));
@@ -27,7 +27,7 @@ class Kunena2Joomcck {
 
 	private function import($params)
 	{
-		$db = JFactory::getDbo();
+		$db = \Joomla\CMS\Factory::getDbo();
 		$db->setQuery("SELECT * FROM `#__kunena_messages` WHERE parent = 0 LIMIT 1");
 		$list = $db->loadObjectList();
 
@@ -97,7 +97,7 @@ class Kunena2Joomcck {
 
 	private function saveComments($id, $params)
 	{
-		$db = JFactory::getDbo();
+		$db = \Joomla\CMS\Factory::getDbo();
 		$db->setQuery("SELECT * FROM `#__kunena_messages` WHERE parent = {$id} ORDER BY `time` ASC");
 
 		$list = $db->loadObjectList();
@@ -128,8 +128,8 @@ class Kunena2Joomcck {
 				$this->comments->parent_id = 1;
 				$this->comments->root_id   = 0;
 				$this->comments->ip        = $item->ip;
-				$this->comments->email     = JFactory::getUser($item->userid)->get('email');
-				$this->comments->name      = JFactory::getUser($item->userid)->get('username');
+				$this->comments->email     = \Joomla\CMS\Factory::getUser($item->userid)->get('email');
+				$this->comments->name      = \Joomla\CMS\Factory::getUser($item->userid)->get('username');
 
 				$_REQUEST['jform']['parent_id'] = 1;
 				$this->comments->check();
@@ -190,9 +190,9 @@ class Kunena2Joomcck {
 			}
 
 			$file = JPATH_ROOT . DIRECTORY_SEPARATOR . 'components/com_joomcck/fields/' . $field->field_type . '/' . $field->field_type . '.php';
-			if(!JFile::exists($file))
+			if(!\Joomla\CMS\Filesystem\File::exists($file))
 			{
-				JFactory::getApplication()->enqueueMessage(JText::sprintf("CFIELDNOTFOUND", $field->field_type),'warning');
+				\Joomla\CMS\Factory::getApplication()->enqueueMessage(\Joomla\CMS\Language\Text::sprintf("CFIELDNOTFOUND", $field->field_type),'warning');
 				continue;
 			}
 			require_once $file;
@@ -226,7 +226,7 @@ class Kunena2Joomcck {
 			}
 		}
 
-		$user = JFactory::getUser($this->record->user_id);
+		$user = \Joomla\CMS\Factory::getUser($this->record->user_id);
 
 		if($this->section->params->get('more.search_title'))
 		{
@@ -259,7 +259,7 @@ class Kunena2Joomcck {
 
 	private function saveFollows($id)
 	{
-		$db = JFactory::getDbo();
+		$db = \Joomla\CMS\Factory::getDbo();
 		$db->setQuery('SELECT * FROM `#__kunena_user_topics` WHERE subscribed = 1 AND  topic_id = ' . $id);
 
 		$list = $db->loadObjectList();
@@ -283,7 +283,7 @@ class Kunena2Joomcck {
 			$this->follow->load($data);
 			if(!$this->follow->id)
 			{
-				$data['ctime'] = JFactory::getDate()->toSql();
+				$data['ctime'] = \Joomla\CMS\Factory::getDate()->toSql();
 
 				$this->follow->bind($data);
 				$this->follow->store();
@@ -299,31 +299,31 @@ class Kunena2Joomcck {
 
 	private function getType($id)
 	{
-		$db = JFactory::getDbo();
+		$db = \Joomla\CMS\Factory::getDbo();
 
 		$db->setQuery('SELECT * FROM #__js_res_types WHERE id = ' . (int)$id);
 
 		$type         = $db->loadObject();
-		$type->params = new JRegistry($type->params);
+		$type->params = new \Joomla\Registry\Registry($type->params);
 
 		return $type;
 	}
 
 	private function getSection($id)
 	{
-		$db = JFactory::getDbo();
+		$db = \Joomla\CMS\Factory::getDbo();
 
 		$db->setQuery('SELECT * FROM #__js_res_sections WHERE id = ' . (int)$id);
 
 		$section         = $db->loadObject();
-		$section->params = new JRegistry($section->params);
+		$section->params = new \Joomla\Registry\Registry($section->params);
 
 		return $section;
 	}
 
 	private function getFields($id)
 	{
-		$db = JFactory::getDbo();
+		$db = \Joomla\CMS\Factory::getDbo();
 
 		$db->setQuery('SELECT * FROM #__js_res_fields WHERE type_id = ' . $id);
 
@@ -336,7 +336,7 @@ class Kunena2Joomcck {
 
 		if(!$list)
 		{
-			$db = JFactory::getDbo();
+			$db = \Joomla\CMS\Factory::getDbo();
 			$db->setQuery("SELECT id, title FROM #__js_res_categories");
 			$list = $db->loadAssocList('id', 'title');
 		}
@@ -346,7 +346,7 @@ class Kunena2Joomcck {
 
 	private function _getMessage($id)
 	{
-		$db = JFactory::getDbo();
+		$db = \Joomla\CMS\Factory::getDbo();
 		$db->setQuery("SELECT `message` FROM `#__kunena_messages_text` WHERE mesid = " . $id);
 
 		return $db->loadResult();

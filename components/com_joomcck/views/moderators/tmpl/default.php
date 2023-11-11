@@ -8,30 +8,30 @@
  */
 defined('_JEXEC') or die('Restricted access'); ?>
 <?php
-$user	= JFactory::getUser();
+$user	= \Joomla\CMS\Factory::getUser();
 $userId	= $user->get('id');
 
 $listOrder	= $this->state->get('list.ordering');
 $listDirn	= $this->state->get('list.direction');
-$alert = JText::_('CMAKESELECTION');
-$params = JComponentHelper::getParams('com_joomcck');
+$alert = \Joomla\CMS\Language\Text::_('CMAKESELECTION');
+$params = \Joomla\CMS\Component\ComponentHelper::getParams('com_joomcck');
 $back = NULL;
-if(JFactory::getApplication()->input->getBase64('return'))
+if(\Joomla\CMS\Factory::getApplication()->input->getBase64('return'))
 {
 	$back = Url::get_back('return');
 }
-JHtml::_('dropdown.init');
+\Joomla\CMS\HTML\HTMLHelper::_('dropdown.init');
 ?>
 
 <?php echo HTMLFormatHelper::layout('navbar'); ?>
 
-<form action="<?php echo JRoute::_('index.php?option=com_joomcck&view=moderators'); ?>" method="post" id="adminForm" name="adminForm">
+<form action="<?php echo \Joomla\CMS\Router\Route::_('index.php?option=com_joomcck&view=moderators'); ?>" method="post" id="adminForm" name="adminForm">
 	<?php echo HTMLFormatHelper::layout('search', $this); ?>
 
 	<div class="page-header">
 		<h1>
-			<img src="<?php echo JUri::root(TRUE); ?>/components/com_joomcck/images/icons/moders.png">
-			<?php echo JText::_('CMODERLIST');?>
+			<img src="<?php echo \Joomla\CMS\Uri\Uri::root(TRUE); ?>/components/com_joomcck/images/icons/moders.png">
+			<?php echo \Joomla\CMS\Language\Text::_('CMODERLIST');?>
 		</h1>
 	</div>
 
@@ -40,7 +40,7 @@ JHtml::_('dropdown.init');
 	<?php if($back):?>
 		<button style="float:left;" type="button" class="btn" onclick="location.href = '<?php /*echo Url::get_back('return', $this->state->get('moderators.return'));*/?>'">
 			<?php echo HTMLFormatHelper::icon('arrow-180.png');  ?>
-			<?php echo JText::_('CBACKTOSECTION'); ?>
+			<?php echo \Joomla\CMS\Language\Text::_('CBACKTOSECTION'); ?>
 		</button>
 	<?php endif; ?>
 
@@ -54,22 +54,22 @@ JHtml::_('dropdown.init');
 			<table class="table table-striped">
 				<thead>
 					<th width="1%">
-						<?php echo JText::_('#'); ?>
+						<?php echo \Joomla\CMS\Language\Text::_('#'); ?>
 					</th>
 					<th width="1%"><input type="checkbox" name="checkall-toggle" value=""
 						onclick="checkAll(this)" /></th>
 					<th width="25px"></th>
 					<th class="has-context">
-						<?php echo JHtml::_('grid.sort',  'User', 'u.username', $listDirn, $listOrder); ?>
+						<?php echo \Joomla\CMS\HTML\HTMLHelper::_('grid.sort',  'User', 'u.username', $listDirn, $listOrder); ?>
 					</th>
 					<th width="1%" nowrap="nowrap">
-						<?php echo JHtml::_('grid.sort',  'Date', 'm.ctime', $listDirn, $listOrder); ?>
+						<?php echo \Joomla\CMS\HTML\HTMLHelper::_('grid.sort',  'Date', 'm.ctime', $listDirn, $listOrder); ?>
 					</th>
 					<th width="1%" nowrap="nowrap">
-						<?php echo JHtml::_('grid.sort',  'State', 'm.published', $listDirn, $listOrder); ?>
+						<?php echo \Joomla\CMS\HTML\HTMLHelper::_('grid.sort',  'State', 'm.published', $listDirn, $listOrder); ?>
 					</th>
 					<th width="1%" class="nowrap">
-						<?php echo JHtml::_('grid.sort',  'ID', 'm.id', $listDirn, $listOrder); ?>
+						<?php echo \Joomla\CMS\HTML\HTMLHelper::_('grid.sort',  'ID', 'm.id', $listDirn, $listOrder); ?>
 					</th>
 				</thead>
 				<tbody>
@@ -82,15 +82,15 @@ JHtml::_('dropdown.init');
 							<?php echo $this->pagination->getRowOffset($i); ?>
 						</td>
 						<td class="center">
-							<?php echo JHtml::_('grid.id', $i, $item->id); ?>
+							<?php echo \Joomla\CMS\HTML\HTMLHelper::_('grid.id', $i, $item->id); ?>
 						</td>
 						<td nowrap="nowrap"><img src="<?php echo CCommunityHelper::getAvatar($item->user_id, 25, 25); ?>"></td>
 						<td>
 							<?php if ($item->checked_out) : ?>
-								<?php echo JHtml::_('jgrid.checkedout', $i, $item->checked_out, $item->checked_out_time, 'moderators.', $canCheckin); ?>
+								<?php echo \Joomla\CMS\HTML\HTMLHelper::_('jgrid.checkedout', $i, $item->checked_out, $item->checked_out_time, 'moderators.', $canCheckin); ?>
 							<?php endif; ?>
 
-							<a href="<?php echo JRoute::_('index.php?option=com_joomcck&task=moderator.edit&id='.(int) $item->id); ?>">
+							<a href="<?php echo \Joomla\CMS\Router\Route::_('index.php?option=com_joomcck&task=moderator.edit&id='.(int) $item->id); ?>">
 								<?php echo CCommunityHelper::getName($item->user_id, $this->section_model->getItem($item->section_id), array('nohtml' => 1)); ?>
 							</a>
 							<?php if($item->icon && $item->icon != -1):?>
@@ -104,10 +104,10 @@ JHtml::_('dropdown.init');
 							<?php endif;?>
 						</td>
 						<td class="center" nowrap="nowrap">
-							<?php echo JHtml::_('date', $item->ctime, 'd M Y');?>
+							<?php echo \Joomla\CMS\HTML\HTMLHelper::_('date', $item->ctime, 'd M Y');?>
 						</td>
 						<td class="center">
-							<?php echo JHtml::_('jgrid.published', $item->published, $i, 'moderators.', $canChange);?>
+							<?php echo \Joomla\CMS\HTML\HTMLHelper::_('jgrid.published', $item->published, $i, 'moderators.', $canChange);?>
 						</td>
 						<td class="center">
 							<?php echo (int) $item->id; ?>
@@ -121,7 +121,7 @@ JHtml::_('dropdown.init');
 					<?php if($this->pagination->getPagesCounter()):?>
 						<?php echo $this->pagination->getPagesCounter(); ?>
 					<?php endif;?>
-					<?php echo str_replace('<option value="0">'.JText::_('JALL').'</option>', '', $this->pagination->getLimitBox());?>
+					<?php echo str_replace('<option value="0">'.\Joomla\CMS\Language\Text::_('JALL').'</option>', '', $this->pagination->getLimitBox());?>
 					<?php echo $this->pagination->getResultsCounter(); ?>
 				</small>
 			</div>
@@ -132,14 +132,14 @@ JHtml::_('dropdown.init');
 		<?php else:?>
 			<div class="clearfix"></div>
 			<div class="alert alert-info">
-				<?php echo JText::_('CADDMODER');?>
+				<?php echo \Joomla\CMS\Language\Text::_('CADDMODER');?>
 			</div>
 		<?php endif;?>
 
 
 	<?php else:?>
 		<div class="alert alert-info">
-			<?php echo JText::_('CPLEASESELECTSECTION');?>
+			<?php echo \Joomla\CMS\Language\Text::_('CPLEASESELECTSECTION');?>
 		</div>
 	<?php endif;?>
 
@@ -149,5 +149,5 @@ JHtml::_('dropdown.init');
 	<input type="hidden" name="boxchecked" value="0" />
 	<input type="hidden" name="filter_order" value="<?php echo $listOrder; ?>" />
 	<input type="hidden" name="filter_order_Dir" value="<?php echo $listDirn; ?>" />
-	<?php echo JHtml::_('form.token'); ?>
+	<?php echo \Joomla\CMS\HTML\HTMLHelper::_('form.token'); ?>
 </form>

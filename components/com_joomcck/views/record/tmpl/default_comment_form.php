@@ -14,7 +14,7 @@ $wa->useScript('keepalive')
 	->useScript('form.validate');
 
 
-JHtml::_('bootstrap.tooltip');
+\Joomla\CMS\HTML\HTMLHelper::_('bootstrap.tooltip');
 
 $this->comment_form->setFieldAttribute('comment','editor', $this->tmpl_params['comment']->get('tmpl_core.comments_editor', 'tinymce'));
 ?>
@@ -23,7 +23,7 @@ $this->comment_form->setFieldAttribute('comment','editor', $this->tmpl_params['c
 <div style="width:900px; margin-left: -450px" class="modal hide fade" id="commentmodal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 	<div class="modal-header">
 		<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-		<h3 id="commentlabel"><?php echo JText::_('CEDITCOMMENT');?></h3>
+		<h3 id="commentlabel"><?php echo \Joomla\CMS\Language\Text::_('CEDITCOMMENT');?></h3>
 	</div>
 
 	<div id="commentframe" class="modal-body" style="overflow-x: hidden; max-height:650px; padding:0;">
@@ -36,7 +36,7 @@ $this->comment_form->setFieldAttribute('comment','editor', $this->tmpl_params['c
 <div class="card form-horizontal">
 
 	<div class="card-header">
-		<h5 class="m-0"><i class="fas fa-plus"></i> <?php echo JText::_($this->tmpl_params['comment']->get('tmpl_core.comments_add_title_lbl'));?></h5>
+		<h5 class="m-0"><i class="fas fa-plus"></i> <?php echo \Joomla\CMS\Language\Text::_($this->tmpl_params['comment']->get('tmpl_core.comments_add_title_lbl'));?></h5>
     </div>
 
 	<div class="card-body">
@@ -98,7 +98,7 @@ $this->comment_form->setFieldAttribute('comment','editor', $this->tmpl_params['c
 		<?php if(in_array($this->type->params->get('comments.comment_attach'), $this->user->getAuthorisedViewLevels())):?>
             <div class="card">
                 <div class="card-header bg-white">
-                    <strong><?php echo JText::_('CATTACH');?></strong>
+                    <strong><?php echo \Joomla\CMS\Language\Text::_('CATTACH');?></strong>
                 </div>
                 <div class="card-body">
                     <div id="field-alert-0" class="alert alert-danger" style="display:none"></div>
@@ -126,7 +126,7 @@ $this->comment_form->setFieldAttribute('comment','editor', $this->tmpl_params['c
     <div class="card-footer">
         <button type="button" class="btn btn-outline-success" onclick="Joomla.submitbutton('comment.save')">
 		    <i class="fas fa-plus"></i>
-		    <?php echo JText::_($this->tmpl_params['comment']->get('tmpl_core.comments_button_title_lbl'));?>
+		    <?php echo \Joomla\CMS\Language\Text::_($this->tmpl_params['comment']->get('tmpl_core.comments_button_title_lbl'));?>
         </button>
     </div>
 
@@ -140,6 +140,6 @@ $this->comment_form->setFieldAttribute('comment','editor', $this->tmpl_params['c
 <input type="hidden" name="jform[record_id]" value="<?php echo $this->item->id;?>">
 <input type="hidden" name="jform[parent_id]" value="1">
 <?php //echo $this->comment_form->getInput('parent_id'); ?>
-<input type="hidden" name="Itemid" value="<?php echo JFactory::getApplication()->input->getInt('Itemid');?>">
+<input type="hidden" name="Itemid" value="<?php echo \Joomla\CMS\Factory::getApplication()->input->getInt('Itemid');?>">
 <input type="hidden" name="is_new" value="1">
-<?php echo JHtml::_( 'form.token' ); ?>
+<?php echo \Joomla\CMS\HTML\HTMLHelper::_( 'form.token' ); ?>

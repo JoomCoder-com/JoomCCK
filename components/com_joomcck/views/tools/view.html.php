@@ -22,8 +22,8 @@ class JoomcckViewTools extends MViewBase
 {
 	public function display($tpl = NULL)
 	{
-		$app = JFactory::getApplication();
-		$db  = JFactory::getDbo();
+		$app = \Joomla\CMS\Factory::getApplication();
+		$db  = \Joomla\CMS\Factory::getDbo();
 
 		if($app->input->getCmd('layout') == 'form')
 		{

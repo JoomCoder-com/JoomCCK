@@ -56,10 +56,10 @@ class JoomcckModelUsers extends MModelList
 	protected function populateState($ordering = null, $direction = null)
 	{
 		// Initialise variables.
-		$app = JFactory::getApplication();
+		$app = \Joomla\CMS\Factory::getApplication();
 
 		// Adjust the context to support modal layouts.
-		if ($layout = JFactory::getApplication()->input->get('layout', 'default')) {
+		if ($layout = \Joomla\CMS\Factory::getApplication()->input->get('layout', 'default')) {
 			$this->context .= '.'.$layout;
 		}
 
@@ -79,20 +79,20 @@ class JoomcckModelUsers extends MModelList
 		$groupId = $this->getUserStateFromRequest($this->context.'.filter.group', 'filter_group_id', null, 'int');
 		$this->setState('filter.group_id', $groupId);
 
-		$groups = json_decode(JoomcckFilter::base64(JFactory::getApplication()->input->get('groups', '', 'BASE64')));
+		$groups = json_decode(JoomcckFilter::base64(\Joomla\CMS\Factory::getApplication()->input->get('groups', '', 'BASE64')));
 		if (isset($groups)) {
 			$groups = \Joomla\Utilities\ArrayHelper::toInteger($groups);
 		}
 		$this->setState('filter.groups', $groups);
 
-		$excluded = json_decode(JoomcckFilter::base64(JFactory::getApplication()->input->get('excluded', '', 'BASE64')));
+		$excluded = json_decode(JoomcckFilter::base64(\Joomla\CMS\Factory::getApplication()->input->get('excluded', '', 'BASE64')));
 		if (isset($excluded)) {
 			$excluded = \Joomla\Utilities\ArrayHelper::toInteger($excluded);
 		}
 		$this->setState('filter.excluded', $excluded);
 
 		// Load the parameters.
-		$params		= JComponentHelper::getParams('com_users');
+		$params		= \Joomla\CMS\Component\ComponentHelper::getParams('com_users');
 		$this->setState('params', $params);
 
 		// List state information.

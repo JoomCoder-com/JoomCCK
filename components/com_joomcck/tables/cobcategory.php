@@ -13,7 +13,7 @@ defined('_JEXEC') or die('Restricted access');
 
 jimport('joomla.database.tablenested');
 
-class JoomcckTableCobCategory extends JTableNested
+class JoomcckTableCobCategory extends \Joomla\CMS\Table\Nested
 {
 	public static $root_id = 0;
 
@@ -23,8 +23,8 @@ class JoomcckTableCobCategory extends JTableNested
 		
 		parent::__construct('#__js_res_categories', 'id', $_db);
 		
-		$this->access = (int)JFactory::getConfig()->get('access');
-		$this->section_id = JFactory::getApplication()->input->getInt('section_id');
+		$this->access = (int)\Joomla\CMS\Factory::getConfig()->get('access');
+		$this->section_id = \Joomla\CMS\Factory::getApplication()->input->getInt('section_id');
 		$this->_option = 'com_joomcck';
 	}
 
@@ -39,7 +39,7 @@ class JoomcckTableCobCategory extends JTableNested
 		return $this->title;
 	}
 
-	protected function _getAssetParentId(JTable $table = null, $id = null)
+	protected function _getAssetParentId(\Joomla\CMS\Table\Table $table = null, $id = null)
 	{
 		// Initialise variables.
 		$assetId = null;
@@ -92,14 +92,14 @@ class JoomcckTableCobCategory extends JTableNested
 	{
 		if(isset($array['params']) && is_array($array['params']))
 		{
-			$registry = new JRegistry();
+			$registry = new \Joomla\Registry\Registry();
 			$registry->loadArray($array['params']);
 			$array['params'] = (string)$registry;
 		}
 		
 		if(isset($array['metadata']) && is_array($array['metadata']))
 		{
-			$registry = new JRegistry();
+			$registry = new \Joomla\Registry\Registry();
 			$registry->loadArray($array['metadata']);
 			$array['metadata'] = (string)$registry;
 		}
@@ -122,7 +122,7 @@ class JoomcckTableCobCategory extends JTableNested
 	{
 		if(trim($this->title) == '')
 		{
-			$this->setError(JText::_('C_MSG_TITLENOTSET'));
+			$this->setError(\Joomla\CMS\Language\Text::_('C_MSG_TITLENOTSET'));
 			return false;
 		}
 		$this->alias = trim($this->alias);
@@ -134,12 +134,12 @@ class JoomcckTableCobCategory extends JTableNested
 		$this->alias = \Joomla\CMS\Application\ApplicationHelper::stringURLSafe($this->alias);
 		if(trim(str_replace('-', '', $this->alias)) == '')
 		{
-			$this->alias = JFactory::getDate()->format('Y-m-d-H-i-s');
+			$this->alias = \Joomla\CMS\Factory::getDate()->format('Y-m-d-H-i-s');
 		}
 		//$this->relative_cats = null;
 		if(is_array($this->relative_cats) && count($this->relative_cats))
 		{
-			$rel_cat = JTable::getInstance('CobCategory', 'JoomcckTable');
+			$rel_cat = \Joomla\CMS\Table\Table::getInstance('CobCategory', 'JoomcckTable');
 
 			$cats = array();
 			foreach($this->relative_cats as $i => $cid)
@@ -168,8 +168,8 @@ class JoomcckTableCobCategory extends JTableNested
 
 	public function store($updateNulls = false)
 	{
-		$date = JFactory::getDate();
-		$user = JFactory::getUser();
+		$date = \Joomla\CMS\Factory::getDate();
+		$user = \Joomla\CMS\Factory::getUser();
 		
 		if($this->id)
 		{
@@ -184,7 +184,7 @@ class JoomcckTableCobCategory extends JTableNested
 			$this->created_user_id = $user->get('id');
 		}
 		// Verify that the alias is unique
-		$table = JTable::getInstance('CobCategory', 'JoomcckTable');
+		$table = \Joomla\CMS\Table\Table::getInstance('CobCategory', 'JoomcckTable');
 		if($table->load(array(
 			'alias' => $this->alias, 
 			'parent_id' => $this->parent_id, 
@@ -192,7 +192,7 @@ class JoomcckTableCobCategory extends JTableNested
 		)) && ($table->id != $this->id || $this->id == 0))
 		{
 			
-			$this->setError(JText::_('JLIB_DATABASE_ERROR_CATEGORY_UNIQUE_ALIAS'));
+			$this->setError(\Joomla\CMS\Language\Text::_('JLIB_DATABASE_ERROR_CATEGORY_UNIQUE_ALIAS'));
 			return false;
 		}
 		//echo '<pre>';print_r($table); die;

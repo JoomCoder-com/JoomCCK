@@ -11,7 +11,7 @@ defined('_JEXEC') or die();
 
 JHTML::_('bootstrap.tooltip', '*[rel^="tooltip"]');
 
-JHtml::_('dropdown.init');
+\Joomla\CMS\HTML\HTMLHelper::_('dropdown.init');
 ?>
 <br />
 <form action="<?php echo \Joomla\CMS\Uri\Uri::getInstance()->toString(); ?>" method="post" name="adminForm" id="sales-form">
@@ -19,13 +19,13 @@ JHtml::_('dropdown.init');
 		<table class="float-end">
 			<tr>
 				<td width="20px">
-					<div class="alert alert-info" style="margin-bottom: 0px;" rel="tipbottom" data-bs-title="<?php echo JText::_('CPOSTAUTHOR')?>"></div>
+					<div class="alert alert-info" style="margin-bottom: 0px;" rel="tipbottom" data-bs-title="<?php echo \Joomla\CMS\Language\Text::_('CPOSTAUTHOR')?>"></div>
 				</td>
 				<td width="20px">
-					<div class="alert alert-success" style="margin-bottom: 0px;" rel="tipbottom" data-bs-title="<?php echo JText::_('CPOSTSUBSCR')?>"></div>
+					<div class="alert alert-success" style="margin-bottom: 0px;" rel="tipbottom" data-bs-title="<?php echo \Joomla\CMS\Language\Text::_('CPOSTSUBSCR')?>"></div>
 				</td>
 				<td width="20px">
-					<div class="alert alert-success" style="margin-bottom: 0px; background-color: #fff; border-color: #cccccc" rel="tipbottom" data-bs-title="<?php echo JText::_('CPOSTEVERYONE')?>"></div>
+					<div class="alert alert-success" style="margin-bottom: 0px; background-color: #fff; border-color: #cccccc" rel="tipbottom" data-bs-title="<?php echo \Joomla\CMS\Language\Text::_('CPOSTEVERYONE')?>"></div>
 				</td>
 			</tr>
 		</table>
@@ -50,9 +50,9 @@ JHtml::_('dropdown.init');
 				<td>1</td>
 				<td class="has-context">
 					
-					<?php $out[] = $this->isme ? JText::_('CPOSTHOMEPAGE') : JText::sprintf('CPOSTHOMEPAGEUSER', CCommunityHelper::getName($this->author, JFactory::getApplication()->input->getInt('section_id')))?>
-					<?php if($this->params->get('sections.'.JFactory::getApplication()->input->getInt('section_id').'.title')):?>
-						<?php $out[] = '<br /><small> '.$this->params->get('sections.'.JFactory::getApplication()->input->getInt('section_id').'.title').'</small>'; ?>
+					<?php $out[] = $this->isme ? \Joomla\CMS\Language\Text::_('CPOSTHOMEPAGE') : \Joomla\CMS\Language\Text::sprintf('CPOSTHOMEPAGEUSER', CCommunityHelper::getName($this->author, \Joomla\CMS\Factory::getApplication()->input->getInt('section_id')))?>
+					<?php if($this->params->get('sections.'.\Joomla\CMS\Factory::getApplication()->input->getInt('section_id').'.title')):?>
+						<?php $out[] = '<br /><small> '.$this->params->get('sections.'.\Joomla\CMS\Factory::getApplication()->input->getInt('section_id').'.title').'</small>'; ?>
 					<?php endif; ?>
 					<div class="btn-group float-end" style="display:none;">
 						<button onclick="parent.choosewheretopost(<?php echo $this->author; ?>, '<?php echo htmlentities(str_replace(array("\n", "\r"), '',implode('', $out)), ENT_QUOTES, 'UTF-8') ?>')" type="button" class="btn btn-sm btn-primary">Choose</button>
@@ -63,12 +63,12 @@ JHtml::_('dropdown.init');
 			<?php foreach ($this->items as $key => $value) {
 				$out = array();
 				$isme = ($value->id == $this->user->get('id'));
-				$params = new JRegistry($value->params);
+				$params = new \Joomla\Registry\Registry($value->params);
 
-				$out[] = $isme ? JText::_('CPOSTHOMEPAGE') : JText::sprintf('CPOSTHOMEPAGEUSER', CCommunityHelper::getName($value->id, JFactory::getApplication()->input->getInt('section_id')));
-				if($params->get('sections.'.JFactory::getApplication()->input->getInt('section_id').'.title'))
+				$out[] = $isme ? \Joomla\CMS\Language\Text::_('CPOSTHOMEPAGE') : \Joomla\CMS\Language\Text::sprintf('CPOSTHOMEPAGEUSER', CCommunityHelper::getName($value->id, \Joomla\CMS\Factory::getApplication()->input->getInt('section_id')));
+				if($params->get('sections.'.\Joomla\CMS\Factory::getApplication()->input->getInt('section_id').'.title'))
 				{
-					$out[] = '<br /><small> '.$params->get('sections.'.JFactory::getApplication()->input->getInt('section_id').'.title').'</small>';
+					$out[] = '<br /><small> '.$params->get('sections.'.\Joomla\CMS\Factory::getApplication()->input->getInt('section_id').'.title').'</small>';
 				}
 				echo sprintf('<tr class="success user-list"><td>%s</td><td class="has-context"><div class="btn-group float-end" style="display:none;">
 						<button onclick="parent.choosewheretopost(%d, \'%s\')" type="button" class="btn btn-sm btn-primary">Choose</button>
@@ -77,12 +77,12 @@ JHtml::_('dropdown.init');
 			<?php foreach ($this->all as $key => $value) {
 				$out = array();
 				$isme = ($value->id == $this->user->get('id'));
-				$params = new JRegistry($value->params);
+				$params = new \Joomla\Registry\Registry($value->params);
 
-				$out[] = $isme ? JText::_('CPOSTHOMEPAGE') : JText::sprintf('CPOSTHOMEPAGEUSER', CCommunityHelper::getName($value->id, JFactory::getApplication()->input->getInt('section_id')));
-				if($params->get('sections.'.JFactory::getApplication()->input->getInt('section_id').'.title'))
+				$out[] = $isme ? \Joomla\CMS\Language\Text::_('CPOSTHOMEPAGE') : \Joomla\CMS\Language\Text::sprintf('CPOSTHOMEPAGEUSER', CCommunityHelper::getName($value->id, \Joomla\CMS\Factory::getApplication()->input->getInt('section_id')));
+				if($params->get('sections.'.\Joomla\CMS\Factory::getApplication()->input->getInt('section_id').'.title'))
 				{
-					$out[] = '<br /><small> '.$params->get('sections.'.JFactory::getApplication()->input->getInt('section_id').'.title').'</small>';
+					$out[] = '<br /><small> '.$params->get('sections.'.\Joomla\CMS\Factory::getApplication()->input->getInt('section_id').'.title').'</small>';
 				}
 				echo sprintf('<tr class=" user-list"><td>%s</td><td class="has-context"><div class="btn-group float-end" style="display:none;">
 						<button onclick="parent.choosewheretopost(%d, \'%s\')" type="button" class="btn btn-sm btn-primary">Choose</button>

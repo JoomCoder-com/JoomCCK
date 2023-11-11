@@ -16,7 +16,7 @@ class JoomcckViewPacksection extends MViewBase
 		$this->state = $this->get('State');
 		$this->item = $this->get('Item');
 
-		$doc = JFactory::getDocument();
+		$doc = \Joomla\CMS\Factory::getDocument();
 
 		$this->form = $this->get('Form');
 
@@ -42,13 +42,13 @@ class JoomcckViewPacksection extends MViewBase
 	 */
 	protected function addToolbar()
 	{
-		JFactory::getApplication()->input->set('hidemainmenu', true);
+		\Joomla\CMS\Factory::getApplication()->input->set('hidemainmenu', true);
 
-		$user		= JFactory::getUser();
+		$user		= \Joomla\CMS\Factory::getUser();
 		$isNew		= ($this->item->id == 0);
 // 		$checkedOut	= !($this->item->checked_out == 0 || $this->item->checked_out == $user->get('id'));
 
-		JToolBarHelper::title(($isNew ? JText::_('CNEWPACKSECTION') : JText::_('CEDITPACKSECTION')), 'sections');
+		JToolBarHelper::title(($isNew ? \Joomla\CMS\Language\Text::_('CNEWPACKSECTION') : \Joomla\CMS\Language\Text::_('CEDITPACKSECTION')), 'sections');
 
 // 		if (!$checkedOut)
 		{

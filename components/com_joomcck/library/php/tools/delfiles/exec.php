@@ -2,9 +2,9 @@
 
 defined('_JEXEC') or die();
 
-$app         = JFactory::getApplication();
-$cp          = JComponentHelper::getParams('com_joomcck');
-$db          = JFactory::getDBO();
+$app         = \Joomla\CMS\Factory::getApplication();
+$cp          = \Joomla\CMS\Component\ComponentHelper::getParams('com_joomcck');
+$db          = \Joomla\CMS\Factory::getDBO();
 $size        = $lost_files        = 0;
 $files_ids[] = 0;
 
@@ -50,7 +50,7 @@ if ($params->get('deleted_articles')) {
     $db->setQuery($sql);
     $files = $db->loadObjectList();
     $size += _deleteFiles($files);
-    $app->enqueueMessage(JText::sprintf('Deleted %d file(s) of deleted articles', count($files)));
+    $app->enqueueMessage(\Joomla\CMS\Language\Text::sprintf('Deleted %d file(s) of deleted articles', count($files)));
 }
 
 if ($params->get('unsaved_articles')) {
@@ -59,11 +59,11 @@ if ($params->get('unsaved_articles')) {
     $db->setQuery($sql);
     $files = $db->loadObjectList();
     $size += _deleteFiles($files);
-    $app->enqueueMessage(JText::sprintf('Deleted %d file(s) of unsaved articles', count($files)));
+    $app->enqueueMessage(\Joomla\CMS\Language\Text::sprintf('Deleted %d file(s) of unsaved articles', count($files)));
 }
 
 if ($params->get('unlinked')) {
-    $files_in_folder = JFolder::files(JPATH_ROOT . DIRECTORY_SEPARATOR . $cp->get('general_upload'), '[0-9]{10}_[a-zA-Z0-9]{32}\..', true, true);
+    $files_in_folder = \Joomla\CMS\Filesystem\Folder::files(JPATH_ROOT . DIRECTORY_SEPARATOR . $cp->get('general_upload'), '[0-9]{10}_[a-zA-Z0-9]{32}\..', true, true);
     settype($files_in_folder, 'array');
 
     $sql = "SELECT filename FROM #__js_res_files";
@@ -78,7 +78,7 @@ if ($params->get('unlinked')) {
         $file_names[basename($file)] = basename($file);
         if (!in_array(basename($file), $files_in_db)) {
             $temp_size = filesize($file);
-            if (JFile::delete($file)) {
+            if (\Joomla\CMS\Filesystem\File::delete($file)) {
                 $size += $temp_size;
                 $lost_files++;
                 unset($file_names[basename($file)]);
@@ -92,15 +92,15 @@ if ($params->get('unlinked')) {
             $db->execute();
         }
     }
-    $app->enqueueMessage(JText::sprintf('Deleted %d of unlinked file(s)', $lost_files));
+    $app->enqueueMessage(\Joomla\CMS\Language\Text::sprintf('Deleted %d of unlinked file(s)', $lost_files));
 }
 
-$app->enqueueMessage(JText::sprintf('Total size cleaned %s.', HTMLFormatHelper::formatSize($size)));
+$app->enqueueMessage(\Joomla\CMS\Language\Text::sprintf('Total size cleaned %s.', HTMLFormatHelper::formatSize($size)));
 
 function _deleteFiles($files)
 {
-    $cp          = JComponentHelper::getParams('com_joomcck');
-    $db          = JFactory::getDbo();
+    $cp          = \Joomla\CMS\Component\ComponentHelper::getParams('com_joomcck');
+    $db          = \Joomla\CMS\Factory::getDbo();
     $files_ids[] = 0;
     $size        = 0;
     foreach ($files as $file) {
@@ -108,8 +108,8 @@ function _deleteFiles($files)
         $size += $file->size;
         $to_delete = JPATH_ROOT . DS . $cp->get('general_upload') . DS . $subfolder . DS . $file->fullpath;
 
-        if (JFile::exists($to_delete)) {
-            if (JFile::delete($to_delete)) {
+        if (\Joomla\CMS\Filesystem\File::exists($to_delete)) {
+            if (\Joomla\CMS\Filesystem\File::delete($to_delete)) {
                 $files_ids[] = $file->id;
             }
         } else {
@@ -130,11 +130,11 @@ function _getSubfolder($id)
     static $defaults = [];
 
     if (!isset($params[$id])) {
-        $db  = JFactory::getDbo();
+        $db  = \Joomla\CMS\Factory::getDbo();
         $sql = "SELECT params, field_type FROM #__js_res_fields WHERE id = " . $id;
         $db->setQuery($sql);
         $result        = $db->loadObject();
-        $params[$id]   = new JRegistry($result->params);
+        $params[$id]   = new \Joomla\Registry\Registry($result->params);
         $defaults[$id] = $result->field_type;
     }
 

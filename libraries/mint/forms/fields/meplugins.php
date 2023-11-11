@@ -34,7 +34,7 @@ class JFormFieldMEplugins extends JFormMEFieldList
 	{
 		// Initialize variables.
 		$group = $this->element['group'];
-		$db = JFactory::getDbo();
+		$db = \Joomla\CMS\Factory::getDbo();
 		
 		$query = $db->getQuery(true);
 		$query->select('element, name, folder');
@@ -50,13 +50,13 @@ class JFormFieldMEplugins extends JFormMEFieldList
 		$items = $db->loadObjectList();
 		$options = array();
 		
-		$lang = JFactory::getLanguage();
+		$lang = \Joomla\CMS\Factory::getLanguage();
 		foreach($items as $item)
 		{
 			$source = JPATH_PLUGINS . '/' . $item->folder . '/' . $item->element;
 			$extension = 'plg_' . $item->folder . '_' . $item->element;
 			$lang->load($extension . '.sys', JPATH_ADMINISTRATOR, null, false, false) || $lang->load($extension . '.sys', $source, null, false, false) || $lang->load($extension . '.sys', JPATH_ADMINISTRATOR, $lang->getDefault(), false, false) || $lang->load($extension . '.sys', $source, $lang->getDefault(), false, false);
-			$item->name = JText::_($item->name);
+			$item->name = \Joomla\CMS\Language\Text::_($item->name);
 			$options[] = JHTML::_('select.option', $item->element, $item->name);
 		}
 		

@@ -16,7 +16,7 @@ class JoomcckViewTemplate extends MViewBase
 	{
 		$this->state = $this->get('State');
 		$this->form = $this->get('Form');
-		$this->form->setFieldAttribute('source', 'syntax', JFactory::getApplication()->input->get('ext'));
+		$this->form->setFieldAttribute('source', 'syntax', \Joomla\CMS\Factory::getApplication()->input->get('ext'));
 
 		// Check for errors.
 		if(count($errors = $this->get('Errors')))

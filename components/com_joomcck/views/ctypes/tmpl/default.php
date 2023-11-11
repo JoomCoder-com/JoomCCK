@@ -11,10 +11,10 @@ use Joomcck\Html\Helpers\Dropdown;
 
 defined('_JEXEC') or die('Restricted access');
 
-JHtml::_('dropdown.init');
-JHtml::_('formbehavior.chosen', '.select');
+\Joomla\CMS\HTML\HTMLHelper::_('dropdown.init');
+\Joomla\CMS\HTML\HTMLHelper::_('formbehavior.chosen', '.select');
 
-$user   = JFactory::getUser();
+$user   = \Joomla\CMS\Factory::getUser();
 $userId = $user->get('id');
 
 $listOrder = $this->state->get('list.ordering');
@@ -29,8 +29,8 @@ $listDirn  = $this->state->get('list.direction');
 
     <div class="page-header">
         <h1>
-            <img src="<?php echo JUri::root(true); ?>/components/com_joomcck/images/icons/types.png">
-			<?php echo JText::_('COB_CONT_TYPES'); ?>
+            <img src="<?php echo \Joomla\CMS\Uri\Uri::root(true); ?>/components/com_joomcck/images/icons/types.png">
+			<?php echo \Joomla\CMS\Language\Text::_('COB_CONT_TYPES'); ?>
         </h1>
     </div>
 
@@ -45,19 +45,19 @@ $listDirn  = $this->state->get('list.direction');
                 <input type="checkbox" name="checkall-toggle" value="" onclick="Joomla.checkAll(this)"/>
             </th>
             <th width="1%">
-				<?php echo JHtml::_('grid.sort', 'JSTATUS', 'a.published', $listDirn, $listOrder); ?>
+				<?php echo \Joomla\CMS\HTML\HTMLHelper::_('grid.sort', 'JSTATUS', 'a.published', $listDirn, $listOrder); ?>
             </th>
             <th>
-				<?php echo JHtml::_('grid.sort', 'CNAME', 'a.name', $listDirn, $listOrder); ?>
+				<?php echo \Joomla\CMS\HTML\HTMLHelper::_('grid.sort', 'CNAME', 'a.name', $listDirn, $listOrder); ?>
             </th>
             <th width="1%">
-				<?php echo JText::_('CFIELDS'); ?>
+				<?php echo \Joomla\CMS\Language\Text::_('CFIELDS'); ?>
             </th>
             <th width="10%">
-				<?php echo JHtml::_('grid.sort', 'JGRID_HEADING_LANGUAGE', 'a.language', $listDirn, $listOrder); ?>
+				<?php echo \Joomla\CMS\HTML\HTMLHelper::_('grid.sort', 'JGRID_HEADING_LANGUAGE', 'a.language', $listDirn, $listOrder); ?>
             </th>
             <th width="1%" class="nowrap">
-				<?php echo JHtml::_('grid.sort', 'ID', 'a.id', $listDirn, $listOrder); ?>
+				<?php echo \Joomla\CMS\HTML\HTMLHelper::_('grid.sort', 'ID', 'a.id', $listDirn, $listOrder); ?>
             </th>
         </tr>
         </thead>
@@ -82,19 +82,19 @@ $listDirn  = $this->state->get('list.direction');
 			?>
             <tr class="row<?php echo $i % 2; ?>">
                 <td class="center">
-					<?php echo JHtml::_('grid.id', $i, $item->id); ?>
+					<?php echo \Joomla\CMS\HTML\HTMLHelper::_('grid.id', $i, $item->id); ?>
                 </td>
                 <td class="center">
-					<?php echo JHtml::_('jgrid.published', $item->published, $i, 'ctypes.', $canChange); ?>
+					<?php echo \Joomla\CMS\HTML\HTMLHelper::_('jgrid.published', $item->published, $i, 'ctypes.', $canChange); ?>
                 </td>
                 <td class="nowrap has-context">
                     <div class="float-start">
 						<?php if ($item->checked_out) : ?>
-							<?php echo JHtml::_('jgrid.checkedout', $i, $item->checked_out, $item->checked_out_time, 'ctypes.', $canCheckin); ?>
+							<?php echo \Joomla\CMS\HTML\HTMLHelper::_('jgrid.checkedout', $i, $item->checked_out, $item->checked_out_time, 'ctypes.', $canCheckin); ?>
 						<?php endif; ?>
 
 						<?php if ($canEdit || $canEditOwn) : ?>
-                            <a href="<?php echo JRoute::_('index.php?option=com_joomcck&task=ctype.edit&id=' . (int) $item->id); ?>">
+                            <a href="<?php echo \Joomla\CMS\Router\Route::_('index.php?option=com_joomcck&task=ctype.edit&id=' . (int) $item->id); ?>">
 								<?php echo $this->escape($item->name); ?></a>
 						<?php else: ?>
 							<?php echo $this->escape($item->name); ?>
@@ -104,7 +104,7 @@ $listDirn  = $this->state->get('list.direction');
 						<?php
 						// Create dropdown items
 						Dropdown::edit($item->id, 'ctype.');
-						Dropdown::addCustomItem('<i class="fas fa-trash text-danger"></i> '.JText::_('C_TOOLBAR_DELETE'), 'javascript:void(0)', 'onclick="if(!confirm(\'' . JText::_('C_TOOLBAR_CONFIRMDELET') . '\')){return;}Joomla.listItemTask(\'cb' . $i . '\',\'types.delete\')"');
+						Dropdown::addCustomItem('<i class="fas fa-trash text-danger"></i> '.\Joomla\CMS\Language\Text::_('C_TOOLBAR_DELETE'), 'javascript:void(0)', 'onclick="if(!confirm(\'' . \Joomla\CMS\Language\Text::_('C_TOOLBAR_CONFIRMDELET') . '\')){return;}Joomla.listItemTask(\'cb' . $i . '\',\'types.delete\')"');
 						if ($item->published) :
 							Dropdown::unpublish('cb' . $i, 'ctypes.');
 						else :
@@ -118,7 +118,7 @@ $listDirn  = $this->state->get('list.direction');
 
 
 						Dropdown::divider();
-						Dropdown::addCustomItem(JText::_('C_MANAGE_FIELDS') . ' <span class="badge ' . ($item->fieldnum ? ' bg-success' : ' bg-light text-dark border') . '">' . $item->fieldnum . '</span>', JRoute::_('index.php?option=com_joomcck&view=tfields&filter_type=' . $item->id));
+						Dropdown::addCustomItem(\Joomla\CMS\Language\Text::_('C_MANAGE_FIELDS') . ' <span class="badge ' . ($item->fieldnum ? ' bg-success' : ' bg-light text-dark border') . '">' . $item->fieldnum . '</span>', \Joomla\CMS\Router\Route::_('index.php?option=com_joomcck&view=tfields&filter_type=' . $item->id));
 
 						echo Dropdown::render();
 						?>
@@ -126,10 +126,10 @@ $listDirn  = $this->state->get('list.direction');
                 </td>
                 <td nowrap="nowrap">
 					<?php if ($addFields): ?>
-                        <a href="<?php echo JRoute::_('index.php?option=com_joomcck&view=tfields&filter_type=' . $item->id) ?>">
-							<?php echo JText::_('CFIELDS'); ?></a>
+                        <a href="<?php echo \Joomla\CMS\Router\Route::_('index.php?option=com_joomcck&view=tfields&filter_type=' . $item->id) ?>">
+							<?php echo \Joomla\CMS\Language\Text::_('CFIELDS'); ?></a>
 					<?php else: ?>
-						<?php echo JText::_('CFIELDS'); ?>
+						<?php echo \Joomla\CMS\Language\Text::_('CFIELDS'); ?>
 					<?php endif; ?>
                     <span class="badge <?php echo $item->fieldnum ? ' bg-success' : 'bg-light text-dark border' ?>"><?php echo $item->fieldnum ?></span>
                 </td>
@@ -149,5 +149,5 @@ $listDirn  = $this->state->get('list.direction');
     <input type="hidden" name="boxchecked" value="0"/>
     <input type="hidden" name="filter_order" value="<?php echo $listOrder; ?>"/>
     <input type="hidden" name="filter_order_Dir" value="<?php echo $listDirn; ?>"/>
-	<?php echo JHtml::_('form.token'); ?>
+	<?php echo \Joomla\CMS\HTML\HTMLHelper::_('form.token'); ?>
 </form>

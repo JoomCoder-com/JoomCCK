@@ -30,7 +30,7 @@ class FilterHelper
 
 		$url = self::url($url, $section);
 
-		if(JComponentHelper::getParams('com_joomcck')->get('filter_nofollow', 1))
+		if(\Joomla\CMS\Component\ComponentHelper::getParams('com_joomcck')->get('filter_nofollow', 1))
 		{
 			$nofollow = 'rel="tooltip nofollow"';
 		}
@@ -41,12 +41,12 @@ class FilterHelper
 
 		$patern = '<a class="filter-link" %s href="%s" ' . $nofollow . '>%s</a>';
 
-		return sprintf($patern, ($tip ? ' data-original-title="' . htmlspecialchars($tip, ENT_COMPAT, 'UTF-8') . '"' : NULL), JRoute::_($url), $text);
+		return sprintf($patern, ($tip ? ' data-original-title="' . htmlspecialchars($tip, ENT_COMPAT, 'UTF-8') . '"' : NULL), \Joomla\CMS\Router\Route::_($url), $text);
 	}
 
 	public static function filterButton($name, $value, $type, $tip, $section, $icon = 'funnel-small.png')
 	{
-		$img = JHtml::image(JURI::root() . 'media/com_joomcck/icons/16/' . $icon, strip_tags($tip), array('border' => 0, 'align' => 'absmiddle'));
+		$img = \Joomla\CMS\HTML\HTMLHelper::image(JURI::root() . 'media/com_joomcck/icons/16/' . $icon, strip_tags($tip), array('border' => 0, 'align' => 'absmiddle'));
 
 		return self::filterLink($name, $value, $img, $type, $tip, $section);
 	}
@@ -55,7 +55,7 @@ class FilterHelper
 	{
 		static $section = NULL;
 
-		$app = JFactory::getApplication();
+		$app = \Joomla\CMS\Factory::getApplication();
 		if(!$section)
 		{
 			$section = ItemsStore::getSection($app->input->getInt('section_id'));
@@ -97,20 +97,20 @@ class FilterHelper
 		$url = 'index.php?option=com_joomcck&' . $url;
 		$url .= '&section_id=' . $section->id;
 
-		$vw       = JFactory::getApplication()->input->getCmd('view_what');
+		$vw       = \Joomla\CMS\Factory::getApplication()->input->getCmd('view_what');
 		$exeption = array('show_children', 'compare', 'show_all_children', 'show_parents', 'show_all_parents');
 
-		if($section->id == JFactory::getApplication()->input->getInt('section_id'))
+		if($section->id == \Joomla\CMS\Factory::getApplication()->input->getInt('section_id'))
 		{
-			if($c = JFactory::getApplication()->input->getInt('cat_id'))
+			if($c = \Joomla\CMS\Factory::getApplication()->input->getInt('cat_id'))
 			{
 				$url .= '&cat_id=' . $c;
 			}
-			if($c = JFactory::getApplication()->input->getInt('ucat_id'))
+			if($c = \Joomla\CMS\Factory::getApplication()->input->getInt('ucat_id'))
 			{
 				$url .= '&ucat_id=' . $c;
 			}
-			if($u = JFactory::getApplication()->input->getInt('user_id'))
+			if($u = \Joomla\CMS\Factory::getApplication()->input->getInt('user_id'))
 			{
 				$url .= '&user_id=' . $u;
 			}

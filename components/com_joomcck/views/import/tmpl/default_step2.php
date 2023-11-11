@@ -10,9 +10,9 @@
 defined('_JEXEC') or die();
 ?>
 <ul class="nav nav-pills">
-	<li><a href="<?php echo JRoute::_('index.php?option=com_joomcck&view=import&step=1&section_id='.$this->input->get('section_id')); ?>"><?php echo JText::_('CIMPORTUPLOAD')?></a></li>
-	<li class="active"><a><?php echo JText::_('CIMPORTCONFIG')?></a></li>
-	<li><a><?php echo JText::_('CIMPORTFINISH')?></a></li>
+	<li><a href="<?php echo \Joomla\CMS\Router\Route::_('index.php?option=com_joomcck&view=import&step=1&section_id='.$this->input->get('section_id')); ?>"><?php echo \Joomla\CMS\Language\Text::_('CIMPORTUPLOAD')?></a></li>
+	<li class="active"><a><?php echo \Joomla\CMS\Language\Text::_('CIMPORTCONFIG')?></a></li>
+	<li><a><?php echo \Joomla\CMS\Language\Text::_('CIMPORTFINISH')?></a></li>
 </ul>
 
 <hr>
@@ -24,7 +24,7 @@ defined('_JEXEC') or die();
 
 <form action="<?php echo \Joomla\CMS\Uri\Uri::getInstance()->toString(); ?>" method="post" name="adminForm" id="adminForm" class="form-horizontal">
 	<div class="row">
-		<?php echo JHtml::_('select.genericlist', $this->presets, 'preset', 'class="col-md-12"');?>
+		<?php echo \Joomla\CMS\HTML\HTMLHelper::_('select.genericlist', $this->presets, 'preset', 'class="col-md-12"');?>
 	</div>
 
 	<div class="hide" id="preset-form">
@@ -32,7 +32,7 @@ defined('_JEXEC') or die();
 	</div>
 
 	<div class="form-actions">
-		<button class="float-end btn btn-primary" type="button" id="next-step"><?php echo JText::_('CNEXT')?></button>
+		<button class="float-end btn btn-primary" type="button" id="next-step"><?php echo \Joomla\CMS\Language\Text::_('CNEXT')?></button>
 	</div>
 	<input type="hidden" name="task" value="import.import">
 	<input type="hidden" name="step" value="3">
@@ -103,7 +103,7 @@ defined('_JEXEC') or die();
 		preset.bind('change', function() {
 			if($(this).val() != '') {
 				$('#preset-form').html('').slideUp('fast', function(){
-					$.get('<?php echo JRoute::_('index.php?option=com_joomcck&view=import&layout=params&tmpl=component', false);?>',
+					$.get('<?php echo \Joomla\CMS\Router\Route::_('index.php?option=com_joomcck&view=import&layout=params&tmpl=component', false);?>',
 						{'preset': preset.val(), type_id: $('input[name="type_id"]').val(), section_id: $('input[name="section_id"]').val()})
 					.done(function(data) {
 
@@ -123,7 +123,7 @@ defined('_JEXEC') or die();
 			if(!field) return false;
 
 			$('#progress').slideDown('fast', function() {
-				$.get('<?php echo JRoute::_('index.php?option=com_joomcck&view=import&layout=categories&tmpl=component', false);?>',
+				$.get('<?php echo \Joomla\CMS\Router\Route::_('index.php?option=com_joomcck&view=import&layout=categories&tmpl=component', false);?>',
 					{'preset': preset.val(), 'field': field, 'section_id':<?php echo $this->section->id;?>})
 				.done(function(data) {
 					$('#progress').slideUp('fast', function() {

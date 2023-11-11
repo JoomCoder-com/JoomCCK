@@ -22,7 +22,7 @@ class JoomcckControllerTags extends MControllerBase
 
 		if(!$this->input)
 		{
-			$this->input = JFactory::getApplication()->input;
+			$this->input = \Joomla\CMS\Factory::getApplication()->input;
 		}
 	}
 	function delete()
@@ -31,7 +31,7 @@ class JoomcckControllerTags extends MControllerBase
 		$model = $this->getModel('tags', 'JoomcckModel');
 		$model->_deleteTag();
 
-		$this->setRedirect('index.php?option=com_joomcck&view=tags', JText::_('C_MSG_TAGDELETEDSUCCESS'));
+		$this->setRedirect('index.php?option=com_joomcck&view=tags', \Joomla\CMS\Language\Text::_('C_MSG_TAGDELETEDSUCCESS'));
 	}
 
 	function save()
@@ -39,7 +39,7 @@ class JoomcckControllerTags extends MControllerBase
 		$model = $this->getModel('tags', 'JoomcckModel');
 		if($model->_saveTag())
 		{
-			$msg = JText::_('C_MSG_TAGSAVEDSUCCESS');
+			$msg = \Joomla\CMS\Language\Text::_('C_MSG_TAGSAVEDSUCCESS');
 			$this->setRedirect('index.php?option=com_joomcck&view=tags', $msg);
 		}
 		else

@@ -22,10 +22,10 @@ switch ($params->get('params.to'))
 {
 	case 1 :
 		if ($show_emailto && $this->value)
-			$to = JHtml::_('content.prepare', $this->value);
+			$to = \Joomla\CMS\HTML\HTMLHelper::_('content.prepare', $this->value);
 		break;
 	case 2 :
-		$to = JText::_('E_ADMIN') . ($show_emailto ? '(' . $app->getCfg('mailfrom') . ')' : '');
+		$to = \Joomla\CMS\Language\Text::_('E_ADMIN') . ($show_emailto ? '(' . $app->getCfg('mailfrom') . ')' : '');
 		break;
 	case 3 :
 		$to = $author->get('name') . ($show_emailto ? ' (' . $author->get('email') . ')' : '');
@@ -35,7 +35,7 @@ switch ($params->get('params.to'))
 		break;
 	case 5 :
 		if ($show_emailto)
-			$to = JHtml::_('content.prepare', $params->get('params.custom'));
+			$to = \Joomla\CMS\HTML\HTMLHelper::_('content.prepare', $params->get('params.custom'));
 		break;
 }
 $key = $record->id.$this->id;
@@ -55,13 +55,13 @@ $key = $record->id.$this->id;
 	<table class="table table-hover">
 		<?php if ($to):?>
 		<tr>
-			<td width="1%" nowrap="nowrap" ><?php echo JText::_('E_SENDTO');?>:</td>
+			<td width="1%" nowrap="nowrap" ><?php echo \Joomla\CMS\Language\Text::_('E_SENDTO');?>:</td>
 			<td><?php echo $to;?></td>
 		</tr>
 		<?php endif; ?>
 		<?php if ($params->get('params.change_name_from', 1) || !$user->id):?>
 		<tr>
-			<td width="1%" nowrap="nowrap"><?php echo JText::_('E_YOURNAME');?></td>
+			<td width="1%" nowrap="nowrap"><?php echo \Joomla\CMS\Language\Text::_('E_YOURNAME');?></td>
 			<td><input required="required" class="form-control" type="text" name="email[<?php echo $this->id;?>][name]"  value="<?php echo $data->get('name', $user->get('name'));?>"
 				size="<?php echo $params->get('params.size', 40);?>" /></td>
 		</tr>
@@ -69,7 +69,7 @@ $key = $record->id.$this->id;
 
 		<?php if ($params->get('params.change_email_from', 1) || !$user->id):?>
 		<tr>
-			<td width="1%" nowrap="nowrap"><?php echo JText::_('E_YOURMAIL');?></td>
+			<td width="1%" nowrap="nowrap"><?php echo \Joomla\CMS\Language\Text::_('E_YOURMAIL');?></td>
 			<td><input required="required" class="form-control" type="text" name="email[<?php echo $this->id;?>][email_from]"  value="<?php echo $data->get('email_from', $user->get('email'));?>"
 				size="<?php echo $params->get('params.size', 40);?>" /></td>
 		</tr>
@@ -81,7 +81,7 @@ $key = $record->id.$this->id;
 				<td>
 					<label class="checkbox">
 						<input required="required" class="form-control" type="checkbox" name="email[<?php echo $this->id;?>][subscr]" value="1" checked>
-						<?php echo JText::_($this->params->get('params.acemail_text')); ?>
+						<?php echo \Joomla\CMS\Language\Text::_($this->params->get('params.acemail_text')); ?>
 					</label>
 				</td>
 			</tr>
@@ -89,7 +89,7 @@ $key = $record->id.$this->id;
 
 		<?php if ($params->get('params.cc')):?>
 		<tr>
-			<td width="1%" nowrap="nowrap"><?php echo JText::_('E_COPY');?></td>
+			<td width="1%" nowrap="nowrap"><?php echo \Joomla\CMS\Language\Text::_('E_COPY');?></td>
 			<td><input class="form-control" type="text" name="email[<?php echo $this->id;?>][cc]"  value="<?php echo $data->get('cc');?>"
 				size="<?php echo $params->get('params.size', 40);?>" /></td>
 		</tr>
@@ -97,7 +97,7 @@ $key = $record->id.$this->id;
 
 		<?php if ($params->get('params.subject_style', 0)):?>
 			<tr>
-				<td width="1%" nowrap="nowrap"><?php echo JText::_('E_SUBJ');?></td>
+				<td width="1%" nowrap="nowrap"><?php echo \Joomla\CMS\Language\Text::_('E_SUBJ');?></td>
 				<td>
 					<?php if ($params->get('params.subject_style', 0) == 2) :
 						$pre_subject_values = explode("\n", trim($params->get('params.pre_subject_val')));
@@ -118,13 +118,13 @@ $key = $record->id.$this->id;
 
 		<?php if ($params->get('params.show_body', 1)):
 
-			JFactory::getDocument()->addScript(JURI::root(TRUE) . '/components/com_joomcck/fields/textarea/assets/grow.js');
+			\Joomla\CMS\Factory::getDocument()->addScript(JURI::root(TRUE) . '/components/com_joomcck/fields/textarea/assets/grow.js');
 			$style = 'box-sizing: border-box;';
 			$style .= 'max-height:' . $params->get('params.grow_max_height', 350) . 'px;';
 			$style .= 'height:' . $params->get('params.grow_min_height', 50) . 'px;';
 		?>
 		<tr>
-			<td width="1%" nowrap="nowrap"><?php echo JText::_('E_MSG');?></td>
+			<td width="1%" nowrap="nowrap"><?php echo \Joomla\CMS\Language\Text::_('E_MSG');?></td>
 			<td>
 				<textarea id="email_body<?php echo $this->id;?>" style="<?php echo $style ?>" name="email[<?php echo $this->id;?>][body]" class="form-control w-100">
                     <?php echo $data->get('body', $params->get('params.body'));?></textarea>
@@ -147,7 +147,7 @@ $key = $record->id.$this->id;
 				if (count($field_info) > 2) :
 					?>
 					<tr>
-						<td><?php echo JText::_($field_info[2]);?>:</td>
+						<td><?php echo \Joomla\CMS\Language\Text::_($field_info[2]);?>:</td>
 						<td>
 						<?php
 						switch (trim($field_info[0])) :
@@ -224,20 +224,20 @@ $key = $record->id.$this->id;
 
 		<?php if ($params->get('params.attachment')): ?>
 		<tr>
-			<td><?php echo JText::_('E_ATTACH');?>:</td>
+			<td><?php echo \Joomla\CMS\Language\Text::_('E_ATTACH');?>:</td>
 			<td>
 				<?php $num = $params->get('params.attach_num', 1);
 				for ($i = 0;$i < $num; $i++):?>
 				<input type="file" name="email_<?php echo $this->id;?>[]" class="btn"/><br>
 				<?php endfor;?>
-				<span class="small"><?php echo JText::_('E_ALLOWEDEXT');?>: <?php echo $params->get('params.formats')?></span>
+				<span class="small"><?php echo \Joomla\CMS\Language\Text::_('E_ALLOWEDEXT');?>: <?php echo $params->get('params.formats')?></span>
 			</td>
 		</tr>
 		<?php endif; ?>
 
 		<?php if ($params->get('params.copy_to_sender', 1)): ?>
 		<tr valign="top">
-			<td><?php echo JText::_('E_SENDCOPY');?></td>
+			<td><?php echo \Joomla\CMS\Language\Text::_('E_SENDCOPY');?></td>
 			<td>
 				<?php
 				    $form = Form::getInstance("emailFormdefault", __DIR__ . "/default.xml",['control' => 'email['.$this->id.']']);
@@ -256,18 +256,18 @@ $key = $record->id.$this->id;
 
 		<?php if ($params->get('params.show_captcha', 1) && !$user->id): ?>
 			<?php
-			$joomcck_params = JComponentHelper::getParams('com_joomcck');
+			$joomcck_params = \Joomla\CMS\Component\ComponentHelper::getParams('com_joomcck');
 			$captcha = Captcha::getInstance($joomcck_params->get('captcha', 'recaptcha'), array('namespace' => 'email'));
 			?>
 			<tr valign="top">
-				<td><?php echo JText::_('E_CAPTCHA');?></td>
+				<td><?php echo \Joomla\CMS\Language\Text::_('E_CAPTCHA');?></td>
 				<td><?php echo $captcha->display('captcha', 'captcha');?></td>
 			</tr>
 		<?php endif; ?>
 
 		<tr>
 			<td></td>
-			<td><input type="submit" id="mailSubmit<?php echo $this->id;?>" name="submit_<?php echo $this->id;?>" value="<?php echo $params->get('params.button', JText::_('E_SEND'));?>" class="btn btn-primary" />
+			<td><input type="submit" id="mailSubmit<?php echo $this->id;?>" name="submit_<?php echo $this->id;?>" value="<?php echo $params->get('params.button', \Joomla\CMS\Language\Text::_('E_SEND'));?>" class="btn btn-primary" />
 			</td>
 		</tr>
 

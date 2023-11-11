@@ -24,14 +24,14 @@ require_once JPATH_ROOT . '/components/com_joomcck/libraries/vendor/autoload.php
 // init webassets
 Webassets::init();
 
-$app        = JFactory::getApplication();
+$app        = \Joomla\CMS\Factory::getApplication();
 $section_id = $params->get('section_id');
 $section    = ItemsStore::getSection($section_id);
 $category   = NULL;
 
 if(!$section->id)
 {
-	Factory::getApplication()->enqueueMessage(JText::_('MOD_SB_NOSECTION'),'warning');
+	Factory::getApplication()->enqueueMessage(\Joomla\CMS\Language\Text::_('MOD_SB_NOSECTION'),'warning');
 
 	return FALSE;
 }
@@ -47,7 +47,7 @@ if(!empty($param_types))
 
 if(!$types)
 {
-	Factory::getApplication()->enqueueMessage(JText::_('MOD_SB_NOTYPE'),'warning');
+	Factory::getApplication()->enqueueMessage(\Joomla\CMS\Language\Text::_('MOD_SB_NOTYPE'),'warning');
 
 	return FALSE;
 }
@@ -86,7 +86,7 @@ if($app->input->getCmd('option') == 'com_joomcck' && $app->input->getInt('sectio
 			{
 				return;
 			}
-			if(!in_array($tmpl_params->get('menu.menu_newrecord'), JFactory::getUser()->getAuthorisedViewLevels()))
+			if(!in_array($tmpl_params->get('menu.menu_newrecord'), \Joomla\CMS\Factory::getUser()->getAuthorisedViewLevels()))
 			{
 				return;
 			}

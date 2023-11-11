@@ -13,19 +13,19 @@ class JoomcckViewComment extends MViewBase
 
 	public function display($tpl = null)
 	{
-		$app = JFactory::getApplication();
-		$this->user = JFactory::getUser();
+		$app = \Joomla\CMS\Factory::getApplication();
+		$this->user = \Joomla\CMS\Factory::getUser();
 		$this->state = $this->get('State');
 		$this->item = $this->get('Item');
 
 		if ($this->item->id && !$this->item->canedit && !$this->item->canmoderate)
 		{
-			$this->setError(JText::_('You have no access to edit this record'));
+			$this->setError(\Joomla\CMS\Language\Text::_('You have no access to edit this record'));
 		}
-		$this->author = JFactory::getUser($this->item->user_id);
+		$this->author = \Joomla\CMS\Factory::getUser($this->item->user_id);
 
 		$this->form = $this->get('Form');
-		$this->user = JFactory::getUser();
+		$this->user = \Joomla\CMS\Factory::getUser();
 
 		if($app->input->getInt('parent_id'))
 			$this->item->parent_id = $app->input->getInt('parent_id');

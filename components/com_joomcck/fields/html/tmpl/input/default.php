@@ -7,7 +7,7 @@
  * @license GNU/GPL http://www.gnu.org/copyleft/gpl.html
  */
 defined('_JEXEC') or die();
-$app = JFactory::getApplication();
+$app = \Joomla\CMS\Factory::getApplication();
 $params = $this->params;
 $text = htmlspecialchars(stripslashes( (string) $this->value), ENT_QUOTES, 'UTF-8');
 $height = $params->get('params.height', '300');
@@ -24,19 +24,19 @@ $height = $params->get('params.height', '300');
 		
 <?php $m = array();
 if (in_array($params->get('params.allow_html', 3), $this->user->getAuthorisedViewLevels())) :
-	$m[] = JText::_('H_TAGSALLOWED');
+	$m[] = \Joomla\CMS\Language\Text::_('H_TAGSALLOWED');
 else :
-	$m[] = JText::_('H_SOMETAGSALLOWED');
+	$m[] = \Joomla\CMS\Language\Text::_('H_SOMETAGSALLOWED');
 	
 	$tags = explode(',', $params->get('params.filter_tags'));
 	ArrayHelper::trim_r($tags);
 	ArrayHelper::clean_r($tags);
-	$li[] = ($this->params->get('params.tags_mode', 0) ? JText::_("H_FOLLOWINGTAGSNOTALLOWED") : JText::_('H_FOLLOWINGTAGSALLOED')) . ': ' . htmlspecialchars('<' . implode('>, <', $tags) . '>');
+	$li[] = ($this->params->get('params.tags_mode', 0) ? \Joomla\CMS\Language\Text::_("H_FOLLOWINGTAGSNOTALLOWED") : \Joomla\CMS\Language\Text::_('H_FOLLOWINGTAGSALLOED')) . ': ' . htmlspecialchars('<' . implode('>, <', $tags) . '>');
 	
 	$attr = explode(',', $params->get('params.filter_attr'));
 	ArrayHelper::trim_r($attr);
 	ArrayHelper::clean_r($attr);
-	$li[] = ($this->params->get('params.attr_mode', 0) ? JText::_('H_FOLLOWINGATTRSNOTALLOWED') : JText::_('H_FOLLOWINGATTRSALLOWED')) . ': ' . htmlspecialchars(implode('="", ', $attr)) . '=""';
+	$li[] = ($this->params->get('params.attr_mode', 0) ? \Joomla\CMS\Language\Text::_('H_FOLLOWINGATTRSNOTALLOWED') : \Joomla\CMS\Language\Text::_('H_FOLLOWINGATTRSALLOWED')) . ': ' . htmlspecialchars(implode('="", ', $attr)) . '=""';
 	
 	$m[] = '<ul><li>' . implode('</li><li>', $li) . '</li></ul>';
 	

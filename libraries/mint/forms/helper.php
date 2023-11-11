@@ -12,9 +12,9 @@ use Joomla\CMS\HTML\HTMLHelper;
 
 defined('JPATH_PLATFORM') or die;
 
-JForm::addFieldPath(JPATH_ROOT . '/libraries/mint/forms/elements');
-JForm::addFieldPath(JPATH_ROOT . '/components/com_joomcck/library/php/fields');
-JForm::addFieldPath(JPATH_ROOT . '/components/com_joomcck/models/fields');
+\Joomla\CMS\Form\Form::addFieldPath(JPATH_ROOT . '/libraries/mint/forms/elements');
+\Joomla\CMS\Form\Form::addFieldPath(JPATH_ROOT . '/components/com_joomcck/library/php/fields');
+\Joomla\CMS\Form\Form::addFieldPath(JPATH_ROOT . '/components/com_joomcck/models/fields');
 
 class MFormHelper
 {
@@ -89,7 +89,7 @@ class MFormHelper
 				$out[] = '<ul class="nav nav-tabs sticky-top" id="' . str_replace('.', '_', $form->getName()) . '" role="tablist">';
 				foreach($groups as $group)
 				{
-					$out[] = '<li class="nav-item" role="presentation"><a  class="nav-link" href="#' . $group . '" data-bs-toggle="tab">' . JText::_('GROUP_' . strtoupper($group)) . '</button></a></li>';
+					$out[] = '<li class="nav-item" role="presentation"><a  class="nav-link" href="#' . $group . '" data-bs-toggle="tab">' . \Joomla\CMS\Language\Text::_('GROUP_' . strtoupper($group)) . '</button></a></li>';
 				}
 				$out[] = '</ul>';
 				$out[] = '<div class="tab-content">';
@@ -103,7 +103,7 @@ class MFormHelper
 				case self::GROUP_SEPARATOR_SLIDER:
 					$out[] = '<div class="accordion-group"><div class="accordion-heading">
 						<a class="accordion-toggle" data-toggle="collapse" data-parent="#' . str_replace('.', '_', $form->getName()) . '" href="#' . $group . '">
-						' . JText::_('GROUP_' . strtoupper($group)) . '</a></div><div id="' . $group . '" class="accordion-body collapse fade"><div class="accordion-inner">';
+						' . \Joomla\CMS\Language\Text::_('GROUP_' . strtoupper($group)) . '</a></div><div id="' . $group . '" class="accordion-body collapse fade"><div class="accordion-inner">';
 					break;
 				case self::GROUP_SEPARATOR_TAB:
 					$out[] = sprintf(' <div class="tab-pane fade" id="%s">', $group);
@@ -193,7 +193,7 @@ class MFormHelper
 	/**
      * @param JForm           $form
      * @param string          $name
-     * @param array|JRegistry $defaults
+     * @param array|\Joomla\Registry\Registry $defaults
      * @param string          $group
      * @param int             $title
      * @param int             $style
@@ -206,7 +206,7 @@ class MFormHelper
 
 		if(is_array($defaults))
 		{
-			$registry = new JRegistry();
+			$registry = new \Joomla\Registry\Registry();
 			$registry->loadArray($defaults);
 			$defaults = $registry;
 		}
@@ -292,11 +292,11 @@ class MFormHelper
 			}
 		}
 
-		$block = sprintf($tmpl[$row_tmpl], JText::_($fieldset->label), implode("\n", $row));
+		$block = sprintf($tmpl[$row_tmpl], \Joomla\CMS\Language\Text::_($fieldset->label), implode("\n", $row));
 
 		$out = sprintf($tmpl['separator' . $separator],
-			JText::_($fieldset->label),
-			(!empty($fieldset->description) ? sprintf($tmpl['description'], JText::_($fieldset->description)) : NULL),
+			\Joomla\CMS\Language\Text::_($fieldset->label),
+			(!empty($fieldset->description) ? sprintf($tmpl['description'], \Joomla\CMS\Language\Text::_($fieldset->description)) : NULL),
 			$block
 		);
 
@@ -319,12 +319,12 @@ class MFormHelper
 
 		/*if($field->description)
 		{
-			JHtml::_('bootstrap.tooltip', '[data-toggle="tooltip"]');
+			\Joomla\CMS\HTML\HTMLHelper::_('bootstrap.tooltip', '[data-toggle="tooltip"]');
 			$tooltip = sprintf('data-toggle="tooltip" title="%s"', );
 		}*/
 
 		$label = sprintf($tmpl['label'],
-			$field->id, $field->id, $class, htmlspecialchars(JText::_($field->description), ENT_COMPAT, 'UTF-8'), str_replace('*', '*', strip_tags($field->label))
+			$field->id, $field->id, $class, htmlspecialchars(\Joomla\CMS\Language\Text::_($field->description), ENT_COMPAT, 'UTF-8'), str_replace('*', '*', strip_tags($field->label))
 		);
 
 		return $label;
@@ -338,19 +338,19 @@ class MFormHelper
 		$out = array();
 
 		$gateways_path = JPATH_COMPONENT . '/library/gateways/';
-		$gateways      = JFolder::folders($gateways_path);
+		$gateways      = \Joomla\CMS\Filesystem\Folder::folders($gateways_path);
 
 		foreach($gateways as $gateway)
 		{
 			$file = $gateways_path . $gateway . DIRECTORY_SEPARATOR . $gateway . '.xml';
-			if(!JFile::exists($file))
+			if(!\Joomla\CMS\Filesystem\File::exists($file))
 				continue;
 
-			$lang = JFactory::getLanguage();
+			$lang = \Joomla\CMS\Factory::getLanguage();
 			$tag  = $lang->getTag();
 			if($tag != 'en-GB')
 			{
-				if(!JFile::exists(JPATH_BASE . "/language/{$tag}/{$tag}.com_emerald_gateway_{$gateway}.ini"))
+				if(!\Joomla\CMS\Filesystem\File::exists(JPATH_BASE . "/language/{$tag}/{$tag}.com_emerald_gateway_{$gateway}.ini"))
 				{
 					$tag == 'en-GB';
 				}
@@ -370,7 +370,7 @@ class MFormHelper
 
 	private static function _get_templates()
 	{
-		$params = JComponentHelper::getParams(JFactory::getApplication()->input->get('option'));
+		$params = \Joomla\CMS\Component\ComponentHelper::getParams(\Joomla\CMS\Factory::getApplication()->input->get('option'));
 		$prefix = $params->get('tmpl_prefix', 'default');
 		if(!empty(self::$templates[$prefix]))
 		{
@@ -381,7 +381,7 @@ class MFormHelper
 	}
 
 	public static function getFieldParams($file, $fid, $value, $root = 'form') {
-		if(!JFile::exists($file))
+		if(!\Joomla\CMS\Filesystem\File::exists($file))
 		{
 			return "File not found: {$file}";
 		}
@@ -392,9 +392,9 @@ class MFormHelper
 
 		$form->loadFile($file, TRUE, $root);
 
-		$field_table = JTable::getInstance('Field', 'JoomcckTable');
+		$field_table = \Joomla\CMS\Table\Table::getInstance('Field', 'JoomcckTable');
 		$field_table->load($fid);
-		$default = !empty($field_table->params) ?new JRegistry($field_table->params) : [];
+		$default = !empty($field_table->params) ?new \Joomla\Registry\Registry($field_table->params) : [];
 
 		return self::renderGroup($form, $default, 'tmpl_'.str_replace('.php', '', $value));
 	}

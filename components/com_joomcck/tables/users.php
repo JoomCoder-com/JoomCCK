@@ -10,7 +10,7 @@
 defined( '_JEXEC' ) or die( 'Restricted access');
 jimport('joomla.table.table');
 
-class JoomcckTableUsers extends JTable
+class JoomcckTableUsers extends \Joomla\CMS\Table\Table
 {
 
 	public function __construct( &$_db ) {

@@ -59,8 +59,8 @@ class modJoomcckCategoriesHelper
 
 	static public function getRecordsNum($section, $cat_id)
 	{
-		$db = JFactory::getDbo();
-		$user = JFactory::getUser();
+		$db = \Joomla\CMS\Factory::getDbo();
+		$user = \Joomla\CMS\Factory::getUser();
 
 		$sql = $db->getQuery(true);
 		$sql->select('count(*)');
@@ -72,12 +72,12 @@ class modJoomcckCategoriesHelper
 
 		if(! in_array($section->params->get('general.show_future_records'), $user->getAuthorisedViewLevels()))
 		{
-			$sql->where("ctime < " . $db->quote(JFactory::getDate()->toSql()));
+			$sql->where("ctime < " . $db->quote(\Joomla\CMS\Factory::getDate()->toSql()));
 		}
 
 		if(! in_array($section->params->get('general.show_past_records'), $user->getAuthorisedViewLevels()))
 		{
-			$sql->where("(extime = '0000-00-00 00:00:00' OR ISNULL(extime) OR extime > '" . JFactory::getDate()->toSql() . "')");
+			$sql->where("(extime = '0000-00-00 00:00:00' OR ISNULL(extime) OR extime > '" . \Joomla\CMS\Factory::getDate()->toSql() . "')");
 		}
 		$db->setQuery($sql);
 		return $db->loadResult();
@@ -85,7 +85,7 @@ class modJoomcckCategoriesHelper
 
 	static public function getCatRecords($cat_id, $params)
 	{
-		$db = JFactory::getDbo();
+		$db = \Joomla\CMS\Factory::getDbo();
 
 		$sql = $db->getQuery(true);
 
@@ -93,8 +93,8 @@ class modJoomcckCategoriesHelper
 		$sql->from('#__js_res_record');
 		$sql->where('published = 1');
 		$sql->where('hidden = 0');
-		$sql->where("ctime < " . $db->quote(JFactory::getDate()->toSql()));
-		$sql->where("(extime = '0000-00-00 00:00:00' OR ISNULL(extime) OR extime > '" . JFactory::getDate()->toSql() . "')");
+		$sql->where("ctime < " . $db->quote(\Joomla\CMS\Factory::getDate()->toSql()));
+		$sql->where("(extime = '0000-00-00 00:00:00' OR ISNULL(extime) OR extime > '" . \Joomla\CMS\Factory::getDate()->toSql() . "')");
 		$sql->where("id IN (SELECT record_id FROM #__js_res_record_category WHERE catid = '{$cat_id}')");
 		if($params->get('orderby'))
 		{
@@ -120,7 +120,7 @@ class modJoomcckCategoriesHelper
 
 	static public function getSectionRecords($params)
 	{
-		$db = JFactory::getDbo();
+		$db = \Joomla\CMS\Factory::getDbo();
 		$items = null;
 		$sql = $db->getQuery(true);
 		$sql->select('id');
@@ -128,8 +128,8 @@ class modJoomcckCategoriesHelper
 		$sql->where('published = 1');
 		$sql->where('hidden = 0');
 		$sql->where('section_id = ' . $params->get('section_id'));
-		$sql->where("ctime < " . $db->quote(JFactory::getDate()->toSql()));
-		$sql->where("(extime = '0000-00-00 00:00:00' OR ISNULL(extime)  OR extime > '" . JFactory::getDate()->toSql() . "')");
+		$sql->where("ctime < " . $db->quote(\Joomla\CMS\Factory::getDate()->toSql()));
+		$sql->where("(extime = '0000-00-00 00:00:00' OR ISNULL(extime)  OR extime > '" . \Joomla\CMS\Factory::getDate()->toSql() . "')");
 		$sql->where("id NOT IN (SELECT record_id FROM #__js_res_record_category WHERE section_id = '" . $params->get('section_id') . "')");
 		if($params->get('orderby'))
 		{

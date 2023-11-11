@@ -33,12 +33,12 @@ class JoomcckModelAuditversions extends MModelList
 
 	public function getTable($type = 'Audit_versions', $prefix = 'JoomcckTable', $config = array())
 	{
-		return JTable::getInstance($type, $prefix, $config);
+		return \Joomla\CMS\Table\Table::getInstance($type, $prefix, $config);
 	}
 
 	public function getListQuery()
 	{
-		$user = JFactory::getUser();
+		$user = \Joomla\CMS\Factory::getUser();
 		$db = $this->getDbo();
 		$query = $db->getQuery(true);
 		

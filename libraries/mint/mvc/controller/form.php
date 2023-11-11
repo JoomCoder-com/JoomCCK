@@ -80,7 +80,7 @@ class MControllerForm extends MControllerBase
 			$this->option = 'com_' . strtolower($this->getName());
 		}
 
-		// Guess the JText message prefix. Defaults to the option.
+		// Guess the \Joomla\CMS\Language\Text message prefix. Defaults to the option.
 		if (empty($this->text_prefix))
 		{
 			$this->text_prefix = strtoupper($this->option);
@@ -92,7 +92,7 @@ class MControllerForm extends MControllerBase
 			$r = null;
 			if (!preg_match('/(.*)Controller(.*)/i', get_class($this), $r))
 			{
-				throw new Exception(JText::_('JLIB_APPLICATION_ERROR_CONTROLLER_GET_NAME'), 500);
+				throw new Exception(\Joomla\CMS\Language\Text::_('JLIB_APPLICATION_ERROR_CONTROLLER_GET_NAME'), 500);
 			}
 			$this->context = strtolower($r[2]);
 		}
@@ -145,18 +145,18 @@ class MControllerForm extends MControllerBase
 	 */
 	public function add()
 	{
-		$app = JFactory::getApplication();
+		$app = \Joomla\CMS\Factory::getApplication();
 		$context = "$this->option.edit.$this->context";
 
 		// Access check.
 		if (!$this->allowAdd())
 		{
 			// Set the internal error and also the redirect error.
-			$this->setError(JText::_('JLIB_APPLICATION_ERROR_CREATE_RECORD_NOT_PERMITTED'));
+			$this->setError(\Joomla\CMS\Language\Text::_('JLIB_APPLICATION_ERROR_CREATE_RECORD_NOT_PERMITTED'));
 			$this->setMessage($this->getError(), 'error');
 
 			$this->setRedirect(
-				JRoute::_(
+				\Joomla\CMS\Router\Route::_(
 					'index.php?option=' . $this->option . '&view=' . $this->view_list
 					. $this->getRedirectToListAppend(), false
 				)
@@ -170,7 +170,7 @@ class MControllerForm extends MControllerBase
 
 		// Redirect to the edit screen.
 		$this->setRedirect(
-			JRoute::_(
+			\Joomla\CMS\Router\Route::_(
 				'index.php?option=' . $this->option . '&view=' . $this->view_item
 				. $this->getRedirectToItemAppend(), false
 			)
@@ -192,7 +192,7 @@ class MControllerForm extends MControllerBase
 	 */
 	protected function allowAdd($data = array())
 	{
-		$user = JFactory::getUser();
+		$user = \Joomla\CMS\Factory::getUser();
 		return ($user->authorise('core.create', $this->option) || count($user->getAuthorisedCategories($this->option, 'core.create')));
 	}
 
@@ -210,7 +210,7 @@ class MControllerForm extends MControllerBase
 	 */
 	protected function allowEdit($data = array(), $key = 'id')
 	{
-		return JFactory::getUser()->authorise('core.edit', $this->option);
+		return \Joomla\CMS\Factory::getUser()->authorise('core.edit', $this->option);
 	}
 
 	/**
@@ -272,13 +272,13 @@ class MControllerForm extends MControllerBase
 		// Attempt to run the batch operation.
 		if ($model->batch($vars, $cid, $contexts))
 		{
-			$this->setMessage(JText::_('JLIB_APPLICATION_SUCCESS_BATCH'));
+			$this->setMessage(\Joomla\CMS\Language\Text::_('JLIB_APPLICATION_SUCCESS_BATCH'));
 
 			return true;
 		}
 		else
 		{
-			$this->setMessage(JText::sprintf('JLIB_APPLICATION_ERROR_BATCH_FAILED', $model->getError()), 'warning');
+			$this->setMessage(\Joomla\CMS\Language\Text::sprintf('JLIB_APPLICATION_ERROR_BATCH_FAILED', $model->getError()), 'warning');
 
 			return false;
 		}
@@ -295,9 +295,9 @@ class MControllerForm extends MControllerBase
 	 */
 	public function cancel($key = null)
 	{
-		JSession::checkToken() or jexit(JText::_('JINVALID_TOKEN'));
+		JSession::checkToken() or jexit(\Joomla\CMS\Language\Text::_('JINVALID_TOKEN'));
 
-		$app = JFactory::getApplication();
+		$app = \Joomla\CMS\Factory::getApplication();
 		$model = $this->getModel();
 		$table = $model->getTable();
 		$checkin = property_exists($table, 'checked_out');
@@ -318,11 +318,11 @@ class MControllerForm extends MControllerBase
 				if ($model->checkin($recordId) === false)
 				{
 					// Check-in failed, go back to the record and display a notice.
-					$this->setError(JText::sprintf('JLIB_APPLICATION_ERROR_CHECKIN_FAILED', $model->getError()));
+					$this->setError(\Joomla\CMS\Language\Text::sprintf('JLIB_APPLICATION_ERROR_CHECKIN_FAILED', $model->getError()));
 					$this->setMessage($this->getError(), 'error');
 
 					$this->setRedirect(
-						JRoute::_(
+						\Joomla\CMS\Router\Route::_(
 							'index.php?option=' . $this->option . '&view=' . $this->view_item
 							. $this->getRedirectToItemAppend($recordId, $key), false
 						)
@@ -338,7 +338,7 @@ class MControllerForm extends MControllerBase
 		$app->setUserState($context . '.data', null);
 
 		$this->setRedirect(
-			JRoute::_(
+			\Joomla\CMS\Router\Route::_(
 				'index.php?option=' . $this->option . '&view=' . $this->view_list
 				. $this->getRedirectToListAppend(), false
 			)
@@ -360,7 +360,7 @@ class MControllerForm extends MControllerBase
 	 */
 	public function edit($key = null, $urlVar = null)
 	{
-		$app   = JFactory::getApplication();
+		$app   = \Joomla\CMS\Factory::getApplication();
 		$model = $this->getModel();
 		$table = $model->getTable();
 		$cid   = $this->input->post->get('cid', array(), 'array');
@@ -385,11 +385,11 @@ class MControllerForm extends MControllerBase
 		// Access check.
 		if (!$this->allowEdit(array($key => $recordId), $key))
 		{
-			$this->setError(JText::_('JLIB_APPLICATION_ERROR_EDIT_NOT_PERMITTED'));
+			$this->setError(\Joomla\CMS\Language\Text::_('JLIB_APPLICATION_ERROR_EDIT_NOT_PERMITTED'));
 			$this->setMessage($this->getError(), 'error');
 
 			$this->setRedirect(
-				JRoute::_(
+				\Joomla\CMS\Router\Route::_(
 					'index.php?option=' . $this->option . '&view=' . $this->view_list
 					. $this->getRedirectToListAppend(), false
 				)
@@ -402,11 +402,11 @@ class MControllerForm extends MControllerBase
 		if ($checkin && !$model->checkout($recordId))
 		{
 			// Check-out failed, display a notice but allow the user to see the record.
-			$this->setError(JText::sprintf('JLIB_APPLICATION_ERROR_CHECKOUT_FAILED', $model->getError()));
+			$this->setError(\Joomla\CMS\Language\Text::sprintf('JLIB_APPLICATION_ERROR_CHECKOUT_FAILED', $model->getError()));
 			$this->setMessage($this->getError(), 'error');
 
 			$this->setRedirect(
-				JRoute::_(
+				\Joomla\CMS\Router\Route::_(
 					'index.php?option=' . $this->option . '&view=' . $this->view_item
 					. $this->getRedirectToItemAppend($recordId, $urlVar), false
 				)
@@ -421,7 +421,7 @@ class MControllerForm extends MControllerBase
 			$app->setUserState($context . '.data', null);
 
 			$this->setRedirect(
-				JRoute::_(
+				\Joomla\CMS\Router\Route::_(
 					'index.php?option=' . $this->option . '&view=' . $this->view_item
 					. $this->getRedirectToItemAppend($recordId, $urlVar), false
 				)
@@ -496,7 +496,7 @@ class MControllerForm extends MControllerBase
 	 */
 	protected function getRedirectToListAppend()
 	{
-		$tmpl = JFactory::getApplication()->input->get('tmpl');
+		$tmpl = \Joomla\CMS\Factory::getApplication()->input->get('tmpl');
 		$append = '';
 
 		// Setup redirect info.
@@ -532,8 +532,8 @@ class MControllerForm extends MControllerBase
 	 */
 	public function loadhistory()
 	{
-		$app = JFactory::getApplication();
-		$lang  = JFactory::getLanguage();
+		$app = \Joomla\CMS\Factory::getApplication();
+		$lang  = \Joomla\CMS\Factory::getLanguage();
 		$model = $this->getModel();
 		$table = $model->getTable();
 		$historyId = $app->input->get('version_id', null, 'integer');
@@ -544,7 +544,7 @@ class MControllerForm extends MControllerBase
 			$this->setMessage($model->getError(), 'error');
 
 			$this->setRedirect(
-					JRoute::_(
+					\Joomla\CMS\Router\Route::_(
 							'index.php?option=' . $this->option . '&view=' . $this->view_list
 							. $this->getRedirectToListAppend(), false
 					)
@@ -567,11 +567,11 @@ class MControllerForm extends MControllerBase
 		// Access check.
 		if (!$this->allowEdit(array($key => $recordId), $key))
 		{
-			$this->setError(JText::_('JLIB_APPLICATION_ERROR_EDIT_NOT_PERMITTED'));
+			$this->setError(\Joomla\CMS\Language\Text::_('JLIB_APPLICATION_ERROR_EDIT_NOT_PERMITTED'));
 			$this->setMessage($this->getError(), 'error');
 
 			$this->setRedirect(
-				JRoute::_(
+				\Joomla\CMS\Router\Route::_(
 					'index.php?option=' . $this->option . '&view=' . $this->view_list
 					. $this->getRedirectToListAppend(), false
 				)
@@ -583,13 +583,13 @@ class MControllerForm extends MControllerBase
 
 		$table->store();
 		$this->setRedirect(
-				JRoute::_(
+				\Joomla\CMS\Router\Route::_(
 						'index.php?option=' . $this->option . '&view=' . $this->view_item
 						. $this->getRedirectToItemAppend($recordId, $urlVar), false
 				)
 		);
 
-		$this->setMessage(JText::sprintf('JLIB_APPLICATION_SUCCESS_LOAD_HISTORY', $model->getState('save_date'), $model->getState('version_note')));
+		$this->setMessage(\Joomla\CMS\Language\Text::sprintf('JLIB_APPLICATION_SUCCESS_LOAD_HISTORY', $model->getState('save_date'), $model->getState('version_note')));
 
 		// Invoke the postSave method to allow for the child class to access the model.
 		$this->postSaveHook($model);
@@ -610,10 +610,10 @@ class MControllerForm extends MControllerBase
 	public function save($key = null, $urlVar = null)
 	{
 		// Check for request forgeries.
-		JSession::checkToken() or jexit(JText::_('JINVALID_TOKEN'));
+		JSession::checkToken() or jexit(\Joomla\CMS\Language\Text::_('JINVALID_TOKEN'));
 
-		$app   = JFactory::getApplication();
-		$lang  = JFactory::getLanguage();
+		$app   = \Joomla\CMS\Factory::getApplication();
+		$lang  = \Joomla\CMS\Factory::getLanguage();
 		$model = $this->getModel();
 		$table = $model->getTable();
 		$data  = $this->input->post->get('jform', array(), 'array');
@@ -645,11 +645,11 @@ class MControllerForm extends MControllerBase
 			if ($checkin && $model->checkin($data[$key]) === false)
 			{
 				// Check-in failed. Go back to the item and display a notice.
-				$this->setError(JText::sprintf('JLIB_APPLICATION_ERROR_CHECKIN_FAILED', $model->getError()));
+				$this->setError(\Joomla\CMS\Language\Text::sprintf('JLIB_APPLICATION_ERROR_CHECKIN_FAILED', $model->getError()));
 				$this->setMessage($this->getError(), 'error');
 
 				$this->setRedirect(
-					JRoute::_(
+					\Joomla\CMS\Router\Route::_(
 						'index.php?option=' . $this->option . '&view=' . $this->view_item
 						. $this->getRedirectToItemAppend($recordId, $urlVar), false
 					)
@@ -666,11 +666,11 @@ class MControllerForm extends MControllerBase
 		// Access check.
 		if (!$this->allowSave($data, $key))
 		{
-			$this->setError(JText::_('JLIB_APPLICATION_ERROR_SAVE_NOT_PERMITTED'));
+			$this->setError(\Joomla\CMS\Language\Text::_('JLIB_APPLICATION_ERROR_SAVE_NOT_PERMITTED'));
 			$this->setMessage($this->getError(), 'error');
 
 			$this->setRedirect(
-				JRoute::_(
+				\Joomla\CMS\Router\Route::_(
 					'index.php?option=' . $this->option . '&view=' . $this->view_list
 					. $this->getRedirectToListAppend(), false
 				)
@@ -717,7 +717,7 @@ class MControllerForm extends MControllerBase
 
 			// Redirect back to the edit screen.
 			$this->setRedirect(
-				JRoute::_(
+				\Joomla\CMS\Router\Route::_(
 					'index.php?option=' . $this->option . '&view=' . $this->view_item
 					. $this->getRedirectToItemAppend($recordId, $urlVar), false
 				)
@@ -738,11 +738,11 @@ class MControllerForm extends MControllerBase
 			$app->setUserState($context . '.data', $validData);
 
 			// Redirect back to the edit screen.
-			$this->setError(JText::sprintf('JLIB_APPLICATION_ERROR_SAVE_FAILED', $model->getError()));
+			$this->setError(\Joomla\CMS\Language\Text::sprintf('JLIB_APPLICATION_ERROR_SAVE_FAILED', $model->getError()));
 			$this->setMessage($this->getError(), 'error');
 
 			$this->setRedirect(
-				JRoute::_(
+				\Joomla\CMS\Router\Route::_(
 					'index.php?option=' . $this->option . '&view=' . $this->view_item
 					. $this->getRedirectToItemAppend($recordId, $urlVar), false
 				)
@@ -758,11 +758,11 @@ class MControllerForm extends MControllerBase
 			$app->setUserState($context . '.data', $validData);
 
 			// Check-in failed, so go back to the record and display a notice.
-			$this->setError(JText::sprintf('JLIB_APPLICATION_ERROR_CHECKIN_FAILED', $model->getError()));
+			$this->setError(\Joomla\CMS\Language\Text::sprintf('JLIB_APPLICATION_ERROR_CHECKIN_FAILED', $model->getError()));
 			$this->setMessage($this->getError(), 'error');
 
 			$this->setRedirect(
-				JRoute::_(
+				\Joomla\CMS\Router\Route::_(
 					'index.php?option=' . $this->option . '&view=' . $this->view_item
 					. $this->getRedirectToItemAppend($recordId, $urlVar), false
 				)
@@ -772,7 +772,7 @@ class MControllerForm extends MControllerBase
 		}
 
 		$this->setMessage(
-			JText::_(
+			\Joomla\CMS\Language\Text::_(
 				($lang->hasKey($this->text_prefix . ($recordId == 0 && $app->isClient('site') ? '_SUBMIT' : '') . '_SAVE_SUCCESS')
 					? $this->text_prefix
 					: 'JLIB_APPLICATION') . ($recordId == 0 && $app->isClient('site') ? '_SUBMIT' : '') . '_SAVE_SUCCESS'
@@ -791,7 +791,7 @@ class MControllerForm extends MControllerBase
 
 				// Redirect back to the edit screen.
 				$this->setRedirect(
-					JRoute::_(
+					\Joomla\CMS\Router\Route::_(
 						'index.php?option=' . $this->option . '&view=' . $this->view_item
 						. $this->getRedirectToItemAppend($recordId, $urlVar), false
 					)
@@ -805,7 +805,7 @@ class MControllerForm extends MControllerBase
 
 				// Redirect back to the edit screen.
 				$this->setRedirect(
-					JRoute::_(
+					\Joomla\CMS\Router\Route::_(
 						'index.php?option=' . $this->option . '&view=' . $this->view_item
 						. $this->getRedirectToItemAppend(null, $urlVar), false
 					)
@@ -819,7 +819,7 @@ class MControllerForm extends MControllerBase
 
 				// Redirect to the list screen.
 				$this->setRedirect(
-					JRoute::_(
+					\Joomla\CMS\Router\Route::_(
 						'index.php?option=' . $this->option . '&view=' . $this->view_list
 						. $this->getRedirectToListAppend(), false
 					)

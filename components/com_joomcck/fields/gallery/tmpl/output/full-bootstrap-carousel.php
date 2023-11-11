@@ -14,7 +14,7 @@ if(empty($this->value))
 }
 
 $key = $this->id . '-' . $record->id;
-$dir = JComponentHelper::getParams('com_joomcck')->get('general_upload') . DIRECTORY_SEPARATOR . $this->params->get('params.subfolder', $this->field_type) . DIRECTORY_SEPARATOR;
+$dir = \Joomla\CMS\Component\ComponentHelper::getParams('com_joomcck')->get('general_upload') . DIRECTORY_SEPARATOR . $this->params->get('params.subfolder', $this->field_type) . DIRECTORY_SEPARATOR;
 ?>
 
     <div id="carusel-<?php echo $key ?>" class="carousel slide" data-bs-ride="carousel">
@@ -70,7 +70,7 @@ $dir = JComponentHelper::getParams('com_joomcck')->get('general_upload') . DIREC
 	<div class="clearfix"></div>
 	<div class="my-2">
         <a class="btn btn-outline-success btn-sm" href="<?php echo Url::task('files.download&fid=' . $this->id . '&rid=' . $record->id, 0); ?>">
-            <span class="fas fa-download"></span> <?php echo JText::_('CDOWNLOADALL') ?>
+            <span class="fas fa-download"></span> <?php echo \Joomla\CMS\Language\Text::_('CDOWNLOADALL') ?>
         </a>
     </div>
 <?php endif; ?>

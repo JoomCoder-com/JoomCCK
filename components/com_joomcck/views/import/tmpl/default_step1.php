@@ -10,9 +10,9 @@
 defined('_JEXEC') || die();
 ?>
 
-<script src="<?php echo JUri::root(true) ?>/media/com_joomcck/vendors/blueimp-file-upload/js/vendor/jquery.ui.widget.js"></script>
-<script src="<?php echo JUri::root(true) ?>/media/com_joomcck/vendors/blueimp-file-upload/js/jquery.iframe-transport.js"></script>
-<script src="<?php echo JUri::root(true) ?>/media/com_joomcck/vendors/blueimp-file-upload/js/jquery.fileupload.js"></script>
+<script src="<?php echo \Joomla\CMS\Uri\Uri::root(true) ?>/media/com_joomcck/vendors/blueimp-file-upload/js/vendor/jquery.ui.widget.js"></script>
+<script src="<?php echo \Joomla\CMS\Uri\Uri::root(true) ?>/media/com_joomcck/vendors/blueimp-file-upload/js/jquery.iframe-transport.js"></script>
+<script src="<?php echo \Joomla\CMS\Uri\Uri::root(true) ?>/media/com_joomcck/vendors/blueimp-file-upload/js/jquery.fileupload.js"></script>
 
 <div class="alert alert-info mb-3">
     <p>Import is a very sensitive and complicated process. Read carefully.</p>
@@ -33,9 +33,9 @@ defined('_JEXEC') || die();
 
 <?php $jsoncode = time(); ?>
 <ul class="nav nav-pills mb-4">
-    <li class="nav-item"><a class="nav-link active">1. <?php echo JText::_('CIMPORTUPLOAD') ?></a></li>
-    <li class="nav-item"><a class="nav-link">2. <?php echo JText::_('CIMPORTCONFIG') ?></a></li>
-    <li class="nav-item"><a class="nav-link">3. <?php echo JText::_('CIMPORTFINISH') ?></a></li>
+    <li class="nav-item"><a class="nav-link active">1. <?php echo \Joomla\CMS\Language\Text::_('CIMPORTUPLOAD') ?></a></li>
+    <li class="nav-item"><a class="nav-link">2. <?php echo \Joomla\CMS\Language\Text::_('CIMPORTCONFIG') ?></a></li>
+    <li class="nav-item"><a class="nav-link">3. <?php echo \Joomla\CMS\Language\Text::_('CIMPORTFINISH') ?></a></li>
 </ul>
 
 <div id="progress" class="progress progress-striped hide">
@@ -61,36 +61,36 @@ defined('_JEXEC') || die();
 <form action="<?php echo \Joomla\CMS\Uri\Uri::getInstance()->toString(); ?>" method="post" name="adminForm"
       id="adminForm" class="form-horizontal">
     <div class="control-group">
-        <label class="control-label" for="type"><?php echo JText::_('CSECTION') ?></label>
+        <label class="control-label" for="type"><?php echo \Joomla\CMS\Language\Text::_('CSECTION') ?></label>
         <div class="controls">
             <select name="section_id" class="form-select">
-				<?php echo JHtml::_('select.options', $this->sections, 'value', 'text', 0, true); ?>
+				<?php echo \Joomla\CMS\HTML\HTMLHelper::_('select.options', $this->sections, 'value', 'text', 0, true); ?>
             </select>
         </div>
     </div>
     <div class="control-group">
-        <label class="control-label" for="type"><?php echo JText::_('CTYPE') ?></label>
+        <label class="control-label" for="type"><?php echo \Joomla\CMS\Language\Text::_('CTYPE') ?></label>
         <div class="controls">
             <select name="type_id" class="form-select">
-				<?php echo JHtml::_('select.options', $this->types, 'value', 'text', 0, true); ?>
+				<?php echo \Joomla\CMS\HTML\HTMLHelper::_('select.options', $this->types, 'value', 'text', 0, true); ?>
             </select>
         </div>
     </div>
     <div class="control-group">
-        <label class="control-label" for="type"><?php echo JText::_('CCSVDELIMITER') ?></label>
+        <label class="control-label" for="type"><?php echo \Joomla\CMS\Language\Text::_('CCSVDELIMITER') ?></label>
         <div class="controls">
             <select name="delimiter" class="form-select">
-                <option value=","><?php echo JText::_('CIMPORTDELCOMA') ?></option>
-                <option value=";"><?php echo JText::_('CIMPORTDELSEMI') ?></option>
+                <option value=","><?php echo \Joomla\CMS\Language\Text::_('CIMPORTDELCOMA') ?></option>
+                <option value=";"><?php echo \Joomla\CMS\Language\Text::_('CIMPORTDELSEMI') ?></option>
             </select>
         </div>
     </div>
 
     <div class="control-group">
-        <label class="control-label" for="type"><?php echo JText::_('CIMPORTUPLOAD') ?></label>
+        <label class="control-label" for="type"><?php echo \Joomla\CMS\Language\Text::_('CIMPORTUPLOAD') ?></label>
         <div class="controls">
 			<span class="btn btn-success" style="position: relative;">
-			<?php echo JText::_('CIMPORTUPLOADFILE') ?>
+			<?php echo \Joomla\CMS\Language\Text::_('CIMPORTUPLOADFILE') ?>
 			<input id="fileupload" type="file" name="files[]">
 			</span>
         </div>
@@ -98,7 +98,7 @@ defined('_JEXEC') || die();
 
 
     <div class="form-actions border rounded p-3 mb-4 d-flex justify-content-end">
-        <button class=" btn btn-primary" id="next-step" disabled="disabled"><?php echo JText::_('CNEXT') ?></button>
+        <button class=" btn btn-primary" id="next-step" disabled="disabled"><?php echo \Joomla\CMS\Language\Text::_('CNEXT') ?></button>
     </div>
     <div class="clearfix"></div>
     <input type="hidden" name="key" value="<?php echo $jsoncode ?>">
@@ -108,7 +108,7 @@ defined('_JEXEC') || die();
 <script>
     (function ($) {
         $('#fileupload').fileupload({
-            url: '<?php echo JRoute::_('index.php?option=com_joomcck&task=import.upload&tmpl=component', false); ?>',
+            url: '<?php echo \Joomla\CMS\Router\Route::_('index.php?option=com_joomcck&task=import.upload&tmpl=component', false); ?>',
             dataType: 'json',
             maxChunkSize: 2000000,
             multipart: true,
@@ -124,7 +124,7 @@ defined('_JEXEC') || die();
                 console.log(data);
                 $('#progress').removeClass('active');
                 $('#progress .bar')
-                    .text('<?php echo JText::_('CIMPORTUPLOADFINISH') ?>')
+                    .text('<?php echo \Joomla\CMS\Language\Text::_('CIMPORTUPLOADFINISH') ?>')
                     .css('width', '100%')
                     .addClass('bar-success').removeClass('bar-warning');
 
@@ -138,7 +138,7 @@ defined('_JEXEC') || die();
                         return;
                     }
                     $.ajax({
-                        url: '<?php echo JRoute::_('index.php?option=com_joomcck&task=import.analize&tmpl=component&json=' . $jsoncode, false); ?>&file=' + file.name,
+                        url: '<?php echo \Joomla\CMS\Router\Route::_('index.php?option=com_joomcck&task=import.analize&tmpl=component&json=' . $jsoncode, false); ?>&file=' + file.name,
                         dataType: 'json',
                         type: 'POST',
                         beforeSend: function () {
@@ -158,13 +158,13 @@ defined('_JEXEC') || die();
                 $('#progress').show().addClass('active');
                 $('#progress .bar')
                     .css('width', progress + '%')
-                    .html('<?php echo JText::_('CIMPORTUPLOAD') ?> <b>' + progress + '%</b>')
+                    .html('<?php echo \Joomla\CMS\Language\Text::_('CIMPORTUPLOAD') ?> <b>' + progress + '%</b>')
                     .removeClass('bar-success').removeClass('bar-warning');
             }
         });
 
         function updatebar(name) {
-            $.getJSON('<?php echo JUri::root(); ?>tmp/' + name + '.json', {dataType: 'json'}, function (data) {
+            $.getJSON('<?php echo \Joomla\CMS\Uri\Uri::root(); ?>tmp/' + name + '.json', {dataType: 'json'}, function (data) {
                 if (data.error) {
                     $('#progress').removeClass('active');
                     $('#progress2 .bar')
@@ -182,7 +182,7 @@ defined('_JEXEC') || die();
                 } else if (data.status >= 100) {
                     $('#progress2').removeClass('active');
                     $('#progress2 .bar')
-                        .text('<?php echo JText::_('CIMPORTANYLIZEFINISH') ?>')
+                        .text('<?php echo \Joomla\CMS\Language\Text::_('CIMPORTANYLIZEFINISH') ?>')
                         .css('width', '100%').removeClass('bar-warning')
                         .addClass('bar-success');
 

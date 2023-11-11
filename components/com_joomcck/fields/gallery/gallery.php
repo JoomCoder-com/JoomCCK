@@ -112,7 +112,7 @@ class JFormFieldCGallery extends CFormFieldUpload
         	overflow:hidden;
         }";
 
-		JFactory::getDocument()->addStyleDeclaration($style);
+		\Joomla\CMS\Factory::getDocument()->addStyleDeclaration($style);
 
 		$rel = '';
 		if($this->params->get('params.lightbox_click_' . $client, 0) == 0)
@@ -131,7 +131,7 @@ class JFormFieldCGallery extends CFormFieldUpload
 		$patern_img = '<div class="image-wrapper" style="background-image:url(\'%s\');"><a id="%d" title="%s" href="%s" ' . $rel . ' data-title="%s"><img class="image-element" src="%s" border="0" title="%s" alt="%s" /></a></div>';
 		$out        = array();
 
-		$dir = JComponentHelper::getParams('com_joomcck')->get('general_upload') . DIRECTORY_SEPARATOR . $this->params->get('params.subfolder', $this->field_type) . DIRECTORY_SEPARATOR;
+		$dir = \Joomla\CMS\Component\ComponentHelper::getParams('com_joomcck')->get('general_upload') . DIRECTORY_SEPARATOR . $this->params->get('params.subfolder', $this->field_type) . DIRECTORY_SEPARATOR;
 
 		foreach($this->value as $picture_index => $file)
 		{
@@ -262,7 +262,7 @@ class JFormFieldCGallery extends CFormFieldUpload
 				width:" . ($total_width + 1) . "px;
 		}";
 
-		JFactory::getDocument()->addStyleDeclaration($style);
+		\Joomla\CMS\Factory::getDocument()->addStyleDeclaration($style);
 
 	}
 
@@ -289,7 +289,7 @@ class JFormFieldCGallery extends CFormFieldUpload
 		$out          = array();
 		$widths       = array();
 
-		$dir = JComponentHelper::getParams('com_joomcck')->get('general_upload') . DIRECTORY_SEPARATOR . $this->params->get('params.subfolder', $this->field_type) . DIRECTORY_SEPARATOR;
+		$dir = \Joomla\CMS\Component\ComponentHelper::getParams('com_joomcck')->get('general_upload') . DIRECTORY_SEPARATOR . $this->params->get('params.subfolder', $this->field_type) . DIRECTORY_SEPARATOR;
 
 		foreach($pictures as $picture_index => $file)
 		{
@@ -351,7 +351,7 @@ class JFormFieldCGallery extends CFormFieldUpload
 		$this->_init();
 		$this->_getRecord($post['record_id']);
 
-		$dir = JComponentHelper::getParams('com_joomcck')->get('general_upload') . DIRECTORY_SEPARATOR . $this->params->get('params.subfolder', $this->field_type) . DIRECTORY_SEPARATOR;
+		$dir = \Joomla\CMS\Component\ComponentHelper::getParams('com_joomcck')->get('general_upload') . DIRECTORY_SEPARATOR . $this->params->get('params.subfolder', $this->field_type) . DIRECTORY_SEPARATOR;
 		$f_key = $this->id . '-' . $this->record->id;
 
 
@@ -400,19 +400,19 @@ class JFormFieldCGallery extends CFormFieldUpload
 
 		if(!isset($post['image_index']))
 		{
-			AjaxHelper::error(JText::_('G_NOIMAGEINDEX'));
+			AjaxHelper::error(\Joomla\CMS\Language\Text::_('G_NOIMAGEINDEX'));
 
 			return;
 		}
 
 		if(!isset($this->value[$post['image_index']]['id']))
 		{
-			AjaxHelper::error(JText::_('G_IMAGENOTININDEX'));
+			AjaxHelper::error(\Joomla\CMS\Language\Text::_('G_IMAGENOTININDEX'));
 
 			return;
 		}
 
-		$this->user = JFactory::getUser();
+		$this->user = \Joomla\CMS\Factory::getUser();
 
 		$this->_getFile($this->value[$post['image_index']]['id']);
 		$this->_getRecord($post['record_id']);
@@ -436,33 +436,33 @@ class JFormFieldCGallery extends CFormFieldUpload
 		$this->_sort();
 		if(!isset($post['image_index']))
 		{
-			AjaxHelper::error(JText::_('G_NOIMAGEINDEX'));
+			AjaxHelper::error(\Joomla\CMS\Language\Text::_('G_NOIMAGEINDEX'));
 
 			return;
 		}
 
 		if(!isset($post['type']))
 		{
-			AjaxHelper::error(JText::_('G_SAVETYPENOTSET'));
+			AjaxHelper::error(\Joomla\CMS\Language\Text::_('G_SAVETYPENOTSET'));
 
 			return;
 		}
 
 		if(!isset($post['context']))
 		{
-			AjaxHelper::error(JText::_('G_CONTEXTNOTSET'));
+			AjaxHelper::error(\Joomla\CMS\Language\Text::_('G_CONTEXTNOTSET'));
 
 			return;
 		}
 
 		if(!isset($this->value[$post['image_index']]['id']))
 		{
-			AjaxHelper::error(JText::_('G_IMAGENOTININDEX'));
+			AjaxHelper::error(\Joomla\CMS\Language\Text::_('G_IMAGENOTININDEX'));
 
 			return;
 		}
 
-		$files_table = JTable::getInstance('Files', 'JoomcckTable');
+		$files_table = \Joomla\CMS\Table\Table::getInstance('Files', 'JoomcckTable');
 		$files_table->load($this->value[$post['image_index']]['id']);
 		$this->_getRecord($post['record_id']);
 
@@ -480,8 +480,8 @@ class JFormFieldCGallery extends CFormFieldUpload
 				$com             = array();
 				$author_delete   = $this->params->get('params.comment_author', 0);
 				$r_author_delete = $this->params->get('params.record_author', 0);
-				$user            = JFactory::getUser();
-				$date            = JFactory::getDate();
+				$user            = \Joomla\CMS\Factory::getUser();
+				$date            = \Joomla\CMS\Factory::getDate();
 				$com['ctime']    = $date->toSql();
 				$com['username'] = $user->get('username', 'guest');
 				$com['user_id']  = $user->get('id', 0);
@@ -515,11 +515,11 @@ class JFormFieldCGallery extends CFormFieldUpload
 
 				if($show_username)
 				{
-					$user_str = JText::sprintf('G_POSTEDBY', $com[$show_username], $date->format('Y-m-d'));
+					$user_str = \Joomla\CMS\Language\Text::sprintf('G_POSTEDBY', $com[$show_username], $date->format('Y-m-d'));
 				}
 				else
 				{
-					$user_str = JText::sprintf('G_POSTEDON', $date->format('Y-m-d'));
+					$user_str = \Joomla\CMS\Language\Text::sprintf('G_POSTEDON', $date->format('Y-m-d'));
 				}
 
 				$out = sprintf("{$avatar}%s<div class='commentUser'>%s</div>
@@ -539,23 +539,23 @@ class JFormFieldCGallery extends CFormFieldUpload
 
 		if(!isset($post['context']))
 		{
-			AjaxHelper::error(JText::_('G_NOCOMMENTINDEX'));
+			AjaxHelper::error(\Joomla\CMS\Language\Text::_('G_NOCOMMENTINDEX'));
 
 			return;
 		}
 
-		$user = JFactory::getUser();
+		$user = \Joomla\CMS\Factory::getUser();
 
 		if(!$user->get('id'))
 		{
-			AjaxHelper::error(JText::_('G_NOTAUTHORIZED'));
+			AjaxHelper::error(\Joomla\CMS\Language\Text::_('G_NOTAUTHORIZED'));
 
 			return;
 		}
 
 		$id = $post['context'];
 
-		$record_table = JTable::getInstance('Record', 'JoomcckTable');
+		$record_table = \Joomla\CMS\Table\Table::getInstance('Record', 'JoomcckTable');
 		$record_table->load($post['record_id']);
 
 		$file = $this->value[$post['image_index']];
@@ -566,7 +566,7 @@ class JFormFieldCGallery extends CFormFieldUpload
 
 		if(!$comment)
 		{
-			AjaxHelper::error(JText::_('G_COMMENTNOTFOUND'));
+			AjaxHelper::error(\Joomla\CMS\Language\Text::_('G_COMMENTNOTFOUND'));
 
 			return;
 		}
@@ -580,14 +580,14 @@ class JFormFieldCGallery extends CFormFieldUpload
 			return 1;
 		}
 
-		AjaxHelper::error(JText::_('G_NORIGHTSTODELETECOMMENT'));
+		AjaxHelper::error(\Joomla\CMS\Language\Text::_('G_NORIGHTSTODELETECOMMENT'));
 
 		return;
 	}
 
 	private function _getFile($id)
 	{
-		$this->file = JTable::getInstance('Files', 'JoomcckTable');
+		$this->file = \Joomla\CMS\Table\Table::getInstance('Files', 'JoomcckTable');
 		$this->file->load($id);
 	}
 
@@ -608,10 +608,10 @@ class JFormFieldCGallery extends CFormFieldUpload
 		if($this->file->user_id == $this->user->get('id') && $this->params->get('params.allow_edit_title', 0))
 		{
 			$titlebox = sprintf('<div id="titlebox"><span id="titletextspan">%s</span> <a href="javascript:void(0);" onclick="gb' . $this->id . '_' . $this->record->id . '.editTitle()">%s</a></div>', $titlebox,
-				JHtml::image(JURI::root() . 'media/com_joomcck/icons/16/sticky-note--pencil.png', JText::_('G_EDIT'), array('align' => 'absmiddle')));
+				\Joomla\CMS\HTML\HTMLHelper::image(JURI::root() . 'media/com_joomcck/icons/16/sticky-note--pencil.png', \Joomla\CMS\Language\Text::_('G_EDIT'), array('align' => 'absmiddle')));
 			$titlebox .= '<div id="titleedit" class="disactiveInput">
     	    	<input id="savetitletext" class="form-control" value="">
-        	    <a href="javascript:void(0);" onclick="gb' . $this->id . '_' . $this->record->id . '.saveTitle();">' . JHtml::image(JURI::root() . 'media/com_joomcck/icons/16/disk.png', JText::_('G_SAVE'), array('align' => 'absmiddle')) . '</a></div>';
+        	    <a href="javascript:void(0);" onclick="gb' . $this->id . '_' . $this->record->id . '.saveTitle();">' . \Joomla\CMS\HTML\HTMLHelper::image(JURI::root() . 'media/com_joomcck/icons/16/disk.png', \Joomla\CMS\Language\Text::_('G_SAVE'), array('align' => 'absmiddle')) . '</a></div>';
 		}
 		$avatar = '';
 		if($this->params->get('params.show_avatar', 0))
@@ -638,12 +638,12 @@ class JFormFieldCGallery extends CFormFieldUpload
 		if($this->file->user_id == $this->user->get('id'))
 		{
 			$description = '<div id="descrbox"><span id="descrtextspan">' . $description . '</span>
-	        	<a href="javascript:void(0);" onclick="Gallerybox.editDescription();">' . JText::_('G_EDIT') . '</a></div>
+	        	<a href="javascript:void(0);" onclick="Gallerybox.editDescription();">' . \Joomla\CMS\Language\Text::_('G_EDIT') . '</a></div>
 
 	        	<div id="descredit" class="disactiveInput">
     	    		<input id="savedescrtext" class="form-control" size="40">
         	    	<a href="javascript:void(0);" onclick="Gallerybox.saveDescription();">
-        	    		' . JText::_('G_SAVE') . '
+        	    		' . \Joomla\CMS\Language\Text::_('G_SAVE') . '
         	    	</a>
         		</div>
         	';
@@ -666,11 +666,11 @@ class JFormFieldCGallery extends CFormFieldUpload
 		{
 			$author_delete   = $this->params->get('params.comment_author', 0);
 			$r_author_delete = $this->params->get('params.record_author', 0);
-			$user            = JFactory::getUser();
+			$user            = \Joomla\CMS\Factory::getUser();
 
 			foreach($comments as $key => $comment)
 			{
-				$date = JFactory::getDate($comment->ctime);
+				$date = \Joomla\CMS\Factory::getDate($comment->ctime);
 				$date = $date->format('Y-m-d');
 
 				$delete_link = "<a href='javascript:void(0);' class=\"delete-comment\" onclick='gb" . $this->id . '_' . $this->record->id . ".deleteComment({$key});'></a>";
@@ -695,11 +695,11 @@ class JFormFieldCGallery extends CFormFieldUpload
 
 				if($show_username)
 				{
-					$user_str = JText::sprintf('G_POSTEDBY', $comment->$show_username, $date);
+					$user_str = \Joomla\CMS\Language\Text::sprintf('G_POSTEDBY', $comment->$show_username, $date);
 				}
 				else
 				{
-					$user_str = JText::sprintf('G_POSTEDON', $date);
+					$user_str = \Joomla\CMS\Language\Text::sprintf('G_POSTEDON', $date);
 				}
 
 				$comment_li[$key] = sprintf("<li id='comment{$key}'>{$avatar}" . ($delete ? $delete_link : '') . "
@@ -716,8 +716,8 @@ class JFormFieldCGallery extends CFormFieldUpload
 		if(in_array($this->params->get('params.allow_comments'), $this->user->getAuthorisedViewLevels()))
 		{
 			return '<textarea id="savecommenttext" class="form-control"></textarea>
-				<a class="btn btn-sm btn-light border" href="javascript:void(0);" onclick="if($(\'savecommenttext\').value == \'\'){alert(\'' . JText::_('CCOMMENT_EMPTY') . '\');return false;}gb' . $this->id . '_' . $this->record->id . '.saveComment();">
-        	    ' . JText::_('G_SAVE') . '</a>';
+				<a class="btn btn-sm btn-light border" href="javascript:void(0);" onclick="if($(\'savecommenttext\').value == \'\'){alert(\'' . \Joomla\CMS\Language\Text::_('CCOMMENT_EMPTY') . '\');return false;}gb' . $this->id . '_' . $this->record->id . '.saveComment();">
+        	    ' . \Joomla\CMS\Language\Text::_('G_SAVE') . '</a>';
 		}
 		else
 		{
@@ -727,7 +727,7 @@ class JFormFieldCGallery extends CFormFieldUpload
 
 	private function _getLatLng()
 	{
-		$data = new JRegistry();
+		$data = new \Joomla\Registry\Registry();
 		$exif = json_decode($this->file->params, TRUE);
 
 		if(!isset($exif["GPSLatitudeRef"]))
@@ -772,65 +772,65 @@ class JFormFieldCGallery extends CFormFieldUpload
 	{
 		// 	    if(!$this->file->params) return;
 
-		$data = new JRegistry($this->file->params);
+		$data = new \Joomla\Registry\Registry($this->file->params);
 		// 	    $data->loadJSON($this->file->params);
-		$user = JFactory::getUser();
+		$user = \Joomla\CMS\Factory::getUser();
 		$td   = $out = array();
 
-		$td[JText::_('G_SIZE')] = $this->file->width . 'x' . $this->file->height . ' (' . HTMLFormatHelper::formatSize($this->file->size) . ')';
+		$td[\Joomla\CMS\Language\Text::_('G_SIZE')] = $this->file->width . 'x' . $this->file->height . ' (' . HTMLFormatHelper::formatSize($this->file->size) . ')';
 		if($this->params->get('params.count_views'))
 		{
-			$td[JText::_('G_VIEWS')] = (int)$this->file->views;
+			$td[\Joomla\CMS\Language\Text::_('G_VIEWS')] = (int)$this->file->views;
 		}
 
 		if(in_array($this->params->get('params.allow_download'), $user->getAuthorisedViewLevels()))
 		{
-			$td[JText::_('G_DOWNLOADS')] = $this->file->hits;
+			$td[\Joomla\CMS\Language\Text::_('G_DOWNLOADS')] = $this->file->hits;
 		}
 		if($data->get('Make'))
 		{
-			$td[JText::_('G_DEVICE')] = $data->get('Make') . ' ' . $data->get('Model');
+			$td[\Joomla\CMS\Language\Text::_('G_DEVICE')] = $data->get('Make') . ' ' . $data->get('Model');
 		}
 
 		if($data->get('FileDateTime'))
 		{
-			$td[JText::_('G_CREATED')] = date('Y-m-d', $data->get('FileDateTime'));
+			$td[\Joomla\CMS\Language\Text::_('G_CREATED')] = date('Y-m-d', $data->get('FileDateTime'));
 		}
 
 		if($data->get('COMPUTED.ApertureFNumber'))
 		{
-			$td[JText::_('G_APERTURE')] = $data->get('COMPUTED.ApertureFNumber');
+			$td[\Joomla\CMS\Language\Text::_('G_APERTURE')] = $data->get('COMPUTED.ApertureFNumber');
 		}
 		if($data->get('ExposureTime'))
 		{
 			$fl                             = explode('/', $data->get('ExposureTime'));
-			$td[JText::_('G_EXPOSURETIME')] = round(($fl[0] / $fl[1]) * 1000, 2) . ' s';
+			$td[\Joomla\CMS\Language\Text::_('G_EXPOSURETIME')] = round(($fl[0] / $fl[1]) * 1000, 2) . ' s';
 		}
 		if($data->get('ShutterSpeedValue'))
 		{
 			$fl                             = explode('/', $data->get('ShutterSpeedValue'));
-			$td[JText::_('G_SHUTTERSPEED')] = round(($fl[0] / $fl[1]), 2);
+			$td[\Joomla\CMS\Language\Text::_('G_SHUTTERSPEED')] = round(($fl[0] / $fl[1]), 2);
 		}
 		if($data->get('FocalLength'))
 		{
 			$fl                            = explode('/', $data->get('FocalLength'));
-			$td[JText::_('G_FOCALLENGTH')] = $fl[0] / $fl[1] . ' mm';
+			$td[\Joomla\CMS\Language\Text::_('G_FOCALLENGTH')] = $fl[0] / $fl[1] . ' mm';
 		}
 		if($data->get('BrightnessValue'))
 		{
 			$fl                           = explode('/', $data->get('BrightnessValue'));
-			$td[JText::_('G_BRIGHTNESS')] = round(($fl[0] / $fl[1]), 2);
+			$td[\Joomla\CMS\Language\Text::_('G_BRIGHTNESS')] = round(($fl[0] / $fl[1]), 2);
 		}
 		if($data->get('ISOSpeedRatings'))
 		{
-			$td[JText::_('G_ISOSPEED')] = $data->get('ISOSpeedRatings');
+			$td[\Joomla\CMS\Language\Text::_('G_ISOSPEED')] = $data->get('ISOSpeedRatings');
 		}
 
-		$td[JText::_('Flash Used')] = ($data->get('Flash') ? JText::_('Yes') : JText::_('No'));
+		$td[\Joomla\CMS\Language\Text::_('Flash Used')] = ($data->get('Flash') ? \Joomla\CMS\Language\Text::_('Yes') : \Joomla\CMS\Language\Text::_('No'));
 
 		if($data->get('XResolution'))
 		{
-			//$td[JText::_('G_RESOLUTION')] = (int)$data->get('XResolution').'x'.(int)$data->get('YResolution');
+			//$td[\Joomla\CMS\Language\Text::_('G_RESOLUTION')] = (int)$data->get('XResolution').'x'.(int)$data->get('YResolution');
 		}
 
 		$out[] = '<table class="tbl" align="center" width="100%">';
@@ -856,14 +856,14 @@ class JFormFieldCGallery extends CFormFieldUpload
 
 	private function _getDownloadLink()
 	{
-		$user = JFactory::getUser();
+		$user = \Joomla\CMS\Factory::getUser();
 		if(!in_array($this->params->get('params.allow_download', 1), $user->getAuthorisedViewLevels()))
 		{
 			return '';
 		}
 		$link  = $this->getDownloadUrl($this->record, $this->file, 0);
 		$out[] = '<div class="download-button"><img src="' . JURI::root(TRUE) . '/media/com_joomcck/icons/16/disk.png" alt="Download" />';
-		$out[] = '<a href="' . $link . '">' . JText::_('G_DOWNLOAD');
+		$out[] = '<a href="' . $link . '">' . \Joomla\CMS\Language\Text::_('G_DOWNLOAD');
 		$out[] = sprintf('<div>%dx%d (%s)</div>', $this->file->width, $this->file->height, HTMLFormatHelper::formatSize($this->file->size));
 		$out[] = '</a></div>';
 
@@ -884,11 +884,11 @@ class JFormFieldCGallery extends CFormFieldUpload
 			if($this->params->get('params.show_mode', 'gallerybox') == 'gallerybox')
 			{
 				MapHelper::loadGoogleMapAPI();
-				JFactory::getDocument()->addScript(JURI::root(TRUE) . '/components/com_joomcck/fields/gallery/gallerybox/gallerybox.js');
+				\Joomla\CMS\Factory::getDocument()->addScript(JURI::root(TRUE) . '/components/com_joomcck/fields/gallery/gallerybox/gallerybox.js');
 				RatingHelp::loadFile();
-				JFactory::getDocument()->addStyleSheet(JURI::root(TRUE) . '/components/com_joomcck/fields/gallery/gallerybox/gallerybox.css');
-				JFactory::getDocument()->addStyleSheet(JURI::root(TRUE) . '/components/com_joomcck/fields/gallery/gallerybox/gallerybox-' . $this->params->get('params.theme', 'Dark') . '.css');
-				JFactory::getDocument()->addScriptDeclaration('
+				\Joomla\CMS\Factory::getDocument()->addStyleSheet(JURI::root(TRUE) . '/components/com_joomcck/fields/gallery/gallerybox/gallerybox.css');
+				\Joomla\CMS\Factory::getDocument()->addStyleSheet(JURI::root(TRUE) . '/components/com_joomcck/fields/gallery/gallerybox/gallerybox-' . $this->params->get('params.theme', 'Dark') . '.css');
+				\Joomla\CMS\Factory::getDocument()->addScriptDeclaration('
 	    	    	jQuery(document).ready(function(){
 		    	    	gb' . $this->id . '_' . $this->record->id . ' = new Gallerybox(
 		    	    		{
@@ -900,8 +900,8 @@ class JFormFieldCGallery extends CFormFieldUpload
 	    	    				show_location:' . $this->params->get('params.show_location', 1) . ',
 	    	    				show_rate:' . $show_rate . ',
 	    	    				texts:{
-									counter:"' . JText::_('CCOUNTER') . '",
-	    	    					sure: "' . JText::_('CSURE') . '"
+									counter:"' . \Joomla\CMS\Language\Text::_('CCOUNTER') . '",
+	    	    					sure: "' . \Joomla\CMS\Language\Text::_('CSURE') . '"
 	    						}
 	    	    			}
 	    	    		);
@@ -910,19 +910,19 @@ class JFormFieldCGallery extends CFormFieldUpload
 			}
 			else
 			{
-				JHtml::_('lightbox.init', $this->id);
+				\Joomla\CMS\HTML\HTMLHelper::_('lightbox.init', $this->id);
 			}
 		}
 
-		$this->path = JPATH_ROOT . DIRECTORY_SEPARATOR . JComponentHelper::getParams('com_joomcck')->get('general_upload') . DIRECTORY_SEPARATOR . 'thumbs_cache' . DIRECTORY_SEPARATOR;
-		if(!JFolder::exists($this->path))
+		$this->path = JPATH_ROOT . DIRECTORY_SEPARATOR . \Joomla\CMS\Component\ComponentHelper::getParams('com_joomcck')->get('general_upload') . DIRECTORY_SEPARATOR . 'thumbs_cache' . DIRECTORY_SEPARATOR;
+		if(!\Joomla\CMS\Filesystem\Folder::exists($this->path))
 		{
-			JFolder::create($this->path, 0755);
+			\Joomla\CMS\Filesystem\Folder::create($this->path, 0755);
 			$index = '<html><body></body></html>';
-			JFile::write($this->path . DIRECTORY_SEPARATOR . 'index.html', $index);
+			\Joomla\CMS\Filesystem\File::write($this->path . DIRECTORY_SEPARATOR . 'index.html', $index);
 		}
 
-		$root      = JPath::clean(JComponentHelper::getParams('com_joomcck')->get('general_upload'));
+		$root      = JPath::clean(\Joomla\CMS\Component\ComponentHelper::getParams('com_joomcck')->get('general_upload'));
 		$url       = str_replace(JPATH_ROOT, '', $root);
 		$url       = str_replace("\\", '/', $url);
 		$url       = preg_replace('#^\/#iU', '', $url);

@@ -15,8 +15,8 @@ class JFormFieldCRadio extends CFormFieldSelectable
 	public function getInput()
 	{
 		$params = $this->params;
-		$doc = JFactory::getDocument();
-		$user = JFactory::getUser();
+		$doc = \Joomla\CMS\Factory::getDocument();
+		$user = \Joomla\CMS\Factory::getUser();
 
 
 		$values = array();
@@ -59,7 +59,7 @@ class JFormFieldCRadio extends CFormFieldSelectable
 
 		if($this->required)
 		{
-			$js .= "\n\t\tif(!rdo{$this->id}){hfid.push({$this->id}); isValid = false; errorText.push('".addslashes(JText::sprintf("CFIELDREQUIRED", $this->label))."');}";
+			$js .= "\n\t\tif(!rdo{$this->id}){hfid.push({$this->id}); isValid = false; errorText.push('".addslashes(\Joomla\CMS\Language\Text::sprintf("CFIELDREQUIRED", $this->label))."');}";
 		}
 		return $js;
 	}

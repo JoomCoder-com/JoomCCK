@@ -24,20 +24,20 @@ $readonly = ($default && $this->params->get('params.label_change')) ? '' : 'read
 <div class="clearfix"></div>
 <button class="btn btn-outline-success" type="button" id="add-url<?php echo $this->id; ?>">
 	<i class="fas fa-plus"></i>
-	<?php echo JText::_('U_ADDURL'); ?>
+	<?php echo \Joomla\CMS\Language\Text::_('U_ADDURL'); ?>
 </button>
 
 
 <script type="text/javascript">
 	var URL<?php echo $this->id;?> = new joomcckUrlField({
 		limit: <?php echo (int)($params->get('params.limit') ? $params->get('params.limit') : 0);?>,
-		limit_alert: '<?php echo addslashes(JText::sprintf("U_REACHEDLIMIT", (int)($params->get('params.limit') ? $params->get('params.limit') : 1)));?>',
+		limit_alert: '<?php echo addslashes(\Joomla\CMS\Language\Text::sprintf("U_REACHEDLIMIT", (int)($params->get('params.limit') ? $params->get('params.limit') : 1)));?>',
 		id: <?php echo $this->id;?>,
 		labels: <?php echo (int)$this->params->get('params.label');?>,
 		labels_change: <?php echo (int)$this->params->get('params.label_change');?>,
 		default_labels: new Array('<?php echo implode("','", $labels)?>'),
-		label1: '<?php echo JText::_('U_URL');?>',
-		label2: '<?php echo JText::_('U_LABEL');?>'
+		label1: '<?php echo \Joomla\CMS\Language\Text::_('U_URL');?>',
+		label2: '<?php echo \Joomla\CMS\Language\Text::_('U_LABEL');?>'
 	});
 	<?php foreach($default as $i => $url_): ?>
 	<?php

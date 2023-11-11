@@ -16,9 +16,9 @@ class JoomcckViewRecords extends MViewBase
 {
 	function display($tpl = null)
 	{
-		$app = JFactory::getApplication();
-		$doc = JFactory::getDocument();
-		$user = JFactory::getUser();
+		$app = \Joomla\CMS\Factory::getApplication();
+		$doc = \Joomla\CMS\Factory::getDocument();
+		$user = \Joomla\CMS\Factory::getUser();
 		$model = $this->getModel();
 
 		$section_id = $app->input->getInt('section_id', 0);
@@ -33,7 +33,7 @@ class JoomcckViewRecords extends MViewBase
 
 		if(!$app->input->getInt('section_id'))
 		{
-			JFactory::getApplication()->enqueueMessage(JText::_('CNOSECTION'),'warning');
+			\Joomla\CMS\Factory::getApplication()->enqueueMessage(\Joomla\CMS\Language\Text::_('CNOSECTION'),'warning');
 			return;
 		}
 
@@ -43,13 +43,13 @@ class JoomcckViewRecords extends MViewBase
 		if ($section->published == 0)
 		{
 
-			Factory::getApplication()->enqueueMessage( JText::_('CERR_SECTIONUNPUB'),'warning');
+			Factory::getApplication()->enqueueMessage( \Joomla\CMS\Language\Text::_('CERR_SECTIONUNPUB'),'warning');
 			return;
 		}
 
 		if(!in_array($section->access, $user->getAuthorisedViewLevels()))
 		{
-			Factory::getApplication()->enqueueMessage( JText::_($section->params->get('general.access_msg')),'warning');
+			Factory::getApplication()->enqueueMessage( \Joomla\CMS\Language\Text::_($section->params->get('general.access_msg')),'warning');
 
 			return;
 		}
@@ -74,10 +74,10 @@ class JoomcckViewRecords extends MViewBase
 			if($category->id && ($category->section_id != $section->id))
 			{
 
-				Factory::getApplication()->enqueueMessage(JText::_('CCATWRONGSECTION'),'warning');
+				Factory::getApplication()->enqueueMessage(\Joomla\CMS\Language\Text::_('CCATWRONGSECTION'),'warning');
 				$category = $this->models['category']->getEmpty();
 			}
-			JFactory::getApplication()->input->set('cat_id', $category->id);
+			\Joomla\CMS\Factory::getApplication()->input->set('cat_id', $category->id);
 		}
 		$this->category = $category;
 
@@ -87,10 +87,10 @@ class JoomcckViewRecords extends MViewBase
 		$app->input->setr('limit', $app->getCfg('feed_limit'));
 		$feedEmail	= (@$app->getCfg('feed_email')) ? $app->getCfg('feed_email') : 'author';
 
-		$link = JRoute::_(Url::records($section, $category->id));
-		$doc->link = $this->escape(JRoute::_($link));
+		$link = \Joomla\CMS\Router\Route::_(Url::records($section, $category->id));
+		$doc->link = $this->escape(\Joomla\CMS\Router\Route::_($link));
 		$doc->title = $section->name;
-		$doc->description = JText::sprintf('CRSSFEEDRECORDS', $section->name);
+		$doc->description = \Joomla\CMS\Language\Text::sprintf('CRSSFEEDRECORDS', $section->name);
 
 		foreach ($items as $row)
 		{
@@ -100,7 +100,7 @@ class JoomcckViewRecords extends MViewBase
 			$title = $this->escape($row->title);
 			$title = html_entity_decode($title, ENT_COMPAT, 'UTF-8');
 
-			$url = $this->escape(JRoute::_(Url::record($row, $type, $section)));
+			$url = $this->escape(\Joomla\CMS\Router\Route::_(Url::record($row, $type, $section)));
 			
 			$description = array();
 			$fields = $fields_model->getRecordFields($row, 'feed');
@@ -119,7 +119,7 @@ class JoomcckViewRecords extends MViewBase
 
 			$description = '<table>'.implode(" ", $description).'</table>';
 			$author			= CCommunityHelper::getName($row->user_id, $row->section_id, array('nohtml' => 1));
-			$date			= JFactory::getDate($row->ctime)->toISO8601();
+			$date			= \Joomla\CMS\Factory::getDate($row->ctime)->toISO8601();
 
 			// load individual item creator class
 			$item = new JFeedItem();
@@ -135,7 +135,7 @@ class JoomcckViewRecords extends MViewBase
 				$item->authorEmail = $app->getCfg('mailfrom');
 			}
 			else {
-				$item->authorEmail = JFactory::getUser($row->user_id)->get('email');
+				$item->authorEmail = \Joomla\CMS\Factory::getUser($row->user_id)->get('email');
 			}
 
 			// loads item info into rss array

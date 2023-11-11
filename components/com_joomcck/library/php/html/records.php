@@ -31,7 +31,7 @@ abstract class JHtmlRecords
 		$state	= \Joomla\Utilities\ArrayHelper::getValue($states, (int) $value, $states[1]);
 
 		if ($canChange) {
-			$html	= '<a href="#" class="btn btn-micro" onclick="return Joomla.listItemTask(\'cb'.$i.'\',\''.$state[1].'\')" rel="tooltip" data-bs-title="'.JText::_($state[2]).'">'
+			$html	= '<a href="#" class="btn btn-micro" onclick="return Joomla.listItemTask(\'cb'.$i.'\',\''.$state[1].'\')" rel="tooltip" data-bs-title="'.\Joomla\CMS\Language\Text::_($state[2]).'">'
 					. $state[0].'</a>';
 		}
 

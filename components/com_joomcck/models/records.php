@@ -37,8 +37,8 @@ class JoomcckModelRecords extends MModelList
 
 	public function populateState($ordering = NULL, $direction = NULL)
 	{
-		//$app = JFactory::getApplication('administrator');
-		$app    = JFactory::getApplication('site');
+		//$app = \Joomla\CMS\Factory::getApplication('administrator');
+		$app    = \Joomla\CMS\Factory::getApplication('site');
 		$filter = JFilterInput::getInstance();
 		$key    = FilterHelper::key();
 
@@ -165,9 +165,9 @@ class JoomcckModelRecords extends MModelList
 
 	public function getListQuery()
 	{
-		$app       = JFactory::getApplication();
+		$app       = \Joomla\CMS\Factory::getApplication();
 		$db        = $this->getDbo();
-		$user      = JFactory::getUser();
+		$user      = \Joomla\CMS\Factory::getUser();
 		$total     = $this->total;
 		$view_what = $app->input->get('view_what');
 
@@ -242,7 +242,7 @@ class JoomcckModelRecords extends MModelList
 				//$query->where('r.featured IN (0,1)');
 			}
 
-			$field_orders = JFactory::getApplication()->getUserState($this->context . '.ordering.vals' . $this->section->id);
+			$field_orders = \Joomla\CMS\Factory::getApplication()->getUserState($this->context . '.ordering.vals' . $this->section->id);
 
 			if($this->state->get('records.ordering'))
 			{
@@ -380,7 +380,7 @@ class JoomcckModelRecords extends MModelList
 	private function _showRecords()
 	{
 		$show = FALSE;
-		$app  = JFactory::getApplication();
+		$app  = \Joomla\CMS\Factory::getApplication();
 
 		if(!$app->input->getInt('cat_id'))
 		{
@@ -434,7 +434,7 @@ class JoomcckModelRecords extends MModelList
 
 		if(!$ids)
 		{
-			$db = JFactory::getDbo();
+			$db = \Joomla\CMS\Factory::getDbo();
 			$db->setQuery($sql);
 			$ids = $db->loadColumn();
 			$ids = array_unique($ids);
@@ -455,11 +455,11 @@ class JoomcckModelRecords extends MModelList
 
 	public function wherecategory(&$query)
 	{
-		$app       = JFactory::getApplication();
+		$app       = \Joomla\CMS\Factory::getApplication();
 		$cat       = $app->input->getInt('cat_id', NULL);
 		$view_what = $app->input->get('view_what');
-		$user      = JFactory::getUser();
-		$db        = JFactory::getDbo();
+		$user      = \Joomla\CMS\Factory::getUser();
+		$db        = \Joomla\CMS\Factory::getDbo();
 
 		if(!empty($this->worns['cats']))
 		{
@@ -498,7 +498,7 @@ class JoomcckModelRecords extends MModelList
 
 				if(!$res)
 				{
-					throw new Exception( JText::sprintf('CERR_NOCATEGORY', $cat),100);
+					throw new Exception( \Joomla\CMS\Language\Text::sprintf('CERR_NOCATEGORY', $cat),100);
 				}
 
 				$cat_sql = "SELECT id FROM `#__js_res_categories`
@@ -549,7 +549,7 @@ class JoomcckModelRecords extends MModelList
 			return;
 		}
 
-		$app = JFactory::getApplication();
+		$app = \Joomla\CMS\Factory::getApplication();
 
 		$filters = $this->getFilters();
 		$ids     = array();
@@ -592,11 +592,11 @@ class JoomcckModelRecords extends MModelList
 
 	public function where($query)
 	{
-		$app          = JFactory::getApplication();
+		$app          = \Joomla\CMS\Factory::getApplication();
 		$view_what    = $app->input->get('view_what');
 		$total        = $this->total;
-		$db           = JFactory::getDbo();
-		$user         = JFactory::getUser();
+		$db           = \Joomla\CMS\Factory::getDbo();
+		$user         = \Joomla\CMS\Factory::getUser();
 		$user_id      = $app->input->getInt('user_id', NULL);
 		$isme         = ((int)$user_id === (int)$user->get('id', NULL) && $user_id);
 		$filters      = TRUE;
@@ -689,25 +689,25 @@ class JoomcckModelRecords extends MModelList
 
 		if($view_what == 'only_future')
 		{
-			$query->where("r.ctime > " . $db->quote(JFactory::getDate()->toSql()));
+			$query->where("r.ctime > " . $db->quote(\Joomla\CMS\Factory::getDate()->toSql()));
 		}
 		elseif(!in_array($this->section->params->get('general.show_future_records'), $user->getAuthorisedViewLevels()) || $view_what == 'only_expired')
 		{
-			$query->where("r.ctime < " . $db->quote(JFactory::getDate()->toSql()));
+			$query->where("r.ctime < " . $db->quote(\Joomla\CMS\Factory::getDate()->toSql()));
 		}
 
 		if($view_what == 'only_expired')
 		{
-			$query->where("(r.extime != '0000-00-00 00:00:00' AND r.extime < '" . JFactory::getDate()->toSql() . "')");
+			$query->where("(r.extime != '0000-00-00 00:00:00' AND r.extime < '" . \Joomla\CMS\Factory::getDate()->toSql() . "')");
 		}
 		elseif($view_what == 'expired')
 		{
-			$query->where("(r.extime != '0000-00-00 00:00:00' AND r.extime < '" . JFactory::getDate()->toSql() . "')");
+			$query->where("(r.extime != '0000-00-00 00:00:00' AND r.extime < '" . \Joomla\CMS\Factory::getDate()->toSql() . "')");
 			$user_id = $user->get('id');
 		}
 		elseif(!in_array($this->section->params->get('general.show_past_records'), $user->getAuthorisedViewLevels()) || $view_what == 'exclude_expired')
 		{
-			$query->where("(r.extime = '0000-00-00 00:00:00' OR ISNULL(extime) OR r.extime > '" . JFactory::getDate()->toSql() . "')");
+			$query->where("(r.extime = '0000-00-00 00:00:00' OR ISNULL(extime) OR r.extime > '" . \Joomla\CMS\Factory::getDate()->toSql() . "')");
 		}
 
 		if($view_what == 'children')
@@ -745,7 +745,7 @@ class JoomcckModelRecords extends MModelList
 			$query->where('r.published = 0');
 
 			$dummy         = new stdClass();
-			$dummy->params = new JRegistry();
+			$dummy->params = new \Joomla\Registry\Registry();
 
 			if(MECAccess::allowPublish(NULL, $dummy, $this->section))
 			{
@@ -763,7 +763,7 @@ class JoomcckModelRecords extends MModelList
 
 		if($this->section->params->get('general.lang_mode') && $include_lang)
 		{
-			$lang = JFactory::getLanguage();
+			$lang = \Joomla\CMS\Factory::getLanguage();
 			$query->where('r.langs = ' . $db->quote($lang->getTag()));
 		}
 
@@ -799,29 +799,29 @@ class JoomcckModelRecords extends MModelList
 
 		if($view_what == 'follow')
 		{
-			$query->where('r.id IN(SELECT ref_id FROM #__js_res_subscribe WHERE user_id = ' . JFactory::getUser($app->input->getInt('user_id'))->get('id') . ' AND section_id = ' . $this->section->id . ' AND `type` = \'record\')');
+			$query->where('r.id IN(SELECT ref_id FROM #__js_res_subscribe WHERE user_id = ' . \Joomla\CMS\Factory::getUser($app->input->getInt('user_id'))->get('id') . ' AND section_id = ' . $this->section->id . ' AND `type` = \'record\')');
 			$user_id = NULL;
 		}
 
 		if($view_what == 'visited')
 		{
-			$query->where('r.id IN(SELECT record_id FROM #__js_res_hits WHERE user_id = ' . JFactory::getUser($app->input->getInt('user_id'))->get('id') . ' AND section_id = ' . $this->section->id . ')');
+			$query->where('r.id IN(SELECT record_id FROM #__js_res_hits WHERE user_id = ' . \Joomla\CMS\Factory::getUser($app->input->getInt('user_id'))->get('id') . ' AND section_id = ' . $this->section->id . ')');
 			$user_id = NULL;
 		}
 
 		if($view_what == 'commented')
 		{
-			$query->where('r.id IN(SELECT record_id FROM #__js_res_comments WHERE user_id = ' . JFactory::getUser($app->input->getInt('user_id'))->get('id') . ' AND section_id = ' . $this->section->id . ')');
+			$query->where('r.id IN(SELECT record_id FROM #__js_res_comments WHERE user_id = ' . \Joomla\CMS\Factory::getUser($app->input->getInt('user_id'))->get('id') . ' AND section_id = ' . $this->section->id . ')');
 			$user_id = NULL;
 		}
 		if($view_what == 'rated')
 		{
-			$query->where('r.id IN(SELECT ref_id FROM #__js_res_vote WHERE user_id = ' . JFactory::getUser($app->input->getInt('user_id'))->get('id') . ' AND ref_type = \'record\' AND section_id = ' . $this->section->id . ')');
+			$query->where('r.id IN(SELECT ref_id FROM #__js_res_vote WHERE user_id = ' . \Joomla\CMS\Factory::getUser($app->input->getInt('user_id'))->get('id') . ' AND ref_type = \'record\' AND section_id = ' . $this->section->id . ')');
 			$user_id = NULL;
 		}
 		if($view_what == 'favorited')
 		{
-			$query->where('r.id IN(SELECT record_id FROM #__js_res_favorite WHERE user_id = ' . JFactory::getUser($app->input->getInt('user_id'))->get('id') . ' AND section_id = ' . $this->section->id . ')');
+			$query->where('r.id IN(SELECT record_id FROM #__js_res_favorite WHERE user_id = ' . \Joomla\CMS\Factory::getUser($app->input->getInt('user_id'))->get('id') . ' AND section_id = ' . $this->section->id . ')');
 			$user_id = NULL;
 		}
 
@@ -925,8 +925,8 @@ class JoomcckModelRecords extends MModelList
 
 		if($view_what == 'field_data')
 		{
-			$from_key  = JFactory::getApplication()->getUserState('com_joomcck.field.from');
-			$in_key    = JFactory::getApplication()->getUserState('com_joomcck.field.in');
+			$from_key  = \Joomla\CMS\Factory::getApplication()->getUserState('com_joomcck.field.from');
+			$in_key    = \Joomla\CMS\Factory::getApplication()->getUserState('com_joomcck.field.in');
 			$record_id = $app->input->getInt('id', $app->input->getInt('_rrid'));
 
 			if($in_key && $from_key && $record_id)
@@ -959,8 +959,8 @@ class JoomcckModelRecords extends MModelList
 
 		if($view_what == 'user_field_data')
 		{
-			$from_key = JFactory::getApplication()->getUserState('com_joomcck.field.from');
-			$in_key   = JFactory::getApplication()->getUserState('com_joomcck.field.in');
+			$from_key = \Joomla\CMS\Factory::getApplication()->getUserState('com_joomcck.field.from');
+			$in_key   = \Joomla\CMS\Factory::getApplication()->getUserState('com_joomcck.field.in');
 
 			if($in_key && $from_key)
 			{
@@ -1021,7 +1021,7 @@ class JoomcckModelRecords extends MModelList
 			$p_ne_lng = $data['lng'] + $dist;
 
 
-			$db  = JFactory::getDbo();
+			$db  = \Joomla\CMS\Factory::getDbo();
 			$sql = "SELECT record_id FROM #__js_res_record_values WHERE value_index = 'lat' AND field_value < " . $p_ne_lat . " AND field_value > " . $p_sw_lat;
 			$db->setQuery($sql);
 			$ids = $db->loadColumn();
@@ -1233,7 +1233,7 @@ class JoomcckModelRecords extends MModelList
 						$typelabels[] = $types[$t]->name;
 					}
 				}
-				$this->worns['type'] = WornHelper::getItem('filter_type', JText::_('CTYPEOF'), $type, implode(', ', $typelabels));
+				$this->worns['type'] = WornHelper::getItem('filter_type', \Joomla\CMS\Language\Text::_('CTYPEOF'), $type, implode(', ', $typelabels));
 			}
 			$query->where("r.type_id IN (" . implode(',', $type) . ")");
 		}
@@ -1290,7 +1290,7 @@ class JoomcckModelRecords extends MModelList
 		$search = $this->getState('records.search');
 		if($search)
 		{
-			$this->worns['search'] = WornHelper::getItem('filter_search', JText::_('CSEARCHTEXT'), $search);
+			$this->worns['search'] = WornHelper::getItem('filter_search', \Joomla\CMS\Language\Text::_('CSEARCHTEXT'), $search);
 
 			$search_mode = NULL;
 			$scount      = explode(" ", $search);
@@ -1357,7 +1357,7 @@ class JoomcckModelRecords extends MModelList
 		$alpha = $this->getState('records.alpha');
 		if($alpha)
 		{
-			$this->worns['alpha'] = WornHelper::getItem('filter_alpha', JText::_('CSTARTWITH'), $alpha);
+			$this->worns['alpha'] = WornHelper::getItem('filter_alpha', \Joomla\CMS\Language\Text::_('CSTARTWITH'), $alpha);
 			$query->where("r.title like '{$alpha}%'");
 		}
 
@@ -1368,9 +1368,9 @@ class JoomcckModelRecords extends MModelList
 			{
 				foreach($tag as $t)
 				{
-					$taglabels[] = JHtml::_('tags.name', $t);
+					$taglabels[] = \Joomla\CMS\HTML\HTMLHelper::_('tags.name', $t);
 				}
-				$this->worns['tags'] = WornHelper::getItem('filter_tag', JText::_('CTAGS'), $tag, implode(', ', $taglabels));
+				$this->worns['tags'] = WornHelper::getItem('filter_tag', \Joomla\CMS\Language\Text::_('CTAGS'), $tag, implode(', ', $taglabels));
 			}
 
 			$sql = "SELECT record_id from #__js_res_tags_history WHERE tag_id IN(" . implode(',', $db->quote($tag)) . ") AND section_id = {$this->section->id}";
@@ -1392,7 +1392,7 @@ class JoomcckModelRecords extends MModelList
 						'nohtml' => 1
 					));
 				}
-				$this->worns['users'] = WornHelper::getItem('filter_user', JText::_('CBYAUTHOR'), $users, implode(', ', $userlabels));
+				$this->worns['users'] = WornHelper::getItem('filter_user', \Joomla\CMS\Language\Text::_('CBYAUTHOR'), $users, implode(', ', $userlabels));
 			}
 			$query->where("r.user_id IN (" . implode(',', $users) . ")");
 			//$query->where("r.user_id = ".(int)$user);
@@ -1403,8 +1403,8 @@ class JoomcckModelRecords extends MModelList
 		{
 			if(!$total)
 			{
-				$catslabels          = JHtml::_('categories.labels', $cats);
-				$this->worns['cats'] = WornHelper::getItem('filter_cat', JText::_('CCATEGORIES'), $cats, $catslabels);
+				$catslabels          = \Joomla\CMS\HTML\HTMLHelper::_('categories.labels', $cats);
+				$this->worns['cats'] = WornHelper::getItem('filter_cat', \Joomla\CMS\Language\Text::_('CCATEGORIES'), $cats, $catslabels);
 			}
 
 			$sql = "SELECT record_id FROM #__js_res_record_category WHERE catid IN(" . implode(',', $cats) . ")";
@@ -1421,8 +1421,8 @@ class JoomcckModelRecords extends MModelList
 
 	public function getIds($sql)
 	{
-		$app = JFactory::getApplication();
-		$db  = JFactory::getDbo();
+		$app = \Joomla\CMS\Factory::getApplication();
+		$db  = \Joomla\CMS\Factory::getDbo();
 		$db->setQuery($sql);
 		$ids = $db->loadColumn();
 		$ids = \Joomla\Utilities\ArrayHelper::toInteger($ids);
@@ -1501,7 +1501,7 @@ class JoomcckModelRecords extends MModelList
 		{
 			require_once JPATH_ROOT . '/components/com_joomcck/fields/' . $filter->field_type . '/' . $filter->field_type . '.php';
 
-			$default           = JFactory::getApplication()->getUserState('com_joomcck.section' . FilterHelper::key() . '.filter_' . $filter->key);
+			$default           = \Joomla\CMS\Factory::getApplication()->getUserState('com_joomcck.section' . FilterHelper::key() . '.filter_' . $filter->key);
 			$name              = 'JFormFieldC' . ucfirst($filter->field_type);
 			$out[$filter->key] = new $name($filter, $default);
 		}
@@ -1566,7 +1566,7 @@ class JoomcckModelRecords extends MModelList
 		$types = \Joomla\Utilities\ArrayHelper::toInteger($types);
 		if(empty($types))
 		{
-			Factory::getApplication()->enqueueMessage(JText::_('CERRNOTYPESELECTED'),'warning');
+			Factory::getApplication()->enqueueMessage(\Joomla\CMS\Language\Text::_('CERRNOTYPESELECTED'),'warning');
 		}
 		$types[] = 0;
 
@@ -1581,10 +1581,10 @@ class JoomcckModelRecords extends MModelList
 
 		$out[$this->section->id] = array();
 		$key                     = FilterHelper::key();
-		$filter_types            = (array)JFactory::getApplication()->getUserState('com_joomcck.section' . $key . '.filter_type', array());
+		$filter_types            = (array)\Joomla\CMS\Factory::getApplication()->getUserState('com_joomcck.section' . $key . '.filter_type', array());
 		foreach($types as $type)
 		{
-			$type->params         = new JRegistry($type->params);
+			$type->params         = new \Joomla\Registry\Registry($type->params);
 			$type->filter_checked = NULL;
 			if(in_array($type->id, $filter_types))
 			{
@@ -1644,7 +1644,7 @@ class JoomcckModelRecords extends MModelList
 			return $types[$this->section->id];
 		}
 
-		$db = JFactory::getDbo();
+		$db = \Joomla\CMS\Factory::getDbo();
 
 		$query = $db->getQuery(TRUE);
 		$query->select('DISTINCT r.type_id');
@@ -1716,7 +1716,7 @@ class JoomcckModelRecords extends MModelList
 
 	private function _set_skiper($ids)
 	{
-		$app = JFactory::getApplication();
+		$app = \Joomla\CMS\Factory::getApplication();
 
 		$skipers = $app->getUserState('skipers.all', array());
 		settype($this->value, 'array');

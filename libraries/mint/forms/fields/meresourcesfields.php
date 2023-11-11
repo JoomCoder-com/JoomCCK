@@ -20,11 +20,11 @@ class JFormFieldMeresourcesfields extends JFormMEFieldList
 	protected function getOptions()
 	{
 		
-		JHtml::addIncludePath(JPATH_ROOT. DIRECTORY_SEPARATOR .'administrator'. DIRECTORY_SEPARATOR .'components'. DIRECTORY_SEPARATOR .'com_joomcck'. DIRECTORY_SEPARATOR .'library'. DIRECTORY_SEPARATOR .'php'. DIRECTORY_SEPARATOR .'html');
+		\Joomla\CMS\HTML\HTMLHelper::addIncludePath(JPATH_ROOT. DIRECTORY_SEPARATOR .'administrator'. DIRECTORY_SEPARATOR .'components'. DIRECTORY_SEPARATOR .'com_joomcck'. DIRECTORY_SEPARATOR .'library'. DIRECTORY_SEPARATOR .'php'. DIRECTORY_SEPARATOR .'html');
 		$key = ( $this->element['key'] ?  $this->element['key'] : 'key');
 		
 		$select = ($this->multiple || $this->element['multi']) ? false : true; 
-		$sections = JHtml::_('joomcck.types', $select, $this->element['filters'], $key, $this->element['client']);
+		$sections = \Joomla\CMS\HTML\HTMLHelper::_('joomcck.types', $select, $this->element['filters'], $key, $this->element['client']);
 		
 		return $sections;
 	}

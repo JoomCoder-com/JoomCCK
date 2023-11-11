@@ -19,13 +19,13 @@ class JFormFieldCountrylimit extends JFormFieldList
 
 	protected function getOptions()
 	{
-		$db = JFactory::getDbo();
+		$db = \Joomla\CMS\Factory::getDbo();
 		$query = 'SELECT id AS value, name AS text' .
 				' FROM #__js_res_country ORDER BY name ASC';
 		$db->setQuery($query);
 		$list = $db->loadObjectList();
 		
-		//$opt = JHtml::_('select.option', '', JText::_('CUNGROUPED'));
+		//$opt = \Joomla\CMS\HTML\HTMLHelper::_('select.option', '', \Joomla\CMS\Language\Text::_('CUNGROUPED'));
 		//array_unshift($list, $opt);
 		
 		return $list;

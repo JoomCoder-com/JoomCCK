@@ -105,11 +105,11 @@ class JFormFieldMEDirectories extends JFormMEFieldList
 			if(!$invite_label){
 				$invite_label = 'Do not use';
 			}
-			array_unshift($options, JHTML::_('select.option', '-1', '- '.JText::_($invite_label).' -'));
+			array_unshift($options, JHTML::_('select.option', '-1', '- '.\Joomla\CMS\Language\Text::_($invite_label).' -'));
 		}
 
 		if (!$this->element['hide_default']) {
-			array_unshift($options, JHTML::_('select.option', '', '- '.JText::_('Use default').' -'));
+			array_unshift($options, JHTML::_('select.option', '', '- '.\Joomla\CMS\Language\Text::_('Use default').' -'));
 		}
 
 		// Merge any additional options in the XML definition.
@@ -129,7 +129,7 @@ class JFormFieldMEDirectories extends JFormMEFieldList
 
 		// Is the path a folder?
 		if (!is_dir($path)) {
-			Factory::getApplication()->enqueueMessage(JText::_('Error: Directory element: Path is not a folder').' '.$path,'warning');
+			Factory::getApplication()->enqueueMessage(\Joomla\CMS\Language\Text::_('Error: Directory element: Path is not a folder').' '.$path,'warning');
 			return false;
 		}
 

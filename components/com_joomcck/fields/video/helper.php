@@ -18,7 +18,7 @@ class CVideoAdapterHelper
 		
 		if(! $adapters)
 		{
-			return JText::_('F_ADAPTERNOTSELECTED');
+			return \Joomla\CMS\Language\Text::_('F_ADAPTERNOTSELECTED');
 		}
 		
 		settype($adapters, 'array');
@@ -34,7 +34,7 @@ class CVideoAdapterHelper
 			}
 		}
 		
-		return JText::sprintf('F_UNKNOWNLINK', JHtml::link($url, $url));
+		return \Joomla\CMS\Language\Text::sprintf('F_UNKNOWNLINK', \Joomla\CMS\HTML\HTMLHelper::link($url, $url));
 	}
 
 	static public function constrain($object, $max_width)
@@ -165,7 +165,7 @@ class CVideoAdapterAbstarct
 		}
 		else
 		{
-			return JText::sprintf('Video not found by URL %s', $this->key);
+			return \Joomla\CMS\Language\Text::sprintf('Video not found by URL %s', $this->key);
 		}
 	}
 }

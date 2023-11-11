@@ -19,17 +19,17 @@ $wa->useScript('keepalive')
 		if(task == 'pack.cancel' || document.formvalidator.isValid(document.getElementById('item-form'))) {
 			Joomla.submitform(task, document.getElementById('item-form'));
 		} else {
-			alert('<?php echo $this->escape(JText::_('JGLOBAL_VALIDATION_FORM_FAILED'));?>');
+			alert('<?php echo $this->escape(\Joomla\CMS\Language\Text::_('JGLOBAL_VALIDATION_FORM_FAILED'));?>');
 		}
 	}
 </script>
 
 
-<form action="<?php echo JUri::getInstance()->toString(); ?>" method="post" name="adminForm" id="item-form" class="form-validate form-horizontal">
+<form action="<?php echo \Joomla\CMS\Uri\Uri::getInstance()->toString(); ?>" method="post" name="adminForm" id="item-form" class="form-validate form-horizontal">
 	<?php echo HTMLFormatHelper::layout('item', $this); ?>
 	<div class="page-header">
 		<h1>
-			<?php echo empty($this->item->id) ? JText::_('CNEWPACK') : JText::sprintf('CEDITPACK', $this->item->name); ?>
+			<?php echo empty($this->item->id) ? \Joomla\CMS\Language\Text::_('CNEWPACK') : \Joomla\CMS\Language\Text::sprintf('CEDITPACK', $this->item->name); ?>
 		</h1>
 	</div>
 
@@ -54,7 +54,7 @@ $wa->useScript('keepalive')
 		<?php echo $this->form->getInput('description'); ?>
 	</div>
 
-	<legend><?php echo JText::_('CPACKSETTINGS'); ?></legend>
+	<legend><?php echo \Joomla\CMS\Language\Text::_('CPACKSETTINGS'); ?></legend>
 	<div class="control-group">
 		<div class="control-label inline">
 			<?php echo $this->form->getLabel('user'); ?>
@@ -130,5 +130,5 @@ $wa->useScript('keepalive')
 
 	<input type="hidden" name="task" value=""/>
 	<input type="hidden" name="return" value="<?php echo $this->state->get('groups.return'); ?>"/>
-	<?php echo JHtml::_('form.token'); ?>
+	<?php echo \Joomla\CMS\HTML\HTMLHelper::_('form.token'); ?>
 </form>

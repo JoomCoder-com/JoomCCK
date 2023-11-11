@@ -13,7 +13,7 @@ class JoomcckViewSections extends MViewBase
 {
 	public function display($tpl = NULL)
 	{
-		JHtml::_('bootstrap.tooltip');
+		\Joomla\CMS\HTML\HTMLHelper::_('bootstrap.tooltip');
 
 		$uri          = \Joomla\CMS\Uri\Uri::getInstance();
 		$this->action = $uri->toString();
@@ -30,7 +30,7 @@ class JoomcckViewSections extends MViewBase
 
 		}
 
-		$this->addFilter(JText::_('JOPTION_SELECT_PUBLISHED'), 'filter_state', JHtml::_('select.options', JHtml::_('jgrid.publishedOptions', array(
+		$this->addFilter(\Joomla\CMS\Language\Text::_('JOPTION_SELECT_PUBLISHED'), 'filter_state', \Joomla\CMS\HTML\HTMLHelper::_('select.options', \Joomla\CMS\HTML\HTMLHelper::_('jgrid.publishedOptions', array(
 			'trash'    => 0,
 			'archived' => 0,
 			'all'      => 0
@@ -42,9 +42,9 @@ class JoomcckViewSections extends MViewBase
 	public function getSortFields()
 	{
 		return array(
-			'a.published' => JText::_('JSTATUS'),
-			'a.id'        => JText::_('ID'),
-			'a.name'      => JText::_('CSECTIONNAME'),
+			'a.published' => \Joomla\CMS\Language\Text::_('JSTATUS'),
+			'a.id'        => \Joomla\CMS\Language\Text::_('ID'),
+			'a.name'      => \Joomla\CMS\Language\Text::_('CSECTIONNAME'),
 		);
 	}
 }

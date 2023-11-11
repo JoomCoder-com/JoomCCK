@@ -15,7 +15,7 @@ jimport('legacy.access.rules');
  * @package JCommerce
  */
 
-class JoomcckTableType extends JTable
+class JoomcckTableType extends \Joomla\CMS\Table\Table
 {
 
 	public $_trackAssets = 1;
@@ -30,7 +30,7 @@ class JoomcckTableType extends JTable
 		$params = \Joomla\CMS\Factory::getApplication()->input->post->get('params', array(), 'array');
 		if($params)
 		{
-			$registry = new JRegistry();
+			$registry = new \Joomla\Registry\Registry();
 			$registry->loadArray($params);
 			$array['params'] = (string)$registry;
 		}
@@ -109,18 +109,18 @@ class JoomcckTableType extends JTable
 				$files = $this->_db->loadObjectList();
 				if(!empty($files))
 				{
-					$field_table = JTable::getInstance('Field', 'JoomcckTable');
-					$params = JComponentHelper::getParams('com_joomcck');
+					$field_table = \Joomla\CMS\Table\Table::getInstance('Field', 'JoomcckTable');
+					$params = \Joomla\CMS\Component\ComponentHelper::getParams('com_joomcck');
 					foreach ($files as $file)
 					{
 						$field_table->load($file->field_id);
-						$field_params = new JRegistry($field_table->params);
+						$field_params = new \Joomla\Registry\Registry($field_table->params);
 						$subfolder = $field_params->get('params.subfolder', $field_table->field_type);
 						$dest = JPATH_ROOT. DIRECTORY_SEPARATOR .$params->get('general_upload'). DIRECTORY_SEPARATOR .$subfolder. DIRECTORY_SEPARATOR . $file->fullpath;
 
-						if(JFile::exists($dest))
+						if(\Joomla\CMS\Filesystem\File::exists($dest))
 						{
-							JFile::delete($dest);
+							\Joomla\CMS\Filesystem\File::delete($dest);
 						}
 					}
 
@@ -138,7 +138,7 @@ class JoomcckTableType extends JTable
 	{
 		if(trim($this->name) == '')
 		{
-			$this->setError(JText::_('C_MSG_NONAME'));
+			$this->setError(\Joomla\CMS\Language\Text::_('C_MSG_NONAME'));
 			return false;
 		}
 
@@ -149,7 +149,7 @@ class JoomcckTableType extends JTable
 
 		if(trim($this->user_id) == '')
 		{
-			$this->user_id = (int)JFactory::getUser()->get('id');
+			$this->user_id = (int)\Joomla\CMS\Factory::getUser()->get('id');
 		}
 
 		return true;
@@ -166,7 +166,7 @@ class JoomcckTableType extends JTable
 		return 'Joomcck Content Type: ' . $this->name;
 	}
 
-	protected function _getAssetParentId(JTable $table = null, $id = null)
+	protected function _getAssetParentId(\Joomla\CMS\Table\Table $table = null, $id = null)
 	{
 		// Initialise variables.
 		$assetId = null;

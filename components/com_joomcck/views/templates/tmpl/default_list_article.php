@@ -13,19 +13,19 @@ defined('_JEXEC') or die();
 	<thead>
 	<tr>
 		<th width="20">
-			<?php echo JText::_('CNUM'); ?>
+			<?php echo \Joomla\CMS\Language\Text::_('CNUM'); ?>
 		</th>
 		<th width="1%">
 			<!--<input type="checkbox" id="checkMain" name="toggle" value=""  onclick="checkAll(<?php echo count($this->items->article); ?>);" />-->
 		</th>
 		<th class="title">
-			<?php echo JText::_('CNAME'); ?>
+			<?php echo \Joomla\CMS\Language\Text::_('CNAME'); ?>
 		</th>
 		<th width="4%">
-			<?php echo JText::_('CVERSION'); ?>
+			<?php echo \Joomla\CMS\Language\Text::_('CVERSION'); ?>
 		</th>
 		<th width="10%">
-			<?php echo JText::_('CAUTHOR'); ?>
+			<?php echo \Joomla\CMS\Language\Text::_('CAUTHOR'); ?>
 		</th>
 	</tr>
 	</thead>
@@ -57,7 +57,7 @@ defined('_JEXEC') or die();
 			<td class="nowrap">
 				<?php if($js != ''): ?>
 					<a href="javascript: void(0);" <?php echo $js; ?>><?php echo $item->ident; ?></a> [<?php echo $item->name ?>]
-					<div id="tmpl<?php echo $id; ?>" style="display: none;" class="tmpl_img"><?php echo JHtml::image($item->img_path, $item->ident); ?></div>
+					<div id="tmpl<?php echo $id; ?>" style="display: none;" class="tmpl_img"><?php echo \Joomla\CMS\HTML\HTMLHelper::image($item->img_path, $item->ident); ?></div>
 				<?php else: ?>
 					<b><?php echo $item->ident; ?></b> [<?php echo $item->name ?>]
 				<?php endif; ?>
@@ -70,7 +70,7 @@ defined('_JEXEC') or die();
 
 				<?php if($js != ''): ?>
 					<div id="tmpl<?php echo $id; ?>" style="display: none;" class="tmpl_img">
-						<?php echo JHtml::image($item->img_path, $item->ident); ?>
+						<?php echo \Joomla\CMS\HTML\HTMLHelper::image($item->img_path, $item->ident); ?>
 					</div>
 				<?php endif; ?>
 				<br/>

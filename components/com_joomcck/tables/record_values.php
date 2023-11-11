@@ -13,7 +13,7 @@ jimport('joomla.table.table');
 /**
  * @package JCommerce
  */
-class JoomcckTableRecord_values extends JTable
+class JoomcckTableRecord_values extends \Joomla\CMS\Table\Table
 {
 
 	public function __construct(&$_db)
@@ -26,7 +26,7 @@ class JoomcckTableRecord_values extends JTable
 		$params = \Joomla\CMS\Factory::getApplication()->input->post->get('params', array(), 'array');
 		if($params)
 		{
-			$registry = new JRegistry();
+			$registry = new \Joomla\Registry\Registry();
 			$registry->loadArray($params);
 			$array['params'] = (string)$registry;
 		}
@@ -40,7 +40,7 @@ class JoomcckTableRecord_values extends JTable
 	{
 		if(trim($this->field_label) == '')
 		{
-			$this->setError(JText::_('CNOLABEL'));
+			$this->setError(\Joomla\CMS\Language\Text::_('CNOLABEL'));
 
 			return FALSE;
 		}
@@ -52,7 +52,7 @@ class JoomcckTableRecord_values extends JTable
 
 		if($this->ctime == '' || $this->ctime == '0000-00-00 00:00:00' || is_null($this->ctime))
 		{
-			$this->ctime = JFactory::getDate()->toSql();
+			$this->ctime = \Joomla\CMS\Factory::getDate()->toSql();
 		}
 
 		return TRUE;
@@ -85,7 +85,7 @@ class JoomcckTableRecord_values extends JTable
 			'category_id' => 0,
 			'params'      => '',
 			'ip'          => $_SERVER['REMOTE_ADDR'],
-			'ctime'       => JFactory::getDate()->toSql(),
+			'ctime'       => \Joomla\CMS\Factory::getDate()->toSql(),
 			'field_type'  => $field->field_type ?: $field->type, 
 			'field_label' => @$field->label_orig ?: $field->label,
 			'field_key'   => @$field->key ?: 'k' . md5(@$field->label_orig ?: $field->label . '-' . $field->field_type ?: $field->type),

@@ -56,7 +56,7 @@ class JHTMLJoomcck
 
 		if(is_array($result)) return $result;
 
-		$db = JFactory::getDbo();
+		$db = \Joomla\CMS\Factory::getDbo();
 
 		$query = $db->getQuery(true);
 		$query->select('id as value, name as text, alias');
@@ -105,7 +105,7 @@ class JHTMLJoomcck
 
 		if(is_array($result)) return $result;
 
-		$db = JFactory::getDbo();
+		$db = \Joomla\CMS\Factory::getDbo();
 
 		$query = $db->getQuery(true);
 		$query->select('`id` as value, `name` as text');
@@ -131,7 +131,7 @@ class JHTMLJoomcck
 		$result = array();
 		if($select)
 		{
-			$result[] = JHtml::_('select.option', NULL, JText::_('CCELECTFIELDTYPE'));
+			$result[] = \Joomla\CMS\HTML\HTMLHelper::_('select.option', NULL, \Joomla\CMS\Language\Text::_('CCELECTFIELDTYPE'));
 		}
 		foreach ($fields AS $group_name => $group)
 		{
@@ -139,7 +139,7 @@ class JHTMLJoomcck
 
 			foreach($group AS $field)
 			{
-				$result[] = JHtml::_('select.option', $field->file_name, $field->name);
+				$result[] = \Joomla\CMS\HTML\HTMLHelper::_('select.option', $field->file_name, $field->name);
 			}
 
 			$result[] = self::optgroup( $group_name);
@@ -174,7 +174,7 @@ class JHTMLJoomcck
 
 		if($select)
 		{
-			$out[] = JHtml::_('select.option', NULL, JText::_('CSELECTFIELD'));
+			$out[] = \Joomla\CMS\HTML\HTMLHelper::_('select.option', NULL, \Joomla\CMS\Language\Text::_('CSELECTFIELD'));
 		}
 
 		foreach ($types AS $t => $type)
@@ -190,10 +190,10 @@ class JHTMLJoomcck
 			{
 				if($client == 'list')
 				{
-					$params = new JRegistry($field->params);
+					$params = new \Joomla\Registry\Registry($field->params);
 					if(!$params->get('core.show_intro', 0)) continue;
 				}
-				$out[] = JHtml::_('select.option', $field->{$key}, $field->label);
+				$out[] = \Joomla\CMS\HTML\HTMLHelper::_('select.option', $field->{$key}, $field->label);
 			}
 			$out[] = self::optgroup($type->name);
 		}
@@ -207,7 +207,7 @@ class JHTMLJoomcck
 
 		if(is_array($result)) return $result;
 
-		$db = JFactory::getDbo();
+		$db = \Joomla\CMS\Factory::getDbo();
 
 		$query = $db->getQuery(true);
 		$query->select('id AS value, name AS text');

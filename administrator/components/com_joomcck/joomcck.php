@@ -24,7 +24,7 @@ jimport('joomla.registry.registry');
 
 require_once JPATH_ROOT . '/administrator/components/com_joomcck/library/helpers/toolbar.php';
 
-if(!JFactory::getUser()->authorise('core.manage', 'com_joomcck'))
+if(!\Joomla\CMS\Factory::getUser()->authorise('core.manage', 'com_joomcck'))
 {
 
 	throw new \Exception(Text::_('JERROR_ALERTNOAUTHOR'), 404);
@@ -32,10 +32,10 @@ if(!JFactory::getUser()->authorise('core.manage', 'com_joomcck'))
 }
 
 // check if config already set
-if(!JComponentHelper::getParams('com_joomcck')->get('general_upload'))
+if(!\Joomla\CMS\Component\ComponentHelper::getParams('com_joomcck')->get('general_upload'))
 {
 
-	Factory::getApplication()->enqueueMessage(JText::_('CUPLOADREQ'),'warning');
+	Factory::getApplication()->enqueueMessage(\Joomla\CMS\Language\Text::_('CUPLOADREQ'),'warning');
 	$this->setRedirect('index.php?option=com_config&view=component&component=com_joomcck');
 }
 
@@ -45,6 +45,6 @@ $input = Factory::getApplication()->input;
 $input->set('view', $input->get('view', 'start'));
 
 $controller = MControllerBase::getInstance('Joomcck');
-$controller->execute(JFactory::getApplication()->input->get('task'));
+$controller->execute(\Joomla\CMS\Factory::getApplication()->input->get('task'));
 $controller->redirect();
 

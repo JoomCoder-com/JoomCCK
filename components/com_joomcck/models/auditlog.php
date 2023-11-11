@@ -29,7 +29,7 @@ class JoomcckModelAuditlog extends MModelList
 
 	protected function populateState($ordering = NULL, $direction = NULL)
 	{
-		$app    = JFactory::getApplication();
+		$app    = \Joomla\CMS\Factory::getApplication();
 		$search = $app->getUserStateFromRequest($this->context . '.filter.search', 'filter_search');
 		$this->setState('filter.search', $search);
 
@@ -74,12 +74,12 @@ class JoomcckModelAuditlog extends MModelList
 
 	public function getTable($type = 'Audit_log', $prefix = 'JoomcckTable', $config = array())
 	{
-		return JTable::getInstance($type, $prefix, $config);
+		return \Joomla\CMS\Table\Table::getInstance($type, $prefix, $config);
 	}
 
 	public function getListQuery()
 	{
-		$user  = JFactory::getUser();
+		$user  = \Joomla\CMS\Factory::getUser();
 		$db    = $this->getDbo();
 		$query = $db->getQuery(TRUE);
 
@@ -232,7 +232,7 @@ class JoomcckModelAuditlog extends MModelList
 			foreach($list as $key => $event)
 			{
 				$type     = ItemsStore::getType($event->type_id);
-				$events[] = JHtml::_('select.option', $event->event, JText::_($type->params->get('audit.al' . $event->event . '.msg')) . ' <span class="badge bg-light text-muted border">' . $event->total . '</span>');
+				$events[] = \Joomla\CMS\HTML\HTMLHelper::_('select.option', $event->event, \Joomla\CMS\Language\Text::_($type->params->get('audit.al' . $event->event . '.msg')) . ' <span class="badge bg-light text-muted border">' . $event->total . '</span>');
 			}
 
 			ArrayHelper::clean_r($events);
@@ -290,7 +290,7 @@ class JoomcckModelAuditlog extends MModelList
 
 			foreach($list as $key => $user)
 			{
-				$users[] = JHtml::_('select.option', $user->user_id, sprintf('%s (%s) <span class="badge bg-light text-muted border">%d</span>', $user->name, $user->username ? $user->username : JText::_('CGUEST'), $user->total));
+				$users[] = \Joomla\CMS\HTML\HTMLHelper::_('select.option', $user->user_id, sprintf('%s (%s) <span class="badge bg-light text-muted border">%d</span>', $user->name, $user->username ? $user->username : \Joomla\CMS\Language\Text::_('CGUEST'), $user->total));
 			}
 
 			ArrayHelper::clean_r($users);
@@ -322,7 +322,7 @@ class JoomcckModelAuditlog extends MModelList
 
 			foreach($list as $key => $section)
 			{
-				$section->params = new JRegistry($section->params);
+				$section->params = new \Joomla\Registry\Registry($section->params);
 				if(MECAccess::allowAuditLog($section))
 				{
 					$sections[$section->id] = $section;
@@ -359,7 +359,7 @@ class JoomcckModelAuditlog extends MModelList
 
 			foreach($list as $key => $type)
 			{
-				$type->params = new JRegistry($type->params);
+				$type->params = new \Joomla\Registry\Registry($type->params);
 				if($type->params->get('audit.audit_log'))
 				{
 					$types[$type->id] = $type;

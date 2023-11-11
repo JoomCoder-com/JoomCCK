@@ -26,11 +26,11 @@ a.button {
 }
 </style>
 
-<form action="<?php echo JRoute::_('index.php?option=com_joomcck&view=auditlog&Itemid='.JFactory::getApplication()->input->getInt('Itemid')); ?>" method="post" name="adminForm" id="sales-form">
+<form action="<?php echo \Joomla\CMS\Router\Route::_('index.php?option=com_joomcck&view=auditlog&Itemid='.\Joomla\CMS\Factory::getApplication()->input->getInt('Itemid')); ?>" method="post" name="adminForm" id="sales-form">
 	<fieldset id="filter-bar">
 		<div class="filter-search fltlft">
-			<a href="<?php echo JURI::root(TRUE)?>/index.php?option=com_joomcck&view=auditlog&Itemid=<?php echo JFactory::getApplication()->input->getInt('Itemid');?>" class="button">
-			<?php echo JText::_('CBACKTOAUDITLOG');?></a>
+			<a href="<?php echo JURI::root(TRUE)?>/index.php?option=com_joomcck&view=auditlog&Itemid=<?php echo \Joomla\CMS\Factory::getApplication()->input->getInt('Itemid');?>" class="button">
+			<?php echo \Joomla\CMS\Language\Text::_('CBACKTOAUDITLOG');?></a>
 		</div>
 
 		<div class="filter-select fltrgt">
@@ -47,27 +47,27 @@ a.button {
 					onclick="checkAll(this)" /></th>
 				</th>
 				<th width="1%">
-					<?php echo JHtml::_('grid.sort',  'ID', 'o.id', $listDirn, $listOrder); ?>
+					<?php echo \Joomla\CMS\HTML\HTMLHelper::_('grid.sort',  'ID', 'o.id', $listDirn, $listOrder); ?>
 				</th>
 				 -->
 				<th width="30%">
-					<?php echo JText::_('CEVENT');; ?>
+					<?php echo \Joomla\CMS\Language\Text::_('CEVENT');; ?>
 				</th>
 				<th nowrap="nowrap" width="1%">
-					<?php echo JText::_('CCREATED');; ?>
+					<?php echo \Joomla\CMS\Language\Text::_('CCREATED');; ?>
 				</th>
 				<th width="1%" nowrap="nowrap">
-					<?php echo JText::_('CEVENTER');; ?>
+					<?php echo \Joomla\CMS\Language\Text::_('CEVENTER');; ?>
 				</th>
 				<th width="1%" nowrap="nowrap">
-					<?php echo JText::_('CACTIONS'); ?>
+					<?php echo \Joomla\CMS\Language\Text::_('CACTIONS'); ?>
 				</th>
 			</tr>
 		</thead>
 		<tbody>
 			<?php foreach ($this->items AS $i => $item):?>
 				<tr class=" <?php echo $k = 1 - @$k?>">
-					<td><?php echo JText::_($this->type_objects[$item->type_id]->params->get('audit.al'.$item->event.'.msg', 'CAUDLOG'.$item->event));?></td>
+					<td><?php echo \Joomla\CMS\Language\Text::_($this->type_objects[$item->type_id]->params->get('audit.al'.$item->event.'.msg', 'CAUDLOG'.$item->event));?></td>
 					<td nowrap><?php echo $item->date;?></td>
 					<td><?php echo $item->user;?></td>
 					<td><?php echo $item->actions;?></td>
@@ -95,5 +95,5 @@ a.button {
 	<input type="hidden" name="boxchecked" value="0" />
 	<input type="hidden" name="filter_order" value="<?php echo $listOrder; ?>" />
 	<input type="hidden" name="filter_order_Dir" value="<?php echo $listDirn; ?>" />
-	<?php echo JHtml::_('form.token'); ?>
+	<?php echo \Joomla\CMS\HTML\HTMLHelper::_('form.token'); ?>
 </form>

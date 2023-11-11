@@ -22,7 +22,7 @@ class CFormFieldUpload extends CFormField
 	public $download_type;
     public function __construct($field, $default)
     {
-        $root      = JPath::clean(JComponentHelper::getParams('com_joomcck')->get('general_upload'));
+        $root      = JPath::clean(\Joomla\CMS\Component\ComponentHelper::getParams('com_joomcck')->get('general_upload'));
         $url       = str_replace(JPATH_ROOT, '', $root);
         $url       = str_replace("\\", '/', $url);
         $url       = preg_replace('#^\/#iU', '', $url);
@@ -57,7 +57,7 @@ class CFormFieldUpload extends CFormField
     public function getInput()
     {
 
-        $user = JFactory::getUser();
+        $user = \Joomla\CMS\Factory::getUser();
         settype($this->value, 'array');
         $default = [];
         if (isset($this->value[0])) {
@@ -71,12 +71,12 @@ class CFormFieldUpload extends CFormField
         $this->options['autostart']  = $this->params->get('params.autostart');
         $this->options['can_delete'] = $this->_getDeleteAccess();
 
-        $html = JHtml::_('mrelements.' . ($this->params->get('params.uploader', 1) == 1 ? "flow" : "mooupload"),
+        $html = \Joomla\CMS\HTML\HTMLHelper::_('mrelements.' . ($this->params->get('params.uploader', 1) == 1 ? "flow" : "mooupload"),
             "jform[fields][{$this->id}]" . $this->fieldname,
             $default, $this->options, $this);
 
         if ($this->params->get('params.subscription', 0) && in_array($this->params->get('params.can_select_subscr', 0), $user->getAuthorisedViewLevels())) {
-            $html .= JHtml::_('emerald.plans', "jform[fields][{$this->id}][subscriptions][]", $this->params->get('params.subscription', []), $this->subscriptions, 'CRESTRICTIONPLANSDESCR');
+            $html .= \Joomla\CMS\HTML\HTMLHelper::_('emerald.plans', "jform[fields][{$this->id}][subscriptions][]", $this->params->get('params.subscription', []), $this->subscriptions, 'CRESTRICTIONPLANSDESCR');
         }
 
         return $html;
@@ -84,11 +84,11 @@ class CFormFieldUpload extends CFormField
 
     public function _getDeleteAccess()
     {
-        $user              = JFactory::getUser();
+        $user              = \Joomla\CMS\Factory::getUser();
         $author_can_delete = $this->params->get('params.delete_access', 1);
-        $params            = JComponentHelper::getParams('com_joomcck');
+        $params            = \Joomla\CMS\Component\ComponentHelper::getParams('com_joomcck');
         $type              = ItemsStore::getType($this->type_id);
-        $app               = JFactory::getApplication();
+        $app               = \Joomla\CMS\Factory::getApplication();
 
         $record_id = $app->input->getInt('id', 0);
 
@@ -202,16 +202,16 @@ class CFormFieldUpload extends CFormField
 
     public function onBeforeDownload($record, $file_index, $file_id, $return = true)
     {
-        $user = JFactory::getUser();
+        $user = \Joomla\CMS\Factory::getUser();
         if (!in_array($this->params->get('params.allow_download', 1), $user->getAuthorisedViewLevels())) {
-            $this->setError(JText::_("CNORIGHTSDOWNLOAD"));
+            $this->setError(\Joomla\CMS\Language\Text::_("CNORIGHTSDOWNLOAD"));
 
             return false;
         }
 
         if ($this->_ajast_subscr($record)) {
             $em_api = JPATH_ROOT . '/components/com_emerald/api.php';
-            if (!JFile::exists($em_api)) {
+            if (!\Joomla\CMS\Filesystem\File::exists($em_api)) {
                 return true;
             }
 
@@ -233,10 +233,10 @@ class CFormFieldUpload extends CFormField
                 return true;
             }
 
-            $result = JText::_($this->params->get('params.subscription_msg'));
+            $result = \Joomla\CMS\Language\Text::_($this->params->get('params.subscription_msg'));
             $result .= sprintf('<br><small><a href="%s">%s</a></small>',
                 EmeraldApi::getLink('list', true, $this->_ajast_subscr($record)),
-                JText::_('CSUBSCRIBENOW')
+                \Joomla\CMS\Language\Text::_('CSUBSCRIBENOW')
             );
 
             $this->setError($result);
@@ -265,7 +265,7 @@ class CFormFieldUpload extends CFormField
             return;
         }
 
-        $user = JFactory::getUser($record->user_id);
+        $user = \Joomla\CMS\Factory::getUser($record->user_id);
 
         if (in_array($this->params->get('params.can_select_subscr', 0), $user->getAuthorisedViewLevels()) &&
             $this->params->get('params.subscription')
@@ -330,7 +330,7 @@ class CFormFieldUpload extends CFormField
             if ($this->params->get('params.show_in_browser', 0) == 0) {
                 $file->url = $this->getDownloadUrl($record, $file, $idx);
             } else {
-                $file->url = JURI::root(true) . '/' . JComponentHelper::getParams('com_joomcck')->get('general_upload') . '/' . $subfolder . '/' . str_replace('\\', '/', $file->fullpath);
+                $file->url = JURI::root(true) . '/' . \Joomla\CMS\Component\ComponentHelper::getParams('com_joomcck')->get('general_upload') . '/' . $subfolder . '/' . str_replace('\\', '/', $file->fullpath);
             }
             $file->subfolder = $subfolder ? $subfolder : $file->ext;
         }
@@ -404,33 +404,33 @@ class CFormFieldUpload extends CFormField
 
     protected function copyFile($filename, $field)
     {
-        $params      = JComponentHelper::getParams('com_joomcck');
+        $params      = \Joomla\CMS\Component\ComponentHelper::getParams('com_joomcck');
         $files_table = JTable::getInstance('Files', 'JoomcckTable');
         if ($files_table->load(['filename' => $filename])) {
             $time = time();
             //$date = date('Y-m', $time);
             $date      = date($params->get('folder_format', 'Y-m'), $time);
-            $ext       = strtolower(JFile::getExt($filename));
+            $ext       = strtolower(\Joomla\CMS\Filesystem\File::getExt($filename));
             $subfolder = $field->params->get('params.subfolder', $ext);
 
             $dest  = JPATH_ROOT . DIRECTORY_SEPARATOR . $params->get('general_upload') . DIRECTORY_SEPARATOR . $subfolder . DIRECTORY_SEPARATOR;
             $index = '<html><body></body></html>';
-            if (!JFolder::exists($dest)) {
-                JFolder::create($dest, 0755);
-                JFile::write($dest . DIRECTORY_SEPARATOR . 'index.html', $index);
+            if (!\Joomla\CMS\Filesystem\Folder::exists($dest)) {
+                \Joomla\CMS\Filesystem\Folder::create($dest, 0755);
+                \Joomla\CMS\Filesystem\File::write($dest . DIRECTORY_SEPARATOR . 'index.html', $index);
             }
             $dest .= $date . DIRECTORY_SEPARATOR;
-            if (!JFolder::exists($dest)) {
+            if (!\Joomla\CMS\Filesystem\Folder::exists($dest)) {
 
-                JFolder::create($dest, 0755);
-                JFile::write($dest . DIRECTORY_SEPARATOR . 'index.html', $index);
+                \Joomla\CMS\Filesystem\Folder::create($dest, 0755);
+                \Joomla\CMS\Filesystem\File::write($dest . DIRECTORY_SEPARATOR . 'index.html', $index);
             }
 
             $files_table->id       = null;
             $parts                 = explode('_', $filename);
             $files_table->filename = $time . '_' . $parts[1];
 
-            $copied = JFile::copy(JPATH_ROOT . DIRECTORY_SEPARATOR . $params->get('general_upload') . DIRECTORY_SEPARATOR . $subfolder . DIRECTORY_SEPARATOR . $files_table->fullpath, $dest . $files_table->filename);
+            $copied = \Joomla\CMS\Filesystem\File::copy(JPATH_ROOT . DIRECTORY_SEPARATOR . $params->get('general_upload') . DIRECTORY_SEPARATOR . $subfolder . DIRECTORY_SEPARATOR . $files_table->fullpath, $dest . $files_table->filename);
 
             $files_table->fullpath = JPath::clean($date . DIRECTORY_SEPARATOR . $files_table->filename, '/');
             $files_table->saved    = 0;
@@ -450,8 +450,8 @@ class CFormFieldUpload extends CFormField
 
     public function onMakeDefault()
     {
-        $app = JFactory::getApplication();
-        $db  = JFactory::getDbo();
+        $app = \Joomla\CMS\Factory::getApplication();
+        $db  = \Joomla\CMS\Factory::getDbo();
 
         $record_id = $app->input->getInt('record_id', 0);
         $field_id  = $app->input->getInt('field_id', 0);
@@ -490,8 +490,8 @@ class CFormFieldUpload extends CFormField
     }
     public function onSaveDetails()
     {
-        $app         = JFactory::getApplication();
-        $db          = JFactory::getDbo();
+        $app         = \Joomla\CMS\Factory::getApplication();
+        $db          = \Joomla\CMS\Factory::getDbo();
         $id          = $app->input->getInt('id', 0);
         $title       = CensorHelper::cleanText($app->input->getString('text'));
         $description = CensorHelper::cleanText($app->input->getString('descr', $default = null, $hash = 'default', $type = 'none', $mask = 4));
@@ -522,7 +522,7 @@ class CFormFieldUpload extends CFormField
             }
 
         }
-        $db = JFactory::getDbo();
+        $db = \Joomla\CMS\Factory::getDbo();
         $db->setQuery("UPDATE `#__js_res_files` SET title = '" . $db->escape(htmlentities($title, ENT_QUOTES, 'UTF-8')) . "', description = '" . $db->escape(htmlentities($description, ENT_QUOTES, 'UTF-8')) . "' WHERE id = {$id}");
 
         if (!$db->execute()) {
@@ -534,7 +534,7 @@ class CFormFieldUpload extends CFormField
 
     /*public function onSaveTitle()
     {
-    $app = JFactory::getApplication();
+    $app = \Joomla\CMS\Factory::getApplication();
 
     $id        = $app->input->getInt('id', 0);
     $text      = CensorHelper::cleanText($app->input->getString('text'));
@@ -562,7 +562,7 @@ class CFormFieldUpload extends CFormField
     }
 
     }
-    $db = JFactory::getDbo();
+    $db = \Joomla\CMS\Factory::getDbo();
     $db->setQuery("UPDATE #__js_res_files SET title = '" . $db->escape($text) . "' WHERE id = {$id}");
 
     if (!$db->execute()) {
@@ -574,7 +574,7 @@ class CFormFieldUpload extends CFormField
 
     public function onSaveDescr()
     {
-    $app       = JFactory::getApplication();
+    $app       = \Joomla\CMS\Factory::getApplication();
     $id        = $app->input->getInt('id', 0);
     $text      = CensorHelper::cleanText($app->input->getString('text', $default = null, $hash = 'default', $type = 'none', $mask = 4));
     $record_id = $app->input->getInt('record_id', 0);
@@ -601,7 +601,7 @@ class CFormFieldUpload extends CFormField
     }
 
     }
-    $db = JFactory::getDbo();
+    $db = \Joomla\CMS\Factory::getDbo();
     $db->setQuery("UPDATE #__js_res_files SET description = '{$text}' WHERE id = {$id}");
 
     if (!$db->execute()) {
@@ -645,8 +645,8 @@ class CFormFieldUpload extends CFormField
                 continue;
             }
 
-            $ext      = \Joomla\String\StringHelper::strtolower(JFile::getExt($file));
-            $new_name = JFactory::getDate($record->ctime)->toUnix() . '_' . md5($file) . '.' . $ext;
+            $ext      = \Joomla\String\StringHelper::strtolower(\Joomla\CMS\Filesystem\File::getExt($file));
+            $new_name = \Joomla\CMS\Factory::getDate($record->ctime)->toUnix() . '_' . md5($file) . '.' . $ext;
 
             $file = $this->_find_import_file($params->get('field.' . $this->id . '.path'), $file);
             if (!$file) {
@@ -681,9 +681,9 @@ class CFormFieldUpload extends CFormField
     {
         $out = $this->_import_fieldlist($heads, $defaults->get('field.' . $this->id . '.fname'), 'fname');
         $out .= sprintf('<div><small>%s</small></div><input type="text" name="import[field][%d][separator]" value="%s" class="col-md-2" >',
-            JText::_('CMULTIVALFIELDSEPARATOR'), $this->id, $defaults->get('field.' . $this->id . '.separator', ','));
+            \Joomla\CMS\Language\Text::_('CMULTIVALFIELDSEPARATOR'), $this->id, $defaults->get('field.' . $this->id . '.separator', ','));
         $out .= sprintf('<div><small>%s</small></div><input type="text" name="import[field][%d][path]" value="%s" class="col-md-12" >',
-            JText::_('CFILESPATH'), $this->id, $defaults->get('field.' . $this->id . '.path', 'files'));
+            \Joomla\CMS\Language\Text::_('CFILESPATH'), $this->id, $defaults->get('field.' . $this->id . '.path', 'files'));
 
         return $out;
     }

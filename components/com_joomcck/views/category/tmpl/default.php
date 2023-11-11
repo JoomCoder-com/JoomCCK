@@ -11,7 +11,7 @@ use Joomla\CMS\HTML\HTMLHelper;
 
 defined('_JEXEC') or die();
 $image_url = JURI::root(TRUE).CImgHelper::getThumb(JPATH_ROOT.'/images/usercategories/'.$this->user->get('id').'/'.@$this->item->icon,
-	100, 100, 'usercaticons', JFactory::getApplication()->input->getInt('user_id'));
+	100, 100, 'usercaticons', \Joomla\CMS\Factory::getApplication()->input->getInt('user_id'));
 ?>
 <script type="text/javascript">
 <!--
@@ -30,7 +30,7 @@ $image_url = JURI::root(TRUE).CImgHelper::getThumb(JPATH_ROOT.'/images/usercateg
 	{
 
 		$.ajax({
-			url:'<?php echo JRoute::_('index.php?option=com_joomcck&task=ajax.removeucicon&tmpl=component', false); ?>',
+			url:'<?php echo \Joomla\CMS\Router\Route::_('index.php?option=com_joomcck&task=ajax.removeucicon&tmpl=component', false); ?>',
 			type:'post',
 			data:{file: file, id: id},
 			dataType: 'json'
@@ -52,11 +52,11 @@ $image_url = JURI::root(TRUE).CImgHelper::getThumb(JPATH_ROOT.'/images/usercateg
 
 </script>
 
-<div class="page-header"><h1><?php echo isset($this->item->id) ? JText::_('CEDITCAT') : JText::_('CADDCAT');?></h1></div>
+<div class="page-header"><h1><?php echo isset($this->item->id) ? \Joomla\CMS\Language\Text::_('CEDITCAT') : \Joomla\CMS\Language\Text::_('CADDCAT');?></h1></div>
 <form action="" method="post" name="adminForm" id="adminForm" class="form-horizontal" enctype="multipart/form-data">
 
 	<?php echo HTMLHelper::_('uitab.startTabSet', 'myTab', ['active' => 'page-catfields', 'recall' => true, 'breakpoint' => 768]); ?>
-        <?php echo HTMLHelper::_('uitab.addTab', 'myTab', 'page-catfields', JText::_('CCATEGORYFIELDS')); ?>
+        <?php echo HTMLHelper::_('uitab.addTab', 'myTab', 'page-catfields', \Joomla\CMS\Language\Text::_('CCATEGORYFIELDS')); ?>
             <div class="row">
         <div class="control-group">
             <div class="control-label col-md-2"><?php echo $this->form->getLabel('name') ; ?></div>
@@ -74,17 +74,17 @@ $image_url = JURI::root(TRUE).CImgHelper::getThumb(JPATH_ROOT.'/images/usercateg
 		<?php endif;?>
 		<?php if(!empty($this->item->icon)):?>
             <div class="control-group" id="iconpreview">
-                <div class="control-label col-md-2"><?php echo JText::_('CICONPREVIEW'); ?></div>
+                <div class="control-label col-md-2"><?php echo \Joomla\CMS\Language\Text::_('CICONPREVIEW'); ?></div>
                 <div class="controls">
                     <img src="<?php echo $image_url;?>">
-                    <a href="javascript:void(0);" onclick="Joomcck.ajax_removeUserCategoryIcon('<?php echo $this->item->icon?>', <?php echo $this->item->id?>);"><?php echo JText::_('CREMOVEICON')?></a>
+                    <a href="javascript:void(0);" onclick="Joomcck.ajax_removeUserCategoryIcon('<?php echo $this->item->icon?>', <?php echo $this->item->id?>);"><?php echo \Joomla\CMS\Language\Text::_('CREMOVEICON')?></a>
                 </div>
             </div>
 		<?php endif;?>
     </div>
         <?php echo HTMLHelper::_('uitab.endTab'); ?>
 
-        <?php echo HTMLHelper::_('uitab.addTab', 'myTab', 'page-specfields', JText::_('CSPECIALFIELD')); ?>
+        <?php echo HTMLHelper::_('uitab.addTab', 'myTab', 'page-specfields', \Joomla\CMS\Language\Text::_('CSPECIALFIELD')); ?>
             <div class="row">
         <div class="control-group">
             <div class="control-label col-md-2"><?php echo $this->form->getLabel('published') ; ?></div>
@@ -114,38 +114,38 @@ $image_url = JURI::root(TRUE).CImgHelper::getThumb(JPATH_ROOT.'/images/usercateg
  	<div class="form-actions">
     	<button type="button" class="btn" onclick="Joomla.submitbutton('usercategory.apply')">
 			<?php echo HTMLFormatHelper::icon('tick-button.png');  ?>
-    		<?php echo JText::_('CAPPLY'); ?>
+    		<?php echo \Joomla\CMS\Language\Text::_('CAPPLY'); ?>
     	</button>
 
     	<button type="button" class="btn" onclick="Joomla.submitbutton('usercategory.save')">
 			<?php echo HTMLFormatHelper::icon('disk--minus.png');  ?>
-    		<?php echo JText::_('CSAVECLOSE'); ?>
+    		<?php echo \Joomla\CMS\Language\Text::_('CSAVECLOSE'); ?>
     	</button>
 
     	<button type="button" class="btn" onclick="Joomla.submitbutton('usercategory.save2new')">
 			<?php echo HTMLFormatHelper::icon('disk-plus.png');  ?>
-    		<?php echo JText::_('CSAVENEW'); ?>
+    		<?php echo \Joomla\CMS\Language\Text::_('CSAVENEW'); ?>
     	</button>
 
     	<?php if(isset($this->item->id)):?>
     		<button type="button" class="btn" onclick="Joomla.submitbutton('usercategory.save2copy')">
 				<?php echo HTMLFormatHelper::icon('disks.png');  ?>
-    			<?php echo JText::_('CSAVECOPY'); ?>
+    			<?php echo \Joomla\CMS\Language\Text::_('CSAVECOPY'); ?>
     		</button>
     	<?php endif; ?>
 
     	<button type="button" class="btn" onclick="Joomla.submitbutton('usercategory.cancel')">
 			<?php echo HTMLFormatHelper::icon('cross-button.png');  ?>
-    		<?php echo JText::_('CCANCEL'); ?>
+    		<?php echo \Joomla\CMS\Language\Text::_('CCANCEL'); ?>
     	</button>
     </div>
 
     <input type="hidden" name="task" value="" />
-    <input type="hidden" name="Itemid" value="<?php echo JFactory::getApplication()->input->getInt('Itemid');?>" />
-    <input type="hidden" name="return" value="<?php echo JFactory::getApplication()->input->getString('return');?>" />
+    <input type="hidden" name="Itemid" value="<?php echo \Joomla\CMS\Factory::getApplication()->input->getInt('Itemid');?>" />
+    <input type="hidden" name="return" value="<?php echo \Joomla\CMS\Factory::getApplication()->input->getString('return');?>" />
     <?php echo $this->form->getInput('section_id');?>
     <?php echo $this->form->getInput('id');?>
-    <?php echo JHtml::_( 'form.token' ); ?>
+    <?php echo \Joomla\CMS\HTML\HTMLHelper::_( 'form.token' ); ?>
 </form>
 
 <?php if($this->section->params->get('personalize.pcat_descr_length')):?>

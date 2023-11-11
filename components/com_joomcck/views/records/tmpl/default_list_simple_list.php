@@ -16,7 +16,7 @@ settype($exclude, 'array');
 foreach ($exclude as &$value) {
 	$value = $this->fields_keys_by_id[$value];
 }
-JHtml::_('dropdown.init');
+\Joomla\CMS\HTML\HTMLHelper::_('dropdown.init');
 ?>
 <style>
 	.avatar {
@@ -36,7 +36,7 @@ JHtml::_('dropdown.init');
 }
 </style>
 <?php if($params->get('tmpl_core.show_title_index')):?>
-	<h2><?php echo JText::_('CONTHISPAGE')?></h2>
+	<h2><?php echo \Joomla\CMS\Language\Text::_('CONTHISPAGE')?></h2>
 	<ul>
 		<?php foreach ($this->items AS $item):?>
 			<li><a href="#record<?php echo $item->id?>"><?php echo $item->title?></a></li>
@@ -60,7 +60,7 @@ JHtml::_('dropdown.init');
 					<div>
 						<h2>
 							<?php if(in_array($params->get('tmpl_core.item_link'), $this->user->getAuthorisedViewLevels())):?>
-								<a <?php echo $item->nofollow ? 'rel="nofollow"' : '';?> href="<?php echo JRoute::_($item->url);?>">
+								<a <?php echo $item->nofollow ? 'rel="nofollow"' : '';?> href="<?php echo \Joomla\CMS\Router\Route::_($item->url);?>">
 									<?php echo $item->title?>
 								</a>
 							<?php else:?>
@@ -97,58 +97,58 @@ JHtml::_('dropdown.init');
 
 			if($params->get('tmpl_core.item_categories') && $item->categories_links)
 			{
-				$category[] = sprintf('<dt>%s<dt> <dd>%s<dd>', (count($item->categories_links) > 1 ? JText::_('CCATEGORIES') : JText::_('CCATEGORY')), implode(', ', $item->categories_links));
+				$category[] = sprintf('<dt>%s<dt> <dd>%s<dd>', (count($item->categories_links) > 1 ? \Joomla\CMS\Language\Text::_('CCATEGORIES') : \Joomla\CMS\Language\Text::_('CCATEGORY')), implode(', ', $item->categories_links));
 			}
 			if($params->get('tmpl_core.item_user_categories') && $item->ucatid)
 			{
-				$category[] = sprintf('<dt>%s<dt> <dd>%s<dd>', JText::_('CUSERCAT'), $item->ucatname_link);
+				$category[] = sprintf('<dt>%s<dt> <dd>%s<dd>', \Joomla\CMS\Language\Text::_('CUSERCAT'), $item->ucatname_link);
 			}
 			if($params->get('tmpl_core.item_author') && $item->user_id)
 			{
-				$author[] = JText::sprintf('CWRITTENBY', CCommunityHelper::getName($item->user_id, $this->section));
+				$author[] = \Joomla\CMS\Language\Text::sprintf('CWRITTENBY', CCommunityHelper::getName($item->user_id, $this->section));
 				if($params->get('tmpl_core.item_author_filter'))
 				{
-					$author[] = FilterHelper::filterButton('filter_user', $item->user_id, NULL, JText::sprintf('CSHOWALLUSERREC', CCommunityHelper::getName($item->user_id, $this->section, array('nohtml' => 1))), $this->section);
+					$author[] = FilterHelper::filterButton('filter_user', $item->user_id, NULL, \Joomla\CMS\Language\Text::sprintf('CSHOWALLUSERREC', CCommunityHelper::getName($item->user_id, $this->section, array('nohtml' => 1))), $this->section);
 				}
 			}
 			if($params->get('tmpl_core.item_ctime'))
 			{
-				$author[] = JText::sprintf('CONDATE', JHtml::_('date', $item->created, $params->get('tmpl_core.item_time_format')));
+				$author[] = \Joomla\CMS\Language\Text::sprintf('CONDATE', \Joomla\CMS\HTML\HTMLHelper::_('date', $item->created, $params->get('tmpl_core.item_time_format')));
 			}
 
 			if($params->get('tmpl_core.item_mtime'))
 			{
-				$author[] = sprintf('%s: %s', JText::_('CCHANGEON'), JHtml::_('date', $item->modify, $params->get('tmpl_core.item_time_format')));
+				$author[] = sprintf('%s: %s', \Joomla\CMS\Language\Text::_('CCHANGEON'), \Joomla\CMS\HTML\HTMLHelper::_('date', $item->modify, $params->get('tmpl_core.item_time_format')));
 			}
 
 			if($params->get('tmpl_core.item_extime'))
 			{
-				$author[] = sprintf('%s: %s', JText::_('CEXPIREON'), $item->expire ? JHtml::_('date', $item->expire, $params->get('tmpl_core.item_time_format')) : JText::_('CNEVER'));
+				$author[] = sprintf('%s: %s', \Joomla\CMS\Language\Text::_('CEXPIREON'), $item->expire ? \Joomla\CMS\HTML\HTMLHelper::_('date', $item->expire, $params->get('tmpl_core.item_time_format')) : \Joomla\CMS\Language\Text::_('CNEVER'));
 			}
 
 			if($params->get('tmpl_core.item_type'))
 			{
-				$details[] = sprintf('%s: %s %s', JText::_('CTYPE'), $item->type_name, ($params->get('tmpl_core.item_type_filter') ? FilterHelper::filterButton('filter_type', $item->type_id, NULL, JText::sprintf('CSHOWALLTYPEREC', $item->type_name), $this->section) : NULL));
+				$details[] = sprintf('%s: %s %s', \Joomla\CMS\Language\Text::_('CTYPE'), $item->type_name, ($params->get('tmpl_core.item_type_filter') ? FilterHelper::filterButton('filter_type', $item->type_id, NULL, \Joomla\CMS\Language\Text::sprintf('CSHOWALLTYPEREC', $item->type_name), $this->section) : NULL));
 			}
 			if($params->get('tmpl_core.item_hits'))
 			{
-				$details[] = sprintf('%s: %s', JText::_('CHITS'), $item->hits);
+				$details[] = sprintf('%s: %s', \Joomla\CMS\Language\Text::_('CHITS'), $item->hits);
 			}
 			if($params->get('tmpl_core.item_comments_num'))
 			{
-				$details[] = sprintf('%s: %s', JText::_('CCOMMENTS'), CommentHelper::numComments($this->submission_types[$item->type_id], $item));
+				$details[] = sprintf('%s: %s', \Joomla\CMS\Language\Text::_('CCOMMENTS'), CommentHelper::numComments($this->submission_types[$item->type_id], $item));
 			}
 			if($params->get('tmpl_core.item_vote_num'))
 			{
-				$details[] = sprintf('%s: %s', JText::_('CVOTES'), $item->votes);
+				$details[] = sprintf('%s: %s', \Joomla\CMS\Language\Text::_('CVOTES'), $item->votes);
 			}
 			if($params->get('tmpl_core.item_favorite_num'))
 			{
-				$details[] = sprintf('%s: %s', JText::_('CFAVORITED'), $item->favorite_num);
+				$details[] = sprintf('%s: %s', \Joomla\CMS\Language\Text::_('CFAVORITED'), $item->favorite_num);
 			}
 			if($params->get('tmpl_core.item_follow_num'))
 			{
-				$details[] = sprintf('%s: %s', JText::_('CFOLLOWERS'), $item->subscriptions_num);
+				$details[] = sprintf('%s: %s', \Joomla\CMS\Language\Text::_('CFOLLOWERS'), $item->subscriptions_num);
 			}
 			?>
 
@@ -170,7 +170,7 @@ JHtml::_('dropdown.init');
 											<?php echo implode(' ', $category);?>
 										<?php endif;?>
 										<?php if($author):?>
-											<dt><?php echo JText::_('Posted');?></dt>
+											<dt><?php echo \Joomla\CMS\Language\Text::_('Posted');?></dt>
 											<dd>
 												<?php echo implode(', ', $author);?>
 											</dd>

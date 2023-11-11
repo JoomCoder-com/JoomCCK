@@ -11,7 +11,7 @@ use Joomla\CMS\Application\ApplicationHelper;
 
 defined('_JEXEC') or die();
 
-$component_params = JComponentHelper::getParams('com_joomcck');
+$component_params = \Joomla\CMS\Component\ComponentHelper::getParams('com_joomcck');
 define('COBS', $component_params->get('separator', ':'));
 
 class Url
@@ -19,7 +19,7 @@ class Url
 
 	static public function back()
 	{
-		$url = JUri::getInstance()->toString();
+		$url = \Joomla\CMS\Uri\Uri::getInstance()->toString();
 		$url = base64_encode($url);
 		$url = urlencode($url);
 		return $url;
@@ -27,7 +27,7 @@ class Url
 
 	static public function get_back($name, $default = NULL)
 	{
-		$url = JFactory::getApplication()->input->getString($name);
+		$url = \Joomla\CMS\Factory::getApplication()->input->getString($name);
 		$url = str_replace(' ', '+', $url);
 
 		if($url)
@@ -40,9 +40,9 @@ class Url
 			$url = $default;
 		}
 
-		if(!JUri::isInternal($url))
+		if(!\Joomla\CMS\Uri\Uri::isInternal($url))
 		{
-			$url = JUri::root();
+			$url = \Joomla\CMS\Uri\Uri::root();
 		}
 
 		return $url;
@@ -82,14 +82,14 @@ class Url
 
 		$url .= '&return=' . self::back();
 
-		return JRoute::_($url);
+		return \Joomla\CMS\Router\Route::_($url);
 	}
 
 	static public function edit($id, $return = NULL)
 	{
 		$url = 'index.php?option=com_joomcck&task=form.edit&id=' . $id . '&return=' . ($return ? $return : self::back());
 
-		return JRoute::_($url, ($return ? FALSE : TRUE));
+		return \Joomla\CMS\Router\Route::_($url, ($return ? FALSE : TRUE));
 	}
 
 	static public function task($task, $id, $return = FALSE)
@@ -97,39 +97,39 @@ class Url
 		$r = ($return ? $return : self::back());
 		$url = 'index.php?option=com_joomcck&task=' . $task . '&id=' . $id . '&return=' . $r;
 
-		return JRoute::_($url);
+		return \Joomla\CMS\Router\Route::_($url);
 	}
 	static public function taskCid($task, $id, $return = FALSE)
 	{
 		$url = 'index.php?option=com_joomcck&task=' . $task . '&cid[]=' . $id . '&return=' . ($return ? $return : self::back());
 
-		return JRoute::_($url);
+		return \Joomla\CMS\Router\Route::_($url);
 	}
 
 	static public function view($view, $x = true)
 	{
 		$url = 'index.php?option=com_joomcck&view=' . $view ;
 
-		return JRoute::_($url, $x);
+		return \Joomla\CMS\Router\Route::_($url, $x);
 	}
 	static public function _($type, $array = array(), $ignore = array())
 	{
-		if($s = JFactory::getApplication()->input->getInt('section_id'))
+		if($s = \Joomla\CMS\Factory::getApplication()->input->getInt('section_id'))
 		{
 			$array['section_id'] = $s;
 		}
 
 		$array['view'] = $type;
 
-		if($c = JFactory::getApplication()->input->getInt('cat_id'))
+		if($c = \Joomla\CMS\Factory::getApplication()->input->getInt('cat_id'))
 		{
 			$array['cat_id'] = $c;
 		}
-		if($c = JFactory::getApplication()->input->getInt('ucat_id'))
+		if($c = \Joomla\CMS\Factory::getApplication()->input->getInt('ucat_id'))
 		{
 			$array['ucat_id'] = $c;
 		}
-		if($u = JFactory::getApplication()->input->getInt('user_id'))
+		if($u = \Joomla\CMS\Factory::getApplication()->input->getInt('user_id'))
 		{
 			$array['user_id'] = $u;
 		}
@@ -139,7 +139,7 @@ class Url
 
 	static public function user($view_what, $user_id = NULL, $section_id = NULL)
 	{
-		$user = JFactory::getUser($user_id);
+		$user = \Joomla\CMS\Factory::getUser($user_id);
 
 		if(!$user->get('id'))
 		{
@@ -150,7 +150,7 @@ class Url
 
 		if(!$section_id)
 		{
-			$section_id = JFactory::getApplication()->input->getInt('section_id');
+			$section_id = \Joomla\CMS\Factory::getApplication()->input->getInt('section_id');
 		}
 
 		if(!$section_id)
@@ -173,9 +173,9 @@ class Url
 			$array['Itemid'] = $section->params->get('general.category_itemid');
 		}
 
-		if(JFactory::getApplication()->input->getInt('start'))
+		if(\Joomla\CMS\Factory::getApplication()->input->getInt('start'))
 		{
-			$array['start'] = JFactory::getApplication()->input->getInt('start');
+			$array['start'] = \Joomla\CMS\Factory::getApplication()->input->getInt('start');
 		}
 
 		return self::build($array);
@@ -200,7 +200,7 @@ class Url
 			return;
 		}
 
-		$app = JFactory::getApplication();
+		$app = \Joomla\CMS\Factory::getApplication();
 
 
 		if(!is_object($record))
@@ -254,7 +254,7 @@ class Url
 
 		if($section->params->get('personalize.personalize') && $record->user_id)
 		{
-			$url .= '&user_id=' . $record->user_id . COBS . ApplicationHelper::stringURLSafe(JFactory::getUser($record->user_id)->get($section->params->get('personalize.author_mode')));
+			$url .= '&user_id=' . $record->user_id . COBS . ApplicationHelper::stringURLSafe(\Joomla\CMS\Factory::getUser($record->user_id)->get($section->params->get('personalize.author_mode')));
 		}
 		if(!empty($category->id))
 		{
@@ -335,7 +335,7 @@ class Url
 		}
 		if((int)$itemid == 0)
 		{
-			$app    = JFactory::getApplication();
+			$app    = \Joomla\CMS\Factory::getApplication();
 			$itemid = $app->input->getInt('Itemid');
 		}
 		$url .= '&Itemid=' . $itemid;
@@ -351,7 +351,7 @@ class Url
 		{
 			$url .= '&ucat_id=' . $ucategory_id;
 		}
-		$url .= '&user_id=' . $user_id . COBS . ApplicationHelper::stringURLSafe(JFactory::getUser($user_id)->get($section->params->get('personalize.author_mode')));
+		$url .= '&user_id=' . $user_id . COBS . ApplicationHelper::stringURLSafe(\Joomla\CMS\Factory::getUser($user_id)->get($section->params->get('personalize.author_mode')));
 		$url .= '&Itemid=' . $section->params->get('general.category_itemid');
 
 		return $url;

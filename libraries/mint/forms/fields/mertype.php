@@ -18,8 +18,8 @@ class JFormFieldMertype extends JFormField
 	{
 		global $app;
 		
-		$db			= JFactory::getDBO();
-		$doc 		= JFactory::getDocument();
+		$db			= \Joomla\CMS\Factory::getDBO();
+		$doc 		= \Joomla\CMS\Factory::getDocument();
 		$template 	= $app->getTemplate();
 		$multi    	= $this->element['multi'];		
 		

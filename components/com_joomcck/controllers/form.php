@@ -30,7 +30,7 @@ class JoomcckControllerForm extends MControllerForm
 
 		if(!$this->input)
 		{
-			$this->input = JFactory::getApplication()->input;
+			$this->input = \Joomla\CMS\Factory::getApplication()->input;
 		}
 	}
 
@@ -39,7 +39,7 @@ class JoomcckControllerForm extends MControllerForm
 		$this->view_list = 'records';
 
 		$record  = $this->input->get('jform', array(), 'array');
-		$user    = JFactory::getUser();
+		$user    = \Joomla\CMS\Factory::getUser();
 		$section = ItemsStore::getSection($record['section_id']);
 		$this->input->set('section_id', $section->id);
 		$type = ItemsStore::getType($record['type_id']);
@@ -59,7 +59,7 @@ class JoomcckControllerForm extends MControllerForm
 			$this->text_prefix = $type->params->get('submission.submit_msg', 'JLIB_APPLICATION');
 		}
 
-		$app = JFactory::getApplication();
+		$app = \Joomla\CMS\Factory::getApplication();
 		if(!$app->getUserState('com_joomcck.edit.form.id'))
 		{
 			$app->setUserState('com_joomcck.edit.form.id', $record['id']);
@@ -74,8 +74,8 @@ class JoomcckControllerForm extends MControllerForm
 
 	public function postSaveHook(MModelBase $model, $validData = array())
 	{
-		$db           = JFactory::getDbo();
-		$user         = JFactory::getUser();
+		$db           = \Joomla\CMS\Factory::getDbo();
+		$user         = \Joomla\CMS\Factory::getUser();
 		$fileds_model = MModelBase::getInstance('Fields', 'JoomcckModel');
 		$record_id    = $model->getState('form.id');
 		$table        = JTable::getInstance('Record_values', 'JoomcckTable');
@@ -94,7 +94,7 @@ class JoomcckControllerForm extends MControllerForm
 		{
 			$url = Url::edit($record_id . '&access_key=' . $record->access_key);
 
-			Factory::getApplication()->enqueueMessage( JText::sprintf('CEDITRECORDLINKALERT', JHtml::link($url, JText::_('CEDITLINK'))), 'warning');
+			Factory::getApplication()->enqueueMessage( \Joomla\CMS\Language\Text::sprintf('CEDITRECORDLINKALERT', \Joomla\CMS\HTML\HTMLHelper::link($url, \Joomla\CMS\Language\Text::_('CEDITLINK'))), 'warning');
 		}
 
 		// Delete values of fields that are deleted.
@@ -119,11 +119,11 @@ class JoomcckControllerForm extends MControllerForm
 				// check if field is email and no user to send edit link
 				if($field->type == 'email' && !$user->get('id') && $field->value && $type->params->get('submission.public_edit'))
 				{
-					$config  = JFactory::getConfig();
-					$subject = JMailHelper::cleanSubject(JText::sprintf('CEDITRECORDEMAIL', $type->name, $section->name));
-					$body    = JMailHelper::cleanBody(JText::sprintf('CEDITREORDBODY', $type->name, $section->name, $config->get('sitename'),
+					$config  = \Joomla\CMS\Factory::getConfig();
+					$subject = JMailHelper::cleanSubject(\Joomla\CMS\Language\Text::sprintf('CEDITRECORDEMAIL', $type->name, $section->name));
+					$body    = JMailHelper::cleanBody(\Joomla\CMS\Language\Text::sprintf('CEDITREORDBODY', $type->name, $section->name, $config->get('sitename'),
 						preg_replace('/\/$/iU', '', JURI::root(TRUE)) . $url));
-					$mailer  = JFactory::getMailer();
+					$mailer  = \Joomla\CMS\Factory::getMailer();
 					$mailer->sendMail($config->get('mailfrom'), $config->get('fromname'),
 						JMailHelper::cleanAddress($field->value), $subject, $body);
 					//JError::raiseNotice(100, $subject.$body);
@@ -308,7 +308,7 @@ class JoomcckControllerForm extends MControllerForm
 				$db->setQuery($sql);
 				$db->execute();
 
-				$data = array('record_id' => $record_id, 'ctime' => JFactory::getDate()->toSql(), 'is_reposted' => 0);
+				$data = array('record_id' => $record_id, 'ctime' => \Joomla\CMS\Factory::getDate()->toSql(), 'is_reposted' => 0);
 				foreach($posts as $pid)
 				{
 					$data['host_id'] = $pid;
@@ -379,7 +379,7 @@ class JoomcckControllerForm extends MControllerForm
 			{
 				$field = JTable::getInstance('Field', 'JoomcckTable');
 				$field->load($this->input->getInt('field_id'));
-				$field->params = new JRegistry($field->params);
+				$field->params = new \Joomla\Registry\Registry($field->params);
 
 				$fand = JTable::getInstance('Record', 'JoomcckTable');
 				$fand->load($this->input->getInt('fand'));
@@ -422,11 +422,11 @@ class JoomcckControllerForm extends MControllerForm
 			switch($type->params->get('submission.redirect'))
 			{
 				case 1:
-					$url = JRoute::_(Url::records($section->id), FALSE);
+					$url = \Joomla\CMS\Router\Route::_(Url::records($section->id), FALSE);
 					break;
 
 				case 2:
-					$url = JRoute::_(Url::record($record_id), FALSE);
+					$url = \Joomla\CMS\Router\Route::_(Url::record($record_id), FALSE);
 					break;
 
 				case 3:
@@ -476,7 +476,7 @@ class JoomcckControllerForm extends MControllerForm
 
 	protected function allowAdd($data = array(), $key = 'id')
 	{
-		$user  = JFactory::getUser();
+		$user  = \Joomla\CMS\Factory::getUser();
 		$allow = $user->authorise('core.create', 'com_joomcck.record');
 
 		if($allow === NULL)
@@ -494,7 +494,7 @@ class JoomcckControllerForm extends MControllerForm
 		$record = ItemsStore::getRecord($data['id']);
 
 		return MECAccess::allowEdit($record, ItemsStore::getType($record->type_id), ItemsStore::getSection($record->section_id));
-		//return JFactory::getUser()->authorise('core.edit', 'com_joomcck.record');
+		//return \Joomla\CMS\Factory::getUser()->authorise('core.edit', 'com_joomcck.record');
 	}
 
 	protected function getRedirectTolistAppend()
@@ -534,7 +534,7 @@ class JoomcckControllerForm extends MControllerForm
 
 		if($recordId)
 		{
-			$user = JFactory::getUser();
+			$user = \Joomla\CMS\Factory::getUser();
 			if(!$user->get('id') && $recordId)
 			{
 				$record = ItemsStore::getRecord($recordId);
@@ -606,7 +606,7 @@ class JoomcckControllerForm extends MControllerForm
 	{
 		$return = urldecode($this->input->getBase64('return'));
 
-		if(empty($return) || !JUri::isInternal(JoomcckFilter::base64($return)))
+		if(empty($return) || !\Joomla\CMS\Uri\Uri::isInternal(JoomcckFilter::base64($return)))
 		{
 			return JURI::base();
 		}

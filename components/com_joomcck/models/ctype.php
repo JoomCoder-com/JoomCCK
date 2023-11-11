@@ -21,21 +21,21 @@ class JoomcckModelCType extends MModelAdmin
 
 	public function getTable($type = 'Type', $prefix = 'JoomcckTable', $config = array())
 	{
-		return JTable::getInstance($type, $prefix, $config);
+		return \Joomla\CMS\Table\Table::getInstance($type, $prefix, $config);
 	}
 
 	/*
 	public function getFields()
 	{
 		$fileds = JPATH_ROOT . '/components/com_joomcck/fields' ;
-		$folders = JFolder::folders($fileds);
+		$folders = \Joomla\CMS\Filesystem\Folder::folders($fileds);
 		$out = array();
 		foreach($folders as $folder)
 		{
-			$xml = JFactory::getXMLParser('Simple');
+			$xml = \Joomla\CMS\Factory::getXMLParser('Simple');
 			if(! $xml->loadFile($fileds . DIRECTORY_SEPARATOR . $folder . DIRECTORY_SEPARATOR . $folder . '.xml'))
 			{
-				JError::raiseWarning(100, JText::sprintf('C_MSG_CANNOTLOADFILE'));
+				JError::raiseWarning(100, \Joomla\CMS\Language\Text::sprintf('C_MSG_CANNOTLOADFILE'));
 				continue;
 			}
 			$group = $xml->document->group[0]->data();
@@ -50,11 +50,11 @@ class JoomcckModelCType extends MModelAdmin
 			$field->url = $xml->document->url[0]->data();
 			$field->description = $xml->document->description[0]->data();
 			$field->description_full = $field->description;
-			$field->description_full .= sprintf('<table><tr><td><b>%s</b></td><td>%s</td></tr> <tr><td><b>%s</b></td><td>%s</td></tr> <tr><td><b>%s</b></td><td>%s</td></tr> <tr><td><b>%s</b></td><td>%s</td></tr></table>', JText::_('JAUTHOR'), $field->author, JText::_('JSITE'), $field->url,
-				JText::_('JGLOBAL_EMAIL'), $field->email, JText::_('CLICENSE'), $field->license);
+			$field->description_full .= sprintf('<table><tr><td><b>%s</b></td><td>%s</td></tr> <tr><td><b>%s</b></td><td>%s</td></tr> <tr><td><b>%s</b></td><td>%s</td></tr> <tr><td><b>%s</b></td><td>%s</td></tr></table>', \Joomla\CMS\Language\Text::_('JAUTHOR'), $field->author, \Joomla\CMS\Language\Text::_('JSITE'), $field->url,
+				\Joomla\CMS\Language\Text::_('JGLOBAL_EMAIL'), $field->email, \Joomla\CMS\Language\Text::_('CLICENSE'), $field->license);
 
 			$field->icon = JURI::root() . 'libraries/mint/forms/fields/joomcck';
-			if(JFile::exists($fileds . DIRECTORY_SEPARATOR . $folder . DIRECTORY_SEPARATOR . $folder . '.png'))
+			if(\Joomla\CMS\Filesystem\File::exists($fileds . DIRECTORY_SEPARATOR . $folder . DIRECTORY_SEPARATOR . $folder . '.png'))
 			{
 				$field->icon .= "/{$folder}/{$folder}.png";
 			}
@@ -72,7 +72,7 @@ class JoomcckModelCType extends MModelAdmin
 
 	public function getForm($data = array(), $loadData = true)
 	{
-		$app = JFactory::getApplication();
+		$app = \Joomla\CMS\Factory::getApplication();
 
 		$form = $this->loadForm('com_joomcck.ctype', 'type', array(
 			'control'   => 'jform',
@@ -87,7 +87,7 @@ class JoomcckModelCType extends MModelAdmin
 
 	protected function loadFormData()
 	{
-		$data = JFactory::getApplication()->getUserState('com_joomcck.edit.ctype.data', array());
+		$data = \Joomla\CMS\Factory::getApplication()->getUserState('com_joomcck.edit.ctype.data', array());
 
 		if(empty($data))
 		{
@@ -104,14 +104,14 @@ class JoomcckModelCType extends MModelAdmin
 
 	protected function canDelete($record)
 	{
-		$user = JFactory::getUser();
+		$user = \Joomla\CMS\Factory::getUser();
 
 		return $user->authorise('core.delete', 'com_joomcck.ctype.' . (int)$record->id);
 	}
 
 	protected function canEditState($record)
 	{
-		$user = JFactory::getUser();
+		$user = \Joomla\CMS\Factory::getUser();
 
 		return $user->authorise('core.edit.state', 'com_joomcck.ctype.' . (int)$record->id);
 	}

@@ -21,12 +21,12 @@ class JoomcckModelComm extends MModelAdmin
 
 	public function getTable($type = 'Cobcomments', $prefix = 'JoomcckTable', $config = array())
 	{
-		return JTable::getInstance($type, $prefix, $config);
+		return \Joomla\CMS\Table\Table::getInstance($type, $prefix, $config);
 	}
 
 	public function getForm($data = array(), $loadData = true)
 	{
-		$app = JFactory::getApplication();
+		$app = \Joomla\CMS\Factory::getApplication();
 
 		$form = $this->loadForm('com_joomcck.comment', 'comm', array('control' => 'jform', 'load_data' => $loadData));
 		if(empty($form))
@@ -38,7 +38,7 @@ class JoomcckModelComm extends MModelAdmin
 
 	protected function loadFormData()
 	{
-		$data = JFactory::getApplication()->getUserState('com_joomcck.edit.comment.data', array());
+		$data = \Joomla\CMS\Factory::getApplication()->getUserState('com_joomcck.edit.comment.data', array());
 
 		if(empty($data))
 		{
@@ -53,7 +53,7 @@ class JoomcckModelComm extends MModelAdmin
 		if ($item = parent::getItem($pk)) {
 			if(!is_array($item->params))
 			{
-				$registry = new JRegistry;
+				$registry = new \Joomla\Registry\Registry;
 				$registry->loadString((string)$item->params);
 				$item->params = $registry->toArray();
 			}
@@ -64,14 +64,14 @@ class JoomcckModelComm extends MModelAdmin
 
 	protected function canDelete($record)
 	{
-		$user = JFactory::getUser();
+		$user = \Joomla\CMS\Factory::getUser();
 
 		return $user->authorise('core.delete', 'com_joomcck.filter.'.(int) $record->id);
 	}
 
 	protected function canEditState($record)
 	{
-		$user = JFactory::getUser();
+		$user = \Joomla\CMS\Factory::getUser();
 
 		return $user->authorise('core.edit.state', 'com_joomcck.filter.'.(int) $record->id);
 	}

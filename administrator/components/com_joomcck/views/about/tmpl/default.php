@@ -14,7 +14,7 @@ defined('_JEXEC') or die('Restricted access'); ?>
 
     <h1>JoomCCK <small><b>Content Construction</b> Kit</small></h1>
     <p>JoomCCK is a great extension to aid in the design of components and content for your site. You can use it to create hundreds of different sections of your site.</p>
-    <div class="mt-3"> <a class="btn btn-success" target="_blank" href="<?php echo $this->linkCP ?>"><?php echo JText::_('Start now') ?></a> <a class="btn btn-light border" href="https://github.com/JoomCoder-com/JoomCCK/discussions" target="_blank">Ideas? Questions? Problems?</a>
+    <div class="mt-3"> <a class="btn btn-success" target="_blank" href="<?php echo $this->linkCP ?>"><?php echo \Joomla\CMS\Language\Text::_('Start now') ?></a> <a class="btn btn-light border" href="https://github.com/JoomCoder-com/JoomCCK/discussions" target="_blank">Ideas? Questions? Problems?</a>
         <!--<a class="btn" href="https://www.joomcoder.com/blog.html">Update log</a>
         <a class="btn" href="https://www.joomcoder.com/community/depot.html">3d party Packs, Translations, Integrations, ..</a>-->
     </div>

@@ -7,8 +7,8 @@
  * @license GNU/GPL http://www.gnu.org/copyleft/gpl.html
  */
 defined('_JEXEC') or die();
-JHtml::_('behavior.formvalidation');
-JHtml::_('bootstrap.modal');
+\Joomla\CMS\HTML\HTMLHelper::_('behavior.formvalidation');
+\Joomla\CMS\HTML\HTMLHelper::_('bootstrap.modal');
 
 ?>
 <style>
@@ -18,8 +18,8 @@ JHtml::_('bootstrap.modal');
 -->
 </style>
 
-<div class="page-header"><h1><?php echo JText::_('CADDSALE')?></h1></div>
-<form action="<?php echo JRoute::_('index.php');?>" method="post" name="adminForm" id="adminForm" class="form-horizontal">
+<div class="page-header"><h1><?php echo \Joomla\CMS\Language\Text::_('CADDSALE')?></h1></div>
+<form action="<?php echo \Joomla\CMS\Router\Route::_('index.php');?>" method="post" name="adminForm" id="adminForm" class="form-horizontal">
 	<div class="row">
 		<div class="control-group">
 			<div class="control-label col-md-2"><?php echo $this->form->getLabel('gateway_id'); ?></div>
@@ -38,9 +38,9 @@ JHtml::_('bootstrap.modal');
 			<div class="input-append">
 				<?php echo $this->form->getInput('record_id'); ?>
 				<span class="add-on" id="producttitle"><?php if($this->item->record_id) echo $this->item->record_id;?></span>
-				<a class="btn btn-primary" onclick="SqueezeBox.fromElement(this, {handler:'iframe', size: {x: 700, y: 500}, url:'<?php echo JRoute::_('index.php?option=com_joomcck&view=elements&layout=products&tmpl=component', false);?>'})">
+				<a class="btn btn-primary" onclick="SqueezeBox.fromElement(this, {handler:'iframe', size: {x: 700, y: 500}, url:'<?php echo \Joomla\CMS\Router\Route::_('index.php?option=com_joomcck&view=elements&layout=products&tmpl=component', false);?>'})">
 					<i class="icon-list icon-white"></i>
-					<?php echo JText::_('CSELECT');?>
+					<?php echo \Joomla\CMS\Language\Text::_('CSELECT');?>
 				</a>
 			</div>
 		</div>
@@ -62,12 +62,12 @@ JHtml::_('bootstrap.modal');
 <div class="form-actions">
 	<button type="button" class="btn" onclick="Joomla.submitbutton('sale.save')">
 		<?php echo HTMLFormatHelper::icon('disk.png');  ?>
-		<?php echo JText::_('CSAVE');?>
+		<?php echo \Joomla\CMS\Language\Text::_('CSAVE');?>
 	</button>
 
 	<button type="button" class="btn" onclick="Joomla.submitbutton('sale.cancel')">
 		<?php echo HTMLFormatHelper::icon('cross.png');  ?>
-		<?php echo JText::_('CCANCEL');?>
+		<?php echo \Joomla\CMS\Language\Text::_('CCANCEL');?>
 	</button>
 </div>
 
@@ -81,7 +81,7 @@ $('jform_user_id').addEvent('blur', function(){
 	$('user-name-check').setStyle('display', 'inline');
 
 	new Request.JSON({
-		url: '<?php echo JRoute::_('index.php?option=com_joomcck&task=ajax.checkuser&tmpl=component', FALSE) ?>',
+		url: '<?php echo \Joomla\CMS\Router\Route::_('index.php?option=com_joomcck&task=ajax.checkuser&tmpl=component', FALSE) ?>',
 		method:'post',
 		data:{
 			user:current_value
@@ -115,6 +115,6 @@ $('jform_user_id').addEvent('focus', function(){
 
 <input type="hidden" name="task" value="" />
 <input type="hidden" name="option" value="com_joomcck" />
-<?php echo JHtml::_( 'form.token' ); ?>
+<?php echo \Joomla\CMS\HTML\HTMLHelper::_( 'form.token' ); ?>
 
 </form>

@@ -62,7 +62,7 @@ class plgContentJoomcck extends JPlugin
 
 		if($this->params->get('rating'))
 		{
-			$db = JFactory::getDbo();
+			$db = \Joomla\CMS\Factory::getDbo();
 			$query = $db->getQuery(true);
 			$query->select("AVG(votes_result)");
 			$query->from("#__js_res_record");
@@ -71,7 +71,7 @@ class plgContentJoomcck extends JPlugin
 			$db->setQuery($query);
 
 			$result = $db->loadResult();
-			$out[] = '<div id="rating-block" class="float-end">'.JText::_('Total').': '.
+			$out[] = '<div id="rating-block" class="float-end">'.\Joomla\CMS\Language\Text::_('Total').': '.
 				RatingHelp::loadRating($this->params->get('rating_tmpl', 'default'), $result, 0, 0, 'Joomcck.ItemRatingCallBack', 0, 0).'</div>';
 
 		}
@@ -92,7 +92,7 @@ class plgContentJoomcck extends JPlugin
 
 		$stype = ItemsStore::getType($this->params->get('type_id'));
 		$section = ItemsStore::getSection($this->params->get('section_id'));
-		$user = JFactory::getUser();
+		$user = \Joomla\CMS\Factory::getUser();
 
 		\Joomla\CMS\Factory::getApplication()->input->set('parent_id', $row->id);
 		\Joomla\CMS\Factory::getApplication()->input->set('parent', 'com_content');
@@ -106,7 +106,7 @@ class plgContentJoomcck extends JPlugin
 		\Joomla\CMS\Factory::getApplication()->input->set('parent_id', 0);
 
 		$return = urlencode(base64_encode(\Joomla\CMS\Uri\Uri::getInstance()->toString()));
-		$app = JFactory::getApplication();
+		$app = \Joomla\CMS\Factory::getApplication();
 
 		if(in_array($stype->params->get('submission.submission'), $user->getAuthorisedViewLevels()))
 		{
@@ -116,7 +116,7 @@ class plgContentJoomcck extends JPlugin
 			$url .= '&parent_id='.$row->id;
 			$url .= '&parent=com_content';
 			$url .= '&return=' . $return;
-			$out[] = '<a class="btn btn-primary btn-large" href="' . JRoute::_($url) . '">' . $this->params->get('button') . '</a>';
+			$out[] = '<a class="btn btn-primary btn-large" href="' . \Joomla\CMS\Router\Route::_($url) . '">' . $this->params->get('button') . '</a>';
 		}
 		if($this->params->get('limit', 5) <= $result['total'])
 		{
@@ -124,10 +124,10 @@ class plgContentJoomcck extends JPlugin
 			$url .= '&parent_id='.$row->id;
 			$url .= '&parent=com_content';
 			$url .= '&view_what=children';
-			$url .= '&page_title='.urlencode(base64_encode(JText::sprintf($this->params->get('title_all', 'All discussions of %s'), $row->title)));
+			$url .= '&page_title='.urlencode(base64_encode(\Joomla\CMS\Language\Text::sprintf($this->params->get('title_all', 'All discussions of %s'), $row->title)));
 			$url .= '&Itemid='.$section->params->get('general.category_itemid', $app->input->get('Itemid'));
 			$url .= '&return=' . $return;
-			$out[] = '<a class="btn" href="' . JRoute::_($url) . '">' . $this->params->get('button_all', 'All discussions') . '</a>';
+			$out[] = '<a class="btn" href="' . \Joomla\CMS\Router\Route::_($url) . '">' . $this->params->get('button_all', 'All discussions') . '</a>';
 		}
 
 		$out[] = '<div class="clearfix"></div><br>';

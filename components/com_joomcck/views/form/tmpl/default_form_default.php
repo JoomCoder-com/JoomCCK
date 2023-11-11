@@ -91,7 +91,7 @@ $k = 0;
 <?php if(in_array($params->get('tmpl_params.form_grouping_type', 0), array(1, 4))):?>
 	<div class="tabbable<?php if($params->get('tmpl_params.form_grouping_type', 0) == 4) echo ' tabs-left' ?>">
 		<ul class="nav nav-tabs" id="tabs-list">
-			<li class="nav-item"><a href="#tab-main" class="nav-link active"  data-bs-toggle="tab"><?php echo JText::_($params->get('tmpl_params.tab_main', 'Main'));?></a></li>
+			<li class="nav-item"><a href="#tab-main" class="nav-link active"  data-bs-toggle="tab"><?php echo \Joomla\CMS\Language\Text::_($params->get('tmpl_params.tab_main', 'Main'));?></a></li>
 
 			<?php if(isset($this->sorted_fields)):?>
 				<?php foreach ($this->sorted_fields as $group_id => $fields) :?>
@@ -101,13 +101,13 @@ $k = 0;
 			<?php endif;?>
 
 			<?php if(count($this->meta)):?>
-				<li class="nav-item"><a class="nav-link" href="#tab-meta"  data-bs-toggle="tab"><?php echo JText::_('Meta Data');?></a></li>
+				<li class="nav-item"><a class="nav-link" href="#tab-meta"  data-bs-toggle="tab"><?php echo \Joomla\CMS\Language\Text::_('Meta Data');?></a></li>
 			<?php endif;?>
 			<?php if(count($this->core_admin_fields)):?>
-				<li class="nav-item"><a class="nav-link"  href="#tab-special"  data-bs-toggle="tab"><?php echo JText::_('Special Fields');?></a></li>
+				<li class="nav-item"><a class="nav-link"  href="#tab-special"  data-bs-toggle="tab"><?php echo \Joomla\CMS\Language\Text::_('Special Fields');?></a></li>
 			<?php endif;?>
 			<?php if(count($this->core_fields)):?>
-				<li class="nav-item"><a class="nav-link"  href="#tab-core"  data-bs-toggle="tab"><?php echo JText::_('Core Fields');?></a></li>
+				<li class="nav-item"><a class="nav-link"  href="#tab-core"  data-bs-toggle="tab"><?php echo \Joomla\CMS\Language\Text::_('Core Fields');?></a></li>
 			<?php endif;?>
 		</ul>
 <?php endif;?>
@@ -124,8 +124,8 @@ $k = 0;
 					<?php echo HTMLFormatHelper::icon($params->get('tmpl_core.item_icon_title_icon', 'edit.png'));  ?>
 				<?php endif;?>
 
-				<?php echo JText::_($this->tmpl_params->get('tmpl_core.form_label_title', 'Title')) ?>
-				<span class="float-end" rel="tooltip" title="<?php echo JText::_('CREQUIRED')?>">
+				<?php echo \Joomla\CMS\Language\Text::_($this->tmpl_params->get('tmpl_core.form_label_title', 'Title')) ?>
+				<span class="float-end" rel="tooltip" title="<?php echo \Joomla\CMS\Language\Text::_('CREQUIRED')?>">
 					<?php echo HTMLFormatHelper::icon('asterisk-small.png');  ?></span>
 			</label>
 			<div class="controls">
@@ -134,7 +134,7 @@ $k = 0;
 			</div>
 		</div>
 	<?php else :?>
-		<input type="hidden" name="jform[title]" value="<?php echo htmlentities(!empty($this->item->title) ? $this->item->title : JText::_('CNOTITLE').': '.time(), ENT_COMPAT, 'UTF-8')?>" />
+		<input type="hidden" name="jform[title]" value="<?php echo htmlentities(!empty($this->item->title) ? $this->item->title : \Joomla\CMS\Language\Text::_('CNOTITLE').': '.time(), ENT_COMPAT, 'UTF-8')?>" />
 	<?php endif;?>
 
 	<?php if($this->anywhere) : ?>
@@ -144,8 +144,8 @@ $k = 0;
 					<?php echo HTMLFormatHelper::icon('document-share.png');  ?>
 				<?php endif;?>
 
-				<?php echo JText::_($this->tmpl_params->get('tmpl_core.form_label_anywhere', 'Where to post')) ?>
-				<span class="float-end" rel="tooltip" title="<?php echo JText::_('CREQUIRED')?>"><?php echo HTMLFormatHelper::icon('asterisk-small.png');  ?></span>
+				<?php echo \Joomla\CMS\Language\Text::_($this->tmpl_params->get('tmpl_core.form_label_anywhere', 'Where to post')) ?>
+				<span class="float-end" rel="tooltip" title="<?php echo \Joomla\CMS\Language\Text::_('CREQUIRED')?>"><?php echo HTMLFormatHelper::icon('asterisk-small.png');  ?></span>
 			</label>
 			<div class="controls">
 				<div id="field-alert-anywhere" class="alert alert-danger" style="display:none"></div>
@@ -160,7 +160,7 @@ $k = 0;
 					<?php echo HTMLFormatHelper::icon('arrow-retweet.png');  ?>
 				<?php endif;?>
 
-				<?php echo JText::_($this->tmpl_params->get('tmpl_core.form_label_anywhere_who', 'Who can repost')) ?>
+				<?php echo \Joomla\CMS\Language\Text::_($this->tmpl_params->get('tmpl_core.form_label_anywhere_who', 'Who can repost')) ?>
 			</label>
 			<div class="controls">
 				<div id="field-alert-anywhere" class="alert alert-danger" style="display:none"></div>
@@ -177,10 +177,10 @@ $k = 0;
 						<?php echo HTMLFormatHelper::icon('category.png');  ?>
 					<?php endif;?>
 
-					<?php echo JText::_($this->tmpl_params->get('tmpl_core.form_label_category', 'Category')) ?>
+					<?php echo \Joomla\CMS\Language\Text::_($this->tmpl_params->get('tmpl_core.form_label_category', 'Category')) ?>
 
 					<?php if(!$this->type->params->get('submission.first_category', 0) && in_array($this->type->params->get('submission.allow_category', 1), $this->user->getAuthorisedViewLevels())) : ?>
-						<span class="float-end" rel="tooltip" title="<?php echo JText::_('CREQUIRED')?>"><?php echo HTMLFormatHelper::icon('asterisk-small.png');  ?></span>
+						<span class="float-end" rel="tooltip" title="<?php echo \Joomla\CMS\Language\Text::_('CREQUIRED')?>"><?php echo HTMLFormatHelper::icon('asterisk-small.png');  ?></span>
 					<?php endif;?>
 				</label>
 			<?php endif;?>
@@ -188,8 +188,8 @@ $k = 0;
 				<div id="field-alert-category" class="alert alert-danger" style="display:none"></div>
 				<?php if(!empty($this->allow_multi_msg)): ?>
 					<div class="alert alert-warning">
-						<?php echo JText::_($this->type->params->get('emerald.type_multicat_subscription_msg')); ?>
-						<a href="<?php echo EmeraldApi::getLink('list', TRUE, $this->type->params->get('emerald.type_multicat_subscription')); ?>"><?php echo JText::_('CSUBSCRIBENOW'); ?></a>
+						<?php echo \Joomla\CMS\Language\Text::_($this->type->params->get('emerald.type_multicat_subscription_msg')); ?>
+						<a href="<?php echo EmeraldApi::getLink('list', TRUE, $this->type->params->get('emerald.type_multicat_subscription')); ?>"><?php echo \Joomla\CMS\Language\Text::_('CSUBSCRIBENOW'); ?></a>
 					</div>
 				<?php endif;?>
 				<?php echo $this->loadTemplate('category_'.$params->get('tmpl_params.tmpl_category', 'default')); ?>
@@ -202,10 +202,10 @@ $k = 0;
 					<?php echo HTMLFormatHelper::icon('category.png');  ?>
 				<?php endif;?>
 
-				<?php echo JText::_($this->tmpl_params->get('tmpl_core.form_label_category', 'Category')) ?>
+				<?php echo \Joomla\CMS\Language\Text::_($this->tmpl_params->get('tmpl_core.form_label_category', 'Category')) ?>
 
 				<?php if(!$this->type->params->get('submission.first_category', 0) && in_array($this->type->params->get('submission.allow_category', 1), $this->user->getAuthorisedViewLevels())) : ?>
-					<span class="float-end" rel="tooltip" title="<?php echo JText::_('CREQUIRED')?>"></span>
+					<span class="float-end" rel="tooltip" title="<?php echo \Joomla\CMS\Language\Text::_('CREQUIRED')?>"></span>
 				<?php endif;?>
 			</label>
 			<div class="controls">
@@ -223,9 +223,9 @@ $k = 0;
 					<?php echo HTMLFormatHelper::icon('category.png');  ?>
 				<?php endif;?>
 
-				<?php echo JText::_($this->tmpl_params->get('tmpl_core.form_label_ucategory', 'Category')) ?>
+				<?php echo \Joomla\CMS\Language\Text::_($this->tmpl_params->get('tmpl_core.form_label_ucategory', 'Category')) ?>
 
-				<span class="float-end" rel="tooltip" title="<?php echo JText::_('CREQUIRED')?>"><?php echo HTMLFormatHelper::icon('asterisk-small.png');  ?></span>
+				<span class="float-end" rel="tooltip" title="<?php echo \Joomla\CMS\Language\Text::_('CREQUIRED')?>"><?php echo HTMLFormatHelper::icon('asterisk-small.png');  ?></span>
 			</label>
 			<div class="controls">
 				<div id="field-alert-ucat" class="alert alert-danger" style="display:none"></div>
@@ -242,7 +242,7 @@ $k = 0;
 		<div class="control-group odd<?php echo $k = 1 - $k ?>">
 			<label id="jform_multirating-lbl" class="control-label" for="jform_multirating" >
 				<?php echo strip_tags($this->form->getLabel('multirating'));?>
-				<span class="float-end" rel="tooltip" title="<?php echo JText::_('CREQUIRED')?>"><?php echo HTMLFormatHelper::icon('asterisk-small.png');  ?></span>
+				<span class="float-end" rel="tooltip" title="<?php echo \Joomla\CMS\Language\Text::_('CREQUIRED')?>"><?php echo HTMLFormatHelper::icon('asterisk-small.png');  ?></span>
 			</label>
 			<div class="controls">
 				<div id="field-alert-rating" class="alert alert-danger" style="display:none"></div>
@@ -263,11 +263,11 @@ $k = 0;
 							
 						
 						<?php if ($field->required): ?>
-							<span class="float-end" rel="tooltip" title="<?php echo JText::_('CREQUIRED')?>"><?php echo HTMLFormatHelper::icon('asterisk-small.png');  ?></span>
+							<span class="float-end" rel="tooltip" title="<?php echo \Joomla\CMS\Language\Text::_('CREQUIRED')?>"><?php echo HTMLFormatHelper::icon('asterisk-small.png');  ?></span>
 						<?php endif;?>
 
 						<?php if ($field->description):?>
-							<span class="float-end" rel="tooltip" style="cursor: help;"  title="<?php echo htmlentities(($field->translateDescription ? JText::_($field->description) : $field->description), ENT_COMPAT, 'UTF-8');?>">
+							<span class="float-end" rel="tooltip" style="cursor: help;"  title="<?php echo htmlentities(($field->translateDescription ? \Joomla\CMS\Language\Text::_($field->description) : $field->description), ENT_COMPAT, 'UTF-8');?>">
 								<?php echo HTMLFormatHelper::icon('question-small-white.png');  ?>
 							</span>
 						<?php endif;?>
@@ -296,10 +296,10 @@ $k = 0;
 				<?php if($params->get('tmpl_core.form_tags_icon', 1)):?>
 					<?php echo HTMLFormatHelper::icon('price-tag.png');  ?>
 				<?php endif;?>
-				<?php echo JText::_($this->tmpl_params->get('tmpl_core.form_label_tags', 'Tags')) ?>
+				<?php echo \Joomla\CMS\Language\Text::_($this->tmpl_params->get('tmpl_core.form_label_tags', 'Tags')) ?>
 			</label>
 			<div class="controls">
-				<?php //echo JHtml::_('tags.tagform', $this->section, json_decode($this->item->tags, TRUE), array(), 'jform[tags]'); ?>
+				<?php //echo \Joomla\CMS\HTML\HTMLHelper::_('tags.tagform', $this->section, json_decode($this->item->tags, TRUE), array(), 'jform[tags]'); ?>
 				<?php echo $this->form->getInput('tags'); ?>
 			</div>
 		</div>
@@ -323,11 +323,11 @@ $k = 0;
 								<?php echo HTMLFormatHelper::icon($field->params->get('core.icon'));  ?>
 							<?php endif;?>
 							<?php if ($field->required): ?>
-								<span class="float-end" rel="tooltip" title="<?php echo JText::_('CREQUIRED')?>"><?php echo HTMLFormatHelper::icon('asterisk-small.png');  ?></span>
+								<span class="float-end" rel="tooltip" title="<?php echo \Joomla\CMS\Language\Text::_('CREQUIRED')?>"><?php echo HTMLFormatHelper::icon('asterisk-small.png');  ?></span>
 							<?php endif;?>
 
 							<?php if ($field->description):?>
-								<span class="float-end" rel="tooltip" style="cursor: help;" title="<?php echo htmlspecialchars(($field->translateDescription ? JText::_($field->description) : $field->description), ENT_COMPAT, 'UTF-8');?>">
+								<span class="float-end" rel="tooltip" style="cursor: help;" title="<?php echo htmlspecialchars(($field->translateDescription ? \Joomla\CMS\Language\Text::_($field->description) : $field->description), ENT_COMPAT, 'UTF-8');?>">
 									<?php echo HTMLFormatHelper::icon('question-small-white.png');  ?>
 								</span>
 							<?php endif;?>
@@ -350,11 +350,11 @@ $k = 0;
 
 	<?php if(count($this->meta)):?>
 		<?php $started = true?>
-		<?php group_start($this, JText::_('CSEO'), 'tab-meta');?>
+		<?php group_start($this, \Joomla\CMS\Language\Text::_('CSEO'), 'tab-meta');?>
 			<?php foreach ($this->meta as $label => $meta_name):?>
 				<div class="control-group odd<?php echo $k = 1 - $k ?>">
 					<label id="jform_meta_descr-lbl" class="control-label" title="" for="jform_<?php echo $meta_name;?>">
-					<?php echo JText::_($label); ?>
+					<?php echo \Joomla\CMS\Language\Text::_($label); ?>
 					</label>
 					<div class="controls">
 						<div class="row">

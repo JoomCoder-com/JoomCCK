@@ -16,4 +16,4 @@ $options['can_delete'] = 1;
 $options['suggestion_limit'] = $this->params->get('params.max_result', 10);
 $options['suggestion_url'] = "index.php?option=com_joomcck&task=ajax.field_call&tmpl=component&field_id={$this->id}&func=onFilterGetValues&section_id={$section->id}&field={$this->type}";
 
-echo JHtml::_('mrelements.pills', "filters[{$this->key}][value]", "filter_" . $this->id, $default, array(), $options);
+echo \Joomla\CMS\HTML\HTMLHelper::_('mrelements.pills', "filters[{$this->key}][value]", "filter_" . $this->id, $default, array(), $options);

@@ -20,16 +20,16 @@ $wa->useScript('keepalive')
 			Joomla.submitform(task, document.getElementById('item-form'));
 		}
 		else {
-			alert('<?php echo $this->escape(JText::_('JGLOBAL_VALIDATION_FORM_FAILED'));?>');
+			alert('<?php echo $this->escape(\Joomla\CMS\Language\Text::_('JGLOBAL_VALIDATION_FORM_FAILED'));?>');
 		}
 	}
 </script>
 
-<form action="<?php echo JUri::getInstance()->toString(); ?>" method="post" name="adminForm" id="item-form" class="form-horizontal">
+<form action="<?php echo \Joomla\CMS\Uri\Uri::getInstance()->toString(); ?>" method="post" name="adminForm" id="item-form" class="form-horizontal">
 	<?php echo HTMLFormatHelper::layout('item', $this); ?>
 	<div class="page-header">
 		<h1>
-			<?php echo empty($this->item->id) ? JText::_('CNEWGROUP') : JText::sprintf('CEDITGROUPS', $this->item->title); ?>
+			<?php echo empty($this->item->id) ? \Joomla\CMS\Language\Text::_('CNEWGROUP') : \Joomla\CMS\Language\Text::sprintf('CEDITGROUPS', $this->item->title); ?>
 		</h1>
 	</div>
 
@@ -57,5 +57,5 @@ $wa->useScript('keepalive')
 	<input type="hidden" id="jform_type_id" name="jform[type_id]" value="<?php echo $this->state->get('groups.type'); ?>"/>
 	<input type="hidden" name="task" value=""/>
 	<input type="hidden" name="return" value="<?php echo $this->state->get('groups.return'); ?>"/>
-	<?php echo JHtml::_('form.token'); ?>
+	<?php echo \Joomla\CMS\HTML\HTMLHelper::_('form.token'); ?>
 </form>

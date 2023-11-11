@@ -13,7 +13,7 @@ defined('_JEXEC') or die('Restricted access');
 /**
  * @package JCommerce
  */
-class JoomcckTableAudit_restore extends JTable
+class JoomcckTableAudit_restore extends \Joomla\CMS\Table\Table
 {
 
 	public function __construct(&$_db)

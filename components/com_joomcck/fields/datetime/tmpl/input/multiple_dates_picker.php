@@ -26,7 +26,7 @@ defined('_JEXEC') or die();
 </div>
 <?php if($this->params->get('params.max_dates', 0) > 0): ?>
 	<small>
-		<?php JText::printf('F_MAX_DATE_INFO', $this->params->get('params.max_dates', 0)) ?>
+		<?php \Joomla\CMS\Language\Text::printf('F_MAX_DATE_INFO', $this->params->get('params.max_dates', 0)) ?>
 	</small>
 <?php endif; ?>
 
@@ -55,7 +55,7 @@ defined('_JEXEC') or die();
 					return;
 				}
 				if(max > 0 && $('#dates_list<?php echo $this->id; ?> li').length >= max) {
-					Joomcck.fieldError(<?php echo $this->id ?>, "<?php  JText::printf('F_ERROR_MAX', $this->params->get('params.max_dates', 0)) ?>");
+					Joomcck.fieldError(<?php echo $this->id ?>, "<?php  \Joomla\CMS\Language\Text::printf('F_ERROR_MAX', $this->params->get('params.max_dates', 0)) ?>");
 					return;
 				}
 				

@@ -33,13 +33,13 @@ class JFormFieldCreturnurl extends JFormFieldList
 	 */
 	protected function getInput()
 	{
-		$id = JFactory::getApplication()->input->getInt('fid');
+		$id = \Joomla\CMS\Factory::getApplication()->input->getInt('fid');
 
 		if(!$id)
 		{
-			return JText::_('RK_SAVETOSEEURL');
+			return \Joomla\CMS\Language\Text::_('RK_SAVETOSEEURL');
 		}
 
-		return sprintf('<input type="text" readonly value="%s" >', JUri::root().'index.php?option=com_joomcck&task=pay.returnUrl&lang=en&processor='.$this->element['processor']);
+		return sprintf('<input type="text" readonly value="%s" >', \Joomla\CMS\Uri\Uri::root().'index.php?option=com_joomcck&task=pay.returnUrl&lang=en&processor='.$this->element['processor']);
 	}
 }

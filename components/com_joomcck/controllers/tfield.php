@@ -21,7 +21,7 @@ class JoomcckControllerTfield extends MControllerForm
 
 		if(!$this->input)
 		{
-			$this->input = JFactory::getApplication()->input;
+			$this->input = \Joomla\CMS\Factory::getApplication()->input;
 		}
 	}
 
@@ -33,7 +33,7 @@ class JoomcckControllerTfield extends MControllerForm
 	protected function getRedirectToItemAppend($recordId = null, $urlVar = 'id')
 	{
 
-		$app = JFactory::getApplication();
+		$app = \Joomla\CMS\Factory::getApplication();
 
 		$append = '';
 		if($t = $app->input->getInt('type_id'))
@@ -44,7 +44,7 @@ class JoomcckControllerTfield extends MControllerForm
 	}
 	protected function getRedirectToListAppend()
 	{
-		$app = JFactory::getApplication();
+		$app = \Joomla\CMS\Factory::getApplication();
 		$append = '';
 		if($t = $app->input->getInt('type_id'))
 		$append = '&type_id='.$t;
@@ -58,7 +58,7 @@ class JoomcckControllerTfield extends MControllerForm
 		$table->reorder('type_id ='. $data['type_id']);
 
 
-		$db = JFactory::getDbo();
+		$db = \Joomla\CMS\Factory::getDbo();
 		$key = 'k'.md5($data['label'].'-'.$data['field_type']);
 
 		$db->setQuery("UPDATE #__js_res_record_values SET field_key = '{$key}', field_type = '{$data['field_type']}', field_label = '". $db->escape($data['label']) ."' WHERE field_id = ".$model->getState('tfield.id'));
@@ -67,7 +67,7 @@ class JoomcckControllerTfield extends MControllerForm
 
 	protected function allowAdd($data = array())
 	{
-		$user = JFactory::getUser();
+		$user = \Joomla\CMS\Factory::getUser();
 		$allow = $user->authorise('core.create', 'com_joomcck.tfields');
 
 		if($allow === null)
@@ -82,6 +82,6 @@ class JoomcckControllerTfield extends MControllerForm
 
 	protected function allowEdit($data = array(), $key = 'id')
 	{
-		return JFactory::getUser()->authorise('core.edit', 'com_joomcck.tfields');
+		return \Joomla\CMS\Factory::getUser()->authorise('core.edit', 'com_joomcck.tfields');
 	}
 }

@@ -10,7 +10,7 @@
 defined( '_JEXEC' ) or die( 'Restricted access');
 jimport('joomla.table.table');
 
-class JoomcckTableVotes extends JTable
+class JoomcckTableVotes extends \Joomla\CMS\Table\Table
 {
 	public function __construct( &$_db ) {
 		parent::__construct( '#__js_res_vote', 'id', $_db );
@@ -18,8 +18,8 @@ class JoomcckTableVotes extends JTable
 
 	public function check()
 	{
-		$user = JFactory::getUser();
-		$this->ctime = JFactory::getDate()->toSql();
+		$user = \Joomla\CMS\Factory::getUser();
+		$this->ctime = \Joomla\CMS\Factory::getDate()->toSql();
 		if(!$this->ip)
 		{
 			$this->ip = $_SERVER['REMOTE_ADDR'];

@@ -11,7 +11,7 @@ $params = $this->params;
 
 if($params->get('params.chosen', false))
 {
-	JHtml::_('formbehavior.chosen', '.joomcck-chosen-'.$this->id);
+	\Joomla\CMS\HTML\HTMLHelper::_('formbehavior.chosen', '.joomcck-chosen-'.$this->id);
 }
 
 $class = ' class="' . $params->get('core.field_class', 'form-control') . ($this->required ? ' required' : NULL) . '"';
@@ -23,7 +23,7 @@ if(!$this->value && $params->get('params.default_val', false))
 }
 $options = $out = array();
 $patern = '<option value="%s"%s>%s</option>';
-//$options[] = sprintf($patern, NULL, NULL, JText::_('Chose value'));
+//$options[] = sprintf($patern, NULL, NULL, \Joomla\CMS\Language\Text::_('Chose value'));
 foreach($this->values as $key => $line)
 {
 	$atr = '';
@@ -49,13 +49,13 @@ foreach($this->values as $key => $line)
 		{
 			$atr .= ' selected="selected"';
 		}
-		$options[] = sprintf($patern, htmlspecialchars($line, ENT_COMPAT, 'UTF-8'), $atr, strip_tags(JText::_($val[0])));
+		$options[] = sprintf($patern, htmlspecialchars($line, ENT_COMPAT, 'UTF-8'), $atr, strip_tags(\Joomla\CMS\Language\Text::_($val[0])));
 	}
 }
 $size = ' size="' . (count($options) > $params->get('params.list_limit', 5) ? $params->get('params.list_limit', 5) : count($options)) . '"';
 ?>
 <?php if ($params->get('params.total_limit')):?>
-<p><small><?php echo JText::sprintf("CSELECTLIMIT", $params->get('params.total_limit'));?></small></p>
+<p><small><?php echo \Joomla\CMS\Language\Text::sprintf("CSELECTLIMIT", $params->get('params.total_limit'));?></small></p>
 <?php endif; ?>
 
 <select onchange="Joomcck.countFieldValues(this, <?php echo $this->id;?>, <?php echo $params->get('params.total_limit');?>, 'select')" multiple="multiple"
@@ -79,6 +79,6 @@ name="jform[fields][<?php echo $this->id;?>][]" class="w-100 form-control elemen
 ?>
 	<div id="variant_<?php echo $this->id;?>">
 		<a id="show_variant_link_<?php echo $this->id;?>"
-			href="javascript:void(0)" onclick="Joomcck.showAddForm(<?php echo $this->id;?>)"><?php echo JText::_($this->params->get('params.user_value_label', 'Your variant'));?></a>
+			href="javascript:void(0)" onclick="Joomcck.showAddForm(<?php echo $this->id;?>)"><?php echo \Joomla\CMS\Language\Text::_($this->params->get('params.user_value_label', 'Your variant'));?></a>
 	</div></p>
 <?php endif;?>

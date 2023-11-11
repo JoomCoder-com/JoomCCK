@@ -22,7 +22,7 @@ class JoomcckControllerPack extends MControllerForm
 
 		if(!$this->input)
 		{
-			$this->input = JFactory::getApplication()->input;
+			$this->input = \Joomla\CMS\Factory::getApplication()->input;
 		}
 	}
 
@@ -33,7 +33,7 @@ class JoomcckControllerPack extends MControllerForm
 
 	protected function allowAdd($data = array())
 	{
-		$user = JFactory::getUser();
+		$user = \Joomla\CMS\Factory::getUser();
 		$allow = $user->authorise('core.create', 'com_joomcck.packs');
 
 		if($allow === null)
@@ -48,7 +48,7 @@ class JoomcckControllerPack extends MControllerForm
 
 	protected function allowEdit($data = array(), $key = 'id')
 	{
-		return JFactory::getUser()->authorise('core.edit', 'com_joomcck.packs');
+		return \Joomla\CMS\Factory::getUser()->authorise('core.edit', 'com_joomcck.packs');
 	}
 
 	public function build()
@@ -58,7 +58,7 @@ class JoomcckControllerPack extends MControllerForm
 		$msg = '';
 		if($model->build($pack_id))
 		{
-			$msg = JText::_('CBUILDCREATED');
+			$msg = \Joomla\CMS\Language\Text::_('CBUILDCREATED');
 		}
 
 		$this->setRedirect('index.php?option=com_joomcck&view=packs', $msg);

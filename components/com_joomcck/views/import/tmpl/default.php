@@ -14,11 +14,11 @@ defined('_JEXEC') or die();
 
 <div class="page-header mb-3">
 	<h1>
-		<img src="<?php echo JUri::root(TRUE); ?>/components/com_joomcck/images/icons/import.png">
-		<?php echo JText::_('CIMPORT'); ?>
+		<img src="<?php echo \Joomla\CMS\Uri\Uri::root(TRUE); ?>/components/com_joomcck/images/icons/import.png">
+		<?php echo \Joomla\CMS\Language\Text::_('CIMPORT'); ?>
 	</h1>
 </div>
 
 <?php 
-echo $this->loadTemplate('step'.JFactory::getApplication()->input->get('step', 1));
+echo $this->loadTemplate('step'.\Joomla\CMS\Factory::getApplication()->input->get('step', 1));
 ?>

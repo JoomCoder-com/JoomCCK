@@ -39,7 +39,7 @@ HTMLHelper::_('bootstrap.modal');
 			</div>
 
 			<div class="modal-footer">
-				<button class="btn btn-secondary" data-bs-dismiss="modal"><?php echo JText::_('CCLOSE') ?></button>
+				<button class="btn btn-secondary" data-bs-dismiss="modal"><?php echo \Joomla\CMS\Language\Text::_('CCLOSE') ?></button>
 			</div>
 		</div>
 

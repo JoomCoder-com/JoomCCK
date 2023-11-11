@@ -18,7 +18,7 @@ class JoomcckControllerModerators extends MControllerAdmin
 		
 		if(!$this->input)
 		{
-			$this->input = JFactory::getApplication()->input;
+			$this->input = \Joomla\CMS\Factory::getApplication()->input;
 		}
         $this->view_list = 'moderators';
 	}

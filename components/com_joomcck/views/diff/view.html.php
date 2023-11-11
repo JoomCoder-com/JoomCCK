@@ -13,9 +13,9 @@ class JoomcckViewDiff extends MViewBase
 
 	function display($tpl = null)
 	{
-		$doc = JFactory::getDocument();
-		$user = JFactory::getUser();
-		$app = JFactory::getApplication();
+		$doc = \Joomla\CMS\Factory::getDocument();
+		$user = \Joomla\CMS\Factory::getUser();
+		$app = \Joomla\CMS\Factory::getApplication();
 		$this->input = $app->input;
 
 		$model = MModelBase::getInstance('Auditversion', 'JoomcckModel');
@@ -24,14 +24,14 @@ class JoomcckViewDiff extends MViewBase
 		$version = $app->input->getInt('version', false);
 		if(!$version)
 		{	
-			JFactory::getApplication()->enqueueMessage(JText::_('NOVERSIONID'),'warning');
+			\Joomla\CMS\Factory::getApplication()->enqueueMessage(\Joomla\CMS\Language\Text::_('NOVERSIONID'),'warning');
 			return;
 		}
 		
 		$record_id = $app->input->getInt('record_id', false);
 		if(!$record_id)
 		{
-			JFactory::getApplication()->enqueueMessage(JText::_('NORECORDID'),'warning');
+			\Joomla\CMS\Factory::getApplication()->enqueueMessage(\Joomla\CMS\Language\Text::_('NORECORDID'),'warning');
 			return;
 		}
 		
@@ -74,9 +74,9 @@ class JoomcckViewDiff extends MViewBase
 	
 	private function _prepareDocument()
 	{
-		JHtml::_('bootstrap.tooltip');
-		$app = JFactory::getApplication();
-		$doc = JFactory::getDocument();
+		\Joomla\CMS\HTML\HTMLHelper::_('bootstrap.tooltip');
+		$app = \Joomla\CMS\Factory::getApplication();
+		$doc = \Joomla\CMS\Factory::getDocument();
 		$menus = $app->getMenu();
 		$menu = $menus->getActive();
 		$this->appParams = $app->getParams();
@@ -93,10 +93,10 @@ class JoomcckViewDiff extends MViewBase
 		
 		if($this->record->title)
 		{
-			$title = JText::_('CAUDITVERSIONSCOMPARE').' : '.$this->record->title.' v. '.$this->record->version.' '.JText::_('and').' v.'.$this->item->version;
+			$title = \Joomla\CMS\Language\Text::_('CAUDITVERSIONSCOMPARE').' : '.$this->record->title.' v. '.$this->record->version.' '.\Joomla\CMS\Language\Text::_('and').' v.'.$this->item->version;
 		}
 		$path = array(array('title' => $title, 'link' => ''));
-		$path[] = array('title' => $this->section->name, 'link' => JRoute::_(Url::records($this->section)));
+		$path[] = array('title' => $this->section->name, 'link' => \Joomla\CMS\Router\Route::_(Url::records($this->section)));
 	
 		if(empty($title))
 		{
@@ -104,11 +104,11 @@ class JoomcckViewDiff extends MViewBase
 		}
 		elseif($app->getCfg('sitename_pagetitles', 0) == 1)
 		{
-			$title = JText::sprintf('JPAGETITLE', $app->getCfg('sitename'), $title);
+			$title = \Joomla\CMS\Language\Text::sprintf('JPAGETITLE', $app->getCfg('sitename'), $title);
 		}
 		elseif($app->getCfg('sitename_pagetitles', 0) == 2)
 		{
-			$title = JText::sprintf('JPAGETITLE', $title, $app->getCfg('sitename'));
+			$title = \Joomla\CMS\Language\Text::sprintf('JPAGETITLE', $title, $app->getCfg('sitename'));
 		}
 	
 		$doc->setTitle($title);

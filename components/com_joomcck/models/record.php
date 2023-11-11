@@ -23,7 +23,7 @@ class JoomcckModelRecord extends MModelItem
 	protected function populateState($ordering = NULL, $direction = NULL)
 	{
 		// Load state from the request.
-		$pk = JFactory::getApplication()->input->getInt('id');
+		$pk = \Joomla\CMS\Factory::getApplication()->input->getInt('id');
 		$this->setState('com_joomcck.record.id', $pk);
 	}
 
@@ -32,7 +32,7 @@ class JoomcckModelRecord extends MModelItem
 		// Initialise variables.
 		$pk = (!empty($pk)) ? $pk : (int)$this->getState('com_joomcck.record.id');
 
-		$user = JFactory::getUser();
+		$user = \Joomla\CMS\Factory::getUser();
 
 		if(isset($this->_item[$pk]))
 		{
@@ -73,7 +73,7 @@ class JoomcckModelRecord extends MModelItem
 
 			if(empty($data))
 			{
-				throw new Exception( JText::_('CERR_RECNOTFOUND') . ': ' . $pk,404);
+				throw new Exception( \Joomla\CMS\Language\Text::_('CERR_RECNOTFOUND') . ': ' . $pk,404);
 			}
 
 			$this->_item[$pk] = $data;
@@ -99,12 +99,12 @@ class JoomcckModelRecord extends MModelItem
 	{
 
 		static $fields = array(), $fields_model = NULL, $user = NULL;
-		$db  = JFactory::getDbo();
-		$app = JFactory::getApplication();
+		$db  = \Joomla\CMS\Factory::getDbo();
+		$app = \Joomla\CMS\Factory::getApplication();
 
 		if(!$user)
 		{
-			$user = JFactory::getUser();
+			$user = \Joomla\CMS\Factory::getUser();
 		}
 		if(!$fields_model)
 		{
@@ -117,7 +117,7 @@ class JoomcckModelRecord extends MModelItem
 		$data->expire  = $data->extime;
 		$data->modify  = $data->mtime;
 
-		$data->ctime = JFactory::getDate($data->ctime);
+		$data->ctime = \Joomla\CMS\Factory::getDate($data->ctime);
 
 		$data->future = FALSE;
 		if($data->ctime->toUnix() > time())
@@ -125,7 +125,7 @@ class JoomcckModelRecord extends MModelItem
 			$data->future = TRUE;
 		}
 
-		$data->mtime = JFactory::getDate($data->mtime);
+		$data->mtime = \Joomla\CMS\Factory::getDate($data->mtime);
 
 		if($section->params->get('general.marknew'))
 		{
@@ -137,7 +137,7 @@ class JoomcckModelRecord extends MModelItem
 
 			/*if($user->get('id'))
 			{
-				$date = JFactory::getDate($user->get('lastvisitDate'))->toUnix();
+				$date = \Joomla\CMS\Factory::getDate($user->get('lastvisitDate'))->toUnix();
 				if($date > $data->ctime->toUnix())
 				{
 					$data->new = false;
@@ -146,7 +146,7 @@ class JoomcckModelRecord extends MModelItem
 			*/
 		}
 
-		$data->params = new JRegistry($data->params);
+		$data->params = new \Joomla\Registry\Registry($data->params);
 
 		$data->type_name = $type->name;
 
@@ -160,7 +160,7 @@ class JoomcckModelRecord extends MModelItem
 		{
 			$data->category_id = $cat_id;
 			$cat_ids[]         = $cat_id;
-			$category_links[]  = JHtml::link(JRoute::_(Url::records($section, $cat_id)), JText::_($title));
+			$category_links[]  = \Joomla\CMS\HTML\HTMLHelper::link(\Joomla\CMS\Router\Route::_(Url::records($section, $cat_id)), \Joomla\CMS\Language\Text::_($title));
 		}
 		$data->categories_links = $category_links;
 
@@ -175,8 +175,8 @@ class JoomcckModelRecord extends MModelItem
 		}
 
 		$data->url  = Url::record($data, $type, $section, $category_id);
-		$data->canon  = \Joomla\CMS\Uri\Uri::getInstance()->getScheme() . '://' . \Joomla\CMS\Uri\Uri::getInstance()->getHost() . JRoute::_(Url::record($data, $type, $section, array_shift($cat_ids)));
-		$data->href = \Joomla\CMS\Uri\Uri::getInstance()->getScheme() . '://' . \Joomla\CMS\Uri\Uri::getInstance()->getHost() . JRoute::_($data->url);
+		$data->canon  = \Joomla\CMS\Uri\Uri::getInstance()->getScheme() . '://' . \Joomla\CMS\Uri\Uri::getInstance()->getHost() . \Joomla\CMS\Router\Route::_(Url::record($data, $type, $section, array_shift($cat_ids)));
+		$data->href = \Joomla\CMS\Uri\Uri::getInstance()->getScheme() . '://' . \Joomla\CMS\Uri\Uri::getInstance()->getHost() . \Joomla\CMS\Router\Route::_($data->url);
 
 		$robots = $type->params->get('submission.robots','');
 
@@ -190,7 +190,7 @@ class JoomcckModelRecord extends MModelItem
 		}
 		else
 		{
-			$data->extime = JFactory::getDate($data->extime);
+			$data->extime = \Joomla\CMS\Factory::getDate($data->extime);
 			if($data->extime->toUnix() < time() && $data->exalert == 0)
 			{
 				$sql = "UPDATE #__js_res_record SET exalert = 1";
@@ -214,7 +214,7 @@ class JoomcckModelRecord extends MModelItem
 
 		if($data->ucatid && $section->params->get('personalize.personalize') && $section->params->get('personalize.pcat_submit'))
 		{
-			$data->ucatname_link = JHtml::link(JRoute::_(URL::usercategory_records($data->user_id, $section, $data->ucatid . ':' . $data->ucatalias)), $data->ucatname);
+			$data->ucatname_link = \Joomla\CMS\HTML\HTMLHelper::link(\Joomla\CMS\Router\Route::_(URL::usercategory_records($data->user_id, $section, $data->ucatid . ':' . $data->ucatalias)), $data->ucatname);
 		}
 
 
@@ -257,7 +257,7 @@ class JoomcckModelRecord extends MModelItem
 				}
 				else
 				{
-					$result = JText::_($field->params->get('core.field_view_message'));
+					$result = \Joomla\CMS\Language\Text::_($field->params->get('core.field_view_message'));
 				}
 			}
 			else
@@ -266,7 +266,7 @@ class JoomcckModelRecord extends MModelItem
 				{
 					if($field->params->get('emerald.field_display_subscription') && trim($field->params->get('emerald.field_display_subscription_msg')))
 					{
-						$result = JText::_($field->params->get('emerald.field_display_subscription_msg'));
+						$result = \Joomla\CMS\Language\Text::_($field->params->get('emerald.field_display_subscription_msg'));
 					}
 					else
 					{
@@ -279,12 +279,12 @@ class JoomcckModelRecord extends MModelItem
 					{
 						if($field->params->get('emerald.field_view_subscription') && trim($field->params->get('emerald.field_view_subscription_msg')))
 						{
-							$result = trim(JText::_($field->params->get('emerald.field_view_subscription_msg')));
+							$result = trim(\Joomla\CMS\Language\Text::_($field->params->get('emerald.field_view_subscription_msg')));
 							if($result)
 							{
 								$result .= sprintf('<br><small><a href="%s">%s</a></small>',
 									EmeraldApi::getLink('list', TRUE, $field->params->get('emerald.field_view_subscription')),
-									JText::_('CSUBSCRIBENOW')
+									\Joomla\CMS\Language\Text::_('CSUBSCRIBENOW')
 								);
 							}
 						}
@@ -331,7 +331,7 @@ class JoomcckModelRecord extends MModelItem
 
 		if($data->featured == 1)
 		{
-			$data->ftime = JFactory::getDate($data->ftime);
+			$data->ftime = \Joomla\CMS\Factory::getDate($data->ftime);
 			if($data->ftime->toUnix() < time())
 			{
 				$sql = "UPDATE #__js_res_record SET featured = 0, ftime = NULL WHERE id = " . $data->id;
@@ -351,8 +351,8 @@ class JoomcckModelRecord extends MModelItem
 
 	private function _controls($record, $type, $section, $notitle = FALSE)
 	{
-		$user = JFactory::getUser();
-		$app  = JFactory::getApplication();
+		$user = \Joomla\CMS\Factory::getUser();
+		$app  = \Joomla\CMS\Factory::getApplication();
 		$view = $app->input->getString('view');
 		static $lognums = array();
 		static $vernums = array();
@@ -376,36 +376,36 @@ class JoomcckModelRecord extends MModelItem
 
 		if(MECAccess::allowDepost($record, $type, $section))
 		{
-			$out[] = sprintf($confirm_patern, 'depost', Url::task('records.depost', $record->id), addslashes(JText::_('CMSG_DEPOST')), 'arrow-detweet.png', JText::_('CMSG_DEPOST'), JText::_('CMSG_DEPOST'));
+			$out[] = sprintf($confirm_patern, 'depost', Url::task('records.depost', $record->id), addslashes(\Joomla\CMS\Language\Text::_('CMSG_DEPOST')), 'arrow-detweet.png', \Joomla\CMS\Language\Text::_('CMSG_DEPOST'), \Joomla\CMS\Language\Text::_('CMSG_DEPOST'));
 		}
 
 		if($record->checked_out && MECAccess::allowCheckin($section))
 		{
-			$out[] = sprintf($pattern, 'checkin', Url::taskCid('records.checkin', $record->id), 'lock.png', JText::_('CCHECKIN'), JText::_('CCHECKIN'));
+			$out[] = sprintf($pattern, 'checkin', Url::taskCid('records.checkin', $record->id), 'lock.png', \Joomla\CMS\Language\Text::_('CCHECKIN'), \Joomla\CMS\Language\Text::_('CCHECKIN'));
 		}
 
 		if(MECAccess::allowModerate($record, $type, $section))
 		{
-			$out[] = sprintf($pattern, 'copy', Url::taskCid('records.copy', $record->id), 'blue-documents-stack.png', JText::_('CCOPY'), JText::_('CCOPY'));
+			$out[] = sprintf($pattern, 'copy', Url::taskCid('records.copy', $record->id), 'blue-documents-stack.png', \Joomla\CMS\Language\Text::_('CCOPY'), \Joomla\CMS\Language\Text::_('CCOPY'));
 		}
 
 		if(MECAccess::allowEdit($record, $type, $section))
 		{
-			$out[] = sprintf($pattern, 'edit', Url::edit($record->id . ':' . $record->alias), 'pencil.png', JText::_('CEDIT'), JText::_('CEDIT'));
+			$out[] = sprintf($pattern, 'edit', Url::edit($record->id . ':' . $record->alias), 'pencil.png', \Joomla\CMS\Language\Text::_('CEDIT'), \Joomla\CMS\Language\Text::_('CEDIT'));
 		}
 		/*if(MECAccess::allowArchive($record, $type, $section))
 		{
-			$out[] = sprintf($pattern, Url::task('records.sarchive', $record->id), 'wooden-box.png', JText::_('CARCHIVE'), JText::_('CARCHIVE'));
+			$out[] = sprintf($pattern, Url::task('records.sarchive', $record->id), 'wooden-box.png', \Joomla\CMS\Language\Text::_('CARCHIVE'), \Joomla\CMS\Language\Text::_('CARCHIVE'));
 		}*/
 
 		if(MECAccess::allowExtend($record, $type, $section))
 		{
-			$out[] = sprintf($pattern, 'extend', Url::task('records.prolong', $record->id), 'clock--plus.png', JText::sprintf('CPROLONG', $type->params->get('properties.default_extend')), JText::sprintf('CPROLONG', $type->params->get('properties.default_extend')));
+			$out[] = sprintf($pattern, 'extend', Url::task('records.prolong', $record->id), 'clock--plus.png', \Joomla\CMS\Language\Text::sprintf('CPROLONG', $type->params->get('properties.default_extend')), \Joomla\CMS\Language\Text::sprintf('CPROLONG', $type->params->get('properties.default_extend')));
 		}
 
 		if(MECAccess::allowFeatured($record, $type, $section))
 		{
-			$text  = ($record->featured ? JText::_('CMAKEUNFEATURE') : JText::sprintf('CMAKEFEATURE', $type->params->get('emerald.type_feature_subscription_time', 10)));
+			$text  = ($record->featured ? \Joomla\CMS\Language\Text::_('CMAKEUNFEATURE') : \Joomla\CMS\Language\Text::sprintf('CMAKEFEATURE', $type->params->get('emerald.type_feature_subscription_time', 10)));
 			$out[] = sprintf($pattern, 'feature', Url::task('records.' . ($record->featured ? 'sunfeatured' : 'sfeatured'), $record->id),
 				($record->featured ? 'crown-silver.png' : 'crown.png'), $text, $text);
 		}
@@ -413,36 +413,36 @@ class JoomcckModelRecord extends MModelItem
 		if(MECAccess::allowCommentBlock($record, $type, $section))
 		{
 			$enabled = $record->params->get('comments.comments_access_post', $type->params->get('comments.comments_access_post', 1));
-			$out[]   = sprintf($pattern, 'block', Url::task('records.' . ($enabled ? 'commentsdisable' : 'commentsenable'), $record->id), ($enabled ? 'balloon--minus.png' : 'balloon--plus.png'), ($enabled ? JText::_('CDISABCOMM') : JText::_('CENABCOMM')), ($enabled ? JText::_('CDISABCOMM') : JText::_('CENABCOMM')));
+			$out[]   = sprintf($pattern, 'block', Url::task('records.' . ($enabled ? 'commentsdisable' : 'commentsenable'), $record->id), ($enabled ? 'balloon--minus.png' : 'balloon--plus.png'), ($enabled ? \Joomla\CMS\Language\Text::_('CDISABCOMM') : \Joomla\CMS\Language\Text::_('CENABCOMM')), ($enabled ? \Joomla\CMS\Language\Text::_('CDISABCOMM') : \Joomla\CMS\Language\Text::_('CENABCOMM')));
 		}
 
 		if(MECAccess::allowPublish($record, $type, $section))
 		{
-			$out[] = sprintf($pattern, ($record->published ? 'unpublish' : 'publish'), Url::task('records.' . ($record->published ? 'sunpub' : 'spub'), $record->id), ($record->published ? 'cross-circle.png' : 'tick.png'), ($record->published ? JText::_('CUNPUB') : JText::_('CPUB')), ($record->published ? JText::_('CUNPUB') : JText::_('CPUB')));
+			$out[] = sprintf($pattern, ($record->published ? 'unpublish' : 'publish'), Url::task('records.' . ($record->published ? 'sunpub' : 'spub'), $record->id), ($record->published ? 'cross-circle.png' : 'tick.png'), ($record->published ? \Joomla\CMS\Language\Text::_('CUNPUB') : \Joomla\CMS\Language\Text::_('CPUB')), ($record->published ? \Joomla\CMS\Language\Text::_('CUNPUB') : \Joomla\CMS\Language\Text::_('CPUB')));
 		}
 
 		if(MECAccess::allowHide($record, $type, $section))
 		{
-			$out[] = sprintf($pattern, 'hide', Url::task('records.' . ($record->hidden ? 'sunhide' : 'shide'), $record->id), ($record->hidden ? 'eye-half0.png' : 'eye-half.png'), ($record->hidden ? JText::_('CUNHIDE') : JText::_('CHIDE')), ($record->hidden ? JText::_('CUNHIDE') : JText::_('CHIDE')));
+			$out[] = sprintf($pattern, 'hide', Url::task('records.' . ($record->hidden ? 'sunhide' : 'shide'), $record->id), ($record->hidden ? 'eye-half0.png' : 'eye-half.png'), ($record->hidden ? \Joomla\CMS\Language\Text::_('CUNHIDE') : \Joomla\CMS\Language\Text::_('CHIDE')), ($record->hidden ? \Joomla\CMS\Language\Text::_('CUNHIDE') : \Joomla\CMS\Language\Text::_('CHIDE')));
 		}
 
 		if(MECAccess::allowDelete($record, $type, $section) && $view != 'record')
 		{
-			$out[] = sprintf($confirm_patern, 'delete', Url::task('records.delete', $record->id), addslashes(JText::_('CCONFIRMDELET_1')), 'minus-circle.png', JText::_('CDELETE'), JText::_('CDELETE'));
+			$out[] = sprintf($confirm_patern, 'delete', Url::task('records.delete', $record->id), addslashes(\Joomla\CMS\Language\Text::_('CCONFIRMDELET_1')), 'minus-circle.png', \Joomla\CMS\Language\Text::_('CDELETE'), \Joomla\CMS\Language\Text::_('CDELETE'));
 		}
 		if(MECAccess::allowDelete($record, $type, $section) && $view == 'record')
 		{
 			$vw = $app->input->get('view_what');
-			$return = base64_encode(JRoute::_(Url::records($record->section_id, $record->category_id, NULL, $vw), FALSE));
+			$return = base64_encode(\Joomla\CMS\Router\Route::_(Url::records($record->section_id, $record->category_id, NULL, $vw), FALSE));
 			if($app->input->get('api') == 1)
 			{
 				$return = FALSE;
 			}
-			$out[] = sprintf($confirm_patern, 'delete', Url::task('records.delete', $record->id, $return), addslashes(JText::_('CCONFIRMDELET_1')),
-				'minus-circle.png', JText::_('CDELETE'), JText::_('CDELETE'));
+			$out[] = sprintf($confirm_patern, 'delete', Url::task('records.delete', $record->id, $return), addslashes(\Joomla\CMS\Language\Text::_('CCONFIRMDELET_1')),
+				'minus-circle.png', \Joomla\CMS\Language\Text::_('CDELETE'), \Joomla\CMS\Language\Text::_('CDELETE'));
 		}
 
-		$db = JFactory::getDbo();
+		$db = \Joomla\CMS\Factory::getDbo();
 		if(MECAccess::allowAuditLog($section))
 		{
 
@@ -455,7 +455,7 @@ class JoomcckModelRecord extends MModelItem
 			if($lognums[$record->id])
 			{
 				$url   = 'index.php?option=com_joomcck&view=auditlog&record_id=' . $record->id . '&Itemid=' . $type->params->get('audit.itemid', $app->input->getInt('Itemid')) . '&return=' . Url::back();
-				$out[] = sprintf($pattern, 'audit', JRoute::_($url), 'calendar-list.png', JText::_('CAUDITLOG'), JText::_('CAUDITLOG') . " <span class='badge bg-light border text-dark'>{$lognums[$record->id]}</span>");
+				$out[] = sprintf($pattern, 'audit', \Joomla\CMS\Router\Route::_($url), 'calendar-list.png', \Joomla\CMS\Language\Text::_('CAUDITLOG'), \Joomla\CMS\Language\Text::_('CAUDITLOG') . " <span class='badge bg-light border text-dark'>{$lognums[$record->id]}</span>");
 			}
 		}
 		if(MECAccess::allowRollback($record, $type, $section) || MECAccess::allowCompare($record, $type, $section))
@@ -474,27 +474,27 @@ class JoomcckModelRecord extends MModelItem
 
 				$labelpattern       = '<a data-bs-toggle="modal" data-bs-target="#%s" class="dropdown-item joomcck-control-item joomcck-control-item-%s" href="%s"><img border="0" src="' . JURI::root(TRUE) . '/media/com_joomcck/icons/16/%s" alt="%s" align="absmiddle" /> %s</a>';
 
-				$label   = sprintf($labelpattern, $attributeId,'rollback',  'javascript:void(0);', 'arrow-split-090.png', JText::_('CVERCONTRL'), JText::_('CVERCONTRL') . ' <span class="badge bg-light border text-dark">v.' . $record->version.'</span>');
+				$label   = sprintf($labelpattern, $attributeId,'rollback',  'javascript:void(0);', 'arrow-split-090.png', \Joomla\CMS\Language\Text::_('CVERCONTRL'), \Joomla\CMS\Language\Text::_('CVERCONTRL') . ' <span class="badge bg-light border text-dark">v.' . $record->version.'</span>');
 				$vpatern = "<a>v.%d - by %s on %s</a>";
 				foreach($vernums[$record->id] AS $version)
 				{
 
-					$ver = sprintf($vpatern, $version->version, CCommunityHelper::getName($version->user_id, $section, TRUE), JFactory::getDate($version->ctime)->format($type->params->get('audit.audit_date_format', $type->params->get('audit.audit_date_custom'))));
+					$ver = sprintf($vpatern, $version->version, CCommunityHelper::getName($version->user_id, $section, TRUE), \Joomla\CMS\Factory::getDate($version->ctime)->format($type->params->get('audit.audit_date_format', $type->params->get('audit.audit_date_custom'))));
 
 					if(MECAccess::allowRollback($record, $type, $section))
 					{
-						$modalContent[$label][$ver][] = sprintf($pattern, 'version',  Url::task('records.rollback', $record->id . '&version=' . $version->version), 'arrow-merge-180-left.png', JText::_('CROLLBACK'), JText::_('CROLLBACK'));
+						$modalContent[$label][$ver][] = sprintf($pattern, 'version',  Url::task('records.rollback', $record->id . '&version=' . $version->version), 'arrow-merge-180-left.png', \Joomla\CMS\Language\Text::_('CROLLBACK'), \Joomla\CMS\Language\Text::_('CROLLBACK'));
 					}
 
 					if(MECAccess::allowCompare($record, $type, $section))
 					{
 						$url                 = 'index.php?option=com_joomcck&view=diff&record_id=' . $record->id . '&version=' . $version->version . '&return=' . Url::back();
-						$modalContent[$label][$ver][] = sprintf($pattern, 'compare',  $url, 'blue-document-view-book.png', JText::_('CCOMPARECUR'), JText::_('CCOMPARECUR'));
+						$modalContent[$label][$ver][] = sprintf($pattern, 'compare',  $url, 'blue-document-view-book.png', \Joomla\CMS\Language\Text::_('CCOMPARECUR'), \Joomla\CMS\Language\Text::_('CCOMPARECUR'));
 					}
 				}
 
 				$url           = 'index.php?option=com_joomcck&view=versions&record_id=' . $record->id . '&return=' . Url::back();
-				$modalContent[$label][] = sprintf($pattern, 'versions',  $url, 'drawer.png', JText::_('CVERSIONSMANAGE'), JText::_('CVERSIONSMANAGE'));
+				$modalContent[$label][] = sprintf($pattern, 'versions',  $url, 'drawer.png', \Joomla\CMS\Language\Text::_('CVERSIONSMANAGE'), \Joomla\CMS\Language\Text::_('CVERSIONSMANAGE'));
 
 
 				// rebuild as listgroup
@@ -530,7 +530,7 @@ class JoomcckModelRecord extends MModelItem
 		if(MECAccess::allowModerate($record, $type, $section))
 		{
 			$url   = 'index.php?option=com_joomcck&view=moderator&user_id=' . $record->user_id . '&section_id=' . $section->id . '&return=' . Url::back();
-			$out[] = sprintf($pattern, 'moderate',  JRoute::_($url), 'user-share.png', JText::_('CSETMODER'), JText::_('CSETMODER'));
+			$out[] = sprintf($pattern, 'moderate',  \Joomla\CMS\Router\Route::_($url), 'user-share.png', \Joomla\CMS\Language\Text::_('CSETMODER'), \Joomla\CMS\Language\Text::_('CSETMODER'));
 		}
 
 		if($out)
@@ -547,14 +547,14 @@ class JoomcckModelRecord extends MModelItem
 		}
 
 
-		$user   = JFactory::getUser();
-		$config = JFactory::getConfig();
+		$user   = \Joomla\CMS\Factory::getUser();
+		$config = \Joomla\CMS\Factory::getConfig();
 
 		$cookie_domain = $config->get('cookie_domain', '');
 		$cookie_path   = $config->get('cookie_path', '/');
 
 
-		$hits = JTable::getInstance('Hits', 'JoomcckTable');
+		$hits = \Joomla\CMS\Table\Table::getInstance('Hits', 'JoomcckTable');
 
 		if($user->get('id'))
 		{
@@ -571,7 +571,7 @@ class JoomcckModelRecord extends MModelItem
 			return;
 		}
 
-		$data['section_id'] = JFactory::getApplication()->input->getInt('section_id', $section_id);
+		$data['section_id'] = \Joomla\CMS\Factory::getApplication()->input->getInt('section_id', $section_id);
 		$hits->bind($data);
 		$hits->check();
 		$hits->store();
@@ -588,7 +588,7 @@ class JoomcckModelRecord extends MModelItem
 	public function onComment($id, Array $comment, $num = TRUE)
 	{
 
-		$record = JTable::getInstance('Record', 'JoomcckTable');
+		$record = \Joomla\CMS\Table\Table::getInstance('Record', 'JoomcckTable');
 		$record->load($id);
 
 		if(empty($record->id))
@@ -598,7 +598,7 @@ class JoomcckModelRecord extends MModelItem
 
 		if($num)
 		{
-			$db = JFactory::getDbo();
+			$db = \Joomla\CMS\Factory::getDbo();
 			$db->setQuery("SELECT COUNT(id) FROM #__js_res_comments WHERE record_id = {$id} AND published = 1");
 			$record->comments = $db->loadResult();
 			$record->mtime    = JDate::getInstance()->toSql();

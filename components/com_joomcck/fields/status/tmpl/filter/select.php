@@ -32,6 +32,6 @@ foreach($this->values as $k => $value)
 	$list[$k]->value = $value->field_value;
 }
 
-array_unshift($list, JHtml::_('select.option', '', '- ' . JText::sprintf('ST_SELECT', $this->label) . ' -'));
+array_unshift($list, \Joomla\CMS\HTML\HTMLHelper::_('select.option', '', '- ' . \Joomla\CMS\Language\Text::sprintf('ST_SELECT', $this->label) . ' -'));
 
-echo JHtml::_('select.genericlist', $list, "filters[{$this->key}]", NULL, 'value', 'text', $this->value);
+echo \Joomla\CMS\HTML\HTMLHelper::_('select.genericlist', $list, "filters[{$this->key}]", NULL, 'value', 'text', $this->value);

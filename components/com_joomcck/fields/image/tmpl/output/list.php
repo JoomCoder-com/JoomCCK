@@ -7,7 +7,7 @@
  * @license GNU/GPL http://www.gnu.org/copyleft/gpl.html
  */
 defined('_JEXEC') or die();
-$image = new JRegistry($this->value);
+$image = new \Joomla\Registry\Registry($this->value);
 ?>
 
 <?php if($this->params->get('params.list_mode', 0)):?>
@@ -18,14 +18,14 @@ $image = new JRegistry($this->value);
 		'background' => $this->params->get('params.thumbs_list_bg', "#000000"),
 		'quality' => $this->params->get('params.thumbs_list_quality', 80))); ?>
 <?php else:?>
-	<?php $url = JUri::root(TRUE).'/'.$this->value['image'];?>
+	<?php $url = \Joomla\CMS\Uri\Uri::root(TRUE).'/'.$this->value['image'];?>
 <?php endif;?>
 
 <?php if($this->params->get('params.lightbox_list', 0)):?>
-	<?php JHtml::_('lightbox.init');?>
-	<a href="<?php echo JUri::root(TRUE).'/'.$image->get('image');?>" title="<?php echo $image->get('image_title');?>" rel="lightbox" data-lightbox="field<?php echo $this->id ?>">
+	<?php \Joomla\CMS\HTML\HTMLHelper::_('lightbox.init');?>
+	<a href="<?php echo \Joomla\CMS\Uri\Uri::root(TRUE).'/'.$image->get('image');?>" title="<?php echo $image->get('image_title');?>" rel="lightbox" data-lightbox="field<?php echo $this->id ?>">
 <?php else:?>
-	<a href="<?php echo JRoute::_(Url::record($record));?>">
+	<a href="<?php echo \Joomla\CMS\Router\Route::_(Url::record($record));?>">
 <?php endif;?>
 <img src="<?php echo $url;?>"
     <?php if($this->params->get('params.img_list_hspace') || $this->params->get('params.img_list_vspace')):?>

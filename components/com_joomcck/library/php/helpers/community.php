@@ -17,24 +17,24 @@ class CCommunityHelper
 
 	static public function karma($actor, $target, $options, $record)
 	{
-		$dispatcher = JFactory::getApplication();
+		$dispatcher = \Joomla\CMS\Factory::getApplication();
 		$dispatcher->triggerEvent('onKarma', array($actor, $target, $options, $record));
 	}
 
 	static public function avtivity($actor, $target, $options, $record)
 	{
-		$dispatcher = JFactory::getApplication();
+		$dispatcher = \Joomla\CMS\Factory::getApplication();
 		$dispatcher->triggerEvent('onActivity', array($actor, $target, $options, $record));
 	}
 
 	static public function notify($user_id, $options)
 	{
-		$dispatcher = JFactory::getApplication();
+		$dispatcher = \Joomla\CMS\Factory::getApplication();
 		$dispatcher->triggerEvent('onNotification', array($user_id, $options));
 
 		$array = array(
 			'id'      => NULL,
-			'ctime'   => JFactory::getDate()->toSql(),
+			'ctime'   => \Joomla\CMS\Factory::getDate()->toSql(),
 			'type'    => $options['type'],
 			'user_id' => $user_id,
 			'params'  => $options['params'],
@@ -66,14 +66,14 @@ class CCommunityHelper
 		if(!$files[$user_id])
 		{
 			$default = $class->getDefaultAvatar();
-			$email   = JFactory::getUser($user_id)->get('email');
+			$email   = \Joomla\CMS\Factory::getUser($user_id)->get('email');
 
-			if($email && JComponentHelper::getParams('com_joomcck')->get('gravatar'))
+			if($email && \Joomla\CMS\Component\ComponentHelper::getParams('com_joomcck')->get('gravatar'))
 			{
-				$default = str_replace(JPATH_ROOT, JUri::root(), (string) $class->getDefaultAvatar());
+				$default = str_replace(JPATH_ROOT, \Joomla\CMS\Uri\Uri::root(), (string) $class->getDefaultAvatar());
 				$aurl = "http://www.gravatar.com/avatar/" . md5(strtolower(trim($email))) . "?s=" . $width;
 				$aurl .= '&d=' . ($default ? urldecode($default) : 'identicon');
-				$scheme = JUri::getInstance()->toString(array('scheme'));
+				$scheme = \Joomla\CMS\Uri\Uri::getInstance()->toString(array('scheme'));
 				$aurl    = str_replace('http://', $scheme, $aurl);
 			}
 			else
@@ -112,7 +112,7 @@ class CCommunityHelper
 			);
 		}
 
-		$options = new JRegistry($options);
+		$options = new \Joomla\Registry\Registry($options);
 
 		if(!is_object($section))
 		{
@@ -130,7 +130,7 @@ class CCommunityHelper
 		$name = $options->get('label');
 		if(!$name)
 		{
-			$name = JFactory::getUser($id)->get($section->params->get('personalize.author_mode', 'username'), JText::_('CGUEST'));
+			$name = \Joomla\CMS\Factory::getUser($id)->get($section->params->get('personalize.author_mode', 'username'), \Joomla\CMS\Language\Text::_('CGUEST'));
 		}
 
 		if($options->get('nohtml') && !(strpos($name, '@') === FALSE))
@@ -156,13 +156,13 @@ class CCommunityHelper
 		{
 			$links = (array)$class->getName($id, $name, $section);
 
-			if(JFolder::exists(JPATH_ROOT . '/components/com_uddeim'))
+			if(\Joomla\CMS\Filesystem\Folder::exists(JPATH_ROOT . '/components/com_uddeim'))
 			{
 				$links = array_merge($links,
 					array(
 						100 => array(
-							'url'   => JRoute::_('index.php?option=com_uddeim&task=new&recip=' . $id),
-							'label' => HTMLFormatHelper::icon('mail.png') . ' ' . JText::_('CUSERMESSAGE')
+							'url'   => \Joomla\CMS\Router\Route::_('index.php?option=com_uddeim&task=new&recip=' . $id),
+							'label' => HTMLFormatHelper::icon('mail.png') . ' ' . \Joomla\CMS\Language\Text::_('CUSERMESSAGE')
 						)
 					)
 				);
@@ -173,8 +173,8 @@ class CCommunityHelper
 				$links = array_merge($links,
 					array(
 						101 => array(
-							'url'   => JRoute::_(Url::user('created', $id, $section->id)),
-							'label' => HTMLFormatHelper::icon($section->params->get('personalize.text_icon')) . ' ' . JText::_($section->params->get('personalize.home_text', 'CALLRECORDSBY'))
+							'url'   => \Joomla\CMS\Router\Route::_(Url::user('created', $id, $section->id)),
+							'label' => HTMLFormatHelper::icon($section->params->get('personalize.text_icon')) . ' ' . \Joomla\CMS\Language\Text::_($section->params->get('personalize.home_text', 'CALLRECORDSBY'))
 						)
 					)
 				);
@@ -193,7 +193,7 @@ class CCommunityHelper
 			{
 				if($options->get('tooltip') == 'name')
 				{
-					$links[0]['label'] = JFactory::getUser($id)->get($section->params->get('personalize.author_mode', 'username'), JText::_('CGUEST'));
+					$links[0]['label'] = \Joomla\CMS\Factory::getUser($id)->get($section->params->get('personalize.author_mode', 'username'), \Joomla\CMS\Language\Text::_('CGUEST'));
 				}
 				$attr = array(
 					'data-original-title' => str_replace('"', "&quot;", $links[0]['label']),
@@ -206,10 +206,10 @@ class CCommunityHelper
 				$root = '';
 				if($options->get('external'))
 				{
-					$uri  = JUri::getInstance();
+					$uri  = \Joomla\CMS\Uri\Uri::getInstance();
 					$root = $uri->toString(array('scheme', 'host', 'port'));
 				}
-				$out = JHtml::link($root . $links[0]['url'], $name, $attr);
+				$out = \Joomla\CMS\HTML\HTMLHelper::link($root . $links[0]['url'], $name, $attr);
 			}
 			elseif(count($links) > 1)
 			{
@@ -218,7 +218,7 @@ class CCommunityHelper
 				foreach($links as $link)
 				{
 					$out .= '<li>';
-					$out .= JHtml::link($link['url'], $link['label'], isset($link['attr']) ? $link['attr'] : array());
+					$out .= \Joomla\CMS\HTML\HTMLHelper::link($link['url'], $link['label'], isset($link['attr']) ? $link['attr'] : array());
 					$out .= '</li>';
 				}
 				$out .= '</ul></span>';
@@ -235,11 +235,11 @@ class CCommunityHelper
 
 		if(!$options->get('nobadge'))
 		{
-			$db = JFactory::getDbo();
+			$db = \Joomla\CMS\Factory::getDbo();
 
 			$api = JPATH_ROOT.'/components/com_emerald/api.php';
-			if(in_array($section->params->get('personalize.vip'), JFactory::getUser()->getAuthorisedViewLevels()) &&
-				!in_array($section->params->get('personalize.novip'), JFactory::getUser($id)->getAuthorisedViewLevels()) && JFile::exists($api))
+			if(in_array($section->params->get('personalize.vip'), \Joomla\CMS\Factory::getUser()->getAuthorisedViewLevels()) &&
+				!in_array($section->params->get('personalize.novip'), \Joomla\CMS\Factory::getUser($id)->getAuthorisedViewLevels()) && \Joomla\CMS\Filesystem\File::exists($api))
 			{
 				include_once $api;
 				if(EmeraldHelper::userPurchasedTotal($id) >= $section->params->get('personalize.glod_amount'))
@@ -279,7 +279,7 @@ class CCommunityHelper
 		{
 			$result = self::isOnline($id);
 
-			$name = '<img src="' . JURI::root(TRUE) . '/media/com_joomcck/icons/16/status' . ($result ? NULL : '-offline') . '.png" rel="tooltip" data-original-title="' . ($result ? JText::_('CONLINE') : JText::_('COFFLINE')) . '" align="absmiddle">' . $name;
+			$name = '<img src="' . JURI::root(TRUE) . '/media/com_joomcck/icons/16/status' . ($result ? NULL : '-offline') . '.png" rel="tooltip" data-original-title="' . ($result ? \Joomla\CMS\Language\Text::_('CONLINE') : \Joomla\CMS\Language\Text::_('COFFLINE')) . '" align="absmiddle">' . $name;
 		}
 
 		$cache[$key] = $name;
@@ -293,13 +293,13 @@ class CCommunityHelper
 
 		if(!$component)
 		{
-			$params    = JComponentHelper::getParams('com_joomcck');
+			$params    = \Joomla\CMS\Component\ComponentHelper::getParams('com_joomcck');
 			$component = str_replace('.php', '', basename($params->get('community', 'com_joomcck.php')));
 		}
 
 		if(empty($class[$component]))
 		{
-			if(!JComponentHelper::isEnabled($component))
+			if(!\Joomla\CMS\Component\ComponentHelper::isEnabled($component))
 			{
 				$component = 'com_joomcck';
 			}
@@ -309,7 +309,7 @@ class CCommunityHelper
 			$name = 'CCommunity' . ucfirst($component);
 			if(!class_exists($name))
 			{
-				throw new Exception( JText::sprintf('CERR_COMMUNITYCLASSNOTFOUND', $name),404);
+				throw new Exception( \Joomla\CMS\Language\Text::sprintf('CERR_COMMUNITYCLASSNOTFOUND', $name),404);
 
 
 			}
@@ -324,12 +324,12 @@ class CCommunityHelper
 	{
 		$url = self::getLoginUrl() . '&return=' . Url::back();
 
-		JFactory::getApplication()->redirect(JRoute::_($url, FALSE));
+		\Joomla\CMS\Factory::getApplication()->redirect(\Joomla\CMS\Router\Route::_($url, FALSE));
 	}
 
 	static public function getRegistrationLink($label)
 	{
-		return JHTML::link(JRoute::_(self::getRegistrationUrl()), $label);
+		return JHTML::link(\Joomla\CMS\Router\Route::_(self::getRegistrationUrl()), $label);
 	}
 
 	static public function getRegistrationUrl()
@@ -355,7 +355,7 @@ class CCommunityHelper
 			return $out[$user_id];
 		}
 
-		$db  = JFactory::getDbo();
+		$db  = \Joomla\CMS\Factory::getDbo();
 		$sql = "SELECT session_id  FROM #__session WHERE client_id = 0 AND userid = {$user_id}";
 		$db->setQuery($sql);
 		$out[$user_id] = (boolean)$db->loadResult();

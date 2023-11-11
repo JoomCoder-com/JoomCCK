@@ -17,7 +17,7 @@ if(JoomcckCommentHelper::laded($this->item->id)) {
 
 	<?php if(!count($this->comments) && $this->item->params->get('comments.comments_access_post') === 0):?>
 		<div class="alert alert-warning">
-			<?php echo JText::_('CMSG_COMMENTSDISABLED')?>
+			<?php echo \Joomla\CMS\Language\Text::_('CMSG_COMMENTSDISABLED')?>
 		</div>
 		<?php return; ?>
 	<?php endif;?>
@@ -31,7 +31,7 @@ if(JoomcckCommentHelper::laded($this->item->id)) {
 
 	function deleteComment(id)
 	{
-		if(!confirm('<?php echo JText::_('CSUREDEL')?>'))
+		if(!confirm('<?php echo \Joomla\CMS\Language\Text::_('CSUREDEL')?>'))
 		{
 			return;
 		}
@@ -50,7 +50,7 @@ if(JoomcckCommentHelper::laded($this->item->id)) {
 	function ajax_rateComment(id, rate)
 	{
 		jQuery.ajax({
-			url:'<?php echo JRoute::_("index.php?option=com_joomcck&task=rate.comment&tmpl=component", FALSE); ?>',
+			url:'<?php echo \Joomla\CMS\Router\Route::_("index.php?option=com_joomcck&task=rate.comment&tmpl=component", FALSE); ?>',
 			data:{comment_id: id, state: rate },
 			dataType: 'json'
 		}).done(function(json){
@@ -72,20 +72,20 @@ if(JoomcckCommentHelper::laded($this->item->id)) {
 		&& in_array($this->item->params->get('comments.comments_access_post', $this->type->params->get('comments.comments_access_post')), $this->user->getAuthorisedViewLevels())):?>	<h2 class="mb-3">
 			<?php if($this->tmpl_params['comment']->get('tmpl_core.comments_rss_button', 1)):?>
 				<span class="float-end">
-					<a class="btn btn-micro" href="<?php echo JRoute::_($this->item->url.'&format=feed&type=rss')?>" target="_blank">
+					<a class="btn btn-micro" href="<?php echo \Joomla\CMS\Router\Route::_($this->item->url.'&format=feed&type=rss')?>" target="_blank">
 						<?php echo HTMLFormatHelper::icon('feed.png');  ?>
-					<?php echo JText::_('CCOMMRSS')?></a>
+					<?php echo \Joomla\CMS\Language\Text::_('CCOMMRSS')?></a>
 				</span>
 			<?php endif;?>
 			<?php if($this->tmpl_params['comment']->get('tmpl_core.comments_title', 1)):?>
-				<?php echo JText::_($this->tmpl_params['comment']->get('tmpl_core.comments_title_lbl', 'CCOMMENTS'));?>
+				<?php echo \Joomla\CMS\Language\Text::_($this->tmpl_params['comment']->get('tmpl_core.comments_title_lbl', 'CCOMMENTS'));?>
 			<?php endif;?>
 		</h2>
 	<?php endif;?>
 
 	<?php if($this->item->params->get('comments.comments_access_post') === 0):?>
 		<div class="alert alert-warning">
-			<?php echo JText::_('CMSG_COMMENTSDISABLED')?>
+			<?php echo \Joomla\CMS\Language\Text::_('CMSG_COMMENTSDISABLED')?>
 		</div>
 	<?php endif;?>
 
@@ -116,7 +116,7 @@ if(JoomcckCommentHelper::laded($this->item->id)) {
 			<div class="clearfix"></div>
 		<?php else :?>
 			<?php if($this->tmpl_params['comment']->get('tmpl_core.comments_nocomment', 0) && in_array($this->item->params->get('comments.comments_access_post', $this->type->params->get('comments.comments_access_post')), $this->user->getAuthorisedViewLevels())):?>
-				<p class="alert alert-info"><?php echo JText::_('CMSG_NOCOMMENTSBEFORST');?></p>
+				<p class="alert alert-info"><?php echo \Joomla\CMS\Language\Text::_('CMSG_NOCOMMENTSBEFORST');?></p>
 			<?php endif;?>
 		<?php endif;?>
 
@@ -127,8 +127,8 @@ if(JoomcckCommentHelper::laded($this->item->id)) {
 				<?php $plans = $tparams->get('emerald.type_comment_subscription');?>
 				<?php if(!is_array($plans)) settype($plans, 'array'); ?>
 				<div id="alert alert-warning">
-					<?php echo JText::_($tparams->get('emerald.type_comment_subscription_msg')).'<br>'.
-								JHtml::link(EmeraldApi::getLink('emlist', FALSE, $plans), JText::_('CSUBSCRIBE'))?>
+					<?php echo \Joomla\CMS\Language\Text::_($tparams->get('emerald.type_comment_subscription_msg')).'<br>'.
+								\Joomla\CMS\HTML\HTMLHelper::link(EmeraldApi::getLink('emlist', FALSE, $plans), \Joomla\CMS\Language\Text::_('CSUBSCRIBE'))?>
 				</div>
 			<?php else :?>
 				<?php echo $this->loadTemplate('comment_form');?>

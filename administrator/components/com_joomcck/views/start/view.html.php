@@ -30,13 +30,13 @@ class JoomcckViewStart extends MViewBase
 
     protected function addToolbar()
     {
-        JToolBarHelper::title(JText::_('Start'));
+        JToolBarHelper::title(\Joomla\CMS\Language\Text::_('Start'));
     }
 
 	public function checkAdminDashboardMenuItem(){
 
-		JTable::addIncludePath(JPATH_ADMINISTRATOR . '/components/com_menus/tables');
-		$menu_table = JTable::getInstance('Menu', 'JTable', []);
+		\Joomla\CMS\Table\Table::addIncludePath(JPATH_ADMINISTRATOR . '/components/com_menus/tables');
+		$menu_table = \Joomla\CMS\Table\Table::getInstance('Menu', '\\Joomla\\CMS\\Table\\Table', []);
 
 		$result = $menu_table->load([
 			"link" => 'index.php?option=com_joomcck&view=cpanel',
@@ -52,8 +52,8 @@ class JoomcckViewStart extends MViewBase
 
 	public function getAdminDashboardLink(){
 
-		JTable::addIncludePath(JPATH_ADMINISTRATOR . '/components/com_menus/tables');
-		$menu_table = JTable::getInstance('Menu', 'JTable', []);
+		\Joomla\CMS\Table\Table::addIncludePath(JPATH_ADMINISTRATOR . '/components/com_menus/tables');
+		$menu_table = \Joomla\CMS\Table\Table::getInstance('Menu', '\\Joomla\\CMS\\Table\\Table', []);
 
 		$menu_table->load([
 			"link" => 'index.php?option=com_joomcck&view=cpanel',

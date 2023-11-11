@@ -14,7 +14,7 @@ if(!is_array($types))
 {
 	settype($types, 'array');
 }
-$db = JFactory::getDbo();
+$db = \Joomla\CMS\Factory::getDbo();
 $db->setQuery('SELECT id, title, type_id, section_id, user_id, fields FROM `#__js_res_record` WHERE type_id IN (' . implode(',', $types) . ')');
 $ids   = $db->loadObjectList();
 $count = 0;
@@ -31,7 +31,7 @@ if(!empty($ids))
 		$section        = ItemsStore::getSection($item->section_id);
 		if(!is_object($section->params))
 		{
-			$section->params = new JRegistry($section->params);
+			$section->params = new \Joomla\Registry\Registry($section->params);
 		}
 
 		foreach($fields_list as $field)
@@ -48,7 +48,7 @@ if(!empty($ids))
 
 		}
 
-		$user = JFactory::getUser($item->user_id);
+		$user = \Joomla\CMS\Factory::getUser($item->user_id);
 
 		if($section->params->get('more.search_title'))
 		{
@@ -74,7 +74,7 @@ if(!empty($ids))
 			$out_fieldsdata[] = CommentHelper::fullText($type, $item);
 		}
 
-		$db2 = JFactory::getDbo();
+		$db2 = \Joomla\CMS\Factory::getDbo();
 		$db2->setQuery("UPDATE `#__js_res_record` SET fieldsdata = '" . $db2->escape(strip_tags(implode(', ', $out_fieldsdata))) . "' WHERE id = $item->id");
 		$db2->execute();
 
@@ -89,5 +89,5 @@ if(!empty($ids))
 	}
 }
 
-$app = JFactory::getApplication();
-$app->enqueueMessage(JText::sprintf('%d record(s) have been reindexed.', $count));
+$app = \Joomla\CMS\Factory::getApplication();
+$app->enqueueMessage(\Joomla\CMS\Language\Text::sprintf('%d record(s) have been reindexed.', $count));

@@ -15,14 +15,14 @@ class JoomcckViewModerators extends MViewBase
 {
 	function display($tpl = null)
 	{
-		$user_id = JFactory::getUser()->get('id');
+		$user_id = \Joomla\CMS\Factory::getUser()->get('id');
 		$this->state = $this->get('State');
-		$params = JComponentHelper::getParams('com_joomcck');
+		$params = \Joomla\CMS\Component\ComponentHelper::getParams('com_joomcck');
 
-		if(!MECAccess::isModerator($user_id, JFactory::getApplication()->input->getInt('filter_section', $this->state->get('filter.section', 0))))
+		if(!MECAccess::isModerator($user_id, \Joomla\CMS\Factory::getApplication()->input->getInt('filter_section', $this->state->get('filter.section', 0))))
 		{
 
-			Factory::getApplication()->enqueueMessage( JText::_('CERR_NOPAGEACCESS'),'warning');
+			Factory::getApplication()->enqueueMessage( \Joomla\CMS\Language\Text::_('CERR_NOPAGEACCESS'),'warning');
 			return;
 		}
 
@@ -36,15 +36,15 @@ class JoomcckViewModerators extends MViewBase
 
 		$this->_prepareDocument();
 
-		$this->addFilter(JText::_('JOPTION_SELECT_PUBLISHED'), 'filter_state', JHtml::_('select.options', JHtml::_('jgrid.publishedOptions', array(
+		$this->addFilter(\Joomla\CMS\Language\Text::_('JOPTION_SELECT_PUBLISHED'), 'filter_state', \Joomla\CMS\HTML\HTMLHelper::_('select.options', \Joomla\CMS\HTML\HTMLHelper::_('jgrid.publishedOptions', array(
 			'trash'    => 0,
 			'archived' => 0,
 			'all'      => 0
 		)), 'value', 'text', $this->state->get('filter.state'), TRUE));
 
-		if($params->get('moderator', - 1) == JFactory::getUser()->get('id'))
+		if($params->get('moderator', - 1) == \Joomla\CMS\Factory::getUser()->get('id'))
 		{
-			$this->addFilter(JText::_('CSELECTSECTION'), 'filter_section', JHtml::_('select.options', $this->filter_sections, 'value', 'text', $this->state->get('filter.section'), TRUE));
+			$this->addFilter(\Joomla\CMS\Language\Text::_('CSELECTSECTION'), 'filter_section', \Joomla\CMS\HTML\HTMLHelper::_('select.options', $this->filter_sections, 'value', 'text', $this->state->get('filter.section'), TRUE));
 		}
 
 
@@ -53,8 +53,8 @@ class JoomcckViewModerators extends MViewBase
 
 	private function _prepareDocument()
 	{
-		$app = JFactory::getApplication();
-		$doc = JFactory::getDocument();
+		$app = \Joomla\CMS\Factory::getApplication();
+		$doc = \Joomla\CMS\Factory::getDocument();
 		$menus = $app->getMenu();
 		$menu = $menus->getActive();
 		$pathway = $app->getPathway();
@@ -69,7 +69,7 @@ class JoomcckViewModerators extends MViewBase
 			$this->appParams->def('page_heading', $title);
 		}
 
-		$title = JText::_('CMODERLIST');
+		$title = \Joomla\CMS\Language\Text::_('CMODERLIST');
 
 		$pathway->addItem($title);
 
@@ -77,11 +77,11 @@ class JoomcckViewModerators extends MViewBase
 
 		if($app->getCfg('sitename_pagetitles', 0) == 1)
 		{
-			$title = JText::sprintf('JPAGETITLE', $app->getCfg('sitename'), $title);
+			$title = \Joomla\CMS\Language\Text::sprintf('JPAGETITLE', $app->getCfg('sitename'), $title);
 		}
 		elseif($app->getCfg('sitename_pagetitles', 0) == 2)
 		{
-			$title = JText::sprintf('JPAGETITLE', $title, $app->getCfg('sitename'));
+			$title = \Joomla\CMS\Language\Text::sprintf('JPAGETITLE', $title, $app->getCfg('sitename'));
 		}
 
 		$doc->setTitle($title);
@@ -90,9 +90,9 @@ class JoomcckViewModerators extends MViewBase
 	public function getSortFields()
 	{
 		return array(
-			'a.published' => JText::_('JSTATUS'),
-			'a.id'        => JText::_('ID'),
-			'a.name'      => JText::_('CNAME'),
+			'a.published' => \Joomla\CMS\Language\Text::_('JSTATUS'),
+			'a.id'        => \Joomla\CMS\Language\Text::_('ID'),
+			'a.name'      => \Joomla\CMS\Language\Text::_('CNAME'),
 		);
 	}
 }

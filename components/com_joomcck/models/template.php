@@ -21,12 +21,12 @@ class JoomcckModelTemplate extends MModelAdmin
 
 	public function getTable($type = 'Type', $prefix = 'JoomcckTable', $config = array())
 	{
-		return JTable::getInstance($type, $prefix, $config);
+		return \Joomla\CMS\Table\Table::getInstance($type, $prefix, $config);
 	}
 
 	public function getForm($data = array(), $loadData = TRUE)
 	{
-		$app = JFactory::getApplication();
+		$app = \Joomla\CMS\Factory::getApplication();
 
 		$form = $this->loadForm('com_joomcck.template', 'template', array(
 			'control'   => 'jform',
@@ -42,16 +42,16 @@ class JoomcckModelTemplate extends MModelAdmin
 
 	protected function loadFormData()
 	{
-		$ext  = JFactory::getApplication()->input->get('ext');
-		$data = JFactory::getApplication()->getUserState('com_joomcck.edit' . $ext . '.template.data', array());
+		$ext  = \Joomla\CMS\Factory::getApplication()->input->get('ext');
+		$data = \Joomla\CMS\Factory::getApplication()->getUserState('com_joomcck.edit' . $ext . '.template.data', array());
 
 		if(empty($data))
 		{
-			$file           = explode('.', JFactory::getApplication()->input->get('file'));
-			$data['ident']  = JFactory::getApplication()->input->get('file');
+			$file           = explode('.', \Joomla\CMS\Factory::getApplication()->input->get('file'));
+			$data['ident']  = \Joomla\CMS\Factory::getApplication()->input->get('file');
 			$file_name = JoomcckTmplHelper::getTmplFile($file[1], $file[0]) . '.' . $ext;
 			$data['source'] = '';
-			if(JFile::exists($file_name))
+			if(\Joomla\CMS\Filesystem\File::exists($file_name))
 			{
 				$data['source'] = file_get_contents($file_name);
 			}
@@ -67,14 +67,14 @@ class JoomcckModelTemplate extends MModelAdmin
 
 	protected function canDelete($record)
 	{
-		$user = JFactory::getUser();
+		$user = \Joomla\CMS\Factory::getUser();
 
 		return $user->authorise('core.delete', 'com_joomcck.template.' . (int)$record->id);
 	}
 
 	protected function canEditState($record)
 	{
-		$user = JFactory::getUser();
+		$user = \Joomla\CMS\Factory::getUser();
 
 		return $user->authorise('core.edit.state', 'com_joomcck.template.' . (int)$record->id);
 	}

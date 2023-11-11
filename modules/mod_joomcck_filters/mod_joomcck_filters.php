@@ -20,14 +20,14 @@ require_once JPATH_ROOT . '/components/com_joomcck/libraries/vendor/autoload.php
 // init webassets
 Webassets::init();
 
-$app = JFactory::getApplication();
+$app = \Joomla\CMS\Factory::getApplication();
 
 if($app->input->getCmd('option') == 'com_joomcck' && $app->input->getCmd('view') == 'form' && $params->get('form_hide', 1))
 {
 	return;
 }
 
-$lang = JFactory::getLanguage();
+$lang = \Joomla\CMS\Factory::getLanguage();
 $lang->load('com_joomcck', JPATH_ROOT);
 
 require_once JPATH_ROOT . '/components/com_joomcck/api.php';

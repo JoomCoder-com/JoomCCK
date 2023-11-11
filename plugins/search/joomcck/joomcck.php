@@ -24,7 +24,7 @@ class plgSearchJoomcck extends JPlugin
 
 			if($this->params->get('show_restricted', 1) == 0)
 			{
-				$sql .= ' AND access IN('.implode(',', JFactory::getUser()->getAuthorisedViewLevels()).')';
+				$sql .= ' AND access IN('.implode(',', \Joomla\CMS\Factory::getUser()->getAuthorisedViewLevels()).')';
 			}
 
 			$sections = (array)$this->params->get('sections', array());
@@ -32,7 +32,7 @@ class plgSearchJoomcck extends JPlugin
 			{
 				$sql .= " AND id NOT IN(" . implode(',', $sections) . ")";
 			}
-			$db = JFactory::getDbo();
+			$db = \Joomla\CMS\Factory::getDbo();
 			$db->setQuery($sql);
 			$sec = $db->loadObjectList('id');
 			
@@ -55,11 +55,11 @@ class plgSearchJoomcck extends JPlugin
 			return $out;
 		}
 		
-		$db = JFactory::getDbo();
-		$app = JFactory::getApplication();
-		$user = JFactory::getUser();
+		$db = \Joomla\CMS\Factory::getDbo();
+		$app = \Joomla\CMS\Factory::getApplication();
+		$user = \Joomla\CMS\Factory::getUser();
 		$groups = implode(',', $user->getAuthorisedViewLevels());
-		$tag = JFactory::getLanguage()->getTag();
+		$tag = \Joomla\CMS\Factory::getLanguage()->getTag();
 		
 		require_once JPATH_SITE . '/components/com_joomcck/library/php/helpers/helper.php';
 		require_once JPATH_SITE . '/components/com_content/helpers/route.php';
@@ -81,7 +81,7 @@ class plgSearchJoomcck extends JPlugin
 		$limit = $this->params->def('search_limit', 50);
 		
 		$nullDate = $db->getNullDate();
-		$date = JFactory::getDate();
+		$date = \Joomla\CMS\Factory::getDate();
 		$now = $date->toSql();
 		
 		$query = $db->getQuery(TRUE);

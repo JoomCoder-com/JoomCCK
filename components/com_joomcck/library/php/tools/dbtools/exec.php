@@ -4,7 +4,7 @@ defined('_JEXEC') or die();
 
 use Joomla\CMS\Factory;
 
-$app = JFactory::getApplication();
+$app = \Joomla\CMS\Factory::getApplication();
 
 $tables = $params->get('db_tables');
 settype($tables[0], 'array');
@@ -14,11 +14,11 @@ $table_line = implode(', ', $tables);
 if(!$tables)
 {
 
-	Factory::getApplication()->enqueueMessage(JText::_('No table selected'),'warning');
+	Factory::getApplication()->enqueueMessage(\Joomla\CMS\Language\Text::_('No table selected'),'warning');
 
 	return;
 }
-$db = JFactory::getDBO();
+$db = \Joomla\CMS\Factory::getDBO();
 
 switch($params->get('db_action'))
 {
@@ -26,18 +26,18 @@ switch($params->get('db_action'))
 		$sql = "OPTIMIZE TABLE " . $table_line;
 		$db->setQuery($sql);
 		$db->execute();
-		$app->enqueueMessage(JText::_('Tables Optimized') . ': ' . $table_line);
+		$app->enqueueMessage(\Joomla\CMS\Language\Text::_('Tables Optimized') . ': ' . $table_line);
 		break;
 	case 2:
 		$sql = "REPAIR TABLE " . $table_line;
 		$db->setQuery($sql);
 		$db->execute();
-		$app->enqueueMessage(JText::_('Tables Repaired') . ': ' . $table_line);
+		$app->enqueueMessage(\Joomla\CMS\Language\Text::_('Tables Repaired') . ': ' . $table_line);
 		break;
 	case 3:
 		$sql = "ANALYZE TABLE " . $table_line;
 		$db->setQuery($sql);
-		$app->enqueueMessage(JText::_('Tables Analized'));
+		$app->enqueueMessage(\Joomla\CMS\Language\Text::_('Tables Analized'));
 		$res = $db->loadObjectList();
 		if($res)
 		{
@@ -52,7 +52,7 @@ switch($params->get('db_action'))
 	case 5:
 		$sql = "CHECK TABLE " . $table_line;
 		$db->setQuery($sql);
-		$app->enqueueMessage(JText::_('Tables Checked'));
+		$app->enqueueMessage(\Joomla\CMS\Language\Text::_('Tables Checked'));
 		$res = $db->loadObjectList();
 		if($res)
 		{
@@ -71,7 +71,7 @@ switch($params->get('db_action'))
 			$sql = "TRUNCATE TABLE " . $table;
 			$db->setQuery($sql);
 			$db->execute();
-			$app->enqueueMessage(JText::_('TRUNCATE Table') . ': ' . $table);
+			$app->enqueueMessage(\Joomla\CMS\Language\Text::_('TRUNCATE Table') . ': ' . $table);
 		}
 		break;
 	case 6: // update database structure

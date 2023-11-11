@@ -25,7 +25,7 @@ class JFormFieldCReadmore extends CFormFieldRelate
 
 		if($this->params->get('params.strict') == 2 && $this->request->get('id'))
 		{
-			$db = JFactory::getDbo();
+			$db = \Joomla\CMS\Factory::getDbo();
 			$db->setQuery("SELECT record_id FROM #__js_res_record_values WHERE field_id = {$this->id} AND field_value = " . $this->request->get('id'));
 			$add = $db->loadColumn();
 			ArrayHelper::clean_r($add);
@@ -63,7 +63,7 @@ class JFormFieldCReadmore extends CFormFieldRelate
 
 	public function onGetList($params)
 	{
-		$db         = JFactory::getDbo();
+		$db         = \Joomla\CMS\Factory::getDbo();
 		$section_id = $this->request->getInt('section_id');
 
 		$query = $db->getQuery(TRUE);
@@ -78,7 +78,7 @@ class JFormFieldCReadmore extends CFormFieldRelate
 		$query->where('type_id IN (' . implode(',', $this->_getTypes()) . ')');
 		if($this->params->get('params.user_strict'))
 		{
-			$user_id = JFactory::getUser()->get('id');
+			$user_id = \Joomla\CMS\Factory::getUser()->get('id');
 			$query->where('user_id = ' . ($user_id ? $user_id : 1));
 		}
 		$db->setQuery($query);

@@ -12,7 +12,7 @@ use Joomla\CMS\HTML\HTMLHelper;
 
 defined('_JEXEC') or die('Restricted access');
 
-JHtml::_('bootstrap.tooltip');
+\Joomla\CMS\HTML\HTMLHelper::_('bootstrap.tooltip');
 /** @var Joomla\CMS\WebAsset\WebAssetManager $wa */
 $wa = $this->document->getWebAssetManager();
 $wa->useScript('keepalive')
@@ -25,23 +25,23 @@ $wa->useScript('keepalive')
 		if(task == 'ctype.cancel' || document.formvalidator.isValid(document.getElementById('adminForm'))) {
 			Joomla.submitform(task, document.getElementById('adminForm'));
 		} else {
-			alert('<?php echo $this->escape(JText::_('JGLOBAL_VALIDATION_FORM_FAILED'));?>');
+			alert('<?php echo $this->escape(\Joomla\CMS\Language\Text::_('JGLOBAL_VALIDATION_FORM_FAILED'));?>');
 		}
 	}
 	
 </script>
 <div id="joomcckContainer">
-    <form action="<?php echo JUri::getInstance()->toString(); ?>" method="post" name="adminForm" id="adminForm" class="form-horizontal">
+    <form action="<?php echo \Joomla\CMS\Uri\Uri::getInstance()->toString(); ?>" method="post" name="adminForm" id="adminForm" class="form-horizontal">
 		<?php echo HTMLFormatHelper::layout('item', $this); ?>
         <div class="page-header">
             <h1>
-				<?php echo empty($this->item->id) ? JText::_('CNEWTYPE') : JText::sprintf('CEDITTYPES', $this->item->name); ?>
+				<?php echo empty($this->item->id) ? \Joomla\CMS\Language\Text::_('CNEWTYPE') : \Joomla\CMS\Language\Text::sprintf('CEDITTYPES', $this->item->name); ?>
             </h1>
         </div>
 
 	    <?php echo HTMLHelper::_('uitab.startTabSet', 'myTab', ['active' => 'page-main', 'recall' => true, 'breakpoint' => 768]); ?>
 
-	    <?php echo HTMLHelper::_('uitab.addTab', 'myTab', 'page-main', JText::_('FS_FORM')); ?>
+	    <?php echo HTMLHelper::_('uitab.addTab', 'myTab', 'page-main', \Joomla\CMS\Language\Text::_('FS_FORM')); ?>
         <div class="float-start" style="max-width: 600px; margin-right: 20px;">
             <div class="control-group">
                 <div class="control-label"><?php echo $this->form->getLabel('id'); ?></div>
@@ -67,7 +67,7 @@ $wa->useScript('keepalive')
 		    <?php echo MFormHelper::renderFieldset($this->params_form, 'prop', $this->item->params, 'properties'); ?>
         </div>
 	    <?php echo HTMLHelper::_('uitab.endTab'); ?>
-	    <?php echo HTMLHelper::_('uitab.addTab', 'myTab', 'page-params', JText::_('FS_GENERAL')); ?>
+	    <?php echo HTMLHelper::_('uitab.addTab', 'myTab', 'page-params', \Joomla\CMS\Language\Text::_('FS_GENERAL')); ?>
         <div class="float-start" style="max-width: 600px; margin-right: 20px;">
 		    <?php echo MFormHelper::renderFieldset($this->params_form, 'templates', $this->item->params, 'properties'); ?>
 		    <?php echo MFormHelper::renderFieldset($this->params_form, 'tags', $this->item->params, 'properties'); ?>
@@ -77,7 +77,7 @@ $wa->useScript('keepalive')
 		    <?php echo MFormHelper::renderFieldset($this->params_form, 'rating', $this->item->params, 'properties'); ?>
         </div>
 	    <?php echo HTMLHelper::_('uitab.endTab'); ?>
-	    <?php echo HTMLHelper::_('uitab.addTab', 'myTab', 'page-submission', JText::_('FS_SUBMISPARAMS')); ?>
+	    <?php echo HTMLHelper::_('uitab.addTab', 'myTab', 'page-submission', \Joomla\CMS\Language\Text::_('FS_SUBMISPARAMS')); ?>
         <div class="float-start" style="max-width: 600px; margin-right: 20px;">
 		    <?php echo MFormHelper::renderFieldset($this->params_form, 'submit', $this->item->params, 'submission'); ?>
         </div>
@@ -86,22 +86,22 @@ $wa->useScript('keepalive')
 		    <?php echo MFormHelper::renderFieldset($this->params_form, 'metadata', $this->item->params, 'submission'); ?>
         </div>
 	    <?php echo HTMLHelper::_('uitab.endTab'); ?>
-	    <?php echo HTMLHelper::_('uitab.addTab', 'myTab', 'page-limit', JText::_('CCATEGORYLIMIT')); ?>
+	    <?php echo HTMLHelper::_('uitab.addTab', 'myTab', 'page-limit', \Joomla\CMS\Language\Text::_('CCATEGORYLIMIT')); ?>
         <div class="float-start" style="max-width: 600px; margin-right: 20px;">
 		    <?php echo MFormHelper::renderGroup($this->params_form, $this->item->params, 'category_limit'); ?>
         </div>
         <div class="float-start">
-            <legend><?php echo JText::_('CCATEGORYLIMIT') ?></legend>
-		    <?php echo JHtml::_('mrelements.catselector', 'params[category_limit][category][]', 0, @$this->item->params['category_limit']['category'], 0); ?>
+            <legend><?php echo \Joomla\CMS\Language\Text::_('CCATEGORYLIMIT') ?></legend>
+		    <?php echo \Joomla\CMS\HTML\HTMLHelper::_('mrelements.catselector', 'params[category_limit][category][]', 0, @$this->item->params['category_limit']['category'], 0); ?>
         </div>
 	    <?php echo HTMLHelper::_('uitab.endTab'); ?>
-	    <?php echo HTMLHelper::_('uitab.addTab', 'myTab', 'page-comments', JText::_('FS_COMMPARAMS')); ?>
+	    <?php echo HTMLHelper::_('uitab.addTab', 'myTab', 'page-comments', \Joomla\CMS\Language\Text::_('FS_COMMPARAMS')); ?>
         <div class="float-start" style="max-width: 600px; margin-right: 20px;">
 		    <?php echo MFormHelper::renderGroup($this->params_form, $this->item->params, 'comments'); ?>
             <div id="comments-params"></div>
         </div>
 	    <?php echo HTMLHelper::_('uitab.endTab'); ?>
-	    <?php echo HTMLHelper::_('uitab.addTab', 'myTab', 'page-audit', JText::_('FS_AUDIT')); ?>
+	    <?php echo HTMLHelper::_('uitab.addTab', 'myTab', 'page-audit', \Joomla\CMS\Language\Text::_('FS_AUDIT')); ?>
         <div class="float-start" style="max-width: 600px; margin-right: 20px;">
 		    <?php echo MFormHelper::renderFieldset($this->params_form, 'ver', $this->item->params, 'audit'); ?>
 		    <?php echo MFormHelper::renderFieldset($this->params_form, 'verl', $this->item->params, 'audit'); ?>
@@ -111,8 +111,8 @@ $wa->useScript('keepalive')
 		    <?php echo MFormHelper::renderFieldset($this->params_form, 'ver2', $this->item->params, 'audit'); ?>
         </div>
 	    <?php echo HTMLHelper::_('uitab.endTab'); ?>
-	    <?php echo HTMLHelper::_('uitab.addTab', 'myTab', 'page-emerald', JText::_('FS_EMERALD')); ?>
-        <p class="lead"><?php echo JText::_('FS_EMERALDINTEGRATE') ?></p>
+	    <?php echo HTMLHelper::_('uitab.addTab', 'myTab', 'page-emerald', \Joomla\CMS\Language\Text::_('FS_EMERALD')); ?>
+        <p class="lead"><?php echo \Joomla\CMS\Language\Text::_('FS_EMERALDINTEGRATE') ?></p>
 
         <div class="float-start" style="max-width: 600px; margin-right: 20px;">
 		    <?php echo MFormHelper::renderFieldset($this->params_form, 'type_subscr', $this->item->params, 'emerald'); ?>
@@ -133,7 +133,7 @@ $wa->useScript('keepalive')
 
 
         <input type="hidden" name="task" value=""/>
-		<?php echo JHtml::_('form.token'); ?>
+		<?php echo \Joomla\CMS\HTML\HTMLHelper::_('form.token'); ?>
     </form>
 </div>
 
@@ -142,7 +142,7 @@ $wa->useScript('keepalive')
 	!function($) {
 		function loadCommentParams() {
 			$.ajax({
-				url: '<?php echo JRoute::_('index.php?option=com_joomcck&task=ajax.loadcommentparams&tmpl=component');?>',
+				url: '<?php echo \Joomla\CMS\Router\Route::_('index.php?option=com_joomcck&task=ajax.loadcommentparams&tmpl=component');?>',
 				context: $('#comments-params'),
 				dataType: 'html',
 				data: {

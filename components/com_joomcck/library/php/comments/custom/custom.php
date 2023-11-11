@@ -23,7 +23,7 @@ class JoomcckCommentsCustom extends JoomcckComments {
 	
 	public function getComments($type, $record)
 	{
-		$out[] = '<h2>'.JText::_('CCOMMENTS').'</h2>';
+		$out[] = '<h2>'.\Joomla\CMS\Language\Text::_('CCOMMENTS').'</h2>';
 		$code = $type->params->get('comments.comment_custom_js_comm');
 		$code = str_replace(array('[URL]', '[ID]'), array(\Joomla\CMS\Uri\Uri::getInstance()->toString(), $record->id), $code);
 		

@@ -68,7 +68,7 @@ class JFormFieldCUploads extends CFormFieldUpload
 		$open_in_b = $this->params->get('params.show_in_browser');
 		if($open_in_b && $this->params->get('params.show_target') == 1)
 		{
-			$doc = JFactory::getDocument();
+			$doc = \Joomla\CMS\Factory::getDocument();
 		
 			$doc->addScriptDeclaration("
 				var x_win{$this->id} = 0; 

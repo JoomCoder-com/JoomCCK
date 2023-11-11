@@ -2,11 +2,11 @@
 
 defined('_JEXEC') or die();
 
-$app = JFactory::getApplication();
-$db = JFactory::getDBO();
+$app = \Joomla\CMS\Factory::getApplication();
+$db = \Joomla\CMS\Factory::getDBO();
 
-$table_record = JTable::getInstance('Record', 'JoomcckTable');
-$table_value = JTable::getInstance('Record_values', 'JoomcckTable');
+$table_record = \Joomla\CMS\Table\Table::getInstance('Record', 'JoomcckTable');
+$table_value = \Joomla\CMS\Table\Table::getInstance('Record_values', 'JoomcckTable');
 
 $section_id = $params->get('section_id');
 $from = (int)$params->get('cat_from');
@@ -60,4 +60,4 @@ VALUES (NULL, '{$to}', '{$item->record_id}',0, NOW(), '{$section_id}', 1, 1)";
 }
 
 
-$app->enqueueMessage(JText::sprintf('%d record(s) have been moved.', $count));
+$app->enqueueMessage(\Joomla\CMS\Language\Text::sprintf('%d record(s) have been moved.', $count));

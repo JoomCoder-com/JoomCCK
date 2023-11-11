@@ -21,13 +21,13 @@ class JFormFieldMeresourcescategory extends JFormMEFieldList
 
 
 		
-		JHtml::addIncludePath(JPATH_ROOT. DIRECTORY_SEPARATOR .'administrator'. DIRECTORY_SEPARATOR .'components'. DIRECTORY_SEPARATOR .'com_joomcck'. DIRECTORY_SEPARATOR .'library'. DIRECTORY_SEPARATOR .'php'. DIRECTORY_SEPARATOR .'html');
-		$sections = JHtml::_('joomcck.sections');
+		\Joomla\CMS\HTML\HTMLHelper::addIncludePath(JPATH_ROOT. DIRECTORY_SEPARATOR .'administrator'. DIRECTORY_SEPARATOR .'components'. DIRECTORY_SEPARATOR .'com_joomcck'. DIRECTORY_SEPARATOR .'library'. DIRECTORY_SEPARATOR .'php'. DIRECTORY_SEPARATOR .'html');
+		$sections = \Joomla\CMS\HTML\HTMLHelper::_('joomcck.sections');
 	
 		$options = array();
 		if ($this->element['select'] == 1)
 		{
-			$options[] = JHTML::_('select.option', '', JText::_('Selet Category'));
+			$options[] = JHTML::_('select.option', '', \Joomla\CMS\Language\Text::_('Selet Category'));
 		}
 		foreach ($sections as $type)
 		{

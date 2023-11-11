@@ -53,7 +53,7 @@ $ind = 0;
 <?php if (count($cats)) : ?>
 	<div class="categories-list" style="padding-bottom: 20px;">
 		<?php if($this->tmpl_params['cindex']->get('tmpl_core.show_title', 1)):?>
-			<h2 class="contentheading"><?php echo JText::_($this->tmpl_params['cindex']->get('tmpl_core.title_label', 'Category Index'))?></h2>
+			<h2 class="contentheading"><?php echo \Joomla\CMS\Language\Text::_($this->tmpl_params['cindex']->get('tmpl_core.title_label', 'Category Index'))?></h2>
 		<?php endif;?>
 		<table class="list" width="100%" border="0" cellpadding="5" cellspacing="0">
 			<tr valign="top">
@@ -62,14 +62,14 @@ $ind = 0;
 				<?php for($i = 0; $i < $rows; $i ++):?>
 					<?php if ($ind >= count($cats)) continue; ?>
 					<?php $category = $cats[$ind]; ?>
-					<<?php echo $this->tmpl_params['cindex']->get('tmpl_params.tag', 'h4')?> class="cat-name<?php echo (JFactory::getApplication()->input->getInt('cat_id') == $category->id ? ' category-active' : NULL)?>">
+					<<?php echo $this->tmpl_params['cindex']->get('tmpl_params.tag', 'h4')?> class="cat-name<?php echo (\Joomla\CMS\Factory::getApplication()->input->getInt('cat_id') == $category->id ? ' category-active' : NULL)?>">
 						<?php if($params->get('tmpl_params.cat_img', 1) && $category->image):?>
 							<div><img style="max-width:<?php echo $params->get('tmpl_params.cat_img_width', 200)?>px;" class="category_icon" alt="<?php echo $category->title; ?>" src="<?php echo JURI::root().$category->image;?>"></div>
 						<?php endif;?>
 						<?php if(count($category->children)):?>
 							<img style="cursor: pointer;" id="iconsubcat<?php echo $category->id;?>" src="<?php echo JURI::root()?>media/com_joomcck/icons/16/toggle.png" hspace="5" align="absmiddle" />
 						<?php endif;?>
-						<a href="<?php echo JRoute::_($category->link)?>"><?php echo $category->title; ?></a>
+						<a href="<?php echo \Joomla\CMS\Router\Route::_($category->link)?>"><?php echo $category->title; ?></a>
 						<?php if($params->get('tmpl_params.cat_nums') && ($category->params->get('submission') || $category->records_num)):?>
 							(<?php echo $category->records_num;?>)
 						<?php endif;?>
@@ -135,12 +135,12 @@ $('.categories-list .subcat').each(function(e){
 	<ul>
 		<?php foreach($category->children as $i => $cat ) :
 		if (!$params->get('tmpl_params.subcat_empty', 1) && !$cat->num_current && !$cat->num_all) continue;  ?>
-			<li<?php echo (JFactory::getApplication()->input->getInt('cat_id') == $cat->id) ? ' class="category-active" ' : ''; ?>>
+			<li<?php echo (\Joomla\CMS\Factory::getApplication()->input->getInt('cat_id') == $cat->id) ? ' class="category-active" ' : ''; ?>>
 				<?php if($params->get('tmpl_params.subcat_limit', 5) <= $i && (count($category->children) > $params->get('tmpl_params.subcat_limit', 5))):?>
-					<a href="<?php echo $category->link;?>"><?php echo JText::_('CMORECATS').'...'?></a></li>
+					<a href="<?php echo $category->link;?>"><?php echo \Joomla\CMS\Language\Text::_('CMORECATS').'...'?></a></li>
 					<?php break;?>
 				<?php else:?>
-					<a href="<?php echo JRoute::_($cat->link)?>">
+					<a href="<?php echo \Joomla\CMS\Router\Route::_($cat->link)?>">
 						<?php echo $cat->title;?>
 					</a>
 					<?php if($params->get('tmpl_params.subcat_nums', 0) && $cat->params->get('submission')):?>

@@ -18,8 +18,8 @@ class JFormFieldMEUsercategories extends JFormField
     protected function getInput()
     {
 
-        $db	= JFactory::getDBO();
-        $user = JFactory::getUser(\Joomla\CMS\Factory::getApplication()->input->getInt('cat_user_id',0));
+        $db	= \Joomla\CMS\Factory::getDBO();
+        $user = \Joomla\CMS\Factory::getUser(\Joomla\CMS\Factory::getApplication()->input->getInt('cat_user_id',0));
         $section_id = \Joomla\CMS\Factory::getApplication()->input->getInt('section_id',0);
 
 		$sql = "SELECT id AS value, name AS text FROM `#__js_res_category_user`
@@ -29,13 +29,13 @@ class JFormFieldMEUsercategories extends JFormField
 		$categories = $db->loadObjectList();
 
 		$html = '<div class="form-inline">';
-		$html .= JHtml::_('select.genericlist', $categories, $this->name, 'class="form-select"', 'value', 'text', $this->value, $this->id);
+		$html .= \Joomla\CMS\HTML\HTMLHelper::_('select.genericlist', $categories, $this->name, 'class="form-select"', 'value', 'text', $this->value, $this->id);
 		if($this->required)
 		{
 		    $uri		= \Joomla\CMS\Uri\Uri::getInstance();
             $return		= base64_encode($uri);
-		    $html .= '<a class="btn btn-outline-success" href="'.JRoute::_('index.php?option=com_joomcck&view=category&section_id='.\Joomla\CMS\Factory::getApplication()->input->getInt('section_id',0).'&task=usercategory.add&return='.$return).'">
-		    			<img src="'.JURI::root().'media/com_joomcck/icons/16/plus-button.png" align="absmiddle" alt="'.JText::_('Add New').'" /> '.JText::_('Add New').'
+		    $html .= '<a class="btn btn-outline-success" href="'.\Joomla\CMS\Router\Route::_('index.php?option=com_joomcck&view=category&section_id='.\Joomla\CMS\Factory::getApplication()->input->getInt('section_id',0).'&task=usercategory.add&return='.$return).'">
+		    			<img src="'.JURI::root().'media/com_joomcck/icons/16/plus-button.png" align="absmiddle" alt="'.\Joomla\CMS\Language\Text::_('Add New').'" /> '.\Joomla\CMS\Language\Text::_('Add New').'
 					</a></div>';
 		}
 

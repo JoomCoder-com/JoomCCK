@@ -51,14 +51,14 @@ class JoomcckModelPacks extends MModelList
 		foreach ($items AS $item)
 		{
 			$filename = 'pack_joomcck.' . JFilterOutput::stringURLSafe($item->name) . '('.str_replace('pack', '', $item->key).').j3.v.9.' . ($item->version) . '.zip';
-			if(JFile::exists($path.$filename))
+			if(\Joomla\CMS\Filesystem\File::exists($path.$filename))
 			{
 				$item->download = '<a href="'.JURI::root(TRUE).'/cache/'.$filename.'">'.$filename.'</a>';
 				$item->size = HTMLFormatHelper::formatSize(filesize($path.$filename));
 			}
 			else
 			{
-				$item->download = JText::_('CNOBUILD');
+				$item->download = \Joomla\CMS\Language\Text::_('CNOBUILD');
 				$item->size = '--';
 			}
 

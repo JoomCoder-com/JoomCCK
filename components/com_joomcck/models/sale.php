@@ -23,7 +23,7 @@ class JoomcckModelSale extends MModelAdmin
 
 	protected function loadFormData()
 	{
-		$data = JFactory::getApplication()->getUserState('com_joomcck.edit.sale.data', array());
+		$data = \Joomla\CMS\Factory::getApplication()->getUserState('com_joomcck.edit.sale.data', array());
 
 		if(empty($data))
 		{
@@ -35,15 +35,15 @@ class JoomcckModelSale extends MModelAdmin
 
 	protected function populateState($ordering = null, $direction = null)
 	{
-		$pk = JFactory::getApplication()->input->getInt('id');
-		JFactory::getApplication()->setUserState('com_joomcck.sale.form.id',  $pk);
+		$pk = \Joomla\CMS\Factory::getApplication()->input->getInt('id');
+		\Joomla\CMS\Factory::getApplication()->setUserState('com_joomcck.sale.form.id',  $pk);
 		$this->setState('com_joomcck.sale.form.id', $pk);
 
-		$this->setState('layout', JFactory::getApplication()->input->getCmd('layout'));
+		$this->setState('layout', \Joomla\CMS\Factory::getApplication()->input->getCmd('layout'));
 	}
 
 	public function getTable($name = '', $prefix = 'Table', $options = array()){
-		return JTable::getInstance('Sales', 'JoomcckTable');
+		return \Joomla\CMS\Table\Table::getInstance('Sales', 'JoomcckTable');
 	}
 
 }

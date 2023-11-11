@@ -22,19 +22,19 @@ class JFormFieldMeresourcessection extends JFormMEFieldList
 	protected function getOptions()
 	{
 		$path = JPATH_ROOT . _DS . 'components' . _DS . 'com_joomcck' . _DS . 'library' . _DS . 'php' . _DS . 'html';
-        if(JFolder::exists($path)) {
-            JHtml::addIncludePath($path);
+        if(\Joomla\CMS\Filesystem\Folder::exists($path)) {
+            \Joomla\CMS\HTML\HTMLHelper::addIncludePath($path);
         }
 		$path = JPATH_ROOT . _DS . 'administrator'. _DS . 'components' . _DS . 'com_joomcck' . _DS . 'library' . _DS . 'php' . _DS . 'html';
-        if(JFolder::exists($path)) {
-            JHtml::addIncludePath($path);
+        if(\Joomla\CMS\Filesystem\Folder::exists($path)) {
+            \Joomla\CMS\HTML\HTMLHelper::addIncludePath($path);
         }
-        $sections = JHtml::_('joomcck.sections');
+        $sections = \Joomla\CMS\HTML\HTMLHelper::_('joomcck.sections');
 
 		$options = array();
 		if($this->element['select'] == 1)
 		{
-			$options[] = JHTML::_('select.option', '', JText::_('CSELECTSECTION'));
+			$options[] = JHTML::_('select.option', '', \Joomla\CMS\Language\Text::_('CSELECTSECTION'));
 		}
 		foreach($sections as $type)
 		{

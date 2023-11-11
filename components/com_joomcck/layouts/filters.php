@@ -8,7 +8,7 @@
  */
 
 defined('_JEXEC') or die('Restricted access');
-$view = JFactory::getApplication()->input->getCmd('view');
+$view = \Joomla\CMS\Factory::getApplication()->input->getCmd('view');
 if(empty($displayData->_filters)) return;
 ?>
 

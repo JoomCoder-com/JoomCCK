@@ -2,11 +2,11 @@
 
 defined('_JEXEC') or die();
 
-$app = JFactory::getApplication();
+$app = \Joomla\CMS\Factory::getApplication();
 $file = new JInputFiles();
-$db = JFactory::getDBO();
-$table_record = JTable::getInstance('Record', 'JoomcckTable');
-$table_value = JTable::getInstance('Record_values', 'JoomcckTable');
+$db = \Joomla\CMS\Factory::getDBO();
+$table_record = \Joomla\CMS\Table\Table::getInstance('Record', 'JoomcckTable');
+$table_value = \Joomla\CMS\Table\Table::getInstance('Record_values', 'JoomcckTable');
 
 $file = $file->get('price', FALSE);
 
@@ -24,7 +24,7 @@ if($file['error'] > 0 OR $file['size'] == 0)
 	return FALSE;
 }
 
-if(strtolower(JFile::getExt($file['name'])) != 'json')
+if(strtolower(\Joomla\CMS\Filesystem\File::getExt($file['name'])) != 'json')
 {
 	$app->enqueueMessage('Error: wrong file extension. Could be only JSON!', 'error');
 
@@ -38,7 +38,7 @@ if(!$params->get('field_id_price') || !$params->get('field_id_article') || !$par
 	return FALSE;
 }
 
-if(!JFile::upload($file['tmp_name'], JPATH_ROOT . DIRECTORY_SEPARATOR . 'tmp/'.$file['name']))
+if(!\Joomla\CMS\Filesystem\File::upload($file['tmp_name'], JPATH_ROOT . DIRECTORY_SEPARATOR . 'tmp/'.$file['name']))
 {
 	$app->enqueueMessage('Error: cannot move file!', 'error');
 

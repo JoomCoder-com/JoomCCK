@@ -20,7 +20,7 @@ class JoomcckControllerGroups extends MControllerAdmin
 
 		if(!$this->input)
 		{
-			$this->input = JFactory::getApplication()->input;
+			$this->input = \Joomla\CMS\Factory::getApplication()->input;
 		}
 	}
 
@@ -32,7 +32,7 @@ class JoomcckControllerGroups extends MControllerAdmin
 
 	public function cancel()
 	{
-		$app =  JFactory::getApplication();
+		$app =  \Joomla\CMS\Factory::getApplication();
 		$app->redirect('index.php?option=com_joomcck&view=fields&id='.$this->input->getInt('type_id'));
 	}
 
@@ -57,6 +57,6 @@ class JoomcckControllerGroups extends MControllerAdmin
 		}
 
 
-		JFactory::getApplication()->close();
+		\Joomla\CMS\Factory::getApplication()->close();
 	}
 }

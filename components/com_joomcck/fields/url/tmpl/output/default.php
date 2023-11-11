@@ -82,12 +82,12 @@ if($this->params->get('params.links_sort', 0))
 		<?php echo isset($val['label']) != '' ? $val['label'] : $val['url'] ?>
 	</a>
 	<?php if($this->params->get('params.snapshot', 1)): ?>
-		<?php $img = htmlentities(JHtml::image(JURI::root() . 'components/com_joomcck/fields/url/assets/loading.gif', JText::_('Snapshot'), array('id' => "snapimg{$id}-$i")), ENT_QUOTES) ?>
+		<?php $img = htmlentities(\Joomla\CMS\HTML\HTMLHelper::image(JURI::root() . 'components/com_joomcck/fields/url/assets/loading.gif', \Joomla\CMS\Language\Text::_('Snapshot'), array('id' => "snapimg{$id}-$i")), ENT_QUOTES) ?>
 
 		<img style="cursor: pointer"
 			 onclick="setTimeout(function(){jQuery('#snapimg<?php echo $id . '-' . $i; ?>').attr('src', 'http://mini.s-shot.ru/1280/<?php echo $this->params->get('params.snapshot_width', 200) ?>/jpeg?<?php echo $val['url']; ?>')}, 1000)"
 			 src="<?php echo JURI::root(TRUE) ?>/media/com_joomcck/icons/16/document-text-image.png"
-			 class="hasPopover" data-bs-original-title="<?php echo JText::_('Snapshot'); ?>" data-bs-content="<?php echo $img; ?>">
+			 class="hasPopover" data-bs-original-title="<?php echo \Joomla\CMS\Language\Text::_('Snapshot'); ?>" data-bs-content="<?php echo $img; ?>">
 
 	<?php endif; ?>
 
@@ -102,17 +102,17 @@ if($this->params->get('params.links_sort', 0))
             style="cursor: pointer"
             class="hasPopover"
             src="<?php echo JURI::root(TRUE) ?>/media/com_joomcck/icons/16/barcode-2d.png"
-            data-bs-original-title="<?php echo JText::_('URL QR'); ?>"
-            data-bs-content='<img src="<?php echo $qrImagePath ?>" title="<?php echo JText::_('URL QR') ?>" height="<?php echo $this->params->get('params.qr_width', 60) . 'px' ?>" width="<?php echo $this->params->get('params.qr_width', 60) . 'px' ?>" />'>
+            data-bs-original-title="<?php echo \Joomla\CMS\Language\Text::_('URL QR'); ?>"
+            data-bs-content='<img src="<?php echo $qrImagePath ?>" title="<?php echo \Joomla\CMS\Language\Text::_('URL QR') ?>" height="<?php echo $this->params->get('params.qr_width', 60) . 'px' ?>" width="<?php echo $this->params->get('params.qr_width', 60) . 'px' ?>" />'>
 	<?php endif; ?>
 
 
 	<?php if($this->params->get('params.link_redirect', 0) && $this->params->get('params.show_hits', 1)): ?>
-		<small><?php echo JText::_('CHITS'); ?> <span class="badge bg-light text-muted border"><?php echo (int)@$val['hits'] ?></span></small>
+		<small><?php echo \Joomla\CMS\Language\Text::_('CHITS'); ?> <span class="badge bg-light text-muted border"><?php echo (int)@$val['hits'] ?></span></small>
 	<?php endif; ?>
 
 	<?php if($this->params->get('params.filter_enable')): ?>
-		<?php echo FilterHelper::filterButton('filter_' . $this->id, $val['url'], $this->type_id, ($this->params->get('params.filter_tip') ? JText::sprintf($this->params->get('params.filter_tip'), '<b>' . $this->label . '</b>', '<b>' . $val['url'] . '</b>') : NULL), $section, $this->params->get('params.filter_icon', 'funnel-small.png')); ?>
+		<?php echo FilterHelper::filterButton('filter_' . $this->id, $val['url'], $this->type_id, ($this->params->get('params.filter_tip') ? \Joomla\CMS\Language\Text::sprintf($this->params->get('params.filter_tip'), '<b>' . $this->label . '</b>', '<b>' . $val['url'] . '</b>') : NULL), $section, $this->params->get('params.filter_icon', 'funnel-small.png')); ?>
 	<?php endif; ?>
 
 

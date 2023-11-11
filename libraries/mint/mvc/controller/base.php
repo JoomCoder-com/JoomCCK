@@ -228,7 +228,7 @@ class MControllerBase extends JObject
 			return self::$instance;
 		}
 
-		$input = JFactory::getApplication()->input;
+		$input = \Joomla\CMS\Factory::getApplication()->input;
 
 		// Get the environment configuration.
 		$basePath = array_key_exists('base_path', $config) ? $config['base_path'] : JPATH_ROOT.'/components/com_joomcck';
@@ -292,7 +292,7 @@ class MControllerBase extends JObject
 			}
 			else
 			{
-				throw new InvalidArgumentException(JText::sprintf('JLIB_APPLICATION_ERROR_INVALID_CONTROLLER', $type, $format));
+				throw new InvalidArgumentException(\Joomla\CMS\Language\Text::sprintf('JLIB_APPLICATION_ERROR_INVALID_CONTROLLER', $type, $format));
 			}
 		}
 
@@ -303,7 +303,7 @@ class MControllerBase extends JObject
 		}
 		else
 		{
-			throw new InvalidArgumentException(JText::sprintf('JLIB_APPLICATION_ERROR_INVALID_CONTROLLER_CLASS', $class));
+			throw new InvalidArgumentException(\Joomla\CMS\Language\Text::sprintf('JLIB_APPLICATION_ERROR_INVALID_CONTROLLER_CLASS', $class));
 		}
 
 		return self::$instance;
@@ -332,7 +332,7 @@ class MControllerBase extends JObject
 			JLog::addLogger(array('text_file' => 'jcontroller.log.php'), JLog::ALL, array('controller'));
 		}
 
-		$this->input = JFactory::getApplication()->input;
+		$this->input = \Joomla\CMS\Factory::getApplication()->input;
 
 
 		// Determine the methods to exclude from the base class.
@@ -516,7 +516,7 @@ class MControllerBase extends JObject
 	{
 		if ($id)
 		{
-			$app = JFactory::getApplication();
+			$app = \Joomla\CMS\Factory::getApplication();
 			$values = (array) $app->getUserState($context . '.id');
 
 			$result = in_array((int) $id, $values);
@@ -608,7 +608,7 @@ class MControllerBase extends JObject
 
 				if (!class_exists($viewClass))
 				{
-					throw new Exception(JText::sprintf('JLIB_APPLICATION_ERROR_VIEW_CLASS_NOT_FOUND', $viewClass, $path), 500);
+					throw new Exception(\Joomla\CMS\Language\Text::sprintf('JLIB_APPLICATION_ERROR_VIEW_CLASS_NOT_FOUND', $viewClass, $path), 500);
 				}
 			}
 			else
@@ -635,7 +635,7 @@ class MControllerBase extends JObject
 	 */
 	public function display($cachable = false, $urlparams = array())
 	{
-		$document = JFactory::getDocument();
+		$document = \Joomla\CMS\Factory::getDocument();
 		$viewType = $document->getType();
 		$viewName = $this->input->get('view', $this->default_view);
 		$viewLayout = $this->input->get('layout', 'default', 'string');
@@ -651,17 +651,17 @@ class MControllerBase extends JObject
 
 		$view->document = $document;
 
-		$conf = JFactory::getConfig();
+		$conf = \Joomla\CMS\Factory::getConfig();
 
 		// Display the view
 		if ($cachable && $viewType != 'feed' && $conf->get('caching') >= 1)
 		{
 			$option = $this->input->get('option');
-			$cache = JFactory::getCache($option, 'view');
+			$cache = \Joomla\CMS\Factory::getCache($option, 'view');
 
 			if (is_array($urlparams))
 			{
-				$app = JFactory::getApplication();
+				$app = \Joomla\CMS\Factory::getApplication();
 
 				if (!empty($app->registeredurlparams))
 				{
@@ -716,7 +716,7 @@ class MControllerBase extends JObject
 		}
 		else
 		{
-			throw new Exception(JText::sprintf('JLIB_APPLICATION_ERROR_TASK_NOT_FOUND', $task), 404);
+			throw new Exception(\Joomla\CMS\Language\Text::sprintf('JLIB_APPLICATION_ERROR_TASK_NOT_FOUND', $task), 404);
 		}
 
 		// Record the actual task being fired
@@ -754,7 +754,7 @@ class MControllerBase extends JObject
 			$model->setState('task', $this->task);
 
 			// Let's get the application object and set menu information if it's available
-			$app = JFactory::getApplication();
+			$app = \Joomla\CMS\Factory::getApplication();
 			$menu = $app->getMenu();
 
 			if (is_object($menu))
@@ -789,7 +789,7 @@ class MControllerBase extends JObject
 			$r = null;
 			if (!preg_match('/(.*)Controller/i', get_class($this), $r))
 			{
-				throw new Exception(JText::_('JLIB_APPLICATION_ERROR_CONTROLLER_GET_NAME'), 500);
+				throw new Exception(\Joomla\CMS\Language\Text::_('JLIB_APPLICATION_ERROR_CONTROLLER_GET_NAME'), 500);
 			}
 			$this->name = strtolower($r[1]);
 		}
@@ -861,7 +861,7 @@ class MControllerBase extends JObject
 			}
 			else
 			{
-				throw new Exception(JText::sprintf('JLIB_APPLICATION_ERROR_VIEW_NOT_FOUND', $name, $type, $prefix), 500);
+				throw new Exception(\Joomla\CMS\Language\Text::sprintf('JLIB_APPLICATION_ERROR_VIEW_NOT_FOUND', $name, $type, $prefix), 500);
 			}
 		}
 
@@ -880,7 +880,7 @@ class MControllerBase extends JObject
 	 */
 	protected function holdEditId($context, $id)
 	{
-		$app = JFactory::getApplication();
+		$app = \Joomla\CMS\Factory::getApplication();
 		$values = (array) $app->getUserState($context . '.id');
 
 		// Add the id to the list if non-zero.
@@ -917,7 +917,7 @@ class MControllerBase extends JObject
 	{
 		if ($this->redirect)
 		{
-			$app = JFactory::getApplication();
+			$app = \Joomla\CMS\Factory::getApplication();
 
 			// Enqueue the redirect message
 			$app->enqueueMessage($this->message, $this->messageType);
@@ -993,7 +993,7 @@ class MControllerBase extends JObject
 	 */
 	protected function releaseEditId($context, $id)
 	{
-		$app = JFactory::getApplication();
+		$app = \Joomla\CMS\Factory::getApplication();
 		$values = (array) $app->getUserState($context . '.id');
 
 		// Do a strict search of the edit list values.

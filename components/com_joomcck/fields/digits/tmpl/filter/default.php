@@ -8,7 +8,7 @@
  */
 defined('_JEXEC') or die();
 
-$document = JFactory::getDocument();
+$document = \Joomla\CMS\Factory::getDocument();
 $document->addScript(JURI::root(TRUE) . '/components/com_joomcck/fields/digits/assets/digits.js');
 $document->addScript(JURI::root(TRUE) . '/components/com_joomcck/fields/digits/assets/jquery.ui.slider.js');
 $document->addStyleSheet(JURI::root(TRUE) . '/components/com_joomcck/fields/digits/assets/css/style.css');
@@ -102,13 +102,13 @@ $app = $this->params->get('params.append', NULL);
 
 		if((parseInt(val) > parseInt(sldr.slider('values', 1))) && (parseInt(sldr.slider('values', 1)) > 0))
 		{
-			errbox.show().html('<?php echo JText::sprintf('D_MINBIGEMAX', $data->min, $data->max, array('jsSafe' => true)) ?>');
+			errbox.show().html('<?php echo \Joomla\CMS\Language\Text::sprintf('D_MINBIGEMAX', $data->min, $data->max, array('jsSafe' => true)) ?>');
 		}
 		else
 		{
 			if(parseInt(val) > <?php echo $data->max;?>)
 			{
-				errbox.show().html('<?php echo JText::sprintf('D_MINTOBIG', $data->min, $data->max, array('jsSafe' => true)) ?>');
+				errbox.show().html('<?php echo \Joomla\CMS\Language\Text::sprintf('D_MINTOBIG', $data->min, $data->max, array('jsSafe' => true)) ?>');
 			}
 			else
 			{
@@ -135,7 +135,7 @@ $app = $this->params->get('params.append', NULL);
 		}
 		if(parseInt(val) < sldr.slider('values', 0))
 		{
-			errbox.show().html('<?php echo JText::sprintf('D_MAXTOSMALL', $data->min, $data->max, array('jsSafe' => true)) ?>');
+			errbox.show().html('<?php echo \Joomla\CMS\Language\Text::sprintf('D_MAXTOSMALL', $data->min, $data->max, array('jsSafe' => true)) ?>');
 		}
 		else
 		{

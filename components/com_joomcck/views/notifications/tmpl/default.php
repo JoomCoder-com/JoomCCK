@@ -23,7 +23,7 @@ HTMLHelper::_('bootstrap.collapse');
 		(function($) {
 			Joomcck.removeNtf = function(id) {
 				$.ajax({
-					url: '<?php echo JRoute::_("index.php?option=com_joomcck&task=ajax.remove_notification&tmpl=component", FALSE); ?>',
+					url: '<?php echo \Joomla\CMS\Router\Route::_("index.php?option=com_joomcck&task=ajax.remove_notification&tmpl=component", FALSE); ?>',
 					dataType: 'json',
 					type: 'POST',
 					context: $('#ntfctn-' + id),
@@ -47,7 +47,7 @@ HTMLHelper::_('bootstrap.collapse');
 			};
 
 			Joomcck.removeNtfBy = function(type) {
-				if(!confirm('<?php echo JText::_("EVENT_CONFIRM_DELETE")?>')) {
+				if(!confirm('<?php echo \Joomla\CMS\Language\Text::_("EVENT_CONFIRM_DELETE")?>')) {
 					return;
 				}
 
@@ -64,7 +64,7 @@ HTMLHelper::_('bootstrap.collapse');
 				});
 
 				$.ajax({
-					url: '<?php echo JRoute::_("index.php?option=com_joomcck&task=ajax.remove_notification_by&tmpl=component", FALSE); ?>',
+					url: '<?php echo \Joomla\CMS\Router\Route::_("index.php?option=com_joomcck&task=ajax.remove_notification_by&tmpl=component", FALSE); ?>',
 					dataType: 'json',
 					type: 'POST',
 					data: {type: type, list: list}
@@ -82,7 +82,7 @@ HTMLHelper::_('bootstrap.collapse');
 
 			Joomcck.markRead = function(id) {
 				$.ajax({
-					url: '<?php echo JRoute::_("index.php?option=com_joomcck&task=ajax.mark_notification&tmpl=component", FALSE); ?>',
+					url: '<?php echo \Joomla\CMS\Router\Route::_("index.php?option=com_joomcck&task=ajax.mark_notification&tmpl=component", FALSE); ?>',
 					dataType: 'json',
 					type: 'POST',
 					context: $('#ntfctn-' + id),
@@ -127,7 +127,7 @@ HTMLHelper::_('bootstrap.collapse');
 
 <?php echo HTMLFormatHelper::layout('navbar'); ?>
 
-	<form action="<?php echo JRoute::_('index.php?option=com_joomcck&view=notifications&Itemid=' . JFactory::getApplication()->input->getInt('Itemid')); ?>"
+	<form action="<?php echo \Joomla\CMS\Router\Route::_('index.php?option=com_joomcck&view=notifications&Itemid=' . \Joomla\CMS\Factory::getApplication()->input->getInt('Itemid')); ?>"
 		  method="post" name="adminForm" id="adminForm">
 
 		<?php if($this->state->get('filter.search') || (!$this->state->get('filter.search') && $this->items)): ?>
@@ -136,8 +136,8 @@ HTMLHelper::_('bootstrap.collapse');
 
 		<div class="page-header">
 			<h1>
-				<img src="<?php echo JUri::root(TRUE); ?>/components/com_joomcck/images/icons/bell.png">
-				<?php echo JText::_('CNOTIFICATIONS'); ?>
+				<img src="<?php echo \Joomla\CMS\Uri\Uri::root(TRUE); ?>/components/com_joomcck/images/icons/bell.png">
+				<?php echo \Joomla\CMS\Language\Text::_('CNOTIFICATIONS'); ?>
 			</h1>
 		</div>
 
@@ -155,20 +155,20 @@ HTMLHelper::_('bootstrap.collapse');
 				<?php if($this->items) : ?>
 					<button class="btn" type="button" onclick="Joomcck.markRead('all');">
 						<?php echo HTMLFormatHelper::icon('asterisk.png'); ?>
-						<?php echo JText::_("CMARKALLREAD"); ?>
+						<?php echo \Joomla\CMS\Language\Text::_("CMARKALLREAD"); ?>
 					</button>
 					<button class="btn" type="button" data-bs-toggle="collapse" data-target="#clear_list_block"
 							rel="{onClose: function() {}}">
 						<?php echo HTMLFormatHelper::icon('cross-button.png'); ?>
-						<?php echo JText::_("CCLEAREVENTS"); ?>
+						<?php echo \Joomla\CMS\Language\Text::_("CCLEAREVENTS"); ?>
 					</button>
 				<?php endif; ?>
 			</div>
 			<div class="float-end">
 				<button class="btn float-end" type="button"
-						onclick="window.location = '<?php echo JRoute::_('index.php?option=com_joomcck&view=options') ?>'">
+						onclick="window.location = '<?php echo \Joomla\CMS\Router\Route::_('index.php?option=com_joomcck&view=options') ?>'">
 					<?php echo HTMLFormatHelper::icon('gear.png'); ?>
-					<?php echo JText::_('CEVENTS_SETTINGS'); ?>
+					<?php echo \Joomla\CMS\Language\Text::_('CEVENTS_SETTINGS'); ?>
 				</button>
 			</div>
 		</div>
@@ -178,39 +178,39 @@ HTMLHelper::_('bootstrap.collapse');
 			<div class="tabbable fade collapse" id="clear_list_block">
 				<br>
 				<ul class="nav nav-tabs">
-					<li class="active"><a href="#page-selected" data-bs-toggle="tab"><?php echo JText::_('CCLEARSELECTED') ?></a></li>
-					<li><a href="#page-events" data-toggle="tab"><?php echo JText::_('CCLEARBYEVENTTYPES') ?></a></li>
-					<li><a href="#page-sections" data-toggle="tab"><?php echo JText::_('CCLEARBYSECTIONS') ?></a></li>
-					<li><a href="#page-user" data-toggle="tab"><?php echo JText::_('CCLEARBYUSER') ?></a></li>
+					<li class="active"><a href="#page-selected" data-bs-toggle="tab"><?php echo \Joomla\CMS\Language\Text::_('CCLEARSELECTED') ?></a></li>
+					<li><a href="#page-events" data-toggle="tab"><?php echo \Joomla\CMS\Language\Text::_('CCLEARBYEVENTTYPES') ?></a></li>
+					<li><a href="#page-sections" data-toggle="tab"><?php echo \Joomla\CMS\Language\Text::_('CCLEARBYSECTIONS') ?></a></li>
+					<li><a href="#page-user" data-toggle="tab"><?php echo \Joomla\CMS\Language\Text::_('CCLEARBYUSER') ?></a></li>
 
 				</ul>
 				<div class="tab-content">
 					<div class="tab-pane active form-inline" id="page-selected">
 						<label class="checkbox">
 							<input type="checkbox" value="1"
-								   onclick="Joomcck.selectAll(this.checked, 'selected'); return;"> <?php echo JText::_('CCHECKALL'); ?>
+								   onclick="Joomcck.selectAll(this.checked, 'selected'); return;"> <?php echo \Joomla\CMS\Language\Text::_('CCHECKALL'); ?>
 						</label>
 
 						<div class="form-actions">
 							<button class="btn" type="button" onclick="Joomcck.removeNtfBy('selected'); return;">
 								<?php echo HTMLFormatHelper::icon('cross-button.png'); ?>
-								<?php echo JText::_("CCLEARSELECTED"); ?>
+								<?php echo \Joomla\CMS\Language\Text::_("CCLEARSELECTED"); ?>
 							</button>
 							<button class="btn" type="button" onclick="Joomcck.removeNtfBy('read'); return;">
 								<?php echo HTMLFormatHelper::icon('cross-button.png'); ?>
-								<?php echo JText::_("CCLEARREAD"); ?>
+								<?php echo \Joomla\CMS\Language\Text::_("CCLEARREAD"); ?>
 							</button>
 							<button class="btn float-end btn-danger" type="button"
-									onclick="if(!confirm('<?php echo JText::_("EVENT_CONFIRM_DELETE") ?>') ) {return;} Joomcck.removeNtf('all'); return;">
+									onclick="if(!confirm('<?php echo \Joomla\CMS\Language\Text::_("EVENT_CONFIRM_DELETE") ?>') ) {return;} Joomcck.removeNtf('all'); return;">
 								<?php echo HTMLFormatHelper::icon('cross-button.png'); ?>
-								<?php echo JText::_("CCLEARHISTORY"); ?>
+								<?php echo \Joomla\CMS\Language\Text::_("CCLEARHISTORY"); ?>
 							</button>
 						</div>
 					</div>
 					<div class="tab-pane" id="page-events">
 						<label class="checkbox">
 							<input type="checkbox" value="1"
-								   onclick="Joomcck.selectAll(this.checked, 'event'); return;"> <?php echo JText::_('CCHECKALL'); ?>
+								   onclick="Joomcck.selectAll(this.checked, 'event'); return;"> <?php echo \Joomla\CMS\Language\Text::_('CCHECKALL'); ?>
 						</label>
 						<table class="table">
 							<?php
@@ -229,7 +229,7 @@ HTMLHelper::_('bootstrap.collapse');
 						<div class="form-actions">
 							<button class="btn" type="button" onclick="Joomcck.removeNtfBy('event'); return;">
 								<?php echo HTMLFormatHelper::icon('cross-button.png'); ?>
-								<?php echo JText::_("JSEARCH_FILTER_CLEAR"); ?>
+								<?php echo \Joomla\CMS\Language\Text::_("JSEARCH_FILTER_CLEAR"); ?>
 							</button>
 						</div>
 					</div>
@@ -237,7 +237,7 @@ HTMLHelper::_('bootstrap.collapse');
 					<div class="tab-pane" id="page-sections">
 						<label class="checkbox">
 							<input type="checkbox" value="1"
-								   onclick="Joomcck.selectAll(this.checked, 'section'); return;"> <?php echo JText::_('CCHECKALL'); ?>
+								   onclick="Joomcck.selectAll(this.checked, 'section'); return;"> <?php echo \Joomla\CMS\Language\Text::_('CCHECKALL'); ?>
 						</label>
 						<table class="table">
 							<?php $tmp = 0;
@@ -255,7 +255,7 @@ HTMLHelper::_('bootstrap.collapse');
 						<div class="form-actions">
 							<button class="btn" type="button" onclick="Joomcck.removeNtfBy('section'); return;">
 								<?php echo HTMLFormatHelper::icon('cross-button.png'); ?>
-								<?php echo JText::_("JSEARCH_FILTER_CLEAR"); ?>
+								<?php echo \Joomla\CMS\Language\Text::_("JSEARCH_FILTER_CLEAR"); ?>
 							</button>
 						</div>
 					</div>
@@ -263,7 +263,7 @@ HTMLHelper::_('bootstrap.collapse');
 					<div class="tab-pane" id="page-user">
 						<label class="checkbox">
 							<input type="checkbox" value="1"
-								   onclick="Joomcck.selectAll(this.checked, 'eventer'); return;"> <?php echo JText::_('CCHECKALL'); ?>
+								   onclick="Joomcck.selectAll(this.checked, 'eventer'); return;"> <?php echo \Joomla\CMS\Language\Text::_('CCHECKALL'); ?>
 						</label>
 						<table class="table">
 							<?php $tmp = 0;
@@ -280,7 +280,7 @@ HTMLHelper::_('bootstrap.collapse');
 						<div class="form-actions">
 							<button class="btn" type="button" onclick="Joomcck.removeNtfBy('eventer'); return;">
 								<?php echo HTMLFormatHelper::icon('cross-button.png'); ?>
-								<?php echo JText::_("JSEARCH_FILTER_CLEAR"); ?>
+								<?php echo \Joomla\CMS\Language\Text::_("JSEARCH_FILTER_CLEAR"); ?>
 							</button>
 						</div>
 					</div>
@@ -290,23 +290,23 @@ HTMLHelper::_('bootstrap.collapse');
 
 
 			<?php if(count($this->sort_items['today'])): ?>
-				<?php drowEventTable(JText::_('CTODAY'), $this->sort_items['today']); ?>
+				<?php drowEventTable(\Joomla\CMS\Language\Text::_('CTODAY'), $this->sort_items['today']); ?>
 			<?php endif; ?>
 
 			<?php if(count($this->sort_items['yesterday'])): ?>
-				<?php drowEventTable(JText::_('CYESTERDAY'), $this->sort_items['yesterday']); ?>
+				<?php drowEventTable(\Joomla\CMS\Language\Text::_('CYESTERDAY'), $this->sort_items['yesterday']); ?>
 			<?php endif; ?>
 
 			<?php if(count($this->sort_items['thisweek'])): ?>
-				<?php drowEventTable(JText::_('CTHISWEEK'), $this->sort_items['thisweek']); ?>
+				<?php drowEventTable(\Joomla\CMS\Language\Text::_('CTHISWEEK'), $this->sort_items['thisweek']); ?>
 			<?php endif; ?>
 
 			<?php if(count($this->sort_items['lastweek'])): ?>
-				<?php drowEventTable(JText::_('CLASTWEEK'), $this->sort_items['lastweek']); ?>
+				<?php drowEventTable(\Joomla\CMS\Language\Text::_('CLASTWEEK'), $this->sort_items['lastweek']); ?>
 			<?php endif; ?>
 
 			<?php if(count($this->sort_items['older'])): ?>
-				<?php drowEventTable(JText::_('COLDER'), $this->sort_items['older']); ?>
+				<?php drowEventTable(\Joomla\CMS\Language\Text::_('COLDER'), $this->sort_items['older']); ?>
 			<?php endif; ?>
 
 			<div style="text-align: center;">
@@ -314,7 +314,7 @@ HTMLHelper::_('bootstrap.collapse');
 					<?php if($this->pagination->getPagesCounter()): ?>
 						<?php echo $this->pagination->getPagesCounter(); ?>
 					<?php endif; ?>
-					<?php echo str_replace('<option value="0">' . JText::_('JALL') . '</option>', '', $this->pagination->getLimitBox()); ?>
+					<?php echo str_replace('<option value="0">' . \Joomla\CMS\Language\Text::_('JALL') . '</option>', '', $this->pagination->getLimitBox()); ?>
 					<?php echo $this->pagination->getResultsCounter(); ?>
 				</small>
 			</div>
@@ -325,7 +325,7 @@ HTMLHelper::_('bootstrap.collapse');
 		<?php endif; ?>
 		<input type="hidden" name="task" value=""/>
 		<input type="hidden" name="limitstart" value="0"/>
-		<?php echo JHtml::_('form.token'); ?>
+		<?php echo \Joomla\CMS\HTML\HTMLHelper::_('form.token'); ?>
 	</form>
 
 <?php function drowEventTable($caption, $list)
@@ -336,9 +336,9 @@ HTMLHelper::_('bootstrap.collapse');
 		<thead>
 		<tr>
 			<th></th>
-			<th><?php echo JText::_('CEVENT') ?></th>
-			<th><?php echo JText::_('CDATE') ?></th>
-			<th width="50px"><?php echo JText::_('CACT') ?></th>
+			<th><?php echo \Joomla\CMS\Language\Text::_('CEVENT') ?></th>
+			<th><?php echo \Joomla\CMS\Language\Text::_('CDATE') ?></th>
+			<th width="50px"><?php echo \Joomla\CMS\Language\Text::_('CACT') ?></th>
 		</tr>
 		</thead>
 		<tbody>
@@ -361,12 +361,12 @@ HTMLHelper::_('bootstrap.collapse');
 						<?php if($item->state_new): ?>
 							<a class="btn btn-micro" id="btn-mark-<?php echo $item->id ?>"
 							   onclick="Joomcck.markRead(<?php echo $item->id; ?>);" rel="tooltip"
-							   data-bs-title="<?php echo JText::_('CMARKASREAD') ?>">
+							   data-bs-title="<?php echo \Joomla\CMS\Language\Text::_('CMARKASREAD') ?>">
 								<?php echo HTMLFormatHelper::icon('asterisk.png'); ?>
 							</a>
 						<?php endif; ?>
 						<a class="btn btn-micro"
-						   onclick="if(!confirm('<?php echo JText::_("EVENT_CONFIRM_DELETE") ?>') ) {return;} Joomcck.removeNtf(<?php echo $item->id; ?>);">
+						   onclick="if(!confirm('<?php echo \Joomla\CMS\Language\Text::_("EVENT_CONFIRM_DELETE") ?>') ) {return;} Joomcck.removeNtf(<?php echo $item->id; ?>);">
 							<?php echo HTMLFormatHelper::icon('cross-button.png'); ?>
 						</a>
 					</div>

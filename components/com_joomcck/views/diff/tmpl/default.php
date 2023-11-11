@@ -12,8 +12,8 @@ JHTML::_('bootstrap.tooltip', '*[rel^="tooltip"]');
 
 include_once JPATH_COMPONENT. DIRECTORY_SEPARATOR .'api.php';
 $back = NULL;
-$user = JFactory::getUser();
-if(JFactory::getApplication()->input->getString('return'))
+$user = \Joomla\CMS\Factory::getUser();
+if(\Joomla\CMS\Factory::getApplication()->input->getString('return'))
 {
 	$back = Url::get_back('return');
 }
@@ -25,7 +25,7 @@ JHTML::_('bootstrap.popover', '[rel="popover-left"]', array('placement' => 'left
 JHTML::_('bootstrap.popover', '[rel="popover-right"]', array('placement' => 'right', 'trigger' => 'click'));
 ?>
 <h1>
-	<?php echo JText::_('CAUDITVERSIONSCOMPARE')?> : <?php echo $this->record->title;?> v.<?php echo $this->record->version;?>
+	<?php echo \Joomla\CMS\Language\Text::_('CAUDITVERSIONSCOMPARE')?> : <?php echo $this->record->title;?> v.<?php echo $this->record->version;?>
 </h1>
 
 <style>
@@ -41,25 +41,25 @@ td.key {
 
 <button type="button" class="btn btn-light border" onclick="location.href = '<?php echo $back;?>'">
 	<?php echo HTMLFormatHelper::icon('arrow-180.png');  ?>
-	<?php echo JText::_('CGOBACK'); ?>
+	<?php echo \Joomla\CMS\Language\Text::_('CGOBACK'); ?>
 </button>
 
 <table class="table table-striped">
 	<thead>
 		<tr>
-			<th width="1%"><?php echo JText::_('CFIELD');?></th>
-			<th width=""><?php echo JText::_('CCURRENT');?> v.<?php echo $this->record->version;?></th>
-			<th width="1%" align="center" style="width: 150px"><?php echo JText::_('CEQUAL');?></th>
+			<th width="1%"><?php echo \Joomla\CMS\Language\Text::_('CFIELD');?></th>
+			<th width=""><?php echo \Joomla\CMS\Language\Text::_('CCURRENT');?> v.<?php echo $this->record->version;?></th>
+			<th width="1%" align="center" style="width: 150px"><?php echo \Joomla\CMS\Language\Text::_('CEQUAL');?></th>
 			<th width="">
-				<?php echo JText::_('CVERSION');?> v.<?php echo $this->item->version;?>
+				<?php echo \Joomla\CMS\Language\Text::_('CVERSION');?> v.<?php echo $this->item->version;?>
 				<?php if($this->versions):?>
 					<div class="btn-group float-end">
 						<a class="btn btn-sm dropdown-toggle" data-bs-toggle="dropdown" href="#"><span class="caret"></span></a>
 						<ul class="dropdown-menu">
 							<?php foreach ($this->versions as $value):?>
 								<li>
-									<a  class="dropdown-item" href="<?php echo JRoute::_('index.php?option=com_joomcck&view=diff&record_id='.$this->record->id.'&version='.$value->version.'&return='.$this->input->getBase64('return')); ?>">
-										<?php echo JText::_('CVERSION');?> v.<?php echo $value->version; ?>
+									<a  class="dropdown-item" href="<?php echo \Joomla\CMS\Router\Route::_('index.php?option=com_joomcck&view=diff&record_id='.$this->record->id.'&version='.$value->version.'&return='.$this->input->getBase64('return')); ?>">
+										<?php echo \Joomla\CMS\Language\Text::_('CVERSION');?> v.<?php echo $value->version; ?>
 									</a>
 								</li>
 							<?php endforeach; ?>
@@ -71,10 +71,10 @@ td.key {
 	</thead>
 	<tbody>
 		<?php
-		_drawLine(JText::_('CTITLE'), $this->record->title, $this->item->record->title);
-		_drawLine(JText::_('CALIAS'), $this->record->alias, $this->item->record->alias);
-		_drawLine(JText::_('CCATEGORIES'), json_decode($this->record->categories, TRUE), json_decode($this->item->record->categories, TRUE));
-		_drawLine(JText::_('CTAGS'), json_decode((string)$this->record->tags, TRUE), json_decode((string)$this->item->record->tags, TRUE));
+		_drawLine(\Joomla\CMS\Language\Text::_('CTITLE'), $this->record->title, $this->item->record->title);
+		_drawLine(\Joomla\CMS\Language\Text::_('CALIAS'), $this->record->alias, $this->item->record->alias);
+		_drawLine(\Joomla\CMS\Language\Text::_('CCATEGORIES'), json_decode($this->record->categories, TRUE), json_decode($this->item->record->categories, TRUE));
+		_drawLine(\Joomla\CMS\Language\Text::_('CTAGS'), json_decode((string)$this->record->tags, TRUE), json_decode((string)$this->item->record->tags, TRUE));
 
 		if(!empty($this->all_field_keys))
 		{
@@ -110,7 +110,7 @@ function _renderCol($var, $field)
 
 	if($field)
 	{
-		$record = ItemsStore::getRecord(JFactory::getApplication()->input->getInt('record_id'));
+		$record = ItemsStore::getRecord(\Joomla\CMS\Factory::getApplication()->input->getInt('record_id'));
 		return JoomcckApi::renderField($record, $field->id, JoomcckApi::FIELD_FULL, $var);
 	}
 
@@ -127,11 +127,11 @@ function _drawLine($field_title, $cur, $ver, $field = FALSE)
 	$equal = _getValMd5($cur) == _getValMd5($ver);
 ?>
 	<tr class="<?php echo $equal ? '' : 'error'; ?>">
-		<td nowrap="nowrap" class="key"><?php echo JText::_($field_title); ?></td>
+		<td nowrap="nowrap" class="key"><?php echo \Joomla\CMS\Language\Text::_($field_title); ?></td>
 		<td><?php echo _renderCol($cur, $field)?></td>
 		<td align="center" class="middlerow" nowrap="nowrap">
 			<?php if($cur):?>
-				<span class="btn btn-micro" rel="popover-left" data-bs-title="<?php echo JText::_('CROAWDATA')?>" data-content="<?php echo str_replace('    ', '&nbsp;&nbsp;&nbsp;&nbsp;', nl2br(htmlspecialchars(print_r($cur, TRUE), ENT_COMPAT, 'UTF-8')));?>">
+				<span class="btn btn-micro" rel="popover-left" data-bs-title="<?php echo \Joomla\CMS\Language\Text::_('CROAWDATA')?>" data-content="<?php echo str_replace('    ', '&nbsp;&nbsp;&nbsp;&nbsp;', nl2br(htmlspecialchars(print_r($cur, TRUE), ENT_COMPAT, 'UTF-8')));?>">
 					<?php echo HTMLFormatHelper::icon('control-180-small.png');  ?>
 				</span>
 			<?php else:?>
@@ -139,13 +139,13 @@ function _drawLine($field_title, $cur, $ver, $field = FALSE)
 			<?php endif;?>
 
 			<?php if($equal):?>
-				<?php echo HTMLFormatHelper::icon('status.png', JText::_('CEQUAL'));  ?>
+				<?php echo HTMLFormatHelper::icon('status.png', \Joomla\CMS\Language\Text::_('CEQUAL'));  ?>
 			<?php else:?>
-				<?php echo HTMLFormatHelper::icon('status-away.png', JText::_('CNOTEQUAL'));  ?>
+				<?php echo HTMLFormatHelper::icon('status-away.png', \Joomla\CMS\Language\Text::_('CNOTEQUAL'));  ?>
 			<?php endif;?>
 
 			<?php if($ver):?>
-				<span class="btn btn-micro" rel="popover-right" data-bs-title="<?php echo JText::_('CROAWDATA')?>" data-content="<?php echo str_replace('    ', '&nbsp;&nbsp;&nbsp;&nbsp;', nl2br(htmlspecialchars(print_r($ver, TRUE), ENT_COMPAT, 'UTF-8')));?>">
+				<span class="btn btn-micro" rel="popover-right" data-bs-title="<?php echo \Joomla\CMS\Language\Text::_('CROAWDATA')?>" data-content="<?php echo str_replace('    ', '&nbsp;&nbsp;&nbsp;&nbsp;', nl2br(htmlspecialchars(print_r($ver, TRUE), ENT_COMPAT, 'UTF-8')));?>">
 					<?php echo HTMLFormatHelper::icon('control-000-small.png');  ?>
 				</span>
 			<?php else:?>

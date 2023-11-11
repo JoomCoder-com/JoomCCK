@@ -32,13 +32,13 @@ class JoomcckViewAbout extends MViewBase
 
         $fields_path = JPATH_ROOT . DIRECTORY_SEPARATOR . 'components' . DIRECTORY_SEPARATOR . 'com_joomcck' . DIRECTORY_SEPARATOR . 'fields';
 
-        $db = JFactory::getDbo();
+        $db = \Joomla\CMS\Factory::getDbo();
         $db->setQuery("SELECT element, manifest_cache FROM `#__extensions` WHERE `name` LIKE 'Joomcck - Field - %'");
         $fields = $db->loadObjectList();
 
         foreach ($fields as $key => $field) {
             $fields[$key]->name    = ucfirst($field->element);
-            $mnf                   = new JRegistry($field->manifest_cache);
+            $mnf                   = new \Joomla\Registry\Registry($field->manifest_cache);
             $fields[$key]->version = $mnf->get('version');
 
         }
@@ -65,7 +65,7 @@ class JoomcckViewAbout extends MViewBase
 
     protected function addToolbar()
     {
-        JToolBarHelper::title(JText::_('About'));
+        JToolBarHelper::title(\Joomla\CMS\Language\Text::_('About'));
         MRToolBar::addSubmenu('about');
     }
 }

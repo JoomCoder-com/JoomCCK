@@ -25,7 +25,7 @@ class CStatistics
 	{
 		if (!isset(self::$records_num[$section_id]))
 		{
-			$db = JFactory::getDbo();
+			$db = \Joomla\CMS\Factory::getDbo();
 			$query = $db->getQuery(true);
 			$query->select("COUNT(id)");
 			$query->from("#__js_res_record");
@@ -51,7 +51,7 @@ class CStatistics
 	{
 		if (!isset(self::$comments_num[$section_id]))
 		{
-			$db = JFactory::getDbo();
+			$db = \Joomla\CMS\Factory::getDbo();
 			$query = $db->getQuery(true);
 			$query->select("COUNT(id)");
 			$query->from("#__js_res_comments");
@@ -72,7 +72,7 @@ class CStatistics
 	{
 		if (!isset(self::$authors_num[$section_id]))
 		{
-			$db = JFactory::getDbo();
+			$db = \Joomla\CMS\Factory::getDbo();
 			$query = $db->getQuery(true);
 			$query->select("user_id");
 			$query->from("#__js_res_record");
@@ -96,14 +96,14 @@ class CStatistics
 	/**
 	 * How many users in this section including authors, subscibes, readers.
 	 * @param int $section_id
-	 * @param JRegistry $params
+	 * @param \Joomla\Registry\Registry $params
 	 * @return int:
 	 */
 	static public function members_num($section_id, $params)
 	{
 		if (!isset(self::$members_num[$section_id]))
 		{
-			$db = JFactory::getDbo();
+			$db = \Joomla\CMS\Factory::getDbo();
 			$query = $db->getQuery(true);
 			$query->select("DISTINCT user_id");
 			$query->from("#__js_res_subscribe");
@@ -161,7 +161,7 @@ class CStatistics
 	{
 		if (!isset(self::$views_num[$section_id]))
 		{
-			$db = JFactory::getDbo();
+			$db = \Joomla\CMS\Factory::getDbo();
 			$query = $db->getQuery(true);
 			$query->select("COUNT(id)");
 			$query->from("#__js_res_hits");
@@ -200,7 +200,7 @@ class CStatistics
 	{
 		if (!isset(self::$created["$section_id-$user_id"]))
 		{
-			$db = JFactory::getDbo();
+			$db = \Joomla\CMS\Factory::getDbo();
 			$query = $db->getQuery(true);
 			$query->select("COUNT(id)");
 			$query->from("#__js_res_record");
@@ -232,7 +232,7 @@ class CStatistics
 	{
 		if (!isset(self::$expired["$section_id-$user_id"]))
 		{
-			$db = JFactory::getDbo();
+			$db = \Joomla\CMS\Factory::getDbo();
 			$query = $db->getQuery(TRUE);
 			$query->select('count(*)');
 			$query->from('#__js_res_record');
@@ -243,7 +243,7 @@ class CStatistics
 			}
 			$query->where('hidden = 0');
 			$query->where('section_id = ' . $section_id);
-			$query->where('(extime != ' . $db->quote('0000-00-00 00:00:00') . ' AND extime < \'' . JFactory::getDate()->toSql() . '\')');
+			$query->where('(extime != ' . $db->quote('0000-00-00 00:00:00') . ' AND extime < \'' . \Joomla\CMS\Factory::getDate()->toSql() . '\')');
 			$query->where('ctime < NOW()');
 			$db->setQuery($query);
 			self::$expired["$section_id-$user_id"] = $db->loadResult();
@@ -261,7 +261,7 @@ class CStatistics
 	{
 		if (!isset(self::$hidden["$section_id-$user_id"]))
 		{
-			$db = JFactory::getDbo();
+			$db = \Joomla\CMS\Factory::getDbo();
 			$query = $db->getQuery(TRUE);
 			$query->select('count(*)');
 			$query->from('#__js_res_record');
@@ -290,7 +290,7 @@ class CStatistics
 	{
 		if (!isset(self::$featured["$section_id-$user_id"]))
 		{
-			$db = JFactory::getDbo();
+			$db = \Joomla\CMS\Factory::getDbo();
 			$query = $db->getQuery(TRUE);
 			$query->select('count(*)');
 			$query->from('#__js_res_record');
@@ -320,7 +320,7 @@ class CStatistics
 	{
 		if (!isset(self::$rated["$section_id-$user_id"]))
 		{
-			$db = JFactory::getDbo();
+			$db = \Joomla\CMS\Factory::getDbo();
 			$query = $db->getQuery(true);
 			$query->select("ref_id");
 			$query->from("#__js_res_vote");
@@ -353,7 +353,7 @@ class CStatistics
 
 		if (!isset(self::$unpublished["$section_id-$user_id"]))
 		{
-			$db = JFactory::getDbo();
+			$db = \Joomla\CMS\Factory::getDbo();
 			$query = $db->getQuery(TRUE);
 			$query->select('count(*)');
 			$query->from('#__js_res_record');
@@ -361,7 +361,7 @@ class CStatistics
 			$query->where('published = 0');
 
 			$dummy = new stdClass();
-			$dummy->params = new JRegistry();
+			$dummy->params = new \Joomla\Registry\Registry();
 			$section = ItemsStore::getSection($section_id);
 
 			if (!MECAccess::allowPublish(null, $dummy, $section))
@@ -390,7 +390,7 @@ class CStatistics
 			self::$comments_left["$section_id-$user_id"] = 0;
 			if ($user_rec = self::_user_records($user_id, $section_id))
 			{
-				$db = JFactory::getDbo();
+				$db = \Joomla\CMS\Factory::getDbo();
 				$query = $db->getQuery(true);
 				$query->select("COUNT(id)");
 				$query->from("#__js_res_comments");
@@ -413,7 +413,7 @@ class CStatistics
 	{
 		if (!isset(self::$commented["$section_id-$user_id"]))
 		{
-			$db = JFactory::getDbo();
+			$db = \Joomla\CMS\Factory::getDbo();
 			$query = $db->getQuery(true);
 			$query->select("record_id");
 			$query->from("#__js_res_comments");
@@ -442,7 +442,7 @@ class CStatistics
 	{
 		if (!isset(self::$visited["$section_id-$user_id"]))
 		{
-			$db = JFactory::getDbo();
+			$db = \Joomla\CMS\Factory::getDbo();
 			$query = $db->getQuery(true);
 			$query->select("record_id");
 			$query->from("#__js_res_hits");
@@ -470,7 +470,7 @@ class CStatistics
 	{
 		if (!isset(self::$categories["$section_id-$user_id"]))
 		{
-			$db = JFactory::getDbo();
+			$db = \Joomla\CMS\Factory::getDbo();
 			$query = $db->getQuery(TRUE);
 			$query->select('count(*)');
 			$query->from('#__js_res_category_user');
@@ -495,7 +495,7 @@ class CStatistics
 			self::$readers["$section_id-$user_id"] = 0;
 			if ($user_rec = self::_user_records($user_id, $section_id))
 			{
-				$db = JFactory::getDbo();
+				$db = \Joomla\CMS\Factory::getDbo();
 				$query = $db->getQuery(true);
 				$query->select("user_id");
 				$query->from("#__js_res_hits");
@@ -537,7 +537,7 @@ class CStatistics
 			self::$rating_average["$section_id-$user_id"] = 0;
 			if ($user_rec = self::_user_records($user_id, $section_id))
 			{
-				$db = JFactory::getDbo();
+				$db = \Joomla\CMS\Factory::getDbo();
 				$query = $db->getQuery(true);
 				$query->select("AVG(vote)");
 				$query->from("#__js_res_vote");
@@ -564,7 +564,7 @@ class CStatistics
 			self::$whofollow["$section_id-$user_id"] = 0;
 			if ($user_rec = self::_user_records($user_id, $section_id))
 			{
-				$db = JFactory::getDbo();
+				$db = \Joomla\CMS\Factory::getDbo();
 				$query = $db->getQuery(true);
 				$query->select("COUNT(id)");
 				$query->from("#__js_res_subscribe_user");
@@ -589,7 +589,7 @@ class CStatistics
 	{
 		if (!isset(self::$followed["$section_id-$user_id"]))
 		{
-			$db = JFactory::getDbo();
+			$db = \Joomla\CMS\Factory::getDbo();
 			$query = $db->getQuery(true);
 			$query->select("ref_id");
 			$query->from("#__js_res_subscribe");
@@ -622,7 +622,7 @@ class CStatistics
 			self::$whofavorited["$section_id-$user_id"] = 0;
 			if ($user_rec = self::_user_records($user_id, $section_id))
 			{
-				$db = JFactory::getDbo();
+				$db = \Joomla\CMS\Factory::getDbo();
 				$query = $db->getQuery(true);
 				$query->select("COUNT(DISTINCT user_id)");
 				$query->from("#__js_res_favorite");
@@ -646,7 +646,7 @@ class CStatistics
 	{
 		if (!isset(self::$favorited["$section_id-$user_id"]))
 		{
-			$db = JFactory::getDbo();
+			$db = \Joomla\CMS\Factory::getDbo();
 			$query = $db->getQuery(true);
 			$query->select('record_id');
 			$query->from('#__js_res_favorite');
@@ -669,7 +669,7 @@ class CStatistics
 	{
 		if (!isset(self::$user_records["$section_id-$user_id"]))
 		{
-			$db = JFactory::getDbo();
+			$db = \Joomla\CMS\Factory::getDbo();
 			$query = $db->getQuery(true);
 			$query = $db->getQuery(true);
 			$query->select("id");
@@ -691,7 +691,7 @@ class CStatistics
 
 	static private function _data_show(&$query, $section_id)
 	{
-		$user = JFactory::getUser();
+		$user = \Joomla\CMS\Factory::getUser();
 		$section = ItemsStore::getSection($section_id);
 
 		if (!in_array($section->params->get('general.show_restrict'), $user->getAuthorisedViewLevels()))
@@ -700,17 +700,17 @@ class CStatistics
 		}
 		if (!in_array($section->params->get('general.show_future_records'), $user->getAuthorisedViewLevels()))
 		{
-			$query->where("ctime < " . JFactory::getDbo()->quote(JFactory::getDate()->toSql()));
+			$query->where("ctime < " . \Joomla\CMS\Factory::getDbo()->quote(\Joomla\CMS\Factory::getDate()->toSql()));
 		}
 		if (!in_array($section->params->get('general.show_past_records'), $user->getAuthorisedViewLevels()))
 		{
-			$query->where("(extime = '0000-00-00 00:00:00' OR ISNULL(extime) OR extime > '" . JFactory::getDate()->toSql() . "')");
+			$query->where("(extime = '0000-00-00 00:00:00' OR ISNULL(extime) OR extime > '" . \Joomla\CMS\Factory::getDate()->toSql() . "')");
 		}
 	}
 
 	static private function _get_records_count($ids, $section_id)
 	{
-		$db = JFactory::getDbo();
+		$db = \Joomla\CMS\Factory::getDbo();
 		$query = $db->getQuery(TRUE);
 		$query->select('count(*)');
 		$query->from('#__js_res_record AS r');
@@ -739,7 +739,7 @@ class CStatistics
 
 		if(!array_key_exists($section_id, $out))
 		{
-			$db = JFactory::getDbo();
+			$db = \Joomla\CMS\Factory::getDbo();
 			$db->setQuery("SELECT COUNT(*) FROM `#__js_res_record` WHERE section_id = {$section_id} AND published = 0");
 			$out[$section_id] = $db->loadResult();
 		}

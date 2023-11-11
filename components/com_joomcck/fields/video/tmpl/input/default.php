@@ -25,10 +25,10 @@
 </style>
 <div id="video-field">
 	<?php if($this->only_one):?>
-		<p class="small"><?php echo JText::_('CONLYONE')?></p>
+		<p class="small"><?php echo \Joomla\CMS\Language\Text::_('CONLYONE')?></p>
 	<?php endif;?>
 	<?php if($this->upload):?>
-		<div class="video-title" data-bs-toggle="collapse" data-bs-target="#upload-pan<?php echo $this->id ?>"><img src="<?php echo JURI::root(TRUE)?>/media/com_joomcck/icons/16/drive-upload.png" align="absmiddle" /> <?php echo JText::_('CUPLOAD')?></div>
+		<div class="video-title" data-bs-toggle="collapse" data-bs-target="#upload-pan<?php echo $this->id ?>"><img src="<?php echo JURI::root(TRUE)?>/media/com_joomcck/icons/16/drive-upload.png" align="absmiddle" /> <?php echo \Joomla\CMS\Language\Text::_('CUPLOAD')?></div>
 		<div id="upload-pan<?php echo $this->id ?>" class="collapse fade video-pan-<?php echo $this->id; ?>">
 			<div class="well">
 				<?php echo $this->upload;?>
@@ -37,7 +37,7 @@
 	<?php endif;?>
 
 	<?php if(in_array($this->params->get('params.embed', 1), $this->user->getAuthorisedViewLevels())): ?>
-		<div class="video-title" data-bs-toggle="collapse" data-bs-target="#embed-pan<?php echo $this->id ?>"><img src="<?php echo JURI::root(TRUE)?>/media/com_joomcck/icons/16/film-cast.png" align="absmiddle" /> <?php echo JText::_('CEMBED')?></div>
+		<div class="video-title" data-bs-toggle="collapse" data-bs-target="#embed-pan<?php echo $this->id ?>"><img src="<?php echo JURI::root(TRUE)?>/media/com_joomcck/icons/16/film-cast.png" align="absmiddle" /> <?php echo \Joomla\CMS\Language\Text::_('CEMBED')?></div>
 		<div id="embed-pan<?php echo $this->id ?>" class="collapse fade video-pan-<?php echo $this->id; ?>">
 			<div class="well">
 				<div id="input_embeds">
@@ -55,7 +55,7 @@
 					<div id="embed-button">
 						<button class="btn" type="button" onclick="Joomcck.addFormElement<?php echo $this->id; ?>('embed', <?php echo $this->id; ?>);">
 							<img src="<?php echo JURI::root(TRUE); ?>/media/com_joomcck/icons/16/plus-button.png" align="absmiddle">
-							<?php echo JText::_('F_ADDEMBEDE'); ?>
+							<?php echo \Joomla\CMS\Language\Text::_('F_ADDEMBEDE'); ?>
 						</button>
 					</div>
 				<?php endif;?>
@@ -65,16 +65,16 @@
 
 	<?php if(in_array($this->params->get('params.link', 1), $this->user->getAuthorisedViewLevels())): ?>
 		<div class="video-title" data-bs-toggle="collapse" data-bs-target="#link-pan<?php echo $this->id ?>">
-			<img src="<?php echo JURI::root(TRUE)?>/media/com_joomcck/icons/16/chain.png" align="absmiddle" /> <?php echo JText::_('CLINK')?></div>
+			<img src="<?php echo JURI::root(TRUE)?>/media/com_joomcck/icons/16/chain.png" align="absmiddle" /> <?php echo \Joomla\CMS\Language\Text::_('CLINK')?></div>
 
 		<div id="link-pan<?php echo $this->id ?>" class="video-pan-<?php echo $this->id; ?> collapse fade">
 			<div class="well">
-				<p><?php echo JText::_('WEUNDERSTAND');?>:
+				<p><?php echo \Joomla\CMS\Language\Text::_('WEUNDERSTAND');?>:
 					<?php foreach ($this->params->get('params.adapters', array()) as $adapter):?>
 						<img align="absmiddle" src="<?php echo JURI::root(TRUE); ?>/components/com_joomcck/fields/video/adapters/icons/<?php echo $adapter;?>.png"
 							alt="<?php echo ucfirst($adapter); ?>" title="<?php echo ucfirst($adapter); ?>" />
 					<?php endforeach;?>
-					<?php echo JText::_('WEUNDERSTAND2');?>
+					<?php echo \Joomla\CMS\Language\Text::_('WEUNDERSTAND2');?>
 				</p>
 
 				<div id="input_links">
@@ -89,7 +89,7 @@
 					<div id="link-button">
 						<button class="btn" type="button" onclick="Joomcck.addFormElement<?php echo $this->id; ?>('link', <?php echo $this->id; ?>);">
 							<img src="<?php echo JURI::root(TRUE); ?>/media/com_joomcck/icons/16/plus-button.png" align="absmiddle">
-							<?php echo JText::_('F_ONEMOREVIDEO'); ?>
+							<?php echo \Joomla\CMS\Language\Text::_('F_ONEMOREVIDEO'); ?>
 						</button>
 					</div>
 				<?php endif;?>
@@ -113,7 +113,7 @@
 			<?php if($this->params->get('params.embed_max_count', 0)): ?>
 				if(emb_count >= <?php echo $this->params->get('params.embed_max_count', 0);?>)
 				{
-					alert('<?php echo JText::sprintf('CMAXCOUNTEMBED', $this->params->get('params.embed_max_count', 0));?>');
+					alert('<?php echo \Joomla\CMS\Language\Text::sprintf('CMAXCOUNTEMBED', $this->params->get('params.embed_max_count', 0));?>');
 					return false;
 				}
 			<?php endif;?>
@@ -128,7 +128,7 @@
 			<?php if($this->params->get('params.link_max_count', 0)): ?>
 				if(lnk_count >= <?php echo $this->params->get('params.link_max_count', 0);?>)
 				{
-					alert('<?php echo JText::sprintf('CMAXCOUNTLINKS', $this->params->get('params.link_max_count', 0));?>');
+					alert('<?php echo \Joomla\CMS\Language\Text::sprintf('CMAXCOUNTLINKS', $this->params->get('params.link_max_count', 0));?>');
 					return false;
 				}
 			<?php endif;?>

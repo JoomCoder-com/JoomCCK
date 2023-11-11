@@ -12,8 +12,8 @@ class JHTMLUsers
 {
 	static public function wheretopost($record)
 	{
-		$user = JFactory::getUser();
-		$db = JFactory::getDbo();
+		$user = \Joomla\CMS\Factory::getUser();
+		$db = \Joomla\CMS\Factory::getDbo();
 
 		if(empty($record->id))
 		{
@@ -40,7 +40,7 @@ class JHTMLUsers
 		$default = $db->loadObjectList();
 
 		foreach ($default as $key => $value) {
-			$default[$key]->params = new JRegistry($value->prm);
+			$default[$key]->params = new \Joomla\Registry\Registry($value->prm);
 		}
 
 		ob_start();
@@ -53,7 +53,7 @@ class JHTMLUsers
 
 	public static function checkboxes($section, $default = array())
 	{
-		$db = JFactory::getDbo();
+		$db = \Joomla\CMS\Factory::getDbo();
 
 		$query = $db->getQuery(true);
 		$query->select($section->params->get('personalize.author_mode', 'username').' as name, id');
@@ -79,7 +79,7 @@ class JHTMLUsers
 
 	public static function select($section, $default = array())
 	{
-		$db = JFactory::getDbo();
+		$db = \Joomla\CMS\Factory::getDbo();
 
 		$query = $db->getQuery(true);
 		$query->select($section->params->get('personalize.author_mode', 'username').' AS text, id as value');
@@ -89,9 +89,9 @@ class JHTMLUsers
 		$list = $db->loadObjectList();
 
 		if(!$list) return;
-		array_unshift($list, JHtml::_('select.option', '', JText::_('CSELECTAUTH')));
+		array_unshift($list, \Joomla\CMS\HTML\HTMLHelper::_('select.option', '', \Joomla\CMS\Language\Text::_('CSELECTAUTH')));
 
-		return JHtml::_('select.genericlist', $list, 'filters[users][]', null, 'value', 'text', $default);
+		return \Joomla\CMS\HTML\HTMLHelper::_('select.genericlist', $list, 'filters[users][]', null, 'value', 'text', $default);
 	}
 
 	public static function form($section, $default = array(), $params = array())
@@ -109,7 +109,7 @@ class JHTMLUsers
 		$default = \Joomla\Utilities\ArrayHelper::toInteger($default);
 		if($default)
 		{
-			$db = JFactory::getDbo();
+			$db = \Joomla\CMS\Factory::getDbo();
 			$query = $db->getQuery(true);
 			$query->select('id, '.$section->params->get('personalize.author_mode', 'username').' AS plain, '.$section->params->get('personalize.author_mode', 'username').' AS html');
 			$query->from('#__users');
@@ -125,6 +125,6 @@ class JHTMLUsers
 		$options['suggestion_limit'] = 10;
 		$options['suggestion_url'] = 'index.php?option=com_joomcck&task=ajax.users_filter&section_id='.$section->id.'&tmpl=component';
         
-		return JHtml::_('mrelements.pills', 'filters[users]', $id, $default, [], $options);
+		return \Joomla\CMS\HTML\HTMLHelper::_('mrelements.pills', 'filters[users]', $id, $default, [], $options);
 	}
 }

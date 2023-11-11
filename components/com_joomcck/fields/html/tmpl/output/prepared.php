@@ -9,4 +9,4 @@
 defined('_JEXEC') or die();
 ?>
 
-<?php echo JHtml::_('content.prepare', $this->value);?>
+<?php echo \Joomla\CMS\HTML\HTMLHelper::_('content.prepare', $this->value);?>

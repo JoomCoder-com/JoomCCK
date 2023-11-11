@@ -25,10 +25,10 @@ class JoomcckViewCType extends MViewBase
 		$this->params_form = $params;
 
 		$this->params_groups = array(
-			'properties' => JText::_('FS_GENERAL'),
-			'submission' => JText::_('FS_SUBMISPARAMS'),
-			'comments' => JText::_('FS_COMMPARAMS'),
-			'emerald' => JText::_('FS_EMERALDINTEGRATE')
+			'properties' => \Joomla\CMS\Language\Text::_('FS_GENERAL'),
+			'submission' => \Joomla\CMS\Language\Text::_('FS_SUBMISPARAMS'),
+			'comments' => \Joomla\CMS\Language\Text::_('FS_COMMPARAMS'),
+			'emerald' => \Joomla\CMS\Language\Text::_('FS_EMERALDINTEGRATE')
 		);
 
 		// Check for errors.
@@ -48,13 +48,13 @@ class JoomcckViewCType extends MViewBase
 	 */
 	protected function addToolbar()
 	{
-		JFactory::getApplication()->input->set('hidemainmenu', true);
+		\Joomla\CMS\Factory::getApplication()->input->set('hidemainmenu', true);
 
-		$user = JFactory::getUser();
+		$user = \Joomla\CMS\Factory::getUser();
 		$isNew = ($this->item->id == 0);
 		$checkedOut = ! ($this->item->checked_out == 0 || $this->item->checked_out == $user->get('id'));
 
-		JToolBarHelper::title(($isNew ? JText::_('CNEWTYPE') : JText::_('CEDITTYPE').': '.$this->item->name), ($isNew ? 'type_new.png' : 'type_edit.png'));
+		JToolBarHelper::title(($isNew ? \Joomla\CMS\Language\Text::_('CNEWTYPE') : \Joomla\CMS\Language\Text::_('CEDITTYPE').': '.$this->item->name), ($isNew ? 'type_new.png' : 'type_edit.png'));
 
 		if(! $checkedOut)
 		{

@@ -22,18 +22,18 @@ var callBackFunction = function ( dd, ident )
 <form action="index.php" method="post" id="adminForm" name="adminForm">
   <div class="col width-50">
     <fieldset>
-    <legend><?php echo JText::_('CPRODTMPL'); ?></legend>
+    <legend><?php echo \Joomla\CMS\Language\Text::_('CPRODTMPL'); ?></legend>
       <TABLE class="admintable" width="100%">
         <TR>
-          <TD class="key"><?php echo JText::_('CNAME'); ?>:</TD>
+          <TD class="key"><?php echo \Joomla\CMS\Language\Text::_('CNAME'); ?>:</TD>
           <td><b><?php echo $this->name; ?></b></td>
         </TR>  
         <TR>
-          <TD class="key"><?php echo JText::_('CTYPE'); ?>:</TD>
+          <TD class="key"><?php echo \Joomla\CMS\Language\Text::_('CTYPE'); ?>:</TD>
           <td><b><?php echo $this->type; ?></b></td>
         </TR>
         <TR>
-          <TD class="key"><?php echo JText::_('CVIEW'); ?>:</TD>
+          <TD class="key"><?php echo \Joomla\CMS\Language\Text::_('CVIEW'); ?>:</TD>
           <td>
           <?php $this->addTemplatePath( $this->tmpl_path ); ?>
           <?php $this->setLayout( 'rating_'.$this->name ); ?>

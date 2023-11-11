@@ -187,7 +187,7 @@ class GifResizer
 		$mystring[9]  = chr(floor($newheight / 256));
 		$mystring[11] = $this->orgvars["background_color"];
 		//if(file_exists($new_filename)){unlink($new_filename);}
-		JFile::write($new_filename, $mystring);
+		\Joomla\CMS\Filesystem\File::write($new_filename, $mystring);
 		//file_put_contents($new_filename,$mystring);
 	}
 

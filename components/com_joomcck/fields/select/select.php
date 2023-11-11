@@ -16,8 +16,8 @@ class JFormFieldCSelect extends CFormFieldSelectable
 	public function getInput()
 	{
 		$params     = $this->params;
-		$doc        = JFactory::getDocument();
-		$this->user = JFactory::getUser();
+		$doc        = \Joomla\CMS\Factory::getDocument();
+		$this->user = \Joomla\CMS\Factory::getUser();
 
 		$values = array();
 		if($params->get('params.sql_source'))
@@ -60,7 +60,7 @@ class JFormFieldCSelect extends CFormFieldSelectable
 		$js = "\n\t\tvar chb{$this->id} = jQuery('[name^=\"jform\\\\[fields\\\\]\\\\[$this->id\\\\]\"]').val();";
 		if($this->required)
 		{
-			$js .= "\n\t\tif(!chb{$this->id}){hfid.push({$this->id}); isValid = false; errorText.push('" . addslashes(JText::sprintf("CFIELDREQUIRED", $this->label)) . "');}";
+			$js .= "\n\t\tif(!chb{$this->id}){hfid.push({$this->id}); isValid = false; errorText.push('" . addslashes(\Joomla\CMS\Language\Text::sprintf("CFIELDREQUIRED", $this->label)) . "');}";
 		}
 
 		return $js;

@@ -7,9 +7,9 @@
 			<?php echo $field;?>
 		<?php endforeach;?>
 	<?php endif;?>
-	<button class="btn btn-warning" <?php echo (!JFactory::getUser()->get('id') ? sprintf(' type="button" rel="tooltip" data-original-title="%s"', JText::_('SSI_LOGINTOBUY')) : null); ?> type="submit">
+	<button class="btn btn-warning" <?php echo (!\Joomla\CMS\Factory::getUser()->get('id') ? sprintf(' type="button" rel="tooltip" data-original-title="%s"', \Joomla\CMS\Language\Text::_('SSI_LOGINTOBUY')) : null); ?> type="submit">
 		<img src="<?php echo JURI::root(true);?>/components/com_joomcck/gateways/paypal/paypal.png" title="PayPal" alt="PayPal">
-		<?php echo JText::_('SSI_BUYNOW');?>
+		<?php echo \Joomla\CMS\Language\Text::_('SSI_BUYNOW');?>
 
 		<?php if($topay): ?>
 			<?php if($topay != $amount): ?>
@@ -19,10 +19,10 @@
 		<?php endif;?>
 
 		<?php if($tax):?>
-			<small><small><?php echo JText::sprintf('SSI_WITHOUTTAX', $tax);?></small></small>
+			<small><small><?php echo \Joomla\CMS\Language\Text::sprintf('SSI_WITHOUTTAX', $tax);?></small></small>
 		<?php endif; ?>
 		<?php if($discount):?>
-			<small><small><?php echo JText::sprintf('SSI_WITHDISC', $discount);?></small></small>
+			<small><small><?php echo \Joomla\CMS\Language\Text::sprintf('SSI_WITHDISC', $discount);?></small></small>
 		<?php endif; ?>
 	</button>
 </form>

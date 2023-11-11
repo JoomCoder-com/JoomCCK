@@ -15,7 +15,7 @@ class JoomcckModelComment extends MModelAdmin
 
 	public function getTable($type = 'Cobcomments', $prefix = 'JoomcckTable', $config = array())
 	{
-		return JTable::getInstance($type, $prefix, $config);
+		return \Joomla\CMS\Table\Table::getInstance($type, $prefix, $config);
 	}
 
 	public function getForm($data = array(), $loadData = true)
@@ -32,13 +32,13 @@ class JoomcckModelComment extends MModelAdmin
 	{
 		parent::populateState();
 
-		$app = JFactory::getApplication();
+		$app = \Joomla\CMS\Factory::getApplication();
 
 		// Load state from the request.
 		if($app->input->getString('view', false) == 'comment')
 		{
 			$pk = $app->input->getInt('id');
-			JFactory::getApplication()->setUserState('com_joomcck.edit.comment.id', $pk);
+			\Joomla\CMS\Factory::getApplication()->setUserState('com_joomcck.edit.comment.id', $pk);
 			$this->setState('com_joomcck.edit.comment.id', $pk);
 		}
 		else
@@ -51,7 +51,7 @@ class JoomcckModelComment extends MModelAdmin
 
 	protected function loadFormData()
 	{
-		$data = JFactory::getApplication()->getUserState('com_joomcck.edit.comment.data', array());
+		$data = \Joomla\CMS\Factory::getApplication()->getUserState('com_joomcck.edit.comment.data', array());
 		$data2 = $this->getItem();
 		if (empty($data))
 		{
@@ -69,9 +69,9 @@ class JoomcckModelComment extends MModelAdmin
 
 	public function getItem($pk = null)
 	{
-		$app = JFactory::getApplication();
+		$app = \Joomla\CMS\Factory::getApplication();
 		$item = parent::getItem($pk);
-		$user = JFactory::getUser();
+		$user = \Joomla\CMS\Factory::getUser();
 		if (!isset($item->id) && !$item->id)
 		{
 			$type = ItemsStore::getType($app->input->getInt('type_id'));
@@ -105,15 +105,15 @@ class JoomcckModelComment extends MModelAdmin
 	{
 		$model = MModelBase::getInstance('Form', 'JoomcckModel');
 		$cmodel = MModelBase::getInstance('Comment', 'JoomcckModel');
-		$item = $model->getItem(JFactory::getApplication()->input->getInt('record_id'));
+		$item = $model->getItem(\Joomla\CMS\Factory::getApplication()->input->getInt('record_id'));
 		$type = $model->getRecordType($item->type_id);
-		$cid = JFactory::getApplication()->input->get('cid');
+		$cid = \Joomla\CMS\Factory::getApplication()->input->get('cid');
 		if(!isset($cid[0]))
 		{
 			return FALSE;
 		}
 		$comment = $cmodel->getItem($cid[0]);
-		$user = JFactory::getUser();
+		$user = \Joomla\CMS\Factory::getUser();
 
 		if (($item->user_id == $user->get('id')) && $type->params->get('comments.comments_approve_author'))
 		{
@@ -136,7 +136,7 @@ class JoomcckModelComment extends MModelAdmin
 
 	protected function canEditState($record)
 	{
-		$user = JFactory::getUser();
+		$user = \Joomla\CMS\Factory::getUser();
 		return $user->authorise('core.edit.state', 'com_joomcck.comment.' . (int)$record->id);
 	}
 
@@ -144,9 +144,9 @@ class JoomcckModelComment extends MModelAdmin
 
 	public function subscribe($data)
 	{
-		$table = JTable::getInstance('Subscription', 'JoomcckTable');
+		$table = \Joomla\CMS\Table\Table::getInstance('Subscription', 'JoomcckTable');
 		$model_record = MModelBase::getInstance('Record', 'JoomcckModel');
-		$user = JFactory::getUser();
+		$user = \Joomla\CMS\Factory::getUser();
 
 		$item = $model_record->getItem($data['record_id']);
 
@@ -168,7 +168,7 @@ class JoomcckModelComment extends MModelAdmin
 
 	private function _prepareComent($comment, $type, $user)
 	{
-        $comment->created = JFactory::getDate($comment->ctime);
+        $comment->created = \Joomla\CMS\Factory::getDate($comment->ctime);
 
         $comment->attachment = AttachmentHelper::getAttachments($comment->attachment, $type->params->get('comments.comments_attachment_hit', 0));
 
@@ -225,7 +225,7 @@ class JoomcckModelComment extends MModelAdmin
 	}
 	public function validate($form, $data, $group = null)
 	{
-		if(JFactory::getUser()->get('id') )
+		if(\Joomla\CMS\Factory::getUser()->get('id') )
 		{
 			$form->removeField('captcha');
 		}

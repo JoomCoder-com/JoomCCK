@@ -21,7 +21,7 @@ class JoomcckControllerTools extends MControllerForm
 		
 		if(!$this->input)
 		{
-			$this->input = JFactory::getApplication()->input;
+			$this->input = \Joomla\CMS\Factory::getApplication()->input;
 		}
 	}
 
@@ -31,7 +31,7 @@ class JoomcckControllerTools extends MControllerForm
 		$name = $this->input->get('name');
 		$uri  = \Joomla\CMS\Uri\Uri::getInstance();
 
-		$params = new JRegistry('');
+		$params = new \Joomla\Registry\Registry('');
 		if(@$_POST['jform'])
 		{
 			$params->loadArray(@$_POST['jform']);
@@ -41,7 +41,7 @@ class JoomcckControllerTools extends MControllerForm
 
         $file = JPATH_ROOT . '/components/com_joomcck/library/php/tools/' . $name . '/exec.php';
 
-		if(JFile::exists($file))
+		if(\Joomla\CMS\Filesystem\File::exists($file))
 		{
 			include $file;
 		}
@@ -58,7 +58,7 @@ class JoomcckControllerTools extends MControllerForm
 
         $form_data = JPATH_ROOT . '/components/com_joomcck/library/php/tools/' . $name . '/data.json';
 		$content = $params->toString();
-		JFile::write($form_data, $content);
+		\Joomla\CMS\Filesystem\File::write($form_data, $content);
 		
 		$this->setRedirect($uri->toString());
 		$this->redirect();

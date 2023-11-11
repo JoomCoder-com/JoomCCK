@@ -114,7 +114,7 @@ class JFormFieldCobTmplList extends JFormFieldList
 
         // Create a read-only list (no name) with hidden input(s) to store the value(s).
         if ((string) $this->readonly == '1' || (string) $this->readonly == 'true') {
-            $html[] = JHtml::_('select.genericlist', $options, '', trim($attr), 'value', 'text', $this->value, $this->id);
+            $html[] = \Joomla\CMS\HTML\HTMLHelper::_('select.genericlist', $options, '', trim($attr), 'value', 'text', $this->value, $this->id);
 
             // E.g. form field type tag sends $this->value as array
             if ($this->multiple && is_array($this->value)) {
@@ -140,7 +140,7 @@ class JFormFieldCobTmplList extends JFormFieldList
             $listoptions['option.attr']    = 'optionattr';
             $listoptions['list.attr']      = trim($attr);
 
-            $html[] = JHtml::_('select.genericlist', $options, $this->name, $listoptions);
+            $html[] = \Joomla\CMS\HTML\HTMLHelper::_('select.genericlist', $options, $this->name, $listoptions);
 		}
 		
 		//JHtmlSelect::genericlist()
@@ -154,17 +154,17 @@ class JFormFieldCobTmplList extends JFormFieldList
 		$xml = $path.DIRECTORY_SEPARATOR.str_replace('.php', '.xml', $this->value ?: $this->default);
 
 
-		if(JFile::exists($xml)) {
+		if(\Joomla\CMS\Filesystem\File::exists($xml)) {
 			$icon = HTMLFormatHelper::icon('gear.png');
 			$parts = explode('/', $this->directory);
 
 
-			$title = JText::sprintf('COB_FIEL_PARAMS', ucfirst($parts[5]));
+			$title = \Joomla\CMS\Language\Text::sprintf('COB_FIEL_PARAMS', ucfirst($parts[5]));
 
 
 			HTMLHelper::_('bootstrap.modal');
 
-			$form = MFormHelper::getFieldParams($xml, JFactory::getApplication()->input->get('id'), $this->value ?: $this->default);
+			$form = MFormHelper::getFieldParams($xml, \Joomla\CMS\Factory::getApplication()->input->get('id'), $this->value ?: $this->default);
 
 			$html[] = <<<EOT
 			<button data-bs-target="#config_$this->id" type="button" role="button" class="btn btn-sm btn-light border" data-bs-toggle="modal">$icon</button>
@@ -301,15 +301,15 @@ EOT;
 
         // Prepend some default options based on field attributes.
         if (!$this->hideNone) {
-            $options[] = JHtml::_('select.option', '-1', JText::alt('JOPTION_DO_NOT_USE', preg_replace('/[^a-zA-Z0-9_\-]/', '_', $this->fieldname)));
+            $options[] = \Joomla\CMS\HTML\HTMLHelper::_('select.option', '-1', \Joomla\CMS\Language\Text::alt('JOPTION_DO_NOT_USE', preg_replace('/[^a-zA-Z0-9_\-]/', '_', $this->fieldname)));
         }
 
         if (!$this->hideDefault) {
-            $options[] = JHtml::_('select.option', '', JText::alt('JOPTION_USE_DEFAULT', preg_replace('/[^a-zA-Z0-9_\-]/', '_', $this->fieldname)));
+            $options[] = \Joomla\CMS\HTML\HTMLHelper::_('select.option', '', \Joomla\CMS\Language\Text::alt('JOPTION_USE_DEFAULT', preg_replace('/[^a-zA-Z0-9_\-]/', '_', $this->fieldname)));
         }
 
         // Get a list of files in the search path with the given filter.
-        $files = JFolder::files($path, $this->filter);
+        $files = \Joomla\CMS\Filesystem\Folder::files($path, $this->filter);
 
         // Build the options list from the list of files.
         if (is_array($files)) {
@@ -323,10 +323,10 @@ EOT;
 
                 // If the extension is to be stripped, do it.
                 if ($this->stripExt) {
-                    $file = JFile::stripExt($file);
+                    $file = \Joomla\CMS\Filesystem\File::stripExt($file);
                 }
 
-                $options[] = JHtml::_('select.option', $file, $file);
+                $options[] = \Joomla\CMS\HTML\HTMLHelper::_('select.option', $file, $file);
             }
         }
 

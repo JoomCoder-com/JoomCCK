@@ -38,7 +38,7 @@ $api = new JoomcckApi();
 ?>
 
 <?php if($this->tmpl_params['cindex']->get('tmpl_core.show_title', 1)):?>
-	<h2><?php echo JText::_($this->tmpl_params['cindex']->get('tmpl_core.title_label', 'Category Index'))?></h2>
+	<h2><?php echo \Joomla\CMS\Language\Text::_($this->tmpl_params['cindex']->get('tmpl_core.title_label', 'Category Index'))?></h2>
 <?php endif;?>
 
 <?php for($i = 0; $i < $rows; $i ++):?>
@@ -63,8 +63,8 @@ $api = new JoomcckApi();
                         <div class="<?php echo ($params->get('tmpl_core.well', 1) ? 'card-body' : NULL)?>"">
 
                             <<?php echo $params->get('tmpl_core.tag', 'h4')?>>
-                            <a href="<?php echo JRoute::_($category->link)?>">
-		                        <?php if($category->id == JFactory::getApplication()->input->getInt('cat_id')):?>
+                            <a href="<?php echo \Joomla\CMS\Router\Route::_($category->link)?>">
+		                        <?php if($category->id == \Joomla\CMS\Factory::getApplication()->input->getInt('cat_id')):?>
                                     <b><?php echo $category->title; ?></b>
 		                        <?php else:?>
 			                        <?php echo $category->title; ?>
@@ -105,11 +105,11 @@ $api = new JoomcckApi();
 		if (!$params->get('tmpl_params.subcat_empty', 1) && !$cat->num_current && !$cat->num_all) continue;  ?>
 			<li <?php if(count($cat->children)){echo 'class="dropdown-submenu"';}?>>
 				<?php if($params->get('tmpl_params.subcat_limit', 5) <= $i && (count($category->children) > $params->get('tmpl_params.subcat_limit', 5))):?>
-					<a tabindex="-1" href="<?php echo $category->link;?>"><?php echo JText::_('CMORECATS').'...'?></a>
+					<a tabindex="-1" href="<?php echo $category->link;?>"><?php echo \Joomla\CMS\Language\Text::_('CMORECATS').'...'?></a>
 					</li>
 					<?php break;?>
 				<?php else:?>
-					<a tabindex="-1" href="<?php echo JRoute::_($cat->link)?>">
+					<a tabindex="-1" href="<?php echo \Joomla\CMS\Router\Route::_($cat->link)?>">
 						<?php echo $cat->title;?>
 						<?php if($params->get('tmpl_params.subcat_nums', 0) && $cat->params->get('submission')):?>
 							<span class="badge bg-light text-muted border"><?php echo (int)$cat->records_num; ?></span>

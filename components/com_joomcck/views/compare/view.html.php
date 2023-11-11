@@ -15,11 +15,11 @@ class JoomcckViewCompare extends MViewBase
 	function display($tpl = null)
 	{
 
-		$app = JFactory::getApplication();
+		$app = \Joomla\CMS\Factory::getApplication();
 
 		if (! $app->input->getInt('section_id'))
 		{
-			throw new GenericDataException(JText::_('CNOSECTION'), 500);
+			throw new GenericDataException(\Joomla\CMS\Language\Text::_('CNOSECTION'), 500);
 			return FALSE;
 		}
 
@@ -30,7 +30,7 @@ class JoomcckViewCompare extends MViewBase
 		$this->html = $records['html'];
 
 		$this->back = NULL;
-		if(JFactory::getApplication()->input->getString('return'))
+		if(\Joomla\CMS\Factory::getApplication()->input->getString('return'))
 		{
 			$this->back = Url::get_back('return');;
 		}

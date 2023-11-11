@@ -97,7 +97,7 @@ class plgFinderJoomcck extends FinderIndexerAdapter
 	protected function index(FinderIndexerResult $item, $format = 'html')
 	{
 		// Check if the extension is enabled
-		if (JComponentHelper::isEnabled($this->extension) == false)
+		if (\Joomla\CMS\Component\ComponentHelper::isEnabled($this->extension) == false)
 		{
 			return;
 		}
@@ -172,7 +172,7 @@ class plgFinderJoomcck extends FinderIndexerAdapter
 
 	protected function getListQuery($sql = null)
 	{
-		$db = JFactory::getDbo();
+		$db = \Joomla\CMS\Factory::getDbo();
 		// Check if we can use the supplied SQL query.
 		$sql = $sql instanceof JDatabaseQuery ? $sql : $db->getQuery(true);
 

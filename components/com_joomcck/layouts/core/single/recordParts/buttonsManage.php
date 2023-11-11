@@ -27,8 +27,8 @@ $containerClass = !isset($containerClass) ? 'float-end controls' : $containerCla
 	<div class="<?php echo $containerClass ?>">
 		<div class="btn-group">
 			<?php if($params->get('tmpl_core.item_print')):?>
-				<a class="btn btn-sm btn-light border" onclick="window.open('<?php echo JRoute::_($current->item->url.'&tmpl=component&print=1');?>','win2','status=no,toolbar=no,scrollbars=yes,titlebar=no,menubar=no,resizable=yes,width=640,height=480,directories=no,location=no'); return false;">
-					<?php echo HTMLFormatHelper::icon('printer.png', JText::_('CPRINT'));  ?></a>
+				<a class="btn btn-sm btn-light border" onclick="window.open('<?php echo \Joomla\CMS\Router\Route::_($current->item->url.'&tmpl=component&print=1');?>','win2','status=no,toolbar=no,scrollbars=yes,titlebar=no,menubar=no,resizable=yes,width=640,height=480,directories=no,location=no'); return false;">
+					<?php echo HTMLFormatHelper::icon('printer.png', \Joomla\CMS\Language\Text::_('CPRINT'));  ?></a>
 			<?php endif;?>
 
 			<?php if($current->user->get('id')):?>
@@ -47,6 +47,6 @@ $containerClass = !isset($containerClass) ? 'float-end controls' : $containerCla
 	</div>
 <?php else:?>
 	<div class="float-end controls">
-		<a href="#" class="btn btn-sm btn-light border" onclick="window.print();return false;"><?php echo HTMLFormatHelper::icon('printer.png', JText::_('CPRINT'));  ?></a>
+		<a href="#" class="btn btn-sm btn-light border" onclick="window.print();return false;"><?php echo HTMLFormatHelper::icon('printer.png', \Joomla\CMS\Language\Text::_('CPRINT'));  ?></a>
 	</div>
 <?php endif;?>

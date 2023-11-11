@@ -31,7 +31,7 @@ class JFormFieldFieldicon extends JFormField
 		$html = '<div class="border p-3 rounded">';
 		$html  .= '<input type="hidden" name="'.$this->name.'" id="icon_param'.$this->fieldname.'" value="'.$this->value.'">';
 		$html .= '<div class="input-group mb-3">
-            <span class="input-group-text"><i class="fas fa-filter"></i> '.JText::_('LTFILTERS').'</span>
+            <span class="input-group-text"><i class="fas fa-filter"></i> '.\Joomla\CMS\Language\Text::_('LTFILTERS').'</span>
               <input id="icon_param_search" class="form-control form-control-sm" type="text" value="" >
             </div>';
 		$html .= '<script type="text/javascript">
@@ -69,7 +69,7 @@ class JFormFieldFieldicon extends JFormField
 		        	if($ext == 'png' || $ext == 'gif')
 		        	{
 		        		$atr['onclick'] = "mrSetIcon{$this->fieldname}('$file')";
-		        		$html .= ' '.JHTML::image(JURI::root().$path.$file, JText::_('CICONCLICKINSERT'), $atr);
+		        		$html .= ' '.JHTML::image(JURI::root().$path.$file, \Joomla\CMS\Language\Text::_('CICONCLICKINSERT'), $atr);
 		        	}
 		            
 		        }

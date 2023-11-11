@@ -126,7 +126,7 @@ abstract class MModelAdmin extends MModelForm
 			$this->event_change_state = 'onContentChangeState';
 		}
 
-		// Guess the JText message prefix. Defaults to the option.
+		// Guess the \Joomla\CMS\Language\Text message prefix. Defaults to the option.
 		if (isset($config['text_prefix']))
 		{
 			$this->text_prefix = strtoupper($config['text_prefix']);
@@ -162,7 +162,7 @@ abstract class MModelAdmin extends MModelForm
 
 		if (empty($pks))
 		{
-			$this->setError(JText::_('JGLOBAL_NO_ITEM_SELECTED'));
+			$this->setError(\Joomla\CMS\Language\Text::_('JGLOBAL_NO_ITEM_SELECTED'));
 
 			return false;
 		}
@@ -170,7 +170,7 @@ abstract class MModelAdmin extends MModelForm
 		$done = false;
 
 		// Set some needed variables.
-		$this->user = JFactory::getUser();
+		$this->user = \Joomla\CMS\Factory::getUser();
 		$this->table = $this->getTable();
 		$this->tableClassName = get_class($this->table);
 		$this->contentType = new JUcmType;
@@ -252,7 +252,7 @@ abstract class MModelAdmin extends MModelForm
 
 		if (!$done)
 		{
-			$this->setError(JText::_('JLIB_APPLICATION_ERROR_INSUFFICIENT_BATCH_INFORMATION'));
+			$this->setError(\Joomla\CMS\Language\Text::_('JLIB_APPLICATION_ERROR_INSUFFICIENT_BATCH_INFORMATION'));
 			return false;
 		}
 
@@ -278,7 +278,7 @@ abstract class MModelAdmin extends MModelForm
 		if (empty($this->batchSet))
 		{
 			// Set some needed variables.
-			$this->user = JFactory::getUser();
+			$this->user = \Joomla\CMS\Factory::getUser();
 			$this->table = $this->getTable();
 			$this->tableClassName = get_class($this->table);
 			$this->contentType = new JUcmType;
@@ -307,7 +307,7 @@ abstract class MModelAdmin extends MModelForm
 			}
 			else
 			{
-				$this->setError(JText::_('JLIB_APPLICATION_ERROR_BATCH_CANNOT_EDIT'));
+				$this->setError(\Joomla\CMS\Language\Text::_('JLIB_APPLICATION_ERROR_BATCH_CANNOT_EDIT'));
 
 				return false;
 			}
@@ -335,7 +335,7 @@ abstract class MModelAdmin extends MModelForm
 		if (empty($this->batchSet))
 		{
 			// Set some needed variables.
-			$this->user = JFactory::getUser();
+			$this->user = \Joomla\CMS\Factory::getUser();
 			$this->table = $this->getTable();
 			$this->tableClassName = get_class($this->table);
 			$this->contentType = new JUcmType;
@@ -372,7 +372,7 @@ abstract class MModelAdmin extends MModelForm
 				else
 				{
 					// Not fatal error
-					$this->setError(JText::sprintf('JLIB_APPLICATION_ERROR_BATCH_MOVE_ROW_NOT_FOUND', $pk));
+					$this->setError(\Joomla\CMS\Language\Text::sprintf('JLIB_APPLICATION_ERROR_BATCH_MOVE_ROW_NOT_FOUND', $pk));
 					continue;
 				}
 			}
@@ -439,7 +439,7 @@ abstract class MModelAdmin extends MModelForm
 		if (empty($this->batchSet))
 		{
 			// Set some needed variables.
-			$this->user = JFactory::getUser();
+			$this->user = \Joomla\CMS\Factory::getUser();
 			$this->table = $this->getTable();
 			$this->tableClassName = get_class($this->table);
 			$this->contentType = new JUcmType;
@@ -468,7 +468,7 @@ abstract class MModelAdmin extends MModelForm
 			}
 			else
 			{
-				$this->setError(JText::_('JLIB_APPLICATION_ERROR_BATCH_CANNOT_EDIT'));
+				$this->setError(\Joomla\CMS\Language\Text::_('JLIB_APPLICATION_ERROR_BATCH_CANNOT_EDIT'));
 
 				return false;
 			}
@@ -496,7 +496,7 @@ abstract class MModelAdmin extends MModelForm
 		if (empty($this->batchSet))
 		{
 			// Set some needed variables.
-			$this->user = JFactory::getUser();
+			$this->user = \Joomla\CMS\Factory::getUser();
 			$this->table = $this->getTable();
 			$this->tableClassName = get_class($this->table);
 			$this->contentType = new JUcmType;
@@ -515,7 +515,7 @@ abstract class MModelAdmin extends MModelForm
 		{
 			if (!$this->user->authorise('core.edit', $contexts[$pk]))
 			{
-				$this->setError(JText::_('JLIB_APPLICATION_ERROR_BATCH_CANNOT_EDIT'));
+				$this->setError(\Joomla\CMS\Language\Text::_('JLIB_APPLICATION_ERROR_BATCH_CANNOT_EDIT'));
 
 				return false;
 			}
@@ -533,7 +533,7 @@ abstract class MModelAdmin extends MModelForm
 				else
 				{
 					// Not fatal error
-					$this->setError(JText::sprintf('JLIB_APPLICATION_ERROR_BATCH_MOVE_ROW_NOT_FOUND', $pk));
+					$this->setError(\Joomla\CMS\Language\Text::sprintf('JLIB_APPLICATION_ERROR_BATCH_MOVE_ROW_NOT_FOUND', $pk));
 					continue;
 				}
 			}
@@ -583,7 +583,7 @@ abstract class MModelAdmin extends MModelForm
 	protected function batchTag($value, $pks, $contexts)
 	{
 		// Set the variables
-		$user = JFactory::getUser();
+		$user = \Joomla\CMS\Factory::getUser();
 		$table = $this->getTable();
 
 		foreach ($pks as $pk)
@@ -609,7 +609,7 @@ abstract class MModelAdmin extends MModelForm
 			}
 			else
 			{
-				$this->setError(JText::_('JLIB_APPLICATION_ERROR_BATCH_CANNOT_EDIT'));
+				$this->setError(\Joomla\CMS\Language\Text::_('JLIB_APPLICATION_ERROR_BATCH_CANNOT_EDIT'));
 
 				return false;
 			}
@@ -632,7 +632,7 @@ abstract class MModelAdmin extends MModelForm
 	 */
 	protected function canDelete($record)
 	{
-		$user = JFactory::getUser();
+		$user = \Joomla\CMS\Factory::getUser();
 
 		return $user->authorise('core.delete', $this->option);
 	}
@@ -648,7 +648,7 @@ abstract class MModelAdmin extends MModelForm
 	 */
 	protected function canEditState($record)
 	{
-		$user = JFactory::getUser();
+		$user = \Joomla\CMS\Factory::getUser();
 
 		return $user->authorise('core.edit.state', $this->option);
 	}
@@ -726,7 +726,7 @@ abstract class MModelAdmin extends MModelForm
 	 */
 	public function delete(&$pks)
 	{
-		$dispatcher = JFactory::getApplication();
+		$dispatcher = \Joomla\CMS\Factory::getApplication();
 		$pks = (array) $pks;
 		$table = $this->getTable();
 
@@ -777,7 +777,7 @@ abstract class MModelAdmin extends MModelForm
 					}
 					else
 					{
-						JLog::add(JText::_('JLIB_APPLICATION_ERROR_DELETE_NOT_PERMITTED'), JLog::WARNING, 'jerror');
+						JLog::add(\Joomla\CMS\Language\Text::_('JLIB_APPLICATION_ERROR_DELETE_NOT_PERMITTED'), JLog::WARNING, 'jerror');
 						return false;
 					}
 				}
@@ -853,7 +853,7 @@ abstract class MModelAdmin extends MModelForm
 
 		if (property_exists($item, 'params'))
 		{
-			$registry = new JRegistry;
+			$registry = new \Joomla\Registry\Registry;
 			$registry->loadString((string)$item->params);
 			$item->params = $registry->toArray();
 		}
@@ -864,7 +864,7 @@ abstract class MModelAdmin extends MModelForm
 	/**
 	 * A protected method to get a set of ordering conditions.
 	 *
-	 * @param   JTable  $table  A JTable object.
+	 * @param   \Joomla\CMS\Table\Table  $table  A \Joomla\CMS\Table\Table object.
 	 *
 	 * @return  array  An array of conditions to add to ordering queries.
 	 *
@@ -888,18 +888,18 @@ abstract class MModelAdmin extends MModelForm
 		$key = $table->getKeyName();
 
 		// Get the pk of the record from the request.
-		$pk = JFactory::getApplication()->input->getInt($key);
+		$pk = \Joomla\CMS\Factory::getApplication()->input->getInt($key);
 		$this->setState($this->getName() . '.id', $pk);
 
 		// Load the parameters.
-		$value = JComponentHelper::getParams($this->option);
+		$value = \Joomla\CMS\Component\ComponentHelper::getParams($this->option);
 		$this->setState('params', $value);
 	}
 
 	/**
 	 * Prepare and sanitise the table data prior to saving.
 	 *
-	 * @param   JTable  $table  A reference to a JTable object.
+	 * @param   \Joomla\CMS\Table\Table  $table  A reference to a \Joomla\CMS\Table\Table object.
 	 *
 	 * @return  void
 	 *
@@ -922,8 +922,8 @@ abstract class MModelAdmin extends MModelForm
 	 */
 	public function publish(&$pks, $value = 1)
 	{
-		$dispatcher = JFactory::getApplication();
-		$user = JFactory::getUser();
+		$dispatcher = \Joomla\CMS\Factory::getApplication();
+		$user = \Joomla\CMS\Factory::getUser();
 		$table = $this->getTable();
 		$pks = (array) $pks;
 
@@ -941,7 +941,7 @@ abstract class MModelAdmin extends MModelForm
 				{
 					// Prune items that you can't change.
 					unset($pks[$i]);
-					JLog::add(JText::_('JLIB_APPLICATION_ERROR_EDITSTATE_NOT_PERMITTED'), JLog::WARNING, 'jerror');
+					JLog::add(\Joomla\CMS\Language\Text::_('JLIB_APPLICATION_ERROR_EDITSTATE_NOT_PERMITTED'), JLog::WARNING, 'jerror');
 
 					return false;
 				}
@@ -1010,7 +1010,7 @@ abstract class MModelAdmin extends MModelForm
 					// Prune items that you can't change.
 					unset($pks[$i]);
 					$this->checkin($pk);
-					JLog::add(JText::_('JLIB_APPLICATION_ERROR_EDITSTATE_NOT_PERMITTED'), JLog::WARNING, 'jerror');
+					JLog::add(\Joomla\CMS\Language\Text::_('JLIB_APPLICATION_ERROR_EDITSTATE_NOT_PERMITTED'), JLog::WARNING, 'jerror');
 					$allowed = false;
 					continue;
 				}
@@ -1059,7 +1059,7 @@ abstract class MModelAdmin extends MModelForm
 	 */
 	public function save($data)
 	{
-		$dispatcher = JFactory::getApplication();
+		$dispatcher = \Joomla\CMS\Factory::getApplication();
 		$table = $this->getTable();
 
 		$key = $table->getKeyName();
@@ -1159,7 +1159,7 @@ abstract class MModelAdmin extends MModelForm
 		if (empty($pks))
 		{
 
-			Factory::getApplication()->enqueueMessage(JText::_($this->text_prefix . '_ERROR_NO_ITEMS_SELECTED'),'warning');
+			Factory::getApplication()->enqueueMessage(\Joomla\CMS\Language\Text::_($this->text_prefix . '_ERROR_NO_ITEMS_SELECTED'),'warning');
 
 			return;
 		}
@@ -1174,7 +1174,7 @@ abstract class MModelAdmin extends MModelForm
 			{
 				// Prune items that you can't change.
 				unset($pks[$i]);
-				JLog::add(JText::_('JLIB_APPLICATION_ERROR_EDITSTATE_NOT_PERMITTED'), JLog::WARNING, 'jerror');
+				JLog::add(\Joomla\CMS\Language\Text::_('JLIB_APPLICATION_ERROR_EDITSTATE_NOT_PERMITTED'), JLog::WARNING, 'jerror');
 			}
 			elseif ($table->ordering != $order[$i])
 			{
@@ -1228,11 +1228,11 @@ abstract class MModelAdmin extends MModelForm
 	/**
 	 * Method to create a tags helper to ensure proper management of tags
 	 *
-	 * @param   JTableObserverTags  $tagsObserver  The tags observer for this table
+	 * @param   \Joomla\CMS\Table\TableObserverTags  $tagsObserver  The tags observer for this table
 	 * @param   JUcmType            $type          The type for the table being processed
 	 * @param   integer             $pk            Primary key of the item bing processed
 	 * @param   string              $typeAlias     The type alias for this table
-	 * @param   JTable              $table         The JTable object
+	 * @param   \Joomla\CMS\Table\Table              $table         The \Joomla\CMS\Table\Table object
 	 *
 	 * @return  void
 	 *
@@ -1262,7 +1262,7 @@ abstract class MModelAdmin extends MModelForm
 		// Check that the category exists
 		if ($categoryId)
 		{
-			$categoryTable = JTable::getInstance('Category');
+			$categoryTable = \Joomla\CMS\Table\Table::getInstance('Category');
 
 			if (!$categoryTable->load($categoryId))
 			{
@@ -1274,7 +1274,7 @@ abstract class MModelAdmin extends MModelForm
 				}
 				else
 				{
-					$this->setError(JText::_('JLIB_APPLICATION_ERROR_BATCH_MOVE_CATEGORY_NOT_FOUND'));
+					$this->setError(\Joomla\CMS\Language\Text::_('JLIB_APPLICATION_ERROR_BATCH_MOVE_CATEGORY_NOT_FOUND'));
 
 					return false;
 				}
@@ -1283,16 +1283,16 @@ abstract class MModelAdmin extends MModelForm
 
 		if (empty($categoryId))
 		{
-			$this->setError(JText::_('JLIB_APPLICATION_ERROR_BATCH_MOVE_CATEGORY_NOT_FOUND'));
+			$this->setError(\Joomla\CMS\Language\Text::_('JLIB_APPLICATION_ERROR_BATCH_MOVE_CATEGORY_NOT_FOUND'));
 			return false;
 		}
 
 		// Check that the user has create permission for the component
-		$extension = JFactory::getApplication()->input->get('option', '');
+		$extension = \Joomla\CMS\Factory::getApplication()->input->get('option', '');
 
 		if (!$this->user->authorise('core.create', $extension . '.category.' . $categoryId))
 		{
-			$this->setError(JText::_('JLIB_APPLICATION_ERROR_BATCH_CANNOT_CREATE'));
+			$this->setError(\Joomla\CMS\Language\Text::_('JLIB_APPLICATION_ERROR_BATCH_CANNOT_CREATE'));
 
 			return false;
 		}
@@ -1305,7 +1305,7 @@ abstract class MModelAdmin extends MModelForm
 	 * for alias and title to use the batch move and copy methods
 	 *
 	 * @param   integer  $categoryId  The target category id
-	 * @param   JTable   $table       The JTable within which move or copy is taking place
+	 * @param   \Joomla\CMS\Table\Table   $table       The \Joomla\CMS\Table\Table within which move or copy is taking place
 	 *
 	 * @return  void
 	 *

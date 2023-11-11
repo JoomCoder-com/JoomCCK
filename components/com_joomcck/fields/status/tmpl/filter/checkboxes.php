@@ -23,7 +23,7 @@ foreach($this->values as $key => $value) :
 	if($this->params->get('params.icon'.$value->field_value))
 	{
 		$path = JURI::root() . 'components/com_joomcck/fields/status/icons/';
-		$label = JHtml::image($path . $this->params->get('params.icon' . $value->field_value), JText::_($strip_label), array('class' => 'hasTip', 'title' => JText::_($strip_label), 'align' => 'absmiddle')). ' '.$label;
+		$label = \Joomla\CMS\HTML\HTMLHelper::image($path . $this->params->get('params.icon' . $value->field_value), \Joomla\CMS\Language\Text::_($strip_label), array('class' => 'hasTip', 'title' => \Joomla\CMS\Language\Text::_($strip_label), 'align' => 'absmiddle')). ' '.$label;
 	}
 	?>
 	<label class="checkbox">

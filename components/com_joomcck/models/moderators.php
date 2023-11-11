@@ -25,7 +25,7 @@ class JoomcckModelModerators extends MModelList
 
 	public function getListQuery()
 	{
-		$user = JFactory::getUser();
+		$user = \Joomla\CMS\Factory::getUser();
 
 		$db    = $this->getDbo();
 		$query = $db->getQuery(TRUE);
@@ -79,7 +79,7 @@ class JoomcckModelModerators extends MModelList
 
 		$db->setQuery($sql);
 		$sections = $db->loadObjectList();
-		$user_id  = JFactory::getUser()->get('id');
+		$user_id  = \Joomla\CMS\Factory::getUser()->get('id');
 		foreach($sections as $key => $value)
 		{
 			if(!MECAccess::isModerator($user_id, $value->value))
@@ -106,7 +106,7 @@ class JoomcckModelModerators extends MModelList
 	{
 		parent::populateState('m.ctime', 'desc');
 
-		$app = JFactory::getApplication();
+		$app = \Joomla\CMS\Factory::getApplication();
 
 		$search = $app->getUserStateFromRequest($this->context . '.filter.search', 'filter_search');
 		$this->setState('filter.search', $search);

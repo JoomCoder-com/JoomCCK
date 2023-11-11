@@ -20,7 +20,7 @@ class JoomcckControllerUsercategory extends MControllerForm
 		
 		if(!$this->input)
 		{
-			$this->input = JFactory::getApplication()->input;
+			$this->input = \Joomla\CMS\Factory::getApplication()->input;
 		}
 		$this->view_list = 'categories';
 		$this->view_item = 'category';
@@ -30,8 +30,8 @@ class JoomcckControllerUsercategory extends MControllerForm
 	{
 
 
-		$user = JFactory::getUser();
-		$db = JFactory::getDbo();
+		$user = \Joomla\CMS\Factory::getUser();
+		$db = \Joomla\CMS\Factory::getDbo();
 		$sql = "SELECT count(id) FROM #__js_res_category_user WHERE user_id=" . $user->get('id') . ' AND section_id =' . $this->input->getInt('section_id');
 		$db->setQuery($sql);
 		$result = $db->loadResult();
@@ -41,8 +41,8 @@ class JoomcckControllerUsercategory extends MControllerForm
 		if($result >= $section->params->get('personalize.pcat_limit') && $section->params->get('personalize.pcat_limit'))
 		{
 
-			Factory::getApplication()->enqueueMessage(JText::_('CMSG_YOU_REACHMAX') . ' ' . $section->params->get('personalize.pcat_limit'),'warning');
-			$this->setRedirect(JRoute::_('index.php?option=com_joomcck&view=categories&section_id' . $this->input->getInt('section_id')));
+			Factory::getApplication()->enqueueMessage(\Joomla\CMS\Language\Text::_('CMSG_YOU_REACHMAX') . ' ' . $section->params->get('personalize.pcat_limit'),'warning');
+			$this->setRedirect(\Joomla\CMS\Router\Route::_('index.php?option=com_joomcck&view=categories&section_id' . $this->input->getInt('section_id')));
 			return;
 		}
 		parent::add();
@@ -56,7 +56,7 @@ class JoomcckControllerUsercategory extends MControllerForm
 	protected function allowAdd($data = array())
 	{
 		return true;
-		$user = JFactory::getUser();
+		$user = \Joomla\CMS\Factory::getUser();
 		$allow = $user->authorise('core.create', 'com_joomcck.usercategory');
 
 		if($allow === null)
@@ -71,7 +71,7 @@ class JoomcckControllerUsercategory extends MControllerForm
 
 	protected function allowEdit($data = array(), $key = 'id')
 	{
-		return JFactory::getUser()->authorise('core.edit', 'com_joomcck.userscategory');
+		return \Joomla\CMS\Factory::getUser()->authorise('core.edit', 'com_joomcck.userscategory');
 	}
 
 	protected function getRedirectToItemAppend($recordId = null, $urlVar = 'id')
@@ -147,7 +147,7 @@ class JoomcckControllerUsercategory extends MControllerForm
 
 		$return = $this->input->getBase64('return');
 
-		if(! empty($return) || JUri::isInternal(JoomcckFilter::base64($return)))
+		if(! empty($return) || \Joomla\CMS\Uri\Uri::isInternal(JoomcckFilter::base64($return)))
 		{
 			return JoomcckFilter::base64($return);
 		}
@@ -173,19 +173,19 @@ class JoomcckControllerUsercategory extends MControllerForm
 
 		if(! empty($files['jform']['name']['icon']))
 		{
-			$user = JFactory::getUser();
+			$user = \Joomla\CMS\Factory::getUser();
 			$id = $model->getState($this->context . '.id');
 			$path = JPATH_ROOT . '/images/usercategories' . DIRECTORY_SEPARATOR . $user->get('id') . DIRECTORY_SEPARATOR;
-			$ext = JFile::getExt($files['jform']['name']['icon']);
-			if(! JFolder::exists($path))
+			$ext = \Joomla\CMS\Filesystem\File::getExt($files['jform']['name']['icon']);
+			if(! \Joomla\CMS\Filesystem\Folder::exists($path))
 			{
-				JFolder::create($path, 0755);
-				JFile::write($path . DIRECTORY_SEPARATOR . 'index.html', @$a);
+				\Joomla\CMS\Filesystem\Folder::create($path, 0755);
+				\Joomla\CMS\Filesystem\File::write($path . DIRECTORY_SEPARATOR . 'index.html', @$a);
 			}
 
-			if(JFile::upload($files['jform']['tmp_name']['icon'], $path . $id . '.' . $ext))
+			if(\Joomla\CMS\Filesystem\File::upload($files['jform']['tmp_name']['icon'], $path . $id . '.' . $ext))
 			{
-				$db = JFactory::getDbo();
+				$db = \Joomla\CMS\Factory::getDbo();
 				$db->setQuery('UPDATE #__js_res_category_user SET icon = "' . $id . '.' . $ext . '" WHERE id = ' . $id);
 				$db->execute();
 			}

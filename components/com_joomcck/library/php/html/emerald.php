@@ -18,12 +18,12 @@ class JHTMLEmerald
 		$html = array();
 		$attr = '';
 
-		if(!JFolder::exists(JPATH_ADMINISTRATOR . DIRECTORY_SEPARATOR . 'components/com_emerald'))
+		if(!\Joomla\CMS\Filesystem\Folder::exists(JPATH_ADMINISTRATOR . DIRECTORY_SEPARATOR . 'components/com_emerald'))
 		{
-			return '<b>' . JText::_('Please install JoomSubscription extension') . '</b>';
+			return '<b>' . \Joomla\CMS\Language\Text::_('Please install JoomSubscription extension') . '</b>';
 		}
 
-		$db = JFactory::getDBO();
+		$db = \Joomla\CMS\Factory::getDBO();
 		$query = "SELECT sp.id AS value,
 						 sp.name AS text,
 						 c.name AS cat_title
@@ -45,18 +45,18 @@ class JHTMLEmerald
 		$groups = array();
 		foreach($plans as $plan)
 		{
-			$groups[$plan->cat_title][] = JHtml::_('select.option', $plan->value, $plan->text, 'value', 'text');
+			$groups[$plan->cat_title][] = \Joomla\CMS\HTML\HTMLHelper::_('select.option', $plan->value, $plan->text, 'value', 'text');
 		}
 
 		$attr .= sprintf(' size="%s" ', (count($groups)+count($plans) > 10 ? 10 : count($groups)+count($plans)));
 		$attr .= ' multiple="multiple"';
 
 		$html[] = '<div><h3>';
-		$html[] = JText::_('CRESTRICTIONPLANS');
+		$html[] = \Joomla\CMS\Language\Text::_('CRESTRICTIONPLANS');
 		$html[] = '</h3>';
-		$html[] = '<div class="small">'.JText::_($descr).'</div>';
+		$html[] = '<div class="small">'.\Joomla\CMS\Language\Text::_($descr).'</div>';
 
-		$html[] = JHtml::_(
+		$html[] = \Joomla\CMS\HTML\HTMLHelper::_(
 				'select.groupedlist', $groups, $name,
 				array(
 						'list.attr' => $attr, 'id' => 'value', 'list.select' => $selected, 'group.items' => null, 'option.key.toHtml' => false,

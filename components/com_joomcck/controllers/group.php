@@ -21,7 +21,7 @@ class JoomcckControllerGroup extends MControllerForm
 
 		if(!$this->input)
 		{
-			$this->input = JFactory::getApplication()->input;
+			$this->input = \Joomla\CMS\Factory::getApplication()->input;
 		}
 	}
 
@@ -47,7 +47,7 @@ class JoomcckControllerGroup extends MControllerForm
 
 	protected function allowAdd($data = array())
 	{
-		$user = JFactory::getUser();
+		$user = \Joomla\CMS\Factory::getUser();
 		$allow = $user->authorise('core.create', 'com_joomcck.groups');
 
 		if($allow === null)
@@ -62,6 +62,6 @@ class JoomcckControllerGroup extends MControllerForm
 
 	protected function allowEdit($data = array(), $key = 'id')
 	{
-		return JFactory::getUser()->authorise('core.edit', 'com_joomcck.groups');
+		return \Joomla\CMS\Factory::getUser()->authorise('core.edit', 'com_joomcck.groups');
 	}
 }

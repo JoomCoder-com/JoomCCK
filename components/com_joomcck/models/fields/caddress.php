@@ -27,14 +27,14 @@ class JFormFieldCaddress extends JFormField
 		<td nowrap="nowrap"><fieldset class="radio">%s</fieldset></td>
 		<td nowrap="nowrap"><fieldset class="radio">%s</fieldset></td>
 		</tr>';
-		$req[] = JHtml::_('select.option', '0', JText::_('CNO'));
-		$req[] = JHtml::_('select.option', '1', JText::_('CYES'));
+		$req[] = \Joomla\CMS\HTML\HTMLHelper::_('select.option', '0', \Joomla\CMS\Language\Text::_('CNO'));
+		$req[] = \Joomla\CMS\HTML\HTMLHelper::_('select.option', '1', \Joomla\CMS\Language\Text::_('CYES'));
 
 		$html[] = '<table class="table table-striped">';
-		$html[] = '<thead><tr><th>'.JText::_('CFIELD').'</th>';
-		$html[] = '<th width="1%">'.JText::_('CSHOW').'</th>';
-		$html[] = '<th width="10%">'.JText::_('CREQUIRE').'</th>';
-		$html[] = '<th width="10%">'.JText::_('CICON').'</th>';
+		$html[] = '<thead><tr><th>'.\Joomla\CMS\Language\Text::_('CFIELD').'</th>';
+		$html[] = '<th width="1%">'.\Joomla\CMS\Language\Text::_('CSHOW').'</th>';
+		$html[] = '<th width="10%">'.\Joomla\CMS\Language\Text::_('CREQUIRE').'</th>';
+		$html[] = '<th width="10%">'.\Joomla\CMS\Language\Text::_('CICON').'</th>';
 		$html[] = '</tr></thead><tbody>';
 
 		$showopt = $this->_getShowOpt();
@@ -42,10 +42,10 @@ class JFormFieldCaddress extends JFormField
 
 		foreach ($fields AS $name => $field)
 		{
-			$data = new JRegistry($field);
-			$show = JHtml::_('select.genericlist', $showopt, $this->name.'['.$name.'][show]', 'style="max-width:100px;"', 'value', 'text', (isset($this->value->$name->show) ? (int)$this->value->$name->show : 0));
-			$require = JHtml::_('Joomcck.yesno', $req, $this->name.'['.$name.'][req]', (isset($this->value->$name->req) ? $this->value->$name->req : 0));
-			$icon = JHtml::_('Joomcck.yesno', $req, $this->name.'['.$name.'][icon]', (isset($this->value->$name->icon) ? $this->value->$name->icon : 1));
+			$data = new \Joomla\Registry\Registry($field);
+			$show = \Joomla\CMS\HTML\HTMLHelper::_('select.genericlist', $showopt, $this->name.'['.$name.'][show]', 'style="max-width:100px;"', 'value', 'text', (isset($this->value->$name->show) ? (int)$this->value->$name->show : 0));
+			$require = \Joomla\CMS\HTML\HTMLHelper::_('Joomcck.yesno', $req, $this->name.'['.$name.'][req]', (isset($this->value->$name->req) ? $this->value->$name->req : 0));
+			$icon = \Joomla\CMS\HTML\HTMLHelper::_('Joomcck.yesno', $req, $this->name.'['.$name.'][icon]', (isset($this->value->$name->icon) ? $this->value->$name->icon : 1));
 
 			$html[] = sprintf($patern, ($i = 1 - @$i), $data->get('label'), $show, $require, $icon);
 		}
@@ -57,10 +57,10 @@ class JFormFieldCaddress extends JFormField
 
 	private function _getShowOpt()
 	{
-		$opt[] = JHtml::_('select.option', '0', JText::_('CNOWHERE'));
-		$opt[] = JHtml::_('select.option', '1', JText::_('CARTLIST'));
-		$opt[] = JHtml::_('select.option', '2', JText::_('CARTFULL'));
-		$opt[] = JHtml::_('select.option', '3', JText::_('CBOTH'));
+		$opt[] = \Joomla\CMS\HTML\HTMLHelper::_('select.option', '0', \Joomla\CMS\Language\Text::_('CNOWHERE'));
+		$opt[] = \Joomla\CMS\HTML\HTMLHelper::_('select.option', '1', \Joomla\CMS\Language\Text::_('CARTLIST'));
+		$opt[] = \Joomla\CMS\HTML\HTMLHelper::_('select.option', '2', \Joomla\CMS\Language\Text::_('CARTFULL'));
+		$opt[] = \Joomla\CMS\HTML\HTMLHelper::_('select.option', '3', \Joomla\CMS\Language\Text::_('CBOTH'));
 
 		return $opt;
 	}

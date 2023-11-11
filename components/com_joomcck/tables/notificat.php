@@ -9,7 +9,7 @@
 
 defined('_JEXEC') or die('Restricted access');
 
-class JoomcckTableNotificat extends JTable
+class JoomcckTableNotificat extends \Joomla\CMS\Table\Table
 {
 	public function __construct(&$_db)
 	{

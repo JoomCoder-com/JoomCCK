@@ -18,7 +18,7 @@ class JoomcckControllerCustom extends JControllerLegacy
 
 	public function expirealerts()
 	{
-		$db = JFactory::getDbo();
+		$db = \Joomla\CMS\Factory::getDbo();
 
 		$db->setQuery("SELECT * FROM `#__js_res_record` WHERE exalert = 0 AND extime < NOW()");
 		$records = $db->loadObjectList();

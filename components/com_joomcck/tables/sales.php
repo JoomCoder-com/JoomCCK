@@ -10,7 +10,7 @@
 defined('_JEXEC') or die('Restricted access');
 jimport('joomla.table.table');
 
-class JoomcckTableSales extends JTable
+class JoomcckTableSales extends \Joomla\CMS\Table\Table
 {
 
 	public function __construct(&$_db)
@@ -35,10 +35,10 @@ class JoomcckTableSales extends JTable
 		$user_id = 0;
 		if(preg_match("/^[0-9]*$/iU", $user))
 		{
-			$user_id = JFactory::getUser($user)->get('id');
+			$user_id = \Joomla\CMS\Factory::getUser($user)->get('id');
 		}
 		
-		$db = JFactory::getDbo();
+		$db = \Joomla\CMS\Factory::getDbo();
 		
 		if(JMailHelper::isEmailAddress($user))
 		{
@@ -64,7 +64,7 @@ class JoomcckTableSales extends JTable
 			return FALSE;
 		}
 		
-		$u = JFactory::getUser();
+		$u = \Joomla\CMS\Factory::getUser();
 		
 		if($u->get('id') == $user_id)
 		{
@@ -104,8 +104,8 @@ class JoomcckTableSales extends JTable
 		
 		$this->field_id = $field_id;
 		
-		$this->ctime = JFactory::getDate()->toSql();
-		$this->mtime = JFactory::getDate()->toSql();
+		$this->ctime = \Joomla\CMS\Factory::getDate()->toSql();
+		$this->mtime = \Joomla\CMS\Factory::getDate()->toSql();
 		
 		$this->section_id = $record->section_id;
 		$this->type_id = $record->type_id;
@@ -120,13 +120,13 @@ class JoomcckTableSales extends JTable
 		}
 		if(!$this->saler_id)
 		{
-			$this->saler_id = JFactory::getUser()->get('id');
+			$this->saler_id = \Joomla\CMS\Factory::getUser()->get('id');
 		}
 		
 		$this->name = $record->title;
 		if(strstr($item_name, '%s'))
 		{
-			$this->name = JText::sprintf($item_name, $record->title);
+			$this->name = \Joomla\CMS\Language\Text::sprintf($item_name, $record->title);
 		}
 		
 		return true;

@@ -26,7 +26,7 @@ class JoomcckControllerTfields extends MControllerAdmin
 
 		if(!$this->input)
 		{
-			$this->input = JFactory::getApplication()->input;
+			$this->input = \Joomla\CMS\Factory::getApplication()->input;
 		}
 		$this->registerTask('required', 'changeState');
 		$this->registerTask('notrequired', 'changeState');
@@ -59,16 +59,16 @@ class JoomcckControllerTfields extends MControllerAdmin
 		}
 
 
-		JFactory::getApplication()->close();
+		\Joomla\CMS\Factory::getApplication()->close();
 	}
 
 	public function changeState()
 	{
 		// Check for request forgeries
-		JSession::checkToken() or die(JText::_('JINVALID_TOKEN'));
+		JSession::checkToken() or die(\Joomla\CMS\Language\Text::_('JINVALID_TOKEN'));
 
 		// Get items to publish from the request.
-		$cid = JFactory::getApplication()->input->get('cid', array(), 'array');
+		$cid = \Joomla\CMS\Factory::getApplication()->input->get('cid', array(), 'array');
 		$data = array(
 			'required' => 1, 'notrequired' => 0,
 			'searchable' => 1, 'notsearchable' => 0,
@@ -80,7 +80,7 @@ class JoomcckControllerTfields extends MControllerAdmin
 
 		if (empty($cid))
 		{
-			JLog::add(JText::_($this->text_prefix . '_NO_ITEM_SELECTED'), JLog::WARNING, 'jerror');
+			JLog::add(\Joomla\CMS\Language\Text::_($this->text_prefix . '_NO_ITEM_SELECTED'), JLog::WARNING, 'jerror');
 		}
 		else
 		{
@@ -98,12 +98,12 @@ class JoomcckControllerTfields extends MControllerAdmin
 			else
 			{
 				$ntext = $this->text_prefix . '_N_ITEMS_UPDATED';
-				$this->setMessage(JText::plural($ntext, count($cid)));
+				$this->setMessage(\Joomla\CMS\Language\Text::plural($ntext, count($cid)));
 			}
 		}
 		$extension = $this->input->get('extension');
 		$extensionURL = ($extension) ? '&extension=' . $extension : '';
-		$this->setRedirect(JRoute::_('index.php?option=' . $this->option . '&view=' . $this->view_list . $extensionURL, false));
+		$this->setRedirect(\Joomla\CMS\Router\Route::_('index.php?option=' . $this->option . '&view=' . $this->view_list . $extensionURL, false));
 	}
 
 

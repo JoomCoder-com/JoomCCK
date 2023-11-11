@@ -11,7 +11,7 @@ defined('_JEXEC') or die('Restricted access');
 jimport('joomla.table.table');
 jimport('legacy.access.rules');
 
-class JoomcckTableSection extends JTable
+class JoomcckTableSection extends \Joomla\CMS\Table\Table
 {
 
 	public function __construct(&$_db)
@@ -31,7 +31,7 @@ class JoomcckTableSection extends JTable
 		return $this->title;
 	}
 
-	protected function _getAssetParentId(JTable $table = null, $id = null)
+	protected function _getAssetParentId(\Joomla\CMS\Table\Table $table = null, $id = null)
 	{
 		// Initialise variables.
 		$assetId = null;
@@ -66,10 +66,10 @@ class JoomcckTableSection extends JTable
 
 	public function bind($array, $ignore = '')
 	{
-		$params = JFactory::getApplication()->input->get('params', array(), 'array');
+		$params = \Joomla\CMS\Factory::getApplication()->input->get('params', array(), 'array');
 		if($params)
 		{
-			$registry = new JRegistry();
+			$registry = new \Joomla\Registry\Registry();
 			$registry->loadArray($params);
 			$array['params'] = (string)$registry;
 		}
@@ -94,7 +94,7 @@ class JoomcckTableSection extends JTable
 	{
 		if(trim($this->name) == '')
 		{
-			$this->setError(JText::_('C_MSG_NONAME'));
+			$this->setError(\Joomla\CMS\Language\Text::_('C_MSG_NONAME'));
 			return false;
 		}
 		$this->alias = trim($this->alias);
@@ -106,7 +106,7 @@ class JoomcckTableSection extends JTable
 		$this->alias = \Joomla\CMS\Application\ApplicationHelper::stringURLSafe($this->alias);
 		if(trim(str_replace('-', '', $this->alias)) == '')
 		{
-			$this->alias = JFactory::getDate()->format('Y-m-d-H-i-s');
+			$this->alias = \Joomla\CMS\Factory::getDate()->format('Y-m-d-H-i-s');
 		}
 		return true;
 	}
@@ -122,7 +122,7 @@ class JoomcckTableSection extends JTable
 			$result = $db->loadObjectList();
 			if($result)
 			{
-				$cat_table = JTable::getInstance('CobCategory', 'JoomcckTable');
+				$cat_table = \Joomla\CMS\Table\Table::getInstance('CobCategory', 'JoomcckTable');
 				foreach ($result as $catid)
 				{
 					$cat_table->load($catid->id);

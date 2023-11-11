@@ -8,7 +8,7 @@
  */
 defined('_JEXEC') or die('Restricted access'); ?>
 <?php global $app, $option, $Itemid;?>
-<?php if (JFactory::getApplication()->input->getInt('modal', 0)):?>
+<?php if (\Joomla\CMS\Factory::getApplication()->input->getInt('modal', 0)):?>
 <script type="text/javascript">
 	window.parent.SqueezeBox.close();
 </script>

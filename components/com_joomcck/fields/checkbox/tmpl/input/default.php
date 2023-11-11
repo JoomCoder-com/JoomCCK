@@ -17,7 +17,7 @@ $span = array(1 => 12, 2 => 6, 3 => 4, 4 => 3, 6 => 2);
 ?>
 <?php if ($this->params->get('params.total_limit')): ?>
     <div class="text-muted pb-2">
-        <small><?php echo JText::sprintf('F_OPTIONSLIMIT', $this->params->get('params.total_limit')); ?></small></div>
+        <small><?php echo \Joomla\CMS\Language\Text::sprintf('F_OPTIONSLIMIT', $this->params->get('params.total_limit')); ?></small></div>
 <?php endif; ?>
 
 <div id="elements-list-<?php echo $this->id; ?>">
@@ -78,7 +78,7 @@ $span = array(1 => 12, 2 => 6, 3 => 4, 4 => 3, 6 => 2);
 		                <?php echo $sel; ?>
                     >
                     <label class="btn <?php echo $type == 'buttons' ? 'btn-primary' : 'btn-outline-primary' ?>" for="field_<?php echo $this->id; ?>_<?php echo $key; ?>">
-		                <?php echo JText::_($text); ?>
+		                <?php echo \Joomla\CMS\Language\Text::_($text); ?>
                     </label>
                 </div>
 			<?php else: ?>
@@ -92,7 +92,7 @@ $span = array(1 => 12, 2 => 6, 3 => 4, 4 => 3, 6 => 2);
 						<?php echo $sel; ?>
                     >
                     <label class="form-check-label" for="field_<?php echo $this->id; ?>_<?php echo $key; ?>">
-						<?php echo JText::_($text); ?>
+						<?php echo \Joomla\CMS\Language\Text::_($text); ?>
                     </label>
                 </div>
 			<?php endif; ?>
@@ -128,6 +128,6 @@ $span = array(1 => 12, 2 => 6, 3 => 4, 4 => 3, 6 => 2);
     <div id="variant_<?php echo $this->id; ?>">
         <a id="show_variant_link_<?php echo $this->id; ?>"
            href="javascript:void(0)"
-           onclick="Joomcck.showAddForm(<?php echo $this->id; ?>)"><?php echo JText::_($this->params->get('params.user_value_label', 'Your variant')); ?></a>
+           onclick="Joomcck.showAddForm(<?php echo $this->id; ?>)"><?php echo \Joomla\CMS\Language\Text::_($this->params->get('params.user_value_label', 'Your variant')); ?></a>
     </div></p>
 <?php endif; ?>

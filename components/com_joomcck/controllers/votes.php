@@ -21,7 +21,7 @@ class JoomcckControllerVotes extends MControllerAdmin
 
 		if(!$this->input)
 		{
-			$this->input = JFactory::getApplication()->input;
+			$this->input = \Joomla\CMS\Factory::getApplication()->input;
 		}
 	}
 	public function &getModel($name = 'Vote', $prefix = 'JoomcckModel',$config = array())

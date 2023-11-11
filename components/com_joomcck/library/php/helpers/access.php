@@ -16,7 +16,7 @@ class MECAccess
 {
 	public static function allowCommentPost($type, $item)
 	{
-		$user = JFactory::getUser();
+		$user = \Joomla\CMS\Factory::getUser();
 
 		if(self::allowCommentModer($type, $item))
 		{
@@ -30,7 +30,7 @@ class MECAccess
 	}
 	public static function allowCommentModer($type, $item, $section = NULL)
 	{
-		$user = JFactory::getUser();
+		$user = \Joomla\CMS\Factory::getUser();
 
 
 		if(in_array($type->params->get('comments.comments_access_moderate'), $user->getAuthorisedViewLevels()))
@@ -56,7 +56,7 @@ class MECAccess
 	}
 	public static function allowAccessAuthor($type, $access, $author_id = NULL)
 	{
-		$user = JFactory::getUser();
+		$user = \Joomla\CMS\Factory::getUser();
 		if(in_array($type->params->get($access), $user->getAuthorisedViewLevels())) {
 			return TRUE;
 		}
@@ -78,7 +78,7 @@ class MECAccess
 
 	public static function allowDepost($record, $type, $section)
 	{
-		$user = JFactory::getUser();
+		$user = \Joomla\CMS\Factory::getUser();
 
 		if(!$section->params->get('personalize.personalize')) {
 			return NULL;
@@ -105,7 +105,7 @@ class MECAccess
 
 	public static function allowUserMenu($u, $type, $section)
 	{
-		$user = JFactory::getUser();
+		$user = \Joomla\CMS\Factory::getUser();
 
 		// Is me
 		if($user->get('id') && $user->get('id') == $u->get('id')) {
@@ -170,7 +170,7 @@ class MECAccess
 
 	public static function allowNew($type, $section)
 	{
-		$user = JFactory::getUser();
+		$user = \Joomla\CMS\Factory::getUser();
 
 		if(in_array($type->params->get('properties.item_can_moderate'), $user->getAuthorisedViewLevels())) {
 			return TRUE;
@@ -184,7 +184,7 @@ class MECAccess
 
 	public static function allowRestore($record, $type = NULL, $section = NULL)
 	{
-		$user = JFactory::getUser();
+		$user = \Joomla\CMS\Factory::getUser();
 
 		$type = ItemsStore::getType($record->type_id);
 		$section = ItemsStore::getSection($record->section_id);
@@ -205,7 +205,7 @@ class MECAccess
 
 	public static function allowAuditLog($section)
 	{
-		$user = JFactory::getUser();
+		$user = \Joomla\CMS\Factory::getUser();
 
 		if(self::allowUserModerate($user, $section, 'allow_audit_log')) {
 			return TRUE;
@@ -216,7 +216,7 @@ class MECAccess
 
 	public static function allowCompare($record, $type, $section)
 	{
-		$user = JFactory::getUser();
+		$user = \Joomla\CMS\Factory::getUser();
 
 		if(!$type->params->get('audit.versioning')) {
 			return FALSE;
@@ -234,7 +234,7 @@ class MECAccess
 
 	public static function allowRollback($record, $type, $section)
 	{
-		$user = JFactory::getUser();
+		$user = \Joomla\CMS\Factory::getUser();
 
 		if(!$type->params->get('audit.versioning')) {
 			return FALSE;
@@ -253,7 +253,7 @@ class MECAccess
 
 	public static function allowFeatured($record, $type, $section)
 	{
-		$user = JFactory::getUser();
+		$user = \Joomla\CMS\Factory::getUser();
 
 		if(in_array($type->params->get('properties.item_can_moderate'), $user->getAuthorisedViewLevels())) {
 			return TRUE;
@@ -279,13 +279,13 @@ class MECAccess
 
 	public static function allowExtend($record, $type, $section)
 	{
-		$user = JFactory::getUser();
+		$user = \Joomla\CMS\Factory::getUser();
 
 		if(!$record->extime) {
 			return FALSE;
 		}
 		if(!is_object($record->extime)) {
-			$record->extime = JFactory::getDate($record->extime);
+			$record->extime = \Joomla\CMS\Factory::getDate($record->extime);
 		}
 
 		if($record->extime->toUnix() > time()) {
@@ -309,7 +309,7 @@ class MECAccess
 
 	public static function allowHide($record, $type, $section)
 	{
-		$user = JFactory::getUser();
+		$user = \Joomla\CMS\Factory::getUser();
 
 		if($type->params->get('properties.allow_hide') && $record->user_id && ($record->user_id == $user->get('id'))) {
 			return TRUE;
@@ -320,7 +320,7 @@ class MECAccess
 
 	public static function allowPublish($record, $type, $section)
 	{
-		$user = JFactory::getUser();
+		$user = \Joomla\CMS\Factory::getUser();
 
 		if(in_array($type->params->get('properties.item_can_moderate'), $user->getAuthorisedViewLevels())) {
 			return TRUE;
@@ -334,7 +334,7 @@ class MECAccess
 
 	public static function allowArchive($record, $type, $section)
 	{
-		$user = JFactory::getUser();
+		$user = \Joomla\CMS\Factory::getUser();
 
 		if(in_array($type->params->get('properties.item_can_moderate'), $user->getAuthorisedViewLevels())) {
 			return TRUE;
@@ -351,7 +351,7 @@ class MECAccess
 
 	public static function allowCommentBlock($record, $type, $section)
 	{
-		$user = JFactory::getUser();
+		$user = \Joomla\CMS\Factory::getUser();
 
 		if(!$type->params->get('comments.comments')) {
 			return FALSE;
@@ -372,7 +372,7 @@ class MECAccess
 
 	public static function allowDelete($record, $type, $section)
 	{
-		$user = JFactory::getUser();
+		$user = \Joomla\CMS\Factory::getUser();
 
 		if(in_array($type->params->get('properties.item_can_moderate'), $user->getAuthorisedViewLevels())) {
 			return TRUE;
@@ -389,8 +389,8 @@ class MECAccess
 
 	public static function allowEdit($record, $type, $section)
 	{
-		$user = JFactory::getUser();
-		$app = JFactory::getApplication();
+		$user = \Joomla\CMS\Factory::getUser();
+		$app = \Joomla\CMS\Factory::getApplication();
 
 		if(in_array($type->params->get('properties.item_can_moderate'), $user->getAuthorisedViewLevels())) {
 			return TRUE;
@@ -420,12 +420,12 @@ class MECAccess
 			) {
 				return TRUE;
 			} else {
-				Factory::getApplication()->enqueueMessage(JText::_('E_ERRSCNOPERMEDITEND'),'warning');
+				Factory::getApplication()->enqueueMessage(\Joomla\CMS\Language\Text::_('E_ERRSCNOPERMEDITEND'),'warning');
 				$modal = '';
 				if($app->input->getInt('modal', FALSE)) {
 					$modal = '&tmpl=component&modal=1';
 				}
-				$app->redirect(JRoute::_('index.php?option=com_users&return=' . Url::back() . $modal));
+				$app->redirect(\Joomla\CMS\Router\Route::_('index.php?option=com_users&return=' . Url::back() . $modal));
 			}
 		}
 
@@ -435,7 +435,7 @@ class MECAccess
 
 	public static function allowModerate($record, $type, $section)
 	{
-		$user = JFactory::getUser();
+		$user = \Joomla\CMS\Factory::getUser();
 
 		if(self::allowUserModerate($user, $section, 'allow_moderators')) {
 			return TRUE;
@@ -446,7 +446,7 @@ class MECAccess
 	{
 		if(empty($user))
 		{
-			$user = JFactory::getUser();
+			$user = \Joomla\CMS\Factory::getUser();
 		}
 
 		return self::allowUserModerate($user, $section, 'allow_restricted');
@@ -454,7 +454,7 @@ class MECAccess
 
 	public static function allowCheckin($section)
 	{
-		$user = JFactory::getUser();
+		$user = \Joomla\CMS\Factory::getUser();
 
 		return self::allowUserModerate($user, $section, 'allow_checkin');
 	}
@@ -472,7 +472,7 @@ class MECAccess
 
 	public static function allowUserModerate($user, $section, $type, $category = array())
 	{
-		$params = JComponentHelper::getParams('com_joomcck');
+		$params = \Joomla\CMS\Component\ComponentHelper::getParams('com_joomcck');
 		if($params->get('moderator', -1) == $user->get('id')) {
 			return TRUE;
 		}
@@ -568,7 +568,7 @@ class MECAccess
 			return $out[$key];
 		}
 
-		$db = JFactory::getDbo();
+		$db = \Joomla\CMS\Factory::getDbo();
 		$sql = "SELECT id FROM #__js_res_categories WHERE id NOT IN (" . implode(',', $cats) . ") AND section_id = {$section->id}";
 		$db->setQuery($sql);
 		$cats = $db->loadColumn();
@@ -590,7 +590,7 @@ class MECAccess
 			return $out[$key];
 		}
 
-		$db = JFactory::getDbo();
+		$db = \Joomla\CMS\Factory::getDbo();
 		$query = $db->getQuery(TRUE);
 
 		$query->select("c.id");
@@ -626,7 +626,7 @@ class MECAccess
 			return $out[$cat_id];
 		}
 
-		$db = JFactory::getDbo();
+		$db = \Joomla\CMS\Factory::getDbo();
 
 		$sql = "SELECT level, lft, rgt FROM #__js_res_categories WHERE id = {$cat_id}";
 		$db->setQuery($sql);
@@ -638,7 +638,7 @@ class MECAccess
 
 	public static function isModerator($user_id, $section_id = 0)
 	{
-		$params = JComponentHelper::getParams('com_joomcck');
+		$params = \Joomla\CMS\Component\ComponentHelper::getParams('com_joomcck');
 		if($params->get('moderator', -1) == $user_id) {
 			return TRUE;
 		}
@@ -648,11 +648,11 @@ class MECAccess
 	}
 	public static function isAdmin($user_id = NULL)
 	{
-		$params = JComponentHelper::getParams('com_joomcck');
+		$params = \Joomla\CMS\Component\ComponentHelper::getParams('com_joomcck');
 
 		if(!$user_id)
 		{
-			$user_id = JFactory::getUser()->get('id');
+			$user_id = \Joomla\CMS\Factory::getUser()->get('id');
 		}
 
 		if($params->get('moderator', -1) == $user_id)
@@ -660,7 +660,7 @@ class MECAccess
 			return TRUE;
 		}
 
-		if(in_array($params->get('moderator_group'), JFactory::getUser($user_id)->getAuthorisedViewLevels()))
+		if(in_array($params->get('moderator_group'), \Joomla\CMS\Factory::getUser($user_id)->getAuthorisedViewLevels()))
 		{
 			return TRUE;
 		}
@@ -681,20 +681,20 @@ class MECAccess
 
 		if(!$moderators) {
 			$sql = 'SELECT id, user_id, section_id, params FROM #__js_res_moderators WHERE published = 1';
-			$db = JFactory::getDbo();
+			$db = \Joomla\CMS\Factory::getDbo();
 			$db->setQuery($sql);
 			$result = $db->loadObjectList();
 			foreach($result as $moder) {
 				$moderators[$moder->user_id][$moder->section_id] = json_decode($moder->params, TRUE);
 			}
-			$moderators = new JRegistry($moderators);
+			$moderators = new \Joomla\Registry\Registry($moderators);
 		}
 
 		return $moderators;
 	}
 	public static function getActions($aname = '', $categoryId = 0)
 	{
-		$user = JFactory::getUser ();
+		$user = \Joomla\CMS\Factory::getUser ();
 		$result = new JObject ();
 
 		$assetName = 'com_joomcck';

@@ -41,7 +41,7 @@ class JFormFieldCListautocomplete extends CFormFieldSelectable
 
 
 		// we use here tomselect layout
-		$this->inputvalue = JHtml::_('mrelements.pills', "jform[fields][{$this->id}]", "field_" . $this->id, $this->value, $out, $options,$this->params);
+		$this->inputvalue = \Joomla\CMS\HTML\HTMLHelper::_('mrelements.pills', "jform[fields][{$this->id}]", "field_" . $this->id, $this->value, $out, $options,$this->params);
 
 		return $this->_display_input();
 	}
@@ -51,7 +51,7 @@ class JFormFieldCListautocomplete extends CFormFieldSelectable
 		$js = "\n\t\tvar lac{$this->id} = jQuery('[name^=\"jform\\\\[fields\\\\]\\\\[$this->id\\\\]\"]').val();";
 		if($this->required)
 		{
-			$js .= "\n\t\tif(!lac{$this->id}){hfid.push({$this->id}); isValid = false; errorText.push('".addslashes(JText::sprintf("CFIELDREQUIRED", $this->label))."');}";
+			$js .= "\n\t\tif(!lac{$this->id}){hfid.push({$this->id}); isValid = false; errorText.push('".addslashes(\Joomla\CMS\Language\Text::sprintf("CFIELDREQUIRED", $this->label))."');}";
 		}
 		return $js;
 	}
@@ -60,7 +60,7 @@ class JFormFieldCListautocomplete extends CFormFieldSelectable
 	{
 		if ($this->params->get('params.max_items', 0) && (is_array($value) && count($value) > $this->params->get('params.max_items')))
 		{
-			$this->setError(JText::sprintf("L_ITEMSLIMITMSG", $this->label));
+			$this->setError(\Joomla\CMS\Language\Text::sprintf("L_ITEMSLIMITMSG", $this->label));
 			return FALSE;
 		}
 
@@ -71,8 +71,8 @@ class JFormFieldCListautocomplete extends CFormFieldSelectable
 	{
 		if ($this->params->get('params.sql_source'))
 		{
-			$db = JFactory::getDbo();
-			$user = JFactory::getUser();
+			$db = \Joomla\CMS\Factory::getDbo();
+			$user = \Joomla\CMS\Factory::getUser();
 			$sql = $this->params->get('params.sql', "SELECT 1 AS id, 'No sql query entered' AS text");
 			$sql = str_replace('[USER_ID]', $user->get('id', 0), $sql);
 			$db->setQuery($sql);
@@ -104,7 +104,7 @@ class JFormFieldCListautocomplete extends CFormFieldSelectable
 	{
 		$out = $this->_import_fieldlist($heads, $defaults->get('field.' . $this->id . '.fname'), 'fname');
 		$out .= sprintf('<div><small>%s</small></div><input type="text" name="import[field][%d][separator]" value="%s" class="col-md-2" >',
-			JText::_('CMULTIVALFIELDSEPARATOR'), $this->id, $defaults->get('field.' . $this->id . '.separator', ','));
+			\Joomla\CMS\Language\Text::_('CMULTIVALFIELDSEPARATOR'), $this->id, $defaults->get('field.' . $this->id . '.separator', ','));
 
 		return $out;
 	}

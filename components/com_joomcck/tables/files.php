@@ -13,7 +13,7 @@ jimport('joomla.table.table');
 jimport('legacy.access.rules');
 
 
-class  JoomcckTableFiles extends JTable
+class  JoomcckTableFiles extends \Joomla\CMS\Table\Table
 {
 
 	public function __construct( &$_db ) {
@@ -22,10 +22,10 @@ class  JoomcckTableFiles extends JTable
 
 	public function check()
 	{
-		$user = JFactory::getUser();
+		$user = \Joomla\CMS\Factory::getUser();
 		$this->user_id = $user->get('id');
 
-		$this->ctime = JFactory::getDate()->toSql();
+		$this->ctime = \Joomla\CMS\Factory::getDate()->toSql();
 		$this->ip = $_SERVER['REMOTE_ADDR'];
 
 		return true;

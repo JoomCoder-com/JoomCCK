@@ -16,7 +16,7 @@ class JoomcckModelNotification extends MModelAdmin
 
 	public function getTable($type = 'Notification', $prefix = 'JoomcckTable', $config = array())
 	{
-		return JTable::getInstance($type, $prefix, $config);
+		return \Joomla\CMS\Table\Table::getInstance($type, $prefix, $config);
 	}
 
 	public function getForm($data = array(), $loadData = true)
@@ -31,21 +31,21 @@ class JoomcckModelNotification extends MModelAdmin
 
 	protected function canDelete($record)
 	{
-		$user = JFactory::getUser();
+		$user = \Joomla\CMS\Factory::getUser();
 
 		return $user->authorise('core.delete', 'com_joomcck.comment.'.(int) $record->id);
 	}
 
 	protected function canEditState($record)
 	{
-		$user = JFactory::getUser();
+		$user = \Joomla\CMS\Factory::getUser();
 
 		return $user->authorise('core.edit.state', 'com_joomcck.comment.'.(int) $record->id);
 	}
 
 	public function getSections()
 	{
-		$user = JFactory::getUser();
+		$user = \Joomla\CMS\Factory::getUser();
 		$db = $this->getDbo();
 		$query = $db->getQuery(true);
 		$query->select('DISTINCT(ref_2)');

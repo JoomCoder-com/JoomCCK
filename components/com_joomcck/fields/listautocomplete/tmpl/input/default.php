@@ -9,7 +9,7 @@
 defined('_JEXEC') or die();
 ?>
 <?php if ($this->params->get('params.total_limit')):?>
-	<small><?php echo JText::sprintf('F_OPTIONSLIMIT', $this->params->get('params.total_limit'));?></small>
+	<small><?php echo \Joomla\CMS\Language\Text::sprintf('F_OPTIONSLIMIT', $this->params->get('params.total_limit'));?></small>
 	<br>
 <?php endif; ?>
 

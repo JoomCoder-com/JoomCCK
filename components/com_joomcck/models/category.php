@@ -35,7 +35,7 @@ class JoomcckModelCategory extends MModelAdmin
 		}
 		$category->params = new \Joomla\Registry\Registry($category->params);
 
-		$descr                  = JHtml::_('content.prepare', $category->description);
+		$descr                  = \Joomla\CMS\HTML\HTMLHelper::_('content.prepare', $category->description);
 		$descr                  = preg_split('#<hr\s+id=("|\')system-readmore("|\')\s*\/*>#i', $descr, 2);
 		$category->descr_before = @$descr[0];
 		$category->descr_after  = @$descr[1];
@@ -70,7 +70,7 @@ class JoomcckModelCategory extends MModelAdmin
 		$o         = new stdClass();
 		$o->id     = 0;
 		$o->title  = NULL;
-		$o->params = new JRegistry();
+		$o->params = new \Joomla\Registry\Registry();
 
 		return $o;
 	}

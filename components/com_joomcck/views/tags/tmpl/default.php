@@ -9,7 +9,7 @@
 
 defined('_JEXEC') or die('Restricted access');
 
-JHtml::_('formbehavior.chosen', '.select');
+\Joomla\CMS\HTML\HTMLHelper::_('formbehavior.chosen', '.select');
 
 $listOrder	= $this->state->get('list.ordering');
 $listDirn	= $this->state->get('list.direction');
@@ -51,13 +51,13 @@ $listDirn	= $this->state->get('list.direction');
 
 <?php echo HTMLFormatHelper::layout('navbar'); ?>
 
-<form action="<?php echo JUri::getInstance()->toString(); ?>" method="post" name="adminForm"  id="adminForm">
+<form action="<?php echo \Joomla\CMS\Uri\Uri::getInstance()->toString(); ?>" method="post" name="adminForm"  id="adminForm">
 	<?php echo HTMLFormatHelper::layout('search', $this); ?>
 
 	<div class="page-header">
 		<h1>
-			<img src="<?php echo JUri::root(TRUE); ?>/components/com_joomcck/images/icons/tags.png">
-			<?php echo JText::_('CTAGS'); ?>
+			<img src="<?php echo \Joomla\CMS\Uri\Uri::root(TRUE); ?>/components/com_joomcck/images/icons/tags.png">
+			<?php echo \Joomla\CMS\Language\Text::_('CTAGS'); ?>
 		</h1>
 	</div>
 
@@ -71,16 +71,16 @@ $listDirn	= $this->state->get('list.direction');
 				<input type="checkbox" name="checkall-toggle" value="" onclick="Joomla.checkAll(this)" />
 			</th>
 			<th class="title">
-				<?php echo JHtml::_('grid.sort',  'CTAGNAME', 't.tag', $listDirn, $listOrder); ?>
+				<?php echo \Joomla\CMS\HTML\HTMLHelper::_('grid.sort',  'CTAGNAME', 't.tag', $listDirn, $listOrder); ?>
 			</th>
 			<th width="10%" class="nawrap center">
-				<?php echo JHtml::_('grid.sort',  'CCREATED', 't.ctime', $listDirn, $listOrder); ?>
+				<?php echo \Joomla\CMS\HTML\HTMLHelper::_('grid.sort',  'CCREATED', 't.ctime', $listDirn, $listOrder); ?>
 			</th>
 			<th width="15%" class="nowrap center">
-				<?php echo JHtml::_('grid.sort', 'CLANGUAGE', 't.language', $listDirn, $listOrder); ?>
+				<?php echo \Joomla\CMS\HTML\HTMLHelper::_('grid.sort', 'CLANGUAGE', 't.language', $listDirn, $listOrder); ?>
 			</th>
 			<th width="1%" class="nowrap">
-				<?php echo JHtml::_('grid.sort',  'ID', 't.id', $listDirn, $listOrder); ?>
+				<?php echo \Joomla\CMS\HTML\HTMLHelper::_('grid.sort',  'ID', 't.id', $listDirn, $listOrder); ?>
 			</th>
 		</thead>
 		<?php echo HTMLFormatHelper::layout('pagenav', $this); ?>
@@ -95,7 +95,7 @@ $listDirn	= $this->state->get('list.direction');
 					<a href="javascript: void(0); showForm(<?php echo $row->id; ?>)" id="tag_<?php echo $row->id; ?>"><?php echo $row->tag; ?></a>
 				</td>
 				<td class="nowrap center small">
-					<?php $data = new JDate( $row->ctime ); echo $data->format( JText::_('CDATE1' ) ); ?>
+					<?php $data = new JDate( $row->ctime ); echo $data->format( \Joomla\CMS\Language\Text::_('CDATE1' ) ); ?>
 				</td>
 				<td class="center">
 					<?php echo $row->language; ?>
@@ -112,5 +112,5 @@ $listDirn	= $this->state->get('list.direction');
 	<input type="hidden" name="boxchecked" value="0" />
 	<input type="hidden" name="filter_order" value="<?php echo $listOrder; ?>" />
 	<input type="hidden" name="filter_order_Dir" value="<?php echo $listDirn; ?>" />
-	<?php echo JHtml::_('form.token'); ?>
+	<?php echo \Joomla\CMS\HTML\HTMLHelper::_('form.token'); ?>
 </form>

@@ -11,7 +11,7 @@ use Joomla\CMS\Application\ApplicationHelper;
 
 defined('_JEXEC') or die('Restricted access');
 
-class JoomcckTablePacks extends JTable
+class JoomcckTablePacks extends \Joomla\CMS\Table\Table
 {
 	public function __construct(&$_db)
 	{
@@ -27,10 +27,10 @@ class JoomcckTablePacks extends JTable
 	{
 		if ($this->ctime == '' || $this->ctime == '0000-00-00 00:00:00' || is_null($this->ctime))
 		{
-			$this->ctime = JFactory::getDate()->toSql();
+			$this->ctime = \Joomla\CMS\Factory::getDate()->toSql();
 		}
 		
-		$this->mtime = JFactory::getDate()->toSql();
+		$this->mtime = \Joomla\CMS\Factory::getDate()->toSql();
 		
 		if (!$this->key)
 		{

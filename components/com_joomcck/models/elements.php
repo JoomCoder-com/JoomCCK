@@ -15,9 +15,9 @@ class JoomcckModelElements extends MModelList
 	
 	public function getArt()
 	{
-		$user = JFactory::getUser();
+		$user = \Joomla\CMS\Factory::getUser();
 		
-		$db = JFactory::getDbo();
+		$db = \Joomla\CMS\Factory::getDbo();
 		
 		$query = $db->getQuery(true);
 		$query->select('r.id, r.title, r.alias, r.section_id, 1 as subscribed');

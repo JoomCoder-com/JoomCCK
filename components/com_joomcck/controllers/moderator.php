@@ -19,7 +19,7 @@ class JoomcckControllerModerator extends MControllerForm
 
 		if(!$this->input)
 		{
-			$this->input = JFactory::getApplication()->input;
+			$this->input = \Joomla\CMS\Factory::getApplication()->input;
 		}
 	}
 
@@ -31,7 +31,7 @@ class JoomcckControllerModerator extends MControllerForm
 	protected function allowAdd($data = array())
 	{
 		return TRUE;
-		$user = JFactory::getUser();
+		$user = \Joomla\CMS\Factory::getUser();
 		$allow = $user->authorise('core.create', 'com_joomcck.moderator');
 
 		if($allow === NULL)
@@ -50,7 +50,7 @@ class JoomcckControllerModerator extends MControllerForm
 		$asset = 'com_joomcck.moderator.' . $recordId;
 
 		// Check general edit permission first.
-		if(JFactory::getUser()->authorise('core.edit', $asset))
+		if(\Joomla\CMS\Factory::getUser()->authorise('core.edit', $asset))
 		{
 			return TRUE;
 		}
@@ -125,7 +125,7 @@ class JoomcckControllerModerator extends MControllerForm
 	{
 		$return = $this->input->getBase64('return');
 
-		if(!empty($return) || JUri::isInternal(JoomcckFilter::base64($return)))
+		if(!empty($return) || \Joomla\CMS\Uri\Uri::isInternal(JoomcckFilter::base64($return)))
 		{
 			return JoomcckFilter::base64($return);
 		}
@@ -136,7 +136,7 @@ class JoomcckControllerModerator extends MControllerForm
 	protected function postSaveHook(MModelBase $model, $validData = array())
 	{
 
-		$return =  trim(JFactory::getApplication()->input->getString('return'));
+		$return =  trim(\Joomla\CMS\Factory::getApplication()->input->getString('return'));
 		if($this->input->getCmd('task') == 'save' && $return)
 		{
 			$return = Url::get_back('return');

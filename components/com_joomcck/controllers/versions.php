@@ -18,7 +18,7 @@ class JoomcckControllerVersions extends MControllerAdmin
 		
 		if(!$this->input)
 		{
-			$this->input = JFactory::getApplication()->input;
+			$this->input = \Joomla\CMS\Factory::getApplication()->input;
 		}
         $this->view_list = 'versions&record_id='.$this->input->getInt('record_id', null).'&return='.$this->input->getString('return', null);
 	}

@@ -25,9 +25,9 @@ class JFormFieldCBoolean extends CFormField
 	{
 		$value = $this->value;
 
-		$label = JText::_($this->params->get('params.' . $value));
+		$label = \Joomla\CMS\Language\Text::_($this->params->get('params.' . $value));
 		$icon  = $this->params->get('params.icon_' . $value, ($value == 'true' ? 'tick.png' : 'cross.png'));
-		$icon  = JHtml::image(JURI::root() . 'media/com_joomcck/icons/16/' . $icon, $label, array(
+		$icon  = \Joomla\CMS\HTML\HTMLHelper::image(JURI::root() . 'media/com_joomcck/icons/16/' . $icon, $label, array(
 			'align' => 'absmiddle'
 		));
 
@@ -83,15 +83,15 @@ class JFormFieldCBoolean extends CFormField
 
 	public function onRenderFilter($section, $module = FALSE)
 	{
-		$document = JFactory::getDocument();
+		$document = \Joomla\CMS\Factory::getDocument();
 
-		$label['true']  = JText::_($this->params->get('params.true'));
-		$label['false'] = JText::_($this->params->get('params.false'));
+		$label['true']  = \Joomla\CMS\Language\Text::_($this->params->get('params.true'));
+		$label['false'] = \Joomla\CMS\Language\Text::_($this->params->get('params.false'));
 		$icon           = array();
-		$icon['true']   = JHtml::image(JURI::root() . 'media/com_joomcck/icons/16/' . $this->params->get('params.icon_true', 'tick.png'), $label['true'], array(
+		$icon['true']   = \Joomla\CMS\HTML\HTMLHelper::image(JURI::root() . 'media/com_joomcck/icons/16/' . $this->params->get('params.icon_true', 'tick.png'), $label['true'], array(
 			'align' => 'absmiddle'
 		));
-		$icon['false']  = JHtml::image(JURI::root() . 'media/com_joomcck/icons/16/' . $this->params->get('params.icon_false', 'cross.png'), $label['false'], array(
+		$icon['false']  = \Joomla\CMS\HTML\HTMLHelper::image(JURI::root() . 'media/com_joomcck/icons/16/' . $this->params->get('params.icon_false', 'cross.png'), $label['false'], array(
 			'align' => 'absmiddle'
 		));
 
@@ -111,7 +111,7 @@ class JFormFieldCBoolean extends CFormField
 		$nums = array();
 		if($this->params->get('params.filter_show_number', 1))
 		{
-			$db    = JFactory::getDbo();
+			$db    = \Joomla\CMS\Factory::getDbo();
 			$query = $db->getQuery(TRUE);
 			$q1    = "SELECT count(record_id) as num
 				FROM `#__js_res_record_values`
@@ -176,7 +176,7 @@ class JFormFieldCBoolean extends CFormField
 			$js = "\n\t\tvar bfield_y = jQuery('#boolyes{$this->id}')";
 			$js .= "\n\t\tvar bfield_n = jQuery('#boolno{$this->id}')";
 
-			$js .= "\n\t\tif(!bfield_y.prop('checked') && !bfield_n.prop('checked')){hfid.push({$this->id}); isValid = false; errorText.push('" . addslashes(JText::sprintf('CFIELDREQUIRED', $this->label)) . "');}";
+			$js .= "\n\t\tif(!bfield_y.prop('checked') && !bfield_n.prop('checked')){hfid.push({$this->id}); isValid = false; errorText.push('" . addslashes(\Joomla\CMS\Language\Text::sprintf('CFIELDREQUIRED', $this->label)) . "');}";
 		}
 
 		return $js;
@@ -221,11 +221,11 @@ class JFormFieldCBoolean extends CFormField
 			return;
 		}
 
-		$label = JText::_($this->params->get('params.' . $value));
+		$label = \Joomla\CMS\Language\Text::_($this->params->get('params.' . $value));
 		$icon  = $this->params->get('params.icon_' . $value);
 		if($icon)
 		{
-			$icon = JHtml::image(JURI::root() . 'media/com_joomcck/icons/16/' . $icon, strip_tags($label),
+			$icon = \Joomla\CMS\HTML\HTMLHelper::image(JURI::root() . 'media/com_joomcck/icons/16/' . $icon, strip_tags($label),
 				array(
 					'align' => 'absmiddle'
 				));
@@ -233,7 +233,7 @@ class JFormFieldCBoolean extends CFormField
 
 		if($this->params->get('params.filter_enable'))
 		{
-			$tip = ($this->params->get('params.filter_tip') ? JText::sprintf($this->params->get('params.filter_tip'), '<b>' . $this->label . '</b>', '<b>' . $label . '</b>') : NULL);
+			$tip = ($this->params->get('params.filter_tip') ? \Joomla\CMS\Language\Text::sprintf($this->params->get('params.filter_tip'), '<b>' . $this->label . '</b>', '<b>' . $label . '</b>') : NULL);
 			switch($this->params->get('params.filter_linkage'))
 			{
 				case 1:

@@ -19,9 +19,9 @@ class JoomcckViewRecords extends MViewBase
 
 	function display($tpl = NULL)
 	{
-		$app         = JFactory::getApplication();
-		$doc         = JFactory::getDocument();
-		$user        = JFactory::getUser();
+		$app         = \Joomla\CMS\Factory::getApplication();
+		$doc         = \Joomla\CMS\Factory::getDocument();
+		$user        = \Joomla\CMS\Factory::getUser();
 		$this->model = $this->getModel();
 		$menus       = $app->getMenu();
 
@@ -35,7 +35,7 @@ class JoomcckViewRecords extends MViewBase
 
 		if(!$app->input->getInt('section_id'))
 		{
-			JFactory::getApplication()->enqueueMessage(JText::_('CNOSECTION'),'warning');
+			\Joomla\CMS\Factory::getApplication()->enqueueMessage(\Joomla\CMS\Language\Text::_('CNOSECTION'),'warning');
 
 			return;
 		}
@@ -45,14 +45,14 @@ class JoomcckViewRecords extends MViewBase
 
 		if($section->published == 0)
 		{
-			JFactory::getApplication()->enqueueMessage(JText::_('CERR_SECTIONUNPUB'),'warning');
+			\Joomla\CMS\Factory::getApplication()->enqueueMessage(\Joomla\CMS\Language\Text::_('CERR_SECTIONUNPUB'),'warning');
 			$this->_redirect();
 
 			return;
 		}
 		if(!$section->params->get('general.status', 1))
 		{
-			Factory::getApplication()->enqueueMessage(JText::_($section->params->get('general.status_msg')),'warning');
+			Factory::getApplication()->enqueueMessage(\Joomla\CMS\Language\Text::_($section->params->get('general.status_msg')),'warning');
 			$this->_redirect();
 
 			return;
@@ -60,7 +60,7 @@ class JoomcckViewRecords extends MViewBase
 		if(!in_array($section->access, $user->getAuthorisedViewLevels()) && !MECAccess::allowRestricted($user, $section))
 		{
 
-			Factory::getApplication()->enqueueMessage(JText::_('CERR_NOPAGEACCESS'),'warning');
+			Factory::getApplication()->enqueueMessage(\Joomla\CMS\Language\Text::_('CERR_NOPAGEACCESS'),'warning');
 			$this->_redirect();
 
 			return;
@@ -101,17 +101,17 @@ class JoomcckViewRecords extends MViewBase
 
 			if(!isset($category->id))
 			{
-				throw new Exception( JText::_('CCATNOTFOUND'),404);
+				throw new Exception( \Joomla\CMS\Language\Text::_('CCATNOTFOUND'),404);
 				$category = $this->models['category']->getEmpty();
 			}
 			if($category->id && ($category->section_id != $section->id))
 			{
-				throw new Exception( JText::_('CCATWRONGSECTION'),404);
+				throw new Exception( \Joomla\CMS\Language\Text::_('CCATWRONGSECTION'),404);
 				$category = $this->models['category']->getEmpty();
 			}
 			if(!in_array($category->access, $user->getAuthorisedViewLevels()))
 			{
-				Factory::getApplication()->enqueueMessage(JText::_('CWARNING_NO_ACCESS_CATEGORY'),'warning');
+				Factory::getApplication()->enqueueMessage(\Joomla\CMS\Language\Text::_('CWARNING_NO_ACCESS_CATEGORY'),'warning');
 
 				return;
 			}
@@ -128,11 +128,11 @@ class JoomcckViewRecords extends MViewBase
 		{
 			if($user->get('id'))
 			{
-				$app->redirect(JRoute::_(Url::user($app->input->get('view_what'), $user->get('id')), FALSE));
+				$app->redirect(\Joomla\CMS\Router\Route::_(Url::user($app->input->get('view_what'), $user->get('id')), FALSE));
 			}
 			else
 			{
-				$app->redirect(JRoute::_(Url::records($section, $category), FALSE));
+				$app->redirect(\Joomla\CMS\Router\Route::_(Url::records($section, $category), FALSE));
 			}
 		}
 
@@ -140,14 +140,14 @@ class JoomcckViewRecords extends MViewBase
 			(($user->get('id') && $user->get('id') != $app->input->getInt('user_id')) || !$user->get('id'))
 		)
 		{
-			Factory::getApplication()->enqueueMessage(JText::_('CERR_NOPAGEACCESS'),'warning');
-			$app->redirect(JRoute::_(Url::records($section, $category), FALSE));
+			Factory::getApplication()->enqueueMessage(\Joomla\CMS\Language\Text::_('CERR_NOPAGEACCESS'),'warning');
+			$app->redirect(\Joomla\CMS\Router\Route::_(Url::records($section, $category), FALSE));
 		}
 
 		$itemid = (int)$category->params->get('category_itemid', $section->params->get('general.category_itemid'));
 		if($itemid && $itemid != $app->input->getInt('Itemid'))
 		{
-			$app->redirect(JRoute::_(Url::records($section, ($category->id ? $category : NULL), NULL, NULL, array('start' => $app->input->getInt('start'))), FALSE));
+			$app->redirect(\Joomla\CMS\Router\Route::_(Url::records($section, ($category->id ? $category : NULL), NULL, NULL, array('start' => $app->input->getInt('start'))), FALSE));
 		}
 
 		$this->category = $category;
@@ -174,7 +174,7 @@ class JoomcckViewRecords extends MViewBase
 			$plg = JPluginHelper::importPlugin('mint', 'formatter_' . strtolower($formatter));
 			if($plg)
 			{
-				$dispatcher = JFactory::getApplication();
+				$dispatcher = \Joomla\CMS\Factory::getApplication();
 				$dispatcher->triggerEvent('onListFormat', array(
 					$this
 				));
@@ -183,7 +183,7 @@ class JoomcckViewRecords extends MViewBase
 			}
 			else
 			{
-				JFactory::getApplication()->enqueueMessage(JText::sprintf('CFORMATERNOTFOUND', $formatter),'warning');
+				\Joomla\CMS\Factory::getApplication()->enqueueMessage(\Joomla\CMS\Language\Text::sprintf('CFORMATERNOTFOUND', $formatter),'warning');
 			}
 		}
 
@@ -213,7 +213,7 @@ class JoomcckViewRecords extends MViewBase
 		$this->total_fields_keys = $this->_fieldsSummary($this->items);
 		$this->sortable          = JoomcckModelRecord::$sortable;
 
-		$field_orders = JFactory::getApplication()->getUserState("com_joomcck.records{$section->id}.ordering.vals{$section->id}");
+		$field_orders = \Joomla\CMS\Factory::getApplication()->getUserState("com_joomcck.records{$section->id}.ordering.vals{$section->id}");
 		if(is_array($field_orders))
 		{
 			$this->ordering = implode('^', $field_orders);
@@ -230,7 +230,7 @@ class JoomcckViewRecords extends MViewBase
 
 		$this->total_types = $this->model->getFilterTypes();
 
-		$this->total_types_option[] = JText::_('CSELECTTYPE');
+		$this->total_types_option[] = \Joomla\CMS\Language\Text::_('CSELECTTYPE');
 		foreach($this->total_types as $type_id)
 		{
 			$this->total_types_option[$type_id] = $this->submission_types[$type_id]->name;
@@ -261,12 +261,12 @@ class JoomcckViewRecords extends MViewBase
 
 	private function _redirect()
 	{
-		$app = JFactory::getApplication()->redirect(JRoute::_('index.php?Itemid=' . $this->section->params->get('general.noaccess_redirect')));
+		$app = \Joomla\CMS\Factory::getApplication()->redirect(\Joomla\CMS\Router\Route::_('index.php?Itemid=' . $this->section->params->get('general.noaccess_redirect')));
 	}
 
 	private function _personalize()
 	{
-		$app = JFactory::getApplication();
+		$app = \Joomla\CMS\Factory::getApplication();
 		if(!($this->section->params->get('personalize.personalize') && $app->input->getInt('user_id')))
 		{
 			return;
@@ -315,7 +315,7 @@ class JoomcckViewRecords extends MViewBase
 
 	private function _showCategoryIndex()
 	{
-		$app  = JFactory::getApplication();
+		$app  = \Joomla\CMS\Factory::getApplication();
 		$show = TRUE;
 
 		if(!$this->section->params->get('general.tmpl_category'))
@@ -424,8 +424,8 @@ class JoomcckViewRecords extends MViewBase
 
 	private function _prepareDocument()
 	{
-		$app             = JFactory::getApplication();
-		$doc             = JFactory::getDocument();
+		$app             = \Joomla\CMS\Factory::getApplication();
+		$doc             = \Joomla\CMS\Factory::getDocument();
 		$menus           = $app->getMenu();
 		$menu            = $menus->getActive();
 		$this->appParams = $app->getParams();
@@ -444,7 +444,7 @@ class JoomcckViewRecords extends MViewBase
 				}
 			}
 
-			$doc->addHeadLink(JRoute::_(Url::records($this->section, $this->category) .
+			$doc->addHeadLink(\Joomla\CMS\Router\Route::_(Url::records($this->section, $this->category) .
 				($app->input->get('start') ? '&start=' . $app->input->get('start') : NULL), TRUE, -1), 'canonical');
 		}
 
@@ -522,17 +522,17 @@ class JoomcckViewRecords extends MViewBase
 			{
 				/*
 				 * if(is_array($w->value)) { $u =
-				 * JFactory::getUser($w->value[0]); $w->value =
+				 * \Joomla\CMS\Factory::getUser($w->value[0]); $w->value =
 				 * $u->get($this->section->params->get('personalize.author_mode'));
 				 * }
 				 */
 				$search_strings[] = $w->label . ': ' . $w->text;
 			}
-			$t[] = JText::_('CSEARCHRESULT') . ' (' . implode(',', $search_strings) . ')';
+			$t[] = \Joomla\CMS\Language\Text::_('CSEARCHRESULT') . ' (' . implode(',', $search_strings) . ')';
 		}
 		if($vw = $app->input->getString('view_what', FALSE))
 		{
-			$t[] = JText::_('VW_' . strtoupper($vw));
+			$t[] = \Joomla\CMS\Language\Text::_('VW_' . strtoupper($vw));
 		}
 
 		if($user_id)
@@ -544,7 +544,7 @@ class JoomcckViewRecords extends MViewBase
 		}
 		if($user_id === 0)
 		{
-			$t[] = JText::_('CGUEST');
+			$t[] = \Joomla\CMS\Language\Text::_('CGUEST');
 		}
 		if($ucat_id = $app->input->getInt('ucat_id', FALSE))
 		{
@@ -561,7 +561,7 @@ class JoomcckViewRecords extends MViewBase
 
 		if($this->pagination->pagesCurrent > 1)
 		{
-			$t[] = JText::_('CPAGE').' ' . $this->pagination->pagesCurrent;
+			$t[] = \Joomla\CMS\Language\Text::_('CPAGE').' ' . $this->pagination->pagesCurrent;
 		}
 		$head_title = implode(' - ', $t);
 
@@ -581,11 +581,11 @@ class JoomcckViewRecords extends MViewBase
 		}
 		elseif($app->getCfg('sitename_pagetitles', 0) == 1)
 		{
-			$head_title = JText::sprintf('JPAGETITLE', $app->getCfg('sitename'), $head_title);
+			$head_title = \Joomla\CMS\Language\Text::sprintf('JPAGETITLE', $app->getCfg('sitename'), $head_title);
 		}
 		elseif($app->getCfg('sitename_pagetitles', 0) == 2)
 		{
-			$head_title = JText::sprintf('JPAGETITLE', $head_title, $app->getCfg('sitename'));
+			$head_title = \Joomla\CMS\Language\Text::sprintf('JPAGETITLE', $head_title, $app->getCfg('sitename'));
 		}
 
 		$doc->setTitle(strip_tags($head_title));
@@ -597,7 +597,7 @@ class JoomcckViewRecords extends MViewBase
 
 				if($this->category->id && $markup->get('title.title_category_name'))
 				{
-					$t[] = JText::_($this->category->title);
+					$t[] = \Joomla\CMS\Language\Text::_($this->category->title);
 				}
 				if($markup->get('title.title_section_name') || !$this->category->id)
 				{
@@ -638,8 +638,8 @@ class JoomcckViewRecords extends MViewBase
 			{
 				$path[] = array(
 					'title' => $this->isMe ?
-						JText::_($this->tmpl_params['markup']->get('title.TITLE_1_CREATED')) :
-						JText::sprintf($this->tmpl_params['markup']->get('title.TITLE_0_CREATED'), CCommunityHelper::getName($user_id, $this->section, TRUE)),
+						\Joomla\CMS\Language\Text::_($this->tmpl_params['markup']->get('title.TITLE_1_CREATED')) :
+						\Joomla\CMS\Language\Text::sprintf($this->tmpl_params['markup']->get('title.TITLE_0_CREATED'), CCommunityHelper::getName($user_id, $this->section, TRUE)),
 					'link'  => ''
 				);
 			}
@@ -661,7 +661,7 @@ class JoomcckViewRecords extends MViewBase
 				if($this->category->parent_id == 1)
 				{
 					$path[] = array(
-						'title' => JText::_($this->category->title),
+						'title' => \Joomla\CMS\Language\Text::_($this->category->title),
 						'link'  => ''
 					);
 				}
@@ -672,7 +672,7 @@ class JoomcckViewRecords extends MViewBase
 					{
 						array_unshift($path,
 							array(
-								'title' => JText::_($cat->title),
+								'title' => \Joomla\CMS\Language\Text::_($cat->title),
 								'link'  => Url::records($this->section, $cat)
 							));
 					}
@@ -684,7 +684,7 @@ class JoomcckViewRecords extends MViewBase
 		{
 			$path[] = array(
 				'title' => $this->section->name,
-				'link'  => JRoute::_(Url::records($this->section))
+				'link'  => \Joomla\CMS\Router\Route::_(Url::records($this->section))
 			);
 		}
 		$path = array_reverse($path);
@@ -750,7 +750,7 @@ class JoomcckViewRecords extends MViewBase
 				'type'  => 'application/rss+xml',
 				'title' => 'RSS 2.0'
 			);
-			$doc->addHeadLink(JRoute::_($link . '&type=rss'), 'alternate', 'rel', $attribs);
+			$doc->addHeadLink(\Joomla\CMS\Router\Route::_($link . '&type=rss'), 'alternate', 'rel', $attribs);
 		}
 		if($this->section->params->get('more.feed_link2', 1))
 		{
@@ -759,7 +759,7 @@ class JoomcckViewRecords extends MViewBase
 				'type'  => 'application/atom+xml',
 				'title' => 'Atom 1.0'
 			);
-			$doc->addHeadLink(JRoute::_($link . '&type=atom'), 'alternate', 'rel', $attribs);
+			$doc->addHeadLink(\Joomla\CMS\Router\Route::_($link . '&type=atom'), 'alternate', 'rel', $attribs);
 		}
 
 	}
@@ -797,9 +797,9 @@ class JoomcckViewRecords extends MViewBase
 
 	private function _setupTemplates()
 	{
-		$doc  = JFactory::getDocument();
-		$app  = JFactory::getApplication();
-		$sess = JFactory::getSession();
+		$doc  = \Joomla\CMS\Factory::getDocument();
+		$app  = \Joomla\CMS\Factory::getApplication();
+		$sess = \Joomla\CMS\Factory::getSession();
 
 		$dir = JPATH_ROOT . '/components/com_joomcck/views/records/tmpl/';
 
@@ -835,12 +835,12 @@ class JoomcckViewRecords extends MViewBase
 			$default_template = $default_tmpl . '.' . $tmp_key;
 		}
 
-		$name = JFactory::getApplication()->getUserState("com_joomcck.section{$key}.filter_tpl", $default_template);
+		$name = \Joomla\CMS\Factory::getApplication()->getUserState("com_joomcck.section{$key}.filter_tpl", $default_template);
 
 		$tmpl = explode('.', $name);
 		$tmpl = $tmpl[0];
 
-		if(!JFile::exists("{$dir}default_list_{$tmpl}.php"))
+		if(!\Joomla\CMS\Filesystem\File::exists("{$dir}default_list_{$tmpl}.php"))
 		{
 			$name = 'default';
 		}
@@ -861,7 +861,7 @@ class JoomcckViewRecords extends MViewBase
 			$limit = $app->getUserStateFromRequest('joomcck' . $key . '.limit', 'limit');
 			if(!$limit)
 			{
-				$limit = $lparams->get('tmpl_core.item_limit_default', JFactory::getConfig()->get('list_limit', 20));
+				$limit = $lparams->get('tmpl_core.item_limit_default', \Joomla\CMS\Factory::getConfig()->get('list_limit', 20));
 				$app->setUserState('joomcck' . $key . '.limit', $limit);
 			}
 		}
@@ -881,18 +881,18 @@ class JoomcckViewRecords extends MViewBase
 
 	public function _dataShow(&$query)
 	{
-		$user = JFactory::getUser();
+		$user = \Joomla\CMS\Factory::getUser();
 		if(!in_array($this->section->params->get('general.show_restrict'), $user->getAuthorisedViewLevels()))
 		{
 			$query->where("access IN(" . implode(',', $user->getAuthorisedViewLevels()) . ")");
 		}
 		if(!in_array($this->section->params->get('general.show_future_records'), $user->getAuthorisedViewLevels()))
 		{
-			$query->where("ctime < " . JFactory::getDbo()->quote(JFactory::getDate()->toSql()));
+			$query->where("ctime < " . \Joomla\CMS\Factory::getDbo()->quote(\Joomla\CMS\Factory::getDate()->toSql()));
 		}
 		if(!in_array($this->section->params->get('general.show_past_records'), $user->getAuthorisedViewLevels()))
 		{
-			$query->where("(extime = '0000-00-00 00:00:00' OR ISNULL(extime) OR extime > '" . JFactory::getDate()->toSql() . "')");
+			$query->where("(extime = '0000-00-00 00:00:00' OR ISNULL(extime) OR extime > '" . \Joomla\CMS\Factory::getDate()->toSql() . "')");
 		}
 	}
 
@@ -904,9 +904,9 @@ class JoomcckViewRecords extends MViewBase
 
 	public function _getUsermenuCounts($params, $user_id = NULL)
 	{
-		$db   = JFactory::getDbo();
-		$app  = JFactory::getApplication();
-		$user = JFactory::getUser($user_id);
+		$db   = \Joomla\CMS\Factory::getDbo();
+		$app  = \Joomla\CMS\Factory::getApplication();
+		$user = \Joomla\CMS\Factory::getUser($user_id);
 		$out  = new stdClass();
 
 		$out->created     = 0;
@@ -1004,7 +1004,7 @@ class JoomcckViewRecords extends MViewBase
 			$tmpl = $tmpl[0];
 
 			$path = JPATH_ROOT . '/components/com_joomcck/views/records/tmpl/default_list_' . $tmpl . '.xml';
-			if(!JFile::exists($path))
+			if(!\Joomla\CMS\Filesystem\File::exists($path))
 			{
 
 				\Joomla\CMS\Factory::getApplication()->enqueueMessage('Template XML file not found: ' . $path);

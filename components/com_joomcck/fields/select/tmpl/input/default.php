@@ -10,7 +10,7 @@ defined('_JEXEC') or die();
 
 if($this->params->get('params.chosen', false))
 {
-	JHtml::_('formbehavior.chosen', '.joomcck-chosen-'.$this->id);
+	\Joomla\CMS\HTML\HTMLHelper::_('formbehavior.chosen', '.joomcck-chosen-'.$this->id);
 }
 
 $class = ' class="' . $this->params->get('core.field_class', 'form-control') . ($this->required ? ' required' : NULL) . '"';
@@ -19,7 +19,7 @@ $style = ' style="max-width: ' . $this->params->get('params.width', '450') . 'px
 ?>
 
 <select name="jform[fields][<?php echo $this->id;?>]" class="elements-list joomcck-chosen-<?php echo $this->id; ?>" id="form_field_list_<?php echo $this->id;?>" <?php echo $required . $style;?>>
-	<option value=""><?php echo JText::_($this->params->get('params.'.($this->params->get('params.sql_source') ? "sql_" : null).'label', 'S_CHOOSEVALUE'));?></option>
+	<option value=""><?php echo \Joomla\CMS\Language\Text::_($this->params->get('params.'.($this->params->get('params.sql_source') ? "sql_" : null).'label', 'S_CHOOSEVALUE'));?></option>
 <?php
 $selected = ($this->value ? $this->value : $this->params->get('params.selected'));
 
@@ -52,11 +52,11 @@ foreach($this->values as $key => $line):
 	else
 	{
 		$value = htmlspecialchars($line, ENT_COMPAT, 'UTF-8');
-		$text = JText::_($val[0]);
+		$text = \Joomla\CMS\Language\Text::_($val[0]);
 	}
 
 	?>
-	<option value="<?php echo $value;?>" <?php echo $atr;?>><?php echo JText::_($text);?></option>
+	<option value="<?php echo $value;?>" <?php echo $atr;?>><?php echo \Joomla\CMS\Language\Text::_($text);?></option>
 
 <?php endforeach; ?>
 </select>
@@ -79,7 +79,7 @@ foreach($this->values as $key => $line):
 	<div id="variant_<?php echo $this->id;?>">
 		<a id="show_variant_link_<?php echo $this->id;?>"
 			href="javascript:void(0)" onclick="Joomcck.showAddForm(<?php echo $this->id;?>)">
-            <?php echo JText::_($this->params->get('params.user_value_label', 'Your variant'));?>
+            <?php echo \Joomla\CMS\Language\Text::_($this->params->get('params.user_value_label', 'Your variant'));?>
         </a>
 	</div></p>
 <?php endif;?>

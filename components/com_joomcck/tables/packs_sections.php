@@ -9,7 +9,7 @@
 
 defined('_JEXEC') or die('Restricted access');
 
-class JoomcckTablePacks_sections extends JTable
+class JoomcckTablePacks_sections extends \Joomla\CMS\Table\Table
 {
 	public function __construct(&$_db)
 	{
@@ -22,17 +22,17 @@ class JoomcckTablePacks_sections extends JTable
 	{
 		if (!isset($data['ctime']))
 		{
-			$data['ctime'] = JFactory::getDate()->toSql();
+			$data['ctime'] = \Joomla\CMS\Factory::getDate()->toSql();
 		}
 		
-		$data['mtime'] = JFactory::getDate()->toSql();
+		$data['mtime'] = \Joomla\CMS\Factory::getDate()->toSql();
 		
 		$params = \Joomla\CMS\Factory::getApplication()->input->post->get('jform', [], 'array');
 		$params_types = \Joomla\CMS\Factory::getApplication()->input->post->get('params', [], 'array');
 		if(isset($params['params']))
 		{
 			$result = array_merge($params['params'], $params_types);
-			$registry = new JRegistry();
+			$registry = new \Joomla\Registry\Registry();
 			$registry->loadArray($result);
 			$data['params'] = (string)$registry;
 		}

@@ -13,19 +13,19 @@ class JoomcckViewCategory extends MViewBase
     function display($tpl = null)
     {
         
-        if (! JFactory::getApplication()->input->getInt('section_id'))
+        if (! \Joomla\CMS\Factory::getApplication()->input->getInt('section_id'))
 		{
-			throw new GenericDataException(JText::_('CNOSECTION'), 500);
+			throw new GenericDataException(\Joomla\CMS\Language\Text::_('CNOSECTION'), 500);
 			return FALSE;
 		}
 		
         $model = MModelBase::getInstance('Usercategory', 'JoomcckModel');
         
-		$this->section = ItemsStore::getSection(JFactory::getApplication()->input->getInt('section_id'));
+		$this->section = ItemsStore::getSection(\Joomla\CMS\Factory::getApplication()->input->getInt('section_id'));
         
         $this->item = $model->getItem();
         $this->form = $model->getForm();
-        $this->user = JFactory::getUser();
+        $this->user = \Joomla\CMS\Factory::getUser();
         
         parent::display($tpl);
     }

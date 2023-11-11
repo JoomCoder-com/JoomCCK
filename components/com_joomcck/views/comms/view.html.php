@@ -15,7 +15,7 @@ class JoomcckViewComms extends MViewBase
 	public function display($tpl = NULL)
 	{
 
-		JHtml::_('bootstrap.tooltip');
+		\Joomla\CMS\HTML\HTMLHelper::_('bootstrap.tooltip');
 
 		$uri          = \Joomla\CMS\Uri\Uri::getInstance();
 		$this->action = $uri->toString();
@@ -31,9 +31,9 @@ class JoomcckViewComms extends MViewBase
 
 		}
 
-		$this->addFilter(JText::_('CFILTERRECORDTYPE'), 'filter_type', JHtml::_('select.options', JHtml::_('joomcck.recordtypes'), 'value', 'text', $this->state->get('filter.type')));
-		$this->addFilter(JText::_('CFILTERSECTION'), 'filter_section', JHtml::_('select.options', JHtml::_('joomcck.sections'), 'value', 'text', $this->state->get('filter.section')));
-		$this->addFilter(JText::_('JOPTION_SELECT_PUBLISHED'), 'filter_state', JHtml::_('select.options', JHtml::_('jgrid.publishedOptions',
+		$this->addFilter(\Joomla\CMS\Language\Text::_('CFILTERRECORDTYPE'), 'filter_type', \Joomla\CMS\HTML\HTMLHelper::_('select.options', \Joomla\CMS\HTML\HTMLHelper::_('joomcck.recordtypes'), 'value', 'text', $this->state->get('filter.type')));
+		$this->addFilter(\Joomla\CMS\Language\Text::_('CFILTERSECTION'), 'filter_section', \Joomla\CMS\HTML\HTMLHelper::_('select.options', \Joomla\CMS\HTML\HTMLHelper::_('joomcck.sections'), 'value', 'text', $this->state->get('filter.section')));
+		$this->addFilter(\Joomla\CMS\Language\Text::_('JOPTION_SELECT_PUBLISHED'), 'filter_state', \Joomla\CMS\HTML\HTMLHelper::_('select.options', \Joomla\CMS\HTML\HTMLHelper::_('jgrid.publishedOptions',
 			array(
 				'archived' => 0, 'trash' => 0, 'all' => 0,
 			)), 'value', 'text', $this->state->get('filter.state'), TRUE));
@@ -47,7 +47,7 @@ class JoomcckViewComms extends MViewBase
 	{
 		foreach($items as $key => $item)
 		{
-			if(JFolder::exists(JPATH_ADMINISTRATOR . DIRECTORY_SEPARATOR . 'components/com_juser'))
+			if(\Joomla\CMS\Filesystem\Folder::exists(JPATH_ADMINISTRATOR . DIRECTORY_SEPARATOR . 'components/com_juser'))
 			{
 				$item->user_href = JURI::root(TRUE) . '/administrator/index.php?option=com_juser&view=user&task=edit&cid[]=' . $item->userid;
 			}
@@ -63,7 +63,7 @@ class JoomcckViewComms extends MViewBase
 
 	protected function addToolbar()
 	{
-		JToolbarHelper::title(JText::_('CCOMMENTS'), 'comments.png');
+		JToolbarHelper::title(\Joomla\CMS\Language\Text::_('CCOMMENTS'), 'comments.png');
 		JToolBarHelper::editList('comment.edit');
 		JToolBarHelper::divider();
 		JToolBarHelper::publishList('comments.publish');
@@ -81,12 +81,12 @@ class JoomcckViewComms extends MViewBase
 	public function getSortFields()
 	{
 		return array(
-			'id'          => JText::_('ID'),
-			'a.ctime'     => JText::_('CCREATED'),
-			'r.title'     => JText::_('CRECORD'),
-			'u.username'  => JText::_('CUSER'),
-			'a.published' => JText::_('JSTATUS'),
-			'a.comment'   => JText::_('CSUBJECT')
+			'id'          => \Joomla\CMS\Language\Text::_('ID'),
+			'a.ctime'     => \Joomla\CMS\Language\Text::_('CCREATED'),
+			'r.title'     => \Joomla\CMS\Language\Text::_('CRECORD'),
+			'u.username'  => \Joomla\CMS\Language\Text::_('CUSER'),
+			'a.published' => \Joomla\CMS\Language\Text::_('JSTATUS'),
+			'a.comment'   => \Joomla\CMS\Language\Text::_('CSUBJECT')
 		);
 
 	}

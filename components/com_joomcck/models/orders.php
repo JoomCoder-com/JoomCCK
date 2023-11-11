@@ -29,7 +29,7 @@ class JoomcckModelOrders extends MModelList
 
 	public function getListQuery()
 	{
-		$user = JFactory::getUser();
+		$user = \Joomla\CMS\Factory::getUser();
 
 		//var_dump( MECAccess::allowSales($user));
 
@@ -142,7 +142,7 @@ class JoomcckModelOrders extends MModelList
 
 		if(!$this->isSuperUser())
 		{
-			$user = JFactory::getUser();
+			$user = \Joomla\CMS\Factory::getUser();
 			$w[] = 's.id IN (SELECT section_id FROM #__js_res_sales WHERE saler_id = '.$user->get('id').')';
 
 			if($secmod = MECAccess::allowViewSales($user))
@@ -159,16 +159,16 @@ class JoomcckModelOrders extends MModelList
 
 	public function isSuperUser($uid = NULL)
 	{
-		$app = JFactory::getApplication();
+		$app = \Joomla\CMS\Factory::getApplication();
 		$menu = $app->getMenu();
 		$active = $menu->getActive();
 
 		if(!$uid)
 		{
-			$uid = JFactory::getUser()->get('id');
+			$uid = \Joomla\CMS\Factory::getUser()->get('id');
 		}
 
-		if(!@$active->getParams() instanceof JRegistry)
+		if(!@$active->getParams() instanceof \Joomla\Registry\Registry)
 		{
 			return false;
 		}
@@ -205,7 +205,7 @@ class JoomcckModelOrders extends MModelList
 
 	protected function populateState($ordering = null, $direction = null)
 	{
-		$app = JFactory::getApplication();
+		$app = \Joomla\CMS\Factory::getApplication();
 
 		$search = $app->getUserStateFromRequest($this->context . '.filter.search', 'filter_search');
 		$this->setState('filter.search', $search);

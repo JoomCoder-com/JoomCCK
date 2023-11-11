@@ -18,28 +18,28 @@ $menu = array();
 
 if($this->comment->canedit)
 {
-	$menu[0] = '<a href="#commentmodal" class="dropdown-item" data-bs-toggle="modal" role="button" onclick="Joomcck.editComment('.$this->comment->id.')">' . JText::_('CEDIT') . '</a>';
+	$menu[0] = '<a href="#commentmodal" class="dropdown-item" data-bs-toggle="modal" role="button" onclick="Joomcck.editComment('.$this->comment->id.')">' . \Joomla\CMS\Language\Text::_('CEDIT') . '</a>';
 }
 if($this->comment->candelete)
 {
-	$menu[2] = JHtml::link('javascript:void(0);', JText::_('CDELETE'), array('class' => 'dropdown-item','onclick' => "deleteComment({$this->comment->id})"));
+	$menu[2] = \Joomla\CMS\HTML\HTMLHelper::link('javascript:void(0);', \Joomla\CMS\Language\Text::_('CDELETE'), array('class' => 'dropdown-item','onclick' => "deleteComment({$this->comment->id})"));
 }
 if($this->comment->canmoderate)
 {
     if($this->comment->published)
     {
-	    $menu[3] = JHtml::link('javascript:void(0);', JText::_('CUNPUB'), array('class' => 'dropdown-item','onclick' => "publishComment({$this->comment->id}, 'unpublish')"));
+	    $menu[3] = \Joomla\CMS\HTML\HTMLHelper::link('javascript:void(0);', \Joomla\CMS\Language\Text::_('CUNPUB'), array('class' => 'dropdown-item','onclick' => "publishComment({$this->comment->id}, 'unpublish')"));
     }
     else
     {
-	    $menu[3] = JHtml::link('javascript:void(0);', JText::_('CPUB'), array('class' => 'dropdown-item','onclick' => "publishComment({$this->comment->id}, 'publish')"));
+	    $menu[3] = \Joomla\CMS\HTML\HTMLHelper::link('javascript:void(0);', \Joomla\CMS\Language\Text::_('CPUB'), array('class' => 'dropdown-item','onclick' => "publishComment({$this->comment->id}, 'publish')"));
     }
 }
 
 $replay = '';
 if($params->get('tmpl_core.comments_nested') > $this->comment->level)
 {
-	$replay = '<a class="btn btn-sm btn-primary" href="#commentmodal" data-bs-toggle="modal" role="button" onclick="Joomcck.editComment(0, '.$this->comment->id.', '.$this->item->id.')"><i class="icon-comments-2"></i> ' . JText::_('CREPLY') . '</a>';
+	$replay = '<a class="btn btn-sm btn-primary" href="#commentmodal" data-bs-toggle="modal" role="button" onclick="Joomcck.editComment(0, '.$this->comment->id.', '.$this->item->id.')"><i class="icon-comments-2"></i> ' . \Joomla\CMS\Language\Text::_('CREPLY') . '</a>';
 }
 
 if(!$this->comment->canmoderate && !$this->comment->published)
@@ -78,7 +78,7 @@ if($this->comment->rate > 10) $bc = 'bg-success';
 								<?php echo HTMLFormatHelper::icon('plus.png');?>
 							</a>
 					<?php endif;?>
-					<big class="badge <?php echo $bc; ?>" rel="tooltip" data-bs-title="<?php echo JText::sprintf('TOTAL_VOTES', $this->comment->rate_num);?>" id="comment_rate_value_<?php echo $this->comment->id?>"><?php echo $this->comment->rate?></big>
+					<big class="badge <?php echo $bc; ?>" rel="tooltip" data-bs-title="<?php echo \Joomla\CMS\Language\Text::sprintf('TOTAL_VOTES', $this->comment->rate_num);?>" id="comment_rate_value_<?php echo $this->comment->id?>"><?php echo $this->comment->rate?></big>
 					<?php if($this->comment->canrate):?>
 							<a href="javascript:void(0);" onclick="ajax_rateComment(<?php echo $this->comment->id?>, 0)">
 								<?php echo HTMLFormatHelper::icon('minus.png');?>
@@ -115,33 +115,33 @@ if($this->comment->rate > 10) $bc = 'bg-success';
 
             <div>
 	            <?php if($this->comment->private): ?>
-		            <?php echo HTMLFormatHelper::icon('lock.png', JText::_('CCOMMPRIVATE'));  ?>
+		            <?php echo HTMLFormatHelper::icon('lock.png', \Joomla\CMS\Language\Text::_('CCOMMPRIVATE'));  ?>
 	            <?php endif;?>
 
 	            <?php if(!$this->comment->published): ?>
-		            <?php echo HTMLFormatHelper::icon('minus-circle.png', JText::_('CCOMMPWAIT'));  ?>
+		            <?php echo HTMLFormatHelper::icon('minus-circle.png', \Joomla\CMS\Language\Text::_('CCOMMPWAIT'));  ?>
 	            <?php endif;?>
 
 	            <?php if($params->get('tmpl_core.comments_username')):?>
-                    <small><?php echo JText::sprintf('CWRITTENBY', ($this->comment->name ? $this->comment->name : CCommunityHelper::getName($this->comment->user_id, $this->section))); ?></small>
+                    <small><?php echo \Joomla\CMS\Language\Text::sprintf('CWRITTENBY', ($this->comment->name ? $this->comment->name : CCommunityHelper::getName($this->comment->user_id, $this->section))); ?></small>
 	            <?php endif;?>
 
 	            <?php if($params->get('tmpl_core.comments_date')):?>
-                    <small><?php echo JText::sprintf('CONDATE', JHtml::_('date', $this->comment->created, $params->get('tmpl_core.comments_time_format'))); ?></small>
+                    <small><?php echo \Joomla\CMS\Language\Text::sprintf('CONDATE', \Joomla\CMS\HTML\HTMLHelper::_('date', $this->comment->created, $params->get('tmpl_core.comments_time_format'))); ?></small>
 	            <?php endif;?>
             </div>
 			
 			<?php if(!empty($this->comment->attachment)):?>
-				<b><?php echo JText::_('CATTACH')?></b>:
+				<b><?php echo \Joomla\CMS\Language\Text::_('CATTACH')?></b>:
 				<ul>
 					<?php foreach ($this->comment->attachment as $attach):?>
 						<li>
 							<a href="<?php echo $attach->url?>"><?php echo $attach->realname;?></a>
 							<?php if($this->type->params->get('comments.comments_attachment_hit')):?>
-								<span class="small"><b><?php echo JText::_('CHITS');?>:</b> <span style="color:purple"><?php echo $attach->hits;?></span></span>
+								<span class="small"><b><?php echo \Joomla\CMS\Language\Text::_('CHITS');?>:</b> <span style="color:purple"><?php echo $attach->hits;?></span></span>
 							<?php endif;?>
 							<?php if($this->type->params->get('comments.comments_attachment_size')):?>
-								<span class="small"><b><?php echo JText::_('CSIZE');?>:</b> <span style="color:green"><?php echo HTMLFormatHelper::formatSize($attach->size);?></span></span>
+								<span class="small"><b><?php echo \Joomla\CMS\Language\Text::_('CSIZE');?>:</b> <span style="color:green"><?php echo HTMLFormatHelper::formatSize($attach->size);?></span></span>
 							<?php endif;?>
 						</li> 
 					<?php endforeach;?>

@@ -23,9 +23,9 @@ class JoomcckViewGroups extends MViewBase
 
 	public function display($tpl = null)
 	{
-		JHtml::_('bootstrap.tooltip');
+		\Joomla\CMS\HTML\HTMLHelper::_('bootstrap.tooltip');
 
-		$app = JFactory::getApplication();
+		$app = \Joomla\CMS\Factory::getApplication();
 
 		$this->state = $this->get('State');
 		$this->items = $this->get('Items');
@@ -54,9 +54,9 @@ class JoomcckViewGroups extends MViewBase
 	public function getSortFields()
 	{
 		return array(
-			'a.published' => JText::_('JSTATUS'),
-			'a.id'        => JText::_('ID'),
-			'a.name'      => JText::_('CNAME'),
+			'a.published' => \Joomla\CMS\Language\Text::_('JSTATUS'),
+			'a.id'        => \Joomla\CMS\Language\Text::_('ID'),
+			'a.name'      => \Joomla\CMS\Language\Text::_('CNAME'),
 		);
 	}
 }

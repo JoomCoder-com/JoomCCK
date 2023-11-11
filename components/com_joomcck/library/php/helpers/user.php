@@ -22,7 +22,7 @@ class CUsrHelper
 		{
 			$section = ItemsStore::getSection($section);
 		}
-		$db = JFactory::getDbo();
+		$db = \Joomla\CMS\Factory::getDbo();
 
 		$db->setQuery("SELECT * FROM `#__js_res_user_options`");
 		$list = $db->loadObjectList();
@@ -39,7 +39,7 @@ class CUsrHelper
 
 		if(!isset($out[$user_id]))
 		{
-			$db = JFactory::getDbo();
+			$db = \Joomla\CMS\Factory::getDbo();
 
 			if($section->params->get('events.subscribe_user'))
 			{
@@ -112,7 +112,7 @@ class CUsrHelper
 	
 	/**
 	 *
-	 * @return JRegistry
+	 * @return \Joomla\Registry\Registry
 	 */
 	public static function getOptions($user = null)
 	{
@@ -120,7 +120,7 @@ class CUsrHelper
 
 		if(! $user)
 		{
-			$uid = JFactory::getUser()->get('id');
+			$uid = \Joomla\CMS\Factory::getUser()->get('id');
 		}
 		else
 		{
@@ -135,7 +135,7 @@ class CUsrHelper
 
 			if(!$table->params) $table->params = '[]';
 
-			$out[$uid] = new JRegistry($table->params);
+			$out[$uid] = new \Joomla\Registry\Registry($table->params);
 		}
 
 		return $out[$uid];

@@ -16,15 +16,15 @@ class JFormFieldCStatus extends CFormField
 
 	public function getInput()
 	{
-		$doc = JFactory::getDocument();
-		$app = JFactory::getApplication();
+		$doc = \Joomla\CMS\Factory::getDocument();
+		$app = \Joomla\CMS\Factory::getApplication();
 		if($app->input->get('id', 0))
 		{
 			$this->record = ItemsStore::getRecord($app->input->get('id'));
 		}
 		$params = $this->params;
 
-		$this->user    = JFactory::getUser();
+		$this->user    = \Joomla\CMS\Factory::getUser();
 		$this->default = !$this->value ? $params->get('params.default', 1) : $this->value;
 
 		$statuses    = $color = array();
@@ -37,7 +37,7 @@ class JFormFieldCStatus extends CFormField
 		foreach($statuses as $key => $status)
 		{
 			$val            = explode('^', (string) $status);
-			$statuses[$key] = JText::_($val[0]);
+			$statuses[$key] = \Joomla\CMS\Language\Text::_($val[0]);
 			$color[$key]    = isset($val[1]) ? $val[1] : FALSE;
 		}
 		if($params->get('params.sort') == 2)
@@ -60,7 +60,7 @@ class JFormFieldCStatus extends CFormField
 		$js = '';
 		if($this->required)
 		{
-			$js .= "\n\t\tif($('field_{$this->id}').value == ''){hfid.push({$this->id}); isValid = false; errorText.push('" . addslashes(JText::sprintf('CFIELDREQUIRED', $this->label)) . "');}";
+			$js .= "\n\t\tif($('field_{$this->id}').value == ''){hfid.push({$this->id}); isValid = false; errorText.push('" . addslashes(\Joomla\CMS\Language\Text::sprintf('CFIELDREQUIRED', $this->label)) . "');}";
 		}
 
 		return $js;
@@ -87,7 +87,7 @@ class JFormFieldCStatus extends CFormField
 			$this->_runSql($value, $record);
 		}
 
-		if(!JFactory::getApplication()->input->get('id') && JFactory::getApplication()->input->get('view') == 'form')
+		if(!\Joomla\CMS\Factory::getApplication()->input->get('id') && \Joomla\CMS\Factory::getApplication()->input->get('view') == 'form')
 		{
 			$this->_sendAlert($value, $record);
 		}
@@ -104,7 +104,7 @@ class JFormFieldCStatus extends CFormField
 		{
 			$c = explode('^', $this->params->get('params.status' . $val));
 			ArrayHelper::clean_r($c);
-			$label[] = (isset($c[1]) ? "<SPAN style=\"color:{$c[1]}\">" . JText::_($c[0]) . "</SPAN>" : JText::_($c[0]));
+			$label[] = (isset($c[1]) ? "<SPAN style=\"color:{$c[1]}\">" . \Joomla\CMS\Language\Text::_($c[0]) . "</SPAN>" : \Joomla\CMS\Language\Text::_($c[0]));
 		}
 		$value = implode(', ', $label);
 
@@ -136,7 +136,7 @@ class JFormFieldCStatus extends CFormField
 
 	public function onRenderFilter($section, $module = FALSE)
 	{
-		$db     = JFactory::getDbo();
+		$db     = \Joomla\CMS\Factory::getDbo();
 		$params = $this->params;
 		$query  = $db->getQuery(TRUE);
 
@@ -165,13 +165,13 @@ class JFormFieldCStatus extends CFormField
 	{
 		$value = !$this->value ? $this->params->get('params.default', 1) : $this->value;
 
-		return JText::_($this->params->get('params.status' . $value));
+		return \Joomla\CMS\Language\Text::_($this->params->get('params.status' . $value));
 
 	}
 
 	public function onRenderFull($record, $type, $section)
 	{
-		$user   = JFactory::getUser();
+		$user   = \Joomla\CMS\Factory::getUser();
 		$params = $this->params;
 		if($params->get('params.moderator', 3) && in_array($params->get('params.moderator', 3), $user->getAuthorisedViewLevels()))
 		{
@@ -207,12 +207,12 @@ class JFormFieldCStatus extends CFormField
 			return;
 		}
 		$this->record = $record;
-		$this->user   = JFactory::getUser();
+		$this->user   = \Joomla\CMS\Factory::getUser();
 		$params       = $this->params;
 		$out          = array();
 
 		$val   = explode('^', $params->get('params.status' . $this->value));
-		$value = $value_color = JText::_($val[0]);
+		$value = $value_color = \Joomla\CMS\Language\Text::_($val[0]);
 
 		if(isset($val[1]))
 		{
@@ -222,7 +222,7 @@ class JFormFieldCStatus extends CFormField
 		if($this->params->get('params.filter_enable'))
 		{
 			$tip = ($this->params->get('params.filter_tip') ?
-				JText::sprintf($this->params->get('params.filter_tip'), '<b>' . JText::_($this->label) . '</b>', $value) :
+				\Joomla\CMS\Language\Text::sprintf($this->params->get('params.filter_tip'), '<b>' . \Joomla\CMS\Language\Text::_($this->label) . '</b>', $value) :
 				NULL
 			);
 			switch($this->params->get('params.filter_linkage'))
@@ -244,7 +244,7 @@ class JFormFieldCStatus extends CFormField
 		switch($params->get('params.' . $client, $type_default))
 		{
 			case 1 :
-				$out[] = JHtml::image($path . $params->get('params.icon' . $this->value), strip_tags($value), array(
+				$out[] = \Joomla\CMS\HTML\HTMLHelper::image($path . $params->get('params.icon' . $this->value), strip_tags($value), array(
 					'class' => 'hasTip',
 					'title' => strip_tags($value),
 					'align' => 'absmiddle'
@@ -254,7 +254,7 @@ class JFormFieldCStatus extends CFormField
 				$out[] = $value;
 				break;
 			case 3 :
-				$out[] = JHtml::image($path . $params->get('params.icon' . $this->value), strip_tags($value), array(
+				$out[] = \Joomla\CMS\HTML\HTMLHelper::image($path . $params->get('params.icon' . $this->value), strip_tags($value), array(
 						'class' => 'hasTip',
 						'title' => strip_tags($value),
 						'align' => 'absmiddle'
@@ -278,7 +278,7 @@ class JFormFieldCStatus extends CFormField
 			$status = !empty($status) ? $status : '';
 
 			$val            = explode('^', $status);
-			$statuses[$key] = JText::_($val[0]);
+			$statuses[$key] = \Joomla\CMS\Language\Text::_($val[0]);
 			$color[$key]    = isset($val[1]) ? $val[1] : FALSE;
 		}
 
@@ -306,15 +306,15 @@ class JFormFieldCStatus extends CFormField
 
 		if(!$this->checkStatus($params->get('params.access' . $to)))
 		{
-			$this->setError(JText::_('ST_STATUSNORIGHTS'));
+			$this->setError(\Joomla\CMS\Language\Text::_('ST_STATUSNORIGHTS'));
 
 			return;
 		}
 		$record_id  = $post['record_id'];
 		$section_id = $post['section_id'];
-		$user       = JFactory::getUser();
+		$user       = \Joomla\CMS\Factory::getUser();
 
-		$table_rec = JTable::getInstance('Record', 'JoomcckTable');
+		$table_rec = \Joomla\CMS\Table\Table::getInstance('Record', 'JoomcckTable');
 		$table_rec->load($record_id);
 
 		if(in_array($to, $params->get('params.rsubscribe', array())))
@@ -332,32 +332,32 @@ class JFormFieldCStatus extends CFormField
 
 		if($params->get('core.searchable', 0))
 		{
-			$table_rec->fieldsdata = str_replace(JText::_($this->params->get('params.status' . $this->value)), JText::_($this->params->get('params.status' . $to)), $table_rec->fieldsdata);
+			$table_rec->fieldsdata = str_replace(\Joomla\CMS\Language\Text::_($this->params->get('params.status' . $this->value)), \Joomla\CMS\Language\Text::_($this->params->get('params.status' . $to)), $table_rec->fieldsdata);
 		}
 
 		if($params->get('params.block_comment') == $to)
 		{
-			$rec_params = new JRegistry($table_rec->params);
+			$rec_params = new \Joomla\Registry\Registry($table_rec->params);
 			$rec_params->set('comments.comments_access_post', 0);
 
 			$table_rec->params = $rec_params->toString();
 		}
 		$table_rec->store();
 
-		$table = JTable::getInstance('Record_values', 'JoomcckTable');
+		$table = \Joomla\CMS\Table\Table::getInstance('Record_values', 'JoomcckTable');
 		$table->load(array('field_id' => $this->id, 'record_id' => $record_id, 'section_id' => $section_id));
 		$table->field_value = $to;
 
 		if(!$table->store())
 		{
-			$this->setError(JText::_('ST_STATUSWASCHANGED'));
+			$this->setError(\Joomla\CMS\Language\Text::_('ST_STATUSWASCHANGED'));
 
 			return;
 		}
 
 		if($params->get('params.sql_action_s' . $to, FALSE) && $params->get('params.sql_source_s' . $to))
 		{
-			$db      = JFactory::getDbo();
+			$db      = \Joomla\CMS\Factory::getDbo();
 			$queries = explode(";", $params->get('params.sql_source_s' . $to));
 			foreach($queries AS $sql)
 			{
@@ -397,7 +397,7 @@ class JFormFieldCStatus extends CFormField
 			switch($params->get('params.' . $type, $type_default))
 			{
 				case 1 :
-					$out[] = JHtml::image($path . $params->get('params.icon' . $to), $value, array(
+					$out[] = \Joomla\CMS\HTML\HTMLHelper::image($path . $params->get('params.icon' . $to), $value, array(
 						'class' => 'hasTip',
 						'title' => $value,
 						'align' => 'absmiddle'
@@ -407,7 +407,7 @@ class JFormFieldCStatus extends CFormField
 					$out[] = $status;
 					break;
 				case 3 :
-					$out[] = JHtml::image($path . $params->get('params.icon' . $to), $value, array(
+					$out[] = \Joomla\CMS\HTML\HTMLHelper::image($path . $params->get('params.icon' . $to), $value, array(
 							'class' => 'hasTip',
 							'title' => $value,
 							'align' => 'absmiddle'
@@ -424,7 +424,7 @@ class JFormFieldCStatus extends CFormField
 
 	public function onComment($record, $section)
 	{
-		$user   = JFactory::getUser();
+		$user   = \Joomla\CMS\Factory::getUser();
 		$params = $this->params;
 		if($params->get('params.moderator', 3) && in_array($params->get('params.moderator', 3), $user->getAuthorisedViewLevels()))
 		{
@@ -459,8 +459,8 @@ class JFormFieldCStatus extends CFormField
 			return FALSE;
 		}
 
-		$app  = JFactory::getApplication();
-		$user = JFactory::getUser();
+		$app  = \Joomla\CMS\Factory::getApplication();
+		$user = \Joomla\CMS\Factory::getUser();
 
 		if(in_array($this->params->get('params.moderator', 3), $user->getAuthorisedViewLevels()))
 		{
@@ -514,7 +514,7 @@ class JFormFieldCStatus extends CFormField
 		{
 			return;
 		}
-		$app          = JFactory::getApplication();
+		$app          = \Joomla\CMS\Factory::getApplication();
 		$this->record = $record ? $record : ItemsStore::getRecord($app->input->get('record_id'));
 
 		$send_to = $this->params->get('params.sendto', 1);
@@ -522,7 +522,7 @@ class JFormFieldCStatus extends CFormField
 		switch($send_to)
 		{
 			case 1:
-				$emails[] = JFactory::getUser($this->record->user_id)->get('email');
+				$emails[] = \Joomla\CMS\Factory::getUser($this->record->user_id)->get('email');
 				break;
 			case 2:
 				$fields_model = MModelBase::getInstance('Tfields', 'JoomcckModel');
@@ -547,9 +547,9 @@ class JFormFieldCStatus extends CFormField
 			return;
 		}
 
-		$mailer   = JFactory::getMailer();
-		$from     = JFactory::getConfig()->get('mailfrom');
-		$fromName = JFactory::getConfig()->get('fromname');
+		$mailer   = \Joomla\CMS\Factory::getMailer();
+		$from     = \Joomla\CMS\Factory::getConfig()->get('mailfrom');
+		$fromName = \Joomla\CMS\Factory::getConfig()->get('fromname');
 		$mailer->SetFrom($from, $fromName);
 		foreach($emails as $email)
 		{
@@ -558,12 +558,12 @@ class JFormFieldCStatus extends CFormField
 		$mailer->setSubject($this->params->get('params.email_subject'));
 		$mailer->IsHTML();
 
-		$url  = JUri::root() . Url::record($this->record);
-		$link = JHtml::link($url, $this->record->title);
-		$body = JText::_($body);
+		$url  = \Joomla\CMS\Uri\Uri::root() . Url::record($this->record);
+		$link = \Joomla\CMS\HTML\HTMLHelper::link($url, $this->record->title);
+		$body = \Joomla\CMS\Language\Text::_($body);
 		$body = str_replace(
 			array('[USERNAME]', '[LINK]', '[TITLE]', '[URL]'),
-			array(JFactory::getUser($this->record->user_id)->get('name'), $link, $this->record->title, $url),
+			array(\Joomla\CMS\Factory::getUser($this->record->user_id)->get('name'), $link, $this->record->title, $url),
 			$body
 		);
 		$mailer->setBody($body);
@@ -578,7 +578,7 @@ class JFormFieldCStatus extends CFormField
 
 		$label = $c[0];
 
-		$label = JText::_($label);
+		$label = \Joomla\CMS\Language\Text::_($label);
 
 		if($html && isset($c[1]))
 		{
@@ -600,17 +600,17 @@ class JFormFieldCStatus extends CFormField
 
 	private function _runSql($to, $table_rec, $record_values_id = NULL)
 	{
-		$user = JFactory::getUser();
+		$user = \Joomla\CMS\Factory::getUser();
 		if(!$record_values_id)
 		{
-			$table = JTable::getInstance('Record_values', 'JoomcckTable');
+			$table = \Joomla\CMS\Table\Table::getInstance('Record_values', 'JoomcckTable');
 			$table->load(array('field_id' => $this->id, 'record_id' => $table_rec->id, 'section_id' => $table_rec->section_id));
 			$record_values_id = $table->id;
 		}
 
 		if($this->params->get('params.sql_action_s' . $to, FALSE) && $this->params->get('params.sql_source_s' . $to))
 		{
-			$db      = JFactory::getDbo();
+			$db      = \Joomla\CMS\Factory::getDbo();
 			$queries = explode(";", $this->params->get('params.sql_source_s' . $to));
 			foreach($queries AS $sql)
 			{

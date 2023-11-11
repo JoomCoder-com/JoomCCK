@@ -30,8 +30,8 @@ class JoomcckViewUsers extends MViewBase
 	 */
 	public function display($tpl = NULL)
 	{
-		$app    = JFactory::getApplication();
-		$user   = JFactory::getUser();
+		$app    = \Joomla\CMS\Factory::getApplication();
+		$user   = \Joomla\CMS\Factory::getUser();
 		$access = TRUE;
 		$field = $app->input->get->get('field', FALSE);
 
@@ -72,7 +72,7 @@ class JoomcckViewUsers extends MViewBase
 		if(!$access)
 		{
 
-			Factory::getApplication()->enqueueMessage(JText::_('CERR_NOPAGEACCESS'),'warning');
+			Factory::getApplication()->enqueueMessage(\Joomla\CMS\Language\Text::_('CERR_NOPAGEACCESS'),'warning');
 
 			return;
 		}

@@ -7,7 +7,7 @@
  * @license   GNU/GPL http://www.gnu.org/copyleft/gpl.html
  */
 defined('_JEXEC') or die();
-$document = JFactory::getDocument();
+$document = \Joomla\CMS\Factory::getDocument();
 $document->addStyleSheet(JURI::root().'components/com_joomcck/library/css/style.css');
 ?>
 <style>
@@ -19,9 +19,9 @@ $document->addStyleSheet(JURI::root().'components/com_joomcck/library/css/style.
 	<?php if ($params->get('show_section_name')) :?>
 	<h4>
 		<?php if($category->id) :
-				echo JHtml::link($category->link.'&Itemid='.$Itemid, $category->title).' - ';
+				echo \Joomla\CMS\HTML\HTMLHelper::link($category->link.'&Itemid='.$Itemid, $category->title).' - ';
 			endif; ?>
-		<?php echo JHtml::link($section->link.'&Itemid='.$Itemid, $section->name);?>		
+		<?php echo \Joomla\CMS\HTML\HTMLHelper::link($section->link.'&Itemid='.$Itemid, $section->name);?>		
 	</h4>
 	<?php endif;?>
 	<ul id="tag-list-mod-tagcloud" class="tag_list">

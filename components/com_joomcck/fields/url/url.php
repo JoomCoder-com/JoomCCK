@@ -18,9 +18,9 @@ class JFormFieldCUrl extends CFormField
 
 	public function getInput()
 	{
-		$document = JFactory::getDocument();
+		$document = \Joomla\CMS\Factory::getDocument();
 		$document->addScript(JURI::root(TRUE) . '/components/com_joomcck/fields/url/assets/url.js');
-		$user   = JFactory::getUser();
+		$user   = \Joomla\CMS\Factory::getUser();
 		$params = $this->params;
 
 		$labels = explode("\n", $params->get('params.default_labels', ''));
@@ -43,12 +43,12 @@ class JFormFieldCUrl extends CFormField
 		});';
 		if($this->required)
 		{
-			$js .= "\n\t\tif(vals{$this->id} === 0){hfid.push({$this->id}); isValid = false; errorText.push('" . addslashes(JText::sprintf('CFIELDREQUIRED', $this->label)) . "');}";
+			$js .= "\n\t\tif(vals{$this->id} === 0){hfid.push({$this->id}); isValid = false; errorText.push('" . addslashes(\Joomla\CMS\Language\Text::sprintf('CFIELDREQUIRED', $this->label)) . "');}";
 		}
 		$limit = $this->params->get('params.limit');
 		if($limit > 0)
 		{
-			$js .= "\n\t\tif(vals{$this->id} > {$limit}){hfid.push({$this->id}); isValid = false; errorText.push('" . addslashes(JText::sprintf('U_REACHEDLIMIT', $limit)) . "');}";
+			$js .= "\n\t\tif(vals{$this->id} > {$limit}){hfid.push({$this->id}); isValid = false; errorText.push('" . addslashes(\Joomla\CMS\Language\Text::sprintf('U_REACHEDLIMIT', $limit)) . "');}";
 		}
 
 		return $js;
@@ -69,7 +69,7 @@ class JFormFieldCUrl extends CFormField
 		}
 		if($this->required && !$vals)
 		{
-			$this->setError(JText::sprintf('CFIELDNOTENTERED', $this->label));
+			$this->setError(\Joomla\CMS\Language\Text::sprintf('CFIELDNOTENTERED', $this->label));
 
 			return FALSE;
 		}
@@ -77,7 +77,7 @@ class JFormFieldCUrl extends CFormField
 		{
 			if($limit > 0 && $vals > $limit)
 			{
-				$this->setError(JText::sprintf('U_REACHEDLIMIT', $this->label));
+				$this->setError(\Joomla\CMS\Language\Text::sprintf('U_REACHEDLIMIT', $this->label));
 
 				return FALSE;
 			}
@@ -140,7 +140,7 @@ class JFormFieldCUrl extends CFormField
 
 	public function onFilterWhere($section, &$query)
 	{
-		$this->value = JFactory::getDbo()->escape($this->value);
+		$this->value = \Joomla\CMS\Factory::getDbo()->escape($this->value);
 		$ids         = $this->getIds("SELECT record_id FROM #__js_res_record_values WHERE field_value = '{$this->value}' AND section_id = {$section->id} AND field_key = '{$this->key}'");
 
 		return $ids;
@@ -161,7 +161,7 @@ class JFormFieldCUrl extends CFormField
 		$out = array();
 		foreach($value AS $link)
 		{
-			$link  = new JRegistry($link);
+			$link  = new \Joomla\Registry\Registry($link);
 			$out[] = $link->get('label', $link->get('url'));
 		}
 
@@ -224,7 +224,7 @@ class JFormFieldCUrl extends CFormField
 
 	public function onFilterData($post)
 	{
-		$db = JFactory::getDbo();
+		$db = \Joomla\CMS\Factory::getDbo();
 
 		$q = $this->request->get('q');
 		$q = $db->escape($q);
@@ -266,8 +266,8 @@ class JFormFieldCUrl extends CFormField
 	{
 		$pattern = '<div><small>%s</small></div>%s';
 
-		$out = sprintf($pattern, JText::_('Label'), $this->_import_fieldlist($heads, $defaults->get('field.' . $this->id . '.label'), 'label'));
-		$out .= sprintf($pattern, JText::_('URL'), $this->_import_fieldlist($heads, $defaults->get('field.' . $this->id . '.url'), 'url'));
+		$out = sprintf($pattern, \Joomla\CMS\Language\Text::_('Label'), $this->_import_fieldlist($heads, $defaults->get('field.' . $this->id . '.label'), 'label'));
+		$out .= sprintf($pattern, \Joomla\CMS\Language\Text::_('URL'), $this->_import_fieldlist($heads, $defaults->get('field.' . $this->id . '.url'), 'url'));
 
 		return $out;
 	}
@@ -280,7 +280,7 @@ class JFormFieldCUrl extends CFormField
 		{
 			return;
 		}
-		$record_table = JTable::getInstance('Record', 'JoomcckTable');
+		$record_table = \Joomla\CMS\Table\Table::getInstance('Record', 'JoomcckTable');
 		$record_table->load($record->id);
 
 
@@ -298,7 +298,7 @@ class JFormFieldCUrl extends CFormField
 		}
 		$record_table->fields = json_encode($rfields);
 		$record_table->store();
-		JFactory::getApplication()->redirect($get['url']);
+		\Joomla\CMS\Factory::getApplication()->redirect($get['url']);
 
 	}
 

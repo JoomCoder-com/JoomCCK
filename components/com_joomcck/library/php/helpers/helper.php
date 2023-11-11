@@ -20,11 +20,11 @@ class MapHelper
 			return;
 		}
 
-		$app     = JFactory::getApplication();
-		$map_key = JComponentHelper::getParams('com_joomcck')->get('map_key');
-		list($lang, $region) = explode('-', JFactory::getLanguage()->getTag());
+		$app     = \Joomla\CMS\Factory::getApplication();
+		$map_key = \Joomla\CMS\Component\ComponentHelper::getParams('com_joomcck')->get('map_key');
+		list($lang, $region) = explode('-', \Joomla\CMS\Factory::getLanguage()->getTag());
 
-		JFactory::getDocument()->addScript('//maps.googleapis.com/maps/api/js?language=' . $lang . '&region=' . $region . '&key=' . $map_key . '&sensor=true&libraries=weather,panoramio,visualization,places');
+		\Joomla\CMS\Factory::getDocument()->addScript('//maps.googleapis.com/maps/api/js?language=' . $lang . '&region=' . $region . '&key=' . $map_key . '&sensor=true&libraries=weather,panoramio,visualization,places');
 
 		$loaded = 1;
 	}
@@ -90,7 +90,7 @@ class CSubscriptionsHelper
 
 	static public function auto_subscribe($record, $section_id)
 	{
-		$db = JFactory::getDbo();
+		$db = \Joomla\CMS\Factory::getDbo();
 
 		$db->setQuery('SELECT user_id FROM `#__js_res_user_options_autofollow` WHERE section_id = ' . $section_id);
 		$user_list = $db->loadColumn();
@@ -102,7 +102,7 @@ class CSubscriptionsHelper
 
 	static public function unsubscribe_record($id)
 	{
-		$user = JFactory::getUser();
+		$user = \Joomla\CMS\Factory::getUser();
 
 		if(!$user->get('id'))
 		{
@@ -133,7 +133,7 @@ class CSubscriptionsHelper
 	static public function subscribe_record($id, $user_id = NULL)
 	{
 		$user_id = $user_id ? $user_id : NULL;
-		$user    = JFactory::getUser($user_id);
+		$user    = \Joomla\CMS\Factory::getUser($user_id);
 		if(!$user->get('id'))
 		{
 			return;
@@ -271,18 +271,18 @@ class FieldHelper
 		return sprintf('field^%s^%s', $field->key, $field->params->get('params.ordering_mode', 'digits'));
 	}
 	static public function loadLang($field_name) {
-		$lang = JFactory::getLanguage();
+		$lang = \Joomla\CMS\Factory::getLanguage();
 		$tag  = $lang->getTag();
 		if($tag != 'en-GB')
 		{
-			if(!JFile::exists(JPATH_BASE . "/language/{$tag}/{$tag}.com_joomcck_field_{$field_name}.ini"))
+			if(!\Joomla\CMS\Filesystem\File::exists(JPATH_BASE . "/language/{$tag}/{$tag}.com_joomcck_field_{$field_name}.ini"))
 			{
 				$tag == 'en-GB';
 			}
 		}
 
 		$lang->load('com_joomcck_field_' . $field_name, JPATH_ROOT, $tag, TRUE);
-		if(JFile::exists(JPATH_ROOT.'/components/com_joomcck/fields/'.$field_name.'/language/'.$tag.'.com_joomcck_field_'.$field_name.'.ini')){
+		if(\Joomla\CMS\Filesystem\File::exists(JPATH_ROOT.'/components/com_joomcck/fields/'.$field_name.'/language/'.$tag.'.com_joomcck_field_'.$field_name.'.ini')){
 		} 
 	}
 }
@@ -292,7 +292,7 @@ class MetaHelper
 
 	public static function setMeta($meta = array())
 	{
-		$doc = JFactory::getDocument();
+		$doc = \Joomla\CMS\Factory::getDocument();
 
 		foreach($meta as $key => $value)
 		{
@@ -311,7 +311,7 @@ class WornHelper
 	{
 		$o        = new stdClass();
 		$o->name  = $name;
-		$o->label = JText::_($label);
+		$o->label = \Joomla\CMS\Language\Text::_($label);
 		$o->text  = $text ? $text : $value;
 		$o->value = $value;
 
@@ -331,7 +331,7 @@ class AjaxHelper
 			'error'   => $msg
 		);
 		echo json_encode($out);
-		JFactory::getApplication()->close();
+		\Joomla\CMS\Factory::getApplication()->close();
 	}
 
 	public static function send($result, $key = 'result')
@@ -341,7 +341,7 @@ class AjaxHelper
 			$key      => $result
 		);
 		echo json_encode($out);
-		JFactory::getApplication()->close();
+		\Joomla\CMS\Factory::getApplication()->close();
 	}
 }
 
@@ -450,10 +450,10 @@ class CensorHelper
 		}
 		if(!self::$params)
 		{
-			self::$params    = JComponentHelper::getParams('com_joomcck');
+			self::$params    = \Joomla\CMS\Component\ComponentHelper::getParams('com_joomcck');
 			self::$bad_words = explode(',', self::$params->get('censor_words',''));
 			ArrayHelper::trim_r(self::$bad_words);
-			self::$replacer = JText::_(trim(self::$params->get('censor_replace','')));
+			self::$replacer = \Joomla\CMS\Language\Text::_(trim(self::$params->get('censor_replace','')));
 		}
 		if(!self::$params->get('censor'))
 		{

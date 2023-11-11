@@ -27,7 +27,7 @@ class JoomcckControllerArticle extends MControllerForm
 		
 		if(!$this->input)
 		{
-			$this->input = JFactory::getApplication()->input;
+			$this->input = \Joomla\CMS\Factory::getApplication()->input;
 		}
 	}
 	
@@ -58,7 +58,7 @@ class JoomcckControllerArticle extends MControllerForm
 
 
 		// Initialise variables.
-		$user		= JFactory::getUser();
+		$user		= \Joomla\CMS\Factory::getUser();
 		$categoryId	= \Joomla\Utilities\ArrayHelper::getValue($data, 'catid', $this->input->getInt('catid'), 'int');
 		$allow		= null;
 
@@ -89,7 +89,7 @@ class JoomcckControllerArticle extends MControllerForm
 	{
 		// Initialise variables.
 		$recordId	= (int) isset($data[$key]) ? $data[$key] : 0;
-		$user		= JFactory::getUser();
+		$user		= \Joomla\CMS\Factory::getUser();
 		$userId		= $user->get('id');
 		$asset		= 'com_content.article.'.$recordId;
 
@@ -234,7 +234,7 @@ class JoomcckControllerArticle extends MControllerForm
 
 		$return = $this->input->get('return', null);
 
-		if (empty($return) || !JUri::isInternal(JoomcckFilter::base64($return))) {
+		if (empty($return) || !\Joomla\CMS\Uri\Uri::isInternal(JoomcckFilter::base64($return))) {
 			return JURI::base();
 		}
 		else {
@@ -256,7 +256,7 @@ class JoomcckControllerArticle extends MControllerForm
 		$task = $this->getTask();
 
 		if ($task == 'save') {
-			$this->setRedirect(JRoute::_('index.php?option=com_content&view=category&id='.$validData['catid'], false));
+			$this->setRedirect(\Joomla\CMS\Router\Route::_('index.php?option=com_content&view=category&id='.$validData['catid'], false));
 		}
 	}
 
@@ -295,7 +295,7 @@ class JoomcckControllerArticle extends MControllerForm
 
 
 		// Check for request forgeries.
-		$this->input->checkToken() or jexit(JText::_('JINVALID_TOKEN'));
+		$this->input->checkToken() or jexit(\Joomla\CMS\Language\Text::_('JINVALID_TOKEN'));
 
 		$user_rating = $this->input->getInt('user_rating', -1);
 
@@ -306,9 +306,9 @@ class JoomcckControllerArticle extends MControllerForm
 			$model = $this->getModel($viewName);
 
 			if ($model->storeVote($id, $user_rating)) {
-				$this->setRedirect($url, JText::_('COM_CONTENT_ARTICLE_VOTE_SUCCESS'));
+				$this->setRedirect($url, \Joomla\CMS\Language\Text::_('COM_CONTENT_ARTICLE_VOTE_SUCCESS'));
 			} else {
-				$this->setRedirect($url, JText::_('COM_CONTENT_ARTICLE_VOTE_FAILURE'));
+				$this->setRedirect($url, \Joomla\CMS\Language\Text::_('COM_CONTENT_ARTICLE_VOTE_FAILURE'));
 			}
 		}
 	}

@@ -44,7 +44,7 @@ abstract class MModelForm extends MModelBase
 		// Only attempt to check the row in if it exists.
 		if ($pk)
 		{
-			$user = JFactory::getUser();
+			$user = \Joomla\CMS\Factory::getUser();
 
 			// Get an instance of the row to checkin.
 			$table = $this->getTable();
@@ -64,7 +64,7 @@ abstract class MModelForm extends MModelBase
 			// Check if this is the user having previously checked out the row.
 			if ($table->checked_out > 0 && $table->checked_out != $user->get('id') && !$user->authorise('core.admin', 'com_checkin'))
 			{
-				$this->setError(JText::_('JLIB_APPLICATION_ERROR_CHECKIN_USER_MISMATCH'));
+				$this->setError(\Joomla\CMS\Language\Text::_('JLIB_APPLICATION_ERROR_CHECKIN_USER_MISMATCH'));
 				return false;
 			}
 
@@ -108,12 +108,12 @@ abstract class MModelForm extends MModelBase
 				return true;
 			}
 
-			$user = JFactory::getUser();
+			$user = \Joomla\CMS\Factory::getUser();
 
 			// Check if this is the user having previously checked out the row.
 			if ($table->checked_out > 0 && $table->checked_out != $user->get('id'))
 			{
-				$this->setError(JText::_('JLIB_APPLICATION_ERROR_CHECKOUT_USER_MISMATCH'));
+				$this->setError(\Joomla\CMS\Language\Text::_('JLIB_APPLICATION_ERROR_CHECKOUT_USER_MISMATCH'));
 				return false;
 			}
 
@@ -169,14 +169,14 @@ abstract class MModelForm extends MModelBase
 		}
 
 		// Get the form.
-		JForm::addFormPath(JPATH_COMPONENT . '/models/forms');
-		JForm::addFieldPath(JPATH_COMPONENT . '/models/fields');
-		JForm::addFormPath(JPATH_COMPONENT . '/model/form');
-		JForm::addFieldPath(JPATH_COMPONENT . '/model/field');
+		\Joomla\CMS\Form\Form::addFormPath(JPATH_COMPONENT . '/models/forms');
+		\Joomla\CMS\Form\Form::addFieldPath(JPATH_COMPONENT . '/models/fields');
+		\Joomla\CMS\Form\Form::addFormPath(JPATH_COMPONENT . '/model/form');
+		\Joomla\CMS\Form\Form::addFieldPath(JPATH_COMPONENT . '/model/field');
 
 		try
 		{
-			$form = JForm::getInstance($name, $source, $options, false, $xpath);
+			$form = \Joomla\CMS\Form\Form::getInstance($name, $source, $options, false, $xpath);
 
 			if (isset($options['load_data']) && $options['load_data'])
 			{
@@ -233,7 +233,7 @@ abstract class MModelForm extends MModelBase
 	protected function preprocessData($context, &$data)
 	{
 		// Get the dispatcher and load the users plugins.
-		$dispatcher = JFactory::getApplication();
+		$dispatcher = \Joomla\CMS\Factory::getApplication();
 		JPluginHelper::importPlugin('content');
 
 		// Trigger the data preparation event.
@@ -265,7 +265,7 @@ abstract class MModelForm extends MModelBase
 		JPluginHelper::importPlugin($group);
 
 		// Get the dispatcher.
-		$dispatcher = JFactory::getApplication();
+		$dispatcher = \Joomla\CMS\Factory::getApplication();
 
 		// Trigger the form preparation event.
 		$results = $dispatcher->triggerEvent('onContentPrepareForm', array($form, $data));

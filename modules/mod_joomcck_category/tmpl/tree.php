@@ -9,7 +9,7 @@
  defined('_JEXEC') or die('Restricted access');
 
 
-$document = JFactory::getDocument();
+$document = \Joomla\CMS\Factory::getDocument();
 $document->addScript(JURI::root(TRUE).'/media/com_joomcck/js/jstree/jstree.min.js');
 $document->addStyleSheet(JURI::root(TRUE).'/media/com_joomcck/js/jstree/themes/default/style.min.css');
 
@@ -39,8 +39,8 @@ if(!function_exists('mod_getChildsDef')) { function mod_getChildsDef($category, 
 			?>
             <li class="<?php echo implode(' ', $class);?>">
 
-                <a href="<?php echo JRoute::_($cat->link)?>">
-					<?php echo JText::_($cat->title);?>
+                <a href="<?php echo \Joomla\CMS\Router\Route::_($cat->link)?>">
+					<?php echo \Joomla\CMS\Language\Text::_($cat->title);?>
 					<?php if($params->get('cat_nums', 0)):?>
                         <small class="badge bg-<?php echo $cat->records_num > 0 ? 'success' : 'light text-dark border' ?> ms-2"><?php echo $cat->records_num; ?></small>
 
@@ -63,7 +63,7 @@ if(!function_exists('mod_getChildsDef')) { function mod_getChildsDef($category, 
         <div class="<?php echo $params->get('section_class');?>">
         <ul>
             <li>
-                <a href="<?php echo JRoute::_($section->link);?>">
+                <a href="<?php echo \Joomla\CMS\Router\Route::_($section->link);?>">
 					<?php echo HTMLFormatHelper::icon($section->params->get('personalize.text_icon', 'home.png'));?>
 					<?php echo $section->name;?></a>
             </li>
@@ -71,9 +71,9 @@ if(!function_exists('mod_getChildsDef')) { function mod_getChildsDef($category, 
 			<?php if($category->parent_id > 1): ?>
                 <li>
 					<?php $category = ItemsStore::getCategory($category->parent_id); ?>
-                    <a href="<?php echo JRoute::_(Url::records($section, $category)); ?>">
+                    <a href="<?php echo \Joomla\CMS\Router\Route::_(Url::records($section, $category)); ?>">
 						<?php echo HTMLFormatHelper::icon('arrow-180.png');?>
-						<?php echo  JText::_($category->title); ?></a>
+						<?php echo  \Joomla\CMS\Language\Text::_($category->title); ?></a>
                 </li>
 			<?php endif;?>
         </ul>
@@ -91,8 +91,8 @@ if(!function_exists('mod_getChildsDef')) { function mod_getChildsDef($category, 
                     $class[] = 'parent';
                 ?>
                 <li class="<?php echo implode(' ', $class);?>">
-                    <a href="<?php echo JRoute::_($cat->link)?>">
-                        <?php echo JText::_($cat->title);?>
+                    <a href="<?php echo \Joomla\CMS\Router\Route::_($cat->link)?>">
+                        <?php echo \Joomla\CMS\Language\Text::_($cat->title);?>
                         <?php if($params->get('cat_nums', 0)):?>
                             <small class="badge bg-<?php echo $cat->records_num > 0 ? 'success' : 'light text-dark border' ?> ms-2"><?php echo $cat->records_num; ?></small>
                         <?php endif;?>
@@ -105,13 +105,13 @@ if(!function_exists('mod_getChildsDef')) { function mod_getChildsDef($category, 
             <?php if($params->get('records') && $section->records):
                 foreach ($section->records as $i => $rec):
                     if($params->get('records_limit') && $i == $params->get('records_limit') ):
-                        $rec->title = JText::_('CMORERECORDS');
+                        $rec->title = \Joomla\CMS\Language\Text::_('CMORERECORDS');
                         $rec->id = -1;
                         $rec->url = $section->link;
                     endif;
                     ?>
                     <li <?php echo implode(' ', $class);?>">
-                        <a href="<?php echo JRoute::_($rec->url)?>">
+                        <a href="<?php echo \Joomla\CMS\Router\Route::_($rec->url)?>">
                             <?php echo $rec->title;?>
                         </a>
                     </li>

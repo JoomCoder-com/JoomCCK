@@ -10,11 +10,11 @@
 defined('_JEXEC') or die();
 
 // Include the component HTML helpers.
-JHtml::addIncludePath(JPATH_COMPONENT . '/helpers/html');
-JHtml::_('bootstrap.tooltip');
-JHtml::_('behavior.multiselect');
+\Joomla\CMS\HTML\HTMLHelper::addIncludePath(JPATH_COMPONENT . '/helpers/html');
+\Joomla\CMS\HTML\HTMLHelper::_('bootstrap.tooltip');
+\Joomla\CMS\HTML\HTMLHelper::_('behavior.multiselect');
 
-$user      = JFactory::getUser();
+$user      = \Joomla\CMS\Factory::getUser();
 $userId    = $user->get('id');
 $section   = $this->section_id;
 $listOrder = $this->escape($this->state->get('list.ordering'));
@@ -25,7 +25,7 @@ $saveOrder = ($listOrder == 'ordering' && $listDirn == 'asc');
 if($saveOrder)
 {
 	$saveOrderingUrl = 'index.php?option=com_joomcck&task=usercategories.saveOrderAjax&tmpl=component';
-	JHtml::_('sortablelist.sortable', 'categoryList', 'adminForm', strtolower($listDirn), $saveOrderingUrl, FALSE, TRUE);
+	\Joomla\CMS\HTML\HTMLHelper::_('sortablelist.sortable', 'categoryList', 'adminForm', strtolower($listDirn), $saveOrderingUrl, FALSE, TRUE);
 }
 ?>
 <style>
@@ -47,66 +47,66 @@ if($saveOrder)
 	-->
 </style>
 
-<div class="page-header"><h1><?php echo JText::sprintf('CSECTIONCATS', $this->section->name); ?></h1></div>
-<form action="<?php echo JRoute::_('index.php?option=com_joomcck&view=categories&section_id=' . $section); ?>" method="post" name="adminForm" id="adminForm">
+<div class="page-header"><h1><?php echo \Joomla\CMS\Language\Text::sprintf('CSECTIONCATS', $this->section->name); ?></h1></div>
+<form action="<?php echo \Joomla\CMS\Router\Route::_('index.php?option=com_joomcck&view=categories&section_id=' . $section); ?>" method="post" name="adminForm" id="adminForm">
 	<div class="btn-toolbar clearfix">
 		<div class="float-start">
-			<button type="button" class="btn" onclick="location.href = '<?php echo JRoute::_(Url::user('created', $user->get('id'), $this->section->id)); ?>'">
+			<button type="button" class="btn" onclick="location.href = '<?php echo \Joomla\CMS\Router\Route::_(Url::user('created', $user->get('id'), $this->section->id)); ?>'">
 				<?php echo HTMLFormatHelper::icon('arrow-180.png'); ?>
-				<?php echo JText::_('CBACKTOSECTION'); ?>
+				<?php echo \Joomla\CMS\Language\Text::_('CBACKTOSECTION'); ?>
 			</button>
 		</div>
 		<div class="float-end">
 			<button type="button" style="margin-right: 5px" class="btn btn-primary" onclick="Joomla.submitbutton('usercategory.add');">
 				<?php echo HTMLFormatHelper::icon('plus-button.png'); ?>
-				<?php echo JText::_('CADDNEW'); ?>
+				<?php echo \Joomla\CMS\Language\Text::_('CADDNEW'); ?>
 			</button>
 
 			<?php if(count($this->items)) : ?>
 				<div class="btn-group" style="margin-right: 5px">
-					<button type="button" class="btn" onclick="if (document.adminForm.boxchecked.value==0){alert('<?php echo JText::_('CMAKESELECTION') ?>');}else{Joomla.submitbutton('usercategories.publish');}">
+					<button type="button" class="btn" onclick="if (document.adminForm.boxchecked.value==0){alert('<?php echo \Joomla\CMS\Language\Text::_('CMAKESELECTION') ?>');}else{Joomla.submitbutton('usercategories.publish');}">
 						<?php echo HTMLFormatHelper::icon('tick-button.png'); ?>
-						<?php echo JText::_('CPUB'); ?>
+						<?php echo \Joomla\CMS\Language\Text::_('CPUB'); ?>
 					</button>
-					<button type="button" class="btn" onclick="if (document.adminForm.boxchecked.value==0){alert('<?php echo JText::_('CMAKESELECTION') ?>');}else{Joomla.submitbutton('usercategories.unpublish')};">
+					<button type="button" class="btn" onclick="if (document.adminForm.boxchecked.value==0){alert('<?php echo \Joomla\CMS\Language\Text::_('CMAKESELECTION') ?>');}else{Joomla.submitbutton('usercategories.unpublish')};">
 						<?php echo HTMLFormatHelper::icon('minus-button.png'); ?>
-						<?php echo JText::_('CUNPUB'); ?>
+						<?php echo \Joomla\CMS\Language\Text::_('CUNPUB'); ?>
 					</button>
 				</div>
 				<button type="button" class="btn btn-danger"
-						onclick="if (document.adminForm.boxchecked.value==0){alert('<?php echo JText::_('CMAKESELECTION') ?>');}else{if(!confirm('<?php echo JText::_('CSUREDEL') ?>')){return;}Joomla.submitbutton('usercategories.delete')};">
+						onclick="if (document.adminForm.boxchecked.value==0){alert('<?php echo \Joomla\CMS\Language\Text::_('CMAKESELECTION') ?>');}else{if(!confirm('<?php echo \Joomla\CMS\Language\Text::_('CSUREDEL') ?>')){return;}Joomla.submitbutton('usercategories.delete')};">
 					<?php echo HTMLFormatHelper::icon('cross-button.png'); ?>
-					<?php echo JText::_('CDELETE'); ?>
+					<?php echo \Joomla\CMS\Language\Text::_('CDELETE'); ?>
 				</button>
 			<?php endif; ?>
 		</div>
 	</div>
 	<?php if(!count($this->items)) : ?>
 		<div class="alert">
-			<?php echo JText::_('CADDNEWCATEGORY'); ?>
+			<?php echo \Joomla\CMS\Language\Text::_('CADDNEWCATEGORY'); ?>
 		</div>
 	<?php else: ?>
 		<table class="table" id="categoryList">
 			<thead>
 			<th width="1%">
-				<?php echo JText::_('#'); ?>
+				<?php echo \Joomla\CMS\Language\Text::_('#'); ?>
 			</th>
 			<th width="1%" class="nowrap center hidden-phone">
-				<?php echo JHtml::_('grid.sort', '<i class="icon-menu-2"></i>', 'ordering', $listDirn, $listOrder, NULL, 'asc', 'JGRID_HEADING_ORDERING'); ?>
+				<?php echo \Joomla\CMS\HTML\HTMLHelper::_('grid.sort', '<i class="icon-menu-2"></i>', 'ordering', $listDirn, $listOrder, NULL, 'asc', 'JGRID_HEADING_ORDERING'); ?>
 			</th>
-			<th width="1%"><input type="checkbox" name="checkall-toggle" value="" title="<?php echo JText::_('JGLOBAL_CHECK_ALL'); ?>" onclick="Joomla.checkAll(this)"/></th>
+			<th width="1%"><input type="checkbox" name="checkall-toggle" value="" title="<?php echo \Joomla\CMS\Language\Text::_('JGLOBAL_CHECK_ALL'); ?>" onclick="Joomla.checkAll(this)"/></th>
 			<th width="5%">
-				<?php echo JHtml::_('grid.sort', 'JSTATUS', 'published', $listDirn, $listOrder); ?>
+				<?php echo \Joomla\CMS\HTML\HTMLHelper::_('grid.sort', 'JSTATUS', 'published', $listDirn, $listOrder); ?>
 			</th>
 			<th>
-				<?php echo JHtml::_('grid.sort', 'JGLOBAL_TITLE', 'name', $listDirn, $listOrder); ?>
+				<?php echo \Joomla\CMS\HTML\HTMLHelper::_('grid.sort', 'JGLOBAL_TITLE', 'name', $listDirn, $listOrder); ?>
 			</th>
 
 			<th width="1%">
-				<?php echo JHtml::_('grid.sort', 'JGRID_HEADING_ACCESS', 'access_level', $listDirn, $listOrder); ?>
+				<?php echo \Joomla\CMS\HTML\HTMLHelper::_('grid.sort', 'JGRID_HEADING_ACCESS', 'access_level', $listDirn, $listOrder); ?>
 			</th>
 			<th width="1%" nowrap="nowrap">
-				<?php echo JHtml::_('grid.sort', 'JGRID_HEADING_ID', 'id', $listDirn, $listOrder); ?>
+				<?php echo \Joomla\CMS\HTML\HTMLHelper::_('grid.sort', 'JGRID_HEADING_ID', 'id', $listDirn, $listOrder); ?>
 			</th>
 			</thead>
 			<tbody>
@@ -128,7 +128,7 @@ if($saveOrder)
 							$disableClassName = '';
 							$disabledLabel    = '';
 							if(!$saveOrder) :
-								$disabledLabel    = JText::_('JORDERINGDISABLED');
+								$disabledLabel    = \Joomla\CMS\Language\Text::_('JORDERINGDISABLED');
 								$disableClassName = 'inactive tip-top';
 							endif; ?>
 							<span class="sortable-handler <?php echo $disableClassName ?>" title="<?php echo $disabledLabel ?>" rel="tooltip">
@@ -143,14 +143,14 @@ if($saveOrder)
 						<input type="text" style="display:none" name="order[]" size="5" value="<?php echo $orderkey; ?>"/>
 					</td>
 					<td class="center">
-						<?php echo JHtml::_('grid.id', $i, $item->id); ?>
+						<?php echo \Joomla\CMS\HTML\HTMLHelper::_('grid.id', $i, $item->id); ?>
 					</td>
 					<td class="center">
-						<?php echo JHtml::_('jgrid.published', $item->published, $i, 'usercategories.', $canChange); ?>
+						<?php echo \Joomla\CMS\HTML\HTMLHelper::_('jgrid.published', $item->published, $i, 'usercategories.', $canChange); ?>
 					</td>
 					<td>
 						<?php if($canEdit || $canEditOwn) : ?>
-							<a href="<?php echo JRoute::_('index.php?option=com_joomcck&view=category&id=' . $item->id . '&section_id=' . $section); ?>">
+							<a href="<?php echo \Joomla\CMS\Router\Route::_('index.php?option=com_joomcck&view=category&id=' . $item->id . '&section_id=' . $section); ?>">
 								<?php echo $this->escape($item->name); ?></a>
 						<?php else : ?>
 							<?php echo $this->escape($item->name); ?>
@@ -184,7 +184,7 @@ if($saveOrder)
 	<input type="hidden" name="filter_order" value="<?php echo $listOrder; ?>"/>
 	<input type="hidden" name="filter_order_Dir"
 		   value="<?php echo $listDirn; ?>"/>
-	<?php echo JHtml::_('form.token'); ?>
+	<?php echo \Joomla\CMS\HTML\HTMLHelper::_('form.token'); ?>
 
 
 </form>

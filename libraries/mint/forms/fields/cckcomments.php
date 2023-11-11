@@ -13,20 +13,20 @@ class JFormFieldCckcomments extends JFormMEFieldList
 	{
 		$path = JPATH_ROOT. DIRECTORY_SEPARATOR .'components'. DIRECTORY_SEPARATOR .'com_joomcck'. DIRECTORY_SEPARATOR .'library'. DIRECTORY_SEPARATOR .'php'. DIRECTORY_SEPARATOR .'comments';
 
-		$folders = JFolder::folders($path);
+		$folders = \Joomla\CMS\Filesystem\Folder::folders($path);
 
-		$list[] = JHtml::_('select.option', '', JText::_('CNOCOMMENTS'));
+		$list[] = \Joomla\CMS\HTML\HTMLHelper::_('select.option', '', \Joomla\CMS\Language\Text::_('CNOCOMMENTS'));
 		foreach ($folders as $folder) {
 			$provider = $folder;
 
 			$xmlfile = $path. DIRECTORY_SEPARATOR .$folder. DIRECTORY_SEPARATOR .$folder.'.xml';
-			if(JFile::exists($xmlfile))
+			if(\Joomla\CMS\Filesystem\File::exists($xmlfile))
 			{
 				$xml = simplexml_load_file($xmlfile);
 				$provider = $xml->name;
 			}
 
-			$list[] = JHtml::_('select.option', $folder, $provider);
+			$list[] = \Joomla\CMS\HTML\HTMLHelper::_('select.option', $folder, $provider);
 		}
 
 		return $list;

@@ -29,18 +29,18 @@ defined('_JEXEC') or die();
 		<div class="row">
 			<input type="text" class="col-md-4" name="filter_search" value="<?php echo $this->state->get('filter.search');?>" />
 			<?php
-				$none_opt = array('id' => '', 'name' => JText::_('CSELECTTYPE'));
+				$none_opt = array('id' => '', 'name' => \Joomla\CMS\Language\Text::_('CSELECTTYPE'));
 				array_unshift($this->types, $none_opt);
-				echo JHtml::_('select.genericlist', $this->types, 'filter_type', array( 'class' => 'col-md-3', 'onchange' => 'this.form.submit();'), 'id', 'name', $this->state->get('filter.type'), 'ddd');
+				echo \Joomla\CMS\HTML\HTMLHelper::_('select.genericlist', $this->types, 'filter_type', array( 'class' => 'col-md-3', 'onchange' => 'this.form.submit();'), 'id', 'name', $this->state->get('filter.type'), 'ddd');
 			?>
 		</div>
 	</div>
 
 	<div class="page-header"><h1>
 		<?php if(!$this->all_products):?>
-			<?php echo JText::_('CMYPRODUCTS')?>
+			<?php echo \Joomla\CMS\Language\Text::_('CMYPRODUCTS')?>
 		<?php else:?>
-			<?php echo JText::_('CALLPRODUCTS')?>
+			<?php echo \Joomla\CMS\Language\Text::_('CALLPRODUCTS')?>
 		<?php endif;?>
 		</h1>
 	</div>
@@ -49,14 +49,14 @@ defined('_JEXEC') or die();
 		<thead>
 			<tr>
 				<th width="1%">#</th>
-				<th><?php echo JText::_('CRECORD')?></th>
+				<th><?php echo \Joomla\CMS\Language\Text::_('CRECORD')?></th>
 			</tr>
 		</thead>
 		<tboby>
 			<?php
 			if(empty($this->items))
 			{
-				echo '<tr><td colspan="8">'.JText::_('CNORECFOUNDSEARCH').'</td>';
+				echo '<tr><td colspan="8">'.\Joomla\CMS\Language\Text::_('CNORECFOUNDSEARCH').'</td>';
 			}
 			?>
 			<?php foreach ($this->items as $key => $item):?>
@@ -75,7 +75,7 @@ defined('_JEXEC') or die();
 		<?php echo $this->pagination->getPagesLinks(); ?>
 	</div>
 
-<input type="hidden" name="Itemid" value="<?php echo JFactory::getApplication()->input->getInt('Itemid')?>" />
+<input type="hidden" name="Itemid" value="<?php echo \Joomla\CMS\Factory::getApplication()->input->getInt('Itemid')?>" />
 <input type="hidden" name="layout" value="products" />
 <input type="hidden" name="view" value="elements" />
 <input type="hidden" name="option" value="com_joomcck" />

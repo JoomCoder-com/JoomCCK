@@ -20,7 +20,7 @@ class JoomcckModelGroup extends MModelAdmin
 
 	public function populateState($ordering = null, $direction = null)
 	{
-		$app = JFactory::getApplication('administrator');
+		$app = \Joomla\CMS\Factory::getApplication('administrator');
 
 		$type = $app->getUserStateFromRequest('com_joomcck.groups.groups.type', 'type_id', 0, 'int');
 		$this->setState('groups.type', $type);
@@ -33,14 +33,14 @@ class JoomcckModelGroup extends MModelAdmin
 
 	public function getTable($type = 'Group', $prefix = 'JoomcckTable', $config = array())
 	{
-		$db = JFactory::getDbo();
+		$db = \Joomla\CMS\Factory::getDbo();
 		include_once __DIR__.'/../tables/group.php';
 		return new JoomcckTableGroup($db);
 	}
 
 	public function getForm($data = array(), $loadData = true)
 	{
-		$app = JFactory::getApplication();
+		$app = \Joomla\CMS\Factory::getApplication();
 
 		$form = $this->loadForm('com_joomcck.group', 'group', array('control' => 'jform', 'load_data' => $loadData));
 		if(empty($form))
@@ -52,7 +52,7 @@ class JoomcckModelGroup extends MModelAdmin
 
 	protected function loadFormData()
 	{
-		$data = JFactory::getApplication()->getUserState('com_joomcck.edit.group.data', array());
+		$data = \Joomla\CMS\Factory::getApplication()->getUserState('com_joomcck.edit.group.data', array());
 
 		if(empty($data))
 		{
@@ -70,14 +70,14 @@ class JoomcckModelGroup extends MModelAdmin
 
 	protected function canDelete($record)
 	{
-		$user = JFactory::getUser();
+		$user = \Joomla\CMS\Factory::getUser();
 
 		return $user->authorise('core.delete', 'com_joomcck.group.'.(int) $record->id);
 	}
 
 	protected function canEditState($record)
 	{
-		$user = JFactory::getUser();
+		$user = \Joomla\CMS\Factory::getUser();
 
 		return $user->authorise('core.edit.state', 'com_joomcck.group.'.(int) $record->id);
 	}

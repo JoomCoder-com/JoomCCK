@@ -34,9 +34,9 @@ class JoomcckViewForm extends MViewBase
 	public function display($tpl = NULL)
 	{
 		// Initialise variables.
-		$app = JFactory::getApplication();
-		$doc = JFactory::getDocument();
-		$user = JFactory::getUser();
+		$app = \Joomla\CMS\Factory::getApplication();
+		$doc = \Joomla\CMS\Factory::getDocument();
+		$user = \Joomla\CMS\Factory::getUser();
 
 		MetaHelper::setMeta(array('robots' => 'NOINDEX, NOFOLLOW'));
 
@@ -46,7 +46,7 @@ class JoomcckViewForm extends MViewBase
 
 		if (!$app->input->getInt('section_id', @$this->item->section_id))
 		{
-			throw new GenericDataException(JText::_('CNOSECTION'), 500);
+			throw new GenericDataException(\Joomla\CMS\Language\Text::_('CNOSECTION'), 500);
 		}
 
 		if (!$app->input->getInt('type_id'))
@@ -72,11 +72,11 @@ class JoomcckViewForm extends MViewBase
 		{
 			if(!$user->get('id'))
 			{
-				Factory::getApplication()->enqueueMessage( JText::_('CPLEASELOGIN'),'warning');
+				Factory::getApplication()->enqueueMessage( \Joomla\CMS\Language\Text::_('CPLEASELOGIN'),'warning');
 			}
 			else
 			{
-				Factory::getApplication()->enqueueMessage( JText::_('CNOPERMISION'),'warning');
+				Factory::getApplication()->enqueueMessage( \Joomla\CMS\Language\Text::_('CNOPERMISION'),'warning');
 
 			}
 			$modal = '';
@@ -84,19 +84,19 @@ class JoomcckViewForm extends MViewBase
 			{
 				$modal = '&tmpl=component&modal=1';
 			}
-			$app->redirect(JRoute::_('index.php?option=com_users&return='.Url::back().$modal));
+			$app->redirect(\Joomla\CMS\Router\Route::_('index.php?option=com_users&return='.Url::back().$modal));
 			return FALSE;
 		}
 
 		if (empty($section->id))
 		{
-			Factory::getApplication()->enqueueMessage( JText::_('CNOSECTION'),'warning');
+			Factory::getApplication()->enqueueMessage( \Joomla\CMS\Language\Text::_('CNOSECTION'),'warning');
 			return FALSE;
 		}
 
 		if (!in_array($this->type->id, $section->params->get('general.type')))
 		{
-			Factory::getApplication()->enqueueMessage( JText::_('CERRTYPENOTALLOWED'),'warning');
+			Factory::getApplication()->enqueueMessage( \Joomla\CMS\Language\Text::_('CERRTYPENOTALLOWED'),'warning');
 			return FALSE;
 		}
 
@@ -106,7 +106,7 @@ class JoomcckViewForm extends MViewBase
 
 		if($parent_id && !empty($this->parent) && $this->parent->published == 0)
 		{
-			Factory::getApplication()->enqueueMessage( JText::_('CNOPERMISION'),'warning');
+			Factory::getApplication()->enqueueMessage( \Joomla\CMS\Language\Text::_('CNOPERMISION'),'warning');
 			return FALSE;
 		}
 
@@ -115,13 +115,13 @@ class JoomcckViewForm extends MViewBase
 			if($section->params->get('general.record_submit_limit') > 0 &&
 				($model_section->countUserRecords($section->id) >= $section->params->get('general.record_submit_limit')))
 			{
-				Factory::getApplication()->enqueueMessage(JText::sprintf('CMAXSUBMITREACHED', $section->params->get('general.record_submit_limit')),'warning');
+				Factory::getApplication()->enqueueMessage(\Joomla\CMS\Language\Text::sprintf('CMAXSUBMITREACHED', $section->params->get('general.record_submit_limit')),'warning');
 				return FALSE;
 			}
 			if($this->type->params->get('submission.limits_total') > 0 &&
 				($model_section->countUserRecords($section->id, $this->type->id) >= $this->type->params->get('submission.limits_total')))
 			{
-				Factory::getApplication()->enqueueMessage(JText::sprintf('CMAXSUBMITREACHED', $this->type->params->get('submission.limits_total')),'warning');
+				Factory::getApplication()->enqueueMessage(\Joomla\CMS\Language\Text::sprintf('CMAXSUBMITREACHED', $this->type->params->get('submission.limits_total')),'warning');
 				return FALSE;
 			}
 
@@ -137,38 +137,38 @@ class JoomcckViewForm extends MViewBase
 				($model_section->countUserRecords($section->id, $this->type->id, TRUE) >= $this->type->params->get('submission.limits_day')))
 			{
 
-				Factory::getApplication()->enqueueMessage(JText::sprintf('CMAXSUBMITREACHEDDAY', $this->type->params->get('submission.limits_day')),'warning');
+				Factory::getApplication()->enqueueMessage(\Joomla\CMS\Language\Text::sprintf('CMAXSUBMITREACHEDDAY', $this->type->params->get('submission.limits_day')),'warning');
 				return FALSE;
 			}
 
             if(!empty($this->parent))
             {
                 $parent_type = ItemsStore::getType($this->parent->type_id);
-				$this->parent->params = new JRegistry($this->parent->params);
+				$this->parent->params = new \Joomla\Registry\Registry($this->parent->params);
 
 				if($this->parent->params->get('comments.comments_access_post', 1) === 0)
 				{
-					$app->enqueueMessage(JText::_($parent_type->params->get('comments.comdisabled')), 'warning');
+					$app->enqueueMessage(\Joomla\CMS\Language\Text::_($parent_type->params->get('comments.comdisabled')), 'warning');
 					$app->redirect(Url::record($this->parent, $parent_type));
 					return FALSE;
 				}
 
 				if(($parent_type->params->get('comments.author_add', 1) == 0) && ($user->get('id') == $this->parent->user_id) && $this->parent->user_id)
 				{
-					$app->enqueueMessage(JText::_($parent_type->params->get('comments.author_add_msg')), 'warning');
+					$app->enqueueMessage(\Joomla\CMS\Language\Text::_($parent_type->params->get('comments.author_add_msg')), 'warning');
 					$app->redirect(Url::record($this->parent, $parent_type));
 					return FALSE;
 				}
 
 				if($parent_type->params->get('comments.button_access') == -1 && $this->parent->user_id && $user->get('id') != $this->parent->user_id) {
-					$app->enqueueMessage(JText::_('CNOPERMISION'));
+					$app->enqueueMessage(\Joomla\CMS\Language\Text::_('CNOPERMISION'));
 					$app->redirect(Url::record($this->parent, $parent_type));
 					return FALSE;
 				}
 
                 if($parent_type->params->get('comments.user_limit') > 0)
                 {
-                    $db = JFactory::getDbo();
+                    $db = \Joomla\CMS\Factory::getDbo();
                     $query = $db->getQuery(true);
 
                     $query->select("COUNT(id)");
@@ -184,7 +184,7 @@ class JoomcckViewForm extends MViewBase
 
                     if($num >= $parent_type->params->get('comments.user_limit'))
                     {
-                        $app->enqueueMessage(JText::_($parent_type->params->get('comments.limit_msg')), 'warning');
+                        $app->enqueueMessage(\Joomla\CMS\Language\Text::_($parent_type->params->get('comments.limit_msg')), 'warning');
                         if($parent_type->params->get('comments.user_limit') == 1 && $parent_type->params->get('comments.limit_redirect') == 1)
                         {
                             $query = $db->getQuery(true);
@@ -259,7 +259,7 @@ class JoomcckViewForm extends MViewBase
 		$this->tmpl_params = $tmpl_params;
 
 		$file = dirname(__FILE__) . DIRECTORY_SEPARATOR . 'tmpl/default_form_' . $this->params->get('properties.tmpl_articleform', 'default') . '.css';
-		if (JFile::exists($file))
+		if (\Joomla\CMS\Filesystem\File::exists($file))
 		{
 			$doc->addStyleSheet(JURI::root(TRUE) . '/components/com_joomcck/views/form/tmpl/default_form_' . $this->params->get('properties.tmpl_articleform', 'default') . '.css');
 		}
@@ -287,7 +287,7 @@ class JoomcckViewForm extends MViewBase
 			$this->form->setFieldAttribute($field, 'label', $tmpl_params->get('tmpl_core.form_label_' . $field));
 			if($field == 'langs' && empty($this->item->id))
 			{
-				$this->form->setValue($field, NULL, JFactory::getLanguage()->getTag());
+				$this->form->setValue($field, NULL, \Joomla\CMS\Factory::getLanguage()->getTag());
 			}
 			if ($tmpl_params->get('tmpl_core.form_show_' . $field) == 1 || $tmpl_params->get('submission.submission') == $tmpl_params->get('tmpl_core.form_show_' . $field))
 			{
@@ -324,19 +324,19 @@ class JoomcckViewForm extends MViewBase
 
 		if (in_array($tmpl_params->get('tmpl_core.form_show_meta_descr'), $user->getAuthorisedViewLevels()))
 		{
-			$this->meta[JText::_('CMETADESCR')] = 'meta_descr';
+			$this->meta[\Joomla\CMS\Language\Text::_('CMETADESCR')] = 'meta_descr';
 		}
 		if (in_array($tmpl_params->get('tmpl_core.form_show_meta_key'), $user->getAuthorisedViewLevels()))
 		{
-			$this->meta[JText::_('CMETAKEY')] = 'meta_key';
+			$this->meta[\Joomla\CMS\Language\Text::_('CMETAKEY')] = 'meta_key';
 		}
 		if (in_array($tmpl_params->get('tmpl_core.form_show_meta_robots'), $user->getAuthorisedViewLevels()))
 		{
-			$this->meta[JText::_('CROBOTS')] = 'meta_index';
+			$this->meta[\Joomla\CMS\Language\Text::_('CROBOTS')] = 'meta_index';
 		}
 		if (in_array($tmpl_params->get('tmpl_core.form_show_alias'), $user->getAuthorisedViewLevels()))
 		{
-			$this->meta[JText::_('CALIASES')] = 'alias';
+			$this->meta[\Joomla\CMS\Language\Text::_('CALIASES')] = 'alias';
 		}
 
 		$this->user = $user;
@@ -356,17 +356,17 @@ class JoomcckViewForm extends MViewBase
 		{
 			if (is_array($section->params))
 			{
-				$params = new JRegistry();
+				$params = new \Joomla\Registry\Registry();
 				$params->loadArray($section->params);
 				$section->params = $params;
 			}
 			$this->section = $section;
-			$catsel_params = new JRegistry();
+			$catsel_params = new \Joomla\Registry\Registry();
 
 			// echo  $tmpl_params->get('tmpl_params.tmpl_categoryselect');
 			$this->catsel_params = CTmpl::prepareTemplate('default_category_', 'tmpl_params.tmpl_category', $tmpl_params);
 
-			$data = JFactory::getApplication()->getUserState('com_joomcck.edit.form.data', array());
+			$data = \Joomla\CMS\Factory::getApplication()->getUserState('com_joomcck.edit.form.data', array());
 
 			if (empty($data['category']) && !empty($this->item->categories))
 			{
@@ -444,20 +444,20 @@ class JoomcckViewForm extends MViewBase
 
 	private function _prepareDocument()
 	{
-		$app	= JFactory::getApplication();
-		$doc = JFactory::getDocument();
+		$app	= \Joomla\CMS\Factory::getApplication();
+		$doc = \Joomla\CMS\Factory::getDocument();
 		$menus	= $app->getMenu();
 		$pathway = $app->getPathway();
 		$pathway = $app->getPathway();
 		$title = FALSE;
 		if($this->item->id)
 		{
-			$title = JText::sprintf('CTEDIT', $this->escape($this->type->name), $this->item->title);
+			$title = \Joomla\CMS\Language\Text::sprintf('CTEDIT', $this->escape($this->type->name), $this->item->title);
 			$pathway->addItem($title);
 		}
 		else
 		{
-			$title = JText::sprintf('CTSUBMIT', $this->escape($this->type->name));
+			$title = \Joomla\CMS\Language\Text::sprintf('CTSUBMIT', $this->escape($this->type->name));
 			$pathway->addItem($title);
 		}
 
@@ -479,10 +479,10 @@ class JoomcckViewForm extends MViewBase
 			$title = $app->getCfg('sitename');
 		}
 		elseif ($app->getCfg('sitename_pagetitles', 0) == 1) {
-			$title = JText::sprintf('JPAGETITLE', $app->getCfg('sitename'), $title);
+			$title = \Joomla\CMS\Language\Text::sprintf('JPAGETITLE', $app->getCfg('sitename'), $title);
 		}
 		elseif ($app->getCfg('sitename_pagetitles', 0) == 2) {
-			$title = JText::sprintf('JPAGETITLE', $title, $app->getCfg('sitename'));
+			$title = \Joomla\CMS\Language\Text::sprintf('JPAGETITLE', $title, $app->getCfg('sitename'));
 		}
 		if (empty($title)) {
 			$title = $this->item->title;
@@ -507,8 +507,8 @@ class JoomcckViewForm extends MViewBase
 	private function _prepareFields($fields, $section, $item)
 	{
 		$sorted = $fg = array();
-		$user = JFactory::getUser();
-		$app = JFactory::getApplication();
+		$user = \Joomla\CMS\Factory::getUser();
+		$app = \Joomla\CMS\Factory::getApplication();
 
 		foreach($fields as $key => $field)
 		{
@@ -529,7 +529,7 @@ class JoomcckViewForm extends MViewBase
 					}
 					else
 					{
-						$msg = JText::_($field->params->get('core.field_submit_message'));
+						$msg = \Joomla\CMS\Language\Text::_($field->params->get('core.field_submit_message'));
 					}
 				}
 			}
@@ -543,7 +543,7 @@ class JoomcckViewForm extends MViewBase
 					}
 					else
 					{
-						$msg = JText::_($field->params->get('core.field_edit_message'));
+						$msg = \Joomla\CMS\Language\Text::_($field->params->get('core.field_edit_message'));
 					}
 				}
 			}
@@ -554,10 +554,10 @@ class JoomcckViewForm extends MViewBase
 				if ($field->params->get('emerald.field_'.$method.'_subscription') && trim($field->params->get('emerald.field_'.$method.'_subscription_msg')))
 				{
 					//$plans = CEmeraldHelper::getSubscrList($field->params->get('emerald.field_'.$method.'_subscription'), $field->params->get('emerald.subscr_idd', $app->input->getInt('Itemid')));
-					$msg = JText::_($field->params->get('emerald.field_'.$method.'_subscription_msg'));
+					$msg = \Joomla\CMS\Language\Text::_($field->params->get('emerald.field_'.$method.'_subscription_msg'));
 					$msg .= sprintf('<br><small><a href="%s">%s</a></small>',
 						EmeraldApi::getLink('list', true, $field->params->get('emerald.field_'.$method.'_subscription')),
-						JText::_('CSUBSCRIBENOW')
+						\Joomla\CMS\Language\Text::_('CSUBSCRIBENOW')
 					);
 				}
 				else continue;

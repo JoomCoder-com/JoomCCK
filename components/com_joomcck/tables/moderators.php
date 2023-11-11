@@ -12,7 +12,7 @@ defined('_JEXEC') or die('Restricted access');
 // Include library dependencies
 jimport('joomla.filter.input');
 
-class JoomcckTableModerators extends JTable
+class JoomcckTableModerators extends \Joomla\CMS\Table\Table
 {
 	public function __construct(&$_db)
 	{
@@ -37,7 +37,7 @@ class JoomcckTableModerators extends JTable
 			@$array['params']['category'] = @$array['category'];
 		}
 		if (isset($array['params']) && is_array($array['params'])) {
-			$registry = new JRegistry;
+			$registry = new \Joomla\Registry\Registry;
 			$registry->loadArray($array['params']);
 			$array['params'] = $registry->toString();
 		}
@@ -49,13 +49,13 @@ class JoomcckTableModerators extends JTable
 	{
 		if ($this->ctime == '' || $this->ctime == '0000-00-00 00:00:00' || is_null($this->ctime))
 		{
-			$this->ctime = JFactory::getDate()->toSql();
+			$this->ctime = \Joomla\CMS\Factory::getDate()->toSql();
 		}
 		$this->_db->setQuery("SELECT id FROM #__js_res_moderators WHERE user_id = {$this->user_id} AND section_id = {$this->section_id}");
 		$result = $this->_db->loadResult();
 		if(!$this->id && $result)
 		{
-			$this->setError(JText::sprintf('C_MSG_MODEREXISTS', $result));
+			$this->setError(\Joomla\CMS\Language\Text::sprintf('C_MSG_MODEREXISTS', $result));
 			return false;
 		}
 		

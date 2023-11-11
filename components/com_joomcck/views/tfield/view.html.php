@@ -26,19 +26,19 @@ class JoomcckViewTField extends MViewBase
 	 */
 	public function display($tpl = null)
 	{
-		$app = JFactory::getApplication();
+		$app = \Joomla\CMS\Factory::getApplication();
 		$this->state = $this->get('State');
 		$this->item = $this->get('Item');
 		$type_id = $this->item->type_id ? $this->item->type_id  : $this->state->get('filter.type');
 
 		$this->form = $this->get('Form');
-		$this->user = JFactory::getUser();
+		$this->user = \Joomla\CMS\Factory::getUser();
 		$params = new JForm('params', array('control' => 'params'));
 		$params->loadFile(JPATH_COMPONENT. '/models/forms/params.field.xml');
 		$this->params_form = $params;
 
-		$this->params_groups = array('core' => JText::_('FS_GENERAL'),
-		'emerald' => JText::_('FS_EMERALDINTEGRATE')
+		$this->params_groups = array('core' => \Joomla\CMS\Language\Text::_('FS_GENERAL'),
+		'emerald' => \Joomla\CMS\Language\Text::_('FS_EMERALDINTEGRATE')
 		);
 
 		if($this->item->id)

@@ -15,7 +15,7 @@ jimport('legacy.access.rules');
 /**
  * @package JCommerce
  */
-class JoomcckTableAudit_log extends JTable
+class JoomcckTableAudit_log extends \Joomla\CMS\Table\Table
 {
 
 	public function __construct(&$_db)

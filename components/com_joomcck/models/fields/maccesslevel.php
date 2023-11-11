@@ -55,7 +55,7 @@ class JFormFieldMaccessLevel extends JFormFieldList
 		// Get the field options.
 		$options = $this->getOptions();
 
-		$out[] = JHtml::_('access.level', $this->name, $this->value, $attr, $options, $this->id);
+		$out[] = \Joomla\CMS\HTML\HTMLHelper::_('access.level', $this->name, $this->value, $attr, $options, $this->id);
 		if($condition != '{}') {
 
 			$out[] = "

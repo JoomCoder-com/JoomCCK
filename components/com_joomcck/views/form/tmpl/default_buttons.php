@@ -15,28 +15,28 @@ defined('_JEXEC') or die();
 		<?php if(in_array($this->tmpl_params->get('tmpl_core.form_show_apply_button'), $this->user->getAuthorisedViewLevels())):?>
 			<button type="button" class="btn-submit btn btn-primary btn-large" onclick="Joomla.submitbutton('form.apply');">
 				<?php echo HTMLFormatHelper::icon('tick-button.png');  ?>
-				<?php echo JText::_($this->tmpl_params->get('tmpl_core.form_label_apply_button')) ?>
+				<?php echo \Joomla\CMS\Language\Text::_($this->tmpl_params->get('tmpl_core.form_label_apply_button')) ?>
 			</button>
 		<?php endif; ?>
 
 		<?php if(in_array($this->tmpl_params->get('tmpl_core.form_show_save_button'), $this->user->getAuthorisedViewLevels())):?>
 			<button type="button" class="btn-submit btn btn-light border" onclick="Joomla.submitbutton('form.save');">
 				<?php echo HTMLFormatHelper::icon('disk.png');  ?>
-				<?php echo JText::_($this->tmpl_params->get('tmpl_core.form_label_save_button')) ?>
+				<?php echo \Joomla\CMS\Language\Text::_($this->tmpl_params->get('tmpl_core.form_label_save_button')) ?>
 			</button>
 		<?php endif; ?>
 
 		<?php if(in_array($this->tmpl_params->get('tmpl_core.form_show_savenew_button'), $this->user->getAuthorisedViewLevels())):?>
 			<button type="button" class="btn-submit btn btn-light border" onclick="Joomla.submitbutton('form.save2new');">
 				<?php echo HTMLFormatHelper::icon('disk-plus.png');  ?>
-				<?php echo JText::_($this->tmpl_params->get('tmpl_core.form_label_savenew_button')) ?>
+				<?php echo \Joomla\CMS\Language\Text::_($this->tmpl_params->get('tmpl_core.form_label_savenew_button')) ?>
 			</button>
 		<?php endif; ?>
 
 		<?php if(in_array($this->tmpl_params->get('tmpl_core.form_show_savecopy_button'), $this->user->getAuthorisedViewLevels()) && $this->item->id):?>
 			<button type="button" class="btn-submit btn btn-light border" onclick="Joomla.submitbutton('form.save2copy');">
 				<?php echo HTMLFormatHelper::icon('disks.png');  ?>
-				<?php echo JText::_($this->tmpl_params->get('tmpl_core.form_label_savecopy_button')) ?>
+				<?php echo \Joomla\CMS\Language\Text::_($this->tmpl_params->get('tmpl_core.form_label_savecopy_button')) ?>
 			</button>
 		<?php endif; ?>
 	<?php endif; ?>
@@ -44,7 +44,7 @@ defined('_JEXEC') or die();
 	<?php if(in_array($this->tmpl_params->get('tmpl_core.form_show_close_button'), $this->user->getAuthorisedViewLevels())):?>
 		<button type="button" class="btn-submit btn btn-light border" onclick="Joomla.submitbutton('form.cancel');">
 			<?php echo HTMLFormatHelper::icon('cross-button.png');  ?>
-			<?php echo JText::_($this->tmpl_params->get('tmpl_core.form_label_close_button')) ?>
+			<?php echo \Joomla\CMS\Language\Text::_($this->tmpl_params->get('tmpl_core.form_label_close_button')) ?>
 		</button>
 	<?php endif; ?>
 </div>

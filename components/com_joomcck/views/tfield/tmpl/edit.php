@@ -24,7 +24,7 @@ $wa->useScript('keepalive')
 			Joomla.submitform(task, document.getElementById('adminForm'));
 		}
 		else {
-			alert('<?php echo $this->escape(JText::_('JGLOBAL_VALIDATION_FORM_FAILED'));?>');
+			alert('<?php echo $this->escape(\Joomla\CMS\Language\Text::_('JGLOBAL_VALIDATION_FORM_FAILED'));?>');
 		}
 	}
 	function ajax_load_sub_params(sel, dir) {
@@ -80,17 +80,17 @@ $wa->useScript('keepalive')
 	}
 </script>
 
-<form action="<?php echo JUri::getInstance()->toString(); ?>" method="post" name="adminForm" id="adminForm" class="form-horizontal">
+<form action="<?php echo \Joomla\CMS\Uri\Uri::getInstance()->toString(); ?>" method="post" name="adminForm" id="adminForm" class="form-horizontal">
 	<?php echo HTMLFormatHelper::layout('item', $this); ?>
 
 	<div class="page-geader">
-		<h1><?php echo empty($this->item->id) ? JText::_('CNEWFIELD') : JText::sprintf('CEDITFIELDS', $this->item->label); ?></h1>
+		<h1><?php echo empty($this->item->id) ? \Joomla\CMS\Language\Text::_('CNEWFIELD') : \Joomla\CMS\Language\Text::sprintf('CEDITFIELDS', $this->item->label); ?></h1>
 	</div>
 
     <div id="joomcckContainer">
 
 	    <?php echo HTMLHelper::_('uitab.startTabSet', 'myTab', ['active' => 'page-main', 'recall' => true, 'breakpoint' => 768]); ?>
-	    <?php echo HTMLHelper::_('uitab.addTab', 'myTab', 'page-main', JText::_('FS_FORM')); ?>
+	    <?php echo HTMLHelper::_('uitab.addTab', 'myTab', 'page-main', \Joomla\CMS\Language\Text::_('FS_FORM')); ?>
             <div class="float-start" style="max-width: 450px; margin-right: 20px;">
                 <div class="control-group">
                     <div class="control-label"><?php echo $this->form->getLabel('id'); ?></div>
@@ -124,7 +124,7 @@ $wa->useScript('keepalive')
 
             </div>
             <div class="float-start" style="max-width: 450px">
-                <legend><?php echo JText::_('CFIELDPARAMS'); ?></legend>
+                <legend><?php echo \Joomla\CMS\Language\Text::_('CFIELDPARAMS'); ?></legend>
                 <div id="additional-form">
                     <?php echo @$this->parameters?>
                 </div>
@@ -133,8 +133,8 @@ $wa->useScript('keepalive')
             </div>
 	    <?php echo HTMLHelper::_('uitab.endTab'); ?>
 
-	    <?php echo HTMLHelper::_('uitab.addTab', 'myTab', 'page-emerald', JText::_('FS_EMERALD')); ?>
-            <p class="lead"><?php echo JText::_('FS_EMERALDINTEGRATE')?>
+	    <?php echo HTMLHelper::_('uitab.addTab', 'myTab', 'page-emerald', \Joomla\CMS\Language\Text::_('FS_EMERALD')); ?>
+            <p class="lead"><?php echo \Joomla\CMS\Language\Text::_('FS_EMERALDINTEGRATE')?>
             <div class="float-start" style="max-width: 500px; margin-right: 20px;">
                 <?php echo MFormHelper::renderFieldset($this->params_form, 'sp', $this->item->params, 'emerald'); ?>
                 <?php echo MFormHelper::renderFieldset($this->params_form, 'sp4', $this->item->params, 'emerald'); ?>
@@ -149,8 +149,8 @@ $wa->useScript('keepalive')
 
     </div>
 
-	<input type="hidden" id="jform_type_id" name="jform[type_id]" value="<?php echo JFactory::getApplication()->input->getInt('type_id', $this->state->get('filter.type'));?>" />
-	<input type="hidden" id="jform_type_id" name="type_id" value="<?php echo $this->state->get('filter.type',JFactory::getApplication()->input->getInt('type_id'));?>" />
+	<input type="hidden" id="jform_type_id" name="jform[type_id]" value="<?php echo \Joomla\CMS\Factory::getApplication()->input->getInt('type_id', $this->state->get('filter.type'));?>" />
+	<input type="hidden" id="jform_type_id" name="type_id" value="<?php echo $this->state->get('filter.type',\Joomla\CMS\Factory::getApplication()->input->getInt('type_id'));?>" />
 	<input type="hidden" name="task" value="" />
-	<?php echo JHtml::_('form.token'); ?>
+	<?php echo \Joomla\CMS\HTML\HTMLHelper::_('form.token'); ?>
 </form>

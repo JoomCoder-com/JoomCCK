@@ -39,9 +39,9 @@ class JoomcckViewNotifications extends MViewBase
 			if(!isset($event_types[$item->type])) $event_types[$item->type] = 0;
 			if(!isset($num_sections[$item->ref_2])) $num_sections[$item->ref_2] = 0;
 
-			$item->params = new JRegistry($item->params);
+			$item->params = new \Joomla\Registry\Registry($item->params);
 			$item->html = CEventsHelper::get_notification($item);
-			$item->date = JHtml::_('date', $item->ctime, $this->section->params->get('events.event_date_format', $this->section->params->get('events.event_date_custom', 'd M Y')));
+			$item->date = \Joomla\CMS\HTML\HTMLHelper::_('date', $item->ctime, $this->section->params->get('events.event_date_format', $this->section->params->get('events.event_date_custom', 'd M Y')));
 
 			if ($item->days < 0)
 				$item->days = 0;
@@ -89,14 +89,14 @@ class JoomcckViewNotifications extends MViewBase
 		if (count($sections) > 0)
 		{
 			$options = array();
-			$options[] = JHTML::_('select.option', '0', JText::_('CSELECTSECTION'));
+			$options[] = JHTML::_('select.option', '0', \Joomla\CMS\Language\Text::_('CSELECTSECTION'));
 			foreach($sections as $type)
 			{
 				$type = ItemsStore::getSection($type);
 				$options[] = JHTML::_('select.option', $type->id, $type->name);
 
 			}
-			$list['sections'] = JHtml::_('select.genericlist', $options, 'section_id', ' onchange="this.form.submit();"', 'value', 'text', $this->section_id);
+			$list['sections'] = \Joomla\CMS\HTML\HTMLHelper::_('select.genericlist', $options, 'section_id', ' onchange="this.form.submit();"', 'value', 'text', $this->section_id);
 		}
 		else if (count($sections) == 1)
 		$this->section_id = $sections[0];
@@ -107,16 +107,16 @@ class JoomcckViewNotifications extends MViewBase
 		$list['show_new'] = '';
 		if($new)
 		{
-			$options[] = JHTML::_('select.option', '0', JText::_('CSHOWALLNTF'));
-			$options[] = JHTML::_('select.option', '1', JText::_('CSHOWUNREADNTF'));
+			$options[] = JHTML::_('select.option', '0', \Joomla\CMS\Language\Text::_('CSHOWALLNTF'));
+			$options[] = JHTML::_('select.option', '1', \Joomla\CMS\Language\Text::_('CSHOWUNREADNTF'));
 
-			$list['show_new'] = JHtml::_('select.genericlist', $options, 'show_new', 'onchange="this.form.submit();"', 'value', 'text', $this->state->get('notifications.show_new'));
+			$list['show_new'] = \Joomla\CMS\HTML\HTMLHelper::_('select.genericlist', $options, 'show_new', 'onchange="this.form.submit();"', 'value', 'text', $this->state->get('notifications.show_new'));
 		}
 
 		$events = CEventsHelper::getEventsList();
 		$show_events = array();
 		$options = array();
-		$options[] = JHTML::_('select.option', '0', JText::_('CSHOWALLNTFTYPES'));
+		$options[] = JHTML::_('select.option', '0', \Joomla\CMS\Language\Text::_('CSHOWALLNTFTYPES'));
 		foreach ($events as $event => $title)
 		{
 			if(in_array($event, $event_types))
@@ -125,7 +125,7 @@ class JoomcckViewNotifications extends MViewBase
 				$show_events[$event] = $title.' <span class="badge bg-light text-muted border">'.$event_types1[$event].'</span>';
 			}
 		}
-		$list['events'] = JHtml::_('select.genericlist', $options, 'event', 'onchange="this.form.submit();"', 'value', 'text', $this->state->get('notifications.event'));
+		$list['events'] = \Joomla\CMS\HTML\HTMLHelper::_('select.genericlist', $options, 'event', 'onchange="this.form.submit();"', 'value', 'text', $this->state->get('notifications.event'));
 
 		$list['clear_list'] = $show_events;
 

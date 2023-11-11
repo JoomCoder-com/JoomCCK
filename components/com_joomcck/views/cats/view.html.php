@@ -26,7 +26,7 @@ class JoomcckViewCats extends MViewBase
 
 	public function display($tpl = null)
 	{
-		$app = JFactory::getApplication();
+		$app = \Joomla\CMS\Factory::getApplication();
 
 		$this->section 		= $app->input->getInt('section_id');
 		$this->state		= $this->get('State');
@@ -34,7 +34,7 @@ class JoomcckViewCats extends MViewBase
 		$this->pagination	= $this->get('Pagination');
 
 		if (!$this->section) {
-			Factory::getApplication()->enqueueMessage( JText::_('C_MSG_SELECTSECTIO'),'warning');
+			Factory::getApplication()->enqueueMessage( \Joomla\CMS\Language\Text::_('C_MSG_SELECTSECTIO'),'warning');
 			$app->redirect('index.php?option=com_joomcck&view=sections');
 
 		}
@@ -56,36 +56,36 @@ class JoomcckViewCats extends MViewBase
 		$section_list = $this->get('Sections');
 		foreach ($section_list as $val)
 		{
-			$sections[] = JHtml::_('select.option', $val->value, $val->text);
+			$sections[] = \Joomla\CMS\HTML\HTMLHelper::_('select.option', $val->value, $val->text);
 			if($section == $val->value)
 			{
 				$this->section = $val;
 			}
 		}
-		$this->addFilter(JText::_('CFILTERSECTION'), 'filter_section', JHtml::_('select.options', $sections, 'value', 'text', $this->state->get('filter.section'), true));
+		$this->addFilter(\Joomla\CMS\Language\Text::_('CFILTERSECTION'), 'filter_section', \Joomla\CMS\HTML\HTMLHelper::_('select.options', $sections, 'value', 'text', $this->state->get('filter.section'), true));
 
 		// Levels filter.
 		$options	= array();
-		$options[]	= JHtml::_('select.option', '1', JText::_('J1'));
-		$options[]	= JHtml::_('select.option', '2', JText::_('J2'));
-		$options[]	= JHtml::_('select.option', '3', JText::_('J3'));
-		$options[]	= JHtml::_('select.option', '4', JText::_('J4'));
-		$options[]	= JHtml::_('select.option', '5', JText::_('J5'));
-		$options[]	= JHtml::_('select.option', '6', JText::_('J6'));
-		$options[]	= JHtml::_('select.option', '7', JText::_('J7'));
-		$options[]	= JHtml::_('select.option', '8', JText::_('J8'));
-		$options[]	= JHtml::_('select.option', '9', JText::_('J9'));
-		$options[]	= JHtml::_('select.option', '10', JText::_('J10'));
+		$options[]	= \Joomla\CMS\HTML\HTMLHelper::_('select.option', '1', \Joomla\CMS\Language\Text::_('J1'));
+		$options[]	= \Joomla\CMS\HTML\HTMLHelper::_('select.option', '2', \Joomla\CMS\Language\Text::_('J2'));
+		$options[]	= \Joomla\CMS\HTML\HTMLHelper::_('select.option', '3', \Joomla\CMS\Language\Text::_('J3'));
+		$options[]	= \Joomla\CMS\HTML\HTMLHelper::_('select.option', '4', \Joomla\CMS\Language\Text::_('J4'));
+		$options[]	= \Joomla\CMS\HTML\HTMLHelper::_('select.option', '5', \Joomla\CMS\Language\Text::_('J5'));
+		$options[]	= \Joomla\CMS\HTML\HTMLHelper::_('select.option', '6', \Joomla\CMS\Language\Text::_('J6'));
+		$options[]	= \Joomla\CMS\HTML\HTMLHelper::_('select.option', '7', \Joomla\CMS\Language\Text::_('J7'));
+		$options[]	= \Joomla\CMS\HTML\HTMLHelper::_('select.option', '8', \Joomla\CMS\Language\Text::_('J8'));
+		$options[]	= \Joomla\CMS\HTML\HTMLHelper::_('select.option', '9', \Joomla\CMS\Language\Text::_('J9'));
+		$options[]	= \Joomla\CMS\HTML\HTMLHelper::_('select.option', '10', \Joomla\CMS\Language\Text::_('J10'));
 
-		$this->addFilter(JText::_('XML_SELECT_LEVEL'), 'filter_level', JHtml::_('select.options', $options, 'value', 'text', $this->state->get('filter.level'), true));
+		$this->addFilter(\Joomla\CMS\Language\Text::_('XML_SELECT_LEVEL'), 'filter_level', \Joomla\CMS\HTML\HTMLHelper::_('select.options', $options, 'value', 'text', $this->state->get('filter.level'), true));
 
-		$this->addFilter(JText::_('JOPTION_SELECT_PUBLISHED'), 'filter_published', JHtml::_('select.options', JHtml::_('jgrid.publishedOptions', array(
+		$this->addFilter(\Joomla\CMS\Language\Text::_('JOPTION_SELECT_PUBLISHED'), 'filter_published', \Joomla\CMS\HTML\HTMLHelper::_('select.options', \Joomla\CMS\HTML\HTMLHelper::_('jgrid.publishedOptions', array(
 			'trash' => 0,
 			'archived' => 0,
 			'all' => 0
 		)), 'value', 'text', $this->state->get('filter.published'), true));
 
-		$this->addFilter(JText::_('JOPTION_SELECT_ACCESS'), 'filter_access', JHtml::_('select.options', JHtml::_('access.assetgroups'), 'value', 'text', $this->state->get('filter.access'), true));
+		$this->addFilter(\Joomla\CMS\Language\Text::_('JOPTION_SELECT_ACCESS'), 'filter_access', \Joomla\CMS\HTML\HTMLHelper::_('select.options', \Joomla\CMS\HTML\HTMLHelper::_('access.assetgroups'), 'value', 'text', $this->state->get('filter.access'), true));
 
 
 		parent::display($tpl);
@@ -94,12 +94,12 @@ class JoomcckViewCats extends MViewBase
 	public function getSortFields()
 	{
 		return array(
-		'a.lft' => JText::_('JGRID_HEADING_ORDERING'),
-		'a.published' => JText::_('JSTATUS'),
-		'a.title' => JText::_('CTITLE'),
-		'a.access' => JText::_('JGRID_HEADING_ACCESS'),
-		'language' => JText::_('JGRID_HEADING_LANGUAGE'),
-		'a.id' => JText::_('ID'),
+		'a.lft' => \Joomla\CMS\Language\Text::_('JGRID_HEADING_ORDERING'),
+		'a.published' => \Joomla\CMS\Language\Text::_('JSTATUS'),
+		'a.title' => \Joomla\CMS\Language\Text::_('CTITLE'),
+		'a.access' => \Joomla\CMS\Language\Text::_('JGRID_HEADING_ACCESS'),
+		'language' => \Joomla\CMS\Language\Text::_('JGRID_HEADING_LANGUAGE'),
+		'a.id' => \Joomla\CMS\Language\Text::_('ID'),
 		);
 	}
 }

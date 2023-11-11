@@ -21,9 +21,9 @@ HTMLHelper::_('bootstrap.tooltip', '*[rel^="tooltip"]');
 	function submitbutton2(task) {
 		var form = document.adminForm;
 		if(document.adminForm.boxchecked.value == 0) {
-			alert('<?php echo JText::_('CPLEASESELECTTMPL'); ?>');
+			alert('<?php echo \Joomla\CMS\Language\Text::_('CPLEASESELECTTMPL'); ?>');
 		} else if(task == 'renameTmpl' && form.tmplname.value == "") {
-			alert("<?php echo JText::_('CPLEASEENTERTMPLNAME'); ?>");
+			alert("<?php echo \Joomla\CMS\Language\Text::_('CPLEASEENTERTMPLNAME'); ?>");
 		} else {
 			form.task.value = task;
 			form.submit();
@@ -32,9 +32,9 @@ HTMLHelper::_('bootstrap.tooltip', '*[rel^="tooltip"]');
 	function submitbutton3(task) {
 		var form = document.adminForm;
 		if(document.adminForm.boxchecked.value == 0) {
-			alert('<?php echo JText::_('CPLEASESELECTTMPL'); ?>');
+			alert('<?php echo \Joomla\CMS\Language\Text::_('CPLEASESELECTTMPL'); ?>');
 		} else if(task == 'change_name' && form.tmpl_name.value == "") {
-			alert("<?php echo JText::_('CPLEASEENTERTMPLNAME'); ?>");
+			alert("<?php echo \Joomla\CMS\Language\Text::_('CPLEASEENTERTMPLNAME'); ?>");
 		} else {
 			form.task.value = task;
 			form.submit();
@@ -46,10 +46,10 @@ HTMLHelper::_('bootstrap.tooltip', '*[rel^="tooltip"]');
 
 <div class="row mb-3">
 	<div class="col-md-4">
-        <p class="text-muted"><?php echo JText::_('CCHANGELABEL'); ?></p>
+        <p class="text-muted"><?php echo \Joomla\CMS\Language\Text::_('CCHANGELABEL'); ?></p>
         <div class="input-group">
 		<span class="input-group-text">
-			<i class="fas fa-flag" rel="tooltip" title="<?php echo JText::_('CIMPORTANTKNOW') . '<br>' . JText::_('TIP_CHANGE_TEMPLATE_NAME') ?>">
+			<i class="fas fa-flag" rel="tooltip" title="<?php echo \Joomla\CMS\Language\Text::_('CIMPORTANTKNOW') . '<br>' . \Joomla\CMS\Language\Text::_('TIP_CHANGE_TEMPLATE_NAME') ?>">
             </i>
 		</span>
             <input  class="form-control form-control-sm" id="renamecopy_name" type="text" size="40" name="tmpl_name">
@@ -65,19 +65,19 @@ HTMLHelper::_('bootstrap.tooltip', '*[rel^="tooltip"]');
 	<thead>
 	<tr>
 		<th width="20">
-			<?php echo JText::_('CNUM'); ?>
+			<?php echo \Joomla\CMS\Language\Text::_('CNUM'); ?>
 		</th>
 		<th width="1%">
 			<!--<input type="checkbox" id="checkMain" name="toggle" value=""  onclick="checkAll(<?php echo count($this->items->categoryselect); ?>);" />-->
 		</th>
 		<th class="title">
-			<?php echo JText::_('CNAME'); ?>
+			<?php echo \Joomla\CMS\Language\Text::_('CNAME'); ?>
 		</th>
 		<th width="4%">
-			<?php echo JText::_('CVERSION'); ?>
+			<?php echo \Joomla\CMS\Language\Text::_('CVERSION'); ?>
 		</th>
 		<th width="10%">
-			<?php echo JText::_('CAUTHOR'); ?>
+			<?php echo \Joomla\CMS\Language\Text::_('CAUTHOR'); ?>
 		</th>
 	</tr>
 	</thead>
@@ -106,7 +106,7 @@ HTMLHelper::_('bootstrap.tooltip', '*[rel^="tooltip"]');
 			<td class="nowrap">
 				<?php if($js != ''): ?>
 					<a href="javascript: void(0);" <?php echo $js; ?>><?php echo $item->ident; ?></a> [<?php echo $item->name ?>]
-					<div id="tmpl<?php echo $id; ?>" style="display: none;" class="tmpl_img"><?php echo JHtml::image($item->img_path, $item->ident); ?></div>
+					<div id="tmpl<?php echo $id; ?>" style="display: none;" class="tmpl_img"><?php echo \Joomla\CMS\HTML\HTMLHelper::image($item->img_path, $item->ident); ?></div>
 				<?php else: ?>
 					<b><?php echo $item->ident; ?></b> [<?php echo $item->name ?>]
 				<?php endif; ?>
@@ -135,4 +135,4 @@ HTMLHelper::_('bootstrap.tooltip', '*[rel^="tooltip"]');
 	<?php } ?>
 </table>
 
-<p class="alert alert-info"><strong><?php echo JText::_('CIMPORTANTKNOW') . '</strong><br>' . JText::_('TIP_CHANGE_TEMPLATE_NAME') ?></p>
+<p class="alert alert-info"><strong><?php echo \Joomla\CMS\Language\Text::_('CIMPORTANTKNOW') . '</strong><br>' . \Joomla\CMS\Language\Text::_('TIP_CHANGE_TEMPLATE_NAME') ?></p>

@@ -21,7 +21,7 @@ class CFormFieldSelectable extends CFormField
     public function _getPillValue($v) {
         return [
             "id" => $v,
-            "text" => JText::_($v)
+            "text" => \Joomla\CMS\Language\Text::_($v)
         ];
     }
 
@@ -30,7 +30,7 @@ class CFormFieldSelectable extends CFormField
 		$object = new stdClass();
 
 		$object->id = $v;
-		$object->text = JText::_($v);
+		$object->text = \Joomla\CMS\Language\Text::_($v);
 
 		return $object;
 	}
@@ -63,7 +63,7 @@ class CFormFieldSelectable extends CFormField
 
 		foreach($value AS &$val)
 		{
-			$val = JText::_($val);
+			$val = \Joomla\CMS\Language\Text::_($val);
 		}
 
 
@@ -129,7 +129,7 @@ class CFormFieldSelectable extends CFormField
 				$this->params->set('params.values', implode("\n", $list));
 				$params = $this->params->toString();
 
-				$table = JTable::getInstance('Field', 'Joomccktable');
+				$table = \Joomla\CMS\Table\Table::getInstance('Field', 'Joomccktable');
 				$table->load($this->id);
 				$table->params = $params;
 				$table->store();
@@ -141,7 +141,7 @@ class CFormFieldSelectable extends CFormField
 
 	public function onRenderFilter($section, $module = FALSE)
 	{
-		$db = JFactory::getDbo();
+		$db = \Joomla\CMS\Factory::getDbo();
 
 		$query = $db->getQuery(TRUE);
 
@@ -213,7 +213,7 @@ class CFormFieldSelectable extends CFormField
 		{
 			$label[] = $this->_getVal($val);
 		}
-		$value = implode(JText::_('CFILTERWORNSEPARATOR'), $label);
+		$value = implode(\Joomla\CMS\Language\Text::_('CFILTERWORNSEPARATOR'), $label);
 
 		return $value;
 	}
@@ -287,10 +287,10 @@ class CFormFieldSelectable extends CFormField
 	{
 		if($this->type == 'text')
 		{
-			return " field_value LIKE '%" . JFactory::getDbo()->escape($text) . "%' ";
+			return " field_value LIKE '%" . \Joomla\CMS\Factory::getDbo()->escape($text) . "%' ";
 		}
 
-		return " field_value = '" . JFactory::getDbo()->escape($text) . "' ";
+		return " field_value = '" . \Joomla\CMS\Factory::getDbo()->escape($text) . "' ";
 	}
 
 	public function onRenderFull($record, $type, $section)
@@ -314,7 +314,7 @@ class CFormFieldSelectable extends CFormField
 
 	private function _getvalues($limit, $record, $type, $section, $client)
 	{
-		$user = JFactory::getUser();
+		$user = \Joomla\CMS\Factory::getUser();
 		if($this->type == 'listautocomplete')
 		{
 			if(is_string($this->value))
@@ -342,15 +342,15 @@ class CFormFieldSelectable extends CFormField
 				$process = str_replace(array('[ID]', '[USER_ID]', '[AUTHOR_ID]'), array($k, $user->get('id', 0), $this->record->user_id), $this->params->get('params.sql_link'));
 				if(substr($process, 0, 9) == 'index.php')
 				{
-					$process = JRoute::_($process);
+					$process = \Joomla\CMS\Router\Route::_($process);
 				}
-				$text = JHtml::link($process, $text, $attributes);
+				$text = \Joomla\CMS\HTML\HTMLHelper::link($process, $text, $attributes);
 				$this->params->set('params.filter_linkage', 2);
 			}
 
 			if($this->params->get('params.filter_enable'))
 			{
-				$tip = ($this->params->get('params.filter_tip') ? JText::sprintf($this->params->get('params.filter_tip'), '<b>' . JText::_($this->label) . '</b>', $text) : NULL);
+				$tip = ($this->params->get('params.filter_tip') ? \Joomla\CMS\Language\Text::sprintf($this->params->get('params.filter_tip'), '<b>' . \Joomla\CMS\Language\Text::_($this->label) . '</b>', $text) : NULL);
 				switch($this->params->get('params.filter_linkage'))
 				{
 					case 1 :
@@ -376,11 +376,11 @@ class CFormFieldSelectable extends CFormField
 	/*protected function _custom_value($type)
 	{
 		$out = array();
-		JFactory::getDocument()->addScript(JURI::root(TRUE) . '/media/com_joomcck/js/GrowingInput.js');
+		\Joomla\CMS\Factory::getDocument()->addScript(JURI::root(TRUE) . '/media/com_joomcck/js/GrowingInput.js');
 		$out[] = '<div style="clear:both"></div>';
 		$out[] = sprintf('<div class="variant-container" id="variant_%d">
 			<a class="small" id="show_variant_link_%d" rel="{field_type:\'%s\', id:%d, inputtype:\'%s\', width:%d, limit:%d, max_size:%d}"
-				href="javascript:void(0)" onclick="Joomcck.showAddForm(this)">%s</a></div>', $this->id, $this->id, $this->type, $this->id, $type, $this->params->get('params.width', '220'), $this->params->get('params.total_limit', 0), $this->params->get('params.size', 0), JText::_($this->params->get('params.user_value_label', 'Your variant')));
+				href="javascript:void(0)" onclick="Joomcck.showAddForm(this)">%s</a></div>', $this->id, $this->id, $this->type, $this->id, $type, $this->params->get('params.width', '220'), $this->params->get('params.total_limit', 0), $this->params->get('params.size', 0), \Joomla\CMS\Language\Text::_($this->params->get('params.user_value_label', 'Your variant')));
 		$out[] = '<div style="clear:both"></div>';
 
 		return implode("\n", $out);
@@ -393,7 +393,7 @@ class CFormFieldSelectable extends CFormField
 
 	public function onFilterGetValues($post)
 	{
-		$db = JFactory::getDbo();
+		$db = \Joomla\CMS\Factory::getDbo();
 		$query = $db->getQuery(TRUE);
 
 		$section = ItemsStore::getSection($post['section_id']);
@@ -417,7 +417,7 @@ class CFormFieldSelectable extends CFormField
 		{
 			$c = explode('^', $item->text);
 			ArrayHelper::clean_r($c);
-			$label = (isset($c[1]) ? "<SPAN style=\"color:{$c[1]}\">" . JText::_($c[0]) . "</SPAN>" : JText::_($c[0]));
+			$label = (isset($c[1]) ? "<SPAN style=\"color:{$c[1]}\">" . \Joomla\CMS\Language\Text::_($c[0]) . "</SPAN>" : \Joomla\CMS\Language\Text::_($c[0]));
 			$label_num = $label;
 			if($this->params->get('params.filter_show_number', 1))
 			{
@@ -459,8 +459,8 @@ function _getSQLValues($obj, $assoc)
 		return $out[$key];
 	}
 
-	$db = JFactory::getDbo();
-	$user = JFactory::getUser();
+	$db = \Joomla\CMS\Factory::getDbo();
+	$user = \Joomla\CMS\Factory::getUser();
 
 	if($obj->params->get('params.sql_ext_db'))
 	{

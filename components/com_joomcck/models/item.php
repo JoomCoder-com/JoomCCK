@@ -16,7 +16,7 @@ class JoomcckModelItem extends MModelAdmin
 
 	public function getTable($type = 'Record', $prefix = 'JoomcckTable', $config = array())
 	{
-		return JTable::getInstance($type, $prefix, $config);
+		return \Joomla\CMS\Table\Table::getInstance($type, $prefix, $config);
 	}
 
 
@@ -26,7 +26,7 @@ class JoomcckModelItem extends MModelAdmin
 
 	public function getFormChCo($data = array(), $loadData = true)
 	{
-		$app = JFactory::getApplication();
+		$app = \Joomla\CMS\Factory::getApplication();
 
 		$form = $this->loadForm('com_joomcck.itemchco', 'itemchco', array('control' => 'jform', 'load_data' => $loadData));
 		if(empty($form))
@@ -41,7 +41,7 @@ class JoomcckModelItem extends MModelAdmin
 	{
 		if(!$value)
 		{
-			$this->setError(JText::_('C_MSG_NOTASK'));
+			$this->setError(\Joomla\CMS\Language\Text::_('C_MSG_NOTASK'));
 			return false;
 		}
 		// Sanitize the ids.
@@ -49,7 +49,7 @@ class JoomcckModelItem extends MModelAdmin
 		$pks = \Joomla\Utilities\ArrayHelper::toInteger($pks);
 
 		if (empty($pks)) {
-			$this->setError(JText::_('C_MSG_SELECTITEM'));
+			$this->setError(\Joomla\CMS\Language\Text::_('C_MSG_SELECTITEM'));
 			return false;
 		}
 
@@ -57,7 +57,7 @@ class JoomcckModelItem extends MModelAdmin
 			$db = $this->getDbo();
 
 			$ids = implode(",", $pks);
-			$now = JFactory::getDate()->toSql();
+			$now = \Joomla\CMS\Factory::getDate()->toSql();
 			$sql = array();
 			switch ($value)
 			{
@@ -74,7 +74,7 @@ class JoomcckModelItem extends MModelAdmin
 					$sql[] = "UPDATE #__js_res_record SET votes = 0, multirating = '', votes_result = 0  WHERE id IN ($ids)";
 					foreach ($pks AS $id)
 					{
-						$ses = JFactory::getSession();
+						$ses = \Joomla\CMS\Factory::getSession();
 						$ses->set("record_rate_{$id}_0", 0);
 						$ses->set("record_rate_{$id}_1", 0);
 						$ses->set("record_rate_{$id}_2", 0);
@@ -85,7 +85,7 @@ class JoomcckModelItem extends MModelAdmin
 						$ses->set("record_rate_{$id}_7", 0);
 						$ses->set("record_rate_{$id}_8", 0);
 
-						$config = JFactory::getConfig();
+						$config = \Joomla\CMS\Factory::getConfig();
 						$cookie_domain = $config->get('cookie_domain', '');
 						$cookie_path = $config->get('cookie_path', '/');
 						setcookie("record_rate_{$id}_0", 0, time() + 365 * 86400, $cookie_path, $cookie_domain);
@@ -136,13 +136,13 @@ class JoomcckModelItem extends MModelAdmin
 		$pks = \Joomla\Utilities\ArrayHelper::toInteger($pks);
 
 		if (empty($pks)) {
-			$this->setError(JText::_('COM_JOOMCCK_NO_ITEM_SELECTED'));
+			$this->setError(\Joomla\CMS\Language\Text::_('COM_JOOMCCK_NO_ITEM_SELECTED'));
 			return false;
 		}
 
 		try {
 			$db = $this->getDbo();
-			$record_table = JTable::getInstance('Record', 'JoomcckTable');
+			$record_table = \Joomla\CMS\Table\Table::getInstance('Record', 'JoomcckTable');
 			foreach($pks AS $pk)
 			{
 				$record_table->load($pk);
@@ -166,7 +166,7 @@ class JoomcckModelItem extends MModelAdmin
 					$record_values = $db->loadAssocList();
 					if($record_values)
 					{
-						$table = JTable::getInstance('Record_values', 'JoomcckTable');
+						$table = \Joomla\CMS\Table\Table::getInstance('Record_values', 'JoomcckTable');
 						$this->_copyRecordDetails($record_values, $table, $record_table->id);
 					}
 
@@ -176,7 +176,7 @@ class JoomcckModelItem extends MModelAdmin
 					$record_values = $db->loadAssocList();
 					if($record_values)
 					{
-						$table = JTable::getInstance('Record_category', 'JoomcckTable');
+						$table = \Joomla\CMS\Table\Table::getInstance('Record_category', 'JoomcckTable');
 						$this->_copyRecordDetails($record_values, $table, $record_table->id);
 					}
 
@@ -186,7 +186,7 @@ class JoomcckModelItem extends MModelAdmin
 					$record_values = $db->loadAssocList();
 					if($record_values)
 					{
-						$table = JTable::getInstance('Taghistory', 'JoomcckTable');
+						$table = \Joomla\CMS\Table\Table::getInstance('Taghistory', 'JoomcckTable');
 						$this->_copyRecordDetails($record_values, $table, $record_table->id);
 					}
 
@@ -196,14 +196,14 @@ class JoomcckModelItem extends MModelAdmin
 					$files = $db->loadAssocList();
 					if(!empty($files))
 					{
-						$params = JComponentHelper::getParams('com_joomcck');
-						$table = JTable::getInstance('Files', 'JoomcckTable');
-						$field_table = JTable::getInstance('Field', 'JoomcckTable');
+						$params = \Joomla\CMS\Component\ComponentHelper::getParams('com_joomcck');
+						$table = \Joomla\CMS\Table\Table::getInstance('Files', 'JoomcckTable');
+						$field_table = \Joomla\CMS\Table\Table::getInstance('Field', 'JoomcckTable');
 						foreach ($files as $file)
 						{
 
 							$field_table->load($file['field_id']);
-							$field_params = new JRegistry($field_table->params);
+							$field_params = new \Joomla\Registry\Registry($field_table->params);
 							$subfolder = $field_params->get('params.subfolder', $field_table->field_type);
 
 // 							$table->load($rv);
@@ -211,15 +211,15 @@ class JoomcckModelItem extends MModelAdmin
 							$date = date($params->get('folder_format'), $time);
 							$dest = JPATH_ROOT. DIRECTORY_SEPARATOR .$params->get('general_upload'). DIRECTORY_SEPARATOR .$subfolder. DIRECTORY_SEPARATOR .$date.DIRECTORY_SEPARATOR;
 
-							if(!JFolder::exists($dest))
+							if(!\Joomla\CMS\Filesystem\Folder::exists($dest))
 							{
-								JFolder::create($dest, 755);
+								\Joomla\CMS\Filesystem\Folder::create($dest, 755);
 							}
 							$file['id'] = null;
 							$parts = explode('_', $file['filename']);
 							$file['filename'] = $time.'_'.$parts[1];
 
-							$copied = JFile::copy(JPATH_ROOT. DIRECTORY_SEPARATOR .$params->get('general_upload'). DIRECTORY_SEPARATOR .$subfolder. DIRECTORY_SEPARATOR .$file['fullpath'], $dest.$file['filename']);
+							$copied = \Joomla\CMS\Filesystem\File::copy(JPATH_ROOT. DIRECTORY_SEPARATOR .$params->get('general_upload'). DIRECTORY_SEPARATOR .$subfolder. DIRECTORY_SEPARATOR .$file['fullpath'], $dest.$file['filename']);
 
 							$root = JPath::clean(JPATH_ROOT. DIRECTORY_SEPARATOR .$params->get('general_upload'));
 							$url = str_replace(JPATH_ROOT, '', $root);

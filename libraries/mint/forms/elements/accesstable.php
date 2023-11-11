@@ -14,13 +14,13 @@ class JFormFieldAccessTable extends JFormField
 
 	protected function getInput()
 	{
-		$db = JFactory::getDbo();
+		$db = \Joomla\CMS\Factory::getDbo();
 		$query = $db->getQuery(true);
 
 		$db->setQuery('SELECT * FROM #__viewlevels WHERE title NOT IN ("Public", "Guest")');
 		$accesslevels = $db->loadObjectList();
 
-		$params = new JRegistry();
+		$params = new \Joomla\Registry\Registry();
 		$params->loadFile(JPATH_COMPONENT_ADMINISTRATOR.'/models/forms/'.$this->element->attributes()->file);
 		$params = $params->get($this->fieldname, array());
 

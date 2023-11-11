@@ -13,19 +13,19 @@ defined('_JEXEC') or die();
 	<thead>
 	<tr>
 		<th width="20">
-			<?php echo JText::_('CNUM'); ?>
+			<?php echo \Joomla\CMS\Language\Text::_('CNUM'); ?>
 		</th>
 		<th class="title">
-			<?php echo JText::_('CNAME'); ?>
+			<?php echo \Joomla\CMS\Language\Text::_('CNAME'); ?>
 		</th>
 		<th>
-			<?php echo JText::_('CVIEW'); ?>
+			<?php echo \Joomla\CMS\Language\Text::_('CVIEW'); ?>
 		</th>
 		<th width="4%">
-			<?php echo JText::_('CVERSION'); ?>
+			<?php echo \Joomla\CMS\Language\Text::_('CVERSION'); ?>
 		</th>
 		<th width="10%">
-			<?php echo JText::_('CAUTHOR'); ?>
+			<?php echo \Joomla\CMS\Language\Text::_('CAUTHOR'); ?>
 		</th>
 	</tr>
 	</thead>

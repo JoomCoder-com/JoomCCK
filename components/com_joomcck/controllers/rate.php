@@ -19,7 +19,7 @@ class JoomcckControllerRate extends MControllerAdmin
 
 		if(!$this->input)
 		{
-			$this->input = JFactory::getApplication()->input;
+			$this->input = \Joomla\CMS\Factory::getApplication()->input;
 		}
 	}
 	public function comment()
@@ -65,7 +65,7 @@ class JoomcckControllerRate extends MControllerAdmin
 		}
 
 		echo json_encode($out);
-		JFactory::getApplication()->close();
+		\Joomla\CMS\Factory::getApplication()->close();
 
 	}
 
@@ -79,15 +79,15 @@ class JoomcckControllerRate extends MControllerAdmin
 
 		if (!(int)$vote || !$id)
 		{
-			$out = array('success' => 0, 'error' => JText::_('CSELECTVOTE'));
+			$out = array('success' => 0, 'error' => \Joomla\CMS\Language\Text::_('CSELECTVOTE'));
 			echo json_encode($out);
 			return;
 		}
 
 		$record = MModelBase::getInstance('Record', 'JoomcckModel')->getItem($id);
 		$type = ItemsStore::getType($record->type_id);
-		$user = JFactory::getUser();
-		$db = JFactory::getDBO();
+		$user = \Joomla\CMS\Factory::getUser();
+		$db = \Joomla\CMS\Factory::getDBO();
 
 		$this->_canVote($record->user_id, $record->id, 'record', $type->params->get('properties.rate_access'), $index, $type->params->get('properties.rate_access_author', 0));
 
@@ -112,7 +112,7 @@ class JoomcckControllerRate extends MControllerAdmin
 				$sql = "SELECT COUNT(*) AS total, ((" . $avg['num_vote'] . " * " . $avg['vote'] . ") + (COUNT(vote) * AVG(vote))) / (" . $avg['num_vote'] . " + COUNT(vote)) AS rating FROM #__js_res_vote WHERE ref_type = 'record' AND ref_id = {$record->id} AND idx = {$index} GROUP BY ref_id";
 				break;
 			case 3 : // smart rating
-				$sql = "SELECT COUNT(*) AS total, if(count(id) >= " . $type->params->get('properties.rate_smart_minimum') . ", sum(vote) / count(id), 0) AS rating FROM " . "#__js_res_vote WHERE ref_type = 'record' AND ref_id = {$record->id} AND ctime > '" . JFactory::getDate()->toSql() . "' - INTERVAL " . $type->params->get('properties.rate_smart_before') . " DAY AND idx = {$index} GROUP BY ref_id";
+				$sql = "SELECT COUNT(*) AS total, if(count(id) >= " . $type->params->get('properties.rate_smart_minimum') . ", sum(vote) / count(id), 0) AS rating FROM " . "#__js_res_vote WHERE ref_type = 'record' AND ref_id = {$record->id} AND ctime > '" . \Joomla\CMS\Factory::getDate()->toSql() . "' - INTERVAL " . $type->params->get('properties.rate_smart_before') . " DAY AND idx = {$index} GROUP BY ref_id";
 
 				break;
 			default : // plain rating
@@ -182,7 +182,7 @@ class JoomcckControllerRate extends MControllerAdmin
 		$out['name'] = $record->title;
 
         echo json_encode($out);
-		JFactory::getApplication()->close();
+		\Joomla\CMS\Factory::getApplication()->close();
 	}
 
 	public function file()
@@ -194,7 +194,7 @@ class JoomcckControllerRate extends MControllerAdmin
 
 		if (!(int)$vote || !$id)
 		{
-			$out = array('success' => 0, 'error' => JText::_('CSELECTVOTE'));
+			$out = array('success' => 0, 'error' => \Joomla\CMS\Language\Text::_('CSELECTVOTE'));
 			echo json_encode($out);
 			return;
 		}
@@ -205,7 +205,7 @@ class JoomcckControllerRate extends MControllerAdmin
 
 		$this->_saveVote('file', $file->id, $vote, $file->section_id);
 
-		$db = JFactory::getDbo();
+		$db = \Joomla\CMS\Factory::getDbo();
 		$sql = "SELECT COUNT(*) AS total, SUM(vote) / COUNT(*) AS rating FROM " . "#__js_res_vote WHERE ref_type = 'file' AND ref_id = {$file->id} GROUP BY ref_id";
 		$db->setQuery($sql);
 		$rating = $db->loadObject();
@@ -216,23 +216,23 @@ class JoomcckControllerRate extends MControllerAdmin
 
 		$out = array('success' => 1);
 		echo json_encode($out);
-		JFactory::getApplication()->close();
+		\Joomla\CMS\Factory::getApplication()->close();
 
 	}
 	private function _saveVote($type, $id, $vote = 1, $section_id = 0, $access_level = 0, $index = 0)
 	{
 
 
-		$config = JFactory::getConfig();
+		$config = \Joomla\CMS\Factory::getConfig();
 
 		$cookie_domain = $config->get('cookie_domain', '');
 		$cookie_path = $config->get('cookie_path', '/');
 		setcookie("{$type}_rate_{$id}_{$index}", 1, time() + 365 * 86400, $cookie_path, $cookie_domain);
 
-		$session = JFactory::getSession();
+		$session = \Joomla\CMS\Factory::getSession();
 		$session->set("{$type}_rate_{$id}_{$index}", 1);
 
-		$user = JFactory::getUser();
+		$user = \Joomla\CMS\Factory::getUser();
 
 		$votes_table = JTable::getInstance('Votes', 'JoomcckTable');
 		$data = array('idx' => $index, 'ref_id' => $id, 'ref_type' => $type);
@@ -255,7 +255,7 @@ class JoomcckControllerRate extends MControllerAdmin
 
 		if($votes_table->id && $access_level > -1)
 		{
-			AjaxHelper::error(JText::_($msg));
+			AjaxHelper::error(\Joomla\CMS\Language\Text::_($msg));
 		}
 
 		$votes_table->bind($data);
@@ -267,7 +267,7 @@ class JoomcckControllerRate extends MControllerAdmin
 	private function _canVote($user_id, $id, $type, $accessLevel = 1, $index = 0, $author = 0)
 	{
 		/*$result = true;
-		$user = JFactory::getUser();
+		$user = \Joomla\CMS\Factory::getUser();
 		if($accessLevel == -1)
 		{
 			if(!$user->get('id') || !$user_id)
@@ -296,7 +296,7 @@ class JoomcckControllerRate extends MControllerAdmin
 				$result = false;
 			}
 
-			$ses = JFactory::getSession();
+			$ses = \Joomla\CMS\Factory::getSession();
 			if($ses->get($type."_rate_{$id}_{$index}"))
 			{
 				$result = false;
@@ -306,15 +306,15 @@ class JoomcckControllerRate extends MControllerAdmin
 		$result = RatingHelp::canRate($type, $user_id, $id, $accessLevel, $index, $author);
 		if(!$result)
 		{
-			AjaxHelper::error(JText::_('CYOUCANNOTRATE'));
+			AjaxHelper::error(\Joomla\CMS\Language\Text::_('CYOUCANNOTRATE'));
 		}
 
 		return $result;
 
 
 		/*
-		$user = JFactory::getUser();
-		$session = JFactory::getSession();
+		$user = \Joomla\CMS\Factory::getUser();
+		$session = \Joomla\CMS\Factory::getSession();
 
 		$result = true;
 		if($user->get('id') && $user->get('id') == $user_id)
@@ -339,7 +339,7 @@ class JoomcckControllerRate extends MControllerAdmin
 
 		if(!$result)
 		{
-			AjaxHelper::error(JText::_('CYOUCANNOTRATE');
+			AjaxHelper::error(\Joomla\CMS\Language\Text::_('CYOUCANNOTRATE');
 			exit;
 		}
 

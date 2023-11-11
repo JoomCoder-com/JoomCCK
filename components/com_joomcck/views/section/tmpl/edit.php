@@ -18,21 +18,21 @@ $wa = $this->document->getWebAssetManager();
 $wa->useScript('keepalive')
 	->useScript('form.validate');
 
-JHtml::_('bootstrap.modal');
+\Joomla\CMS\HTML\HTMLHelper::_('bootstrap.modal');
 ?>
 <div id="joomcckContainer">
-    <form action="<?php echo JUri::getInstance()->toString(); ?>" method="post" name="adminForm" id="adminForm" class="form-horizontal">
+    <form action="<?php echo \Joomla\CMS\Uri\Uri::getInstance()->toString(); ?>" method="post" name="adminForm" id="adminForm" class="form-horizontal">
 		<?php echo HTMLFormatHelper::layout('item', $this); ?>
         <div class="page-header">
             <h1>
-				<?php echo empty($this->item->id) ? JText::_('CNEWSECTION') : JText::sprintf('CEDITSECTIONS', $this->item->name); ?>
+				<?php echo empty($this->item->id) ? \Joomla\CMS\Language\Text::_('CNEWSECTION') : \Joomla\CMS\Language\Text::sprintf('CEDITSECTIONS', $this->item->name); ?>
             </h1>
         </div>
 
         <div>
 			<?php echo HTMLHelper::_('uitab.startTabSet', 'myTab', ['active' => 'page-main', 'recall' => true, 'breakpoint' => 768]); ?>
 
-			<?php echo HTMLHelper::_('uitab.addTab', 'myTab', 'page-main', JText::_('FS_FORM')); ?>
+			<?php echo HTMLHelper::_('uitab.addTab', 'myTab', 'page-main', \Joomla\CMS\Language\Text::_('FS_FORM')); ?>
 
             <div class="float-start" style="max-width: 500px; min-width:600px; margin-right: 20px;">
                 <div class="control-group">
@@ -72,7 +72,7 @@ JHtml::_('bootstrap.modal');
 
 			<?php echo HTMLHelper::_('uitab.endTab'); ?>
 
-			<?php echo HTMLHelper::_('uitab.addTab', 'myTab', 'page-params', JText::_('FS_GENERAL')); ?>
+			<?php echo HTMLHelper::_('uitab.addTab', 'myTab', 'page-params', \Joomla\CMS\Language\Text::_('FS_GENERAL')); ?>
 
             <div class="float-start" style="max-width: 600px; margin-right: 20px;">
 				<?php echo MFormHelper::renderFieldset($this->params_form, 'general2', $this->item->params, 'general', MFormHelper::FIELDSET_SEPARATOR_HEADER, MFormHelper::STYLE_TABLE); ?>
@@ -87,7 +87,7 @@ JHtml::_('bootstrap.modal');
 
 			<?php echo HTMLHelper::_('uitab.endTab'); ?>
 
-			<?php echo HTMLHelper::_('uitab.addTab', 'myTab', 'page-personalize', JText::_('FS_PERSPARAMS')); ?>
+			<?php echo HTMLHelper::_('uitab.addTab', 'myTab', 'page-personalize', \Joomla\CMS\Language\Text::_('FS_PERSPARAMS')); ?>
 
             <div class="float-start" style="max-width: 500px; margin-right: 20px;">
 				<?php echo MFormHelper::renderFieldset($this->params_form, 'persa', $this->item->params, 'personalize', MFormHelper::FIELDSET_SEPARATOR_HEADER, MFormHelper::STYLE_TABLE); ?>
@@ -101,7 +101,7 @@ JHtml::_('bootstrap.modal');
 
 			<?php echo HTMLHelper::_('uitab.endTab'); ?>
 
-			<?php echo HTMLHelper::_('uitab.addTab', 'myTab', 'page-events', JText::_('FS_EVENTPARAMS')); ?>
+			<?php echo HTMLHelper::_('uitab.addTab', 'myTab', 'page-events', \Joomla\CMS\Language\Text::_('FS_EVENTPARAMS')); ?>
 
             <div class="float-start" style="max-width: 500px; margin-right: 20px;">
 				<?php echo MFormHelper::renderFieldset($this->params_form, 'generalevents', $this->item->params, 'events', MFormHelper::FIELDSET_SEPARATOR_HEADER, MFormHelper::STYLE_TABLE); ?>
@@ -120,6 +120,6 @@ JHtml::_('bootstrap.modal');
         </div>
 
         <input type="hidden" name="task" value=""/>
-		<?php echo JHtml::_('form.token'); ?>
+		<?php echo \Joomla\CMS\HTML\HTMLHelper::_('form.token'); ?>
     </form>
 </div>

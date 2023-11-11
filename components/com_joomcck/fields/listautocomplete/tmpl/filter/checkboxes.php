@@ -15,9 +15,9 @@ $default = $this->default;
 ?>
 
 <?php if($this->params->get('params.total_limit') != 1):?>
-    <select class="form-select mb-3" name="filters[<?php echo $this->key;?>][by]" title="<?php echo JText::_('CFILTERCONDITION')?>" rel="tooltip">
-        <option value="any" <?php if($this->value && $this->value['by'] == 'any') echo 'selected="selected"';?>><?php echo JText::_('CRECORDHASANYVALUE')?></option>
-        <option value="all" <?php if($this->value && $this->value['by'] == 'all') echo 'selected="selected"';?>><?php echo JText::_('CRECORDHASALLVALUES')?></option>
+    <select class="form-select mb-3" name="filters[<?php echo $this->key;?>][by]" title="<?php echo \Joomla\CMS\Language\Text::_('CFILTERCONDITION')?>" rel="tooltip">
+        <option value="any" <?php if($this->value && $this->value['by'] == 'any') echo 'selected="selected"';?>><?php echo \Joomla\CMS\Language\Text::_('CRECORDHASANYVALUE')?></option>
+        <option value="all" <?php if($this->value && $this->value['by'] == 'all') echo 'selected="selected"';?>><?php echo \Joomla\CMS\Language\Text::_('CRECORDHASALLVALUES')?></option>
     </select>
 
 <?php endif;?>

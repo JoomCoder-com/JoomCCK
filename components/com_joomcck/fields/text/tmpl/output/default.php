@@ -14,7 +14,7 @@ defined('_JEXEC') or die();
 <?php if($this->params->get('params.qr_code', 0)) : 
     $width = $this->params->get('params.qr_width', 60); ?>
 	<img src="http://chart.apis.google.com/chart?chs=<?php echo $width;?>x<?php echo $width;?>&cht=qr&chld=L|0&chl=<?php echo urlencode(strip_tags($this->value));?>" 
-			title="<?php echo JText::_('TXT_QR');?>" class="qr-image" width="<?php echo $width;?>" height="<?php echo $width;?>" align="absmiddle">
+			title="<?php echo \Joomla\CMS\Language\Text::_('TXT_QR');?>" class="qr-image" width="<?php echo $width;?>" height="<?php echo $width;?>" align="absmiddle">
 <?php endif; ?>
 
 <?php echo $this->value;?>

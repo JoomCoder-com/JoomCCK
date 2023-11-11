@@ -15,7 +15,7 @@ jimport( 'joomla.filesystem.folder' );
 jimport( 'joomla.filesystem.file'   );
 
 // Include the component HTML helpers.
-JHtml::addIncludePath(JPATH_COMPONENT.'/helpers/html');
+\Joomla\CMS\HTML\HTMLHelper::addIncludePath(JPATH_COMPONENT.'/helpers/html');
 
 class JFormFieldCpacksections extends JFormField
 {
@@ -23,10 +23,10 @@ class JFormFieldCpacksections extends JFormField
 	
 	public function getInput()
 	{
-		$db = JFactory::getDbo();
+		$db = \Joomla\CMS\Factory::getDbo();
 		if(!\Joomla\CMS\Factory::getApplication()->input->getInt('id' , 0))
 		{
-			$app = JFactory::getApplication();
+			$app = \Joomla\CMS\Factory::getApplication();
 			$pack_id = $app->getUserStateFromRequest('com_joomcck.packsections.pack', 'pack_id');
 			
 			$db->setQuery('SELECT section_id FROM #__js_res_packs_sections WHERE pack_id = '.$pack_id);
@@ -38,9 +38,9 @@ class JFormFieldCpacksections extends JFormField
 			
 			$options = $db->loadObjectList();
 			
-			array_unshift($options, JHTML::_('select.option', '', JText::_('CSELECTSECTION')));
+			array_unshift($options, JHTML::_('select.option', '', \Joomla\CMS\Language\Text::_('CSELECTSECTION')));
 			
-			$html = JHtml::_('select.genericlist', $options, 'jform[section_id]', 'onchange="changeSection(this.value);" class="form-select required"');
+			$html = \Joomla\CMS\HTML\HTMLHelper::_('select.genericlist', $options, 'jform[section_id]', 'onchange="changeSection(this.value);" class="form-select required"');
 		}
 		else
 		{

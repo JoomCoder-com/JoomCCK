@@ -11,23 +11,23 @@ use Joomla\CMS\Factory;
 
 defined('_JEXEC') or die();
 
-JHtml::addIncludePath(JPATH_COMPONENT . DIRECTORY_SEPARATOR . 'library/php');
+\Joomla\CMS\HTML\HTMLHelper::addIncludePath(JPATH_COMPONENT . DIRECTORY_SEPARATOR . 'library/php');
 
 class JoomcckViewVersions extends MViewBase
 {
 
 	function display($tpl = null)
 	{
-		$doc = JFactory::getDocument();
-		$user = JFactory::getUser();
-		$app = JFactory::getApplication();
+		$doc = \Joomla\CMS\Factory::getDocument();
+		$user = \Joomla\CMS\Factory::getUser();
+		$app = \Joomla\CMS\Factory::getApplication();
 
 		$model = MModelBase::getInstance('Auditversions', 'JoomcckModel');
 		$this->state = $model->getState();
-		$record_id = JFactory::getApplication()->input->getInt('record_id');
+		$record_id = \Joomla\CMS\Factory::getApplication()->input->getInt('record_id');
 		if(!$record_id)
 		{
-			JFactory::getApplication()->enqueueMessage(JText::_('NORECORDID'),'warning');
+			\Joomla\CMS\Factory::getApplication()->enqueueMessage(\Joomla\CMS\Language\Text::_('NORECORDID'),'warning');
 
 			return;
 		}
@@ -41,13 +41,13 @@ class JoomcckViewVersions extends MViewBase
 
 		foreach ($items as $k => $item)
 		{
-			$items[$k]->date = JHtml::_('date', $item->ctime, $record_type->params->get('audit.audit_date_format', $record_type->params->get('audit.audit_date_custom', 'd M Y h:i:s')));
+			$items[$k]->date = \Joomla\CMS\HTML\HTMLHelper::_('date', $item->ctime, $record_type->params->get('audit.audit_date_format', $record_type->params->get('audit.audit_date_custom', 'd M Y h:i:s')));
 		}
 
 		if(!count($items))
 		{
 
-			Factory::getApplication()->enqueueMessage(JText::_('CERR_NOVERSIONS'),'warning');
+			Factory::getApplication()->enqueueMessage(\Joomla\CMS\Language\Text::_('CERR_NOVERSIONS'),'warning');
 			return;
 		}
 
@@ -61,8 +61,8 @@ class JoomcckViewVersions extends MViewBase
 
 	private function _prepareDocument()
 	{
-		$app = JFactory::getApplication();
-		$doc = JFactory::getDocument();
+		$app = \Joomla\CMS\Factory::getApplication();
+		$doc = \Joomla\CMS\Factory::getDocument();
 		$menus = $app->getMenu();
 		$menu = $menus->getActive();
 		$this->appParams = $app->getParams();
@@ -79,10 +79,10 @@ class JoomcckViewVersions extends MViewBase
 
 		if($this->record->title)
 		{
-			$title = JText::_('CAUDITVERSIONS').' : '.$this->record->title.' v. '.$this->record->version;
+			$title = \Joomla\CMS\Language\Text::_('CAUDITVERSIONS').' : '.$this->record->title.' v. '.$this->record->version;
 		}
 		$path = array(array('title' => $title, 'link' => ''));
-		$path[] = array('title' => $this->section->name, 'link' => JRoute::_(Url::records($this->section)));
+		$path[] = array('title' => $this->section->name, 'link' => \Joomla\CMS\Router\Route::_(Url::records($this->section)));
 
 		if(empty($title))
 		{
@@ -90,11 +90,11 @@ class JoomcckViewVersions extends MViewBase
 		}
 		elseif($app->getCfg('sitename_pagetitles', 0) == 1)
 		{
-			$title = JText::sprintf('JPAGETITLE', $app->getCfg('sitename'), $title);
+			$title = \Joomla\CMS\Language\Text::sprintf('JPAGETITLE', $app->getCfg('sitename'), $title);
 		}
 		elseif($app->getCfg('sitename_pagetitles', 0) == 2)
 		{
-			$title = JText::sprintf('JPAGETITLE', $title, $app->getCfg('sitename'));
+			$title = \Joomla\CMS\Language\Text::sprintf('JPAGETITLE', $title, $app->getCfg('sitename'));
 		}
 
 		$doc->setTitle($title);

@@ -31,7 +31,7 @@ class JHTMLMrelements
 		}
 
 		$html = '<a class="dropdown-item" href="javascript:void(0);" onclick="Joomla.tableOrdering(\'' . $order . '\',\'' . $direction . '\',\'' . $task . '\');">';
-		$html .= JText::_($title);
+		$html .= \Joomla\CMS\Language\Text::_($title);
 
 		if($order == $selected)
 		{
@@ -55,10 +55,10 @@ class JHTMLMrelements
 	public static function catselector($name, $section, $default, $limit = 0, $ignore = array())
 	{
 
-		$lang = JFactory::getLanguage();
+		$lang = \Joomla\CMS\Factory::getLanguage();
 		$lang->load('com_joomcck', JPATH_ROOT);
 
-		$db = JFactory::getDbo();
+		$db = \Joomla\CMS\Factory::getDbo();
 
 		if(!$section)
 		{
@@ -77,7 +77,7 @@ class JHTMLMrelements
 			$categories = $db->loadObjectList();
 			foreach($categories as &$category)
 			{
-				$category->params = new JRegistry($category->params);
+				$category->params = new \Joomla\Registry\Registry($category->params);
 				$category->title  = htmlentities($category->title, ENT_QUOTES, 'UTF-8');
 				$category->path   = htmlentities($category->path, ENT_QUOTES, 'UTF-8');
 			}
@@ -101,7 +101,7 @@ class JHTMLMrelements
 		$out = ob_get_contents();
 		ob_end_clean();
         
-		$document = JFactory::getDocument();
+		$document = \Joomla\CMS\Factory::getDocument();
 		$document->addStyleSheet(JURI::root(TRUE) . '/components/com_joomcck/library/php/html/mrelements/catselector.css');
         
 		return $out;
@@ -109,12 +109,12 @@ class JHTMLMrelements
 	
 	public static function flow($name = 'filecontrol', $files = NULL, $options = array(), $field = NULL)
     {
-        $app = JFactory::getApplication();
-        $doc = JFactory::getDocument();
+        $app = \Joomla\CMS\Factory::getApplication();
+        $doc = \Joomla\CMS\Factory::getDocument();
 		$doc->addScript(JURI::root(TRUE) . '/media/com_joomcck/vendors/flow/flow.js');
 		$doc->addStyleSheet(JURI::root(TRUE) . '/components/com_joomcck/library/php/html/mrelements/flow.css');
         
-        $upload_url = JRoute::_("index.php?option=com_joomcck&task=files.upload&tmpl=component&section_id=" . $app->input->getInt('section_id') . "&record_id=" . $app->input->getInt('id') . "&type_id=" . $app->input->getInt('type_id') . "&field_id={$field->id}&key=" . md5($name) ."&iscomment=".(int)@$field->iscomment, false);
+        $upload_url = \Joomla\CMS\Router\Route::_("index.php?option=com_joomcck&task=files.upload&tmpl=component&section_id=" . $app->input->getInt('section_id') . "&record_id=" . $app->input->getInt('id') . "&type_id=" . $app->input->getInt('type_id') . "&field_id={$field->id}&key=" . md5($name) ."&iscomment=".(int)@$field->iscomment, false);
         
         ob_start();
 		include 'mrelements/flow.php';
@@ -125,8 +125,8 @@ class JHTMLMrelements
     }
 	/*public static function jqupload($name = 'filecontrol', $files = NULL, $options = array(), $field = NULL)
 	{
-        $app = JFactory::getApplication();
-        $doc = JFactory::getDocument();
+        $app = \Joomla\CMS\Factory::getApplication();
+        $doc = \Joomla\CMS\Factory::getDocument();
         $doc->addStyleSheet(JURI::root(TRUE) . '/media/com_joomcck/vendors/blueimp-file-upload/css/all.css');
         $doc->addScript(JURI::root(TRUE) . '/media/com_joomcck/vendors/blueimp-file-upload/js/vendor/jquery.ui.widget.js');
         $doc->addScript(JURI::root(TRUE) . '/media/com_joomcck/vendors/blueimp-file-upload/js/jquery.iframe-transport.js');
@@ -170,7 +170,7 @@ class JHTMLMrelements
 			(function ($) {
 				$( document ).ready(function() {
 					$('#fileupload').fileupload({
-				        url: '" . JRoute::_("index.php?option=com_joomcck&task=files.upload&tmpl=component&section_id=" . $app->input->getInt('section_id') . "&record_id=" . $app->input->getInt('id') . "&type_id=" . $app->input->getInt('type_id') . "&field_id={$field->id}&key=" . md5($name), FALSE) . "',
+				        url: '" . \Joomla\CMS\Router\Route::_("index.php?option=com_joomcck&task=files.upload&tmpl=component&section_id=" . $app->input->getInt('section_id') . "&record_id=" . $app->input->getInt('id') . "&type_id=" . $app->input->getInt('type_id') . "&field_id={$field->id}&key=" . md5($name), FALSE) . "',
 				        maxChunkSize: 200000,
 						paramName: '{$tempname}[]',
 						formName: '{$name}',
@@ -220,7 +220,7 @@ class JHTMLMrelements
 				<div class="progress-extended">&nbsp;</div>
 			</div>';
 
-		$cob_params = JComponentHelper::getParams('com_joomcck');
+		$cob_params = \Joomla\CMS\Component\ComponentHelper::getParams('com_joomcck');
 		$path       = $cob_params->get('general_upload');
 		$path .= '/' . $field->params->get('params.subfolder') . '/';
         $t = [];
@@ -229,10 +229,10 @@ class JHTMLMrelements
 			foreach($files as $file)
 			{
 				$img = FALSE;
-				$ext = JFile::getExt($file['filename']);
+				$ext = \Joomla\CMS\Filesystem\File::getExt($file['filename']);
 				if(in_array($ext, array('png', 'jpg', 'jpeg', 'gif', 'bmp')))
 				{
-					$img = CImgHelper::getThumb(JPATH_ROOT . '/' . $path . $file['fullpath'], 50, 50, 'uploader', JFactory::getUser()->get('id'), ['mode' => 1]);
+					$img = CImgHelper::getThumb(JPATH_ROOT . '/' . $path . $file['fullpath'], 50, 50, 'uploader', \Joomla\CMS\Factory::getUser()->get('id'), ['mode' => 1]);
 				}
 				$t[] = '
 				<tr class="template-download fade in">
@@ -246,7 +246,7 @@ class JHTMLMrelements
 			        </td>
 			        <td>
 			            <p class="name">
-			            	<a href="' . JUri::root() . $path . $file['fullpath'] . '" target="blank"><span id="title' . $file['id'] . '">' . ($file['title'] ? $file['title'] : $file['realname']) . '</span></a>
+			            	<a href="' . \Joomla\CMS\Uri\Uri::root() . $path . $file['fullpath'] . '" target="blank"><span id="title' . $file['id'] . '">' . ($file['title'] ? $file['title'] : $file['realname']) . '</span></a>
 			            	<button class="btn btn-sm btn-light border" type="button" onclick="addTitleInterface()">Edit title</button>
 			            </p>
 
@@ -254,8 +254,8 @@ class JHTMLMrelements
 			        </td>
 			        <td width="1%">' . $file['size'] . '</td>
 			        <td width="1%">
-		                <button class="btn btn-sm btn-link btn-danger" data-type="DELETE" style="width:30px" data-url="' . JRoute::_("index.php?option=com_joomcck&task=files.uploadremove&tmpl=component&filename=" . $file['filename']) . '">
-		                    ' . HTMLFormatHelper::icon('minus-circle.png', JText::_('CDELETE')) . '
+		                <button class="btn btn-sm btn-link btn-danger" data-type="DELETE" style="width:30px" data-url="' . \Joomla\CMS\Router\Route::_("index.php?option=com_joomcck&task=files.uploadremove&tmpl=component&filename=" . $file['filename']) . '">
+		                    ' . HTMLFormatHelper::icon('minus-circle.png', \Joomla\CMS\Language\Text::_('CDELETE')) . '
 		                </button>
 			        </td>
 			    </tr>';
@@ -268,7 +268,7 @@ class JHTMLMrelements
 
 		return $out;
 
-		//$out[] = '<input id="fileupload" type="file" name="files[]" data-url="'.JRoute::_("index.php?option=com_joomcck&task=files.upload&tmpl=component&section_id=" . $app->input->getInt('section_id') . "&record_id=" . $app->input->getInt('id') . "&type_id=" . $app->input->getInt('type_id') . "&field_id={$field_id}&key=" . md5($name), FALSE ).'" multiple>';
+		//$out[] = '<input id="fileupload" type="file" name="files[]" data-url="'.\Joomla\CMS\Router\Route::_("index.php?option=com_joomcck&task=files.upload&tmpl=component&section_id=" . $app->input->getInt('section_id') . "&record_id=" . $app->input->getInt('id') . "&type_id=" . $app->input->getInt('type_id') . "&field_id={$field_id}&key=" . md5($name), FALSE ).'" multiple>';
     }*/
     
 
@@ -285,18 +285,18 @@ class JHTMLMrelements
         if(!is_object($field)) {
             $field = json_decode(json_encode(["id" => $field]));
         }
-        $app = JFactory::getApplication();
-		$doc = JFactory::getDocument();
+        $app = \Joomla\CMS\Factory::getApplication();
+		$doc = \Joomla\CMS\Factory::getDocument();
 		$doc->addScript(JURI::root(TRUE) . '/media/com_joomcck/js/mooupload/MooUpload.js');
 		$doc->addStyleSheet(JURI::root(TRUE) . '/media/com_joomcck/js/mooupload/style.css');
 
-		$params = new JRegistry();
+		$params = new \Joomla\Registry\Registry();
 		$params->loadArray($options);
 		$tempname  = $params->get('tmpname', substr(md5(time() . rand(1, 1000000)), 0, 5));
 		$record_id = $app->input->getInt('id', 0);
 
 		$exts    = explode(',', str_replace(' ', '', $params->get('file_formats', 'zip, jpg, png, jpeg, gif, txt, md, bmp')));
-		$session = JFactory::getSession();
+		$session = \Joomla\CMS\Factory::getSession();
 		$session->set('width', $params->get('width', 0), md5($name));
 		$session->set('height', $params->get('height', 0), md5($name));
 		$session->set('max_size', $params->get('max_size', 2097152), md5($name));
@@ -314,8 +314,8 @@ class JHTMLMrelements
 		<script type=\"text/javascript\">
 			window.addEvent('domready', function() {
 				var myUpload = new MooUpload('{$tempname}', {
-					action: '" . JRoute::_("index.php?option=com_joomcck&task=files.mooupload&tmpl=component&section_id=" . $app->input->getInt('section_id') . "&record_id=" . $app->input->getInt('id') . "&type_id=" . $app->input->getInt('type_id') . "&field_id={$field->id}&key=" . md5($name), FALSE) . "',
-					action_remove_file: '" . JRoute::_("index.php?option=com_joomcck&task=files.uploadremove&tmpl=component") . "',
+					action: '" . \Joomla\CMS\Router\Route::_("index.php?option=com_joomcck&task=files.mooupload&tmpl=component&section_id=" . $app->input->getInt('section_id') . "&record_id=" . $app->input->getInt('id') . "&type_id=" . $app->input->getInt('type_id') . "&field_id={$field->id}&key=" . md5($name), FALSE) . "',
+					action_remove_file: '" . \Joomla\CMS\Router\Route::_("index.php?option=com_joomcck&task=files.uploadremove&tmpl=component") . "',
 					method: '" . $params->get('method', 'auto') . "',
 					tempname: '{$tempname}',
 					files:" . $files . ",
@@ -334,21 +334,21 @@ class JHTMLMrelements
 				      movie: '" . JURI::root(TRUE) . "/media/com_joomcck/js/mooupload/Moo.Uploader.swf'
 				    },
 				    texts: {
-					    error      : '" . JText::_('CERROR') . "',
-					    file       : '" . JText::_('CFILE') . "',
-					    filesize   : '" . JText::_('CFILESIZE') . "',
-					    filetype   : '" . JText::_('CFILETYPE') . "',
-					    nohtml5    : '" . JText::_('CNOHTMLSUPPORT') . "',
-					    noflash    : '" . JText::_('CINSTALLFLASH') . "',
-					    sel        : '" . JText::_('CACT') . "',
-					    selectfile : '" . JText::_('CADDFILE') . "',
-					    status     : '" . JText::_('CSTATUS') . "',
-					    startupload: '" . JText::_('CCTARTUPLOAD') . "',
-					    uploaded   : '" . JText::_('CUPLOADED') . "',
-					    sure	   : '" . JText::_('CSURE') . "',
-					    edit_descr : '" . JText::_('CEDITDESCR') . "',
-					    edit_title : '" . JText::_('CEDITTITLE') . "',
-					    deleting   : '" . JText::_('CDELETING') . "'
+					    error      : '" . \Joomla\CMS\Language\Text::_('CERROR') . "',
+					    file       : '" . \Joomla\CMS\Language\Text::_('CFILE') . "',
+					    filesize   : '" . \Joomla\CMS\Language\Text::_('CFILESIZE') . "',
+					    filetype   : '" . \Joomla\CMS\Language\Text::_('CFILETYPE') . "',
+					    nohtml5    : '" . \Joomla\CMS\Language\Text::_('CNOHTMLSUPPORT') . "',
+					    noflash    : '" . \Joomla\CMS\Language\Text::_('CINSTALLFLASH') . "',
+					    sel        : '" . \Joomla\CMS\Language\Text::_('CACT') . "',
+					    selectfile : '" . \Joomla\CMS\Language\Text::_('CADDFILE') . "',
+					    status     : '" . \Joomla\CMS\Language\Text::_('CSTATUS') . "',
+					    startupload: '" . \Joomla\CMS\Language\Text::_('CCTARTUPLOAD') . "',
+					    uploaded   : '" . \Joomla\CMS\Language\Text::_('CUPLOADED') . "',
+					    sure	   : '" . \Joomla\CMS\Language\Text::_('CSURE') . "',
+					    edit_descr : '" . \Joomla\CMS\Language\Text::_('CEDITDESCR') . "',
+					    edit_title : '" . \Joomla\CMS\Language\Text::_('CEDITTITLE') . "',
+					    deleting   : '" . \Joomla\CMS\Language\Text::_('CDELETING') . "'
 				    },
 
 				    " . ($params->get('callback') ? "
@@ -358,11 +358,11 @@ class JHTMLMrelements
 				    onFileDelete: function(error, filename){
 						if(error == '1016')
 						{
-							msg = '" . JText::sprintf('CERR_FILEDOSENTDELETED', "' + filename + '", array('jsSafe' => TRUE)) . "';
+							msg = '" . \Joomla\CMS\Language\Text::sprintf('CERR_FILEDOSENTDELETED', "' + filename + '", array('jsSafe' => TRUE)) . "';
 						}
 						if(error == '1017')
 						{
-							msg = '" . JText::sprintf('CERR_FILEDOSENTEXIST', "' + filename + '", array('jsSafe' => TRUE)) . "';
+							msg = '" . \Joomla\CMS\Language\Text::sprintf('CERR_FILEDOSENTEXIST', "' + filename + '", array('jsSafe' => TRUE)) . "';
 						}
 						if(error)
 						{
@@ -373,19 +373,19 @@ class JHTMLMrelements
 						var msg = error;
 						if(error == '1012')
 						{
-							msg = '" . JText::sprintf('CERR_FILEUPLOADLIMITREACHED', $params->get('max_count', 1), array('jsSafe' => TRUE)) . "';
+							msg = '" . \Joomla\CMS\Language\Text::sprintf('CERR_FILEUPLOADLIMITREACHED', $params->get('max_count', 1), array('jsSafe' => TRUE)) . "';
 						}
 						if(error == '1013')
 						{
-							msg = '" . JText::sprintf('CERR_EXTENSIONNOTALLOWED', "' + filename + '", array('jsSafe' => TRUE)) . "';
+							msg = '" . \Joomla\CMS\Language\Text::sprintf('CERR_EXTENSIONNOTALLOWED', "' + filename + '", array('jsSafe' => TRUE)) . "';
 						}
 						if(error == '1014')
 						{
-							msg = '" . JText::sprintf('CERR_UPLOADEDFILESIZESMALLER', "' + filename + '", array('jsSafe' => TRUE)) . "';
+							msg = '" . \Joomla\CMS\Language\Text::sprintf('CERR_UPLOADEDFILESIZESMALLER', "' + filename + '", array('jsSafe' => TRUE)) . "';
 						}
 						if(error == '1015')
 						{
-							msg = '" . JText::sprintf('CERR_UPLOADEDFILESIZEBIGGER', "' + filename + '", array('jsSafe' => TRUE)) . "';
+							msg = '" . \Joomla\CMS\Language\Text::sprintf('CERR_UPLOADEDFILESIZEBIGGER', "' + filename + '", array('jsSafe' => TRUE)) . "';
 						}
 						Joomcck.fieldError(" . $field->id . ", msg);
 					}
@@ -398,9 +398,9 @@ class JHTMLMrelements
 
 		if($exts)
 		{
-			$out[] = '<br/><span class="small">' . JText::_('CER_ONLYFORMATS') . ': <b>' . implode("</b>, <b>", $exts) . '</b></span>';
+			$out[] = '<br/><span class="small">' . \Joomla\CMS\Language\Text::_('CER_ONLYFORMATS') . ': <b>' . implode("</b>, <b>", $exts) . '</b></span>';
 		}
-		$out[] = '<br/><span class="small">' . JText::_('CNSG_MAXSIZEPERFILE') . ': <b>' . HTMLFormatHelper::formatSize($params->get('max_size', 2097152)) . '</b></span>';
+		$out[] = '<br/><span class="small">' . \Joomla\CMS\Language\Text::_('CNSG_MAXSIZEPERFILE') . ': <b>' . HTMLFormatHelper::formatSize($params->get('max_size', 2097152)) . '</b></span>';
 
 		return implode("\n", $out);
 
@@ -472,7 +472,7 @@ class JHTMLMrelements
 	}
 	public static function listautocomplete($name, $id, $default = array(), $list = array(), $options = array())
 	{
-		$params = new JRegistry();
+		$params = new \Joomla\Registry\Registry();
 		$params->loadArray($options);
 
 		settype($default, 'array');
@@ -482,7 +482,7 @@ class JHTMLMrelements
 			return '<input type="hidden" name="' . $name . '" id="' . $id . '" value="" />';
 		}
 
-		$doc = JFactory::getDocument();
+		$doc = \Joomla\CMS\Factory::getDocument();
 		$doc->addStyleSheet(JURI::root(TRUE) . '/media/com_joomcck/js/autocomplete/style.css');
 		$doc->addScript(JURI::root(TRUE) . '/media/com_joomcck/js/autocomplete/GrowingInput.js');
 		$doc->addScript(JURI::root(TRUE) . '/media/com_joomcck/js/autocomplete/TextboxList.js');
@@ -524,8 +524,8 @@ class JHTMLMrelements
 			$el[] = sprintf($patern, str_replace('"', '\\"', stripslashes($item->id)), str_replace('"', '\\"', stripslashes($item->plain)), str_replace('"', '\\"', stripslashes($item->html)));
 		}
 
-		$a[] = "\nplaceholder: '" . JText::_('CTYPETOSUGGEST') . "'";
-		$a[] = "\nremote:{ emptyResultPlaceholder:'" . JText::_('CNOSUGGEST') . "', loadPlaceholder:'" . JText::_('CPLSWAIT') . "'}";
+		$a[] = "\nplaceholder: '" . \Joomla\CMS\Language\Text::_('CTYPETOSUGGEST') . "'";
+		$a[] = "\nremote:{ emptyResultPlaceholder:'" . \Joomla\CMS\Language\Text::_('CNOSUGGEST') . "', loadPlaceholder:'" . \Joomla\CMS\Language\Text::_('CPLSWAIT') . "'}";
 		$a[] = "\nwidth: '" . $params->get('min_width', 300) . "'";
 		$a[] = "\nminLength: " . $params->get('min_length', 1);
 		$a[] = "\nmaxResults: " . $params->get('max_result', 10);
@@ -569,7 +569,7 @@ class JHTMLMrelements
 			}';
 		}
 
-		$additional[] = "\ntexts:{ limit : '" . JText::_('C_JSLIMITOPTIONS') . "'	}";
+		$additional[] = "\ntexts:{ limit : '" . \Joomla\CMS\Language\Text::_('C_JSLIMITOPTIONS') . "'	}";
 
 		$uniq    = substr(md5(time() . '-' . rand(0, 1000)), 0, 5);
 		$options = '{' . implode(',', $additional) . '}';
@@ -592,11 +592,11 @@ class JHTMLMrelements
 				jQuery(box).css('background-image', 'url(\"" . JURI::root(TRUE) . "/media/com_joomcck/js/mooupload/imgs/load_bg_blue.gif\")');
 
 				jQuery.ajax({
-					url:'" . JRoute::_($params->get('onRemove'), FALSE) . "',
+					url:'" . \Joomla\CMS\Router\Route::_($params->get('onRemove'), FALSE) . "',
 					type:'POST',
 					dataType:'json',
 					data:{
-						rid: " . JFactory::getApplication()->input->getInt('id') . ",
+						rid: " . \Joomla\CMS\Factory::getApplication()->input->getInt('id') . ",
 						tid: box.value[0]
 					}
 				}).done(function(json) {
@@ -639,12 +639,12 @@ class JHTMLMrelements
 
 		if($params->get('onAdd', 0))
 		{
-			$html[] = ($params->get('max_items', 0) ? "if(default{$uniq}.length > " . $params->get('max_items', 0) . "){ alert('" . JText::_('CTAGLIMITREACHED') . "'); return;}" : "") . "
+			$html[] = ($params->get('max_items', 0) ? "if(default{$uniq}.length > " . $params->get('max_items', 0) . "){ alert('" . \Joomla\CMS\Language\Text::_('CTAGLIMITREACHED') . "'); return;}" : "") . "
 
 				jQuery(box).css('background-image', 'url(\"" . JURI::root(TRUE) . "/media/com_joomcck/js/mooupload/imgs/load_bg_blue.gif\")');
 
 				jQuery.ajax({
-					url:'" . JRoute::_($params->get('onAdd'), FALSE) . "',
+					url:'" . \Joomla\CMS\Router\Route::_($params->get('onAdd'), FALSE) . "',
 					type:'POST',
 					dataType:'json',
 					data:{
@@ -686,7 +686,7 @@ class JHTMLMrelements
 		{
 			//$html[] = "t{$uniq}.container.addClass('textboxlist-loading');\n";
 			$html[] = "jQuery.ajax({
-				url:'" . JRoute::_($params->get('ajax_url'), FALSE) . "',
+				url:'" . \Joomla\CMS\Router\Route::_($params->get('ajax_url'), FALSE) . "',
 				type:'POST',
 				dataType:'json',
 				data:{" . $params->get('ajax_data') . "}

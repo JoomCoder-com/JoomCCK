@@ -29,11 +29,11 @@ $key = $vars->index . '_' . $vars->rid;
 
 <script type="text/javascript">
 	var newRating<?php echo $key;?> = felixRating.newRating('<?php echo $vars->rating_ident; ?>_rateBox', <?php echo $vars->rating_active; ?>);
-	newRating<?php echo $key;?>.setStars({ "20": '<?php echo JText::_("VOTE_NOTGOOD")?>',
-		"40": '<?php echo JText::_("VOTE_FAIR")?>',
-		"60": '<?php echo JText::_("VOTE_GOOD")?>',
-		"80": '<?php echo JText::_("VOTE_VERYGOOD")?>',
-		"100": '<?php echo JText::_("VOTE_EXEL")?>' });
+	newRating<?php echo $key;?>.setStars({ "20": '<?php echo \Joomla\CMS\Language\Text::_("VOTE_NOTGOOD")?>',
+		"40": '<?php echo \Joomla\CMS\Language\Text::_("VOTE_FAIR")?>',
+		"60": '<?php echo \Joomla\CMS\Language\Text::_("VOTE_GOOD")?>',
+		"80": '<?php echo \Joomla\CMS\Language\Text::_("VOTE_VERYGOOD")?>',
+		"100": '<?php echo \Joomla\CMS\Language\Text::_("VOTE_EXEL")?>' });
 	newRating<?php echo $key;?>.setCurrentStar("<?php echo $vars->rating_current; ?>");
 	newRating<?php echo $key;?>.setIndex(<?php echo $vars->index?>);
 	<?php if( $vars->callbackfunction ){ ?>

@@ -1,7 +1,7 @@
 <?php
 defined('_JEXEC') or die();
 
-$app = JFactory::getApplication();
+$app = \Joomla\CMS\Factory::getApplication();
 
 if(!$params->get('field_id_geo'))
 {
@@ -10,7 +10,7 @@ if(!$params->get('field_id_geo'))
 	return FALSE;
 }
 
-$db = JFactory::getDbo();
+$db = \Joomla\CMS\Factory::getDbo();
 $db->setQuery("SELECT * FROM `#__js_res_fields` WHERE id = " . $params->get('field_id_geo'));
 $field = $db->loadObject();
 
@@ -38,7 +38,7 @@ $db->execute();
 $db->setQuery("SELECT `id`, `fields` FROM `#__js_res_record` WHERE id IN(SELECT r.record_id FROM `#__js_res_record_values` AS r WHERE r.field_id = {$field->id})");
 $list = $db->loadAssocList('id', 'fields');
 
-$table = JTable::getInstance('Record', 'JoomcckTable');
+$table = \Joomla\CMS\Table\Table::getInstance('Record', 'JoomcckTable');
 
 foreach($list as $id => $fields)
 {

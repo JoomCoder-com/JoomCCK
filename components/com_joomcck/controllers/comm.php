@@ -22,7 +22,7 @@ class JoomcckControllerComm extends MControllerForm
 
 		if(!$this->input)
 		{
-			$this->input = JFactory::getApplication()->input;
+			$this->input = \Joomla\CMS\Factory::getApplication()->input;
 		}
 	}
 
@@ -33,7 +33,7 @@ class JoomcckControllerComm extends MControllerForm
 
 	protected function allowAdd($data = array())
 	{
-		$user = JFactory::getUser();
+		$user = \Joomla\CMS\Factory::getUser();
 		$allow = $user->authorise('core.create', 'com_joomcck.comment');
 
 		if($allow === null)
@@ -48,6 +48,6 @@ class JoomcckControllerComm extends MControllerForm
 
 	protected function allowEdit($data = array(), $key = 'id')
 	{
-		return JFactory::getUser()->authorise('core.edit', 'com_joomcck.comment');
+		return \Joomla\CMS\Factory::getUser()->authorise('core.edit', 'com_joomcck.comment');
 	}
 }

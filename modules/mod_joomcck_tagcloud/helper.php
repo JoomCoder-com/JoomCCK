@@ -28,7 +28,7 @@ class modJoomcckTagcloudHelper
 
 	public static function getTags($section, $params, $cat_id)
 	{
-		$db = JFactory::getDBO();
+		$db = \Joomla\CMS\Factory::getDBO();
 
 		$where = array();
 
@@ -124,13 +124,13 @@ class modJoomcckTagcloudHelper
 			switch ($params->get('item_tag_num', 0))
 			{
 				case '1':
-					$nums[$val->id] = array('rel' => "tooltip", 'data-bs-title' => JText::_('CTAGHITS') . ': ' . $val->hits);
+					$nums[$val->id] = array('rel' => "tooltip", 'data-bs-title' => \Joomla\CMS\Language\Text::_('CTAGHITS') . ': ' . $val->hits);
 					break;
 				case '2':
-					$nums[$val->id] = array('rel' => "tooltip", 'data-bs-title' => JText::_('CTAGUSAGE') . ': ' . $val->r_usage);
+					$nums[$val->id] = array('rel' => "tooltip", 'data-bs-title' => \Joomla\CMS\Language\Text::_('CTAGUSAGE') . ': ' . $val->r_usage);
 					break;
 				case '3':
-					$nums[$val->id] = array('rel' => "tooltip", 'data-bs-title' => JText::_('CTAGHITS') . ': ' . $val->hits . ', ' . JText::_('CTAGUSAGE') . ': ' . $val->r_usage);
+					$nums[$val->id] = array('rel' => "tooltip", 'data-bs-title' => \Joomla\CMS\Language\Text::_('CTAGHITS') . ': ' . $val->hits . ', ' . \Joomla\CMS\Language\Text::_('CTAGUSAGE') . ': ' . $val->r_usage);
 					break;
 			}
 		}
@@ -190,7 +190,7 @@ class modJoomcckTagcloudHelper
 		$tmp  = 0;
 		foreach ($indexes as $i => $id)
 		{
-			$list[$id]->html = JHtml::link(JRoute::_($link . '&filter_val[0]=' . $id), $list[$id]->tag,
+			$list[$id]->html = \Joomla\CMS\HTML\HTMLHelper::link(\Joomla\CMS\Router\Route::_($link . '&filter_val[0]=' . $id), $list[$id]->tag,
 				($params->get('item_tag_num', 0) ? @$nums[$id] : null));
 			$out[$tmp]       = $list[$id];
 			$tmp++;

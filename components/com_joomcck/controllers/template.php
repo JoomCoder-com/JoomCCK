@@ -22,7 +22,7 @@ class JoomcckControllerTemplate extends MControllerForm
 
 		if(!$this->input)
 		{
-			$this->input = JFactory::getApplication()->input;
+			$this->input = \Joomla\CMS\Factory::getApplication()->input;
 		}
 	}
 
@@ -33,7 +33,7 @@ class JoomcckControllerTemplate extends MControllerForm
 
 	protected function allowAdd($data = array())
 	{
-		$user  = JFactory::getUser();
+		$user  = \Joomla\CMS\Factory::getUser();
 		$allow = $user->authorise('core.create', 'com_joomcck.template');
 
 		if($allow === NULL)
@@ -48,7 +48,7 @@ class JoomcckControllerTemplate extends MControllerForm
 
 	protected function allowEdit($data = array(), $key = 'id')
 	{
-		return JFactory::getUser()->authorise('core.edit', 'com_joomcck.template');
+		return \Joomla\CMS\Factory::getUser()->authorise('core.edit', 'com_joomcck.template');
 	}
 
 	public function postSaveHook(MModelBase $model, $validData = array())
@@ -63,16 +63,16 @@ class JoomcckControllerTemplate extends MControllerForm
 		$file     = explode('.', $data['ident']);
 		$filename = JoomcckTmplHelper::getTmplFile($file[1], $file[0]) . '.' . $this->input->get('ext');
 
-		if(!JFile::write($filename, $data['source']))
+		if(!\Joomla\CMS\Filesystem\File::write($filename, $data['source']))
 		{
 
-			Factory::getApplication()->enqueueMessage(JText::_('CCOULDNOTSAVEFILE'),'warning');
+			Factory::getApplication()->enqueueMessage(\Joomla\CMS\Language\Text::_('CCOULDNOTSAVEFILE'),'warning');
 		}
 
 		$this->setRedirect(Url::view('templates', FALSE));
 		if($this->getTask() == 'apply')
 		{
-			$this->setRedirect(JUri::getInstance()->toString());
+			$this->setRedirect(\Joomla\CMS\Uri\Uri::getInstance()->toString());
 		}
 	}
 
@@ -98,7 +98,7 @@ class JoomcckControllerTemplate extends MControllerForm
 
 	public function editFile($ext)
 	{
-		$app     = JFactory::getApplication();
+		$app     = \Joomla\CMS\Factory::getApplication();
 		$tmpl    = str_replace(array('[', ']', ','), array('', '', '.'), $app->input->getString('id'));
 		$context = "$this->option.edit{$ext}.$this->context";
 
@@ -106,7 +106,7 @@ class JoomcckControllerTemplate extends MControllerForm
 		$app->setUserState($context . '.data', NULL);
 
 		$this->setRedirect(
-			JRoute::_(
+			\Joomla\CMS\Router\Route::_(
 				'index.php?option=' . $this->option . '&view=' . $this->view_item
 				. '&file=' . $tmpl . '&ext=' . $ext, FALSE
 			)

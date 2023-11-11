@@ -18,14 +18,14 @@ class JFormFieldCgateway extends JFormMEFieldList
 
 	protected function getOptions()
 	{
-		$folders = JFolder::folders(JPATH_ROOT . DIRECTORY_SEPARATOR . 'components' . DIRECTORY_SEPARATOR . 'com_joomcck' . DIRECTORY_SEPARATOR . 'gateways');
+		$folders = \Joomla\CMS\Filesystem\Folder::folders(JPATH_ROOT . DIRECTORY_SEPARATOR . 'components' . DIRECTORY_SEPARATOR . 'com_joomcck' . DIRECTORY_SEPARATOR . 'gateways');
 		
-		$out[] = JHtml::_('select.option', '', '- ' . JText::_('Select gateway') . ' -');
+		$out[] = \Joomla\CMS\HTML\HTMLHelper::_('select.option', '', '- ' . \Joomla\CMS\Language\Text::_('Select gateway') . ' -');
 		if (count($folders))
 		{
 			foreach($folders as $folder)
 			{
-				$out[] = JHtml::_('select.option', $folder, $folder);
+				$out[] = \Joomla\CMS\HTML\HTMLHelper::_('select.option', $folder, $folder);
 			}
 		}
 		return $out;

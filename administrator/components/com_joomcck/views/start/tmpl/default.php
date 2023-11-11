@@ -10,7 +10,7 @@
 defined('_JEXEC') or die('Restricted access');
 
 // check config
-$configCorrect = !empty(JComponentHelper::getParams('com_joomcck')->get('general_upload','media/com_joomcck/uploads'));
+$configCorrect = !empty(\Joomla\CMS\Component\ComponentHelper::getParams('com_joomcck')->get('general_upload','media/com_joomcck/uploads'));
 
 
 

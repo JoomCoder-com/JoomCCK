@@ -27,7 +27,7 @@ class CommentHelper {
 	private static function _getclass($name)
 	{
 		$file = JPATH_ROOT. '/components/com_joomcck/library/php/comments/'.$name. DIRECTORY_SEPARATOR .$name.'.php';
-		if(JFile::exists($file))
+		if(\Joomla\CMS\Filesystem\File::exists($file))
 		{
 			include_once $file;
 			$name = 'JoomcckComments'.ucfirst($name);

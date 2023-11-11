@@ -24,8 +24,8 @@ include_once JPATH_ROOT . '/components/com_joomcck/library/php/html/tags.php';
 
 $section  = new JObject();
 $category = new JObject();
-$app      = JFactory::getApplication();
-$lang     = JFactory::getLanguage();
+$app      = \Joomla\CMS\Factory::getApplication();
+$lang     = \Joomla\CMS\Factory::getLanguage();
 
 $Itemid = $app->input->getInt('Itemid');
 $tag    = $lang->getTag();
@@ -38,7 +38,7 @@ $category->id = $app->input->getInt('cat_id');
 if($params->get('show_section_name'))
 {
 	JModelLegacy::addIncludePath(JPATH_ROOT . '/components/com_joomcck/models');
-	JTable::addIncludePath(JPATH_ROOT . '/administrator/components/com_joomcck/tables');
+	\Joomla\CMS\Table\Table::addIncludePath(JPATH_ROOT . '/administrator/components/com_joomcck/tables');
 	$section  = modJoomcckTagcloudHelper::getSection($section->id);
 	$category = modJoomcckTagcloudHelper::getCategory($category->id);
 }

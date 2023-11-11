@@ -53,7 +53,7 @@ class JoomcckModelCats extends MModelList
 	protected function populateState($ordering = NULL, $direction = NULL)
 	{
 		// Initialise variables.
-		$app     = JFactory::getApplication();
+		$app     = \Joomla\CMS\Factory::getApplication();
 		$context = $this->context;
 
 		$section = $app->getUserStateFromRequest('com_joomcck.cats.filter.section', 'section_id', 0);
@@ -121,8 +121,8 @@ class JoomcckModelCats extends MModelList
 		// Create a new query object.
 		$db      = $this->getDbo();
 		$query   = $db->getQuery(TRUE);
-		$user    = JFactory::getUser();
-		$section = JFactory::getApplication()->input->getInt('section_id');
+		$user    = \Joomla\CMS\Factory::getUser();
+		$section = \Joomla\CMS\Factory::getApplication()->input->getInt('section_id');
 
 		// Select the required fields from the table.
 		$query->select($this->getState('list.select', 'a.id, a.title, a.alias, a.note, a.published, a.access' . ', a.checked_out, a.checked_out_time, a.created_user_id' . ', a.path, a.parent_id, a.level, a.lft, a.rgt' . ', a.language' . ', a.params'));
@@ -230,7 +230,7 @@ class JoomcckModelCats extends MModelList
 		$cats  = $byparent = array();
 		foreach($items as $key => $item)
 		{
-			$params = new JRegistry();
+			$params = new \Joomla\Registry\Registry();
 			$params->loadString((string)$item->params);
 
 			$cats[$item->id]         = $item;
@@ -331,7 +331,7 @@ class JoomcckModelCats extends MModelList
 		{
 			foreach($items as $key => $item)
 			{
-				$params = new JRegistry();
+				$params = new \Joomla\Registry\Registry();
 				$params->loadString((string)$item->params);
 
 				$cats[$item->id]         = $item;

@@ -24,7 +24,7 @@ Webassets::init();
 include_once JPATH_ROOT . '/components/com_joomcck/api.php';
 require_once(dirname(__FILE__) . '/helper.php');
 
-$app = JFactory::getApplication();
+$app = \Joomla\CMS\Factory::getApplication();
 $Itemid = $app->input->getInt('Itemid');
 $headerText = trim($params->get('header_text',''));
 $footerText = trim($params->get('footer_text',''));

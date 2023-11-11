@@ -13,14 +13,14 @@ defined('_JEXEC') or die;
 	<thead>
 		<tr>
 			<th>#</th>
-			<th><?php echo JText::_('CFILE')?></th>
+			<th><?php echo \Joomla\CMS\Language\Text::_('CFILE')?></th>
 			
 			<?php if($this->hits):?>
-				<th><?php echo JText::_('CHITS')?></th>
+				<th><?php echo \Joomla\CMS\Language\Text::_('CHITS')?></th>
 			<?php endif;?>
 
 			<?php if($this->size):?>
-				<th><?php echo JText::_('CSIZE')?></th>
+				<th><?php echo \Joomla\CMS\Language\Text::_('CSIZE')?></th>
 			<?php endif;?>
 		</tr>
 	</thead>

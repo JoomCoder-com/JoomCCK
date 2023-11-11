@@ -16,7 +16,7 @@ class JFormFieldCCheckbox extends CFormFieldSelectable
     {
         $params     = $this->params;
         $values     = [];
-        $this->user = JFactory::getUser();
+        $this->user = \Joomla\CMS\Factory::getUser();
 
         if ($params->get('params.sql_source')) {
             $values = $this->_getSqlValues();
@@ -53,10 +53,10 @@ class JFormFieldCCheckbox extends CFormFieldSelectable
     {
         $js = "\n\t\tvar chb{$this->id} = jQuery('[name^=\"jform\\\\[fields\\\\]\\\\[$this->id\\\\]\"]:checked').length;";
         if ($this->required) {
-            $js .= "\n\t\tif(!chb{$this->id}){hfid.push({$this->id}); isValid = false; errorText.push('" . addslashes(JText::sprintf("CFIELDREQUIRED", $this->label)) . "');}";
+            $js .= "\n\t\tif(!chb{$this->id}){hfid.push({$this->id}); isValid = false; errorText.push('" . addslashes(\Joomla\CMS\Language\Text::sprintf("CFIELDREQUIRED", $this->label)) . "');}";
         }
         if ($this->params->get('params.total_limit')) {
-            $js .= "\n\t\tif(chb{$this->id} > " . $this->params->get('params.total_limit') . ") {hfid.push({$this->id}); isValid = false; errorText.push('" . addslashes(JText::sprintf('F_OPTIONSLIMIT', $this->params->get('params.total_limit'))) . "');}";
+            $js .= "\n\t\tif(chb{$this->id} > " . $this->params->get('params.total_limit') . ") {hfid.push({$this->id}); isValid = false; errorText.push('" . addslashes(\Joomla\CMS\Language\Text::sprintf('F_OPTIONSLIMIT', $this->params->get('params.total_limit'))) . "');}";
         }
 
         return $js;
@@ -66,7 +66,7 @@ class JFormFieldCCheckbox extends CFormFieldSelectable
     {
         if ($this->params->get('params.total_limit',0)) {
             if (count((array)$value) > $this->params->get('params.total_limit',0)) {
-                $this->setError(JText::sprintf('F_VALUESLIMIT', $this->params->get('params.total_limit',0), $this->label));
+                $this->setError(\Joomla\CMS\Language\Text::sprintf('F_VALUESLIMIT', $this->params->get('params.total_limit',0), $this->label));
             }
         }
 
@@ -89,7 +89,7 @@ class JFormFieldCCheckbox extends CFormFieldSelectable
     {
         $out = $this->_import_fieldlist($heads, $defaults->get('field.' . $this->id . '.fname'), 'fname');
         $out .= sprintf('<div><small>%s</small></div><input type="text" name="import[field][%d][separator]" value="%s" class="col-md-2" >',
-            JText::_('CMULTIVALFIELDSEPARATOR'), $this->id, $defaults->get('field.' . $this->id . '.separator', ','));
+            \Joomla\CMS\Language\Text::_('CMULTIVALFIELDSEPARATOR'), $this->id, $defaults->get('field.' . $this->id . '.separator', ','));
 
         return $out;
     }

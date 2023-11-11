@@ -48,7 +48,7 @@ class JFormFieldIcons extends JFormField
 					if ($ext == 'png' || $ext == 'gif')
 					{
 						$atr['onclick'] = "mrSetIcon{$this->fieldname}('{$file}')";
-						$html .= ' ' . JHTML::image( $path.'/'.$file, JText::_('Click to insert'), $atr);
+						$html .= ' ' . JHTML::image( $path.'/'.$file, \Joomla\CMS\Language\Text::_('Click to insert'), $atr);
 					}				
 				}
 				closedir($dh);

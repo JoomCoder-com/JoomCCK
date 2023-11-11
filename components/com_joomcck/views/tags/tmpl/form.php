@@ -9,13 +9,13 @@
 
 defined('_JEXEC') or die('Restricted access'); ?>
 
-<h1><?php echo JText::_('CEDITTAG'); ?> </h1>
+<h1><?php echo \Joomla\CMS\Language\Text::_('CEDITTAG'); ?> </h1>
 <br>
 <form action="index.php" method="post" id="adminForm" name="adminForm">
 
 	<TABLE class="admintable" width="100%">
     <TR>
-      <TD class="key"><?php echo JText::_('CTAG'); ?>:</TD>
+      <TD class="key"><?php echo \Joomla\CMS\Language\Text::_('CTAG'); ?>:</TD>
       <td><input type="text" name="title" value="<?php echo $this->item->tag; ?>" size="45" /></td>
     </TR>  
   </table>
@@ -24,7 +24,7 @@ defined('_JEXEC') or die('Restricted access'); ?>
   <div class="button_holder" id="button_holder">
     <div class="button1" style="width:30%">
       <div class="next">
-        <a onclick="submitbutton('save');"><?php echo JText::_('CSAVECHANGES'); ?></a>
+        <a onclick="submitbutton('save');"><?php echo \Joomla\CMS\Language\Text::_('CSAVECHANGES'); ?></a>
       </div>
     </div>
   </div>

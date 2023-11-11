@@ -16,7 +16,7 @@ class JoomcckModelCategories extends MModelList
 	{
 		$db = $this->getDbo();
 		$query = $db->getQuery(true);
-		$user = JFactory::getUser();
+		$user = \Joomla\CMS\Factory::getUser();
 
 		$query->select("c.id, c.title,  c.*, CONCAT(repeat('-- ', (c.level - 1)), c.title) as opt ");
 		$query->select("(SELECT count(id) FROM #__js_res_categories WHERE parent_id = c.id)  as childs_num ");
@@ -51,7 +51,7 @@ class JoomcckModelCategories extends MModelList
 				$sql->where('r.published = 1');
 			}
 			$sql->where('r.hidden = 0');
-			$sql->where('r.section_id = ' . JFactory::getApplication()->input->getInt('section_id'));
+			$sql->where('r.section_id = ' . \Joomla\CMS\Factory::getApplication()->input->getInt('section_id'));
 
 			if(! in_array($this->section->params->get('general.show_restrict'), $user->getAuthorisedViewLevels()))
 			{
@@ -60,12 +60,12 @@ class JoomcckModelCategories extends MModelList
 
 			if(!in_array($this->section->params->get('general.show_future_records'), $user->getAuthorisedViewLevels()))
 			{
-				$sql->where("r.ctime < ".$db->quote(JFactory::getDate()->toSql()));
+				$sql->where("r.ctime < ".$db->quote(\Joomla\CMS\Factory::getDate()->toSql()));
 			}
 
 			if(!in_array($this->section->params->get('general.show_past_records'), $user->getAuthorisedViewLevels()))
 			{
-				$sql->where("(r.extime = '0000-00-00 00:00:00' OR ISNULL(r.extime)  OR r.extime > '".JFactory::getDate()->toSql()."')");
+				$sql->where("(r.extime = '0000-00-00 00:00:00' OR ISNULL(r.extime)  OR r.extime > '".\Joomla\CMS\Factory::getDate()->toSql()."')");
 			}
 
 			$query->select("({$sql}) AS comments_num");
@@ -88,7 +88,7 @@ class JoomcckModelCategories extends MModelList
 	{
 		// Get a storage key.
 		$store = $this->getStoreId();
-		$user = JFactory::getUser();
+		$user = \Joomla\CMS\Factory::getUser();
 		// Try to load the data from internal storage.
 		if (! empty($this->cache[$store]))
 		{
@@ -132,12 +132,12 @@ class JoomcckModelCategories extends MModelList
 	
 				if(!in_array($this->section->params->get('general.show_future_records'), $user->getAuthorisedViewLevels()))
 				{
-					$sql2->where("r.ctime < ".$this->_db->quote(JFactory::getDate()->toSql()));
+					$sql2->where("r.ctime < ".$this->_db->quote(\Joomla\CMS\Factory::getDate()->toSql()));
 				}
 	
 				if(!in_array($this->section->params->get('general.show_past_records'), $user->getAuthorisedViewLevels()))
 				{
-					$sql2->where("(r.extime = '0000-00-00 00:00:00' OR ISNULL(r.extime)  OR r.extime > '".JFactory::getDate()->toSql()."')");
+					$sql2->where("(r.extime = '0000-00-00 00:00:00' OR ISNULL(r.extime)  OR r.extime > '".\Joomla\CMS\Factory::getDate()->toSql()."')");
 				}
 	
 				if(!in_array($this->section->params->get('general.show_children'), $user->getAuthorisedViewLevels()))
@@ -147,7 +147,7 @@ class JoomcckModelCategories extends MModelList
 
 				if($this->section->params->get('general.lang_mode'))
 				{
-					$sql2->where('r.langs = ' . $this->_db->quote(JFactory::getLanguage()->getTag()));
+					$sql2->where('r.langs = ' . $this->_db->quote(\Joomla\CMS\Factory::getLanguage()->getTag()));
 				}
 	
 				$sql->where('rc.record_id IN ('.$sql2.')');
@@ -170,7 +170,7 @@ class JoomcckModelCategories extends MModelList
 
 		foreach ( $items as $key => $item )
 		{
-			$params = new JRegistry();
+			$params = new \Joomla\Registry\Registry();
 			$params->loadString((string)$item->params);
 			
 			if(@$this->hidesubmision && !$params->get('submission', 1))
@@ -185,13 +185,13 @@ class JoomcckModelCategories extends MModelList
 			$cats[$item->id]->params = $params;
 			$cats[$item->id]->link = Url::records($this->section, $cats[$item->id]);
 
-			$descr = JText::_($item->description);
-			$descr = JHtml::_('content.prepare', $descr);
+			$descr = \Joomla\CMS\Language\Text::_($item->description);
+			$descr = \Joomla\CMS\HTML\HTMLHelper::_('content.prepare', $descr);
 			$descr = preg_split('#<hr\s+id=("|\')system-readmore("|\')\s*\/*>#i', $descr, 2);
 			$cats[$item->id]->descr_before = @$descr[0];
 			$cats[$item->id]->descr_after = @$descr[1];
 			$cats[$item->id]->descr_full = implode($descr);
-			$cats[$item->id]->title = JText::_($item->title);
+			$cats[$item->id]->title = \Joomla\CMS\Language\Text::_($item->title);
 
 			if(!empty($cats[$item->id]->image)){
 				$cats[$item->id]->image = \Joomla\CMS\HTML\HTMLHelper::cleanImageURL($cats[$item->id]->image);
@@ -316,7 +316,7 @@ class JoomcckModelCategories extends MModelList
 		if(!empty($result))
 		{
 			foreach ($result as $key => $cat) {
-				$cat->params = new JRegistry($cat->params);
+				$cat->params = new \Joomla\Registry\Registry($cat->params);
 				$cat->path = str_replace('root/', '', $cat->path);
 				ItemsStore::$categories[$key] = $cat;
 			}
@@ -345,7 +345,7 @@ class JoomcckModelCategories extends MModelList
 		{
 			foreach ( $items as $key => $item )
 			{
-				$params = new JRegistry();
+				$params = new \Joomla\Registry\Registry();
 				$params->loadString((string)$item->params);
 
 				$cats[$item->id] = $item;

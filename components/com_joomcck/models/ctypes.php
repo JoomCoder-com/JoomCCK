@@ -25,7 +25,7 @@ class JoomcckModelCTypes extends MModelList
 
 	protected function populateState($ordering = NULL, $direction = NULL)
 	{
-		$app = JFactory::getApplication('administrator');
+		$app = \Joomla\CMS\Factory::getApplication('administrator');
 
 		$search = $app->getUserStateFromRequest($this->context . '.filter.search', 'filter_search');
 		$this->setState('filter.search', $search);

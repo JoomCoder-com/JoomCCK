@@ -385,12 +385,12 @@ class MModelList extends MModelBase
 		}
 
 		// Get the form.
-		JForm::addFormPath(JPATH_COMPONENT . '/models/forms');
-		JForm::addFieldPath(JPATH_COMPONENT . '/models/fields');
+		\Joomla\CMS\Form\Form::addFormPath(JPATH_COMPONENT . '/models/forms');
+		\Joomla\CMS\Form\Form::addFieldPath(JPATH_COMPONENT . '/models/fields');
 
 		try
 		{
-			$form = JForm::getInstance($name, $source, $options, false, $xpath);
+			$form = \Joomla\CMS\Form\Form::getInstance($name, $source, $options, false, $xpath);
 
 			if (isset($options['load_data']) && $options['load_data'])
 			{
@@ -432,7 +432,7 @@ class MModelList extends MModelBase
 	protected function loadFormData()
 	{
 		// Check the session for previously entered form data.
-		$data = JFactory::getApplication()->getUserState($this->context, new stdClass);
+		$data = \Joomla\CMS\Factory::getApplication()->getUserState($this->context, new stdClass);
 
 		// Pre-fill the list options
 		if (!property_exists($data, 'list'))
@@ -469,7 +469,7 @@ class MModelList extends MModelBase
 		// If the context is set, assume that stateful lists are used.
 		if ($this->context)
 		{
-			$app = JFactory::getApplication();
+			$app = \Joomla\CMS\Factory::getApplication();
 
 			// Receive & set filters
 			if ($filters = $app->getUserStateFromRequest($this->context . '.filter', 'filter', array(), 'array'))
@@ -658,7 +658,7 @@ class MModelList extends MModelBase
 	 */
 	public function getUserStateFromRequest($key, $request, $default = null, $type = 'none', $resetPage = true)
 	{
-		$app = JFactory::getApplication();
+		$app = \Joomla\CMS\Factory::getApplication();
 		$input     = $app->input;
 		$old_state = $app->getUserState($key);
 		$cur_state = (!is_null($old_state)) ? $old_state : $default;

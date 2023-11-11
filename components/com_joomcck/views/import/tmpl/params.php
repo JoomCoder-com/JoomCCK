@@ -12,10 +12,10 @@ defined('_JEXEC') or die();
 <br>
 <div class="row">
 	<div class="col-md-6">
-		<legend><?php echo JText::_('CIMPORTPARAMS')?></legend>
+		<legend><?php echo \Joomla\CMS\Language\Text::_('CIMPORTPARAMS')?></legend>
 		<div class="control-group">
-			<label class="control-label" for="name"><?php echo JText::_('CNAME');?>
-				<span class="float-end" rel="tooltip" data-bs-title="<?php echo JText::_('CREQUIRED') ?>">
+			<label class="control-label" for="name"><?php echo \Joomla\CMS\Language\Text::_('CNAME');?>
+				<span class="float-end" rel="tooltip" data-bs-title="<?php echo \Joomla\CMS\Language\Text::_('CREQUIRED') ?>">
 					<?php echo HTMLFormatHelper::icon('asterisk-small.png');  ?></span>
 			</label>
 
@@ -26,23 +26,23 @@ defined('_JEXEC') or die();
 			</div>
 		</div>
 		<div class="control-group">
-			<label class="control-label" for="name"><?php echo JText::_('ID');?>
-				<span class="float-end" rel="tooltip" data-bs-title="<?php echo JText::_('CREQUIRED') ?>">
+			<label class="control-label" for="name"><?php echo \Joomla\CMS\Language\Text::_('ID');?>
+				<span class="float-end" rel="tooltip" data-bs-title="<?php echo \Joomla\CMS\Language\Text::_('CREQUIRED') ?>">
 					<?php echo HTMLFormatHelper::icon('asterisk-small.png');  ?></span>
 			</label>
 
 			<div class="controls">
 				<div class="row">
 					<?php echo $this->fieldlist('id', $this->item->params->get('field.id'));?>
-					<small><?php echo JText::_('CIMPORTUNIQID')?></small>
+					<small><?php echo \Joomla\CMS\Language\Text::_('CIMPORTUNIQID')?></small>
 				</div>
 			</div>
 		</div>
 		<?php if($this->section->categories || ($this->section->params->get('personalize.personalize', 0) && in_array($this->section->params->get('personalize.pcat_submit', 0), $this->user->getAuthorisedViewLevels()))): ?>
-			<legend><?php echo JText::_('CCATEGORIES')?></legend>
+			<legend><?php echo \Joomla\CMS\Language\Text::_('CCATEGORIES')?></legend>
 			<div class="control-group">
-				<label class="control-label" for="name"><?php echo JText::_('CCATEGORY');?>
-					<span class="float-end" rel="tooltip" data-bs-title="<?php echo JText::_('CREQUIRED') ?>">
+				<label class="control-label" for="name"><?php echo \Joomla\CMS\Language\Text::_('CCATEGORY');?>
+					<span class="float-end" rel="tooltip" data-bs-title="<?php echo \Joomla\CMS\Language\Text::_('CREQUIRED') ?>">
 						<?php echo HTMLFormatHelper::icon('asterisk-small.png');  ?></span>
 				</label>
 
@@ -60,12 +60,12 @@ defined('_JEXEC') or die();
 		<?php endif; ?>
 	</div>
 	<div class="col-md-6">
-		<legend><?php echo JText::_('CIMPORTFIELDASSOC')?></legend>
+		<legend><?php echo \Joomla\CMS\Language\Text::_('CIMPORTFIELDASSOC')?></legend>
 
 		<?php if($this->type->params->get('properties.item_title') == 1): ?>
 			<div class="control-group">
-				<label class="control-label" for="name"><?php echo JText::_('CTITLE');?>
-					<span class="float-end" rel="tooltip" data-bs-title="<?php echo JText::_('CREQUIRED') ?>">
+				<label class="control-label" for="name"><?php echo \Joomla\CMS\Language\Text::_('CTITLE');?>
+					<span class="float-end" rel="tooltip" data-bs-title="<?php echo \Joomla\CMS\Language\Text::_('CREQUIRED') ?>">
 						<?php echo HTMLFormatHelper::icon('asterisk-small.png');  ?></span>
 				</label>
 
@@ -79,7 +79,7 @@ defined('_JEXEC') or die();
 
 		<div class="control-group">
 			<label class="control-label" for="name">
-				<?php echo JText::_('CTIME');?>
+				<?php echo \Joomla\CMS\Language\Text::_('CTIME');?>
 			</label>
 
 			<div class="controls">
@@ -91,7 +91,7 @@ defined('_JEXEC') or die();
 
 		<div class="control-group">
 			<label class="control-label" for="name">
-				<?php echo JText::_('MTIME');?>
+				<?php echo \Joomla\CMS\Language\Text::_('MTIME');?>
 			</label>
 
 			<div class="controls">
@@ -106,7 +106,7 @@ defined('_JEXEC') or die();
 			<div class="control-group">
 				<label class="control-label" for="type"><?php echo $field->label;?>
 					<?php if($field->required): ?>
-						<span class="float-end" rel="tooltip" data-bs-title="<?php echo JText::_('CREQUIRED') ?>">
+						<span class="float-end" rel="tooltip" data-bs-title="<?php echo \Joomla\CMS\Language\Text::_('CREQUIRED') ?>">
 							<?php echo HTMLFormatHelper::icon('asterisk-small.png');  ?></span>
 					<?php endif;?>
 				</label>

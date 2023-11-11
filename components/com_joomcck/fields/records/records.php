@@ -36,8 +36,8 @@ class JFormFieldCRecords extends CFormField
 		$ids       = array();
 		$user_id   = NULL;
 		$view_what = $this->params->get('params.list_type', '');
-		$user      = JFactory::getUser();
-		$app       = JFactory::getApplication();
+		$user      = \Joomla\CMS\Factory::getUser();
+		$app       = \Joomla\CMS\Factory::getApplication();
 
 		switch($view_what)
 		{
@@ -84,13 +84,13 @@ class JFormFieldCRecords extends CFormField
 				if(!$from || !$in)
 				{
 
-					Factory::getApplication()->enqueueMessage(JText::_('R_NOTSETFROMANDINFIELDS'),'warning');
+					Factory::getApplication()->enqueueMessage(\Joomla\CMS\Language\Text::_('R_NOTSETFROMANDINFIELDS'),'warning');
 
 					return NULL;
 				}
 
-				JFactory::getApplication()->setUserState('com_joomcck.field.from', $from);
-				JFactory::getApplication()->setUserState('com_joomcck.field.in', $in);
+				\Joomla\CMS\Factory::getApplication()->setUserState('com_joomcck.field.from', $from);
+				\Joomla\CMS\Factory::getApplication()->setUserState('com_joomcck.field.in', $in);
 				$app->input->set('_rrid', $record->id);
 
 				break;
@@ -130,7 +130,7 @@ class JFormFieldCRecords extends CFormField
 			$cat_id = $this->request->getInt('cat_id', 0);
 		}
 
-		JFactory::getApplication()->setUserState('com_joomcck.skip_record', $record->id);
+		\Joomla\CMS\Factory::getApplication()->setUserState('com_joomcck.skip_record', $record->id);
 
 		$api           = new JoomcckApi();
 		$this->content = $api->records(
@@ -145,7 +145,7 @@ class JFormFieldCRecords extends CFormField
 			0, '', FALSE, $ids
 		);
 
-		JFactory::getApplication()->setUserState('com_joomcck.skip_record', 0);
+		\Joomla\CMS\Factory::getApplication()->setUserState('com_joomcck.skip_record', 0);
 
 		return $this->_display_output('full', $record, $type, $section);
 

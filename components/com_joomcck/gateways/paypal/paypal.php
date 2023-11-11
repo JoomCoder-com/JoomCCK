@@ -21,9 +21,9 @@ class MintPayPaypal extends MintPayAbstract
 
 	public function button($field)
 	{
-		$pay     = new JRegistry((array) @$field->pay);
+		$pay     = new \Joomla\Registry\Registry((array) @$field->pay);
 		$options = $field->params;
-		$user    = JFactory::getUser();
+		$user    = \Joomla\CMS\Factory::getUser();
 
 		if (!$pay->get('business', $options->get('pay.business')))
 		{
@@ -74,7 +74,7 @@ class MintPayPaypal extends MintPayAbstract
 		$hiddenfields[] = $this->_hidden('currency_code', $pp_cur);
 		$hiddenfields[] = $this->_hidden($options->get('pay.discount_type', 'discount_rate'), $pp_discount);
 		$hiddenfields[] = $this->_hidden($options->get('pay.tax_type', 'tax_rate'), $pp_tax);
-		$hiddenfields[] = $this->_hidden('item_name', JText::sprintf($options->get('params.item_name', 'SSI_ITEMNAME'), $field->record->title));
+		$hiddenfields[] = $this->_hidden('item_name', \Joomla\CMS\Language\Text::sprintf($options->get('params.item_name', 'SSI_ITEMNAME'), $field->record->title));
 		$hiddenfields[] = $this->_hidden('rm', 2);
 		$hiddenfields[] = $this->_hidden('custom', $user->get('id'));
 		$hiddenfields[] = $this->_hidden('first_name', $user->get('name'));
@@ -82,13 +82,13 @@ class MintPayPaypal extends MintPayAbstract
 		$hiddenfields[] = $this->_hidden('invoice', "{$field->record->id}::{$field->id}::" . time());
 		$hiddenfields[] = $this->_hidden('no_shipping', $pp_shipping);
 
-		$part           = explode('-', JFactory::getLanguage()->getTag());
+		$part           = explode('-', \Joomla\CMS\Factory::getLanguage()->getTag());
 		$hiddenfields[] = $this->_hidden('lc', strtoupper($part[0]));
 
 		$url->setVar('result', 'cancel');
 		$hiddenfields[] = $this->_hidden('cancel_return', $url->toString());
 
-		$ipn = JRoute::_('index.php?option=com_joomcck&task=field.call&func=onReceivePayment&field_id=' . $field->id . '&record_id=' . $field->record->id, false, -1);
+		$ipn = \Joomla\CMS\Router\Route::_('index.php?option=com_joomcck&task=field.call&func=onReceivePayment&field_id=' . $field->id . '&record_id=' . $field->record->id, false, -1);
 		if ($options->get('pay.ipn'))
 		{
 			$url->setVar('result', 'return');
@@ -102,7 +102,7 @@ class MintPayPaypal extends MintPayAbstract
 
 		if ($field->params->get('pay.allow_amount'))
 		{
-			$nonehidden[JText::_('CAMOUNT')] = '<input type="text" onkeyup="Joomcck.formatFloat(this, 2, 11)" class="col-md-2" name="amount" value="' . $pp_amount . '" />';
+			$nonehidden[\Joomla\CMS\Language\Text::_('CAMOUNT')] = '<input type="text" onkeyup="Joomcck.formatFloat(this, 2, 11)" class="col-md-2" name="amount" value="' . $pp_amount . '" />';
 			$amount                          = 0;
 			$discount                        = 0;
 			$topay                           = 0;
@@ -114,7 +114,7 @@ class MintPayPaypal extends MintPayAbstract
 
 		if ($field->params->get('pay.allow_count'))
 		{
-			$nonehidden[JText::_('PP_QNT')] = '<input type="text" class="col-md-2" onkeyup="Joomcck.formatInt(this)" name="quantity" value="' . $options->get('pay.default_count', 1) . '" />';
+			$nonehidden[\Joomla\CMS\Language\Text::_('PP_QNT')] = '<input type="text" class="col-md-2" onkeyup="Joomcck.formatInt(this)" name="quantity" value="' . $options->get('pay.default_count', 1) . '" />';
 		}
 		else
 		{
@@ -136,7 +136,7 @@ class MintPayPaypal extends MintPayAbstract
 
 		if ($field->params->get('pay.adaptive') && $pp_amount > $field->params->get('pay.minimum_amount'))
 		{
-			$action = JRoute::_('index.php?option=com_joomcck&task=field.call&func=onAdaptivePayment&field_id=' . $field->id . '&record_id=' . $field->record->id);
+			$action = \Joomla\CMS\Router\Route::_('index.php?option=com_joomcck&task=field.call&func=onAdaptivePayment&field_id=' . $field->id . '&record_id=' . $field->record->id);
 		}
 
 		ob_start();
@@ -155,41 +155,41 @@ class MintPayPaypal extends MintPayAbstract
 
 	public function form($field)
 	{
-		$user = JFactory::getUser();
+		$user = \Joomla\CMS\Factory::getUser();
 
 		$value = $field->pay;
 		settype($value, 'array');
-		$default = new JRegistry($value);
+		$default = new \Joomla\Registry\Registry($value);
 
 		$params = $field->params;
 
 		$form = $this->load_form('paypal', $field->id);
 
-		$out[JText::_('CPRICE')] = '<input class="form-control" onkeyup="Joomcck.formatFloat(this, 2, 10)" type="text" size="4" name="jform[fields][' . $field->id . '][pay][amount]" value="' . $default->get('amount') . '"/> ';
+		$out[\Joomla\CMS\Language\Text::_('CPRICE')] = '<input class="form-control" onkeyup="Joomcck.formatFloat(this, 2, 10)" type="text" size="4" name="jform[fields][' . $field->id . '][pay][amount]" value="' . $default->get('amount') . '"/> ';
 		if (in_array($params->get('pay.allow_currency'), $user->getAuthorisedViewLevels()))
 		{
-			$out[JText::_('CPRICE')] .= $form->getInput('default_currency', 'pay', $default->get('default_currency', $params->get('pay.default_currency')));
+			$out[\Joomla\CMS\Language\Text::_('CPRICE')] .= $form->getInput('default_currency', 'pay', $default->get('default_currency', $params->get('pay.default_currency')));
 		}
 		else
 		{
-			$out[JText::_('CPRICE')] .= $params->get('pay.default_currency');
+			$out[\Joomla\CMS\Language\Text::_('CPRICE')] .= $params->get('pay.default_currency');
 		}
 
 		if (in_array($params->get('pay.allow_email'), $user->getAuthorisedViewLevels()))
 		{
-			$out[JText::_('PP_EMAIL')] = $form->getInput('business', 'pay', $default->get('business', $params->get('pay.business', $user->get('email'))));
+			$out[\Joomla\CMS\Language\Text::_('PP_EMAIL')] = $form->getInput('business', 'pay', $default->get('business', $params->get('pay.business', $user->get('email'))));
 		}
 
 		if (in_array($params->get('pay.allow_discount'), $user->getAuthorisedViewLevels()))
 		{
-			$out[JText::_('CDISCOUNT')] = $form->getInput('default_discount', 'pay', $default->get('default_discount', $params->get('pay.default_discount')));
-			$out[JText::_('CDISCOUNT')] .= ($params->get('pay.discount_type') == 'discount_rate' ? ' 0.001 - 100 %' : ' Fixed flat amount');
+			$out[\Joomla\CMS\Language\Text::_('CDISCOUNT')] = $form->getInput('default_discount', 'pay', $default->get('default_discount', $params->get('pay.default_discount')));
+			$out[\Joomla\CMS\Language\Text::_('CDISCOUNT')] .= ($params->get('pay.discount_type') == 'discount_rate' ? ' 0.001 - 100 %' : ' Fixed flat amount');
 		}
 
 		if (in_array($params->get('pay.allow_tax_rate'), $user->getAuthorisedViewLevels()))
 		{
-			$out[JText::_('CTAX')] = $form->getInput('default_tax', 'pay', $default->get('default_tax', $params->get('pay.default_tax')));
-			$out[JText::_('CTAX')] .= ($params->get('pay.tax_type') == 'tax_rate' ? ' 0.001 - 100 %' : ' Fixed flat amount');
+			$out[\Joomla\CMS\Language\Text::_('CTAX')] = $form->getInput('default_tax', 'pay', $default->get('default_tax', $params->get('pay.default_tax')));
+			$out[\Joomla\CMS\Language\Text::_('CTAX')] .= ($params->get('pay.tax_type') == 'tax_rate' ? ' 0.001 - 100 %' : ' Fixed flat amount');
 		}
 
 		return $this->render_form($out);
@@ -197,10 +197,10 @@ class MintPayPaypal extends MintPayAbstract
 
 	public function receive($field, $post, $record)
 	{
-		$app = JFactory::getApplication();
+		$app = \Joomla\CMS\Factory::getApplication();
 		$this->log('start transaction receive', $post);
 
-		$accept = new JRegistry($this->_decodePayPalIPN());
+		$accept = new \Joomla\Registry\Registry($this->_decodePayPalIPN());
 		if ($field->params->get('pay.ipn'))
 		{
 			$this->log('IPN recieved. Start check.');
@@ -224,14 +224,14 @@ class MintPayPaypal extends MintPayAbstract
 				return false;
 			}
 
-			if (false == ($data = $this->_PDTcheck($field, JFactory::getApplication()->input->get('tx', $accept->get('tx')), $field->params->get('pay.authcode'))))
+			if (false == ($data = $this->_PDTcheck($field, \Joomla\CMS\Factory::getApplication()->input->get('tx', $accept->get('tx')), $field->params->get('pay.authcode'))))
 			{
 				Factory::getApplication()->enqueueMessage('cannot verify order', 'warning');
 				$this->log('cannot verify order');
 
 				return false;
 			}
-			$accept = new JRegistry($data);
+			$accept = new \Joomla\Registry\Registry($data);
 		}
 
 		//transaction[0].is_primary_receiver=true
@@ -307,15 +307,15 @@ class MintPayPaypal extends MintPayAbstract
 						case 'COMPLETED':
 						case 'INCOMPLETE':
 							$out['status'] = 5;
-							$app->enqueueMessage(JText::_('PP_PAYOK'));
+							$app->enqueueMessage(\Joomla\CMS\Language\Text::_('PP_PAYOK'));
 							break;
 
 						case 'CREATED':
 						case 'PENDING':
 						case 'PROCESSING':
 							$out['status']  = 3;
-							$out['comment'] = JText::_('PP_PAYSUCCBUT');
-							$app->enqueueMessage(JText::_('PP_PAYSUCCBUT'));
+							$out['comment'] = \Joomla\CMS\Language\Text::_('PP_PAYSUCCBUT');
+							$app->enqueueMessage(\Joomla\CMS\Language\Text::_('PP_PAYSUCCBUT'));
 							break;
 
 						case 'ERROR':
@@ -366,13 +366,13 @@ class MintPayPaypal extends MintPayAbstract
 					case 'Failed' :
 					case 'Voided' :
 						$out['status'] = 2;
-						Factory::getApplication()->enqueueMessage(JText::_('PP_PAYMENTFAIL'), 'warning');
+						Factory::getApplication()->enqueueMessage(\Joomla\CMS\Language\Text::_('PP_PAYMENTFAIL'), 'warning');
 						break;
 
 					case 'Pending' :
 						$out['status']  = 3;
 						$out['comment'] = $accept->get('pending_reason');
-						$app->enqueueMessage(JText::_('PP_PAYSUCCBUT'));
+						$app->enqueueMessage(\Joomla\CMS\Language\Text::_('PP_PAYSUCCBUT'));
 						break;
 
 					case 'Canceled_Reversal' :
@@ -380,7 +380,7 @@ class MintPayPaypal extends MintPayAbstract
 					case 'Refunded' :
 						$out['status']  = 4;
 						$out['comment'] = $reasons[$accept->get('reason_code')];
-						Factory::getApplication()->enqueueMessage(JText::_('PP_REFUND'), 'warning');
+						Factory::getApplication()->enqueueMessage(\Joomla\CMS\Language\Text::_('PP_REFUND'), 'warning');
 
 						break;
 
@@ -388,7 +388,7 @@ class MintPayPaypal extends MintPayAbstract
 					case 'Processed' :
 					case 'Completed' :
 						$out['status'] = 5;
-						$app->enqueueMessage(JText::_('PP_PAYOK'));
+						$app->enqueueMessage(\Joomla\CMS\Language\Text::_('PP_PAYOK'));
 						break;
 				}
 				$this->log('transaction prepared', $out);
@@ -400,14 +400,14 @@ class MintPayPaypal extends MintPayAbstract
 			case "new_case" :
 				$this->log('case raised cancel order');
 				$out['status']  = 1;
-				$out['comment'] = JText::_('PP_DISPUTSTART');
+				$out['comment'] = \Joomla\CMS\Language\Text::_('PP_DISPUTSTART');
 				$this->new_order($out, $record, $field);
 				break;
 
 			case "adjustment" :
 				$this->log('case resolved confirm order');
 				$out['status']  = 5;
-				$out['comment'] = JText::_('PP_DISPUTRSOLV');
+				$out['comment'] = \Joomla\CMS\Language\Text::_('PP_DISPUTRSOLV');
 				$this->new_order($out, $record, $field);
 				break;
 

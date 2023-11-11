@@ -12,7 +12,7 @@ class JHTMLCategories
 {
 	public static function labels($cats)
 	{
-		$db = JFactory::getDbo();
+		$db = \Joomla\CMS\Factory::getDbo();
 		$sql = "SELECT title, id FROM #__js_res_categories WHERE id IN(".implode(',', $cats).")";
 		$db->setQuery($sql);
 		$cats = $db->loadAssocList('id', 'title');
@@ -27,14 +27,14 @@ class JHTMLCategories
 			$section = ItemsStore::getSection($section);
 		}
 
-		$reg = new JRegistry();
+		$reg = new \Joomla\Registry\Registry();
 		$reg->loadArray($params);
 
 		ArrayHelper::clean_r($default);
 		$default = \Joomla\Utilities\ArrayHelper::toInteger($default);
 		if($default)
 		{
-			$db = JFactory::getDbo();
+			$db = \Joomla\CMS\Factory::getDbo();
 			$query = $db->getQuery(true);
 			$query->select('id, title as text');
 			$query->from('#__js_res_categories');
@@ -50,12 +50,12 @@ class JHTMLCategories
 		$options['suggestion_limit'] = 10;
 		$options['suggestion_url'] = 'index.php?option=com_joomcck&task=ajax.category_filter&section_id='.$section->id.'&tmpl=component';
 
-		return JHtml::_('mrelements.pills', 'filters[cats]', "categs", $default, array(), $options);
+		return \Joomla\CMS\HTML\HTMLHelper::_('mrelements.pills', 'filters[cats]', "categs", $default, array(), $options);
 	}
 
 	public static function checkboxes($section, $default = array(), $params = array())
 	{
-		$db = JFactory::getDbo();
+		$db = \Joomla\CMS\Factory::getDbo();
 
 		if (! is_array($default) && ! empty($default))
 		{
@@ -64,7 +64,7 @@ class JHTMLCategories
 		$default = \Joomla\Utilities\ArrayHelper::toInteger($default);
 		ArrayHelper::clean_r($default);
 
-		$reg = new JRegistry();
+		$reg = new \Joomla\Registry\Registry();
 		$reg->loadArray($params);
 		$columns = $reg->get('columns', 3);
 
@@ -108,7 +108,7 @@ class JHTMLCategories
 
 	public static function select($section, $default = array(), $params = array())
 	{
-		$db = JFactory::getDbo();
+		$db = \Joomla\CMS\Factory::getDbo();
 
 		if (! is_array($default) && ! empty($default))
 		{
@@ -117,7 +117,7 @@ class JHTMLCategories
 		$default = \Joomla\Utilities\ArrayHelper::toInteger($default);
 		ArrayHelper::clean_r($default);
 
-		$reg = new JRegistry();
+		$reg = new \Joomla\Registry\Registry();
 		$reg->loadArray($params);
 
 		$multiple = $reg->get('multiple', 0);
@@ -159,9 +159,9 @@ class JHTMLCategories
 		{
 			$df = new stdClass();
 			$df->id = '';
-			$df->opt = ' - '.JText::_('CPLEASESELECTCAT').' - ';
+			$df->opt = ' - '.\Joomla\CMS\Language\Text::_('CPLEASESELECTCAT').' - ';
 			array_unshift($categories, $df);
-			$out = JHtml::_('select.genericlist', $categories, 'filters[cats]'.($multiple ? '[]' : ''), $attr, 'id', 'opt', $default);
+			$out = \Joomla\CMS\HTML\HTMLHelper::_('select.genericlist', $categories, 'filters[cats]'.($multiple ? '[]' : ''), $attr, 'id', 'opt', $default);
 		}
 		return $out;
 	}

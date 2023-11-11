@@ -18,7 +18,7 @@ class JoomcckControllerUsercategories extends MControllerAdmin
 		
 		if(!$this->input)
 		{
-			$this->input = JFactory::getApplication()->input;
+			$this->input = \Joomla\CMS\Factory::getApplication()->input;
 		}
         $this->view_list = 'categories';
 	}
@@ -31,7 +31,7 @@ class JoomcckControllerUsercategories extends MControllerAdmin
 	
 	public function saveOrderAjax()
 	{
-		JSession::checkToken() or jexit(JText::_('JINVALID_TOKEN'));
+		JSession::checkToken() or jexit(\Joomla\CMS\Language\Text::_('JINVALID_TOKEN'));
 	
 		// Get the arrays from the Request
 		$pks   = $this->input->post->get('cid', null, 'array');
@@ -50,7 +50,7 @@ class JoomcckControllerUsercategories extends MControllerAdmin
 			}
 		}
 		// Close the application
-		JFactory::getApplication()->close();
+		\Joomla\CMS\Factory::getApplication()->close();
 	
 	}
 }

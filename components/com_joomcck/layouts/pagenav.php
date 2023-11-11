@@ -17,24 +17,24 @@ $listDirn	= $displayData->escape($displayData->state->get('list.direction'));
 		<div class="float-end">
 			<div class="btn-group">
 				<select  name="directionTable" id="directionTable" class="input-medium select" onchange="Joomcck.orderTable('<?php echo $listOrder ?>')">
-					<option value=""><?php echo JText::_('JFIELD_ORDERING_DESC'); ?></option>
+					<option value=""><?php echo \Joomla\CMS\Language\Text::_('JFIELD_ORDERING_DESC'); ?></option>
 					<option value="asc" <?php if($listDirn == 'asc')
 					{
 						echo 'selected="selected"';
-					} ?>><?php echo JText::_('JGLOBAL_ORDER_ASCENDING'); ?></option>
+					} ?>><?php echo \Joomla\CMS\Language\Text::_('JGLOBAL_ORDER_ASCENDING'); ?></option>
 					<option value="desc" <?php if($listDirn == 'desc')
 					{
 						echo 'selected="selected"';
-					} ?>><?php echo JText::_('JGLOBAL_ORDER_DESCENDING'); ?></option>
+					} ?>><?php echo \Joomla\CMS\Language\Text::_('JGLOBAL_ORDER_DESCENDING'); ?></option>
 				</select>
 			</div>
 			<div class="btn-group">
 				<select name="sortTable" id="sortTable" class="input-medium select" onchange="Joomcck.orderTable('<?php echo $listOrder ?>')">
-					<option value=""><?php echo JText::_('JGLOBAL_SORT_BY'); ?></option>
-					<?php echo JHtml::_('select.options', $displayData->getSortFields(), 'value', 'text', $listOrder); ?>
+					<option value=""><?php echo \Joomla\CMS\Language\Text::_('JGLOBAL_SORT_BY'); ?></option>
+					<?php echo \Joomla\CMS\HTML\HTMLHelper::_('select.options', $displayData->getSortFields(), 'value', 'text', $listOrder); ?>
 				</select>
 			</div>
-			<?php echo str_replace(array('<option value="0">' . JText::_('JALL') . '</option>', 'class="form-control'), array('', 'class="select'), $displayData->pagination->getLimitBox()); ?>
+			<?php echo str_replace(array('<option value="0">' . \Joomla\CMS\Language\Text::_('JALL') . '</option>', 'class="form-control'), array('', 'class="select'), $displayData->pagination->getLimitBox()); ?>
 		</div>
 		<div style="float-start">
 			<small>

@@ -27,7 +27,7 @@ class CVideoAdapterYoutube extends CVideoAdapterAbstarct
 			return true;
 		}
 
-		$url = JUri::getInstance($url);
+		$url = \Joomla\CMS\Uri\Uri::getInstance($url);
 		$v = $url->getVar('v');
 		if($v)
 		{
@@ -42,7 +42,7 @@ class CVideoAdapterYoutube extends CVideoAdapterAbstarct
 		return sprintf(self::$tamplate,
 				$this->params->get('width', 350),
 				$this->params->get('height', 200),
-				JUri::getInstance()->getScheme(),
+				\Joomla\CMS\Uri\Uri::getInstance()->getScheme(),
 				$this->key
 			);
 	}

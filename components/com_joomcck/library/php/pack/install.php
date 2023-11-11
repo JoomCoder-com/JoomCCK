@@ -13,7 +13,7 @@ defined('_JEXEC') || die('Restricted access');
  * Script file of Joomcck Pack
  */
 
-JTable::addIncludePath(JPATH_ROOT . '/components/com_joomcck/tables');
+\Joomla\CMS\Table\Table::addIncludePath(JPATH_ROOT . '/components/com_joomcck/tables');
 include_once JPATH_ROOT . '/components/com_joomcck/api.php';
 
 class packInstallerScript
@@ -32,12 +32,12 @@ class packInstallerScript
         $this->key = (string) $adapter->getParent()->manifest->key;
 
         define('PACKS_PATH', JPATH_ADMINISTRATOR . DIRECTORY_SEPARATOR . 'components/com_joomcck/packs');
-        if (!JFolder::exists(PACKS_PATH)) {
-            JFolder::create(PACKS_PATH);
+        if (!\Joomla\CMS\Filesystem\Folder::exists(PACKS_PATH)) {
+            \Joomla\CMS\Filesystem\Folder::create(PACKS_PATH);
         }
         $this->isNew = false;
         $this->id    = [];
-        if (!JFile::exists(PACKS_PATH . DIRECTORY_SEPARATOR . $this->key . '.json')) {
+        if (!\Joomla\CMS\Filesystem\File::exists(PACKS_PATH . DIRECTORY_SEPARATOR . $this->key . '.json')) {
             $this->isNew = true;
         } else {
             $ids       = file_get_contents(PACKS_PATH . DIRECTORY_SEPARATOR . $this->key . '.json');
@@ -233,14 +233,14 @@ class packInstallerScript
     private function _end()
     {
         $content = json_encode($this->ids);
-        JFile::write(PACKS_PATH . DIRECTORY_SEPARATOR . $this->key . '.json', $content);
+        \Joomla\CMS\Filesystem\File::write(PACKS_PATH . DIRECTORY_SEPARATOR . $this->key . '.json', $content);
 
-        if (JFolder::exists(JPATH_ADMINISTRATOR . DIRECTORY_SEPARATOR . 'components/com_joomcck/packs' . DIRECTORY_SEPARATOR . $this->key)) {
-            JFolder::delete(JPATH_ADMINISTRATOR . DIRECTORY_SEPARATOR . 'components/com_joomcck/packs' . DIRECTORY_SEPARATOR . $this->key);
+        if (\Joomla\CMS\Filesystem\Folder::exists(JPATH_ADMINISTRATOR . DIRECTORY_SEPARATOR . 'components/com_joomcck/packs' . DIRECTORY_SEPARATOR . $this->key)) {
+            \Joomla\CMS\Filesystem\Folder::delete(JPATH_ADMINISTRATOR . DIRECTORY_SEPARATOR . 'components/com_joomcck/packs' . DIRECTORY_SEPARATOR . $this->key);
         }
 
         // create empty folder for correct uninstall pack from extension manager
-        JFolder::create(JPATH_ADMINISTRATOR . DIRECTORY_SEPARATOR . 'components/com_joomcck/packs' . DIRECTORY_SEPARATOR . $this->key);
+        \Joomla\CMS\Filesystem\Folder::create(JPATH_ADMINISTRATOR . DIRECTORY_SEPARATOR . 'components/com_joomcck/packs' . DIRECTORY_SEPARATOR . $this->key);
     }
 
     private function _touchConfigs()
@@ -248,7 +248,7 @@ class packInstallerScript
         $content = $this->_getObject('configs');
         foreach ($content as $config) {
             $file = JPATH_ROOT . '/components/com_joomcck/configs/' . $config . '.json';
-            if (!JFile::exists($file)) {
+            if (!\Joomla\CMS\Filesystem\File::exists($file)) {
                 continue;
             }
 
@@ -269,7 +269,7 @@ class packInstallerScript
                 }
             }
             $array = json_encode($array);
-            JFile::write($file, $array);
+            \Joomla\CMS\Filesystem\File::write($file, $array);
         }
     }
 
@@ -287,7 +287,7 @@ class packInstallerScript
             if (@$params['list']) {
                 $new_id = @$this->ids['sections'][$id];
                 if ($section_table->load($new_id)) {
-                    $tparams = new JRegistry($section_table->params);
+                    $tparams = new \Joomla\Registry\Registry($section_table->params);
                     $tmpls   = $tparams->get('general.tmpl_list');
                     settype($tmpls, 'array');
                     foreach ($tmpls as $tmpl) {
@@ -302,7 +302,7 @@ class packInstallerScript
                 if (@$type['article']) {
                     $new_id = @$this->ids['types'][$id];
                     if ($type_table->load($new_id)) {
-                        $tparams = new JRegistry($type_table->params);
+                        $tparams = new \Joomla\Registry\Registry($type_table->params);
                         $t       = explode('.', $tparams->get('properties.tmpl_article'));
                         $file    = JPATH_ROOT . '/components/com_joomcck/views/record/tmpl/default_record_' . $t[0] . $key;
                         $this->_touchFile($file);
@@ -315,7 +315,7 @@ class packInstallerScript
     private function _touchFile($file)
     {
         $php = $file . '.php';
-        if (JFile::exists($php)) {
+        if (\Joomla\CMS\Filesystem\File::exists($php)) {
             $content = $original = file_get_contents($php);
 
             foreach ($this->ids['fields'] as $old_id => $new_id) {
@@ -329,7 +329,7 @@ class packInstallerScript
             }
 
             if (md5($original) != md5($content)) {
-                JFile::write($php, $content);
+                \Joomla\CMS\Filesystem\File::write($php, $content);
             }
         }
     }
@@ -340,7 +340,7 @@ class packInstallerScript
         foreach (@$this->ids['fields'] as $old_id => $new_id) {
             if ($table->load($new_id)) {
                 $save   = null;
-                $params = new JRegistry($table->params);
+                $params = new \Joomla\Registry\Registry($table->params);
                 switch ($table->field_type) {
                     case 'child':
                         $save = 1;
@@ -379,7 +379,7 @@ class packInstallerScript
 
         foreach (@$this->ids['types'] as $old_id => $new_id) {
             if ($table->load($new_id)) {
-                $params     = new JRegistry($table->params);
+                $params     = new \Joomla\Registry\Registry($table->params);
                 $categories = $params->get('category_limit.category');
                 settype($categories, 'array');
 	            $categories = \Joomla\Utilities\ArrayHelper::toInteger($categories);
@@ -425,7 +425,7 @@ class packInstallerScript
         $table = JTable::getInstance('Section', 'JoomcckTable');
         foreach (@$this->ids['sections'] as $old_id => $new_id) {
             if ($table->load($new_id)) {
-                $params = new JRegistry($table->params);
+                $params = new \Joomla\Registry\Registry($table->params);
                 $types  = $params->get('general.type');
                 settype($types, 'array');
 	            $types = \Joomla\Utilities\ArrayHelper::toInteger($types);
@@ -450,7 +450,7 @@ class packInstallerScript
             $table = JTable::getInstance('CobCategory', 'JoomcckTable');
             foreach (@$this->ids['categories'] as $old_id => $new_id) {
                 if ($table->load($new_id)) {
-                    $params = new JRegistry($table->params);
+                    $params = new \Joomla\Registry\Registry($table->params);
                     $types  = $params->get('posttype');
                     settype($types, 'array');
 	                $types = \Joomla\Utilities\ArrayHelper::toInteger($types);
@@ -479,7 +479,7 @@ class packInstallerScript
                     continue;
                 }
 
-                $categories     = new JRegistry($table->categories);
+                $categories     = new \Joomla\Registry\Registry($table->categories);
                 $categories     = $categories->toArray();
                 $new_categories = [];
                 foreach ($categories as $id => $value) {
@@ -492,12 +492,12 @@ class packInstallerScript
                     }
                 }
                 if (!empty($new_categories)) {
-                    $categories        = new JRegistry($new_categories);
+                    $categories        = new \Joomla\Registry\Registry($new_categories);
                     $table->categories = $categories->toString();
                     $table->store();
                 }
 
-                $tags     = new JRegistry($table->tags);
+                $tags     = new \Joomla\Registry\Registry($table->tags);
                 $tags     = $tags->toArray();
                 $new_tags = [];
                 foreach ($tags as $id => $value) {
@@ -510,12 +510,12 @@ class packInstallerScript
                     }
                 }
                 if (!empty($new_tags)) {
-                    $tags              = new JRegistry($new_tags);
+                    $tags              = new \Joomla\Registry\Registry($new_tags);
                     $table->categories = $tags->toString();
                     $table->store();
                 }
 
-                $fields     = new JRegistry($table->fields);
+                $fields     = new \Joomla\Registry\Registry($table->fields);
                 $fields     = $fields->toArray();
                 $new_fields = [];
                 foreach ($fields as $id => $value) {
@@ -556,7 +556,7 @@ class packInstallerScript
                 }
 
                 if (!empty($new_fields)) {
-                    $fields        = new JRegistry($new_fields);
+                    $fields        = new \Joomla\Registry\Registry($new_fields);
                     $table->fields = $fields->toString();
                     $table->store();
                 }
@@ -567,21 +567,21 @@ class packInstallerScript
     private function _moveFiles()
     {
         $pack_usercategories_path = JPATH_ADMINISTRATOR . '/components/com_joomcck/packs/' . $this->key . '/usercategories';
-        if (JFolder::exists($pack_usercategories_path)) {
-            $folders = JFolder::folders($pack_usercategories_path);
+        if (\Joomla\CMS\Filesystem\Folder::exists($pack_usercategories_path)) {
+            $folders = \Joomla\CMS\Filesystem\Folder::folders($pack_usercategories_path);
             foreach ($folders as $folder) {
                 $new_foldername = $this->ids['users'][$folder];
                 $path           = JPATH_ROOT . '/images/usercategories/' . $new_foldername;
-                if (!JFolder::exists($path)) {
-                    JFolder::create($path);
+                if (!\Joomla\CMS\Filesystem\Folder::exists($path)) {
+                    \Joomla\CMS\Filesystem\Folder::create($path);
                 }
-                $files = JFolder::files($pack_usercategories_path . DIRECTORY_SEPARATOR . $folder);
+                $files = \Joomla\CMS\Filesystem\Folder::files($pack_usercategories_path . DIRECTORY_SEPARATOR . $folder);
                 foreach ($files as $file) {
-                    $ext          = JFile::getExt($file);
+                    $ext          = \Joomla\CMS\Filesystem\File::getExt($file);
                     $ucid         = str_replace('.' . $ext, '', $file);
                     $new_filename = $this->ids['category_user'][$ucid];
                     $dest         = JPATH_ROOT . '/images/usercategories' . DIRECTORY_SEPARATOR . $new_foldername . DIRECTORY_SEPARATOR . $new_filename . '.' . $ext;
-                    JFile::copy($pack_usercategories_path . DIRECTORY_SEPARATOR . $folder . DIRECTORY_SEPARATOR . $file, $dest, '', true);
+                    \Joomla\CMS\Filesystem\File::copy($pack_usercategories_path . DIRECTORY_SEPARATOR . $folder . DIRECTORY_SEPARATOR . $file, $dest, '', true);
                 }
             }
         }
@@ -590,7 +590,7 @@ class packInstallerScript
     private function _getObject($name, $assoc = false)
     {
         $file = JPATH_ADMINISTRATOR . '/components/com_joomcck/packs/' . $this->key . '/' . $name . '.json';
-        if (!JFile::exists($file)) {
+        if (!\Joomla\CMS\Filesystem\File::exists($file)) {
             return [];
         }
         $content = file_get_contents($file);
@@ -602,7 +602,7 @@ class packInstallerScript
     private function _loadUsers()
     {
         $users  = $this->_getObject('users', true);
-        $params = JComponentHelper::getParams('com_joomcck');
+        $params = \Joomla\CMS\Component\ComponentHelper::getParams('com_joomcck');
         $global = $params->get('moderator');
 
         switch ($this->pack->user) {
@@ -640,7 +640,7 @@ class packInstallerScript
 
         $model->register($data);
 
-        $db  = JFactory::getDbo();
+        $db  = \Joomla\CMS\Factory::getDbo();
         $sql = "SELECT id FROM `#__users` WHERE email = '{$user['email']}' OR username = '{$user['username']}'";
         $db->setQuery($sql);
 
@@ -648,7 +648,7 @@ class packInstallerScript
     }
     private function _matchUser($user)
     {
-        $db = JFactory::getDbo();
+        $db = \Joomla\CMS\Factory::getDbo();
 
         $sql = "SELECT id FROM `#__users` WHERE email = '{$user['email']}' OR username = '{$user['username']}'";
         $db->setQuery($sql);
@@ -658,7 +658,7 @@ class packInstallerScript
 
     private function _loadTable($name, $prefix, $file, $keys = [])
     {
-        $db      = JFactory::getDbo();
+        $db      = \Joomla\CMS\Factory::getDbo();
         $content = $this->_getObject($file, true);
 
         if ($file == 'categories' || $file == 'comments' || $file == 'field_multilevelselect') {
@@ -696,7 +696,7 @@ class packInstallerScript
                 $this->records_with_files[$row['record_id']][$row['field_id']] = 1;
             }
             if ($file == 'tags') {
-                $db  = JFactory::getDBO();
+                $db  = \Joomla\CMS\Factory::getDBO();
                 $sql = "SELECT id FROM #__js_res_tags WHERE LOWER(`tag`) = '" . \Joomla\String\StringHelper::strtolower($row['tag']) . "'";
                 $db->setQuery($sql);
                 $tid = $db->loadResult();
@@ -729,7 +729,7 @@ class packInstallerScript
                 if ($k == 'user_id') {
                     $val = (array_key_exists($row[$k], $this->ids['users']) ?
                         $this->ids['users'][$row[$k]] :
-                        JComponentHelper::getPrams('com_joomcck')->get('moderator'));
+                        \Joomla\CMS\Component\ComponentHelper::getPrams('com_joomcck')->get('moderator'));
                 } else {
                     $val = @$this->ids[$v][$row[$k]];
                 }
@@ -794,7 +794,7 @@ class packInstallerScript
                     $menu_table->home         = 0;
                     $menu_table->language     = '*';
                     $menu_table->type         = 'component';
-                    $menu_table->component_id = JComponentHelper::getComponent('com_joomcck')->id;
+                    $menu_table->component_id = \Joomla\CMS\Component\ComponentHelper::getComponent('com_joomcck')->id;
                     $menu_table->published    = 1;
                     $menu_table->title        = $row['title'] ? $row['title'] : $row['name'];
                     $menu_table->alias        = $row['alias'] . '-' . $this->key;
@@ -811,7 +811,7 @@ class packInstallerScript
                     throw new Exception( $menu_table->getError(),400);
                 }
 
-                $params = new JRegistry($table->params);
+                $params = new \Joomla\Registry\Registry($table->params);
                 $params->set('general.category_itemid', $menu_table->id);
                 $table->params = $params->toString();
                 $table->store();
@@ -823,7 +823,7 @@ class packInstallerScript
                 $type_table = JTable::getInstance('Type', 'JoomcckTable');
                 foreach ($types as $type_id) {
                     $type_table->load($this->ids['types'][$type_id]);
-                    $params = new JRegistry($type_table->params);
+                    $params = new \Joomla\Registry\Registry($type_table->params);
                     $params->set('properties.item_itemid', $menu_table->id);
                     $type_table->params = $params->toString();
                     $type_table->store();

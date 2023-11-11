@@ -18,7 +18,7 @@ class JoomcckControllerComment extends MControllerForm
 
 		if(!$this->input)
 		{
-			$this->input = JFactory::getApplication()->input;
+			$this->input = \Joomla\CMS\Factory::getApplication()->input;
 		}
 	}
 	public function save($key = null, $urlVar = null)
@@ -29,7 +29,7 @@ class JoomcckControllerComment extends MControllerForm
 
 		$form = $this->input->get('jform', array(), 'array');
 
-		$user = JFactory::getUser();
+		$user = \Joomla\CMS\Factory::getUser();
 		$record = MModelBase::getInstance('Record', 'JoomcckModel')->getItem($form['record_id']);
 		$section = MModelBase::getInstance('Section', 'JoomcckModel')->getItem($record->section_id);
 		$type = MModelBase::getInstance('Form', 'JoomcckModel')->getRecordType($record->type_id);
@@ -69,7 +69,7 @@ class JoomcckControllerComment extends MControllerForm
 				$table->store();
 			}
 
-			//CEmeraldHelper::countLimit('type', 'comment', $type, JFactory::getUser()->get('id'));
+			//CEmeraldHelper::countLimit('type', 'comment', $type, \Joomla\CMS\Factory::getUser()->get('id'));
 		}
 		else if ($this->input->getInt('is_edited'))
 		{
@@ -104,7 +104,7 @@ class JoomcckControllerComment extends MControllerForm
 		if($this->input->getCmd('view') == 'comment')
 		{
 			echo '<script type="text/javascript">parent.window.jQuery("#commentmodal").modal("toggle");parent.window.location.reload();</script>';
-			JFactory::getApplication()->close();
+			\Joomla\CMS\Factory::getApplication()->close();
 		}
 	}
 
@@ -121,7 +121,7 @@ class JoomcckControllerComment extends MControllerForm
 
 	protected function allowAdd($data = array())
 	{
-		$user = JFactory::getUser();
+		$user = \Joomla\CMS\Factory::getUser();
 		$allow = $user->authorise('core.create', 'com_joomcck.comment');
 
 		if ($allow === null)
@@ -136,7 +136,7 @@ class JoomcckControllerComment extends MControllerForm
 
 	protected function allowEdit($data = array(), $key = 'id')
 	{
-		return JFactory::getUser()->authorise('core.edit', 'com_joomcck.comment');
+		return \Joomla\CMS\Factory::getUser()->authorise('core.edit', 'com_joomcck.comment');
 	}
 
 	protected function getRedirectToItemAppend($recordId = null, $urlVar = 'id')

@@ -33,13 +33,13 @@ class JFormFieldReturnurl extends JFormFieldList
 	 */
 	protected function getInput()
 	{
-		$id = JFactory::getApplication()->input->getInt('id');
+		$id = \Joomla\CMS\Factory::getApplication()->input->getInt('id');
 
 		if(!$id)
 		{
-			return JText::_('EMR_RETURNURL');
+			return \Joomla\CMS\Language\Text::_('EMR_RETURNURL');
 		}
 
-		return sprintf('<input type="text" readonly value="%s" >', JRoute::_('index.php?option=com_emerald&Itemid=1&task=payment.back&processor='.$this->element['processor'], TRUE, -1));
+		return sprintf('<input type="text" readonly value="%s" >', \Joomla\CMS\Router\Route::_('index.php?option=com_emerald&Itemid=1&task=payment.back&processor='.$this->element['processor'], TRUE, -1));
 	}
 }

@@ -14,12 +14,12 @@ JHTML::_('bootstrap.tooltip', '*[rel^="tooltip"]');
 <?php foreach($types AS $type): ?>
 	<?php
 	$attr = "";
-	if(!in_array($type->params->get('submission.submission'), JFactory::getUser()->getAuthorisedViewLevels()))
+	if(!in_array($type->params->get('submission.submission'), \Joomla\CMS\Factory::getUser()->getAuthorisedViewLevels()))
 	{
-		if(!JFactory::getUser()->get('id'))
+		if(!\Joomla\CMS\Factory::getUser()->get('id'))
 		{
-			$url = JRoute::_('index.php?option=com_users&view=login&return=' . Url::back());
-			$attr = ' rel="tooltip" data-bs-title="'.JText::sprintf('MOD_SB_REGISTER', $type->name).'" ';
+			$url = \Joomla\CMS\Router\Route::_('index.php?option=com_users&view=login&return=' . Url::back());
+			$attr = ' rel="tooltip" data-bs-title="'.\Joomla\CMS\Language\Text::sprintf('MOD_SB_REGISTER', $type->name).'" ';
 		}
 		else
 		{
@@ -28,9 +28,9 @@ JHTML::_('bootstrap.tooltip', '*[rel^="tooltip"]');
 	}
 	else
 	{
-		$url = JRoute::_(Url::add($section, $type, $category));
+		$url = \Joomla\CMS\Router\Route::_(Url::add($section, $type, $category));
 	}
 	?>
 	<a class="btn btn-block btn-large btn-primary btn-addnew" href="<?php echo $url; ?>"<?php echo $attr; ?>>
-		<?php echo JText::sprintf($params->get('label', 'Add New Article'), $type->name); ?></a>
+		<?php echo \Joomla\CMS\Language\Text::sprintf($params->get('label', 'Add New Article'), $type->name); ?></a>
 <?php endforeach; ?>

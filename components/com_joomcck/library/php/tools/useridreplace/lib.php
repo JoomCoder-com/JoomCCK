@@ -15,7 +15,7 @@ class METoolSetUserHelper
 {
 	public static function execute($params)
 	{
-		$db = JFactory::getDBO();
+		$db = \Joomla\CMS\Factory::getDBO();
 
 		$from = (int)$params->get('user_from');
 
@@ -74,12 +74,12 @@ class METoolSetUserHelper
 			$db->setQuery($sql);
 			$db->execute();
 		}
-		JFactory::getApplication()->enqueueMessage(JText::_('Successfully'));
+		\Joomla\CMS\Factory::getApplication()->enqueueMessage(\Joomla\CMS\Language\Text::_('Successfully'));
 	}
 
 	public static function cleanFiles($from)
 	{
-		$db = JFactory::getDBO();
+		$db = \Joomla\CMS\Factory::getDBO();
 
 		$sql = "SELECT * FROM #__js_res_files WHERE user_id = " . $from;
 		$db->setQuery($sql);
@@ -88,12 +88,12 @@ class METoolSetUserHelper
 		foreach($files AS $file)
 		{
 			$subfolder = self::_getSubfolder($file->field_id);
-			$joomcck_params = JComponentHelper::getParams('com_joomcck');
+			$joomcck_params = \Joomla\CMS\Component\ComponentHelper::getParams('com_joomcck');
 
 			$filetodel = JPATH_ROOT . DIRECTORY_SEPARATOR . $joomcck_params->get('general_upload') . DIRECTORY_SEPARATOR . $subfolder . DIRECTORY_SEPARATOR . $files->fullpath;
-			if(JFile::exists($filetodel))
+			if(\Joomla\CMS\Filesystem\File::exists($filetodel))
 			{
-				JFile::delete($filetodel);
+				\Joomla\CMS\Filesystem\File::delete($filetodel);
 			}
 		}
 	}
@@ -104,14 +104,14 @@ class METoolSetUserHelper
 		if(!self::isTableExists($table)) return;
 		if($action == 0) return;
 
-		$db = JFactory::getDBO();
+		$db = \Joomla\CMS\Factory::getDBO();
 
 		if($action == 1)
 		{
 			return;
 		}
 
-		$db = JFactory::getDBO();
+		$db = \Joomla\CMS\Factory::getDBO();
 
 		settype($tag, 'array');
 		foreach($tag AS $t)
@@ -132,7 +132,7 @@ class METoolSetUserHelper
 
 	public static function isTableExists($table_name)
 	{
-		$db  = JFactory::getDBO();
+		$db  = \Joomla\CMS\Factory::getDBO();
 		$sql = "SHOW TABLES LIKE '%{$table_name}'";
 
 		$db->setQuery($sql);
@@ -148,11 +148,11 @@ class METoolSetUserHelper
 
 		if(!isset($params[$id]))
 		{
-			$db = JFactory::getDbo();
+			$db = \Joomla\CMS\Factory::getDbo();
 			$sql = "SELECT params, field_type FROM #__js_res_fields WHERE id = ".$id;
 			$db->setQuery($sql);
 			$result = $db->loadObject();
-			$params[$id] = new JRegistry($result->params);
+			$params[$id] = new \Joomla\Registry\Registry($result->params);
 			$defaults[$id] = $result->field_type;
 		}
 

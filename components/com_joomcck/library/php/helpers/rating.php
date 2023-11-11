@@ -13,14 +13,14 @@ class RatingHelp
 
 	public static function loadFile()
 	{
-		$document = JFactory::getDocument();
+		$document = \Joomla\CMS\Factory::getDocument();
 		$document->addScript(JURI::root(TRUE) . '/components/com_joomcck/library/js/felixrating.js');
 
 		$document->addScriptDeclaration(
 			"function FileRatingCallBack( vote, ident )
 			{
 				jQuery.ajax({
-					url:'" . JRoute::_("index.php?option=com_joomcck&task=rate.file&tmpl=component", FALSE) . "',
+					url:'" . \Joomla\CMS\Router\Route::_("index.php?option=com_joomcck&task=rate.file&tmpl=component", FALSE) . "',
 				data:{vote: vote, id: ident},
 				type: 'post',
 				dataType: 'json'
@@ -32,7 +32,7 @@ class RatingHelp
 	{
 
 
-		$user = JFactory::getUser();
+		$user = \Joomla\CMS\Factory::getUser();
 		$isAuthor = $user_id == $user->get('id');
 
 		if($accessLevel == -1)
@@ -67,14 +67,14 @@ class RatingHelp
 
 
 
-			if($user->get('id') && JFactory::getApplication()->input->cookie->get("{$type}_rate_{$id}_{$index}", 0, 'INT'))
+			if($user->get('id') && \Joomla\CMS\Factory::getApplication()->input->cookie->get("{$type}_rate_{$id}_{$index}", 0, 'INT'))
 			{
 
 
 				return FALSE;
 			}
 
-			$ses = JFactory::getSession();
+			$ses = \Joomla\CMS\Factory::getSession();
 			if($ses->get("{$type}_rate_{$id}_{$index}"))
 			{
 				return FALSE;
@@ -86,7 +86,7 @@ class RatingHelp
 
 	public static function loadRating($tmpl_name, $current, $prod_id, $index, $callbackfunction, $rating_active, $record_id = '')
 	{
-		$document = JFactory::getDocument();
+		$document = \Joomla\CMS\Factory::getDocument();
 		$document->addScript(JURI::root(TRUE) . '/components/com_joomcck/library/js/felixrating.js');
 
 		$tmpl_name = explode('.', $tmpl_name);
@@ -121,7 +121,7 @@ class RatingHelp
 			return FALSE;
 		}
 
-		$document = JFactory::getDocument();
+		$document = \Joomla\CMS\Factory::getDocument();
 		$document->addScript(JURI::root(TRUE) . '/components/com_joomcck/library/js/felixrating.js');
 
 		$options = $type->params->get('properties.rate_multirating_options','');
@@ -132,9 +132,9 @@ class RatingHelp
 		if(count($options) > 1 && $type->params->get('properties.rate_multirating', false))
 		{
 
-			$template = JFactory::getApplication()->getTemplate();
+			$template = \Joomla\CMS\Factory::getApplication()->getTemplate();
 			$path     = JPATH_THEMES . '/' . $template . '/html/com_joomcck/multirating/' . $type->params->get('properties.rate_multirating_tmpl', 'default.php');
-			if(!JFile::exists($path))
+			if(!\Joomla\CMS\Filesystem\File::exists($path))
 			{
 				$path = JPATH_ROOT . '/components/com_joomcck/views/rating_tmpls/multirating/' . $type->params->get('properties.rate_multirating_tmpl', 'default.php');
 			}
@@ -153,7 +153,7 @@ class RatingHelp
 
 			if($type->params->get('properties.rate_access') != -1)
 			{
-				$out .= '<small id="rating-text-' . $record->id . '">' . JText::sprintf('CRAINGDATA', $record->votes_result, $record->votes) . '</small>';
+				$out .= '<small id="rating-text-' . $record->id . '">' . \Joomla\CMS\Language\Text::sprintf('CRAINGDATA', $record->votes_result, $record->votes) . '</small>';
 			}
 
 			return $out;
@@ -171,7 +171,7 @@ class RatingHelp
 
 	public static function loadFormMultiratings($record, $type, $section, $active = 1)
 	{
-		$document = JFactory::getDocument();
+		$document = \Joomla\CMS\Factory::getDocument();
 		$document->addScript(JURI::root(TRUE) . '/components/com_joomcck/library/js/felixrating.js');
 
 		$options = $type->params->get('properties.rate_multirating_options');
@@ -183,7 +183,7 @@ class RatingHelp
 			$record->multirating = '[]';
 		}
 
-		$doc = JFactory::getDocument();
+		$doc = \Joomla\CMS\Factory::getDocument();
 
 		$out[]  = '<input id="jform_votes" type="hidden" name="jform[votes]" value="1">';
 		$out[]  = '<input id="jform_votes_result" type="hidden" name="jform[votes_result]" value="' . @$record->votes_result . '">';
@@ -221,7 +221,7 @@ class RatingHelp
 			foreach($options as $key => $option)
 			{
 				$parts = explode('::', $option);
-				$out[] = sprintf($pat, NULL, JText::_($parts[0]),
+				$out[] = sprintf($pat, NULL, \Joomla\CMS\Language\Text::_($parts[0]),
 					self::loadRating(isset($parts[1]) ? $parts[1] : $type->params->get('properties.tmpl_rating'),
 						round((int)@$result[$key]['sum']), $record->id, $key, 'FormItemRatingCallBack', $active, $key));
 			}

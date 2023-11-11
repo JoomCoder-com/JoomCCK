@@ -10,7 +10,7 @@
 defined('_JEXEC') or die('Restricted access');
 jimport('joomla.table.table');
 
-class JoomcckTableTaghistory extends JTable
+class JoomcckTableTaghistory extends \Joomla\CMS\Table\Table
 {
 	public function __construct(&$_db)
 	{
@@ -22,7 +22,7 @@ class JoomcckTableTaghistory extends JTable
 	{
 		if (! isset($data['ctime']))
 		{
-			$data['ctime'] = JFactory::getDate()->toSql();
+			$data['ctime'] = \Joomla\CMS\Factory::getDate()->toSql();
 		}
 		return parent::bind($data, $ignore);
 	}

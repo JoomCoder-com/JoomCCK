@@ -16,14 +16,14 @@ class JHTMLLoader
 		ArrayHelper::clean_r($attr);
 		
 		$options = json_encode($attr);
-		JFactory::getDocument()->addScript(JUri::root(TRUE).'/media/com_joomcck/js/bootstrap/clickover/clickover.js');
-		JFactory::getDocument()->addScriptDeclaration("jQuery(document).ready(function(){
+		\Joomla\CMS\Factory::getDocument()->addScript(\Joomla\CMS\Uri\Uri::root(TRUE).'/media/com_joomcck/js/bootstrap/clickover/clickover.js');
+		\Joomla\CMS\Factory::getDocument()->addScriptDeclaration("jQuery(document).ready(function(){
 			jQuery('*[rel=\"{$rel}\"]').clickover({$options});
 		});");
 	}
 	public static function modal()
 	{
-		JFactory::getDocument()->addScript(JUri::root(TRUE).'/media/com_joomcck/vendors/jquery-modal/jquery.modal.js');
-		JFactory::getDocument()->addStyleSheet(JUri::root(TRUE).'/media/com_joomcck/vendors/jquery-modal/jquery.modal.css');
+		\Joomla\CMS\Factory::getDocument()->addScript(\Joomla\CMS\Uri\Uri::root(TRUE).'/media/com_joomcck/vendors/jquery-modal/jquery.modal.js');
+		\Joomla\CMS\Factory::getDocument()->addStyleSheet(\Joomla\CMS\Uri\Uri::root(TRUE).'/media/com_joomcck/vendors/jquery-modal/jquery.modal.css');
 	}
 }

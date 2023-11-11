@@ -22,7 +22,7 @@ class JoomcckCommentsCore extends JoomcckComments {
 
 	public function getIndex($type, $item) {
 
-		$db = JFactory::getDbo();
+		$db = \Joomla\CMS\Factory::getDbo();
 
 		$db->setQuery("SELECT comment FROM #__js_res_comments WHERE published = 1 AND record_id = {$item->id}");
 		$list = $db->loadColumn();

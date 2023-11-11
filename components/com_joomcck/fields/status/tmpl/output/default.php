@@ -26,7 +26,7 @@ $path = JURI::root().'components/com_joomcck/fields/status/icons/';
 $access = array(4=>3,5=>3,6=>0,1=>1,2=>1,3=>1);
 foreach($this->statuses as $key => $status)
 {
-	$icon = JHtml::image($path . $params->get('params.icon' . $key), $status, array('align' => 'absmiddle'));
+	$icon = \Joomla\CMS\HTML\HTMLHelper::image($path . $params->get('params.icon' . $key), $status, array('align' => 'absmiddle'));
 	if (!empty($this->color[$key]))
 	{
 		$status = '<span style="color: ' . $this->color[$key] . '">' . $status . '</span>';
@@ -35,7 +35,7 @@ foreach($this->statuses as $key => $status)
 	if($this->checkStatus($params->get('params.access' . $key, $access[$key]), 'edit'))
 	{
 		$list[] = sprintf('<li rel="tooltipright" title="%s"><button type="button" class="dropdown-item" onclick="changeStatus%d(%d, \'%s\')">%s</button></li>',
-			htmlentities(JText::sprintf('ST_CLICKTOCHANGE', $status), ENT_QUOTES, 'UTF-8'), $id, $key, $this->clienttype, $li_html);
+			htmlentities(\Joomla\CMS\Language\Text::sprintf('ST_CLICKTOCHANGE', $status), ENT_QUOTES, 'UTF-8'), $id, $key, $this->clienttype, $li_html);
 	}
 }
 ?>
@@ -44,7 +44,7 @@ foreach($this->statuses as $key => $status)
 
 <?php if (count($list)): ?>
 	<div class="dropdown d-inline">
-		<button id="field_<?php echo $id;?>_button" type="button" aria-expanded="false" class="dropdown-toggle btn btn-sm btn-outline-dark" data-bs-toggle="dropdown" rel="tooltip" title="<?php echo JText::_('ST_CHANGETO');?>"></button>
+		<button id="field_<?php echo $id;?>_button" type="button" aria-expanded="false" class="dropdown-toggle btn btn-sm btn-outline-dark" data-bs-toggle="dropdown" rel="tooltip" title="<?php echo \Joomla\CMS\Language\Text::_('ST_CHANGETO');?>"></button>
 		<ul class="dropdown-menu" ><?php echo implode("\n", $list);?></ul>
 	</div>
 <?php endif; ?>

@@ -15,31 +15,31 @@ class JoomcckControllerItems extends JoomcckControllerRecords
     public function change_core()
     {
         $this->setRedirect(
-            JRoute::_('index.php?option=' . $this->option . '&view=items&layout=change_core&' . $this->_getCIDs(), false)
+            \Joomla\CMS\Router\Route::_('index.php?option=' . $this->option . '&view=items&layout=change_core&' . $this->_getCIDs(), false)
         );
     }
     public function change_field()
     {
         $this->setRedirect(
-            JRoute::_('index.php?option=' . $this->option . '&view=items&layout=change_field&' . $this->_getCIDs(), false)
+            \Joomla\CMS\Router\Route::_('index.php?option=' . $this->option . '&view=items&layout=change_field&' . $this->_getCIDs(), false)
         );
     }
     public function change_category()
     {
         $this->setRedirect(
-            JRoute::_('index.php?option=' . $this->option . '&view=items&layout=change_category&' . $this->_getCIDs(), false)
+            \Joomla\CMS\Router\Route::_('index.php?option=' . $this->option . '&view=items&layout=change_category&' . $this->_getCIDs(), false)
         );
     }
     public function cancel()
     {
         $this->setRedirect(
-            JRoute::_('index.php?option=' . $this->option . '&view=items', false)
+            \Joomla\CMS\Router\Route::_('index.php?option=' . $this->option . '&view=items', false)
         );
     }
     public function applychco()
     {
-		$db = JFactory::getDbo();
-		$app = JFactory::getApplication();
+		$db = \Joomla\CMS\Factory::getDbo();
+		$app = \Joomla\CMS\Factory::getApplication();
 		
         $form = $this->input->get('jform', [], 'array');
         $cid = $this->input->get('cid', [], 'array');
@@ -72,13 +72,13 @@ class JoomcckControllerItems extends JoomcckControllerRecords
 			$query = sprintf('UPDATE `#__js_res_record` SET %s WHERE id IN(%s)',implode(', ', $sql), implode(',', $cid));
 			$db->setQuery($query);
 			$db->execute();
-			$app->enqueueMessage(JText::printf('COM_JOOMCCK_N_ITEMS_UPDATED', count($cid)));
+			$app->enqueueMessage(\Joomla\CMS\Language\Text::printf('COM_JOOMCCK_N_ITEMS_UPDATED', count($cid)));
 		} else {
 			$app->enqueueMessage(Mint::_('CNOCHANGE'));
 		}
 
         $this->setRedirect(
-            JRoute::_('index.php?option=' . $this->option . '&view=items', false)
+            \Joomla\CMS\Router\Route::_('index.php?option=' . $this->option . '&view=items', false)
         );
     }
 
@@ -91,7 +91,7 @@ class JoomcckControllerItems extends JoomcckControllerRecords
             $this->redirect(Url::view('items', false));
         }
 
-        $app = JFactory::getApplication();
+        $app = \Joomla\CMS\Factory::getApplication();
         foreach ($ids as $id) {
             $app->input->set('id', $id);
             parent::delete();
@@ -108,7 +108,7 @@ class JoomcckControllerItems extends JoomcckControllerRecords
     public function publish()
     {
         $ids  = $this->input->get('cid', [], '', 'array');
-        $app  = JFactory::getApplication();
+        $app  = \Joomla\CMS\Factory::getApplication();
         $task = $this->getTask();
         foreach ($ids as $id) {
             $app->input->set('id', $id);

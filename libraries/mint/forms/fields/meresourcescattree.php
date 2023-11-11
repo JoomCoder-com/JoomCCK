@@ -42,7 +42,7 @@ class JFormFieldMeresourcescattree extends JFormFieldList
 		// Initialise variables.
 		$options = array();
 		
-		$db = JFactory::getDbo();
+		$db = \Joomla\CMS\Factory::getDbo();
 		$query = $db->getQuery(true);
 		
 		$options = array();

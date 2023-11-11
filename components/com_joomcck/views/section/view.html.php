@@ -9,7 +9,7 @@
 
 defined('_JEXEC') or die ();
 
-JForm::addFieldPath(JPATH_ROOT . '/administrator/components/com_menus/models/fields');
+\Joomla\CMS\Form\Form::addFieldPath(JPATH_ROOT . '/administrator/components/com_menus/models/fields');
 class JoomcckViewSection extends MViewBase
 {
 	public function display($tpl = NULL)
@@ -28,10 +28,10 @@ class JoomcckViewSection extends MViewBase
 		$params->loadFile(JPATH_COMPONENT. '/models/forms/params.section.xml');
 		$this->params_form   = $params;
 		$this->params_groups = array(
-			'general'     => JText::_('FS_GENERAL'),
-			'events'      => JText::_('FS_EVENTPARAMS'),
-			'personalize' => JText::_('FS_PERSPARAMS'),
-			'more'        => JText::_('FS_OTHERPARAMS'),
+			'general'     => \Joomla\CMS\Language\Text::_('FS_GENERAL'),
+			'events'      => \Joomla\CMS\Language\Text::_('FS_EVENTPARAMS'),
+			'personalize' => \Joomla\CMS\Language\Text::_('FS_PERSPARAMS'),
+			'more'        => \Joomla\CMS\Language\Text::_('FS_OTHERPARAMS'),
 		);
 
 		// Check for errors.

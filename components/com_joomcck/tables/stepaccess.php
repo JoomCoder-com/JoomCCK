@@ -9,7 +9,7 @@
 
 defined('_JEXEC') or die('Restricted access');
 
-class JoomcckTableStepaccess extends JTable
+class JoomcckTableStepaccess extends \Joomla\CMS\Table\Table
 {
 	public function __construct(&$_db)
 	{

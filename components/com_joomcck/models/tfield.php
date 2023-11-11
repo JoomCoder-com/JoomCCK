@@ -20,7 +20,7 @@ class JoomcckModelTfield extends MModelAdmin
 
 	public function populateState($ordering = NULL, $direction = NULL)
 	{
-		$app = JFactory::getApplication('administrator');
+		$app = \Joomla\CMS\Factory::getApplication('administrator');
 
 		$type = $app->getUserStateFromRequest('com_joomcck.tfields.filter.type', 'type_id', 0, 'int');
 		$this->setState('filter.type', $type);
@@ -30,7 +30,7 @@ class JoomcckModelTfield extends MModelAdmin
 
 	public function getTable($type = 'Field', $prefix = 'JoomcckTable', $config = array())
 	{
-		return JTable::getInstance($type, $prefix, $config);
+		return \Joomla\CMS\Table\Table::getInstance($type, $prefix, $config);
 	}
 
 	public function save($data)
@@ -42,7 +42,7 @@ class JoomcckModelTfield extends MModelAdmin
 	public function getFieldForm($field_type, $default = array())
 	{
 		$file = JPATH_ROOT . '/components/com_joomcck/fields' . DIRECTORY_SEPARATOR . $field_type . DIRECTORY_SEPARATOR . $field_type . '.xml';
-		if(!JFile::exists($file))
+		if(!\Joomla\CMS\Filesystem\File::exists($file))
 		{
 			echo "File not found: {$file}";
 		}
@@ -60,7 +60,7 @@ class JoomcckModelTfield extends MModelAdmin
 
 	public function getForm($data = array(), $loadData = TRUE)
 	{
-		$app = JFactory::getApplication();
+		$app = \Joomla\CMS\Factory::getApplication();
 
 		$form = $this->loadForm('com_joomcck.tfield', 'field', array(
 			'control'   => 'jform',
@@ -76,7 +76,7 @@ class JoomcckModelTfield extends MModelAdmin
 
 	protected function loadFormData()
 	{
-		$data = JFactory::getApplication()->getUserState('com_joomcck.edit.tfield.data', array());
+		$data = \Joomla\CMS\Factory::getApplication()->getUserState('com_joomcck.edit.tfield.data', array());
 
 		if(empty($data))
 		{
@@ -96,15 +96,15 @@ class JoomcckModelTfield extends MModelAdmin
 			if(!is_array($item->params))
 			{
 				//echo $item->params;
-				$registry = new JRegistry();
+				$registry = new \Joomla\Registry\Registry();
 				$registry->loadString((string)$item->params);
 				$item->params = $registry->toArray();
 			}
 		}
 
-		if(JFactory::getApplication()->input->getInt('group'))
+		if(\Joomla\CMS\Factory::getApplication()->input->getInt('group'))
 		{
-			$item->group_id = JFactory::getApplication()->input->getInt('group');
+			$item->group_id = \Joomla\CMS\Factory::getApplication()->input->getInt('group');
 		}
 
 		return $item;
@@ -117,22 +117,22 @@ class JoomcckModelTfield extends MModelAdmin
 
 	protected function canDelete($record)
 	{
-		$user = JFactory::getUser();
+		$user = \Joomla\CMS\Factory::getUser();
 
 		return $user->authorise('core.delete', 'com_joomcck.tfield.' . (int)$record->id);
 	}
 
 	protected function canEditState($record)
 	{
-		$user = JFactory::getUser();
+		$user = \Joomla\CMS\Factory::getUser();
 
 		return $user->authorise('core.edit.state', 'com_joomcck.tfield.' . (int)$record->id);
 	}
 
 	public function changeState($task, &$pks, $value = 1)
 	{
-		$dispatcher = JFactory::getApplication();
-		$user       = JFactory::getUser();
+		$dispatcher = \Joomla\CMS\Factory::getApplication();
+		$user       = \Joomla\CMS\Factory::getUser();
 		$table      = $this->getTable();
 		$pks        = (array)$pks;
 
@@ -148,14 +148,14 @@ class JoomcckModelTfield extends MModelAdmin
 				{
 					// Prune items that you can't change.
 					unset($pks[$i]);
-					JLog::add(JText::_('JLIB_APPLICATION_ERROR_EDITSTATE_NOT_PERMITTED'), JLog::WARNING, 'jerror');
+					JLog::add(\Joomla\CMS\Language\Text::_('JLIB_APPLICATION_ERROR_EDITSTATE_NOT_PERMITTED'), JLog::WARNING, 'jerror');
 
 					return FALSE;
 				}
 			}
 		}
 
-		$params = new JRegistry($table->params);
+		$params = new \Joomla\Registry\Registry($table->params);
 		$param  = str_replace('not', '', $task);
 		$params->set('core.' . $param, $value);
 

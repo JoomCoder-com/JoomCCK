@@ -44,12 +44,12 @@ class JoomcckViewPack extends MViewBase
 	 */
 	protected function addToolbar()
 	{
-		JFactory::getApplication()->input->set('hidemainmenu', TRUE);
-		$user       = JFactory::getUser();
+		\Joomla\CMS\Factory::getApplication()->input->set('hidemainmenu', TRUE);
+		$user       = \Joomla\CMS\Factory::getUser();
 		$isNew      = ($this->item->id == 0);
 		$checkedOut = !($this->item->checked_out == 0 || $this->item->checked_out == $user->get('id'));
 
-		JToolBarHelper::title(($isNew ? JText::_('CNEWPACK') : JText::_('CEDITPACK')), 'packs');
+		JToolBarHelper::title(($isNew ? \Joomla\CMS\Language\Text::_('CNEWPACK') : \Joomla\CMS\Language\Text::_('CEDITPACK')), 'packs');
 
 		if(!$checkedOut)
 		{

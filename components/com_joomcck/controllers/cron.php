@@ -14,20 +14,20 @@ class JoomcckControllerCron extends MControllerAdmin
 
 	public function __construct($config = array())
 	{
-		$config = JComponentHelper::getParams('com_joomcck');
+		$config = \Joomla\CMS\Component\ComponentHelper::getParams('com_joomcck');
 
 
 		parent::__construct($config);
 
 		if(!$this->input)
 		{
-			$this->input = JFactory::getApplication()->input;
+			$this->input = \Joomla\CMS\Factory::getApplication()->input;
 		}
 
 		if(!$this->input->get('secret') || $config->get('cron_key') != $this->input->get('secret'))
 		{
 			echo "Secret code is wrong. Add secret word in Joomcck global config and add <code>&secret=secretword</code> to URL.";
-			JFactory::getApplication()->close();
+			\Joomla\CMS\Factory::getApplication()->close();
 		}
 	}
 
@@ -35,8 +35,8 @@ class JoomcckControllerCron extends MControllerAdmin
 	{
 		$interval = 30;
 
-		$date = JFactory::getDate()->toSql();
-		$db   = JFactory::getDBO();
+		$date = \Joomla\CMS\Factory::getDate()->toSql();
+		$db   = \Joomla\CMS\Factory::getDBO();
 		$sql  = "UPDATE #__js_res_record
 			SET checked_out = 0, checked_out_time = NULL
 			WHERE checked_out > 0
@@ -58,7 +58,7 @@ class JoomcckControllerCron extends MControllerAdmin
 
 	private function _sendDaijest($type)
 	{
-		$db = JFactory::getDbo();
+		$db = \Joomla\CMS\Factory::getDbo();
 
 		switch($type)
 		{
@@ -109,21 +109,21 @@ class JoomcckControllerCron extends MControllerAdmin
 			return;
 		}
 
-		$config       = JFactory::getConfig();
+		$config       = \Joomla\CMS\Factory::getConfig();
 		$sorted_notes = array();
 
 		foreach($notes as $key => $note)
 		{
 			if(!is_object($note->params))
 			{
-				$note->params = new JRegistry($note->params);
+				$note->params = new \Joomla\Registry\Registry($note->params);
 			}
 			$sorted_notes[$note->user_id][$note->ref_1][] = $note;
 			unset($notes[$key]);
 		}
 
-		$main = JText::_('ALERTMAIN');
-		$msg  = JText::_('ALERTDAIJEST');
+		$main = \Joomla\CMS\Language\Text::_('ALERTMAIN');
+		$msg  = \Joomla\CMS\Language\Text::_('ALERTDAIJEST');
 		$link = '<a href="%s" target="_blank">%s</a>';
 
 		foreach($sorted_notes as $user_id => $records)
@@ -144,8 +144,8 @@ class JoomcckControllerCron extends MControllerAdmin
 					continue;
 				}
 
-				$url    = JRoute::_(Url::record($record), TRUE, -1);
-				$scheme = JUri::getInstance()->toString(array('scheme'));
+				$url    = \Joomla\CMS\Router\Route::_(Url::record($record), TRUE, -1);
+				$scheme = \Joomla\CMS\Uri\Uri::getInstance()->toString(array('scheme'));
 				$url    = str_replace('http://', $scheme, $url);
 
 
@@ -154,7 +154,7 @@ class JoomcckControllerCron extends MControllerAdmin
 				$li = array();
 				foreach($notes as $note)
 				{
-					$event = JText::_('ALERT_EVENT_' . strtoupper($note->type)) . ' <small>(' . JHtml::_('date', $note->ctime, 'd M Y H:i') . ')</small>';
+					$event = \Joomla\CMS\Language\Text::_('ALERT_EVENT_' . strtoupper($note->type)) . ' <small>(' . \Joomla\CMS\HTML\HTMLHelper::_('date', $note->ctime, 'd M Y H:i') . ')</small>';
 					switch($note->type)
 					{
 						case 'comment_new':
@@ -189,7 +189,7 @@ class JoomcckControllerCron extends MControllerAdmin
 						case 'child_attached':
 						case 'parent_attached':
 							$section = ItemsStore::getSection($note->ref_2);
-							$event = ucfirst(JText::sprintf('alert_event_'.$note->type, strtolower($section->params->get('general.item_label', 'item')))) . ' <small>(' . JHtml::_('date', $note->ctime, 'd M Y H:i') . ')</small>';
+							$event = ucfirst(\Joomla\CMS\Language\Text::sprintf('alert_event_'.$note->type, strtolower($section->params->get('general.item_label', 'item')))) . ' <small>(' . \Joomla\CMS\HTML\HTMLHelper::_('date', $note->ctime, 'd M Y H:i') . ')</small>';
 							break;
 
 					}
@@ -203,17 +203,17 @@ class JoomcckControllerCron extends MControllerAdmin
 				$list[] = '<ul><li>' . implode('</li><li>', $li) . '</li></ul>';
 			}
 
-			$subject = JText::sprintf('ALERT_SUBJECT_DAIJEST_' . $type, $num) . ' ' . $config->get('sitename');
+			$subject = \Joomla\CMS\Language\Text::sprintf('ALERT_SUBJECT_DAIJEST_' . $type, $num) . ' ' . $config->get('sitename');
 			$text    = str_replace('[EVENTS]', implode("\n", $list), $text);
 			$text    = str_replace(
 				array(
 					'[BRAND]', '[USER]', '[NUM]'
 				),
 				array(
-					$config->get('sitename'), JFactory::getUser($user_id)->get('name'), $num
+					$config->get('sitename'), \Joomla\CMS\Factory::getUser($user_id)->get('name'), $num
 				), $text);
 
-			$result = JFactory::getMailer()->sendMail($config->get('mailfrom'), $config->get('fromname'), JFactory::getUser($user_id)->get('email'), $subject, $text, TRUE);
+			$result = \Joomla\CMS\Factory::getMailer()->sendMail($config->get('mailfrom'), $config->get('fromname'), \Joomla\CMS\Factory::getUser($user_id)->get('email'), $subject, $text, TRUE);
 			if($result)
 			{
 				if($note_ids)

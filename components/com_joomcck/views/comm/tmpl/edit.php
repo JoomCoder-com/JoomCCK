@@ -22,16 +22,16 @@ $wa->useScript('keepalive')
 			Joomla.submitform(task);
 		}
 		else {
-			alert('<?php echo $this->escape(JText::_('JGLOBAL_VALIDATION_FORM_FAILED'));?>');
+			alert('<?php echo $this->escape(\Joomla\CMS\Language\Text::_('JGLOBAL_VALIDATION_FORM_FAILED'));?>');
 		}
 	}
 </script>
 
-<form action="<?php echo JUri::getInstance()->toString(); ?>" method="post" name="adminForm" id="adminForm" class="form-horizontal form-validate">
+<form action="<?php echo \Joomla\CMS\Uri\Uri::getInstance()->toString(); ?>" method="post" name="adminForm" id="adminForm" class="form-horizontal form-validate">
 	<?php echo HTMLFormatHelper::layout('item', $this); ?>
 	<div class="page-header">
 		<h1>
-			<?php echo JText::_('CEDITCOMMENT'); ?>
+			<?php echo \Joomla\CMS\Language\Text::_('CEDITCOMMENT'); ?>
 		</h1>
 	</div>
 
@@ -68,6 +68,6 @@ $wa->useScript('keepalive')
 	</div>
 
 	<input type="hidden" name="task" value="" />
-	<?php echo JHtml::_('form.token'); ?>
+	<?php echo \Joomla\CMS\HTML\HTMLHelper::_('form.token'); ?>
 	<?php echo $this->form->getInput('langs'); ?>
 </form>

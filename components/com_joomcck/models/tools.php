@@ -20,7 +20,7 @@ class JoomcckModelTools extends JModelAdmin
 
 	function __construct()
 	{
-		$this->_id    = JFactory::getApplication()->input->getInt('id');
+		$this->_id    = \Joomla\CMS\Factory::getApplication()->input->getInt('id');
 		$this->option = 'com_joomcck';
 		parent::__construct();
 	}
@@ -42,8 +42,8 @@ class JoomcckModelTools extends JModelAdmin
 			$this->_fetchTools();
 		}
 
-		$tool = $this->_tools[JFactory::getApplication()->input->get('name')];
-		$tool->name = JFactory::getApplication()->input->get('name');
+		$tool = $this->_tools[\Joomla\CMS\Factory::getApplication()->input->get('name')];
+		$tool->name = \Joomla\CMS\Factory::getApplication()->input->get('name');
 
 		return $tool;
 	}
@@ -56,18 +56,18 @@ class JoomcckModelTools extends JModelAdmin
 		$form_data = JPATH_ROOT . '/components/com_joomcck/library/php/tools/' . $tool->name . '/data.json';
 
         $form = '';
-		if(JFile::exists($form_file))
+		if(\Joomla\CMS\Filesystem\File::exists($form_file))
 		{
-			if(!JFile::exists($form_data))
+			if(!\Joomla\CMS\Filesystem\File::exists($form_data))
 			{
 				$a = '{}';
-				JFile::write($form_data, $a);
+				\Joomla\CMS\Filesystem\File::write($form_data, $a);
 			}
 
-			$params = new JRegistry();
+			$params = new \Joomla\Registry\Registry();
 			$params->loadFile($form_data);
 
-			$form_object = JForm::getInstance('joomccklools.form', $form_file, array('control' => 'jform'));
+			$form_object = \Joomla\CMS\Form\Form::getInstance('joomccklools.form', $form_file, array('control' => 'jform'));
 			$form        = MEFormHelper::renderFieldset($form_object, $tool->name, $params, NULL, FORM_STYLE_TABLE);
 		}
 

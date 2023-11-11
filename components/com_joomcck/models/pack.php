@@ -27,7 +27,7 @@ class JoomcckModelPack extends MModelAdmin
 
     public function __construct($config)
     {
-        $app = JFactory::getApplication();
+        $app = \Joomla\CMS\Factory::getApplication();
         //$app->registerEvent('onContentBeforeDelete', [$this, 'onAfterModuleList']);
         //$config['event_before_delete'] = 'deleteZip';
         $this->option                  = 'com_joomcck';
@@ -37,12 +37,12 @@ class JoomcckModelPack extends MModelAdmin
 
     public function getTable($type = 'Packs', $prefix = 'JoomcckTable', $config = [])
     {
-        return JTable::getInstance($type, $prefix, $config);
+        return \Joomla\CMS\Table\Table::getInstance($type, $prefix, $config);
     }
 
     public function getForm($data = [], $loadData = true)
     {
-        $app = JFactory::getApplication();
+        $app = \Joomla\CMS\Factory::getApplication();
 
         $form = $this->loadForm('com_joomcck.pack', 'pack', ['control' => 'jform', 'load_data' => $loadData]);
         if (empty($form)) {
@@ -54,7 +54,7 @@ class JoomcckModelPack extends MModelAdmin
 
     protected function loadFormData()
     {
-        $data = JFactory::getApplication()->getUserState('com_joomcck.edit.' . $this->getName() . '.data', []);
+        $data = \Joomla\CMS\Factory::getApplication()->getUserState('com_joomcck.edit.' . $this->getName() . '.data', []);
 
         if (empty($data)) {
             $data = $this->getItem();
@@ -70,14 +70,14 @@ class JoomcckModelPack extends MModelAdmin
 
     protected function canDelete($record)
     {
-        $user = JFactory::getUser();
+        $user = \Joomla\CMS\Factory::getUser();
 
         return $user->authorise('core.delete', 'com_joomcck.pack.' . (int) $record->id);
     }
 
     protected function canEditState($record)
     {
-        $user = JFactory::getUser();
+        $user = \Joomla\CMS\Factory::getUser();
 
         return $user->authorise('core.edit.state', 'com_joomcck.pack.' . (int) $record->id);
     }
@@ -87,7 +87,7 @@ class JoomcckModelPack extends MModelAdmin
         $result = parent::delete($pks);
 
         if ($result) {
-            $db = JFactory::getDbo();
+            $db = \Joomla\CMS\Factory::getDbo();
             $db->setQuery("DELETE FROM #__js_res_packs_sections WHERE pack_id IN (" . implode(',', $pks) . ")");
             $db->execute();
         }
@@ -95,14 +95,14 @@ class JoomcckModelPack extends MModelAdmin
 
     public function build($pack_id)
     {
-        $db         = JFactory::getDBO();
+        $db         = \Joomla\CMS\Factory::getDBO();
         $this->pack = $this->getItem($pack_id);
 
         MModelBase::addIncludePath(JPATH_ROOT . '/components/com_joomcck/models');
         $pack_sections = MModelBase::getInstance('Packsections', 'JoomcckModel')->getPackSectoins($pack_id);
 
         if (!$pack_sections) {
-            JFactory::getApplication()->enqueueMessage(JText::sprintf('CPACKNOSECTIONS', $this->pack->name),'warning');
+            \Joomla\CMS\Factory::getApplication()->enqueueMessage(\Joomla\CMS\Language\Text::sprintf('CPACKNOSECTIONS', $this->pack->name),'warning');
 
             return false;
         }
@@ -129,15 +129,15 @@ class JoomcckModelPack extends MModelAdmin
          */
         $type_pack_params = [];
 
-        if (JFolder::exists(PACK_ROOT)) {
-            JFolder::delete(PACK_ROOT);
+        if (\Joomla\CMS\Filesystem\Folder::exists(PACK_ROOT)) {
+            \Joomla\CMS\Filesystem\Folder::delete(PACK_ROOT);
         }
-        JFolder::create(PACK_ROOT);
+        \Joomla\CMS\Filesystem\Folder::create(PACK_ROOT);
 
         foreach ($pack_sections as $ps) {
             $section = ItemsStore::getSection($ps->section_id);
             if (is_array($section->params)) {
-                $section->params = new JRegistry($section->params);
+                $section->params = new \Joomla\Registry\Registry($section->params);
             }
 
             $this->_prepare_template($ps->params, $section->params, 'general.tmpl_list', 'records/tmpl', 'default_list_');
@@ -147,7 +147,7 @@ class JoomcckModelPack extends MModelAdmin
 
             $cats = $this->_getItems('categories', ['section_id = ' . $ps->section_id], 'level ASC');
             foreach ($cats as $c) {
-                $cat_params = new JRegistry($c->params);
+                $cat_params = new \Joomla\Registry\Registry($c->params);
                 $this->_prepare_templates($ps->params, $cat_params, 'records/tmpl');
                 $c->params          = $cat_params->toString();
                 $categories[$c->id] = $c;
@@ -177,9 +177,9 @@ class JoomcckModelPack extends MModelAdmin
         foreach ($type_pack_params as $type_id => $type_settings) {
             $type = ItemsStore::getType($type_id);
             if (!is_object($type->params)) {
-                $type->params = new JRegistry($type->params);
+                $type->params = new \Joomla\Registry\Registry($type->params);
             }
-            $type_settings = new JRegistry($type_settings);
+            $type_settings = new \Joomla\Registry\Registry($type_settings);
             if ($type_settings->get('copy_content')) {
                 $type_ids_with_content[] = $type_id;
             }
@@ -211,7 +211,7 @@ class JoomcckModelPack extends MModelAdmin
         $fields = $this->_getItems('fields', ['type_id IN (' . implode(',', $type_ids) . ')']);
 
         foreach ($fields as &$field) {
-            $f_params = new JRegistry($field->params);
+            $f_params = new \Joomla\Registry\Registry($field->params);
             
             foreach ($f_params->toArray() as $key => $param) {
                 if (is_array($param)) {
@@ -269,10 +269,10 @@ class JoomcckModelPack extends MModelAdmin
             if ($uc->icon) {
                 $dest   = PACK_ROOT . DIRECTORY_SEPARATOR . 'admin' . DIRECTORY_SEPARATOR . PACK_KEY . DIRECTORY_SEPARATOR . 'usercategories' . DIRECTORY_SEPARATOR . $uc->user_id . DIRECTORY_SEPARATOR . $uc->icon;
                 $folder = dirname($dest);
-                if (!JFolder::exists($folder)) {
-                    JFolder::create($folder);
+                if (!\Joomla\CMS\Filesystem\Folder::exists($folder)) {
+                    \Joomla\CMS\Filesystem\Folder::create($folder);
                 }
-                JFile::copy(JPATH_ROOT . '/images/usercategories' . DIRECTORY_SEPARATOR . $uc->user_id . DIRECTORY_SEPARATOR . $uc->icon, $dest);
+                \Joomla\CMS\Filesystem\File::copy(JPATH_ROOT . '/images/usercategories' . DIRECTORY_SEPARATOR . $uc->user_id . DIRECTORY_SEPARATOR . $uc->icon, $dest);
             }
         }
 
@@ -292,17 +292,17 @@ class JoomcckModelPack extends MModelAdmin
 
             $files = $this->_getItems('files', ['record_id IN (' . implode(',', $record_ids) . ') AND saved = 1']);
             $this->_packFile('files', $files);
-            $joomcck_params = JComponentHelper::getParams('com_joomcck');
+            $joomcck_params = \Joomla\CMS\Component\ComponentHelper::getParams('com_joomcck');
             foreach ($files as $file) {
-                $params        = new JRegistry($fields[$file->field_id]->params);
-                $subfolder     = $params->get('params.subfolder', JFile::getExt($file->filename));
+                $params        = new \Joomla\Registry\Registry($fields[$file->field_id]->params);
+                $subfolder     = $params->get('params.subfolder', \Joomla\CMS\Filesystem\File::getExt($file->filename));
                 $file_fullpath = str_replace($joomcck_params->get('general_upload') . DIRECTORY_SEPARATOR . $subfolder . DIRECTORY_SEPARATOR, '', $file->fullpath);
                 $dest          = PACK_ROOT . '/uploads/' . $subfolder . DIRECTORY_SEPARATOR . $file_fullpath;
                 $folder        = dirname($dest);
-                if (!JFolder::exists($folder)) {
-                    JFolder::create($folder);
+                if (!\Joomla\CMS\Filesystem\Folder::exists($folder)) {
+                    \Joomla\CMS\Filesystem\Folder::create($folder);
                 }
-                JFile::copy(JPATH_ROOT . DIRECTORY_SEPARATOR . $joomcck_params->get('general_upload') . DIRECTORY_SEPARATOR . $subfolder . DIRECTORY_SEPARATOR . $file_fullpath, $dest);
+                \Joomla\CMS\Filesystem\File::copy(JPATH_ROOT . DIRECTORY_SEPARATOR . $joomcck_params->get('general_upload') . DIRECTORY_SEPARATOR . $subfolder . DIRECTORY_SEPARATOR . $file_fullpath, $dest);
             }
 
             $users = $this->_getUsers($record_ids);
@@ -331,13 +331,13 @@ class JoomcckModelPack extends MModelAdmin
                 $path = JPATH_ROOT . DIRECTORY_SEPARATOR . $file;
                 $path = JPath::clean($path);
 
-                if (JFile::exists($path)) {
+                if (\Joomla\CMS\Filesystem\File::exists($path)) {
                     $folder = JPath::clean(PACK_ROOT . DIRECTORY_SEPARATOR . 'add' . DIRECTORY_SEPARATOR . $file);
-                    JFolder::create(dirname($folder));
-                    JFile::copy($path, $folder);
+                    \Joomla\CMS\Filesystem\Folder::create(dirname($folder));
+                    \Joomla\CMS\Filesystem\File::copy($path, $folder);
                 }
-                if (JFolder::exists($path)) {
-                    JFolder::copy($path, JPath::clean(PACK_ROOT . DIRECTORY_SEPARATOR . 'add' . DIRECTORY_SEPARATOR . $file), null, true);
+                if (\Joomla\CMS\Filesystem\Folder::exists($path)) {
+                    \Joomla\CMS\Filesystem\Folder::copy($path, JPath::clean(PACK_ROOT . DIRECTORY_SEPARATOR . 'add' . DIRECTORY_SEPARATOR . $file), null, true);
                 }
             }
         }
@@ -351,7 +351,7 @@ class JoomcckModelPack extends MModelAdmin
         $this->pack->sections = $pack_sections;
         $this->_packFile('pack', $this->pack);
 
-        JFile::copy(JPATH_COMPONENT . '/library/php/pack/install.php', PACK_ROOT . '/install.pack.php');
+        \Joomla\CMS\Filesystem\File::copy(JPATH_COMPONENT . '/library/php/pack/install.php', PACK_ROOT . '/install.pack.php');
 
         $this->_copy_tmpls();
         $this->_xml_paths['site']['configs'] = TRUE;
@@ -365,11 +365,11 @@ class JoomcckModelPack extends MModelAdmin
         $zipper->addDir(PACK_ROOT);
         $zipper->close();
 
-        JFolder::delete(PACK_ROOT);
+        \Joomla\CMS\Filesystem\Folder::delete(PACK_ROOT);
 
         $table = $this->getTable();
         $table->load($this->pack->id);
-        $table->btime = JFactory::getDate()->toSql();
+        $table->btime = \Joomla\CMS\Factory::getDate()->toSql();
         $table->version += 1;
         $table->store();
 
@@ -395,10 +395,10 @@ class JoomcckModelPack extends MModelAdmin
         
                 $folder = dirname($dest);
         
-                if (!JFolder::exists($folder)) {
-                    JFolder::create($folder);
+                if (!\Joomla\CMS\Filesystem\Folder::exists($folder)) {
+                    \Joomla\CMS\Filesystem\Folder::create($folder);
                 }
-                JFile::copy($src, $dest);
+                \Joomla\CMS\Filesystem\File::copy($src, $dest);
             }
         }
     }
@@ -446,27 +446,27 @@ class JoomcckModelPack extends MModelAdmin
 
         $folder = dirname($dest);
 
-        if (!JFolder::exists($folder)) {
-            JFolder::create($folder);
+        if (!\Joomla\CMS\Filesystem\Folder::exists($folder)) {
+            \Joomla\CMS\Filesystem\Folder::create($folder);
         }
 
-        JFile::copy($src . '.php', $dest . '.php');
+        \Joomla\CMS\Filesystem\File::copy($src . '.php', $dest . '.php');
         $this->_xml_paths['site']['views'] = TRUE;
 
-        if (JFile::exists($src . '.css')) {
-            JFile::copy($src . '.css', $dest . '.css');
+        if (\Joomla\CMS\Filesystem\File::exists($src . '.css')) {
+            \Joomla\CMS\Filesystem\File::copy($src . '.css', $dest . '.css');
         }
-        if (JFile::exists($src . '.png')) {
-            JFile::copy($src . '.png', $dest . '.png');
+        if (\Joomla\CMS\Filesystem\File::exists($src . '.png')) {
+            \Joomla\CMS\Filesystem\File::copy($src . '.png', $dest . '.png');
         }
-        if (JFile::exists($src . '.xml')) {
-            JFile::copy($src . '.xml', $dest . '.xml');
+        if (\Joomla\CMS\Filesystem\File::exists($src . '.xml')) {
+            \Joomla\CMS\Filesystem\File::copy($src . '.xml', $dest . '.xml');
         }
-        if (JFile::exists($src . '.js')) {
-            JFile::copy($src . '.js', $dest . '.js');
+        if (\Joomla\CMS\Filesystem\File::exists($src . '.js')) {
+            \Joomla\CMS\Filesystem\File::copy($src . '.js', $dest . '.js');
         }
-        if (JFolder::exists($src)) {
-            JFolder::copy($src, $dest, '', true);
+        if (\Joomla\CMS\Filesystem\Folder::exists($src)) {
+            \Joomla\CMS\Filesystem\Folder::copy($src, $dest, '', true);
         }
     }
 
@@ -479,7 +479,7 @@ class JoomcckModelPack extends MModelAdmin
         $this->_packFile('configs', $configs);
 
         foreach ($configs as $config) {
-            if (JFile::exists($src . $config . '.json')) {
+            if (\Joomla\CMS\Filesystem\File::exists($src . $config . '.json')) {
                 $cnf = json_decode(file_get_contents($src . $config . '.json'), true);
                 foreach ($cnf as $key => $val) {
                     foreach ($val as $k => $v) {
@@ -497,16 +497,16 @@ class JoomcckModelPack extends MModelAdmin
         }
         $configs = array_unique($this->_tpl_config);
 
-        if (!JFolder::exists($dest)) {
-            JFolder::create($dest);
+        if (!\Joomla\CMS\Filesystem\Folder::exists($dest)) {
+            \Joomla\CMS\Filesystem\Folder::create($dest);
         }
         foreach ($configs as $config) {
-            if (JFile::exists($src . $config . '.json')) {
-                JFile::copy($src . $config . '.json', $dest . $this->_getTmplName($config) . '.json');
+            if (\Joomla\CMS\Filesystem\File::exists($src . $config . '.json')) {
+                \Joomla\CMS\Filesystem\File::copy($src . $config . '.json', $dest . $this->_getTmplName($config) . '.json');
             } else {
                 $parts = explode('.', $config);
-                if (JFile::exists($src . $parts[0] . '.json')) {
-                    JFile::copy($src . $parts[0] . '.json', $dest . $this->_getTmplName($config) . '.json');
+                if (\Joomla\CMS\Filesystem\File::exists($src . $parts[0] . '.json')) {
+                    \Joomla\CMS\Filesystem\File::copy($src . $parts[0] . '.json', $dest . $this->_getTmplName($config) . '.json');
                 }
             }
         }
@@ -514,7 +514,7 @@ class JoomcckModelPack extends MModelAdmin
         if (!empty($this->_subtmpl)) {
             foreach ($this->_subtmpl as $tmpl => $params) {
                 $str = $params->toString();
-                JFile::write($dest . $tmpl . '.json', $str);
+                \Joomla\CMS\Filesystem\File::write($dest . $tmpl . '.json', $str);
             }
         }
     }
@@ -528,16 +528,16 @@ class JoomcckModelPack extends MModelAdmin
 
         $folder = dirname($dest);
 
-        if (!JFolder::exists($folder)) {
-            JFolder::create($folder);
+        if (!\Joomla\CMS\Filesystem\Folder::exists($folder)) {
+            \Joomla\CMS\Filesystem\Folder::create($folder);
         }
 
-        if (JFolder::exists($src . $name . '_img')) {
-            JFolder::copy($src . $name . '_img', $dest . $name . '_img', '', true);
+        if (\Joomla\CMS\Filesystem\Folder::exists($src . $name . '_img')) {
+            \Joomla\CMS\Filesystem\Folder::copy($src . $name . '_img', $dest . $name . '_img', '', true);
         }
 
-        JFile::copy($src . 'rating_' . $name . '.php', $dest . 'rating_' . $name . '.php');
-        JFile::copy($src . 'rating_' . $name . '.xml', $dest . 'rating_' . $name . '.xml');
+        \Joomla\CMS\Filesystem\File::copy($src . 'rating_' . $name . '.php', $dest . 'rating_' . $name . '.php');
+        \Joomla\CMS\Filesystem\File::copy($src . 'rating_' . $name . '.xml', $dest . 'rating_' . $name . '.xml');
 
         $this->_xml_paths['site']['views'] = TRUE;
     }
@@ -577,7 +577,7 @@ class JoomcckModelPack extends MModelAdmin
             $object = [];
         }
         $json = json_encode($object);
-        JFile::write(PACK_ROOT . DIRECTORY_SEPARATOR . 'admin' . DIRECTORY_SEPARATOR . PACK_KEY . DIRECTORY_SEPARATOR . $filename . '.json', $json);
+        \Joomla\CMS\Filesystem\File::write(PACK_ROOT . DIRECTORY_SEPARATOR . 'admin' . DIRECTORY_SEPARATOR . PACK_KEY . DIRECTORY_SEPARATOR . $filename . '.json', $json);
     }
 
     /**
@@ -591,7 +591,7 @@ class JoomcckModelPack extends MModelAdmin
      */
     private function _getItems($table_name, $where = [], $order = 'id')
     {
-        $db = JFactory::getDbo();
+        $db = \Joomla\CMS\Factory::getDbo();
         $db->setQuery("SELECT * FROM `#__js_res_{$table_name}` WHERE " . implode(' AND ', $where) . " ORDER BY {$order}");
         $items = $db->loadObjectList('id');
 
@@ -600,7 +600,7 @@ class JoomcckModelPack extends MModelAdmin
 
     private function _getUsers($record_ids)
     {
-        $db    = JFactory::getDbo();
+        $db    = \Joomla\CMS\Factory::getDbo();
         $query = $db->getQuery(true);
         $query->select('*');
         $query->from('#__users');
@@ -615,14 +615,14 @@ class JoomcckModelPack extends MModelAdmin
     private function _add_folder_path_additionals()
     {
         $dest = PACK_ROOT . '/add';
-        if (JFolder::exists($dest)) {
-            $files = JFolder::files($dest);
+        if (\Joomla\CMS\Filesystem\Folder::exists($dest)) {
+            $files = \Joomla\CMS\Filesystem\Folder::files($dest);
 
             foreach ($files as $file) {
                 $this->_xml_paths['add'][] = $file;
             }
 
-            if ($folders = JFolder::folders($dest)) {
+            if ($folders = \Joomla\CMS\Filesystem\Folder::folders($dest)) {
                 foreach ($folders as $folder) {
                     $this->_xml_paths['addfolder'][] = $folder;
                 }
@@ -630,14 +630,14 @@ class JoomcckModelPack extends MModelAdmin
         }
 
         $dest = PACK_ROOT . '/uploads';
-        if (JFolder::exists($dest)) {
-            $files = JFolder::files($dest);
+        if (\Joomla\CMS\Filesystem\Folder::exists($dest)) {
+            $files = \Joomla\CMS\Filesystem\Folder::files($dest);
 
             foreach ($files as $file) {
                 $this->_xml_paths['files'][] = $file;
             }
 
-            if ($folders = JFolder::folders($dest)) {
+            if ($folders = \Joomla\CMS\Filesystem\Folder::folders($dest)) {
                 foreach ($folders as $folder) {
                     $this->_xml_paths['filesfolders'][] = $folder;
                 }
@@ -700,11 +700,11 @@ class JoomcckModelPack extends MModelAdmin
             }
         }
         if ($replace) {
-            $add[] = "\t\t<files folder=\"uploads\" target=\"" . trim(JComponentHelper::getParams('com_joomcck')->get('general_upload'), '/') . "\">\n" . $replace . "\t\t</files>";
+            $add[] = "\t\t<files folder=\"uploads\" target=\"" . trim(\Joomla\CMS\Component\ComponentHelper::getParams('com_joomcck')->get('general_upload'), '/') . "\">\n" . $replace . "\t\t</files>";
         }
         $install = str_replace('[ADD]', implode("\n", $add), $install);
 
-        JFile::write(PACK_ROOT . DIRECTORY_SEPARATOR . 'pack.xml', $install);
+        \Joomla\CMS\Filesystem\File::write(PACK_ROOT . DIRECTORY_SEPARATOR . 'pack.xml', $install);
     }
 }
 
@@ -714,8 +714,8 @@ class ZipRemover extends Joomla\Event\Event
     {
 
         $filename = JPATH_ROOT . '/cache/pack_' . $table->key . '.zip';
-        if (JFile::exists($filename)) {
-            JFile::delete($filename);
+        if (\Joomla\CMS\Filesystem\File::exists($filename)) {
+            \Joomla\CMS\Filesystem\File::delete($filename);
         }
     }
 }

@@ -15,17 +15,17 @@ $listDirn = $this->state->get('list.direction');
 
 <?php echo HTMLFormatHelper::layout('navbar'); ?>
 
-<form action="<?php echo JUri::getInstance()->toString();?>" method="post" name="adminForm" id="adminForm">
+<form action="<?php echo \Joomla\CMS\Uri\Uri::getInstance()->toString();?>" method="post" name="adminForm" id="adminForm">
 	<div class="page-header">
 		<h1>
-			<img src="<?php echo JUri::root(TRUE); ?>/components/com_joomcck/images/icons/sections.png">
-			<?php echo JText::sprintf('CREDISPACKSECTIONS', $this->pack->name); ?>
+			<img src="<?php echo \Joomla\CMS\Uri\Uri::root(TRUE); ?>/components/com_joomcck/images/icons/sections.png">
+			<?php echo \Joomla\CMS\Language\Text::sprintf('CREDISPACKSECTIONS', $this->pack->name); ?>
 		</h1>
 	</div>
 
-	<a href="<?php echo JRoute::_('index.php?option=com_joomcck&view=packs'); ?>" class="btn">
+	<a href="<?php echo \Joomla\CMS\Router\Route::_('index.php?option=com_joomcck&view=packs'); ?>" class="btn">
 		<?php echo HTMLFormatHelper::icon('arrow-180.png'); ?>
-		<?php echo JText::_('COB_BACKTOPACKER'); ?>
+		<?php echo \Joomla\CMS\Language\Text::_('COB_BACKTOPACKER'); ?>
 	</a>
 	<div class="clearfix"></div>
 	<br/>
@@ -38,11 +38,11 @@ $listDirn = $this->state->get('list.direction');
 				<th width="1%"><input type="checkbox" name="checkall-toggle" value="" onclick="checkAll(this)" /></th>
 				
 				<th class="title">
-					<?php echo JHtml::_('grid.sort',  'Name', 'name', $listDirn, $listOrder); ?>
+					<?php echo \Joomla\CMS\HTML\HTMLHelper::_('grid.sort',  'Name', 'name', $listDirn, $listOrder); ?>
 				</th>
 
 				<th width="1%" class="nowrap">
-					<?php echo JHtml::_('grid.sort',  'ID', 'id', $listDirn, $listOrder); ?>
+					<?php echo \Joomla\CMS\HTML\HTMLHelper::_('grid.sort',  'ID', 'id', $listDirn, $listOrder); ?>
 				</th>
 			</tr>
 		</thead>
@@ -61,10 +61,10 @@ $listDirn = $this->state->get('list.direction');
 			?>
 			<tr class="row<?php echo $i % 2; ?>">
 				<td class="center">
-					<?php echo JHtml::_('grid.id', $i, $item->id); ?>
+					<?php echo \Joomla\CMS\HTML\HTMLHelper::_('grid.id', $i, $item->id); ?>
 				</td>
 				<td nowrap="nowrap">
-					<a href="<?php echo JRoute::_('index.php?option=com_joomcck&task=packsection.edit&id='.$item->id); ?>"><?php echo $item->name; ?></a>
+					<a href="<?php echo \Joomla\CMS\Router\Route::_('index.php?option=com_joomcck&task=packsection.edit&id='.$item->id); ?>"><?php echo $item->name; ?></a>
 				</td>
 				<td class="center">
 					<?php echo (int) $item->id; ?>
@@ -79,5 +79,5 @@ $listDirn = $this->state->get('list.direction');
 	<input type="hidden" name="boxchecked" value="0" />
 	<input type="hidden" name="filter_order" value="<?php echo $listOrder; ?>" />
 	<input type="hidden" name="filter_order_Dir" value="<?php echo $listDirn; ?>" />
-	<?php echo JHtml::_('form.token'); ?>
+	<?php echo \Joomla\CMS\HTML\HTMLHelper::_('form.token'); ?>
 </form>

@@ -12,7 +12,7 @@ class JHTMLTags
 {
 	public static function name($id)
 	{
-		$db = JFactory::getDBO();
+		$db = \Joomla\CMS\Factory::getDBO();
 		settype($id, 'int');
 
 		$query = $db->getQuery(true);
@@ -26,7 +26,7 @@ class JHTMLTags
 
 	public static function tagcheckboxes($section, $default = array())
 	{
-		$db = JFactory::getDbo();
+		$db = \Joomla\CMS\Factory::getDbo();
 
 		$query = $db->getQuery(true);
 		$query->select('tag, id');
@@ -55,7 +55,7 @@ class JHTMLTags
 
 	public static function tagselect($section, $default = array())
 	{
-		$db = JFactory::getDbo();
+		$db = \Joomla\CMS\Factory::getDbo();
 
 		$query = $db->getQuery(true);
 		$query->select('tag as text, id as value');
@@ -66,10 +66,10 @@ class JHTMLTags
 		$list = $db->loadObjectList();
 
 		if(!$list) return;
-		array_unshift($list, JHtml::_('select.option', '', '- '.JText::_('CSELECTTAG').' -'));
+		array_unshift($list, \Joomla\CMS\HTML\HTMLHelper::_('select.option', '', '- '.\Joomla\CMS\Language\Text::_('CSELECTTAG').' -'));
 
 
-		return JHtml::_('select.genericlist', $list, 'filters[tags][]', 'class="form-select"', 'value', 'text', $default);
+		return \Joomla\CMS\HTML\HTMLHelper::_('select.genericlist', $list, 'filters[tags][]', 'class="form-select"', 'value', 'text', $default);
 	}
 
 	public static function tagform($section, $default = array(), $params = array(), $name = 'filters[tags]')
@@ -82,8 +82,8 @@ class JHTMLTags
         ArrayHelper::clean_r($default);
 		$default = \Joomla\Utilities\ArrayHelper::toInteger($default);
         
-        $db = JFactory::getDbo();
-        $app = JFactory::getApplication();
+        $db = \Joomla\CMS\Factory::getDbo();
+        $app = \Joomla\CMS\Factory::getApplication();
         $options = [];
 
         if($default)
@@ -103,7 +103,7 @@ class JHTMLTags
 		$options['suggestion_limit'] = 10;
 		$options['suggestion_url'] = 'index.php?option=com_joomcck&task=ajax.tags_list_filter&tmpl=component&section_id='.$section->id;
         
-		return JHtml::_('mrelements.pills', $name, 'tags', $default, [], $options);
+		return \Joomla\CMS\HTML\HTMLHelper::_('mrelements.pills', $name, 'tags', $default, [], $options);
     }
     
 	public static function tagform2($section, $default = array(), $params = array(), $name = 'filters[tags]')
@@ -127,7 +127,7 @@ class JHTMLTags
 		$default = \Joomla\Utilities\ArrayHelper::toInteger($default);
 		if($default)
 		{
-			$db = JFactory::getDbo();
+			$db = \Joomla\CMS\Factory::getDbo();
 			$query = $db->getQuery(true);
 			$query->select('tag as plain, tag as html, tag as render, id');
 			$query->from('#__js_res_tags');
@@ -149,7 +149,7 @@ class JHTMLTags
 		$options['ajax_url'] = 'index.php?option=com_joomcck&task=ajax.tags_list_filter&tmpl=component&section_id='.$section->id;
 		$options['ajax_data'] = '';
 
-		return JHtml::_('mrelements.listautocomplete', $name, $id, $default, array(), $options);
+		return \Joomla\CMS\HTML\HTMLHelper::_('mrelements.listautocomplete', $name, $id, $default, array(), $options);
 	}
 
 	public static function tagtoggle($section, $default)
@@ -157,7 +157,7 @@ class JHTMLTags
 		ArrayHelper::clean_r($default);
 		$default = \Joomla\Utilities\ArrayHelper::toInteger($default);
 
-        $db = JFactory::getDbo();
+        $db = \Joomla\CMS\Factory::getDbo();
 
 		$query = $db->getQuery(true);
 		$query->select('tag, id');
@@ -189,7 +189,7 @@ class JHTMLTags
     
 	public static function tagcloud($section, $html_tags, $relevance)
 	{
-		$db = JFactory::getDbo();
+		$db = \Joomla\CMS\Factory::getDbo();
 
 		$query = $db->getQuery(true);
 		$query->select('tag, id');
@@ -212,7 +212,7 @@ class JHTMLTags
 		foreach ( $list as $id => &$tag )
 		{
 			$url = FilterHelper::url('task=records.filter&filter_name[0]=filter_tag&filter_val[0]='.$tag->id, $section);
-			$tag->tag = JHtml::link(JRoute::_($url), $tag->tag);
+			$tag->tag = \Joomla\CMS\HTML\HTMLHelper::link(\Joomla\CMS\Router\Route::_($url), $tag->tag);
 			if ($relevance)
 			{
 				if ($relevance == 3)
@@ -271,7 +271,7 @@ class JHTMLTags
 					$order = null;
 			}
 
-			$db = JFactory::getDBO();
+			$db = \Joomla\CMS\Factory::getDBO();
 			$query = $db->getQuery(true);
 			$query->select('t.tag, t.id');
 			$query->select('(SELECT COUNT(*) FROM #__js_res_tags_history WHERE tag_id = t.id) as r_usage');
@@ -300,13 +300,13 @@ class JHTMLTags
 				switch ($show_nums)
 				{
 					case '1' :
-						$nums[$val->id] = 'rel="tooltip" data-original-title="' . $list[$val->id] . '::' . JText::_('CTAGHITS') . ': ' . $val->hits . '"';
+						$nums[$val->id] = 'rel="tooltip" data-original-title="' . $list[$val->id] . '::' . \Joomla\CMS\Language\Text::_('CTAGHITS') . ': ' . $val->hits . '"';
 						break;
 					case '2' :
-						$nums[$val->id] = 'rel="tooltip" data-original-title="' . $list[$val->id] . '::' . JText::_('CTAGUSAGE') . ': ' . $val->r_usage . '"';
+						$nums[$val->id] = 'rel="tooltip" data-original-title="' . $list[$val->id] . '::' . \Joomla\CMS\Language\Text::_('CTAGUSAGE') . ': ' . $val->r_usage . '"';
 						break;
 					case '3' :
-						$nums[$val->id] = 'rel="tooltip" data-original-title="'.JText::_('CTAGHITS').': '.$val->hits.', '.JText::_('CTAGUSAGE').': '.$val->r_usage.'"';
+						$nums[$val->id] = 'rel="tooltip" data-original-title="'.\Joomla\CMS\Language\Text::_('CTAGHITS').': '.$val->hits.', '.\Joomla\CMS\Language\Text::_('CTAGUSAGE').': '.$val->r_usage.'"';
 						break;
 				}
 			}
@@ -371,7 +371,7 @@ class JHTMLTags
 		foreach ( $indexes as $i => $id)// => &$tag )
 		{
 			$tag = $list[$id];
-			$tag =  JHtml::link(JRoute::_($link.'&filter_val[0]='.$id), $tag, ($nums ? $nums[$id] : NULL));
+			$tag =  \Joomla\CMS\HTML\HTMLHelper::link(\Joomla\CMS\Router\Route::_($link.'&filter_val[0]='.$id), $tag, ($nums ? $nums[$id] : NULL));
 			$out[] = '<li class="tag_element" id="tag-' . $id . '">' .$tag. '</li>';
 		}
 		return implode(' ', $out);
@@ -399,7 +399,7 @@ class JHTMLTags
 					$order = null;
 			}
 
-			$db = JFactory::getDBO();
+			$db = \Joomla\CMS\Factory::getDBO();
 			$query = $db->getQuery(true);
 			$query->select('t.tag, t.id');
 			$query->select('(SELECT COUNT(*) FROM #__js_res_tags_history WHERE tag_id = t.id) as r_usage');
@@ -428,13 +428,13 @@ class JHTMLTags
 				switch ($show_nums)
 				{
 					case '1' :
-						$nums[$val->id] = 'rel="tooltip" data-original-title="' . $list[$val->id] . '::' . JText::_('CTAGHITS') . ': ' . $val->hits . '"';
+						$nums[$val->id] = 'rel="tooltip" data-original-title="' . $list[$val->id] . '::' . \Joomla\CMS\Language\Text::_('CTAGHITS') . ': ' . $val->hits . '"';
 						break;
 					case '2' :
-						$nums[$val->id] = 'rel="tooltip" data-original-title="' . $list[$val->id] . '::' . JText::_('CTAGUSAGE') . ': ' . $val->r_usage . '"';
+						$nums[$val->id] = 'rel="tooltip" data-original-title="' . $list[$val->id] . '::' . \Joomla\CMS\Language\Text::_('CTAGUSAGE') . ': ' . $val->r_usage . '"';
 						break;
 					case '3' :
-						$nums[$val->id] = 'rel="tooltip" data-original-title="'.JText::_('CTAGHITS').': '.$val->hits.', '.JText::_('CTAGUSAGE').': '.$val->r_usage.'"';
+						$nums[$val->id] = 'rel="tooltip" data-original-title="'.\Joomla\CMS\Language\Text::_('CTAGHITS').': '.$val->hits.', '.\Joomla\CMS\Language\Text::_('CTAGUSAGE').': '.$val->r_usage.'"';
 						break;
 				}
 			}
@@ -499,12 +499,12 @@ class JHTMLTags
 		foreach ( $indexes as $i => $id)// => &$tag )
 		{
 			//$tag = $list[$id];
-			//$tag =  JHtml::link(JRoute::_($link.'&filter_val[0]='.$id), $tag, ($nums ? $nums[$id] : NULL));
+			//$tag =  \Joomla\CMS\HTML\HTMLHelper::link(\Joomla\CMS\Router\Route::_($link.'&filter_val[0]='.$id), $tag, ($nums ? $nums[$id] : NULL));
 			$out[] = array(
 				'id' => $id,
 				'attr' => ($nums && isset($nums[$id]) ? $nums[$id] : NULL),
 				'tag' => $list[$id],
-				'link' => JRoute::_($link.'&filter_val[0]='.$id)
+				'link' => \Joomla\CMS\Router\Route::_($link.'&filter_val[0]='.$id)
 			);
 		}
 		return $out;
@@ -532,7 +532,7 @@ class JHTMLTags
 		$options['onRemove'] = "index.php?option=com_joomcck&task=ajax.remove_tag&tmpl=component&rid=".$record->id;
 
         
-		$out = JHtml::_('mrelements.pills', "tags$record_id", "add-tags-".$record_id, $default, [], $options);
+		$out = \Joomla\CMS\HTML\HTMLHelper::_('mrelements.pills', "tags$record_id", "add-tags-".$record_id, $default, [], $options);
         return $out;
         
         /*
@@ -554,8 +554,8 @@ class JHTMLTags
 	{
 		$model = MModelBase::getInstance('Article', 'ResModel');
 		$tags = $model->getTags($record->id);
-		$user = JFactory::getUser();
-		$db = JFactory::getDBO();
+		$user = \Joomla\CMS\Factory::getUser();
+		$db = \Joomla\CMS\Factory::getDBO();
 		$tabs = JPane::getInstance('tabs');
 
 		$html = '<input type="hidden" class="form-control" name="tags" value=", '.$tags.'" id="alltags" />';
@@ -595,7 +595,7 @@ class JHTMLTags
 
 			if($alltags)
 			{
-				$link = sprintf('<span id="tag_show_link"><a href="javascript:void(0);" onclick="tag_show_my()">%s</a></span>', JText::_('CCHOSETAG'));
+				$link = sprintf('<span id="tag_show_link"><a href="javascript:void(0);" onclick="tag_show_my()">%s</a></span>', \Joomla\CMS\Language\Text::_('CCHOSETAG'));
 				$html2 .= '<div id="tags_my" style="display:none; clear:both">';
 				if(count($alltags) < 20)
 				{
@@ -646,23 +646,23 @@ class JHTMLTags
 
 					$html2 .=  $tabs->startPane('tags-pane');
 
-					$html2 .=  $tabs->startPanel(JText::_('CLATESTTAGS'), 'tlt1');
+					$html2 .=  $tabs->startPanel(\Joomla\CMS\Language\Text::_('CLATESTTAGS'), 'tlt1');
 					foreach ($last as $item) {
-						$date = JFactory::getDate($item->ctime);
-						$now = JFactory::getDate();
+						$date = \Joomla\CMS\Factory::getDate($item->ctime);
+						$now = \Joomla\CMS\Factory::getDate();
 						if($now->format('%d') == $date->format('%d'))
 						{
-							$lbl = JText::_('CTODAY');
+							$lbl = \Joomla\CMS\Language\Text::_('CTODAY');
 						}
 						elseif(($now->format('%d') - 1) == $date->format('%d'))
 						{
-							$lbl = JText::_('CYESTERDAY');
+							$lbl = \Joomla\CMS\Language\Text::_('CYESTERDAY');
 						}
 						else
 						{
 							$diff = $now->toUnix() - $date->toUnix();
 							$n = round($diff / 86400);
-							$lbl = $n.' '.JText::_('CDAYAGO');
+							$lbl = $n.' '.\Joomla\CMS\Language\Text::_('CDAYAGO');
 						}
 
 						$l[] = sprintf('<span id="tagl%d" class="tag_item" style="cursor:pointer" onclick="tag_insert(\'%s\', \'tagl%d\')">%s <span class="small">(%s)</span></span>', ++$i, $item->tag, $i, $item->tag, $lbl);
@@ -670,18 +670,18 @@ class JHTMLTags
 					$html2 .= implode(' ', $l).'<div style="clear:both"></div>';
 					$html2 .=  $tabs->endPanel();
 
-					$html2 .=  $tabs->startPanel(JText::_('CMOSTUSE'), 'tmu1');
+					$html2 .=  $tabs->startPanel(\Joomla\CMS\Language\Text::_('CMOSTUSE'), 'tmu1');
 					foreach ($used as $item) {
-						$lbl = $item->total.' '.JText::_('CRECORDS');
+						$lbl = $item->total.' '.\Joomla\CMS\Language\Text::_('CRECORDS');
 
 						$u[] = sprintf('<span id="tagl%d" class="tag_item" style="cursor:pointer" onclick="tag_insert(\'%s\', \'tagl%d\')">%s <span class="small">(%s)</span></span>', ++$i, $item->tag, $i, $item->tag, $lbl);
 					}
 					$html2 .= implode(' ', $u).'<div style="clear:both"></div>';
 					$html2 .=  $tabs->endPanel();
 
-					$html2 .=  $tabs->startPanel(JText::_('CMOSTPOP'), 'tmp1');
+					$html2 .=  $tabs->startPanel(\Joomla\CMS\Language\Text::_('CMOSTPOP'), 'tmp1');
 					foreach ($hits as $item) {
-						$lbl = $item->hits.' '.JText::_('CHITS');
+						$lbl = $item->hits.' '.\Joomla\CMS\Language\Text::_('CHITS');
 
 						$h[] = sprintf('<span id="tagl%d" class="tag_item" style="cursor:pointer" onclick="tag_insert(\'%s\', \'tagl%d\')">%s <span class="small">(%s)</span></span>', ++$i, $item->tag, $i, $item->tag, $lbl);
 					}
@@ -694,7 +694,7 @@ class JHTMLTags
 			}
 
 		}
-		$html .= sprintf('<p style="clear:both"><img id="tag_image" src="%s/components/com_resource/images/tag-icon.png" align="absmiddle"><input onkeyup="getTagSuggestions(this.value);" type="text" name="tag" id="tag_input" class="form-control" /> <input type="button"  onclick="tag_insert(document.getElementById(\'tag_input\').value);" class="button" value="%s" /> %s <br><span class="small">%s</span></p><p style="clear:both" id="search_tags_result"> </p>', JURI::root(TRUE), JText::_('CADD'), ($alltags ? $link : NULL), JText::_('CENTERSEPARATE'));
+		$html .= sprintf('<p style="clear:both"><img id="tag_image" src="%s/components/com_resource/images/tag-icon.png" align="absmiddle"><input onkeyup="getTagSuggestions(this.value);" type="text" name="tag" id="tag_input" class="form-control" /> <input type="button"  onclick="tag_insert(document.getElementById(\'tag_input\').value);" class="button" value="%s" /> %s <br><span class="small">%s</span></p><p style="clear:both" id="search_tags_result"> </p>', JURI::root(TRUE), \Joomla\CMS\Language\Text::_('CADD'), ($alltags ? $link : NULL), \Joomla\CMS\Language\Text::_('CENTERSEPARATE'));
 
 		$html .= @$html2;
 
@@ -704,7 +704,7 @@ class JHTMLTags
 	public static function tag($tag)
 	{
 		static $i; $i++;
-		$out = sprintf(' <span id="etag%d" class="tag_item"><img align="absmiddle" src="%s/components/com_resource/images/tag_delete.png" class="hasTip" title="::%s %s" style="cursor:pointer" onclick="deleteTag(\'%s\', \'etag%d\')" /> %s</span>', $i, JURI::root(TRUE), JText::_('CDELETETAG'), $tag, $tag, $i, $tag);
+		$out = sprintf(' <span id="etag%d" class="tag_item"><img align="absmiddle" src="%s/components/com_resource/images/tag_delete.png" class="hasTip" title="::%s %s" style="cursor:pointer" onclick="deleteTag(\'%s\', \'etag%d\')" /> %s</span>', $i, JURI::root(TRUE), \Joomla\CMS\Language\Text::_('CDELETETAG'), $tag, $tag, $i, $tag);
 		return $out;
 	}
 	public static function tag2($tag, $i)
@@ -724,9 +724,9 @@ class JHTMLTags
 		if(!$iparams->get('item_tag')) return FALSE;
 
 		$id = $item->id;
-		$db = JFactory::getDBO();
+		$db = \Joomla\CMS\Factory::getDBO();
 		$url = \Joomla\CMS\Uri\Uri::getInstance();
-		$user = JFactory::getUser();
+		$user = \Joomla\CMS\Factory::getUser();
 		$section_id ? NULL : $section_id = \Joomla\CMS\Factory::getApplication()->input->getInt('category_id',0);
 
 		$sql = "SELECT t.id, t.tag  FROM #__js_res_tags_history AS h
@@ -753,7 +753,7 @@ class JHTMLTags
 	xajax_jsAddTag(rid, string);
 }";
 
-		//$document = JFactory::getDocument();
+		//$document = \Joomla\CMS\Factory::getDocument();
 		//$document->addScriptDeclaration($script);
 
 		$where = getFilterWhere($params);
@@ -816,7 +816,7 @@ class JHTMLTags
 
 			$out .= ' <span id="new_tags'.$item->id.'"></span> '.
 				JHTML::image(JURI::root(TRUE).'/components/com_resource/images/load.gif', '', array('id'=>'load_image'.$item->id, 'style' => 'display:none'))
-				.' <span style="display:none" id="atfid'.$item->id.'"><input type="text" class="form-control" id="new_tag_input'.$item->id.'" /> <input type="button" class="button" value="'. JText::_('CADD') .'" onclick="addTagToRecord('.$item->id.')" /></span>'.JHTML::image(JURI::root(TRUE).'/components/com_resource/images/tag-icon-plus.png', JText::_('CADDTAGS'), array('id'=>'tag_img_id'.$item->id, 'align'=>'absmiddle', 'onclick'=>'document.getElementById(\'atfid'.$item->id.'\').style.display = \'block\';', 'style'=>'cursor:pointer'));
+				.' <span style="display:none" id="atfid'.$item->id.'"><input type="text" class="form-control" id="new_tag_input'.$item->id.'" /> <input type="button" class="button" value="'. \Joomla\CMS\Language\Text::_('CADD') .'" onclick="addTagToRecord('.$item->id.')" /></span>'.JHTML::image(JURI::root(TRUE).'/components/com_resource/images/tag-icon-plus.png', \Joomla\CMS\Language\Text::_('CADDTAGS'), array('id'=>'tag_img_id'.$item->id, 'align'=>'absmiddle', 'onclick'=>'document.getElementById(\'atfid'.$item->id.'\').style.display = \'block\';', 'style'=>'cursor:pointer'));
 		}
 
 		return $out;

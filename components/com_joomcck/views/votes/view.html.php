@@ -19,7 +19,7 @@ class JoomcckViewVotes extends MViewBase
 
 	public function display($tpl = NULL)
 	{
-		JHtml::_('bootstrap.tooltip');
+		\Joomla\CMS\HTML\HTMLHelper::_('bootstrap.tooltip');
 
 		$this->state      = $this->get('State');
 		$this->items      = $this->get('Items');
@@ -33,9 +33,9 @@ class JoomcckViewVotes extends MViewBase
 
 		}
 
-		$this->addFilter(JText::_('CFILERVOTETYPE'), 'filter_type', JHtml::_('select.options', JHtml::_('votes.types'), 'value', 'text', $this->state->get('filter.type')));
-		$this->addFilter(JText::_('CFILTERVOTE'), 'filter_votes', JHtml::_('select.options', JHtml::_('votes.values'), 'value', 'text', $this->state->get('filter.votes')));
-		$this->addFilter(JText::_('CFILTERSECTION'), 'filter_section', JHtml::_('select.options', JHtml::_('joomcck.sections'), 'value', 'text', $this->state->get('filter.section')));
+		$this->addFilter(\Joomla\CMS\Language\Text::_('CFILERVOTETYPE'), 'filter_type', \Joomla\CMS\HTML\HTMLHelper::_('select.options', \Joomla\CMS\HTML\HTMLHelper::_('votes.types'), 'value', 'text', $this->state->get('filter.type')));
+		$this->addFilter(\Joomla\CMS\Language\Text::_('CFILTERVOTE'), 'filter_votes', \Joomla\CMS\HTML\HTMLHelper::_('select.options', \Joomla\CMS\HTML\HTMLHelper::_('votes.values'), 'value', 'text', $this->state->get('filter.votes')));
+		$this->addFilter(\Joomla\CMS\Language\Text::_('CFILTERSECTION'), 'filter_section', \Joomla\CMS\HTML\HTMLHelper::_('select.options', \Joomla\CMS\HTML\HTMLHelper::_('joomcck.sections'), 'value', 'text', $this->state->get('filter.section')));
 
 		parent::display($tpl);
 
@@ -45,7 +45,7 @@ class JoomcckViewVotes extends MViewBase
 	{
 		foreach($items as $key => $item)
 		{
-			if(JFolder::exists(JPATH_ADMINISTRATOR . DIRECTORY_SEPARATOR . 'components/com_juser'))
+			if(\Joomla\CMS\Filesystem\Folder::exists(JPATH_ADMINISTRATOR . DIRECTORY_SEPARATOR . 'components/com_juser'))
 			{
 				$item->user_href = JURI::root() . 'administrator/index.php?option=com_juser&view=user&task=edit&cid[]=' . $item->userid;
 			}
@@ -62,12 +62,12 @@ class JoomcckViewVotes extends MViewBase
 	public  function getSortFields()
 	{
 		return array(
-			'a.id'       => JText::_('ID'),
-			'a.ctime'    => JText::_('CVOTED'),
-			'r.title'    => JText::_('CRECORD'),
-			'u.username' => JText::_('CUSER'),
-			'a.vote'     => JText::_('CVOTE'),
-			'a.ref_type' => JText::_('CTYPE')
+			'a.id'       => \Joomla\CMS\Language\Text::_('ID'),
+			'a.ctime'    => \Joomla\CMS\Language\Text::_('CVOTED'),
+			'r.title'    => \Joomla\CMS\Language\Text::_('CRECORD'),
+			'u.username' => \Joomla\CMS\Language\Text::_('CUSER'),
+			'a.vote'     => \Joomla\CMS\Language\Text::_('CVOTE'),
+			'a.ref_type' => \Joomla\CMS\Language\Text::_('CTYPE')
 		);
 
 	}

@@ -25,16 +25,16 @@ class JoomcckViewElements extends MViewBase
 
 	private function _homepages($tpl = null)
 	{
-		$app = JFactory::getApplication();
+		$app = \Joomla\CMS\Factory::getApplication();
 		$model = MModelBase::getInstance('Homepages', 'JoomcckModel');
 
 		$this->author = $model->_getauthor();
-		$this->user = JFactory::getUser();
+		$this->user = \Joomla\CMS\Factory::getUser();
 		$this->isme = $this->user->get('id') == $this->author;
 
-		$db = JFactory::getDbo();
+		$db = \Joomla\CMS\Factory::getDbo();
 		$db->setQuery("SELECT * FROM `#__js_res_user_options` WHERE user_id = {$this->author}");
-		$this->params = new JRegistry(@$db->loadObject()->params);
+		$this->params = new \Joomla\Registry\Registry(@$db->loadObject()->params);
 
 		$this->state = $model->getState();
 		$this->items = $model->getItems();
@@ -46,11 +46,11 @@ class JoomcckViewElements extends MViewBase
 
 	private function _addsale($tpl)
 	{
-		$user = JFactory::getUser();
+		$user = \Joomla\CMS\Factory::getUser();
 
 		if(!$user->get('id'))
 		{
-			Factory::getApplication()->enqueueMessage( JText::_('CERRNOSALER'),'warning');
+			Factory::getApplication()->enqueueMessage( \Joomla\CMS\Language\Text::_('CERRNOSALER'),'warning');
 			CCommunityHelper::goToLogin();
 		}
 
@@ -61,23 +61,23 @@ class JoomcckViewElements extends MViewBase
 		$this->form = $model->getForm();
 		$this->form->setFieldAttribute('gateway_id', 'default', strtoupper(substr(md5(time()), 0, 5)));
 
-		Factory::getApplication()->enqueueMessage( JText::_('CNEWORDERNOTICE'),'warning');
+		Factory::getApplication()->enqueueMessage( \Joomla\CMS\Language\Text::_('CNEWORDERNOTICE'),'warning');
 
 		parent::display($tpl);
 	}
 
 	private function _saler($tpl)
 	{
-		$user = JFactory::getUser();
+		$user = \Joomla\CMS\Factory::getUser();
 
 		if(!$user->get('id'))
 		{
-			Factory::getApplication()->enqueueMessage( JText::_('CERRNOSALER'),'warning');
+			Factory::getApplication()->enqueueMessage( \Joomla\CMS\Language\Text::_('CERRNOSALER'),'warning');
 			CCommunityHelper::goToLogin();
 		}
 
-		JFactory::getApplication()->input->set('filter_buyer', 0);
-		JFactory::getApplication()->input->set('filter_saler', $user->get('id'));
+		\Joomla\CMS\Factory::getApplication()->input->set('filter_buyer', 0);
+		\Joomla\CMS\Factory::getApplication()->input->set('filter_saler', $user->get('id'));
 
 		$this->_orders($user);
 
@@ -85,27 +85,27 @@ class JoomcckViewElements extends MViewBase
 	}
 	private function _buyer($tpl)
 	{
-		$user = JFactory::getUser();
+		$user = \Joomla\CMS\Factory::getUser();
 
 		if(!$user->get('id'))
 		{
-			Factory::getApplication()->enqueueMessage( JText::_('CERRNOBUYER'),'warning');
+			Factory::getApplication()->enqueueMessage( \Joomla\CMS\Language\Text::_('CERRNOBUYER'),'warning');
 			CCommunityHelper::goToLogin();
 		}
 
-		JFactory::getApplication()->input->set('filter_saler', 0);
-		JFactory::getApplication()->input->set('filter_buyer', $user->get('id'));
+		\Joomla\CMS\Factory::getApplication()->input->set('filter_saler', 0);
+		\Joomla\CMS\Factory::getApplication()->input->set('filter_buyer', $user->get('id'));
 		$this->_orders($user);
 
 		parent::display($tpl);
 	}
 	private function _orders($user)
 	{
-		$user = JFactory::getUser();
+		$user = \Joomla\CMS\Factory::getUser();
 
 		if(!$user->get('id'))
 		{
-			Factory::getApplication()->enqueueMessage( JText::_('CERRNOBUYER'),'warning');
+			Factory::getApplication()->enqueueMessage( \Joomla\CMS\Language\Text::_('CERRNOBUYER'),'warning');
 			CCommunityHelper::goToLogin();
 		}
 
@@ -122,7 +122,7 @@ class JoomcckViewElements extends MViewBase
 		$this->stat = $this->pay->get_statuses();
 		foreach ($this->stat AS $key => $stat)
 		{
-			$this->statuses[] = JHtml::_('select.option', $key, $stat);
+			$this->statuses[] = \Joomla\CMS\HTML\HTMLHelper::_('select.option', $key, $stat);
 		}
 
 		if(!$this->orders)
@@ -132,8 +132,8 @@ class JoomcckViewElements extends MViewBase
 
 		foreach ($this->orders AS &$order)
 		{
-			JTable::addIncludePath(JPATH_COMPONENT_ADMINISTRATOR . 'tables/field.php');
-			$field_table = JTable::getInstance('Field', 'JoomcckTable');
+			\Joomla\CMS\Table\Table::addIncludePath(JPATH_COMPONENT_ADMINISTRATOR . 'tables/field.php');
+			$field_table = \Joomla\CMS\Table\Table::getInstance('Field', 'JoomcckTable');
 			$field_table->load($order->field_id);
 
 			$order->record = ItemsStore::getRecord($order->record_id);
@@ -164,7 +164,7 @@ class JoomcckViewElements extends MViewBase
 	}
 	private function _field($tpl)
 	{
-		$app = JFactory::getApplication();
+		$app = \Joomla\CMS\Factory::getApplication();
 		$section_id = $app->input->get('section_id');
 		$func = $app->input->get('func');
 		$id = $app->input->getInt('id');
@@ -173,23 +173,23 @@ class JoomcckViewElements extends MViewBase
 
 		if(! $id)
 		{
-			throw new Exception( JText::_('AJAX_NOFIELDID'),500);
+			throw new Exception( \Joomla\CMS\Language\Text::_('AJAX_NOFIELDID'),500);
 
 		}
 
-		JTable::addIncludePath(JPATH_COMPONENT_ADMINISTRATOR . 'tables/field.php');
-		$field_table = JTable::getInstance('Field', 'JoomcckTable');
+		\Joomla\CMS\Table\Table::addIncludePath(JPATH_COMPONENT_ADMINISTRATOR . 'tables/field.php');
+		$field_table = \Joomla\CMS\Table\Table::getInstance('Field', 'JoomcckTable');
 		$field_table->load($id);
 		$field_path =  JPATH_ROOT . '/components/com_joomcck/fields' . DIRECTORY_SEPARATOR . $field_table->field_type . DIRECTORY_SEPARATOR . $field_table->field_type . '.php';
-		if(! JFile::exists($field_path))
+		if(! \Joomla\CMS\Filesystem\File::exists($field_path))
 		{
-			throw new Exception( JText::_('AJAX_FIELDNOTFOUND'),500);
+			throw new Exception( \Joomla\CMS\Language\Text::_('AJAX_FIELDNOTFOUND'),500);
 
 		}
 
 		if(! $func)
 		{
-			throw new Exception( JText::_('AJAX_NOFUNCNAME'),500);
+			throw new Exception( \Joomla\CMS\Language\Text::_('AJAX_NOFUNCNAME'),500);
 
 		}
 
@@ -213,7 +213,7 @@ class JoomcckViewElements extends MViewBase
 		$classname = 'JFormFieldC' . ucfirst($field_table->field_type);
 		if(! class_exists($classname))
 		{
-			throw new Exception( JText::_('CCLASSNOTFOUND'),500);
+			throw new Exception( \Joomla\CMS\Language\Text::_('CCLASSNOTFOUND'),500);
 
 		}
 
@@ -221,7 +221,7 @@ class JoomcckViewElements extends MViewBase
 
 		if(! method_exists($fieldclass, $func))
 		{
-			throw new Exception( JText::_('AJAX_METHODNOTFOUND').$func,500);
+			throw new Exception( \Joomla\CMS\Language\Text::_('AJAX_METHODNOTFOUND').$func,500);
 
 		}
 		$this->context = $fieldclass->$func($record, $section);
@@ -231,17 +231,17 @@ class JoomcckViewElements extends MViewBase
 
 	private function _options($tpl)
 	{
-		JFactory::getApplication()->redirect(JRoute::_('index.php?option=com_joomcck&view=options&return='.JFactory::getApplication()->input->getBase64('return'), FALSE));
+		\Joomla\CMS\Factory::getApplication()->redirect(\Joomla\CMS\Router\Route::_('index.php?option=com_joomcck&view=options&return='.\Joomla\CMS\Factory::getApplication()->input->getBase64('return'), FALSE));
 		return;
 	}
 
 	private function _records($tpl)
 	{
-		$app = JFactory::getApplication();
-		$doc = JFactory::getDocument();
-		$user = JFactory::getUser();
+		$app = \Joomla\CMS\Factory::getApplication();
+		$doc = \Joomla\CMS\Factory::getDocument();
+		$user = \Joomla\CMS\Factory::getUser();
 		$model = MModelBase::getInstance('Records', 'JoomcckModel');
-		$state_limit = JFactory::getApplication()->getUserState('global.list.limit');
+		$state_limit = \Joomla\CMS\Factory::getApplication()->getUserState('global.list.limit');
 		$app->input->set('limit', 10);
 		$app->input->set('view_what', 'all');
 
@@ -250,23 +250,23 @@ class JoomcckViewElements extends MViewBase
 
 		require_once JPATH_ROOT . '/components/com_joomcck/models/category.php';
 		$model_category       = new JoomcckModelCategory();
-		if(! JFactory::getApplication()->input->getInt('section_id'))
+		if(! \Joomla\CMS\Factory::getApplication()->input->getInt('section_id'))
 		{
-			JFactory::getApplication()->enqueueMessage(JText::_('CNOSECTION'),'warning');
+			\Joomla\CMS\Factory::getApplication()->enqueueMessage(\Joomla\CMS\Language\Text::_('CNOSECTION'),'warning');
 			return;
 		}
-		$section = ItemsStore::getSection(JFactory::getApplication()->input->getInt('section_id'));
+		$section = ItemsStore::getSection(\Joomla\CMS\Factory::getApplication()->input->getInt('section_id'));
 
 		if($section->published == 0)
 		{
-			Factory::getApplication()->enqueueMessage( JText::_('CERR_SECTIONUNPUB'),'warning');
+			Factory::getApplication()->enqueueMessage( \Joomla\CMS\Language\Text::_('CERR_SECTIONUNPUB'),'warning');
 			return;
 		}
 
 		if(! in_array($section->access, $user->getAuthorisedViewLevels()) && !MECAccess::allowRestricted($user, $section))
 		{
 
-			Factory::getApplication()->enqueueMessage( JText::_($section->params->get('general.access_msg')),'warning');
+			Factory::getApplication()->enqueueMessage( \Joomla\CMS\Language\Text::_($section->params->get('general.access_msg')),'warning');
 			return;
 		}
 		$this->section = $section;
@@ -274,9 +274,9 @@ class JoomcckViewElements extends MViewBase
 
 		// --- GET CATEGORY ----
 		$category = $model_category->getEmpty();
-		if(JFactory::getApplication()->input->getInt('cat_id'))
+		if(\Joomla\CMS\Factory::getApplication()->input->getInt('cat_id'))
 		{
-			$category = $model_category->getItem(JFactory::getApplication()->input->getInt('cat_id'));
+			$category = $model_category->getItem(\Joomla\CMS\Factory::getApplication()->input->getInt('cat_id'));
 			if(! isset($category->id))
 			{
 
@@ -285,27 +285,27 @@ class JoomcckViewElements extends MViewBase
 			}
 			if($category->id && ($category->section_id != $section->id))
 			{
-				Factory::getApplication()->enqueueMessage( JText::_('CCATWRONGSECTION'),'warning');
+				Factory::getApplication()->enqueueMessage( \Joomla\CMS\Language\Text::_('CCATWRONGSECTION'),'warning');
 				$category = $model_category->getEmpty();
 			}
-			JFactory::getApplication()->input->set('cat_id', $category->id);
+			\Joomla\CMS\Factory::getApplication()->input->set('cat_id', $category->id);
 		}
 		$this->category = $category;
 
 		// Get field
-		if(JFactory::getApplication()->input->getInt('field_id'))
+		if(\Joomla\CMS\Factory::getApplication()->input->getInt('field_id'))
 		{
-			JTable::addIncludePath(JPATH_COMPONENT_ADMINISTRATOR . 'tables/field.php');
-			$field = JTable::getInstance('Field', 'JoomcckTable');
-			$field->load(JFactory::getApplication()->input->getInt('field_id'));
-			$params = new JRegistry($field->params);
+			\Joomla\CMS\Table\Table::addIncludePath(JPATH_COMPONENT_ADMINISTRATOR . 'tables/field.php');
+			$field = \Joomla\CMS\Table\Table::getInstance('Field', 'JoomcckTable');
+			$field->load(\Joomla\CMS\Factory::getApplication()->input->getInt('field_id'));
+			$params = new \Joomla\Registry\Registry($field->params);
 
 			if(!in_array($params->get('params.strict_to_user'), $user->getAuthorisedViewLevels()))
 			{
 				if($params->get('params.strict_to_user_mode') > 1)
 				{
-					$record = JTable::getInstance('Record', 'JoomcckTable');
-					$record->load(JFactory::getApplication()->input->getInt('record_id'));
+					$record = \Joomla\CMS\Table\Table::getInstance('Record', 'JoomcckTable');
+					$record->load(\Joomla\CMS\Factory::getApplication()->input->getInt('record_id'));
 					$user_id = $record->user_id;
 					if(!$user_id && $params->get('params.strict_to_user_mode') == 3)
 					{
@@ -321,24 +321,24 @@ class JoomcckViewElements extends MViewBase
 				{
 					$user_id = 999999999;
 				}
-				JFactory::getApplication()->input->set('user_id', $user_id);
+				\Joomla\CMS\Factory::getApplication()->input->set('user_id', $user_id);
 			}
 
 			if($field->field_type == 'parent')
 			{
-				$table = JTable::getInstance('Field', 'JoomcckTable');
+				$table = \Joomla\CMS\Table\Table::getInstance('Field', 'JoomcckTable');
 				$table->load($params->get('params.child_field'));
 				$child = new \Joomla\Registry\Registry($table->params);
 
 				if($child->get('params.multi_parent') == 0)
 				{
-					$db = JFactory::getDbo();
+					$db = \Joomla\CMS\Factory::getDbo();
 					$db->setQuery("SELECT record_id FROM #__js_res_record_values WHERE field_id = " . $table->id);
 					$ids = $db->loadColumn();
 
 					if(count($ids) > 0)
 					{
-						JFactory::getApplication()->input->set('excludes', implode(',', $ids));
+						\Joomla\CMS\Factory::getApplication()->input->set('excludes', implode(',', $ids));
 					}
 				}
 			}
@@ -355,24 +355,24 @@ class JoomcckViewElements extends MViewBase
 		$this->pagination = $model->getPagination();
 		$this->user = $user;
 
-		JFactory::getApplication()->setUserState('global.list.limit', $state_limit);
+		\Joomla\CMS\Factory::getApplication()->setUserState('global.list.limit', $state_limit);
 
 		parent::display($tpl);
 	}
 
 	private function _products($tpl)
 	{
-		$user = JFactory::getUser();
+		$user = \Joomla\CMS\Factory::getUser();
 
 		if(!$user->get('id'))
 		{
-			Factory::getApplication()->enqueueMessage( JText::_('CERRNOBUYER'),'warning');
+			Factory::getApplication()->enqueueMessage( \Joomla\CMS\Language\Text::_('CERRNOBUYER'),'warning');
 			CCommunityHelper::goToLogin();
 		}
 
 		$model = MModelBase::getInstance('Products', 'JoomcckModel');
 		$orders_model = MModelBase::getInstance('Orders', 'JoomcckModel');
-		$state_limit = JFactory::getApplication()->getUserState('global.list.limit');
+		$state_limit = \Joomla\CMS\Factory::getApplication()->getUserState('global.list.limit');
 
 		$tmpl_params = array();
 		$category = NULL;

@@ -15,7 +15,7 @@ class JoomcckViewGroup extends MViewBase
 
 	public function display($tpl = null)
 	{
-		$app = JFactory::getApplication();
+		$app = \Joomla\CMS\Factory::getApplication();
 
 		$this->state = $this->get('State');
 		$this->item = $this->get('Item');
@@ -36,13 +36,13 @@ class JoomcckViewGroup extends MViewBase
 
 	protected function addToolbar()
 	{
-		JFactory::getApplication()->input->set('hidemainmenu', true);
+		\Joomla\CMS\Factory::getApplication()->input->set('hidemainmenu', true);
 
-		$user		= JFactory::getUser();
+		$user		= \Joomla\CMS\Factory::getUser();
 		$isNew		= ($this->item->id == 0);
 		$checkedOut	= !($this->item->checked_out == 0 || $this->item->checked_out == $user->get('id'));
 
-		JToolBarHelper::title(($isNew ? JText::_('CNEWGROUP') : JText::_('CEDITGROUP')), ($isNew ? 'field_new.png' : 'field_edit.png'));
+		JToolBarHelper::title(($isNew ? \Joomla\CMS\Language\Text::_('CNEWGROUP') : \Joomla\CMS\Language\Text::_('CEDITGROUP')), ($isNew ? 'field_new.png' : 'field_edit.png'));
 
 		if (!$checkedOut){
 			JToolBarHelper::apply('group.apply', 'JTOOLBAR_APPLY');
@@ -53,7 +53,7 @@ class JoomcckViewGroup extends MViewBase
 		if($isNew)
 		{
 			$bar = JToolBar::getInstance();
-			$bar->appendButton('Custom', '<a class="btn btn-sm btn-light border" href="'.JRoute::_('index.php?option=com_joomcck&view=groups').'"><i class="icon-cancel "></i> '.JText::_('JTOOLBAR_CANCEL').'</a>', 'cancel');
+			$bar->appendButton('Custom', '<a class="btn btn-sm btn-light border" href="'.\Joomla\CMS\Router\Route::_('index.php?option=com_joomcck&view=groups').'"><i class="icon-cancel "></i> '.\Joomla\CMS\Language\Text::_('JTOOLBAR_CANCEL').'</a>', 'cancel');
 		}
 		else
 		{

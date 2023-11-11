@@ -14,24 +14,24 @@ class JHTMLVotes
 	public static function types()
 	{
 		$out = array();
-		$out[] = JHtml::_('select.option', 'record', 'Record');
-		$out[] = JHtml::_('select.option', 'comment', 'Comment');
-		$out[] = JHtml::_('select.option', 'file', 'File');
+		$out[] = \Joomla\CMS\HTML\HTMLHelper::_('select.option', 'record', 'Record');
+		$out[] = \Joomla\CMS\HTML\HTMLHelper::_('select.option', 'comment', 'Comment');
+		$out[] = \Joomla\CMS\HTML\HTMLHelper::_('select.option', 'file', 'File');
 		return $out;
 	}
 	public static function values()
 	{
 		$out = array();
-		$out[] = JHtml::_('select.option', 10, 10);
-		$out[] = JHtml::_('select.option', 20, 20);
-		$out[] = JHtml::_('select.option', 30, 30);
-		$out[] = JHtml::_('select.option', 40, 40);
-		$out[] = JHtml::_('select.option', 50, 50);
-		$out[] = JHtml::_('select.option', 60, 60);
-		$out[] = JHtml::_('select.option', 70, 70);
-		$out[] = JHtml::_('select.option', 80, 80);
-		$out[] = JHtml::_('select.option', 90, 90);
-		$out[] = JHtml::_('select.option', 100, 100);
+		$out[] = \Joomla\CMS\HTML\HTMLHelper::_('select.option', 10, 10);
+		$out[] = \Joomla\CMS\HTML\HTMLHelper::_('select.option', 20, 20);
+		$out[] = \Joomla\CMS\HTML\HTMLHelper::_('select.option', 30, 30);
+		$out[] = \Joomla\CMS\HTML\HTMLHelper::_('select.option', 40, 40);
+		$out[] = \Joomla\CMS\HTML\HTMLHelper::_('select.option', 50, 50);
+		$out[] = \Joomla\CMS\HTML\HTMLHelper::_('select.option', 60, 60);
+		$out[] = \Joomla\CMS\HTML\HTMLHelper::_('select.option', 70, 70);
+		$out[] = \Joomla\CMS\HTML\HTMLHelper::_('select.option', 80, 80);
+		$out[] = \Joomla\CMS\HTML\HTMLHelper::_('select.option', 90, 90);
+		$out[] = \Joomla\CMS\HTML\HTMLHelper::_('select.option', 100, 100);
 		return $out;
 	}
 }

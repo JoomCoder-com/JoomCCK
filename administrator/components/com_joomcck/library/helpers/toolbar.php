@@ -24,20 +24,20 @@ class MRToolBar extends JToolBarHelper
 	public static function addSubmenu($vName = 'records')
 	{
 		Sidebar::addEntry(
-			'<img src="'.JUri::root(TRUE).'/media/com_joomcck/icons/16/gear.png" align="absmiddle"> '.
-			JText::_('XML_SUBMENU_CONFIGURATION'),
+			'<img src="'.\Joomla\CMS\Uri\Uri::root(TRUE).'/media/com_joomcck/icons/16/gear.png" align="absmiddle"> '.
+			\Joomla\CMS\Language\Text::_('XML_SUBMENU_CONFIGURATION'),
 			'index.php?option=com_config&view=component&component=com_joomcck&return='.base64_encode(\Joomla\CMS\Uri\Uri::getInstance()),
 			$vName == 'config'
 		);
 		Sidebar::addEntry(
-			'<img src="'.JUri::root(TRUE).'/media/com_joomcck/icons/16/information.png" align="absmiddle"> '.
-			JText::_('XML_SUBMENU_ABOUT'),
+			'<img src="'.\Joomla\CMS\Uri\Uri::root(TRUE).'/media/com_joomcck/icons/16/information.png" align="absmiddle"> '.
+			\Joomla\CMS\Language\Text::_('XML_SUBMENU_ABOUT'),
 			'index.php?option=com_joomcck&view=about',
 			$vName == 'about'
 		);
 		Sidebar::addEntry(
-			'<img src="'.JUri::root(TRUE).'/media/com_joomcck/icons/16/lifebuoy.png" align="absmiddle"> '.
-			JText::_('XML_SUBMENU_SUPPORT'),
+			'<img src="'.\Joomla\CMS\Uri\Uri::root(TRUE).'/media/com_joomcck/icons/16/lifebuoy.png" align="absmiddle"> '.
+			\Joomla\CMS\Language\Text::_('XML_SUBMENU_SUPPORT'),
 			'https://www.joomcoder.com/support/community-forum/category-items/6-community-forum/48-joomcck-8.html',
 			$vName == 'html'
 		);

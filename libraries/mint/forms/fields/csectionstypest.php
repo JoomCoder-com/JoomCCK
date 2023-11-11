@@ -9,7 +9,7 @@
 defined('JPATH_PLATFORM') or die();
 jimport('joomla.html.html');
 jimport('joomla.form.formfield');
-$document = JFactory::getDocument();
+$document = \Joomla\CMS\Factory::getDocument();
 $document->addScript(JURI::root(TRUE).'/administrator/components/com_joomcck/library/js/main.js');
 
 
@@ -18,7 +18,7 @@ class JFormFieldCsectionstypest extends JFormField
 	protected $type = 'Csectionstypest';
 	protected function getInput()
 	{
-		$doc 		= JFactory::getDocument();
+		$doc 		= \Joomla\CMS\Factory::getDocument();
 		$multi    	= $this->element['multiple'];
 		$required    	= $this->element['required'];
 

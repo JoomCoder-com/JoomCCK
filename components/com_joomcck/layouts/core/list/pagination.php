@@ -25,7 +25,7 @@ if(!$showPagination)
 
 // remove "all" items option, + small select input
 if($showLimitBox){
-    $limitBox = str_replace('<option value="0">' . JText::_('JALL') . '</option>', '', $pagination->getLimitBox());
+    $limitBox = str_replace('<option value="0">' . \Joomla\CMS\Language\Text::_('JALL') . '</option>', '', $pagination->getLimitBox());
 	$limitBox = str_replace('class="form-select"', 'class="form-select form-select-sm"', $pagination->getLimitBox());
 
 }

@@ -15,13 +15,13 @@ class JoomcckViewModerator extends MViewBase
 {
     function display($tpl = null)
     {
-        $section_id = JFactory::getApplication()->input->getInt('section_id');
-        $user_id = JFactory::getUser()->get('id');
+        $section_id = \Joomla\CMS\Factory::getApplication()->input->getInt('section_id');
+        $user_id = \Joomla\CMS\Factory::getUser()->get('id');
 
         if(!MECAccess::isModerator($user_id, $section_id))
         {
 
-	        Factory::getApplication()->enqueueMessage( JText::_('CERR_NOPAGEACCESS'),'warning');
+	        Factory::getApplication()->enqueueMessage( \Joomla\CMS\Language\Text::_('CERR_NOPAGEACCESS'),'warning');
         	return;
         }
 
@@ -35,7 +35,7 @@ class JoomcckViewModerator extends MViewBase
 
         if(!$section_id)
         {
-        	JFactory::getApplication()->enqueueMessage(JText::_('CNOSECTION'),'warning');
+        	\Joomla\CMS\Factory::getApplication()->enqueueMessage(\Joomla\CMS\Language\Text::_('CNOSECTION'),'warning');
         	return;
         }
 
@@ -48,8 +48,8 @@ class JoomcckViewModerator extends MViewBase
 
     private function _prepareDocument()
     {
-    	$app = JFactory::getApplication();
-    	$doc = JFactory::getDocument();
+    	$app = \Joomla\CMS\Factory::getApplication();
+    	$doc = \Joomla\CMS\Factory::getDocument();
     	$menus = $app->getMenu();
     	$menu = $menus->getActive();
     	$pathway = $app->getPathway();
@@ -64,7 +64,7 @@ class JoomcckViewModerator extends MViewBase
     		$this->appParams->def('page_heading', $title);
     	}
 
-    	$title = isset($this->item->id) ? JText::_('CEDITMODER') : JText::_('CADDMODER');
+    	$title = isset($this->item->id) ? \Joomla\CMS\Language\Text::_('CEDITMODER') : \Joomla\CMS\Language\Text::_('CADDMODER');
 
     	$pathway->addItem($title);
 
@@ -72,11 +72,11 @@ class JoomcckViewModerator extends MViewBase
 
     	if($app->getCfg('sitename_pagetitles', 0) == 1)
     	{
-    		$title = JText::sprintf('JPAGETITLE', $app->getCfg('sitename'), $title);
+    		$title = \Joomla\CMS\Language\Text::sprintf('JPAGETITLE', $app->getCfg('sitename'), $title);
     	}
     	elseif($app->getCfg('sitename_pagetitles', 0) == 2)
     	{
-    		$title = JText::sprintf('JPAGETITLE', $title, $app->getCfg('sitename'));
+    		$title = \Joomla\CMS\Language\Text::sprintf('JPAGETITLE', $title, $app->getCfg('sitename'));
     	}
 
     	$doc->setTitle($title);

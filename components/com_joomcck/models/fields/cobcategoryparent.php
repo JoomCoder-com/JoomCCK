@@ -44,7 +44,7 @@ class JFormFieldCobCategoryParent extends JFormFieldList
 		// Initialise variables.
 		$options = array();
 
-		$db		= JFactory::getDbo();
+		$db		= \Joomla\CMS\Factory::getDbo();
 		$query	= $db->getQuery(true);
 	
 		$section = \Joomla\CMS\Factory::getApplication()->input->getInt('section_id',0);
@@ -101,7 +101,7 @@ class JFormFieldCobCategoryParent extends JFormFieldList
 			$options[$i]->text = str_repeat('- ',$options[$i]->level).$options[$i]->text;
 		}
 		// Initialise variables.
-		$user = JFactory::getUser();
+		$user = \Joomla\CMS\Factory::getUser();
 
 		if (empty($id)) {
 			// New item, only have to check core.create.
@@ -137,7 +137,7 @@ class JFormFieldCobCategoryParent extends JFormFieldList
 		if (isset($row) && !isset($options[0])) {
 			/*if ($row->parent_id == '1') {
 				$parent = new stdClass();
-				$parent->text = JText::_('JGLOBAL_ROOT_PARENT');
+				$parent->text = \Joomla\CMS\Language\Text::_('JGLOBAL_ROOT_PARENT');
 				array_unshift($options, $parent);
 			}*/
 		}

@@ -17,13 +17,13 @@ class JoomcckModelAuditversion extends MModelAdmin
 
 	public function getTable($type = 'Audit_versions', $prefix = 'JoomcckTable', $config = array())
 	{
-		return JTable::getInstance($type, $prefix, $config);
+		return \Joomla\CMS\Table\Table::getInstance($type, $prefix, $config);
 	}
 
 	public function &getItem($version = 0, $record_id = 0)
 	{
 		// Initialise variables.
-		$user = JFactory::getUser();
+		$user = \Joomla\CMS\Factory::getUser();
 
 		try
 		{
@@ -44,7 +44,7 @@ class JoomcckModelAuditversion extends MModelAdmin
 			{
 
 
-				throw new Exception( JText::_('CERR_VERNOTFOUND') . ': ' . $version,404);
+				throw new Exception( \Joomla\CMS\Language\Text::_('CERR_VERNOTFOUND') . ': ' . $version,404);
 			}
 
 			$data->record   = json_decode($data->record_serial);

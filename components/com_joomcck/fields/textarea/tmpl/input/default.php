@@ -23,7 +23,7 @@ $js         = '';
 	$symbols_left = $symbols_left < 0 ? 0 : $symbols_left;
 	?>
 	<p class="text-success mb-2" id="alert-limit-<?php echo $this->id ?>">
-		<small><?php echo JText::sprintf($params->get('params.symbols_left_msg', 'TA_SYMBOLSLEFTMSG'), '<b><span id="lim_' . $this->id . '">' . $symbols_left . '</span></b>', $max_length); ?></small>
+		<small><?php echo \Joomla\CMS\Language\Text::sprintf($params->get('params.symbols_left_msg', 'TA_SYMBOLSLEFTMSG'), '<b><span id="lim_' . $this->id . '">' . $symbols_left . '</span></b>', $max_length); ?></small>
 	</p>
 	<script type="text/javascript">
 		function plg_textarea_truncate<?php echo $this->id;?>(elem) {
@@ -48,23 +48,23 @@ $js         = '';
 <?php endif; ?>
 
 <?php if($params->get('params.bbcode', 0) && $params->get('params.bbcode_menu', 0)):
-	JFactory::getDocument()->addScript(JURI::root(TRUE) . '/components/com_joomcck/fields/textarea/assets/bbeditor.js');
+	\Joomla\CMS\Factory::getDocument()->addScript(JURI::root(TRUE) . '/components/com_joomcck/fields/textarea/assets/bbeditor.js');
 	?>
 	<div id="controls_<?php echo $this->id; ?>">
 		<div class="btn-group float-start">
-			<button type="button" class="btn btn-sm btn-light border"><?php echo JText::_("TA_BBCODEBOLD"); ?></button>
-			<button type="button" class="btn btn-sm btn-light border"><?php echo JText::_("TA_BBCODEITALIC"); ?></button>
-			<button type="button" class="btn btn-sm btn-light border"><?php echo JText::_("TA_BBCODEUNDERLINE"); ?></button>
+			<button type="button" class="btn btn-sm btn-light border"><?php echo \Joomla\CMS\Language\Text::_("TA_BBCODEBOLD"); ?></button>
+			<button type="button" class="btn btn-sm btn-light border"><?php echo \Joomla\CMS\Language\Text::_("TA_BBCODEITALIC"); ?></button>
+			<button type="button" class="btn btn-sm btn-light border"><?php echo \Joomla\CMS\Language\Text::_("TA_BBCODEUNDERLINE"); ?></button>
 
-			<button type="button" rel="tooltip" data-bs-title="<?php echo JText::_("TA_BBCODEURL"); ?>"
+			<button type="button" rel="tooltip" data-bs-title="<?php echo \Joomla\CMS\Language\Text::_("TA_BBCODEURL"); ?>"
 					class="btn btn-sm btn-light border"><i class="icon-out-2"></i></button>
-			<button type="button" rel="tooltip" data-bs-title="<?php echo JText::_("TA_BBCODEIMG"); ?>"
+			<button type="button" rel="tooltip" data-bs-title="<?php echo \Joomla\CMS\Language\Text::_("TA_BBCODEIMG"); ?>"
 					class="btn btn-sm btn-light border"><i class="icon-picture"></i></button>
-			<button type="button" rel="tooltip" data-bs-title="<?php echo JText::_("TA_BBCODECODE"); ?>"
+			<button type="button" rel="tooltip" data-bs-title="<?php echo \Joomla\CMS\Language\Text::_("TA_BBCODECODE"); ?>"
 					class="btn btn-sm btn-light border"><i class="icon-tools"></i></button>
 		</div>
 		<div class="float-end form-inline">
-			<label><?php echo JText::_("Font size"); ?></label>
+			<label><?php echo \Joomla\CMS\Language\Text::_("Font size"); ?></label>
 			<select style="width: 50px;">
 				<option value="1">1</option>
 				<option value="2">2</option>
@@ -74,15 +74,15 @@ $js         = '';
 				<option value="6">6</option>
 				<option value="7">7</option>
 			</select>
-			<label><?php echo JText::_("Color"); ?></label>
+			<label><?php echo \Joomla\CMS\Language\Text::_("Color"); ?></label>
 			<select style="width: 100px;">
-				<option value="red" style="color: red"><?php echo JText::_("TA_BBCOLORRED"); ?></option>
-				<option value="orange" style="color: orange"><?php echo JText::_("TA_BBCOLORORANGE"); ?></option>
-				<option value="yellow" style="color: yellow"><?php echo JText::_("TA_BBCOLORYELLOW"); ?></option>
-				<option value="green" style="color: green"><?php echo JText::_("TA_BBCOLORGREEN"); ?></option>
-				<option value="blue" style="color: blue"><?php echo JText::_("TA_BBCOLORBLUE"); ?></option>
-				<option value="violet" style="color: violet"><?php echo JText::_("TA_BBCOLORVIOLET"); ?></option>
-				<option value="black" style="color: black"><?php echo JText::_("TA_BBCOLORBLACK"); ?></option>
+				<option value="red" style="color: red"><?php echo \Joomla\CMS\Language\Text::_("TA_BBCOLORRED"); ?></option>
+				<option value="orange" style="color: orange"><?php echo \Joomla\CMS\Language\Text::_("TA_BBCOLORORANGE"); ?></option>
+				<option value="yellow" style="color: yellow"><?php echo \Joomla\CMS\Language\Text::_("TA_BBCOLORYELLOW"); ?></option>
+				<option value="green" style="color: green"><?php echo \Joomla\CMS\Language\Text::_("TA_BBCOLORGREEN"); ?></option>
+				<option value="blue" style="color: blue"><?php echo \Joomla\CMS\Language\Text::_("TA_BBCOLORBLUE"); ?></option>
+				<option value="violet" style="color: violet"><?php echo \Joomla\CMS\Language\Text::_("TA_BBCOLORVIOLET"); ?></option>
+				<option value="black" style="color: black"><?php echo \Joomla\CMS\Language\Text::_("TA_BBCOLORBLACK"); ?></option>
 			</select>
 		</div>
 	</div>
@@ -107,7 +107,7 @@ endif;
 	<div class="clearfix"></div>
 
 <?php if($params->get('params.grow_enable', 0)) :
-	JFactory::getDocument()->addScript(JURI::root(TRUE) . '/components/com_joomcck/fields/textarea/assets/grow.js');
+	\Joomla\CMS\Factory::getDocument()->addScript(JURI::root(TRUE) . '/components/com_joomcck/fields/textarea/assets/grow.js');
 	?>
 	<script type="text/javascript">
 		jQuery("#field_<?php echo $this->id;?>").expanding();
@@ -154,16 +154,16 @@ endif;
 <?php endif; ?>
 <?php if($this->params->get('params.mention')): ?>
 	<?php
-	JFactory::getDocument()->addStyleSheet(JUri::root(TRUE) . '/media/com_joomcck/vendors/At.js/dist/css/jquery.atwho.min.css');
-	JFactory::getDocument()->addScript(JUri::root(TRUE) . '/media/com_joomcck/vendors/At.js/dist/js/jquery.atwho.min.js');
-	JFactory::getDocument()->addScript(JUri::root(TRUE) . '/media/com_joomcck/vendors/Caret.js/dist/jquery.caret.min.js');
+	\Joomla\CMS\Factory::getDocument()->addStyleSheet(\Joomla\CMS\Uri\Uri::root(TRUE) . '/media/com_joomcck/vendors/At.js/dist/css/jquery.atwho.min.css');
+	\Joomla\CMS\Factory::getDocument()->addScript(\Joomla\CMS\Uri\Uri::root(TRUE) . '/media/com_joomcck/vendors/At.js/dist/js/jquery.atwho.min.js');
+	\Joomla\CMS\Factory::getDocument()->addScript(\Joomla\CMS\Uri\Uri::root(TRUE) . '/media/com_joomcck/vendors/Caret.js/dist/jquery.caret.min.js');
 	?>
 	<script type="text/javascript">
 		(function($) {
 			$("#field_<?php echo $this->id;?>").atwho({
 				at: '@',
 				limit: 10,
-				data: '<?php echo JRoute::_('index.php?option=com_joomcck&task=ajax.usermention', FALSE);  ?>',
+				data: '<?php echo \Joomla\CMS\Router\Route::_('index.php?option=com_joomcck&task=ajax.usermention', FALSE);  ?>',
 				dispayTpl: "<li>${name} <small>${username}</small></li>",
 				insertTpl: ':${name}:'
 			});
@@ -176,35 +176,35 @@ endif;
 $m = array();
 if($this->params->get('params.mention'))
 {
-	$m[] = JText::_('TA_MENTIONS');
+	$m[] = \Joomla\CMS\Language\Text::_('TA_MENTIONS');
 }
 if($params->get('params.markdown') && $this->params->get('params.markdown_text_show'))
 {
-	$m[] = JText::_($this->params->get('params.markdown_text', 'TA_USEMARKDOWN'));
+	$m[] = \Joomla\CMS\Language\Text::_($this->params->get('params.markdown_text', 'TA_USEMARKDOWN'));
 }
 if($params->get('params.bbcode') && $this->params->get('params.bbcode_text_show'))
 {
-	$m[] = JText::_($this->params->get('params.bbcode_text', 'TA_USEBBCODE'));
+	$m[] = \Joomla\CMS\Language\Text::_($this->params->get('params.bbcode_text', 'TA_USEBBCODE'));
 }
 
 if($params->get('params.allow_html', 1) == 1)
 {
-	$m[] = JText::_('TA_TAGSALLOWED');
+	$m[] = \Joomla\CMS\Language\Text::_('TA_TAGSALLOWED');
 }
 if($params->get('params.allow_html', 1) == 2)
 {
-	$m[] = JText::_('TA_SOMETAGSALLOWED');
+	$m[] = \Joomla\CMS\Language\Text::_('TA_SOMETAGSALLOWED');
 
 	$tags = explode(',', $params->get('params.filter_tags'));
 	ArrayHelper::trim_r($tags);
 	ArrayHelper::clean_r($tags);
-	$li[] = $this->params->get('params.tags_mode', 0) == 0 ? JText::sprintf('TA_FOLLOWINGTAGSALLOWED') . ': ' . htmlspecialchars('<' . implode('>, <', $tags) . '>') : JText::sprintf('TA_FOLLOWINGTAGSNOTALLOWED') . ': ' . htmlspecialchars('<' . implode('>, <', $tags) . '>');
+	$li[] = $this->params->get('params.tags_mode', 0) == 0 ? \Joomla\CMS\Language\Text::sprintf('TA_FOLLOWINGTAGSALLOWED') . ': ' . htmlspecialchars('<' . implode('>, <', $tags) . '>') : \Joomla\CMS\Language\Text::sprintf('TA_FOLLOWINGTAGSNOTALLOWED') . ': ' . htmlspecialchars('<' . implode('>, <', $tags) . '>');
 
 	$attr = explode(',', $params->get('params.filter_attr',''));
 	ArrayHelper::trim_r($attr);
 	ArrayHelper::clean_r($attr);
 	if($attr)
-		$li[] = $this->params->get('params.attr_mode', 0) == 0 ? JText::sprintf('TA_FOLLOWINGATTRSALLOWED') . ': ' . htmlspecialchars(implode('="", ', $attr)) . '=""' : JText::sprintf('TA_FOLLOWINGATTRSNOTALLOWED') . ': ' . htmlspecialchars(implode('="", ', $attr)) . '=""';
+		$li[] = $this->params->get('params.attr_mode', 0) == 0 ? \Joomla\CMS\Language\Text::sprintf('TA_FOLLOWINGATTRSALLOWED') . ': ' . htmlspecialchars(implode('="", ', $attr)) . '=""' : \Joomla\CMS\Language\Text::sprintf('TA_FOLLOWINGATTRSNOTALLOWED') . ': ' . htmlspecialchars(implode('="", ', $attr)) . '=""';
 
 	$m[] = '<ul><li>' . implode('</li><li>', $li) . '</li></ul>';
 }

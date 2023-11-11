@@ -20,12 +20,12 @@ class JoomcckControllerAuditlog extends MControllerForm
 		
 		if(!$this->input)
 		{
-			$this->input = JFactory::getApplication()->input;
+			$this->input = \Joomla\CMS\Factory::getApplication()->input;
 		}
 	}
 	public function reset()
 	{
-		$app = JFactory::getApplication();
+		$app = \Joomla\CMS\Factory::getApplication();
 
 		$app->setUserState('com_joomcck.auditlog.filter.search', '');
 		$app->setUserState('com_joomcck.auditlog.section_id', '');
@@ -35,6 +35,6 @@ class JoomcckControllerAuditlog extends MControllerForm
 		$app->setUserState('com_joomcck.auditlog.fcs', '');
 		$app->setUserState('com_joomcck.auditlog.fce', '');
 
-		$this->setRedirect(JRoute::_('index.php?option=com_joomcck&view=auditlog', false));
+		$this->setRedirect(\Joomla\CMS\Router\Route::_('index.php?option=com_joomcck&view=auditlog', false));
 	}
 }
