@@ -10,7 +10,7 @@ defined('_JEXEC') or die();
 
 require_once JPATH_SITE . '/components/com_content/router.php';
 
-class plgSearchJoomcck extends JPlugin
+class plgSearchJoomcck extends \Joomla\CMS\Plugin\CMSPlugin
 {
 
 	function onContentSearchAreas()

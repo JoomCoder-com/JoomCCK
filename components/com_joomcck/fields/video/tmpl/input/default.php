@@ -39,7 +39,7 @@ defined('_JEXEC') or die('Restricted access');
 		<p class="small"><?php echo \Joomla\CMS\Language\Text::_('CONLYONE')?></p>
 	<?php endif;?>
 	<?php if($this->upload):?>
-		<div class="video-title" data-bs-toggle="collapse" data-bs-target="#upload-pan<?php echo $this->id ?>"><img src="<?php echo JURI::root(TRUE)?>/media/com_joomcck/icons/16/drive-upload.png" align="absmiddle" /> <?php echo \Joomla\CMS\Language\Text::_('CUPLOAD')?></div>
+		<div class="video-title" data-bs-toggle="collapse" data-bs-target="#upload-pan<?php echo $this->id ?>"><img src="<?php echo \Joomla\CMS\Uri\Uri::root(TRUE)?>/media/com_joomcck/icons/16/drive-upload.png" align="absmiddle" /> <?php echo \Joomla\CMS\Language\Text::_('CUPLOAD')?></div>
 		<div id="upload-pan<?php echo $this->id ?>" class="collapse fade video-pan-<?php echo $this->id; ?>">
 			<div class="well">
 				<?php echo $this->upload;?>
@@ -48,7 +48,7 @@ defined('_JEXEC') or die('Restricted access');
 	<?php endif;?>
 
 	<?php if(in_array($this->params->get('params.embed', 1), $this->user->getAuthorisedViewLevels())): ?>
-		<div class="video-title" data-bs-toggle="collapse" data-bs-target="#embed-pan<?php echo $this->id ?>"><img src="<?php echo JURI::root(TRUE)?>/media/com_joomcck/icons/16/film-cast.png" align="absmiddle" /> <?php echo \Joomla\CMS\Language\Text::_('CEMBED')?></div>
+		<div class="video-title" data-bs-toggle="collapse" data-bs-target="#embed-pan<?php echo $this->id ?>"><img src="<?php echo \Joomla\CMS\Uri\Uri::root(TRUE)?>/media/com_joomcck/icons/16/film-cast.png" align="absmiddle" /> <?php echo \Joomla\CMS\Language\Text::_('CEMBED')?></div>
 		<div id="embed-pan<?php echo $this->id ?>" class="collapse fade video-pan-<?php echo $this->id; ?>">
 			<div class="well">
 				<div id="input_embeds">
@@ -56,7 +56,7 @@ defined('_JEXEC') or die('Restricted access');
 						<div class="element-box">
 							<textarea class="form-control" style="" name="jform[fields][<?php echo $this->id; ?>][embed][]" cols="50" rows="5"
 							id="<?php echo $this->formControl.$this->name;?>" ><?php echo $embed;?></textarea>
-							<img align="absmiddle" src="<?php echo JURI::root(TRUE)?>/media/com_joomcck/icons/16/cross-button.png"
+							<img align="absmiddle" src="<?php echo \Joomla\CMS\Uri\Uri::root(TRUE)?>/media/com_joomcck/icons/16/cross-button.png"
 							class="link_delete" onclick="Joomcck.deleteFormElement<?php echo $this->id; ?>('embed', this);">
 						</div>
 					<?php endforeach;?>
@@ -65,7 +65,7 @@ defined('_JEXEC') or die('Restricted access');
 				<?php if(!$this->only_one):?>
 					<div id="embed-button">
 						<button class="btn" type="button" onclick="Joomcck.addFormElement<?php echo $this->id; ?>('embed', <?php echo $this->id; ?>);">
-							<img src="<?php echo JURI::root(TRUE); ?>/media/com_joomcck/icons/16/plus-button.png" align="absmiddle">
+							<img src="<?php echo \Joomla\CMS\Uri\Uri::root(TRUE); ?>/media/com_joomcck/icons/16/plus-button.png" align="absmiddle">
 							<?php echo \Joomla\CMS\Language\Text::_('F_ADDEMBEDE'); ?>
 						</button>
 					</div>
@@ -76,13 +76,13 @@ defined('_JEXEC') or die('Restricted access');
 
 	<?php if(in_array($this->params->get('params.link', 1), $this->user->getAuthorisedViewLevels())): ?>
 		<div class="video-title" data-bs-toggle="collapse" data-bs-target="#link-pan<?php echo $this->id ?>">
-			<img src="<?php echo JURI::root(TRUE)?>/media/com_joomcck/icons/16/chain.png" align="absmiddle" /> <?php echo \Joomla\CMS\Language\Text::_('CLINK')?></div>
+			<img src="<?php echo \Joomla\CMS\Uri\Uri::root(TRUE)?>/media/com_joomcck/icons/16/chain.png" align="absmiddle" /> <?php echo \Joomla\CMS\Language\Text::_('CLINK')?></div>
 
 		<div id="link-pan<?php echo $this->id ?>" class="video-pan-<?php echo $this->id; ?> collapse fade">
 			<div class="well">
 				<p><?php echo \Joomla\CMS\Language\Text::_('WEUNDERSTAND');?>:
 					<?php foreach ($this->params->get('params.adapters', array()) as $adapter):?>
-						<img align="absmiddle" src="<?php echo JURI::root(TRUE); ?>/components/com_joomcck/fields/video/adapters/icons/<?php echo $adapter;?>.png"
+						<img align="absmiddle" src="<?php echo \Joomla\CMS\Uri\Uri::root(TRUE); ?>/components/com_joomcck/fields/video/adapters/icons/<?php echo $adapter;?>.png"
 							alt="<?php echo ucfirst($adapter); ?>" title="<?php echo ucfirst($adapter); ?>" />
 					<?php endforeach;?>
 					<?php echo \Joomla\CMS\Language\Text::_('WEUNDERSTAND2');?>
@@ -91,7 +91,7 @@ defined('_JEXEC') or die('Restricted access');
 				<div id="input_links">
 					<?php foreach ($this->link AS $link):?>
 						<div class="element-box">
-							<input class="form-control" name="jform[fields][<?php echo $this->id;?>][link][]" type="text" value="<?php echo $link; ?>"  id="<?php echo $this->formControl.$this->name;?>" /><img align="absmiddle" src="<?php echo JURI::root(TRUE)?>/media/com_joomcck/icons/16/cross-button.png" class="link_delete" onclick="Joomcck.deleteFormElement<?php echo $this->id; ?>('link', this);">
+							<input class="form-control" name="jform[fields][<?php echo $this->id;?>][link][]" type="text" value="<?php echo $link; ?>"  id="<?php echo $this->formControl.$this->name;?>" /><img align="absmiddle" src="<?php echo \Joomla\CMS\Uri\Uri::root(TRUE)?>/media/com_joomcck/icons/16/cross-button.png" class="link_delete" onclick="Joomcck.deleteFormElement<?php echo $this->id; ?>('link', this);">
 						</div>
 					<?php endforeach;?>
 				</div>
@@ -99,7 +99,7 @@ defined('_JEXEC') or die('Restricted access');
 				<?php if(!$this->only_one):?>
 					<div id="link-button">
 						<button class="btn" type="button" onclick="Joomcck.addFormElement<?php echo $this->id; ?>('link', <?php echo $this->id; ?>);">
-							<img src="<?php echo JURI::root(TRUE); ?>/media/com_joomcck/icons/16/plus-button.png" align="absmiddle">
+							<img src="<?php echo \Joomla\CMS\Uri\Uri::root(TRUE); ?>/media/com_joomcck/icons/16/plus-button.png" align="absmiddle">
 							<?php echo \Joomla\CMS\Language\Text::_('F_ONEMOREVIDEO'); ?>
 						</button>
 					</div>
@@ -167,7 +167,7 @@ defined('_JEXEC') or die('Restricted access');
 
 		var close_link = $(document.createElement("img")).attr({
 			 'class': 'link_delete',
-			 'src': '<?php echo JURI::root(TRUE)?>/media/com_joomcck/icons/16/cross-button.png'
+			 'src': '<?php echo \Joomla\CMS\Uri\Uri::root(TRUE)?>/media/com_joomcck/icons/16/cross-button.png'
 			}).appendTo(input_div);
 
 		close_link.on('click', function(){

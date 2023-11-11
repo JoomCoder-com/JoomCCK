@@ -34,7 +34,7 @@ class JoomcckViewTemplates extends MViewBase
 		$this->config = \Joomla\CMS\Component\ComponentHelper::getParams('com_joomcck');
 		$this->action = \Joomla\CMS\Uri\Uri::getInstance()->toString();
 		$this->items  = $this->get('Form');
-		$this->ftp    = JClientHelper::setCredentialsFromRequest('ftp');
+		$this->ftp    = \Joomla\CMS\Client\ClientHelper::setCredentialsFromRequest('ftp');
 		parent::display($tpl);
 	}
 

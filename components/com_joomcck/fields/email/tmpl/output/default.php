@@ -13,7 +13,7 @@ defined('_JEXEC') or die();
 ?>
 <?php
 $document = \Joomla\CMS\Factory::getDocument();
-$document->addScript(JURI::root(TRUE) . '/components/com_joomcck/fields/email/email_iframe.js');
+$document->addScript(\Joomla\CMS\Uri\Uri::root(TRUE) . '/components/com_joomcck/fields/email/email_iframe.js');
 $params = $this->params;
 
 if ($this->value && in_array($params->get('params.view_mail', 1), $this->user->getAuthorisedViewLevels()))

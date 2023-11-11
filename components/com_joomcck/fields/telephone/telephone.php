@@ -15,11 +15,11 @@ class JFormFieldCTelephone extends CFormField
 	public function getInput()
 	{
 		$document = \Joomla\CMS\Factory::getDocument();
-// 		$document->addScript(JURI::root(TRUE) . '/media/com_joomcck/js/autocomplete/mootools-autocompleter-1.2.js');
-// 		$document->addStyleSheet(JURI::root(TRUE) . '/media/com_joomcck/js/autocomplete/autocompleter.css');
-		$document->addScript(JURI::root(TRUE) . '/media/com_joomcck/vendors/bootstrap-pills/js/bootstrap-typeahead.js');
-		$document->addStyleSheet(JURI::root(TRUE) . '/components/com_joomcck/fields/telephone/telephone.css');
-		$document->addScript(JURI::root(TRUE) . '/components/com_joomcck/fields/telephone/telephone.js');
+// 		$document->addScript(\Joomla\CMS\Uri\Uri::root(TRUE) . '/media/com_joomcck/js/autocomplete/mootools-autocompleter-1.2.js');
+// 		$document->addStyleSheet(\Joomla\CMS\Uri\Uri::root(TRUE) . '/media/com_joomcck/js/autocomplete/autocompleter.css');
+		$document->addScript(\Joomla\CMS\Uri\Uri::root(TRUE) . '/media/com_joomcck/vendors/bootstrap-pills/js/bootstrap-typeahead.js');
+		$document->addStyleSheet(\Joomla\CMS\Uri\Uri::root(TRUE) . '/components/com_joomcck/fields/telephone/telephone.css');
+		$document->addScript(\Joomla\CMS\Uri\Uri::root(TRUE) . '/components/com_joomcck/fields/telephone/telephone.js');
 
 
 		$value = $this->value ? $this->value : null;
@@ -100,8 +100,8 @@ class JFormFieldCTelephone extends CFormField
 	public function onRenderFilter($section, $module = false)
 	{
 		$document = \Joomla\CMS\Factory::getDocument();
-		$document->addStyleSheet(JURI::root(TRUE) . '/components/com_joomcck/fields/telephone/telephone.css');
-		$document->addScript(JURI::root(TRUE) . '/components/com_joomcck/fields/telephone/telephone.js');
+		$document->addStyleSheet(\Joomla\CMS\Uri\Uri::root(TRUE) . '/components/com_joomcck/fields/telephone/telephone.css');
+		$document->addScript(\Joomla\CMS\Uri\Uri::root(TRUE) . '/components/com_joomcck/fields/telephone/telephone.js');
 
 		$val = '';
 		if ($this->value)
@@ -140,7 +140,7 @@ class JFormFieldCTelephone extends CFormField
 	private function _render($client, $record, $type, $section )
 	{
 		if(!$this->value) return ;
-		\Joomla\CMS\Factory::getDocument()->addStyleSheet(JURI::root(TRUE) . '/components/com_joomcck/fields/telephone/telephone.css');
+		\Joomla\CMS\Factory::getDocument()->addStyleSheet(\Joomla\CMS\Uri\Uri::root(TRUE) . '/components/com_joomcck/fields/telephone/telephone.css');
 
 		$value = $this->value;
 		$f_value = '';
@@ -217,7 +217,7 @@ class JFormFieldCTelephone extends CFormField
 			$data[$k]->flag = '';
 			if(is_file(JPATH_ROOT.'/media/com_joomcck/icons/flag/16/' . \Joomla\String\StringHelper::strtolower($val->code2) . '.png'))
 			{
-				$data[$k]->flag = '<img src="' . JURI::root(TRUE) . '/media/com_joomcck/icons/flag/16/' . \Joomla\String\StringHelper::strtolower($val->code2) . '.png" border="0" align="absmiddle" alt="' . \Joomla\CMS\Language\Text::_($val->name) . '">';
+				$data[$k]->flag = '<img src="' . \Joomla\CMS\Uri\Uri::root(TRUE) . '/media/com_joomcck/icons/flag/16/' . \Joomla\String\StringHelper::strtolower($val->code2) . '.png" border="0" align="absmiddle" alt="' . \Joomla\CMS\Language\Text::_($val->name) . '">';
 			}
 		}
 		return $data;

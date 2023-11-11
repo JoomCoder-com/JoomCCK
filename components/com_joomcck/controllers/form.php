@@ -122,7 +122,7 @@ class JoomcckControllerForm extends MControllerForm
 					$config  = \Joomla\CMS\Factory::getConfig();
 					$subject = \Joomla\CMS\Mail\MailHelper::cleanSubject(\Joomla\CMS\Language\Text::sprintf('CEDITRECORDEMAIL', $type->name, $section->name));
 					$body    = \Joomla\CMS\Mail\MailHelper::cleanBody(\Joomla\CMS\Language\Text::sprintf('CEDITREORDBODY', $type->name, $section->name, $config->get('sitename'),
-						preg_replace('/\/$/iU', '', JURI::root(TRUE)) . $url));
+						preg_replace('/\/$/iU', '', \Joomla\CMS\Uri\Uri::root(TRUE)) . $url));
 					$mailer  = \Joomla\CMS\Factory::getMailer();
 					$mailer->sendMail($config->get('mailfrom'), $config->get('fromname'),
 						\Joomla\CMS\Mail\MailHelper::cleanAddress($field->value), $subject, $body);
@@ -436,7 +436,7 @@ class JoomcckControllerForm extends MControllerForm
 			}
 
 			$ret = Url::get_back('return');
-			if(!JURI::isInternal($ret))
+			if(!\Joomla\CMS\Uri\Uri::isInternal($ret))
 			{
 				$ret = '';
 			}
@@ -608,7 +608,7 @@ class JoomcckControllerForm extends MControllerForm
 
 		if(empty($return) || !\Joomla\CMS\Uri\Uri::isInternal(JoomcckFilter::base64($return)))
 		{
-			return JURI::base();
+			return \Joomla\CMS\Uri\Uri::base();
 		}
 		else
 		{

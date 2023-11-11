@@ -156,7 +156,7 @@ class JFormFieldCGallery extends CFormFieldUpload
 
 			if($this->params->get('params.count_views'))
 			{
-				$url_to_original = sprintf('%s/index.php?option=com_joomcck&task=files.show&id=%d&user_id='.$this->record->user_id.'&fldr=gallery'.$f_key.'&file_key=%s&tmpl=component', JURI::root(TRUE), $file['id'], $key);
+				$url_to_original = sprintf('%s/index.php?option=com_joomcck&task=files.show&id=%d&user_id='.$this->record->user_id.'&fldr=gallery'.$f_key.'&file_key=%s&tmpl=component', \Joomla\CMS\Uri\Uri::root(TRUE), $file['id'], $key);
 			}
 
 			$title = htmlspecialchars(empty($file['title']) ? $file['realname'] : $file['title'], ENT_COMPAT, 'UTF-8');
@@ -317,7 +317,7 @@ class JFormFieldCGallery extends CFormFieldUpload
 
 			if($this->params->get('params.count_views'))
 			{
-				$url_to_original[$picture_index] = sprintf('%s/index.php?option=com_joomcck&task=files.show&id=%d&user_id='.$this->record->user_id.'&fldr=gallery'.$f_key.'&file_key=%s&tmpl=component', JURI::root(TRUE), $file['id'], $key);
+				$url_to_original[$picture_index] = sprintf('%s/index.php?option=com_joomcck&task=files.show&id=%d&user_id='.$this->record->user_id.'&fldr=gallery'.$f_key.'&file_key=%s&tmpl=component', \Joomla\CMS\Uri\Uri::root(TRUE), $file['id'], $key);
 			}
 		}
 
@@ -383,7 +383,7 @@ class JFormFieldCGallery extends CFormFieldUpload
 
 			if($this->params->get('params.count_views'))
 			{
-				$url_to_original = sprintf('%s/index.php?option=com_joomcck&task=files.show&id=%d&user_id='.$this->record->user_id.'&fldr=gallery'.$f_key.'&file_key=%s&tmpl=component', JURI::root(TRUE), $file['id'], $key);
+				$url_to_original = sprintf('%s/index.php?option=com_joomcck&task=files.show&id=%d&user_id='.$this->record->user_id.'&fldr=gallery'.$f_key.'&file_key=%s&tmpl=component', \Joomla\CMS\Uri\Uri::root(TRUE), $file['id'], $key);
 			}
 			$out[] = sprintf($patern_img, $url, $file['realname'], $url_to_original, $url);
 		}
@@ -608,10 +608,10 @@ class JFormFieldCGallery extends CFormFieldUpload
 		if($this->file->user_id == $this->user->get('id') && $this->params->get('params.allow_edit_title', 0))
 		{
 			$titlebox = sprintf('<div id="titlebox"><span id="titletextspan">%s</span> <a href="javascript:void(0);" onclick="gb' . $this->id . '_' . $this->record->id . '.editTitle()">%s</a></div>', $titlebox,
-				\Joomla\CMS\HTML\HTMLHelper::image(JURI::root() . 'media/com_joomcck/icons/16/sticky-note--pencil.png', \Joomla\CMS\Language\Text::_('G_EDIT'), array('align' => 'absmiddle')));
+				\Joomla\CMS\HTML\HTMLHelper::image(\Joomla\CMS\Uri\Uri::root() . 'media/com_joomcck/icons/16/sticky-note--pencil.png', \Joomla\CMS\Language\Text::_('G_EDIT'), array('align' => 'absmiddle')));
 			$titlebox .= '<div id="titleedit" class="disactiveInput">
     	    	<input id="savetitletext" class="form-control" value="">
-        	    <a href="javascript:void(0);" onclick="gb' . $this->id . '_' . $this->record->id . '.saveTitle();">' . \Joomla\CMS\HTML\HTMLHelper::image(JURI::root() . 'media/com_joomcck/icons/16/disk.png', \Joomla\CMS\Language\Text::_('G_SAVE'), array('align' => 'absmiddle')) . '</a></div>';
+        	    <a href="javascript:void(0);" onclick="gb' . $this->id . '_' . $this->record->id . '.saveTitle();">' . \Joomla\CMS\HTML\HTMLHelper::image(\Joomla\CMS\Uri\Uri::root() . 'media/com_joomcck/icons/16/disk.png', \Joomla\CMS\Language\Text::_('G_SAVE'), array('align' => 'absmiddle')) . '</a></div>';
 		}
 		$avatar = '';
 		if($this->params->get('params.show_avatar', 0))
@@ -862,7 +862,7 @@ class JFormFieldCGallery extends CFormFieldUpload
 			return '';
 		}
 		$link  = $this->getDownloadUrl($this->record, $this->file, 0);
-		$out[] = '<div class="download-button"><img src="' . JURI::root(TRUE) . '/media/com_joomcck/icons/16/disk.png" alt="Download" />';
+		$out[] = '<div class="download-button"><img src="' . \Joomla\CMS\Uri\Uri::root(TRUE) . '/media/com_joomcck/icons/16/disk.png" alt="Download" />';
 		$out[] = '<a href="' . $link . '">' . \Joomla\CMS\Language\Text::_('G_DOWNLOAD');
 		$out[] = sprintf('<div>%dx%d (%s)</div>', $this->file->width, $this->file->height, HTMLFormatHelper::formatSize($this->file->size));
 		$out[] = '</a></div>';
@@ -884,10 +884,10 @@ class JFormFieldCGallery extends CFormFieldUpload
 			if($this->params->get('params.show_mode', 'gallerybox') == 'gallerybox')
 			{
 				MapHelper::loadGoogleMapAPI();
-				\Joomla\CMS\Factory::getDocument()->addScript(JURI::root(TRUE) . '/components/com_joomcck/fields/gallery/gallerybox/gallerybox.js');
+				\Joomla\CMS\Factory::getDocument()->addScript(\Joomla\CMS\Uri\Uri::root(TRUE) . '/components/com_joomcck/fields/gallery/gallerybox/gallerybox.js');
 				RatingHelp::loadFile();
-				\Joomla\CMS\Factory::getDocument()->addStyleSheet(JURI::root(TRUE) . '/components/com_joomcck/fields/gallery/gallerybox/gallerybox.css');
-				\Joomla\CMS\Factory::getDocument()->addStyleSheet(JURI::root(TRUE) . '/components/com_joomcck/fields/gallery/gallerybox/gallerybox-' . $this->params->get('params.theme', 'Dark') . '.css');
+				\Joomla\CMS\Factory::getDocument()->addStyleSheet(\Joomla\CMS\Uri\Uri::root(TRUE) . '/components/com_joomcck/fields/gallery/gallerybox/gallerybox.css');
+				\Joomla\CMS\Factory::getDocument()->addStyleSheet(\Joomla\CMS\Uri\Uri::root(TRUE) . '/components/com_joomcck/fields/gallery/gallerybox/gallerybox-' . $this->params->get('params.theme', 'Dark') . '.css');
 				\Joomla\CMS\Factory::getDocument()->addScriptDeclaration('
 	    	    	jQuery(document).ready(function(){
 		    	    	gb' . $this->id . '_' . $this->record->id . ' = new Gallerybox(
@@ -926,6 +926,6 @@ class JFormFieldCGallery extends CFormFieldUpload
 		$url       = str_replace(JPATH_ROOT, '', $root);
 		$url       = str_replace("\\", '/', $url);
 		$url       = preg_replace('#^\/#iU', '', $url);
-		$this->url = JURI::root(TRUE) . '/' . str_replace("//", "/", $url);
+		$this->url = \Joomla\CMS\Uri\Uri::root(TRUE) . '/' . str_replace("//", "/", $url);
 	}
 }

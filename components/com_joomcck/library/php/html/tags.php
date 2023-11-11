@@ -701,7 +701,7 @@ class JHTMLTags
 			}
 
 		}
-		$html .= sprintf('<p style="clear:both"><img id="tag_image" src="%s/components/com_resource/images/tag-icon.png" align="absmiddle"><input onkeyup="getTagSuggestions(this.value);" type="text" name="tag" id="tag_input" class="form-control" /> <input type="button"  onclick="tag_insert(document.getElementById(\'tag_input\').value);" class="button" value="%s" /> %s <br><span class="small">%s</span></p><p style="clear:both" id="search_tags_result"> </p>', JURI::root(TRUE), \Joomla\CMS\Language\Text::_('CADD'), ($alltags ? $link : NULL), \Joomla\CMS\Language\Text::_('CENTERSEPARATE'));
+		$html .= sprintf('<p style="clear:both"><img id="tag_image" src="%s/components/com_resource/images/tag-icon.png" align="absmiddle"><input onkeyup="getTagSuggestions(this.value);" type="text" name="tag" id="tag_input" class="form-control" /> <input type="button"  onclick="tag_insert(document.getElementById(\'tag_input\').value);" class="button" value="%s" /> %s <br><span class="small">%s</span></p><p style="clear:both" id="search_tags_result"> </p>', \Joomla\CMS\Uri\Uri::root(TRUE), \Joomla\CMS\Language\Text::_('CADD'), ($alltags ? $link : NULL), \Joomla\CMS\Language\Text::_('CENTERSEPARATE'));
 
 		$html .= @$html2;
 
@@ -711,7 +711,7 @@ class JHTMLTags
 	public static function tag($tag)
 	{
 		static $i; $i++;
-		$out = sprintf(' <span id="etag%d" class="tag_item"><img align="absmiddle" src="%s/components/com_resource/images/tag_delete.png" class="hasTip" title="::%s %s" style="cursor:pointer" onclick="deleteTag(\'%s\', \'etag%d\')" /> %s</span>', $i, JURI::root(TRUE), \Joomla\CMS\Language\Text::_('CDELETETAG'), $tag, $tag, $i, $tag);
+		$out = sprintf(' <span id="etag%d" class="tag_item"><img align="absmiddle" src="%s/components/com_resource/images/tag_delete.png" class="hasTip" title="::%s %s" style="cursor:pointer" onclick="deleteTag(\'%s\', \'etag%d\')" /> %s</span>', $i, \Joomla\CMS\Uri\Uri::root(TRUE), \Joomla\CMS\Language\Text::_('CDELETETAG'), $tag, $tag, $i, $tag);
 		return $out;
 	}
 	public static function tag2($tag, $i)
@@ -822,8 +822,8 @@ class JHTMLTags
 		{
 
 			$out .= ' <span id="new_tags'.$item->id.'"></span> '.
-				\Joomla\CMS\HTML\HTMLHelper::image(JURI::root(TRUE).'/components/com_resource/images/load.gif', '', array('id'=>'load_image'.$item->id, 'style' => 'display:none'))
-				.' <span style="display:none" id="atfid'.$item->id.'"><input type="text" class="form-control" id="new_tag_input'.$item->id.'" /> <input type="button" class="button" value="'. \Joomla\CMS\Language\Text::_('CADD') .'" onclick="addTagToRecord('.$item->id.')" /></span>'.\Joomla\CMS\HTML\HTMLHelper::image(JURI::root(TRUE).'/components/com_resource/images/tag-icon-plus.png', \Joomla\CMS\Language\Text::_('CADDTAGS'), array('id'=>'tag_img_id'.$item->id, 'align'=>'absmiddle', 'onclick'=>'document.getElementById(\'atfid'.$item->id.'\').style.display = \'block\';', 'style'=>'cursor:pointer'));
+				\Joomla\CMS\HTML\HTMLHelper::image(\Joomla\CMS\Uri\Uri::root(TRUE).'/components/com_resource/images/load.gif', '', array('id'=>'load_image'.$item->id, 'style' => 'display:none'))
+				.' <span style="display:none" id="atfid'.$item->id.'"><input type="text" class="form-control" id="new_tag_input'.$item->id.'" /> <input type="button" class="button" value="'. \Joomla\CMS\Language\Text::_('CADD') .'" onclick="addTagToRecord('.$item->id.')" /></span>'.\Joomla\CMS\HTML\HTMLHelper::image(\Joomla\CMS\Uri\Uri::root(TRUE).'/components/com_resource/images/tag-icon-plus.png', \Joomla\CMS\Language\Text::_('CADDTAGS'), array('id'=>'tag_img_id'.$item->id, 'align'=>'absmiddle', 'onclick'=>'document.getElementById(\'atfid'.$item->id.'\').style.display = \'block\';', 'style'=>'cursor:pointer'));
 		}
 
 		return $out;

@@ -12,10 +12,8 @@ namespace Joomla\Component\Joomcck\Site\Service;
 
 use \Joomla\CMS\Component\ComponentHelper;
 use \Joomla\CMS\Factory;
-use Joomla\CMS\Component\ComponentHelper;
 use Joomla\CMS\Component\Router\RouterView;
 use Joomla\CMS\Component\Router\Rules\RulesInterface;
-use Joomla\CMS\Factory;
 use Joomla\CMS\Language\Multilanguage;
 use Joomla\Database\DatabaseDriver;
 

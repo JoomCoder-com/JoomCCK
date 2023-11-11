@@ -237,7 +237,7 @@ class JFormFieldCStatus extends CFormField
 			}
 		}
 
-		$path = JURI::root() . 'components/com_joomcck/fields/status/icons/';
+		$path = \Joomla\CMS\Uri\Uri::root() . 'components/com_joomcck/fields/status/icons/';
 
 		$type_default = $client == 'full' ? 3 : 1;
 
@@ -392,7 +392,7 @@ class JFormFieldCStatus extends CFormField
 			$value        = explode('^', $params->get('params.status' . $to));
 			$status       = (isset($value[1])) ? '<span style="color: ' . $value[1] . '">' . $value[0] . '</span>' : $value[0];
 			$value        = $value[0];
-			$path         = JURI::root() . 'components/com_joomcck/fields/status/icons/';
+			$path         = \Joomla\CMS\Uri\Uri::root() . 'components/com_joomcck/fields/status/icons/';
 			$type_default = $type == 'full' ? 3 : 1;
 			switch($params->get('params.' . $type, $type_default))
 			{

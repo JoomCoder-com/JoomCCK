@@ -58,50 +58,50 @@ class JoomcckTmplHelper
 			case 'markup':
 				$view     = 'records';
 				$name     = 'default_markup_' . $name . '.png';
-				$img_path = JURI::root() . 'components/com_joomcck/views/' . $view . '/tmpl/' . $name;
+				$img_path = \Joomla\CMS\Uri\Uri::root() . 'components/com_joomcck/views/' . $view . '/tmpl/' . $name;
 				break;
 			case 'user_menu':
 				$view     = 'records';
 				$name     = 'default_menu_' . $name . '.png';
-				$img_path = JURI::root() . 'components/com_joomcck/views/' . $view . '/tmpl/' . $name;
+				$img_path = \Joomla\CMS\Uri\Uri::root() . 'components/com_joomcck/views/' . $view . '/tmpl/' . $name;
 				break;
 			case 'itemlist':
 				$view     = 'records';
 				$name     = 'default_list_' . $name . '.png';
-				$img_path = JURI::root() . 'components/com_joomcck/views/' . $view . '/tmpl/' . $name;
+				$img_path = \Joomla\CMS\Uri\Uri::root() . 'components/com_joomcck/views/' . $view . '/tmpl/' . $name;
 				break;
 			case 'category':
 				$view     = 'records';
 				$name     = 'default_cindex_' . $name . '.png';
-				$img_path = JURI::root() . 'components/com_joomcck/views/' . $view . '/tmpl/' . $name;
+				$img_path = \Joomla\CMS\Uri\Uri::root() . 'components/com_joomcck/views/' . $view . '/tmpl/' . $name;
 				break;
 			case 'categoryselect':
 				$view     = 'form';
 				$name     = 'default_category_' . $name . '.png';
-				$img_path = JURI::root() . 'components/com_joomcck/views/' . $view . '/tmpl/' . $name;
+				$img_path = \Joomla\CMS\Uri\Uri::root() . 'components/com_joomcck/views/' . $view . '/tmpl/' . $name;
 				break;
 			case 'filters':
 				$view     = 'records';
 				$name     = 'default_filters_' . $name . '.png';
-				$img_path = JURI::root() . 'components/com_joomcck/views/' . $view . '/tmpl/' . $name;
+				$img_path = \Joomla\CMS\Uri\Uri::root() . 'components/com_joomcck/views/' . $view . '/tmpl/' . $name;
 				break;
 			case 'comments':
 				$view     = 'record';
 				$name     = 'default_comments_' . $name . '.png';
-				$img_path = JURI::root() . 'components/com_joomcck/views/' . $view . '/tmpl/' . $name;
+				$img_path = \Joomla\CMS\Uri\Uri::root() . 'components/com_joomcck/views/' . $view . '/tmpl/' . $name;
 				break;
 			case 'article':
 				$view     = 'record';
 				$name     = 'default_record_' . $name . '.png';
-				$img_path = JURI::root() . 'components/com_joomcck/views/' . $view . '/tmpl/' . $name;
+				$img_path = \Joomla\CMS\Uri\Uri::root() . 'components/com_joomcck/views/' . $view . '/tmpl/' . $name;
 				break;
 			case 'articleform':
 				$view     = 'form';
 				$name     = 'default_form_' . $name . '.png';
-				$img_path = JURI::root() . 'components/com_joomcck/views/' . $view . '/tmpl/' . $name;
+				$img_path = \Joomla\CMS\Uri\Uri::root() . 'components/com_joomcck/views/' . $view . '/tmpl/' . $name;
 				break;
 			case 'rating':
-				$img_path = JURI::root() . 'components/com_joomcck/views/rating_tmpls/' . $name . '_img/';
+				$img_path = \Joomla\CMS\Uri\Uri::root() . 'components/com_joomcck/views/rating_tmpls/' . $name . '_img/';
 				break;
 		}
 

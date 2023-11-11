@@ -30,7 +30,7 @@ class JHTMLIp {
 		
 		if($results[$ip])
 		{
-			$file = JURI::root()."media/com_joomcck/icons/flag/16/" . strtolower ( $results[$ip]->short_code ) . ".png";
+			$file = \Joomla\CMS\Uri\Uri::root()."media/com_joomcck/icons/flag/16/" . strtolower ( $results[$ip]->short_code ) . ".png";
 			$options['style'] = 'cursor:pointer';
 			$options['onclick'] = "document.getElementById('filter_search').value='country:" . strtolower ( $results[$ip]->code ) . "'; document.adminForm.submit();";
 			$options['width'] = 16;
@@ -47,7 +47,7 @@ class JHTMLIp {
 		$API = JPATH_ROOT. '/administrator/components/com_jdefender';
 		if(@is_dir($API))
 		{
-			$atr['onclick'] = "document.getElementById('icondefend{$id}').src = '".JURI::root()."administrator/components/com_joomcck/images/load.gif'; xajax_jsrBlockIP('$ip', {$id});";
+			$atr['onclick'] = "document.getElementById('icondefend{$id}').src = '".\Joomla\CMS\Uri\Uri::root()."administrator/components/com_joomcck/images/load.gif'; xajax_jsrBlockIP('$ip', {$id});";
 			$sql = "SELECT COUNT(*) FROM #__jdefender_block_list WHERE type = 'ip' AND `value` = '$ip'";
 			$db =\Joomla\CMS\Factory::getDBO();
 			$db->setQuery($sql);
@@ -74,14 +74,14 @@ class JHTMLIp {
 			$atr['title'] = Jtext::_('CBLOCKIP');
 		}
 
-		return \Joomla\CMS\HTML\HTMLHelper::image(JURI::root().'administrator/components/com_joomcck/images/'.$img, Jtext::_('CBLOCKIP'), $atr);
+		return \Joomla\CMS\HTML\HTMLHelper::image(\Joomla\CMS\Uri\Uri::root().'administrator/components/com_joomcck/images/'.$img, Jtext::_('CBLOCKIP'), $atr);
 	}
 	public static function block_user($user, $id) {
 		
 		$API = JPATH_ROOT. '/administrator/components/com_jdefender';
 		if(@is_dir($API))
 		{
-			$atr['onclick'] = "document.getElementById('icondefend2{$user}{$id}').src = '".JURI::root()."administrator/components/com_joomcck/images/load.gif'; xajax_jsrBlockUser('$user', {$id});";
+			$atr['onclick'] = "document.getElementById('icondefend2{$user}{$id}').src = '".\Joomla\CMS\Uri\Uri::root()."administrator/components/com_joomcck/images/load.gif'; xajax_jsrBlockUser('$user', {$id});";
 			$sql = "SELECT COUNT(*) FROM #__jdefender_block_list WHERE type = 'user' AND `value` = '$user'";
 			$db =\Joomla\CMS\Factory::getDBO();
 			$db->setQuery($sql);
@@ -113,6 +113,6 @@ class JHTMLIp {
 			$atr['title'] = Jtext::_('CUNBLOCKUSER');
 		}
 
-		return \Joomla\CMS\HTML\HTMLHelper::image(JURI::root().'administrator/components/com_joomcck/images/'.$img, $atr['title'], $atr);
+		return \Joomla\CMS\HTML\HTMLHelper::image(\Joomla\CMS\Uri\Uri::root().'administrator/components/com_joomcck/images/'.$img, $atr['title'], $atr);
 	}
 }

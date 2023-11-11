@@ -12,7 +12,7 @@ defined('_JEXEC') or die;
 jimport('joomla.html.pagination');
 jimport('joomla.utilities.utility');
 
-class plgContentJoomcck extends JPlugin
+class plgContentJoomcck extends \Joomla\CMS\Plugin\CMSPlugin
 {
 	public function __construct(& $subject, $config)
 	{

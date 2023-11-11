@@ -70,7 +70,7 @@ class JFormFieldAccessTable extends \Joomla\CMS\Form\FormField
 
 	private function _getSwitcher($name, $value)
 	{
-		$btn = new JFormFieldRadio();
+		$btn = new \Joomla\CMS\Form\Field\RadioField();
 		$btn->setup(new SimpleXMLElement('<field name="'.$this->name.'['.$name.']" class="btn-group btn-mini" type="radio" default="0"><option value="1" class="btn-mini">ON_ENABLE</option><option value="0" class="btn-mini">ON_DISABLE</option></field>'), $value);
 		return $btn->getInput();
 	}

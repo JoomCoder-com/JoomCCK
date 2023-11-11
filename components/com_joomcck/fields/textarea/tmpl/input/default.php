@@ -48,7 +48,7 @@ $js         = '';
 <?php endif; ?>
 
 <?php if($params->get('params.bbcode', 0) && $params->get('params.bbcode_menu', 0)):
-	\Joomla\CMS\Factory::getDocument()->addScript(JURI::root(TRUE) . '/components/com_joomcck/fields/textarea/assets/bbeditor.js');
+	\Joomla\CMS\Factory::getDocument()->addScript(\Joomla\CMS\Uri\Uri::root(TRUE) . '/components/com_joomcck/fields/textarea/assets/bbeditor.js');
 	?>
 	<div id="controls_<?php echo $this->id; ?>">
 		<div class="btn-group float-start">
@@ -107,7 +107,7 @@ endif;
 	<div class="clearfix"></div>
 
 <?php if($params->get('params.grow_enable', 0)) :
-	\Joomla\CMS\Factory::getDocument()->addScript(JURI::root(TRUE) . '/components/com_joomcck/fields/textarea/assets/grow.js');
+	\Joomla\CMS\Factory::getDocument()->addScript(\Joomla\CMS\Uri\Uri::root(TRUE) . '/components/com_joomcck/fields/textarea/assets/grow.js');
 	?>
 	<script type="text/javascript">
 		jQuery("#field_<?php echo $this->id;?>").expanding();

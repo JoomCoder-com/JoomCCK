@@ -29,7 +29,7 @@ defined('_JEXEC') or die();
 	<div class="control-group">
 		<div class="control-label col-md-2"><?php echo $this->form->getLabel('user_id'); ?></div>
 		<div class="controls"><?php echo $this->form->getInput('user_id'); ?>
-		<img alt="loading..." id="user-name-check" align="absmiddle" src="<?php echo JURI::root(TRUE);?>/components/com_joomcck/images/load.gif" style="display: none;">
+		<img alt="loading..." id="user-name-check" align="absmiddle" src="<?php echo \Joomla\CMS\Uri\Uri::root(TRUE);?>/components/com_joomcck/images/load.gif" style="display: none;">
 		</div>
 	</div>
 	<div class="control-group">
@@ -98,7 +98,7 @@ $('jform_user_id').addEvent('blur', function(){
 				$('jform_user_id').addClass('user-alert');
 				return;
 			}
-			$('user-name-check').set('src', '<?php echo JURI::root(TRUE);?>/media/com_joomcck/icons/16/tick.png');
+			$('user-name-check').set('src', '<?php echo \Joomla\CMS\Uri\Uri::root(TRUE);?>/media/com_joomcck/icons/16/tick.png');
 			$('jform_user_id').removeClass('user-alert');
 
 		}.bind(this)
@@ -106,7 +106,7 @@ $('jform_user_id').addEvent('blur', function(){
 });
 
 $('jform_user_id').addEvent('focus', function(){
-	$('user-name-check').set('src', '<?php echo JURI::root(TRUE);?>/components/com_joomcck/images/load.gif');
+	$('user-name-check').set('src', '<?php echo \Joomla\CMS\Uri\Uri::root(TRUE);?>/components/com_joomcck/images/load.gif');
 	$('user-name-check').setStyle('display', 'none');
 });
 </script>

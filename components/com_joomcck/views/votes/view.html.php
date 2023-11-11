@@ -47,11 +47,11 @@ class JoomcckViewVotes extends MViewBase
 		{
 			if(is_dir(JPATH_ADMINISTRATOR . DIRECTORY_SEPARATOR . 'components/com_juser'))
 			{
-				$item->user_href = JURI::root() . 'administrator/index.php?option=com_juser&view=user&task=edit&cid[]=' . $item->userid;
+				$item->user_href = \Joomla\CMS\Uri\Uri::root() . 'administrator/index.php?option=com_juser&view=user&task=edit&cid[]=' . $item->userid;
 			}
 			else
 			{
-				$item->user_href = JURI::root() . 'administrator/index.php?option=com_user&view=user&task=edit&cid[]=' . $item->userid;
+				$item->user_href = \Joomla\CMS\Uri\Uri::root() . 'administrator/index.php?option=com_user&view=user&task=edit&cid[]=' . $item->userid;
 			}
 
 			$items [$key] = $item;

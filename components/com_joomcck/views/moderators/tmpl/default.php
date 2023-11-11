@@ -94,7 +94,7 @@ if(\Joomla\CMS\Factory::getApplication()->input->getBase64('return'))
 								<?php echo CCommunityHelper::getName($item->user_id, $this->section_model->getItem($item->section_id), array('nohtml' => 1)); ?>
 							</a>
 							<?php if($item->icon && $item->icon != -1):?>
-								<img src="<?php echo JURI::root(TRUE);?>/components/com_joomcck/images/moderator/<?php echo $item->icon; ?>" alt="" />
+								<img src="<?php echo \Joomla\CMS\Uri\Uri::root(TRUE);?>/components/com_joomcck/images/moderator/<?php echo $item->icon; ?>" alt="" />
 							<?php endif; ?>
 
 							<?php if($item->description):?>

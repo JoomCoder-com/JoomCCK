@@ -22,7 +22,7 @@ defined('_JEXEC') or die();
 $id = $record->id.$this->id;
 $list = array();
 $params = $this->params;
-$path = JURI::root().'components/com_joomcck/fields/status/icons/';
+$path = \Joomla\CMS\Uri\Uri::root().'components/com_joomcck/fields/status/icons/';
 $access = array(4=>3,5=>3,6=>0,1=>1,2=>1,3=>1);
 foreach($this->statuses as $key => $status)
 {

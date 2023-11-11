@@ -235,7 +235,7 @@ class JoomcckControllerArticle extends MControllerForm
 		$return = $this->input->get('return', null);
 
 		if (empty($return) || !\Joomla\CMS\Uri\Uri::isInternal(JoomcckFilter::base64($return))) {
-			return JURI::base();
+			return \Joomla\CMS\Uri\Uri::base();
 		}
 		else {
 			return JoomcckFilter::base64($return);

@@ -33,7 +33,7 @@ $wa->useScript('keepalive')
         let selectedId = $(sel).attr('id');
 
 		jQuery.ajax({
-			url: '<?php echo JURI::base(); ?>index.php?option=com_joomcck&task=ajax.loadfieldparams&tmpl=component',
+			url: '<?php echo \Joomla\CMS\Uri\Uri::base(); ?>index.php?option=com_joomcck&task=ajax.loadfieldparams&tmpl=component',
 			context: jQuery('#config_'+ selectedId + ' .modal-body'),
 			dataType: 'html',
 			data:{value: selected, dir: dir, fid: <?php echo (int)$this->item->id;?> }
@@ -53,7 +53,7 @@ $wa->useScript('keepalive')
         let selected = $(sel).find(':selected').val();
 
 		jQuery.ajax({
-			url: '<?php echo JURI::base(); ?>index.php?option=com_joomcck&task=ajax.loadfieldform&tmpl=component',
+			url: '<?php echo \Joomla\CMS\Uri\Uri::base(); ?>index.php?option=com_joomcck&task=ajax.loadfieldform&tmpl=component',
 			context: jQuery('#additional-form'),
 			dataType: 'html',
 			data:{field: selected}
@@ -69,7 +69,7 @@ $wa->useScript('keepalive')
 
 
 		jQuery.ajax({
-			url: '<?php echo JURI::root(); ?>index.php?option=com_joomcck&task=ajax.loadcommerce&tmpl=component',
+			url: '<?php echo \Joomla\CMS\Uri\Uri::root(); ?>index.php?option=com_joomcck&task=ajax.loadcommerce&tmpl=component',
 			context: jQuery('#additional-pay-form'),
 			dataType: 'html',
 			data:{gateway: selected, fid: <?php echo (int) $this->item->id;?> }

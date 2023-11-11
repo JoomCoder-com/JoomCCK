@@ -222,7 +222,7 @@ class AttachmentHelper
 			{
 				$file = \Joomla\Utilities\ArrayHelper::toObject($file);
 			}
-			$file->url = JURI::root(TRUE) . '/index.php?option=com_joomcck&task=files.download_attach&tmpl=component&id=' . $file->id;
+			$file->url = \Joomla\CMS\Uri\Uri::root(TRUE) . '/index.php?option=com_joomcck&task=files.download_attach&tmpl=component&id=' . $file->id;
 		}
 
 		return $list;

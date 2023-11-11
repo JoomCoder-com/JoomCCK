@@ -318,44 +318,6 @@ class MViewBase extends \Joomla\CMS\Object\CMSObject
 		return FALSE;
 	}
 
-	/**
-	 * Assign variable for the view (by reference).
-	 *
-	 * You are not allowed to set variables that begin with an underscore;
-	 * these are either private properties for JView or private variables
-	 * within the template script itself.
-	 *
-	 * <code>
-	 * $view = new JView;
-	 *
-	 * // Assign by name and value
-	 * $view->assignRef('var1', $ref);
-	 *
-	 * // Assign directly
-	 * $view->ref = &$var1;
-	 * </code>
-	 *
-	 * @param   string $key  The name for the reference in the view.
-	 * @param   mixed  &$val The referenced variable.
-	 *
-	 * @return  boolean  True on success, false on failure.
-	 *
-	 * @since       12.2
-	 * @deprecated  13.3  Use native PHP syntax.
-	 */
-	public function assignRef($key, &$val)
-	{
-		\Joomla\CMS\Log\Log::add(__METHOD__ . ' is deprecated. Use native PHP syntax.', \Joomla\CMS\Log\Log::WARNING, 'deprecated');
-
-		if(is_string($key) && substr($key, 0, 1) != '_')
-		{
-			$this->$key = &$val;
-
-			return TRUE;
-		}
-
-		return FALSE;
-	}
 
 	/**
 	 * Escapes a value for output in a view script.
@@ -831,7 +793,7 @@ class MViewBase extends \Joomla\CMS\Object\CMSObject
 	/**
 	 * Returns the form object
 	 *
-	 * @return  mixed  A JForm object on success, false on failure
+	 * @return  mixed  A \Joomla\CMS\Form\Form object on success, false on failure
 	 *
 	 * @since   3.2
 	 */

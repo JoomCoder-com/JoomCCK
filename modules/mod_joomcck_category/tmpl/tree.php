@@ -10,8 +10,8 @@
 
 
 $document = \Joomla\CMS\Factory::getDocument();
-$document->addScript(JURI::root(TRUE).'/media/com_joomcck/js/jstree/jstree.min.js');
-$document->addStyleSheet(JURI::root(TRUE).'/media/com_joomcck/js/jstree/themes/default/style.min.css');
+$document->addScript(\Joomla\CMS\Uri\Uri::root(TRUE).'/media/com_joomcck/js/jstree/jstree.min.js');
+$document->addStyleSheet(\Joomla\CMS\Uri\Uri::root(TRUE).'/media/com_joomcck/js/jstree/themes/default/style.min.css');
 
 if(!function_exists('mod_getChildsDef')) { function mod_getChildsDef($category, $params, $parents, $k = 1) {
 	if($params->get('mode', 0) != 2) return;

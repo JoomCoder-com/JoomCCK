@@ -53,7 +53,7 @@ class JoomcckModelCType extends MModelAdmin
 			$field->description_full .= sprintf('<table><tr><td><b>%s</b></td><td>%s</td></tr> <tr><td><b>%s</b></td><td>%s</td></tr> <tr><td><b>%s</b></td><td>%s</td></tr> <tr><td><b>%s</b></td><td>%s</td></tr></table>', \Joomla\CMS\Language\Text::_('JAUTHOR'), $field->author, \Joomla\CMS\Language\Text::_('JSITE'), $field->url,
 				\Joomla\CMS\Language\Text::_('JGLOBAL_EMAIL'), $field->email, \Joomla\CMS\Language\Text::_('CLICENSE'), $field->license);
 
-			$field->icon = JURI::root() . 'libraries/mint/forms/fields/joomcck';
+			$field->icon = \Joomla\CMS\Uri\Uri::root() . 'libraries/mint/forms/fields/joomcck';
 			if(is_file($fileds . DIRECTORY_SEPARATOR . $folder . DIRECTORY_SEPARATOR . $folder . '.png'))
 			{
 				$field->icon .= "/{$folder}/{$folder}.png";

@@ -53,7 +53,7 @@ class JoomcckModelPacks extends MModelList
 			$filename = 'pack_joomcck.' . \Joomla\CMS\Filter\OutputFilter::stringURLSafe($item->name) . '('.str_replace('pack', '', $item->key).').j3.v.9.' . ($item->version) . '.zip';
 			if(is_file($path.$filename))
 			{
-				$item->download = '<a href="'.JURI::root(TRUE).'/cache/'.$filename.'">'.$filename.'</a>';
+				$item->download = '<a href="'.\Joomla\CMS\Uri\Uri::root(TRUE).'/cache/'.$filename.'">'.$filename.'</a>';
 				$item->size = HTMLFormatHelper::formatSize(filesize($path.$filename));
 			}
 			else

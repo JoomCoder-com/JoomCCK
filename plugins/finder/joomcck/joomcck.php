@@ -8,7 +8,7 @@ defined('JPATH_BASE') or die;
 
 require_once JPATH_ADMINISTRATOR . '/components/com_finder/helpers/indexer/adapter.php';
 
-class plgFinderJoomcck extends FinderIndexerAdapter
+class plgFinderJoomcck extends \Joomla\Component\Finder\Administrator\Indexer\Adapter
 {
 	protected $context = 'Joomcck';
 
@@ -94,7 +94,7 @@ class plgFinderJoomcck extends FinderIndexerAdapter
 		}
 	}
 
-	protected function index(FinderIndexerResult $item, $format = 'html')
+	protected function index(\Joomla\Component\Finder\Administrator\Indexer\Result $item, $format = 'html')
 	{
 		// Check if the extension is enabled
 		if (\Joomla\CMS\Component\ComponentHelper::isEnabled($this->extension) == false)
@@ -110,7 +110,7 @@ class plgFinderJoomcck extends FinderIndexerAdapter
 		// Build the necessary route and path information.
 		$item->url = $this->getURL($item->id, $this->extension, $this->layout);
 		$item->route = Url::record($item);
-		$item->path = FinderIndexerHelper::getContentPath($item->route);
+		$item->path = \Joomla\Component\Finder\Administrator\Indexer\Helper::getContentPath($item->route);
 
 		// Get the menu title if it exists.
 		$title = $this->getItemMenuTitle($item->url);
@@ -122,9 +122,9 @@ class plgFinderJoomcck extends FinderIndexerAdapter
 		}
 
 		// Add the meta-data processing instructions.
-		$item->addInstruction(FinderIndexer::META_CONTEXT, 'meta_key');
-		$item->addInstruction(FinderIndexer::META_CONTEXT, 'meta_desc');
-		$item->addInstruction(FinderIndexer::META_CONTEXT, 'author');
+		$item->addInstruction(\Joomla\Component\Finder\Administrator\Indexer\Indexer::META_CONTEXT, 'meta_key');
+		$item->addInstruction(\Joomla\Component\Finder\Administrator\Indexer\Indexer::META_CONTEXT, 'meta_desc');
+		$item->addInstruction(\Joomla\Component\Finder\Administrator\Indexer\Indexer::META_CONTEXT, 'author');
 
 		// Translate the state. Articles should only be published if the category is published.
 		$item->state = $this->translateState($item->state, $item->cat_state);
@@ -145,7 +145,7 @@ class plgFinderJoomcck extends FinderIndexerAdapter
 		$item->addTaxonomy('Language', $item->language);
 
 		// Get content extras.
-		FinderIndexerHelper::getContentExtras($item);
+		\Joomla\Component\Finder\Administrator\Indexer\Helper::getContentExtras($item);
 
 		// Index the item.
 		$this->indexer->index($item);
@@ -174,7 +174,7 @@ class plgFinderJoomcck extends FinderIndexerAdapter
 	{
 		$db = \Joomla\CMS\Factory::getDbo();
 		// Check if we can use the supplied SQL query.
-		$sql = $sql instanceof JDatabaseQuery ? $sql : $db->getQuery(true);
+		$sql = $sql instanceof \Joomla\Database\DatabaseQuery ? $sql : $db->getQuery(true);
 
 		$sql->select('a.id, a.title, a.alias, a.fieldsdata AS body');
 		$sql->select('a.published, a.published as state, a.ctime AS start_date, a.extime AS end_date, a.user_id');

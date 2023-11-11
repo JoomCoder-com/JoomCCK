@@ -77,7 +77,7 @@ class JoomcckTableSection extends \Joomla\CMS\Table\Table
 		// Bind the rules.
 		if(isset($array['rules']) && is_array($array['rules']))
 		{
-			$rules = new JAccessRules($array['rules']);
+			$rules = new \Joomla\CMS\Access\Rules($array['rules']);
 			$this->setRules($rules);
 		}
 		return parent::bind($array, $ignore);

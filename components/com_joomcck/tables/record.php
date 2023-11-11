@@ -46,11 +46,11 @@ class JoomcckTableRecord extends \Joomla\CMS\Table\Table
 
 		if(isset($array['rules']) && is_array($array['rules']))
 		{
-			$rules = new JAccessRules($array['rules']);
+			$rules = new \Joomla\CMS\Access\Rules($array['rules']);
 		}
 		else
 		{
-			$rules = new JAccessRules(array());
+			$rules = new \Joomla\CMS\Access\Rules(array());
 		}
 		$this->setRules($rules);
 

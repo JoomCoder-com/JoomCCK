@@ -8,7 +8,7 @@
  */
 defined('_JEXEC') or die();
 
-\Joomla\CMS\Factory::getDocument()->addScript(JURI::root(TRUE) . '/media/com_joomcck/vendors/jquery.countdown/dist/jquery.countdown.min.js');
+\Joomla\CMS\Factory::getDocument()->addScript(\Joomla\CMS\Uri\Uri::root(TRUE) . '/media/com_joomcck/vendors/jquery.countdown/dist/jquery.countdown.min.js');
 
 $val = $this->value[0];
 $date = '<span class="countdown_date">'.$this->dates[0].'</span>';

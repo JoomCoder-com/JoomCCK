@@ -173,19 +173,19 @@ abstract class MModelAdmin extends MModelForm
 		$this->user = \Joomla\CMS\Factory::getApplication()->getIdentity();
 		$this->table = $this->getTable();
 		$this->tableClassName = get_class($this->table);
-		$this->contentType = new JUcmType;
+		$this->contentType = new \Joomla\CMS\UCM\UCMType;
 		$this->type = $this->contentType->getTypeByTable($this->tableClassName);
 		$this->batchSet = true;
 
 		if ($this->type == false)
 		{
-			$type = new JUcmType;
+			$type = new \Joomla\CMS\UCM\UCMType;
 			$this->type = $type->getTypeByAlias($this->typeAlias);
 
 		}
 		if ($this->type === false)
 		{
-			$type = new JUcmType;
+			$type = new \Joomla\CMS\UCM\UCMType;
 			$this->type = $type->getTypeByAlias($this->typeAlias);
 			$typeAlias = $this->type->type_alias;
 		}
@@ -281,7 +281,7 @@ abstract class MModelAdmin extends MModelForm
 			$this->user = \Joomla\CMS\Factory::getApplication()->getIdentity();
 			$this->table = $this->getTable();
 			$this->tableClassName = get_class($this->table);
-			$this->contentType = new JUcmType;
+			$this->contentType = new \Joomla\CMS\UCM\UCMType;
 			$this->type = $this->contentType->getTypeByTable($this->tableClassName);
 		}
 
@@ -338,7 +338,7 @@ abstract class MModelAdmin extends MModelForm
 			$this->user = \Joomla\CMS\Factory::getApplication()->getIdentity();
 			$this->table = $this->getTable();
 			$this->tableClassName = get_class($this->table);
-			$this->contentType = new JUcmType;
+			$this->contentType = new \Joomla\CMS\UCM\UCMType;
 			$this->type = $this->contentType->getTypeByTable($this->tableClassName);
 		}
 
@@ -442,7 +442,7 @@ abstract class MModelAdmin extends MModelForm
 			$this->user = \Joomla\CMS\Factory::getApplication()->getIdentity();
 			$this->table = $this->getTable();
 			$this->tableClassName = get_class($this->table);
-			$this->contentType = new JUcmType;
+			$this->contentType = new \Joomla\CMS\UCM\UCMType;
 			$this->type = $this->contentType->getTypeByTable($this->tableClassName);
 		}
 
@@ -499,7 +499,7 @@ abstract class MModelAdmin extends MModelForm
 			$this->user = \Joomla\CMS\Factory::getApplication()->getIdentity();
 			$this->table = $this->getTable();
 			$this->tableClassName = get_class($this->table);
-			$this->contentType = new JUcmType;
+			$this->contentType = new \Joomla\CMS\UCM\UCMType;
 			$this->type = $this->contentType->getTypeByTable($this->tableClassName);
 		}
 
@@ -1151,7 +1151,7 @@ abstract class MModelAdmin extends MModelForm
 	{
 		$table = $this->getTable();
 		$tableClassName = get_class($table);
-		$contentType = new JUcmType;
+		$contentType = new \Joomla\CMS\UCM\UCMType;
 		$type = $contentType->getTypeByTable($tableClassName);
 		$tagsObserver = $table->getObserverOfClass('JTableObserverTags');
 		$conditions = array();
@@ -1229,7 +1229,7 @@ abstract class MModelAdmin extends MModelForm
 	 * Method to create a tags helper to ensure proper management of tags
 	 *
 	 * @param   \Joomla\CMS\Table\TableObserverTags  $tagsObserver  The tags observer for this table
-	 * @param   JUcmType            $type          The type for the table being processed
+	 * @param   \Joomla\CMS\UCM\UCMType            $type          The type for the table being processed
 	 * @param   integer             $pk            Primary key of the item bing processed
 	 * @param   string              $typeAlias     The type alias for this table
 	 * @param   \Joomla\CMS\Table\Table              $table         The \Joomla\CMS\Table\Table object
@@ -1242,7 +1242,7 @@ abstract class MModelAdmin extends MModelForm
 	{
 		if (!empty($tagsObserver) && !empty($type))
 		{
-			$table->tagsHelper = new JHelperTags;
+			$table->tagsHelper = new \Joomla\CMS\Helper\TagsHelper;
 			$table->tagsHelper->typeAlias = $typeAlias;
 			$table->tagsHelper->tags = explode(',', $table->tagsHelper->getTagIds($pk, $typeAlias));
 		}

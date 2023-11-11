@@ -257,7 +257,7 @@ class CCommunityHelper
 
 				if(!empty($icon))
 				{
-					$name .= ' <img src="' . JURI::root(TRUE) . '/components/com_joomcck/images/vip/' . $icon . '" alt="VIP" />';
+					$name .= ' <img src="' . \Joomla\CMS\Uri\Uri::root(TRUE) . '/components/com_joomcck/images/vip/' . $icon . '" alt="VIP" />';
 				}
 			}
 
@@ -271,7 +271,7 @@ class CCommunityHelper
 
 			if(isset($icons[$section->id][$id]) && $icons[$section->id][$id]->icon != -1)
 			{
-				$name .= ' <img src="' . JURI::root(TRUE) . '/components/com_joomcck/images/moderator/' . $icons[$section->id][$id]->icon . '" alt="" />';
+				$name .= ' <img src="' . \Joomla\CMS\Uri\Uri::root(TRUE) . '/components/com_joomcck/images/moderator/' . $icons[$section->id][$id]->icon . '" alt="" />';
 			}
 		}
 
@@ -279,7 +279,7 @@ class CCommunityHelper
 		{
 			$result = self::isOnline($id);
 
-			$name = '<img src="' . JURI::root(TRUE) . '/media/com_joomcck/icons/16/status' . ($result ? NULL : '-offline') . '.png" rel="tooltip" data-original-title="' . ($result ? \Joomla\CMS\Language\Text::_('CONLINE') : \Joomla\CMS\Language\Text::_('COFFLINE')) . '" align="absmiddle">' . $name;
+			$name = '<img src="' . \Joomla\CMS\Uri\Uri::root(TRUE) . '/media/com_joomcck/icons/16/status' . ($result ? NULL : '-offline') . '.png" rel="tooltip" data-original-title="' . ($result ? \Joomla\CMS\Language\Text::_('CONLINE') : \Joomla\CMS\Language\Text::_('COFFLINE')) . '" align="absmiddle">' . $name;
 		}
 
 		$cache[$key] = $name;

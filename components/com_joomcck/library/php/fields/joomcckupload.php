@@ -26,7 +26,7 @@ class CFormFieldUpload extends CFormField
         $url       = str_replace(JPATH_ROOT, '', $root);
         $url       = str_replace("\\", '/', $url);
         $url       = preg_replace('#^\/#iU', '', $url);
-        $this->url = JURI::root(true) . '/' . str_replace("//", "/", $url);
+        $this->url = \Joomla\CMS\Uri\Uri::root(true) . '/' . str_replace("//", "/", $url);
 
         $this->fieldname = null;
 
@@ -330,7 +330,7 @@ class CFormFieldUpload extends CFormField
             if ($this->params->get('params.show_in_browser', 0) == 0) {
                 $file->url = $this->getDownloadUrl($record, $file, $idx);
             } else {
-                $file->url = JURI::root(true) . '/' . \Joomla\CMS\Component\ComponentHelper::getParams('com_joomcck')->get('general_upload') . '/' . $subfolder . '/' . str_replace('\\', '/', $file->fullpath);
+                $file->url = \Joomla\CMS\Uri\Uri::root(true) . '/' . \Joomla\CMS\Component\ComponentHelper::getParams('com_joomcck')->get('general_upload') . '/' . $subfolder . '/' . str_replace('\\', '/', $file->fullpath);
             }
             $file->subfolder = $subfolder ? $subfolder : $file->ext;
         }
@@ -385,7 +385,7 @@ class CFormFieldUpload extends CFormField
         if (empty($record)) {
             return;
         }
-        $url = JURI::root(true) . '/index.php?option=com_joomcck&task=files.download&tmpl=component';
+        $url = \Joomla\CMS\Uri\Uri::root(true) . '/index.php?option=com_joomcck&task=files.download&tmpl=component';
         $url .= '&id=' . $file->id;
         $url .= '&fid=' . $this->id;
         $url .= '&fidx=' . $idx;

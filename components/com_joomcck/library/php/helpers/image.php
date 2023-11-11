@@ -111,7 +111,7 @@ class CImgHelper {
 
 		self::$img = $img;
 
-		return JURI::root(TRUE).'/images/joomcck_thumbs/'.$folder.'/'.(int)$user_id.'/'.$key.'.'.$ext;
+		return \Joomla\CMS\Uri\Uri::root(TRUE).'/images/joomcck_thumbs/'.$folder.'/'.(int)$user_id.'/'.$key.'.'.$ext;
 	}
 
 	/**

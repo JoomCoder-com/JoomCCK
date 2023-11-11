@@ -28,8 +28,8 @@ class JFormFieldCtext extends CFormFieldSelectable
 
 		if($mask->mask_type)
 		{
-			\Joomla\CMS\Factory::getDocument()->addScript(JURI::root(TRUE) . '/media/com_joomcck/js/mask/masks.js');
-			\Joomla\CMS\Factory::getDocument()->addScript(JURI::root(TRUE) . '/components/com_joomcck/fields/text/text.js');
+			\Joomla\CMS\Factory::getDocument()->addScript(\Joomla\CMS\Uri\Uri::root(TRUE) . '/media/com_joomcck/js/mask/masks.js');
+			\Joomla\CMS\Factory::getDocument()->addScript(\Joomla\CMS\Uri\Uri::root(TRUE) . '/components/com_joomcck/fields/text/text.js');
 			switch($mask->mask_type)
 			{
 				case '(###) ### #######' :

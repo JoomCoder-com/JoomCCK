@@ -19,7 +19,7 @@ class JFormFieldCUrl extends CFormField
 	public function getInput()
 	{
 		$document = \Joomla\CMS\Factory::getDocument();
-		$document->addScript(JURI::root(TRUE) . '/components/com_joomcck/fields/url/assets/url.js');
+		$document->addScript(\Joomla\CMS\Uri\Uri::root(TRUE) . '/components/com_joomcck/fields/url/assets/url.js');
 		$user   = \Joomla\CMS\Factory::getApplication()->getIdentity();
 		$params = $this->params;
 

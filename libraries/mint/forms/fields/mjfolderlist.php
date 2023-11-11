@@ -44,7 +44,7 @@ class JFormFieldMjfolderList extends \Joomla\CMS\Form\Field\ListField
 						$('#label{$this->fieldname}').html();
 					}
 					$.ajax({
-						url: '".JURI::root(TRUE)."/index.php?option=com_joomcck&task=ajax.icons&tmpl=component',
+						url: '".\Joomla\CMS\Uri\Uri::root(TRUE)."/index.php?option=com_joomcck&task=ajax.icons&tmpl=component',
 						dataType: 'json',
 						type: 'POST',
 						data:{

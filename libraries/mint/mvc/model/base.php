@@ -305,7 +305,7 @@ abstract class MModelBase extends \Joomla\CMS\Object\CMSObject
 	/**
 	 * Returns a record count for the query.
 	 *
-	 * @param   JDatabaseQuery|string  $query  The query.
+	 * @param   \Joomla\Database\DatabaseQuery|string  $query  The query.
 	 *
 	 * @return  integer  Number of rows for query.
 	 *
@@ -313,8 +313,8 @@ abstract class MModelBase extends \Joomla\CMS\Object\CMSObject
 	 */
 	protected function _getListCount($query)
 	{
-		// Use fast COUNT(*) on JDatabaseQuery objects if there no GROUP BY or HAVING clause:
-		if ($query instanceof JDatabaseQuery
+		// Use fast COUNT(*) on \Joomla\Database\DatabaseQuery objects if there no GROUP BY or HAVING clause:
+		if ($query instanceof \Joomla\Database\DatabaseQuery
 			&& $query->type == 'select'
 			&& $query->group === null
 			&& $query->having === null)
@@ -562,7 +562,7 @@ abstract class MModelBase extends \Joomla\CMS\Object\CMSObject
 			'defaultgroup' => ($group) ? $group : (isset($this->option) ? $this->option : \Joomla\CMS\Factory::getApplication()->input->get('option')),
 			'cachebase' => ($client_id) ? JPATH_ADMINISTRATOR . '/cache' : $conf->get('cache_path', JPATH_SITE . '/cache'));
 
-		$cache = JCache::getInstance('callback', $options);
+		$cache = \Joomla\CMS\Cache\Cache::getInstance('callback', $options);
 		$cache->clean();
 
 		// Trigger the onContentCleanCache event.

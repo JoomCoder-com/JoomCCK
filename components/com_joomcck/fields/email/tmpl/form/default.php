@@ -118,7 +118,7 @@ $key = $record->id.$this->id;
 
 		<?php if ($params->get('params.show_body', 1)):
 
-			\Joomla\CMS\Factory::getDocument()->addScript(JURI::root(TRUE) . '/components/com_joomcck/fields/textarea/assets/grow.js');
+			\Joomla\CMS\Factory::getDocument()->addScript(\Joomla\CMS\Uri\Uri::root(TRUE) . '/components/com_joomcck/fields/textarea/assets/grow.js');
 			$style = 'box-sizing: border-box;';
 			$style .= 'max-height:' . $params->get('params.grow_max_height', 350) . 'px;';
 			$style .= 'height:' . $params->get('params.grow_min_height', 50) . 'px;';

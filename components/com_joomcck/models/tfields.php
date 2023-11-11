@@ -159,7 +159,7 @@ class JoomcckModelTfields extends MModelList
 			$field->description_full .= sprintf('<table><tr><td><b>%s</b></td><td>%s</td></tr> <tr><td><b>%s</b></td><td>%s</td></tr> <tr><td><b>%s</b></td><td>%s</td></tr> <tr><td><b>%s</b></td><td>%s</td></tr></table>', \Joomla\CMS\Language\Text::_('JAUTHOR'), (string)$field->author, \Joomla\CMS\Language\Text::_('JSITE'), (string)$field->url,
 				\Joomla\CMS\Language\Text::_('JGLOBAL_EMAIL'), (string)$field->email, \Joomla\CMS\Language\Text::_('CLICENSE'), (string)$field->license);
 
-			$field->icon = JURI::root(TRUE) . '/libraries/mint/forms/fields/joomcck';
+			$field->icon = \Joomla\CMS\Uri\Uri::root(TRUE) . '/libraries/mint/forms/fields/joomcck';
 			if(is_file($fileds . DIRECTORY_SEPARATOR . $folder . DIRECTORY_SEPARATOR . $folder . '.png'))
 			{
 				$field->icon .= "/{$folder}/{$folder}.png";

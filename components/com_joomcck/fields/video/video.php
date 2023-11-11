@@ -78,7 +78,7 @@ class JFormFieldCVideo extends CFormFieldUpload
 		}
 		if(!empty($this->value['files']))
 		{
-			\Joomla\CMS\Factory::getDocument()->addScript(JURI::root(TRUE) . '/media/com_joomcck/vendors/jwplayer/jwplayer.js');
+			\Joomla\CMS\Factory::getDocument()->addScript(\Joomla\CMS\Uri\Uri::root(TRUE) . '/media/com_joomcck/vendors/jwplayer/jwplayer.js');
 		}
 
 		return $this->_display_output($client, $record, $type, $section);
@@ -321,7 +321,7 @@ JWP;
 		$url    = str_replace(JPATH_ROOT, '', $root);
 		$url    = str_replace("\\", '/', $url);
 		$url    = preg_replace('#^\/#iU', '', $url);
-		$url    = JURI::root(TRUE) . '/' . str_replace("//", "/", $url);
+		$url    = \Joomla\CMS\Uri\Uri::root(TRUE) . '/' . str_replace("//", "/", $url);
 
 		$parts = explode('_', $file->filename);
 		$date  = date($params->get('folder_format', 'Y-m'), (int)$parts[0]);

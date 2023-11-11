@@ -205,7 +205,7 @@ class JoomcckModelUsers extends MModelList
 	/**
 	 * Build an SQL query to load the list data.
 	 *
-	 * @return	JDatabaseQuery
+	 * @return	\Joomla\Database\DatabaseQuery
 	 * @since	1.6
 	 */
 	protected function getListQuery()

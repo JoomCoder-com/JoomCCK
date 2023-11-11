@@ -14,7 +14,7 @@ defined('_JEXEC') or die('Restricted access');
 
 jimport('joomla.plugin.plugin');
 
-class plgSystemJoomcck extends JPlugin
+class plgSystemJoomcck extends \Joomla\CMS\Plugin\CMSPlugin
 {
 	function onJQuizFinished($params)
 	{

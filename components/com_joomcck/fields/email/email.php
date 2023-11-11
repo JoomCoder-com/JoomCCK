@@ -25,7 +25,7 @@ class JFormFieldCEmail extends CFormField
 	public function getInput()
 	{
 		$document = \Joomla\CMS\Factory::getDocument();
-		$document->addScript(JURI::root(TRUE) . '/components/com_joomcck/fields/email/email.js');
+		$document->addScript(\Joomla\CMS\Uri\Uri::root(TRUE) . '/components/com_joomcck/fields/email/email.js');
 		$user = \Joomla\CMS\Factory::getApplication()->getIdentity();
 
 		if($this->params->get('params.enter_mail', 1) && in_array($this->params->get('params.enter_mail', 1), $user->getAuthorisedViewLevels()))
@@ -94,7 +94,7 @@ class JFormFieldCEmail extends CFormField
 	{
 
 		$document = \Joomla\CMS\Factory::getDocument();
-		$document->addScript(JURI::root(TRUE) . '/components/com_joomcck/fields/email/email.js');
+		$document->addScript(\Joomla\CMS\Uri\Uri::root(TRUE) . '/components/com_joomcck/fields/email/email.js');
 
 		return $this->_display_filter($section, $module);
 	}
@@ -394,7 +394,7 @@ class JFormFieldCEmail extends CFormField
 	public function _getForm($record, $section)
 	{
 		$document = \Joomla\CMS\Factory::getDocument();
-		$document->addScript(JURI::root(TRUE) . '/components/com_joomcck/fields/email/email.js');
+		$document->addScript(\Joomla\CMS\Uri\Uri::root(TRUE) . '/components/com_joomcck/fields/email/email.js');
 		$author = \Joomla\CMS\Factory::getUser($record->user_id);
 		$user   = \Joomla\CMS\Factory::getApplication()->getIdentity();
 		$params = $this->params;

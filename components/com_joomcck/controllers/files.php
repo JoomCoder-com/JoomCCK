@@ -489,7 +489,7 @@ class JoomcckControllerFiles extends MControllerAdmin
                 'bmp'
             )
         )) {
-            $size = @getimagesize(\Joomla\CMS\Filesystem\Path::clean($dest));
+            $size = @getimagesize(Joomla\Filesystem\Path::clean($dest));
 
             if ($size && !empty($size)) {
                 $data['width']  = $size[0];
@@ -521,7 +521,7 @@ class JoomcckControllerFiles extends MControllerAdmin
                     )
                 )
             ) {
-                $metadata       = @exif_read_data(\Joomla\CMS\Filesystem\Path::clean($src));
+                $metadata       = @exif_read_data(Joomla\Filesystem\Path::clean($src));
                 $data['params'] = json_encode($metadata);
             }
         }
@@ -532,7 +532,7 @@ class JoomcckControllerFiles extends MControllerAdmin
                 'mp3'
             )
         )) {
-            $data['params'] = $this->_getID3(\Joomla\CMS\Filesystem\Path::clean($src));
+            $data['params'] = $this->_getID3(Joomla\Filesystem\Path::clean($src));
         }
 
         $table = \Joomla\CMS\Table\Table::getInstance('Files', 'JoomcckTable');

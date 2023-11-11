@@ -17,7 +17,7 @@ defined('_JEXEC') or die('Restricted access');
 jimport('joomla.plugin.plugin');
 require_once JPATH_ROOT . '/components/com_joomcck/library/php/helpers/helper.php';
 
-class plgContentGlossary extends JPlugin
+class plgContentGlossary extends \Joomla\CMS\Plugin\CMSPlugin
 {
 
 	function onContentPrepare($context, &$article, &$params, $page = 0)

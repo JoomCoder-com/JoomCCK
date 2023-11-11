@@ -786,7 +786,7 @@ class JoomcckControllerAjax extends MControllerAdmin
 
 			if($cat->image)
 			{
-				$html .= '<img class="float-start img-polaroid" src="' . JURI::root(TRUE) . '/' . $cat->image . '" style="max-width:50px;" hspace="5" align="absmiddle">';
+				$html .= '<img class="float-start img-polaroid" src="' . \Joomla\CMS\Uri\Uri::root(TRUE) . '/' . $cat->image . '" style="max-width:50px;" hspace="5" align="absmiddle">';
 			}
 			$html .= $cat->title;
 			$html .= '<br><small>' . $cat->path . '</small>';

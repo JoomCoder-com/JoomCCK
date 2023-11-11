@@ -31,7 +31,7 @@ class JoomcckTableField extends \Joomla\CMS\Table\Table
 		}
 
 		if (isset($array['rules']) && is_array($array['rules'])) {
-			$rules = new JAccessRules($array['rules']);
+			$rules = new \Joomla\CMS\Access\Rules($array['rules']);
 			$this->setRules($rules);
 		}
 

@@ -194,7 +194,7 @@ class JoomcckControllerUsercategory extends MControllerForm
 		if($this->getTask() == 'save')
 		{
 			$return = Url::get_back('return');
-			if(! JURI::isInternal($return))
+			if(! \Joomla\CMS\Uri\Uri::isInternal($return))
 			{
 				$return = '';
 			}

@@ -27,7 +27,7 @@ class JFormFieldCBoolean extends CFormField
 
 		$label = \Joomla\CMS\Language\Text::_($this->params->get('params.' . $value));
 		$icon  = $this->params->get('params.icon_' . $value, ($value == 'true' ? 'tick.png' : 'cross.png'));
-		$icon  = \Joomla\CMS\HTML\HTMLHelper::image(JURI::root() . 'media/com_joomcck/icons/16/' . $icon, $label, array(
+		$icon  = \Joomla\CMS\HTML\HTMLHelper::image(\Joomla\CMS\Uri\Uri::root() . 'media/com_joomcck/icons/16/' . $icon, $label, array(
 			'align' => 'absmiddle'
 		));
 
@@ -88,10 +88,10 @@ class JFormFieldCBoolean extends CFormField
 		$label['true']  = \Joomla\CMS\Language\Text::_($this->params->get('params.true'));
 		$label['false'] = \Joomla\CMS\Language\Text::_($this->params->get('params.false'));
 		$icon           = array();
-		$icon['true']   = \Joomla\CMS\HTML\HTMLHelper::image(JURI::root() . 'media/com_joomcck/icons/16/' . $this->params->get('params.icon_true', 'tick.png'), $label['true'], array(
+		$icon['true']   = \Joomla\CMS\HTML\HTMLHelper::image(\Joomla\CMS\Uri\Uri::root() . 'media/com_joomcck/icons/16/' . $this->params->get('params.icon_true', 'tick.png'), $label['true'], array(
 			'align' => 'absmiddle'
 		));
-		$icon['false']  = \Joomla\CMS\HTML\HTMLHelper::image(JURI::root() . 'media/com_joomcck/icons/16/' . $this->params->get('params.icon_false', 'cross.png'), $label['false'], array(
+		$icon['false']  = \Joomla\CMS\HTML\HTMLHelper::image(\Joomla\CMS\Uri\Uri::root() . 'media/com_joomcck/icons/16/' . $this->params->get('params.icon_false', 'cross.png'), $label['false'], array(
 			'align' => 'absmiddle'
 		));
 
@@ -225,7 +225,7 @@ class JFormFieldCBoolean extends CFormField
 		$icon  = $this->params->get('params.icon_' . $value);
 		if($icon)
 		{
-			$icon = \Joomla\CMS\HTML\HTMLHelper::image(JURI::root() . 'media/com_joomcck/icons/16/' . $icon, strip_tags($label),
+			$icon = \Joomla\CMS\HTML\HTMLHelper::image(\Joomla\CMS\Uri\Uri::root() . 'media/com_joomcck/icons/16/' . $icon, strip_tags($label),
 				array(
 					'align' => 'absmiddle'
 				));

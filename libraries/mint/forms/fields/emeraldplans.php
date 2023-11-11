@@ -11,7 +11,7 @@ jimport('joomla.html.html');
 jimport('joomla.form.formfield');
 \Joomla\CMS\Form\FormHelper::loadFieldClass('melist');
 
-class JFormFieldEmeraldplans extends JFormFieldGroupedList
+class JFormFieldEmeraldplans extends \Joomla\CMS\Form\Field\GroupedlistField
 {
 
 	public $type = 'Emeraldplans';

@@ -39,16 +39,16 @@ $num = CEventsHelper::showNum('total', 0);
 		<div class="btn-group float-end">
 			<?php if($params->get('menu.menu_user_cat_manage') && in_array($this->section->params->get('personalize.pcat_submit'), $this->user->getAuthorisedViewLevels())):?>
 				<a class="btn-sm btn-light border" rel="tooltip" data-bs-title="<?php echo \Joomla\CMS\Language\Text::_($params->get('menu.menu_user_cat_manage_label', 'Manage Categories'))?>" href="<?php echo \Joomla\CMS\Router\Route::_(Url::_('categories').'&return='.Url::back())?>">
-					<img src="<?php echo JURI::root(TRUE);?>/media/com_joomcck/icons/16/category.png" align="absmiddle" /></a>
+					<img src="<?php echo \Joomla\CMS\Uri\Uri::root(TRUE);?>/media/com_joomcck/icons/16/category.png" align="absmiddle" /></a>
 			<?php endif;?>
 			<?php if($params->get('menu.menu_user_moder') && MECAccess::allowModerate(NULL, NULL, $this->section)):?>
 				<a class="btn-sm btn-light border" rel="tooltip" data-bs-original-title="<?php echo \Joomla\CMS\Language\Text::_($params->get('menu.menu_user_moder_label', 'Manage Moderators'))?>" href="<?php echo \Joomla\CMS\Router\Route::_('index.php?option=com_joomcck&view=moderators&filter_section='.$this->section->id.'&return='.Url::back());?>">
-						<img src="<?php echo JURI::root(TRUE);?>/media/com_joomcck/icons/16/user-share.png" align="absmiddle" /></a>
+						<img src="<?php echo \Joomla\CMS\Uri\Uri::root(TRUE);?>/media/com_joomcck/icons/16/user-share.png" align="absmiddle" /></a>
 			<?php endif;?>
 
 			<?php if($this->section->params->get('personalize.allow_section_set', 1)):?>
 				<a class="btn-sm btn-light border" rel="tooltip" data-bs-title="<?php echo \Joomla\CMS\Language\Text::sprintf('CSELECTOPTIONS', $this->section->name);?>" href="<?php echo \Joomla\CMS\Router\Route::_('index.php?option=com_joomcck&view=options&layout=section&section_id='.$this->section->id.'&return='.Url::back());?>">
-					<img src="<?php echo JURI::root(TRUE);?>/media/com_joomcck/icons/16/gear.png" align="absmiddle" /></a>
+					<img src="<?php echo \Joomla\CMS\Uri\Uri::root(TRUE);?>/media/com_joomcck/icons/16/gear.png" align="absmiddle" /></a>
 			<?php endif;?>
 		</div>
 	<?php elseif ($this->user->get('id') && in_array($this->section->params->get('events.subscribe_user'), $this->user->getAuthorisedViewLevels())):?>
@@ -81,14 +81,14 @@ $num = CEventsHelper::showNum('total', 0);
 
 <?php if(\Joomla\CMS\Factory::getApplication()->input->get('view_what') == 'events'):?>
 	<button href="javascript:void(0);" class="btn" type="button" onclick="Joomla.submitbutton('records.markread')">
-		<img src="<?php echo JURI::root(TRUE)?>/media/com_joomcck/icons/16/bell--minus.png"
+		<img src="<?php echo \Joomla\CMS\Uri\Uri::root(TRUE)?>/media/com_joomcck/icons/16/bell--minus.png"
 			align="absmiddle" alt="<?php echo \Joomla\CMS\Language\Text::_('CCLEARALL_NOTIF'); ?>" />
 		<?php echo Jtext::_('CCLEARALL_NOTIF');?>
 	</button>
 
 	<button class="btn" type="button"
 		onclick="window.location = '<?php echo \Joomla\CMS\Router\Route::_('index.php?option=com_joomcck&view=notifications&return='.Url::back());?>'">
-		<img src="<?php echo JURI::root(TRUE)?>/media/com_joomcck/icons/16/bell.png"
+		<img src="<?php echo \Joomla\CMS\Uri\Uri::root(TRUE)?>/media/com_joomcck/icons/16/bell.png"
 			align="absmiddle" alt="<?php echo \Joomla\CMS\Language\Text::_('CNOTCENTR'); ?>" />
 		<?php echo \Joomla\CMS\Language\Text::_('CNOTCENTR');?>
 		<?php if($num):?>
@@ -97,7 +97,7 @@ $num = CEventsHelper::showNum('total', 0);
 	</button>
 
 	<button class="btn" type="button" onclick="window.location = '<?php echo \Joomla\CMS\Router\Route::_('index.php?option=com_joomcck&view=options&return='.Url::back())?>'">
-		<img src="<?php echo JURI::root(TRUE)?>/media/com_joomcck/icons/16/gear.png" align="absmiddle">
+		<img src="<?php echo \Joomla\CMS\Uri\Uri::root(TRUE)?>/media/com_joomcck/icons/16/gear.png" align="absmiddle">
 		<?php echo \Joomla\CMS\Language\Text::_('CNOTSET')?>
 	</button>
 <?php else: ?>
@@ -177,7 +177,7 @@ $num = CEventsHelper::showNum('total', 0);
 			<li class="nav-item" <?php if($vw == 'follow') echo 'class="active"'?>>
 				<a class="nav-link" href="<?php echo \Joomla\CMS\Router\Route::_(Url::user('follow', $current_user->get('id')));?>">
 					<?php if($params->get('menu.menu_user_follow_icon')):?>
-						<img src="<?php echo JURI::root(TRUE);?>/media/com_joomcck/icons/16/follow1.png" align="absmiddle" />
+						<img src="<?php echo \Joomla\CMS\Uri\Uri::root(TRUE);?>/media/com_joomcck/icons/16/follow1.png" align="absmiddle" />
 					<?php endif;?>
 					<?php echo \Joomla\CMS\Language\Text::_($params->get('menu.menu_user_follow_label', 'Follow'))?>
 					<sup><?php echo $counts->followed;?></sup>
@@ -189,7 +189,7 @@ $num = CEventsHelper::showNum('total', 0);
 			<li class="nav-item" <?php if($vw == 'favorited') echo 'class="active"'?>>
 				<a class="nav-link" href="<?php echo \Joomla\CMS\Router\Route::_(Url::user('favorited', $current_user->get('id')));?>">
 					<?php if($params->get('menu.menu_user_favorite_icon')):?>
-						<img src="<?php echo JURI::root(TRUE) . '/media/com_joomcck/icons/bookmarks/' . $listparams->get('tmpl_core.bookmark_icons', 'star') . '/state1.png';?>" align="absmiddle" />
+						<img src="<?php echo \Joomla\CMS\Uri\Uri::root(TRUE) . '/media/com_joomcck/icons/bookmarks/' . $listparams->get('tmpl_core.bookmark_icons', 'star') . '/state1.png';?>" align="absmiddle" />
 					<?php endif;?>
 					<?php echo \Joomla\CMS\Language\Text::_($params->get('menu.menu_user_favorite_label', 'Bookmarked'))?>
 					<sup><?php echo $counts->favorited; ?></sup>
@@ -201,7 +201,7 @@ $num = CEventsHelper::showNum('total', 0);
 			<li class="nav-item" <?php if($vw == 'rated') echo 'class="active"'?>>
 				<a class="nav-link" href="<?php echo \Joomla\CMS\Router\Route::_(Url::user('rated', $current_user->get('id')));?>">
 					<?php if($params->get('menu.menu_user_rated_icon')):?>
-						<img src="<?php echo JURI::root(TRUE);?>/media/com_joomcck/icons/16/star.png" align="absmiddle" />
+						<img src="<?php echo \Joomla\CMS\Uri\Uri::root(TRUE);?>/media/com_joomcck/icons/16/star.png" align="absmiddle" />
 					<?php endif;?>
 					<?php echo \Joomla\CMS\Language\Text::_($params->get('menu.menu_user_rated_label', 'Rated'))?>
 					<sup><?php echo $counts->rated; ?></sup>
@@ -213,7 +213,7 @@ $num = CEventsHelper::showNum('total', 0);
 			<li class="nav-item" <?php if($vw == 'commented') echo 'class="active"'?>>
 				<a class="nav-link" href="<?php echo \Joomla\CMS\Router\Route::_(Url::user('commented', $current_user->get('id')));?>">
 					<?php if($params->get('menu.menu_user_commented_icon')):?>
-						<img src="<?php echo JURI::root(TRUE);?>/media/com_joomcck/icons/16/balloon-left.png" align="absmiddle" />
+						<img src="<?php echo \Joomla\CMS\Uri\Uri::root(TRUE);?>/media/com_joomcck/icons/16/balloon-left.png" align="absmiddle" />
 					<?php endif;?>
 					<?php echo \Joomla\CMS\Language\Text::_($params->get('menu.menu_user_commented_label', 'Commented'))?>
 					<sup><?php echo $counts->commented; ?></sup>
@@ -225,7 +225,7 @@ $num = CEventsHelper::showNum('total', 0);
 			<li class="nav-item" <?php if($vw == 'visited') echo 'class="active"'?>>
 				<a class="nav-link" href="<?php echo \Joomla\CMS\Router\Route::_(Url::user('visited', $current_user->get('id')));?>">
 					<?php if($params->get('menu.menu_user_visited_icon')):?>
-						<img src="<?php echo JURI::root(TRUE);?>/media/com_joomcck/icons/16/hand-point-090.png" align="absmiddle" />
+						<img src="<?php echo \Joomla\CMS\Uri\Uri::root(TRUE);?>/media/com_joomcck/icons/16/hand-point-090.png" align="absmiddle" />
 					<?php endif;?>
 					<?php echo \Joomla\CMS\Language\Text::_($params->get('menu.menu_user_visited_label', 'Visited'))?>
 					<sup><?php echo $counts->visited; ?></sup>
@@ -249,17 +249,17 @@ $num = CEventsHelper::showNum('total', 0);
 					<?php if ($in_array):?>
 						<?php switch ($vw):
 								  case 'hidden':?>
-								<img src="<?php echo JURI::root(TRUE);?>/media/com_joomcck/icons/16/eye-half.png" align="absmiddle" />
+								<img src="<?php echo \Joomla\CMS\Uri\Uri::root(TRUE);?>/media/com_joomcck/icons/16/eye-half.png" align="absmiddle" />
 								<?php echo \Joomla\CMS\Language\Text::_($params->get('menu.menu_user_'.$vw.'_label', ''))?>
 								<sup><?php echo $counts->hidden; ?></sup>
 							<?php break;?>
 							<?php case 'expire':?>
-								<img src="<?php echo JURI::root(TRUE);?>/media/com_joomcck/icons/16/clock--exclamation.png" align="absmiddle" />
+								<img src="<?php echo \Joomla\CMS\Uri\Uri::root(TRUE);?>/media/com_joomcck/icons/16/clock--exclamation.png" align="absmiddle" />
 								<?php echo \Joomla\CMS\Language\Text::_($params->get('menu.menu_user_'.$vw.'_label', ''))?>
 								<sup><?php echo $counts->expired; ?></sup>
 							<?php break;?>
 							<?php case 'unpublished':?>
-								<img src="<?php echo JURI::root(TRUE);?>/media/com_joomcck/icons/16/minus-circle.png" align="absmiddle" />
+								<img src="<?php echo \Joomla\CMS\Uri\Uri::root(TRUE);?>/media/com_joomcck/icons/16/minus-circle.png" align="absmiddle" />
 								<?php echo \Joomla\CMS\Language\Text::_($params->get('menu.menu_user_'.$vw.'_label', ''))?>
 								<sup><?php echo $counts->unpublished; ?></sup>
 							<?php break;?>
@@ -272,7 +272,7 @@ $num = CEventsHelper::showNum('total', 0);
 						<li <?php if($vw == 'hidden') echo 'class="active"'?>>
 							<a  class="dropdown-item" href="<?php echo \Joomla\CMS\Router\Route::_(Url::user('hidden', $current_user->get('id')));?>">
 								<?php if($params->get('menu.menu_user_hidden_icon')):?>
-									<img src="<?php echo JURI::root(TRUE);?>/media/com_joomcck/icons/16/eye-half.png" align="absmiddle" />
+									<img src="<?php echo \Joomla\CMS\Uri\Uri::root(TRUE);?>/media/com_joomcck/icons/16/eye-half.png" align="absmiddle" />
 								<?php endif;?>
 								<?php echo \Joomla\CMS\Language\Text::_($params->get('menu.menu_user_hidden_label', 'Hidden'))?>
 								<sup><?php echo $counts->hidden; ?></sup>
@@ -283,7 +283,7 @@ $num = CEventsHelper::showNum('total', 0);
 						<li <?php if($vw == 'expired') echo 'class="active"'?>>
 							<a class="dropdown-item" href="<?php echo \Joomla\CMS\Router\Route::_(Url::user('expired', $current_user->get('id')));?>">
 								<?php if($params->get('menu.menu_user_expire_icon')):?>
-									<img src="<?php echo JURI::root(TRUE);?>/media/com_joomcck/icons/16/clock--exclamation.png" align="absmiddle" />
+									<img src="<?php echo \Joomla\CMS\Uri\Uri::root(TRUE);?>/media/com_joomcck/icons/16/clock--exclamation.png" align="absmiddle" />
 								<?php endif;?>
 								<?php echo \Joomla\CMS\Language\Text::_($params->get('menu.menu_user_expire_label', 'Expired'))?>
 								<sup><?php echo $counts->expired; ?></sup>
@@ -294,7 +294,7 @@ $num = CEventsHelper::showNum('total', 0);
 						<li <?php if($vw == 'unpublished') echo 'class="active"'?>>
 							<a class="dropdown-item" href="<?php echo \Joomla\CMS\Router\Route::_(Url::user('unpublished', $current_user->get('id')));?>">
 								<?php if($params->get('menu.menu_user_unpublished_icon')):?>
-									<img src="<?php echo JURI::root(TRUE);?>/media/com_joomcck/icons/16/minus-circle.png" align="absmiddle" />
+									<img src="<?php echo \Joomla\CMS\Uri\Uri::root(TRUE);?>/media/com_joomcck/icons/16/minus-circle.png" align="absmiddle" />
 								<?php endif;?>
 								<?php echo \Joomla\CMS\Language\Text::_($params->get('menu.menu_user_unpublished_label', 'Expired'))?>
 								<sup><?php echo $counts->unpublished; ?></sup>

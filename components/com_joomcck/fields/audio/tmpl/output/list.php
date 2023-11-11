@@ -54,11 +54,11 @@ defined('_JEXEC') or die();
                 <td>
                     <a href="javascript:void(0)" id="file_play_<?php echo $record->id; ?>_<?php echo $k; ?>"
                        onclick="play<?php echo $record->id; ?>(<?php echo $k; ?>)">
-                        <img src="<?php echo JURI::root(true) ?>/media/com_joomcck/icons/16/control.png"
+                        <img src="<?php echo \Joomla\CMS\Uri\Uri::root(true) ?>/media/com_joomcck/icons/16/control.png"
                              alt="<?php echo \Joomla\CMS\Language\Text::_('P_PLAY') ?>" align="absmiddle"></a>
                     <a href="javascript:void(0)" id="file_stop_<?php echo $record->id; ?>_<?php echo $k; ?>"
                        onclick="stop<?php echo $record->id; ?>(<?php echo $k; ?>)" style="display:none">
-                        <img src="<?php echo JURI::root(true) ?>/media/com_joomcck/icons/16/control-stop-square.png"
+                        <img src="<?php echo \Joomla\CMS\Uri\Uri::root(true) ?>/media/com_joomcck/icons/16/control-stop-square.png"
                              alt="<?php echo \Joomla\CMS\Language\Text::_('P_STOP') ?>" align="absmiddle"></a>
 					<?php echo $file->title ? $file->title : $file->realname; ?>
 					<?php if ($data->get('comment') && $this->params->get('tmpl_list.show_comment')): ?>
@@ -88,7 +88,7 @@ defined('_JEXEC') or die();
                             <center>
                                 <a href="#lyric<?php echo $file->id; ?>" class="modal"
                                    rel="{handler:'adopt', size:{x:400,y:500}}">
-                                    <img src="<?php echo JURI::root(true) ?>/media/com_joomcck/icons/16/clipboard-list.png"
+                                    <img src="<?php echo \Joomla\CMS\Uri\Uri::root(true) ?>/media/com_joomcck/icons/16/clipboard-list.png"
                                          alt="<?php echo \Joomla\CMS\Language\Text::_('P_LYRIC') ?>" align="absmiddle">
                                 </a>
                                 <div style="display: none;">
@@ -104,7 +104,7 @@ defined('_JEXEC') or die();
 						<?php if (in_array($this->params->get('params.allow_download', 0), $this->user->getAuthorisedViewLevels())): ?>
                             <center>
                                 <a href="<?php echo $file->url ?>">
-                                    <img src="<?php echo JURI::root(true) ?>/media/com_joomcck/icons/16/disk.png"
+                                    <img src="<?php echo \Joomla\CMS\Uri\Uri::root(true) ?>/media/com_joomcck/icons/16/disk.png"
                                          alt="<?php echo \Joomla\CMS\Language\Text::_('CDOWNLOAD') ?>" align="absmiddle"></a>
 								<?php if ($this->params->get('tmpl_list.hits', 0)): ?>
                                     [<?php echo $file->hits ?>]

@@ -241,7 +241,7 @@ EOT;
     }
 
     /**
-     * Method to attach a JForm object to the field.
+     * Method to attach a \Joomla\CMS\Form\Form object to the field.
      *
      *                                      For example if the field has name="foo" and the group value is set to "bar" then the
      *                                      full field name would end up being "bar[foo]".

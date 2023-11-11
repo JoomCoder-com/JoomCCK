@@ -36,7 +36,7 @@ class JoomcckViewRecord extends MViewBase
         $model_comments->setState('list.limit', 20);
 		$comments = $model_comments->getItems($record->id, $type, 20);
 
-		$link = JURI::root(TRUE).'/index.php?option=com_joomcck&view=record&id='.$record->id;
+		$link = \Joomla\CMS\Uri\Uri::root(TRUE).'/index.php?option=com_joomcck&view=record&id='.$record->id;
 		$doc->link = $this->escape(\Joomla\CMS\Router\Route::_($link));
 		$doc->title = $record->title;
 		$doc->description = \Joomla\CMS\Language\Text::sprintf('CRSSFEEDCOMMENT', $record->title);
@@ -55,7 +55,7 @@ class JoomcckViewRecord extends MViewBase
 			$date			= $row->created->toISO8601();
 
 			// load individual item creator class
-			$item = new JFeedItem();
+			$item = new \Joomla\CMS\Document\Feed\FeedItem();
 			$item->title		= $title;
 			$item->link			= $url;
 			$item->description	= $description;

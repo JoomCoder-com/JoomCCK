@@ -7,7 +7,7 @@
  * @license   GNU/GPL http://www.gnu.org/copyleft/gpl.html
  */
 
-use Joomla\CMS\Filesystem\Folder;
+use Joomla\Filesystem\Folder;
 
 defined('_JEXEC') || die();
 

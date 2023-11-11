@@ -22,7 +22,7 @@ foreach($this->values as $key => $value) :
 	$strip_label = strip_tags($label);
 	if($this->params->get('params.icon'.$value->field_value))
 	{
-		$path = JURI::root() . 'components/com_joomcck/fields/status/icons/';
+		$path = \Joomla\CMS\Uri\Uri::root() . 'components/com_joomcck/fields/status/icons/';
 		$label = \Joomla\CMS\HTML\HTMLHelper::image($path . $this->params->get('params.icon' . $value->field_value), \Joomla\CMS\Language\Text::_($strip_label), array('class' => 'hasTip', 'title' => \Joomla\CMS\Language\Text::_($strip_label), 'align' => 'absmiddle')). ' '.$label;
 	}
 	?>

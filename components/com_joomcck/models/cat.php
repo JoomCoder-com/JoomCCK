@@ -182,7 +182,7 @@ class JoomcckModelCat extends MModelAdmin
 	 *
 	 * @param	array	$data		Data for the form.
 	 * @param	boolean	$loadData	True if the form is to load its own data (default case), false if not.
-	 * @return	mixed	A JForm object on success, false on failure
+	 * @return	mixed	A \Joomla\CMS\Form\Form object on success, false on failure
 	 * @since	1.6
 	 */
 	public function getForm($data = array(), $loadData = true)
@@ -264,7 +264,7 @@ class JoomcckModelCat extends MModelAdmin
 	 * @throws	Exception if there is an error loading the form.
 	 * @since	1.6
 	 */
-	/*protected function preprocessForm(JForm $form, $data, $groups = '')
+	/*protected function preprocessForm(\Joomla\CMS\Form\Form $form, $data, $groups = '')
 	{
 		jimport('joomla.filesystem.path');
 

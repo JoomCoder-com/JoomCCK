@@ -17,7 +17,7 @@ class JFormFieldCDigits extends CFormField
 	public function getInput()
 	{
 		$document = \Joomla\CMS\Factory::getDocument();
-		$document->addScript(JURI::root(TRUE).'/components/com_joomcck/fields/digits/assets/digits.js');
+		$document->addScript(\Joomla\CMS\Uri\Uri::root(TRUE).'/components/com_joomcck/fields/digits/assets/digits.js');
 
 		return $this->_display_input();
 	}

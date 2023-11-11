@@ -20,25 +20,25 @@ if(!in_array($markup->get('filters.show_more'), $current->user->getAuthorisedVie
     <div class="fade collapse separator-box" id="filter-collapse">
         <div class="btn-group float-end">
             <button class="btn btn-sm btn-primary" onclick="Joomla.submitbutton('records.filters')">
-                <img src="<?php echo JURI::root(true) ?>/media/com_joomcck/icons/16/tick-button.png" align="absmiddle"
+                <img src="<?php echo \Joomla\CMS\Uri\Uri::root(true) ?>/media/com_joomcck/icons/16/tick-button.png" align="absmiddle"
                      alt="<?php echo \Joomla\CMS\Language\Text::_('CAPPLY'); ?>"/>
 				<?php echo \Joomla\CMS\Language\Text::_('CAPPLY'); ?></button>
 			<?php if (count($current->worns)): ?>
                 <button class="btn btn-light btn-sm border" type="button"
                         onclick="Joomla.submitbutton('records.cleanall')">
-                    <img src="<?php echo JURI::root(true) ?>/media/com_joomcck/icons/16/cross-button.png"
+                    <img src="<?php echo \Joomla\CMS\Uri\Uri::root(true) ?>/media/com_joomcck/icons/16/cross-button.png"
                          align="absmiddle"
                          alt="<?php echo \Joomla\CMS\Language\Text::_('CRESETFILTERS'); ?>"/>
 					<?php echo \Joomla\CMS\Language\Text::_('CRESETFILTERS'); ?></button>
 			<?php endif; ?>
             <button class="btn btn-light btn-sm border" type="button" data-bs-toggle="collapse"
                     data-bs-target="#filter-collapse">
-                <img src="<?php echo JURI::root(true) ?>/media/com_joomcck/icons/16/minus-button.png" align="absmiddle"
+                <img src="<?php echo \Joomla\CMS\Uri\Uri::root(true) ?>/media/com_joomcck/icons/16/minus-button.png" align="absmiddle"
                      alt="<?php echo \Joomla\CMS\Language\Text::_('CCLOSE'); ?>"/>
 				<?php echo \Joomla\CMS\Language\Text::_('CCLOSE'); ?></button>
         </div>
         <h3>
-            <img src="<?php echo JURI::root(true) ?>/media/com_joomcck/icons/16/funnel.png" align="absmiddle"
+            <img src="<?php echo \Joomla\CMS\Uri\Uri::root(true) ?>/media/com_joomcck/icons/16/funnel.png" align="absmiddle"
                  alt="<?php echo \Joomla\CMS\Language\Text::_('CMORESEARCHOPTIONS'); ?>"/>
 			<?php echo \Joomla\CMS\Language\Text::_('CMORESEARCHOPTIONS') ?>
         </h3>

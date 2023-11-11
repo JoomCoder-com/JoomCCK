@@ -37,11 +37,11 @@ var callBackFunction = function ( dd, ident )
           <td>
           <?php $this->addTemplatePath( $this->tmpl_path ); ?>
           <?php $this->setLayout( 'rating_'.$this->name ); ?>
-          <?php $this->assignRef( 'prod_id',          $ident = '0');?>
-          <?php $this->assignRef( 'rating_ident',     $ident = 'test');?>
-          <?php $this->assignRef( 'rating_current',   $current = '60');?>
-          <?php $this->assignRef( 'rating_active',    $rating_active = 'true');?>
-          <?php $this->assignRef( 'callbackfunction', $callbackfunction = 'callBackFunction');?>
+          <?php $this->prod_id  =  0;?>
+          <?php $this->rating_ident = 'test';?>
+          <?php $this->rating_current = 60; ?>
+          <?php $this->rating_active = true;?>
+          <?php $this->callbackfunction = 'callBackFunction';?>
           <?php echo $this->loadTemplate( ); ?>
           </td>
         </TR>

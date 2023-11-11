@@ -64,10 +64,10 @@ $ind = 0;
 					<?php $category = $cats[$ind]; ?>
 					<<?php echo $this->tmpl_params['cindex']->get('tmpl_params.tag', 'h4')?> class="cat-name<?php echo (\Joomla\CMS\Factory::getApplication()->input->getInt('cat_id') == $category->id ? ' category-active' : NULL)?>">
 						<?php if($params->get('tmpl_params.cat_img', 1) && $category->image):?>
-							<div><img style="max-width:<?php echo $params->get('tmpl_params.cat_img_width', 200)?>px;" class="category_icon" alt="<?php echo $category->title; ?>" src="<?php echo JURI::root().$category->image;?>"></div>
+							<div><img style="max-width:<?php echo $params->get('tmpl_params.cat_img_width', 200)?>px;" class="category_icon" alt="<?php echo $category->title; ?>" src="<?php echo \Joomla\CMS\Uri\Uri::root().$category->image;?>"></div>
 						<?php endif;?>
 						<?php if(count($category->children)):?>
-							<img style="cursor: pointer;" id="iconsubcat<?php echo $category->id;?>" src="<?php echo JURI::root()?>media/com_joomcck/icons/16/toggle.png" hspace="5" align="absmiddle" />
+							<img style="cursor: pointer;" id="iconsubcat<?php echo $category->id;?>" src="<?php echo \Joomla\CMS\Uri\Uri::root()?>media/com_joomcck/icons/16/toggle.png" hspace="5" align="absmiddle" />
 						<?php endif;?>
 						<a href="<?php echo \Joomla\CMS\Router\Route::_($category->link)?>"><?php echo $category->title; ?></a>
 						<?php if($params->get('tmpl_params.cat_nums') && ($category->params->get('submission') || $category->records_num)):?>
@@ -104,7 +104,7 @@ $('.categories-list .subcat').each(function(e){
 		if(!<?php echo $params->get('tmpl_params.cat_unfold') ? 'true' : 'false';?>)
 		{
 			list_element.hide();
-			icon.attr('src', '<?php echo JURI::root()?>media/com_joomcck/icons/16/toggle-expand.png');
+			icon.attr('src', '<?php echo \Joomla\CMS\Uri\Uri::root()?>media/com_joomcck/icons/16/toggle-expand.png');
 		}
 	}
 
@@ -118,12 +118,12 @@ $('.categories-list .subcat').each(function(e){
         if(list_element.css('display') == 'block')
         {
             Cookies.set('category_state'+e.id, 1, {expires: 7});
-            icon.attr('src', '<?php echo JURI::root()?>media/com_joomcck/icons/16/toggle.png');
+            icon.attr('src', '<?php echo \Joomla\CMS\Uri\Uri::root()?>media/com_joomcck/icons/16/toggle.png');
         }
         else
         {
             Cookies.remove('category_state'+e.id);
-            icon.attr('src', '<?php echo JURI::root()?>media/com_joomcck/icons/16/toggle-expand.png');
+            icon.attr('src', '<?php echo \Joomla\CMS\Uri\Uri::root()?>media/com_joomcck/icons/16/toggle-expand.png');
         }
 
     })

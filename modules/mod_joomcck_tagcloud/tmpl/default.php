@@ -8,7 +8,7 @@
  */
 defined('_JEXEC') or die();
 $document = \Joomla\CMS\Factory::getDocument();
-$document->addStyleSheet(JURI::root().'components/com_joomcck/library/css/style.css');
+$document->addStyleSheet(\Joomla\CMS\Uri\Uri::root().'components/com_joomcck/library/css/style.css');
 ?>
 <style>
 <!--

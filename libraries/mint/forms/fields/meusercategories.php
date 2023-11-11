@@ -35,7 +35,7 @@ class JFormFieldMEUsercategories extends \Joomla\CMS\Form\FormField
 		    $uri		= \Joomla\CMS\Uri\Uri::getInstance();
             $return		= base64_encode($uri);
 		    $html .= '<a class="btn btn-outline-success" href="'.\Joomla\CMS\Router\Route::_('index.php?option=com_joomcck&view=category&section_id='.\Joomla\CMS\Factory::getApplication()->input->getInt('section_id',0).'&task=usercategory.add&return='.$return).'">
-		    			<img src="'.JURI::root().'media/com_joomcck/icons/16/plus-button.png" align="absmiddle" alt="'.\Joomla\CMS\Language\Text::_('Add New').'" /> '.\Joomla\CMS\Language\Text::_('Add New').'
+		    			<img src="'.\Joomla\CMS\Uri\Uri::root().'media/com_joomcck/icons/16/plus-button.png" align="absmiddle" alt="'.\Joomla\CMS\Language\Text::_('Add New').'" /> '.\Joomla\CMS\Language\Text::_('Add New').'
 					</a></div>';
 		}
 

@@ -13,7 +13,7 @@ jimport('joomla.form.formrule');
 /**
  * Form Rule class for the Joomla Framework.
  */
-class JFormRuleMeCaptcha extends JFormRule
+class JFormRuleMeCaptcha extends \Joomla\CMS\Form\FormRule
 {
 
 	protected $regex = '';

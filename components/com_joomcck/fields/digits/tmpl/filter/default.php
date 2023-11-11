@@ -9,9 +9,9 @@
 defined('_JEXEC') or die();
 
 $document = \Joomla\CMS\Factory::getDocument();
-$document->addScript(JURI::root(TRUE) . '/components/com_joomcck/fields/digits/assets/digits.js');
-$document->addScript(JURI::root(TRUE) . '/components/com_joomcck/fields/digits/assets/jquery.ui.slider.js');
-$document->addStyleSheet(JURI::root(TRUE) . '/components/com_joomcck/fields/digits/assets/css/style.css');
+$document->addScript(\Joomla\CMS\Uri\Uri::root(TRUE) . '/components/com_joomcck/fields/digits/assets/digits.js');
+$document->addScript(\Joomla\CMS\Uri\Uri::root(TRUE) . '/components/com_joomcck/fields/digits/assets/jquery.ui.slider.js');
+$document->addStyleSheet(\Joomla\CMS\Uri\Uri::root(TRUE) . '/components/com_joomcck/fields/digits/assets/css/style.css');
 
 $data = $this->data;
 

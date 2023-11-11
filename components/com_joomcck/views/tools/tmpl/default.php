@@ -34,7 +34,7 @@ defined('_JEXEC') or die();
 		$w    = (@$row->width ? @$row->width : '570');
 		?>
 		<tr>
-			<td><img src="<?php echo JURI::root(TRUE); ?>/components/com_joomcck/library/php/tools/<?php echo $name; ?>/icon.png"/>
+			<td><img src="<?php echo \Joomla\CMS\Uri\Uri::root(TRUE); ?>/components/com_joomcck/library/php/tools/<?php echo $name; ?>/icon.png"/>
 			</td>
 			<td><a href="<?php echo \Joomla\CMS\Router\Route::_($link); ?>"
 				   title="<?php echo \Joomla\CMS\Language\Text::_($row->label); ?>::<?php echo htmlspecialchars(\Joomla\CMS\Language\Text::_($row->description)); ?>">

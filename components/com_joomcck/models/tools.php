@@ -13,7 +13,7 @@ jimport('joomla.application.component.modeladmin');
 jimport('joomla.form.form');
 jimport('mint.forms.formhelper');
 
-class JoomcckModelTools extends JModelAdmin
+class JoomcckModelTools extends \Joomla\CMS\MVC\Model\AdminModel
 {
 	var $_tools = array();
 	var $_form = array();

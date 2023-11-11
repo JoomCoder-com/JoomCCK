@@ -302,7 +302,7 @@ class  CFormFieldRelate extends CFormField
 		}
 		$type_id = implode(',', $type_id);
 
-		$doTask = JURI::root(TRUE) . '/index.php?option=com_joomcck&view=elements&layout=records&tmpl=component&section_id=' .
+		$doTask = \Joomla\CMS\Uri\Uri::root(TRUE) . '/index.php?option=com_joomcck&view=elements&layout=records&tmpl=component&section_id=' .
 			$section_id . '&filter_type=' . $type_id . '&mode=form&field_id=' . $this->id;
 		if(!in_array($this->params->get('params.strict_to_user'), \Joomla\CMS\Factory::getApplication()->getIdentity()->getAuthorisedViewLevels()))
 		{

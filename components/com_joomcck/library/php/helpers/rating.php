@@ -14,7 +14,7 @@ class RatingHelp
 	public static function loadFile()
 	{
 		$document = \Joomla\CMS\Factory::getDocument();
-		$document->addScript(JURI::root(TRUE) . '/components/com_joomcck/library/js/felixrating.js');
+		$document->addScript(\Joomla\CMS\Uri\Uri::root(TRUE) . '/components/com_joomcck/library/js/felixrating.js');
 
 		$document->addScriptDeclaration(
 			"function FileRatingCallBack( vote, ident )
@@ -87,7 +87,7 @@ class RatingHelp
 	public static function loadRating($tmpl_name, $current, $prod_id, $index, $callbackfunction, $rating_active, $record_id = '')
 	{
 		$document = \Joomla\CMS\Factory::getDocument();
-		$document->addScript(JURI::root(TRUE) . '/components/com_joomcck/library/js/felixrating.js');
+		$document->addScript(\Joomla\CMS\Uri\Uri::root(TRUE) . '/components/com_joomcck/library/js/felixrating.js');
 
 		$tmpl_name = explode('.', $tmpl_name);
 		$tmpl_name = $tmpl_name[0];
@@ -95,7 +95,7 @@ class RatingHelp
 		//echo $rating_active;
 
 		$vars                   = new stdClass();
-		$vars->img_path         = JURI::root(TRUE) . '/components/com_joomcck/views/rating_tmpls/' . $tmpl_name . '_img/';
+		$vars->img_path         = \Joomla\CMS\Uri\Uri::root(TRUE) . '/components/com_joomcck/views/rating_tmpls/' . $tmpl_name . '_img/';
 		$vars->rating_ident     = 'r' . md5($prod_id . '-' . $index);
 		$vars->rating_active    = (int)$rating_active;
 		$vars->callbackfunction = $callbackfunction;
@@ -122,7 +122,7 @@ class RatingHelp
 		}
 
 		$document = \Joomla\CMS\Factory::getDocument();
-		$document->addScript(JURI::root(TRUE) . '/components/com_joomcck/library/js/felixrating.js');
+		$document->addScript(\Joomla\CMS\Uri\Uri::root(TRUE) . '/components/com_joomcck/library/js/felixrating.js');
 
 		$options = $type->params->get('properties.rate_multirating_options','');
 		$options = explode("\n", $options);
@@ -172,7 +172,7 @@ class RatingHelp
 	public static function loadFormMultiratings($record, $type, $section, $active = 1)
 	{
 		$document = \Joomla\CMS\Factory::getDocument();
-		$document->addScript(JURI::root(TRUE) . '/components/com_joomcck/library/js/felixrating.js');
+		$document->addScript(\Joomla\CMS\Uri\Uri::root(TRUE) . '/components/com_joomcck/library/js/felixrating.js');
 
 		$options = $type->params->get('properties.rate_multirating_options');
 		$options = explode("\n", $options);

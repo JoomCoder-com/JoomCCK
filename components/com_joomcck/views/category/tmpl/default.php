@@ -10,7 +10,7 @@
 use Joomla\CMS\HTML\HTMLHelper;
 
 defined('_JEXEC') or die();
-$image_url = JURI::root(TRUE).CImgHelper::getThumb(JPATH_ROOT.'/images/usercategories/'.$this->user->get('id').'/'.@$this->item->icon,
+$image_url = \Joomla\CMS\Uri\Uri::root(TRUE).CImgHelper::getThumb(JPATH_ROOT.'/images/usercategories/'.$this->user->get('id').'/'.@$this->item->icon,
 	100, 100, 'usercaticons', \Joomla\CMS\Factory::getApplication()->input->getInt('user_id'));
 ?>
 <script type="text/javascript">

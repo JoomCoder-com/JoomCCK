@@ -62,7 +62,7 @@ class MFormHelper
     static private $conditions_val = [];
 
 	/**
-	 * @param JForm $form
+	 * @param \Joomla\CMS\Form\Form $form
 	 * @param       $defaults
 	 * @param       $groups
 	 * @param int   $separator
@@ -161,7 +161,7 @@ class MFormHelper
 	/**
 	 * Render form based on jform object.
 	 *
-	 * @param JForm $form
+	 * @param \Joomla\CMS\Form\Form $form
 	 * @param array $defaults
 	 * @param mixed $group group name or array of group names
 	 * @param int   $separator
@@ -191,7 +191,7 @@ class MFormHelper
 	}
 
 	/**
-     * @param JForm           $form
+     * @param \Joomla\CMS\Form\Form           $form
      * @param string          $name
      * @param array|\Joomla\Registry\Registry $defaults
      * @param string          $group

@@ -4,6 +4,8 @@
  * @license		http://www.gnu.org/licenses/gpl-2.0.html GNU/GPL
  */
 
+use Joomla\CMS\Factory;
+
 defined( '_JEXEC' ) or die( 'Restricted access' );
 
 
@@ -44,13 +46,13 @@ class pkg_joomcckInstallerScript
 	 */
 	public function postflight($type, $parent)
 	{
-		$app = JFactory::getApplication();
+		$app = Factory::getApplication();
 
 		// don't enable plugins if action type is update
 		if ($type == 'update' || $type == 'uninstall') return;
 
 
-		$db = JFactory::getDBO();
+		$db = Factory::getDBO();
 
 		$manifest = $parent->getManifest();
 
@@ -70,8 +72,8 @@ class pkg_joomcckInstallerScript
 			. ' WHERE element IN (' . implode(', ', $plugins) . ') AND type =' . $db->q("plugin");
 		$db->setQuery($query);
 		if (!$db->execute()) {
-			$application = JFactory::getApplication();
-			$application->enqueueMessage('Failed to Enable plugins ' . $db->getError(), 'error');
+			$application = Factory::getApplication();
+			$application->enqueueMessage('Failed to Enable plugins som plugins', 'error');
 		}
 
 	}

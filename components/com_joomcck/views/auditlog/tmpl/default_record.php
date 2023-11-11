@@ -29,7 +29,7 @@ a.button {
 <form action="<?php echo \Joomla\CMS\Router\Route::_('index.php?option=com_joomcck&view=auditlog&Itemid='.\Joomla\CMS\Factory::getApplication()->input->getInt('Itemid')); ?>" method="post" name="adminForm" id="sales-form">
 	<fieldset id="filter-bar">
 		<div class="filter-search fltlft">
-			<a href="<?php echo JURI::root(TRUE)?>/index.php?option=com_joomcck&view=auditlog&Itemid=<?php echo \Joomla\CMS\Factory::getApplication()->input->getInt('Itemid');?>" class="button">
+			<a href="<?php echo \Joomla\CMS\Uri\Uri::root(TRUE)?>/index.php?option=com_joomcck&view=auditlog&Itemid=<?php echo \Joomla\CMS\Factory::getApplication()->input->getInt('Itemid');?>" class="button">
 			<?php echo \Joomla\CMS\Language\Text::_('CBACKTOAUDITLOG');?></a>
 		</div>
 

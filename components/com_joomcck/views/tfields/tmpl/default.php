@@ -117,7 +117,7 @@ if($saveOrder)
 				</td>
 				<td nowrap="nowrap">
 					<?php
-					$icon = JURI::root() . 'components/com_joomcck/fields/';
+					$icon = \Joomla\CMS\Uri\Uri::root() . 'components/com_joomcck/fields/';
 					if(is_file(JPATH_ROOT . '/components/com_joomcck/fields' . DIRECTORY_SEPARATOR . $item->field_type . DIRECTORY_SEPARATOR . $item->field_type . '.png'))
 					{
 						$icon .= "{$item->field_type}/{$item->field_type}.png";
@@ -142,7 +142,7 @@ if($saveOrder)
 						<?php endif; ?>
 
 						<?php if($params->get('core.icon')): ?>
-							<img alt="Icon" src="<?php echo JURI::root(TRUE) ?>/media/com_joomcck/icons/16/<?php echo $params->get('core.icon'); ?>" align="absmiddle">
+							<img alt="Icon" src="<?php echo \Joomla\CMS\Uri\Uri::root(TRUE) ?>/media/com_joomcck/icons/16/<?php echo $params->get('core.icon'); ?>" align="absmiddle">
 						<?php endif; ?>
 
 						<a href="<?php echo \Joomla\CMS\Router\Route::_('index.php?option=com_joomcck&task=tfield.edit&id=' . (int)$item->id); ?>">

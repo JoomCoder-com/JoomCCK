@@ -261,7 +261,7 @@ class JoomcckViewForm extends MViewBase
 		$file = dirname(__FILE__) . DIRECTORY_SEPARATOR . 'tmpl/default_form_' . $this->params->get('properties.tmpl_articleform', 'default') . '.css';
 		if (is_file($file))
 		{
-			$doc->addStyleSheet(JURI::root(TRUE) . '/components/com_joomcck/views/form/tmpl/default_form_' . $this->params->get('properties.tmpl_articleform', 'default') . '.css');
+			$doc->addStyleSheet(\Joomla\CMS\Uri\Uri::root(TRUE) . '/components/com_joomcck/views/form/tmpl/default_form_' . $this->params->get('properties.tmpl_articleform', 'default') . '.css');
 		}
 		
 		$this->multirating = FALSE;

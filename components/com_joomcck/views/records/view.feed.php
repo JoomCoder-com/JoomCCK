@@ -122,7 +122,7 @@ class JoomcckViewRecords extends MViewBase
 			$date			= \Joomla\CMS\Factory::getDate($row->ctime)->toISO8601();
 
 			// load individual item creator class
-			$item = new JFeedItem();
+			$item = new \Joomla\CMS\Document\Feed\FeedItem();
 			$item->title		= $title;
 			$item->link			= $url;
 			$item->description	= $description;

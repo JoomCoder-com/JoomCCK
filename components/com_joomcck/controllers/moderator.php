@@ -140,7 +140,7 @@ class JoomcckControllerModerator extends MControllerForm
 		if($this->input->getCmd('task') == 'save' && $return)
 		{
 			$return = Url::get_back('return');
-			if(!JURI::isInternal($return))
+			if(!\Joomla\CMS\Uri\Uri::isInternal($return))
 			{
 				$return = '';
 			}

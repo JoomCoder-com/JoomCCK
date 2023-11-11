@@ -50,11 +50,11 @@ class JFormFieldFieldicon extends \Joomla\CMS\Form\FormField
            });
          });})(jQuery);
 		</script>';
-		$html .= '<img id="icon_img'.$this->fieldname.'" align="absmiddle" src="'.JURI::root().
+		$html .= '<img id="icon_img'.$this->fieldname.'" align="absmiddle" src="'.\Joomla\CMS\Uri\Uri::root().
 			($this->value ? $path.$this->value : 'media/com_joomcck/blank.png').'"> <span id="icon_name'.$this->fieldname.'" class="icon_name">'.$this->value.'</span>';
 		$html .= ' <a class="btn btn-sm border bg-light" href="javascript:void(0)" title="Delete curent icon" onclick="mrSetIcon'.$this->fieldname.'(\'\')"><i class="fas fa-times"></i></a>';
 		$html .= '<div class="mt-3" style="clear:both"></div><div style="height:58px;width:100%;overflow-x:hidden;overflow-y:scroll">';
-		$html .= "<script type=\"text/javascript\">function mrSetIcon{$this->fieldname}(file){document.getElementById('icon_img".$this->fieldname."').src = '".JURI::root().$path."' + file;	document.getElementById('icon_name".$this->fieldname."').innerHTML = file;	document.getElementById('icon_param".$this->fieldname."').value = file;}</script>";
+		$html .= "<script type=\"text/javascript\">function mrSetIcon{$this->fieldname}(file){document.getElementById('icon_img".$this->fieldname."').src = '".\Joomla\CMS\Uri\Uri::root().$path."' + file;	document.getElementById('icon_name".$this->fieldname."').innerHTML = file;	document.getElementById('icon_param".$this->fieldname."').value = file;}</script>";
 		
 		$atr = array(
 			'border' 	=> 0,
@@ -69,7 +69,7 @@ class JFormFieldFieldicon extends \Joomla\CMS\Form\FormField
 		        	if($ext == 'png' || $ext == 'gif')
 		        	{
 		        		$atr['onclick'] = "mrSetIcon{$this->fieldname}('$file')";
-		        		$html .= ' '.\Joomla\CMS\HTML\HTMLHelper::image(JURI::root().$path.$file, \Joomla\CMS\Language\Text::_('CICONCLICKINSERT'), $atr);
+		        		$html .= ' '.\Joomla\CMS\HTML\HTMLHelper::image(\Joomla\CMS\Uri\Uri::root().$path.$file, \Joomla\CMS\Language\Text::_('CICONCLICKINSERT'), $atr);
 		        	}
 		            
 		        }

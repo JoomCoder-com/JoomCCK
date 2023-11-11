@@ -72,7 +72,7 @@ class CTmpl
 				break;
 		}
 
-		$url = str_replace(array(JPATH_ROOT, DIRECTORY_SEPARATOR), array(JURI::root(TRUE), '/'), $dir);
+		$url = str_replace(array(JPATH_ROOT, DIRECTORY_SEPARATOR), array(\Joomla\CMS\Uri\Uri::root(TRUE), '/'), $dir);
 		$doc = \Joomla\CMS\Factory::getDocument();
 		$css = $dir.$type.$template[0].'.css';
 		if(is_file($css))

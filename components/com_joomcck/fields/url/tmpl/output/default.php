@@ -70,7 +70,7 @@ if($this->params->get('params.links_sort', 0))
 	$url_parse = parse_url($url);
 	if($this->params->get('params.link_redirect', 0))
 	{
-		$url = JURI::root() . 'index.php?option=com_joomcck&task=field.call&func=_redirect&field_id=' . $this->id . '&record_id=' . $record->id . '&url=' . urlencode($val['url']);
+		$url = \Joomla\CMS\Uri\Uri::root() . 'index.php?option=com_joomcck&task=field.call&func=_redirect&field_id=' . $this->id . '&record_id=' . $record->id . '&url=' . urlencode($val['url']);
 	}
 	?>
 
@@ -82,11 +82,11 @@ if($this->params->get('params.links_sort', 0))
 		<?php echo isset($val['label']) != '' ? $val['label'] : $val['url'] ?>
 	</a>
 	<?php if($this->params->get('params.snapshot', 1)): ?>
-		<?php $img = htmlentities(\Joomla\CMS\HTML\HTMLHelper::image(JURI::root() . 'components/com_joomcck/fields/url/assets/loading.gif', \Joomla\CMS\Language\Text::_('Snapshot'), array('id' => "snapimg{$id}-$i")), ENT_QUOTES) ?>
+		<?php $img = htmlentities(\Joomla\CMS\HTML\HTMLHelper::image(\Joomla\CMS\Uri\Uri::root() . 'components/com_joomcck/fields/url/assets/loading.gif', \Joomla\CMS\Language\Text::_('Snapshot'), array('id' => "snapimg{$id}-$i")), ENT_QUOTES) ?>
 
 		<img style="cursor: pointer"
 			 onclick="setTimeout(function(){jQuery('#snapimg<?php echo $id . '-' . $i; ?>').attr('src', 'http://mini.s-shot.ru/1280/<?php echo $this->params->get('params.snapshot_width', 200) ?>/jpeg?<?php echo $val['url']; ?>')}, 1000)"
-			 src="<?php echo JURI::root(TRUE) ?>/media/com_joomcck/icons/16/document-text-image.png"
+			 src="<?php echo \Joomla\CMS\Uri\Uri::root(TRUE) ?>/media/com_joomcck/icons/16/document-text-image.png"
 			 class="hasPopover" data-bs-original-title="<?php echo \Joomla\CMS\Language\Text::_('Snapshot'); ?>" data-bs-content="<?php echo $img; ?>">
 
 	<?php endif; ?>
@@ -101,7 +101,7 @@ if($this->params->get('params.links_sort', 0))
 		<img
             style="cursor: pointer"
             class="hasPopover"
-            src="<?php echo JURI::root(TRUE) ?>/media/com_joomcck/icons/16/barcode-2d.png"
+            src="<?php echo \Joomla\CMS\Uri\Uri::root(TRUE) ?>/media/com_joomcck/icons/16/barcode-2d.png"
             data-bs-original-title="<?php echo \Joomla\CMS\Language\Text::_('URL QR'); ?>"
             data-bs-content='<img src="<?php echo $qrImagePath ?>" title="<?php echo \Joomla\CMS\Language\Text::_('URL QR') ?>" height="<?php echo $this->params->get('params.qr_width', 60) . 'px' ?>" width="<?php echo $this->params->get('params.qr_width', 60) . 'px' ?>" />'>
 	<?php endif; ?>

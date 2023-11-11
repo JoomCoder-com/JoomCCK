@@ -54,7 +54,7 @@ class JoomcckViewAbout extends MViewBase
             "type" => 'component'
         ]);
 
-        $live_site    = substr(JURI::root(), 0, -1);
+        $live_site    = substr(\Joomla\CMS\Uri\Uri::root(), 0, -1);
         $app          = Joomla\CMS\Application\CMSApplication::getInstance('site');
         $router       = $app->getRouter();
         $url          = $router->build($live_site . '/index.php?option=com_joomcck&view=cpanel&Itemid=' . $menu_table->id);

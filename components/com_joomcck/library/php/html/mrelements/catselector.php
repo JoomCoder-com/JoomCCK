@@ -49,7 +49,7 @@ defined('_JEXEC') or die('Restricted access');
 							<a class="btn btn-outline-dark" href="javascript:void(0);" <?php if($c->children){ echo 'onclick="CatSelector.get_children('.$c->id.', '.$c->section_id.', 1)"';}else{echo ' class="disabled"';}?>>
 								<?php if($c->id != \Joomla\CMS\Factory::getApplication()->input->getInt('id') && $c->params->get('submission', 1)):?>
 									<img class="float-end" id="s_icon<?php echo $c->id;?>"
-										src="<?php echo JURI::root(TRUE);?>/media/com_joomcck/icons/16/plus-button.png"
+										src="<?php echo \Joomla\CMS\Uri\Uri::root(TRUE);?>/media/com_joomcck/icons/16/plus-button.png"
 										onclick="CatSelector.add(<?php echo $c->id;?>, '<?php echo $c->title;?>', '<?php echo $c->path;?>')" />
 								<?php endif;?>
 								<?php echo $c->title?>
@@ -69,8 +69,8 @@ defined('_JEXEC') or die('Restricted access');
 	</div>
 	<small>
 		<?php echo \Joomla\CMS\Language\Text::sprintf('CCLICKTOASIGNCATEGORY',
-			\Joomla\CMS\HTML\HTMLHelper::image(JURI::root().'media/com_joomcck/icons/16/plus-button.png', \Joomla\CMS\Language\Text::_('CADDCATEGORY'), array('align'=>'absmiddle', 'width' => 12, 'style' => 'float: none')),
-			\Joomla\CMS\HTML\HTMLHelper::image(JURI::root().'media/com_joomcck/icons/16/cross-button.png', \Joomla\CMS\Language\Text::_('CDELETECATEGORY'), array('align'=>'absmiddle', 'width' => 12, 'style' => 'float: none')));?>
+			\Joomla\CMS\HTML\HTMLHelper::image(\Joomla\CMS\Uri\Uri::root().'media/com_joomcck/icons/16/plus-button.png', \Joomla\CMS\Language\Text::_('CADDCATEGORY'), array('align'=>'absmiddle', 'width' => 12, 'style' => 'float: none')),
+			\Joomla\CMS\HTML\HTMLHelper::image(\Joomla\CMS\Uri\Uri::root().'media/com_joomcck/icons/16/cross-button.png', \Joomla\CMS\Language\Text::_('CDELETECATEGORY'), array('align'=>'absmiddle', 'width' => 12, 'style' => 'float: none')));?>
 	</small>
 </div>
 <div class="clearfix"></div>
@@ -205,7 +205,7 @@ defined('_JEXEC') or die('Restricted access');
 						if(obj.params.submission == "1")
 						{
 							html += '<img id="s_icon' + obj.id +
-								'" src="<?php echo JURI::root(TRUE);?>/media/com_joomcck/icons/16/plus-button.png" ' +
+								'" src="<?php echo \Joomla\CMS\Uri\Uri::root(TRUE);?>/media/com_joomcck/icons/16/plus-button.png" ' +
 								'onclick="CatSelector.add(' + obj.id +', \'' + obj.title +'\', \'' + obj.path +'\')" />';
 						}
 						html += obj.title+'</a>';

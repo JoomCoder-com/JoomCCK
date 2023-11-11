@@ -32,7 +32,7 @@ $max_level = count($levels);
 
 		window.redirectToCategory = function(id) {
 			if(!id) return;
-			window.location = '<?php echo JURI::base(); ?>index.php?option=com_joomcck&view=records&section_id=<?php echo $section->id; ?>&cat_id='+id;
+			window.location = '<?php echo \Joomla\CMS\Uri\Uri::base(); ?>index.php?option=com_joomcck&view=records&section_id=<?php echo $section->id; ?>&cat_id='+id;
 		}
 
 		window.modJsc_getChilds_select = function(el, selectid, i, populate) {

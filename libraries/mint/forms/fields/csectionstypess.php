@@ -54,7 +54,7 @@ class JFormFieldCsectionstypess extends JFormMEFieldList
 			{
 				var sel = $(id);
 				new Request.HTML({
-					url:'".JURI::root()."administrator/index.php?option=com_joomcck&task=ajax.loadsectiontypes&no_html=1',
+					url:'".\Joomla\CMS\Uri\Uri::root()."administrator/index.php?option=com_joomcck&task=ajax.loadsectiontypes&no_html=1',
 					method:'post',
 					autoCancel:true,
 					data:{section_id: value, selected: selected_types},

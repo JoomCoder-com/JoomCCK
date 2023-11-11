@@ -49,11 +49,11 @@ class JoomcckViewComms extends MViewBase
 		{
 			if(is_dir(JPATH_ADMINISTRATOR . DIRECTORY_SEPARATOR . 'components/com_juser'))
 			{
-				$item->user_href = JURI::root(TRUE) . '/administrator/index.php?option=com_juser&view=user&task=edit&cid[]=' . $item->userid;
+				$item->user_href = \Joomla\CMS\Uri\Uri::root(TRUE) . '/administrator/index.php?option=com_juser&view=user&task=edit&cid[]=' . $item->userid;
 			}
 			else
 			{
-				$item->user_href = JURI::root(TRUE) . '/administrator/index.php?option=com_user&view=user&task=edit&cid[]=' . $item->userid;
+				$item->user_href = \Joomla\CMS\Uri\Uri::root(TRUE) . '/administrator/index.php?option=com_user&view=user&task=edit&cid[]=' . $item->userid;
 			}
 
 			$items[$key] = $item;
@@ -63,7 +63,7 @@ class JoomcckViewComms extends MViewBase
 
 	protected function addToolbar()
 	{
-		JToolbarHelper::title(\Joomla\CMS\Language\Text::_('CCOMMENTS'), 'comments.png');
+		\Joomla\CMS\Toolbar\ToolbarHelper::title(\Joomla\CMS\Language\Text::_('CCOMMENTS'), 'comments.png');
 		JToolBarHelper::editList('comment.edit');
 		JToolBarHelper::divider();
 		JToolBarHelper::publishList('comments.publish');

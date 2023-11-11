@@ -48,7 +48,7 @@ class MModelList extends MModelBase
 	/**
 	 * An internal cache for the last query used.
 	 *
-	 * @var    JDatabaseQuery
+	 * @var    \Joomla\Database\DatabaseQuery
 	 * @since  12.2
 	 */
 	protected $query = array();
@@ -98,7 +98,7 @@ class MModelList extends MModelBase
 	 *
 	 * This method ensures that the query is constructed only once for a given state of the model.
 	 *
-	 * @return  JDatabaseQuery  A JDatabaseQuery object
+	 * @return  \Joomla\Database\DatabaseQuery  A \Joomla\Database\DatabaseQuery object
 	 *
 	 * @since   12.2
 	 */
@@ -186,9 +186,9 @@ class MModelList extends MModelBase
 	}
 
 	/**
-	 * Method to get a JDatabaseQuery object for retrieving the data set from a database.
+	 * Method to get a \Joomla\Database\DatabaseQuery object for retrieving the data set from a database.
 	 *
-	 * @return  JDatabaseQuery   A JDatabaseQuery object to retrieve the data set.
+	 * @return  \Joomla\Database\DatabaseQuery   A \Joomla\Database\DatabaseQuery object to retrieve the data set.
 	 *
 	 * @since   12.2
 	 */
@@ -201,9 +201,9 @@ class MModelList extends MModelBase
 	}
 
 	/**
-	 * Method to get a JPagination object for the data set.
+	 * Method to get a \Joomla\CMS\Pagination\Pagination object for the data set.
 	 *
-	 * @return  JPagination  A JPagination object for the data set.
+	 * @return  \Joomla\CMS\Pagination\Pagination  A \Joomla\CMS\Pagination\Pagination object for the data set.
 	 *
 	 * @since   12.2
 	 */
@@ -220,7 +220,7 @@ class MModelList extends MModelBase
 
 		// Create the pagination object.
 		$limit = (int) $this->getState('list.limit') - (int) $this->getState('list.links');
-		$page = new JPagination($this->getTotal(), $this->getStart(), $limit);
+		$page = new \Joomla\CMS\Pagination\Pagination($this->getTotal(), $this->getStart(), $limit);
 
 		// Add the object to the internal cache.
 		$this->cache[$store] = $page;
@@ -328,7 +328,7 @@ class MModelList extends MModelBase
 	 * @param   array    $data      data
 	 * @param   boolean  $loadData  load current data
 	 *
-	 * @return  JForm/false  the JForm object or false
+	 * @return  JForm/false  the \Joomla\CMS\Form\Form object or false
 	 *
 	 * @since   3.2
 	 */
@@ -365,7 +365,7 @@ class MModelList extends MModelBase
 	 * @param   boolean  $clear    Optional argument to force load a new form.
 	 * @param   string   $xpath    An optional xpath to search for the fields.
 	 *
-	 * @return  mixed  JForm object on success, False on error.
+	 * @return  mixed  \Joomla\CMS\Form\Form object on success, False on error.
 	 *
 	 * @see     JForm
 	 * @since   3.2
@@ -607,7 +607,7 @@ class MModelList extends MModelBase
 	/**
 	 * Method to allow derived classes to preprocess the form.
 	 *
-	 * @param   JForm   $form   A JForm object.
+	 * @param   \Joomla\CMS\Form\Form   $form   A \Joomla\CMS\Form\Form object.
 	 * @param   mixed   $data   The data expected for the form.
 	 * @param   string  $group  The name of the plugin group to import (defaults to "content").
 	 *
@@ -616,7 +616,7 @@ class MModelList extends MModelBase
 	 * @since   3.2
 	 * @throws  Exception if there is an error in the form event.
 	 */
-	protected function preprocessForm(JForm $form, $data, $group = 'content')
+	protected function preprocessForm(\Joomla\CMS\Form\Form $form, $data, $group = 'content')
 	{
 		// Import the appropriate plugin group.
 		\Joomla\CMS\Plugin\PluginHelper::importPlugin($group);

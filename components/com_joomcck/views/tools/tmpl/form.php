@@ -16,7 +16,7 @@ defined('_JEXEC') or die();
 
 <div class="page-header mb-3">
 	<h1>
-    <img src="<?php echo JURI::root(TRUE); ?>/components/com_joomcck/library/php/tools/<?php echo $this->tool->name; ?>/icon.png"/>
+    <img src="<?php echo \Joomla\CMS\Uri\Uri::root(TRUE); ?>/components/com_joomcck/library/php/tools/<?php echo $this->tool->name; ?>/icon.png"/>
 	<?php echo $this->tool->label; ?>
     </h1>
     <small><?php echo $this->tool->description; ?></small>

@@ -17,7 +17,7 @@ jimport('mint.mvc.model.base');
  * @subpackage  Model
  * @see         JForm
  * @see         JFormField
- * @see         JFormRule
+ * @see         \Joomla\CMS\Form\FormRule
  * @since       12.2
  */
 abstract class MModelForm extends MModelBase
@@ -134,7 +134,7 @@ abstract class MModelForm extends MModelBase
 	 * @param   array    $data      Data for the form.
 	 * @param   boolean  $loadData  True if the form is to load its own data (default case), false if not.
 	 *
-	 * @return  mixed  A JForm object on success, false on failure
+	 * @return  mixed  A \Joomla\CMS\Form\Form object on success, false on failure
 	 *
 	 * @since   12.2
 	 */
@@ -149,7 +149,7 @@ abstract class MModelForm extends MModelBase
 	 * @param   boolean  $clear    Optional argument to force load a new form.
 	 * @param   string   $xpath    An optional xpath to search for the fields.
 	 *
-	 * @return  mixed  JForm object on success, False on error.
+	 * @return  mixed  \Joomla\CMS\Form\Form object on success, False on error.
 	 *
 	 * @see     JForm
 	 * @since   12.2
@@ -249,7 +249,7 @@ abstract class MModelForm extends MModelBase
 	/**
 	 * Method to allow derived classes to preprocess the form.
 	 *
-	 * @param   JForm   $form   A JForm object.
+	 * @param   \Joomla\CMS\Form\Form   $form   A \Joomla\CMS\Form\Form object.
 	 * @param   mixed   $data   The data expected for the form.
 	 * @param   string  $group  The name of the plugin group to import (defaults to "content").
 	 *
@@ -259,7 +259,7 @@ abstract class MModelForm extends MModelBase
 	 * @since   12.2
 	 * @throws  Exception if there is an error in the form event.
 	 */
-	protected function preprocessForm(JForm $form, $data, $group = 'content')
+	protected function preprocessForm(\Joomla\CMS\Form\Form $form, $data, $group = 'content')
 	{
 		// Import the appropriate plugin group.
 		\Joomla\CMS\Plugin\PluginHelper::importPlugin($group);
@@ -286,13 +286,13 @@ abstract class MModelForm extends MModelBase
 	/**
 	 * Method to validate the form data.
 	 *
-	 * @param   JForm   $form   The form to validate against.
+	 * @param   \Joomla\CMS\Form\Form   $form   The form to validate against.
 	 * @param   array   $data   The data to validate.
 	 * @param   string  $group  The name of the field group to validate.
 	 *
 	 * @return  mixed  Array of filtered data if valid, false otherwise.
 	 *
-	 * @see     JFormRule
+	 * @see     \Joomla\CMS\Form\FormRule
 	 * @see     \Joomla\CMS\Filter\InputFilter
 	 * @since   12.2
 	 */

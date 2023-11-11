@@ -359,14 +359,14 @@ class JoomcckModelRecord extends MModelItem
 
 		if($notitle)
 		{
-			$pattern        = '<a class="dropdown-item joomcck-control-item joomcck-control-item-%s" href="%s"><img border="0" src="' . JURI::root(TRUE) . '/media/com_joomcck/icons/16/%s" alt="%s" align="absmiddle" title="%s" /></a>';
-			$confirm_patern = '<a class="dropdown-item joomcck-control-item joomcck-control-item-%s" href="%s" onclick="javascript:if(!confirm(\'%s\')){return false;}"><img border="0" src="' . JURI::root(TRUE) . '/media/com_joomcck/icons/16/%s" alt="%s" align="absmiddle" title="%s" /></a>';
+			$pattern        = '<a class="dropdown-item joomcck-control-item joomcck-control-item-%s" href="%s"><img border="0" src="' . \Joomla\CMS\Uri\Uri::root(TRUE) . '/media/com_joomcck/icons/16/%s" alt="%s" align="absmiddle" title="%s" /></a>';
+			$confirm_patern = '<a class="dropdown-item joomcck-control-item joomcck-control-item-%s" href="%s" onclick="javascript:if(!confirm(\'%s\')){return false;}"><img border="0" src="' . \Joomla\CMS\Uri\Uri::root(TRUE) . '/media/com_joomcck/icons/16/%s" alt="%s" align="absmiddle" title="%s" /></a>';
 		}
 
 		else
 		{
-			$pattern        = '<a class="dropdown-item joomcck-control-item joomcck-control-item-%s" href="%s"><img border="0" src="' . JURI::root(TRUE) . '/media/com_joomcck/icons/16/%s" alt="%s" align="absmiddle" /> %s</a>';
-			$confirm_patern = '<a class="dropdown-item joomcck-control-item joomcck-control-item-%s" href="%s" onclick="javascript:if(!confirm(\'%s\')){return false;}"><img border="0" src="' . JURI::root(TRUE) . '/media/com_joomcck/icons/16/%s" alt="%s" align="absmiddle" /> %s</a>';
+			$pattern        = '<a class="dropdown-item joomcck-control-item joomcck-control-item-%s" href="%s"><img border="0" src="' . \Joomla\CMS\Uri\Uri::root(TRUE) . '/media/com_joomcck/icons/16/%s" alt="%s" align="absmiddle" /> %s</a>';
+			$confirm_patern = '<a class="dropdown-item joomcck-control-item joomcck-control-item-%s" href="%s" onclick="javascript:if(!confirm(\'%s\')){return false;}"><img border="0" src="' . \Joomla\CMS\Uri\Uri::root(TRUE) . '/media/com_joomcck/icons/16/%s" alt="%s" align="absmiddle" /> %s</a>';
 		}
 		$out = array();
 		if(!$user->get('id'))
@@ -472,7 +472,7 @@ class JoomcckModelRecord extends MModelItem
 
 				$attributeId = 'versionControl-'.$record->id;
 
-				$labelpattern       = '<a data-bs-toggle="modal" data-bs-target="#%s" class="dropdown-item joomcck-control-item joomcck-control-item-%s" href="%s"><img border="0" src="' . JURI::root(TRUE) . '/media/com_joomcck/icons/16/%s" alt="%s" align="absmiddle" /> %s</a>';
+				$labelpattern       = '<a data-bs-toggle="modal" data-bs-target="#%s" class="dropdown-item joomcck-control-item joomcck-control-item-%s" href="%s"><img border="0" src="' . \Joomla\CMS\Uri\Uri::root(TRUE) . '/media/com_joomcck/icons/16/%s" alt="%s" align="absmiddle" /> %s</a>';
 
 				$label   = sprintf($labelpattern, $attributeId,'rollback',  'javascript:void(0);', 'arrow-split-090.png', \Joomla\CMS\Language\Text::_('CVERCONTRL'), \Joomla\CMS\Language\Text::_('CVERCONTRL') . ' <span class="badge bg-light border text-dark">v.' . $record->version.'</span>');
 				$vpatern = "<a>v.%d - by %s on %s</a>";

@@ -131,7 +131,7 @@ class JoomcckControllerSale extends MControllerForm
 
 		if(empty($return) || ! \Joomla\CMS\Uri\Uri::isInternal(JoomcckFilter::base64($return)))
 		{
-			return JURI::base();
+			return \Joomla\CMS\Uri\Uri::base();
 		}
 		else
 		{
