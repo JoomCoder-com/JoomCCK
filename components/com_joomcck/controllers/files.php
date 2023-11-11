@@ -10,7 +10,7 @@
  */
 
 use Joomla\CMS\Factory;
-use Joomla\Filesystem\Folder;
+use Joomla\CMS\Filesystem\Folder;
 use Joomla\String\StringHelper;
 
 defined('_JEXEC') or die();

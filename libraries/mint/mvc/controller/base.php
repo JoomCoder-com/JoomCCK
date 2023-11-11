@@ -461,8 +461,13 @@ class MControllerBase extends \Joomla\CMS\Object\CMSObject
 		// Loop through the path directories
 		foreach ($path as $dir)
 		{
+
+
+			$cleanedDir = \Joomla\Filesystem\Path::check($dir);
+
+
 			// No surrounding spaces allowed!
-			$dir = rtrim(Joomla\Filesystem\Path::check($dir, '/'), '/') . '/';
+			$dir = rtrim($cleanedDir, '/') . '/';
 
 			// Add to the top of the search dirs
 			array_unshift($this->paths[$type], $dir);
