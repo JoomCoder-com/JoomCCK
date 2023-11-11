@@ -57,7 +57,7 @@ class JFormFieldMEplugins extends JFormMEFieldList
 			$extension = 'plg_' . $item->folder . '_' . $item->element;
 			$lang->load($extension . '.sys', JPATH_ADMINISTRATOR, null, false, false) || $lang->load($extension . '.sys', $source, null, false, false) || $lang->load($extension . '.sys', JPATH_ADMINISTRATOR, $lang->getDefault(), false, false) || $lang->load($extension . '.sys', $source, $lang->getDefault(), false, false);
 			$item->name = \Joomla\CMS\Language\Text::_($item->name);
-			$options[] = JHTML::_('select.option', $item->element, $item->name);
+			$options[] = \Joomla\CMS\HTML\HTMLHelper::_('select.option', $item->element, $item->name);
 		}
 		
 		return $options;

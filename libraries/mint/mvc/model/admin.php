@@ -74,7 +74,7 @@ abstract class MModelAdmin extends MModelForm
 	 *
 	 * @param   array  $config  An optional associative array of configuration settings.
 	 *
-	 * @see     JModelLegacy
+	 * @see     \Joomla\CMS\MVC\Model\BaseDatabaseModel
 	 * @since   12.2
 	 */
 	public function __construct($config = array())
@@ -731,7 +731,7 @@ abstract class MModelAdmin extends MModelForm
 		$table = $this->getTable();
 
 		// Include the content plugins for the on delete events.
-		JPluginHelper::importPlugin('content');
+		\Joomla\CMS\Plugin\PluginHelper::importPlugin('content');
 
 		// Iterate the items to delete each one.
 		foreach ($pks as $i => $pk)
@@ -772,12 +772,12 @@ abstract class MModelAdmin extends MModelForm
 					$error = $this->getError();
 					if ($error)
 					{
-						JLog::add($error, JLog::WARNING, 'jerror');
+						\Joomla\CMS\Log\Log::add($error, \Joomla\CMS\Log\Log::WARNING, 'jerror');
 						return false;
 					}
 					else
 					{
-						JLog::add(\Joomla\CMS\Language\Text::_('JLIB_APPLICATION_ERROR_DELETE_NOT_PERMITTED'), JLog::WARNING, 'jerror');
+						\Joomla\CMS\Log\Log::add(\Joomla\CMS\Language\Text::_('JLIB_APPLICATION_ERROR_DELETE_NOT_PERMITTED'), \Joomla\CMS\Log\Log::WARNING, 'jerror');
 						return false;
 					}
 				}
@@ -928,7 +928,7 @@ abstract class MModelAdmin extends MModelForm
 		$pks = (array) $pks;
 
 		// Include the content plugins for the change of state event.
-		JPluginHelper::importPlugin('content');
+		\Joomla\CMS\Plugin\PluginHelper::importPlugin('content');
 
 		// Access checks.
 		foreach ($pks as $i => $pk)
@@ -941,7 +941,7 @@ abstract class MModelAdmin extends MModelForm
 				{
 					// Prune items that you can't change.
 					unset($pks[$i]);
-					JLog::add(\Joomla\CMS\Language\Text::_('JLIB_APPLICATION_ERROR_EDITSTATE_NOT_PERMITTED'), JLog::WARNING, 'jerror');
+					\Joomla\CMS\Log\Log::add(\Joomla\CMS\Language\Text::_('JLIB_APPLICATION_ERROR_EDITSTATE_NOT_PERMITTED'), \Joomla\CMS\Log\Log::WARNING, 'jerror');
 
 					return false;
 				}
@@ -1010,7 +1010,7 @@ abstract class MModelAdmin extends MModelForm
 					// Prune items that you can't change.
 					unset($pks[$i]);
 					$this->checkin($pk);
-					JLog::add(\Joomla\CMS\Language\Text::_('JLIB_APPLICATION_ERROR_EDITSTATE_NOT_PERMITTED'), JLog::WARNING, 'jerror');
+					\Joomla\CMS\Log\Log::add(\Joomla\CMS\Language\Text::_('JLIB_APPLICATION_ERROR_EDITSTATE_NOT_PERMITTED'), \Joomla\CMS\Log\Log::WARNING, 'jerror');
 					$allowed = false;
 					continue;
 				}
@@ -1067,7 +1067,7 @@ abstract class MModelAdmin extends MModelForm
 		$isNew = true;
 
 		// Include the content plugins for the on save events.
-		JPluginHelper::importPlugin('content');
+		\Joomla\CMS\Plugin\PluginHelper::importPlugin('content');
 
 		// Allow an exception to be thrown.
 		try
@@ -1174,7 +1174,7 @@ abstract class MModelAdmin extends MModelForm
 			{
 				// Prune items that you can't change.
 				unset($pks[$i]);
-				JLog::add(\Joomla\CMS\Language\Text::_('JLIB_APPLICATION_ERROR_EDITSTATE_NOT_PERMITTED'), JLog::WARNING, 'jerror');
+				\Joomla\CMS\Log\Log::add(\Joomla\CMS\Language\Text::_('JLIB_APPLICATION_ERROR_EDITSTATE_NOT_PERMITTED'), \Joomla\CMS\Log\Log::WARNING, 'jerror');
 			}
 			elseif ($table->ordering != $order[$i])
 			{

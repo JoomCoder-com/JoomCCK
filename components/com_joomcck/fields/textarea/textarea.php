@@ -157,7 +157,7 @@ class JFormFieldCTextarea extends CFormField
 
 
 			$value = str_replace(array('&lt;', '&gt;', '<?php', '?>'), array('^^^', '@@@', '^@^', '@^@'), $value);
-			$value = JFilterInput::getInstance($tags, $attr, $tag_mode, $attmode)->clean($value);
+			$value = \Joomla\CMS\Filter\InputFilter::getInstance($tags, $attr, $tag_mode, $attmode)->clean($value);
 			$value = str_replace(array('^@^', '@^@', '^^^', '@@@'), array('&lt;?php', '?&gt;', '&lt;', '&gt;'), $value);
 
 			$len1 = StringHelper::strlen($value);

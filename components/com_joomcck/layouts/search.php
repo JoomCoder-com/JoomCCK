@@ -9,7 +9,7 @@
 
 defined('_JEXEC') or die('Restricted access');
 
-JHTML::_('bootstrap.tooltip', '*[rel^="tooltip"]');
+\Joomla\CMS\HTML\HTMLHelper::_('bootstrap.tooltip', '*[rel^="tooltip"]');
 
 $filters = [];
 if($displayData->state->get('filter.search')) {

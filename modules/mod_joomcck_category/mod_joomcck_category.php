@@ -29,7 +29,7 @@ $Itemid = $app->input->getInt('Itemid');
 $headerText = trim($params->get('header_text',''));
 $footerText = trim($params->get('footer_text',''));
 
-JModelLegacy::addIncludePath(JPATH_ROOT . '/components/com_joomcck/models');
+\Joomla\CMS\MVC\Model\BaseDatabaseModel::addIncludePath(JPATH_ROOT . '/components/com_joomcck/models');
 
 $cat_id = $params->get('init_cat');
 if(!$cat_id && $app->input->getInt('cat_id') && $params->get('mode', 2) == 1 &&

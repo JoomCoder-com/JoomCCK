@@ -54,7 +54,7 @@ class JFormFieldCEmail extends CFormField
 
 	public function validateField($value, $record, $type, $section)
 	{
-		if($value && !JMailHelper::isEmailAddress($value))
+		if($value && !\Joomla\CMS\Mail\MailHelper::isEmailAddress($value))
 		{
 			$this->setError(\Joomla\CMS\Language\Text::sprintf('E_ENTEREDINCORRECT', $this->label));
 
@@ -232,7 +232,7 @@ class JFormFieldCEmail extends CFormField
 			default :
 				break;
 		}
-		if(!JMailHelper::isEmailAddress($email))
+		if(!\Joomla\CMS\Mail\MailHelper::isEmailAddress($email))
 		{
 
 			Factory::getApplication()->enqueueMessage(\Joomla\CMS\Language\Text::_('E_SENDTOINCORRENT'),'warning');
@@ -272,7 +272,7 @@ class JFormFieldCEmail extends CFormField
 
 			return;
 		}
-		if(!JMailHelper::isEmailAddress($data['email_from']))
+		if(!\Joomla\CMS\Mail\MailHelper::isEmailAddress($data['email_from']))
 		{
 
 			Factory::getApplication()->enqueueMessage(\Joomla\CMS\Language\Text::_('E_SENDERMAILINCORRENT'),'warning');
@@ -366,8 +366,8 @@ class JFormFieldCEmail extends CFormField
 		$mail->setSender($sender);
 		$mail->addReplyTo($reply[0], $reply[1]);
 		$mail->isHTML(!!$this->params->get('params.email_format'));
-		$mail->setBody(JMailHelper::cleanBody($body));
-		$mail->setSubject(JMailHelper::cleanSubject($data['subject']));
+		$mail->setBody(\Joomla\CMS\Mail\MailHelper::cleanBody($body));
+		$mail->setSubject(\Joomla\CMS\Mail\MailHelper::cleanSubject($data['subject']));
 
 		if(!$mail->Send())
 		{

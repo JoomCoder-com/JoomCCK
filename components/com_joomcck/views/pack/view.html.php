@@ -18,7 +18,7 @@ class JoomcckViewPack extends MViewBase
 
 		$this->form = $this->get('Form');
 
-		$params = new JForm('params', array('control' => 'params'));
+		$params = new \Joomla\CMS\Form\Form('params', array('control' => 'params'));
 		$params->loadFile(JPATH_COMPONENT_ADMINISTRATOR . DIRECTORY_SEPARATOR . 'xml/pack.xml');
 		$this->params_form   = $params;
 		$this->params_groups = array(

@@ -69,7 +69,7 @@ class JFormFieldFieldicon extends JFormField
 		        	if($ext == 'png' || $ext == 'gif')
 		        	{
 		        		$atr['onclick'] = "mrSetIcon{$this->fieldname}('$file')";
-		        		$html .= ' '.JHTML::image(JURI::root().$path.$file, \Joomla\CMS\Language\Text::_('CICONCLICKINSERT'), $atr);
+		        		$html .= ' '.\Joomla\CMS\HTML\HTMLHelper::image(JURI::root().$path.$file, \Joomla\CMS\Language\Text::_('CICONCLICKINSERT'), $atr);
 		        	}
 		            
 		        }

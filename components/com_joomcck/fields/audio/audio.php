@@ -87,7 +87,7 @@ class JFormFieldCAudio extends CFormFieldUpload
 		$ext    = \Joomla\CMS\Filesystem\File::getExt($name);
 		$parts  = explode("_", $name);
 		$params = \Joomla\CMS\Component\ComponentHelper::getParams('com_joomcck');
-		$root   = JPath::clean(JPATH_ROOT . DIRECTORY_SEPARATOR . $params->get('general_upload'));
+		$root   = \Joomla\CMS\Filesystem\Path::clean(JPATH_ROOT . DIRECTORY_SEPARATOR . $params->get('general_upload'));
 
 		$dir  = $root . DIRECTORY_SEPARATOR . $ext . DIRECTORY_SEPARATOR . date($params->get('folder_format'), $parts[0]) . DIRECTORY_SEPARATOR;
 		$from = $dir . $name;
@@ -114,7 +114,7 @@ class JFormFieldCAudio extends CFormFieldUpload
 		$command = sprintf('%s -i "%s" %s "%s"',
 			$this->params->get('params.command', 'ffmpeg'), $src, $codec, str_replace('.' . $_ext, '.' . $ext, $src));
 
-		$p = proc_open($command, $descriptorspec, $pipes, JPath::clean(JPATH_ROOT . DIRECTORY_SEPARATOR . \Joomla\CMS\Component\ComponentHelper::getParams('com_joomcck')->get('general_upload')));
+		$p = proc_open($command, $descriptorspec, $pipes, \Joomla\CMS\Filesystem\Path::clean(JPATH_ROOT . DIRECTORY_SEPARATOR . \Joomla\CMS\Component\ComponentHelper::getParams('com_joomcck')->get('general_upload')));
 		proc_close($p);
 	}
 
@@ -132,7 +132,7 @@ class JFormFieldCAudio extends CFormFieldUpload
 	{
 		\Joomla\CMS\Factory::getDocument()->addScript(JURI::root(TRUE) . '/media/com_joomcck/vendors/jwplayer/jwplayer.js');
 
-		$browser             = JBrowser::getInstance();
+		$browser             = \Joomla\CMS\Environment\Browser::getInstance();
 		$this->user          = \Joomla\CMS\Factory::getUser();
 		$this->descr         = $this->params->get('params.allow_add_descr', 0);
 		$this->download_type = '[{type: "download"}]';

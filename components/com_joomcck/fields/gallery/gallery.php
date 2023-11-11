@@ -466,7 +466,7 @@ class JFormFieldCGallery extends CFormFieldUpload
 		$files_table->load($this->value[$post['image_index']]['id']);
 		$this->_getRecord($post['record_id']);
 
-		$out = JFilterOutput::cleanText($post['context']);
+		$out = \Joomla\CMS\Filter\OutputFilter::cleanText($post['context']);
 		$out = CensorHelper::cleanText($out);
 		switch($post['type'])
 		{
@@ -922,7 +922,7 @@ class JFormFieldCGallery extends CFormFieldUpload
 			\Joomla\CMS\Filesystem\File::write($this->path . DIRECTORY_SEPARATOR . 'index.html', $index);
 		}
 
-		$root      = JPath::clean(\Joomla\CMS\Component\ComponentHelper::getParams('com_joomcck')->get('general_upload'));
+		$root      = \Joomla\CMS\Filesystem\Path::clean(\Joomla\CMS\Component\ComponentHelper::getParams('com_joomcck')->get('general_upload'));
 		$url       = str_replace(JPATH_ROOT, '', $root);
 		$url       = str_replace("\\", '/', $url);
 		$url       = preg_replace('#^\/#iU', '', $url);

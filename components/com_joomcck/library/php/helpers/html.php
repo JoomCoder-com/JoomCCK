@@ -39,7 +39,7 @@ class HTMLFormatHelper
 			'user_id' => $user->get('id'), 'type' => 'section', 'ref_id' => $section->id, 'section_id' => $section->id
 		);
 
-		$table = JTable::getInstance('Subscribe', 'JoomcckTable');
+		$table = \Joomla\CMS\Table\Table::getInstance('Subscribe', 'JoomcckTable');
 		$table->load($data);
 
 		if($table->id)
@@ -70,7 +70,7 @@ class HTMLFormatHelper
 			return;
 		}
 
-		$stable = JTable::getInstance('Subscribe', 'JoomcckTable');
+		$stable = \Joomla\CMS\Table\Table::getInstance('Subscribe', 'JoomcckTable');
 		$data   = array(
 			'user_id' => $user->get('id'), 'type' => 'section', 'ref_id' => $section->id, 'section_id' => $section->id
 		);
@@ -80,7 +80,7 @@ class HTMLFormatHelper
 		<img id="follow_%d" align="absmiddle" src="%s/media/com_joomcck/icons/16/follow%d.png"/>
 		<span id="followtext_%d">%s</span></a>';
 
-		$table = JTable::getInstance('Subscribecat', 'JoomcckTable');
+		$table = \Joomla\CMS\Table\Table::getInstance('Subscribecat', 'JoomcckTable');
 		$data  = array('user_id' => $user->get('id'), 'cat_id' => $cat_id, 'section_id' => $section->id);
 		$table->load($data);
 
@@ -124,7 +124,7 @@ class HTMLFormatHelper
 		}
 
 
-		$stable = JTable::getInstance('Subscribe', 'JoomcckTable');
+		$stable = \Joomla\CMS\Table\Table::getInstance('Subscribe', 'JoomcckTable');
 		$data   = array(
 			'user_id' => $user->get('id'), 'type' => 'section', 'ref_id' => $section->id, 'section_id' => $section->id
 		);
@@ -134,7 +134,7 @@ class HTMLFormatHelper
 		<img id="followuser_%d" align="absmiddle" src="%s/media/com_joomcck/icons/16/follow%d.png"/>
 		<span id="followtext_%d">%s</span></a>';
 
-		$table = JTable::getInstance('Subscribeuser', 'JoomcckTable');
+		$table = \Joomla\CMS\Table\Table::getInstance('Subscribeuser', 'JoomcckTable');
 		$data  = array('user_id' => $user->get('id'), 'u_id' => $user_id, 'section_id' => $section->id);
 		$table->load($data);
 

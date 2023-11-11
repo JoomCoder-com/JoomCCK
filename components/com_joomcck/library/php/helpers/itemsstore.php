@@ -15,7 +15,7 @@ jimport('mint.mvc.controller.base');
 jimport('mint.mvc.view.base');
 jimport('joomla.database.table');
 
-JTable::addIncludePath(JPATH_ROOT . '/components/com_joomcck/tables', 'JoomcckTable');
+\Joomla\CMS\Table\Table::addIncludePath(JPATH_ROOT . '/components/com_joomcck/tables', 'JoomcckTable');
 MModelBase::addIncludePath(JPATH_ROOT . '/components/com_joomcck/models', 'JoomcckModel');
 include_once dirname(__FILE__) . '/url.php';
 

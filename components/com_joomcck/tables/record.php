@@ -407,7 +407,7 @@ class JoomcckTableRecord extends \Joomla\CMS\Table\Table
 				elseif($data->get('2', 1))
 				{
 					$rand = base64_encode(md5(time() . '-' . $title));
-					$rand = JFilterInput::getInstance()->clean($rand);
+					$rand = \Joomla\CMS\Filter\InputFilter::getInstance()->clean($rand);
 				}
 
 				$rand = substr($rand, 0, $data->get('0', 8));

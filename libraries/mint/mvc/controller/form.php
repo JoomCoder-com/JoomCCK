@@ -66,7 +66,7 @@ class MControllerForm extends MControllerBase
 	 *
 	 * @param   array  $config  An optional associative array of configuration settings.
 	 *
-	 * @see     JControllerLegacy
+	 * @see     \Joomla\CMS\MVC\Controller\BaseController
 	 * @since   12.2
 	 * @throws  Exception
 	 */
@@ -242,7 +242,7 @@ class MControllerForm extends MControllerBase
 	/**
 	 * Method to run batch operations.
 	 *
-	 * @param   JModelLegacy  $model  The model of the component being processed.
+	 * @param   \Joomla\CMS\MVC\Model\BaseDatabaseModel  $model  The model of the component being processed.
 	 *
 	 * @return	boolean	 True if successful, false otherwise and internal error is set.
 	 *
@@ -295,7 +295,7 @@ class MControllerForm extends MControllerBase
 	 */
 	public function cancel($key = null)
 	{
-		JSession::checkToken() or jexit(\Joomla\CMS\Language\Text::_('JINVALID_TOKEN'));
+		\Joomla\CMS\Session\Session::checkToken() or jexit(\Joomla\CMS\Language\Text::_('JINVALID_TOKEN'));
 
 		$app = \Joomla\CMS\Factory::getApplication();
 		$model = $this->getModel();
@@ -610,7 +610,7 @@ class MControllerForm extends MControllerBase
 	public function save($key = null, $urlVar = null)
 	{
 		// Check for request forgeries.
-		JSession::checkToken() or jexit(\Joomla\CMS\Language\Text::_('JINVALID_TOKEN'));
+		\Joomla\CMS\Session\Session::checkToken() or jexit(\Joomla\CMS\Language\Text::_('JINVALID_TOKEN'));
 
 		$app   = \Joomla\CMS\Factory::getApplication();
 		$lang  = \Joomla\CMS\Factory::getLanguage();

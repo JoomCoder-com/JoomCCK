@@ -8,7 +8,7 @@
  */
 defined('_JEXEC') or die();
 
-JHTML::_('bootstrap.tooltip', '*[rel^="tooltip"]');
+\Joomla\CMS\HTML\HTMLHelper::_('bootstrap.tooltip', '*[rel^="tooltip"]');
 if(!$this->values) return;
 $default = $this->default;
 $hidden = array();

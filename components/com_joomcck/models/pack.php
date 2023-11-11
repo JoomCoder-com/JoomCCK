@@ -329,15 +329,15 @@ class JoomcckModelPack extends MModelAdmin
                     continue;
                 }
                 $path = JPATH_ROOT . DIRECTORY_SEPARATOR . $file;
-                $path = JPath::clean($path);
+                $path = \Joomla\CMS\Filesystem\Path::clean($path);
 
                 if (\Joomla\CMS\Filesystem\File::exists($path)) {
-                    $folder = JPath::clean(PACK_ROOT . DIRECTORY_SEPARATOR . 'add' . DIRECTORY_SEPARATOR . $file);
+                    $folder = \Joomla\CMS\Filesystem\Path::clean(PACK_ROOT . DIRECTORY_SEPARATOR . 'add' . DIRECTORY_SEPARATOR . $file);
                     \Joomla\CMS\Filesystem\Folder::create(dirname($folder));
                     \Joomla\CMS\Filesystem\File::copy($path, $folder);
                 }
                 if (\Joomla\CMS\Filesystem\Folder::exists($path)) {
-                    \Joomla\CMS\Filesystem\Folder::copy($path, JPath::clean(PACK_ROOT . DIRECTORY_SEPARATOR . 'add' . DIRECTORY_SEPARATOR . $file), null, true);
+                    \Joomla\CMS\Filesystem\Folder::copy($path, \Joomla\CMS\Filesystem\Path::clean(PACK_ROOT . DIRECTORY_SEPARATOR . 'add' . DIRECTORY_SEPARATOR . $file), null, true);
                 }
             }
         }
@@ -358,7 +358,7 @@ class JoomcckModelPack extends MModelAdmin
         $this->_generateXml();
 
         //Archiving
-        $zip_filename = JPATH_CACHE . '/pack_joomcck.' . JFilterOutput::stringURLSafe($this->pack->get('name', 'Pack name')) . '(' . str_replace('pack', '', PACK_KEY) . ').j3.v.9.' . ($this->pack->version + 1) . '.zip';
+        $zip_filename = JPATH_CACHE . '/pack_joomcck.' . \Joomla\CMS\Filter\OutputFilter::stringURLSafe($this->pack->get('name', 'Pack name')) . '(' . str_replace('pack', '', PACK_KEY) . ').j3.v.9.' . ($this->pack->version + 1) . '.zip';
 
         $zipper = new Zipper();
         $zipper->open($zip_filename, ZIPARCHIVE::CREATE | ZIPARCHIVE::OVERWRITE);

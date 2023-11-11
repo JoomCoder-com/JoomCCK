@@ -128,7 +128,7 @@ class CUsrHelper
 		}
 		if(!isset($out[$uid]))
 		{
-			$table = JTable::getInstance('Useropt', 'JoomcckTable');
+			$table = \Joomla\CMS\Table\Table::getInstance('Useropt', 'JoomcckTable');
 			$table->load(array(
 				'user_id' => $uid
 			));

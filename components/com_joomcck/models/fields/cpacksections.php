@@ -38,7 +38,7 @@ class JFormFieldCpacksections extends JFormField
 			
 			$options = $db->loadObjectList();
 			
-			array_unshift($options, JHTML::_('select.option', '', \Joomla\CMS\Language\Text::_('CSELECTSECTION')));
+			array_unshift($options, \Joomla\CMS\HTML\HTMLHelper::_('select.option', '', \Joomla\CMS\Language\Text::_('CSELECTSECTION')));
 			
 			$html = \Joomla\CMS\HTML\HTMLHelper::_('select.genericlist', $options, 'jform[section_id]', 'onchange="changeSection(this.value);" class="form-select required"');
 		}

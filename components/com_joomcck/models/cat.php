@@ -145,7 +145,7 @@ class JoomcckModelCat extends MModelAdmin
 			$tz	= new DateTimeZone(\Joomla\CMS\Factory::getApplication()->getCfg('offset'));
 
 			if (intval($result->created_time)) {
-				$date = new JDate($result->created_time);
+				$date = new \Joomla\CMS\Date\Date($result->created_time);
 				$date->setTimezone($tz);
 				$result->created_time = $date->toSql(true);
 			}
@@ -154,7 +154,7 @@ class JoomcckModelCat extends MModelAdmin
 			}
 
 			if (intval($result->modified_time)) {
-				$date = new JDate($result->modified_time);
+				$date = new \Joomla\CMS\Date\Date($result->modified_time);
 				$date->setTimezone($tz);
 				$result->modified_time = $date->toSql(true);
 			}
@@ -277,11 +277,11 @@ class JoomcckModelCat extends MModelAdmin
 		$name = 'category'.($section ? ('.'.$section):'');
 
 		// Looking first in the component models/forms folder
-		$path = JPath::clean(JPATH_ADMINISTRATOR."/components/$component/models/forms/$name.xml");
+		$path = \Joomla\CMS\Filesystem\Path::clean(JPATH_ADMINISTRATOR."/components/$component/models/forms/$name.xml");
 
 		// Old way: looking in the component folder
 		if (!file_exists($path)) {
-			$path = JPath::clean(JPATH_ADMINISTRATOR."/components/$component/$name.xml");
+			$path = \Joomla\CMS\Filesystem\Path::clean(JPATH_ADMINISTRATOR."/components/$component/$name.xml");
 		}
 
 		if (file_exists($path)) {
@@ -295,7 +295,7 @@ class JoomcckModelCat extends MModelAdmin
 
 		// Try to find the component helper.
 		$eName	= str_replace('com_', '', $component);
-		$path	= JPath::clean(JPATH_ADMINISTRATOR."/components/$component/helpers/category.php");
+		$path	= \Joomla\CMS\Filesystem\Path::clean(JPATH_ADMINISTRATOR."/components/$component/helpers/category.php");
 
 		if (file_exists($path)) {
 			require_once $path;

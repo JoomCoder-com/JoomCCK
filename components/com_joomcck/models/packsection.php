@@ -116,7 +116,7 @@ class JoomcckModelPacksection extends MModelAdmin
 
 			$li_out[] = '<li' . ($i == 0 ? ' class="active"' : '') . '>' . '<a onclick="jQuery(this).tab(\'show\');return false;" href="#type' . $type->id . '">' . $type->name . '</a></li>';
 
-			$form = new JForm('params', array(
+			$form = new \Joomla\CMS\Form\Form('params', array(
 				'control' => 'params[types][' . $type_id . ']'
 			));
 

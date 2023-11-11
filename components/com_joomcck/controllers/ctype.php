@@ -65,10 +65,10 @@ class JoomcckControllerCType extends MControllerForm
 				return;
 			}
 
-			$old = JTable::getInstance('Type', 'JoomcckTable');
+			$old = \Joomla\CMS\Table\Table::getInstance('Type', 'JoomcckTable');
 			$old->load($old_id);
 
-			$new = JTable::getInstance('Type', 'JoomcckTable');
+			$new = \Joomla\CMS\Table\Table::getInstance('Type', 'JoomcckTable');
 			$new->load($new_id);
 
 			$params = new \Joomla\Registry\Registry($new->params);

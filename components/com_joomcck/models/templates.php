@@ -103,8 +103,8 @@ function parseXMLTemplateFile($path)
 		}
 
 		$tmpdir = uniqid('install_');
-		$extractdir = JPath::clean(dirname($tmp_dest). DIRECTORY_SEPARATOR .$tmpdir);
-		$archivename = JPath::clean($tmp_dest);
+		$extractdir = \Joomla\CMS\Filesystem\Path::clean(dirname($tmp_dest). DIRECTORY_SEPARATOR .$tmpdir);
+		$archivename = \Joomla\CMS\Filesystem\Path::clean($tmp_dest);
 
 		jimport('joomla.filesystem.archive');
 

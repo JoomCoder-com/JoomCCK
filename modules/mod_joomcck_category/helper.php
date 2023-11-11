@@ -52,7 +52,7 @@ class modJoomcckCategoriesHelper
 	static public function getParentsList($cat_id)
 	{
 		if(is_null($cat_id)) return array();
-		$model = JModelLegacy::getInstance('Categories', 'JoomcckModel');
+		$model = \Joomla\CMS\MVC\Model\BaseDatabaseModel::getInstance('Categories', 'JoomcckModel');
 		$parents = $model->getParentsByChild($cat_id);
 		return $parents;
 	}

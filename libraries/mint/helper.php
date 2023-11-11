@@ -18,7 +18,7 @@ class Mint
 		if(empty($text))
 			return '';
 
-		$text = JFilterInput::getInstance([], [], 1, 1)->clean(strip_tags($text), 'string');
+		$text = \Joomla\CMS\Filter\InputFilter::getInstance([], [], 1, 1)->clean(strip_tags($text), 'string');
 
 		$key   = strtoupper($text);
 		$trans = \Joomla\CMS\Language\Text::_($key, $jsSafe, $interpretBackSlashes, $script);

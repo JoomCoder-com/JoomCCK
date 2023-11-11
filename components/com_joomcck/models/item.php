@@ -221,10 +221,10 @@ class JoomcckModelItem extends MModelAdmin
 
 							$copied = \Joomla\CMS\Filesystem\File::copy(JPATH_ROOT. DIRECTORY_SEPARATOR .$params->get('general_upload'). DIRECTORY_SEPARATOR .$subfolder. DIRECTORY_SEPARATOR .$file['fullpath'], $dest.$file['filename']);
 
-							$root = JPath::clean(JPATH_ROOT. DIRECTORY_SEPARATOR .$params->get('general_upload'));
+							$root = \Joomla\CMS\Filesystem\Path::clean(JPATH_ROOT. DIRECTORY_SEPARATOR .$params->get('general_upload'));
 							$url = str_replace(JPATH_ROOT, '', $root);
 							$url = str_replace("\\", '/', $url);
-							$file['fullpath'] = JPath::clean($subfolder. DIRECTORY_SEPARATOR .$date. DIRECTORY_SEPARATOR .$file['filename']);
+							$file['fullpath'] = \Joomla\CMS\Filesystem\Path::clean($subfolder. DIRECTORY_SEPARATOR .$date. DIRECTORY_SEPARATOR .$file['filename']);
 							$metadata = '';
 							if(function_exists('exif_read_data'))
 							{

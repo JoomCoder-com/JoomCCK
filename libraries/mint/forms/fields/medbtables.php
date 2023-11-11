@@ -29,7 +29,7 @@ class JFormFieldMedbtables extends JFormMEFieldList
 		
 		foreach ($tables as $table)
 		{
-			$options[] = JHTML::_('select.option', $table[0], $table[0]);
+			$options[] = \Joomla\CMS\HTML\HTMLHelper::_('select.option', $table[0], $table[0]);
 		}
 		return $options;
 

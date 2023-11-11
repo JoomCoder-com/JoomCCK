@@ -70,7 +70,7 @@ abstract class MModelBase extends JObject
 	protected $event_clean_cache = null;
 
 	/**
-	 * Add a directory where JModelLegacy should search for models. You may
+	 * Add a directory where \Joomla\CMS\MVC\Model\BaseDatabaseModel should search for models. You may
 	 * either pass a string or an array of directories.
 	 *
 	 * @param   mixed   $path    A path or array[sting] of paths to search.
@@ -105,12 +105,12 @@ abstract class MModelBase extends JObject
 
 			if (!in_array($path, $paths[$prefix]))
 			{
-				array_unshift($paths[$prefix], JPath::clean($path));
+				array_unshift($paths[$prefix], \Joomla\CMS\Filesystem\Path::clean($path));
 			}
 
 			if (!in_array($path, $paths['']))
 			{
-				array_unshift($paths[''], JPath::clean($path));
+				array_unshift($paths[''], \Joomla\CMS\Filesystem\Path::clean($path));
 			}
 		}
 
@@ -173,10 +173,10 @@ abstract class MModelBase extends JObject
 		if (!class_exists($modelClass))
 		{
 			jimport('joomla.filesystem.path');
-			$path = JPath::find(self::addIncludePath(null, $prefix), self::_createFileName('model', array('name' => $type)));
+			$path = \Joomla\CMS\Filesystem\Path::find(self::addIncludePath(null, $prefix), self::_createFileName('model', array('name' => $type)));
 			if (!$path)
 			{
-				$path = JPath::find(self::addIncludePath(null, ''), self::_createFileName('model', array('name' => $type)));
+				$path = \Joomla\CMS\Filesystem\Path::find(self::addIncludePath(null, ''), self::_createFileName('model', array('name' => $type)));
 			}
 			if ($path)
 			{
@@ -184,7 +184,7 @@ abstract class MModelBase extends JObject
 
 				if (!class_exists($modelClass))
 				{
-					JLog::add(\Joomla\CMS\Language\Text::sprintf('JLIB_APPLICATION_ERROR_MODELCLASS_NOT_FOUND', $modelClass), JLog::WARNING, 'jerror');
+					\Joomla\CMS\Log\Log::add(\Joomla\CMS\Language\Text::sprintf('JLIB_APPLICATION_ERROR_MODELCLASS_NOT_FOUND', $modelClass), \Joomla\CMS\Log\Log::WARNING, 'jerror');
 					return false;
 				}
 			}

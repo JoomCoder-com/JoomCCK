@@ -35,7 +35,7 @@ class JFormFieldCsectionstypest extends JFormField
 		if($required) $class = 'required ';
 		
 		$html = '';
-		$html	.= JHTML::_('select.genericlist',  array(), $this->name.($multi ? "[]" : null),  ' class="inputbox '.$class.'" '.$multiselect);
+		$html	.= \Joomla\CMS\HTML\HTMLHelper::_('select.genericlist',  array(), $this->name.($multi ? "[]" : null),  ' class="inputbox '.$class.'" '.$multiselect);
 		
 		return $html;
 	}

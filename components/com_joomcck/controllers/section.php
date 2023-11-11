@@ -74,7 +74,7 @@ class JoomcckControllerSection extends MControllerForm
 		{
 			$new_id = $model->getState('section.id', 0);
 
-			$new = JTable::getInstance('Section', 'JoomcckTable');
+			$new = \Joomla\CMS\Table\Table::getInstance('Section', 'JoomcckTable');
 			$new->load($new_id);
 			$params = new \Joomla\Registry\Registry($new->params);
 			$key    = md5(time() . '-' . $new_id);
@@ -91,7 +91,7 @@ class JoomcckControllerSection extends MControllerForm
 
 	private function _createType($section, $post) {
 
-		$type = JTable::getInstance('Type', 'JoomcckTable');
+		$type = \Joomla\CMS\Table\Table::getInstance('Type', 'JoomcckTable');
 
 		$type->save([
 			"name" => $post['type'],
@@ -104,7 +104,7 @@ class JoomcckControllerSection extends MControllerForm
 		\Joomla\CMS\Router\Route::_('index.php?option=com_joomcck&task=ctype.edit&id='.$type->id).'">here!</a></p>';
 		$type->store();
 
-		$field = JTable::getInstance('Field', 'JoomcckTable');
+		$field = \Joomla\CMS\Table\Table::getInstance('Field', 'JoomcckTable');
 
 		$field->save([
 			"key" => 'k7487b05e1d4d26cb2631e6cace96b7ee',
@@ -138,10 +138,10 @@ class JoomcckControllerSection extends MControllerForm
 	private function _createMenu($section, $menu_type) {
 		$db = \Joomla\CMS\Factory::getDbo();
 
-		JTable::addIncludePath(JPATH_ADMINISTRATOR . '/components/com_menus/tables');
-		JTable::addIncludePath(JPATH_LIBRARIES . '/src/Table');
+		\Joomla\CMS\Table\Table::addIncludePath(JPATH_ADMINISTRATOR . '/components/com_menus/tables');
+		\Joomla\CMS\Table\Table::addIncludePath(JPATH_LIBRARIES . '/src/Table');
 
-		$et = JTable::getInstance('Extension', 'JTable');
+		$et = \Joomla\CMS\Table\Table::getInstance('Extension', '\\Joomla\\CMS\\Table\\Table');
         $et->load([
             "name"    => 'com_joomcck',
             "type"    => 'component',
@@ -153,7 +153,7 @@ class JoomcckControllerSection extends MControllerForm
 			return;
 		}
 		
-		$menu_table = JTable::getInstance('Menu', 'JTable', []);
+		$menu_table = \Joomla\CMS\Table\Table::getInstance('Menu', '\\Joomla\\CMS\\Table\\Table', []);
 		
         $sql = "SELECT id FROM `#__usergroups` WHERE title = 'Public'";
         $db->setQuery($sql);

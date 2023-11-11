@@ -82,7 +82,7 @@ class  CFormFieldRelate extends CFormField
 		{
 			if($this->params->get('params.strict_to_user_mode') > 1 && $app->input->getInt('id'))
 			{
-				$record = JTable::getInstance('Record', 'JoomcckTable');
+				$record = \Joomla\CMS\Table\Table::getInstance('Record', 'JoomcckTable');
 				$record->load($app->input->getInt('id'));
 				$user_id = $record->user_id;
 				if(!$user_id && $this->params->get('params.strict_to_user_mode') == 3)
@@ -101,7 +101,7 @@ class  CFormFieldRelate extends CFormField
 
 		if($this->type == 'parent' && !$this->isFilter)
 		{
-			$table = JTable::getInstance('Field', 'JoomcckTable');
+			$table = \Joomla\CMS\Table\Table::getInstance('Field', 'JoomcckTable');
 			$table->load($this->params->get('params.child_field'));
 			$child = new Registry($table->params);
 
@@ -632,7 +632,7 @@ class  CFormFieldRelate extends CFormField
 	{
 		$db = \Joomla\CMS\Factory::getDbo();
 
-		$table = JTable::getInstance('Record_values', 'JoomcckTable');
+		$table = \Joomla\CMS\Table\Table::getInstance('Record_values', 'JoomcckTable');
 
 		if($this->type == 'child')
 		{
@@ -670,7 +670,7 @@ class  CFormFieldRelate extends CFormField
 			return;
 		}
 
-		$field = JTable::getInstance('Field', 'JoomcckTable');
+		$field = \Joomla\CMS\Table\Table::getInstance('Field', 'JoomcckTable');
 		$field->load($save['field_id']);
 
 		$save['field_label'] = $field->label;

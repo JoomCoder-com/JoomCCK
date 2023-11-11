@@ -8,14 +8,14 @@ class SMF2Joomcck {
 	public function migrate($params)
 	{
 		\Joomla\CMS\Table\Table::addIncludePath(JPATH_ROOT . '/administrator/components/com_joomcck/tables');
-		JModelLegacy::addIncludePath(JPATH_ROOT . '/components/com_joomcck/models');
+		\Joomla\CMS\MVC\Model\BaseDatabaseModel::addIncludePath(JPATH_ROOT . '/components/com_joomcck/models');
 
 		$this->record   = \Joomla\CMS\Table\Table::getInstance('Record', 'JoomcckTable');
 		$this->category = \Joomla\CMS\Table\Table::getInstance('Record_category', 'JoomcckTable');
-		$this->comments = JTable::getInstance('Cobcomments', 'JoomcckTable');
+		$this->comments = \Joomla\CMS\Table\Table::getInstance('Cobcomments', 'JoomcckTable');
 		$this->fields   = $this->getFields($params->get('type_id'));
-		$this->values   = JTable::getInstance('Record_values', 'JoomcckTable');
-		$this->follow   = JTable::getInstance('Subscribe', 'JoomcckTable');
+		$this->values   = \Joomla\CMS\Table\Table::getInstance('Record_values', 'JoomcckTable');
+		$this->follow   = \Joomla\CMS\Table\Table::getInstance('Subscribe', 'JoomcckTable');
 
 		$this->type    = $this->getType($params->get('type_id'));
 		$this->section = $this->getSection($params->get('section_id'));
@@ -58,8 +58,8 @@ class SMF2Joomcck {
 			$message = $this->_getMessage($record->ID_FIRST_MSG);
 
 			$data['title'] = $message->subject;
-			$data['ctime'] = JDate::getInstance($message->posterTime)->toSql();
-			$data['mtime'] = $message->modifiedTime ? JDate::getInstance($message->modifiedTime)->toSql() : $data['ctime'];
+			$data['ctime'] = \Joomla\CMS\Date\Date::getInstance($message->posterTime)->toSql();
+			$data['mtime'] = $message->modifiedTime ? \Joomla\CMS\Date\Date::getInstance($message->modifiedTime)->toSql() : $data['ctime'];
 			$data['ip']    = $message->posterIP;
 
 
@@ -124,7 +124,7 @@ class SMF2Joomcck {
 			{
 
 				$this->comments->bind($data);
-				$this->comments->ctime     = JDate::getInstance($item->posterTime)->toSql();
+				$this->comments->ctime     = \Joomla\CMS\Date\Date::getInstance($item->posterTime)->toSql();
 				$this->comments->langs     = '*';
 				$this->comments->published = 1;
 				$this->comments->access    = 1;

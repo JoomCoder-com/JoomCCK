@@ -317,7 +317,7 @@ JWP;
 	public function _getVideoThumb($file)
 	{
 		$params = \Joomla\CMS\Component\ComponentHelper::getParams('com_joomcck');
-		$root   = JPath::clean($params->get('general_upload'));
+		$root   = \Joomla\CMS\Filesystem\Path::clean($params->get('general_upload'));
 		$url    = str_replace(JPATH_ROOT, '', $root);
 		$url    = str_replace("\\", '/', $url);
 		$url    = preg_replace('#^\/#iU', '', $url);

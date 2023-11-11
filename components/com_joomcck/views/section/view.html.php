@@ -24,7 +24,7 @@ class JoomcckViewSection extends MViewBase
 		$this->item  = $this->get('Item');
 		$this->canDo = 1;
 
-		$params = new JForm('params', array('control' => 'params'));
+		$params = new \Joomla\CMS\Form\Form('params', array('control' => 'params'));
 		$params->loadFile(JPATH_COMPONENT. '/models/forms/params.section.xml');
 		$this->params_form   = $params;
 		$this->params_groups = array(

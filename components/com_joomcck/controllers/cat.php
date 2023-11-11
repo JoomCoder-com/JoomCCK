@@ -27,7 +27,7 @@ class JoomcckControllerCat extends MControllerForm
 	public function postSaveHook(MModelBase $model, $validData = array())
 	{
 		$app = \Joomla\CMS\Factory::getApplication();
-		$section = JTable::getInstance('Section', 'JoomcckTable');
+		$section = \Joomla\CMS\Table\Table::getInstance('Section', 'JoomcckTable');
 		$section->load($app->input->getInt('section_id'));
 
 		$id = (int)$model->getState($this->context.'.id');

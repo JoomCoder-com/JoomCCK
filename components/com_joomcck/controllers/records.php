@@ -169,7 +169,7 @@ class JoomcckControllerRecords extends MControllerAdmin
 		$db->setQuery($sql);
 		$db->execute();
 
-		$this->record = JTable::getInstance('Record', 'JoomcckTable');
+		$this->record = \Joomla\CMS\Table\Table::getInstance('Record', 'JoomcckTable');
 
 		$this->_rollback($lastversion);
 
@@ -257,7 +257,7 @@ class JoomcckControllerRecords extends MControllerAdmin
 
 	private function _restore_table($list, $table_class, $ref = 'record_id')
 	{
-		$table = JTable::getInstance($table_class, 'JoomcckTable');
+		$table = \Joomla\CMS\Table\Table::getInstance($table_class, 'JoomcckTable');
 		$name = $table->getTableName();
 
 		if(!$name)
@@ -493,7 +493,7 @@ class JoomcckControllerRecords extends MControllerAdmin
 
 		if($type->params->get('audit.versioning'))
 		{
-			$versions = JTable::getInstance('Audit_versions', 'JoomcckTable');
+			$versions = \Joomla\CMS\Table\Table::getInstance('Audit_versions', 'JoomcckTable');
 			$version  = $versions->snapshot($this->input->getInt('id'), $type);
 		}
 
@@ -522,7 +522,7 @@ class JoomcckControllerRecords extends MControllerAdmin
 
 		if(!empty($files) && !$type->params->get('audit.versioning'))
 		{
-			$field_table   = JTable::getInstance('Field', 'JoomcckTable');
+			$field_table   = \Joomla\CMS\Table\Table::getInstance('Field', 'JoomcckTable');
 			$joomcck_params = \Joomla\CMS\Component\ComponentHelper::getParams('com_joomcck');
 
 			foreach($files AS $file)
@@ -577,7 +577,7 @@ class JoomcckControllerRecords extends MControllerAdmin
 
 			$restore['type_id'] = $type->id;
 
-			$table = JTable::getInstance('Audit_restore', 'JoomcckTable');
+			$table = \Joomla\CMS\Table\Table::getInstance('Audit_restore', 'JoomcckTable');
 			$table->save($restore);
 		}
 
@@ -612,7 +612,7 @@ class JoomcckControllerRecords extends MControllerAdmin
 		ATlog::log($this->record, ATlog::REC_DELETE);
 		$this->_finish(\Joomla\CMS\Language\Text::_('CMSG_RECDELETEDOK'));
 
-		JPluginHelper::importPlugin('mint');
+		\Joomla\CMS\Plugin\PluginHelper::importPlugin('mint');
 		$dispatcher = \Joomla\CMS\Factory::getApplication();
 		$dispatcher->triggerEvent('onRecordDelete', array($this->record));
 
@@ -665,7 +665,7 @@ class JoomcckControllerRecords extends MControllerAdmin
 
 	protected function _checkAccess($control, $id)
 	{
-		$this->record = JTable::getInstance('Record', 'JoomcckTable');
+		$this->record = \Joomla\CMS\Table\Table::getInstance('Record', 'JoomcckTable');
 		$this->record->load($id);
 
 		$this->record;

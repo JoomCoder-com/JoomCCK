@@ -24,11 +24,11 @@ class JFormFieldMeresourcestype extends JFormMEFieldList
 		$options = array();
 		if ($this->element['select'] == 1)
 		{
-			$options[] = JHTML::_('select.option', '', \Joomla\CMS\Language\Text::_('Select Content Type'));
+			$options[] = \Joomla\CMS\HTML\HTMLHelper::_('select.option', '', \Joomla\CMS\Language\Text::_('Select Content Type'));
 		}
 		foreach ($sections as $type)
 		{
-			$options[] = JHTML::_('select.option', $type->value, $type->text);
+			$options[] = \Joomla\CMS\HTML\HTMLHelper::_('select.option', $type->value, $type->text);
 
 		}
 		return $options;

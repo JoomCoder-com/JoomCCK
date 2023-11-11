@@ -138,7 +138,7 @@ class MControllerBase extends JObject
 	/**
 	 * Instance container.
 	 *
-	 * @var    JControllerLegacy
+	 * @var    \Joomla\CMS\MVC\Controller\BaseController
 	 * @since  12.2
 	 */
 	protected static $instance;
@@ -216,7 +216,7 @@ class MControllerBase extends JObject
 	 * @param   string  $prefix  The prefix for the controller.
 	 * @param   array   $config  An array of optional constructor options.
 	 *
-	 * @return  JControllerLegacy
+	 * @return  \Joomla\CMS\MVC\Controller\BaseController
 	 *
 	 * @since   12.2
 	 * @throws  Exception if the controller cannot be loaded.
@@ -237,7 +237,7 @@ class MControllerBase extends JObject
 
 
 		// Check for array format.
-		$filter = JFilterInput::getInstance();
+		$filter = \Joomla\CMS\Filter\InputFilter::getInstance();
 
 		if (is_array($command))
 		{
@@ -329,7 +329,7 @@ class MControllerBase extends JObject
 
 		if (defined('JDEBUG') && JDEBUG)
 		{
-			JLog::addLogger(array('text_file' => 'jcontroller.log.php'), JLog::ALL, array('controller'));
+			\Joomla\CMS\Log\Log::addLogger(array('text_file' => 'jcontroller.log.php'), \Joomla\CMS\Log\Log::ALL, array('controller'));
 		}
 
 		$this->input = \Joomla\CMS\Factory::getApplication()->input;
@@ -443,7 +443,7 @@ class MControllerBase extends JObject
 	 * @param   string  $type  The path type (e.g. 'model', 'view').
 	 * @param   mixed   $path  The directory string  or stream array to search.
 	 *
-	 * @return  JControllerLegacy  A JControllerLegacy object to support chaining.
+	 * @return  \Joomla\CMS\MVC\Controller\BaseController  A \Joomla\CMS\MVC\Controller\BaseController object to support chaining.
 	 *
 	 * @since   12.2
 	 * @note    Replaces _addPath.
@@ -462,7 +462,7 @@ class MControllerBase extends JObject
 		foreach ($path as $dir)
 		{
 			// No surrounding spaces allowed!
-			$dir = rtrim(JPath::check($dir, '/'), '/') . '/';
+			$dir = rtrim(\Joomla\CMS\Filesystem\Path::check($dir, '/'), '/') . '/';
 
 			// Add to the top of the search dirs
 			array_unshift($this->paths[$type], $dir);
@@ -476,7 +476,7 @@ class MControllerBase extends JObject
 	 *
 	 * @param   mixed  $path  The directory (string) or list of directories (array) to add.
 	 *
-	 * @return  JControllerLegacy  This object to support chaining.
+	 * @return  \Joomla\CMS\MVC\Controller\BaseController  This object to support chaining.
 	 */
 	public function addViewPath($path)
 	{
@@ -497,7 +497,7 @@ class MControllerBase extends JObject
 	 */
 	public function authorise($task)
 	{
-		JLog::add(__METHOD__ . ' is deprecated. Use JAccess instead.', JLog::WARNING, 'deprecated');
+		\Joomla\CMS\Log\Log::add(__METHOD__ . ' is deprecated. Use JAccess instead.', \Joomla\CMS\Log\Log::WARNING, 'deprecated');
 
 		return true;
 	}
@@ -523,7 +523,7 @@ class MControllerBase extends JObject
 
 			if (defined('JDEBUG') && JDEBUG)
 			{
-				JLog::add(
+				\Joomla\CMS\Log\Log::add(
 					sprintf(
 						'Checking edit ID %s.%s: %d %s',
 						$context,
@@ -531,7 +531,7 @@ class MControllerBase extends JObject
 						(int) $result,
 						str_replace("\n", ' ', print_r($values, 1))
 					),
-					JLog::INFO,
+					\Joomla\CMS\Log\Log::INFO,
 					'controller'
 				);
 			}
@@ -600,7 +600,7 @@ class MControllerBase extends JObject
 		if (!class_exists($viewClass))
 		{
 			jimport('joomla.filesystem.path');
-			$path = JPath::find($this->paths['view'], $this->createFileName('view', array('name' => $viewName, 'type' => $viewType)));
+			$path = \Joomla\CMS\Filesystem\Path::find($this->paths['view'], $this->createFileName('view', array('name' => $viewName, 'type' => $viewType)));
 
 			if ($path)
 			{
@@ -627,9 +627,9 @@ class MControllerBase extends JObject
 	 * you will need to override it in your own controllers.
 	 *
 	 * @param   boolean  $cachable   If true, the view output will be cached
-	 * @param   array    $urlparams  An array of safe url parameters and their variable types, for valid values see {@link JFilterInput::clean()}.
+	 * @param   array    $urlparams  An array of safe url parameters and their variable types, for valid values see {@link \Joomla\CMS\Filter\InputFilter::clean()}.
 	 *
-	 * @return  JControllerLegacy  A JControllerLegacy object to support chaining.
+	 * @return  \Joomla\CMS\MVC\Controller\BaseController  A \Joomla\CMS\MVC\Controller\BaseController object to support chaining.
 	 *
 	 * @since   12.2
 	 */
@@ -674,7 +674,7 @@ class MControllerBase extends JObject
 
 				foreach ($urlparams as $key => $value)
 				{
-					// Add your safe url parameters with variable type as value {@see JFilterInput::clean()}.
+					// Add your safe url parameters with variable type as value {@see \Joomla\CMS\Filter\InputFilter::clean()}.
 					$registeredurlparams->$key = $value;
 				}
 
@@ -892,14 +892,14 @@ class MControllerBase extends JObject
 
 			if (defined('JDEBUG') && JDEBUG)
 			{
-				JLog::add(
+				\Joomla\CMS\Log\Log::add(
 					sprintf(
 						'Holding edit ID %s.%s %s',
 						$context,
 						$id,
 						str_replace("\n", ' ', print_r($values, 1))
 					),
-					JLog::INFO,
+					\Joomla\CMS\Log\Log::INFO,
 					'controller'
 				);
 			}
@@ -934,7 +934,7 @@ class MControllerBase extends JObject
 	 *
 	 * @param   string  $method  The name of the method in the derived class to perform if a named task is not found.
 	 *
-	 * @return  JControllerLegacy  A JControllerLegacy object to support chaining.
+	 * @return  \Joomla\CMS\MVC\Controller\BaseController  A \Joomla\CMS\MVC\Controller\BaseController object to support chaining.
 	 *
 	 * @since   12.2
 	 */
@@ -951,7 +951,7 @@ class MControllerBase extends JObject
 	 * @param   string  $task    The task.
 	 * @param   string  $method  The name of the method in the derived class to perform for this task.
 	 *
-	 * @return  JControllerLegacy  A JControllerLegacy object to support chaining.
+	 * @return  \Joomla\CMS\MVC\Controller\BaseController  A \Joomla\CMS\MVC\Controller\BaseController object to support chaining.
 	 *
 	 * @since   12.2
 	 */
@@ -970,7 +970,7 @@ class MControllerBase extends JObject
 	 *
 	 * @param   string  $task  The task.
 	 *
-	 * @return  JControllerLegacy  This object to support chaining.
+	 * @return  \Joomla\CMS\MVC\Controller\BaseController  This object to support chaining.
 	 *
 	 * @since   12.2
 	 */
@@ -1006,14 +1006,14 @@ class MControllerBase extends JObject
 
 			if (defined('JDEBUG') && JDEBUG)
 			{
-				JLog::add(
+				\Joomla\CMS\Log\Log::add(
 					sprintf(
 						'Releasing edit ID %s.%s %s',
 						$context,
 						$id,
 						str_replace("\n", ' ', print_r($values, 1))
 					),
-					JLog::INFO,
+					\Joomla\CMS\Log\Log::INFO,
 					'controller'
 				);
 			}
@@ -1066,7 +1066,7 @@ class MControllerBase extends JObject
 	 * @param   string  $msg   Message to display on redirect. Optional, defaults to value set internally by controller, if any.
 	 * @param   string  $type  Message type. Optional, defaults to 'message' or the type set by a previous call to setMessage.
 	 *
-	 * @return  JControllerLegacy  This object to support chaining.
+	 * @return  \Joomla\CMS\MVC\Controller\BaseController  This object to support chaining.
 	 *
 	 * @since   12.2
 	 */

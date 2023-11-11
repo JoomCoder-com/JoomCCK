@@ -54,7 +54,7 @@ class ATlog {
 		if(is_int($record))
 		{
 			$record_id = $record;
-			$record = JTable::getInstance('Record', 'JoomcckTable');
+			$record = \Joomla\CMS\Table\Table::getInstance('Record', 'JoomcckTable');
 			$record->load($record_id);
 		}
 		if(is_object($record))
@@ -88,7 +88,7 @@ class ATlog {
 			return;
 		}
 
-		$log = JTable::getInstance('Audit_log', 'JoomcckTable');
+		$log = \Joomla\CMS\Table\Table::getInstance('Audit_log', 'JoomcckTable');
 
 		$record['type_name'] = $type->name;
 		$record['section_name'] = ItemsStore::getSection($record['section_id'])->name;

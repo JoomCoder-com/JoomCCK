@@ -159,7 +159,7 @@ class JoomcckControllerUsercategory extends MControllerForm
 	{
 		$form = $this->input->get('jform', array(), 'array');
 		
-		$form['description'] = JFilterInput::getInstance()->clean($form['description']);
+		$form['description'] = \Joomla\CMS\Filter\InputFilter::getInstance()->clean($form['description']);
 		
 		$this->input->post->set('jform', $form);
 		

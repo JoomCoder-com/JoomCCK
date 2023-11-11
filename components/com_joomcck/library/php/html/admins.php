@@ -29,13 +29,13 @@ class JHTMLAdmins
 		;
 		$db->setQuery( $query );
 		if ( $nouser ) {
-			$users[] = JHTML::_('select.option',  '0', '- '. \Joomla\CMS\Language\Text::_( 'CNOUSER' ) .' -' );
+			$users[] = \Joomla\CMS\HTML\HTMLHelper::_('select.option',  '0', '- '. \Joomla\CMS\Language\Text::_( 'CNOUSER' ) .' -' );
 			$users = array_merge( $users, $db->loadObjectList() );
 		} else {
 			$users = $db->loadObjectList();
 		}
 
-		$users = JHTML::_('select.genericlist',   $users, $name, 'class="form-select" size="1" '. $javascript, 'value', 'text', $active );
+		$users = \Joomla\CMS\HTML\HTMLHelper::_('select.genericlist',   $users, $name, 'class="form-select" size="1" '. $javascript, 'value', 'text', $active );
 
 		return $users;
 	}

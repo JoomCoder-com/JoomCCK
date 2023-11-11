@@ -167,11 +167,11 @@ class JoomcckViewRecords extends MViewBase
 			$item_ids[] = $item->id;
 		}
 
-		JSession::getInstance('com_joomcck', array())->set('joomcck_last_list_ids', $item_ids);
+		\Joomla\CMS\Session\Session::getInstance('com_joomcck', array())->set('joomcck_last_list_ids', $item_ids);
 
 		if($formatter = $app->input->get('formatter', FALSE))
 		{
-			$plg = JPluginHelper::importPlugin('mint', 'formatter_' . strtolower($formatter));
+			$plg = \Joomla\CMS\Plugin\PluginHelper::importPlugin('mint', 'formatter_' . strtolower($formatter));
 			if($plg)
 			{
 				$dispatcher = \Joomla\CMS\Factory::getApplication();

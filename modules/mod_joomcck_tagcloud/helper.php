@@ -7,21 +7,21 @@
  * @license   GNU/GPL http://www.gnu.org/copyleft/gpl.html
  */
 defined('_JEXEC') or die('Restricted access');
-JHTML::_('bootstrap.tooltip', '*[rel^="tooltip"]');
+\Joomla\CMS\HTML\HTMLHelper::_('bootstrap.tooltip', '*[rel^="tooltip"]');
 
 class modJoomcckTagcloudHelper
 {
 
 	public static function getSection($id)
 	{
-		$model = JModelLegacy::getInstance('Section', 'JoomcckModel');
+		$model = \Joomla\CMS\MVC\Model\BaseDatabaseModel::getInstance('Section', 'JoomcckModel');
 
 		return $model->getItem($id);
 	}
 
 	public static function getCategory($id)
 	{
-		$model = JModelLegacy::getInstance('Category', 'JoomcckModel');
+		$model = \Joomla\CMS\MVC\Model\BaseDatabaseModel::getInstance('Category', 'JoomcckModel');
 
 		return $model->getItem($id);
 	}

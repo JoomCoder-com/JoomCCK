@@ -31,7 +31,7 @@ class JoomcckControllerUsercategories extends MControllerAdmin
 	
 	public function saveOrderAjax()
 	{
-		JSession::checkToken() or jexit(\Joomla\CMS\Language\Text::_('JINVALID_TOKEN'));
+		\Joomla\CMS\Session\Session::checkToken() or jexit(\Joomla\CMS\Language\Text::_('JINVALID_TOKEN'));
 	
 		// Get the arrays from the Request
 		$pks   = $this->input->post->get('cid', null, 'array');

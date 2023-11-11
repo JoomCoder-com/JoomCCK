@@ -12,7 +12,7 @@ use Joomla\CMS\Factory;
 
 defined('_JEXEC') or die('Restricted access');
 
-JHTML::_('bootstrap.tooltip', '*[rel^="tooltip"]');
+\Joomla\CMS\HTML\HTMLHelper::_('bootstrap.tooltip', '*[rel^="tooltip"]');
 
 jimport('joomla.plugin.plugin');
 require_once JPATH_ROOT . '/components/com_joomcck/library/php/helpers/helper.php';
@@ -31,7 +31,7 @@ class plgContentGlossary extends JPlugin
 			return;
 		}
 
-		JHTML::_('bootstrap.tooltip');
+		\Joomla\CMS\HTML\HTMLHelper::_('bootstrap.tooltip');
 
 		$field = $this->params->get('field');
 		if(! $field)

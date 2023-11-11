@@ -66,7 +66,7 @@ class JoomcckControllerForm extends MControllerForm
 		}
 
 		$dispatcher = Factory::getApplication();
-		JPluginHelper::importPlugin('mint');
+		\Joomla\CMS\Plugin\PluginHelper::importPlugin('mint');
 		$dispatcher->triggerEvent('onBeforeArticleSaved', array(($record['id'] == 0), $record, $section, $type));
 
 		parent::save($key, $urlVar);
@@ -78,12 +78,12 @@ class JoomcckControllerForm extends MControllerForm
 		$user         = \Joomla\CMS\Factory::getUser();
 		$fileds_model = MModelBase::getInstance('Fields', 'JoomcckModel');
 		$record_id    = $model->getState('form.id');
-		$table        = JTable::getInstance('Record_values', 'JoomcckTable');
+		$table        = \Joomla\CMS\Table\Table::getInstance('Record_values', 'JoomcckTable');
 
 		$type    = ItemsStore::getType($validData['type_id']);
 		$section = ItemsStore::getSection($validData['section_id']);
 
-		$record = JTable::getInstance('Record', 'JoomcckTable');
+		$record = \Joomla\CMS\Table\Table::getInstance('Record', 'JoomcckTable');
 		$record->load($record_id);
 
 		$fields = $fileds_model->getFormFields($validData['type_id'], $record_id, FALSE, json_decode($record->fields, TRUE));
@@ -120,12 +120,12 @@ class JoomcckControllerForm extends MControllerForm
 				if($field->type == 'email' && !$user->get('id') && $field->value && $type->params->get('submission.public_edit'))
 				{
 					$config  = \Joomla\CMS\Factory::getConfig();
-					$subject = JMailHelper::cleanSubject(\Joomla\CMS\Language\Text::sprintf('CEDITRECORDEMAIL', $type->name, $section->name));
-					$body    = JMailHelper::cleanBody(\Joomla\CMS\Language\Text::sprintf('CEDITREORDBODY', $type->name, $section->name, $config->get('sitename'),
+					$subject = \Joomla\CMS\Mail\MailHelper::cleanSubject(\Joomla\CMS\Language\Text::sprintf('CEDITRECORDEMAIL', $type->name, $section->name));
+					$body    = \Joomla\CMS\Mail\MailHelper::cleanBody(\Joomla\CMS\Language\Text::sprintf('CEDITREORDBODY', $type->name, $section->name, $config->get('sitename'),
 						preg_replace('/\/$/iU', '', JURI::root(TRUE)) . $url));
 					$mailer  = \Joomla\CMS\Factory::getMailer();
 					$mailer->sendMail($config->get('mailfrom'), $config->get('fromname'),
-						JMailHelper::cleanAddress($field->value), $subject, $body);
+						\Joomla\CMS\Mail\MailHelper::cleanAddress($field->value), $subject, $body);
 					//JError::raiseNotice(100, $subject.$body);
 				}
 
@@ -186,8 +186,8 @@ class JoomcckControllerForm extends MControllerForm
 		{
 			settype($categories, 'array');
 
-			$table_cat      = JTable::getInstance('CobCategory', 'JoomcckTable');
-			$table_category = JTable::getInstance('Record_category', 'JoomcckTable');
+			$table_cat      = \Joomla\CMS\Table\Table::getInstance('CobCategory', 'JoomcckTable');
+			$table_category = \Joomla\CMS\Table\Table::getInstance('Record_category', 'JoomcckTable');
 
 			$cids = array();
 			foreach($categories as $key => $category)
@@ -233,8 +233,8 @@ class JoomcckControllerForm extends MControllerForm
 		
 		if(isset($validData['tags']) && $validData['tags'] != '')
 		{
-            $tag_table     = JTable::getInstance('Tags', 'JoomcckTable');
-            $taghist_table = JTable::getInstance('Taghistory', 'JoomcckTable');
+            $tag_table     = \Joomla\CMS\Table\Table::getInstance('Tags', 'JoomcckTable');
+            $taghist_table = \Joomla\CMS\Table\Table::getInstance('Taghistory', 'JoomcckTable');
 
             $out = $data = $rtags = $tag_ids = [];
 
@@ -313,7 +313,7 @@ class JoomcckControllerForm extends MControllerForm
 				{
 					$data['host_id'] = $pid;
 
-					$post_table = JTable::getInstance('Reposts', 'JoomcckTable');
+					$post_table = \Joomla\CMS\Table\Table::getInstance('Reposts', 'JoomcckTable');
 					$post_table->save($data);
 					$post_table->reset();
 				}
@@ -329,7 +329,7 @@ class JoomcckControllerForm extends MControllerForm
 		if($type->params->get('audit.versioning'))
 		{
 			$record->store();
-			$versions = JTable::getInstance('Audit_versions', 'JoomcckTable');
+			$versions = \Joomla\CMS\Table\Table::getInstance('Audit_versions', 'JoomcckTable');
 			$version  = $versions->snapshot($validData['id'], $type);
 
 			$record->version = $version;
@@ -377,11 +377,11 @@ class JoomcckControllerForm extends MControllerForm
 			// event on parent or child added
 			if($this->input->getInt('fand') && $this->input->getInt('field_id'))
 			{
-				$field = JTable::getInstance('Field', 'JoomcckTable');
+				$field = \Joomla\CMS\Table\Table::getInstance('Field', 'JoomcckTable');
 				$field->load($this->input->getInt('field_id'));
 				$field->params = new \Joomla\Registry\Registry($field->params);
 
-				$fand = JTable::getInstance('Record', 'JoomcckTable');
+				$fand = \Joomla\CMS\Table\Table::getInstance('Record', 'JoomcckTable');
 				$fand->load($this->input->getInt('fand'));
 
 				$fand->added = $record;
@@ -398,12 +398,12 @@ class JoomcckControllerForm extends MControllerForm
 				$parent = ItemsStore::getRecord($record->parent_id);
 				CEventsHelper::notify('record', CEventsHelper::_COMMENT_NEW, $parent->id, $parent->section_id, 0, 0, 0, get_class_vars($parent));
 
-				$model_record = JModelLegacy::getInstance('Record', 'JoomcckModel');
+				$model_record = \Joomla\CMS\MVC\Model\BaseDatabaseModel::getInstance('Record', 'JoomcckModel');
 				$model_record->onComment($record->parent_id, $validData, false);
 
 				/*$db->setQuery("SELECT COUNT(id) FROM `#__js_res_record` WHERE parent_id = {$record->parent_id} AND parent = 'com_joomcck' AND published = 1");
 				$parent->comments = $db->loadResult();
-				$parent->mtime = JDate::getInstance()->toSql();*/
+				$parent->mtime = \Joomla\CMS\Date\Date::getInstance()->toSql();*/
 			}
 		}
 
@@ -414,7 +414,7 @@ class JoomcckControllerForm extends MControllerForm
 		CSubscriptionsHelper::subscribe_record($record);
 
 		$dispatcher = Factory::getApplication();
-		JPluginHelper::importPlugin('mint');
+		\Joomla\CMS\Plugin\PluginHelper::importPlugin('mint');
 		$dispatcher->triggerEvent('onAfterArticleSaved', array($isnew, $record, $fields, $section, $type));
 
 		if($this->getTask() == 'save')

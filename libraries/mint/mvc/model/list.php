@@ -73,7 +73,7 @@ class MModelList extends MModelBase
 	 *
 	 * @param   array  $config  An optional associative array of configuration settings.
 	 *
-	 * @see     JModelLegacy
+	 * @see     \Joomla\CMS\MVC\Model\BaseDatabaseModel
 	 * @since   12.2
 	 */
 	public function __construct($config = array())
@@ -619,7 +619,7 @@ class MModelList extends MModelBase
 	protected function preprocessForm(JForm $form, $data, $group = 'content')
 	{
 		// Import the appropriate plugin group.
-		JPluginHelper::importPlugin($group);
+		\Joomla\CMS\Plugin\PluginHelper::importPlugin($group);
 
 		// Get the dispatcher.
 		$dispatcher = \Joomla\CMS\Factory::getApplication();
@@ -649,7 +649,7 @@ class MModelList extends MModelBase
 	 * @param   string   $key        The key of the user state variable.
 	 * @param   string   $request    The name of the variable passed in a request.
 	 * @param   string   $default    The default value for the variable if not found. Optional.
-	 * @param   string   $type       Filter for the variable, for valid values see {@link JFilterInput::clean()}. Optional.
+	 * @param   string   $type       Filter for the variable, for valid values see {@link \Joomla\CMS\Filter\InputFilter::clean()}. Optional.
 	 * @param   boolean  $resetPage  If true, the limitstart in request is set to zero
 	 *
 	 * @return  The request user state.

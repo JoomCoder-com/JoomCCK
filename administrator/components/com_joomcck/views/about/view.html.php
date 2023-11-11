@@ -46,8 +46,8 @@ class JoomcckViewAbout extends MViewBase
         $this->data   = $data;
         $this->fields = $fields;
 
-        JTable::addIncludePath(JPATH_ADMINISTRATOR . '/components/com_menus/tables');
-        $menu_table = JTable::getInstance('Menu', 'JTable', []);
+        \Joomla\CMS\Table\Table::addIncludePath(JPATH_ADMINISTRATOR . '/components/com_menus/tables');
+        $menu_table = \Joomla\CMS\Table\Table::getInstance('Menu', '\\Joomla\\CMS\\Table\\Table', []);
 
         $menu_table->load([
             "link" => 'index.php?option=com_joomcck&view=cpanel',

@@ -37,10 +37,10 @@ class JoomcckControllerSale extends MControllerForm
 			return ;
 		}
 
-		$order = JTable::getInstance('Sales', 'JoomcckTable');
+		$order = \Joomla\CMS\Table\Table::getInstance('Sales', 'JoomcckTable');
 		$order->load($order_id);
 
-		$field = JTable::getInstance('Field', 'JoomcckTable');
+		$field = \Joomla\CMS\Table\Table::getInstance('Field', 'JoomcckTable');
 		$field->load($order->field_id);
 		$field->params = new \Joomla\Registry\Registry($field->params);
 
@@ -100,7 +100,7 @@ class JoomcckControllerSale extends MControllerForm
 
 		$id = $this->input->getInt('id');
 
-		$table = JTable::getInstance('Sales', 'JoomcckTable');
+		$table = \Joomla\CMS\Table\Table::getInstance('Sales', 'JoomcckTable');
 		$table->load($id);
 
 		if($table->gateway && $table->gateway != 'CMANUAL')

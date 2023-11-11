@@ -48,7 +48,7 @@ class JoomcckControllerTools extends MControllerForm
 		else
 		{
 			$dispatcher = \Joomla\CMS\Factory::getApplication();
-			JPluginHelper::importPlugin('mint');
+			\Joomla\CMS\Plugin\PluginHelper::importPlugin('mint');
 			$dispatcher->triggerEvent('onToolExecute', array(
 				$name,
 				$params

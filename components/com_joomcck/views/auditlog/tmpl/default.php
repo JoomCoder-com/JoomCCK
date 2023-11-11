@@ -11,7 +11,7 @@ use Joomcck\Layout\Helpers\Layout;
 
 defined('_JEXEC') or die ();
 
-JHTML::_('bootstrap.tooltip', '*[rel^="tooltip"]');
+\Joomla\CMS\HTML\HTMLHelper::_('bootstrap.tooltip', '*[rel^="tooltip"]');
 
 $listOrder = $this->state->get('list.ordering');
 $listDirn  = $this->state->get('list.direction');

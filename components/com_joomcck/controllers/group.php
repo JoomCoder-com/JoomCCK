@@ -33,7 +33,7 @@ class JoomcckControllerGroup extends MControllerForm
 	public function postSaveHook(MModelBase $model, $validData = array())
 	{
 
-		$table = JTable::getInstance('Group', 'JoomcckTable');
+		$table = \Joomla\CMS\Table\Table::getInstance('Group', 'JoomcckTable');
 		$table->reorder('type_id ='. $validData['type_id']);
 
 		if($this->input->getBase64('return'))

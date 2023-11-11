@@ -34,11 +34,11 @@ class JFormFieldMeresourcessection extends JFormMEFieldList
 		$options = array();
 		if($this->element['select'] == 1)
 		{
-			$options[] = JHTML::_('select.option', '', \Joomla\CMS\Language\Text::_('CSELECTSECTION'));
+			$options[] = \Joomla\CMS\HTML\HTMLHelper::_('select.option', '', \Joomla\CMS\Language\Text::_('CSELECTSECTION'));
 		}
 		foreach($sections as $type)
 		{
-			$options[] = JHTML::_('select.option', $type->value . ($this->element['alias'] == 1 ? ':' . $type->alias : NULL), $type->text);
+			$options[] = \Joomla\CMS\HTML\HTMLHelper::_('select.option', $type->value . ($this->element['alias'] == 1 ? ':' . $type->alias : NULL), $type->text);
 
 		}
 

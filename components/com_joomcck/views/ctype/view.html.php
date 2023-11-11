@@ -18,7 +18,7 @@ class JoomcckViewCType extends MViewBase
 		$this->item = $this->get('Item');
 		$this->form = $this->get('Form');
 
-		$params = new JForm('params', array(
+		$params = new \Joomla\CMS\Form\Form('params', array(
 			'control' => 'params'
 		));
 		$params->loadFile(JPATH_COMPONENT. '/models/forms/params.type.xml');

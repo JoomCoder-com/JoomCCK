@@ -61,7 +61,7 @@ class com_joomcckInstallerScript
         $db->setQuery($sql);
         $menu_type = $db->loadResult();
 
-        $et = JTable::getInstance('Extension', 'JTable');
+        $et = \Joomla\CMS\Table\Table::getInstance('Extension', '\\Joomla\\CMS\\Table\\Table');
         $et->load([
             "name"    => 'com_joomcck',
             "type"    => 'component',
@@ -82,8 +82,8 @@ class com_joomcckInstallerScript
         $et->params = json_encode($params);
         $et->store();
 
-        JTable::addIncludePath(JPATH_ADMINISTRATOR . '/components/com_menus/tables');
-        $menu_table = JTable::getInstance('Menu', 'JTable', []);
+        \Joomla\CMS\Table\Table::addIncludePath(JPATH_ADMINISTRATOR . '/components/com_menus/tables');
+        $menu_table = \Joomla\CMS\Table\Table::getInstance('Menu', '\\Joomla\\CMS\\Table\\Table', []);
 
         $menu_table->load([
             "link"         => 'index.php?option=com_joomcck&view=cpanel',
@@ -555,7 +555,7 @@ class com_joomcckInstallerScript
     }
 }
 
-class JoomlaTableExtensions extends JTable
+class JoomlaTableExtensions extends \Joomla\CMS\Table\Table
 {
     public function __construct(&$_db)
     {

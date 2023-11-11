@@ -61,7 +61,7 @@ class JoomcckControllerFiles extends MControllerAdmin
         $return = Url::get_back('return');
         $params = \Joomla\CMS\Component\ComponentHelper::getParams('com_joomcck');
 
-        $files    = JTable::getInstance('Files', 'JoomcckTable');
+        $files    = \Joomla\CMS\Table\Table::getInstance('Files', 'JoomcckTable');
         $field_id = $this->input->getInt('fid');
         if (!$field_id) {
 	        Factory::getApplication()->enqueueMessage(\Joomla\CMS\Language\Text::_('CERRNOFILEID'), 'warning');
@@ -71,8 +71,8 @@ class JoomcckControllerFiles extends MControllerAdmin
             return;
         }
 
-        JTable::addIncludePath(JPATH_COMPONENT_ADMINISTRATOR . 'tables/field.php');
-        $field_table = JTable::getInstance('Field', 'JoomcckTable');
+        \Joomla\CMS\Table\Table::addIncludePath(JPATH_COMPONENT_ADMINISTRATOR . 'tables/field.php');
+        $field_table = \Joomla\CMS\Table\Table::getInstance('Field', 'JoomcckTable');
         $field_table->load($field_id);
         if (!$field_table->id) {
 	        Factory::getApplication()->enqueueMessage(\Joomla\CMS\Language\Text::_('CERRNOFILEID'), 'warning');
@@ -178,7 +178,7 @@ class JoomcckControllerFiles extends MControllerAdmin
 
             foreach ($fileslist as $file) {
                 $subfolder = $fieldclass->params->get('params.subfolder', $file['ext']);
-                $add       = JPath::clean(JPATH_ROOT . DIRECTORY_SEPARATOR . $params->get('general_upload') . DIRECTORY_SEPARATOR . $subfolder . DIRECTORY_SEPARATOR . $file['fullpath']);
+                $add       = \Joomla\CMS\Filesystem\Path::clean(JPATH_ROOT . DIRECTORY_SEPARATOR . $params->get('general_upload') . DIRECTORY_SEPARATOR . $subfolder . DIRECTORY_SEPARATOR . $file['fullpath']);
                 $zipper->addFile($add, $file['realname']);
             }
 
@@ -245,7 +245,7 @@ class JoomcckControllerFiles extends MControllerAdmin
     {
         $params = \Joomla\CMS\Component\ComponentHelper::getParams('com_joomcck');
 
-        $files = JTable::getInstance('Files', 'JoomcckTable');
+        $files = \Joomla\CMS\Table\Table::getInstance('Files', 'JoomcckTable');
         if ($id = $this->input->get('id', 0)) {
             $files->load($id);
         }
@@ -328,7 +328,7 @@ class JoomcckControllerFiles extends MControllerAdmin
                 ]
             ]);
         } else {
-            $field = JTable::getInstance('Field', 'JoomcckTable');
+            $field = \Joomla\CMS\Table\Table::getInstance('Field', 'JoomcckTable');
             $field->load($this->input->getInt('field_id'));
             if (!$field->id) {
                 echo json_encode(['error' => 1, 'msg' => 'Cannot load field: ' . $this->input->getInt('field_id')]);
@@ -373,7 +373,7 @@ class JoomcckControllerFiles extends MControllerAdmin
             if ($save['id']) {
                 \Joomla\CMS\Filesystem\File::delete($src);
                 if($this->input->get('record_id') && !$this->input->getInt('iscomment')) {
-                    $record = JTable::getInstance('Record', 'JoomcckTable');
+                    $record = \Joomla\CMS\Table\Table::getInstance('Record', 'JoomcckTable');
                     $record->load($this->input->get('record_id'));
                     if($record->id) {
                         $fields = json_decode($record->fields, TRUE);
@@ -381,10 +381,10 @@ class JoomcckControllerFiles extends MControllerAdmin
                         $record->fields = json_encode($fields);
                         $record->store();
 
-                        $rv = JTable::getInstance('Record_values', 'JoomcckTable');
+                        $rv = \Joomla\CMS\Table\Table::getInstance('Record_values', 'JoomcckTable');
                         $rv->store_value($save['realname'], NULL, $record, $field);
 
-                        $file_table = JTable::getInstance('Files', 'JoomcckTable');
+                        $file_table = \Joomla\CMS\Table\Table::getInstance('Files', 'JoomcckTable');
                         $file_table->load($save['id']);
                         $file_table->saved = 1;
                         $file_table->store();
@@ -415,7 +415,7 @@ class JoomcckControllerFiles extends MControllerAdmin
             $ext       = StringHelper::strtolower(\Joomla\CMS\Filesystem\File::getExt($response['upload_name']));
             $subfolder = $ext;
             if ($field_id = $this->input->getInt('field_id')) {
-                $field = JTable::getInstance('Field', 'JoomcckTable');
+                $field = \Joomla\CMS\Table\Table::getInstance('Field', 'JoomcckTable');
                 $field->load($field_id);
                 $field->params = new \Joomla\Registry\Registry($field->params);
                 $subfolder     = $field->params->get('params.subfolder', $field->field_type);
@@ -475,7 +475,7 @@ class JoomcckControllerFiles extends MControllerAdmin
             'type_id'    => $this->input->getInt('type_id'),
             'field_id'   => $this->input->getInt('field_id'),
             'ext'        => $ext,
-            'fullpath'   => JPath::clean($date . DIRECTORY_SEPARATOR . $upload_name, '/'),
+            'fullpath'   => \Joomla\CMS\Filesystem\Path::clean($date . DIRECTORY_SEPARATOR . $upload_name, '/'),
             'size'       => filesize($src)
         );
 
@@ -489,7 +489,7 @@ class JoomcckControllerFiles extends MControllerAdmin
                 'bmp'
             )
         )) {
-            $size = @getimagesize(JPath::clean($dest));
+            $size = @getimagesize(\Joomla\CMS\Filesystem\Path::clean($dest));
 
             if ($size && !empty($size)) {
                 $data['width']  = $size[0];
@@ -521,7 +521,7 @@ class JoomcckControllerFiles extends MControllerAdmin
                     )
                 )
             ) {
-                $metadata       = @exif_read_data(JPath::clean($src));
+                $metadata       = @exif_read_data(\Joomla\CMS\Filesystem\Path::clean($src));
                 $data['params'] = json_encode($metadata);
             }
         }
@@ -532,10 +532,10 @@ class JoomcckControllerFiles extends MControllerAdmin
                 'mp3'
             )
         )) {
-            $data['params'] = $this->_getID3(JPath::clean($src));
+            $data['params'] = $this->_getID3(\Joomla\CMS\Filesystem\Path::clean($src));
         }
 
-        $table = JTable::getInstance('Files', 'JoomcckTable');
+        $table = \Joomla\CMS\Table\Table::getInstance('Files', 'JoomcckTable');
         $table->load(array('filename' => $upload_name));
         if (!$table->id) {
             $table->save($data);
@@ -549,9 +549,9 @@ class JoomcckControllerFiles extends MControllerAdmin
     {
         $filename = $this->input->get('filename');
 
-        $files_table  = JTable::getInstance('Files', 'JoomcckTable');
-        $field_table  = JTable::getInstance('Field', 'JoomcckTable');
-        $record_table = JTable::getInstance('Record', 'JoomcckTable');
+        $files_table  = \Joomla\CMS\Table\Table::getInstance('Files', 'JoomcckTable');
+        $field_table  = \Joomla\CMS\Table\Table::getInstance('Field', 'JoomcckTable');
+        $record_table = \Joomla\CMS\Table\Table::getInstance('Record', 'JoomcckTable');
 
         $files_table->load(
             array(
@@ -632,7 +632,7 @@ class JoomcckControllerFiles extends MControllerAdmin
 
     public function show()
     {
-        $files   = JTable::getInstance('Files', 'JoomcckTable');
+        $files   = \Joomla\CMS\Table\Table::getInstance('Files', 'JoomcckTable');
         $id      = $this->input->getInt('id', 0);
         $folder  = $this->input->getString('fldr', '');
         $user_id = $this->input->getInt('user_id', 0);

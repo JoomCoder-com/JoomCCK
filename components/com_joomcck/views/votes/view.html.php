@@ -12,7 +12,7 @@ defined('_JEXEC') or die ('Restricted access');
 jimport('joomla.application.component.view');
 jimport('joomla.filesystem.folder');
 
-JHTML::_('bootstrap.modal', 'a.modal');
+\Joomla\CMS\HTML\HTMLHelper::_('bootstrap.modal', 'a.modal');
 
 class JoomcckViewVotes extends MViewBase
 {

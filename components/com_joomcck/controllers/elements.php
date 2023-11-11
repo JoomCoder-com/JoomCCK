@@ -45,7 +45,7 @@ class JoomcckControllerElements extends MControllerAdmin
 		$app = \Joomla\CMS\Factory::getApplication();
 		$data = $this->input->get('jform', array(), 'array');
 
-		$table = JTable::getInstance('Useropt', 'JoomcckTable');
+		$table = \Joomla\CMS\Table\Table::getInstance('Useropt', 'JoomcckTable');
 
 		$table->load(array(
 			'user_id' => $me->get('id')

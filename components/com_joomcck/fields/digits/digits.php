@@ -47,7 +47,7 @@ class JFormFieldCDigits extends CFormField
 
 	public function onPrepareSave($value, $record, $type, $section)
 	{
-		$filter = JFilterInput::getInstance();
+		$filter = \Joomla\CMS\Filter\InputFilter::getInstance();
 		return $filter->clean($value);
 	}
 

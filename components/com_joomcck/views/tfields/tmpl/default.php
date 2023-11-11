@@ -9,7 +9,7 @@
 
 defined('_JEXEC') or die('Restricted access');
 
-JHTML::_('bootstrap.tooltip', '*[rel^="tooltip"]');
+\Joomla\CMS\HTML\HTMLHelper::_('bootstrap.tooltip', '*[rel^="tooltip"]');
 
 $user = \Joomla\CMS\Factory::getUser();
 $userId = $user->get('id');

@@ -24,7 +24,7 @@ class JFormFieldMetags extends JFormField
 	{
 
 		$app   = \Joomla\CMS\Factory::getApplication();
-		$model = JModelLegacy::getInstance('Form', 'JoomcckModel');
+		$model = \Joomla\CMS\MVC\Model\BaseDatabaseModel::getInstance('Form', 'JoomcckModel');
 		$type  = $model->getRecordType($app->input->getInt('type_id'));
 
 		$default = $this->getDefault();

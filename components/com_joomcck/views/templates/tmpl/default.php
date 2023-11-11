@@ -87,7 +87,7 @@ HTMLHelper::_('bootstrap.collapse','',['parent' => '#joomcckContainer']);
             </div>
         </div>
         <input type="hidden" name="task" value="templates.install"/>
-	    <?php echo JHTML::_('form.token'); ?>
+	    <?php echo \Joomla\CMS\HTML\HTMLHelper::_('form.token'); ?>
     </form>
 
     <div class="clearfix"></div>
@@ -152,6 +152,6 @@ HTMLHelper::_('bootstrap.collapse','',['parent' => '#joomcckContainer']);
 
         <input type="hidden" name="task" value=""/>
         <input type="hidden" name="boxchecked" value="0"/>
-		<?php echo JHTML::_('form.token'); ?>
+		<?php echo \Joomla\CMS\HTML\HTMLHelper::_('form.token'); ?>
     </form>
 </div>

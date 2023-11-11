@@ -31,10 +31,10 @@ class JFormFieldMertype extends JFormField
 		$db->setQuery($query);
 		$list = $db->loadObjectList();
 		
-		$types[] = JHTML::_('select.option', "", '- Select Type -');
+		$types[] = \Joomla\CMS\HTML\HTMLHelper::_('select.option', "", '- Select Type -');
 		foreach ($list as $val)
 		{
-		    $types[] = JHTML::_('select.option', $val->id, $val->name);
+		    $types[] = \Joomla\CMS\HTML\HTMLHelper::_('select.option', $val->id, $val->name);
 		}
 				
 		$multiselect = '';
@@ -43,7 +43,7 @@ class JFormFieldMertype extends JFormField
 		
 		
 		$html = '';
-		$html	.= JHTML::_('select.genericlist',  $types, 
+		$html	.= \Joomla\CMS\HTML\HTMLHelper::_('select.genericlist',  $types, 
             $this->name.($multi ? "[]" : null),  ' class="form-select" '.$multiselect, 'value', 'text', $this->value);
             
 		return $html;

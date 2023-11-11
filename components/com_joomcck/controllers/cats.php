@@ -31,7 +31,7 @@ class JoomcckControllerCats extends MControllerAdmin
 	{
 		parent::delete();
 
-		$section = JTable::getInstance('Section', 'JoomcckTable');
+		$section = \Joomla\CMS\Table\Table::getInstance('Section', 'JoomcckTable');
 		$section->load($this->input->getInt('section_id'));
 
 		$db = \Joomla\CMS\Factory::getDbo();
@@ -100,7 +100,7 @@ class JoomcckControllerCats extends MControllerAdmin
 
 	public function saveOrderAjax()
 	{
-		JSession::checkToken() or jexit(\Joomla\CMS\Language\Text::_('JINVALID_TOKEN'));
+		\Joomla\CMS\Session\Session::checkToken() or jexit(\Joomla\CMS\Language\Text::_('JINVALID_TOKEN'));
 
 		// Get the arrays from the Request
 		$pks   = $this->input->post->get('cid', null, 'array');

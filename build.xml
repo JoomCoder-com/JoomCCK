@@ -10,30 +10,19 @@
         <copy file="./language/en-GB/com_joomcck_field_audio.ini" todir="${releasespath}/build/components/com_joomcck/site/language/en-GB" />
         <copy file="./language/en-GB/com_joomcck_field_boolean.ini" todir="${releasespath}/build/components/com_joomcck/site/language/en-GB" />
         <copy file="./language/en-GB/com_joomcck_field_checkbox.ini" todir="${releasespath}/build/components/com_joomcck/site/language/en-GB" />
-        <copy file="./language/en-GB/com_joomcck_field_child.ini" todir="${releasespath}/build/components/com_joomcck/site/language/en-GB" />
         <copy file="./language/en-GB/com_joomcck_field_datetime.ini" todir="${releasespath}/build/components/com_joomcck/site/language/en-GB" />
         <copy file="./language/en-GB/com_joomcck_field_digits.ini" todir="${releasespath}/build/components/com_joomcck/site/language/en-GB" />
-        <copy file="./language/en-GB/com_joomcck_field_dripcontent.ini" todir="${releasespath}/build/components/com_joomcck/site/language/en-GB" />
         <copy file="./language/en-GB/com_joomcck_field_email.ini" todir="${releasespath}/build/components/com_joomcck/site/language/en-GB" />
         <copy file="./language/en-GB/com_joomcck_field_gallery.ini" todir="${releasespath}/build/components/com_joomcck/site/language/en-GB" />
-        <copy file="./language/en-GB/com_joomcck_field_geo.ini" todir="${releasespath}/build/components/com_joomcck/site/language/en-GB" />
         <copy file="./language/en-GB/com_joomcck_field_html.ini" todir="${releasespath}/build/components/com_joomcck/site/language/en-GB" />
         <copy file="./language/en-GB/com_joomcck_field_image.ini" todir="${releasespath}/build/components/com_joomcck/site/language/en-GB" />
-        <copy file="./language/en-GB/com_joomcck_field_j2store.ini" todir="${releasespath}/build/components/com_joomcck/site/language/en-GB" />
         <copy file="./language/en-GB/com_joomcck_field_listautocomplete.ini" todir="${releasespath}/build/components/com_joomcck/site/language/en-GB" />
-        <copy file="./language/en-GB/com_joomcck_field_multilevelselect.ini" todir="${releasespath}/build/components/com_joomcck/site/language/en-GB" />
         <copy file="./language/en-GB/com_joomcck_field_multiselect.ini" todir="${releasespath}/build/components/com_joomcck/site/language/en-GB" />
-        <copy file="./language/en-GB/com_joomcck_field_parent.ini" todir="${releasespath}/build/components/com_joomcck/site/language/en-GB" />
         <copy file="./language/en-GB/com_joomcck_field_passwd.ini" todir="${releasespath}/build/components/com_joomcck/site/language/en-GB" />
-        <copy file="./language/en-GB/com_joomcck_field_paytoaccess.ini" todir="${releasespath}/build/components/com_joomcck/site/language/en-GB" />
         <copy file="./language/en-GB/com_joomcck_field_paytodownload.ini" todir="${releasespath}/build/components/com_joomcck/site/language/en-GB" />
-        <copy file="./language/en-GB/com_joomcck_field_payvoucher.ini" todir="${releasespath}/build/components/com_joomcck/site/language/en-GB" />
-        <copy file="./language/en-GB/com_joomcck_field_q2c.ini" todir="${releasespath}/build/components/com_joomcck/site/language/en-GB" />
         <copy file="./language/en-GB/com_joomcck_field_radio.ini" todir="${releasespath}/build/components/com_joomcck/site/language/en-GB" />
         <copy file="./language/en-GB/com_joomcck_field_readmore.ini" todir="${releasespath}/build/components/com_joomcck/site/language/en-GB" />
         <copy file="./language/en-GB/com_joomcck_field_records.ini" todir="${releasespath}/build/components/com_joomcck/site/language/en-GB" />
-        <copy file="./language/en-GB/com_joomcck_field_register.ini" todir="${releasespath}/build/components/com_joomcck/site/language/en-GB" />
-        <copy file="./language/en-GB/com_joomcck_field_related_access.ini" todir="${releasespath}/build/components/com_joomcck/site/language/en-GB" />
         <copy file="./language/en-GB/com_joomcck_field_select.ini" todir="${releasespath}/build/components/com_joomcck/site/language/en-GB" />
         <copy file="./language/en-GB/com_joomcck_field_status.ini" todir="${releasespath}/build/components/com_joomcck/site/language/en-GB" />
         <copy file="./language/en-GB/com_joomcck_field_telephone.ini" todir="${releasespath}/build/components/com_joomcck/site/language/en-GB" />
@@ -43,15 +32,12 @@
         <copy file="./language/en-GB/com_joomcck_field_url.ini" todir="${releasespath}/build/components/com_joomcck/site/language/en-GB" />
         <copy file="./language/en-GB/com_joomcck_field_video.ini" todir="${releasespath}/build/components/com_joomcck/site/language/en-GB" />
         <copy file="./language/en-GB/com_joomcck_gateway_paypal.ini" todir="${releasespath}/build/components/com_joomcck/site/language/en-GB" />
-        <copy file="./language/en-GB/com_joomcck_gateway_robokassa.ini" todir="${releasespath}/build/components/com_joomcck/site/language/en-GB" />
 
         <!-- Language files plugins -->
 
 
         <!-- Language files modules -->
         <copy file="./language/en-GB/mod_joomcck_submitbutton.ini" todir="${releasespath}/build/modules/mod_joomcck_submitbutton/language/en-GB" />
-        <copy file="./language/en-GB/mod_joomcck_userstatistics.ini" todir="${releasespath}/build/modules/mod_joomcck_userstatistics/language/en-GB" />
-
 
         <!-- Component files -->
         <copy todir="${releasespath}/build/components/com_joomcck/admin">
@@ -79,32 +65,15 @@
         <copy todir="${releasespath}/build/modules/mod_joomcck_filters">
             <fileset dir="./modules/mod_joomcck_filters"></fileset>
         </copy>
-        <copy todir="${releasespath}/build/modules/mod_joomcck_followers">
-            <fileset dir="./modules/mod_joomcck_followers"></fileset>
-        </copy>
-        <copy todir="${releasespath}/build/modules/mod_joomcck_ifollow">
-            <fileset dir="./modules/mod_joomcck_ifollow"></fileset>
-        </copy>
-        <copy todir="${releasespath}/build/modules/mod_joomcck_notifications">
-            <fileset dir="./modules/mod_joomcck_notifications"></fileset>
-        </copy>
-        <copy todir="${releasespath}/build/modules/mod_joomcck_participants">
-            <fileset dir="./modules/mod_joomcck_participants"></fileset>
-        </copy>
+
         <copy todir="${releasespath}/build/modules/mod_joomcck_records">
             <fileset dir="./modules/mod_joomcck_records"></fileset>
-        </copy>
-        <copy todir="${releasespath}/build/modules/mod_joomcck_sectionstatistics">
-            <fileset dir="./modules/mod_joomcck_sectionstatistics"></fileset>
         </copy>
         <copy todir="${releasespath}/build/modules/mod_joomcck_submitbutton">
             <fileset dir="./modules/mod_joomcck_submitbutton"></fileset>
         </copy>
         <copy todir="${releasespath}/build/modules/mod_joomcck_tagcloud">
             <fileset dir="./modules/mod_joomcck_tagcloud"></fileset>
-        </copy>
-        <copy todir="${releasespath}/build/modules/mod_joomcck_userstatistics">
-            <fileset dir="./modules/mod_joomcck_userstatistics"></fileset>
         </copy>
 
         <!-- Plugin files -->
@@ -122,21 +91,6 @@
         </copy>
         <copy todir="${releasespath}/build/plugins/plg_finder_joomcck">
             <fileset dir="./plugins/finder/joomcck"></fileset>
-        </copy>
-        <copy todir="${releasespath}/build/plugins/plg_mint_formatter_csv">
-            <fileset dir="./plugins/mint/formatter_csv"></fileset>
-        </copy>
-        <copy todir="${releasespath}/build/plugins/plg_mint_formatter_ini">
-            <fileset dir="./plugins/mint/formatter_ini"></fileset>
-        </copy>
-        <copy todir="${releasespath}/build/plugins/plg_mint_formatter_joomlaupdate">
-            <fileset dir="./plugins/mint/formatter_joomlaupdate"></fileset>
-        </copy>
-        <copy todir="${releasespath}/build/plugins/plg_mint_formatter_json">
-            <fileset dir="./plugins/mint/formatter_json"></fileset>
-        </copy>
-        <copy todir="${releasespath}/build/plugins/plg_mint_formatter_xml">
-            <fileset dir="./plugins/mint/formatter_xml"></fileset>
         </copy>
 
         <!-- Library files -->

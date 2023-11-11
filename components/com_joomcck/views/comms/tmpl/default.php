@@ -9,7 +9,7 @@
 
 defined('_JEXEC') or die('Restricted access');
 
-JHTML::_('bootstrap.tooltip', '*[rel^="tooltip"]');
+\Joomla\CMS\HTML\HTMLHelper::_('bootstrap.tooltip', '*[rel^="tooltip"]');
 
 $user = \Joomla\CMS\Factory::getUser();
 $userId = $user->get('id');
@@ -43,19 +43,19 @@ $listDirn = $this->state->get('list.direction');
 			<input type="checkbox" name="checkall-toggle" value="" title="<?php echo \Joomla\CMS\Language\Text::_('JGLOBAL_CHECK_ALL'); ?>" onclick="Joomla.checkAll(this)"/>
 		</th>
 		<th class="">
-			<?php echo JHTML::_('grid.sort', 'CSUBJECT', 'a.comment', $listDirn, $listOrder); ?>
+			<?php echo \Joomla\CMS\HTML\HTMLHelper::_('grid.sort', 'CSUBJECT', 'a.comment', $listDirn, $listOrder); ?>
 		</th>
 		<th width="10%" class="nowrap">
-			<?php echo JHTML::_('grid.sort', 'CUSER', 'u.username', $listDirn, $listOrder); ?>
+			<?php echo \Joomla\CMS\HTML\HTMLHelper::_('grid.sort', 'CUSER', 'u.username', $listDirn, $listOrder); ?>
 		</th>
 		<th width="1%" class="nowrap">
-			<?php echo JHTML::_('grid.sort', 'JSTATUS', 'a.published', $listDirn, $listOrder); ?>
+			<?php echo \Joomla\CMS\HTML\HTMLHelper::_('grid.sort', 'JSTATUS', 'a.published', $listDirn, $listOrder); ?>
 		</th>
 		<th width="8%" class="nowrap">
-			<?php echo JHTML::_('grid.sort', 'CCREATED', 'a.ctime', $listDirn, $listOrder); ?>
+			<?php echo \Joomla\CMS\HTML\HTMLHelper::_('grid.sort', 'CCREATED', 'a.ctime', $listDirn, $listOrder); ?>
 		</th>
 		<th width="1%">
-			<?php echo JHTML::_('grid.sort', 'ID', 'a.id', $listDirn, $listOrder); ?>
+			<?php echo \Joomla\CMS\HTML\HTMLHelper::_('grid.sort', 'ID', 'a.id', $listDirn, $listOrder); ?>
 		</th>
 		</thead>
 		<?php echo HTMLFormatHelper::layout('pagenav', $this); ?>
@@ -69,7 +69,7 @@ $listDirn = $this->state->get('list.direction');
 
 			<tr class="row<?php echo $i % 2; ?>">
 				<td>
-					<?php echo JHTML::_('grid.id', $i, $item->id); ?>
+					<?php echo \Joomla\CMS\HTML\HTMLHelper::_('grid.id', $i, $item->id); ?>
 				</td>
 				<td>
 					<a href="javascript:void(0);" rel="tooltip" data-bs-title="<?php echo \Joomla\CMS\Language\Text::_('CFILTERRECORD'); ?>"
@@ -107,7 +107,7 @@ $listDirn = $this->state->get('list.direction');
 						<?php if($item->ip): ?>
 							<div>
 								<?php echo \Joomla\CMS\HTML\HTMLHelper::_('ip.country', $item->ip); ?>
-								<?php echo JHTML::link('javascript:void(0);', $item->ip, array(
+								<?php echo \Joomla\CMS\HTML\HTMLHelper::link('javascript:void(0);', $item->ip, array(
 									'rel' => "tooltip", 'data-bs-title' => \Joomla\CMS\Language\Text::_('CFILTERIP'), 'onclick' => 'document.getElementById(\'filter_search\').value=\'ip:' . $item->ip . '\'; document.adminForm.submit();'
 								)); ?>
 								<?php //echo \Joomla\CMS\HTML\HTMLHelper::_('ip.block_ip', $item->ip, $item->id);?>
@@ -120,7 +120,7 @@ $listDirn = $this->state->get('list.direction');
 
 				<td align="center" class="nowrap">
 					<small>
-						<?php $data = new JDate($item->ctime);
+						<?php $data = new \Joomla\CMS\Date\Date($item->ctime);
 						echo $data->format(\Joomla\CMS\Language\Text::_('CDATE1')); ?>
 					</small>
 				</td>

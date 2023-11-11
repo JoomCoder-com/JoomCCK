@@ -28,7 +28,7 @@ class packInstallerScript
      */
     public function __construct(JAdapterInstance $adapter)
     {
-        JTable::addIncludePath(JPATH_ADMINISTRATOR . DIRECTORY_SEPARATOR . 'components/com_joomcck/tables');
+        \Joomla\CMS\Table\Table::addIncludePath(JPATH_ADMINISTRATOR . DIRECTORY_SEPARATOR . 'components/com_joomcck/tables');
         $this->key = (string) $adapter->getParent()->manifest->key;
 
         define('PACKS_PATH', JPATH_ADMINISTRATOR . DIRECTORY_SEPARATOR . 'components/com_joomcck/packs');
@@ -279,8 +279,8 @@ class packInstallerScript
         settype($pack['sections'], 'array');
         $key = ($pack['addkey'] ? '_' . $this->key : '');
 
-        $section_table = JTable::getInstance('Section', 'JoomcckTable');
-        $type_table    = JTable::getInstance('Type', 'JoomcckTable');
+        $section_table = \Joomla\CMS\Table\Table::getInstance('Section', 'JoomcckTable');
+        $type_table    = \Joomla\CMS\Table\Table::getInstance('Type', 'JoomcckTable');
 
         foreach ($pack['sections'] as $id => $section) {
             $params = json_decode($section['params'], true);
@@ -336,7 +336,7 @@ class packInstallerScript
 
     private function _touchParams()
     {
-        $table = JTable::getInstance('Field', 'JoomcckTable');
+        $table = \Joomla\CMS\Table\Table::getInstance('Field', 'JoomcckTable');
         foreach (@$this->ids['fields'] as $old_id => $new_id) {
             if ($table->load($new_id)) {
                 $save   = null;
@@ -375,7 +375,7 @@ class packInstallerScript
             }
         }
 
-        $table = JTable::getInstance('Type', 'JoomcckTable');
+        $table = \Joomla\CMS\Table\Table::getInstance('Type', 'JoomcckTable');
 
         foreach (@$this->ids['types'] as $old_id => $new_id) {
             if ($table->load($new_id)) {
@@ -422,7 +422,7 @@ class packInstallerScript
             }
         }
 
-        $table = JTable::getInstance('Section', 'JoomcckTable');
+        $table = \Joomla\CMS\Table\Table::getInstance('Section', 'JoomcckTable');
         foreach (@$this->ids['sections'] as $old_id => $new_id) {
             if ($table->load($new_id)) {
                 $params = new \Joomla\Registry\Registry($table->params);
@@ -447,7 +447,7 @@ class packInstallerScript
             }
         }
         if ($this->isNew || (!$this->isNew && $this->pack->demo == 1)) {
-            $table = JTable::getInstance('CobCategory', 'JoomcckTable');
+            $table = \Joomla\CMS\Table\Table::getInstance('CobCategory', 'JoomcckTable');
             foreach (@$this->ids['categories'] as $old_id => $new_id) {
                 if ($table->load($new_id)) {
                     $params = new \Joomla\Registry\Registry($table->params);
@@ -472,7 +472,7 @@ class packInstallerScript
                 }
             }
 
-            $table = JTable::getInstance('Record', 'JoomcckTable');
+            $table = \Joomla\CMS\Table\Table::getInstance('Record', 'JoomcckTable');
             settype($this->ids['records'], 'array');
             foreach (@$this->ids['records'] as $old_id => $new_id) {
                 if (!$table->load($new_id)) {
@@ -628,8 +628,8 @@ class packInstallerScript
 
     private function _createUser($user)
     {
-        JModelLegacy::addIncludePath(JPATH_ROOT . '/components/com_users/models/');
-        $model = JModelLegacy::getInstance('Registration', 'UsersModel');
+        \Joomla\CMS\MVC\Model\BaseDatabaseModel::addIncludePath(JPATH_ROOT . '/components/com_users/models/');
+        $model = \Joomla\CMS\MVC\Model\BaseDatabaseModel::getInstance('Registration', 'UsersModel');
 
         $data['name']      = $user['name'];
         $data['username']  = $user['username'];
@@ -763,8 +763,8 @@ class packInstallerScript
                 $db->setQuery($sql);
                 $menutype = $db->loadResult();
 
-                JTable::addIncludePath(JPATH_ADMINISTRATOR . '/components/com_menus/tables');
-                $menu_table = JTable::getInstance('Menu', 'JTable', []);
+                \Joomla\CMS\Table\Table::addIncludePath(JPATH_ADMINISTRATOR . '/components/com_menus/tables');
+                $menu_table = \Joomla\CMS\Table\Table::getInstance('Menu', '\\Joomla\\CMS\\Table\\Table', []);
 
                 $menu_table->load([
                     "link" => "index.php?option=com_joomcck&view=records&section_id={$table->id}",
@@ -820,7 +820,7 @@ class packInstallerScript
                 if (!is_array($types)) {
                     settype($types, 'array');
                 }
-                $type_table = JTable::getInstance('Type', 'JoomcckTable');
+                $type_table = \Joomla\CMS\Table\Table::getInstance('Type', 'JoomcckTable');
                 foreach ($types as $type_id) {
                     $type_table->load($this->ids['types'][$type_id]);
                     $params = new \Joomla\Registry\Registry($type_table->params);

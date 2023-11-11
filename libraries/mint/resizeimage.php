@@ -461,7 +461,7 @@ class JS_Image_Resizer
 		foreach($gifDecoder->GIFGetFrames() as $k => $frame)
 		{
 			// store the current frame to disk.
-			// $filename = JPath::clean($this->tempDir. DIRECTORY_SEPARATOR .uniqid('resize_', true));
+			// $filename = \Joomla\CMS\Filesystem\Path::clean($this->tempDir. DIRECTORY_SEPARATOR .uniqid('resize_', true));
 
 			$img    = imagecreatefromstring($frame);
 			$newimg = @imagecreatetruecolor($width, $height);
@@ -541,7 +541,7 @@ class JS_Image_Resizer
 	{
 		//jimport ('joomla.filesystem.file');
 
-		//$newfile = JPath::check($newfile);
+		//$newfile = \Joomla\CMS\Filesystem\Path::check($newfile);
 		if(!empty($newfile))
 		{
 			$tmpname = JPATH_ROOT . '/tmp/' . md5($newfile);

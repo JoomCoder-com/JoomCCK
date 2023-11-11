@@ -139,7 +139,7 @@ class MViewBase extends JObject
 		// Set the charset (used by the variable escaping functions)
 		if(array_key_exists('charset', $config))
 		{
-			JLog::add('Setting a custom charset for escaping is deprecated. Override JViewLegacy::escape() instead.', JLog::WARNING, 'deprecated');
+			\Joomla\CMS\Log\Log::add('Setting a custom charset for escaping is deprecated. Override JViewLegacy::escape() instead.', \Joomla\CMS\Log\Log::WARNING, 'deprecated');
 			$this->_charset = $config['charset'];
 		}
 
@@ -268,7 +268,7 @@ class MViewBase extends JObject
 	 */
 	public function assign()
 	{
-		JLog::add(__METHOD__ . ' is deprecated. Use native PHP syntax.', JLog::WARNING, 'deprecated');
+		\Joomla\CMS\Log\Log::add(__METHOD__ . ' is deprecated. Use native PHP syntax.', \Joomla\CMS\Log\Log::WARNING, 'deprecated');
 
 		// Get the arguments; there may be 1 or 2.
 		$arg0 = @func_get_arg(0);
@@ -345,7 +345,7 @@ class MViewBase extends JObject
 	 */
 	public function assignRef($key, &$val)
 	{
-		JLog::add(__METHOD__ . ' is deprecated. Use native PHP syntax.', JLog::WARNING, 'deprecated');
+		\Joomla\CMS\Log\Log::add(__METHOD__ . ' is deprecated. Use native PHP syntax.', \Joomla\CMS\Log\Log::WARNING, 'deprecated');
 
 		if(is_string($key) && substr($key, 0, 1) != '_')
 		{
@@ -429,7 +429,7 @@ class MViewBase extends JObject
 	 *
 	 * @param   string $name The name of the model (optional)
 	 *
-	 * @return  mixed  JModelLegacy object
+	 * @return  mixed  \Joomla\CMS\MVC\Model\BaseDatabaseModel object
 	 *
 	 * @since   12.2
 	 */
@@ -499,7 +499,7 @@ class MViewBase extends JObject
 	 * referenced by the name without JModel, eg. JModelCategory is just
 	 * Category.
 	 *
-	 * @param   JModelLegacy $model   The model to add to the view.
+	 * @param   \Joomla\CMS\MVC\Model\BaseDatabaseModel $model   The model to add to the view.
 	 * @param   boolean      $default Is this the default model?
 	 *
 	 * @return  object   The added model.
@@ -580,7 +580,7 @@ class MViewBase extends JObject
 	 */
 	public function setEscape($spec)
 	{
-		JLog::add(__METHOD__ . ' is deprecated. Override JViewLegacy::escape() instead.', JLog::WARNING, 'deprecated');
+		\Joomla\CMS\Log\Log::add(__METHOD__ . ' is deprecated. Override JViewLegacy::escape() instead.', \Joomla\CMS\Log\Log::WARNING, 'deprecated');
 
 		$this->_escape = $spec;
 	}
@@ -655,24 +655,24 @@ class MViewBase extends JObject
 		jimport('joomla.filesystem.path');
 
 		$filetofind      = $this->_createFileName('template', array('name' => $params->get('tmpl_prefix', 'bs2') . '.' .$file));
-		$this->_template = JPath::find($this->_path['template'], $filetofind);
+		$this->_template = \Joomla\CMS\Filesystem\Path::find($this->_path['template'], $filetofind);
 
 		if($this->_template == FALSE)
 		{
 			$filetofind      = $this->_createFileName('', array('name' => $params->get('tmpl_prefix', 'bs2') . '.default' . (isset($tpl) ? '_' . $tpl : $tpl)));
-			$this->_template = JPath::find($this->_path['template'], $filetofind);
+			$this->_template = \Joomla\CMS\Filesystem\Path::find($this->_path['template'], $filetofind);
 		}
 
 		if($this->_template == FALSE)
 		{
 			$filetofind      = $this->_createFileName('template', array('name' => $file));
-			$this->_template = JPath::find($this->_path['template'], $filetofind);
+			$this->_template = \Joomla\CMS\Filesystem\Path::find($this->_path['template'], $filetofind);
 		}
 
 		if($this->_template == FALSE)
 		{
 			$filetofind      = $this->_createFileName('', array('name' => 'default' . (isset($tpl) ? '_' . $tpl : $tpl)));
-			$this->_template = JPath::find($this->_path['template'], $filetofind);
+			$this->_template = \Joomla\CMS\Filesystem\Path::find($this->_path['template'], $filetofind);
 		}
 
 
@@ -724,7 +724,7 @@ class MViewBase extends JObject
 
 		// Load the template script
 		jimport('joomla.filesystem.path');
-		$helper = JPath::find($this->_path['helper'], $this->_createFileName('helper', array('name' => $file)));
+		$helper = \Joomla\CMS\Filesystem\Path::find($this->_path['helper'], $this->_createFileName('helper', array('name' => $file)));
 
 		if($helper != FALSE)
 		{

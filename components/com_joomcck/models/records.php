@@ -39,7 +39,7 @@ class JoomcckModelRecords extends MModelList
 	{
 		//$app = \Joomla\CMS\Factory::getApplication('administrator');
 		$app    = \Joomla\CMS\Factory::getApplication('site');
-		$filter = JFilterInput::getInstance();
+		$filter = \Joomla\CMS\Filter\InputFilter::getInstance();
 		$key    = FilterHelper::key();
 
 		$section_id = $app->getUserStateFromRequest($this->context . $key . '.filter.section_id', 'section_id', '', 'int');

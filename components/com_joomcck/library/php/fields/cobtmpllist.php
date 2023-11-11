@@ -150,7 +150,7 @@ class JFormFieldCobTmplList extends JFormFieldList
             $path = JPATH_ROOT . '/' . $path;
         }
 
-		$path = JPath::clean($path);
+		$path = \Joomla\CMS\Filesystem\Path::clean($path);
 		$xml = $path.DIRECTORY_SEPARATOR.str_replace('.php', '.xml', $this->value ?: $this->default);
 
 
@@ -297,7 +297,7 @@ EOT;
             $path = JPATH_ROOT . '/' . $path;
         }
 
-        $path = JPath::clean($path);
+        $path = \Joomla\CMS\Filesystem\Path::clean($path);
 
         // Prepend some default options based on field attributes.
         if (!$this->hideNone) {

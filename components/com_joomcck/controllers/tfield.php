@@ -54,7 +54,7 @@ class JoomcckControllerTfield extends MControllerForm
 
 	public function postSaveHook(MModelBase $model, $data = array())
 	{
-		$table = JTable::getInstance('Field', 'JoomcckTable');
+		$table = \Joomla\CMS\Table\Table::getInstance('Field', 'JoomcckTable');
 		$table->reorder('type_id ='. $data['type_id']);
 
 

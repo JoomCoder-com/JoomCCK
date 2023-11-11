@@ -65,7 +65,7 @@ class JoomcckControllerTfields extends MControllerAdmin
 	public function changeState()
 	{
 		// Check for request forgeries
-		JSession::checkToken() or die(\Joomla\CMS\Language\Text::_('JINVALID_TOKEN'));
+		\Joomla\CMS\Session\Session::checkToken() or die(\Joomla\CMS\Language\Text::_('JINVALID_TOKEN'));
 
 		// Get items to publish from the request.
 		$cid = \Joomla\CMS\Factory::getApplication()->input->get('cid', array(), 'array');
@@ -80,7 +80,7 @@ class JoomcckControllerTfields extends MControllerAdmin
 
 		if (empty($cid))
 		{
-			JLog::add(\Joomla\CMS\Language\Text::_($this->text_prefix . '_NO_ITEM_SELECTED'), JLog::WARNING, 'jerror');
+			\Joomla\CMS\Log\Log::add(\Joomla\CMS\Language\Text::_($this->text_prefix . '_NO_ITEM_SELECTED'), \Joomla\CMS\Log\Log::WARNING, 'jerror');
 		}
 		else
 		{
@@ -93,7 +93,7 @@ class JoomcckControllerTfields extends MControllerAdmin
 			// Publish the items.
 			if (!$model->changeState($task, $cid, $value))
 			{
-				JLog::add($model->getError(), JLog::WARNING, 'jerror');
+				\Joomla\CMS\Log\Log::add($model->getError(), \Joomla\CMS\Log\Log::WARNING, 'jerror');
 			}
 			else
 			{

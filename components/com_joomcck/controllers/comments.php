@@ -31,8 +31,8 @@ class JoomcckControllerComments extends MControllerAdmin
 		$cid	= $this->input->get('cid', array(), '', 'array');
 		$cid = \Joomla\Utilities\ArrayHelper::toInteger($cid);
 
-		JTable::addIncludePath(JPATH_ROOT . '/components/com_joomcck/tables');
-		$comment = JTable::getInstance('Cobcomments', 'JoomcckTable');
+		\Joomla\CMS\Table\Table::addIncludePath(JPATH_ROOT . '/components/com_joomcck/tables');
+		$comment = \Joomla\CMS\Table\Table::getInstance('Cobcomments', 'JoomcckTable');
 		$comment->load($cid[0]);
 		
 		parent::delete();
@@ -40,7 +40,7 @@ class JoomcckControllerComments extends MControllerAdmin
 		$model_record = MModelBase::getInstance('Record', 'JoomcckModel');
 		$model_record->onComment($this->input->get('record_id'), get_class_vars($comment));
 		
-		$record = JTable::getInstance('Record', 'JoomcckTable');
+		$record = \Joomla\CMS\Table\Table::getInstance('Record', 'JoomcckTable');
 		$record->load($this->input->getInt('record_id'));
 		
 		$url = 'index.php?option=com_joomcck&view=record';
@@ -74,10 +74,10 @@ class JoomcckControllerComments extends MControllerAdmin
 		$cid	= $this->input->get('cid', array(), '', 'array');
 		$cid = \Joomla\Utilities\ArrayHelper::toInteger($cid);
 		
-		$comment = JTable::getInstance('Cobcomments', 'JoomcckTable');
+		$comment = \Joomla\CMS\Table\Table::getInstance('Cobcomments', 'JoomcckTable');
 		$comment->load($cid[0]);
 		
-		$record = JTable::getInstance('Record', 'JoomcckTable');
+		$record = \Joomla\CMS\Table\Table::getInstance('Record', 'JoomcckTable');
 		$record->load($comment->record_id);
 			
 		if($comment->user_id)

@@ -22,7 +22,7 @@ class CFormFieldUpload extends CFormField
 	public $download_type;
     public function __construct($field, $default)
     {
-        $root      = JPath::clean(\Joomla\CMS\Component\ComponentHelper::getParams('com_joomcck')->get('general_upload'));
+        $root      = \Joomla\CMS\Filesystem\Path::clean(\Joomla\CMS\Component\ComponentHelper::getParams('com_joomcck')->get('general_upload'));
         $url       = str_replace(JPATH_ROOT, '', $root);
         $url       = str_replace("\\", '/', $url);
         $url       = preg_replace('#^\/#iU', '', $url);
@@ -145,7 +145,7 @@ class CFormFieldUpload extends CFormField
     {
         settype($this->value, 'array');
         $out   = $saved   = [];
-        $files = JTable::getInstance('Files', 'JoomcckTable');
+        $files = \Joomla\CMS\Table\Table::getInstance('Files', 'JoomcckTable');
         foreach ($this->value as $key => $file) {
             if (!\Joomla\String\StringHelper::strcmp($key, 'subscriptions')) {
                 continue;
@@ -177,7 +177,7 @@ class CFormFieldUpload extends CFormField
             unset($array['descr']);
         }
 
-        $files = JTable::getInstance('Files', 'JoomcckTable');
+        $files = \Joomla\CMS\Table\Table::getInstance('Files', 'JoomcckTable');
         if (!empty($array['title']) || !empty($array['descr'])) {
             $files->saveInfo($array['title'], $array['descr']);
         }
@@ -188,7 +188,7 @@ class CFormFieldUpload extends CFormField
             return $data[$key];
         }
 
-        $files = JTable::getInstance('Files', 'JoomcckTable');
+        $files = \Joomla\CMS\Table\Table::getInstance('Files', 'JoomcckTable');
         $array = $files->prepareSave($array);
 
         $data[$key] = json_decode($array, true);
@@ -305,7 +305,7 @@ class CFormFieldUpload extends CFormField
             $list = json_decode($list);
         }
 
-        $files = JTable::getInstance('Files', 'JoomcckTable');
+        $files = \Joomla\CMS\Table\Table::getInstance('Files', 'JoomcckTable');
 
         if (!is_array(@$list[0])) {
             $list      = $files->getFiles($list, 'filename');
@@ -405,7 +405,7 @@ class CFormFieldUpload extends CFormField
     protected function copyFile($filename, $field)
     {
         $params      = \Joomla\CMS\Component\ComponentHelper::getParams('com_joomcck');
-        $files_table = JTable::getInstance('Files', 'JoomcckTable');
+        $files_table = \Joomla\CMS\Table\Table::getInstance('Files', 'JoomcckTable');
         if ($files_table->load(['filename' => $filename])) {
             $time = time();
             //$date = date('Y-m', $time);
@@ -432,7 +432,7 @@ class CFormFieldUpload extends CFormField
 
             $copied = \Joomla\CMS\Filesystem\File::copy(JPATH_ROOT . DIRECTORY_SEPARATOR . $params->get('general_upload') . DIRECTORY_SEPARATOR . $subfolder . DIRECTORY_SEPARATOR . $files_table->fullpath, $dest . $files_table->filename);
 
-            $files_table->fullpath = JPath::clean($date . DIRECTORY_SEPARATOR . $files_table->filename, '/');
+            $files_table->fullpath = \Joomla\CMS\Filesystem\Path::clean($date . DIRECTORY_SEPARATOR . $files_table->filename, '/');
             $files_table->saved    = 0;
 
             if (!$copied) {
@@ -469,7 +469,7 @@ class CFormFieldUpload extends CFormField
         $db->setQuery($sql);
         $db->execute();
 
-        $record_table = JTable::getInstance('Record', 'JoomcckTable');
+        $record_table = \Joomla\CMS\Table\Table::getInstance('Record', 'JoomcckTable');
         $record_table->load($record_id);
         $fields = json_decode($record_table->fields, true);
 
@@ -500,7 +500,7 @@ class CFormFieldUpload extends CFormField
         $field_id  = $app->input->getInt('field_id', 0);
 
         if ($record_id && $field_id) {
-            $record_table = JTable::getInstance('Record', 'JoomcckTable');
+            $record_table = \Joomla\CMS\Table\Table::getInstance('Record', 'JoomcckTable');
             $record_table->load($record_id);
             $fields = json_decode($record_table->fields, true);
 
@@ -541,7 +541,7 @@ class CFormFieldUpload extends CFormField
     $record_id = $app->input->getInt('record_id', 0);
     $field_id  = $app->input->getInt('field_id', 0);
     if ($record_id && $field_id) {
-    $record_table = JTable::getInstance('Record', 'JoomcckTable');
+    $record_table = \Joomla\CMS\Table\Table::getInstance('Record', 'JoomcckTable');
     $record_table->load($record_id);
     $fields = json_decode($record_table->fields, true);
 
@@ -580,7 +580,7 @@ class CFormFieldUpload extends CFormField
     $record_id = $app->input->getInt('record_id', 0);
     $field_id  = $app->input->getInt('field_id', 0);
     if ($record_id && $field_id) {
-    $record_table = JTable::getInstance('Record', 'JoomcckTable');
+    $record_table = \Joomla\CMS\Table\Table::getInstance('Record', 'JoomcckTable');
     $record_table->load($record_id);
     $fields = json_decode($record_table->fields, true);
 

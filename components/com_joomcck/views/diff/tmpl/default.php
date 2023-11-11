@@ -7,7 +7,7 @@
  * @license GNU/GPL http://www.gnu.org/copyleft/gpl.html
  */
 defined('_JEXEC') or die();
-JHTML::_('bootstrap.tooltip', '*[rel^="tooltip"]');
+\Joomla\CMS\HTML\HTMLHelper::_('bootstrap.tooltip', '*[rel^="tooltip"]');
 
 
 include_once JPATH_COMPONENT. DIRECTORY_SEPARATOR .'api.php';
@@ -21,8 +21,8 @@ if(!$back)
 {
 	$back = Url::record($this->record);
 }
-JHTML::_('bootstrap.popover', '[rel="popover-left"]', array('placement' => 'left', 'trigger' => 'click'));
-JHTML::_('bootstrap.popover', '[rel="popover-right"]', array('placement' => 'right', 'trigger' => 'click'));
+\Joomla\CMS\HTML\HTMLHelper::_('bootstrap.popover', '[rel="popover-left"]', array('placement' => 'left', 'trigger' => 'click'));
+\Joomla\CMS\HTML\HTMLHelper::_('bootstrap.popover', '[rel="popover-right"]', array('placement' => 'right', 'trigger' => 'click'));
 ?>
 <h1>
 	<?php echo \Joomla\CMS\Language\Text::_('CAUDITVERSIONSCOMPARE')?> : <?php echo $this->record->title;?> v.<?php echo $this->record->version;?>

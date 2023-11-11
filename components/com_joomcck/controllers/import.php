@@ -33,7 +33,7 @@ class JoomcckControllerImport extends MControllerAdmin
 		$app    = \Joomla\CMS\Factory::getApplication();
 		$params = $this->input->get('import', array(), 'array');
 
-		$imports = JTable::getInstance('Import', 'JoomcckTable');
+		$imports = \Joomla\CMS\Table\Table::getInstance('Import', 'JoomcckTable');
 
 		if($this->input->get('preset') == 'new')
 		{
@@ -87,8 +87,8 @@ class JoomcckControllerImport extends MControllerAdmin
 
 			require_once JPATH_ROOT . '/components/com_joomcck/models/fields.php';
 			$fields_model = new JoomcckModelFields();
-			$record_table = JTable::getInstance('Record', 'JoomcckTable');
-			$cat_table    = JTable::getInstance('Record_category', 'JoomcckTable');
+			$record_table = \Joomla\CMS\Table\Table::getInstance('Record', 'JoomcckTable');
+			$cat_table    = \Joomla\CMS\Table\Table::getInstance('Record_category', 'JoomcckTable');
 
 			$stat = array();
 
@@ -150,8 +150,8 @@ class JoomcckControllerImport extends MControllerAdmin
 					$_REQUEST['jform']['category'][] = $data['categories'];
 				}
 
-				if($row->get($params->get('field.ctime')) || $isNew) $data['ctime']   = JDate::getInstance($row->get($params->get('field.ctime', 'now')))->toSql();
-				if($row->get($params->get('field.mtime')) || $isNew) $data['mtime']   = JDate::getInstance($row->get($params->get('field.mtime', 'now')))->toSql();
+				if($row->get($params->get('field.ctime')) || $isNew) $data['ctime']   = \Joomla\CMS\Date\Date::getInstance($row->get($params->get('field.ctime', 'now')))->toSql();
+				if($row->get($params->get('field.mtime')) || $isNew) $data['mtime']   = \Joomla\CMS\Date\Date::getInstance($row->get($params->get('field.mtime', 'now')))->toSql();
 				if($row->get($params->get('field.user_id')) || $isNew) $data['user_id'] = $row->get($params->get('field.user_id'), \Joomla\CMS\Factory::getUser()->get('id'));
 				if($row->get($params->get('field.access')) || $isNew) $data['access']  = $row->get($params->get('field.access'));
 				if($row->get($params->get('field.extime')) || $isNew) $data['extime']  = $row->get($params->get('field.extime'));
@@ -237,7 +237,7 @@ class JoomcckControllerImport extends MControllerAdmin
 			$db->setQuery($sql);
 			$list = $db->loadObjectList();
 
-			$record_values = JTable::getInstance('Record_values', 'JoomcckTable');
+			$record_values = \Joomla\CMS\Table\Table::getInstance('Record_values', 'JoomcckTable');
 
 			foreach($list AS $item)
 			{

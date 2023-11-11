@@ -8,7 +8,7 @@
  * @license   GNU/GPL http://www.gnu.org/copyleft/gpl.html
  */
 defined('_JEXEC') or die('Restricted access');
-JHTML::_('bootstrap.tooltip', '*[rel^="tooltip"]');
+\Joomla\CMS\HTML\HTMLHelper::_('bootstrap.tooltip', '*[rel^="tooltip"]');
 ?>
 <style>
 	.filter-icon {

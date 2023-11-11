@@ -37,7 +37,7 @@ class JoomcckControllerTemplates extends MControllerForm
 
 	public function install()
 	{
-		JSession::checkToken() or jexit(\Joomla\CMS\Language\Text::_('JINVALID_TOKEN'));
+		\Joomla\CMS\Session\Session::checkToken() or jexit(\Joomla\CMS\Language\Text::_('JINVALID_TOKEN'));
 
 		$app = \Joomla\CMS\Factory::getApplication();
 		$uri = \Joomla\CMS\Uri\Uri::getInstance();
@@ -58,7 +58,7 @@ class JoomcckControllerTemplates extends MControllerForm
 
 	public function uninstall()
 	{
-		JSession::checkToken() or jexit(\Joomla\CMS\Language\Text::_('JINVALID_TOKEN'));
+		\Joomla\CMS\Session\Session::checkToken() or jexit(\Joomla\CMS\Language\Text::_('JINVALID_TOKEN'));
 
 		$app = \Joomla\CMS\Factory::getApplication();
 		$uri = \Joomla\CMS\Uri\Uri::getInstance();
@@ -100,7 +100,7 @@ class JoomcckControllerTemplates extends MControllerForm
 
 	public function copy($func = 'copy')
 	{
-		JSession::checkToken() or jexit(\Joomla\CMS\Language\Text::_('JINVALID_TOKEN'));
+		\Joomla\CMS\Session\Session::checkToken() or jexit(\Joomla\CMS\Language\Text::_('JINVALID_TOKEN'));
 
 		$app = \Joomla\CMS\Factory::getApplication();
 		$uri = \Joomla\CMS\Uri\Uri::getInstance();
@@ -125,7 +125,7 @@ class JoomcckControllerTemplates extends MControllerForm
 
 	public function change_label()
 	{
-		JSession::checkToken() or jexit(\Joomla\CMS\Language\Text::_('JINVALID_TOKEN'));
+		\Joomla\CMS\Session\Session::checkToken() or jexit(\Joomla\CMS\Language\Text::_('JINVALID_TOKEN'));
 
 		$tmpls = $this->input->get('cid', array(), 'array');
 		$uri   = \Joomla\CMS\Uri\Uri::getInstance();

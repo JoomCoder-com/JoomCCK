@@ -39,8 +39,8 @@ class JFormFieldMetouchfields extends JFormMEFieldList
 	protected function getOptions()
 	{
 		// Initialize variables.
-		JModelLegacy::addIncludePath(JPATH_ROOT. 'components/com_mightytouch/models');
-		$fieldsModel = JModelLegacy::getInstance('Fields', 'MightyTouchModel');
+		\Joomla\CMS\MVC\Model\BaseDatabaseModel::addIncludePath(JPATH_ROOT. 'components/com_mightytouch/models');
+		$fieldsModel = \Joomla\CMS\MVC\Model\BaseDatabaseModel::getInstance('Fields', 'MightyTouchModel');
 		$options = array();
 
 		$fieldsModel->populateAllFieldsState();
@@ -48,7 +48,7 @@ class JFormFieldMetouchfields extends JFormMEFieldList
 		
 		foreach($fields as $fld)
 		{
-			$options[] = JHTML::_('select.option', $fld->id, $fld->title);
+			$options[] = \Joomla\CMS\HTML\HTMLHelper::_('select.option', $fld->id, $fld->title);
 		}
 		
 		$options = array_merge(parent::getOptions(), $options);

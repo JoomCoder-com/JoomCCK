@@ -8,7 +8,7 @@
  */
 defined('_JEXEC') or die('Restricted access');
 
-JHTML::_('bootstrap.tooltip', '*[rel^="tooltip"]');
+\Joomla\CMS\HTML\HTMLHelper::_('bootstrap.tooltip', '*[rel^="tooltip"]');
 
 $k = $p1 = 0;
 $params = $this->tmpl_params['list'];

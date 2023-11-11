@@ -8,7 +8,7 @@
  */
 defined('_JEXEC') or die();
 
-JHTML::_('bootstrap.tooltip', '*[rel^="tooltip"]');
+\Joomla\CMS\HTML\HTMLHelper::_('bootstrap.tooltip', '*[rel^="tooltip"]');
 
 ?>
 <h1><?php echo isset($this->item->id) ? \Joomla\CMS\Language\Text::_('CEDITMODER') : \Joomla\CMS\Language\Text::_('CADDMODER');?></h1>

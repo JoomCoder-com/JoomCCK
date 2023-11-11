@@ -11,7 +11,7 @@ use Joomla\CMS\HTML\Helpers\Bootstrap;
 
 defined('_JEXEC') or die('Restricted access');
 
-JHTML::_('bootstrap.tooltip', '*[rel^="tooltip"]');
+\Joomla\CMS\HTML\HTMLHelper::_('bootstrap.tooltip', '*[rel^="tooltip"]');
 
 Bootstrap::dropdown();
 

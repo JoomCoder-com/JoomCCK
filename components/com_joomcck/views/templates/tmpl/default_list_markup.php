@@ -78,7 +78,7 @@ defined('_JEXEC') or die();
 				<small><?php echo($i + 1); ?></small>
 			</td>
 			<td>
-				<?php echo JHTML::_('grid.id', $i, $ident); ?>
+				<?php echo \Joomla\CMS\HTML\HTMLHelper::_('grid.id', $i, $ident); ?>
 			</td>
 			<td class="nowrap">
 				<?php if($js != ''): ?>

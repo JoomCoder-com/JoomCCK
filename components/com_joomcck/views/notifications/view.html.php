@@ -89,11 +89,11 @@ class JoomcckViewNotifications extends MViewBase
 		if (count($sections) > 0)
 		{
 			$options = array();
-			$options[] = JHTML::_('select.option', '0', \Joomla\CMS\Language\Text::_('CSELECTSECTION'));
+			$options[] = \Joomla\CMS\HTML\HTMLHelper::_('select.option', '0', \Joomla\CMS\Language\Text::_('CSELECTSECTION'));
 			foreach($sections as $type)
 			{
 				$type = ItemsStore::getSection($type);
-				$options[] = JHTML::_('select.option', $type->id, $type->name);
+				$options[] = \Joomla\CMS\HTML\HTMLHelper::_('select.option', $type->id, $type->name);
 
 			}
 			$list['sections'] = \Joomla\CMS\HTML\HTMLHelper::_('select.genericlist', $options, 'section_id', ' onchange="this.form.submit();"', 'value', 'text', $this->section_id);
@@ -107,8 +107,8 @@ class JoomcckViewNotifications extends MViewBase
 		$list['show_new'] = '';
 		if($new)
 		{
-			$options[] = JHTML::_('select.option', '0', \Joomla\CMS\Language\Text::_('CSHOWALLNTF'));
-			$options[] = JHTML::_('select.option', '1', \Joomla\CMS\Language\Text::_('CSHOWUNREADNTF'));
+			$options[] = \Joomla\CMS\HTML\HTMLHelper::_('select.option', '0', \Joomla\CMS\Language\Text::_('CSHOWALLNTF'));
+			$options[] = \Joomla\CMS\HTML\HTMLHelper::_('select.option', '1', \Joomla\CMS\Language\Text::_('CSHOWUNREADNTF'));
 
 			$list['show_new'] = \Joomla\CMS\HTML\HTMLHelper::_('select.genericlist', $options, 'show_new', 'onchange="this.form.submit();"', 'value', 'text', $this->state->get('notifications.show_new'));
 		}
@@ -116,12 +116,12 @@ class JoomcckViewNotifications extends MViewBase
 		$events = CEventsHelper::getEventsList();
 		$show_events = array();
 		$options = array();
-		$options[] = JHTML::_('select.option', '0', \Joomla\CMS\Language\Text::_('CSHOWALLNTFTYPES'));
+		$options[] = \Joomla\CMS\HTML\HTMLHelper::_('select.option', '0', \Joomla\CMS\Language\Text::_('CSHOWALLNTFTYPES'));
 		foreach ($events as $event => $title)
 		{
 			if(in_array($event, $event_types))
 			{
-				$options[] = JHTML::_('select.option', $event, $title);
+				$options[] = \Joomla\CMS\HTML\HTMLHelper::_('select.option', $event, $title);
 				$show_events[$event] = $title.' <span class="badge bg-light text-muted border">'.$event_types1[$event].'</span>';
 			}
 		}

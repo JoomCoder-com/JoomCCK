@@ -109,7 +109,7 @@ class CSubscriptionsHelper
 			return;
 		}
 
-		$record = JTable::getInstance('Record', 'JoomcckTable');
+		$record = \Joomla\CMS\Table\Table::getInstance('Record', 'JoomcckTable');
 		$record->load($id);
 
 		$data = array(
@@ -119,7 +119,7 @@ class CSubscriptionsHelper
 			'section_id' => $record->section_id
 		);
 
-		$table = JTable::getInstance('Subscribe', 'JoomcckTable');
+		$table = \Joomla\CMS\Table\Table::getInstance('Subscribe', 'JoomcckTable');
 		$table->load($data);
 
 		if($table->id)
@@ -142,7 +142,7 @@ class CSubscriptionsHelper
 		$record = $id;
 		if(!is_object($id))
 		{
-			$record = JTable::getInstance('Record', 'JoomcckTable');
+			$record = \Joomla\CMS\Table\Table::getInstance('Record', 'JoomcckTable');
 			$record->load($id);
 		}
 
@@ -164,7 +164,7 @@ class CSubscriptionsHelper
 			'section_id' => $record->section_id
 		);
 
-		$table = JTable::getInstance('Subscribe', 'JoomcckTable');
+		$table = \Joomla\CMS\Table\Table::getInstance('Subscribe', 'JoomcckTable');
 		$table->load($data);
 
 		if(!$table->id)
@@ -212,7 +212,7 @@ class AttachmentHelper
 
 			if($in)
 			{
-				$files = JTable::getInstance('Files', 'JoomcckTable');
+				$files = \Joomla\CMS\Table\Table::getInstance('Files', 'JoomcckTable');
 				$list  = $files->getFiles($in, 'id');
 			}
 		}

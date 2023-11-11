@@ -10,7 +10,7 @@ defined('_JEXEC') or die('Restricted access');
 if(!function_exists('mod_getChildsDef')) { function mod_getChildsDef($category, $params, $parents, $k = 1) {
 	if($params->get('mode', 0) != 2) return;
 
-	$model = JModelLegacy::getInstance('Categories', 'joomcckModel');
+	$model = \Joomla\CMS\MVC\Model\BaseDatabaseModel::getInstance('Categories', 'joomcckModel');
 
 	$model->section = $params->get('section_id');
 	$model->parent_id = $category->id;

@@ -11,7 +11,7 @@ defined('_JEXEC') or die();
 
 jimport('joomla.application.component.controllerbase');
 
-class JoomcckControllerCustom extends JControllerLegacy
+class JoomcckControllerCustom extends \Joomla\CMS\MVC\Controller\BaseController
 {
 
 

@@ -38,18 +38,18 @@ class JFormFieldMETextMask extends JFormField
 	{
 		$opt = array();
 
-		$opt[] = JHTML::_('select.option', '', \Joomla\CMS\Language\Text::_('Do not use'));
-		$opt[] = JHTML::_('select.option', '(###) ### #######', \Joomla\CMS\Language\Text::_('Phone'));
-		$opt[] = JHTML::_('select.option', '(###) ###-####', \Joomla\CMS\Language\Text::_('Phone US'));
-		$opt[] = JHTML::_('select.option', 'mm/dd/yyyy', \Joomla\CMS\Language\Text::_('Date'));
-		$opt[] = JHTML::_('select.option', '#####-###', \Joomla\CMS\Language\Text::_('Code'));
-		$opt[] = JHTML::_('select.option', '#### #### #### ####', \Joomla\CMS\Language\Text::_('Credit Card'));
-		$opt[] = JHTML::_('select.option', '#', \Joomla\CMS\Language\Text::_('Integer'));
-		$opt[] = JHTML::_('select.option', '#####.##', \Joomla\CMS\Language\Text::_('Decimal'));
-		$opt[] = JHTML::_('select.option', '#,###.##', \Joomla\CMS\Language\Text::_('Numeric with format'));
-		$opt[] = JHTML::_('select.option', '$#,###.##', \Joomla\CMS\Language\Text::_('Dollar'));
-		$opt[] = JHTML::_('select.option', '€#,###.##', \Joomla\CMS\Language\Text::_('Euro'));
-		$opt[] = JHTML::_('select.option', 'custom', \Joomla\CMS\Language\Text::_('Custom'));
+		$opt[] = \Joomla\CMS\HTML\HTMLHelper::_('select.option', '', \Joomla\CMS\Language\Text::_('Do not use'));
+		$opt[] = \Joomla\CMS\HTML\HTMLHelper::_('select.option', '(###) ### #######', \Joomla\CMS\Language\Text::_('Phone'));
+		$opt[] = \Joomla\CMS\HTML\HTMLHelper::_('select.option', '(###) ###-####', \Joomla\CMS\Language\Text::_('Phone US'));
+		$opt[] = \Joomla\CMS\HTML\HTMLHelper::_('select.option', 'mm/dd/yyyy', \Joomla\CMS\Language\Text::_('Date'));
+		$opt[] = \Joomla\CMS\HTML\HTMLHelper::_('select.option', '#####-###', \Joomla\CMS\Language\Text::_('Code'));
+		$opt[] = \Joomla\CMS\HTML\HTMLHelper::_('select.option', '#### #### #### ####', \Joomla\CMS\Language\Text::_('Credit Card'));
+		$opt[] = \Joomla\CMS\HTML\HTMLHelper::_('select.option', '#', \Joomla\CMS\Language\Text::_('Integer'));
+		$opt[] = \Joomla\CMS\HTML\HTMLHelper::_('select.option', '#####.##', \Joomla\CMS\Language\Text::_('Decimal'));
+		$opt[] = \Joomla\CMS\HTML\HTMLHelper::_('select.option', '#,###.##', \Joomla\CMS\Language\Text::_('Numeric with format'));
+		$opt[] = \Joomla\CMS\HTML\HTMLHelper::_('select.option', '$#,###.##', \Joomla\CMS\Language\Text::_('Dollar'));
+		$opt[] = \Joomla\CMS\HTML\HTMLHelper::_('select.option', '€#,###.##', \Joomla\CMS\Language\Text::_('Euro'));
+		$opt[] = \Joomla\CMS\HTML\HTMLHelper::_('select.option', 'custom', \Joomla\CMS\Language\Text::_('Custom'));
 		
 		if(!$this->value) $this->value = new stdClass();
 		if(!isset($this->value->type)) $this->value->type = false;

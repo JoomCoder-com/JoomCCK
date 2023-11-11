@@ -8,7 +8,7 @@
  */
 
 defined('_JEXEC') or die();
-class CDate extends JDate
+class CDate extends \Joomla\CMS\Date\Date
 {
 	const DIR_DATE_TO_SFORMAT = 0;
 	const DIR_SFORMAT_TO_DATE = 1;

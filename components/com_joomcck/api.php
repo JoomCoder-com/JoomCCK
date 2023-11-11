@@ -48,21 +48,21 @@ if(\Joomla\CMS\Component\ComponentHelper::getParams('com_joomcck')->get('compati
 	\Joomla\CMS\HTML\HTMLHelper::_('bootstrap.loadCss');
 }
 
-JHTML::_('bootstrap.tooltip');
-JHTML::_('bootstrap.modal');
-JHTML::_('bootstrap.popover', '*[rel="popover"]',
+\Joomla\CMS\HTML\HTMLHelper::_('bootstrap.tooltip');
+\Joomla\CMS\HTML\HTMLHelper::_('bootstrap.modal');
+\Joomla\CMS\HTML\HTMLHelper::_('bootstrap.popover', '*[rel="popover"]',
 	array(
 		'placement' => 'bottom',
 		'trigger'   => 'click'
 	)
 );
-JHTML::_('bootstrap.tooltip', '*[rel^="tooltip"]');
-JHTML::_('bootstrap.tooltip', '*[rel="tooltipright"]',
+\Joomla\CMS\HTML\HTMLHelper::_('bootstrap.tooltip', '*[rel^="tooltip"]');
+\Joomla\CMS\HTML\HTMLHelper::_('bootstrap.tooltip', '*[rel="tooltipright"]',
 	array(
 		'placement' => 'right'
 	)
 );
-JHTML::_('bootstrap.tooltip', '*[rel="tooltipbottom"]',
+\Joomla\CMS\HTML\HTMLHelper::_('bootstrap.tooltip', '*[rel="tooltipbottom"]',
 	array(
 		'placement' => 'bottom'
 	)
@@ -325,8 +325,8 @@ class JoomcckApi
 
 		$obj = new Registry($data);
 
-		$obj->def('ctime', JDate::getInstance()->toSql());
-		$obj->def('mtime', JDate::getInstance()->toSql());
+		$obj->def('ctime', \Joomla\CMS\Date\Date::getInstance()->toSql());
+		$obj->def('mtime', \Joomla\CMS\Date\Date::getInstance()->toSql());
 		$obj->def('title', 'NO: ' . time());
 		$obj->def('user_id', \Joomla\CMS\Factory::getUser()->id);
 		$obj->def('section_id', $section_id);
@@ -359,7 +359,7 @@ class JoomcckApi
 				\Joomla\CMS\Factory::getApplication()->setUserState('com_joomcck.edit.form.data', array('fields' => $fields));
 				$table->clean($record->id, $field_ids);
 
-				$fileds_model = JModelLegacy::getInstance('Fields', 'JoomcckModel');
+				$fileds_model = \Joomla\CMS\MVC\Model\BaseDatabaseModel::getInstance('Fields', 'JoomcckModel');
 				$form_fields  = $fileds_model->getFormFields($record->type_id, $record->id, FALSE, $fields);
 
 				$validData['id'] = $record->id;

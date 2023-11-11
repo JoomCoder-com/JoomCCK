@@ -76,7 +76,7 @@ class MFormHelper
 		settype($groups, 'array');
 
 		HTMLHelper::_('bootstrap.framework');
-		JHTML::_('bootstrap.tooltip');
+		\Joomla\CMS\HTML\HTMLHelper::_('bootstrap.tooltip');
 
 		$out = array();
 		switch($group_separator)
@@ -359,7 +359,7 @@ class MFormHelper
 			$lang->load('com_emerald_gateway_' . $gateway, JPATH_ROOT, $tag, TRUE);
 
 			$xml    = new SimpleXMLElement($file, NULL, TRUE);
-			$params = new JForm($gateway, array('control' => 'params[gateways]'));
+			$params = new \Joomla\CMS\Form\Form($gateway, array('control' => 'params[gateways]'));
 			$params->loadFile($file, TRUE, 'config');
 
 			$out[$gateway] = array('title' => $xml->name, 'html' => MFormHelper::renderGroup($params, $defaults, $gateway));
@@ -386,7 +386,7 @@ class MFormHelper
 			return "File not found: {$file}";
 		}
 
-		$form = new JForm('params', array(
+		$form = new \Joomla\CMS\Form\Form('params', array(
 			'control' => 'params'
 		));
 

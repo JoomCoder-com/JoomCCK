@@ -9,7 +9,7 @@
 defined('_JEXEC') or die();
 
 
-JHTML::_('bootstrap.tooltip', '*[rel^="tooltip"]');
+\Joomla\CMS\HTML\HTMLHelper::_('bootstrap.tooltip', '*[rel^="tooltip"]');
 
 // no need to continue if there is no value
 if (!$this->values) return;

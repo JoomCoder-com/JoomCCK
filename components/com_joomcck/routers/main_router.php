@@ -140,7 +140,7 @@ function JoomcckBuildRoute(&$query)
 
 					if(count($user) < 2)
 					{
-						$user[1] = JFilterOutput::stringURLSafe(\Joomla\CMS\Factory::getUser($user[0])->get(ItemsStore::getSection($section[0])->params->get('personalize.author_mode')));
+						$user[1] = \Joomla\CMS\Filter\OutputFilter::stringURLSafe(\Joomla\CMS\Factory::getUser($user[0])->get(ItemsStore::getSection($section[0])->params->get('personalize.author_mode')));
 					}
 
 					$segments[] = ($user[0] . '-' . cleanAlias($user[1]));
@@ -347,7 +347,7 @@ function JoomcckBuildRoute(&$query)
 function JoomcckParseRoute($segments)
 {
 	$vars         = array();
-	$filter       = JFilterInput::getInstance();
+	$filter       = \Joomla\CMS\Filter\InputFilter::getInstance();
 	$count        = count($segments);
 	$last_segment = count($segments) - 1;
 

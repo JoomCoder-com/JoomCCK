@@ -195,7 +195,7 @@ class JFormFieldMlist extends JFormField
 				}
 
 				// Requires vote plugin
-				if (in_array('vote', $requires) && !JPluginHelper::isEnabled('content', 'vote'))
+				if (in_array('vote', $requires) && !\Joomla\CMS\Plugin\PluginHelper::isEnabled('content', 'vote'))
 				{
 					continue;
 				}

@@ -18,13 +18,13 @@ class MintPayAbstract
 
 	/**
 	 *
-	 * @var JTable
+	 * @var \Joomla\CMS\Table\Table
 	 */
 	var $table = FALSE;
 
 	function __construct()
 	{
-		$this->table = JTable::getInstance('Sales', 'JoomcckTable');
+		$this->table = \Joomla\CMS\Table\Table::getInstance('Sales', 'JoomcckTable');
 	}
 
 	public function prepare_output(&$obj, $client, $record, $type, $section)
@@ -97,7 +97,7 @@ class MintPayAbstract
 		}
 		$out = array();
 
-		$form = new JForm('jform', array('control' => "jform[fields][{$id}]"));
+		$form = new \Joomla\CMS\Form\Form('jform', array('control' => "jform[fields][{$id}]"));
 		$form->loadFile($xml);
 
 		return $form;
@@ -141,8 +141,8 @@ class MintPayAbstract
 			$mail->setSender($sender);
 			$mail->addReplyTo($sender[0], $sender[1]);
 			$mail->isHTML(true);
-			$mail->setBody(JMailHelper::cleanBody($body));
-			$mail->setSubject(JMailHelper::cleanSubject($subject));
+			$mail->setBody(\Joomla\CMS\Mail\MailHelper::cleanBody($body));
+			$mail->setSubject(\Joomla\CMS\Mail\MailHelper::cleanSubject($subject));
 
 			if (!$mail->Send())
 			{

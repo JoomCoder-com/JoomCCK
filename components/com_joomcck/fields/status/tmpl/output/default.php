@@ -10,12 +10,12 @@
 use Joomla\Component\Finder\Administrator\Indexer\Parser\Html;
 
 defined('_JEXEC') or die();
-JHTML::_('bootstrap.tooltip', '*[rel="tooltipright"]',
+\Joomla\CMS\HTML\HTMLHelper::_('bootstrap.tooltip', '*[rel="tooltipright"]',
 	array(
 		'placement' => 'right'
 	)
 );
-JHTML::_('bootstrap.tooltip', '*[rel^="tooltip"]');
+\Joomla\CMS\HTML\HTMLHelper::_('bootstrap.tooltip', '*[rel^="tooltip"]');
 
 
 

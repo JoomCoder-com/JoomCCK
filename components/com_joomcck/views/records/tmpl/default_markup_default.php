@@ -12,7 +12,7 @@ use Joomla\CMS\Layout\LayoutHelper;
 
 defined('_JEXEC') or die('Restricted access');
 
-JHTML::_('bootstrap.tooltip', '*[rel^="tooltip"]');
+\Joomla\CMS\HTML\HTMLHelper::_('bootstrap.tooltip', '*[rel^="tooltip"]');
 
 $user_id = $this->input->getInt('user_id', 0);
 $app     = \Joomla\CMS\Factory::getApplication();

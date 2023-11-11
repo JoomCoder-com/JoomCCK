@@ -37,8 +37,8 @@ class JoomcckControllerField extends MControllerAdmin
 			return;
 		}
 
-		JTable::addIncludePath(JPATH_COMPONENT_ADMINISTRATOR . 'tables/field.php');
-		$field_table = JTable::getInstance('Field', 'JoomcckTable');
+		\Joomla\CMS\Table\Table::addIncludePath(JPATH_COMPONENT_ADMINISTRATOR . 'tables/field.php');
+		$field_table = \Joomla\CMS\Table\Table::getInstance('Field', 'JoomcckTable');
 		$field_table->load($field_id);
 
 		if(!$field_table->id)

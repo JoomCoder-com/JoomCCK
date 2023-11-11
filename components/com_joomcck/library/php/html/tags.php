@@ -567,7 +567,7 @@ class JHTMLTags
 		{
 			$tag = trim($tag);
 			if(!$tag) continue;
-			$t[] = JHTML::_('tags.tag', $tag);
+			$t[] = \Joomla\CMS\HTML\HTMLHelper::_('tags.tag', $tag);
 			$escape[] = $db->quote(trim($tag));
 		}
 
@@ -807,7 +807,7 @@ class JHTMLTags
 				}
 			}
 
-			$t[] = JHTML::link( $link, $tag->tag, array());
+			$t[] = \Joomla\CMS\HTML\HTMLHelper::link( $link, $tag->tag, array());
 		}
 		if(@$t) $out = implode(", ", $t);
 
@@ -815,8 +815,8 @@ class JHTMLTags
 		{
 
 			$out .= ' <span id="new_tags'.$item->id.'"></span> '.
-				JHTML::image(JURI::root(TRUE).'/components/com_resource/images/load.gif', '', array('id'=>'load_image'.$item->id, 'style' => 'display:none'))
-				.' <span style="display:none" id="atfid'.$item->id.'"><input type="text" class="form-control" id="new_tag_input'.$item->id.'" /> <input type="button" class="button" value="'. \Joomla\CMS\Language\Text::_('CADD') .'" onclick="addTagToRecord('.$item->id.')" /></span>'.JHTML::image(JURI::root(TRUE).'/components/com_resource/images/tag-icon-plus.png', \Joomla\CMS\Language\Text::_('CADDTAGS'), array('id'=>'tag_img_id'.$item->id, 'align'=>'absmiddle', 'onclick'=>'document.getElementById(\'atfid'.$item->id.'\').style.display = \'block\';', 'style'=>'cursor:pointer'));
+				\Joomla\CMS\HTML\HTMLHelper::image(JURI::root(TRUE).'/components/com_resource/images/load.gif', '', array('id'=>'load_image'.$item->id, 'style' => 'display:none'))
+				.' <span style="display:none" id="atfid'.$item->id.'"><input type="text" class="form-control" id="new_tag_input'.$item->id.'" /> <input type="button" class="button" value="'. \Joomla\CMS\Language\Text::_('CADD') .'" onclick="addTagToRecord('.$item->id.')" /></span>'.\Joomla\CMS\HTML\HTMLHelper::image(JURI::root(TRUE).'/components/com_resource/images/tag-icon-plus.png', \Joomla\CMS\Language\Text::_('CADDTAGS'), array('id'=>'tag_img_id'.$item->id, 'align'=>'absmiddle', 'onclick'=>'document.getElementById(\'atfid'.$item->id.'\').style.display = \'block\';', 'style'=>'cursor:pointer'));
 		}
 
 		return $out;

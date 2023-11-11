@@ -10,7 +10,7 @@ defined('_JEXEC') or die();
 
 jimport('mint.resizeimage');
 
-JPluginHelper::importPlugin('mint');
+\Joomla\CMS\Plugin\PluginHelper::importPlugin('mint');
 
 class CCommunityHelper
 {
@@ -48,7 +48,7 @@ class CCommunityHelper
 			'eventer' => $options['eventer']
 		);
 
-		$table = JTable::getInstance('Notificat', 'JoomcckTable');
+		$table = \Joomla\CMS\Table\Table::getInstance('Notificat', 'JoomcckTable');
 		$table->save($array);
 	}
 
@@ -329,7 +329,7 @@ class CCommunityHelper
 
 	static public function getRegistrationLink($label)
 	{
-		return JHTML::link(\Joomla\CMS\Router\Route::_(self::getRegistrationUrl()), $label);
+		return \Joomla\CMS\HTML\HTMLHelper::link(\Joomla\CMS\Router\Route::_(self::getRegistrationUrl()), $label);
 	}
 
 	static public function getRegistrationUrl()

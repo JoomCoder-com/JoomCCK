@@ -71,7 +71,7 @@ class CEventsHelper
 
 		if($record_id)
 		{
-			$record = JTable::getInstance('Record', 'JoomcckTable');
+			$record = \Joomla\CMS\Table\Table::getInstance('Record', 'JoomcckTable');
 			$record->load($record_id);
 
 			$icats = json_decode($record->categories, TRUE);

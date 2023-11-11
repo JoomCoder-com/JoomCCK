@@ -134,7 +134,7 @@ class JoomcckControllerCron extends MControllerAdmin
 
 			foreach($records AS $id => $notes)
 			{
-				$record = JTable::getInstance('Record', 'JoomcckTable');
+				$record = \Joomla\CMS\Table\Table::getInstance('Record', 'JoomcckTable');
 				$record->load($id);
 
 				if(empty($record->id))

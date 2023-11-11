@@ -9,7 +9,7 @@
 
 defined('_JEXEC') or die();
 
-JHTML::_('bootstrap.modal', 'a.cmodal');
+\Joomla\CMS\HTML\HTMLHelper::_('bootstrap.modal', 'a.cmodal');
 
 jimport('joomla.application.component.view');
 class JoomcckViewTField extends MViewBase
@@ -33,7 +33,7 @@ class JoomcckViewTField extends MViewBase
 
 		$this->form = $this->get('Form');
 		$this->user = \Joomla\CMS\Factory::getUser();
-		$params = new JForm('params', array('control' => 'params'));
+		$params = new \Joomla\CMS\Form\Form('params', array('control' => 'params'));
 		$params->loadFile(JPATH_COMPONENT. '/models/forms/params.field.xml');
 		$this->params_form = $params;
 

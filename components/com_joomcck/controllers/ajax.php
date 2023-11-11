@@ -130,7 +130,7 @@ class JoomcckControllerAjax extends MControllerAdmin
 
 		$db = \Joomla\CMS\Factory::getDbo();
 
-		if(JMailHelper::isEmailAddress($user))
+		if(\Joomla\CMS\Mail\MailHelper::isEmailAddress($user))
 		{
 			$db->setQuery("SELECT id FROM #__users WHERE email = " . $db->quote($user));
 			$user_id = $db->loadResult();
@@ -158,7 +158,7 @@ class JoomcckControllerAjax extends MControllerAdmin
 
 	public function status()
 	{
-		$order = JTable::getInstance('Sales', 'JoomcckTable');
+		$order = \Joomla\CMS\Table\Table::getInstance('Sales', 'JoomcckTable');
 		$order->load($this->input->getInt('order_id'));
 
 		if(!$order->id)
@@ -179,8 +179,8 @@ class JoomcckControllerAjax extends MControllerAdmin
 		$order->status = $this->input->getInt('status');
 		$order->store();
 
-		JTable::addIncludePath(JPATH_COMPONENT_ADMINISTRATOR . 'tables/field.php');
-		$field = JTable::getInstance('Field', 'JoomcckTable');
+		\Joomla\CMS\Table\Table::addIncludePath(JPATH_COMPONENT_ADMINISTRATOR . 'tables/field.php');
+		$field = \Joomla\CMS\Table\Table::getInstance('Field', 'JoomcckTable');
 		$field->load($order->field_id);
 		$field->params = new \Joomla\Registry\Registry($field->params);
 
@@ -226,7 +226,7 @@ class JoomcckControllerAjax extends MControllerAdmin
 			'type'       => 'record',
 			'section_id' => $this->input->getInt('section_id')
 		);
-		$table = JTable::getInstance('Subscribe', 'JoomcckTable');
+		$table = \Joomla\CMS\Table\Table::getInstance('Subscribe', 'JoomcckTable');
 		$i     = 0;
 		foreach($list as $id)
 		{
@@ -259,7 +259,7 @@ class JoomcckControllerAjax extends MControllerAdmin
 			'section_id' => $this->input->getInt('section_id')
 		);
 
-		$table = JTable::getInstance('Subscribe', 'JoomcckTable');
+		$table = \Joomla\CMS\Table\Table::getInstance('Subscribe', 'JoomcckTable');
 		$table->load($data);
 
 		if($table->id)
@@ -299,10 +299,10 @@ class JoomcckControllerAjax extends MControllerAdmin
 			'ref_id'     => $this->input->getInt('cat_id'),
 			'section_id' => $this->input->getInt('section_id')
 		);
-		$stable = JTable::getInstance('Subscribe', 'JoomcckTable');
+		$stable = \Joomla\CMS\Table\Table::getInstance('Subscribe', 'JoomcckTable');
 		$stable->load($sdata);
 
-		$table = JTable::getInstance('Subscribecat', 'JoomcckTable');
+		$table = \Joomla\CMS\Table\Table::getInstance('Subscribecat', 'JoomcckTable');
 		$data  = array(
 			'user_id'    => $user->get('id'),
 			'cat_id'     => $this->input->getInt('cat_id'),
@@ -367,10 +367,10 @@ class JoomcckControllerAjax extends MControllerAdmin
 			'ref_id'     => $this->input->getInt('user_id'),
 			'section_id' => $this->input->getInt('section_id')
 		);
-		$stable = JTable::getInstance('Subscribe', 'JoomcckTable');
+		$stable = \Joomla\CMS\Table\Table::getInstance('Subscribe', 'JoomcckTable');
 		$stable->load($sdata);
 
-		$table = JTable::getInstance('Subscribeuser', 'JoomcckTable');
+		$table = \Joomla\CMS\Table\Table::getInstance('Subscribeuser', 'JoomcckTable');
 		$data  = array(
 			'user_id'    => $user->get('id'),
 			'u_id'       => $this->input->getInt('user_id'),
@@ -436,7 +436,7 @@ class JoomcckControllerAjax extends MControllerAdmin
 			AjaxHelper::error(\Joomla\CMS\Language\Text::_('AJAX_PLEASELOGIN'));
 		}
 
-		$record = JTable::getInstance('Record', 'JoomcckTable');
+		$record = \Joomla\CMS\Table\Table::getInstance('Record', 'JoomcckTable');
 		$record->load($this->input->getInt('record_id'));
 
 		$data = array(
@@ -446,7 +446,7 @@ class JoomcckControllerAjax extends MControllerAdmin
 			'section_id' => $record->section_id
 		);
 
-		$table = JTable::getInstance('Subscribe', 'JoomcckTable');
+		$table = \Joomla\CMS\Table\Table::getInstance('Subscribe', 'JoomcckTable');
 		$table->load($data);
 
 		if($table->id)
@@ -498,7 +498,7 @@ class JoomcckControllerAjax extends MControllerAdmin
 		$list = $app->getUserState("compare.set{$sid}");
 		ArrayHelper::clean_r($list);
 
-		$record = JTable::getInstance('Record', 'JoomcckTable');
+		$record = \Joomla\CMS\Table\Table::getInstance('Record', 'JoomcckTable');
 		$record->load($rid);
 
 		$type = ItemsStore::getType($record->type_id);
@@ -527,14 +527,14 @@ class JoomcckControllerAjax extends MControllerAdmin
 			AjaxHelper::error(\Joomla\CMS\Language\Text::_('AJAX_PLEASELOGIN'));
 		}
 
-		$record = JTable::getInstance('Record', 'JoomcckTable');
+		$record = \Joomla\CMS\Table\Table::getInstance('Record', 'JoomcckTable');
 		$record->load($this->input->getInt('record_id'));
 
 		$data  = array(
 			'host_id'   => $user->get('id'),
 			'record_id' => $this->input->getInt('record_id')
 		);
-		$table = JTable::getInstance('Reposts', 'JoomcckTable');
+		$table = \Joomla\CMS\Table\Table::getInstance('Reposts', 'JoomcckTable');
 		$table->load($data);
 
 		if(!$table->id)
@@ -570,14 +570,14 @@ class JoomcckControllerAjax extends MControllerAdmin
 			AjaxHelper::error(\Joomla\CMS\Language\Text::_('AJAX_PLEASELOGIN'));
 		}
 
-		$record = JTable::getInstance('Record', 'JoomcckTable');
+		$record = \Joomla\CMS\Table\Table::getInstance('Record', 'JoomcckTable');
 		$record->load($this->input->getInt('record_id'));
 
 		$data  = array(
 			'user_id'   => $user->get('id'),
 			'record_id' => $this->input->getInt('record_id')
 		);
-		$table = JTable::getInstance('Favorites', 'JoomcckTable');
+		$table = \Joomla\CMS\Table\Table::getInstance('Favorites', 'JoomcckTable');
 		$table->load($data);
 
 		if($table->id)
@@ -894,13 +894,13 @@ class JoomcckControllerAjax extends MControllerAdmin
 			die('Error');
 
 
-		$table  = JTable::getInstance('Taghistory', 'JoomcckTable');
+		$table  = \Joomla\CMS\Table\Table::getInstance('Taghistory', 'JoomcckTable');
 		$table->load(array(
 			'tag_id'    => $tag_id,
 			'record_id' => $this->input->getInt('rid')
 		));
 		$table->delete();
-		$record = JTable::getInstance('Record', 'JoomcckTable');
+		$record = \Joomla\CMS\Table\Table::getInstance('Record', 'JoomcckTable');
 		$record->load($this->input->getInt('rid'));
 		$rtags = ($record->tags != '') ? json_decode($record->tags, 1) : array();
 		$new   = $rtags[$tag_id];
@@ -917,10 +917,10 @@ class JoomcckControllerAjax extends MControllerAdmin
 	public function add_tags()
 	{
 		$user = \Joomla\CMS\Factory::getUser();
-		$tag_table     = JTable::getInstance('Tags', 'JoomcckTable');
-		$taghist_table = JTable::getInstance('Taghistory', 'JoomcckTable');
+		$tag_table     = \Joomla\CMS\Table\Table::getInstance('Tags', 'JoomcckTable');
+		$taghist_table = \Joomla\CMS\Table\Table::getInstance('Taghistory', 'JoomcckTable');
         
-		$record = JTable::getInstance('Record', 'JoomcckTable');
+		$record = \Joomla\CMS\Table\Table::getInstance('Record', 'JoomcckTable');
         $record->load($this->input->getInt('rid'));
         
 		$tag_id  = $this->input->get('tid');
@@ -982,8 +982,8 @@ class JoomcckControllerAjax extends MControllerAdmin
 			AjaxHelper::error(\Joomla\CMS\Language\Text::_('AJAX_NOFIELDID'));
 		}
 
-		JTable::addIncludePath(JPATH_COMPONENT_ADMINISTRATOR . 'tables/field.php');
-		$field_table = JTable::getInstance('Field', 'JoomcckTable');
+		\Joomla\CMS\Table\Table::addIncludePath(JPATH_COMPONENT_ADMINISTRATOR . 'tables/field.php');
+		$field_table = \Joomla\CMS\Table\Table::getInstance('Field', 'JoomcckTable');
 		$field_table->load($id);
 
 		$field     = $field_table->field_type;
@@ -1107,7 +1107,7 @@ class JoomcckControllerAjax extends MControllerAdmin
 		else
 		{
 
-			$table = JTable::getInstance('Notificat', 'JoomcckTable');
+			$table = \Joomla\CMS\Table\Table::getInstance('Notificat', 'JoomcckTable');
 			$table->load($id);
 
 			if($client == 'component')
@@ -1322,7 +1322,7 @@ class JoomcckControllerAjax extends MControllerAdmin
 			exit();
 		}
 
-		$form = new JForm('params', array(
+		$form = new \Joomla\CMS\Form\Form('params', array(
 			'control' => 'params'
 		));
 
@@ -1345,7 +1345,7 @@ class JoomcckControllerAjax extends MControllerAdmin
 	public function loadfieldparams()
 	{
 		$xml = JPATH_ROOT.$this->input->getString('dir').DIRECTORY_SEPARATOR.str_replace('.php', '.xml', $this->input->get('value'));
-		$xml = JPath::clean($xml);
+		$xml = \Joomla\CMS\Filesystem\Path::clean($xml);
 		$form = '';
 		
 		$segments = explode('/', $this->input->getString('dir'));
@@ -1382,7 +1382,7 @@ class JoomcckControllerAjax extends MControllerAdmin
 		}
 		$out = array();
 
-		$form = new JForm('params', array(
+		$form = new \Joomla\CMS\Form\Form('params', array(
 			'control' => 'params'
 		));
 
@@ -1430,10 +1430,10 @@ class JoomcckControllerAjax extends MControllerAdmin
 		}
 		foreach ($list as $val)
 		{
-			$types[] = JHTML::_('select.option', $val->id, $val->name);
+			$types[] = \Joomla\CMS\HTML\HTMLHelper::_('select.option', $val->id, $val->name);
 		}
 
-		echo JHTML::_('select.options', $types, 'value', 'text', $selected);
+		echo \Joomla\CMS\HTML\HTMLHelper::_('select.options', $types, 'value', 'text', $selected);
 		\Joomla\CMS\Factory::getApplication()->close();
 	}
 }

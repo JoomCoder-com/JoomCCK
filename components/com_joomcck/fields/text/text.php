@@ -123,7 +123,7 @@ class JFormFieldCtext extends CFormFieldSelectable
 			return null;
 		}
 
-		$filter = JFilterInput::getInstance();
+		$filter = \Joomla\CMS\Filter\InputFilter::getInstance();
 		return $filter->clean($value);
 	}
 

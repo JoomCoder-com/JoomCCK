@@ -14,7 +14,7 @@ defined('_JEXEC') or die('Restricted access');
 \Joomla\CMS\HTML\HTMLHelper::addIncludePath(JPATH_COMPONENT . '/helpers/html');
 \Joomla\CMS\HTML\HTMLHelper::_('dropdown.init');
 \Joomla\CMS\HTML\HTMLHelper::_('bootstrap.modal', 'a.modal');
-JHTML::_('bootstrap.tooltip', '*[rel^="tooltip"]');
+\Joomla\CMS\HTML\HTMLHelper::_('bootstrap.tooltip', '*[rel^="tooltip"]');
 \Joomla\CMS\HTML\HTMLHelper::_('formbehavior.chosen', '.select');
 
 $user = \Joomla\CMS\Factory::getUser();
@@ -89,7 +89,7 @@ $listDirn = $this->state->get('list.direction');
 					<div>
 					<small>
 						<?php echo \Joomla\CMS\HTML\HTMLHelper::_('ip.country', $item->ip); ?>
-						<?php echo JHTML::link('javascript:void(0);', $item->ip, array('rel' => "tooltip", 'title' => \Joomla\CMS\Language\Text::_('CFILTERBYIP'), 'onclick' => 'Joomcck.setAndSubmit(\'filter_search\', \'ip:' . $item->ip . '\');')); ?>
+						<?php echo \Joomla\CMS\HTML\HTMLHelper::link('javascript:void(0);', $item->ip, array('rel' => "tooltip", 'title' => \Joomla\CMS\Language\Text::_('CFILTERBYIP'), 'onclick' => 'Joomcck.setAndSubmit(\'filter_search\', \'ip:' . $item->ip . '\');')); ?>
 					</small>
 					</div>
 				<?php endif; ?>
@@ -198,12 +198,12 @@ $listDirn = $this->state->get('list.direction');
 			</td>
 			<td nowrap="nowrap">
 				<small>
-					<?php $data = new JDate($item->ctime);
+					<?php $data = new \Joomla\CMS\Date\Date($item->ctime);
 					echo $data->format(\Joomla\CMS\Language\Text::_('CDATE1')); ?><br/>
 					<?php if($item->extime == '0000-00-00 00:00:00' || is_null($item->extime)): ?>
 						<span style="color: green"><?php echo \Joomla\CMS\Language\Text::_('CNEVER') ?></span>
 					<?php else: ?>
-						<?php $extime = new JDate($item->extime); ?>
+						<?php $extime = new \Joomla\CMS\Date\Date($item->extime); ?>
 						<span style="color: <?php echo($extime->toUnix() <= time() ? 'red' : 'green') ?>">
 							<?php echo $extime->format(\Joomla\CMS\Language\Text::_('CDATE1')); ?>
 							</span>

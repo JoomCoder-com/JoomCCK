@@ -40,7 +40,7 @@ class JoomcckTableSales extends \Joomla\CMS\Table\Table
 		
 		$db = \Joomla\CMS\Factory::getDbo();
 		
-		if(JMailHelper::isEmailAddress($user))
+		if(\Joomla\CMS\Mail\MailHelper::isEmailAddress($user))
 		{
 			$db->setQuery("SELECT id FROM #__users WHERE email = ".$db->quote($user));
 			$user_id = $db->loadResult();

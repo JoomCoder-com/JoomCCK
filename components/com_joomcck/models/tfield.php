@@ -49,7 +49,7 @@ class JoomcckModelTfield extends MModelAdmin
 
 		FieldHelper::loadLang($field_type);
 
-		$form = new JForm('params', array(
+		$form = new \Joomla\CMS\Form\Form('params', array(
 			'control' => 'params'
 		));
 
@@ -148,7 +148,7 @@ class JoomcckModelTfield extends MModelAdmin
 				{
 					// Prune items that you can't change.
 					unset($pks[$i]);
-					JLog::add(\Joomla\CMS\Language\Text::_('JLIB_APPLICATION_ERROR_EDITSTATE_NOT_PERMITTED'), JLog::WARNING, 'jerror');
+					\Joomla\CMS\Log\Log::add(\Joomla\CMS\Language\Text::_('JLIB_APPLICATION_ERROR_EDITSTATE_NOT_PERMITTED'), \Joomla\CMS\Log\Log::WARNING, 'jerror');
 
 					return FALSE;
 				}

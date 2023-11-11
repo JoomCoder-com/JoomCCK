@@ -89,13 +89,13 @@ $listDirn	= $this->state->get('list.direction');
 
 			<tr class="<?php $k = 1 - $k; echo "row$k"; ?>">
 				<td>
-					<?php echo JHTML::_('grid.id', $i, $row->id ); ?>
+					<?php echo \Joomla\CMS\HTML\HTMLHelper::_('grid.id', $i, $row->id ); ?>
 				</td>
 				<td id="tag_container_<?php echo $row->id; ?>">
 					<a href="javascript: void(0); showForm(<?php echo $row->id; ?>)" id="tag_<?php echo $row->id; ?>"><?php echo $row->tag; ?></a>
 				</td>
 				<td class="nowrap center small">
-					<?php $data = new JDate( $row->ctime ); echo $data->format( \Joomla\CMS\Language\Text::_('CDATE1' ) ); ?>
+					<?php $data = new \Joomla\CMS\Date\Date( $row->ctime ); echo $data->format( \Joomla\CMS\Language\Text::_('CDATE1' ) ); ?>
 				</td>
 				<td class="center">
 					<?php echo $row->language; ?>

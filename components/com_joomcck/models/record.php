@@ -601,7 +601,7 @@ class JoomcckModelRecord extends MModelItem
 			$db = \Joomla\CMS\Factory::getDbo();
 			$db->setQuery("SELECT COUNT(id) FROM #__js_res_comments WHERE record_id = {$id} AND published = 1");
 			$record->comments = $db->loadResult();
-			$record->mtime    = JDate::getInstance()->toSql();
+			$record->mtime    = \Joomla\CMS\Date\Date::getInstance()->toSql();
 			$record->index();
 		}
 

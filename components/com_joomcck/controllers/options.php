@@ -56,7 +56,7 @@ class JoomcckControllerOptions extends MControllerAdmin
 		$app = \Joomla\CMS\Factory::getApplication();
 		$data = $this->input->get('jform', array(), 'array');
 
-		$table = JTable::getInstance('Useropt', 'JoomcckTable');
+		$table = \Joomla\CMS\Table\Table::getInstance('Useropt', 'JoomcckTable');
 
 		$table->load(array(
 			'user_id' => $me->get('id')
@@ -128,7 +128,7 @@ class JoomcckControllerOptions extends MControllerAdmin
 		$app = \Joomla\CMS\Factory::getApplication();
 		$data = $this->input->get('jform', array(), 'array');
 
-		$table = JTable::getInstance('Useropt', 'JoomcckTable');
+		$table = \Joomla\CMS\Table\Table::getInstance('Useropt', 'JoomcckTable');
 
 		$table->load(array(
 			'user_id' => $me->get('id')
@@ -139,8 +139,8 @@ class JoomcckControllerOptions extends MControllerAdmin
 		{
 			$params = json_decode($table->params, TRUE);
 
-			$data['title'] = JFilterInput::getInstance()->clean($data['title']);
-			$data['description'] = JFilterInput::getInstance()->clean($data['description']);
+			$data['title'] = \Joomla\CMS\Filter\InputFilter::getInstance()->clean($data['title']);
+			$data['description'] = \Joomla\CMS\Filter\InputFilter::getInstance()->clean($data['description']);
 
 			$params['sections'][$section_id] = $data;
 
@@ -159,7 +159,7 @@ class JoomcckControllerOptions extends MControllerAdmin
 
 		$data = array('section_id' => $section_id, 'user_id' => $me->get('id'));
 
-		$map = JTable::getInstance('Userpostmap', 'JoomcckTable');
+		$map = \Joomla\CMS\Table\Table::getInstance('Userpostmap', 'JoomcckTable');
 		$map->load($data);
 		if(!$map->id)
 		{

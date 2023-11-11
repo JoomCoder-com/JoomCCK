@@ -8,7 +8,7 @@
  */
 defined('_JEXEC') or die('Restricted access');
 
-JHTML::_('bootstrap.tooltip', '*[rel^="tooltip"]');
+\Joomla\CMS\HTML\HTMLHelper::_('bootstrap.tooltip', '*[rel^="tooltip"]');
 
 $user = \Joomla\CMS\Factory::getUser();
 $userId = $user->get('id');
@@ -40,22 +40,22 @@ $listDirn = $this->escape($this->state->get('list.direction'));
 				<input type="checkbox" name="checkall-toggle" value="" title="<?php echo \Joomla\CMS\Language\Text::_('JGLOBAL_CHECK_ALL'); ?>" onclick="Joomla.checkAll(this)"/>
 			</th>
 			<th width="1%" nowrap="nowrap">
-				<?php echo JHTML::_('grid.sort', 'CVOTE', 'a.vote', $listDirn, $listOrder); ?>
+				<?php echo \Joomla\CMS\HTML\HTMLHelper::_('grid.sort', 'CVOTE', 'a.vote', $listDirn, $listOrder); ?>
 			</th>
 			<th width="1%" nowrap="nowrap">
-				<?php echo JHTML::_('grid.sort', 'CTYPE', 'a.ref_type', $listDirn, $listOrder); ?>
+				<?php echo \Joomla\CMS\HTML\HTMLHelper::_('grid.sort', 'CTYPE', 'a.ref_type', $listDirn, $listOrder); ?>
 			</th>
 			<th class="title">
-				<?php echo JHTML::_('grid.sort', 'CARTICLE', 'r.title', $listDirn, $listOrder); ?>
+				<?php echo \Joomla\CMS\HTML\HTMLHelper::_('grid.sort', 'CARTICLE', 'r.title', $listDirn, $listOrder); ?>
 			</th>
 			<th width="10%">
-				<?php echo JHTML::_('grid.sort', 'CUSER', 'u.username', $listDirn, $listOrder); ?>
+				<?php echo \Joomla\CMS\HTML\HTMLHelper::_('grid.sort', 'CUSER', 'u.username', $listDirn, $listOrder); ?>
 			</th>
 			<th width="8%" nowrap="nowrap">
-				<?php echo JHTML::_('grid.sort', 'CVOTED', 'a.ctime', $listDirn, $listOrder); ?>
+				<?php echo \Joomla\CMS\HTML\HTMLHelper::_('grid.sort', 'CVOTED', 'a.ctime', $listDirn, $listOrder); ?>
 			</th>
 			<th width="1%" nowrap="nowrap">
-				<?php echo JHTML::_('grid.sort', 'ID', 'a.id', $listDirn, $listOrder); ?>
+				<?php echo \Joomla\CMS\HTML\HTMLHelper::_('grid.sort', 'ID', 'a.id', $listDirn, $listOrder); ?>
 			</th>
 		</tr>
 		</thead>
@@ -63,7 +63,7 @@ $listDirn = $this->escape($this->state->get('list.direction'));
 		<tbody>
 		<?php foreach($this->items as $i => $item) : ?>
 			<tr class="row<?php echo $i % 2; ?>">
-				<td><?php echo JHTML::_('grid.id', $i, $item->id); ?></td>
+				<td><?php echo \Joomla\CMS\HTML\HTMLHelper::_('grid.id', $i, $item->id); ?></td>
 				<td>
 					<small>
 						<a href="#" rel="tooltip" data-bs-title="<?php echo \Joomla\CMS\Language\Text::_('CFILTERBYVOTE'); ?>" onclick="Joomcck.setAndSubmit('filter_votes', '<?php echo $item->vote ?>')">
@@ -106,7 +106,7 @@ $listDirn = $this->escape($this->state->get('list.direction'));
 						<?php if($item->ip): ?>
 							<div>
 								<?php echo \Joomla\CMS\HTML\HTMLHelper::_('ip.country', $item->ip); ?>
-								<?php echo JHTML::link('javascript:void(0);', $item->ip, array(
+								<?php echo \Joomla\CMS\HTML\HTMLHelper::link('javascript:void(0);', $item->ip, array(
 									'rel' => "tooltip", 'data-bs-title' => \Joomla\CMS\Language\Text::_('CFILTERBYIP'), 'onclick' => 'document.getElementById(\'filter_search\').value=\'ip:' . $item->ip . '\'; document.adminForm.submit();'
 								)); ?>
 								<?php //echo \Joomla\CMS\HTML\HTMLHelper::_('ip.block_ip', $item->ip, $item->id);?>
@@ -116,7 +116,7 @@ $listDirn = $this->escape($this->state->get('list.direction'));
 				</td>
 				<td align="center" class="nowrap">
 					<small>
-						<?php $data = new JDate($item->ctime);
+						<?php $data = new \Joomla\CMS\Date\Date($item->ctime);
 						echo $data->format(\Joomla\CMS\Language\Text::_('CDATE1')); ?>
 					</small>
 				</td>

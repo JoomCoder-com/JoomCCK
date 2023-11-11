@@ -10,7 +10,7 @@
 defined('_JEXEC') or die();
 $params = $this->params;
 
-JHTML::_('bootstrap.tooltip', '*[rel^="tooltip"]');
+\Joomla\CMS\HTML\HTMLHelper::_('bootstrap.tooltip', '*[rel^="tooltip"]');
 
 $class      = ' class="form-control expanding' . $params->get('core.field_class') . ($this->required ? ' required' : NULL) . '"';
 $required   = $this->required ? ' required="true" ' : NULL;

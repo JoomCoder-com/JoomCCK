@@ -16,7 +16,7 @@ $user = \Joomla\CMS\Factory::getUser();
 $userId = $user->get('id');
 \Joomla\CMS\HTML\HTMLHelper::_('dropdown.init');
 \Joomla\CMS\HTML\HTMLHelper::_('formbehavior.chosen', '.select');
-JHTML::_('bootstrap.tooltip', '*[rel^="tooltip"]');
+\Joomla\CMS\HTML\HTMLHelper::_('bootstrap.tooltip', '*[rel^="tooltip"]');
 $listOrder = $this->state->get('list.ordering');
 $listDirn = $this->state->get('list.direction');
 ?>

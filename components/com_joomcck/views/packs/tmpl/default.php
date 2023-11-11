@@ -86,7 +86,7 @@ $listDirn = $this->state->get('list.direction');
 					<small>
 						<?php echo $item->download; ?>
 						<br/><?php echo \Joomla\CMS\Language\Text::_('Size'); ?>: <span class="badge bg-info"><?php echo $item->size; ?></span>
-						<br/><?php echo \Joomla\CMS\Language\Text::_('CBTIME'); ?>: <?php echo !in_array($item->btime,[null,'0000-00-00 00:00:00']) ? JDate::getInstance($item->btime) : \Joomla\CMS\Language\Text::_('CNEVER'); ?>
+						<br/><?php echo \Joomla\CMS\Language\Text::_('CBTIME'); ?>: <?php echo !in_array($item->btime,[null,'0000-00-00 00:00:00']) ? \Joomla\CMS\Date\Date::getInstance($item->btime) : \Joomla\CMS\Language\Text::_('CNEVER'); ?>
 					</small>
 				</td>
 				<td class="center">

@@ -8,7 +8,7 @@
  */
 defined('_JEXEC') or die('Restricted access');
 
-JHTML::_('bootstrap.tooltip', '*[rel^="tooltip"]');
+\Joomla\CMS\HTML\HTMLHelper::_('bootstrap.tooltip', '*[rel^="tooltip"]');
 
 $started = false;
 $params = $this->tmpl_params;
@@ -149,7 +149,7 @@ $k = 0;
 			</label>
 			<div class="controls">
 				<div id="field-alert-anywhere" class="alert alert-danger" style="display:none"></div>
-				<?php echo JHTML::_('cusers.wheretopost', @$this->item); ?>
+				<?php echo \Joomla\CMS\HTML\HTMLHelper::_('cusers.wheretopost', @$this->item); ?>
 			</div>
 		</div>
 		

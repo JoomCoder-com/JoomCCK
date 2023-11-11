@@ -8,7 +8,7 @@
  */
 defined('_JEXEC') or die();
 
-JHTML::_('bootstrap.tooltip', '*[rel^="tooltip"]');
+\Joomla\CMS\HTML\HTMLHelper::_('bootstrap.tooltip', '*[rel^="tooltip"]');
 
 $width = $this->params->get('params.qr_width', 120);
 ?>

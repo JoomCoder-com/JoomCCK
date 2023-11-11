@@ -26,7 +26,7 @@ class JoomcckControllerRate extends MControllerAdmin
 	{
 
 
-		$comment = JTable::getInstance('Cobcomments', 'JoomcckTable');
+		$comment = \Joomla\CMS\Table\Table::getInstance('Cobcomments', 'JoomcckTable');
 		$comment->load($this->input->getInt('comment_id'));
 
 		$type = ItemsStore::getType($comment->type_id);
@@ -55,7 +55,7 @@ class JoomcckControllerRate extends MControllerAdmin
 
 		if($comment->user_id)
 		{
-			$record = JTable::getInstance('Record', 'JoomcckTable');
+			$record = \Joomla\CMS\Table\Table::getInstance('Record', 'JoomcckTable');
 			$record->load($comment->record_id);
 
 			$data = $comment->getProperties();
@@ -199,7 +199,7 @@ class JoomcckControllerRate extends MControllerAdmin
 			return;
 		}
 
-		$file = JTable::getInstance('Files', 'JoomcckTable');
+		$file = \Joomla\CMS\Table\Table::getInstance('Files', 'JoomcckTable');
 		$file->load($id);
 		$this->_canVote($file->user_id, $file->id, 'file');
 
@@ -234,7 +234,7 @@ class JoomcckControllerRate extends MControllerAdmin
 
 		$user = \Joomla\CMS\Factory::getUser();
 
-		$votes_table = JTable::getInstance('Votes', 'JoomcckTable');
+		$votes_table = \Joomla\CMS\Table\Table::getInstance('Votes', 'JoomcckTable');
 		$data = array('idx' => $index, 'ref_id' => $id, 'ref_type' => $type);
 		if($user->get('id'))
 		{

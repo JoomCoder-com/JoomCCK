@@ -51,7 +51,7 @@ class JoomcckControllerComment extends MControllerForm
 	public function postSaveHook(MModelBase $model, $validData = array())
 	{
 
-		$record = JTable::getInstance('Record', 'JoomcckTable');
+		$record = \Joomla\CMS\Table\Table::getInstance('Record', 'JoomcckTable');
 		$record->load($validData['record_id']);
 		$validData['record'] = $record->getProperties();
 
@@ -80,7 +80,7 @@ class JoomcckControllerComment extends MControllerForm
 		{
 			if ($validData['parent_id'])
 			{
-				$comment = JTable::getInstance('Cobcomments', 'JoomcckTable');
+				$comment = \Joomla\CMS\Table\Table::getInstance('Cobcomments', 'JoomcckTable');
 				$comment->load($validData['parent_id']);
 
 				if ($comment->user_id)

@@ -50,7 +50,7 @@ class MControllerAdmin extends MControllerBase
 	 *
 	 * @param   array  $config  An optional associative array of configuration settings.
 	 *
-	 * @see     JControllerLegacy
+	 * @see     \Joomla\CMS\MVC\Controller\BaseController
 	 * @since   12.2
 	 * @throws  Exception
 	 */
@@ -108,14 +108,14 @@ class MControllerAdmin extends MControllerBase
 	public function delete()
 	{
 		// Check for request forgeries
-		JSession::checkToken() or die(\Joomla\CMS\Language\Text::_('JINVALID_TOKEN'));
+		\Joomla\CMS\Session\Session::checkToken() or die(\Joomla\CMS\Language\Text::_('JINVALID_TOKEN'));
 
 		// Get items to remove from the request.
 		$cid = \Joomla\CMS\Factory::getApplication()->input->get('cid', array(), 'array');
 
 		if (!is_array($cid) || count($cid) < 1)
 		{
-			JLog::add(\Joomla\CMS\Language\Text::_($this->text_prefix . '_NO_ITEM_SELECTED'), JLog::WARNING, 'jerror');
+			\Joomla\CMS\Log\Log::add(\Joomla\CMS\Language\Text::_($this->text_prefix . '_NO_ITEM_SELECTED'), \Joomla\CMS\Log\Log::WARNING, 'jerror');
 		}
 		else
 		{
@@ -161,9 +161,9 @@ class MControllerAdmin extends MControllerBase
 	 * Display is not supported by this controller.
 	 *
 	 * @param   boolean  $cachable   If true, the view output will be cached
-	 * @param   array    $urlparams  An array of safe url parameters and their variable types, for valid values see {@link JFilterInput::clean()}.
+	 * @param   array    $urlparams  An array of safe url parameters and their variable types, for valid values see {@link \Joomla\CMS\Filter\InputFilter::clean()}.
 	 *
-	 * @return  JControllerLegacy  A JControllerLegacy object to support chaining.
+	 * @return  \Joomla\CMS\MVC\Controller\BaseController  A \Joomla\CMS\MVC\Controller\BaseController object to support chaining.
 	 *
 	 * @since   12.2
 	 */
@@ -182,7 +182,7 @@ class MControllerAdmin extends MControllerBase
 	public function publish()
 	{
 		// Check for request forgeries
-		JSession::checkToken() or die(\Joomla\CMS\Language\Text::_('JINVALID_TOKEN'));
+		\Joomla\CMS\Session\Session::checkToken() or die(\Joomla\CMS\Language\Text::_('JINVALID_TOKEN'));
 
 		// Get items to publish from the request.
 		$cid = \Joomla\CMS\Factory::getApplication()->input->get('cid', array(), 'array');
@@ -192,7 +192,7 @@ class MControllerAdmin extends MControllerBase
 
 		if (empty($cid))
 		{
-			JLog::add(\Joomla\CMS\Language\Text::_($this->text_prefix . '_NO_ITEM_SELECTED'), JLog::WARNING, 'jerror');
+			\Joomla\CMS\Log\Log::add(\Joomla\CMS\Language\Text::_($this->text_prefix . '_NO_ITEM_SELECTED'), \Joomla\CMS\Log\Log::WARNING, 'jerror');
 		}
 		else
 		{
@@ -246,7 +246,7 @@ class MControllerAdmin extends MControllerBase
 	public function reorder()
 	{
 		// Check for request forgeries.
-		JSession::checkToken() or jexit(\Joomla\CMS\Language\Text::_('JINVALID_TOKEN'));
+		\Joomla\CMS\Session\Session::checkToken() or jexit(\Joomla\CMS\Language\Text::_('JINVALID_TOKEN'));
 
 		$ids = \Joomla\CMS\Factory::getApplication()->input->post->get('cid', array(), 'array');
 		$inc = ($this->getTask() == 'orderup') ? -1 : 1;
@@ -279,7 +279,7 @@ class MControllerAdmin extends MControllerBase
 	public function saveorder()
 	{
 		// Check for request forgeries.
-		JSession::checkToken() or jexit(\Joomla\CMS\Language\Text::_('JINVALID_TOKEN'));
+		\Joomla\CMS\Session\Session::checkToken() or jexit(\Joomla\CMS\Language\Text::_('JINVALID_TOKEN'));
 
 		// Get the input
 		$pks = $this->input->post->get('cid', array(), 'array');
@@ -321,7 +321,7 @@ class MControllerAdmin extends MControllerBase
 	public function checkin()
 	{
 		// Check for request forgeries.
-		JSession::checkToken() or jexit(\Joomla\CMS\Language\Text::_('JINVALID_TOKEN'));
+		\Joomla\CMS\Session\Session::checkToken() or jexit(\Joomla\CMS\Language\Text::_('JINVALID_TOKEN'));
 
 		$ids = \Joomla\CMS\Factory::getApplication()->input->post->get('cid', array(), 'array');
 

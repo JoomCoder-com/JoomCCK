@@ -37,7 +37,7 @@ $category->id = $app->input->getInt('cat_id');
 
 if($params->get('show_section_name'))
 {
-	JModelLegacy::addIncludePath(JPATH_ROOT . '/components/com_joomcck/models');
+	\Joomla\CMS\MVC\Model\BaseDatabaseModel::addIncludePath(JPATH_ROOT . '/components/com_joomcck/models');
 	\Joomla\CMS\Table\Table::addIncludePath(JPATH_ROOT . '/administrator/components/com_joomcck/tables');
 	$section  = modJoomcckTagcloudHelper::getSection($section->id);
 	$category = modJoomcckTagcloudHelper::getCategory($category->id);

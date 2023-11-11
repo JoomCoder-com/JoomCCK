@@ -625,7 +625,7 @@ class JFormFieldCDatetime extends CFormField
             return null;
         }
 
-        return [JDate::getInstance(strtotime($data))->toSql()];
+        return [\Joomla\CMS\Date\Date::getInstance(strtotime($data))->toSql()];
     }
 
     public function onImport($value, $params, $record = null)

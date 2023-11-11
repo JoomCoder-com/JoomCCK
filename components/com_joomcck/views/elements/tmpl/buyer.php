@@ -11,7 +11,7 @@ use Joomla\CMS\HTML\HTMLHelper;
 
 defined('_JEXEC') or die();
 
-JHTML::_('bootstrap.tooltip', '*[rel^="tooltip"]');
+\Joomla\CMS\HTML\HTMLHelper::_('bootstrap.tooltip', '*[rel^="tooltip"]');
 
 ?>
 

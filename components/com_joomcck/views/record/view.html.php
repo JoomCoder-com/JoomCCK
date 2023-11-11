@@ -183,7 +183,7 @@ class JoomcckViewRecord extends MViewBase
 
 		if($formatter = $app->input->getCmd('formatter', FALSE))
 		{
-			$plg = JPluginHelper::importPlugin('mint', 'formatter_' . strtolower($formatter));
+			$plg = \Joomla\CMS\Plugin\PluginHelper::importPlugin('mint', 'formatter_' . strtolower($formatter));
 			if($plg)
 			{
 				$dispatcher = \Joomla\CMS\Factory::getApplication();

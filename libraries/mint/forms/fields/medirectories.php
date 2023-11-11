@@ -98,18 +98,18 @@ class JFormFieldMEDirectories extends JFormMEFieldList
 				$folder = preg_replace( '#(\\'.$_ds.'[^\\'.$_ds.']*\\'.$_ds.'\\.\\.)#', '', $folder);
 			}
 
-			$options[] = JHTML::_('select.option', $folder, $folder_label);
+			$options[] = \Joomla\CMS\HTML\HTMLHelper::_('select.option', $folder, $folder_label);
 		}
 
 		if (!$this->element['hide_none']) {
 			if(!$invite_label){
 				$invite_label = 'Do not use';
 			}
-			array_unshift($options, JHTML::_('select.option', '-1', '- '.\Joomla\CMS\Language\Text::_($invite_label).' -'));
+			array_unshift($options, \Joomla\CMS\HTML\HTMLHelper::_('select.option', '-1', '- '.\Joomla\CMS\Language\Text::_($invite_label).' -'));
 		}
 
 		if (!$this->element['hide_default']) {
-			array_unshift($options, JHTML::_('select.option', '', '- '.\Joomla\CMS\Language\Text::_('Use default').' -'));
+			array_unshift($options, \Joomla\CMS\HTML\HTMLHelper::_('select.option', '', '- '.\Joomla\CMS\Language\Text::_('Use default').' -'));
 		}
 
 		// Merge any additional options in the XML definition.
@@ -125,7 +125,7 @@ class JFormFieldMEDirectories extends JFormMEFieldList
 		$arr = array ();
 
 		// Check to make sure the path valid and clean
-		$path = JPath::clean($path);
+		$path = \Joomla\CMS\Filesystem\Path::clean($path);
 
 		// Is the path a folder?
 		if (!is_dir($path)) {

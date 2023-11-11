@@ -74,7 +74,7 @@ class JHTMLIp {
 			$atr['title'] = Jtext::_('CBLOCKIP');
 		}
 
-		return JHTML::image(JURI::root().'administrator/components/com_joomcck/images/'.$img, Jtext::_('CBLOCKIP'), $atr);
+		return \Joomla\CMS\HTML\HTMLHelper::image(JURI::root().'administrator/components/com_joomcck/images/'.$img, Jtext::_('CBLOCKIP'), $atr);
 	}
 	public static function block_user($user, $id) {
 		
@@ -113,6 +113,6 @@ class JHTMLIp {
 			$atr['title'] = Jtext::_('CUNBLOCKUSER');
 		}
 
-		return JHTML::image(JURI::root().'administrator/components/com_joomcck/images/'.$img, $atr['title'], $atr);
+		return \Joomla\CMS\HTML\HTMLHelper::image(JURI::root().'administrator/components/com_joomcck/images/'.$img, $atr['title'], $atr);
 	}
 }

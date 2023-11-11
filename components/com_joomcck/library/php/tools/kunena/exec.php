@@ -7,7 +7,7 @@ class Kunena2Joomcck {
 	public function migrate($params)
 	{
 		\Joomla\CMS\Table\Table::addIncludePath(JPATH_ROOT . '/administrator/components/com_joomcck/tables');
-		JModelLegacy::addIncludePath(JPATH_ROOT . '/components/com_joomcck/models');
+		\Joomla\CMS\MVC\Model\BaseDatabaseModel::addIncludePath(JPATH_ROOT . '/components/com_joomcck/models');
 
 		$this->record   = \Joomla\CMS\Table\Table::getInstance('Record', 'JoomcckTable');
 		$this->category = \Joomla\CMS\Table\Table::getInstance('Record_category', 'JoomcckTable');
@@ -57,8 +57,8 @@ class Kunena2Joomcck {
 			$message = $this->_getMessage($record->id);
 
 			$data['title'] = $record->subject;
-			$data['ctime'] = JDate::getInstance($record->time)->toSql();
-			$data['mtime'] = $record->modified_time ? JDate::getInstance($record->modified_time)->toSql() : $data['ctime'];
+			$data['ctime'] = \Joomla\CMS\Date\Date::getInstance($record->time)->toSql();
+			$data['mtime'] = $record->modified_time ? \Joomla\CMS\Date\Date::getInstance($record->modified_time)->toSql() : $data['ctime'];
 			$data['ip']    = $record->ip;
 
 
@@ -120,7 +120,7 @@ class Kunena2Joomcck {
 			if(!$this->comments->id)
 			{
 				$this->comments->bind($data);
-				$this->comments->ctime     = JDate::getInstance($item->time)->toSql();
+				$this->comments->ctime     = \Joomla\CMS\Date\Date::getInstance($item->time)->toSql();
 				$this->comments->langs     = '*';
 				$this->comments->published = (int)!$item->locked;
 				$this->comments->access    = 1;

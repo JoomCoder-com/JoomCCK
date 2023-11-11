@@ -175,7 +175,7 @@ class JFormFieldCHtml extends CFormField
 			settype($plugins, 'array');
 			foreach($plugins as $plugin)
 			{
-				JPluginHelper::importPlugin('content', $plugin);
+				\Joomla\CMS\Plugin\PluginHelper::importPlugin('content', $plugin);
 				// strict loading of content type plugin - loadmodule to warn rss feed breaking
 				if ($this->request->get("format") == 'feed' && $plugin == 'loadmodule') continue;
 			}
@@ -198,7 +198,7 @@ class JFormFieldCHtml extends CFormField
 			ArrayHelper::clean_r($tags);
 			ArrayHelper::clean_r($attr);
 
-			$value = JFilterInput::getInstance($tags, $attr, $this->params->get('params.tags_mode', 0), $this->params->get('params.attr_mode', 0))->clean($value, 'html');
+			$value = \Joomla\CMS\Filter\InputFilter::getInstance($tags, $attr, $this->params->get('params.tags_mode', 0), $this->params->get('params.attr_mode', 0))->clean($value, 'html');
 			$len1 = \Joomla\String\StringHelper::strlen($value);
 			if ($len != $len1)
 			{
