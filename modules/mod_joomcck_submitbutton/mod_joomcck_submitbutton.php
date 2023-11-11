@@ -105,4 +105,4 @@ foreach($types AS $key => $type)
 }
 
 
-require JModuleHelper::getLayoutPath('mod_joomcck_submitbutton', $params->get('layout', 'default'));
+require \Joomla\CMS\Helper\ModuleHelper::getLayoutPath('mod_joomcck_submitbutton', $params->get('layout', 'default'));

@@ -13,10 +13,10 @@ jimport('joomla.html.html');
 jimport('joomla.form.formfield');
 jimport('joomla.filesystem.file');
 
-JFormHelper::loadFieldClass('list');
+\Joomla\CMS\Form\FormHelper::loadFieldClass('list');
 
 
-class JFormFieldMersubtmpls extends JFormFieldList
+class JFormFieldMersubtmpls extends \Joomla\CMS\Form\Field\ListField
 {
     
     protected $type = 'Mersubtmpls';

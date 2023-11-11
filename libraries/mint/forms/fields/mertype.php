@@ -11,7 +11,7 @@ defined('JPATH_PLATFORM') or die;
 jimport('joomla.html.html');
 jimport('joomla.form.formfield');
 
-class JFormFieldMertype extends JFormField
+class JFormFieldMertype extends \Joomla\CMS\Form\FormField
 {
 	protected $type = 'Mertype';
 	protected function getInput()

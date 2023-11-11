@@ -18,7 +18,7 @@ jimport('joomla.form.formfield');
  * @subpackage	Form
  * @since		1.6
  */
-class JFormFieldMEPictureresize extends JFormFieldList
+class JFormFieldMEPictureresize extends \Joomla\CMS\Form\Field\ListField
 {
 	/**
 	 * The form field type.

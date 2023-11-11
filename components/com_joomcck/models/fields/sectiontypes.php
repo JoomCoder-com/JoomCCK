@@ -12,9 +12,9 @@ defined('JPATH_BASE') or die;
 jimport('joomla.html.html');
 jimport('joomla.form.formfield');
 jimport('joomla.form.helper');
-JFormHelper::loadFieldClass('list');
+\Joomla\CMS\Form\FormHelper::loadFieldClass('list');
 
-class JFormFieldSectiontypes extends JFormFieldList
+class JFormFieldSectiontypes extends \Joomla\CMS\Form\Field\ListField
 {
 	protected $type = 'sectiontypes';
 

@@ -9,7 +9,7 @@
 
 defined('JPATH_PLATFORM') or die;
 
-JFormHelper::loadFieldClass('list');
+\Joomla\CMS\Form\FormHelper::loadFieldClass('list');
 
 /**
  * Form Field class for the Joomla Platform.
@@ -18,7 +18,7 @@ JFormHelper::loadFieldClass('list');
  * @link   http://www.w3.org/TR/html-markup/command.radio.html#command.radio
  * @since  11.1
  */
-class JFormFieldMRadio extends JFormFieldList
+class JFormFieldMRadio extends \Joomla\CMS\Form\Field\ListField
 {
 	/**
 	 * The form field type.

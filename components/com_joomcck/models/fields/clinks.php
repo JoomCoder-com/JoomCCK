@@ -14,7 +14,7 @@ jimport('joomla.form.formfield');
 jimport( 'joomla.filesystem.folder' );
 jimport( 'joomla.filesystem.file'   );
 
-class JFormFieldClinks extends JFormField
+class JFormFieldClinks extends \Joomla\CMS\Form\FormField
 {
 	public $type = 'Clinks';
 	

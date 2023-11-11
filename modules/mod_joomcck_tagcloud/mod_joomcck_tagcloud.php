@@ -22,8 +22,8 @@ if(!file_exists($joomcck))
 require_once(dirname(__FILE__) . '/helper.php');
 include_once JPATH_ROOT . '/components/com_joomcck/library/php/html/tags.php';
 
-$section  = new JObject();
-$category = new JObject();
+$section  = new \Joomla\CMS\Object\CMSObject();
+$category = new \Joomla\CMS\Object\CMSObject();
 $app      = \Joomla\CMS\Factory::getApplication();
 $lang     = \Joomla\CMS\Factory::getLanguage();
 
@@ -54,4 +54,4 @@ if(!$list)
 $html = $params->get('html_tags', 'H1, H2, H3, H4, H5, H6, strong, b, em, big, small');
 
 
-require JModuleHelper::getLayoutPath('mod_joomcck_tagcloud', $params->get('layout', 'default'));
+require \Joomla\CMS\Helper\ModuleHelper::getLayoutPath('mod_joomcck_tagcloud', $params->get('layout', 'default'));

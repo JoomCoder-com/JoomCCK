@@ -92,7 +92,7 @@ class MEFormHelper
 		$out = '';
 		if($separator == FORM_SEPARATOR_SLIDER)
 		{
-			$pane = JPane::getInstance('Sliders');
+
 			$out .= \Joomla\CMS\HTML\HTMLHelper::_('sliders.start', 'type-sliders', array(
 				'useCookie' => 1
 			));

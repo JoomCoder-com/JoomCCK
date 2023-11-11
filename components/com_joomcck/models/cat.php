@@ -7,6 +7,7 @@
  * @license GNU/GPL http://www.gnu.org/copyleft/gpl.html
  */
 
+use Joomla\CMS\Access\Rules;
 use Joomla\CMS\Factory;
 
 defined('_JEXEC') or die;
@@ -277,11 +278,11 @@ class JoomcckModelCat extends MModelAdmin
 		$name = 'category'.($section ? ('.'.$section):'');
 
 		// Looking first in the component models/forms folder
-		$path = \Joomla\CMS\Filesystem\Path::clean(JPATH_ADMINISTRATOR."/components/$component/models/forms/$name.xml");
+		$path =\Joomla\Filesystem\Path::clean(JPATH_ADMINISTRATOR."/components/$component/models/forms/$name.xml");
 
 		// Old way: looking in the component folder
 		if (!file_exists($path)) {
-			$path = \Joomla\CMS\Filesystem\Path::clean(JPATH_ADMINISTRATOR."/components/$component/$name.xml");
+			$path =\Joomla\Filesystem\Path::clean(JPATH_ADMINISTRATOR."/components/$component/$name.xml");
 		}
 
 		if (file_exists($path)) {
@@ -295,7 +296,7 @@ class JoomcckModelCat extends MModelAdmin
 
 		// Try to find the component helper.
 		$eName	= str_replace('com_', '', $component);
-		$path	= \Joomla\CMS\Filesystem\Path::clean(JPATH_ADMINISTRATOR."/components/$component/helpers/category.php");
+		$path	=\Joomla\Filesystem\Path::clean(JPATH_ADMINISTRATOR."/components/$component/helpers/category.php");
 
 		if (file_exists($path)) {
 			require_once $path;
@@ -367,7 +368,7 @@ class JoomcckModelCat extends MModelAdmin
 
 		// Bind the rules.
 		if (isset($data['rules'])) {
-			$rules = new JRules($data['rules']);
+			$rules = new Rules($data['rules']);
 			$table->setRules($rules);
 		}
 

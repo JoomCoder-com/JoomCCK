@@ -85,7 +85,7 @@ class JoomcckCommentsJoomcck extends JoomcckComments
 			$data->item->params->get('comments.comments_access_post', 1))
 		{
 			$data->url_new = 'index.php?option=com_joomcck&view=form&section_id=' . $data->section->id;
-			$data->url_new .= '&type_id=' . $data->stype->id . ':' . JApplicationHelper::stringURLSafe($data->stype->name);
+			$data->url_new .= '&type_id=' . $data->stype->id . ':' . \Joomla\CMS\Application\ApplicationHelper::stringURLSafe($data->stype->name);
 			if($data->params->get('comments.catid', 0))
 			{
 				$data->url_new .= '&cat_id=' . $data->params->get('comments.catid', 0);
@@ -142,7 +142,7 @@ class JoomcckCommentsJoomcck extends JoomcckComments
 
 
 		$tmpl = $data->params->get('comments.layout', 'default');
-		return JLayoutHelper::render(str_replace('.php', '', $tmpl), $data, JPATH_ROOT . '/components/com_joomcck/library/php/comments/joomcck/layouts');
+		return \Joomla\CMS\Layout\LayoutHelper::render(str_replace('.php', '', $tmpl), $data, JPATH_ROOT . '/components/com_joomcck/library/php/comments/joomcck/layouts');
 	}
 
 	public function getIndex($type, $item)

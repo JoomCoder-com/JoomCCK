@@ -12,7 +12,7 @@ defined('_JEXEC') or die;
 jimport('joomla.html.html');
 jimport('joomla.form.formfield');
 
-class JFormFieldCountrylimit extends JFormFieldList
+class JFormFieldCountrylimit extends \Joomla\CMS\Form\Field\ListField
 {
 	
 	protected $type = 'countrylimit';

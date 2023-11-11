@@ -14,7 +14,7 @@ jimport('joomla.form.formfield');
 jimport( 'joomla.filesystem.folder' );
 jimport( 'joomla.filesystem.file'   );
 
-class JFormFieldFieldicon extends JFormField
+class JFormFieldFieldicon extends \Joomla\CMS\Form\FormField
 {
 	public $type = 'Fieldicon';
 	

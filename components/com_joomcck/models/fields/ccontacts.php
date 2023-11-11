@@ -14,7 +14,7 @@ jimport('joomla.form.formfield');
 jimport( 'joomla.filesystem.folder' );
 jimport( 'joomla.filesystem.file'   );
 
-class JFormFieldCcontacts extends JFormField
+class JFormFieldCcontacts extends \Joomla\CMS\Form\FormField
 {
 	public $type = 'Ccontacts';
 	

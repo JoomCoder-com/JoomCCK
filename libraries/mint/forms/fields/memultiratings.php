@@ -10,7 +10,7 @@ defined('JPATH_PLATFORM') or die();
 
 jimport('joomla.form.formfield');
 
-class JFormFieldMEMultiRatings extends JFormField
+class JFormFieldMEMultiRatings extends \Joomla\CMS\Form\FormField
 {
 	protected $type = 'MultiRatings';
 

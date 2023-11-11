@@ -19,7 +19,7 @@ defined('JPATH_PLATFORM') or die;
  * @subpackage  Model
  * @since       12.2
  */
-abstract class MModelBase extends JObject
+abstract class MModelBase extends \Joomla\CMS\Object\CMSObject
 {
 	/**
 	 * Indicates if the internal state has been set
@@ -105,12 +105,12 @@ abstract class MModelBase extends JObject
 
 			if (!in_array($path, $paths[$prefix]))
 			{
-				array_unshift($paths[$prefix], \Joomla\CMS\Filesystem\Path::clean($path));
+				array_unshift($paths[$prefix],\Joomla\Filesystem\Path::clean($path));
 			}
 
 			if (!in_array($path, $paths['']))
 			{
-				array_unshift($paths[''], \Joomla\CMS\Filesystem\Path::clean($path));
+				array_unshift($paths[''],\Joomla\Filesystem\Path::clean($path));
 			}
 		}
 
@@ -173,10 +173,10 @@ abstract class MModelBase extends JObject
 		if (!class_exists($modelClass))
 		{
 			jimport('joomla.filesystem.path');
-			$path = \Joomla\CMS\Filesystem\Path::find(self::addIncludePath(null, $prefix), self::_createFileName('model', array('name' => $type)));
+			$path =\Joomla\Filesystem\Path::find(self::addIncludePath(null, $prefix), self::_createFileName('model', array('name' => $type)));
 			if (!$path)
 			{
-				$path = \Joomla\CMS\Filesystem\Path::find(self::addIncludePath(null, ''), self::_createFileName('model', array('name' => $type)));
+				$path =\Joomla\Filesystem\Path::find(self::addIncludePath(null, ''), self::_createFileName('model', array('name' => $type)));
 			}
 			if ($path)
 			{
@@ -240,7 +240,7 @@ abstract class MModelBase extends JObject
 		}
 		else
 		{
-			$this->state = new JObject;
+			$this->state = new \Joomla\CMS\Object\CMSObject;
 		}
 
 		// Set the model dbo
@@ -363,7 +363,7 @@ abstract class MModelBase extends JObject
 	/**
 	 * Method to get the database driver object
 	 *
-	 * @return  JDatabaseDriver
+	 * @return  \Joomla\Database\DatabaseDriver
 	 */
 	public function getDbo()
 	{
@@ -517,7 +517,7 @@ abstract class MModelBase extends JObject
 	/**
 	 * Method to set the database driver object
 	 *
-	 * @param   JDatabaseDriver  $db  A JDatabaseDriver based object
+	 * @param   \Joomla\Database\DatabaseDriver  $db  A \Joomla\Database\DatabaseDriver based object
 	 *
 	 * @return  void
 	 *

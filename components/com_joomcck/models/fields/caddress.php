@@ -14,7 +14,7 @@ jimport('joomla.form.formfield');
 jimport( 'joomla.filesystem.folder' );
 jimport( 'joomla.filesystem.file'   );
 
-class JFormFieldCaddress extends JFormField
+class JFormFieldCaddress extends \Joomla\CMS\Form\FormField
 {
 	public $type = 'Caddress';
 

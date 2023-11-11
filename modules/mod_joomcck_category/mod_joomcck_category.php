@@ -68,4 +68,4 @@ if($params->get('records'))
 $parents = modJoomcckCategoriesHelper::getParentsList($cat_id);
 $parents[] = $params->get('section_id');
 
-require JModuleHelper::getLayoutPath('mod_joomcck_category', $params->get('layout', 'default'));
+require \Joomla\CMS\Helper\ModuleHelper::getLayoutPath('mod_joomcck_category', $params->get('layout', 'default'));

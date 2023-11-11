@@ -7,6 +7,9 @@
  * @license GNU/GPL http://www.gnu.org/copyleft/gpl.html
  */
 
+use Joomla\CMS\HTML\HTMLHelper;
+use Joomla\CMS\Language\Text;
+
 defined('_JEXEC') or die();
 class JHTMLTags
 {
@@ -554,9 +557,8 @@ class JHTMLTags
 	{
 		$model = MModelBase::getInstance('Article', 'ResModel');
 		$tags = $model->getTags($record->id);
-		$user = \Joomla\CMS\Factory::getApplication()->getIdentity();
+		$user = \Joomla\CMS\Factory::getApplicaton()->getIdentity();
 		$db = \Joomla\CMS\Factory::getDBO();
-		$tabs = JPane::getInstance('tabs');
 
 		$html = '<input type="hidden" class="form-control" name="tags" value=", '.$tags.'" id="alltags" />';
 
@@ -644,9 +646,11 @@ class JHTMLTags
 
 					if($last) $all['l'] = $last;
 
-					$html2 .=  $tabs->startPane('tags-pane');
+					$html2 = HTMLHelper::_('uitab.startTabSet', 'tagstabs', ['active' => 'site', 'recall' => true, 'breakpoint' => 768]);
 
-					$html2 .=  $tabs->startPanel(\Joomla\CMS\Language\Text::_('CLATESTTAGS'), 'tlt1');
+					$html2 .= HTMLHelper::_('uitab.addTab', 'tagstabs', 't1l1', Text::_('CLATESTTAGS'));
+
+
 					foreach ($last as $item) {
 						$date = \Joomla\CMS\Factory::getDate($item->ctime);
 						$now = \Joomla\CMS\Factory::getDate();
@@ -668,27 +672,30 @@ class JHTMLTags
 						$l[] = sprintf('<span id="tagl%d" class="tag_item" style="cursor:pointer" onclick="tag_insert(\'%s\', \'tagl%d\')">%s <span class="small">(%s)</span></span>', ++$i, $item->tag, $i, $item->tag, $lbl);
 					}
 					$html2 .= implode(' ', $l).'<div style="clear:both"></div>';
-					$html2 .=  $tabs->endPanel();
+					$html2 .=  HTMLHelper::_('uitab.endTab');
 
-					$html2 .=  $tabs->startPanel(\Joomla\CMS\Language\Text::_('CMOSTUSE'), 'tmu1');
+
+					$html2 .= HTMLHelper::_('uitab.addTab', 'tagstabs', 'tmu1', Text::_('CMOSTUSE'));
+
+
 					foreach ($used as $item) {
 						$lbl = $item->total.' '.\Joomla\CMS\Language\Text::_('CRECORDS');
 
 						$u[] = sprintf('<span id="tagl%d" class="tag_item" style="cursor:pointer" onclick="tag_insert(\'%s\', \'tagl%d\')">%s <span class="small">(%s)</span></span>', ++$i, $item->tag, $i, $item->tag, $lbl);
 					}
 					$html2 .= implode(' ', $u).'<div style="clear:both"></div>';
-					$html2 .=  $tabs->endPanel();
+					$html2 .=  HTMLHelper::_('uitab.endTab');
 
-					$html2 .=  $tabs->startPanel(\Joomla\CMS\Language\Text::_('CMOSTPOP'), 'tmp1');
+					$html2 .= HTMLHelper::_('uitab.addTab', 'tagstabs', 'tmp1', Text::_('CMOSTPOP'));
 					foreach ($hits as $item) {
 						$lbl = $item->hits.' '.\Joomla\CMS\Language\Text::_('CHITS');
 
 						$h[] = sprintf('<span id="tagl%d" class="tag_item" style="cursor:pointer" onclick="tag_insert(\'%s\', \'tagl%d\')">%s <span class="small">(%s)</span></span>', ++$i, $item->tag, $i, $item->tag, $lbl);
 					}
 					$html2 .= implode(' ', $h).'<div style="clear:both"></div>';
-					$html2 .=  $tabs->endPanel();
+					$html2 .=  HTMLHelper::_('uitab.endTab');
 
-					$html2 .=  $tabs->endPane();
+					$html2 .=  HTMLHelper::_('uitab.endTabSet');
 				}
 				$html2 .= '</div>';
 			}

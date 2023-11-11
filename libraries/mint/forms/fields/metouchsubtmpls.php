@@ -15,7 +15,7 @@ jimport('joomla.form.helper');
 jimport('joomla.filesystem.folder' );
 jimport('joomla.filesystem.file'   );
 
-JFormHelper::loadFieldClass('melist');
+\Joomla\CMS\Form\FormHelper::loadFieldClass('melist');
 require_once JPATH_ROOT. DIRECTORY_SEPARATOR .'administrator'. DIRECTORY_SEPARATOR .'components'. DIRECTORY_SEPARATOR .'com_mightytouch'. DIRECTORY_SEPARATOR .'helpers'. DIRECTORY_SEPARATOR .'subtmpls.php';
 
 class JFormFieldMEtouchsubtmpls extends JFormMEFieldList

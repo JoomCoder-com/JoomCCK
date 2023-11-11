@@ -12,7 +12,7 @@ defined('_JEXEC') or die();
 jimport('joomla.html.html');
 jimport('joomla.form.formfield');
 
-class CFormField extends JFormField
+class CFormField extends \Joomla\CMS\Form\FormField
 {
 
 	public $label_orig;

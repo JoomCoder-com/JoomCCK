@@ -9,9 +9,9 @@
 
 defined('_JEXEC') or die;
 
-JFormHelper::loadFieldClass('list');
+\Joomla\CMS\Form\FormHelper::loadFieldClass('list');
 
-class JFormFieldEmrplanslist extends JFormFieldList
+class JFormFieldEmrplanslist extends \Joomla\CMS\Form\Field\ListField
 {
 	/**
 	 * The form field type.

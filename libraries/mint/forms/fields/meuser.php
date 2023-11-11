@@ -18,7 +18,7 @@ jimport('joomla.form.formfield');
  * @subpackage  com_users
  * @since       11.1
  */
-class JFormFieldMeuser extends JFormField
+class JFormFieldMeuser extends \Joomla\CMS\Form\FormField
 {
 	/**
 	 * The form field type.

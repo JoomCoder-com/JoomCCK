@@ -18,7 +18,7 @@ jimport('joomla.filesystem.file');
 
 HTMLHelper::_('bootstrap.tooltip', '.hasTooltip');
 
-class JFormFieldCckevents extends JFormField
+class JFormFieldCckevents extends \Joomla\CMS\Form\FormField
 {
 
 	public $type = 'Cckevents';

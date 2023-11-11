@@ -9,7 +9,7 @@
 
 defined('JPATH_PLATFORM') or die;
 
-JFormHelper::loadFieldClass('list');
+\Joomla\CMS\Form\FormHelper::loadFieldClass('list');
 
 /**
  * Form Field class for the Joomla Platform.
@@ -19,7 +19,7 @@ JFormHelper::loadFieldClass('list');
  * @see    JAccess
  * @since  1.7.0
  */
-class JFormFieldMaccessLevel extends JFormFieldList
+class JFormFieldMaccessLevel extends \Joomla\CMS\Form\Field\ListField
 {
 	/**
 	 * The form field type.

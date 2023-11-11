@@ -25,7 +25,7 @@ class JFormFieldCHtml extends CFormField
 
 		$this->value = ($this->value ? $this->value : $params->get('params.default_value'));
 
-		$this->editor = JEditor::getInstance($params->get('params.editor', 'tinymce'));
+		$this->editor = \Joomla\CMS\Editor\Editor::getInstance($params->get('params.editor', 'tinymce'));
 
 		$buttons = $params->get('params.editor_btn', []);
 

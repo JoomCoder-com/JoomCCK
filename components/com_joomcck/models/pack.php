@@ -329,15 +329,15 @@ class JoomcckModelPack extends MModelAdmin
                     continue;
                 }
                 $path = JPATH_ROOT . DIRECTORY_SEPARATOR . $file;
-                $path = \Joomla\CMS\Filesystem\Path::clean($path);
+                $path =\Joomla\Filesystem\Path::clean($path);
 
                 if (is_file($path)) {
-                    $folder = \Joomla\CMS\Filesystem\Path::clean(PACK_ROOT . DIRECTORY_SEPARATOR . 'add' . DIRECTORY_SEPARATOR . $file);
+                    $folder =\Joomla\Filesystem\Path::clean(PACK_ROOT . DIRECTORY_SEPARATOR . 'add' . DIRECTORY_SEPARATOR . $file);
                     \Joomla\Filesystem\Folder::create(dirname($folder));
                     \Joomla\Filesystem\File::copy($path, $folder);
                 }
                 if (is_dir($path)) {
-                    \Joomla\Filesystem\Folder::copy($path, \Joomla\CMS\Filesystem\Path::clean(PACK_ROOT . DIRECTORY_SEPARATOR . 'add' . DIRECTORY_SEPARATOR . $file), null, true);
+                    \Joomla\Filesystem\Folder::copy($path,\Joomla\Filesystem\Path::clean(PACK_ROOT . DIRECTORY_SEPARATOR . 'add' . DIRECTORY_SEPARATOR . $file), null, true);
                 }
             }
         }

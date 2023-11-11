@@ -18,7 +18,7 @@ defined('JPATH_PLATFORM') or die;
  * @subpackage  View
  * @since       12.2
  */
-class MViewBase extends JObject
+class MViewBase extends \Joomla\CMS\Object\CMSObject
 {
 	/**
 	 * The name of the view
@@ -418,7 +418,7 @@ class MViewBase extends JObject
 
 		}
 
-		// Degrade to JObject::get
+		// Degrade to \Joomla\CMS\Object\CMSObject::get
 		$result = parent::get($property, $default);
 
 		return $result;
@@ -655,24 +655,24 @@ class MViewBase extends JObject
 		jimport('joomla.filesystem.path');
 
 		$filetofind      = $this->_createFileName('template', array('name' => $params->get('tmpl_prefix', 'bs2') . '.' .$file));
-		$this->_template = \Joomla\CMS\Filesystem\Path::find($this->_path['template'], $filetofind);
+		$this->_template =\Joomla\Filesystem\Path::find($this->_path['template'], $filetofind);
 
 		if($this->_template == FALSE)
 		{
 			$filetofind      = $this->_createFileName('', array('name' => $params->get('tmpl_prefix', 'bs2') . '.default' . (isset($tpl) ? '_' . $tpl : $tpl)));
-			$this->_template = \Joomla\CMS\Filesystem\Path::find($this->_path['template'], $filetofind);
+			$this->_template =\Joomla\Filesystem\Path::find($this->_path['template'], $filetofind);
 		}
 
 		if($this->_template == FALSE)
 		{
 			$filetofind      = $this->_createFileName('template', array('name' => $file));
-			$this->_template = \Joomla\CMS\Filesystem\Path::find($this->_path['template'], $filetofind);
+			$this->_template =\Joomla\Filesystem\Path::find($this->_path['template'], $filetofind);
 		}
 
 		if($this->_template == FALSE)
 		{
 			$filetofind      = $this->_createFileName('', array('name' => 'default' . (isset($tpl) ? '_' . $tpl : $tpl)));
-			$this->_template = \Joomla\CMS\Filesystem\Path::find($this->_path['template'], $filetofind);
+			$this->_template =\Joomla\Filesystem\Path::find($this->_path['template'], $filetofind);
 		}
 
 
@@ -724,7 +724,7 @@ class MViewBase extends JObject
 
 		// Load the template script
 		jimport('joomla.filesystem.path');
-		$helper = \Joomla\CMS\Filesystem\Path::find($this->_path['helper'], $this->_createFileName('helper', array('name' => $file)));
+		$helper =\Joomla\Filesystem\Path::find($this->_path['helper'], $this->_createFileName('helper', array('name' => $file)));
 
 		if($helper != FALSE)
 		{
@@ -745,7 +745,7 @@ class MViewBase extends JObject
 	 */
 	protected function _setPath($type, $path)
 	{
-		$component = JApplicationHelper::getComponentName();
+		$component = \Joomla\CMS\Application\ApplicationHelper::getComponentName();
 		$app       = \Joomla\CMS\Factory::getApplication();
 
 		// Clear out the prior search dirs

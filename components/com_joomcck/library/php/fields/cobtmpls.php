@@ -13,9 +13,9 @@ jimport('joomla.html.html');
 jimport('joomla.form.formfield');
 jimport('joomla.filesystem.file');
 
-JFormHelper::loadFieldClass('list');
+\Joomla\CMS\Form\FormHelper::loadFieldClass('list');
 
-class JFormFieldCobtmpls extends JFormFieldList
+class JFormFieldCobtmpls extends \Joomla\CMS\Form\Field\ListField
 {
 	
 	protected $type = 'Cobtmpls';

@@ -32,7 +32,7 @@ class CCommunityCom_joomcck
 		$file = JPATH_ROOT . '/components/com_joomcck/images' . DIRECTORY_SEPARATOR;
 		$file .= 'avatar0.gif';
 
-		//return \Joomla\CMS\Filesystem\Path::clean($file);
+		//return\Joomla\Filesystem\Path::clean($file);
 	}
 
 	public function getAvatar($user_id)
@@ -42,7 +42,7 @@ class CCommunityCom_joomcck
 		{
 			$file .= 'avatar1.gif';
 
-			//return \Joomla\CMS\Filesystem\Path::clean($file);
+			//return\Joomla\Filesystem\Path::clean($file);
 		}
 	}
 }

@@ -14,7 +14,7 @@ defined('JPATH_BASE') or die;
 jimport('joomla.html.html');
 jimport('joomla.form.formfield');
 jimport('joomla.form.helper');
-JFormHelper::loadFieldClass('list');
+\Joomla\CMS\Form\FormHelper::loadFieldClass('list');
 
 /**
  * Form Field class for the Joomla Framework.
@@ -23,7 +23,7 @@ JFormHelper::loadFieldClass('list');
  * @subpackage	com_categories
  * @since		1.6
  */
-class JFormFieldCobCategoryParent extends JFormFieldList
+class JFormFieldCobCategoryParent extends \Joomla\CMS\Form\Field\ListField
 {
 	/**
 	 * The form field type.

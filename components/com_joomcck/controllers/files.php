@@ -178,7 +178,7 @@ class JoomcckControllerFiles extends MControllerAdmin
 
             foreach ($fileslist as $file) {
                 $subfolder = $fieldclass->params->get('params.subfolder', $file['ext']);
-                $add       = \Joomla\CMS\Filesystem\Path::clean(JPATH_ROOT . DIRECTORY_SEPARATOR . $params->get('general_upload') . DIRECTORY_SEPARATOR . $subfolder . DIRECTORY_SEPARATOR . $file['fullpath']);
+                $add       =\Joomla\Filesystem\Path::clean(JPATH_ROOT . DIRECTORY_SEPARATOR . $params->get('general_upload') . DIRECTORY_SEPARATOR . $subfolder . DIRECTORY_SEPARATOR . $file['fullpath']);
                 $zipper->addFile($add, $file['realname']);
             }
 
@@ -475,7 +475,7 @@ class JoomcckControllerFiles extends MControllerAdmin
             'type_id'    => $this->input->getInt('type_id'),
             'field_id'   => $this->input->getInt('field_id'),
             'ext'        => $ext,
-            'fullpath'   => \Joomla\CMS\Filesystem\Path::clean($date . DIRECTORY_SEPARATOR . $upload_name, '/'),
+            'fullpath'   =>\Joomla\Filesystem\Path::clean($date . DIRECTORY_SEPARATOR . $upload_name, '/'),
             'size'       => filesize($src)
         );
 

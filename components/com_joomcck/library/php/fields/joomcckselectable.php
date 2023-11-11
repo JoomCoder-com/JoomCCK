@@ -473,7 +473,7 @@ function _getSQLValues($obj, $assoc)
 		$option['database'] = $obj->params->get('params.sql_db_name');
 		$option['prefix'] = '';
 
-		$db = JDatabaseDriver::getInstance($option);
+		$db = \Joomla\Database\DatabaseDriver::getInstance($option);
 	}
 
 	$sql = $obj->params->get('params.sql', "SELECT 1 AS id, 'No sql query entered' AS text");

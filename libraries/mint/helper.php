@@ -73,7 +73,7 @@ class Mint
 			$options['suffixes'] = [$params->get('tmpl_prefix')];
 		}
 
-		return new JLayoutFile($name, $path, $options);
+		return new \Joomla\CMS\Layout\FileLayout($name, $path, $options);
 	}
 }
 

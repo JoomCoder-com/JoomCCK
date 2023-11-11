@@ -9,7 +9,7 @@
 defined('JPATH_PLATFORM') or die();
 jimport('joomla.html.html');
 jimport('joomla.form.formfield');
-JFormHelper::loadFieldClass('melist');
+\Joomla\CMS\Form\FormHelper::loadFieldClass('melist');
 
 class JFormFieldEmeraldplans extends JFormFieldGroupedList
 {

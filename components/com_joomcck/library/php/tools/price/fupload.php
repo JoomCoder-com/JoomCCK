@@ -9,7 +9,7 @@
 
 defined('_JEXEC') or die;
 
-class JFormFieldFUpload extends JFormField
+class JFormFieldFUpload extends \Joomla\CMS\Form\FormField
 {
 	/**
 	 * The form field type.

@@ -19,7 +19,7 @@ jimport('joomla.form.formfield');
  * @subpackage	com_weblinks
  * @since		1.6
  */
-class JFormFieldOrderingfields extends JFormField
+class JFormFieldOrderingfields extends \Joomla\CMS\Form\FormField
 {
 	/**
 	 * The form field type.

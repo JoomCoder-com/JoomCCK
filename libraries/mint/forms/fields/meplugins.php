@@ -12,7 +12,7 @@ jimport('joomla.html.html');
 jimport('joomla.form.formfield');
 jimport('joomla.form.helper');
 
-JFormHelper::loadFieldClass('melist');
+\Joomla\CMS\Form\FormHelper::loadFieldClass('melist');
 
 class JFormFieldMEplugins extends JFormMEFieldList
 {

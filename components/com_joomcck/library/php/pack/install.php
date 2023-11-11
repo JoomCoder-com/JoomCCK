@@ -24,9 +24,9 @@ class packInstallerScript
     /**
      * Constructor
      *
-     * @param JAdapterInstance $adapter The object responsible for running this script
+     * @param \Joomla\CMS\Adapter\AdapterInstance$adapter The object responsible for running this script
      */
-    public function __construct(JAdapterInstance $adapter)
+    public function __construct(\Joomla\CMS\Adapter\AdapterInstance$adapter)
     {
         \Joomla\CMS\Table\Table::addIncludePath(JPATH_ADMINISTRATOR . DIRECTORY_SEPARATOR . 'components/com_joomcck/tables');
         $this->key = (string) $adapter->getParent()->manifest->key;
@@ -49,10 +49,10 @@ class packInstallerScript
      * Called on installation
      *
      *
-     * @param  JAdapterInstance $adapter The object responsible for running this script
+     * @param  \Joomla\CMS\Adapter\AdapterInstance$adapter The object responsible for running this script
      * @return boolean          True on success
      */
-    public function install(JAdapterInstance $adapter)
+    public function install(\Joomla\CMS\Adapter\AdapterInstance$adapter)
     {
         $this->pack = $this->_getObject('pack');
         $this->_loadUsers();
@@ -208,10 +208,10 @@ class packInstallerScript
      * Called on update
      *
      *
-     * @param  JAdapterInstance $adapter The object responsible for running this script
+     * @param  \Joomla\CMS\Adapter\AdapterInstance$adapter The object responsible for running this script
      * @return boolean          True on success
      */
-    public function update(JAdapterInstance $adapter)
+    public function update(\Joomla\CMS\Adapter\AdapterInstance$adapter)
     {
         $this->install($adapter);
     }
@@ -223,9 +223,9 @@ class packInstallerScript
     /**
      * Called on uninstallation
      *
-     * @param JAdapterInstance $adapter The object responsible for running this script
+     * @param \Joomla\CMS\Adapter\AdapterInstance$adapter The object responsible for running this script
      */
-    public function uninstall(JAdapterInstance $adapter)
+    public function uninstall(\Joomla\CMS\Adapter\AdapterInstance$adapter)
     {
 
     }

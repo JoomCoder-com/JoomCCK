@@ -7,9 +7,9 @@
 defined('JPATH_PLATFORM') or die;
 
 jimport('joomla.filesystem.folder');
-JFormHelper::loadFieldClass('list');
+\Joomla\CMS\Form\FormHelper::loadFieldClass('list');
 
-class JFormFieldMjfolderList extends JFormFieldList
+class JFormFieldMjfolderList extends \Joomla\CMS\Form\Field\ListField
 {
 
 	public $type = 'MJFolderList';

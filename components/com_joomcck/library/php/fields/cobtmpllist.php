@@ -15,14 +15,14 @@ jimport('joomla.filesystem.folder');
 jimport('joomla.filesystem.file');
 jimport('joomla.filesystem.path');
 
-JFormHelper::loadFieldClass('list');
+\Joomla\CMS\Form\FormHelper::loadFieldClass('list');
 
 /**
  * Supports an HTML select list of files
  *
  * @since  1.7.0
  */
-class JFormFieldCobTmplList extends JFormFieldList
+class JFormFieldCobTmplList extends \Joomla\CMS\Form\Field\ListField
 {
     /**
      * The form field type.
@@ -150,7 +150,7 @@ class JFormFieldCobTmplList extends JFormFieldList
             $path = JPATH_ROOT . '/' . $path;
         }
 
-		$path = \Joomla\CMS\Filesystem\Path::clean($path);
+		$path =\Joomla\Filesystem\Path::clean($path);
 		$xml = $path.DIRECTORY_SEPARATOR.str_replace('.php', '.xml', $this->value ?: $this->default);
 
 
@@ -297,7 +297,7 @@ EOT;
             $path = JPATH_ROOT . '/' . $path;
         }
 
-        $path = \Joomla\CMS\Filesystem\Path::clean($path);
+        $path =\Joomla\Filesystem\Path::clean($path);
 
         // Prepend some default options based on field attributes.
         if (!$this->hideNone) {

@@ -74,7 +74,7 @@ if($params->get('filter_type_type'))
 	$f_types = $model->getAllTypes();
 }
 
-require(JModuleHelper::getLayoutPath('mod_joomcck_filters', $params->get('layout', 'default')));
+require(\Joomla\CMS\Helper\ModuleHelper::getLayoutPath('mod_joomcck_filters', $params->get('layout', 'default')));
 
 $app->input->set('section_id', $sid);
 $app->input->set('cat_id', $cid);

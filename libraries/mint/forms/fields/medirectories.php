@@ -15,7 +15,7 @@ jimport('joomla.html.html');
 jimport('joomla.form.formfield');
 jimport('joomla.form.helper');
 jimport( 'joomla.filesystem.folder' );
-JFormHelper::loadFieldClass('melist');
+\Joomla\CMS\Form\FormHelper::loadFieldClass('melist');
 
 
 class JFormFieldMEDirectories extends JFormMEFieldList
@@ -125,7 +125,7 @@ class JFormFieldMEDirectories extends JFormMEFieldList
 		$arr = array ();
 
 		// Check to make sure the path valid and clean
-		$path = \Joomla\CMS\Filesystem\Path::clean($path);
+		$path = \Joomla\Filesystem\Path::clean($path);
 
 		// Is the path a folder?
 		if (!is_dir($path)) {

@@ -16,7 +16,7 @@ jimport('joomla.form.formfield');
 jimport('joomla.filesystem.folder');
 jimport('joomla.filesystem.file');
 
-class JFormFieldIcons extends JFormField
+class JFormFieldIcons extends \Joomla\CMS\Form\FormField
 {
 	public $type = 'Icons';
 

@@ -22,7 +22,7 @@ class CFormFieldUpload extends CFormField
 	public $download_type;
     public function __construct($field, $default)
     {
-        $root      = \Joomla\CMS\Filesystem\Path::clean(\Joomla\CMS\Component\ComponentHelper::getParams('com_joomcck')->get('general_upload'));
+        $root      =\Joomla\Filesystem\Path::clean(\Joomla\CMS\Component\ComponentHelper::getParams('com_joomcck')->get('general_upload'));
         $url       = str_replace(JPATH_ROOT, '', $root);
         $url       = str_replace("\\", '/', $url);
         $url       = preg_replace('#^\/#iU', '', $url);
@@ -432,7 +432,7 @@ class CFormFieldUpload extends CFormField
 
             $copied = \Joomla\Filesystem\File::copy(JPATH_ROOT . DIRECTORY_SEPARATOR . $params->get('general_upload') . DIRECTORY_SEPARATOR . $subfolder . DIRECTORY_SEPARATOR . $files_table->fullpath, $dest . $files_table->filename);
 
-            $files_table->fullpath = \Joomla\CMS\Filesystem\Path::clean($date . DIRECTORY_SEPARATOR . $files_table->filename, '/');
+            $files_table->fullpath =\Joomla\Filesystem\Path::clean($date . DIRECTORY_SEPARATOR . $files_table->filename, '/');
             $files_table->saved    = 0;
 
             if (!$copied) {

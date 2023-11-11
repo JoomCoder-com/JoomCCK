@@ -19,7 +19,7 @@ jimport('joomla.form.formfield');
  * @subpackage  Form
  * @since       11.1
  */
-class JFormFieldMERadio extends JFormField
+class JFormFieldMERadio extends \Joomla\CMS\Form\FormField
 {
 	/**
 	 * The form field type.

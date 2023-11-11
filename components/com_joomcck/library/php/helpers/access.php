@@ -695,7 +695,7 @@ class MECAccess
 	public static function getActions($aname = '', $categoryId = 0)
 	{
 		$user = \Joomla\CMS\Factory::getUser ();
-		$result = new JObject ();
+		$result = new \Joomla\CMS\Object\CMSObject ();
 
 		$assetName = 'com_joomcck';
 		if($aname != '') $assetName .= '.' . $aname;

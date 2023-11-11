@@ -12,7 +12,7 @@ defined('_JEXEC') or die;
 jimport('joomla.html.html');
 jimport('joomla.form.formfield');
 
-class JFormFieldFieldsgroup extends JFormFieldList
+class JFormFieldFieldsgroup extends \Joomla\CMS\Form\Field\ListField
 {
 	
 	protected $type = 'Fieldsgroup';

@@ -8,9 +8,9 @@
  */
 defined('JPATH_PLATFORM') or die();
 
-JFormHelper::loadFieldClass('list');
+\Joomla\CMS\Form\FormHelper::loadFieldClass('list');
 
-class JFormFieldShopList extends JFormFieldList
+class JFormFieldShopList extends \Joomla\CMS\Form\Field\ListField
 {
 
 	protected function getOptions()

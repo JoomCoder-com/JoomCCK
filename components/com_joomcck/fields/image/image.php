@@ -64,7 +64,7 @@ class JFormFieldCImage extends CFormField
 	{
 		if($this->params->get('params.select_type', 2) == 2)
 		{
-			$file  = new JInputFiles();
+			$file  = new \Joomla\CMS\Input\Files();
 			$file  = $file->get('fields' . $this->id . 'image', FALSE);
 			$check = $file['name'];
 			if(!$check)
@@ -150,7 +150,7 @@ class JFormFieldCImage extends CFormField
 	{
 		if($this->params->get('params.select_type', 2) == 2)
 		{
-			$file = new JInputFiles();
+			$file = new \Joomla\CMS\Input\Files();
 			$file = $file->get('fields' . $this->id . 'image', FALSE);
 			if(!$file['error'] && !empty($file['name']))
 			{

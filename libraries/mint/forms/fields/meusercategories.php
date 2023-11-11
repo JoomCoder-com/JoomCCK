@@ -11,7 +11,7 @@ defined('JPATH_PLATFORM') or die;
 
 jimport('joomla.form.formfield');
 
-class JFormFieldMEUsercategories extends JFormField
+class JFormFieldMEUsercategories extends \Joomla\CMS\Form\FormField
 {
     protected $type = 'MEUsercategories';
 

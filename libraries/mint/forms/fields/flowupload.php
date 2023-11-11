@@ -12,7 +12,7 @@ defined('JPATH_PLATFORM') or die;
 jimport('joomla.html.html');
 jimport('joomla.form.formfield');
 
-class JFormFieldFlowupload extends JFormField
+class JFormFieldFlowupload extends \Joomla\CMS\Form\FormField
 {
 	public $type = 'flowupload';
 

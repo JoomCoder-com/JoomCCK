@@ -12,7 +12,7 @@ defined('_JEXEC') or die();
 jimport('joomla.html.html');
 jimport('joomla.form.formfieldradio');
 
-class JFormFieldCckAuditEvents extends JFormField
+class JFormFieldCckAuditEvents extends \Joomla\CMS\Form\FormField
 {
 
 	public $type = 'CckAuditEvents';

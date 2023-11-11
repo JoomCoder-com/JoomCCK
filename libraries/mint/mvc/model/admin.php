@@ -847,9 +847,9 @@ abstract class MModelAdmin extends MModelForm
 			}
 		}
 
-		// Convert to the JObject before adding other data.
+		// Convert to the \Joomla\CMS\Object\CMSObject before adding other data.
 		$properties = $table->getProperties(1);
-		$item = \Joomla\Utilities\ArrayHelper::toObject($properties, 'JObject');
+		$item = \Joomla\Utilities\ArrayHelper::toObject($properties, '\\Joomla\\CMS\\Object\\CMSObject');
 
 		if (property_exists($item, 'params'))
 		{

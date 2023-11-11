@@ -155,7 +155,7 @@ class JFormFieldCEmail extends CFormField
 		{
 			$joomcck_params = \Joomla\CMS\Component\ComponentHelper::getParams('com_joomcck');
 			jimport('mint.recaptchalib');
-			$captcha = JCaptcha::getInstance($joomcck_params->get('captcha', 'recaptcha'), array('namespace' => 'email'));
+			$captcha = \Joomla\CMS\Captcha\Captcha::getInstance($joomcck_params->get('captcha', 'recaptcha'), array('namespace' => 'email'));
 			if(!$captcha->checkAnswer('code'))
 			{
 
@@ -310,7 +310,7 @@ class JFormFieldCEmail extends CFormField
 			$data['subject'] = \Joomla\CMS\Language\Text::_($this->params->get('params.subject', 'No subject set in email field'));
 		}
 
-		$files = new JInputFiles();
+		$files = new \Joomla\CMS\Input\Files();
 		$files = $files->get('email_' . $this->id, array());
 
 

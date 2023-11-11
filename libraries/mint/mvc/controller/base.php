@@ -19,7 +19,7 @@ defined('JPATH_PLATFORM') or die;
  * @subpackage  Controller
  * @since       12.2
  */
-class MControllerBase extends JObject
+class MControllerBase extends \Joomla\CMS\Object\CMSObject
 {
 	/**
 	 * The base path of the controller
@@ -600,7 +600,7 @@ class MControllerBase extends JObject
 		if (!class_exists($viewClass))
 		{
 			jimport('joomla.filesystem.path');
-			$path = \Joomla\CMS\Filesystem\Path::find($this->paths['view'], $this->createFileName('view', array('name' => $viewName, 'type' => $viewType)));
+			$path =\Joomla\Filesystem\Path::find($this->paths['view'], $this->createFileName('view', array('name' => $viewName, 'type' => $viewType)));
 
 			if ($path)
 			{

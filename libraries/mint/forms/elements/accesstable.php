@@ -9,7 +9,7 @@
 
 defined('_JEXEC') or die;
 
-class JFormFieldAccessTable extends JFormField
+class JFormFieldAccessTable extends \Joomla\CMS\Form\FormField
 {
 
 	protected function getInput()

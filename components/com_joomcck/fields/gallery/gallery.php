@@ -922,7 +922,7 @@ class JFormFieldCGallery extends CFormFieldUpload
 			\Joomla\Filesystem\File::write($this->path . DIRECTORY_SEPARATOR . 'index.html', $index);
 		}
 
-		$root      = \Joomla\CMS\Filesystem\Path::clean(\Joomla\CMS\Component\ComponentHelper::getParams('com_joomcck')->get('general_upload'));
+		$root      =\Joomla\Filesystem\Path::clean(\Joomla\CMS\Component\ComponentHelper::getParams('com_joomcck')->get('general_upload'));
 		$url       = str_replace(JPATH_ROOT, '', $root);
 		$url       = str_replace("\\", '/', $url);
 		$url       = preg_replace('#^\/#iU', '', $url);

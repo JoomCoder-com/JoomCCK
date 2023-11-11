@@ -17,7 +17,7 @@ jimport( 'joomla.filesystem.file'   );
 // Include the component HTML helpers.
 \Joomla\CMS\HTML\HTMLHelper::addIncludePath(JPATH_COMPONENT.'/helpers/html');
 
-class JFormFieldCpacksections extends JFormField
+class JFormFieldCpacksections extends \Joomla\CMS\Form\FormField
 {
 	public $type = 'Cpacksections';
 	

@@ -15,7 +15,7 @@ defined('JPATH_PLATFORM') or die;
  *
  * @since  1.7.0
  */
-class JFormFieldMlist extends JFormField
+class JFormFieldMlist extends \Joomla\CMS\Form\FormField
 {
 	/**
 	 * The form field type.
@@ -177,19 +177,19 @@ class JFormFieldMlist extends JFormField
 			if ($requires = explode(',', (string) $option['requires']))
 			{
 				// Requires multilanguage
-				if (in_array('multilanguage', $requires) && !JLanguageMultilang::isEnabled())
+				if (in_array('multilanguage', $requires) && !\Joomla\CMS\Language\Multilanguage::isEnabled())
 				{
 					continue;
 				}
 
 				// Requires associations
-				if (in_array('associations', $requires) && !JLanguageAssociations::isEnabled())
+				if (in_array('associations', $requires) && !\Joomla\CMS\Language\Associations::isEnabled())
 				{
 					continue;
 				}
 
 				// Requires adminlanguage
-				if (in_array('adminlanguage', $requires) && !JModuleHelper::isAdminMultilang())
+				if (in_array('adminlanguage', $requires) && !\Joomla\CMS\Helper\ModuleHelper::isAdminMultilang())
 				{
 					continue;
 				}
@@ -231,7 +231,7 @@ class JFormFieldMlist extends JFormField
 			{
 				$tmp['optionattr'] = " data-showon='" .
 					json_encode(
-						JFormHelper::parseShowOnConditions((string) $option['showon'], $this->formControl, $this->group)
+						\Joomla\CMS\Form\FormHelper::parseShowOnConditions((string) $option['showon'], $this->formControl, $this->group)
 						)
 					. "'";
 			}
@@ -300,7 +300,7 @@ class JFormFieldMlist extends JFormField
 	 * @param   string  $text        Text/Language variable of the option.
 	 * @param   array   $attributes  Array of attributes ('name' => 'value' format)
 	 *
-	 * @return  JFormFieldList  For chaining.
+	 * @return  \Joomla\CMS\Form\Field\ListField  For chaining.
 	 *
 	 * @since   3.7.0
 	 */

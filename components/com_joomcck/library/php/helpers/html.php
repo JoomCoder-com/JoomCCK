@@ -340,7 +340,7 @@ class HTMLFormatHelper
 			$name = $prefix . '-' . $name;
 		}
 
-		$bar = new JLayoutFile($name, JPATH_COMPONENT . '/layouts');
+		$bar = new \Joomla\CMS\Layout\FileLayout($name, JPATH_COMPONENT . '/layouts');
 
 		return $bar->render($data);
 	}

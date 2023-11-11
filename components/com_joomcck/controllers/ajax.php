@@ -1345,7 +1345,7 @@ class JoomcckControllerAjax extends MControllerAdmin
 	public function loadfieldparams()
 	{
 		$xml = JPATH_ROOT.$this->input->getString('dir').DIRECTORY_SEPARATOR.str_replace('.php', '.xml', $this->input->get('value'));
-		$xml = \Joomla\CMS\Filesystem\Path::clean($xml);
+		$xml =\Joomla\Filesystem\Path::clean($xml);
 		$form = '';
 		
 		$segments = explode('/', $this->input->getString('dir'));

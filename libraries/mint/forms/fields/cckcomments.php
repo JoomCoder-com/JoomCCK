@@ -3,7 +3,7 @@ defined('_JEXEC') or die();
 jimport('joomla.html.html');
 jimport('joomla.form.formfield');
 
-JFormHelper::loadFieldClass('melist');
+\Joomla\CMS\Form\FormHelper::loadFieldClass('melist');
 
 class JFormFieldCckcomments extends JFormMEFieldList
 {

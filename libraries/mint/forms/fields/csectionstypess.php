@@ -11,7 +11,7 @@ define('_DS', DIRECTORY_SEPARATOR);
 
 jimport('joomla.html.html');
 jimport('joomla.form.formfield');
-JFormHelper::loadFieldClass('melist');
+\Joomla\CMS\Form\FormHelper::loadFieldClass('melist');
 
 class JFormFieldCsectionstypess extends JFormMEFieldList
 {
