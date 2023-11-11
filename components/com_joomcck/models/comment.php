@@ -71,7 +71,7 @@ class JoomcckModelComment extends MModelAdmin
 	{
 		$app = \Joomla\CMS\Factory::getApplication();
 		$item = parent::getItem($pk);
-		$user = \Joomla\CMS\Factory::getUser();
+		$user = \Joomla\CMS\Factory::getApplication()->getIdentity();
 		if (!isset($item->id) && !$item->id)
 		{
 			$type = ItemsStore::getType($app->input->getInt('type_id'));
@@ -113,7 +113,7 @@ class JoomcckModelComment extends MModelAdmin
 			return FALSE;
 		}
 		$comment = $cmodel->getItem($cid[0]);
-		$user = \Joomla\CMS\Factory::getUser();
+		$user = \Joomla\CMS\Factory::getApplication()->getIdentity();
 
 		if (($item->user_id == $user->get('id')) && $type->params->get('comments.comments_approve_author'))
 		{
@@ -136,7 +136,7 @@ class JoomcckModelComment extends MModelAdmin
 
 	protected function canEditState($record)
 	{
-		$user = \Joomla\CMS\Factory::getUser();
+		$user = \Joomla\CMS\Factory::getApplication()->getIdentity();
 		return $user->authorise('core.edit.state', 'com_joomcck.comment.' . (int)$record->id);
 	}
 
@@ -146,7 +146,7 @@ class JoomcckModelComment extends MModelAdmin
 	{
 		$table = \Joomla\CMS\Table\Table::getInstance('Subscription', 'JoomcckTable');
 		$model_record = MModelBase::getInstance('Record', 'JoomcckModel');
-		$user = \Joomla\CMS\Factory::getUser();
+		$user = \Joomla\CMS\Factory::getApplication()->getIdentity();
 
 		$item = $model_record->getItem($data['record_id']);
 
@@ -225,7 +225,7 @@ class JoomcckModelComment extends MModelAdmin
 	}
 	public function validate($form, $data, $group = null)
 	{
-		if(\Joomla\CMS\Factory::getUser()->get('id') )
+		if(\Joomla\CMS\Factory::getApplication()->getIdentity()->get('id') )
 		{
 			$form->removeField('captcha');
 		}

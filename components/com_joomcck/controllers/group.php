@@ -47,7 +47,7 @@ class JoomcckControllerGroup extends MControllerForm
 
 	protected function allowAdd($data = array())
 	{
-		$user = \Joomla\CMS\Factory::getUser();
+		$user = \Joomla\CMS\Factory::getApplication()->getIdentity();
 		$allow = $user->authorise('core.create', 'com_joomcck.groups');
 
 		if($allow === null)
@@ -62,6 +62,6 @@ class JoomcckControllerGroup extends MControllerForm
 
 	protected function allowEdit($data = array(), $key = 'id')
 	{
-		return \Joomla\CMS\Factory::getUser()->authorise('core.edit', 'com_joomcck.groups');
+		return \Joomla\CMS\Factory::getApplication()->getIdentity()->authorise('core.edit', 'com_joomcck.groups');
 	}
 }

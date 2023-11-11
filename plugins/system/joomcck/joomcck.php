@@ -32,7 +32,7 @@ class plgSystemJoomcck extends JPlugin
 			return;
 		}
 
-		$user = \Joomla\CMS\Factory::getUser();
+		$user = \Joomla\CMS\Factory::getApplication()->getIdentity();
 
 		\Joomla\CMS\Table\Table::addIncludePath(JPATH_ROOT . '/components/com_joomcck/fields/dripcontent/tables');
 		$table = \Joomla\CMS\Table\Table::getInstance('Stepaccess', 'JoomcckTable');
@@ -120,7 +120,7 @@ class plgSystemJoomcck extends JPlugin
 		{
 			return;
 		}
-		if(!defined('F0F_INCLUDED') && \Joomla\CMS\Filesystem\File::exists(JPATH_LIBRARIES . '/f0f/include.php'))
+		if(!defined('F0F_INCLUDED') && is_file(JPATH_LIBRARIES . '/f0f/include.php'))
 		{
 			require_once JPATH_LIBRARIES . '/f0f/include.php';
 		}

@@ -12,7 +12,7 @@ class JHTMLUsers
 {
 	static public function wheretopost($record)
 	{
-		$user = \Joomla\CMS\Factory::getUser();
+		$user = \Joomla\CMS\Factory::getApplication()->getIdentity();
 		$db = \Joomla\CMS\Factory::getDbo();
 
 		if(empty($record->id))

@@ -11,7 +11,7 @@ defined('_JEXEC') or die('Restricted access');
 
 \Joomla\CMS\HTML\HTMLHelper::_('bootstrap.tooltip', '*[rel^="tooltip"]');
 
-$user = \Joomla\CMS\Factory::getUser();
+$user = \Joomla\CMS\Factory::getApplication()->getIdentity();
 $userId = $user->get('id');
 
 $listOrder = $this->state->get('list.ordering');
@@ -118,7 +118,7 @@ if($saveOrder)
 				<td nowrap="nowrap">
 					<?php
 					$icon = JURI::root() . 'components/com_joomcck/fields/';
-					if(\Joomla\CMS\Filesystem\File::exists(JPATH_ROOT . '/components/com_joomcck/fields' . DIRECTORY_SEPARATOR . $item->field_type . DIRECTORY_SEPARATOR . $item->field_type . '.png'))
+					if(is_file(JPATH_ROOT . '/components/com_joomcck/fields' . DIRECTORY_SEPARATOR . $item->field_type . DIRECTORY_SEPARATOR . $item->field_type . '.png'))
 					{
 						$icon .= "{$item->field_type}/{$item->field_type}.png";
 					}

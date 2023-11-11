@@ -175,7 +175,7 @@ class JoomcckControllerTemplates extends MControllerForm
 		$file = JoomcckTmplHelper::getTmplFile($type, $name, TRUE) . '.' . $config . '.json';
 
 		$reg_string = $regestry->toString();
-		\Joomla\CMS\Filesystem\File::write($file, $reg_string);
+		\Joomla\Filesystem\File::write($file, $reg_string);
 
 		$msg = \Joomla\CMS\Language\Text::_('C_MSG_TMPLPARAMS_SAVEOK');
 		switch($task)

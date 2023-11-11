@@ -23,7 +23,7 @@ class JoomcckModelComments extends MModelList
 		$app = \Joomla\CMS\Factory::getApplication();
 
 		$file = JPATH_ROOT . '/components/com_joomcck/views/record/tmpl/default_comments_' . $this->type->params->get('properties.tmpl_comment', 'default') . '.json';
-		if(\Joomla\CMS\Filesystem\File::exists($file))
+		if(is_file($file))
 		{
 			$file = file_get_contents();
 		}
@@ -54,7 +54,7 @@ class JoomcckModelComments extends MModelList
 		}
 
 		$app  = \Joomla\CMS\Factory::getApplication();
-		$user = \Joomla\CMS\Factory::getUser();
+		$user = \Joomla\CMS\Factory::getApplication()->getIdentity();
 		$type = $this->type;
 
 		$value = $app->getUserStateFromRequest('com_joomcck.comments.list.limit', 'limit', $this->getState('comments.limit'));
@@ -203,7 +203,7 @@ class JoomcckModelComments extends MModelList
 		}
 		$type = $this->type;
 
-		$user  = \Joomla\CMS\Factory::getUser();
+		$user  = \Joomla\CMS\Factory::getApplication()->getIdentity();
 		$db    = $this->getDbo();
 		$query = $db->getQuery(TRUE);
 

@@ -14,7 +14,7 @@ defined('_JEXEC') or die();
 \Joomla\CMS\HTML\HTMLHelper::_('bootstrap.tooltip');
 \Joomla\CMS\HTML\HTMLHelper::_('behavior.multiselect');
 
-$user      = \Joomla\CMS\Factory::getUser();
+$user      = \Joomla\CMS\Factory::getApplication()->getIdentity();
 $userId    = $user->get('id');
 $section   = $this->section_id;
 $listOrder = $this->escape($this->state->get('list.ordering'));

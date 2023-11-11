@@ -15,7 +15,7 @@ class JoomcckModelElements extends MModelList
 	
 	public function getArt()
 	{
-		$user = \Joomla\CMS\Factory::getUser();
+		$user = \Joomla\CMS\Factory::getApplication()->getIdentity();
 		
 		$db = \Joomla\CMS\Factory::getDbo();
 		

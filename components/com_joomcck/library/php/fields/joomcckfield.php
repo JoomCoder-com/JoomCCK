@@ -106,7 +106,7 @@ class CFormField extends JFormField
 		$this->group_order = @$field->gordering;
 
 		FieldHelper::loadLang($this->type);
-		$this->user = \Joomla\CMS\Factory::getUser();
+		$this->user = \Joomla\CMS\Factory::getApplication()->getIdentity();
 	}
 
 	protected  function _display_filter($section, $module = false)
@@ -123,7 +123,7 @@ class CFormField extends JFormField
 		$tpath = JPATH_THEMES . '/' . $template . '/html/com_joomcck/fields/'.$this->type.'/filter/' . $layoutName;
 
 
-		if(!\Joomla\CMS\Filesystem\File::exists($tpath))
+		if(!is_file($tpath))
 		{
 			$tpath = JPATH_ROOT. '/components/com_joomcck/fields'. DIRECTORY_SEPARATOR .$this->type. DIRECTORY_SEPARATOR .'tmpl/filter'. DIRECTORY_SEPARATOR .$layoutName;
 		}
@@ -141,7 +141,7 @@ class CFormField extends JFormField
 		ob_start();
 		$template = \Joomla\CMS\Factory::getApplication()->getTemplate();
 		$tpath = JPATH_THEMES . '/' . $template . '/html/com_joomcck/fields/'.$this->type.'/input/' . $this->params->get('params.template_input',  'default.php');
-		if(!\Joomla\CMS\Filesystem\File::exists($tpath))
+		if(!is_file($tpath))
 		{
 			$tpath = JPATH_ROOT. '/components/com_joomcck/fields'. DIRECTORY_SEPARATOR .$this->type. DIRECTORY_SEPARATOR .'tmpl/input'. DIRECTORY_SEPARATOR .$this->params->get('params.template_input',  'default.php');
 		}
@@ -157,7 +157,7 @@ class CFormField extends JFormField
 
 		$template = \Joomla\CMS\Factory::getApplication()->getTemplate();
 		$tpath = JPATH_THEMES . '/' . $template . '/html/com_joomcck/fields/'.$this->type.'/output/' . $this->params->get('params.template_output_'.$client,  'default.php');
-		if(!\Joomla\CMS\Filesystem\File::exists($tpath))
+		if(!is_file($tpath))
 		{
 			$tpath = JPATH_ROOT. '/components/com_joomcck/fields'. DIRECTORY_SEPARATOR .$this->type. DIRECTORY_SEPARATOR .'tmpl/output'. DIRECTORY_SEPARATOR .$this->params->get('params.template_output_'.$client,  'default.php');
 		}
@@ -247,7 +247,7 @@ class CFormField extends JFormField
 
 	public function validateField($value, $record, $type, $section)
 	{
-		$user = \Joomla\CMS\Factory::getUser();
+		$user = \Joomla\CMS\Factory::getApplication()->getIdentity();
 		$jform = $this->request->get('jform', array(), 'array');
 		$submission = TRUE;
 
@@ -419,7 +419,7 @@ class CFormField extends JFormField
 
 		if(!array_key_exists($path, $lists))
 		{
-			$lists[$path] = \Joomla\CMS\Filesystem\Folder::files($path, '.', true, true);
+			$lists[$path] = \Joomla\Filesystem\Folder::files($path, '.', true, true);
 		}
 
 		foreach($lists[$path] AS $f)

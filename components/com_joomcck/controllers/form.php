@@ -39,7 +39,7 @@ class JoomcckControllerForm extends MControllerForm
 		$this->view_list = 'records';
 
 		$record  = $this->input->get('jform', array(), 'array');
-		$user    = \Joomla\CMS\Factory::getUser();
+		$user    = \Joomla\CMS\Factory::getApplication()->getIdentity();
 		$section = ItemsStore::getSection($record['section_id']);
 		$this->input->set('section_id', $section->id);
 		$type = ItemsStore::getType($record['type_id']);
@@ -75,7 +75,7 @@ class JoomcckControllerForm extends MControllerForm
 	public function postSaveHook(MModelBase $model, $validData = array())
 	{
 		$db           = \Joomla\CMS\Factory::getDbo();
-		$user         = \Joomla\CMS\Factory::getUser();
+		$user         = \Joomla\CMS\Factory::getApplication()->getIdentity();
 		$fileds_model = MModelBase::getInstance('Fields', 'JoomcckModel');
 		$record_id    = $model->getState('form.id');
 		$table        = \Joomla\CMS\Table\Table::getInstance('Record_values', 'JoomcckTable');
@@ -476,7 +476,7 @@ class JoomcckControllerForm extends MControllerForm
 
 	protected function allowAdd($data = array(), $key = 'id')
 	{
-		$user  = \Joomla\CMS\Factory::getUser();
+		$user  = \Joomla\CMS\Factory::getApplication()->getIdentity();
 		$allow = $user->authorise('core.create', 'com_joomcck.record');
 
 		if($allow === NULL)
@@ -494,7 +494,7 @@ class JoomcckControllerForm extends MControllerForm
 		$record = ItemsStore::getRecord($data['id']);
 
 		return MECAccess::allowEdit($record, ItemsStore::getType($record->type_id), ItemsStore::getSection($record->section_id));
-		//return \Joomla\CMS\Factory::getUser()->authorise('core.edit', 'com_joomcck.record');
+		//return \Joomla\CMS\Factory::getApplication()->getIdentity()->authorise('core.edit', 'com_joomcck.record');
 	}
 
 	protected function getRedirectTolistAppend()
@@ -534,7 +534,7 @@ class JoomcckControllerForm extends MControllerForm
 
 		if($recordId)
 		{
-			$user = \Joomla\CMS\Factory::getUser();
+			$user = \Joomla\CMS\Factory::getApplication()->getIdentity();
 			if(!$user->get('id') && $recordId)
 			{
 				$record = ItemsStore::getRecord($recordId);

@@ -45,7 +45,7 @@ class JoomcckControllerOptions extends MControllerAdmin
 	}
 	public function saveoptions()
 	{
-		$me = \Joomla\CMS\Factory::getUser();
+		$me = \Joomla\CMS\Factory::getApplication()->getIdentity();
 		
 
 		if(! $me->id)
@@ -113,7 +113,7 @@ class JoomcckControllerOptions extends MControllerAdmin
 
 	public function savesectionoptions()
 	{
-		$me = \Joomla\CMS\Factory::getUser();
+		$me = \Joomla\CMS\Factory::getApplication()->getIdentity();
 		
 
 		if(! $me->id)

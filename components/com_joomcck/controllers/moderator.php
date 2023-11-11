@@ -31,7 +31,7 @@ class JoomcckControllerModerator extends MControllerForm
 	protected function allowAdd($data = array())
 	{
 		return TRUE;
-		$user = \Joomla\CMS\Factory::getUser();
+		$user = \Joomla\CMS\Factory::getApplication()->getIdentity();
 		$allow = $user->authorise('core.create', 'com_joomcck.moderator');
 
 		if($allow === NULL)
@@ -50,7 +50,7 @@ class JoomcckControllerModerator extends MControllerForm
 		$asset = 'com_joomcck.moderator.' . $recordId;
 
 		// Check general edit permission first.
-		if(\Joomla\CMS\Factory::getUser()->authorise('core.edit', $asset))
+		if(\Joomla\CMS\Factory::getApplication()->getIdentity()->authorise('core.edit', $asset))
 		{
 			return TRUE;
 		}

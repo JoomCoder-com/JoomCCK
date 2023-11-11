@@ -74,7 +74,7 @@ class com_joomcckInstallerScript
 
         $params = json_decode(($et->params ?: '{}'));
         if (empty($params->moderator)) {
-            $params->moderator = \Joomla\CMS\Factory::getUser()->get('id');
+            $params->moderator = \Joomla\CMS\Factory::getApplication()->getIdentity()->get('id');
         }
         if (empty($params->general_upload)) {
             $params->general_upload = 'uploads';
@@ -139,36 +139,36 @@ class com_joomcckInstallerScript
     {
         define('CDIR', JPATH_ROOT . '/administrator/components/com_joomcck/');
 
-        if (\Joomla\CMS\Filesystem\Folder::exists(CDIR . 'controllers')) {
-            \Joomla\CMS\Filesystem\Folder::delete(CDIR . 'controllers');
+        if (is_dir(CDIR . 'controllers')) {
+            \Joomla\Filesystem\Folder::delete(CDIR . 'controllers');
         }
 
-        if (\Joomla\CMS\Filesystem\Folder::exists(CDIR . 'helpers')) {
-            \Joomla\CMS\Filesystem\Folder::delete(CDIR . 'helpers');
+        if (is_dir(CDIR . 'helpers')) {
+            \Joomla\Filesystem\Folder::delete(CDIR . 'helpers');
         }
 
-        if (\Joomla\CMS\Filesystem\Folder::exists(CDIR . 'tables')) {
-            \Joomla\CMS\Filesystem\Folder::delete(CDIR . 'tables');
+        if (is_dir(CDIR . 'tables')) {
+            \Joomla\Filesystem\Folder::delete(CDIR . 'tables');
         }
 
-        if (\Joomla\CMS\Filesystem\Folder::exists(CDIR . 'models')) {
-            \Joomla\CMS\Filesystem\Folder::delete(CDIR . 'models');
+        if (is_dir(CDIR . 'models')) {
+            \Joomla\Filesystem\Folder::delete(CDIR . 'models');
         }
 
-        if (\Joomla\CMS\Filesystem\Folder::exists(CDIR . 'xml')) {
-            \Joomla\CMS\Filesystem\Folder::delete(CDIR . 'xml');
+        if (is_dir(CDIR . 'xml')) {
+            \Joomla\Filesystem\Folder::delete(CDIR . 'xml');
         }
 
-        if (\Joomla\CMS\Filesystem\Folder::exists(CDIR . 'library/css')) {
-            \Joomla\CMS\Filesystem\Folder::delete(CDIR . 'library/css');
+        if (is_dir(CDIR . 'library/css')) {
+            \Joomla\Filesystem\Folder::delete(CDIR . 'library/css');
         }
 
-        if (\Joomla\CMS\Filesystem\Folder::exists(CDIR . 'library/js')) {
-            \Joomla\CMS\Filesystem\Folder::delete(CDIR . 'library/js');
+        if (is_dir(CDIR . 'library/js')) {
+            \Joomla\Filesystem\Folder::delete(CDIR . 'library/js');
         }
 
-        if (\Joomla\CMS\Filesystem\Folder::exists(CDIR . 'library/php')) {
-            \Joomla\CMS\Filesystem\Folder::delete(CDIR . 'library/php');
+        if (is_dir(CDIR . 'library/php')) {
+            \Joomla\Filesystem\Folder::delete(CDIR . 'library/php');
         }
 
     }
@@ -186,7 +186,7 @@ class com_joomcckInstallerScript
         $db->setQuery("SHOW TABLES lIKE '%_js_res_%'");
         $list = $db->loadColumn();
 
-        $tables = \Joomla\CMS\Filesystem\Folder::files(JPATH_ROOT . '/administrator/components/com_joomcck/library/db', '\.json$');
+        $tables = \Joomla\Filesystem\Folder::files(JPATH_ROOT . '/administrator/components/com_joomcck/library/db', '\.json$');
 
 
         foreach ($tables as $file) {
@@ -548,8 +548,8 @@ class com_joomcckInstallerScript
         ];
 
         foreach ($files as $file) {
-            if (\Joomla\CMS\Filesystem\File::exists(JPATH_ROOT . $file)) {
-                \Joomla\CMS\Filesystem\File::delete(JPATH_ROOT . $file);
+            if (is_file(JPATH_ROOT . $file)) {
+                \Joomla\Filesystem\File::delete(JPATH_ROOT . $file);
             }
         }
     }

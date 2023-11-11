@@ -29,7 +29,7 @@ class JoomcckModelCat extends MModelAdmin
 	 */
 	protected function canDelete($record)
 	{
-		$user = \Joomla\CMS\Factory::getUser();
+		$user = \Joomla\CMS\Factory::getApplication()->getIdentity();
 
 		return $user->authorise('core.delete', 'com_joomcck.cat.'.(int) $record->id);
 	}
@@ -43,7 +43,7 @@ class JoomcckModelCat extends MModelAdmin
 	 */
 	protected function canEditState($record)
 	{
-		$user = \Joomla\CMS\Factory::getUser();
+		$user = \Joomla\CMS\Factory::getApplication()->getIdentity();
 
 		// Check for existing cat.
 		if (!empty($record->id)) {
@@ -463,7 +463,7 @@ class JoomcckModelCat extends MModelAdmin
 	{
 		// Check that user has edit permission for every category being changed
 		// Note that the entire batch operation fails if any category lacks edit permission
-		$user	= \Joomla\CMS\Factory::getUser();
+		$user	= \Joomla\CMS\Factory::getApplication()->getIdentity();
 		$section = \Joomla\CMS\Factory::getApplication()->input->getInt('section_id',0);
 		foreach ($pks as $pk) {
 			if (!$user->authorise('core.edit', 'com_joomcck.cat.'.$pk)) {
@@ -503,7 +503,7 @@ class JoomcckModelCat extends MModelAdmin
 
 		$table	= $this->getTable();
 		$db		= $this->getDbo();
-		$user	= \Joomla\CMS\Factory::getUser();
+		$user	= \Joomla\CMS\Factory::getApplication()->getIdentity();
 		$section = \Joomla\CMS\Factory::getApplication()->input->getInt('section_id',0);
 
 		// Check that the parent exists
@@ -667,7 +667,7 @@ class JoomcckModelCat extends MModelAdmin
 
 		$table	= $this->getTable();
 		$db		= $this->getDbo();
-		$user	= \Joomla\CMS\Factory::getUser();
+		$user	= \Joomla\CMS\Factory::getApplication()->getIdentity();
 		$section = \Joomla\CMS\Factory::getApplication()->input->getInt('section_id',0);
 
 		// Check that the parent exists.

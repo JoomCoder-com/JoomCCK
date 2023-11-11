@@ -29,7 +29,7 @@ class MintPay
 			return $instances[$key];
 		}
 		$file = JPATH_ROOT . "/components/com_joomcck/gateways/{$provider}/{$provider}.php";
-		if (!\Joomla\CMS\Filesystem\File::exists($file))
+		if (!is_file($file))
 		{
 			throw new Exception( \Joomla\CMS\Language\Text::sprintf('CGATEWAYNOTFOUND', $provider),500);
 
@@ -46,7 +46,7 @@ class MintPay
 		
 		$lang = \Joomla\CMS\Factory::getLanguage();
 		$tag = $lang->getTag();
-		if (!\Joomla\CMS\Filesystem\File::exists(JPATH_BASE . DIRECTORY_SEPARATOR . 'language' . DIRECTORY_SEPARATOR . $tag . DIRECTORY_SEPARATOR . $tag . '.com_joomcck_field_' . $provider . '.ini'))
+		if (!is_file(JPATH_BASE . DIRECTORY_SEPARATOR . 'language' . DIRECTORY_SEPARATOR . $tag . DIRECTORY_SEPARATOR . $tag . '.com_joomcck_field_' . $provider . '.ini'))
 		{
 			$tag == 'en-GB';
 		}		

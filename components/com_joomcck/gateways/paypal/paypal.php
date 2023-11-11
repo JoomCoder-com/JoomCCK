@@ -23,7 +23,7 @@ class MintPayPaypal extends MintPayAbstract
 	{
 		$pay     = new \Joomla\Registry\Registry((array) @$field->pay);
 		$options = $field->params;
-		$user    = \Joomla\CMS\Factory::getUser();
+		$user    = \Joomla\CMS\Factory::getApplication()->getIdentity();
 
 		if (!$pay->get('business', $options->get('pay.business')))
 		{
@@ -155,7 +155,7 @@ class MintPayPaypal extends MintPayAbstract
 
 	public function form($field)
 	{
-		$user = \Joomla\CMS\Factory::getUser();
+		$user = \Joomla\CMS\Factory::getApplication()->getIdentity();
 
 		$value = $field->pay;
 		settype($value, 'array');

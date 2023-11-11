@@ -38,7 +38,7 @@ class JoomcckViewGroup extends MViewBase
 	{
 		\Joomla\CMS\Factory::getApplication()->input->set('hidemainmenu', true);
 
-		$user		= \Joomla\CMS\Factory::getUser();
+		$user		= \Joomla\CMS\Factory::getApplication()->getIdentity();
 		$isNew		= ($this->item->id == 0);
 		$checkedOut	= !($this->item->checked_out == 0 || $this->item->checked_out == $user->get('id'));
 

@@ -121,7 +121,7 @@ class JoomcckModelCats extends MModelList
 		// Create a new query object.
 		$db      = $this->getDbo();
 		$query   = $db->getQuery(TRUE);
-		$user    = \Joomla\CMS\Factory::getUser();
+		$user    = \Joomla\CMS\Factory::getApplication()->getIdentity();
 		$section = \Joomla\CMS\Factory::getApplication()->input->getInt('section_id');
 
 		// Select the required fields from the table.

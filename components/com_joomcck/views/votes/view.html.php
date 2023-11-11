@@ -45,7 +45,7 @@ class JoomcckViewVotes extends MViewBase
 	{
 		foreach($items as $key => $item)
 		{
-			if(\Joomla\CMS\Filesystem\Folder::exists(JPATH_ADMINISTRATOR . DIRECTORY_SEPARATOR . 'components/com_juser'))
+			if(is_dir(JPATH_ADMINISTRATOR . DIRECTORY_SEPARATOR . 'components/com_juser'))
 			{
 				$item->user_href = JURI::root() . 'administrator/index.php?option=com_juser&view=user&task=edit&cid[]=' . $item->userid;
 			}

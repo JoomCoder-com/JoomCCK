@@ -78,7 +78,7 @@ class JFormFieldCReadmore extends CFormFieldRelate
 		$query->where('type_id IN (' . implode(',', $this->_getTypes()) . ')');
 		if($this->params->get('params.user_strict'))
 		{
-			$user_id = \Joomla\CMS\Factory::getUser()->get('id');
+			$user_id = \Joomla\CMS\Factory::getApplication()->getIdentity()->get('id');
 			$query->where('user_id = ' . ($user_id ? $user_id : 1));
 		}
 		$db->setQuery($query);

@@ -691,7 +691,7 @@ class CStatistics
 
 	static private function _data_show(&$query, $section_id)
 	{
-		$user = \Joomla\CMS\Factory::getUser();
+		$user = \Joomla\CMS\Factory::getApplication()->getIdentity();
 		$section = ItemsStore::getSection($section_id);
 
 		if (!in_array($section->params->get('general.show_restrict'), $user->getAuthorisedViewLevels()))

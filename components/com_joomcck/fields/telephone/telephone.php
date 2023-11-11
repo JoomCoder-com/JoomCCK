@@ -215,7 +215,7 @@ class JFormFieldCTelephone extends CFormField
 			$data[$k]->value = $val->phone_code;
 
 			$data[$k]->flag = '';
-			if(\Joomla\CMS\Filesystem\File::exists(JPATH_ROOT.'/media/com_joomcck/icons/flag/16/' . \Joomla\String\StringHelper::strtolower($val->code2) . '.png'))
+			if(is_file(JPATH_ROOT.'/media/com_joomcck/icons/flag/16/' . \Joomla\String\StringHelper::strtolower($val->code2) . '.png'))
 			{
 				$data[$k]->flag = '<img src="' . JURI::root(TRUE) . '/media/com_joomcck/icons/flag/16/' . \Joomla\String\StringHelper::strtolower($val->code2) . '.png" border="0" align="absmiddle" alt="' . \Joomla\CMS\Language\Text::_($val->name) . '">';
 			}

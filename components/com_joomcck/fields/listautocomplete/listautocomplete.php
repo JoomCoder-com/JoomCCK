@@ -72,7 +72,7 @@ class JFormFieldCListautocomplete extends CFormFieldSelectable
 		if ($this->params->get('params.sql_source'))
 		{
 			$db = \Joomla\CMS\Factory::getDbo();
-			$user = \Joomla\CMS\Factory::getUser();
+			$user = \Joomla\CMS\Factory::getApplication()->getIdentity();
 			$sql = $this->params->get('params.sql', "SELECT 1 AS id, 'No sql query entered' AS text");
 			$sql = str_replace('[USER_ID]', $user->get('id', 0), $sql);
 			$db->setQuery($sql);

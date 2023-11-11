@@ -52,7 +52,7 @@ class JFormFieldMRadio extends JFormFieldList
 
 		$file = __DIR__.'/tmpl/mradio-'.$prefix.'.php';
 
-		if(\Joomla\CMS\Filesystem\File::exists($file))
+		if(is_file($file))
 		{
 			return $file;
 		}

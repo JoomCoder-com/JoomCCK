@@ -29,7 +29,7 @@ class JoomcckControllerComment extends MControllerForm
 
 		$form = $this->input->get('jform', array(), 'array');
 
-		$user = \Joomla\CMS\Factory::getUser();
+		$user = \Joomla\CMS\Factory::getApplication()->getIdentity();
 		$record = MModelBase::getInstance('Record', 'JoomcckModel')->getItem($form['record_id']);
 		$section = MModelBase::getInstance('Section', 'JoomcckModel')->getItem($record->section_id);
 		$type = MModelBase::getInstance('Form', 'JoomcckModel')->getRecordType($record->type_id);
@@ -69,7 +69,7 @@ class JoomcckControllerComment extends MControllerForm
 				$table->store();
 			}
 
-			//CEmeraldHelper::countLimit('type', 'comment', $type, \Joomla\CMS\Factory::getUser()->get('id'));
+			//CEmeraldHelper::countLimit('type', 'comment', $type, \Joomla\CMS\Factory::getApplication()->getIdentity()->get('id'));
 		}
 		else if ($this->input->getInt('is_edited'))
 		{
@@ -121,7 +121,7 @@ class JoomcckControllerComment extends MControllerForm
 
 	protected function allowAdd($data = array())
 	{
-		$user = \Joomla\CMS\Factory::getUser();
+		$user = \Joomla\CMS\Factory::getApplication()->getIdentity();
 		$allow = $user->authorise('core.create', 'com_joomcck.comment');
 
 		if ($allow === null)
@@ -136,7 +136,7 @@ class JoomcckControllerComment extends MControllerForm
 
 	protected function allowEdit($data = array(), $key = 'id')
 	{
-		return \Joomla\CMS\Factory::getUser()->authorise('core.edit', 'com_joomcck.comment');
+		return \Joomla\CMS\Factory::getApplication()->getIdentity()->authorise('core.edit', 'com_joomcck.comment');
 	}
 
 	protected function getRedirectToItemAppend($recordId = null, $urlVar = 'id')

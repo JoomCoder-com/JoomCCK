@@ -101,7 +101,7 @@ class JFormFieldCobCategoryParent extends JFormFieldList
 			$options[$i]->text = str_repeat('- ',$options[$i]->level).$options[$i]->text;
 		}
 		// Initialise variables.
-		$user = \Joomla\CMS\Factory::getUser();
+		$user = \Joomla\CMS\Factory::getApplication()->getIdentity();
 
 		if (empty($id)) {
 			// New item, only have to check core.create.

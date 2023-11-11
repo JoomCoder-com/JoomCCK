@@ -31,21 +31,21 @@ class JoomcckModelNotification extends MModelAdmin
 
 	protected function canDelete($record)
 	{
-		$user = \Joomla\CMS\Factory::getUser();
+		$user = \Joomla\CMS\Factory::getApplication()->getIdentity();
 
 		return $user->authorise('core.delete', 'com_joomcck.comment.'.(int) $record->id);
 	}
 
 	protected function canEditState($record)
 	{
-		$user = \Joomla\CMS\Factory::getUser();
+		$user = \Joomla\CMS\Factory::getApplication()->getIdentity();
 
 		return $user->authorise('core.edit.state', 'com_joomcck.comment.'.(int) $record->id);
 	}
 
 	public function getSections()
 	{
-		$user = \Joomla\CMS\Factory::getUser();
+		$user = \Joomla\CMS\Factory::getApplication()->getIdentity();
 		$db = $this->getDbo();
 		$query = $db->getQuery(true);
 		$query->select('DISTINCT(ref_2)');

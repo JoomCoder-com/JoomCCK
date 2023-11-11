@@ -29,7 +29,7 @@ class MintPayAbstract
 
 	public function prepare_output(&$obj, $client, $record, $type, $section)
 	{
-		$obj->user = \Joomla\CMS\Factory::getUser();
+		$obj->user = \Joomla\CMS\Factory::getApplication()->getIdentity();
 		$obj->record = $record;
 		$obj->section = $section;
 
@@ -60,7 +60,7 @@ class MintPayAbstract
 			return;
 		}
 
-		$user = \Joomla\CMS\Factory::getUser();
+		$user = \Joomla\CMS\Factory::getApplication()->getIdentity();
 		if(in_array($obj->params->get('params.skip_for'), $user->getAuthorisedViewLevels()))
 		{
 			return;
@@ -91,7 +91,7 @@ class MintPayAbstract
 	public function load_form($provider, $id)
 	{
 		$xml = JPATH_COMPONENT. DIRECTORY_SEPARATOR .'gateways'. DIRECTORY_SEPARATOR .$provider. DIRECTORY_SEPARATOR .$provider.'.xml';
-		if(!\Joomla\CMS\Filesystem\File::exists($xml))
+		if(!is_file($xml))
 		{
 			echo \Joomla\CMS\Language\Text::_('CFILENOTFOUND').": {$xml}";
 		}
@@ -114,7 +114,7 @@ class MintPayAbstract
 	{
 		if($field->params->get('params.send_mail'))
 		{
-			$user = \Joomla\CMS\Factory::getUser();
+			$user = \Joomla\CMS\Factory::getApplication()->getIdentity();
 			$config = \Joomla\CMS\Factory::getConfig();
 
 			$_from = $config->get('config.mailfrom');
@@ -166,10 +166,10 @@ class MintPayAbstract
 
 		$folder = JPATH_ROOT. '/logs'. DIRECTORY_SEPARATOR .$this->provider;
 
-		if(!\Joomla\CMS\Filesystem\Folder::exists($folder))
+		if(!is_dir($folder))
 		{
-			\Joomla\CMS\Filesystem\Folder::create($folder, 0755);
-			\Joomla\CMS\Filesystem\File::write($folder. DIRECTORY_SEPARATOR .'index.html', $index = ' ');
+			\Joomla\Filesystem\Folder::create($folder, 0755);
+			\Joomla\Filesystem\File::write($folder. DIRECTORY_SEPARATOR .'index.html', $index = ' ');
 		}
 		if(is_array($add))
 		{

@@ -35,7 +35,7 @@ class JoomcckTableUsercategory extends \Joomla\CMS\Table\Table
     
 	public function check()
 	{
-		$this->user_id = \Joomla\CMS\Factory::getUser()->get('id');
+		$this->user_id = \Joomla\CMS\Factory::getApplication()->getIdentity()->get('id');
         $date = \Joomla\CMS\Factory::getDate()->toSql();
 
 		if($this->ctime <= 0){

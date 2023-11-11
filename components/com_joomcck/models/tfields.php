@@ -131,12 +131,12 @@ class JoomcckModelTfields extends MModelList
 	public function getFields()
 	{
 		$fileds = JPATH_ROOT . '/components/com_joomcck/fields' ;
-		$folders = \Joomla\CMS\Filesystem\Folder::folders($fileds);
+		$folders = \Joomla\Filesystem\Folder::folders($fileds);
 		$out = array();
 		foreach($folders as $folder)
 		{
 			$file = $fileds . DIRECTORY_SEPARATOR . $folder . DIRECTORY_SEPARATOR . $folder . '.xml';
-			if(!\Joomla\CMS\Filesystem\File::exists($file))
+			if(!is_file($file))
 			{
 				Factory::getApplication()->enqueueMessage( \Joomla\CMS\Language\Text::sprintf('C_MSG_CANNOTLOADFILE', $folder),'warning');
 				continue;
@@ -160,7 +160,7 @@ class JoomcckModelTfields extends MModelList
 				\Joomla\CMS\Language\Text::_('JGLOBAL_EMAIL'), (string)$field->email, \Joomla\CMS\Language\Text::_('CLICENSE'), (string)$field->license);
 
 			$field->icon = JURI::root(TRUE) . '/libraries/mint/forms/fields/joomcck';
-			if(\Joomla\CMS\Filesystem\File::exists($fileds . DIRECTORY_SEPARATOR . $folder . DIRECTORY_SEPARATOR . $folder . '.png'))
+			if(is_file($fileds . DIRECTORY_SEPARATOR . $folder . DIRECTORY_SEPARATOR . $folder . '.png'))
 			{
 				$field->icon .= "/{$folder}/{$folder}.png";
 			}

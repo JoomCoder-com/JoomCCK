@@ -64,14 +64,14 @@ class JoomcckModelComm extends MModelAdmin
 
 	protected function canDelete($record)
 	{
-		$user = \Joomla\CMS\Factory::getUser();
+		$user = \Joomla\CMS\Factory::getApplication()->getIdentity();
 
 		return $user->authorise('core.delete', 'com_joomcck.filter.'.(int) $record->id);
 	}
 
 	protected function canEditState($record)
 	{
-		$user = \Joomla\CMS\Factory::getUser();
+		$user = \Joomla\CMS\Factory::getApplication()->getIdentity();
 
 		return $user->authorise('core.edit.state', 'com_joomcck.filter.'.(int) $record->id);
 	}

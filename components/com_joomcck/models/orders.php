@@ -29,7 +29,7 @@ class JoomcckModelOrders extends MModelList
 
 	public function getListQuery()
 	{
-		$user = \Joomla\CMS\Factory::getUser();
+		$user = \Joomla\CMS\Factory::getApplication()->getIdentity();
 
 		//var_dump( MECAccess::allowSales($user));
 
@@ -142,7 +142,7 @@ class JoomcckModelOrders extends MModelList
 
 		if(!$this->isSuperUser())
 		{
-			$user = \Joomla\CMS\Factory::getUser();
+			$user = \Joomla\CMS\Factory::getApplication()->getIdentity();
 			$w[] = 's.id IN (SELECT section_id FROM #__js_res_sales WHERE saler_id = '.$user->get('id').')';
 
 			if($secmod = MECAccess::allowViewSales($user))
@@ -165,7 +165,7 @@ class JoomcckModelOrders extends MModelList
 
 		if(!$uid)
 		{
-			$uid = \Joomla\CMS\Factory::getUser()->get('id');
+			$uid = \Joomla\CMS\Factory::getApplication()->getIdentity()->get('id');
 		}
 
 		if(!@$active->getParams() instanceof \Joomla\Registry\Registry)

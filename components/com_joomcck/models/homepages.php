@@ -29,7 +29,7 @@ class JoomcckModelHomepages extends MModelList
 	public function _getauthor()
 	{
 		$app = \Joomla\CMS\Factory::getApplication();
-		$user = \Joomla\CMS\Factory::getUser();
+		$user = \Joomla\CMS\Factory::getApplication()->getIdentity();
 		
 		$id = $app->input->getInt('record_id');
 
@@ -46,7 +46,7 @@ class JoomcckModelHomepages extends MModelList
 	public function getAll()
 	{
 		$app = \Joomla\CMS\Factory::getApplication();
-		$user = \Joomla\CMS\Factory::getUser();
+		$user = \Joomla\CMS\Factory::getApplication()->getIdentity();
 		
 		$author = $this->_getauthor();
 
@@ -93,7 +93,7 @@ class JoomcckModelHomepages extends MModelList
 	public function getListQuery()
 	{
 		$app = \Joomla\CMS\Factory::getApplication();
-		$user = \Joomla\CMS\Factory::getUser();
+		$user = \Joomla\CMS\Factory::getApplication()->getIdentity();
 		$author = $this->_getauthor();
 
 		$db = $this->getDbo();

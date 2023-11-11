@@ -92,7 +92,7 @@ class plgContentJoomcck extends JPlugin
 
 		$stype = ItemsStore::getType($this->params->get('type_id'));
 		$section = ItemsStore::getSection($this->params->get('section_id'));
-		$user = \Joomla\CMS\Factory::getUser();
+		$user = \Joomla\CMS\Factory::getApplication()->getIdentity();
 
 		\Joomla\CMS\Factory::getApplication()->input->set('parent_id', $row->id);
 		\Joomla\CMS\Factory::getApplication()->input->set('parent', 'com_content');

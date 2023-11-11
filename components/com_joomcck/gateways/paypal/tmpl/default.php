@@ -18,7 +18,7 @@ defined('_JEXEC') or die('Restricted access');
 			<?php echo $field;?>
 		<?php endforeach;?>
 	<?php endif;?>
-	<button class="btn btn-warning" <?php echo (!\Joomla\CMS\Factory::getUser()->get('id') ? sprintf(' type="button" rel="tooltip" data-original-title="%s"', \Joomla\CMS\Language\Text::_('SSI_LOGINTOBUY')) : null); ?> type="submit">
+	<button class="btn btn-warning" <?php echo (!\Joomla\CMS\Factory::getApplication()->getIdentity()->get('id') ? sprintf(' type="button" rel="tooltip" data-original-title="%s"', \Joomla\CMS\Language\Text::_('SSI_LOGINTOBUY')) : null); ?> type="submit">
 		<img src="<?php echo JURI::root(true);?>/components/com_joomcck/gateways/paypal/paypal.png" title="PayPal" alt="PayPal">
 		<?php echo \Joomla\CMS\Language\Text::_('SSI_BUYNOW');?>
 

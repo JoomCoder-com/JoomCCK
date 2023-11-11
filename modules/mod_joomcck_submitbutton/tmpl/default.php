@@ -14,9 +14,9 @@ defined('_JEXEC') or die('Restricted access');
 <?php foreach($types AS $type): ?>
 	<?php
 	$attr = "";
-	if(!in_array($type->params->get('submission.submission'), \Joomla\CMS\Factory::getUser()->getAuthorisedViewLevels()))
+	if(!in_array($type->params->get('submission.submission'), \Joomla\CMS\Factory::getApplication()->getIdentity()->getAuthorisedViewLevels()))
 	{
-		if(!\Joomla\CMS\Factory::getUser()->get('id'))
+		if(!\Joomla\CMS\Factory::getApplication()->getIdentity()->get('id'))
 		{
 			$url = \Joomla\CMS\Router\Route::_('index.php?option=com_users&view=login&return=' . Url::back());
 			$attr = ' rel="tooltip" data-bs-title="'.\Joomla\CMS\Language\Text::sprintf('MOD_SB_REGISTER', $type->name).'" ';

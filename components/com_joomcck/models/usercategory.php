@@ -84,7 +84,7 @@ class JoomcckModelUsercategory extends MModelAdmin
 		$table = $this->getTable();
 		$app = \Joomla\CMS\Factory::getApplication();
 		$section_id = $app->getUserStateFromRequest('com_joomcck.usercategories.section_id', 'section_id', null, 'int');
-		$user = \Joomla\CMS\Factory::getUser();
+		$user = \Joomla\CMS\Factory::getApplication()->getIdentity();
 		
 		$table->reorder('section_id ='. $section_id . ' AND user_id ='. $user->get('id'));
 	}

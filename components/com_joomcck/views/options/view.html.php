@@ -17,7 +17,7 @@ class JoomcckViewOptions extends MViewBase
 	function display($tpl = null)
 	{
 		$app = \Joomla\CMS\Factory::getApplication();
-		$user = \Joomla\CMS\Factory::getUser();
+		$user = \Joomla\CMS\Factory::getApplication()->getIdentity();
 
 		if(!$user->id)
 		{

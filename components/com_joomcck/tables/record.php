@@ -95,7 +95,7 @@ class JoomcckTableRecord extends \Joomla\CMS\Table\Table
 	public function check()
 	{
 		$isNew = (boolean)empty($this->id);
-		$user  = \Joomla\CMS\Factory::getUser();
+		$user  = \Joomla\CMS\Factory::getApplication()->getIdentity();
 		$app   = \Joomla\CMS\Factory::getApplication();
 
 		if($this->checked_out && $user->get('id') != $this->checked_out)
@@ -478,7 +478,7 @@ class JoomcckTableRecord extends \Joomla\CMS\Table\Table
 			if(
 				$this->published === 0 &&
 				$type->params->get('emerald.type_publish_subscription') &&
-				\Joomla\CMS\Filesystem\File::exists($em_api)
+				is_file($em_api)
 			)
 			{
 				require_once $em_api;
@@ -583,7 +583,7 @@ class JoomcckTableRecord extends \Joomla\CMS\Table\Table
 	public function check_cli()
 	{
 		$isNew = (boolean)empty($this->id);
-		$user  = \Joomla\CMS\Factory::getUser();
+		$user  = \Joomla\CMS\Factory::getApplication()->getIdentity();
 
 		if($this->checked_out && $user->get('id') != $this->checked_out)
 		{

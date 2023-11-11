@@ -63,7 +63,7 @@ class JoomcckTableField extends \Joomla\CMS\Table\Table
 		}
 
 		if(trim($this->user_id) == '') {
-			$this->user_id = (int)\Joomla\CMS\Factory::getUser()->get('id');
+			$this->user_id = (int)\Joomla\CMS\Factory::getApplication()->getIdentity()->get('id');
 		}
 
 		settype($this->ordering, 'integer');

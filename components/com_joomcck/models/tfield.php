@@ -42,7 +42,7 @@ class JoomcckModelTfield extends MModelAdmin
 	public function getFieldForm($field_type, $default = array())
 	{
 		$file = JPATH_ROOT . '/components/com_joomcck/fields' . DIRECTORY_SEPARATOR . $field_type . DIRECTORY_SEPARATOR . $field_type . '.xml';
-		if(!\Joomla\CMS\Filesystem\File::exists($file))
+		if(!is_file($file))
 		{
 			echo "File not found: {$file}";
 		}
@@ -117,14 +117,14 @@ class JoomcckModelTfield extends MModelAdmin
 
 	protected function canDelete($record)
 	{
-		$user = \Joomla\CMS\Factory::getUser();
+		$user = \Joomla\CMS\Factory::getApplication()->getIdentity();
 
 		return $user->authorise('core.delete', 'com_joomcck.tfield.' . (int)$record->id);
 	}
 
 	protected function canEditState($record)
 	{
-		$user = \Joomla\CMS\Factory::getUser();
+		$user = \Joomla\CMS\Factory::getApplication()->getIdentity();
 
 		return $user->authorise('core.edit.state', 'com_joomcck.tfield.' . (int)$record->id);
 	}
@@ -132,7 +132,7 @@ class JoomcckModelTfield extends MModelAdmin
 	public function changeState($task, &$pks, $value = 1)
 	{
 		$dispatcher = \Joomla\CMS\Factory::getApplication();
-		$user       = \Joomla\CMS\Factory::getUser();
+		$user       = \Joomla\CMS\Factory::getApplication()->getIdentity();
 		$table      = $this->getTable();
 		$pks        = (array)$pks;
 

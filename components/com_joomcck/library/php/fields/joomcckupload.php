@@ -57,7 +57,7 @@ class CFormFieldUpload extends CFormField
     public function getInput()
     {
 
-        $user = \Joomla\CMS\Factory::getUser();
+        $user = \Joomla\CMS\Factory::getApplication()->getIdentity();
         settype($this->value, 'array');
         $default = [];
         if (isset($this->value[0])) {
@@ -84,7 +84,7 @@ class CFormFieldUpload extends CFormField
 
     public function _getDeleteAccess()
     {
-        $user              = \Joomla\CMS\Factory::getUser();
+        $user              = \Joomla\CMS\Factory::getApplication()->getIdentity();
         $author_can_delete = $this->params->get('params.delete_access', 1);
         $params            = \Joomla\CMS\Component\ComponentHelper::getParams('com_joomcck');
         $type              = ItemsStore::getType($this->type_id);
@@ -202,7 +202,7 @@ class CFormFieldUpload extends CFormField
 
     public function onBeforeDownload($record, $file_index, $file_id, $return = true)
     {
-        $user = \Joomla\CMS\Factory::getUser();
+        $user = \Joomla\CMS\Factory::getApplication()->getIdentity();
         if (!in_array($this->params->get('params.allow_download', 1), $user->getAuthorisedViewLevels())) {
             $this->setError(\Joomla\CMS\Language\Text::_("CNORIGHTSDOWNLOAD"));
 
@@ -211,7 +211,7 @@ class CFormFieldUpload extends CFormField
 
         if ($this->_ajast_subscr($record)) {
             $em_api = JPATH_ROOT . '/components/com_emerald/api.php';
-            if (!\Joomla\CMS\Filesystem\File::exists($em_api)) {
+            if (!is_file($em_api)) {
                 return true;
             }
 
@@ -410,27 +410,27 @@ class CFormFieldUpload extends CFormField
             $time = time();
             //$date = date('Y-m', $time);
             $date      = date($params->get('folder_format', 'Y-m'), $time);
-            $ext       = strtolower(\Joomla\CMS\Filesystem\File::getExt($filename));
+            $ext       = strtolower(\Joomla\Filesystem\File::getExt($filename));
             $subfolder = $field->params->get('params.subfolder', $ext);
 
             $dest  = JPATH_ROOT . DIRECTORY_SEPARATOR . $params->get('general_upload') . DIRECTORY_SEPARATOR . $subfolder . DIRECTORY_SEPARATOR;
             $index = '<html><body></body></html>';
-            if (!\Joomla\CMS\Filesystem\Folder::exists($dest)) {
-                \Joomla\CMS\Filesystem\Folder::create($dest, 0755);
-                \Joomla\CMS\Filesystem\File::write($dest . DIRECTORY_SEPARATOR . 'index.html', $index);
+            if (!is_dir($dest)) {
+                \Joomla\Filesystem\Folder::create($dest, 0755);
+                \Joomla\Filesystem\File::write($dest . DIRECTORY_SEPARATOR . 'index.html', $index);
             }
             $dest .= $date . DIRECTORY_SEPARATOR;
-            if (!\Joomla\CMS\Filesystem\Folder::exists($dest)) {
+            if (!is_dir($dest)) {
 
-                \Joomla\CMS\Filesystem\Folder::create($dest, 0755);
-                \Joomla\CMS\Filesystem\File::write($dest . DIRECTORY_SEPARATOR . 'index.html', $index);
+                \Joomla\Filesystem\Folder::create($dest, 0755);
+                \Joomla\Filesystem\File::write($dest . DIRECTORY_SEPARATOR . 'index.html', $index);
             }
 
             $files_table->id       = null;
             $parts                 = explode('_', $filename);
             $files_table->filename = $time . '_' . $parts[1];
 
-            $copied = \Joomla\CMS\Filesystem\File::copy(JPATH_ROOT . DIRECTORY_SEPARATOR . $params->get('general_upload') . DIRECTORY_SEPARATOR . $subfolder . DIRECTORY_SEPARATOR . $files_table->fullpath, $dest . $files_table->filename);
+            $copied = \Joomla\Filesystem\File::copy(JPATH_ROOT . DIRECTORY_SEPARATOR . $params->get('general_upload') . DIRECTORY_SEPARATOR . $subfolder . DIRECTORY_SEPARATOR . $files_table->fullpath, $dest . $files_table->filename);
 
             $files_table->fullpath = \Joomla\CMS\Filesystem\Path::clean($date . DIRECTORY_SEPARATOR . $files_table->filename, '/');
             $files_table->saved    = 0;
@@ -645,7 +645,7 @@ class CFormFieldUpload extends CFormField
                 continue;
             }
 
-            $ext      = \Joomla\String\StringHelper::strtolower(\Joomla\CMS\Filesystem\File::getExt($file));
+            $ext      = \Joomla\String\StringHelper::strtolower(\Joomla\Filesystem\File::getExt($file));
             $new_name = \Joomla\CMS\Factory::getDate($record->ctime)->toUnix() . '_' . md5($file) . '.' . $ext;
 
             $file = $this->_find_import_file($params->get('field.' . $this->id . '.path'), $file);

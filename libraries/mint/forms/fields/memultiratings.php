@@ -54,7 +54,7 @@ class JFormFieldMEMultiRatings extends JFormField
 		    $tmpl_mask    = MRtemplates::getTmplMask( $type );
         }
 
-		$files = \Joomla\CMS\Filesystem\Folder::files($layouts_path, $tmpl_mask['index_file']);
+		$files = \Joomla\Filesystem\Folder::files($layouts_path, $tmpl_mask['index_file']);
 
 		foreach($files as $key => $file)
 		{

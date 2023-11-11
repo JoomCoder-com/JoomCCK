@@ -56,14 +56,14 @@ class JoomcckModelPacksection extends MModelAdmin
 
 	protected function canDelete($record)
 	{
-		$user = \Joomla\CMS\Factory::getUser();
+		$user = \Joomla\CMS\Factory::getApplication()->getIdentity();
 
 		return $user->authorise('core.delete', 'com_joomcck.packsection.' . (int)$record->id);
 	}
 
 	protected function canEditState($record)
 	{
-		$user = \Joomla\CMS\Factory::getUser();
+		$user = \Joomla\CMS\Factory::getApplication()->getIdentity();
 
 		return $user->authorise('core.edit.state', 'com_joomcck.packsection.' . (int)$record->id);
 	}
@@ -82,7 +82,7 @@ class JoomcckModelPacksection extends MModelAdmin
 	{
 		MModelBase::addIncludePath(JPATH_ROOT . '/components/com_joomcck/models');
 		$file = JPATH_COMPONENT. '/models/forms/packtype.xml';
-		if(!\Joomla\CMS\Filesystem\File::exists($file))
+		if(!is_file($file))
 		{
 			echo "File not found: {$file}";
 		}

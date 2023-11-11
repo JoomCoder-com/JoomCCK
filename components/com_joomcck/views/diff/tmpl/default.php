@@ -12,7 +12,7 @@ defined('_JEXEC') or die();
 
 include_once JPATH_COMPONENT. DIRECTORY_SEPARATOR .'api.php';
 $back = NULL;
-$user = \Joomla\CMS\Factory::getUser();
+$user = \Joomla\CMS\Factory::getApplication()->getIdentity();
 if(\Joomla\CMS\Factory::getApplication()->input->getString('return'))
 {
 	$back = Url::get_back('return');

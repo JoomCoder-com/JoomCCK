@@ -235,7 +235,7 @@ $num = CEventsHelper::showNum('total', 0);
 
 		<?php
 		if(
-			($user->get('id') && $user->get('id') == \Joomla\CMS\Factory::getUser()->get('id')) &&
+			($user->get('id') && $user->get('id') == \Joomla\CMS\Factory::getApplication()->getIdentity()->get('id')) &&
 			(
 				($params->get('menu.menu_user_hidden') && MECAccess::allowUserMenu($user, 'hidden', $this->section)) ||
 				($params->get('menu.menu_user_expire') && MECAccess::allowUserMenu($user, 'expire', $this->section)) ||

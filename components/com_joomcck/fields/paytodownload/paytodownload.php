@@ -69,7 +69,7 @@ class JFormFieldCPaytodownload extends CFormFieldUpload implements CFormFieldCom
 
 	public function onBeforeDownload($record, $file_index, $file_id, $return = TRUE)
 	{
-		$user = \Joomla\CMS\Factory::getUser();
+		$user = \Joomla\CMS\Factory::getApplication()->getIdentity();
 
 		if(empty($this->value['pay']['amount']))
 		{

@@ -130,7 +130,7 @@ class JoomcckModelFields extends MModelList
 			foreach ($items as $key => $item)
 			{
 				$file = JPATH_ROOT. '/components/com_joomcck/fields/'.$item->field_type.'/'.$item->field_type.'.php';
-				if(!\Joomla\CMS\Filesystem\File::exists($file))
+				if(!is_file($file))
 				{
 					\Joomla\CMS\Factory::getApplication()->enqueueMessage(\Joomla\CMS\Language\Text::sprintf("CFIELDNOTFOUND", $item->field_type),'warning');
 					continue;
@@ -195,7 +195,7 @@ class JoomcckModelFields extends MModelList
 			if($client == 'list' && !$params[$field->id]->get('core.show_intro', 0)) continue;
 
 			$file = JPATH_ROOT. '/components/com_joomcck/fields/'.$field->field_type.'/'.$field->field_type.'.php';
-			if(!\Joomla\CMS\Filesystem\File::exists($file))
+			if(!is_file($file))
 			{
 				\Joomla\CMS\Factory::getApplication()->enqueueMessage(\Joomla\CMS\Language\Text::sprintf("CFIELDNOTFOUND", $field->field_type),'warning');
 				continue;

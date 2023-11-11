@@ -22,7 +22,7 @@ class  JoomcckTableFiles extends \Joomla\CMS\Table\Table
 
 	public function check()
 	{
-		$user = \Joomla\CMS\Factory::getUser();
+		$user = \Joomla\CMS\Factory::getApplication()->getIdentity();
 		$this->user_id = $user->get('id');
 
 		$this->ctime = \Joomla\CMS\Factory::getDate()->toSql();

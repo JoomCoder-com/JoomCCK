@@ -14,7 +14,7 @@ $directory = $this->directory;
 <?php switch ($this->params->get('params.select_type', 0)):?>
 <?php
 	case 0:
-		$imageFiles = \Joomla\CMS\Filesystem\Folder::files(JPATH_SITE . '/' . $directory, NULL, $this->params->get('params.show_subfolders', 0), TRUE);
+		$imageFiles = \Joomla\Filesystem\Folder::files(JPATH_SITE . '/' . $directory, NULL, $this->params->get('params.show_subfolders', 0), TRUE);
 		$images = array(\Joomla\CMS\HTML\HTMLHelper::_('select.option', '', \Joomla\CMS\Language\Text::_('JOPTION_SELECT_IMAGE')));
 
 		foreach ($imageFiles as $file)

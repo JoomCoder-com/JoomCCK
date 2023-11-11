@@ -21,11 +21,11 @@ class CTmpl
 		$json1 = $config . $prefix . $template[0] . '.' .@$template[1] .  '.json';
 		$json3 = $config . $prefix . $template[0] . '.json';
 
-		if(\Joomla\CMS\Filesystem\File::exists($json1))
+		if(is_file($json1))
 		{
 			$file = file_get_contents($json1);
 		}
-		elseif(\Joomla\CMS\Filesystem\File::exists($json3))
+		elseif(is_file($json3))
 		{
 			$file = file_get_contents($json3);
 		}
@@ -75,13 +75,13 @@ class CTmpl
 		$url = str_replace(array(JPATH_ROOT, DIRECTORY_SEPARATOR), array(JURI::root(TRUE), '/'), $dir);
 		$doc = \Joomla\CMS\Factory::getDocument();
 		$css = $dir.$type.$template[0].'.css';
-		if(\Joomla\CMS\Filesystem\File::exists($css))
+		if(is_file($css))
 		{
 			$doc->addStyleSheet($url.$type. $template[0] . '.css');
 		}
 
 		$js = $dir . $type . $template[0] . '.js';
-		if(\Joomla\CMS\Filesystem\File::exists($js))
+		if(is_file($js))
 		{
 			$doc->addScript($url.$type. $template[0] . '.js');
 		}
@@ -98,13 +98,13 @@ class CTmpl
 		echo $json3.'<br>';
 		echo $json4.'<br>';
 		*/
-		if(\Joomla\CMS\Filesystem\File::exists($json1))
+		if(is_file($json1))
 		{
 	
 			$file = file_get_contents($json1);
 
 		}
-		elseif(\Joomla\CMS\Filesystem\File::exists($json3))
+		elseif(is_file($json3))
 		{
 			$file = file_get_contents($json3);
 		}

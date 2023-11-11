@@ -50,7 +50,7 @@ class JoomcckControllerField extends MControllerAdmin
 
 
 		$field_path =  JPATH_ROOT . '/components/com_joomcck/fields' . DIRECTORY_SEPARATOR . $field_table->field_type . DIRECTORY_SEPARATOR . $field_table->field_type . '.php';
-		if(!\Joomla\CMS\Filesystem\File::exists($field_path))
+		if(!is_file($field_path))
 		{
 			throw new GenericDataException(\Joomla\CMS\Language\Text::_('CERRNOFILEHDD'), 500);
 

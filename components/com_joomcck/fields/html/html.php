@@ -20,7 +20,7 @@ class JFormFieldCHtml extends CFormField
 	{
 		$app = \Joomla\CMS\Factory::getApplication();
 		$doc = \Joomla\CMS\Factory::getDocument();
-		$this->user = \Joomla\CMS\Factory::getUser();
+		$this->user = \Joomla\CMS\Factory::getApplication()->getIdentity();
 		$params = $this->params;
 
 		$this->value = ($this->value ? $this->value : $params->get('params.default_value'));
@@ -186,7 +186,7 @@ class JFormFieldCHtml extends CFormField
 	}
 	private function _filter($value)
 	{
-		$user = \Joomla\CMS\Factory::getUser();
+		$user = \Joomla\CMS\Factory::getApplication()->getIdentity();
 		if (!in_array($this->params->get('params.allow_html', 3), $user->getAuthorisedViewLevels()))
 		{
 			$len = \Joomla\String\StringHelper::strlen($value);

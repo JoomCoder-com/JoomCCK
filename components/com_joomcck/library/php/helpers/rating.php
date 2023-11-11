@@ -32,7 +32,7 @@ class RatingHelp
 	{
 
 
-		$user = \Joomla\CMS\Factory::getUser();
+		$user = \Joomla\CMS\Factory::getApplication()->getIdentity();
 		$isAuthor = $user_id == $user->get('id');
 
 		if($accessLevel == -1)
@@ -134,7 +134,7 @@ class RatingHelp
 
 			$template = \Joomla\CMS\Factory::getApplication()->getTemplate();
 			$path     = JPATH_THEMES . '/' . $template . '/html/com_joomcck/multirating/' . $type->params->get('properties.rate_multirating_tmpl', 'default.php');
-			if(!\Joomla\CMS\Filesystem\File::exists($path))
+			if(!is_file($path))
 			{
 				$path = JPATH_ROOT . '/components/com_joomcck/views/rating_tmpls/multirating/' . $type->params->get('properties.rate_multirating_tmpl', 'default.php');
 			}

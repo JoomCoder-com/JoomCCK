@@ -91,9 +91,9 @@ class METoolSetUserHelper
 			$joomcck_params = \Joomla\CMS\Component\ComponentHelper::getParams('com_joomcck');
 
 			$filetodel = JPATH_ROOT . DIRECTORY_SEPARATOR . $joomcck_params->get('general_upload') . DIRECTORY_SEPARATOR . $subfolder . DIRECTORY_SEPARATOR . $files->fullpath;
-			if(\Joomla\CMS\Filesystem\File::exists($filetodel))
+			if(is_file($filetodel))
 			{
-				\Joomla\CMS\Filesystem\File::delete($filetodel);
+				\Joomla\Filesystem\File::delete($filetodel);
 			}
 		}
 	}

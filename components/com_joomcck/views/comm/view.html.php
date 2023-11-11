@@ -37,7 +37,7 @@ class JoomcckViewComm extends MViewBase
 	{
 		\Joomla\CMS\Factory::getApplication()->input->set('hidemainmenu', true);
 		
-		$user		= \Joomla\CMS\Factory::getUser();
+		$user		= \Joomla\CMS\Factory::getApplication()->getIdentity();
 		$isNew		= ($this->item->id == 0);
 		
 		JToolBarHelper::title(\Joomla\CMS\Language\Text::_('CEDITCOMMENT'), 'comments.png');

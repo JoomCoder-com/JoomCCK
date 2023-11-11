@@ -18,7 +18,7 @@ class JHTMLEmerald
 		$html = array();
 		$attr = '';
 
-		if(!\Joomla\CMS\Filesystem\Folder::exists(JPATH_ADMINISTRATOR . DIRECTORY_SEPARATOR . 'components/com_emerald'))
+		if(!is_dir(JPATH_ADMINISTRATOR . DIRECTORY_SEPARATOR . 'components/com_emerald'))
 		{
 			return '<b>' . \Joomla\CMS\Language\Text::_('Please install JoomSubscription extension') . '</b>';
 		}

@@ -40,7 +40,7 @@ class JFormFieldMeuser extends JFormField
 		$html = array();
 
 // 		$params = \Joomla\CMS\Component\ComponentHelper::getParams('com_joomcck');
-// 		if($params->get('moderator', -1) != \Joomla\CMS\Factory::getUser()->get('id'))
+// 		if($params->get('moderator', -1) != \Joomla\CMS\Factory::getApplication()->getIdentity()->get('id'))
 // 		{
 // 			$user = \Joomla\CMS\Factory::getUser(\Joomla\CMS\Factory::getApplication()->input->getInt('user_id'));
 // 			$html[] =

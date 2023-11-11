@@ -12,7 +12,7 @@ defined('_JEXEC') or die();
 
 ?>
 <?php
-$user	= \Joomla\CMS\Factory::getUser();
+$user	= \Joomla\CMS\Factory::getApplication()->getIdentity();
 $userId	= $user->get('id');
 $colors = array(
 	1 => '721111',

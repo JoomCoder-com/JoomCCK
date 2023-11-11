@@ -190,7 +190,7 @@ class Kunena2Joomcck {
 			}
 
 			$file = JPATH_ROOT . DIRECTORY_SEPARATOR . 'components/com_joomcck/fields/' . $field->field_type . '/' . $field->field_type . '.php';
-			if(!\Joomla\CMS\Filesystem\File::exists($file))
+			if(!is_file($file))
 			{
 				\Joomla\CMS\Factory::getApplication()->enqueueMessage(\Joomla\CMS\Language\Text::sprintf("CFIELDNOTFOUND", $field->field_type),'warning');
 				continue;

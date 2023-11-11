@@ -29,7 +29,7 @@ class JoomcckViewElements extends MViewBase
 		$model = MModelBase::getInstance('Homepages', 'JoomcckModel');
 
 		$this->author = $model->_getauthor();
-		$this->user = \Joomla\CMS\Factory::getUser();
+		$this->user = \Joomla\CMS\Factory::getApplication()->getIdentity();
 		$this->isme = $this->user->get('id') == $this->author;
 
 		$db = \Joomla\CMS\Factory::getDbo();
@@ -46,7 +46,7 @@ class JoomcckViewElements extends MViewBase
 
 	private function _addsale($tpl)
 	{
-		$user = \Joomla\CMS\Factory::getUser();
+		$user = \Joomla\CMS\Factory::getApplication()->getIdentity();
 
 		if(!$user->get('id'))
 		{
@@ -68,7 +68,7 @@ class JoomcckViewElements extends MViewBase
 
 	private function _saler($tpl)
 	{
-		$user = \Joomla\CMS\Factory::getUser();
+		$user = \Joomla\CMS\Factory::getApplication()->getIdentity();
 
 		if(!$user->get('id'))
 		{
@@ -85,7 +85,7 @@ class JoomcckViewElements extends MViewBase
 	}
 	private function _buyer($tpl)
 	{
-		$user = \Joomla\CMS\Factory::getUser();
+		$user = \Joomla\CMS\Factory::getApplication()->getIdentity();
 
 		if(!$user->get('id'))
 		{
@@ -101,7 +101,7 @@ class JoomcckViewElements extends MViewBase
 	}
 	private function _orders($user)
 	{
-		$user = \Joomla\CMS\Factory::getUser();
+		$user = \Joomla\CMS\Factory::getApplication()->getIdentity();
 
 		if(!$user->get('id'))
 		{
@@ -181,7 +181,7 @@ class JoomcckViewElements extends MViewBase
 		$field_table = \Joomla\CMS\Table\Table::getInstance('Field', 'JoomcckTable');
 		$field_table->load($id);
 		$field_path =  JPATH_ROOT . '/components/com_joomcck/fields' . DIRECTORY_SEPARATOR . $field_table->field_type . DIRECTORY_SEPARATOR . $field_table->field_type . '.php';
-		if(! \Joomla\CMS\Filesystem\File::exists($field_path))
+		if(! is_file($field_path))
 		{
 			throw new Exception( \Joomla\CMS\Language\Text::_('AJAX_FIELDNOTFOUND'),500);
 
@@ -239,7 +239,7 @@ class JoomcckViewElements extends MViewBase
 	{
 		$app = \Joomla\CMS\Factory::getApplication();
 		$doc = \Joomla\CMS\Factory::getDocument();
-		$user = \Joomla\CMS\Factory::getUser();
+		$user = \Joomla\CMS\Factory::getApplication()->getIdentity();
 		$model = MModelBase::getInstance('Records', 'JoomcckModel');
 		$state_limit = \Joomla\CMS\Factory::getApplication()->getUserState('global.list.limit');
 		$app->input->set('limit', 10);
@@ -362,7 +362,7 @@ class JoomcckViewElements extends MViewBase
 
 	private function _products($tpl)
 	{
-		$user = \Joomla\CMS\Factory::getUser();
+		$user = \Joomla\CMS\Factory::getApplication()->getIdentity();
 
 		if(!$user->get('id'))
 		{

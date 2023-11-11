@@ -25,7 +25,7 @@ class JoomcckModelModerators extends MModelList
 
 	public function getListQuery()
 	{
-		$user = \Joomla\CMS\Factory::getUser();
+		$user = \Joomla\CMS\Factory::getApplication()->getIdentity();
 
 		$db    = $this->getDbo();
 		$query = $db->getQuery(TRUE);
@@ -79,7 +79,7 @@ class JoomcckModelModerators extends MModelList
 
 		$db->setQuery($sql);
 		$sections = $db->loadObjectList();
-		$user_id  = \Joomla\CMS\Factory::getUser()->get('id');
+		$user_id  = \Joomla\CMS\Factory::getApplication()->getIdentity()->get('id');
 		foreach($sections as $key => $value)
 		{
 			if(!MECAccess::isModerator($user_id, $value->value))

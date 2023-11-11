@@ -338,19 +338,19 @@ class MFormHelper
 		$out = array();
 
 		$gateways_path = JPATH_COMPONENT . '/library/gateways/';
-		$gateways      = \Joomla\CMS\Filesystem\Folder::folders($gateways_path);
+		$gateways      = \Joomla\Filesystem\Folder::folders($gateways_path);
 
 		foreach($gateways as $gateway)
 		{
 			$file = $gateways_path . $gateway . DIRECTORY_SEPARATOR . $gateway . '.xml';
-			if(!\Joomla\CMS\Filesystem\File::exists($file))
+			if(!is_file($file))
 				continue;
 
 			$lang = \Joomla\CMS\Factory::getLanguage();
 			$tag  = $lang->getTag();
 			if($tag != 'en-GB')
 			{
-				if(!\Joomla\CMS\Filesystem\File::exists(JPATH_BASE . "/language/{$tag}/{$tag}.com_emerald_gateway_{$gateway}.ini"))
+				if(!is_file(JPATH_BASE . "/language/{$tag}/{$tag}.com_emerald_gateway_{$gateway}.ini"))
 				{
 					$tag == 'en-GB';
 				}
@@ -381,7 +381,7 @@ class MFormHelper
 	}
 
 	public static function getFieldParams($file, $fid, $value, $root = 'form') {
-		if(!\Joomla\CMS\Filesystem\File::exists($file))
+		if(!is_file($file))
 		{
 			return "File not found: {$file}";
 		}

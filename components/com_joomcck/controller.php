@@ -55,7 +55,7 @@ class JoomcckController extends MControllerBase
                     'cats','auditlog','notifications','import'))
 		)
 		{
-			if(!\Joomla\CMS\Factory::getUser()->get('id'))
+			if(!\Joomla\CMS\Factory::getApplication()->getIdentity()->get('id'))
 			{
 				$app->enqueueMessage(\Joomla\CMS\Language\Text::_('CPLEASELOGIN'),'warning');
 				$app->setHeader('status', 403, true);
@@ -80,7 +80,7 @@ class JoomcckController extends MControllerBase
 			$view   = $this->input->getCmd('view', 'default');
 			$layout = $this->input->getCmd('layout', 'default');
 
-			if(\Joomla\CMS\Filesystem\File::exists(JPATH_ROOT . "/components/com_joomcck/views/{$view}/tmpl/{$prefix}-{$layout}.php"))
+			if(is_file(JPATH_ROOT . "/components/com_joomcck/views/{$view}/tmpl/{$prefix}-{$layout}.php"))
 			{
 				$this->input->set('layout', $prefix.'-'.$layout);
 			}

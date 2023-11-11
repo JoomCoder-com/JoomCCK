@@ -118,9 +118,9 @@ class JoomcckTableType extends \Joomla\CMS\Table\Table
 						$subfolder = $field_params->get('params.subfolder', $field_table->field_type);
 						$dest = JPATH_ROOT. DIRECTORY_SEPARATOR .$params->get('general_upload'). DIRECTORY_SEPARATOR .$subfolder. DIRECTORY_SEPARATOR . $file->fullpath;
 
-						if(\Joomla\CMS\Filesystem\File::exists($dest))
+						if(is_file($dest))
 						{
-							\Joomla\CMS\Filesystem\File::delete($dest);
+							\Joomla\Filesystem\File::delete($dest);
 						}
 					}
 
@@ -149,7 +149,7 @@ class JoomcckTableType extends \Joomla\CMS\Table\Table
 
 		if(trim($this->user_id) == '')
 		{
-			$this->user_id = (int)\Joomla\CMS\Factory::getUser()->get('id');
+			$this->user_id = (int)\Joomla\CMS\Factory::getApplication()->getIdentity()->get('id');
 		}
 
 		return true;

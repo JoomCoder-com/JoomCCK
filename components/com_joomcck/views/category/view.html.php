@@ -25,7 +25,7 @@ class JoomcckViewCategory extends MViewBase
         
         $this->item = $model->getItem();
         $this->form = $model->getForm();
-        $this->user = \Joomla\CMS\Factory::getUser();
+        $this->user = \Joomla\CMS\Factory::getApplication()->getIdentity();
         
         parent::display($tpl);
     }

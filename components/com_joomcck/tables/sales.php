@@ -64,7 +64,7 @@ class JoomcckTableSales extends \Joomla\CMS\Table\Table
 			return FALSE;
 		}
 		
-		$u = \Joomla\CMS\Factory::getUser();
+		$u = \Joomla\CMS\Factory::getApplication()->getIdentity();
 		
 		if($u->get('id') == $user_id)
 		{
@@ -120,7 +120,7 @@ class JoomcckTableSales extends \Joomla\CMS\Table\Table
 		}
 		if(!$this->saler_id)
 		{
-			$this->saler_id = \Joomla\CMS\Factory::getUser()->get('id');
+			$this->saler_id = \Joomla\CMS\Factory::getApplication()->getIdentity()->get('id');
 		}
 		
 		$this->name = $record->title;

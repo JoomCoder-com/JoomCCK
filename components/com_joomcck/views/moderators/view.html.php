@@ -15,7 +15,7 @@ class JoomcckViewModerators extends MViewBase
 {
 	function display($tpl = null)
 	{
-		$user_id = \Joomla\CMS\Factory::getUser()->get('id');
+		$user_id = \Joomla\CMS\Factory::getApplication()->getIdentity()->get('id');
 		$this->state = $this->get('State');
 		$params = \Joomla\CMS\Component\ComponentHelper::getParams('com_joomcck');
 
@@ -42,7 +42,7 @@ class JoomcckViewModerators extends MViewBase
 			'all'      => 0
 		)), 'value', 'text', $this->state->get('filter.state'), TRUE));
 
-		if($params->get('moderator', - 1) == \Joomla\CMS\Factory::getUser()->get('id'))
+		if($params->get('moderator', - 1) == \Joomla\CMS\Factory::getApplication()->getIdentity()->get('id'))
 		{
 			$this->addFilter(\Joomla\CMS\Language\Text::_('CSELECTSECTION'), 'filter_section', \Joomla\CMS\HTML\HTMLHelper::_('select.options', $this->filter_sections, 'value', 'text', $this->state->get('filter.section'), TRUE));
 		}

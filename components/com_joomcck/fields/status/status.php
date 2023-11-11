@@ -24,7 +24,7 @@ class JFormFieldCStatus extends CFormField
 		}
 		$params = $this->params;
 
-		$this->user    = \Joomla\CMS\Factory::getUser();
+		$this->user    = \Joomla\CMS\Factory::getApplication()->getIdentity();
 		$this->default = !$this->value ? $params->get('params.default', 1) : $this->value;
 
 		$statuses    = $color = array();
@@ -171,7 +171,7 @@ class JFormFieldCStatus extends CFormField
 
 	public function onRenderFull($record, $type, $section)
 	{
-		$user   = \Joomla\CMS\Factory::getUser();
+		$user   = \Joomla\CMS\Factory::getApplication()->getIdentity();
 		$params = $this->params;
 		if($params->get('params.moderator', 3) && in_array($params->get('params.moderator', 3), $user->getAuthorisedViewLevels()))
 		{
@@ -207,7 +207,7 @@ class JFormFieldCStatus extends CFormField
 			return;
 		}
 		$this->record = $record;
-		$this->user   = \Joomla\CMS\Factory::getUser();
+		$this->user   = \Joomla\CMS\Factory::getApplication()->getIdentity();
 		$params       = $this->params;
 		$out          = array();
 
@@ -312,7 +312,7 @@ class JFormFieldCStatus extends CFormField
 		}
 		$record_id  = $post['record_id'];
 		$section_id = $post['section_id'];
-		$user       = \Joomla\CMS\Factory::getUser();
+		$user       = \Joomla\CMS\Factory::getApplication()->getIdentity();
 
 		$table_rec = \Joomla\CMS\Table\Table::getInstance('Record', 'JoomcckTable');
 		$table_rec->load($record_id);
@@ -424,7 +424,7 @@ class JFormFieldCStatus extends CFormField
 
 	public function onComment($record, $section)
 	{
-		$user   = \Joomla\CMS\Factory::getUser();
+		$user   = \Joomla\CMS\Factory::getApplication()->getIdentity();
 		$params = $this->params;
 		if($params->get('params.moderator', 3) && in_array($params->get('params.moderator', 3), $user->getAuthorisedViewLevels()))
 		{
@@ -460,7 +460,7 @@ class JFormFieldCStatus extends CFormField
 		}
 
 		$app  = \Joomla\CMS\Factory::getApplication();
-		$user = \Joomla\CMS\Factory::getUser();
+		$user = \Joomla\CMS\Factory::getApplication()->getIdentity();
 
 		if(in_array($this->params->get('params.moderator', 3), $user->getAuthorisedViewLevels()))
 		{
@@ -600,7 +600,7 @@ class JFormFieldCStatus extends CFormField
 
 	private function _runSql($to, $table_rec, $record_values_id = NULL)
 	{
-		$user = \Joomla\CMS\Factory::getUser();
+		$user = \Joomla\CMS\Factory::getApplication()->getIdentity();
 		if(!$record_values_id)
 		{
 			$table = \Joomla\CMS\Table\Table::getInstance('Record_values', 'JoomcckTable');

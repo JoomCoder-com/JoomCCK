@@ -211,15 +211,15 @@ class JoomcckModelItem extends MModelAdmin
 							$date = date($params->get('folder_format'), $time);
 							$dest = JPATH_ROOT. DIRECTORY_SEPARATOR .$params->get('general_upload'). DIRECTORY_SEPARATOR .$subfolder. DIRECTORY_SEPARATOR .$date.DIRECTORY_SEPARATOR;
 
-							if(!\Joomla\CMS\Filesystem\Folder::exists($dest))
+							if(!is_dir($dest))
 							{
-								\Joomla\CMS\Filesystem\Folder::create($dest, 755);
+								\Joomla\Filesystem\Folder::create($dest, 755);
 							}
 							$file['id'] = null;
 							$parts = explode('_', $file['filename']);
 							$file['filename'] = $time.'_'.$parts[1];
 
-							$copied = \Joomla\CMS\Filesystem\File::copy(JPATH_ROOT. DIRECTORY_SEPARATOR .$params->get('general_upload'). DIRECTORY_SEPARATOR .$subfolder. DIRECTORY_SEPARATOR .$file['fullpath'], $dest.$file['filename']);
+							$copied = \Joomla\Filesystem\File::copy(JPATH_ROOT. DIRECTORY_SEPARATOR .$params->get('general_upload'). DIRECTORY_SEPARATOR .$subfolder. DIRECTORY_SEPARATOR .$file['fullpath'], $dest.$file['filename']);
 
 							$root = \Joomla\CMS\Filesystem\Path::clean(JPATH_ROOT. DIRECTORY_SEPARATOR .$params->get('general_upload'));
 							$url = str_replace(JPATH_ROOT, '', $root);

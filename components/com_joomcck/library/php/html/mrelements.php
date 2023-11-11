@@ -229,10 +229,10 @@ class JHTMLMrelements
 			foreach($files as $file)
 			{
 				$img = FALSE;
-				$ext = \Joomla\CMS\Filesystem\File::getExt($file['filename']);
+				$ext = \Joomla\Filesystem\File::getExt($file['filename']);
 				if(in_array($ext, array('png', 'jpg', 'jpeg', 'gif', 'bmp')))
 				{
-					$img = CImgHelper::getThumb(JPATH_ROOT . '/' . $path . $file['fullpath'], 50, 50, 'uploader', \Joomla\CMS\Factory::getUser()->get('id'), ['mode' => 1]);
+					$img = CImgHelper::getThumb(JPATH_ROOT . '/' . $path . $file['fullpath'], 50, 50, 'uploader', \Joomla\CMS\Factory::getApplication()->getIdentity()->get('id'), ['mode' => 1]);
 				}
 				$t[] = '
 				<tr class="template-download fade in">

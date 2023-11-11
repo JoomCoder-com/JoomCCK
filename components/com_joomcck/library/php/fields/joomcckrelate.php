@@ -34,7 +34,7 @@ class  CFormFieldRelate extends CFormField
 	protected function _render_input($type, $name, $section_id, $types, $multi = TRUE)
 	{
 		$db      = \Joomla\CMS\Factory::getDbo();
-		$user    = \Joomla\CMS\Factory::getUser();
+		$user    = \Joomla\CMS\Factory::getApplication()->getIdentity();
 		$app     = \Joomla\CMS\Factory::getApplication();
 		$section = ItemsStore::getSection($section_id);
 
@@ -304,9 +304,9 @@ class  CFormFieldRelate extends CFormField
 
 		$doTask = JURI::root(TRUE) . '/index.php?option=com_joomcck&view=elements&layout=records&tmpl=component&section_id=' .
 			$section_id . '&filter_type=' . $type_id . '&mode=form&field_id=' . $this->id;
-		if(!in_array($this->params->get('params.strict_to_user'), \Joomla\CMS\Factory::getUser()->getAuthorisedViewLevels()))
+		if(!in_array($this->params->get('params.strict_to_user'), \Joomla\CMS\Factory::getApplication()->getIdentity()->getAuthorisedViewLevels()))
 		{
-			$doTask .= '&user_id=' . \Joomla\CMS\Factory::getUser()->get('id', 1);
+			$doTask .= '&user_id=' . \Joomla\CMS\Factory::getApplication()->getIdentity()->get('id', 1);
 		}
 		ob_start();
 		?>
@@ -459,15 +459,15 @@ class  CFormFieldRelate extends CFormField
 
 		$this->show_btn_new = $this->show_btn_exist = $this->show_btn_all = NULL;
 
-		if(in_array($this->params->get('params.add_more_access'), \Joomla\CMS\Factory::getUser()->getAuthorisedViewLevels()))
+		if(in_array($this->params->get('params.add_more_access'), \Joomla\CMS\Factory::getApplication()->getIdentity()->getAuthorisedViewLevels()))
 		{
 			$this->show_btn_new = TRUE;
 		}
-		if($this->params->get('params.add_more_access_auth') && (\Joomla\CMS\Factory::getUser()->get('id') == $record->user_id && $record->user_id))
+		if($this->params->get('params.add_more_access_auth') && (\Joomla\CMS\Factory::getApplication()->getIdentity()->get('id') == $record->user_id && $record->user_id))
 		{
 			$this->show_btn_new = TRUE;
 		}
-		if($this->params->get('params.add_more_access') == '-1' && \Joomla\CMS\Factory::getUser()->get('id') == $record->user_id && $record->user_id)
+		if($this->params->get('params.add_more_access') == '-1' && \Joomla\CMS\Factory::getApplication()->getIdentity()->get('id') == $record->user_id && $record->user_id)
 		{
 			$this->show_btn_new = TRUE;
 		}
@@ -476,15 +476,15 @@ class  CFormFieldRelate extends CFormField
 			$this->show_btn_new = NULL;
 		}
 
-		if(in_array($this->params->get('params.add_existing'), \Joomla\CMS\Factory::getUser()->getAuthorisedViewLevels()))
+		if(in_array($this->params->get('params.add_existing'), \Joomla\CMS\Factory::getApplication()->getIdentity()->getAuthorisedViewLevels()))
 		{
 			$this->show_btn_exist = TRUE;
 		}
-		if($this->params->get('params.add_existing_auth') && (\Joomla\CMS\Factory::getUser()->get('id') == $record->user_id && $record->user_id))
+		if($this->params->get('params.add_existing_auth') && (\Joomla\CMS\Factory::getApplication()->getIdentity()->get('id') == $record->user_id && $record->user_id))
 		{
 			$this->show_btn_exist = TRUE;
 		}
-		if($this->params->get('params.add_existing') == '-1' && \Joomla\CMS\Factory::getUser()->get('id') == $record->user_id && $record->user_id)
+		if($this->params->get('params.add_existing') == '-1' && \Joomla\CMS\Factory::getApplication()->getIdentity()->get('id') == $record->user_id && $record->user_id)
 		{
 			$this->show_btn_exist = TRUE;
 		}
@@ -512,7 +512,7 @@ class  CFormFieldRelate extends CFormField
 		}
 
 
-		if($this->content['html'] && ($this->content['total'] >= $this->params->get('params.limit_' . $client, 10)) && in_array($this->params->get('params.show_list_all'), \Joomla\CMS\Factory::getUser()->getAuthorisedViewLevels()) && $this->params->get('params.show_list_all_' . $client))
+		if($this->content['html'] && ($this->content['total'] >= $this->params->get('params.limit_' . $client, 10)) && in_array($this->params->get('params.show_list_all'), \Joomla\CMS\Factory::getApplication()->getIdentity()->getAuthorisedViewLevels()) && $this->params->get('params.show_list_all_' . $client))
 		{
 			// comparability with easysocial
 			$file = JPATH_ADMINISTRATOR . '/components/com_joomcck/tables/field.php';
@@ -675,7 +675,7 @@ class  CFormFieldRelate extends CFormField
 
 		$save['field_label'] = $field->label;
 		$save['field_key'] 	= $field->key;
-		$save['user_id'] 	= \Joomla\CMS\Factory::getUser()->get('id');
+		$save['user_id'] 	= \Joomla\CMS\Factory::getApplication()->getIdentity()->get('id');
 		$save['section_id'] = $this->_getChildSectionId($save['field_id']);
 		$save['type_id'] 	= ($params['field'] == 'child' ?
 			$this->type_id : MModelBase::getInstance('Tfields', 'JoomcckModel')->getFieldTypeId($save['field_id']));

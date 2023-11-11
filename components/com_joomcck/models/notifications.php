@@ -38,7 +38,7 @@ class JoomcckModelnotifications extends MModelList
 
 	public function getListQuery()
 	{
-		$user = \Joomla\CMS\Factory::getUser();
+		$user = \Joomla\CMS\Factory::getApplication()->getIdentity();
 		$db = $this->getDbo();
 		
 		$section_id = $this->state->get('notifications.section_id');

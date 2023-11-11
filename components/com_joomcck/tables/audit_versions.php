@@ -25,8 +25,8 @@ class JoomcckTableAudit_versions extends \Joomla\CMS\Table\Table
 		$this->record_id = $record_id;
 		$this->ip = $_SERVER['REMOTE_ADDR'];
 		$this->ctime = \Joomla\CMS\Factory::getDate()->toSql();
-		$this->user_id = \Joomla\CMS\Factory::getUser()->get('id', 0);
-		$this->username = \Joomla\CMS\Factory::getUser()->get('username');
+		$this->user_id = \Joomla\CMS\Factory::getApplication()->getIdentity()->get('id', 0);
+		$this->username = \Joomla\CMS\Factory::getApplication()->getIdentity()->get('username');
 
 		$this->_db->setQuery('SELECT MAX(`version`) FROM #__js_res_audit_versions WHERE record_id = '.$this->record_id);
 		$this->version = ($this->_db->loadResult() + 1);

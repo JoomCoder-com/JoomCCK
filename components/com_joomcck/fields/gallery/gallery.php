@@ -412,7 +412,7 @@ class JFormFieldCGallery extends CFormFieldUpload
 			return;
 		}
 
-		$this->user = \Joomla\CMS\Factory::getUser();
+		$this->user = \Joomla\CMS\Factory::getApplication()->getIdentity();
 
 		$this->_getFile($this->value[$post['image_index']]['id']);
 		$this->_getRecord($post['record_id']);
@@ -480,7 +480,7 @@ class JFormFieldCGallery extends CFormFieldUpload
 				$com             = array();
 				$author_delete   = $this->params->get('params.comment_author', 0);
 				$r_author_delete = $this->params->get('params.record_author', 0);
-				$user            = \Joomla\CMS\Factory::getUser();
+				$user            = \Joomla\CMS\Factory::getApplication()->getIdentity();
 				$date            = \Joomla\CMS\Factory::getDate();
 				$com['ctime']    = $date->toSql();
 				$com['username'] = $user->get('username', 'guest');
@@ -544,7 +544,7 @@ class JFormFieldCGallery extends CFormFieldUpload
 			return;
 		}
 
-		$user = \Joomla\CMS\Factory::getUser();
+		$user = \Joomla\CMS\Factory::getApplication()->getIdentity();
 
 		if(!$user->get('id'))
 		{
@@ -666,7 +666,7 @@ class JFormFieldCGallery extends CFormFieldUpload
 		{
 			$author_delete   = $this->params->get('params.comment_author', 0);
 			$r_author_delete = $this->params->get('params.record_author', 0);
-			$user            = \Joomla\CMS\Factory::getUser();
+			$user            = \Joomla\CMS\Factory::getApplication()->getIdentity();
 
 			foreach($comments as $key => $comment)
 			{
@@ -774,7 +774,7 @@ class JFormFieldCGallery extends CFormFieldUpload
 
 		$data = new \Joomla\Registry\Registry($this->file->params);
 		// 	    $data->loadJSON($this->file->params);
-		$user = \Joomla\CMS\Factory::getUser();
+		$user = \Joomla\CMS\Factory::getApplication()->getIdentity();
 		$td   = $out = array();
 
 		$td[\Joomla\CMS\Language\Text::_('G_SIZE')] = $this->file->width . 'x' . $this->file->height . ' (' . HTMLFormatHelper::formatSize($this->file->size) . ')';
@@ -856,7 +856,7 @@ class JFormFieldCGallery extends CFormFieldUpload
 
 	private function _getDownloadLink()
 	{
-		$user = \Joomla\CMS\Factory::getUser();
+		$user = \Joomla\CMS\Factory::getApplication()->getIdentity();
 		if(!in_array($this->params->get('params.allow_download', 1), $user->getAuthorisedViewLevels()))
 		{
 			return '';
@@ -915,11 +915,11 @@ class JFormFieldCGallery extends CFormFieldUpload
 		}
 
 		$this->path = JPATH_ROOT . DIRECTORY_SEPARATOR . \Joomla\CMS\Component\ComponentHelper::getParams('com_joomcck')->get('general_upload') . DIRECTORY_SEPARATOR . 'thumbs_cache' . DIRECTORY_SEPARATOR;
-		if(!\Joomla\CMS\Filesystem\Folder::exists($this->path))
+		if(!is_dir($this->path))
 		{
-			\Joomla\CMS\Filesystem\Folder::create($this->path, 0755);
+			\Joomla\Filesystem\Folder::create($this->path, 0755);
 			$index = '<html><body></body></html>';
-			\Joomla\CMS\Filesystem\File::write($this->path . DIRECTORY_SEPARATOR . 'index.html', $index);
+			\Joomla\Filesystem\File::write($this->path . DIRECTORY_SEPARATOR . 'index.html', $index);
 		}
 
 		$root      = \Joomla\CMS\Filesystem\Path::clean(\Joomla\CMS\Component\ComponentHelper::getParams('com_joomcck')->get('general_upload'));

@@ -554,7 +554,7 @@ class JHTMLTags
 	{
 		$model = MModelBase::getInstance('Article', 'ResModel');
 		$tags = $model->getTags($record->id);
-		$user = \Joomla\CMS\Factory::getUser();
+		$user = \Joomla\CMS\Factory::getApplication()->getIdentity();
 		$db = \Joomla\CMS\Factory::getDBO();
 		$tabs = JPane::getInstance('tabs');
 
@@ -726,7 +726,7 @@ class JHTMLTags
 		$id = $item->id;
 		$db = \Joomla\CMS\Factory::getDBO();
 		$url = \Joomla\CMS\Uri\Uri::getInstance();
-		$user = \Joomla\CMS\Factory::getUser();
+		$user = \Joomla\CMS\Factory::getApplication()->getIdentity();
 		$section_id ? NULL : $section_id = \Joomla\CMS\Factory::getApplication()->input->getInt('category_id',0);
 
 		$sql = "SELECT t.id, t.tag  FROM #__js_res_tags_history AS h

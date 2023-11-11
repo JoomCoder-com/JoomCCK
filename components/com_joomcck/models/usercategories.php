@@ -48,7 +48,7 @@ class JoomcckModelUsercategories extends MModelList
 			$this->setError(\Joomla\CMS\Language\Text::_('CNOSECTION'));
 			return FALSE;
 		}
-		$user = \Joomla\CMS\Factory::getUser();
+		$user = \Joomla\CMS\Factory::getApplication()->getIdentity();
 		
 		$db = $this->getDbo();
 		$query = $db->getQuery(true);

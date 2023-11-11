@@ -63,7 +63,7 @@ if ($params->get('unsaved_articles')) {
 }
 
 if ($params->get('unlinked')) {
-    $files_in_folder = \Joomla\CMS\Filesystem\Folder::files(JPATH_ROOT . DIRECTORY_SEPARATOR . $cp->get('general_upload'), '[0-9]{10}_[a-zA-Z0-9]{32}\..', true, true);
+    $files_in_folder = \Joomla\Filesystem\Folder::files(JPATH_ROOT . DIRECTORY_SEPARATOR . $cp->get('general_upload'), '[0-9]{10}_[a-zA-Z0-9]{32}\..', true, true);
     settype($files_in_folder, 'array');
 
     $sql = "SELECT filename FROM #__js_res_files";
@@ -78,7 +78,7 @@ if ($params->get('unlinked')) {
         $file_names[basename($file)] = basename($file);
         if (!in_array(basename($file), $files_in_db)) {
             $temp_size = filesize($file);
-            if (\Joomla\CMS\Filesystem\File::delete($file)) {
+            if (\Joomla\Filesystem\File::delete($file)) {
                 $size += $temp_size;
                 $lost_files++;
                 unset($file_names[basename($file)]);
@@ -108,8 +108,8 @@ function _deleteFiles($files)
         $size += $file->size;
         $to_delete = JPATH_ROOT . DS . $cp->get('general_upload') . DS . $subfolder . DS . $file->fullpath;
 
-        if (\Joomla\CMS\Filesystem\File::exists($to_delete)) {
-            if (\Joomla\CMS\Filesystem\File::delete($to_delete)) {
+        if (is_file($to_delete)) {
+            if (\Joomla\Filesystem\File::delete($to_delete)) {
                 $files_ids[] = $file->id;
             }
         } else {

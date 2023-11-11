@@ -170,7 +170,7 @@ abstract class MModelAdmin extends MModelForm
 		$done = false;
 
 		// Set some needed variables.
-		$this->user = \Joomla\CMS\Factory::getUser();
+		$this->user = \Joomla\CMS\Factory::getApplication()->getIdentity();
 		$this->table = $this->getTable();
 		$this->tableClassName = get_class($this->table);
 		$this->contentType = new JUcmType;
@@ -278,7 +278,7 @@ abstract class MModelAdmin extends MModelForm
 		if (empty($this->batchSet))
 		{
 			// Set some needed variables.
-			$this->user = \Joomla\CMS\Factory::getUser();
+			$this->user = \Joomla\CMS\Factory::getApplication()->getIdentity();
 			$this->table = $this->getTable();
 			$this->tableClassName = get_class($this->table);
 			$this->contentType = new JUcmType;
@@ -335,7 +335,7 @@ abstract class MModelAdmin extends MModelForm
 		if (empty($this->batchSet))
 		{
 			// Set some needed variables.
-			$this->user = \Joomla\CMS\Factory::getUser();
+			$this->user = \Joomla\CMS\Factory::getApplication()->getIdentity();
 			$this->table = $this->getTable();
 			$this->tableClassName = get_class($this->table);
 			$this->contentType = new JUcmType;
@@ -439,7 +439,7 @@ abstract class MModelAdmin extends MModelForm
 		if (empty($this->batchSet))
 		{
 			// Set some needed variables.
-			$this->user = \Joomla\CMS\Factory::getUser();
+			$this->user = \Joomla\CMS\Factory::getApplication()->getIdentity();
 			$this->table = $this->getTable();
 			$this->tableClassName = get_class($this->table);
 			$this->contentType = new JUcmType;
@@ -496,7 +496,7 @@ abstract class MModelAdmin extends MModelForm
 		if (empty($this->batchSet))
 		{
 			// Set some needed variables.
-			$this->user = \Joomla\CMS\Factory::getUser();
+			$this->user = \Joomla\CMS\Factory::getApplication()->getIdentity();
 			$this->table = $this->getTable();
 			$this->tableClassName = get_class($this->table);
 			$this->contentType = new JUcmType;
@@ -583,7 +583,7 @@ abstract class MModelAdmin extends MModelForm
 	protected function batchTag($value, $pks, $contexts)
 	{
 		// Set the variables
-		$user = \Joomla\CMS\Factory::getUser();
+		$user = \Joomla\CMS\Factory::getApplication()->getIdentity();
 		$table = $this->getTable();
 
 		foreach ($pks as $pk)
@@ -632,7 +632,7 @@ abstract class MModelAdmin extends MModelForm
 	 */
 	protected function canDelete($record)
 	{
-		$user = \Joomla\CMS\Factory::getUser();
+		$user = \Joomla\CMS\Factory::getApplication()->getIdentity();
 
 		return $user->authorise('core.delete', $this->option);
 	}
@@ -648,7 +648,7 @@ abstract class MModelAdmin extends MModelForm
 	 */
 	protected function canEditState($record)
 	{
-		$user = \Joomla\CMS\Factory::getUser();
+		$user = \Joomla\CMS\Factory::getApplication()->getIdentity();
 
 		return $user->authorise('core.edit.state', $this->option);
 	}
@@ -923,7 +923,7 @@ abstract class MModelAdmin extends MModelForm
 	public function publish(&$pks, $value = 1)
 	{
 		$dispatcher = \Joomla\CMS\Factory::getApplication();
-		$user = \Joomla\CMS\Factory::getUser();
+		$user = \Joomla\CMS\Factory::getApplication()->getIdentity();
 		$table = $this->getTable();
 		$pks = (array) $pks;
 

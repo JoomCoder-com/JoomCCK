@@ -29,7 +29,7 @@ class JoomcckControllerImport extends MControllerAdmin
 
 	public function import()
 	{
-		$user   = \Joomla\CMS\Factory::getUser();
+		$user   = \Joomla\CMS\Factory::getApplication()->getIdentity();
 		$app    = \Joomla\CMS\Factory::getApplication();
 		$params = $this->input->get('import', array(), 'array');
 
@@ -152,7 +152,7 @@ class JoomcckControllerImport extends MControllerAdmin
 
 				if($row->get($params->get('field.ctime')) || $isNew) $data['ctime']   = \Joomla\CMS\Date\Date::getInstance($row->get($params->get('field.ctime', 'now')))->toSql();
 				if($row->get($params->get('field.mtime')) || $isNew) $data['mtime']   = \Joomla\CMS\Date\Date::getInstance($row->get($params->get('field.mtime', 'now')))->toSql();
-				if($row->get($params->get('field.user_id')) || $isNew) $data['user_id'] = $row->get($params->get('field.user_id'), \Joomla\CMS\Factory::getUser()->get('id'));
+				if($row->get($params->get('field.user_id')) || $isNew) $data['user_id'] = $row->get($params->get('field.user_id'), \Joomla\CMS\Factory::getApplication()->getIdentity()->get('id'));
 				if($row->get($params->get('field.access')) || $isNew) $data['access']  = $row->get($params->get('field.access'));
 				if($row->get($params->get('field.extime')) || $isNew) $data['extime']  = $row->get($params->get('field.extime'));
 
@@ -340,12 +340,12 @@ class JoomcckControllerImport extends MControllerAdmin
 		$this->key = $this->input->get('json');
 		$file      = $this->input->getString('file');
 
-		$ext        = strtolower(\Joomla\CMS\Filesystem\File::getExt($file));
+		$ext        = strtolower(\Joomla\Filesystem\File::getExt($file));
 		$this->json = JPATH_ROOT . '/tmp/' . $this->key . '.json';
 
 		$upload = JPATH_ROOT . '/tmp/import_uploads/' . urldecode($file);
 
-		if(!\Joomla\CMS\Filesystem\File::exists($upload))
+		if(!is_file($upload))
 		{
 			$this->_error('CIMPORTCANNOTFINDFILE');
 		}
@@ -368,9 +368,9 @@ class JoomcckControllerImport extends MControllerAdmin
 			$dir       = JPATH_ROOT . '/tmp/import_extract/' . $this->key;
 			$this->dir = $dir;
 
-			if(!\Joomla\CMS\Filesystem\Folder::exists($dir))
+			if(!is_dir($dir))
 			{
-				\Joomla\CMS\Filesystem\Folder::create($dir);
+				\Joomla\Filesystem\Folder::create($dir);
 			}
 
 			if(!JArchive::extract($upload, $dir))
@@ -378,7 +378,7 @@ class JoomcckControllerImport extends MControllerAdmin
 				$this->_error('CIMPORTCANNOTEXTRACT');
 			}
 
-			$files = \Joomla\CMS\Filesystem\Folder::files($dir, '\.(csv|json)$', TRUE, TRUE);
+			$files = \Joomla\Filesystem\Folder::files($dir, '\.(csv|json)$', TRUE, TRUE);
 			if(count($files) == 0)
 			{
 				$this->_error('CIMPORTNOFOUND');
@@ -392,7 +392,7 @@ class JoomcckControllerImport extends MControllerAdmin
 		}
 
 		$this->_msg(20, 'CIMPORTPARCE');
-		if(!\Joomla\CMS\Filesystem\File::exists($upload))
+		if(!is_file($upload))
 		{
 			$this->_error('CIMPORTCANNOTFINDFILE');
 		}
@@ -403,7 +403,7 @@ class JoomcckControllerImport extends MControllerAdmin
 		$this->db->setQuery("DELETE FROM `#__js_res_import_rows` WHERE `ctime` < NOW() - INTERVAL 1 DAY OR `import` = {$this->key}");
 		$this->db->execute();
 
-		$ext = strtolower(\Joomla\CMS\Filesystem\File::getExt($upload));
+		$ext = strtolower(\Joomla\Filesystem\File::getExt($upload));
 		if($ext == 'csv')
 		{
 			$this->_load_csv($upload, $this->input->get('delimiter', ','));
@@ -487,9 +487,9 @@ class JoomcckControllerImport extends MControllerAdmin
 
 		\Joomla\CMS\Factory::getSession()->set('importprocess', 0);
 
-		if(!\Joomla\CMS\Filesystem\Folder::exists($options['upload_dir']))
+		if(!is_dir($options['upload_dir']))
 		{
-			\Joomla\CMS\Filesystem\Folder::create($options['upload_dir']);
+			\Joomla\Filesystem\Folder::create($options['upload_dir']);
 		}
 
 		$upload = new UploadHandler($options);
@@ -501,9 +501,9 @@ class JoomcckControllerImport extends MControllerAdmin
 	{
 		if(!empty($this->dir))
 		{
-			\Joomla\CMS\Filesystem\Folder::delete($this->dir);
+			\Joomla\Filesystem\Folder::delete($this->dir);
 		}
-		\Joomla\CMS\Filesystem\File::write($this->json, json_encode(array(
+		\Joomla\Filesystem\File::write($this->json, json_encode(array(
 			'error' => \Joomla\CMS\Language\Text::_($msg)
 		)));
 		\Joomla\CMS\Factory::getApplication()->close();
@@ -511,7 +511,7 @@ class JoomcckControllerImport extends MControllerAdmin
 
 	private function _msg($stat, $msg)
 	{
-		\Joomla\CMS\Filesystem\File::write($this->json, json_encode(array(
+		\Joomla\Filesystem\File::write($this->json, json_encode(array(
 			'status' => $stat,
 			'msg'    => \Joomla\CMS\Language\Text::_($msg)
 		)));

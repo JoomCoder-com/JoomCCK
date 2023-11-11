@@ -169,7 +169,7 @@ class JoomcckTableCobCategory extends \Joomla\CMS\Table\Nested
 	public function store($updateNulls = false)
 	{
 		$date = \Joomla\CMS\Factory::getDate();
-		$user = \Joomla\CMS\Factory::getUser();
+		$user = \Joomla\CMS\Factory::getApplication()->getIdentity();
 		
 		if($this->id)
 		{

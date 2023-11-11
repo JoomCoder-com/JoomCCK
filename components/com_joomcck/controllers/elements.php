@@ -34,7 +34,7 @@ class JoomcckControllerElements extends MControllerAdmin
 	}
 	public function saveoptions()
 	{
-		$me = \Joomla\CMS\Factory::getUser();
+		$me = \Joomla\CMS\Factory::getApplication()->getIdentity();
 		
 
 		if(! $me->id)

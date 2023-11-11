@@ -18,7 +18,7 @@ class JoomcckViewRecords extends MViewBase
 	{
 		$app = \Joomla\CMS\Factory::getApplication();
 		$doc = \Joomla\CMS\Factory::getDocument();
-		$user = \Joomla\CMS\Factory::getUser();
+		$user = \Joomla\CMS\Factory::getApplication()->getIdentity();
 		$model = $this->getModel();
 
 		$section_id = $app->input->getInt('section_id', 0);

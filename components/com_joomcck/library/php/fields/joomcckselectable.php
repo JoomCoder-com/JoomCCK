@@ -314,7 +314,7 @@ class CFormFieldSelectable extends CFormField
 
 	private function _getvalues($limit, $record, $type, $section, $client)
 	{
-		$user = \Joomla\CMS\Factory::getUser();
+		$user = \Joomla\CMS\Factory::getApplication()->getIdentity();
 		if($this->type == 'listautocomplete')
 		{
 			if(is_string($this->value))
@@ -460,7 +460,7 @@ function _getSQLValues($obj, $assoc)
 	}
 
 	$db = \Joomla\CMS\Factory::getDbo();
-	$user = \Joomla\CMS\Factory::getUser();
+	$user = \Joomla\CMS\Factory::getApplication()->getIdentity();
 
 	if($obj->params->get('params.sql_ext_db'))
 	{

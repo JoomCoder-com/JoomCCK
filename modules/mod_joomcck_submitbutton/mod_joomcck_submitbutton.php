@@ -86,7 +86,7 @@ if($app->input->getCmd('option') == 'com_joomcck' && $app->input->getInt('sectio
 			{
 				return;
 			}
-			if(!in_array($tmpl_params->get('menu.menu_newrecord'), \Joomla\CMS\Factory::getUser()->getAuthorisedViewLevels()))
+			if(!in_array($tmpl_params->get('menu.menu_newrecord'), \Joomla\CMS\Factory::getApplication()->getIdentity()->getAuthorisedViewLevels()))
 			{
 				return;
 			}

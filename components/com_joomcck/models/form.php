@@ -81,7 +81,7 @@ class JoomcckModelForm extends MModelAdmin
 			$type       = $this->getRecordType(\Joomla\CMS\Factory::getApplication()->input->getInt('type_id'), $itemId);
 			$section_id = \Joomla\CMS\Factory::getApplication()->input->getInt('section_id');
 
-			$user            = \Joomla\CMS\Factory::getUser();
+			$user            = \Joomla\CMS\Factory::getApplication()->getIdentity();
 			$out             = new stdClass();
 			$out->id         = NULL;
 			$out->type_id    = \Joomla\CMS\Factory::getApplication()->input->getInt('type_id');
@@ -204,7 +204,7 @@ class JoomcckModelForm extends MModelAdmin
 		$fields_list = MModelBase::getInstance('Fields', 'JoomcckModel')->getFormFields($data['type_id']);
 
 		$tmpl_params = CTmpl::prepareTemplate('default_form_', 'properties.tmpl_articleform', $type->params);
-		if(\Joomla\CMS\Factory::getUser()->get('id') || $tmpl_params->get('tmpl_core.form_captcha', 0) == 0)
+		if(\Joomla\CMS\Factory::getApplication()->getIdentity()->get('id') || $tmpl_params->get('tmpl_core.form_captcha', 0) == 0)
 		{
 			$form->removeField('captcha');
 		}

@@ -29,7 +29,7 @@ class JoomcckTableCobcomments extends Nested
 		$app = \Joomla\CMS\Factory::getApplication();
 
 		$post = $app->input->get('jform', array(), 'array');
-		$user = \Joomla\CMS\Factory::getUser();
+		$user = \Joomla\CMS\Factory::getApplication()->getIdentity();
 
 		if(@$post['parent_id'] != 0 && !$this->id)
 		{
@@ -100,7 +100,7 @@ class JoomcckTableCobcomments extends Nested
 		if(
 			$this->published == 0 &&
 			$type->params->get('comments.type_comment_subscription') &&
-			\Joomla\CMS\Filesystem\File::exists($em_api)
+			is_file($em_api)
 		)
 		{
 			require_once $em_api;

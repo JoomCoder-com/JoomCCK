@@ -36,7 +36,7 @@ class JoomcckModelOptions extends MModelAdmin
 
 	public function getSub()
 	{
-		$user = \Joomla\CMS\Factory::getUser();
+		$user = \Joomla\CMS\Factory::getApplication()->getIdentity();
 
 		$db = \Joomla\CMS\Factory::getDbo();
 
@@ -76,7 +76,7 @@ class JoomcckModelOptions extends MModelAdmin
 			return $out;
 		}
 
-		$me = \Joomla\CMS\Factory::getUser();
+		$me = \Joomla\CMS\Factory::getApplication()->getIdentity();
 
 		$table = \Joomla\CMS\Table\Table::getInstance('Useropt', 'JoomcckTable');
 		$table->load(array('user_id' => $me->get('id')));

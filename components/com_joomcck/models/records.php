@@ -167,7 +167,7 @@ class JoomcckModelRecords extends MModelList
 	{
 		$app       = \Joomla\CMS\Factory::getApplication();
 		$db        = $this->getDbo();
-		$user      = \Joomla\CMS\Factory::getUser();
+		$user      = \Joomla\CMS\Factory::getApplication()->getIdentity();
 		$total     = $this->total;
 		$view_what = $app->input->get('view_what');
 
@@ -458,7 +458,7 @@ class JoomcckModelRecords extends MModelList
 		$app       = \Joomla\CMS\Factory::getApplication();
 		$cat       = $app->input->getInt('cat_id', NULL);
 		$view_what = $app->input->get('view_what');
-		$user      = \Joomla\CMS\Factory::getUser();
+		$user      = \Joomla\CMS\Factory::getApplication()->getIdentity();
 		$db        = \Joomla\CMS\Factory::getDbo();
 
 		if(!empty($this->worns['cats']))
@@ -596,7 +596,7 @@ class JoomcckModelRecords extends MModelList
 		$view_what    = $app->input->get('view_what');
 		$total        = $this->total;
 		$db           = \Joomla\CMS\Factory::getDbo();
-		$user         = \Joomla\CMS\Factory::getUser();
+		$user         = \Joomla\CMS\Factory::getApplication()->getIdentity();
 		$user_id      = $app->input->getInt('user_id', NULL);
 		$isme         = ((int)$user_id === (int)$user->get('id', NULL) && $user_id);
 		$filters      = TRUE;

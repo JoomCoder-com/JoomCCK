@@ -51,7 +51,7 @@ class JoomcckModelTemplate extends MModelAdmin
 			$data['ident']  = \Joomla\CMS\Factory::getApplication()->input->get('file');
 			$file_name = JoomcckTmplHelper::getTmplFile($file[1], $file[0]) . '.' . $ext;
 			$data['source'] = '';
-			if(\Joomla\CMS\Filesystem\File::exists($file_name))
+			if(is_file($file_name))
 			{
 				$data['source'] = file_get_contents($file_name);
 			}
@@ -67,14 +67,14 @@ class JoomcckModelTemplate extends MModelAdmin
 
 	protected function canDelete($record)
 	{
-		$user = \Joomla\CMS\Factory::getUser();
+		$user = \Joomla\CMS\Factory::getApplication()->getIdentity();
 
 		return $user->authorise('core.delete', 'com_joomcck.template.' . (int)$record->id);
 	}
 
 	protected function canEditState($record)
 	{
-		$user = \Joomla\CMS\Factory::getUser();
+		$user = \Joomla\CMS\Factory::getApplication()->getIdentity();
 
 		return $user->authorise('core.edit.state', 'com_joomcck.template.' . (int)$record->id);
 	}

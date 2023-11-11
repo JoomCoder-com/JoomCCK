@@ -17,7 +17,7 @@ class JFormFieldCMultiselect extends CFormFieldSelectable
 	{
 		$params     = $this->params;
 		$doc        = \Joomla\CMS\Factory::getDocument();
-		$this->user = \Joomla\CMS\Factory::getUser();
+		$this->user = \Joomla\CMS\Factory::getApplication()->getIdentity();
 
 		$values = array();
 		if($params->get('params.sql_source'))

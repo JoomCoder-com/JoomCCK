@@ -87,7 +87,7 @@ class JoomcckControllerCat extends MControllerForm
 	 */
 	protected function allowAdd($data = array())
 	{
-		return \Joomla\CMS\Factory::getUser()->authorise('core.create', 'com_joomcck.category');
+		return \Joomla\CMS\Factory::getApplication()->getIdentity()->authorise('core.create', 'com_joomcck.category');
 	}
 
 	/**
@@ -105,7 +105,7 @@ class JoomcckControllerCat extends MControllerForm
 	{
 		// Initialise variables.
 		$recordId	= (int) isset($data[$key]) ? $data[$key] : 0;
-		$user		= \Joomla\CMS\Factory::getUser();
+		$user		= \Joomla\CMS\Factory::getApplication()->getIdentity();
 		$userId		= $user->get('id');
 
 		// Check general edit permission first.

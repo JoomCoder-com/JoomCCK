@@ -16,7 +16,7 @@ class JFormFieldCCheckbox extends CFormFieldSelectable
     {
         $params     = $this->params;
         $values     = [];
-        $this->user = \Joomla\CMS\Factory::getUser();
+        $this->user = \Joomla\CMS\Factory::getApplication()->getIdentity();
 
         if ($params->get('params.sql_source')) {
             $values = $this->_getSqlValues();

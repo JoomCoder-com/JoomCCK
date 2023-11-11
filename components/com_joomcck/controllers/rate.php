@@ -86,7 +86,7 @@ class JoomcckControllerRate extends MControllerAdmin
 
 		$record = MModelBase::getInstance('Record', 'JoomcckModel')->getItem($id);
 		$type = ItemsStore::getType($record->type_id);
-		$user = \Joomla\CMS\Factory::getUser();
+		$user = \Joomla\CMS\Factory::getApplication()->getIdentity();
 		$db = \Joomla\CMS\Factory::getDBO();
 
 		$this->_canVote($record->user_id, $record->id, 'record', $type->params->get('properties.rate_access'), $index, $type->params->get('properties.rate_access_author', 0));
@@ -232,7 +232,7 @@ class JoomcckControllerRate extends MControllerAdmin
 		$session = \Joomla\CMS\Factory::getSession();
 		$session->set("{$type}_rate_{$id}_{$index}", 1);
 
-		$user = \Joomla\CMS\Factory::getUser();
+		$user = \Joomla\CMS\Factory::getApplication()->getIdentity();
 
 		$votes_table = \Joomla\CMS\Table\Table::getInstance('Votes', 'JoomcckTable');
 		$data = array('idx' => $index, 'ref_id' => $id, 'ref_type' => $type);
@@ -267,7 +267,7 @@ class JoomcckControllerRate extends MControllerAdmin
 	private function _canVote($user_id, $id, $type, $accessLevel = 1, $index = 0, $author = 0)
 	{
 		/*$result = true;
-		$user = \Joomla\CMS\Factory::getUser();
+		$user = \Joomla\CMS\Factory::getApplication()->getIdentity();
 		if($accessLevel == -1)
 		{
 			if(!$user->get('id') || !$user_id)
@@ -313,7 +313,7 @@ class JoomcckControllerRate extends MControllerAdmin
 
 
 		/*
-		$user = \Joomla\CMS\Factory::getUser();
+		$user = \Joomla\CMS\Factory::getApplication()->getIdentity();
 		$session = \Joomla\CMS\Factory::getSession();
 
 		$result = true;

@@ -156,7 +156,7 @@ class CCommunityHelper
 		{
 			$links = (array)$class->getName($id, $name, $section);
 
-			if(\Joomla\CMS\Filesystem\Folder::exists(JPATH_ROOT . '/components/com_uddeim'))
+			if(is_dir(JPATH_ROOT . '/components/com_uddeim'))
 			{
 				$links = array_merge($links,
 					array(
@@ -238,8 +238,8 @@ class CCommunityHelper
 			$db = \Joomla\CMS\Factory::getDbo();
 
 			$api = JPATH_ROOT.'/components/com_emerald/api.php';
-			if(in_array($section->params->get('personalize.vip'), \Joomla\CMS\Factory::getUser()->getAuthorisedViewLevels()) &&
-				!in_array($section->params->get('personalize.novip'), \Joomla\CMS\Factory::getUser($id)->getAuthorisedViewLevels()) && \Joomla\CMS\Filesystem\File::exists($api))
+			if(in_array($section->params->get('personalize.vip'), \Joomla\CMS\Factory::getApplication()->getIdentity()->getAuthorisedViewLevels()) &&
+				!in_array($section->params->get('personalize.novip'), \Joomla\CMS\Factory::getUser($id)->getAuthorisedViewLevels()) && is_file($api))
 			{
 				include_once $api;
 				if(EmeraldHelper::userPurchasedTotal($id) >= $section->params->get('personalize.glod_amount'))

@@ -18,7 +18,7 @@ class JoomcckTableVotes extends \Joomla\CMS\Table\Table
 
 	public function check()
 	{
-		$user = \Joomla\CMS\Factory::getUser();
+		$user = \Joomla\CMS\Factory::getApplication()->getIdentity();
 		$this->ctime = \Joomla\CMS\Factory::getDate()->toSql();
 		if(!$this->ip)
 		{

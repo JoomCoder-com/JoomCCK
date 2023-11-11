@@ -25,7 +25,7 @@ class MEFormHelper
 	{
 		$result = NULL;
 
-		if(! \Joomla\CMS\Filesystem\Folder::exists(JPATH_ADMINISTRATOR . DIRECTORY_SEPARATOR . 'components' . DIRECTORY_SEPARATOR . $ext))
+		if(! is_dir(JPATH_ADMINISTRATOR . DIRECTORY_SEPARATOR . 'components' . DIRECTORY_SEPARATOR . $ext))
 		{
 			switch($ext)
 			{

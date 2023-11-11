@@ -24,7 +24,7 @@ jimport('joomla.registry.registry');
 
 require_once JPATH_ROOT . '/administrator/components/com_joomcck/library/helpers/toolbar.php';
 
-if(!\Joomla\CMS\Factory::getUser()->authorise('core.manage', 'com_joomcck'))
+if(!\Joomla\CMS\Factory::getApplication()->getIdentity()->authorise('core.manage', 'com_joomcck'))
 {
 
 	throw new \Exception(Text::_('JERROR_ALERTNOAUTHOR'), 404);

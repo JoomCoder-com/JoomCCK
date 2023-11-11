@@ -14,7 +14,7 @@ class JoomcckViewComment extends MViewBase
 	public function display($tpl = null)
 	{
 		$app = \Joomla\CMS\Factory::getApplication();
-		$this->user = \Joomla\CMS\Factory::getUser();
+		$this->user = \Joomla\CMS\Factory::getApplication()->getIdentity();
 		$this->state = $this->get('State');
 		$this->item = $this->get('Item');
 
@@ -25,7 +25,7 @@ class JoomcckViewComment extends MViewBase
 		$this->author = \Joomla\CMS\Factory::getUser($this->item->user_id);
 
 		$this->form = $this->get('Form');
-		$this->user = \Joomla\CMS\Factory::getUser();
+		$this->user = \Joomla\CMS\Factory::getApplication()->getIdentity();
 
 		if($app->input->getInt('parent_id'))
 			$this->item->parent_id = $app->input->getInt('parent_id');

@@ -20,7 +20,7 @@ class JFormFieldCUrl extends CFormField
 	{
 		$document = \Joomla\CMS\Factory::getDocument();
 		$document->addScript(JURI::root(TRUE) . '/components/com_joomcck/fields/url/assets/url.js');
-		$user   = \Joomla\CMS\Factory::getUser();
+		$user   = \Joomla\CMS\Factory::getApplication()->getIdentity();
 		$params = $this->params;
 
 		$labels = explode("\n", $params->get('params.default_labels', ''));

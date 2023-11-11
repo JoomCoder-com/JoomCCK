@@ -327,19 +327,19 @@ JWP;
 		$date  = date($params->get('folder_format', 'Y-m'), (int)$parts[0]);
 
 		$thumb_path = JPATH_ROOT . DIRECTORY_SEPARATOR . $params->get('general_upload') . DIRECTORY_SEPARATOR . 'thumbs_cache' . DIRECTORY_SEPARATOR . $this->params->get('params.subfolder') . DIRECTORY_SEPARATOR . $date;
-		if(\Joomla\CMS\Filesystem\File::exists($thumb_path . DIRECTORY_SEPARATOR . $file->filename . '.jpg'))
+		if(is_file($thumb_path . DIRECTORY_SEPARATOR . $file->filename . '.jpg'))
 		{
 			return $url . '/thumbs_cache/' . $this->params->get('params.subfolder') . '/' . $date . '/' . $file->filename . '.jpg';
 		}
 
-		if(!\Joomla\CMS\Filesystem\Folder::exists($thumb_path))
+		if(!is_dir($thumb_path))
 		{
-			\Joomla\CMS\Filesystem\Folder::create($thumb_path);
+			\Joomla\Filesystem\Folder::create($thumb_path);
 		}
 
 		passthru($this->params->get('params.command', 'ffmpeg') . " -i \"" . JPATH_ROOT . DIRECTORY_SEPARATOR . $params->get('general_upload') . DIRECTORY_SEPARATOR . $this->params->get('params.subfolder') . DIRECTORY_SEPARATOR . $file->fullpath . "\" -ss  00:00:03 -s qcif  " . $thumb_path . DIRECTORY_SEPARATOR . $file->filename . '.jpg');
 
-		if(\Joomla\CMS\Filesystem\File::exists($thumb_path . DIRECTORY_SEPARATOR . $file->filename . '.jpg'))
+		if(is_file($thumb_path . DIRECTORY_SEPARATOR . $file->filename . '.jpg'))
 		{
 			return $url . '/thumbs_cache/' . $this->params->get('params.subfolder') . '/' . $date . '/' . $file->filename . '.jpg';
 		}

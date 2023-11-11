@@ -120,7 +120,7 @@ class CUsrHelper
 
 		if(! $user)
 		{
-			$uid = \Joomla\CMS\Factory::getUser()->get('id');
+			$uid = \Joomla\CMS\Factory::getApplication()->getIdentity()->get('id');
 		}
 		else
 		{

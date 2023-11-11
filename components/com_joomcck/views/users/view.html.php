@@ -31,7 +31,7 @@ class JoomcckViewUsers extends MViewBase
 	public function display($tpl = NULL)
 	{
 		$app    = \Joomla\CMS\Factory::getApplication();
-		$user   = \Joomla\CMS\Factory::getUser();
+		$user   = \Joomla\CMS\Factory::getApplication()->getIdentity();
 		$access = TRUE;
 		$field = $app->input->get->get('field', FALSE);
 

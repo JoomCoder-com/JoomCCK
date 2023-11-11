@@ -118,7 +118,7 @@ class JoomcckControllerRecords extends MControllerAdmin
 		}
 
 		$db = \Joomla\CMS\Factory::getDbo();
-		$db->setQuery("DELETE FROM `#__js_res_record_repost` WHERE record_id = {$this->record->id} AND host_id = " . \Joomla\CMS\Factory::getUser()->get('id'));
+		$db->setQuery("DELETE FROM `#__js_res_record_repost` WHERE record_id = {$this->record->id} AND host_id = " . \Joomla\CMS\Factory::getApplication()->getIdentity()->get('id'));
 		$db->execute();
 
 		$this->record->onRepost();
@@ -298,7 +298,7 @@ class JoomcckControllerRecords extends MControllerAdmin
 		{
 			return;
 		}
-		$user = \Joomla\CMS\Factory::getUser();
+		$user = \Joomla\CMS\Factory::getApplication()->getIdentity();
 		CEmeraldHelper::allowType('extend', $this->type, $user->id, $this->section, TRUE, '', $this->record->user_id);
 
 		$this->record->extime  = \Joomla\CMS\Factory::getDate("+" . $this->type->params->get('properties.default_extend', 10) . ' day')->toSql();
@@ -366,7 +366,7 @@ class JoomcckControllerRecords extends MControllerAdmin
 			return;
 		}
 
-		$user = \Joomla\CMS\Factory::getUser();
+		$user = \Joomla\CMS\Factory::getApplication()->getIdentity();
 
 		CEmeraldHelper::allowType('feature', $this->type, $user->id, $this->section, TRUE, NULL, $this->record->user_id);
 
@@ -392,7 +392,7 @@ class JoomcckControllerRecords extends MControllerAdmin
 		{
 			return;
 		}
-		$user = \Joomla\CMS\Factory::getUser();
+		$user = \Joomla\CMS\Factory::getApplication()->getIdentity();
 
 		//CEmeraldHelper::allowType('feature', $this->type, $user->id, $this->section, TRUE, $this->record->user_id);
 
@@ -530,12 +530,12 @@ class JoomcckControllerRecords extends MControllerAdmin
 				$field_table->load($file->field_id);
 				$field_params = new \Joomla\Registry\Registry($field_table->params);
 				$subfolder    = $field_params->get('params.subfolder', $field_table->field_type);
-				if(\Joomla\CMS\Filesystem\File::exists(JPATH_ROOT . DIRECTORY_SEPARATOR . $joomcck_params->get('general_upload') . DIRECTORY_SEPARATOR . $subfolder . DIRECTORY_SEPARATOR . $file->fullpath))
+				if(is_file(JPATH_ROOT . DIRECTORY_SEPARATOR . $joomcck_params->get('general_upload') . DIRECTORY_SEPARATOR . $subfolder . DIRECTORY_SEPARATOR . $file->fullpath))
 				{
 					unlink(JPATH_ROOT . DIRECTORY_SEPARATOR . $joomcck_params->get('general_upload') . DIRECTORY_SEPARATOR . $subfolder . DIRECTORY_SEPARATOR . $file->fullpath);
 				}
 				// deleting image field files
-				elseif(\Joomla\CMS\Filesystem\File::exists(JPATH_ROOT . DIRECTORY_SEPARATOR . $file->fullpath))
+				elseif(is_file(JPATH_ROOT . DIRECTORY_SEPARATOR . $file->fullpath))
 				{
 					unlink(JPATH_ROOT . DIRECTORY_SEPARATOR . $file->fullpath);
 				}
@@ -624,7 +624,7 @@ class JoomcckControllerRecords extends MControllerAdmin
 	public function markread()
 	{
 		$app  = \Joomla\CMS\Factory::getApplication();
-		$user = \Joomla\CMS\Factory::getUser();
+		$user = \Joomla\CMS\Factory::getApplication()->getIdentity();
 
 		$db = \Joomla\CMS\Factory::getDbo();
 		$db->setQuery("UPDATE #__js_res_notifications SET state_new = 0, notified = 1 WHERE user_id = " . $user->get('id') . ' AND ref_2 = ' . $this->input->getInt('section_id'));

@@ -27,7 +27,7 @@ $app = \Joomla\CMS\Factory::getApplication();
 $section_id = $app->input->getInt('section_id');
 
 $user_id = $cat_id = NULL;
-$user    = \Joomla\CMS\Factory::getUser();
+$user    = \Joomla\CMS\Factory::getApplication()->getIdentity();
 
 $author = $app->input->get('user_id');
 if(!$author && $app->input->get('option') == 'com_joomcck' && $app->input->getCmd('view') == 'record' && $app->input->getInt('id'))

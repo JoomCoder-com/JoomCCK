@@ -20,7 +20,7 @@ class JoomcckViewAuditlog extends MViewBase
 	function display($tpl = NULL)
 	{
 		$doc  = \Joomla\CMS\Factory::getDocument();
-		$user = \Joomla\CMS\Factory::getUser();
+		$user = \Joomla\CMS\Factory::getApplication()->getIdentity();
 		$app  = \Joomla\CMS\Factory::getApplication();
 		$this->params = Factory::getApplication()->getMenu()->getActive()->getParams();
 

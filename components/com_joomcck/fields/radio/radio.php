@@ -16,7 +16,7 @@ class JFormFieldCRadio extends CFormFieldSelectable
 	{
 		$params = $this->params;
 		$doc = \Joomla\CMS\Factory::getDocument();
-		$user = \Joomla\CMS\Factory::getUser();
+		$user = \Joomla\CMS\Factory::getApplication()->getIdentity();
 
 
 		$values = array();

@@ -54,7 +54,7 @@ class JoomcckViewTemplates extends MViewBase
 
 		$file_png       = JoomcckTmplHelper::getTmplFile($matches[2], $matches[1] . '.png');
 		$this->img_path = '';
-		if(\Joomla\CMS\Filesystem\File::exists($file_png))
+		if(is_file($file_png))
 		{
 			$img_path       = JoomcckTmplHelper::getTmplImgSrc($matches[2], $matches[1]);
 			$this->img_path = $img_path;
@@ -70,7 +70,7 @@ class JoomcckViewTemplates extends MViewBase
 
 
 		$config       = JoomcckTmplHelper::getTmplFile($matches[2], $matches[1], TRUE) . '.' . $app->input->get('config') . '.json';
-		$ini          = \Joomla\CMS\Filesystem\File::exists($config) ? file_get_contents($config) : '';
+		$ini          = is_file($config) ? file_get_contents($config) : '';
 		$this->params = new \Joomla\Registry\Registry($ini);
 		$this->config = $app->input->get('config');
 

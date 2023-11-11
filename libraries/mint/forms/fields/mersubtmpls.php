@@ -34,7 +34,7 @@ class JFormFieldMersubtmpls extends JFormFieldList
 		$document->addScript(\Joomla\CMS\Uri\Uri::root().'media/com_joomcck/js/iziModal.min.js');
 
         $old = false;
-        if(\Joomla\CMS\Filesystem\File::exists(JPATH_ROOT.'/components/com_joomcck/library/php/helpers/templates.php'))
+        if(is_file(JPATH_ROOT.'/components/com_joomcck/library/php/helpers/templates.php'))
         {
             require_once JPATH_ROOT.'/components/com_joomcck/library/php/helpers/templates.php';
         }
@@ -107,7 +107,7 @@ class JFormFieldMersubtmpls extends JFormFieldList
 		    $tmpl_mask    = MRtemplates::getTmplMask( $type );
         }
 
-		$files   = \Joomla\CMS\Filesystem\Folder::files($layouts_path, $tmpl_mask['index_file']);
+		$files   = \Joomla\Filesystem\Folder::files($layouts_path, $tmpl_mask['index_file']);
 		$exclude = explode(',', $this->element['exclude']);
 
 		$md5id = $this->_getKey();

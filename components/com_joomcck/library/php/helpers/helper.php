@@ -102,7 +102,7 @@ class CSubscriptionsHelper
 
 	static public function unsubscribe_record($id)
 	{
-		$user = \Joomla\CMS\Factory::getUser();
+		$user = \Joomla\CMS\Factory::getApplication()->getIdentity();
 
 		if(!$user->get('id'))
 		{
@@ -275,14 +275,14 @@ class FieldHelper
 		$tag  = $lang->getTag();
 		if($tag != 'en-GB')
 		{
-			if(!\Joomla\CMS\Filesystem\File::exists(JPATH_BASE . "/language/{$tag}/{$tag}.com_joomcck_field_{$field_name}.ini"))
+			if(!is_file(JPATH_BASE . "/language/{$tag}/{$tag}.com_joomcck_field_{$field_name}.ini"))
 			{
 				$tag == 'en-GB';
 			}
 		}
 
 		$lang->load('com_joomcck_field_' . $field_name, JPATH_ROOT, $tag, TRUE);
-		if(\Joomla\CMS\Filesystem\File::exists(JPATH_ROOT.'/components/com_joomcck/fields/'.$field_name.'/language/'.$tag.'.com_joomcck_field_'.$field_name.'.ini')){
+		if(is_file(JPATH_ROOT.'/components/com_joomcck/fields/'.$field_name.'/language/'.$tag.'.com_joomcck_field_'.$field_name.'.ini')){
 		} 
 	}
 }

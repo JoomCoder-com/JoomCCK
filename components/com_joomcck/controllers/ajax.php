@@ -61,7 +61,7 @@ class JoomcckControllerAjax extends MControllerAdmin
 		$dir = JPATH_ROOT . '/' . $this->input->getPath('dir');
 
 		$out = array();
-		if(\Joomla\CMS\Filesystem\Folder::exists($dir))
+		if(is_dir($dir))
 		{
 			if($dh = opendir($dir))
 			{
@@ -105,7 +105,7 @@ class JoomcckControllerAjax extends MControllerAdmin
 
 		CEventsHelper::notify('record', CEventsHelper::_COMMENT_NEW, $record->id, $record->section_id, 0, 0, 0, array());
 
-		$user = \Joomla\CMS\Factory::getUser();
+		$user = \Joomla\CMS\Factory::getApplication()->getIdentity();
 		if($user->get('id'))
 		{
 			CSubscriptionsHelper::subscribe_record($record);
@@ -168,7 +168,7 @@ class JoomcckControllerAjax extends MControllerAdmin
 
 		$record = ItemsStore::getRecord($order->record_id);
 
-		$user         = \Joomla\CMS\Factory::getUser();
+		$user         = \Joomla\CMS\Factory::getApplication()->getIdentity();
 		$orders_model = MModelBase::getInstance('Orders', 'JoomcckModel');
 
 		if(!in_array($order->section_id, MECAccess::allowChangeSaleStatus($user)) && !$orders_model->isSuperUser($user->get('id')) && !($user->get('id') == $record->user_id))
@@ -194,7 +194,7 @@ class JoomcckControllerAjax extends MControllerAdmin
 
 	public function unfollowallsection()
 	{
-		$user = \Joomla\CMS\Factory::getUser();
+		$user = \Joomla\CMS\Factory::getApplication()->getIdentity();
 		if(!$user->get('id'))
 		{
 			AjaxHelper::error(\Joomla\CMS\Language\Text::_('AJAX_PLEASELOGIN'));
@@ -211,7 +211,7 @@ class JoomcckControllerAjax extends MControllerAdmin
 
 	public function followallsection()
 	{
-		$user = \Joomla\CMS\Factory::getUser();
+		$user = \Joomla\CMS\Factory::getApplication()->getIdentity();
 		if(!$user->get('id'))
 		{
 			AjaxHelper::error(\Joomla\CMS\Language\Text::_('AJAX_PLEASELOGIN'));
@@ -246,7 +246,7 @@ class JoomcckControllerAjax extends MControllerAdmin
 
 	public function followsection()
 	{
-		$user = \Joomla\CMS\Factory::getUser();
+		$user = \Joomla\CMS\Factory::getApplication()->getIdentity();
 		if(!$user->get('id'))
 		{
 			AjaxHelper::error(\Joomla\CMS\Language\Text::_('AJAX_PLEASELOGIN'));
@@ -287,7 +287,7 @@ class JoomcckControllerAjax extends MControllerAdmin
 
 	public function followcat()
 	{
-		$user = \Joomla\CMS\Factory::getUser();
+		$user = \Joomla\CMS\Factory::getApplication()->getIdentity();
 		if(!$user->get('id'))
 		{
 			AjaxHelper::error(\Joomla\CMS\Language\Text::_('AJAX_PLEASELOGIN'));
@@ -355,7 +355,7 @@ class JoomcckControllerAjax extends MControllerAdmin
 
 	public function followuser()
 	{
-		$user = \Joomla\CMS\Factory::getUser();
+		$user = \Joomla\CMS\Factory::getApplication()->getIdentity();
 		if(!$user->get('id'))
 		{
 			AjaxHelper::error(\Joomla\CMS\Language\Text::_('AJAX_PLEASELOGIN'));
@@ -430,7 +430,7 @@ class JoomcckControllerAjax extends MControllerAdmin
 
 	public function follow()
 	{
-		$user = \Joomla\CMS\Factory::getUser();
+		$user = \Joomla\CMS\Factory::getApplication()->getIdentity();
 		if(!$user->get('id'))
 		{
 			AjaxHelper::error(\Joomla\CMS\Language\Text::_('AJAX_PLEASELOGIN'));
@@ -521,7 +521,7 @@ class JoomcckControllerAjax extends MControllerAdmin
 
 	public function repost()
 	{
-		$user = \Joomla\CMS\Factory::getUser();
+		$user = \Joomla\CMS\Factory::getApplication()->getIdentity();
 		if(!$user->get('id'))
 		{
 			AjaxHelper::error(\Joomla\CMS\Language\Text::_('AJAX_PLEASELOGIN'));
@@ -564,7 +564,7 @@ class JoomcckControllerAjax extends MControllerAdmin
 
 	public function bookmark()
 	{
-		$user = \Joomla\CMS\Factory::getUser();
+		$user = \Joomla\CMS\Factory::getApplication()->getIdentity();
 		if(!$user->get('id'))
 		{
 			AjaxHelper::error(\Joomla\CMS\Language\Text::_('AJAX_PLEASELOGIN'));
@@ -621,11 +621,11 @@ class JoomcckControllerAjax extends MControllerAdmin
 	{
 		$file     = $this->input->get('file');
 		$id       = $this->input->get('id');
-		$user     = \Joomla\CMS\Factory::getUser();
+		$user     = \Joomla\CMS\Factory::getApplication()->getIdentity();
 		$fullpath = JPATH_ROOT . '/images/usercategories/' . $user->get('id') . DIRECTORY_SEPARATOR . $file;
-		if(\Joomla\CMS\Filesystem\File::exists($fullpath))
+		if(is_file($fullpath))
 		{
-			if(\Joomla\CMS\Filesystem\File::delete($fullpath))
+			if(\Joomla\Filesystem\File::delete($fullpath))
 			{
 				$db = \Joomla\CMS\Factory::getDbo();
 				$db->setQuery('UPDATE #__js_res_category_user SET icon = "" WHERE id = ' . $id);
@@ -717,7 +717,7 @@ class JoomcckControllerAjax extends MControllerAdmin
 		if(!$empty_cats)
 		{
 			$section = ItemsStore::getSection($section_id);
-			$user = \Joomla\CMS\Factory::getUser();
+			$user = \Joomla\CMS\Factory::getApplication()->getIdentity();
 
 			$sql = $db->getQuery(true);
 			$sql->select('count(rc.catid) as num, rc.catid');
@@ -916,7 +916,7 @@ class JoomcckControllerAjax extends MControllerAdmin
 
 	public function add_tags()
 	{
-		$user = \Joomla\CMS\Factory::getUser();
+		$user = \Joomla\CMS\Factory::getApplication()->getIdentity();
 		$tag_table     = \Joomla\CMS\Table\Table::getInstance('Tags', 'JoomcckTable');
 		$taghist_table = \Joomla\CMS\Table\Table::getInstance('Taghistory', 'JoomcckTable');
         
@@ -1010,7 +1010,7 @@ class JoomcckControllerAjax extends MControllerAdmin
 			$classname  = 'CFormFieldUpload';
 		}
 
-		if(!\Joomla\CMS\Filesystem\File::exists($field_path))
+		if(!is_file($field_path))
 		{
 			AjaxHelper::error(\Joomla\CMS\Language\Text::_('AJAX_FIELDNOTFOUND' . $id));
 		}
@@ -1082,7 +1082,7 @@ class JoomcckControllerAjax extends MControllerAdmin
 
 		if($id == 'all')
 		{
-			$user  = \Joomla\CMS\Factory::getUser();
+			$user  = \Joomla\CMS\Factory::getApplication()->getIdentity();
 			$db    = \Joomla\CMS\Factory::getDbo();
 			$query = $db->getQuery(TRUE);
 			$query->update('#__js_res_notifications');
@@ -1131,7 +1131,7 @@ class JoomcckControllerAjax extends MControllerAdmin
 		$id         = $this->input->getInt('id');
 		$section_id = $this->input->getInt('section_id');
 
-		$user  = \Joomla\CMS\Factory::getUser();
+		$user  = \Joomla\CMS\Factory::getApplication()->getIdentity();
 		$db    = \Joomla\CMS\Factory::getDbo();
 		$query = $db->getQuery(TRUE);
 		$query->delete();
@@ -1181,7 +1181,7 @@ class JoomcckControllerAjax extends MControllerAdmin
 		}
 		else
 		{
-			$user  = \Joomla\CMS\Factory::getUser();
+			$user  = \Joomla\CMS\Factory::getApplication()->getIdentity();
 			$query = $db->getQuery(TRUE);
 			$query->select(' id ');
 			$query->from('#__js_res_notifications');
@@ -1239,7 +1239,7 @@ class JoomcckControllerAjax extends MControllerAdmin
 	{
 		$ids        = $this->input->get('exist', array(0), 'array');
 		$section_id = $this->input->getInt('section_id');
-		$user       = \Joomla\CMS\Factory::getUser();
+		$user       = \Joomla\CMS\Factory::getApplication()->getIdentity();
 		$db         = \Joomla\CMS\Factory::getDbo();
 		$query      = $db->getQuery(TRUE);
 
@@ -1317,7 +1317,7 @@ class JoomcckControllerAjax extends MControllerAdmin
 		}
 
 		$file = JPATH_ROOT. '/components/com_joomcck/library/php/comments'. DIRECTORY_SEPARATOR .$folder. DIRECTORY_SEPARATOR .$folder.'.xml';
-		if(!\Joomla\CMS\Filesystem\File::exists($file))
+		if(!is_file($file))
 		{
 			exit();
 		}
@@ -1350,7 +1350,7 @@ class JoomcckControllerAjax extends MControllerAdmin
 		
 		$segments = explode('/', $this->input->getString('dir'));
 		FieldHelper::loadLang($segments[4]);
-		if(\Joomla\CMS\Filesystem\File::exists($xml)) {
+		if(is_file($xml)) {
 			$form = MFormHelper::getFieldParams($xml, $this->input->get('fid'), str_replace('.php', '', $this->input->get('value')));
 		}
 
@@ -1376,7 +1376,7 @@ class JoomcckControllerAjax extends MControllerAdmin
 		$field = MModelBase::getInstance('TField', 'JoomcckModel')->getItem($this->input->get('fid'));
 
 		$xml = JPATH_ROOT . '/components/com_joomcck/gateways' . DIRECTORY_SEPARATOR . $gateway . DIRECTORY_SEPARATOR . $gateway . '.xml';
-		if(! \Joomla\CMS\Filesystem\File::exists($xml))
+		if(! is_file($xml))
 		{
 			echo "File not found: {$xml}";
 		}

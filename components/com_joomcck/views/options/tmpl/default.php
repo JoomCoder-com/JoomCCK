@@ -8,7 +8,7 @@
  */
 defined('_JEXEC') or die();
 $back = null;
-$user = \Joomla\CMS\Factory::getUser();
+$user = \Joomla\CMS\Factory::getApplication()->getIdentity();
 $app  = \Joomla\CMS\Factory::getApplication();
 if ($app->input->getString('return'))
 {

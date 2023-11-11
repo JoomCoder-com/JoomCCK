@@ -11,7 +11,7 @@ defined('_JEXEC') or die();
 \Joomla\CMS\HTML\HTMLHelper::_('bootstrap.tooltip', '*[rel^="tooltip"]');
 
 $back = NULL;
-$user = \Joomla\CMS\Factory::getUser();
+$user = \Joomla\CMS\Factory::getApplication()->getIdentity();
 if(\Joomla\CMS\Factory::getApplication()->input->getBase64('return'))
 {
 	$back = Url::get_back('return');

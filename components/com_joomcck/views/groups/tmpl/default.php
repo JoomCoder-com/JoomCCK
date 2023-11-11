@@ -9,7 +9,7 @@
 
 defined('_JEXEC') or die('Restricted access'); ?>
 <?php
-$user	= \Joomla\CMS\Factory::getUser();
+$user	= \Joomla\CMS\Factory::getApplication()->getIdentity();
 $userId	= $user->get('id');
 
 $listOrder	= $this->state->get('list.ordering');

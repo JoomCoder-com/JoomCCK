@@ -67,7 +67,7 @@ class CEventsHelper
 	{
 		$user_opt = CUsrHelper::getOptions();
 		$section  = ItemsStore::getSection($section_id);
-		$user     = \Joomla\CMS\Factory::getUser();
+		$user     = \Joomla\CMS\Factory::getApplication()->getIdentity();
 
 		if($record_id)
 		{
@@ -132,7 +132,7 @@ class CEventsHelper
 			$user_id = $only_user;
 		}
 
-		if($user->id && in_array($section->params->get('events.event.' . $event . '.activ'), \Joomla\CMS\Factory::getUser()->getAuthorisedViewLevels()))
+		if($user->id && in_array($section->params->get('events.event.' . $event . '.activ'), \Joomla\CMS\Factory::getApplication()->getIdentity()->getAuthorisedViewLevels()))
 		{
 			$array['new_vote'] = @$params['new_vote'];
 			$array['status']   = @$params['status'];
@@ -363,7 +363,7 @@ class CEventsHelper
 	static public function cleanRecord($id)
 	{
 		$db = Jfactory::getDbo();
-		$db->setQuery("DELETE FROM #__js_res_notifications WHERE ref_1 = " . $id . ' AND user_id = ' . \Joomla\CMS\Factory::getUser()->get('id') . ' AND ref_2 = ' . \Joomla\CMS\Factory::getApplication()->input->getInt('section_id'));
+		$db->setQuery("DELETE FROM #__js_res_notifications WHERE ref_1 = " . $id . ' AND user_id = ' . \Joomla\CMS\Factory::getApplication()->getIdentity()->get('id') . ' AND ref_2 = ' . \Joomla\CMS\Factory::getApplication()->input->getInt('section_id'));
 		$db->execute();
 	}
 
@@ -371,13 +371,13 @@ class CEventsHelper
 	{
 		$db = Jfactory::getDbo();
 
-		$db->setQuery("UPDATE #__js_res_notifications SET state_new = 0, notified = 1 WHERE ref_1 = " . $record->id . ' AND user_id = ' . \Joomla\CMS\Factory::getUser()->get('id') . ' AND ref_2 = ' . $record->section_id);
+		$db->setQuery("UPDATE #__js_res_notifications SET state_new = 0, notified = 1 WHERE ref_1 = " . $record->id . ' AND user_id = ' . \Joomla\CMS\Factory::getApplication()->getIdentity()->get('id') . ' AND ref_2 = ' . $record->section_id);
 		$db->execute();
 	}
 
 	static public function getNum($type, $id = 0, $key = 'num')
 	{
-		$user = \Joomla\CMS\Factory::getUser();
+		$user = \Joomla\CMS\Factory::getApplication()->getIdentity();
 		if(!$user->get('id'))
 		{
 			return;

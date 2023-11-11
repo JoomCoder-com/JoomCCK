@@ -45,7 +45,7 @@ class JHTMLIp {
 	public static function block_ip($ip, $id) {
 		
 		$API = JPATH_ROOT. '/administrator/components/com_jdefender';
-		if(@\Joomla\CMS\Filesystem\Folder::exists($API))
+		if(@is_dir($API))
 		{
 			$atr['onclick'] = "document.getElementById('icondefend{$id}').src = '".JURI::root()."administrator/components/com_joomcck/images/load.gif'; xajax_jsrBlockIP('$ip', {$id});";
 			$sql = "SELECT COUNT(*) FROM #__jdefender_block_list WHERE type = 'ip' AND `value` = '$ip'";
@@ -79,7 +79,7 @@ class JHTMLIp {
 	public static function block_user($user, $id) {
 		
 		$API = JPATH_ROOT. '/administrator/components/com_jdefender';
-		if(@\Joomla\CMS\Filesystem\Folder::exists($API))
+		if(@is_dir($API))
 		{
 			$atr['onclick'] = "document.getElementById('icondefend2{$user}{$id}').src = '".JURI::root()."administrator/components/com_joomcck/images/load.gif'; xajax_jsrBlockUser('$user', {$id});";
 			$sql = "SELECT COUNT(*) FROM #__jdefender_block_list WHERE type = 'user' AND `value` = '$user'";

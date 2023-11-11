@@ -11,7 +11,7 @@ defined('_JEXEC') or die('Restricted access');
 
 \Joomla\CMS\HTML\HTMLHelper::_('bootstrap.tooltip', '*[rel^="tooltip"]');
 
-$user = \Joomla\CMS\Factory::getUser();
+$user = \Joomla\CMS\Factory::getApplication()->getIdentity();
 $userId = $user->get('id');
 
 $listOrder = $this->state->get('list.ordering');
@@ -90,7 +90,7 @@ $listDirn = $this->state->get('list.direction');
 						$user = \Joomla\CMS\Factory::getUser($item->user_id);
 						$link = 'index.php?option=com_users&task=edit&cid[]=' . $user->get('id');
          
-						if(\Joomla\CMS\Filesystem\Folder::exists(JPATH_ADMINISTRATOR . '/components/com_juser'))
+						if(is_dir(JPATH_ADMINISTRATOR . '/components/com_juser'))
 						{
 							$link = 'index.php?option=com_juser&task=edit&cid[]=' . $user->get('id');
 						}

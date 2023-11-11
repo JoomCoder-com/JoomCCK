@@ -16,7 +16,7 @@ class JoomcckModelCategories extends MModelList
 	{
 		$db = $this->getDbo();
 		$query = $db->getQuery(true);
-		$user = \Joomla\CMS\Factory::getUser();
+		$user = \Joomla\CMS\Factory::getApplication()->getIdentity();
 
 		$query->select("c.id, c.title,  c.*, CONCAT(repeat('-- ', (c.level - 1)), c.title) as opt ");
 		$query->select("(SELECT count(id) FROM #__js_res_categories WHERE parent_id = c.id)  as childs_num ");
@@ -88,7 +88,7 @@ class JoomcckModelCategories extends MModelList
 	{
 		// Get a storage key.
 		$store = $this->getStoreId();
-		$user = \Joomla\CMS\Factory::getUser();
+		$user = \Joomla\CMS\Factory::getApplication()->getIdentity();
 		// Try to load the data from internal storage.
 		if (! empty($this->cache[$store]))
 		{

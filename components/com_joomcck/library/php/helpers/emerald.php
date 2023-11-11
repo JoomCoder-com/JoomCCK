@@ -15,11 +15,11 @@ class CEmeraldHelper
 	{
 
 		$em_api = JPATH_ROOT . '/components/com_emerald/api.php';
-		if(!\Joomla\CMS\Filesystem\File::exists($em_api))
+		if(!is_file($em_api))
 		{
 			return TRUE;
 		}
-		$user   = \Joomla\CMS\Factory::getUser();
+		$user   = \Joomla\CMS\Factory::getApplication()->getIdentity();
 		$params = $type->params;
 
 		if(!$params->get('emerald.type_' . $method . '_subscription'))
@@ -59,12 +59,12 @@ class CEmeraldHelper
 	public static function allowField($method, $field, $user_id, $section, $record, $count = TRUE, $apply_count = TRUE)
 	{
 		$em_api = JPATH_ROOT . '/components/com_emerald/api.php';
-		if(!\Joomla\CMS\Filesystem\File::exists($em_api))
+		if(!is_file($em_api))
 		{
 			return TRUE;
 		}
 
-		$user   = \Joomla\CMS\Factory::getUser();
+		$user   = \Joomla\CMS\Factory::getApplication()->getIdentity();
 		$params = $field->params;
 		if(!$params->get('emerald.field_' . $method . '_subscription'))
 		{
@@ -113,7 +113,7 @@ class CEmeraldHelper
 	public static function countLimit($func, $method, $type, $record)
 	{
 		$em_api = JPATH_ROOT . '/components/com_emerald/api.php';
-		if(!\Joomla\CMS\Filesystem\File::exists($em_api))
+		if(!is_file($em_api))
 		{
 			return TRUE;
 		}
@@ -122,7 +122,7 @@ class CEmeraldHelper
 			return;
 		}
 
-		$user   = \Joomla\CMS\Factory::getUser();
+		$user   = \Joomla\CMS\Factory::getApplication()->getIdentity();
 		$params = $type->params;
 		if(!$params->get('emerald.' . $func . '_' . $method . '_subscription'))
 		{
@@ -152,7 +152,7 @@ class CEmeraldHelper
 	public static function getSubscrList($plans, $Itemid)
 	{
 		$em_api = JPATH_ROOT . '/components/com_emerald/api.php';
-		if(!\Joomla\CMS\Filesystem\File::exists($em_api))
+		if(!is_file($em_api))
 		{
 			return TRUE;
 		}

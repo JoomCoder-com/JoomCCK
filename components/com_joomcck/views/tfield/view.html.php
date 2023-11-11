@@ -32,7 +32,7 @@ class JoomcckViewTField extends MViewBase
 		$type_id = $this->item->type_id ? $this->item->type_id  : $this->state->get('filter.type');
 
 		$this->form = $this->get('Form');
-		$this->user = \Joomla\CMS\Factory::getUser();
+		$this->user = \Joomla\CMS\Factory::getApplication()->getIdentity();
 		$params = new \Joomla\CMS\Form\Form('params', array('control' => 'params'));
 		$params->loadFile(JPATH_COMPONENT. '/models/forms/params.field.xml');
 		$this->params_form = $params;

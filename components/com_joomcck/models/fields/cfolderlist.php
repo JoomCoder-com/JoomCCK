@@ -184,7 +184,7 @@ class JFormFieldCFolderList extends JFormFieldList
 
 		$path = $this->directory;
 
-		if (!\Joomla\CMS\Filesystem\Folder::exists($path))
+		if (!is_dir($path))
 		{
 			$path = JPATH_ROOT . '/' . $path;
 		}
@@ -201,7 +201,7 @@ class JFormFieldCFolderList extends JFormFieldList
 		}
 
 		// Get a list of folders in the search path with the given filter.
-		$folders = \Joomla\CMS\Filesystem\Folder::folders($path, $this->filter, $this->recursive, true);
+		$folders = \Joomla\Filesystem\Folder::folders($path, $this->filter, $this->recursive, true);
 
 		// Build the options list from the list of folders.
 		if (is_array($folders))

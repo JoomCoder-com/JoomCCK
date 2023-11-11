@@ -31,7 +31,7 @@ class JoomcckModelTemplates extends MModelAdmin
 
 		$layouts_path = JoomcckTmplHelper::getTmplPath($type);
 		$tmpl_mask = JoomcckTmplHelper::getTmplMask($type);
-		$files = \Joomla\CMS\Filesystem\Folder::files($layouts_path, $tmpl_mask['index_file']);
+		$files = \Joomla\Filesystem\Folder::files($layouts_path, $tmpl_mask['index_file']);
 		foreach($files as $key => $file)
 		{
 			$result[$key] = new stdClass();
@@ -48,7 +48,7 @@ class JoomcckModelTemplates extends MModelAdmin
 			}
 			$file_png = JoomcckTmplHelper::getTmplFile($type, $result[$key]->ident.'.png');
 			$result[$key]->img_path = '';
-			if(\Joomla\CMS\Filesystem\File::exists($file_png))
+			if(is_file($file_png))
 			{
 				$img_path = JoomcckTmplHelper::getTmplImgSrc($type, $result[$key]->ident);
 				$result[$key]->img_path = $img_path;
@@ -60,7 +60,7 @@ class JoomcckModelTemplates extends MModelAdmin
 function parseXMLTemplateFile($path)
 	{
 		// Read the file to see if it's a valid component XML file
-		if(!\Joomla\CMS\Filesystem\File::exists($path))
+		if(!is_file($path))
 		{
 			\Joomla\CMS\Factory::getApplication()->enqueueMessage('File not found: '.$path,'warning');
 			return false;
@@ -97,7 +97,7 @@ function parseXMLTemplateFile($path)
 		$tmp_dest 	= $app->getCfg('tmp_path'). DIRECTORY_SEPARATOR .$userfile['name'];
 		$tmp_src	= $userfile['tmp_name'];
 
-		if(!\Joomla\CMS\Filesystem\File::upload( $tmp_src, $tmp_dest ) ) {
+		if(!\Joomla\Filesystem\File::upload( $tmp_src, $tmp_dest ) ) {
 			Factory::getApplication()->enqueueMessage(\Joomla\CMS\Language\Text::_('C_MASG_TMPLUPLOADFAIL'),'warning');
 			return false;
 		}
@@ -115,34 +115,34 @@ function parseXMLTemplateFile($path)
 			return false;
 		}
 
-		\Joomla\CMS\Filesystem\File::delete($archivename);
+		\Joomla\Filesystem\File::delete($archivename);
 
 		$tmpl_types = JoomcckTmplHelper::getTmplTypes();
 
 		foreach( $tmpl_types as $type ) {
 			$mask = JoomcckTmplHelper::getTmplFullMask($type);
 
-			$files = \Joomla\CMS\Filesystem\Folder::files( $extractdir, $mask['index_file'], true, true );
+			$files = \Joomla\Filesystem\Folder::files( $extractdir, $mask['index_file'], true, true );
 
 			if($files)
 			{
 				foreach( $files as $file ) {
 					echo 'copy: '.$file.'-'.JoomcckTmplHelper::getTmplPath( $type ).strrchr($file, DIRECTORY_SEPARATOR).'<br />';
-					\Joomla\CMS\Filesystem\File::copy( $file, JoomcckTmplHelper::getTmplPath( $type ).strrchr($file, DIRECTORY_SEPARATOR) );
+					\Joomla\Filesystem\File::copy( $file, JoomcckTmplHelper::getTmplPath( $type ).strrchr($file, DIRECTORY_SEPARATOR) );
 				}
 			}
 			if( isset( $mask['folder'] ) ) {
-				$folders = \Joomla\CMS\Filesystem\Folder::folders( $extractdir, $mask['folder'], true, true );
+				$folders = \Joomla\Filesystem\Folder::folders( $extractdir, $mask['folder'], true, true );
 				if($folders)
 				{
 					foreach( $folders as $folder ) {
-						\Joomla\CMS\Filesystem\Folder::copy( $folder, JoomcckTmplHelper::getTmplPath( $type ).strrchr($folder, DIRECTORY_SEPARATOR), '', true );
+						\Joomla\Filesystem\Folder::copy( $folder, JoomcckTmplHelper::getTmplPath( $type ).strrchr($folder, DIRECTORY_SEPARATOR), '', true );
 					}
 				}
 			}
 		}
 
-		\Joomla\CMS\Filesystem\Folder::delete($extractdir);
+		\Joomla\Filesystem\Folder::delete($extractdir);
 
 		return true;
 	}
@@ -159,19 +159,19 @@ function parseXMLTemplateFile($path)
 			if($masks['index_file'])
 			{
 
-				$files = \Joomla\CMS\Filesystem\Folder::files( $layouts_path, $masks['index_file'] );
+				$files = \Joomla\Filesystem\Folder::files( $layouts_path, $masks['index_file'] );
 
 				foreach( $files as $file ){
-					\Joomla\CMS\Filesystem\File::delete( $layouts_path. DIRECTORY_SEPARATOR .$file );
+					\Joomla\Filesystem\File::delete( $layouts_path. DIRECTORY_SEPARATOR .$file );
 				}
 			}
 			if($masks['folder'])
 			{
 
-				$folders = \Joomla\CMS\Filesystem\Folder::folders( $layouts_path, $masks['folder'], false, true );
+				$folders = \Joomla\Filesystem\Folder::folders( $layouts_path, $masks['folder'], false, true );
 
 				foreach( $folders as $folder ){
-					\Joomla\CMS\Filesystem\Folder::delete( $folder );
+					\Joomla\Filesystem\Folder::delete( $folder );
 				}
 			}
 		}
@@ -182,7 +182,7 @@ function parseXMLTemplateFile($path)
 	{
 		$xml = new SimpleXMLElement(file_get_contents($file));
 		$xml->name = $new_name;
-		\Joomla\CMS\Filesystem\File::write($file, $xml->asXML());
+		\Joomla\Filesystem\File::write($file, $xml->asXML());
 
 		return true;
 	}
@@ -283,40 +283,40 @@ function parseXMLTemplateFile($path)
 		}
 		if(!$new_name){
 		$i = 0; $new_name = $matches[1]."_copy_{$i}";
-			while(\Joomla\CMS\Filesystem\File::exists($layouts_path. DIRECTORY_SEPARATOR .sprintf($index_file_name, $new_name) ) ) {
+			while(is_file($layouts_path. DIRECTORY_SEPARATOR .sprintf($index_file_name, $new_name) ) ) {
 				$oi = $i; $i++; $new_name = str_replace("_{$oi}", "_{$i}", $new_name);
 			}
-		} else if( \Joomla\CMS\Filesystem\File::exists($layouts_path. DIRECTORY_SEPARATOR .sprintf($index_file_name, $new_name)) ) {
+		} else if( is_file($layouts_path. DIRECTORY_SEPARATOR .sprintf($index_file_name, $new_name)) ) {
 			Factory::getApplication()->enqueueMessage(\Joomla\CMS\Language\Text::_('C_MSG_TMPLEXISTS'),'warning');
 			return false;
 		}
 
-		$files = \Joomla\CMS\Filesystem\Folder::files( $layouts_path, $file_filter );
+		$files = \Joomla\Filesystem\Folder::files( $layouts_path, $file_filter );
 
 		foreach( $files as $file ){
 			$original_file = $layouts_path. DIRECTORY_SEPARATOR .$file;
 			$new_file      = $layouts_path. DIRECTORY_SEPARATOR .preg_replace ($file_new_tmpl_name[0], sprintf($file_new_tmpl_name[1], $new_name), $file );
-			\Joomla\CMS\Filesystem\File::$func($original_file, $new_file);
+			\Joomla\Filesystem\File::$func($original_file, $new_file);
 		}
 		$configs = JPATH_ROOT.'/components/com_joomcck/configs/';
 
-		if(\Joomla\CMS\Filesystem\File::exists($configs.$folder2.'.json'))
+		if(is_file($configs.$folder2.'.json'))
 		{
-			\Joomla\CMS\Filesystem\File::$func($configs.$folder2.'.json', $configs.$folder.'.json');
+			\Joomla\Filesystem\File::$func($configs.$folder2.'.json', $configs.$folder.'.json');
 		}
 
 		if($matches[2] == 'rating')
 		{
-			$folders = \Joomla\CMS\Filesystem\Folder::folders( $layouts_path, $folder_filter );
+			$folders = \Joomla\Filesystem\Folder::folders( $layouts_path, $folder_filter );
 			foreach( $folders as $folder ){
-				\Joomla\CMS\Filesystem\Folder::$func( $layouts_path. DIRECTORY_SEPARATOR .$folder, $layouts_path. DIRECTORY_SEPARATOR .preg_replace ( $folder_new_ratig_name[0], sprintf($folder_new_ratig_name[1], $new_name), $folder ) );
+				\Joomla\Filesystem\Folder::$func( $layouts_path. DIRECTORY_SEPARATOR .$folder, $layouts_path. DIRECTORY_SEPARATOR .preg_replace ( $folder_new_ratig_name[0], sprintf($folder_new_ratig_name[1], $new_name), $folder ) );
 			}
 		}
 		else
 		{
-			if(\Joomla\CMS\Filesystem\Folder::exists($layouts_path. DIRECTORY_SEPARATOR .str_replace($new_name, $matches[1], $folder)))
+			if(is_dir($layouts_path. DIRECTORY_SEPARATOR .str_replace($new_name, $matches[1], $folder)))
 			{
-				\Joomla\CMS\Filesystem\Folder::$func($layouts_path. DIRECTORY_SEPARATOR .str_replace($new_name, $matches[1], $folder), $layouts_path. DIRECTORY_SEPARATOR .$folder);
+				\Joomla\Filesystem\Folder::$func($layouts_path. DIRECTORY_SEPARATOR .str_replace($new_name, $matches[1], $folder), $layouts_path. DIRECTORY_SEPARATOR .$folder);
 			}
 		}
 

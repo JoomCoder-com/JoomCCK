@@ -41,7 +41,7 @@ class JoomcckControllerTools extends MControllerForm
 
         $file = JPATH_ROOT . '/components/com_joomcck/library/php/tools/' . $name . '/exec.php';
 
-		if(\Joomla\CMS\Filesystem\File::exists($file))
+		if(is_file($file))
 		{
 			include $file;
 		}
@@ -58,7 +58,7 @@ class JoomcckControllerTools extends MControllerForm
 
         $form_data = JPATH_ROOT . '/components/com_joomcck/library/php/tools/' . $name . '/data.json';
 		$content = $params->toString();
-		\Joomla\CMS\Filesystem\File::write($form_data, $content);
+		\Joomla\Filesystem\File::write($form_data, $content);
 		
 		$this->setRedirect($uri->toString());
 		$this->redirect();

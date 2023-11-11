@@ -26,7 +26,7 @@ class JoomcckModelFollows extends MModelList
 
 	public function getCats($section)
 	{
-		$user = \Joomla\CMS\Factory::getUser();
+		$user = \Joomla\CMS\Factory::getApplication()->getIdentity();
 		$db = \Joomla\CMS\Factory::getDbo();
 		$db->setQuery("SELECT cat.id, cat.title, cat.alias, cat.params, cat.path FROM #__js_res_subscribe_cat AS c
 		LEFT JOIN #__js_res_categories AS cat ON cat.id = c.cat_id
@@ -42,7 +42,7 @@ class JoomcckModelFollows extends MModelList
 	}
 	public function getUsers($section)
 	{
-		$user = \Joomla\CMS\Factory::getUser();
+		$user = \Joomla\CMS\Factory::getApplication()->getIdentity();
 		$db = \Joomla\CMS\Factory::getDbo();
 		$db->setQuery("SELECT u_id as id FROM #__js_res_subscribe_user WHERE section_id = {$section->id} AND exclude = ".(int)$section->follow." AND user_id = {$user->id}");
 
@@ -57,21 +57,21 @@ class JoomcckModelFollows extends MModelList
 
 	public function getTotalRecords($section_id)
 	{
-		$user = \Joomla\CMS\Factory::getUser();
+		$user = \Joomla\CMS\Factory::getApplication()->getIdentity();
 		$db = \Joomla\CMS\Factory::getDbo();
 		$db->setQuery("SELECT count(*) FROM #__js_res_record WHERE section_id = {$section_id} AND (user_id = " . $user->get('id') . " OR access IN(".implode(',', $user->getAuthorisedViewLevels())."))");
 		return (int)$db->loadResult();
 	}
 	public function getSubRecords($section_id)
 	{
-		$user = \Joomla\CMS\Factory::getUser();
+		$user = \Joomla\CMS\Factory::getApplication()->getIdentity();
 		$db = \Joomla\CMS\Factory::getDbo();
 		$db->setQuery("SELECT count(*) FROM #__js_res_subscribe WHERE `type` = 'record' AND section_id = {$section_id} AND user_id = {$user->id}");
 		return (int)$db->loadResult();
 	}
 	public function getListQuery()
 	{
-		$user = \Joomla\CMS\Factory::getUser();
+		$user = \Joomla\CMS\Factory::getApplication()->getIdentity();
 
 		//var_dump( MECAccess::allowSales($user));
 

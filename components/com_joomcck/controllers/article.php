@@ -58,7 +58,7 @@ class JoomcckControllerArticle extends MControllerForm
 
 
 		// Initialise variables.
-		$user		= \Joomla\CMS\Factory::getUser();
+		$user		= \Joomla\CMS\Factory::getApplication()->getIdentity();
 		$categoryId	= \Joomla\Utilities\ArrayHelper::getValue($data, 'catid', $this->input->getInt('catid'), 'int');
 		$allow		= null;
 
@@ -89,7 +89,7 @@ class JoomcckControllerArticle extends MControllerForm
 	{
 		// Initialise variables.
 		$recordId	= (int) isset($data[$key]) ? $data[$key] : 0;
-		$user		= \Joomla\CMS\Factory::getUser();
+		$user		= \Joomla\CMS\Factory::getApplication()->getIdentity();
 		$userId		= $user->get('id');
 		$asset		= 'com_content.article.'.$recordId;
 

@@ -18,7 +18,7 @@ class JFormFieldCPasswd extends CFormField
 	public function getInput()
 	{
 		$params = $this->params;
-		$user   = \Joomla\CMS\Factory::getUser();
+		$user   = \Joomla\CMS\Factory::getApplication()->getIdentity();
 		$value  = '';
 		if($this->value && ($params->get('params.show_edit', 0) || in_array($params->get('params.allow_view', 0), $user->getAuthorisedViewLevels())))
 		{
@@ -80,7 +80,7 @@ class JFormFieldCPasswd extends CFormField
 
 	private function _render($client, $record, $type, $section)
 	{
-		$user = \Joomla\CMS\Factory::getUser();
+		$user = \Joomla\CMS\Factory::getApplication()->getIdentity();
 		if(!$this->value)
 		{
 			return;

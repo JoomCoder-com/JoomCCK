@@ -36,7 +36,7 @@ class JoomcckViewForm extends MViewBase
 		// Initialise variables.
 		$app = \Joomla\CMS\Factory::getApplication();
 		$doc = \Joomla\CMS\Factory::getDocument();
-		$user = \Joomla\CMS\Factory::getUser();
+		$user = \Joomla\CMS\Factory::getApplication()->getIdentity();
 
 		MetaHelper::setMeta(array('robots' => 'NOINDEX, NOFOLLOW'));
 
@@ -259,7 +259,7 @@ class JoomcckViewForm extends MViewBase
 		$this->tmpl_params = $tmpl_params;
 
 		$file = dirname(__FILE__) . DIRECTORY_SEPARATOR . 'tmpl/default_form_' . $this->params->get('properties.tmpl_articleform', 'default') . '.css';
-		if (\Joomla\CMS\Filesystem\File::exists($file))
+		if (is_file($file))
 		{
 			$doc->addStyleSheet(JURI::root(TRUE) . '/components/com_joomcck/views/form/tmpl/default_form_' . $this->params->get('properties.tmpl_articleform', 'default') . '.css');
 		}
@@ -507,7 +507,7 @@ class JoomcckViewForm extends MViewBase
 	private function _prepareFields($fields, $section, $item)
 	{
 		$sorted = $fg = array();
-		$user = \Joomla\CMS\Factory::getUser();
+		$user = \Joomla\CMS\Factory::getApplication()->getIdentity();
 		$app = \Joomla\CMS\Factory::getApplication();
 
 		foreach($fields as $key => $field)

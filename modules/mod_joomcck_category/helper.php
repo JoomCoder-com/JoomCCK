@@ -60,7 +60,7 @@ class modJoomcckCategoriesHelper
 	static public function getRecordsNum($section, $cat_id)
 	{
 		$db = \Joomla\CMS\Factory::getDbo();
-		$user = \Joomla\CMS\Factory::getUser();
+		$user = \Joomla\CMS\Factory::getApplication()->getIdentity();
 
 		$sql = $db->getQuery(true);
 		$sql->select('count(*)');

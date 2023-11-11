@@ -16,7 +16,7 @@ class JoomcckViewModerator extends MViewBase
     function display($tpl = null)
     {
         $section_id = \Joomla\CMS\Factory::getApplication()->input->getInt('section_id');
-        $user_id = \Joomla\CMS\Factory::getUser()->get('id');
+        $user_id = \Joomla\CMS\Factory::getApplication()->getIdentity()->get('id');
 
         if(!MECAccess::isModerator($user_id, $section_id))
         {

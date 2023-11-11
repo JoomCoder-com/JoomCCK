@@ -17,7 +17,7 @@ class HTMLFormatHelper
 
 	public static function followsection(&$section)
 	{
-		$user = \Joomla\CMS\Factory::getUser();
+		$user = \Joomla\CMS\Factory::getApplication()->getIdentity();
 
 		if(!$user->get('id'))
 		{
@@ -59,7 +59,7 @@ class HTMLFormatHelper
 
 	public static function followcat($cat_id, $section)
 	{
-		$user = \Joomla\CMS\Factory::getUser();
+		$user = \Joomla\CMS\Factory::getApplication()->getIdentity();
 
 		if(!$user->get('id'))
 		{
@@ -111,7 +111,7 @@ class HTMLFormatHelper
 
 	public static function followuser($user_id, $section)
 	{
-		$user = \Joomla\CMS\Factory::getUser();
+		$user = \Joomla\CMS\Factory::getApplication()->getIdentity();
 
 		if(!$user->get('id'))
 		{
@@ -165,7 +165,7 @@ class HTMLFormatHelper
 
 	public static function follow($record, $section)
 	{
-		$user = \Joomla\CMS\Factory::getUser();
+		$user = \Joomla\CMS\Factory::getApplication()->getIdentity();
 
 		if(!$user->get('id'))
 		{
@@ -226,7 +226,7 @@ class HTMLFormatHelper
 
 	public static function repost($record, $section)
 	{
-		$user = \Joomla\CMS\Factory::getUser();
+		$user = \Joomla\CMS\Factory::getApplication()->getIdentity();
 
 		if(!$user->get('id'))
 		{
@@ -276,7 +276,7 @@ class HTMLFormatHelper
 
 	public static function bookmark($record, $type, $params)
 	{
-		$user = \Joomla\CMS\Factory::getUser();
+		$user = \Joomla\CMS\Factory::getApplication()->getIdentity();
 
 		if(!$user->get('id'))
 		{
@@ -335,7 +335,7 @@ class HTMLFormatHelper
 	{
 		$prefix = \Joomla\CMS\Component\ComponentHelper::getParams('com_joomcck')->get('tmpl_prefix');
 
-		if($prefix && \Joomla\CMS\Filesystem\File::exists(JPATH_COMPONENT . '/layouts/' . $prefix . '-' . $name . '.php'))
+		if($prefix && is_file(JPATH_COMPONENT . '/layouts/' . $prefix . '-' . $name . '.php'))
 		{
 			$name = $prefix . '-' . $name;
 		}
@@ -563,7 +563,7 @@ class HTMLFormatHelper
 
 		$document->addScript(JURI::root(TRUE) . '/components/com_joomcck/library/js/felixrating.js');
 
-		if(\Joomla\CMS\Filesystem\File::exists(JPATH_ROOT . '/components/com_joomcck/library/css/custom.css'))
+		if(is_file(JPATH_ROOT . '/components/com_joomcck/library/css/custom.css'))
 		{
 			$document->addStyleSheet(JURI::root(TRUE) . '/components/com_joomcck/library/css/custom.css');
 		}
@@ -572,7 +572,7 @@ class HTMLFormatHelper
 			$document->addStyleSheet(JURI::root(TRUE) . '/components/com_joomcck/library/css/style.css');
 		}
 
-		if(\Joomla\CMS\Filesystem\File::exists(JPATH_ROOT . '/media/com_joomcck/css/custom.css'))
+		if(is_file(JPATH_ROOT . '/media/com_joomcck/css/custom.css'))
 		{
 			$document->addStyleSheet(\Joomla\CMS\Uri\Uri::root(TRUE) . '/media/com_joomcck/css/custom.css');
 		}

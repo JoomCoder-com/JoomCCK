@@ -44,7 +44,7 @@ abstract class MModelForm extends MModelBase
 		// Only attempt to check the row in if it exists.
 		if ($pk)
 		{
-			$user = \Joomla\CMS\Factory::getUser();
+			$user = \Joomla\CMS\Factory::getApplication()->getIdentity();
 
 			// Get an instance of the row to checkin.
 			$table = $this->getTable();
@@ -108,7 +108,7 @@ abstract class MModelForm extends MModelBase
 				return true;
 			}
 
-			$user = \Joomla\CMS\Factory::getUser();
+			$user = \Joomla\CMS\Factory::getApplication()->getIdentity();
 
 			// Check if this is the user having previously checked out the row.
 			if ($table->checked_out > 0 && $table->checked_out != $user->get('id'))

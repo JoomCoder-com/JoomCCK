@@ -61,10 +61,10 @@ class JFormFieldCDatetime extends CFormField
 
         $doc->addScript(\Joomla\CMS\Uri\Uri::root(true) . '/media/com_joomcck/vendors/moment/min/moment.min.js');
         $doc->addScript(\Joomla\CMS\Uri\Uri::root(true) . '/media/com_joomcck/vendors/moment/locale/en-gb.js');
-        if (\Joomla\CMS\Filesystem\File::exists(JPATH_ROOT . '/media/com_joomcck/vendors/moment/locale/' . $lang . '.js')) {
+        if (is_file(JPATH_ROOT . '/media/com_joomcck/vendors/moment/locale/' . $lang . '.js')) {
             $doc->addScript(\Joomla\CMS\Uri\Uri::root(true) . '/media/com_joomcck/vendors/moment/locale/' . $lang . '.js');
         }
-        if (\Joomla\CMS\Filesystem\File::exists(JPATH_ROOT . '/media/com_joomcck/vendors/moment/locale/' . $short_lang . '.js')) {
+        if (is_file(JPATH_ROOT . '/media/com_joomcck/vendors/moment/locale/' . $short_lang . '.js')) {
             $doc->addScript(\Joomla\CMS\Uri\Uri::root(true) . '/media/com_joomcck/vendors/moment/locale/' . $short_lang . '.js');
         }
         $doc->addScript(\Joomla\CMS\Uri\Uri::root(true) . '/media/com_joomcck/vendors/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js');
@@ -219,10 +219,10 @@ class JFormFieldCDatetime extends CFormField
 
         $doc->addScript(\Joomla\CMS\Uri\Uri::root(true) . '/media/com_joomcck/vendors/moment/min/moment.min.js');
         $doc->addScript(\Joomla\CMS\Uri\Uri::root(true) . '/media/com_joomcck/vendors/moment/locale/en-gb.js');
-        if (\Joomla\CMS\Filesystem\File::exists(JPATH_ROOT . '/media/com_joomcck/vendors/moment/locale/' . $lang . '.js')) {
+        if (is_file(JPATH_ROOT . '/media/com_joomcck/vendors/moment/locale/' . $lang . '.js')) {
             $doc->addScript(\Joomla\CMS\Uri\Uri::root(true) . '/media/com_joomcck/vendors/moment/locale/' . $lang . '.js');
         }
-        if (\Joomla\CMS\Filesystem\File::exists(JPATH_ROOT . '/media/com_joomcck/vendors/moment/locale/' . $short_lang . '.js')) {
+        if (is_file(JPATH_ROOT . '/media/com_joomcck/vendors/moment/locale/' . $short_lang . '.js')) {
             $doc->addScript(\Joomla\CMS\Uri\Uri::root(true) . '/media/com_joomcck/vendors/moment/locale/' . $short_lang . '.js');
         }
         $doc->addScript(\Joomla\CMS\Uri\Uri::root(true) . '/media/com_joomcck/vendors/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js');

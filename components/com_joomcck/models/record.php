@@ -32,7 +32,7 @@ class JoomcckModelRecord extends MModelItem
 		// Initialise variables.
 		$pk = (!empty($pk)) ? $pk : (int)$this->getState('com_joomcck.record.id');
 
-		$user = \Joomla\CMS\Factory::getUser();
+		$user = \Joomla\CMS\Factory::getApplication()->getIdentity();
 
 		if(isset($this->_item[$pk]))
 		{
@@ -104,7 +104,7 @@ class JoomcckModelRecord extends MModelItem
 
 		if(!$user)
 		{
-			$user = \Joomla\CMS\Factory::getUser();
+			$user = \Joomla\CMS\Factory::getApplication()->getIdentity();
 		}
 		if(!$fields_model)
 		{
@@ -351,7 +351,7 @@ class JoomcckModelRecord extends MModelItem
 
 	private function _controls($record, $type, $section, $notitle = FALSE)
 	{
-		$user = \Joomla\CMS\Factory::getUser();
+		$user = \Joomla\CMS\Factory::getApplication()->getIdentity();
 		$app  = \Joomla\CMS\Factory::getApplication();
 		$view = $app->input->getString('view');
 		static $lognums = array();
@@ -547,7 +547,7 @@ class JoomcckModelRecord extends MModelItem
 		}
 
 
-		$user   = \Joomla\CMS\Factory::getUser();
+		$user   = \Joomla\CMS\Factory::getApplication()->getIdentity();
 		$config = \Joomla\CMS\Factory::getConfig();
 
 		$cookie_domain = $config->get('cookie_domain', '');

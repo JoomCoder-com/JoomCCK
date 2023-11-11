@@ -21,7 +21,7 @@ class JoomcckViewImport extends MViewBase
 	public function display($tpl = null)
 	{
 		$app = \Joomla\CMS\Factory::getApplication();
-		$this->user = \Joomla\CMS\Factory::getUser();
+		$this->user = \Joomla\CMS\Factory::getApplication()->getIdentity();
 		
 		$section = ItemsStore::getSection($app->input->get('section_id'));
 		$this->section = $section;

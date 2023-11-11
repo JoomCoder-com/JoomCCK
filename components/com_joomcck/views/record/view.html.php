@@ -20,7 +20,7 @@ class JoomcckViewRecord extends MViewBase
 
 		$app  = \Joomla\CMS\Factory::getApplication();
 		$doc  = \Joomla\CMS\Factory::getDocument();
-		$user = \Joomla\CMS\Factory::getUser();
+		$user = \Joomla\CMS\Factory::getApplication()->getIdentity();
 
 		$tmpl_params = array();
 		$category    = NULL;
@@ -219,7 +219,7 @@ class JoomcckViewRecord extends MViewBase
 		{
 			return TRUE;
 		}
-		$user = \Joomla\CMS\Factory::getUser();
+		$user = \Joomla\CMS\Factory::getApplication()->getIdentity();
 
 		if(MECAccess::allowRestricted($user, $section))
 		{
@@ -259,7 +259,7 @@ class JoomcckViewRecord extends MViewBase
 
 	private function _checkItemAccess($item, $section)
 	{
-		$user  = \Joomla\CMS\Factory::getUser();
+		$user  = \Joomla\CMS\Factory::getApplication()->getIdentity();
 		$error = TRUE;
 		$app   = \Joomla\CMS\Factory::getApplication();
 		$db    = \Joomla\CMS\Factory::getDbo();

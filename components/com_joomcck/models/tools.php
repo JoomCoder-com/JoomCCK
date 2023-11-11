@@ -56,12 +56,12 @@ class JoomcckModelTools extends JModelAdmin
 		$form_data = JPATH_ROOT . '/components/com_joomcck/library/php/tools/' . $tool->name . '/data.json';
 
         $form = '';
-		if(\Joomla\CMS\Filesystem\File::exists($form_file))
+		if(is_file($form_file))
 		{
-			if(!\Joomla\CMS\Filesystem\File::exists($form_data))
+			if(!is_file($form_data))
 			{
 				$a = '{}';
-				\Joomla\CMS\Filesystem\File::write($form_data, $a);
+				\Joomla\Filesystem\File::write($form_data, $a);
 			}
 
 			$params = new \Joomla\Registry\Registry();
@@ -107,7 +107,7 @@ class JoomcckModelTools extends JModelAdmin
 
 		foreach($folders AS $key => $folder)
 		{
-			if(!\Joomla\CMS\Filesystem\Folder::exists($folder))
+			if(!is_dir($folder))
 			{
 				continue;
 			}

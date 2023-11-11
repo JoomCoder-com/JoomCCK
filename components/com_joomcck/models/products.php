@@ -15,7 +15,7 @@ class JoomcckModelProducts extends MModelList
     
 	public function getListQuery()
 	{
-		$user = \Joomla\CMS\Factory::getUser();
+		$user = \Joomla\CMS\Factory::getApplication()->getIdentity();
 		$db = \Joomla\CMS\Factory::getDbo();
 		$orders_model = MModelBase::getInstance('Orders', 'JoomcckModel');
 		

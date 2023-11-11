@@ -146,7 +146,7 @@ class JFormFieldCobTmplList extends JFormFieldList
 		//JHtmlSelect::genericlist()
 		$path = $this->directory;
 
-        if (!\Joomla\CMS\Filesystem\Folder::exists($path)) {
+        if (!is_dir($path)) {
             $path = JPATH_ROOT . '/' . $path;
         }
 
@@ -154,7 +154,7 @@ class JFormFieldCobTmplList extends JFormFieldList
 		$xml = $path.DIRECTORY_SEPARATOR.str_replace('.php', '.xml', $this->value ?: $this->default);
 
 
-		if(\Joomla\CMS\Filesystem\File::exists($xml)) {
+		if(is_file($xml)) {
 			$icon = HTMLFormatHelper::icon('gear.png');
 			$parts = explode('/', $this->directory);
 
@@ -293,7 +293,7 @@ EOT;
 
         $path = $this->directory;
 
-        if (!\Joomla\CMS\Filesystem\Folder::exists($path)) {
+        if (!is_dir($path)) {
             $path = JPATH_ROOT . '/' . $path;
         }
 
@@ -309,7 +309,7 @@ EOT;
         }
 
         // Get a list of files in the search path with the given filter.
-        $files = \Joomla\CMS\Filesystem\Folder::files($path, $this->filter);
+        $files = \Joomla\Filesystem\Folder::files($path, $this->filter);
 
         // Build the options list from the list of files.
         if (is_array($files)) {
@@ -323,7 +323,7 @@ EOT;
 
                 // If the extension is to be stripped, do it.
                 if ($this->stripExt) {
-                    $file = \Joomla\CMS\Filesystem\File::stripExt($file);
+                    $file = \Joomla\Filesystem\File::stripExt($file);
                 }
 
                 $options[] = \Joomla\CMS\HTML\HTMLHelper::_('select.option', $file, $file);

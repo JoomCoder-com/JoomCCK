@@ -36,7 +36,7 @@ class JFormFieldCRecords extends CFormField
 		$ids       = array();
 		$user_id   = NULL;
 		$view_what = $this->params->get('params.list_type', '');
-		$user      = \Joomla\CMS\Factory::getUser();
+		$user      = \Joomla\CMS\Factory::getApplication()->getIdentity();
 		$app       = \Joomla\CMS\Factory::getApplication();
 
 		switch($view_what)

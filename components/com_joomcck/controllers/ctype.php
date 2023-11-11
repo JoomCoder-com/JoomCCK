@@ -33,7 +33,7 @@ class JoomcckControllerCType extends MControllerForm
 
 	protected function allowAdd($data = array())
 	{
-		$user  = \Joomla\CMS\Factory::getUser();
+		$user  = \Joomla\CMS\Factory::getApplication()->getIdentity();
 		$allow = $user->authorise('core.create', 'com_joomcck.ctypes');
 
 		if($allow === NULL)
@@ -48,7 +48,7 @@ class JoomcckControllerCType extends MControllerForm
 
 	protected function allowEdit($data = array(), $key = 'id')
 	{
-		return \Joomla\CMS\Factory::getUser()->authorise('core.edit', 'com_joomcck.ctypes');
+		return \Joomla\CMS\Factory::getApplication()->getIdentity()->authorise('core.edit', 'com_joomcck.ctypes');
 	}
 
 	public function postSaveHook(MModelBase $model, $validData = array())
@@ -119,11 +119,11 @@ class JoomcckControllerCType extends MControllerForm
 
 		$file = JPATH_ROOT . "/components/com_joomcck/configs/default_{$name}_{$tmpl_name}.json";
 
-		if(\Joomla\CMS\Filesystem\File::exists($file))
+		if(is_file($file))
 		{
 			$tmpl = explode('.', $tmpl_name);
 			$dest = JPATH_ROOT . "/components/com_joomcck/configs/default_{$name}_{$tmpl[0]}.{$key}.json";
-			\Joomla\CMS\Filesystem\File::copy($file, $dest);
+			\Joomla\Filesystem\File::copy($file, $dest);
 
 			$params->set('properties.tmpl_' . $name, $tmpl[0] . '.' . $key);
 		}

@@ -68,14 +68,14 @@ class JoomcckModelSection extends MModelAdmin
 
 	protected function canDelete($record)
 	{
-		$user = \Joomla\CMS\Factory::getUser();
+		$user = \Joomla\CMS\Factory::getApplication()->getIdentity();
 
 		return $user->authorise('core.delete', 'com_joomcck.section.' . (int)$record->id);
 	}
 
 	protected function canEditState($record)
 	{
-		$user = \Joomla\CMS\Factory::getUser();
+		$user = \Joomla\CMS\Factory::getApplication()->getIdentity();
 
 		return $user->authorise('core.edit.state', 'com_joomcck.section.' . (int)$record->id);
 	}
@@ -125,7 +125,7 @@ class JoomcckModelSection extends MModelAdmin
 
 	public function countUserRecords($section_id, $type_id = NULL, $byday = FALSE)
 	{
-		$user = \Joomla\CMS\Factory::getUser();
+		$user = \Joomla\CMS\Factory::getApplication()->getIdentity();
 
 		$query = $this->_db->getQuery(TRUE);
 

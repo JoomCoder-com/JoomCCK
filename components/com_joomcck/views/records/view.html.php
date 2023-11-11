@@ -21,7 +21,7 @@ class JoomcckViewRecords extends MViewBase
 	{
 		$app         = \Joomla\CMS\Factory::getApplication();
 		$doc         = \Joomla\CMS\Factory::getDocument();
-		$user        = \Joomla\CMS\Factory::getUser();
+		$user        = \Joomla\CMS\Factory::getApplication()->getIdentity();
 		$this->model = $this->getModel();
 		$menus       = $app->getMenu();
 
@@ -840,7 +840,7 @@ class JoomcckViewRecords extends MViewBase
 		$tmpl = explode('.', $name);
 		$tmpl = $tmpl[0];
 
-		if(!\Joomla\CMS\Filesystem\File::exists("{$dir}default_list_{$tmpl}.php"))
+		if(!is_file("{$dir}default_list_{$tmpl}.php"))
 		{
 			$name = 'default';
 		}
@@ -881,7 +881,7 @@ class JoomcckViewRecords extends MViewBase
 
 	public function _dataShow(&$query)
 	{
-		$user = \Joomla\CMS\Factory::getUser();
+		$user = \Joomla\CMS\Factory::getApplication()->getIdentity();
 		if(!in_array($this->section->params->get('general.show_restrict'), $user->getAuthorisedViewLevels()))
 		{
 			$query->where("access IN(" . implode(',', $user->getAuthorisedViewLevels()) . ")");
@@ -1004,7 +1004,7 @@ class JoomcckViewRecords extends MViewBase
 			$tmpl = $tmpl[0];
 
 			$path = JPATH_ROOT . '/components/com_joomcck/views/records/tmpl/default_list_' . $tmpl . '.xml';
-			if(!\Joomla\CMS\Filesystem\File::exists($path))
+			if(!is_file($path))
 			{
 
 				\Joomla\CMS\Factory::getApplication()->enqueueMessage('Template XML file not found: ' . $path);

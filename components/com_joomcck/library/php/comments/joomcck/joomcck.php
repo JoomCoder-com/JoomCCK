@@ -53,7 +53,7 @@ class JoomcckCommentsJoomcck extends JoomcckComments
 			return;
 		}
 
-		$data->user   = \Joomla\CMS\Factory::getUser();
+		$data->user   = \Joomla\CMS\Factory::getApplication()->getIdentity();
 		if(!in_array($data->params->get('comments.access', 1), $data->user->getAuthorisedViewLevels()))
 		{
 			return;

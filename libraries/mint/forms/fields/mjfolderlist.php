@@ -110,7 +110,7 @@ class JFormFieldMjfolderList extends JFormFieldList
 		}
 
 		// Get a list of folders in the search path with the given filter.
-		$folders = \Joomla\CMS\Filesystem\Folder::folders($path, $filter);
+		$folders = \Joomla\Filesystem\Folder::folders($path, $filter);
 
 		// Build the options list from the list of folders.
 		if (is_array($folders))

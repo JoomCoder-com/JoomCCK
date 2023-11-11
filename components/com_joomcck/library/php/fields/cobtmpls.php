@@ -99,7 +99,7 @@ class JFormFieldCobtmpls extends JFormFieldList
 		    $tmpl_mask    = MRtemplates::getTmplMask( $type );
         }
 
-		$files   = \Joomla\CMS\Filesystem\Folder::files($layouts_path, $tmpl_mask['index_file']);
+		$files   = \Joomla\Filesystem\Folder::files($layouts_path, $tmpl_mask['index_file']);
 		$exclude = explode(',', (string) $this->element['exclude']);
 
 		$md5id = $this->_getKey();

@@ -32,12 +32,12 @@ class packInstallerScript
         $this->key = (string) $adapter->getParent()->manifest->key;
 
         define('PACKS_PATH', JPATH_ADMINISTRATOR . DIRECTORY_SEPARATOR . 'components/com_joomcck/packs');
-        if (!\Joomla\CMS\Filesystem\Folder::exists(PACKS_PATH)) {
-            \Joomla\CMS\Filesystem\Folder::create(PACKS_PATH);
+        if (!is_dir(PACKS_PATH)) {
+            \Joomla\Filesystem\Folder::create(PACKS_PATH);
         }
         $this->isNew = false;
         $this->id    = [];
-        if (!\Joomla\CMS\Filesystem\File::exists(PACKS_PATH . DIRECTORY_SEPARATOR . $this->key . '.json')) {
+        if (!is_file(PACKS_PATH . DIRECTORY_SEPARATOR . $this->key . '.json')) {
             $this->isNew = true;
         } else {
             $ids       = file_get_contents(PACKS_PATH . DIRECTORY_SEPARATOR . $this->key . '.json');
@@ -233,14 +233,14 @@ class packInstallerScript
     private function _end()
     {
         $content = json_encode($this->ids);
-        \Joomla\CMS\Filesystem\File::write(PACKS_PATH . DIRECTORY_SEPARATOR . $this->key . '.json', $content);
+        \Joomla\Filesystem\File::write(PACKS_PATH . DIRECTORY_SEPARATOR . $this->key . '.json', $content);
 
-        if (\Joomla\CMS\Filesystem\Folder::exists(JPATH_ADMINISTRATOR . DIRECTORY_SEPARATOR . 'components/com_joomcck/packs' . DIRECTORY_SEPARATOR . $this->key)) {
-            \Joomla\CMS\Filesystem\Folder::delete(JPATH_ADMINISTRATOR . DIRECTORY_SEPARATOR . 'components/com_joomcck/packs' . DIRECTORY_SEPARATOR . $this->key);
+        if (is_dir(JPATH_ADMINISTRATOR . DIRECTORY_SEPARATOR . 'components/com_joomcck/packs' . DIRECTORY_SEPARATOR . $this->key)) {
+            \Joomla\Filesystem\Folder::delete(JPATH_ADMINISTRATOR . DIRECTORY_SEPARATOR . 'components/com_joomcck/packs' . DIRECTORY_SEPARATOR . $this->key);
         }
 
         // create empty folder for correct uninstall pack from extension manager
-        \Joomla\CMS\Filesystem\Folder::create(JPATH_ADMINISTRATOR . DIRECTORY_SEPARATOR . 'components/com_joomcck/packs' . DIRECTORY_SEPARATOR . $this->key);
+        \Joomla\Filesystem\Folder::create(JPATH_ADMINISTRATOR . DIRECTORY_SEPARATOR . 'components/com_joomcck/packs' . DIRECTORY_SEPARATOR . $this->key);
     }
 
     private function _touchConfigs()
@@ -248,7 +248,7 @@ class packInstallerScript
         $content = $this->_getObject('configs');
         foreach ($content as $config) {
             $file = JPATH_ROOT . '/components/com_joomcck/configs/' . $config . '.json';
-            if (!\Joomla\CMS\Filesystem\File::exists($file)) {
+            if (!is_file($file)) {
                 continue;
             }
 
@@ -269,7 +269,7 @@ class packInstallerScript
                 }
             }
             $array = json_encode($array);
-            \Joomla\CMS\Filesystem\File::write($file, $array);
+            \Joomla\Filesystem\File::write($file, $array);
         }
     }
 
@@ -315,7 +315,7 @@ class packInstallerScript
     private function _touchFile($file)
     {
         $php = $file . '.php';
-        if (\Joomla\CMS\Filesystem\File::exists($php)) {
+        if (is_file($php)) {
             $content = $original = file_get_contents($php);
 
             foreach ($this->ids['fields'] as $old_id => $new_id) {
@@ -329,7 +329,7 @@ class packInstallerScript
             }
 
             if (md5($original) != md5($content)) {
-                \Joomla\CMS\Filesystem\File::write($php, $content);
+                \Joomla\Filesystem\File::write($php, $content);
             }
         }
     }
@@ -567,21 +567,21 @@ class packInstallerScript
     private function _moveFiles()
     {
         $pack_usercategories_path = JPATH_ADMINISTRATOR . '/components/com_joomcck/packs/' . $this->key . '/usercategories';
-        if (\Joomla\CMS\Filesystem\Folder::exists($pack_usercategories_path)) {
-            $folders = \Joomla\CMS\Filesystem\Folder::folders($pack_usercategories_path);
+        if (is_dir($pack_usercategories_path)) {
+            $folders = \Joomla\Filesystem\Folder::folders($pack_usercategories_path);
             foreach ($folders as $folder) {
                 $new_foldername = $this->ids['users'][$folder];
                 $path           = JPATH_ROOT . '/images/usercategories/' . $new_foldername;
-                if (!\Joomla\CMS\Filesystem\Folder::exists($path)) {
-                    \Joomla\CMS\Filesystem\Folder::create($path);
+                if (!is_dir($path)) {
+                    \Joomla\Filesystem\Folder::create($path);
                 }
-                $files = \Joomla\CMS\Filesystem\Folder::files($pack_usercategories_path . DIRECTORY_SEPARATOR . $folder);
+                $files = \Joomla\Filesystem\Folder::files($pack_usercategories_path . DIRECTORY_SEPARATOR . $folder);
                 foreach ($files as $file) {
-                    $ext          = \Joomla\CMS\Filesystem\File::getExt($file);
+                    $ext          = \Joomla\Filesystem\File::getExt($file);
                     $ucid         = str_replace('.' . $ext, '', $file);
                     $new_filename = $this->ids['category_user'][$ucid];
                     $dest         = JPATH_ROOT . '/images/usercategories' . DIRECTORY_SEPARATOR . $new_foldername . DIRECTORY_SEPARATOR . $new_filename . '.' . $ext;
-                    \Joomla\CMS\Filesystem\File::copy($pack_usercategories_path . DIRECTORY_SEPARATOR . $folder . DIRECTORY_SEPARATOR . $file, $dest, '', true);
+                    \Joomla\Filesystem\File::copy($pack_usercategories_path . DIRECTORY_SEPARATOR . $folder . DIRECTORY_SEPARATOR . $file, $dest, '', true);
                 }
             }
         }
@@ -590,7 +590,7 @@ class packInstallerScript
     private function _getObject($name, $assoc = false)
     {
         $file = JPATH_ADMINISTRATOR . '/components/com_joomcck/packs/' . $this->key . '/' . $name . '.json';
-        if (!\Joomla\CMS\Filesystem\File::exists($file)) {
+        if (!is_file($file)) {
             return [];
         }
         $content = file_get_contents($file);

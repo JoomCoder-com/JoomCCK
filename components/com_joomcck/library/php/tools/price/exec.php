@@ -24,7 +24,7 @@ if($file['error'] > 0 OR $file['size'] == 0)
 	return FALSE;
 }
 
-if(strtolower(\Joomla\CMS\Filesystem\File::getExt($file['name'])) != 'json')
+if(strtolower(\Joomla\Filesystem\File::getExt($file['name'])) != 'json')
 {
 	$app->enqueueMessage('Error: wrong file extension. Could be only JSON!', 'error');
 
@@ -38,7 +38,7 @@ if(!$params->get('field_id_price') || !$params->get('field_id_article') || !$par
 	return FALSE;
 }
 
-if(!\Joomla\CMS\Filesystem\File::upload($file['tmp_name'], JPATH_ROOT . DIRECTORY_SEPARATOR . 'tmp/'.$file['name']))
+if(!\Joomla\Filesystem\File::upload($file['tmp_name'], JPATH_ROOT . DIRECTORY_SEPARATOR . 'tmp/'.$file['name']))
 {
 	$app->enqueueMessage('Error: cannot move file!', 'error');
 

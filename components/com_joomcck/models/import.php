@@ -14,7 +14,7 @@ class JoomcckModelImport extends MModelList
 	public function getPresets()
 	{
 		$this->_db->setQuery("SELECT id as value, name as text FROM #__js_res_import WHERE section_id = " .
-			\Joomla\CMS\Factory::getApplication()->input->get('section_id') . " AND user_id = " . \Joomla\CMS\Factory::getUser()->get('id', 0));
+			\Joomla\CMS\Factory::getApplication()->input->get('section_id') . " AND user_id = " . \Joomla\CMS\Factory::getApplication()->getIdentity()->get('id', 0));
 
 		return $this->_db->loadObjectList();
 	}

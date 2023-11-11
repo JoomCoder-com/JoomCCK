@@ -462,7 +462,7 @@ abstract class MModelBase extends JObject
 		// Only attempt to check the row in if it exists.
 		if ($version_id)
 		{
-			$user = \Joomla\CMS\Factory::getUser();
+			$user = \Joomla\CMS\Factory::getApplication()->getIdentity();
 
 			// Get an instance of the row to checkout.
 			$historyTable = \Joomla\CMS\Table\Table::getInstance('Contenthistory');

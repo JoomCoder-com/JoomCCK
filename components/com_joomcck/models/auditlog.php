@@ -79,7 +79,7 @@ class JoomcckModelAuditlog extends MModelList
 
 	public function getListQuery()
 	{
-		$user  = \Joomla\CMS\Factory::getUser();
+		$user  = \Joomla\CMS\Factory::getApplication()->getIdentity();
 		$db    = $this->getDbo();
 		$query = $db->getQuery(TRUE);
 

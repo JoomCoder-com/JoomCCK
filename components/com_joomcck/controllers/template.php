@@ -33,7 +33,7 @@ class JoomcckControllerTemplate extends MControllerForm
 
 	protected function allowAdd($data = array())
 	{
-		$user  = \Joomla\CMS\Factory::getUser();
+		$user  = \Joomla\CMS\Factory::getApplication()->getIdentity();
 		$allow = $user->authorise('core.create', 'com_joomcck.template');
 
 		if($allow === NULL)
@@ -48,7 +48,7 @@ class JoomcckControllerTemplate extends MControllerForm
 
 	protected function allowEdit($data = array(), $key = 'id')
 	{
-		return \Joomla\CMS\Factory::getUser()->authorise('core.edit', 'com_joomcck.template');
+		return \Joomla\CMS\Factory::getApplication()->getIdentity()->authorise('core.edit', 'com_joomcck.template');
 	}
 
 	public function postSaveHook(MModelBase $model, $validData = array())
@@ -63,7 +63,7 @@ class JoomcckControllerTemplate extends MControllerForm
 		$file     = explode('.', $data['ident']);
 		$filename = JoomcckTmplHelper::getTmplFile($file[1], $file[0]) . '.' . $this->input->get('ext');
 
-		if(!\Joomla\CMS\Filesystem\File::write($filename, $data['source']))
+		if(!\Joomla\Filesystem\File::write($filename, $data['source']))
 		{
 
 			Factory::getApplication()->enqueueMessage(\Joomla\CMS\Language\Text::_('CCOULDNOTSAVEFILE'),'warning');

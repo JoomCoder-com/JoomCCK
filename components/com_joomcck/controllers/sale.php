@@ -59,7 +59,7 @@ class JoomcckControllerSale extends MControllerForm
 
 	protected function allowAdd($data = array(), $key = 'id')
 	{
-		$user = \Joomla\CMS\Factory::getUser();
+		$user = \Joomla\CMS\Factory::getApplication()->getIdentity();
 		$allow = $user->authorise('core.create', 'com_joomcck.sale');
 
 		if($allow === null)
@@ -74,7 +74,7 @@ class JoomcckControllerSale extends MControllerForm
 
 	protected function allowEdit($data = array(), $key = 'id')
 	{
-		return \Joomla\CMS\Factory::getUser()->authorise('core.edit', 'com_joomcck.sale');
+		return \Joomla\CMS\Factory::getApplication()->getIdentity()->authorise('core.edit', 'com_joomcck.sale');
 	}
 
 	protected function getRedirectToItemAppend($recordId = null, $urlVar = 'id')
@@ -90,7 +90,7 @@ class JoomcckControllerSale extends MControllerForm
 	{
 		$this->setRedirect(\Joomla\CMS\Router\Route::_('index.php?option=com_joomcck&view=elements&layout=saler', FALSE));
 
-		$user = \Joomla\CMS\Factory::getUser();
+		$user = \Joomla\CMS\Factory::getApplication()->getIdentity();
 
 		if(!$user->get('id'))
 		{
@@ -150,7 +150,7 @@ class JoomcckControllerSale extends MControllerForm
 		$user_ids = \Joomla\Utilities\ArrayHelper::toInteger($user_ids);
 		ArrayHelper::clean_r($user_ids);
 
-		return (in_array(\Joomla\CMS\Factory::getUser()->get('id'), $user_ids));
+		return (in_array(\Joomla\CMS\Factory::getApplication()->getIdentity()->get('id'), $user_ids));
 	}
 
 	public function clean()

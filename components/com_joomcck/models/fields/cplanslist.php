@@ -32,7 +32,7 @@ class JFormFieldCPlanslist extends JFormFieldList
 	protected function getInput()
 	{
 		$file = JPATH_ROOT.'/components/com_emerald/models/fields/planslist.php';
-		if(\Joomla\CMS\Filesystem\File::exists($file) && \Joomla\CMS\Component\ComponentHelper::isEnabled('com_emerald'))
+		if(is_file($file) && \Joomla\CMS\Component\ComponentHelper::isEnabled('com_emerald'))
 		{
 			include_once $file;
 			$element = new JFormFieldPlanslist($this->form);

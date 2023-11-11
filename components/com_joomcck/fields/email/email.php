@@ -26,7 +26,7 @@ class JFormFieldCEmail extends CFormField
 	{
 		$document = \Joomla\CMS\Factory::getDocument();
 		$document->addScript(JURI::root(TRUE) . '/components/com_joomcck/fields/email/email.js');
-		$user = \Joomla\CMS\Factory::getUser();
+		$user = \Joomla\CMS\Factory::getApplication()->getIdentity();
 
 		if($this->params->get('params.enter_mail', 1) && in_array($this->params->get('params.enter_mail', 1), $user->getAuthorisedViewLevels()))
 		{
@@ -121,7 +121,7 @@ class JFormFieldCEmail extends CFormField
 		$uri      = \Joomla\CMS\Uri\Uri::getInstance();
 
 		$this->author = \Joomla\CMS\Factory::getUser($record->user_id);
-		$this->user   = \Joomla\CMS\Factory::getUser();
+		$this->user   = \Joomla\CMS\Factory::getApplication()->getIdentity();
 		$this->url    = $uri->toString();
 
 		return $this->_display_output($client, $record, $type, $section);
@@ -130,7 +130,7 @@ class JFormFieldCEmail extends CFormField
 
 	public function _sendEmail($post, $record)
 	{
-		$user   = \Joomla\CMS\Factory::getUser();
+		$user   = \Joomla\CMS\Factory::getApplication()->getIdentity();
 		$app    = \Joomla\CMS\Factory::getApplication();
 		$config = \Joomla\CMS\Factory::getConfig();
 
@@ -170,7 +170,7 @@ class JFormFieldCEmail extends CFormField
 
 		ob_start();
 		$tpath = JPATH_THEMES . '/' . \Joomla\CMS\Factory::getApplication()->getTemplate() . '/html/com_joomcck/fields/email/email/' . $this->params->get('params.template_body', 'default.php');
-		if(!\Joomla\CMS\Filesystem\File::exists($tpath))
+		if(!is_file($tpath))
 		{
 			$tpath = JPATH_ROOT . '/components/com_joomcck/fields/email/tmpl/email/' . $this->params->get('params.template_body', 'default.php');
 		}
@@ -321,7 +321,7 @@ class JFormFieldCEmail extends CFormField
 			{
 				continue;
 			}
-			$ext = \Joomla\CMS\Filesystem\File::getExt($file['name']);
+			$ext = \Joomla\Filesystem\File::getExt($file['name']);
 			ArrayHelper::clean_r($formats);
 			if(!in_array(strtolower($ext), $formats))
 			{
@@ -330,9 +330,9 @@ class JFormFieldCEmail extends CFormField
 
 				return FALSE;
 			}
-			if(\Joomla\CMS\Filesystem\File::exists($file['tmp_name']))
+			if(is_file($file['tmp_name']))
 			{
-				\Joomla\CMS\Filesystem\File::copy($file['tmp_name'], JPATH_CACHE . DIRECTORY_SEPARATOR . $file['name']);
+				\Joomla\Filesystem\File::copy($file['tmp_name'], JPATH_CACHE . DIRECTORY_SEPARATOR . $file['name']);
 				$mail->addAttachment(JPATH_CACHE . DIRECTORY_SEPARATOR . $file['name']);
 			}
 		}
@@ -378,7 +378,7 @@ class JFormFieldCEmail extends CFormField
 
 		$acemail = JPATH_ADMINISTRATOR . '/components/com_acymailing/helpers/helper.php';
 
-		if($this->params->get('params.acemail') && \Joomla\CMS\Filesystem\File::exists($acemail))
+		if($this->params->get('params.acemail') && is_file($acemail))
 		{
 			include_once $acemail;
 			$myUser          = new stdClass();
@@ -396,7 +396,7 @@ class JFormFieldCEmail extends CFormField
 		$document = \Joomla\CMS\Factory::getDocument();
 		$document->addScript(JURI::root(TRUE) . '/components/com_joomcck/fields/email/email.js');
 		$author = \Joomla\CMS\Factory::getUser($record->user_id);
-		$user   = \Joomla\CMS\Factory::getUser();
+		$user   = \Joomla\CMS\Factory::getApplication()->getIdentity();
 		$params = $this->params;
 		$app    = \Joomla\CMS\Factory::getApplication();
 

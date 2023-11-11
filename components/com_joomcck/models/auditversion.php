@@ -23,7 +23,7 @@ class JoomcckModelAuditversion extends MModelAdmin
 	public function &getItem($version = 0, $record_id = 0)
 	{
 		// Initialise variables.
-		$user = \Joomla\CMS\Factory::getUser();
+		$user = \Joomla\CMS\Factory::getApplication()->getIdentity();
 
 		try
 		{

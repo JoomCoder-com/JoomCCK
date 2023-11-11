@@ -192,7 +192,7 @@ class MControllerForm extends MControllerBase
 	 */
 	protected function allowAdd($data = array())
 	{
-		$user = \Joomla\CMS\Factory::getUser();
+		$user = \Joomla\CMS\Factory::getApplication()->getIdentity();
 		return ($user->authorise('core.create', $this->option) || count($user->getAuthorisedCategories($this->option, 'core.create')));
 	}
 
@@ -210,7 +210,7 @@ class MControllerForm extends MControllerBase
 	 */
 	protected function allowEdit($data = array(), $key = 'id')
 	{
-		return \Joomla\CMS\Factory::getUser()->authorise('core.edit', $this->option);
+		return \Joomla\CMS\Factory::getApplication()->getIdentity()->authorise('core.edit', $this->option);
 	}
 
 	/**

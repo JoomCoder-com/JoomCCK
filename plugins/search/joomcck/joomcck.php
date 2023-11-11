@@ -24,7 +24,7 @@ class plgSearchJoomcck extends JPlugin
 
 			if($this->params->get('show_restricted', 1) == 0)
 			{
-				$sql .= ' AND access IN('.implode(',', \Joomla\CMS\Factory::getUser()->getAuthorisedViewLevels()).')';
+				$sql .= ' AND access IN('.implode(',', \Joomla\CMS\Factory::getApplication()->getIdentity()->getAuthorisedViewLevels()).')';
 			}
 
 			$sections = (array)$this->params->get('sections', array());
@@ -57,7 +57,7 @@ class plgSearchJoomcck extends JPlugin
 		
 		$db = \Joomla\CMS\Factory::getDbo();
 		$app = \Joomla\CMS\Factory::getApplication();
-		$user = \Joomla\CMS\Factory::getUser();
+		$user = \Joomla\CMS\Factory::getApplication()->getIdentity();
 		$groups = implode(',', $user->getAuthorisedViewLevels());
 		$tag = \Joomla\CMS\Factory::getLanguage()->getTag();
 		

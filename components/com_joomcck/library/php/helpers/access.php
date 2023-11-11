@@ -16,7 +16,7 @@ class MECAccess
 {
 	public static function allowCommentPost($type, $item)
 	{
-		$user = \Joomla\CMS\Factory::getUser();
+		$user = \Joomla\CMS\Factory::getApplication()->getIdentity();
 
 		if(self::allowCommentModer($type, $item))
 		{
@@ -30,7 +30,7 @@ class MECAccess
 	}
 	public static function allowCommentModer($type, $item, $section = NULL)
 	{
-		$user = \Joomla\CMS\Factory::getUser();
+		$user = \Joomla\CMS\Factory::getApplication()->getIdentity();
 
 
 		if(in_array($type->params->get('comments.comments_access_moderate'), $user->getAuthorisedViewLevels()))
@@ -56,7 +56,7 @@ class MECAccess
 	}
 	public static function allowAccessAuthor($type, $access, $author_id = NULL)
 	{
-		$user = \Joomla\CMS\Factory::getUser();
+		$user = \Joomla\CMS\Factory::getApplication()->getIdentity();
 		if(in_array($type->params->get($access), $user->getAuthorisedViewLevels())) {
 			return TRUE;
 		}
@@ -78,7 +78,7 @@ class MECAccess
 
 	public static function allowDepost($record, $type, $section)
 	{
-		$user = \Joomla\CMS\Factory::getUser();
+		$user = \Joomla\CMS\Factory::getApplication()->getIdentity();
 
 		if(!$section->params->get('personalize.personalize')) {
 			return NULL;
@@ -105,7 +105,7 @@ class MECAccess
 
 	public static function allowUserMenu($u, $type, $section)
 	{
-		$user = \Joomla\CMS\Factory::getUser();
+		$user = \Joomla\CMS\Factory::getApplication()->getIdentity();
 
 		// Is me
 		if($user->get('id') && $user->get('id') == $u->get('id')) {
@@ -170,7 +170,7 @@ class MECAccess
 
 	public static function allowNew($type, $section)
 	{
-		$user = \Joomla\CMS\Factory::getUser();
+		$user = \Joomla\CMS\Factory::getApplication()->getIdentity();
 
 		if(in_array($type->params->get('properties.item_can_moderate'), $user->getAuthorisedViewLevels())) {
 			return TRUE;
@@ -184,7 +184,7 @@ class MECAccess
 
 	public static function allowRestore($record, $type = NULL, $section = NULL)
 	{
-		$user = \Joomla\CMS\Factory::getUser();
+		$user = \Joomla\CMS\Factory::getApplication()->getIdentity();
 
 		$type = ItemsStore::getType($record->type_id);
 		$section = ItemsStore::getSection($record->section_id);
@@ -205,7 +205,7 @@ class MECAccess
 
 	public static function allowAuditLog($section)
 	{
-		$user = \Joomla\CMS\Factory::getUser();
+		$user = \Joomla\CMS\Factory::getApplication()->getIdentity();
 
 		if(self::allowUserModerate($user, $section, 'allow_audit_log')) {
 			return TRUE;
@@ -216,7 +216,7 @@ class MECAccess
 
 	public static function allowCompare($record, $type, $section)
 	{
-		$user = \Joomla\CMS\Factory::getUser();
+		$user = \Joomla\CMS\Factory::getApplication()->getIdentity();
 
 		if(!$type->params->get('audit.versioning')) {
 			return FALSE;
@@ -234,7 +234,7 @@ class MECAccess
 
 	public static function allowRollback($record, $type, $section)
 	{
-		$user = \Joomla\CMS\Factory::getUser();
+		$user = \Joomla\CMS\Factory::getApplication()->getIdentity();
 
 		if(!$type->params->get('audit.versioning')) {
 			return FALSE;
@@ -253,7 +253,7 @@ class MECAccess
 
 	public static function allowFeatured($record, $type, $section)
 	{
-		$user = \Joomla\CMS\Factory::getUser();
+		$user = \Joomla\CMS\Factory::getApplication()->getIdentity();
 
 		if(in_array($type->params->get('properties.item_can_moderate'), $user->getAuthorisedViewLevels())) {
 			return TRUE;
@@ -279,7 +279,7 @@ class MECAccess
 
 	public static function allowExtend($record, $type, $section)
 	{
-		$user = \Joomla\CMS\Factory::getUser();
+		$user = \Joomla\CMS\Factory::getApplication()->getIdentity();
 
 		if(!$record->extime) {
 			return FALSE;
@@ -309,7 +309,7 @@ class MECAccess
 
 	public static function allowHide($record, $type, $section)
 	{
-		$user = \Joomla\CMS\Factory::getUser();
+		$user = \Joomla\CMS\Factory::getApplication()->getIdentity();
 
 		if($type->params->get('properties.allow_hide') && $record->user_id && ($record->user_id == $user->get('id'))) {
 			return TRUE;
@@ -320,7 +320,7 @@ class MECAccess
 
 	public static function allowPublish($record, $type, $section)
 	{
-		$user = \Joomla\CMS\Factory::getUser();
+		$user = \Joomla\CMS\Factory::getApplication()->getIdentity();
 
 		if(in_array($type->params->get('properties.item_can_moderate'), $user->getAuthorisedViewLevels())) {
 			return TRUE;
@@ -334,7 +334,7 @@ class MECAccess
 
 	public static function allowArchive($record, $type, $section)
 	{
-		$user = \Joomla\CMS\Factory::getUser();
+		$user = \Joomla\CMS\Factory::getApplication()->getIdentity();
 
 		if(in_array($type->params->get('properties.item_can_moderate'), $user->getAuthorisedViewLevels())) {
 			return TRUE;
@@ -351,7 +351,7 @@ class MECAccess
 
 	public static function allowCommentBlock($record, $type, $section)
 	{
-		$user = \Joomla\CMS\Factory::getUser();
+		$user = \Joomla\CMS\Factory::getApplication()->getIdentity();
 
 		if(!$type->params->get('comments.comments')) {
 			return FALSE;
@@ -372,7 +372,7 @@ class MECAccess
 
 	public static function allowDelete($record, $type, $section)
 	{
-		$user = \Joomla\CMS\Factory::getUser();
+		$user = \Joomla\CMS\Factory::getApplication()->getIdentity();
 
 		if(in_array($type->params->get('properties.item_can_moderate'), $user->getAuthorisedViewLevels())) {
 			return TRUE;
@@ -389,7 +389,7 @@ class MECAccess
 
 	public static function allowEdit($record, $type, $section)
 	{
-		$user = \Joomla\CMS\Factory::getUser();
+		$user = \Joomla\CMS\Factory::getApplication()->getIdentity();
 		$app = \Joomla\CMS\Factory::getApplication();
 
 		if(in_array($type->params->get('properties.item_can_moderate'), $user->getAuthorisedViewLevels())) {
@@ -435,7 +435,7 @@ class MECAccess
 
 	public static function allowModerate($record, $type, $section)
 	{
-		$user = \Joomla\CMS\Factory::getUser();
+		$user = \Joomla\CMS\Factory::getApplication()->getIdentity();
 
 		if(self::allowUserModerate($user, $section, 'allow_moderators')) {
 			return TRUE;
@@ -446,7 +446,7 @@ class MECAccess
 	{
 		if(empty($user))
 		{
-			$user = \Joomla\CMS\Factory::getUser();
+			$user = \Joomla\CMS\Factory::getApplication()->getIdentity();
 		}
 
 		return self::allowUserModerate($user, $section, 'allow_restricted');
@@ -454,7 +454,7 @@ class MECAccess
 
 	public static function allowCheckin($section)
 	{
-		$user = \Joomla\CMS\Factory::getUser();
+		$user = \Joomla\CMS\Factory::getApplication()->getIdentity();
 
 		return self::allowUserModerate($user, $section, 'allow_checkin');
 	}
@@ -652,7 +652,7 @@ class MECAccess
 
 		if(!$user_id)
 		{
-			$user_id = \Joomla\CMS\Factory::getUser()->get('id');
+			$user_id = \Joomla\CMS\Factory::getApplication()->getIdentity()->get('id');
 		}
 
 		if($params->get('moderator', -1) == $user_id)

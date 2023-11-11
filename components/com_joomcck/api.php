@@ -69,7 +69,7 @@ if(\Joomla\CMS\Component\ComponentHelper::getParams('com_joomcck')->get('compati
 );
 
 $em_api = JPATH_ROOT . '/components/com_emerald/api.php';
-if(\Joomla\CMS\Filesystem\File::exists($em_api))
+if(is_file($em_api))
 {
 	require_once $em_api;
 }
@@ -217,7 +217,7 @@ class JoomcckApi
 		}
 
 		$field_path = JPATH_ROOT . "/components/com_joomcck/fields/{$field_table->field_type}/{$field_table->field_type}.php";
-		if(!\Joomla\CMS\Filesystem\File::exists($field_path))
+		if(!is_file($field_path))
 		{
 
 			throw new GenericDataException(implode(\Joomla\CMS\Language\Text::_('CERRNOFILEHDD')), 500);
@@ -328,7 +328,7 @@ class JoomcckApi
 		$obj->def('ctime', \Joomla\CMS\Date\Date::getInstance()->toSql());
 		$obj->def('mtime', \Joomla\CMS\Date\Date::getInstance()->toSql());
 		$obj->def('title', 'NO: ' . time());
-		$obj->def('user_id', \Joomla\CMS\Factory::getUser()->id);
+		$obj->def('user_id', \Joomla\CMS\Factory::getApplication()->getIdentity()->id);
 		$obj->def('section_id', $section_id);
 		$obj->def('type_id', $type_id);
 
@@ -592,7 +592,7 @@ class JoomcckApi
 		$view                    = new JoomcckViewRecords();
 		$this->total_fields_keys = $view->_fieldsSummary($items);
 		$this->items             = $items;
-		$this->user              = \Joomla\CMS\Factory::getUser();
+		$this->user              = \Joomla\CMS\Factory::getApplication()->getIdentity();
 		$this->input             = $app->input;
 
 		require_once JPATH_ROOT . '/components/com_joomcck/models/category.php';
@@ -666,7 +666,7 @@ class JoomcckApi
 		$tmpl = explode('.', $tpl);
 		$tmpl = $tmpl[0];
 
-		if(!\Joomla\CMS\Filesystem\File::exists("{$dir}default_list_{$tmpl}.php"))
+		if(!is_file("{$dir}default_list_{$tmpl}.php"))
 		{
 			throw new Exception( 'TMPL not found',100);
 

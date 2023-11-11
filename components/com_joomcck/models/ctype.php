@@ -28,7 +28,7 @@ class JoomcckModelCType extends MModelAdmin
 	public function getFields()
 	{
 		$fileds = JPATH_ROOT . '/components/com_joomcck/fields' ;
-		$folders = \Joomla\CMS\Filesystem\Folder::folders($fileds);
+		$folders = \Joomla\Filesystem\Folder::folders($fileds);
 		$out = array();
 		foreach($folders as $folder)
 		{
@@ -54,7 +54,7 @@ class JoomcckModelCType extends MModelAdmin
 				\Joomla\CMS\Language\Text::_('JGLOBAL_EMAIL'), $field->email, \Joomla\CMS\Language\Text::_('CLICENSE'), $field->license);
 
 			$field->icon = JURI::root() . 'libraries/mint/forms/fields/joomcck';
-			if(\Joomla\CMS\Filesystem\File::exists($fileds . DIRECTORY_SEPARATOR . $folder . DIRECTORY_SEPARATOR . $folder . '.png'))
+			if(is_file($fileds . DIRECTORY_SEPARATOR . $folder . DIRECTORY_SEPARATOR . $folder . '.png'))
 			{
 				$field->icon .= "/{$folder}/{$folder}.png";
 			}
@@ -104,14 +104,14 @@ class JoomcckModelCType extends MModelAdmin
 
 	protected function canDelete($record)
 	{
-		$user = \Joomla\CMS\Factory::getUser();
+		$user = \Joomla\CMS\Factory::getApplication()->getIdentity();
 
 		return $user->authorise('core.delete', 'com_joomcck.ctype.' . (int)$record->id);
 	}
 
 	protected function canEditState($record)
 	{
-		$user = \Joomla\CMS\Factory::getUser();
+		$user = \Joomla\CMS\Factory::getApplication()->getIdentity();
 
 		return $user->authorise('core.edit.state', 'com_joomcck.ctype.' . (int)$record->id);
 	}

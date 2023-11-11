@@ -16,7 +16,7 @@ defined('_JEXEC') or die;
 \Joomla\CMS\HTML\HTMLHelper::_('dropdown.init');
 \Joomla\CMS\HTML\HTMLHelper::_('formbehavior.chosen', '.select');
 
-$user		= \Joomla\CMS\Factory::getUser();
+$user		= \Joomla\CMS\Factory::getApplication()->getIdentity();
 $userId		= $user->get('id');
 $section	= $this->state->get('filter.section') ? $this->escape($this->state->get('filter.section')) : $this->section;
 $listOrder	= $this->escape($this->state->get('list.ordering'));
