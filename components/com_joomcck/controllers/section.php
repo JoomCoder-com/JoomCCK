@@ -141,7 +141,8 @@ class JoomcckControllerSection extends MControllerForm
 		\Joomla\CMS\Table\Table::addIncludePath(JPATH_ADMINISTRATOR . '/components/com_menus/tables');
 		\Joomla\CMS\Table\Table::addIncludePath(JPATH_LIBRARIES . '/src/Table');
 
-		$et = \Joomla\CMS\Table\Table::getInstance('Extension', '\\Joomla\\CMS\\Table\\Table');
+		$et = \Joomla\CMS\Table\Table::getInstance('Extension', 'JTable');
+
         $et->load([
             "name"    => 'com_joomcck',
             "type"    => 'component',
@@ -153,7 +154,7 @@ class JoomcckControllerSection extends MControllerForm
 			return;
 		}
 		
-		$menu_table = \Joomla\CMS\Table\Table::getInstance('Menu', '\\Joomla\\CMS\\Table\\Table', []);
+		$menu_table = \Joomla\CMS\Table\Table::getInstance('Menu', 'JTable', []);
 		
         $sql = "SELECT id FROM `#__usergroups` WHERE title = 'Public'";
         $db->setQuery($sql);

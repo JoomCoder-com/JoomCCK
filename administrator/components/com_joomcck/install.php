@@ -61,7 +61,7 @@ class com_joomcckInstallerScript
         $db->setQuery($sql);
         $menu_type = $db->loadResult();
 
-        $et = \Joomla\CMS\Table\Table::getInstance('Extension', '\\Joomla\\CMS\\Table\\Table');
+        $et = \Joomla\CMS\Table\Table::getInstance('Extension', 'JTable');
         $et->load([
             "name"    => 'com_joomcck',
             "type"    => 'component',
@@ -83,7 +83,7 @@ class com_joomcckInstallerScript
         $et->store();
 
         \Joomla\CMS\Table\Table::addIncludePath(JPATH_ADMINISTRATOR . '/components/com_menus/tables');
-        $menu_table = \Joomla\CMS\Table\Table::getInstance('Menu', '\\Joomla\\CMS\\Table\\Table', []);
+        $menu_table = \Joomla\CMS\Table\Table::getInstance('Menu', 'JTable', []);
 
         $menu_table->load([
             "link"         => 'index.php?option=com_joomcck&view=cpanel',

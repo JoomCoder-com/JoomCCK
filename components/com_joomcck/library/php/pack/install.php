@@ -764,7 +764,7 @@ class packInstallerScript
                 $menutype = $db->loadResult();
 
                 \Joomla\CMS\Table\Table::addIncludePath(JPATH_ADMINISTRATOR . '/components/com_menus/tables');
-                $menu_table = \Joomla\CMS\Table\Table::getInstance('Menu', '\\Joomla\\CMS\\Table\\Table', []);
+                $menu_table = \Joomla\CMS\Table\Table::getInstance('Menu', 'JTable', []);
 
                 $menu_table->load([
                     "link" => "index.php?option=com_joomcck&view=records&section_id={$table->id}",

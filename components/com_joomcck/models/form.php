@@ -37,7 +37,7 @@ class JoomcckModelForm extends MModelAdmin
 
 	protected function populateState($ordering = NULL, $direction = NULL)
 	{
-		$app = Joomla\CMS\Application\CMSApplication::getInstance('Site');
+		$app = \Joomla\CMS\Factory::getApplication();
 
 		$pk = $app->input->getInt('id');
 		\Joomla\CMS\Factory::getApplication()->setUserState('com_joomcck.edit.form.id', $pk);
