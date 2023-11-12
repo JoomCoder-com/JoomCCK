@@ -49,11 +49,9 @@
         <file type="module" id="mod_joomcck_userstatistics" client="site">modules/mod_joomcck_userstatistics</file>
     </files>
 
-    <dlid/>
-
     <updateservers>
-        <server type="extension" priority="1" name="JoomCCK Pro Update">
-            <![CDATA[https://www.joomcoder.com/index.php?option=com_mediastore&task=pluginTask&plugin=joomla&subtask=server&id=24&j=4]]>
+        <server type="extension" priority="1" name="JoomCCK Update">
+            <![CDATA[https://raw.githubusercontent.com/JoomCoder-com/JoomCCK/main/update.xml]]>
         </server>
     </updateservers>
 
