@@ -170,7 +170,7 @@ $listDirn = $this->state->get('list.direction');
 						<span style="color: lightgray">|</span>
 						<?php echo \Joomla\CMS\Language\Text::_('CAUTHOR'); ?>:
 						<small>
-							<?php echo \Joomla\CMS\HTML\HTMLHelper::link('javascript:void(0);', ($item->userlogin ? $item->userlogin : Jtext::_('CANONYMOUS')), array(
+							<?php echo \Joomla\CMS\HTML\HTMLHelper::link('javascript:void(0);', ($item->userlogin ? $item->userlogin : \Joomla\CMS\Language\Text::_('CANONYMOUS')), array(
 								'rel' => "tooltip", 'title' => \Joomla\CMS\Language\Text::_('CFILTERBYUSER'), 'onclick' => 'Joomcck.setAndSubmit(\'filter_search\', \'user:' . $item->user_id . '\');'
 							)) ?>
 

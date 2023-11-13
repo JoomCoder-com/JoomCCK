@@ -341,7 +341,7 @@ class JoomcckModelRecord extends MModelItem
 			}
 		}
 
-		$data->repostedby       = (array)json_decode($data->repostedby, TRUE);
+		$data->repostedby       = (array) json_decode((string)$data->repostedby, TRUE);
 		$data->rating           = RatingHelp::loadMultiratings($data, $type, $section);
 		$data->controls         = $this->_controls($data, $type, $section);
 		$data->controls_notitle = $this->_controls($data, $type, $section, TRUE);

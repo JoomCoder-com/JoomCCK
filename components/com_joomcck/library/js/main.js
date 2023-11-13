@@ -283,7 +283,7 @@ var _gaq = _gaq || [];
 	Joomcck.CleanCompare = function(return_url, section) {
 		$('#compare').slideUp('fast');
 		$.ajax({
-			url:  '<?php echo JRoute::_("index.php?option=com_joomcck&task=ajax.compareclean&tmpl=component", FALSE); ?>',
+			url:  '<?php echo \Joomla\CMS\Router\Route::_("index.php?option=com_joomcck&task=ajax.compareclean&tmpl=component", FALSE); ?>',
 			type: 'POST',
 			data:     {
 				section_id:  section
@@ -302,10 +302,10 @@ var _gaq = _gaq || [];
 
 	Joomcck.CompareRecord = function(id, section) {
 		var button = $('#compare_' + id);
-		$('img', button).attr('src', '<?php echo JURI::root(TRUE);?>/components/com_joomcck/images/load.gif');
+		$('img', button).attr('src', '<?php echo \Joomla\CMS\Uri\Uri::root(TRUE);?>/components/com_joomcck/images/load.gif');
 
 		$.ajax({
-			url:      '<?php echo JRoute::_("index.php?option=com_joomcck&task=ajax.compare&tmpl=component", FALSE); ?>',
+			url:      '<?php echo \Joomla\CMS\Router\Route::_("index.php?option=com_joomcck&task=ajax.compare&tmpl=component", FALSE); ?>',
 			dataType: 'json',
 			type:     'POST',
 			data:     {
@@ -319,7 +319,7 @@ var _gaq = _gaq || [];
 				return;
 			}
 
-			$('img', button).attr('src', '<?php echo JURI::root(TRUE);?>/media/com_joomcck/icons/16/edit-diff.png');
+			$('img', button).attr('src', '<?php echo \Joomla\CMS\Uri\Uri::root(TRUE);?>/media/com_joomcck/icons/16/edit-diff.png');
 			$('#compare div.alert').removeClass('alert-warning').addClass('alert-info');
 
 			$('#compare').slideDown('fast', function() {
@@ -333,7 +333,7 @@ var _gaq = _gaq || [];
 				return;
 			}
 
-			$('#compare div.alert h4').html('<?php echo JText::sprintf("CCOMPAREMSG", "' + json.result + '") ?>');
+			$('#compare div.alert h4').html('<?php echo \Joomla\CMS\Language\Text::sprintf("CCOMPAREMSG", "' + json.result + '") ?>');
 
 			if(_gaq) {
 				_gaq.push(['_trackEvent', 'Compare', id]);
@@ -342,10 +342,10 @@ var _gaq = _gaq || [];
 	};
 	Joomcck.RepostRecord = function(id, section) {
 		var button = $('#repost_' + id);
-		$('img', button).attr('src', '<?php echo JURI::root(TRUE);?>/components/com_joomcck/images/load.gif');
+		$('img', button).attr('src', '<?php echo \Joomla\CMS\Uri\Uri::root(TRUE);?>/components/com_joomcck/images/load.gif');
 
 		$.ajax({
-			url:      '<?php echo JRoute::_("index.php?option=com_joomcck&task=ajax.repost&tmpl=component", FALSE); ?>',
+			url:      '<?php echo \Joomla\CMS\Router\Route::_("index.php?option=com_joomcck&task=ajax.repost&tmpl=component", FALSE); ?>',
 			dataType: 'json',
 			type:     'POST',
 			data:     {
@@ -370,9 +370,9 @@ var _gaq = _gaq || [];
 	};
 
 	Joomcck.followRecord = function(id, section) {
-		$('#follow_record_' + id).attr('src', '<?php echo JURI::root(TRUE);?>/components/com_joomcck/images/load.gif');
+		$('#follow_record_' + id).attr('src', '<?php echo \Joomla\CMS\Uri\Uri::root(TRUE);?>/components/com_joomcck/images/load.gif');
 		$.ajax({
-			url:      '<?php echo JRoute::_("index.php?option=com_joomcck&task=ajax.follow&tmpl=component", FALSE); ?>',
+			url:      '<?php echo \Joomla\CMS\Router\Route::_("index.php?option=com_joomcck&task=ajax.follow&tmpl=component", FALSE); ?>',
 			context:  $('#follow_record_' + id),
 			dataType: 'json',
 			type:     'POST',
@@ -389,7 +389,7 @@ var _gaq = _gaq || [];
 				return;
 			}
 			$(this)
-				.attr('src', '<?php echo JURI::root(TRUE);?>/media/com_joomcck/icons/16/follow' + json.state + '.png')
+				.attr('src', '<?php echo \Joomla\CMS\Uri\Uri::root(TRUE);?>/media/com_joomcck/icons/16/follow' + json.state + '.png')
 				.attr('data-original-title', json.title);
 			Joomcck.redrawBS();
 
@@ -400,9 +400,9 @@ var _gaq = _gaq || [];
 	};
 
 	Joomcck.bookmarkRecord = function(id, img) {
-		$('#bookmark_' + id).attr('src', '<?php echo JURI::root(TRUE);?>/components/com_joomcck/images/load.gif');
+		$('#bookmark_' + id).attr('src', '<?php echo \Joomla\CMS\Uri\Uri::root(TRUE);?>/components/com_joomcck/images/load.gif');
 		$.ajax({
-			url:      '<?php echo JRoute::_("index.php?option=com_joomcck&task=ajax.bookmark&tmpl=component", FALSE); ?>',
+			url:      '<?php echo \Joomla\CMS\Router\Route::_("index.php?option=com_joomcck&task=ajax.bookmark&tmpl=component", FALSE); ?>',
 			context:  $('#bookmark_' + id),
 			dataType: 'json',
 			type:     'POST',
@@ -418,7 +418,7 @@ var _gaq = _gaq || [];
 				return;
 			}
 			$(this)
-				.attr('src', '<?php echo JURI::root(TRUE);?>/media/com_joomcck/icons/bookmarks/' + img + '/state' + json.state + '.png')
+				.attr('src', '<?php echo \Joomla\CMS\Uri\Uri::root(TRUE);?>/media/com_joomcck/icons/bookmarks/' + img + '/state' + json.state + '.png')
 				.attr('data-original-title', json.title);
 			Joomcck.redrawBS();
 			if(_gaq) {
@@ -428,10 +428,10 @@ var _gaq = _gaq || [];
 	};
 
 	Joomcck.followSection = function(id) {
-		$('#follow_' + id).attr('src', '<?php echo JURI::root(TRUE);?>/components/com_joomcck/images/load.gif');
+		$('#follow_' + id).attr('src', '<?php echo \Joomla\CMS\Uri\Uri::root(TRUE);?>/components/com_joomcck/images/load.gif');
 
 		$.ajax({
-			url:      '<?php echo JRoute::_("index.php?option=com_joomcck&task=ajax.followsection&tmpl=component", FALSE); ?>',
+			url:      '<?php echo \Joomla\CMS\Router\Route::_("index.php?option=com_joomcck&task=ajax.followsection&tmpl=component", FALSE); ?>',
 			context:  $('#follow_' + id),
 			dataType: 'json',
 			type:     'POST',
@@ -446,15 +446,15 @@ var _gaq = _gaq || [];
 				alert(json.error);
 				return;
 			}
-			$('#follow_' + id).attr('src', '<?php echo JURI::root(TRUE);?>/media/com_joomcck/icons/16/follow' + (json.state.toInt() ? 0 : 1) + '.png');
+			$('#follow_' + id).attr('src', '<?php echo \Joomla\CMS\Uri\Uri::root(TRUE);?>/media/com_joomcck/icons/16/follow' + (json.state.toInt() ? 0 : 1) + '.png');
 			$('#followtext_' + id).html(json.title);
 			if(json.state == 0) {
 				$('#followsec-' + id).addClass('btn-primary').bind('mouseleave',function() {
 					$(this).removeClass('btn-danger').addClass('btn-primary');
-					$('#followtext_' + id).html('<?php echo JText::_("CFOLLOWINGSECION");?>');
+					$('#followtext_' + id).html('<?php echo \Joomla\CMS\Language\Text::_("CFOLLOWINGSECION");?>');
 				}).bind('mouseenter', function() {
 					$(this).removeClass('btn-primary').addClass('btn-danger');
-					$('#followtext_' + id).html('<?php echo JText::_("CSECUNFOLLOW");?>');
+					$('#followtext_' + id).html('<?php echo \Joomla\CMS\Language\Text::_("CSECUNFOLLOW");?>');
 				});
 			}
 			else {
@@ -467,9 +467,9 @@ var _gaq = _gaq || [];
 	};
 
 	Joomcck.followUser = function(id, section) {
-		$('#followuser_' + id).attr('src', '<?php echo JURI::root(TRUE);?>/components/com_joomcck/images/load.gif');
+		$('#followuser_' + id).attr('src', '<?php echo \Joomla\CMS\Uri\Uri::root(TRUE);?>/components/com_joomcck/images/load.gif');
 		$.ajax({
-			url:      '<?php echo JRoute::_("index.php?option=com_joomcck&task=ajax.followuser&tmpl=component", FALSE); ?>',
+			url:      '<?php echo \Joomla\CMS\Router\Route::_("index.php?option=com_joomcck&task=ajax.followuser&tmpl=component", FALSE); ?>',
 			dataType: 'json',
 			type:     'POST',
 			data:     {
@@ -484,7 +484,7 @@ var _gaq = _gaq || [];
 				alert(json.error);
 				return;
 			}
-			$('#followuser_' + id).attr('src', '<?php echo JURI::root(TRUE);?>/media/com_joomcck/icons/16/follow' + (json.state.toInt() ? 0 : 1) + '.png');
+			$('#followuser_' + id).attr('src', '<?php echo \Joomla\CMS\Uri\Uri::root(TRUE);?>/media/com_joomcck/icons/16/follow' + (json.state.toInt() ? 0 : 1) + '.png');
 			$('#followtext_' + id).html(json.title);
 			if(json.state == 0) {
 				$('#followuser-' + id).addClass('btn-primary').bind('mouseleave',function() {
@@ -505,10 +505,10 @@ var _gaq = _gaq || [];
 	};
 
 	Joomcck.followCat = function(id, section) {
-		$('#follow_' + id).attr('src', '<?php echo JURI::root(TRUE);?>/components/com_joomcck/images/load.gif');
+		$('#follow_' + id).attr('src', '<?php echo \Joomla\CMS\Uri\Uri::root(TRUE);?>/components/com_joomcck/images/load.gif');
 
 		$.ajax({
-			url:      '<?php echo JRoute::_("index.php?option=com_joomcck&task=ajax.followcat&tmpl=component", FALSE); ?>',
+			url:      '<?php echo \Joomla\CMS\Router\Route::_("index.php?option=com_joomcck&task=ajax.followcat&tmpl=component", FALSE); ?>',
 			dataType: 'json',
 			type:     'POST',
 			data:     {
@@ -523,15 +523,15 @@ var _gaq = _gaq || [];
 				alert(json.error);
 				return;
 			}
-			$('#follow_' + id).attr('src', '<?php echo JURI::root(TRUE);?>/media/com_joomcck/icons/16/follow' + (json.state.toInt() ? 0 : 1) + '.png');
+			$('#follow_' + id).attr('src', '<?php echo \Joomla\CMS\Uri\Uri::root(TRUE);?>/media/com_joomcck/icons/16/follow' + (json.state.toInt() ? 0 : 1) + '.png');
 			$('#followtext_' + id).html(json.title);
 			if(json.state == 0) {
 				$('#followcat-' + id).addClass('btn-primary').bind('mouseleave',function() {
 					$(this).removeClass('btn-danger').addClass('btn-primary');
-					$('#followtext_' + id).html('<?php echo JText::_("CCATFOLLOWING");?>');
+					$('#followtext_' + id).html('<?php echo \Joomla\CMS\Language\Text::_("CCATFOLLOWING");?>');
 				}).bind('mouseenter', function() {
 					$(this).removeClass('btn-primary').addClass('btn-danger');
-					$('#followtext_' + id).html('<?php echo JText::_("CCATUNFOLLOW");?>');
+					$('#followtext_' + id).html('<?php echo \Joomla\CMS\Language\Text::_("CCATUNFOLLOW");?>');
 				});
 			}
 			else {
@@ -551,9 +551,9 @@ var _gaq = _gaq || [];
 	Joomcck.ItemRatingCallBackSingle = function(vote, ident, index, multi) {
 		var old_html = $('#rating-text-' + ident).html();
 
-		$('#rating-text-' + ident).addClass('progress progress-striped active').html('<div class="bar" style="width: 100%;"><?php echo JText::_("CPROCESS") ?></div>');
+		$('#rating-text-' + ident).addClass('progress progress-striped active').html('<div class="bar" style="width: 100%;"><?php echo \Joomla\CMS\Language\Text::_("CPROCESS") ?></div>');
 		$.ajax({
-			url:      '<?php echo JRoute::_("index.php?option=com_joomcck&task=rate.record&tmpl=component", FALSE); ?>',
+			url:      '<?php echo \Joomla\CMS\Router\Route::_("index.php?option=com_joomcck&task=rate.record&tmpl=component", FALSE); ?>',
 			dataType: 'json',
 			type:     'POST',
 			data:     {vote: vote, id: ident, index: index}
@@ -570,7 +570,7 @@ var _gaq = _gaq || [];
 				return;
 			}
 
-			$('#rating-text-' + ident).html('<?php echo JText::sprintf("CRAINGDATA", "' + json.result + '", "' + json.votes + '");?>');
+			$('#rating-text-' + ident).html('<?php echo \Joomla\CMS\Language\Text::sprintf("CRAINGDATA", "' + json.result + '", "' + json.votes + '");?>');
 
 			if(json.result) {
 				if(multi) {
@@ -640,11 +640,11 @@ var _gaq = _gaq || [];
 		var ba = $(document.createElement('button'))
 			.attr('type', 'button')
 			.attr('class', 'btn btn-sm btn-outline-secondary')
-			.html('<img src="<?php echo JURI::root(TRUE);?>/media/com_joomcck/icons/16/plus-button.png" /> <?php echo JText::_("Add");?>');
+			.html('<img src="<?php echo \Joomla\CMS\Uri\Uri::root(TRUE);?>/media/com_joomcck/icons/16/plus-button.png" /> <?php echo \Joomla\CMS\Language\Text::_("Add");?>');
 		var bc = $(document.createElement('button'))
 			.attr('type', 'button')
 			.attr('class', 'btn btn-sm btn-outline-secondary')
-			.html('<img src="<?php echo JURI::root(TRUE);?>/media/com_joomcck/icons/16/minus-button.png" /> <?php echo JText::_("Close");?>');
+			.html('<img src="<?php echo \Joomla\CMS\Uri\Uri::root(TRUE);?>/media/com_joomcck/icons/16/minus-button.png" /> <?php echo \Joomla\CMS\Language\Text::_("Close");?>');
 
 		var bg = $(document.createElement('div'))
 			.attr('class', 'input-group w-50')
@@ -658,7 +658,7 @@ var _gaq = _gaq || [];
 
 		ba.click(function(el) {
 			if(!input.val()) {
-				alert('<?php echo JText::_("CENTERVAL")?>');
+				alert('<?php echo \Joomla\CMS\Language\Text::_("CENTERVAL")?>');
 				return;
 			}
 
@@ -744,7 +744,7 @@ var _gaq = _gaq || [];
 
 		if(selected > limit) {
 
-			var msg = '<?php echo JText::sprintf("CERRJSMOREOPTIONS")?>';
+			var msg = '<?php echo \Joomla\CMS\Language\Text::sprintf("CERRJSMOREOPTIONS")?>';
 			Joomcck.fieldError(field_id, msg);
 
 			if(type == 'checkbox') {
@@ -796,7 +796,7 @@ var _gaq = _gaq || [];
 	};
 
 	Joomcck.editComment = function(id, parent, record) {
-		var url = '<?php echo JRoute::_("index.php?option=com_joomcck&view=comment&tmpl=component", FALSE);?>' + '&id=' + id;
+		var url = '<?php echo \Joomla\CMS\Router\Route::_("index.php?option=com_joomcck&view=comment&tmpl=component", FALSE);?>' + '&id=' + id;
 		if(parent) {
 			url += '&parent_id=' + parent + '&record_id=' + record;
 		}
@@ -809,21 +809,21 @@ var _gaq = _gaq || [];
 		$('#commentframe').html(iframe);
 
 		if(id) {
-			$('#commentlabel').html('<?php echo htmlentities(JText::_("CEDITCOMMENT"), ENT_QUOTES, "UTF-8")?>');
+			$('#commentlabel').html('<?php echo htmlentities(\Joomla\CMS\Language\Text::_("CEDITCOMMENT"), ENT_QUOTES, "UTF-8")?>');
 		}
 		else {
-			$('#commentlabel').html('<?php echo htmlentities(JText::_("CADDCOMMENT"), ENT_QUOTES, "UTF-8")?>');
+			$('#commentlabel').html('<?php echo htmlentities(\Joomla\CMS\Language\Text::_("CADDCOMMENT"), ENT_QUOTES, "UTF-8")?>');
 		}
 	};
 
-	Joomcck.field_call_url = '<?php echo JRoute::_("index.php?option=com_joomcck&task=ajax.field_call&tmpl=component", FALSE);?>';
+	Joomcck.field_call_url = '<?php echo \Joomla\CMS\Router\Route::_("index.php?option=com_joomcck&task=ajax.field_call&tmpl=component", FALSE);?>';
 
 }($));
 
 
 function trackComment(comment, id) {
 	$.ajax({
-		url:  '<?php echo JRoute::_("index.php?option=com_joomcck&task=ajax.trackcomment&tmpl=component", FALSE); ?>',
+		url:  '<?php echo \Joomla\CMS\Router\Route::_("index.php?option=com_joomcck&task=ajax.trackcomment&tmpl=component", FALSE); ?>',
 		data: {
 			record_id: id
 		}

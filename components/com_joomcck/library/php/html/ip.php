@@ -36,7 +36,7 @@ class JHTMLIp {
 			$options['width'] = 16;
 			$options['height'] = 16;
 			$options['align'] = 'absmiddle';
-			$options['title'] = $results[$ip]->country . " " . Jtext::_ ( 'CCLICKTOFILTER' ) ;
+			$options['title'] = $results[$ip]->country . " " . \Joomla\CMS\Language\Text::_ ( 'CCLICKTOFILTER' ) ;
 			
 			return \Joomla\CMS\HTML\HTMLHelper::image($file, $results[$ip]->country, $options);
 		}
@@ -55,7 +55,7 @@ class JHTMLIp {
 		}
 		else
 		{
-			$atr['onclick'] = "alert('".Jtext::_('CINSTALLDEFENDER')."')";
+			$atr['onclick'] = "alert('".\Joomla\CMS\Language\Text::_('CINSTALLDEFENDER')."')";
 			$res = 0;
 		}
 		$atr['align'] = 'absmiddle';
@@ -66,15 +66,15 @@ class JHTMLIp {
 		if($res)
 		{
 			$img = 'secure_b.png';
-			$atr['title'] = Jtext::_('CUNBLOCKIP');
+			$atr['title'] = \Joomla\CMS\Language\Text::_('CUNBLOCKIP');
 		}
 		else
 		{
 			$img = 'secure.png';
-			$atr['title'] = Jtext::_('CBLOCKIP');
+			$atr['title'] = \Joomla\CMS\Language\Text::_('CBLOCKIP');
 		}
 
-		return \Joomla\CMS\HTML\HTMLHelper::image(\Joomla\CMS\Uri\Uri::root().'administrator/components/com_joomcck/images/'.$img, Jtext::_('CBLOCKIP'), $atr);
+		return \Joomla\CMS\HTML\HTMLHelper::image(\Joomla\CMS\Uri\Uri::root().'administrator/components/com_joomcck/images/'.$img, \Joomla\CMS\Language\Text::_('CBLOCKIP'), $atr);
 	}
 	public static function block_user($user, $id) {
 		
@@ -89,7 +89,7 @@ class JHTMLIp {
 		}
 		else
 		{
-			$atr['onclick'] = "alert('".Jtext::_('CBLOKUSERDEFENDER')."')";
+			$atr['onclick'] = "alert('".\Joomla\CMS\Language\Text::_('CBLOKUSERDEFENDER')."')";
 			$res = 0;
 		}
 		$atr['align'] = 'absmiddle';
@@ -105,12 +105,12 @@ class JHTMLIp {
 		if($res)
 		{
 			$img = 'user_secure.png';
-			$atr['title'] = Jtext::_('CBLOCKUSER');
+			$atr['title'] = \Joomla\CMS\Language\Text::_('CBLOCKUSER');
 		}
 		else
 		{
 			$img = 'user_secure_b.png';
-			$atr['title'] = Jtext::_('CUNBLOCKUSER');
+			$atr['title'] = \Joomla\CMS\Language\Text::_('CUNBLOCKUSER');
 		}
 
 		return \Joomla\CMS\HTML\HTMLHelper::image(\Joomla\CMS\Uri\Uri::root().'administrator/components/com_joomcck/images/'.$img, $atr['title'], $atr);

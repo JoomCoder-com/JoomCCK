@@ -31,8 +31,8 @@ class CTmpl
 		}
 		else
 		{
+			Factory::getApplication()->enqueueMessage('Config not found: '.$json1.'<br><Please complete template configuration of template:<br><code>'.$prefix.$template[0].'</code>','warning');
 
-			Factory::getApplication()->enqueueMessage('Config not found: '.$json1,'warning');
 			$file = array();
 		}
 		var_dump($json1, $json3);
@@ -100,7 +100,7 @@ class CTmpl
 		*/
 		if(is_file($json1))
 		{
-	
+
 			$file = file_get_contents($json1);
 
 		}
@@ -111,7 +111,7 @@ class CTmpl
 		else
 		{
 
-			Factory::getApplication()->enqueueMessage('Config not found: '.$json1,'warning');
+			Factory::getApplication()->enqueueMessage('Config not found: '.$json1.'<br><Please complete template configuration of template:<br><code>'.$type.$template[0].'</code>','warning');
 
 			$file = array();
 		}

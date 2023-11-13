@@ -110,7 +110,6 @@ class plgFinderJoomcck extends \Joomla\Component\Finder\Administrator\Indexer\Ad
 		// Build the necessary route and path information.
 		$item->url = $this->getURL($item->id, $this->extension, $this->layout);
 		$item->route = Url::record($item);
-		$item->path = \Joomla\Component\Finder\Administrator\Indexer\Helper::getContentPath($item->route);
 
 		// Get the menu title if it exists.
 		$title = $this->getItemMenuTitle($item->url);

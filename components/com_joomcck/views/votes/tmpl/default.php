@@ -100,7 +100,7 @@ $listDirn = $this->escape($this->state->get('list.direction'));
 							)) ?>
 							<?php //echo \Joomla\CMS\HTML\HTMLHelper::_('ip.block_user', $item->user_id, $item->id);?>
 						<?php else: ?>
-							<?php echo $item->username ? $item->username . " (<a href=\"javascript:void(0);\" rel=\"tooltip\" data-bs-title=\"" . \Joomla\CMS\Language\Text::_('CFILTEREMAIL') . "\" onclick=\"document.getElementById('filter_search').value='email:{$item->useremail}'; document.adminForm.submit();\">{$item->useremail}</a>) " : Jtext::_('CANONYMOUS') ?>
+							<?php echo $item->username ? $item->username . " (<a href=\"javascript:void(0);\" rel=\"tooltip\" data-bs-title=\"" . \Joomla\CMS\Language\Text::_('CFILTEREMAIL') . "\" onclick=\"document.getElementById('filter_search').value='email:{$item->useremail}'; document.adminForm.submit();\">{$item->useremail}</a>) " : \Joomla\CMS\Language\Text::_('CANONYMOUS') ?>
 						<?php endif; ?>
 
 						<?php if($item->ip): ?>

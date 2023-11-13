@@ -83,7 +83,7 @@ $num = CEventsHelper::showNum('total', 0);
 	<button href="javascript:void(0);" class="btn" type="button" onclick="Joomla.submitbutton('records.markread')">
 		<img src="<?php echo \Joomla\CMS\Uri\Uri::root(TRUE)?>/media/com_joomcck/icons/16/bell--minus.png"
 			align="absmiddle" alt="<?php echo \Joomla\CMS\Language\Text::_('CCLEARALL_NOTIF'); ?>" />
-		<?php echo Jtext::_('CCLEARALL_NOTIF');?>
+		<?php echo \Joomla\CMS\Language\Text::_('CCLEARALL_NOTIF');?>
 	</button>
 
 	<button class="btn" type="button"
