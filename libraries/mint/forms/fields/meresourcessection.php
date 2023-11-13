@@ -54,7 +54,7 @@ class JFormFieldMeresourcessection extends JFormMEFieldList
 		}
 		if($this->element['append'])
 		{
-			$html .= '<br><br>' . $this->element['append'];
+			$html .= '<small>' . $this->element['append'].'</small>';
 		}
 
 		return $html;
