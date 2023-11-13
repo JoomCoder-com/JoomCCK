@@ -54,17 +54,17 @@ class JoomcckViewCType extends MViewBase
 		$isNew = ($this->item->id == 0);
 		$checkedOut = ! ($this->item->checked_out == 0 || $this->item->checked_out == $user->get('id'));
 
-		JToolBarHelper::title(($isNew ? \Joomla\CMS\Language\Text::_('CNEWTYPE') : \Joomla\CMS\Language\Text::_('CEDITTYPE').': '.$this->item->name), ($isNew ? 'type_new.png' : 'type_edit.png'));
+		\Joomla\CMS\Toolbar\ToolbarHelper::title(($isNew ? \Joomla\CMS\Language\Text::_('CNEWTYPE') : \Joomla\CMS\Language\Text::_('CEDITTYPE').': '.$this->item->name), ($isNew ? 'type_new.png' : 'type_edit.png'));
 
 		if(! $checkedOut)
 		{
-			JToolBarHelper::apply('type.apply', 'JTOOLBAR_APPLY');
-			JToolBarHelper::save('type.save', 'JTOOLBAR_SAVE');
-			JToolBarHelper::save2new('type.save2new');
-			if(! $isNew) JToolBarHelper::save2copy('type.save2copy');
+			\Joomla\CMS\Toolbar\ToolbarHelper::apply('type.apply', 'JTOOLBAR_APPLY');
+			\Joomla\CMS\Toolbar\ToolbarHelper::save('type.save', 'JTOOLBAR_SAVE');
+			\Joomla\CMS\Toolbar\ToolbarHelper::save2new('type.save2new');
+			if(! $isNew) \Joomla\CMS\Toolbar\ToolbarHelper::save2copy('type.save2copy');
 		}
-		JToolBarHelper::cancel('type.cancel', 'JTOOLBAR_CANCEL');
+		\Joomla\CMS\Toolbar\ToolbarHelper::cancel('type.cancel', 'JTOOLBAR_CANCEL');
 		//MRToolBar::helpW('http://help.joomcoder.com/joomcck/index.html?filters.htm', 1000, 500);
-		JToolBarHelper::divider();
+		\Joomla\CMS\Toolbar\ToolbarHelper::divider();
 	}
 }

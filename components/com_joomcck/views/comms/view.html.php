@@ -64,12 +64,12 @@ class JoomcckViewComms extends MViewBase
 	protected function addToolbar()
 	{
 		\Joomla\CMS\Toolbar\ToolbarHelper::title(\Joomla\CMS\Language\Text::_('CCOMMENTS'), 'comments.png');
-		JToolBarHelper::editList('comment.edit');
-		JToolBarHelper::divider();
-		JToolBarHelper::publishList('comments.publish');
-		JToolBarHelper::unpublishList('comments.unpublish');
-		JToolBarHelper::divider();
-		JToolBarHelper::deleteList('', 'comments.delete', 'Delete');
+		\Joomla\CMS\Toolbar\ToolbarHelper::editList('comment.edit');
+		\Joomla\CMS\Toolbar\ToolbarHelper::divider();
+		\Joomla\CMS\Toolbar\ToolbarHelper::publishList('comments.publish');
+		\Joomla\CMS\Toolbar\ToolbarHelper::unpublishList('comments.unpublish');
+		\Joomla\CMS\Toolbar\ToolbarHelper::divider();
+		\Joomla\CMS\Toolbar\ToolbarHelper::deleteList('', 'comments.delete', 'Delete');
 
 		MRToolBar::addSubmenu('comments');
 

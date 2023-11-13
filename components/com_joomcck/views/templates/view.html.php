@@ -100,8 +100,8 @@ class JoomcckViewTemplates extends MViewBase
 	private function addToolbar()
 	{
 		MRToolBar::addSubmenu('templates');
-		JToolBarHelper::title(\Joomla\CMS\Language\Text::_('CTEMPLATMANAGER'), 'thememanager.png');
-		JToolBarHelper::deleteList('', 'templates.uninstall', \Joomla\CMS\Language\Text::_('CUNINSTALL'));
+		\Joomla\CMS\Toolbar\ToolbarHelper::title(\Joomla\CMS\Language\Text::_('CTEMPLATMANAGER'), 'thememanager.png');
+		\Joomla\CMS\Toolbar\ToolbarHelper::deleteList('', 'templates.uninstall', \Joomla\CMS\Language\Text::_('CUNINSTALL'));
 		MRToolBar::install();
 		MRToolBar::cr();
 		//MRToolBar::helpW('http://help.joomcoder.com/joomcck/index.html?templates2.htm', 1000, 500);

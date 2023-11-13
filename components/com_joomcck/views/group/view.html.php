@@ -42,13 +42,13 @@ class JoomcckViewGroup extends MViewBase
 		$isNew		= ($this->item->id == 0);
 		$checkedOut	= !($this->item->checked_out == 0 || $this->item->checked_out == $user->get('id'));
 
-		JToolBarHelper::title(($isNew ? \Joomla\CMS\Language\Text::_('CNEWGROUP') : \Joomla\CMS\Language\Text::_('CEDITGROUP')), ($isNew ? 'field_new.png' : 'field_edit.png'));
+		\Joomla\CMS\Toolbar\ToolbarHelper::title(($isNew ? \Joomla\CMS\Language\Text::_('CNEWGROUP') : \Joomla\CMS\Language\Text::_('CEDITGROUP')), ($isNew ? 'field_new.png' : 'field_edit.png'));
 
 		if (!$checkedOut){
-			JToolBarHelper::apply('group.apply', 'JTOOLBAR_APPLY');
-			JToolBarHelper::save('group.save', 'JTOOLBAR_SAVE');
-			JToolBarHelper::custom('group.save2new', 'save-new.png', 'save-new_f2.png', 'JTOOLBAR_SAVE_AND_NEW', false);
-			if(!$isNew) JToolBarHelper::custom('group.save2copy', 'save-copy.png', 'save-copy_f2.png', 'JTOOLBAR_SAVE_AS_COPY', false);
+			\Joomla\CMS\Toolbar\ToolbarHelper::apply('group.apply', 'JTOOLBAR_APPLY');
+			\Joomla\CMS\Toolbar\ToolbarHelper::save('group.save', 'JTOOLBAR_SAVE');
+			\Joomla\CMS\Toolbar\ToolbarHelper::custom('group.save2new', 'save-new.png', 'save-new_f2.png', 'JTOOLBAR_SAVE_AND_NEW', false);
+			if(!$isNew) \Joomla\CMS\Toolbar\ToolbarHelper::custom('group.save2copy', 'save-copy.png', 'save-copy_f2.png', 'JTOOLBAR_SAVE_AS_COPY', false);
 		}
 		if($isNew)
 		{
@@ -57,8 +57,8 @@ class JoomcckViewGroup extends MViewBase
 		}
 		else
 		{
-			JToolBarHelper::cancel('group.cancel', 'JTOOLBAR_CANCEL');
+			\Joomla\CMS\Toolbar\ToolbarHelper::cancel('group.cancel', 'JTOOLBAR_CANCEL');
 		}
-		JToolBarHelper::divider();
+		\Joomla\CMS\Toolbar\ToolbarHelper::divider();
 	}
 }

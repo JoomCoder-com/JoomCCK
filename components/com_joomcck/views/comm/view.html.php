@@ -40,13 +40,13 @@ class JoomcckViewComm extends MViewBase
 		$user		= \Joomla\CMS\Factory::getApplication()->getIdentity();
 		$isNew		= ($this->item->id == 0);
 		
-		JToolBarHelper::title(\Joomla\CMS\Language\Text::_('CEDITCOMMENT'), 'comments.png');
+		\Joomla\CMS\Toolbar\ToolbarHelper::title(\Joomla\CMS\Language\Text::_('CEDITCOMMENT'), 'comments.png');
 		
-		JToolBarHelper::apply('comment.apply', 'JTOOLBAR_APPLY');
-		JToolBarHelper::save('comment.save', 'JTOOLBAR_SAVE');
+		\Joomla\CMS\Toolbar\ToolbarHelper::apply('comment.apply', 'JTOOLBAR_APPLY');
+		\Joomla\CMS\Toolbar\ToolbarHelper::save('comment.save', 'JTOOLBAR_SAVE');
 		
-		JToolBarHelper::cancel('comment.cancel', 'JTOOLBAR_CANCEL');
+		\Joomla\CMS\Toolbar\ToolbarHelper::cancel('comment.cancel', 'JTOOLBAR_CANCEL');
 		//MRToolBar::helpW('http://help.joomcoder.com/joomcck/index.html?filters.htm', 1000, 500);
-		JToolBarHelper::divider();
+		\Joomla\CMS\Toolbar\ToolbarHelper::divider();
 	}
 }

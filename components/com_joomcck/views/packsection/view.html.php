@@ -48,15 +48,15 @@ class JoomcckViewPacksection extends MViewBase
 		$isNew		= ($this->item->id == 0);
 // 		$checkedOut	= !($this->item->checked_out == 0 || $this->item->checked_out == $user->get('id'));
 
-		JToolBarHelper::title(($isNew ? \Joomla\CMS\Language\Text::_('CNEWPACKSECTION') : \Joomla\CMS\Language\Text::_('CEDITPACKSECTION')), 'sections');
+		\Joomla\CMS\Toolbar\ToolbarHelper::title(($isNew ? \Joomla\CMS\Language\Text::_('CNEWPACKSECTION') : \Joomla\CMS\Language\Text::_('CEDITPACKSECTION')), 'sections');
 
 // 		if (!$checkedOut)
 		{
-			JToolBarHelper::apply('packsection.apply', 'JTOOLBAR_APPLY');
-			JToolBarHelper::save('packsection.save', 'JTOOLBAR_SAVE');
-			JToolBarHelper::custom('packsection.save2new', 'save-new.png', 'save-new_f2.png', 'JTOOLBAR_SAVE_AND_NEW', false);
+			\Joomla\CMS\Toolbar\ToolbarHelper::apply('packsection.apply', 'JTOOLBAR_APPLY');
+			\Joomla\CMS\Toolbar\ToolbarHelper::save('packsection.save', 'JTOOLBAR_SAVE');
+			\Joomla\CMS\Toolbar\ToolbarHelper::custom('packsection.save2new', 'save-new.png', 'save-new_f2.png', 'JTOOLBAR_SAVE_AND_NEW', false);
 		}
-		JToolBarHelper::cancel('packsection.cancel', 'JTOOLBAR_CANCEL');
+		\Joomla\CMS\Toolbar\ToolbarHelper::cancel('packsection.cancel', 'JTOOLBAR_CANCEL');
 		//MRToolBar::helpW('http://help.joomcoder.com/joomcck/index.html?filters.htm', 1000, 500);
 	}
 }

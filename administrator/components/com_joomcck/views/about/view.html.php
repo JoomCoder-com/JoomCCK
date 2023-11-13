@@ -65,7 +65,7 @@ class JoomcckViewAbout extends MViewBase
 
     protected function addToolbar()
     {
-        JToolBarHelper::title(\Joomla\CMS\Language\Text::_('About'));
+        \Joomla\CMS\Toolbar\ToolbarHelper::title(\Joomla\CMS\Language\Text::_('About'));
         MRToolBar::addSubmenu('about');
     }
 }

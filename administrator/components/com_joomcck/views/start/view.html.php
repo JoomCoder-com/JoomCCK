@@ -30,7 +30,7 @@ class JoomcckViewStart extends MViewBase
 
     protected function addToolbar()
     {
-        JToolBarHelper::title(\Joomla\CMS\Language\Text::_('Start'));
+        \Joomla\CMS\Toolbar\ToolbarHelper::title(\Joomla\CMS\Language\Text::_('Start'));
     }
 
 	public function checkAdminDashboardMenuItem(){
@@ -61,8 +61,6 @@ class JoomcckViewStart extends MViewBase
 		]);
 
 		$live_site    = substr(\Joomla\CMS\Uri\Uri::root(), 0, -1);
-		$app          = Joomla\CMS\Application\CMSApplication::getInstance('site');
-		$router       = $app->getRouter();
 		$url          = $live_site . '/index.php?option=com_joomcck&view=cpanel&Itemid=' . $menu_table->id;
 
 		return $url;

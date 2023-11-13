@@ -19,7 +19,7 @@ defined('_JEXEC') or die;
  * @subpackage	com_joomcck
  *
  */
-class MRToolBar extends JToolBarHelper
+class MRToolBar extends \Joomla\CMS\Toolbar\ToolbarHelper
 {
 	public static function addSubmenu($vName = 'records')
 	{

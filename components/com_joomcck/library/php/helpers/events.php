@@ -6,6 +6,9 @@
  * @copyright Copyright (C) 2012 joomcoder (https://www.joomcoder.com). All rights reserved.
  * @license   GNU/GPL http://www.gnu.org/copyleft/gpl.html
  */
+
+use Joomla\CMS\Factory;
+
 defined('_JEXEC') or die();
 
 class CEventsHelper
@@ -67,7 +70,7 @@ class CEventsHelper
 	{
 		$user_opt = CUsrHelper::getOptions();
 		$section  = ItemsStore::getSection($section_id);
-		$user     = \Joomla\CMS\Factory::getApplication()->getIdentity();
+		$user     = Factory::getApplication()->getIdentity();
 
 		if($record_id)
 		{
@@ -132,7 +135,7 @@ class CEventsHelper
 			$user_id = $only_user;
 		}
 
-		if($user->id && in_array($section->params->get('events.event.' . $event . '.activ'), \Joomla\CMS\Factory::getApplication()->getIdentity()->getAuthorisedViewLevels()))
+		if($user->id && in_array($section->params->get('events.event.' . $event . '.activ'), Factory::getApplication()->getIdentity()->getAuthorisedViewLevels()))
 		{
 			$array['new_vote'] = @$params['new_vote'];
 			$array['status']   = @$params['status'];
@@ -173,7 +176,7 @@ class CEventsHelper
 		}
 		else
 		{
-			$db    = \Joomla\CMS\Factory::getDbo();
+			$db    = Factory::getDbo();
 			$query = $db->getQuery(TRUE);
 			$query->select('user_id');
 			$query->from('#__js_res_subscribe');
@@ -228,7 +231,7 @@ class CEventsHelper
 
 		foreach($list as $uid)
 		{
-			$senduser = \Joomla\CMS\Factory::getUser($uid);
+			$senduser = Factory::getUser($uid);
 			if(!in_array($section->params->get('events.event.' . $event . '.notif', $who), $senduser->getAuthorisedViewLevels()) && !($record->user_id && $senduser->get('id') == $record->user_id))
 			{
 				continue;
@@ -342,7 +345,7 @@ class CEventsHelper
 
 		if($item->ref_5)
 		{
-			$db = \Joomla\CMS\Factory::getDbo();
+			$db = Factory::getDbo();
 			include_once JPATH_ROOT . '/components/com_joomcck/tables/field.php';
 			$field = new JoomcckTableField($db);
 			$field->load($item->ref_5);
@@ -362,22 +365,22 @@ class CEventsHelper
 
 	static public function cleanRecord($id)
 	{
-		$db = Jfactory::getDbo();
-		$db->setQuery("DELETE FROM #__js_res_notifications WHERE ref_1 = " . $id . ' AND user_id = ' . \Joomla\CMS\Factory::getApplication()->getIdentity()->get('id') . ' AND ref_2 = ' . \Joomla\CMS\Factory::getApplication()->input->getInt('section_id'));
+		$db = Factory::getDbo();
+		$db->setQuery("DELETE FROM #__js_res_notifications WHERE ref_1 = " . $id . ' AND user_id = ' . Factory::getApplication()->getIdentity()->get('id') . ' AND ref_2 = ' . Factory::getApplication()->input->getInt('section_id'));
 		$db->execute();
 	}
 
 	static public function markReadRecord($record)
 	{
-		$db = Jfactory::getDbo();
+		$db = Factory::getDbo();
 
-		$db->setQuery("UPDATE #__js_res_notifications SET state_new = 0, notified = 1 WHERE ref_1 = " . $record->id . ' AND user_id = ' . \Joomla\CMS\Factory::getApplication()->getIdentity()->get('id') . ' AND ref_2 = ' . $record->section_id);
+		$db->setQuery("UPDATE #__js_res_notifications SET state_new = 0, notified = 1 WHERE ref_1 = " . $record->id . ' AND user_id = ' . Factory::getApplication()->getIdentity()->get('id') . ' AND ref_2 = ' . $record->section_id);
 		$db->execute();
 	}
 
 	static public function getNum($type, $id = 0, $key = 'num')
 	{
-		$user = \Joomla\CMS\Factory::getApplication()->getIdentity();
+		$user = Factory::getApplication()->getIdentity();
 		if(!$user->get('id'))
 		{
 			return;
@@ -389,7 +392,7 @@ class CEventsHelper
 		{
 			$events = array();
 
-			$db  = \Joomla\CMS\Factory::getDbo();
+			$db  = Factory::getDbo();
 			$sql = "SELECT `ref_1`, `ref_2`, `ref_3`, `ref_4`, `ref_5`, `type`, `eventer`, `ctime`  FROM #__js_res_notifications WHERE state_new = 1 AND user_id = " . $user->get('id');
 			$db->setQuery($sql);
 			$list = $db->loadObjectList();
