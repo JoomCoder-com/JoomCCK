@@ -146,6 +146,21 @@ defined('_JEXEC') or die('Restricted access');
     </div>
 
 
+    <?php if($this->hasExtendedVersion): ?>
+
+        <p class="alert alert-warning mt-5 text-center">
+            <i class="fas fa-star"></i> <a href="https://www.joomcoder.com/joomla-extensions/9-components/24-joomcck" target="_blank">Get now</a> <strong>JoomCCK Extended</strong> version to use the full power of JoomCCK
+            <br><br>
+            <a class="btn btn-light border" href="https://www.joomcoder.com/joomla-extensions/9-components/24-joomcck" target="_blank"><i class ="fas fa-download"></i> Download Now</a>
+        </p>
+
+
+    <?php endif; ?>
+
+
+
+
+
 
 </div>
 

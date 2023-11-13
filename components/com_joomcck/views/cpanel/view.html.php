@@ -12,8 +12,32 @@ jimport('mint.mvc.view.base');
 
 class JoomcckViewCpanel extends MViewBase
 {
+
+	public $hasExtendedVersion = false;
+
+
 	function display($tpl = null)
 	{
+
+		// check if has extended version
+		$this->hasExtendedVersion();
+
 		parent::display($tpl);
 	}
+
+	/*
+	 * Check if extended version installed
+	 */
+	public function hasExtendedVersion(){
+
+		$file = JPATH_ROOT.'/modules/mod_joomcck_ifollow/mod_joomcck_ifollow.xml';
+
+		if(is_file($file))
+			$this->hasExtendedVersion = true;
+
+
+
+
+	}
+
 }
