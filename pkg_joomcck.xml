@@ -34,7 +34,6 @@
         <file type="module" id="mod_joomcck_category" client="site">modules/mod_joomcck_category</file>
         <file type="module" id="mod_joomcck_filters" client="site">modules/mod_joomcck_filters</file>
         <file type="module" id="mod_joomcck_records" client="site">modules/mod_joomcck_records</file>
-        <file type="module" id="mod_joomcck_sectionstatistics" client="site">modules/mod_joomcck_sectionstatistics</file>
         <file type="module" id="mod_joomcck_submitbutton" client="site">modules/mod_joomcck_submitbutton</file>
         <file type="module" id="mod_joomcck_tagcloud" client="site">modules/mod_joomcck_tagcloud</file>
     </files>

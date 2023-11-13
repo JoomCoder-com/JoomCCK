@@ -54,30 +54,19 @@
 		<language tag="en-GB">language/en-GB/com_joomcck_field_audio.ini</language>
 		<language tag="en-GB">language/en-GB/com_joomcck_field_boolean.ini</language>
 		<language tag="en-GB">language/en-GB/com_joomcck_field_checkbox.ini</language>
-		<language tag="en-GB">language/en-GB/com_joomcck_field_child.ini</language>
 		<language tag="en-GB">language/en-GB/com_joomcck_field_datetime.ini</language>
 		<language tag="en-GB">language/en-GB/com_joomcck_field_digits.ini</language>
-		<language tag="en-GB">language/en-GB/com_joomcck_field_dripcontent.ini</language>
 		<language tag="en-GB">language/en-GB/com_joomcck_field_email.ini</language>
 		<language tag="en-GB">language/en-GB/com_joomcck_field_gallery.ini</language>
-		<language tag="en-GB">language/en-GB/com_joomcck_field_geo.ini</language>
 		<language tag="en-GB">language/en-GB/com_joomcck_field_html.ini</language>
 		<language tag="en-GB">language/en-GB/com_joomcck_field_image.ini</language>
-		<language tag="en-GB">language/en-GB/com_joomcck_field_j2store.ini</language>
 		<language tag="en-GB">language/en-GB/com_joomcck_field_listautocomplete.ini</language>
-		<language tag="en-GB">language/en-GB/com_joomcck_field_multilevelselect.ini</language>
 		<language tag="en-GB">language/en-GB/com_joomcck_field_multiselect.ini</language>
-		<language tag="en-GB">language/en-GB/com_joomcck_field_parent.ini</language>
 		<language tag="en-GB">language/en-GB/com_joomcck_field_passwd.ini</language>
-		<language tag="en-GB">language/en-GB/com_joomcck_field_paytoaccess.ini</language>
 		<language tag="en-GB">language/en-GB/com_joomcck_field_paytodownload.ini</language>
-		<language tag="en-GB">language/en-GB/com_joomcck_field_payvoucher.ini</language>
-		<language tag="en-GB">language/en-GB/com_joomcck_field_q2c.ini</language>
 		<language tag="en-GB">language/en-GB/com_joomcck_field_radio.ini</language>
 		<language tag="en-GB">language/en-GB/com_joomcck_field_readmore.ini</language>
 		<language tag="en-GB">language/en-GB/com_joomcck_field_records.ini</language>
-		<language tag="en-GB">language/en-GB/com_joomcck_field_register.ini</language>
-		<language tag="en-GB">language/en-GB/com_joomcck_field_related_access.ini</language>
 		<language tag="en-GB">language/en-GB/com_joomcck_field_select.ini</language>
 		<language tag="en-GB">language/en-GB/com_joomcck_field_status.ini</language>
 		<language tag="en-GB">language/en-GB/com_joomcck_field_telephone.ini</language>
@@ -87,7 +76,6 @@
 		<language tag="en-GB">language/en-GB/com_joomcck_field_url.ini</language>
 		<language tag="en-GB">language/en-GB/com_joomcck_field_video.ini</language>
 		<language tag="en-GB">language/en-GB/com_joomcck_gateway_paypal.ini</language>
-		<language tag="en-GB">language/en-GB/com_joomcck_gateway_robokassa.ini</language>
 	</languages>
 	<administration>
 		<menu link="option=com_joomcck&amp;view=start">com_joomcck</menu>
