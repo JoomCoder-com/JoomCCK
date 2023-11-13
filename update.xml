@@ -7,7 +7,7 @@
         <version>5.0</version>
         <infourl title="JoomCCK">https://github.com/JoomCoder-com/JoomCCK/releases</infourl>
         <downloads>
-            <downloadurl type="full" download="zip">https://github.com/JoomCoder-com/JoomCCK/releases/download/5.0/com_joomcck_v5.0_j4.zip</downloadurl>
+            <downloadurl type="full" download="zip">https://github.com/JoomCoder-com/JoomCCK/archive/refs/tags/5.0.zip</downloadurl>
         </downloads>
         <maintainer>JoomCoder</maintainer>
         <maintainerurl>https://www.joomcoder.com</maintainerurl>
