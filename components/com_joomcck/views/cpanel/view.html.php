@@ -36,8 +36,6 @@ class JoomcckViewCpanel extends MViewBase
 			$this->hasExtendedVersion = true;
 
 
-
-
 	}
 
 }
