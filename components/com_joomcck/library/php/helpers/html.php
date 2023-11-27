@@ -46,7 +46,7 @@ class HTMLFormatHelper
 		{
 			$section->follow = 1;
 
-			return sprintf($format, $section->id, ' btn-primary', $section->id, "jQuery(this).addClass('btn-danger').removeClass('btn-primary').children('span').html('" . \Joomla\CMS\Language\Text::_('CSECUNFOLLOW') . "');", "jQuery(this).addClass('btn-primary').removeClass('btn-danger').children('span').html('" . \Joomla\CMS\Language\Text::_('CFOLLOWINGSECION') . "');", $section->id, \Joomla\CMS\Uri\Uri::root(TRUE), 1, $section->id, \Joomla\CMS\Language\Text::_('CFOLLOWINGSECION'));
+			return sprintf($format, $section->id, ' btn-outline-primary', $section->id, "jQuery(this).addClass('btn-danger').removeClass('btn-outline-primary').children('span').html('" . \Joomla\CMS\Language\Text::_('CSECUNFOLLOW') . "');", "jQuery(this).addClass('btn-outline-primary').removeClass('btn-outline-danger').children('span').html('" . \Joomla\CMS\Language\Text::_('CFOLLOWINGSECION') . "');", $section->id, \Joomla\CMS\Uri\Uri::root(TRUE), 1, $section->id, \Joomla\CMS\Language\Text::_('CFOLLOWINGSECION'));
 		}
 		else
 		{

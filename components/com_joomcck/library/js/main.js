@@ -446,19 +446,19 @@ var _gaq = _gaq || [];
 				alert(json.error);
 				return;
 			}
-			$('#follow_' + id).attr('src', '<?php echo \Joomla\CMS\Uri\Uri::root(TRUE);?>/media/com_joomcck/icons/16/follow' + (json.state.toInt() ? 0 : 1) + '.png');
+			$('#follow_' + id).attr('src', '<?php echo \Joomla\CMS\Uri\Uri::root(TRUE);?>/media/com_joomcck/icons/16/follow' + (parseInt(json.state) ? 0 : 1) + '.png');
 			$('#followtext_' + id).html(json.title);
 			if(json.state == 0) {
-				$('#followsec-' + id).addClass('btn-primary').bind('mouseleave',function() {
-					$(this).removeClass('btn-danger').addClass('btn-primary');
+				$('#followsec-' + id).addClass('btn-outline-primary').bind('mouseleave',function() {
+					$(this).removeClass('btn-outline-danger').addClass('btn-outline-primary');
 					$('#followtext_' + id).html('<?php echo \Joomla\CMS\Language\Text::_("CFOLLOWINGSECION");?>');
 				}).bind('mouseenter', function() {
-					$(this).removeClass('btn-primary').addClass('btn-danger');
+					$(this).removeClass('btn-outline-primary').addClass('btn-outline-danger');
 					$('#followtext_' + id).html('<?php echo \Joomla\CMS\Language\Text::_("CSECUNFOLLOW");?>');
 				});
 			}
 			else {
-				$('#followsec-' + id).removeClass('btn-primary btn-danger').unbind('mouseenter mouseleave').prop("onmouseover", null).prop("onmouseout", null);
+				$('#followsec-' + id).removeClass('btn-outline-primary btn-outline-danger').unbind('mouseenter mouseleave').prop("onmouseover", null).prop("onmouseout", null);
 			}
 			if(_gaq) {
 				_gaq.push(['_trackEvent', 'Follow', json.state == 1 ? 'Unfollow Section' : 'Follow Section', json.name]);
@@ -484,19 +484,19 @@ var _gaq = _gaq || [];
 				alert(json.error);
 				return;
 			}
-			$('#followuser_' + id).attr('src', '<?php echo \Joomla\CMS\Uri\Uri::root(TRUE);?>/media/com_joomcck/icons/16/follow' + (json.state.toInt() ? 0 : 1) + '.png');
+			$('#followuser_' + id).attr('src', '<?php echo \Joomla\CMS\Uri\Uri::root(TRUE);?>/media/com_joomcck/icons/16/follow' + (parseInt(json.state) ? 0 : 1) + '.png');
 			$('#followtext_' + id).html(json.title);
 			if(json.state == 0) {
-				$('#followuser-' + id).addClass('btn-primary').bind('mouseleave',function() {
-					$(this).removeClass('btn-danger').addClass('btn-primary');
+				$('#followuser-' + id).addClass('btn-outline-primary').bind('mouseleave',function() {
+					$(this).removeClass('btn-outline-danger').addClass('btn-outline-primary');
 					$('#followtext_' + id).html(json.title);
 				}).bind('mouseenter', function() {
-					$(this).removeClass('btn-primary').addClass('btn-danger');
+					$(this).removeClass('btn-outline-primary').addClass('btn-outline-danger');
 					$('#followtext_' + id).html(json.title2);
 				});
 			}
 			else {
-				$('#followuser-' + id).removeClass('btn-primary btn-danger').unbind('mouseenter mouseleave').prop("onmouseover", null).prop("onmouseout", null);
+				$('#followuser-' + id).removeClass('btn-outline-primary btn-outline-danger').unbind('mouseenter mouseleave').prop("onmouseover", null).prop("onmouseout", null);
 			}
 			if(_gaq) {
 				_gaq.push(['_trackEvent', 'Follow', json.state == 1 ? 'Unfollow User' : 'Follow User', json.name]);
@@ -523,19 +523,19 @@ var _gaq = _gaq || [];
 				alert(json.error);
 				return;
 			}
-			$('#follow_' + id).attr('src', '<?php echo \Joomla\CMS\Uri\Uri::root(TRUE);?>/media/com_joomcck/icons/16/follow' + (json.state.toInt() ? 0 : 1) + '.png');
+			$('#follow_' + id).attr('src', '<?php echo \Joomla\CMS\Uri\Uri::root(TRUE);?>/media/com_joomcck/icons/16/follow' + (parseInt(json.state) ? 0 : 1) + '.png');
 			$('#followtext_' + id).html(json.title);
 			if(json.state == 0) {
-				$('#followcat-' + id).addClass('btn-primary').bind('mouseleave',function() {
-					$(this).removeClass('btn-danger').addClass('btn-primary');
+				$('#followcat-' + id).addClass('btn-outline-primary').bind('mouseleave',function() {
+					$(this).removeClass('btn-outline-danger').addClass('btn-outline-primary');
 					$('#followtext_' + id).html('<?php echo \Joomla\CMS\Language\Text::_("CCATFOLLOWING");?>');
 				}).bind('mouseenter', function() {
-					$(this).removeClass('btn-primary').addClass('btn-danger');
+					$(this).removeClass('btn-outline-primary').addClass('btn-outline-danger');
 					$('#followtext_' + id).html('<?php echo \Joomla\CMS\Language\Text::_("CCATUNFOLLOW");?>');
 				});
 			}
 			else {
-				$('#followcat-' + id).removeClass('btn-primary btn-danger').unbind('mouseenter mouseleave').prop("onmouseover", null).prop("onmouseout", null);
+				$('#followcat-' + id).removeClass('btn-outline-primary btn-outline-danger').unbind('mouseenter mouseleave').prop("onmouseover", null).prop("onmouseout", null);
 			}
 
 			if(_gaq) {
