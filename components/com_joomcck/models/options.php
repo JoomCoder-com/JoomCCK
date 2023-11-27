@@ -13,7 +13,7 @@ class JoomcckModelOptions extends MModelAdmin
 {
 	public function getForm($data = array(), $loadData = TRUE)
 	{
-		$form = $this->loadForm('com_joomcck.options', 'options', array('control' => 'jform', 'load_data' => $loadData));
+		$form = $this->loadForm('com_joomcck.options', 'options', array('control' => 'jform', 'load_data' => false));
 		if(empty($form))
 		{
 			return FALSE;
