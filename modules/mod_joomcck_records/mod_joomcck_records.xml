@@ -20,7 +20,7 @@
                 <field name="section_id" class="form-select" type="meresourcessection" required="true" select="1" type_elem_name="types"
                        default="" label="Select section"
                        description="Select the Home section which will for this module."/>
-                <field name="types" type="mertype" size="10" default="" multi="1" label="Only following types"/>
+                <field name="types" type="mertype" size="10" default="" multi="1" label="Only following types" />
                 <field name="orderby" type="list" default="r.ctime DESC" label="Primary Order" description="">
                     <option value="r.ctime ASC">Oldest first</option>
                     <option value="r.ctime DESC">Most recent first</option>
@@ -65,11 +65,11 @@
                     <option value="last_created">Added for the lats N days</option>
                 </field>
 
-                <field name="rsection_id" type="meresourcessection" select="1" type_elem_name="types"
+                <field name="rsection_id" type="meresourcessection" class="form-select" select="1" type_elem_name="types"
                        default="" label="Section with reviewed articles"
                        description="Select the section where articles that was reviewed are saved. Works only with What to show - New reviews for my articles..."/>
 
-                <field label="Field" description="Only works with What to show - Field value equal to... or Children and Parents " name="field_src" type="meresourcesfields"/>
+                <field label="Field" class="form-select" description="Only works with What to show - Field value equal to... or Children and Parents " name="field_src" type="meresourcesfields"/>
                 <field label="Field Value"  description="Only works with What to show - Field value equal to... You can use placeholders [USERNAME]" name="field_value" type="text"/>
                 <field name="fvco" type="list" default="0" label="Field value comparison">
                     <option value="= '{0}'">Equal</option>
@@ -97,7 +97,12 @@
 					<option value="3">Restrict current user's homepage or curently logged in</option>
 					<option value="4">Restrict curently logged in or current user's homepage</option>
                 </field>
-                <field label="Template overwrite" name="tmpl" type="mersubtmpls" default="" exclude="calendar"
+                <field label="Template overwrite"
+                       name="tmpl"
+                       type="mersubtmpls"
+                       default=""
+                       exclude="calendar"
+                       class="form-select"
                        description="Template to display list of articles. The changes takes effect only after relogin or session cleanup"
                        tmpltype="itemlist">
                     <option value="">Do not override template</option>

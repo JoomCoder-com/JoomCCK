@@ -50,11 +50,11 @@ class JFormFieldMersubtmpls extends \Joomla\CMS\Form\Field\ListField
         $app      = \Joomla\CMS\Factory::getApplication();
         
         // FIXIT: old joomcck
-        if($old) {
+        if(\Joomla\CMS\Factory::getApplication()->isClient('administrator')) {
             \Joomla\CMS\HTML\HTMLHelper::_('bootstrap.modal');
             $document = \Joomla\CMS\Factory::getDocument();
             $document->addStyleDeclaration('.tmpl_button{padding: 2px; font-size: 110%;}.tmpl_button img { padding: 0 2px 0 0; margin: 0px;}');
-            $document->addScript(\Joomla\CMS\Uri\Uri::base(TRUE) . '/components/com_joomcck/library/js/main.js');
+            $document->addScript(\Joomla\CMS\Uri\Uri::root(). '/components/com_joomcck/library/js/main.js');
         }
 
 		$tmpltype     = $this->element['tmpltype'];
@@ -73,6 +73,7 @@ class JFormFieldMersubtmpls extends \Joomla\CMS\Form\Field\ListField
 
 		$multi = $this->element['multi'] ? 'size="5" multiple="multiple"' : NULL;
 
+
 		$script     = "<script type='text/javascript'>
 			Joomcck.addTmplEditLink('{$tmpltype}', '{$this->id}', '" . $app->input->get('tmpl') . "', '" . \Joomla\CMS\Uri\Uri::root() . "');
 		</script>";
@@ -83,7 +84,7 @@ class JFormFieldMersubtmpls extends \Joomla\CMS\Form\Field\ListField
 			$script = $javascript = NULL;
 		}
 
-		$out = sprintf('<div class="float-start">%s</div><div class="float-start" style="margin-left:10px" id="%s_link">%s</div>', \Joomla\CMS\HTML\HTMLHelper::_('select.genericlist', $options, $this->name . ($multi ? '[]' : NULL), $multi . $javascript, 'value', 'text', $this->value, "{$this->id}"),
+		$out = sprintf('<div class="float-start">%s</div><div class="float-start" style="margin-left:10px" id="%s_link">%s</div>', \Joomla\CMS\HTML\HTMLHelper::_('select.genericlist', $options, $this->name . ($multi ? '[]' : NULL), $multi . $javascript . ' class="form-select"', 'value', 'text', $this->value, "{$this->id}"),
 			str_replace(array(']', '['), '', $this->id), $script);
 
 		return $out;
