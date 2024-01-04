@@ -8,6 +8,11 @@
  */
 defined('_JEXEC') or die();
 $image = new \Joomla\Registry\Registry($this->value);
+
+$cleanedImage = \Joomla\CMS\HTML\HTMLHelper::cleanImageURL($image->get('image'));
+
+$image->set('image',$cleanedImage->url);
+
 ?>
 
 <?php if($this->params->get('params.full_mode', 0)):?>
