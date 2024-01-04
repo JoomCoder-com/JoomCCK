@@ -263,6 +263,10 @@ var _gaq = _gaq || [];
 							iframeURL: url,
 							'onClosed': function(){
 								$('#ejbIframeModal').remove();
+							},
+							'onOpened': function(){
+								$('#ejbIframeModal').css('z-index',999999999);
+								$('.iziModal-overlay').css('z-index',99999999);
 							}
 						});
 
