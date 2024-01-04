@@ -17,7 +17,7 @@ $app = \Joomla\CMS\Factory::getApplication();
 //$params = $this->state->get('params');
 ?>
 
-<script type="text/javascript"><!--
+<script type="text/javascript">
 	Joomla.submitbutton = function(task) {
 
 
@@ -166,7 +166,7 @@ $app = \Joomla\CMS\Factory::getApplication();
 
 		Joomla.submitform(task);
 	};
---></script>
+</script>
 <?php if ($this->tmpl_params->get('tmpl_core.form_heading', 1)): ?>
 	<div class="page-header">
 		<h1>

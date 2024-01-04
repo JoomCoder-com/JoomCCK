@@ -16,7 +16,7 @@
 					<option value="0">XML_OPT_INITDIRECTORY</option>
 					<option value="1">XML_OPT_JOOMLAMEDIAMNG</option>
 			  	</field>
-				<field name="formats" type="text" size="40" label="F_FORMATS" default="png,jpg,gif,jpeg" description=""/>
+				<field name="formats" type="text" size="40" label="F_FORMATS" default="png,jpg,gif,jpeg,webp,avif" description=""/>
 				<field name="directory" type="text" size="40" label="F_INITDIRECTORY" default="images" description=""/>
 			  	<field name="show_subfolders" type="radio" class="btn-group" default="0" label="F_SUBFOLDER">
 					<option value="0">JNO</option>

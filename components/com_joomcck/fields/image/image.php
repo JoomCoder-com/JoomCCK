@@ -56,6 +56,16 @@ class JFormFieldCImage extends CFormField
 	{
 		if($this->required)
 		{
+
+
+			// joomla core media field
+			if($this->params->get('params.select_type', 2) == 1){
+
+				return "\n\t\tif(!jQuery('#jform_fields__{$this->id}__image').val()){ hfid.push({$this->id}); isValid = false; errorText.push('" . addslashes(\Joomla\CMS\Language\Text::sprintf('CFIELDREQUIRED', $this->label)) . "');}";
+
+			}
+
+
 			return "\n\t\tif(!jQuery('#jformfields{$this->id}image').val() && !jQuery('#jformfields{$this->id}hiddenimage').val()){ hfid.push({$this->id}); isValid = false; errorText.push('" . addslashes(\Joomla\CMS\Language\Text::sprintf('CFIELDREQUIRED', $this->label)) . "');}";
 		}
 	}
@@ -79,11 +89,12 @@ class JFormFieldCImage extends CFormField
 
 		$ext = \Joomla\Filesystem\File::getExt($check);
 
-		$formats = explode(',', strtolower(str_replace(array(' '), '', $this->params->get('params.formats', 'png,jpg,gif,jpeg'))));
+		$formats = explode(',', strtolower(str_replace(array(' '), '', $this->params->get('params.formats', 'png,jpg,gif,jpeg,webp,avif'))));
+
 
 		if($check && FALSE === array_search(strtolower($ext), $formats))
 		{
-			$this->setError(\Joomla\CMS\Language\Text::sprintf('F_NOTALLOWEDEXT', $this->label, str_replace(',', ', ', $this->params->get('params.formats', 'png,jpg,gif,jpeg'))));
+			$this->setError(\Joomla\CMS\Language\Text::sprintf('F_NOTALLOWEDEXT', $this->label, str_replace(',', ', ', $this->params->get('params.formats', 'png,jpg,gif,jpeg,webp,avif'))));
 
 			return FALSE;
 		}
