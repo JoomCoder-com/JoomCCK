@@ -1047,28 +1047,6 @@ class JoomcckControllerAjax extends MControllerAdmin
 		}
 
 
-		// adapt to autocomplete
-		if(is_array($result)){
-
-			$autoCompleteResult = [];
-
-			foreach ($result as $item){
-
-				if(is_array($item)){
-					$autoCompleteResult[] = ['id' => $item['id'], 'text' => $item['title']];
-				}else{
-					$autoCompleteResult[] = ['id' => $item, 'text' => $item];
-				}
-
-
-
-			}
-
-			$result = $autoCompleteResult;
-
-		}
-
-
 		AjaxHelper::send($result);
 
 		\Joomla\CMS\Factory::getApplication()->close();

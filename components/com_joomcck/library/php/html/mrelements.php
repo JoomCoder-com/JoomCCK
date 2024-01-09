@@ -589,7 +589,7 @@ class JHTMLMrelements
 		if($params->get('onRemove', 0))
 		{
 			$html[] = "
-				jQuery(box).css('background-image', 'url(\"" . \Joomla\CMS\Uri\Uri::root(TRUE) . "/media/com_joomcck/js/mooupload/imgs/load_bg_blue.gif\")');
+				jQuery(box).css('background-image', 'url(\"" . \Joomla\CMS\Uri\Uri::root(TRUE) . "/media/com_joomcck/img/loading.gif\")');
 
 				jQuery.ajax({
 					url:'" . \Joomla\CMS\Router\Route::_($params->get('onRemove'), FALSE) . "',
@@ -641,7 +641,7 @@ class JHTMLMrelements
 		{
 			$html[] = ($params->get('max_items', 0) ? "if(default{$uniq}.length > " . $params->get('max_items', 0) . "){ alert('" . \Joomla\CMS\Language\Text::_('CTAGLIMITREACHED') . "'); return;}" : "") . "
 
-				jQuery(box).css('background-image', 'url(\"" . \Joomla\CMS\Uri\Uri::root(TRUE) . "/media/com_joomcck/js/mooupload/imgs/load_bg_blue.gif\")');
+				jQuery(box).css('background-image', 'url(\"" . \Joomla\CMS\Uri\Uri::root(TRUE) . "/media/com_joomcck/img/loading.gif\")');
 
 				jQuery.ajax({
 					url:'" . \Joomla\CMS\Router\Route::_($params->get('onAdd'), FALSE) . "',

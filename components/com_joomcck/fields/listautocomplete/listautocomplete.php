@@ -85,6 +85,27 @@ class JFormFieldCListautocomplete extends CFormFieldSelectable
             $out = $this->_getPillValues($list);
 		}
 
+		// adapt to autocomplete
+		if(is_array($out)){
+
+			$autoCompleteResult = [];
+
+			foreach ($out as $item){
+
+				if(is_array($item)){
+					$autoCompleteResult[] = ['id' => $item['id'], 'text' => $item['title']];
+				}else{
+					$autoCompleteResult[] = ['id' => $item, 'text' => $item];
+				}
+
+
+
+			}
+
+			return $autoCompleteResult;
+
+		}
+
 		return $out;
 	}
 
