@@ -86,7 +86,7 @@ class MFormHelper
 				break;
 			case self::GROUP_SEPARATOR_TAB:
 
-				$out[] = '<ul class="nav nav-tabs sticky-top" id="' . str_replace('.', '_', $form->getName()) . '" role="tablist">';
+				$out[] = '<ul class="nav nav-tabs sticky-top bg-white" id="' . str_replace('.', '_', $form->getName()) . '" role="tablist">';
 				foreach($groups as $group)
 				{
 					$out[] = '<li class="nav-item" role="presentation"><a  class="nav-link" href="#' . $group . '" data-bs-toggle="tab">' . \Joomla\CMS\Language\Text::_('GROUP_' . strtoupper($group)) . '</button></a></li>';
