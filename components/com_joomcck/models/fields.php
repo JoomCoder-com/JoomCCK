@@ -118,7 +118,7 @@ class JoomcckModelFields extends MModelList
 		if($itemId && !$fields)
 		{
 			$db = \Joomla\CMS\Factory::getDbo();
-			$db->setQuery("SELECT `fields` FROM `#__js_res_record` WHERE `id` = {$itemId}");
+			$db->setQuery("SELECT `fields` FROM `#__js_res_record` WHERE `id` = {$itemId} ORDER BY `ordering` asc");
 			$json = $db->loadResult();
 			$fields = json_decode($json, true);
 		}

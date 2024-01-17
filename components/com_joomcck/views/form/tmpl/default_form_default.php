@@ -252,7 +252,10 @@ $k = 0;
 	<?php endif;?>
 
 
-	<?php if(isset($this->sorted_fields[0])):?>
+	<?php if(isset($this->sorted_fields[0])):
+
+
+    ?>
 		<?php foreach ($this->sorted_fields[0] as $field_id => $field):?>
 			<div id="fld-<?php echo $field->id;?>" class="control-group odd<?php echo $k = 1 - $k ?> <?php echo 'field-'.$field_id; ?> <?php echo $field->fieldclass;?>">
 				<?php if($field->params->get('core.show_lable') == 1 || $field->params->get('core.show_lable') == 3):?>

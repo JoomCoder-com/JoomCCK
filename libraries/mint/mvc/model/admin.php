@@ -1153,7 +1153,7 @@ abstract class MModelAdmin extends MModelForm
 		$tableClassName = get_class($table);
 		$contentType = new \Joomla\CMS\UCM\UCMType;
 		$type = $contentType->getTypeByTable($tableClassName);
-		$tagsObserver = $table->getObserverOfClass('JTableObserverTags');
+		//$tagsObserver = $table->getObserverOfClass('JTableObserverTags');
 		$conditions = array();
 
 		if (empty($pks))
@@ -1180,10 +1180,10 @@ abstract class MModelAdmin extends MModelForm
 			{
 				$table->ordering = $order[$i];
 
-				if ($type)
+				/*if ($type)
 				{
 					$this->createTagsHelper($tagsObserver, $type, $pk, $type->type_alias, $table);
-				}
+				}*/
 
 				if (!$table->store())
 				{
