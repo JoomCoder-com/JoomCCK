@@ -16,6 +16,8 @@ if(empty($this->value))
 $this->record = $record;
 $this->_init();
 
+
+
 ?>
 
 <?php if ($this->params->get('params.thumbs_resize_mode', 1) == 1): ?>

@@ -14,6 +14,7 @@ class JFormFieldCGallery extends CFormFieldUpload
 
 	public $resizer;
 	public $path;
+	public $uploadsPath;
 
 	public function getInput()
 	{
@@ -23,7 +24,7 @@ class JFormFieldCGallery extends CFormFieldUpload
 		$params['max_size']         = ($this->params->get('params.max_size', 4000) * 1024);
 		$params['method']           = $this->params->get('params.method', 'auto');
 		$params['max_count']        = $this->params->get('params.max_count', 0);
-		$params['file_formats']     = $this->params->get('params.file_formats', 'jpg, png, gif, bmp, jpeg');
+		$params['file_formats']     = $this->params->get('params.file_formats', 'jpg, png, gif, bmp, jpeg, avif, webp');
 		$params['allow_edit_title'] = $this->params->get('params.allow_edit_title', 1);
 		// 		$params['allow_add_descr'] = $this->params->get('params.allow_add_descr', 1);;
 		if($this->params->get('params.show_mode', 'gallerybox') == 'gallerybox')
@@ -174,7 +175,11 @@ class JFormFieldCGallery extends CFormFieldUpload
 		{
 			return;
 		}
+
+
 		$total_width = $this->params->get('params.column_width');
+
+
 		$max_per_row = $this->params->get('params.image_in_row');
 		$padding     = $this->params->get('params.image_padding', 0);
 		$max_height  = $this->params->get('params.max_height', 0);
@@ -186,6 +191,17 @@ class JFormFieldCGallery extends CFormFieldUpload
 
 		for($i = 0; $i < $rows; $i++)
 		{
+
+			// get image size automatically
+			if(!$this->value[$count]['height'] || !$this->value[$count]['width']){
+
+				$imageInfo = getImageSize($this->uploadsPath.$this->value[$count]['fullpath']);
+				$this->value[$count]['height'] = $imageInfo[1];
+				$this->value[$count]['width'] = $imageInfo[0];
+
+			}
+
+
 			$base_height = (int)$this->value[$count]['height'];
 			$base_width  = 0;
 			$pictures    = array();
@@ -197,6 +213,13 @@ class JFormFieldCGallery extends CFormFieldUpload
 					break;
 				}
 				$image = $this->value[$count];
+
+
+
+
+
+
+
 
 				$base_width += $this->resizer->calculateByHeight($base_height, $image['height'], $image['width']);
 				$pictures[$count] = $image;
@@ -350,6 +373,7 @@ class JFormFieldCGallery extends CFormFieldUpload
 	{
 		$this->_init();
 		$this->_getRecord($post['record_id']);
+
 
 		$dir = \Joomla\CMS\Component\ComponentHelper::getParams('com_joomcck')->get('general_upload') . DIRECTORY_SEPARATOR . $this->params->get('params.subfolder', $this->field_type) . DIRECTORY_SEPARATOR;
 		$f_key = $this->id . '-' . $this->record->id;
@@ -921,6 +945,9 @@ class JFormFieldCGallery extends CFormFieldUpload
 			$index = '<html><body></body></html>';
 			\Joomla\Filesystem\File::write($this->path . DIRECTORY_SEPARATOR . 'index.html', $index);
 		}
+
+
+		$this->uploadsPath = JPATH_ROOT . DIRECTORY_SEPARATOR . \Joomla\CMS\Component\ComponentHelper::getParams('com_joomcck')->get('general_upload') . DIRECTORY_SEPARATOR.'uploads'.DIRECTORY_SEPARATOR;
 
 		$root      =\Joomla\Filesystem\Path::clean(\Joomla\CMS\Component\ComponentHelper::getParams('com_joomcck')->get('general_upload'));
 		$url       = str_replace(JPATH_ROOT, '', $root);

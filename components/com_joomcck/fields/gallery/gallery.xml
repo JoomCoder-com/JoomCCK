@@ -11,7 +11,7 @@
 				<field class="form-select" type="cobtmpllist" name="template_output_full" onchange="ajax_load_sub_params(this, 'components/com_joomcck/fields/gallery/tmpl/output');" filter="php$" hide_none="1" hide_default="1" directory="components/com_joomcck/fields/gallery/tmpl/output" label="F_TMPLFULL" default="full.php" />
 			</fieldset>
 			<fieldset name="general" label="FS_UPLOAD">
-				<field name="file_formats" size="40" type="text" default="zip, jpg, png, jpeg, gif, txt, md, bmp" label="F_ALLOWEDFORMATS" />
+				<field name="file_formats" size="40" type="text" default="zip, jpg, png, jpeg, gif, txt, md, bmp, webp, avif" label="F_ALLOWEDFORMATS" />
 				<field name="max_count" type="text" default="0" size="3" label="F_MAXCOUNTLIMIT" />
 				<field name="max_size" type="text" size="3" label="F_MAXSIZE" description="" default="2048" />
 				<field name="subfolder" type="text" label="F_SPECSUBFOLDER" description="F_SPECSUBFOLDER_DESCR" default="uploads" />
