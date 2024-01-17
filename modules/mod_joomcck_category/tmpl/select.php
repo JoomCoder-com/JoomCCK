@@ -168,13 +168,13 @@ $max_level = count($levels);
 					?>
 					<div>
 						<?php echo \Joomla\CMS\Language\Text::_($level); ?><br/>
-						<?php echo \Joomla\CMS\HTML\HTMLHelper::_('select.genericlist', $options, 'category_select1', 'class="catselect" onchange="' . $function . '"', 'value', 'text', $selected); ?>
+						<?php echo \Joomla\CMS\HTML\HTMLHelper::_('select.genericlist', $options, 'category_select1', 'class="catselect form-select form-select-sm" onchange="' . $function . '"', 'value', 'text', $selected); ?>
 					</div>
 
 				<?php else: ?>
 					<div>
 						<?php echo \Joomla\CMS\Language\Text::_($level); ?><br/>
-						<?php echo \Joomla\CMS\HTML\HTMLHelper::_('select.genericlist', $options, 'category_select' . $i, ' class="catselect" onchange="' . $function . '"'); ?>
+						<?php echo \Joomla\CMS\HTML\HTMLHelper::_('select.genericlist', $options, 'category_select' . $i, ' class="catselect form-select form-select-sm" onchange="' . $function . '"'); ?>
 					</div>
 				<?php endif; ?>
 				<?php $i++; ?>
