@@ -18,15 +18,15 @@ define('S', $component_params->get('separator', ':'));
 
 function category_route($cid)
 {
-	static $component_params = NULL;
-	if(!$cid)
+	static $component_params = null;
+	if (!$cid)
 	{
 		return;
 	}
 
 	$category       = ItemsStore::getCategory($cid);
 	$category->path = str_replace("root/", '', $category->path);
-	if($pos = strrpos($category->path, '/'))
+	if ($pos = strrpos($category->path, '/'))
 	{
 		$path = substr_replace($category->path, $cid . '-', strrpos($category->path, '/') + 1, 0);
 	}
@@ -41,9 +41,9 @@ function category_route($cid)
 function my_unset($str, &$query)
 {
 	$vars = explode(',', $str);
-	foreach($vars as $var)
+	foreach ($vars as $var)
 	{
-		if(isset($query[$var]))
+		if (isset($query[$var]))
 		{
 			unset($query[$var]);
 		}
@@ -56,13 +56,13 @@ function is_view_what($vw)
 		"favorited", "children", "rated", "visited", "created", "commented", "related", "expired", "unpublished",
 		"hidden", "follow", "events", "featured", "show_all_children", "show_all_parents"
 	);
-	foreach($view_whats as $alias)
+	foreach ($view_whats as $alias)
 	{
-		if(\Joomla\CMS\Language\Text::_($alias) == urldecode($vw))
+		if (\Joomla\CMS\Language\Text::_($alias) == urldecode($vw))
 		{
 			return $alias;
 		}
-		if(\Joomla\CMS\Language\Text::_('user_' . $alias) == urldecode($vw))
+		if (\Joomla\CMS\Language\Text::_('user_' . $alias) == urldecode($vw))
 		{
 			return 'user_' . $alias;
 		}
@@ -78,7 +78,7 @@ function cleanAlias($alias)
 		'#', '$', '%' . '^', '&', '*', '+', '='
 	), '-', $alias);
 
-	while(strpos($alias, '--') !== FALSE)
+	while (strpos($alias, '--') !== false)
 	{
 		$alias = str_replace('--', '-', $alias);
 	}
@@ -90,7 +90,7 @@ function explodeUrlParam($param)
 {
 	$s = S;
 
-	if(preg_match('/^[0-9]*\:/', (string) $param))
+	if (preg_match('/^[0-9]*\:/', (string) $param))
 	{
 		$s = ':';
 	}
@@ -99,7 +99,7 @@ function explodeUrlParam($param)
 
 	$out[0] = $array[0];
 
-	if(count($array) > 1)
+	if (count($array) > 1)
 	{
 		unset($array[0]);
 		$out[1] = implode('-', $array);
@@ -110,35 +110,38 @@ function explodeUrlParam($param)
 
 function JoomcckBuildRoute(&$query)
 {
-	static $component_params = NULL;
+	static $component_params = null;
 
 	$component_params = (!empty($component_params) ? $component_params : \Joomla\CMS\Component\ComponentHelper::getParams('com_joomcck'));
 
+	// active menu
+	$activeMenu = \Joomla\CMS\Factory::getApplication()->getMenu()->getActive();
+
 	$segments = array();
-	$unset    = FALSE;
-	switch(@$query['view'])
+	$unset    = false;
+	switch (@$query['view'])
 	{
 		case 'records':
-			$unset = TRUE;
+			$unset = true;
 
-			if(isset($query['view_what']))
+			if (isset($query['view_what']))
 			{
 				$user = explodeUrlParam(@$query['user_id']);
 
-				if(isset($user[0]) && $user[0])
+				if (isset($user[0]) && $user[0])
 				{
 					$segments[] = urlencode(\Joomla\CMS\Language\Text::_('SEF_USERITEM'));
 
 					$segments[] = urlencode(\Joomla\CMS\Language\Text::_($query['view_what']));
 
 					$section = explodeUrlParam($query['section_id']);
-					if(count($section) < 2)
+					if (count($section) < 2)
 					{
 						$section[1] = ItemsStore::getSection($section[0])->alias;
 					}
 					$segments[] = ($section[0] . '-' . cleanAlias($section[1]));
 
-					if(count($user) < 2)
+					if (count($user) < 2)
 					{
 						$user[1] = \Joomla\CMS\Filter\OutputFilter::stringURLSafe(\Joomla\CMS\Factory::getUser($user[0])->get(ItemsStore::getSection($section[0])->params->get('personalize.author_mode')));
 					}
@@ -152,7 +155,7 @@ function JoomcckBuildRoute(&$query)
 					$segments[] = urlencode(\Joomla\CMS\Language\Text::_($query['view_what']));
 
 					$section = explodeUrlParam($query['section_id']);
-					if(count($section) < 2)
+					if (count($section) < 2)
 					{
 						$section[1] = ItemsStore::getSection($section[0])->alias;
 					}
@@ -161,23 +164,23 @@ function JoomcckBuildRoute(&$query)
 				break;
 			}
 
-			if(isset($query['ucat_id']))
+			if (isset($query['ucat_id']))
 			{
 				$segments[] = urlencode(\Joomla\CMS\Language\Text::_('SEF_USERCATEGORY'));
 				$section    = explodeUrlParam($query['section_id']);
-				if(count($section) < 2)
+				if (count($section) < 2)
 				{
 					$section[1] = ItemsStore::getSection($section[0])->alias;
 				}
 				$segments[] = ($section[0] . '-' . cleanAlias($section[1]));
 				$ucat       = explodeUrlParam($query['ucat_id']);
-				if(count($ucat) < 2)
+				if (count($ucat) < 2)
 				{
 					$ucat[1] = ItemsStore::getUserCategory($ucat[0])->alias;
 				}
 				$segments[] = ($ucat[0] . '-' . cleanAlias($ucat[1]));
 				$user       = explodeUrlParam($query['user_id']);
-				if(count($user) < 2)
+				if (count($user) < 2)
 				{
 					$user[1] = \Joomla\CMS\Application\ApplicationHelper::stringURLSafe(\Joomla\CMS\Factory::getUser($user[0])->get(ItemsStore::getSection($section[0])->params->get('personalize.author_mode')));
 				}
@@ -185,23 +188,23 @@ function JoomcckBuildRoute(&$query)
 				break;
 			}
 
-			if(isset($query['cat_id']))
+			if (isset($query['cat_id']))
 			{
 				$segments[] = urlencode(\Joomla\CMS\Language\Text::_('SEF_CATITEMS'));
 				$section    = explodeUrlParam($query['section_id']);
-				if(count($section) < 2)
+				if (count($section) < 2)
 				{
 					$section[1] = ItemsStore::getSection($section[0])->alias;
 				}
 				$segments[] = ($section[0] . '-' . cleanAlias($section[1]));
 				$category   = explodeUrlParam($query['cat_id']);
-				if($component_params->get('sef_category', 0) == 'full')
+				if ($component_params->get('sef_category', 0) == 'full')
 				{
 					$segments[] = category_route($category[0]);
 				}
 				else
 				{
-					if(count($category) < 2)
+					if (count($category) < 2)
 					{
 						$category[1] = ItemsStore::getCategory($category[0])->alias;
 					}
@@ -231,13 +234,23 @@ function JoomcckBuildRoute(&$query)
 				break;
 			}*/
 
-			if(isset($query['section_id']))
+			if (isset($query['section_id'])) // is section
 			{
+
+				// check if has an item id, if has it then use item id build
+				if (isset($query['Itemid']))
+				{
+					unset($query['view']);
+					unset($query['section_id']);
+
+					return [];
+				}
+
 				$segments[] = urlencode(\Joomla\CMS\Language\Text::_('SEF_ITEMS'));
-				if(isset($query['section_id']))
+				if (isset($query['section_id']))
 				{
 					$section = explodeUrlParam($query['section_id']);
-					if(count($section) < 2)
+					if (count($section) < 2)
 					{
 						$section[1] = ItemsStore::getSection($section[0])->alias;
 					}
@@ -248,12 +261,12 @@ function JoomcckBuildRoute(&$query)
 			break;
 
 		case 'record':
-			$unset = TRUE;
-			if(isset($query['user_id']))
+			$unset = true;
+			if (isset($query['user_id']))
 			{
 				$segments[] = urlencode(\Joomla\CMS\Language\Text::_('SEF_USER_ITEM'));
 				$user       = explodeUrlParam($query['user_id']);
-				if(!isset($user[1]))
+				if (!isset($user[1]))
 				{
 					$user[1] = \Joomla\CMS\Application\ApplicationHelper::stringURLSafe(\Joomla\CMS\Factory::getUser($user[0])->get('name'));
 				}
@@ -264,16 +277,16 @@ function JoomcckBuildRoute(&$query)
 				$segments[] = urlencode(\Joomla\CMS\Language\Text::_('SEF_ITEM'));
 			}
 
-			if(isset($query['cat_id']))
+			if (isset($query['cat_id']))
 			{
 				$category = explodeUrlParam($query['cat_id']);
-				if($component_params->get('sef_category', 0) == 'full')
+				if ($component_params->get('sef_category', 0) == 'full')
 				{
 					$segments[] = category_route($category[0]);
 				}
 				else
 				{
-					if(count($category) < 2)
+					if (count($category) < 2)
 					{
 						$category[1] = ItemsStore::getCategory($category[0])->alias;
 					}
@@ -287,12 +300,12 @@ function JoomcckBuildRoute(&$query)
 			break;
 
 		case 'form':
-			$unset = TRUE;
-			if(isset($query['id']))
+			$unset = true;
+			if (isset($query['id']))
 			{
 				$segments[] = urlencode(\Joomla\CMS\Language\Text::_('SEF_FORM_EDIT'));
 				$record     = explodeUrlParam($query['id']);
-				if(count($record) < 2)
+				if (count($record) < 2)
 				{
 					$record[1] = ItemsStore::getRecord($record[0])->alias;
 				}
@@ -302,30 +315,30 @@ function JoomcckBuildRoute(&$query)
 			{
 				$segments[] = urlencode(\Joomla\CMS\Language\Text::_('SEF_FORM_ADD'));
 
-				if(isset($query['section_id']))
+				if (isset($query['section_id']))
 				{
 					$section = explodeUrlParam($query['section_id']);
-					if(count($section) < 2)
+					if (count($section) < 2)
 					{
 						$section[1] = ItemsStore::getSection($section[0])->alias;
 					}
 					$segments[] = ($section[0] . '-' . cleanAlias($section[1]));
 				}
-				if(isset($query['type_id']))
+				if (isset($query['type_id']))
 				{
 					$type       = explodeUrlParam($query['type_id']);
 					$segments[] = $type[0] . (isset($type[1]) ? '-' . \Joomla\CMS\Application\ApplicationHelper::stringURLSafe($type[1]) : '');
 				}
-				if(isset($query['cat_id']))
+				if (isset($query['cat_id']))
 				{
 					$category = explodeUrlParam($query['cat_id']);
-					if($component_params->get('sef_category', 0) == 'full')
+					if ($component_params->get('sef_category', 0) == 'full')
 					{
 						$segments[] = category_route($category[0]);
 					}
 					else
 					{
-						if(count($category) < 2)
+						if (count($category) < 2)
 						{
 							$category[1] = ItemsStore::getCategory($category[0])->alias;
 						}
@@ -335,7 +348,7 @@ function JoomcckBuildRoute(&$query)
 			}
 			break;
 	}
-	if($unset)
+	if ($unset)
 	{
 		my_unset('view,section_id,cat_id,view_what,user_id,ucat_id,type_id,id', $query);
 	}
@@ -351,7 +364,7 @@ function JoomcckParseRoute($segments)
 	$count        = count($segments);
 	$last_segment = count($segments) - 1;
 
-	switch(urldecode(str_replace(':', '-', $segments[0])))
+	switch (urldecode(str_replace(':', '-', $segments[0])))
 	{
 		case \Joomla\CMS\Language\Text::_('SEF_ITEMS'):
 			$vars['view']       = 'records';
@@ -386,7 +399,7 @@ function JoomcckParseRoute($segments)
 			$vars['section_id'] = $filter->clean($segments[1], 'INT');
 			$vars['type_id']    = $filter->clean($segments[2], 'INT');
 
-			if($count >= 4)
+			if ($count >= 4)
 			{
 				$vars['cat_id'] = $filter->clean($segments[$last_segment], 'INT');
 			}
@@ -405,7 +418,7 @@ function JoomcckParseRoute($segments)
 			$vars['view']    = 'record';
 			$vars['user_id'] = $filter->clean($segments[1], 'INT');
 			$vars['id']      = $filter->clean($segments[$last_segment], 'INT');
-			if($count >= 4)
+			if ($count >= 4)
 			{
 				$vars['cat_id'] = $filter->clean($segments[$last_segment - 1], 'INT');
 			}
@@ -413,7 +426,7 @@ function JoomcckParseRoute($segments)
 		case \Joomla\CMS\Language\Text::_('SEF_ITEM'):
 			$vars['view'] = 'record';
 			$vars['id']   = $filter->clean($segments[$last_segment], 'INT');
-			if($count >= 3)
+			if ($count >= 3)
 			{
 				$vars['cat_id'] = $filter->clean($segments[$last_segment - 1], 'INT');
 			}
