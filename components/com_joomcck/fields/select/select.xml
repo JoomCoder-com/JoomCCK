@@ -49,7 +49,7 @@
 					<option value="2">XML_OPT_ACS</option>
 					<option value="3">XML_OPT_DESC</option>
 				</field>
-				<field name="width" type="text" default="450" label="F_MAXWIDTH" size="3"/>
+				<field name="width" type="text" default="450px" label="F_MAXWIDTH" size="3"/>
 				<field name="size" type="text" size="3" default="10" label="F_MAXSIZE" description="F_MAXSIZE_DESCR"/>
 				<field name="values" type="textarea" cols="40" rows="5" default="" label="F_VALUESLIST" description="F_VALUESLIST_DESCR"/>
 				<field name="default_val" type="text" size="2" default="0" label="F_DEFAULTVAL"/>

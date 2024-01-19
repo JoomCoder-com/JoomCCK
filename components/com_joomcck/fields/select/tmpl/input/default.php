@@ -15,7 +15,7 @@ if($this->params->get('params.chosen', false))
 
 $class = ' class="' . $this->params->get('core.field_class', 'form-control') . ($this->required ? ' required' : NULL) . '"';
 $required = $this->required ? ' required="true" ' : NULL;
-$style = ' style="max-width: ' . $this->params->get('params.width', '450') . 'px"';
+$style = ' style="max-width: ' . $this->params->get('params.width', '450px') . '"';
 ?>
 
 <select name="jform[fields][<?php echo $this->id;?>]" class="elements-list joomcck-chosen-<?php echo $this->id; ?>" id="form_field_list_<?php echo $this->id;?>" <?php echo $required . $style;?>>
