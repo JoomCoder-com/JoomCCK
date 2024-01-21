@@ -551,8 +551,12 @@ class MModelList extends MModelBase
 			// Keep B/C for components previous to jform forms for filters
 			{
 				// Pre-fill the limits
-				$limit = $app->getUserStateFromRequest('global.list.limit', 'limit', $app->getCfg('list_limit'), 'uint');
+				
+				$limit = $app->getUserStateFromRequest('list.limit', 'limit',        (int) \Joomla\CMS\Component\ComponentHelper::getComponent('com_joomcck')->getParams()->get('list_limit',20), 'uint');
+
 				$this->setState('list.limit', $limit);
+
+
 
 				// Check if the ordering field is in the white list, otherwise use the incoming value.
 				$value = $app->getUserStateFromRequest($this->context . '.ordercol', 'filter_order', $ordering);

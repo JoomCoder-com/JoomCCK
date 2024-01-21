@@ -62,7 +62,7 @@ $listDirn = $this->state->get('list.direction');
 			</th>
 		</tr>
 		</thead>
-		<?php echo HTMLFormatHelper::layout('pagenav', $this); ?>
+
 		<tbody>
 		<?php foreach($this->items as $i => $item) :
 			$ordering   = ($listOrder == 'f.ordering');
@@ -139,6 +139,8 @@ $listDirn = $this->state->get('list.direction');
 		<?php endforeach; ?>
 		</tbody>
 	</table>
+
+	<?php echo HTMLFormatHelper::layout('pagenav', $this); ?>
 
 	<input type="hidden" name="task" value=""/>
     <input type="hidden" name="id" value="0"/>

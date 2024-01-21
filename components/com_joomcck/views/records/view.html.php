@@ -861,7 +861,7 @@ class JoomcckViewRecords extends MViewBase
 			$limit = $app->getUserStateFromRequest('joomcck' . $key . '.limit', 'limit');
 			if(!$limit)
 			{
-				$limit = $lparams->get('tmpl_core.item_limit_default', \Joomla\CMS\Factory::getConfig()->get('list_limit', 20));
+				$limit = $lparams->get('tmpl_core.item_limit_default', \Joomla\CMS\Component\ComponentHelper::getComponent('com_joomcck')->getParams()->get('list_limit',20));
 				$app->setUserState('joomcck' . $key . '.limit', $limit);
 			}
 		}
