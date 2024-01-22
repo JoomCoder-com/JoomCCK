@@ -29,6 +29,13 @@ abstract class MModelForm extends MModelBase
 	 * @since  12.2
 	 */
 	protected $_forms = array();
+	/**
+	 * Maps events to plugin groups.
+	 *
+	 * @var    array
+	 * @since  3.6
+	 */
+	protected $events_map = null;
 
 	/**
 	 * Method to checkin a row.
