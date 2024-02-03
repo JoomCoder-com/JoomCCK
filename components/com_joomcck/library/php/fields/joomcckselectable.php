@@ -421,7 +421,7 @@ class CFormFieldSelectable extends CFormField
 			$label_num = $label;
 			if($this->params->get('params.filter_show_number', 1))
 			{
-				$label_num .= '<span class="badge text-bg-light shadow-sm">' . $item->num . '</span>';
+				$label_num .= '<span class="badge text-bg-light shadow-sm px-2 py-1">' . $item->num . '</span>';
 			}
 			$out[] = $item->text;
 		}

@@ -179,7 +179,7 @@ $listDirn = $this->state->get('list.direction');
 					<br/>
 					<small>
 						<?php echo \Joomla\CMS\HTML\HTMLHelper::_('grid.sort', 'CHITS', 'a.hits', $listDirn, $listOrder); ?>
-						<span class="badge text-bg-light shadow-sm"><small><?php echo $this->escape($item->hits); ?></small></span>
+						<span class="badge text-bg-light shadow-sm px-2 py-1"><small><?php echo $this->escape($item->hits); ?></small></span>
 
 						<?php echo \Joomla\CMS\HTML\HTMLHelper::_('grid.sort', 'CCOMMENTS', 'a.comments', $listDirn, $listOrder); ?>
 						<a rel="tooltip" data-bs-toggle="tooltip" title="<?php echo \Joomla\CMS\Language\Text::_('CSHOWRECORDCOMMENTS'); ?>" href="<?php echo \Joomla\CMS\Router\Route::_('index.php?option=com_joomcck&view=comms&filter_search=record:' . $item->id); ?>" class="badge bg-info">
@@ -192,7 +192,7 @@ $listDirn = $this->state->get('list.direction');
 						</a>
 
 						<?php echo \Joomla\CMS\HTML\HTMLHelper::_('grid.sort', 'CFAVORITED', 'a.favorite_num', $listDirn, $listOrder); ?>
-						<span class="badge text-bg-light shadow-sm"><small><?php echo $this->escape($item->favorite_num); ?></small></span>
+						<span class="badge text-bg-light shadow-sm px-2 py-1"><small><?php echo $this->escape($item->favorite_num); ?></small></span>
 					</small>
 				</div>
 			</td>

@@ -232,7 +232,7 @@ class JoomcckModelAuditlog extends MModelList
 			foreach($list as $key => $event)
 			{
 				$type     = ItemsStore::getType($event->type_id);
-				$events[] = \Joomla\CMS\HTML\HTMLHelper::_('select.option', $event->event, \Joomla\CMS\Language\Text::_($type->params->get('audit.al' . $event->event . '.msg')) . ' <span class="badge text-bg-light shadow-sm">' . $event->total . '</span>');
+				$events[] = \Joomla\CMS\HTML\HTMLHelper::_('select.option', $event->event, \Joomla\CMS\Language\Text::_($type->params->get('audit.al' . $event->event . '.msg')) . ' <span class="badge text-bg-light shadow-sm px-2 py-1">' . $event->total . '</span>');
 			}
 
 			ArrayHelper::clean_r($events);
@@ -290,7 +290,7 @@ class JoomcckModelAuditlog extends MModelList
 
 			foreach($list as $key => $user)
 			{
-				$users[] = \Joomla\CMS\HTML\HTMLHelper::_('select.option', $user->user_id, sprintf('%s (%s) <span class="badge text-bg-light shadow-sm">%d</span>', $user->name, $user->username ? $user->username : \Joomla\CMS\Language\Text::_('CGUEST'), $user->total));
+				$users[] = \Joomla\CMS\HTML\HTMLHelper::_('select.option', $user->user_id, sprintf('%s (%s) <span class="badge text-bg-light shadow-sm px-2 py-1">%d</span>', $user->name, $user->username ? $user->username : \Joomla\CMS\Language\Text::_('CGUEST'), $user->total));
 			}
 
 			ArrayHelper::clean_r($users);

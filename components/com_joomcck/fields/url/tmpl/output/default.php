@@ -108,7 +108,7 @@ if($this->params->get('params.links_sort', 0))
 
 
 	<?php if($this->params->get('params.link_redirect', 0) && $this->params->get('params.show_hits', 1)): ?>
-		<small><?php echo \Joomla\CMS\Language\Text::_('CHITS'); ?> <span class="badge text-bg-light shadow-sm"><?php echo (int)@$val['hits'] ?></span></small>
+		<small><?php echo \Joomla\CMS\Language\Text::_('CHITS'); ?> <span class="badge text-bg-light shadow-sm px-2 py-1"><?php echo (int)@$val['hits'] ?></span></small>
 	<?php endif; ?>
 
 	<?php if($this->params->get('params.filter_enable')): ?>
