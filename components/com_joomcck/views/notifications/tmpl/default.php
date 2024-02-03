@@ -246,7 +246,7 @@ HTMLHelper::_('bootstrap.collapse');
 								<?php if($tmp % 2 == 0): ?><tr><?php endif; ?>
 								<td><label class="checkbox"><input type="checkbox" name="clear_section"
 																   value="<?php echo $section->id; ?>"> <?php echo $section->name; ?>
-										<span class="badge bg-light text-muted border"><?php echo $this->num_sections[$section->id]; ?></span></label>
+										<span class="badge text-bg-light shadow-sm"><?php echo $this->num_sections[$section->id]; ?></span></label>
 								</td>
 								<?php if($tmp % 2 == 1): ?></tr><?php endif; ?>
 								<?php $tmp++;
@@ -272,7 +272,7 @@ HTMLHelper::_('bootstrap.collapse');
 								<?php if($tmp % 2 == 0): ?><tr><?php endif; ?>
 								<td><label class="checkbox"><input type="checkbox" name="clear_eventer"
 																   value="<?php echo $user; ?>"> <?php echo $name; ?> <span
-											class="badge bg-light text-muted border"><?php echo $num; ?></span></label></td>
+											class="badge text-bg-light shadow-sm"><?php echo $num; ?></span></label></td>
 								<?php if($tmp % 2 == 1): ?></tr><?php endif; ?>
 								<?php $tmp++;
 							endforeach; ?>

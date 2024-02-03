@@ -55,7 +55,7 @@ class JoomcckViewAuditlog extends MViewBase
 		{
 			foreach($sections as $name)
 			{
-				$this->sections[] = \Joomla\CMS\HTML\HTMLHelper::_('select.option', $name->id, $name->name . ' <span class="badge bg-light text-muted border">' . $name->total . '</span>');
+				$this->sections[] = \Joomla\CMS\HTML\HTMLHelper::_('select.option', $name->id, $name->name . ' <span class="badge text-bg-light shadow-sm">' . $name->total . '</span>');
 				$s_params = new \Joomla\Registry\Registry($name->params);
 				$this->versions[$name->id] = $s_params->get('audit.versioning');
 			}
@@ -72,7 +72,7 @@ class JoomcckViewAuditlog extends MViewBase
 		{
 			foreach($types as $name)
 			{
-				$this->types[] = \Joomla\CMS\HTML\HTMLHelper::_('select.option', $name->id, $name->name . ' <span class="badge bg-light text-muted border">' . $name->total . '</span>');
+				$this->types[] = \Joomla\CMS\HTML\HTMLHelper::_('select.option', $name->id, $name->name . ' <span class="badge text-bg-light shadow-sm">' . $name->total . '</span>');
 			}
 		}
 

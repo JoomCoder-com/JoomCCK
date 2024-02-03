@@ -132,7 +132,7 @@ $section = $this->section;
                                     class="btn" id="unsub-<?php echo $section->id ?>"
                                     onclick="Joomcck.ajax_unsubscr_sec(<?php echo $section->id; ?>)">
 								<?php echo \Joomla\CMS\Language\Text::_('CUNSUBREC') ?>
-                                <span class="badge bg-light text-muted border"><?php echo $section->records; ?></span>
+                                <span class="badge text-bg-light shadow-sm"><?php echo $section->records; ?></span>
                             </button>
                             <button class="btn"
                                     type="button" <?php echo(($section->records_total && ($section->records_total > $section->records)) ? null : 'style="display: none;"'); ?>
@@ -140,7 +140,7 @@ $section = $this->section;
                                     onclick="Joomcck.ajax_subscr_sec(<?php echo $section->id; ?>)"
                                     href="javascript:void(0);">
 								<?php echo \Joomla\CMS\Language\Text::_('CSUBRECART') ?>
-                                <span class="badge bg-light text-muted border"><?php echo $section->records_total - $section->records; ?></span>
+                                <span class="badge text-bg-light shadow-sm"><?php echo $section->records_total - $section->records; ?></span>
                             </button>
                         </div>
                         <div id="bro-ba" style="width:50px; display:none;"

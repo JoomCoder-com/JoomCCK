@@ -112,7 +112,7 @@ $api = new JoomcckApi();
 					<a tabindex="-1" href="<?php echo \Joomla\CMS\Router\Route::_($cat->link)?>">
 						<?php echo $cat->title;?>
 						<?php if($params->get('tmpl_params.subcat_nums', 0) && $cat->params->get('submission')):?>
-							<span class="badge bg-light text-muted border"><?php echo (int)$cat->records_num; ?></span>
+							<span class="badge text-bg-light shadow-sm"><?php echo (int)$cat->records_num; ?></span>
 						<?php endif;?>
 					</a>
 

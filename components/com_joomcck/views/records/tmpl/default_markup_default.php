@@ -328,7 +328,7 @@ $current_user = \Joomla\CMS\Factory::getUser($this->input->getInt('user_id', $th
 													<?php echo HTMLFormatHelper::icon($this->section->params->get('personalize.text_icon', 'home.png')); ?>
 												<?php endif; ?>
 												<?php echo \Joomla\CMS\Language\Text::_($markup->get('menu.menu_user_my_label', 'My Homepage')) ?>
-                                                <span class="badge bg-light text-muted border"><?php echo $counts->created; ?></span>
+                                                <span class="badge text-bg-light shadow-sm"><?php echo $counts->created; ?></span>
                                             </a></li>
 									<?php endif; ?>
 
@@ -340,7 +340,7 @@ $current_user = \Joomla\CMS\Factory::getUser($this->input->getInt('user_id', $th
                                                          align="absmiddle"/>
 												<?php endif; ?>
 												<?php echo \Joomla\CMS\Language\Text::_($markup->get('menu.menu_user_follow_label', 'Watched')) ?>
-                                                <span class="badge bg-light text-muted border"><?php echo $counts->followed; ?></span>
+                                                <span class="badge text-bg-light shadow-sm"><?php echo $counts->followed; ?></span>
                                             </a></li>
 									<?php endif; ?>
 
@@ -364,7 +364,7 @@ $current_user = \Joomla\CMS\Factory::getUser($this->input->getInt('user_id', $th
                                                          align="absmiddle"/>
 												<?php endif; ?>
 												<?php echo \Joomla\CMS\Language\Text::_($markup->get('menu.menu_user_favorite_label', 'Bookmarked')) ?>
-                                                <span class="badge bg-light text-muted border"><?php echo $counts->favorited; ?></span>
+                                                <span class="badge text-bg-light shadow-sm"><?php echo $counts->favorited; ?></span>
                                             </a></li>
 									<?php endif; ?>
 									<?php if ($markup->get('menu.menu_user_rated') && $counts->rated): ?>
@@ -375,7 +375,7 @@ $current_user = \Joomla\CMS\Factory::getUser($this->input->getInt('user_id', $th
                                                          align="absmiddle"/>
 												<?php endif; ?>
 												<?php echo \Joomla\CMS\Language\Text::_($markup->get('menu.menu_user_rated_label', 'Rated')) ?>
-                                                <span class="badge bg-light text-muted border"><?php echo $counts->rated; ?></span>
+                                                <span class="badge text-bg-light shadow-sm"><?php echo $counts->rated; ?></span>
                                             </a></li>
 									<?php endif; ?>
 
@@ -387,7 +387,7 @@ $current_user = \Joomla\CMS\Factory::getUser($this->input->getInt('user_id', $th
                                                          align="absmiddle"/>
 												<?php endif; ?>
 												<?php echo \Joomla\CMS\Language\Text::_($markup->get('menu.menu_user_commented_label', 'Commented')) ?>
-                                                <span class="badge bg-light text-muted border"><?php echo $counts->commented; ?></span>
+                                                <span class="badge text-bg-light shadow-sm"><?php echo $counts->commented; ?></span>
                                             </a></li>
 									<?php endif; ?>
 
@@ -399,7 +399,7 @@ $current_user = \Joomla\CMS\Factory::getUser($this->input->getInt('user_id', $th
                                                          align="absmiddle"/>
 												<?php endif; ?>
 												<?php echo \Joomla\CMS\Language\Text::_($markup->get('menu.menu_user_visited_label', 'Visited')) ?>
-                                                <span class="badge bg-light text-muted border"><?php echo $counts->visited; ?></span>
+                                                <span class="badge text-bg-light shadow-sm"><?php echo $counts->visited; ?></span>
                                             </a></li>
 									<?php endif; ?>
 
@@ -411,7 +411,7 @@ $current_user = \Joomla\CMS\Factory::getUser($this->input->getInt('user_id', $th
                                                          align="absmiddle"/>
 												<?php endif; ?>
 												<?php echo \Joomla\CMS\Language\Text::_($markup->get('menu.menu_user_expire_label', 'Expired')) ?>
-                                                <span class="badge bg-light text-muted border"><?php echo $counts->expired; ?></span>
+                                                <span class="badge text-bg-light shadow-sm"><?php echo $counts->expired; ?></span>
                                             </a></li>
 									<?php endif; ?>
 
@@ -423,7 +423,7 @@ $current_user = \Joomla\CMS\Factory::getUser($this->input->getInt('user_id', $th
                                                          align="absmiddle"/>
 												<?php endif; ?>
 												<?php echo \Joomla\CMS\Language\Text::_($markup->get('menu.menu_user_hidden_label', 'Hidden')) ?>
-                                                <span class="badge bg-light text-muted border"><?php echo $counts->hidden; ?></span>
+                                                <span class="badge text-bg-light shadow-sm"><?php echo $counts->hidden; ?></span>
                                             </a></li>
 									<?php endif; ?>
 
@@ -435,7 +435,7 @@ $current_user = \Joomla\CMS\Factory::getUser($this->input->getInt('user_id', $th
                                                          align="absmiddle"/>
 												<?php endif; ?>
 												<?php echo \Joomla\CMS\Language\Text::_($markup->get('menu.menu_user_feature_label', 'Fetured')) ?>
-                                                <span class="badge bg-light text-muted border"><?php echo $counts->featured; ?></span>
+                                                <span class="badge text-bg-light shadow-sm"><?php echo $counts->featured; ?></span>
                                             </a></li>
 									<?php endif; ?>
 
@@ -447,7 +447,7 @@ $current_user = \Joomla\CMS\Factory::getUser($this->input->getInt('user_id', $th
                                                          align="absmiddle"/>
 												<?php endif; ?>
 												<?php echo \Joomla\CMS\Language\Text::_($markup->get('menu.menu_user_unpublished_label', 'On Approval')) ?>
-                                                <span class="badge bg-light text-muted border"><?php echo $counts->unpublished; ?></span>
+                                                <span class="badge text-bg-light shadow-sm"><?php echo $counts->unpublished; ?></span>
                                             </a></li>
 									<?php endif; ?>
 
@@ -486,7 +486,7 @@ $current_user = \Joomla\CMS\Factory::getUser($this->input->getInt('user_id', $th
                                                          align="absmiddle"/>
 												<?php endif; ?>
 												<?php echo \Joomla\CMS\Language\Text::_($markup->get('menu.menu_user_cat_manage_label', 'Categories')) ?>
-                                                <span class="badge bg-light text-muted border"><?php echo $counts->categories; ?></span>
+                                                <span class="badge text-bg-light shadow-sm"><?php echo $counts->categories; ?></span>
                                             </a>
 											<?php if ($markup->get('menu.menu_user_cat_add')): ?>
                                                 <ul class="dropdown-menu">
@@ -563,7 +563,7 @@ $current_user = \Joomla\CMS\Factory::getUser($this->input->getInt('user_id', $th
 							<?php echo $markup->get('main.alpha_num') ? 'rel="tooltip" data-bs-title="' . \Joomla\CMS\Language\Text::plural('CXNRECFOUND',
 									@$this->alpha_totals[$alpha]) . '"' : null; ?>><?php echo $alpha; ?></span>
 					<?php else: ?>
-                        <span class="badge bg-light text-muted border"><?php echo $alpha; ?></span>
+                        <span class="badge text-bg-light shadow-sm"><?php echo $alpha; ?></span>
 					<?php endif; ?>
 				<?php endforeach; ?>
             </div>

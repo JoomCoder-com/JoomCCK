@@ -30,7 +30,7 @@ foreach($this->values as $key => $value) :
 
     <div class="d-inline">
         <input class="btn-check" autocomplete="off" name="filters[<?php echo $this->key;?>][value][]" type="checkbox" id="filterInlineCheckbox<?php echo $this->key;?>-<?php echo $key ?>" value="<?php echo htmlspecialchars($value->field_value);?>" <?php echo (in_array($value->field_value, $default) ? ' checked="checked"' : NULL);?>>
-        <label class="btn btn-outline-success" for="filterInlineCheckbox<?php echo $this->key;?>-<?php echo $key ?>"><?php echo $label;?> <span class="badge bg-light text-muted border"><?php echo ($this->params->get('params.filter_show_number', 1) ? $value->num : NULL);?></span></label>
+        <label class="btn btn-outline-success" for="filterInlineCheckbox<?php echo $this->key;?>-<?php echo $key ?>"><?php echo $label;?> <span class="badge text-bg-light shadow-sm"><?php echo ($this->params->get('params.filter_show_number', 1) ? $value->num : NULL);?></span></label>
     </div>
 
 
