@@ -72,7 +72,7 @@ if(JoomcckCommentHelper::laded($this->item->id)) {
 		&& in_array($this->item->params->get('comments.comments_access_post', $this->type->params->get('comments.comments_access_post')), $this->user->getAuthorisedViewLevels())):?>	<h2 class="mb-3">
 			<?php if($this->tmpl_params['comment']->get('tmpl_core.comments_rss_button', 1)):?>
 				<span class="float-end">
-					<a class="btn btn-micro" href="<?php echo \Joomla\CMS\Router\Route::_($this->item->url.'&format=feed&type=rss')?>" target="_blank">
+					<a class="btn btn-sm btn-outline-secondary" href="<?php echo \Joomla\CMS\Router\Route::_($this->item->url.'&format=feed&type=rss')?>" target="_blank">
 						<?php echo HTMLFormatHelper::icon('feed.png');  ?>
 					<?php echo \Joomla\CMS\Language\Text::_('CCOMMRSS')?></a>
 				</span>
@@ -89,7 +89,7 @@ if(JoomcckCommentHelper::laded($this->item->id)) {
 		</div>
 	<?php endif;?>
 
-	<form method="post" name="adminForm" id="adminForm" class="form-validate" enctype="multipart/form-data">
+	<form method="post" name="adminForm" id="adminForm" class="form-validate mt-4" enctype="multipart/form-data">
 		<?php if(count($this->comments)):?>
 			<?php foreach ($this->comments AS $comment):?>
 				<?php if(empty($comment->id)) continue;?>

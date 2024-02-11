@@ -35,8 +35,19 @@ $this->comment_form->setFieldAttribute('comment','editor', $this->tmpl_params['c
 <a name="comment-form" id="form-starts"></a>
 <div class="card form-horizontal">
 
-	<div class="card-header">
+	<div class="card-header d-flex justify-content-between align-items-center">
 		<h5 class="m-0"><i class="fas fa-plus"></i> <?php echo \Joomla\CMS\Language\Text::_($this->tmpl_params['comment']->get('tmpl_core.comments_add_title_lbl'));?></h5>
+
+		<div>
+			<?php if($this->tmpl_params['comment']->get('tmpl_core.comments_subscribe', 1) && $this->user->get('id') && in_array($this->section->params->get('events.subscribe_record'), $this->user->getAuthorisedViewLevels())):?>
+				<?php echo $this->comment_form->getInput('subscribe');?>
+			<?php endif;?>
+
+			<?php if(in_array($this->type->params->get('comments.comments_private'), $this->user->getAuthorisedViewLevels())):?>
+				<?php echo $this->comment_form->getInput('private');?>
+			<?php endif;?>
+        </div>
+
     </div>
 
 	<div class="card-body">
@@ -65,35 +76,9 @@ $this->comment_form->setFieldAttribute('comment','editor', $this->tmpl_params['c
         </div>
 
 
-        <div class="row">
-
-	        <?php if($this->tmpl_params['comment']->get('tmpl_core.comments_subscribe', 1) && $this->user->get('id') && in_array($this->section->params->get('events.subscribe_record'), $this->user->getAuthorisedViewLevels())):?>
-                <div class="col-md-4 mb-3">
-			        <?php echo $this->comment_form->renderField('subscribe');?>
-                </div>
-	        <?php endif;?>
-
-
-	        <?php if(in_array($this->type->params->get('comments.comments_private'), $this->user->getAuthorisedViewLevels())):?>
-                <div class="col-md-4 mb-3">
-	                <?php echo $this->comment_form->renderField('private');?>
-                </div>
-	        <?php endif;?>
-
-
-	        <?php if(in_array($this->type->params->get('comments.comments_access_access'), $this->user->getAuthorisedViewLevels())):?>
-		        <div class="col-md-4 mb-3">
-			        <?php echo $this->comment_form->renderField('access'); ?>
-                </div>
-	        <?php endif;?>
-
-        </div>
-
-
-
-
-
-
+		<?php if(in_array($this->type->params->get('comments.comments_access_access'), $this->user->getAuthorisedViewLevels())):?>
+			<?php echo $this->comment_form->renderField('access'); ?>
+		<?php endif;?>
 
 		<?php if(in_array($this->type->params->get('comments.comment_attach'), $this->user->getAuthorisedViewLevels())):?>
             <div class="card">
@@ -114,7 +99,6 @@ $this->comment_form->setFieldAttribute('comment','editor', $this->tmpl_params['c
 		<?php endif;?>
 
 
-
 		<?php if($this->type->params->get('comments.comment_captcha') && !$this->user->get('id')):?>
             <div class="formelm">
 				<?php echo $this->comment_form->getInput('captcha'); ?>
@@ -123,7 +107,7 @@ $this->comment_form->setFieldAttribute('comment','editor', $this->tmpl_params['c
 
     </div>
 
-    <div class="card-footer">
+    <div class="card-footer py-3">
         <button type="button" class="btn btn-outline-success" onclick="Joomla.submitbutton('comment.save')">
 		    <i class="fas fa-plus"></i>
 		    <?php echo \Joomla\CMS\Language\Text::_($this->tmpl_params['comment']->get('tmpl_core.comments_button_title_lbl'));?>

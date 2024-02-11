@@ -8,8 +8,8 @@
 
 	<field id="access" name="access" default="1" type="accesslevel" class="form-select-sm" label="X_WHOACCESSCOMENT" description="JFIELD_ACCESS_DESC" labelclass="control-label" size="1" />
 	<field id="comment" name="comment" type="editor" required="true" buttons="false" hide="pagebreak,readmore,article" filter="raw" />
-	<field id="private" name="private" label="CPRIVATE" description="COMMENTPRIVATECHECKBOX" type="checkbox" default="0"  />
-	<field id="subscribe" label="CFOLLOW" description="COMMENTFOLLOWCHECKBOX" name="subscribe" type="checkbox" default="1"/>
+	<field id="private" name="private" icon-label="fas fa-user-lock" class="btn-sm btn-outline-dark" label="CPRIVATE" description="COMMENTPRIVATECHECKBOX" type="ccheckboxtoggle" default="0"  />
+	<field id="subscribe" icon-label="fas fa-eye" class="btn-sm btn-outline-dark" label="CFOLLOW" description="COMMENTFOLLOWCHECKBOX" name="subscribe" type="ccheckboxtoggle" default="1"/>
 
 	<field name="name" type="text" label="Name" required="true" labelclass="control-label" />
 	<field name="email" type="text" label="Email" required="true" labelclass="control-label" />
