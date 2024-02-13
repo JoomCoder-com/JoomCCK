@@ -276,6 +276,10 @@
 				<option value="0">CNO</option>
 				<option value="1">CYES</option>
 			</field>
+			<field name="onlinestatus" type="mradio" class="btn-group" default="1" description="XX_ONLINESTATUSDESCR" label="X_ONLINESTATUS">
+				<option value="0">CNO</option>
+				<option value="1">CYES</option>
+			</field>
 		</fieldset>
 		<fieldset name="persa2" label="X_GENERALPERS2">
 			<field name="records_mode" type="list" default="0" label="X_SECRECORDMOD">
@@ -292,10 +296,7 @@
 			</field>
 			<field name="home_text" type="text" default="See all articles" size="3" label="X_HOMETEXT"/>
 			<field name="text_icon" type="fieldicon" default="home.png" size="3" label="X_TEXTICON"/>
-			<field name="onlinestatus" type="mradio" class="btn-group" default="1" description="XX_ONLINESTATUSDESCR" label="X_ONLINESTATUS">
-				<option value="0">CNO</option>
-				<option value="1">CYES</option>
-			</field>
+
 		</fieldset>
 		<fieldset name="categories-private-sub" label="X_SECFSLUCAT">
 			<field name="pcat_submit" type="maccesslevel" condition='{"not0":["params_personalize_pcat_meta","params_personalize_pcat_icon","params_personalize_pcat_descr_length","params_personalize_pcat_limit"]}' default="0" label="X_SECWHOSUBMITUCAT">
