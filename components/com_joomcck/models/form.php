@@ -172,7 +172,9 @@ class JoomcckModelForm extends MModelAdmin
 
 		$table = \Joomla\CMS\Table\Table::getInstance('Type', 'JoomcckTable');
 		$table->load($typeId);
+		$table->name_original = $table->name;
 		$table->name = \Joomla\CMS\Language\Text::_($table->name);
+
 
 		$params = new \Joomla\Registry\Registry();
 		$params->loadString((string)$table->params);

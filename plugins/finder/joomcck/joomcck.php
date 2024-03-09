@@ -5,10 +5,12 @@
  */
 
 use Joomla\Component\Finder\Administrator\Indexer\Adapter;
+use Joomla\Component\Finder\Administrator\Indexer\Indexer;
 
 defined('JPATH_BASE') or die;
 
 require_once JPATH_ADMINISTRATOR . '/components/com_finder/helpers/indexer/adapter.php';
+require_once JPATH_SITE.'/components/com_joomcck/library/php/helpers/itemsstore.php';
 
 class plgFinderJoomcck extends Adapter
 {
@@ -18,7 +20,7 @@ class plgFinderJoomcck extends Adapter
 
 	protected $layout = 'record';
 
-	protected $type_title = 'Article';
+	protected $type_title = 'JoomCCK Item';
 
 	protected $table = '#__js_res_record';
 
@@ -104,54 +106,41 @@ class plgFinderJoomcck extends Adapter
 			return;
 		}
 
-		$item->body = preg_replace('/ \w*@\w*\.\w*,?/i', '', $item->body);
-
-		// Trigger the onContentPrepare event.
- 		$item->summary = $item->body;
-
 		// get record item using JoomCCK
-		$itemCCK = ItemsStore::getRecord($item->id);
+		$itemCCK = \ItemsStore::getRecord($item->id);
+
+		// get record item type
+		$itemType = \ItemsStore::getType($itemCCK->type_id);
+
+
+		// build item
 
 		// Build the necessary route and path information.
 		$item->url = $this->getURL($item->id, $this->extension, $this->layout);
-
-		// route URL
 		$item->route = Url::record($itemCCK);
+		$item->title = $itemCCK->title;
+		$item->body = '';
+		$item->summary = '';
+		$item->author = \Joomla\CMS\Factory::getUser($itemCCK->user_id)->name;
 
-		// Get the menu title if it exists.
-		$title = $this->getItemMenuTitle($item->url);
 
-		// Adjust the title if necessary.
-		if (!empty($title) && $this->params->get('use_menu_title', true))
-		{
-			$item->title = $title;
-		}
 
-		// Add the meta-data processing instructions.
-		$item->addInstruction(\Joomla\Component\Finder\Administrator\Indexer\Indexer::META_CONTEXT, 'meta_key');
-		$item->addInstruction(\Joomla\Component\Finder\Administrator\Indexer\Indexer::META_CONTEXT, 'meta_desc');
-		$item->addInstruction(\Joomla\Component\Finder\Administrator\Indexer\Indexer::META_CONTEXT, 'author');
+		//$item->addInstruction(Indexer::META_CONTEXT, 'author');
+
 
 		// Translate the state. Articles should only be published if the category is published.
 		$item->state = $this->translateState($item->state, $item->cat_state);
 
 		// Add the type taxonomy data.
-		$item->addTaxonomy('Type', 'Article');
-
-		// Add the author taxonomy data.
-		if (!empty($item->author))
-		{
-			$item->addTaxonomy('Author', $item->author);
-		}
-
+		$item->addTaxonomy('Type', $itemType->name_original);
+		//$item->addTaxonomy('Author', $item->author);
 		// Add the category taxonomy data.
-		$item->addTaxonomy('Category', $item->category, $item->cat_state, $item->cat_access);
-
+		//$item->addTaxonomy('Category', $item->category, $item->cat_state, $item->cat_access);
 		// Add the language taxonomy data.
 		$item->addTaxonomy('Language', $item->language);
 
 		// Get content extras.
-		\Joomla\Component\Finder\Administrator\Indexer\Helper::getContentExtras($item);
+		//\Joomla\Component\Finder\Administrator\Indexer\Helper::getContentExtras($item);
 
 		// Index the item.
 		$this->indexer->index($item);
