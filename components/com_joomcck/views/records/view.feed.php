@@ -29,7 +29,8 @@ class JoomcckViewRecords extends MViewBase
 		$this->models['categories'] = MModelBase::getInstance('Categories', 'JoomcckModel');
 		$this->models['section'] 	= MModelBase::getInstance('Section', 'JoomcckModel');
 		$this->models['record'] 	= MModelBase::getInstance('Record', 'JoomcckModel');
-		$fields_model = MModelBase::getInstance('Tfields', 'JoomcckModel');
+		$fields_model = MModelBase::getInstance('Fields', 'JoomcckModel');
+
 
 		if(!$app->input->getInt('section_id'))
 		{
@@ -84,7 +85,7 @@ class JoomcckViewRecords extends MViewBase
 		$items = NULL;
 		$items = $this->get('Items');
 
-		$app->input->setr('limit', $app->getCfg('feed_limit'));
+		$app->input->set('limit', $app->getCfg('feed_limit'));
 		$feedEmail	= (@$app->getCfg('feed_email')) ? $app->getCfg('feed_email') : 'author';
 
 		$link = \Joomla\CMS\Router\Route::_(Url::records($section, $category->id));
