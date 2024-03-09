@@ -4,11 +4,13 @@
  * @license     GNU General Public License version 2 or later; see LICENSE
  */
 
+use Joomla\Component\Finder\Administrator\Indexer\Adapter;
+
 defined('JPATH_BASE') or die;
 
 require_once JPATH_ADMINISTRATOR . '/components/com_finder/helpers/indexer/adapter.php';
 
-class plgFinderJoomcck extends \Joomla\Component\Finder\Administrator\Indexer\Adapter
+class plgFinderJoomcck extends Adapter
 {
 	protected $context = 'Joomcck';
 
@@ -107,9 +109,14 @@ class plgFinderJoomcck extends \Joomla\Component\Finder\Administrator\Indexer\Ad
 		// Trigger the onContentPrepare event.
  		$item->summary = $item->body;
 
+		// get record item using JoomCCK
+		$itemCCK = ItemsStore::getRecord($item->id);
+
 		// Build the necessary route and path information.
 		$item->url = $this->getURL($item->id, $this->extension, $this->layout);
-		$item->route = Url::record($item);
+
+		// route URL
+		$item->route = Url::record($itemCCK);
 
 		// Get the menu title if it exists.
 		$title = $this->getItemMenuTitle($item->url);
