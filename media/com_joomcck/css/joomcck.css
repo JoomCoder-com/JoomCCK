@@ -1,0 +1,6 @@
+/* Required css file */
+
+/* fix issue when button disabled tooltip doesn't display */
+.hasTooltip[disabled] {
+    pointer-events: all !important;
+}

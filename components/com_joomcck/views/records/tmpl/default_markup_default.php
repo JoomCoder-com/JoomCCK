@@ -12,7 +12,7 @@ use Joomla\CMS\Layout\LayoutHelper;
 
 defined('_JEXEC') or die('Restricted access');
 
-\Joomla\CMS\HTML\HTMLHelper::_('bootstrap.tooltip', '*[rel^="tooltip"]');
+\Joomla\CMS\HTML\HTMLHelper::_('bootstrap.tooltip', '.hasTooltip');
 
 $user_id = $this->input->getInt('user_id', 0);
 $app     = \Joomla\CMS\Factory::getApplication();
@@ -31,6 +31,9 @@ if ($this->input->getString('return'))
 
 $isMe         = $this->isMe;
 $current_user = \Joomla\CMS\Factory::getUser($this->input->getInt('user_id', $this->user->get('id')));
+
+// required css file fix issues of UI/UX
+\Joomla\CMS\Factory::getDocument()->addStyleSheet(\Joomla\CMS\Uri\Uri::root().'/media/com_joomcck/css/joomcck.css');
 
 
 ?>
@@ -111,9 +114,9 @@ $current_user = \Joomla\CMS\Factory::getUser($this->input->getInt('user_id', $th
                                        value="<?php echo htmlentities($this->state->get('records.search'), ENT_COMPAT, 'utf-8'); ?>"/>
 							<?php endif; ?>
 							<?php if (in_array($markup->get('filters.show_more'), $this->user->getAuthorisedViewLevels())): ?>
-                                <button type="button" class="btn btn-sm btn-light border" data-bs-toggle="collapse"
-                                        data-bs-target="#filter-collapse" rel="tooltip"
-                                        data-bs-title="<?php echo \Joomla\CMS\Language\Text::_('CMORESEARCHOPTIONS') ?>">
+                                <button type="button" class="btn btn-sm btn-light border hasTooltip" data-bs-toggle="collapse"
+                                        data-bs-target="#filter-collapse"
+                                        title="<?php echo \Joomla\CMS\Language\Text::_('CMORESEARCHOPTIONS') ?>">
 									<?php echo HTMLFormatHelper::icon('binocular.png'); ?>
                                 </button>
 							<?php endif; ?>
@@ -168,7 +171,7 @@ $current_user = \Joomla\CMS\Factory::getUser($this->input->getInt('user_id', $th
 									}
 									else
 									{
-										$o[] = '<a  class="dropdown-item" class="disabled" rel="tooltipright" data-bs-title="' . \Joomla\CMS\Language\Text::sprintf($markup->get('menu.menu_user_register', 'Register or login to submit %s'), \Joomla\CMS\Language\Text::_($type->name)) . '">' . \Joomla\CMS\Language\Text::_($type->name) . '</a>';
+										$o[] = '<a  class="dropdown-item" disabled class="disabled hasTooltip" title="' . \Joomla\CMS\Language\Text::sprintf($markup->get('menu.menu_user_register', 'Register or login to submit %s'), \Joomla\CMS\Language\Text::_($type->name)) . '">' . \Joomla\CMS\Language\Text::_($type->name) . '</a>';
 									}
 									if ($o)
 									{
@@ -197,8 +200,8 @@ $current_user = \Joomla\CMS\Factory::getUser($this->input->getInt('user_id', $th
                                 <li class="dropdown me-2">
                                     <a
 										<?php if (!(in_array($submit->params->get('submission.submission'), $this->user->getAuthorisedViewLevels()) || MECAccess::allowNew($submit, $this->section))): ?>
-                                            class="disabled tip-bottom  btn btn-light border btn-sm" rel="tooltip" href="#"
-                                            data-bs-title="<?php echo \Joomla\CMS\Language\Text::sprintf($markup->get('menu.menu_user_register', 'Register or login to submit <b>%s</b>'), \Joomla\CMS\Language\Text::_($submit->name)) ?>"
+                                            disabled class="disabled btn btn-light border btn-sm hasTooltip" href="#"
+                                            title="<?php echo \Joomla\CMS\Language\Text::sprintf($markup->get('menu.menu_user_register', 'Register or login to submit <b>%s</b>'), \Joomla\CMS\Language\Text::_($submit->name)) ?>"
 										<?php else: ?>
                                             class="btn btn-light border btn-sm" href="<?php echo Url::add($this->section, $submit, $this->category); ?>"
 										<?php endif; ?>
@@ -558,12 +561,12 @@ $current_user = \Joomla\CMS\Factory::getUser($this->input->getInt('user_id', $th
             <div class="alpha-set">
 				<?php foreach ($set as $alpha): ?>
 					<?php if (in_array($alpha, $this->alpha_list)): ?>
-                        <span class="badge bg-warning"
+                        <button type="button" class="badge bg-warning hasTooltip"
                               onclick="Joomcck.applyFilter('filter_alpha', '<?php echo $alpha ?>')"
-							<?php echo $markup->get('main.alpha_num') ? 'rel="tooltip" data-bs-title="' . \Joomla\CMS\Language\Text::plural('CXNRECFOUND',
-									@$this->alpha_totals[$alpha]) . '"' : null; ?>><?php echo $alpha; ?></span>
+							<?php echo $markup->get('main.alpha_num') ? ' title="' . \Joomla\CMS\Language\Text::plural('CXNRECFOUND',
+									@$this->alpha_totals[$alpha]) . '"' : null; ?>><?php echo $alpha; ?></button>
 					<?php else: ?>
-                        <span class="badge text-bg-light shadow-sm px-2 py-1"><?php echo $alpha; ?></span>
+                        <button disabled class="badge text-bg-light shadow-sm px-2 py-1"><?php echo $alpha; ?></button>
 					<?php endif; ?>
 				<?php endforeach; ?>
             </div>
@@ -582,9 +585,9 @@ $current_user = \Joomla\CMS\Factory::getUser($this->input->getInt('user_id', $th
 
                 <div><i class="fas fa-filter"></i> <?php echo $worn->label ?></div>
 				<?php echo $worn->text ?>
-                <button type="button" class="btn-close" data-bs-dismiss="alert"  aria-label="Close"
-                        onclick="Joomcck.cleanFilter('<?php echo $worn->name ?>')" rel="tooltip"
-                        data-bs-title="<?php echo \Joomla\CMS\Language\Text::_('CDELETEFILTER') ?>">
+                <button type="button" class="btn-close hasTooltip" data-bs-dismiss="alert"  aria-label="Close"
+                        onclick="Joomcck.cleanFilter('<?php echo $worn->name ?>')"
+                        title="<?php echo \Joomla\CMS\Language\Text::_('CDELETEFILTER') ?>">
                 </button>
             </div>
 		<?php endforeach; ?>
