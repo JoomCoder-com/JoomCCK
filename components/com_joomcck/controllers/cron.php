@@ -14,10 +14,10 @@ class JoomcckControllerCron extends MControllerAdmin
 
 	public function __construct($config = array())
 	{
-		$config = \Joomla\CMS\Component\ComponentHelper::getParams('com_joomcck');
-
 
 		parent::__construct($config);
+
+		$config = \Joomla\CMS\Component\ComponentHelper::getParams('com_joomcck');
 
 		if(!$this->input)
 		{
@@ -47,6 +47,7 @@ class JoomcckControllerCron extends MControllerAdmin
 
 	public function sendAlert()
 	{
+
 		$this->_sendDaijest(1);
 		$this->_sendDaijest(2);
 		$this->_sendDaijest(3);
