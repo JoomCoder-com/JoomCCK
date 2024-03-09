@@ -38,16 +38,16 @@ $num = CEventsHelper::showNum('total', 0);
 	<?php if($this->isMe):?>
 		<div class="btn-group float-end">
 			<?php if($params->get('menu.menu_user_cat_manage') && in_array($this->section->params->get('personalize.pcat_submit'), $this->user->getAuthorisedViewLevels())):?>
-				<a class="btn-sm btn-light border" rel="tooltip" data-bs-title="<?php echo \Joomla\CMS\Language\Text::_($params->get('menu.menu_user_cat_manage_label', 'Manage Categories'))?>" href="<?php echo \Joomla\CMS\Router\Route::_(Url::_('categories').'&return='.Url::back())?>">
+				<a class="btn-sm btn-light btn" rel="tooltip" data-bs-title="<?php echo \Joomla\CMS\Language\Text::_($params->get('menu.menu_user_cat_manage_label', 'Manage Categories'))?>" href="<?php echo \Joomla\CMS\Router\Route::_(Url::_('categories').'&return='.Url::back())?>">
 					<img src="<?php echo \Joomla\CMS\Uri\Uri::root(TRUE);?>/media/com_joomcck/icons/16/category.png" align="absmiddle" /></a>
 			<?php endif;?>
 			<?php if($params->get('menu.menu_user_moder') && MECAccess::allowModerate(NULL, NULL, $this->section)):?>
-				<a class="btn-sm btn-light border" rel="tooltip" data-bs-original-title="<?php echo \Joomla\CMS\Language\Text::_($params->get('menu.menu_user_moder_label', 'Manage Moderators'))?>" href="<?php echo \Joomla\CMS\Router\Route::_('index.php?option=com_joomcck&view=moderators&filter_section='.$this->section->id.'&return='.Url::back());?>">
+				<a class="btn-sm btn-light btn" rel="tooltip" data-bs-original-title="<?php echo \Joomla\CMS\Language\Text::_($params->get('menu.menu_user_moder_label', 'Manage Moderators'))?>" href="<?php echo \Joomla\CMS\Router\Route::_('index.php?option=com_joomcck&view=moderators&filter_section='.$this->section->id.'&return='.Url::back());?>">
 						<img src="<?php echo \Joomla\CMS\Uri\Uri::root(TRUE);?>/media/com_joomcck/icons/16/user-share.png" align="absmiddle" /></a>
 			<?php endif;?>
 
 			<?php if($this->section->params->get('personalize.allow_section_set', 1)):?>
-				<a class="btn-sm btn-light border" rel="tooltip" data-bs-title="<?php echo \Joomla\CMS\Language\Text::sprintf('CSELECTOPTIONS', $this->section->name);?>" href="<?php echo \Joomla\CMS\Router\Route::_('index.php?option=com_joomcck&view=options&layout=section&section_id='.$this->section->id.'&return='.Url::back());?>">
+				<a class="btn-sm btn-light btn" rel="tooltip" data-bs-title="<?php echo \Joomla\CMS\Language\Text::sprintf('CSELECTOPTIONS', $this->section->name);?>" href="<?php echo \Joomla\CMS\Router\Route::_('index.php?option=com_joomcck&view=options&layout=section&section_id='.$this->section->id.'&return='.Url::back());?>">
 					<img src="<?php echo \Joomla\CMS\Uri\Uri::root(TRUE);?>/media/com_joomcck/icons/16/gear.png" align="absmiddle" /></a>
 			<?php endif;?>
 		</div>
@@ -103,24 +103,24 @@ $num = CEventsHelper::showNum('total', 0);
 <?php else: ?>
 	<?php if((!$vw || $vw == 'created')
 		&& ($params->get('personal.user_avatar') || $params->get('personal.user_info') || $params->get('personal.user_message'))):?>
-		<table>
+		<table class="w-100 mt-3">
 			<tr>
 				<?php if($params->get('personal.user_avatar')):?>
 					<td valign="top" width="<?php echo $params->get('personal.user_avatar_w', 100) + 20?>px">
-						<img src="<?php echo CCommunityHelper::getAvatar(\Joomla\CMS\Factory::getApplication()->input->getInt('user_id'), $params->get('personal.user_avatar_w', 100), $params->get('personal.user_avatar_h', 100));?>" />
+						<img class="rounded border shadow-sm" src="<?php echo CCommunityHelper::getAvatar(\Joomla\CMS\Factory::getApplication()->input->getInt('user_id'), $params->get('personal.user_avatar_w', 100), $params->get('personal.user_avatar_h', 100));?>" />
 					</td>
 				<?php endif;?>
 
 				<td>
 					<?php if($params->get('personal.user_info')):?>
 						<div>
-							<small>
-								<?php echo CCommunityHelper::getName($current_user->id, $this->section);?>
-								<?php if($this->section->params->get('events.subscribe_user')):?>
-									<?php echo \Joomla\CMS\Language\Text::_('CFOLLOWING') ?> <span class="badge lead"><?php echo CStatistics::follow($current_user->get('id', 0), $this->section->id) ?></span>
-									<?php echo \Joomla\CMS\Language\Text::_('CFOLLOWERS') ?>  <span class="badge lead"><?php echo CStatistics::followed($current_user->get('id', 0), $this->section->id) ?></span>
-								<?php endif;?>
-							</small>
+							<?php echo CCommunityHelper::getName($current_user->id, $this->section);?>
+							<?php if($this->section->params->get('events.subscribe_user')):?>
+                                <div class="float-end">
+									<?php echo \Joomla\CMS\Language\Text::_('CFOLLOWING') ?> <span class="badge border rounded bg-light text-black"><?php echo CStatistics::follow($current_user->get('id', 0), $this->section->id) ?></span>
+									<?php echo \Joomla\CMS\Language\Text::_('CFOLLOWERS') ?>  <span class="badge border rounded bg-light text-black"><?php echo CStatistics::followed($current_user->get('id', 0), $this->section->id) ?></span>
+                                </div>
+							<?php endif;?>
 						</div>
 					<?php endif;?>
 					<?php if($params->get('personal.user_message')):?>
