@@ -128,9 +128,7 @@ if(!function_exists('mod_getChildsDef')) { function mod_getChildsDef($category, 
 
 <script>
 
-    $(document).ready(function(){
-
-
+    jQuery(document).ready(function($){
         $('#joomcck-tree-categories<?php echo $module->id ?>').jstree().on("click", ".jstree-anchor", function() {
             document.location.href = this.href;
         });

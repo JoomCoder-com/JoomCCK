@@ -115,11 +115,11 @@ HTMLHelper::_('bootstrap.modal');
         });
 
         <?php if(!$field->iscomment): ?>
-        $(document).on("click", "#flow-menu<?php echo $field->id; ?> a.btn-delete" , function() {
+        jQuery(document).on("click", "#flow-menu<?php echo $field->id; ?> a.btn-delete" , function() {
             $('#flow-file-' + $(this).data('id')).remove();
         });
 
-        $(document).on("click", "#flow-menu<?php echo $field->id; ?> a.btn-make-default" , function() {
+        jQuery(document).on("click", "#flow-menu<?php echo $field->id; ?> a.btn-make-default" , function() {
             var dlink = $(this);
             $.ajax({
                 dataType: 'json', 
@@ -143,7 +143,7 @@ HTMLHelper::_('bootstrap.modal');
 
 
 
-        $(document).on("click", "#flow-menu<?php echo $field->id; ?> a.btn-edit" , function() {
+        jQuery(document).on("click", "#flow-menu<?php echo $field->id; ?> a.btn-edit" , function() {
             var tbtn = $(this);
             var json = tbtn.data('json');
             var id = tbtn.data('id');
@@ -166,7 +166,7 @@ HTMLHelper::_('bootstrap.modal');
             myModal.show();
 
 
-            $(document).on("click",'#myModal<?php echo $field->id; ?> .btn-save-modal',function(){
+            jQuery(document).on("click",'#myModal<?php echo $field->id; ?> .btn-save-modal',function(){
 
                 console.log('im here');
 

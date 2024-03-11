@@ -35,7 +35,7 @@ class JFormFieldFieldicon extends \Joomla\CMS\Form\FormField
               <input id="icon_param_search" class="form-control form-control-sm" type="text" value="" >
             </div>';
 		$html .= '<script type="text/javascript">
-         (function($){$(document).ready(function() {
+         (function($){jQuery(document).ready(function($) {
            $("#icon_param_search").on("input", function (){
              var imgSearch = $(this).val();
              var imgBox = $(this).parent().next().next().next().next().next().next().next();

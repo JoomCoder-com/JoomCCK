@@ -68,7 +68,7 @@ class JFormFieldMeuser extends \Joomla\CMS\Form\FormField
 
 		// Build the script.
 		$script = array();
-		$script[] = '$(document).ready(function() {';
+		$script[] = 'jQuery(document).ready(function($) {';
 		$script[] = '	window.jSelectUser_'.$this->id.' = function (id, title) {';
 		$script[] = '		var old_id = document.getElementById("'.$this->id.'_id").value;';
 		$script[] = '		if (old_id != id) {';
