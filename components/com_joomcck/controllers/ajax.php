@@ -7,6 +7,8 @@
  * @license   GNU/GPL http://www.gnu.org/copyleft/gpl.html
  */
 
+use Joomla\CMS\Language\Text;
+
 defined('_JEXEC') or die();
 
 jimport('mint.mvc.controller.admin');
@@ -119,7 +121,7 @@ class JoomcckControllerAjax extends MControllerAdmin
 
 		if(!$user)
 		{
-			AjaxHelper::error(\Joomla\CMS\Language\Text::_('AJAX_ENTERUSERNAMEOREMAILORID'));
+			AjaxHelper::error(Text::_('AJAX_ENTERUSERNAMEOREMAILORID'));
 		}
 
 		$user_id = 0;
@@ -150,7 +152,7 @@ class JoomcckControllerAjax extends MControllerAdmin
 
 		if(!$user_id)
 		{
-			AjaxHelper::error(\Joomla\CMS\Language\Text::_('AJAX_USERNOTFOUND'));
+			AjaxHelper::error(Text::_('AJAX_USERNOTFOUND'));
 		}
 
 		AjaxHelper::send($user_id);
@@ -163,7 +165,7 @@ class JoomcckControllerAjax extends MControllerAdmin
 
 		if(!$order->id)
 		{
-			AjaxHelper::error(\Joomla\CMS\Language\Text::_('AJAX_CANNOTLOADORDER'));
+			AjaxHelper::error(Text::_('AJAX_CANNOTLOADORDER'));
 		}
 
 		$record = ItemsStore::getRecord($order->record_id);
@@ -173,7 +175,7 @@ class JoomcckControllerAjax extends MControllerAdmin
 
 		if(!in_array($order->section_id, MECAccess::allowChangeSaleStatus($user)) && !$orders_model->isSuperUser($user->get('id')) && !($user->get('id') == $record->user_id))
 		{
-			AjaxHelper::error(\Joomla\CMS\Language\Text::_('AJAX_CANNOTCHANGESTATUS'));
+			AjaxHelper::error(Text::_('AJAX_CANNOTCHANGESTATUS'));
 		}
 
 		$order->status = $this->input->getInt('status');
@@ -197,7 +199,7 @@ class JoomcckControllerAjax extends MControllerAdmin
 		$user = \Joomla\CMS\Factory::getApplication()->getIdentity();
 		if(!$user->get('id'))
 		{
-			AjaxHelper::error(\Joomla\CMS\Language\Text::_('AJAX_PLEASELOGIN'));
+			AjaxHelper::error(Text::_('AJAX_PLEASELOGIN'));
 		}
 
 		$db = \Joomla\CMS\Factory::getDbo();
@@ -206,7 +208,7 @@ class JoomcckControllerAjax extends MControllerAdmin
 		{
 			AjaxHelper::send($db->getAffectedRows(), 'rows');
 		}
-		AjaxHelper::error(\Joomla\CMS\Language\Text::_('Error'));
+		AjaxHelper::error(Text::_('Error'));
 	}
 
 	public function followallsection()
@@ -214,7 +216,7 @@ class JoomcckControllerAjax extends MControllerAdmin
 		$user = \Joomla\CMS\Factory::getApplication()->getIdentity();
 		if(!$user->get('id'))
 		{
-			AjaxHelper::error(\Joomla\CMS\Language\Text::_('AJAX_PLEASELOGIN'));
+			AjaxHelper::error(Text::_('AJAX_PLEASELOGIN'));
 		}
 
 		$db = \Joomla\CMS\Factory::getDbo();
@@ -249,7 +251,7 @@ class JoomcckControllerAjax extends MControllerAdmin
 		$user = \Joomla\CMS\Factory::getApplication()->getIdentity();
 		if(!$user->get('id'))
 		{
-			AjaxHelper::error(\Joomla\CMS\Language\Text::_('AJAX_PLEASELOGIN'));
+			AjaxHelper::error(Text::_('AJAX_PLEASELOGIN'));
 		}
 
 		$data = array(
@@ -265,13 +267,13 @@ class JoomcckControllerAjax extends MControllerAdmin
 		if($table->id)
 		{
 			$state = 1;
-			$text  = \Joomla\CMS\Language\Text::_('CSECFOLLOW');
+			$text  = Text::_('CSECFOLLOW');
 			$table->delete();
 		}
 		else
 		{
 			$state = 0;
-			$text  = \Joomla\CMS\Language\Text::_('CFOLLOWINGSECION');
+			$text  = Text::_('CFOLLOWINGSECION');
 			$table->save($data);
 		}
 
@@ -290,7 +292,7 @@ class JoomcckControllerAjax extends MControllerAdmin
 		$user = \Joomla\CMS\Factory::getApplication()->getIdentity();
 		if(!$user->get('id'))
 		{
-			AjaxHelper::error(\Joomla\CMS\Language\Text::_('AJAX_PLEASELOGIN'));
+			AjaxHelper::error(Text::_('AJAX_PLEASELOGIN'));
 		}
 
 		$sdata  = array(
@@ -334,7 +336,7 @@ class JoomcckControllerAjax extends MControllerAdmin
 			$data['exclude'] = $state;
 			$table->save($data);
 		}
-		$text = $state == 0 ? \Joomla\CMS\Language\Text::_('CCATFOLLOWING') : \Joomla\CMS\Language\Text::_('CCATFOLLOW');
+		$text = $state == 0 ? Text::_('CCATFOLLOWING') : Text::_('CCATFOLLOW');
 
 		$out = array(
 			'success' => 1,
@@ -358,7 +360,7 @@ class JoomcckControllerAjax extends MControllerAdmin
 		$user = \Joomla\CMS\Factory::getApplication()->getIdentity();
 		if(!$user->get('id'))
 		{
-			AjaxHelper::error(\Joomla\CMS\Language\Text::_('AJAX_PLEASELOGIN'));
+			AjaxHelper::error(Text::_('AJAX_PLEASELOGIN'));
 		}
 
 		$sdata  = array(
@@ -403,9 +405,9 @@ class JoomcckControllerAjax extends MControllerAdmin
 			$table->save($data);
 		}
 		$text  = $state == 0 ?
-			\Joomla\CMS\Language\Text::sprintf('CUSERFOLLOWING', CCommunityHelper::getName($this->input->getInt('user_id'), $this->input->getInt('section_id'), array('nohtml' => 1))) :
-			\Joomla\CMS\Language\Text::sprintf('CUSERFOLLOW', CCommunityHelper::getName($this->input->getInt('user_id'), $this->input->getInt('section_id'), array('nohtml' => 1)));
-		$text2 = \Joomla\CMS\Language\Text::sprintf('CUSERUNFOLLOW', CCommunityHelper::getName($this->input->getInt('user_id'), $this->input->getInt('section_id'), array(
+			Text::sprintf('CUSERFOLLOWING', CCommunityHelper::getName($this->input->getInt('user_id'), $this->input->getInt('section_id'), array('nohtml' => 1))) :
+			Text::sprintf('CUSERFOLLOW', CCommunityHelper::getName($this->input->getInt('user_id'), $this->input->getInt('section_id'), array('nohtml' => 1)));
+		$text2 = Text::sprintf('CUSERUNFOLLOW', CCommunityHelper::getName($this->input->getInt('user_id'), $this->input->getInt('section_id'), array(
 			'nohtml' => 1
 		)));
 
@@ -433,7 +435,7 @@ class JoomcckControllerAjax extends MControllerAdmin
 		$user = \Joomla\CMS\Factory::getApplication()->getIdentity();
 		if(!$user->get('id'))
 		{
-			AjaxHelper::error(\Joomla\CMS\Language\Text::_('AJAX_PLEASELOGIN'));
+			AjaxHelper::error(Text::_('AJAX_PLEASELOGIN'));
 		}
 
 		$record = \Joomla\CMS\Table\Table::getInstance('Record', 'JoomcckTable');
@@ -452,13 +454,13 @@ class JoomcckControllerAjax extends MControllerAdmin
 		if($table->id)
 		{
 			$state = 0;
-			$text  = \Joomla\CMS\Language\Text::_('CMSG_CLICKTOFOLLOW');
+			$text  = Text::_('CMSG_CLICKTOFOLLOW');
 			$table->delete();
 		}
 		else
 		{
 			$state = 1;
-			$text  = \Joomla\CMS\Language\Text::_('CMSG_CLICKTOUNFOLLOW');
+			$text  = Text::_('CMSG_CLICKTOUNFOLLOW');
 			$table->save($data);
 		}
 
@@ -505,12 +507,12 @@ class JoomcckControllerAjax extends MControllerAdmin
 
 		if(!$type->params->get('properties.item_compare'))
 		{
-			AjaxHelper::error(\Joomla\CMS\Language\Text::_('AJAX_COMPARENOTALLOED'));
+			AjaxHelper::error(Text::_('AJAX_COMPARENOTALLOED'));
 		}
 
 		if(count($list) >= $type->params->get('properties.item_compare'))
 		{
-			AjaxHelper::error(\Joomla\CMS\Language\Text::sprintf('AJAX_COMPARELIMIT', $type->params->get('properties.item_compare')));
+			AjaxHelper::error(Text::sprintf('AJAX_COMPARELIMIT', $type->params->get('properties.item_compare')));
 		}
 
 		$list[] = $rid;
@@ -524,7 +526,7 @@ class JoomcckControllerAjax extends MControllerAdmin
 		$user = \Joomla\CMS\Factory::getApplication()->getIdentity();
 		if(!$user->get('id'))
 		{
-			AjaxHelper::error(\Joomla\CMS\Language\Text::_('AJAX_PLEASELOGIN'));
+			AjaxHelper::error(Text::_('AJAX_PLEASELOGIN'));
 		}
 
 		$record = \Joomla\CMS\Table\Table::getInstance('Record', 'JoomcckTable');
@@ -545,7 +547,7 @@ class JoomcckControllerAjax extends MControllerAdmin
 			$table->bind($data);
 			if(!$table->store())
 			{
-				AjaxHelper::error(\Joomla\CMS\Language\Text::_($table->getError()));
+				AjaxHelper::error(Text::_($table->getError()));
 			}
 			$record->onRepost();
 
@@ -567,7 +569,7 @@ class JoomcckControllerAjax extends MControllerAdmin
 		$user = \Joomla\CMS\Factory::getApplication()->getIdentity();
 		if(!$user->get('id'))
 		{
-			AjaxHelper::error(\Joomla\CMS\Language\Text::_('AJAX_PLEASELOGIN'));
+			AjaxHelper::error(Text::_('AJAX_PLEASELOGIN'));
 		}
 
 		$record = \Joomla\CMS\Table\Table::getInstance('Record', 'JoomcckTable');
@@ -584,7 +586,7 @@ class JoomcckControllerAjax extends MControllerAdmin
 		{
 			$table->delete();
 			$state = 0;
-			$text  = \Joomla\CMS\Language\Text::_('CMSG_ADDBOOKMARK');
+			$text  = Text::_('CMSG_ADDBOOKMARK');
 		}
 		else
 		{
@@ -595,10 +597,10 @@ class JoomcckControllerAjax extends MControllerAdmin
 			$table->bind($data);
 			if(!$table->store())
 			{
-				AjaxHelper::error(\Joomla\CMS\Language\Text::_($table->getError()));
+				AjaxHelper::error(Text::_($table->getError()));
 			}
 			$state = 1;
-			$text  = \Joomla\CMS\Language\Text::_('CMSG_REMOVEBOOKMARK');
+			$text  = Text::_('CMSG_REMOVEBOOKMARK');
 
 			$data = $record->getProperties();
 
@@ -635,7 +637,7 @@ class JoomcckControllerAjax extends MControllerAdmin
 		}
 		else
 		{
-			AjaxHelper::error(\Joomla\CMS\Language\Text::_('CFILENOTEXISTS'));
+			AjaxHelper::error(Text::_('CFILENOTEXISTS'));
 		}
 	}
 
@@ -979,7 +981,7 @@ class JoomcckControllerAjax extends MControllerAdmin
 		$id = $this->input->getInt('field_id');
 		if(!$id)
 		{
-			AjaxHelper::error(\Joomla\CMS\Language\Text::_('AJAX_NOFIELDID'));
+			AjaxHelper::error(Text::_('AJAX_NOFIELDID'));
 		}
 
 		\Joomla\CMS\Table\Table::addIncludePath(JPATH_COMPONENT_ADMINISTRATOR . 'tables/field.php');
@@ -993,12 +995,12 @@ class JoomcckControllerAjax extends MControllerAdmin
 
 		if(!$field)
 		{
-			AjaxHelper::error(\Joomla\CMS\Language\Text::_('AJAX_NOFIELDNAME'));
+			AjaxHelper::error(Text::_('AJAX_NOFIELDNAME'));
 		}
 
 		if(!$func)
 		{
-			AjaxHelper::error(\Joomla\CMS\Language\Text::_('AJAX_NOFUNCNAME'));
+			AjaxHelper::error(Text::_('AJAX_NOFUNCNAME'));
 		}
 
 		$field_path = JPATH_ROOT . '/components/com_joomcck/fields' . DIRECTORY_SEPARATOR . $field . DIRECTORY_SEPARATOR . $field . '.php';
@@ -1012,7 +1014,7 @@ class JoomcckControllerAjax extends MControllerAdmin
 
 		if(!is_file($field_path))
 		{
-			AjaxHelper::error(\Joomla\CMS\Language\Text::_('AJAX_FIELDNOTFOUND' . $id));
+			AjaxHelper::error(Text::_('AJAX_FIELDNOTFOUND' . $id));
 		}
 
 		require_once $field_path;
@@ -1029,21 +1031,21 @@ class JoomcckControllerAjax extends MControllerAdmin
 
 		if(!class_exists($classname))
 		{
-			AjaxHelper::error(\Joomla\CMS\Language\Text::_('CCLASSNOTFOUND'));
+			AjaxHelper::error(Text::_('CCLASSNOTFOUND'));
 		}
 
 		$fieldclass = new $classname($field_table, $default);
 
 		if(!method_exists($fieldclass, $func))
 		{
-			AjaxHelper::error(\Joomla\CMS\Language\Text::_('AJAX_METHODNOTFOUND'));
+			AjaxHelper::error(Text::_('AJAX_METHODNOTFOUND'));
 		}
 
 		$result = $fieldclass->$func($params, $record);
 
 		if($fieldclass->getErrors())
 		{
-			AjaxHelper::error(\Joomla\CMS\Language\Text::_($fieldclass->getError()));
+			AjaxHelper::error(Text::_($fieldclass->getError()));
 		}
 
 
@@ -1076,11 +1078,14 @@ class JoomcckControllerAjax extends MControllerAdmin
 				$query->where('ref_2 = ' . $section_id);
 			}
 			$db->setQuery($query);
-			$db->execute();
-			if($db->getErrors())
-			{
-				AjaxHelper::error(\Joomla\CMS\Language\Text::_($db->getError()));
+
+
+			try {
+				$db->execute();
+			} catch (\RuntimeException $e) {
+				AjaxHelper::error(\Joomla\CMS\Language\Text::_($e->getMessage()));
 			}
+
 		}
 		else
 		{
@@ -1094,11 +1099,14 @@ class JoomcckControllerAjax extends MControllerAdmin
 			}
 
 			$table->notified = 1;
-			$table->store();
-			if($table->getErrors())
-			{
-				AjaxHelper::error(\Joomla\CMS\Language\Text::_($table->getError()));
+
+
+			try {
+				$table->store();
+			} catch (\RuntimeException $e) {
+				AjaxHelper::error(Text::_($e->getMessage()));
 			}
+
 		}
 
 		AjaxHelper::send(0);
@@ -1129,9 +1137,11 @@ class JoomcckControllerAjax extends MControllerAdmin
 		}
 		$db->setQuery($query);
 		$db->execute();
-		if($db->getErrors())
-		{
-			AjaxHelper::error(\Joomla\CMS\Language\Text::_($db->getError()));
+
+		try {
+			$db->execute();
+		} catch (\RuntimeException $e) {
+			AjaxHelper::error(Text::_($e->getMessage()));
 		}
 
 		AjaxHelper::send(0);
@@ -1202,13 +1212,15 @@ class JoomcckControllerAjax extends MControllerAdmin
 		$query->from('#__js_res_notifications');
 		$query->where("id IN (" . implode(", ", $ids) . ")");
 		$db->setQuery($query);
-		$db->execute();
-		if($db->getErrors())
-		{
-			AjaxHelper::error(\Joomla\CMS\Language\Text::_($db->getError()));
 
-			return;
+
+		try {
+			$db->execute();
+		} catch (\RuntimeException $e) {
+			AjaxHelper::error(Text::_($e->getMessage()));
 		}
+
+
 
 		AjaxHelper::send($ids);
 	}
@@ -1246,7 +1258,7 @@ class JoomcckControllerAjax extends MControllerAdmin
 
 		if($db->getError())
 		{
-			AjaxHelper::error(\Joomla\CMS\Language\Text::_($db->getError()));
+			AjaxHelper::error(Text::_($db->getError()));
 
 			return " ";
 		}
@@ -1277,11 +1289,13 @@ class JoomcckControllerAjax extends MControllerAdmin
 		$query->where('id IN (' . implode(', ', $id) . ')');
 
 		$db->setQuery($query);
-		$db->execute();
-		if($db->getErrors())
-		{
-			echo AjaxHelper::error(\Joomla\CMS\Language\Text::_($db->getError()));
+
+		try {
+			$db->execute();
+		} catch (\RuntimeException $e) {
+			AjaxHelper::error(Text::_($e->getMessage()));
 		}
+
 
 		AjaxHelper::send(0);
 	}

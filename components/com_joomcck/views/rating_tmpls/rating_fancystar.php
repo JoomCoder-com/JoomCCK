@@ -30,16 +30,16 @@ $key = $vars->index . '_' . $vars->rid;
 <script type="text/javascript">
 	var newRating<?php echo $key;?> = felixRating.newRating('<?php echo $vars->rating_ident; ?>_rateBox', <?php echo $vars->rating_active; ?>);
 	newRating<?php echo $key;?>.setStars({ 
-		"10": '<?php echo JText::_("1")?>',
-		"20": '<?php echo JText::_("2")?>',
-		"30": '<?php echo JText::_("3")?>',
-		"40": '<?php echo JText::_("4")?>',
-		"50": '<?php echo JText::_("5")?>',
-		"60": '<?php echo JText::_("6")?>',
-		"70": '<?php echo JText::_("7")?>',
-		"80": '<?php echo JText::_("8")?>',
-		"90": '<?php echo JText::_("9")?>',
-		"100": '<?php echo JText::_("10")?>'
+		"10": '<?php echo \Joomla\CMS\Language\Text::_("1")?>',
+		"20": '<?php echo \Joomla\CMS\Language\Text::_("2")?>',
+		"30": '<?php echo \Joomla\CMS\Language\Text::_("3")?>',
+		"40": '<?php echo \Joomla\CMS\Language\Text::_("4")?>',
+		"50": '<?php echo \Joomla\CMS\Language\Text::_("5")?>',
+		"60": '<?php echo \Joomla\CMS\Language\Text::_("6")?>',
+		"70": '<?php echo \Joomla\CMS\Language\Text::_("7")?>',
+		"80": '<?php echo \Joomla\CMS\Language\Text::_("8")?>',
+		"90": '<?php echo \Joomla\CMS\Language\Text::_("9")?>',
+		"100": '<?php echo \Joomla\CMS\Language\Text::_("10")?>'
 		});
 	newRating<?php echo $key;?>.setCurrentStar("<?php echo $vars->rating_current; ?>");
 	newRating<?php echo $key;?>.setIndex(<?php echo $vars->index?>);

@@ -30,11 +30,11 @@ $key = $vars->index . '_' . $vars->rid;
 <script type="text/javascript">
 	var newRating<?php echo $key;?> = felixRating.newRating('<?php echo $vars->rating_ident; ?>_rateBox', <?php echo $vars->rating_active; ?>);
 	newRating<?php echo $key;?>.setStars({ 
-		"20": '<?php echo JText::_("20%")?>',
-		"40": '<?php echo JText::_("40%")?>',
-		"60": '<?php echo JText::_("60%")?>',
-		"80": '<?php echo JText::_("80%")?>',
-		"100": '<?php echo JText::_("100%")?>'
+		"20": '<?php echo \Joomla\CMS\Language\Text::_("20%")?>',
+		"40": '<?php echo \Joomla\CMS\Language\Text::_("40%")?>',
+		"60": '<?php echo \Joomla\CMS\Language\Text::_("60%")?>',
+		"80": '<?php echo \Joomla\CMS\Language\Text::_("80%")?>',
+		"100": '<?php echo \Joomla\CMS\Language\Text::_("100%")?>'
 		});
 	newRating<?php echo $key;?>.setCurrentStar("<?php echo $vars->rating_current; ?>");
 	newRating<?php echo $key;?>.setIndex(<?php echo $vars->index?>);
