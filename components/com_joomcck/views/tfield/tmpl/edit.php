@@ -91,46 +91,49 @@ $wa->useScript('keepalive')
 
 	    <?php echo HTMLHelper::_('uitab.startTabSet', 'myTab', ['active' => 'page-main', 'recall' => true, 'breakpoint' => 768]); ?>
 	    <?php echo HTMLHelper::_('uitab.addTab', 'myTab', 'page-main', \Joomla\CMS\Language\Text::_('FS_FORM')); ?>
-            <div class="float-start" style="max-width: 450px; margin-right: 20px;">
-                <div class="control-group">
-                    <div class="control-label"><?php echo $this->form->getLabel('id'); ?></div>
-                    <div class="controls"><?php echo $this->form->getInput('id'); ?></div>
-                </div>
-                <div class="control-group">
-                    <div class="control-label"><?php echo $this->form->getLabel('label'); ?></div>
-                    <div class="controls"><?php echo $this->form->getInput('label'); ?></div>
-                </div>
-                <div class="control-group">
-                    <div class="control-label"><?php echo $this->form->getLabel('field_type'); ?></div>
-                    <div class="controls"><?php echo $this->form->getInput('field_type'); ?></div>
-                </div>
-                <div class="control-group">
-                    <div class="control-label"><?php echo $this->form->getLabel('published'); ?></div>
-                    <div class="controls"><?php echo $this->form->getInput('published'); ?></div>
-                </div>
-                <div class="control-group">
-                    <div class="control-label"><?php echo $this->form->getLabel('ordering'); ?></div>
-                    <div class="controls"><?php echo $this->form->getInput('ordering'); ?></div>
-                </div>
-                <div class="control-group">
-                    <div class="control-label"><?php echo $this->form->getLabel('group_id'); ?></div>
-                    <div class="controls"><?php echo $this->form->getInput('group_id'); ?></div>
-                </div>
-                <?php echo MFormHelper::renderFieldset($this->params_form, 'general', $this->item->params, 'core'); ?>
-                <?php echo MFormHelper::renderFieldset($this->params_form, 'label', $this->item->params, 'core'); ?>
-                <?php echo MFormHelper::renderFieldset($this->params_form, 'access2_view', $this->item->params, 'core'); ?>
-                <?php echo MFormHelper::renderFieldset($this->params_form, 'access2_submit', $this->item->params, 'core'); ?>
-                <?php echo MFormHelper::renderFieldset($this->params_form, 'access2_edit', $this->item->params, 'core'); ?>
 
-            </div>
-            <div class="float-start" style="max-width: 450px">
-                <legend><?php echo \Joomla\CMS\Language\Text::_('CFIELDPARAMS'); ?></legend>
-                <div id="additional-form">
-                    <?php echo @$this->parameters?>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="control-group">
+                        <div class="control-label"><?php echo $this->form->getLabel('id'); ?></div>
+                        <div class="controls"><?php echo $this->form->getInput('id'); ?></div>
+                    </div>
+                    <div class="control-group">
+                        <div class="control-label"><?php echo $this->form->getLabel('label'); ?></div>
+                        <div class="controls"><?php echo $this->form->getInput('label'); ?></div>
+                    </div>
+                    <div class="control-group">
+                        <div class="control-label"><?php echo $this->form->getLabel('field_type'); ?></div>
+                        <div class="controls"><?php echo $this->form->getInput('field_type'); ?></div>
+                    </div>
+                    <div class="control-group">
+                        <div class="control-label"><?php echo $this->form->getLabel('published'); ?></div>
+                        <div class="controls"><?php echo $this->form->getInput('published'); ?></div>
+                    </div>
+                    <div class="control-group">
+                        <div class="control-label"><?php echo $this->form->getLabel('ordering'); ?></div>
+                        <div class="controls"><?php echo $this->form->getInput('ordering'); ?></div>
+                    </div>
+                    <div class="control-group">
+                        <div class="control-label"><?php echo $this->form->getLabel('group_id'); ?></div>
+                        <div class="controls"><?php echo $this->form->getInput('group_id'); ?></div>
+                    </div>
+	                <?php echo MFormHelper::renderFieldset($this->params_form, 'general', $this->item->params, 'core'); ?>
+	                <?php echo MFormHelper::renderFieldset($this->params_form, 'label', $this->item->params, 'core'); ?>
+	                <?php echo MFormHelper::renderFieldset($this->params_form, 'access2_view', $this->item->params, 'core'); ?>
+	                <?php echo MFormHelper::renderFieldset($this->params_form, 'access2_submit', $this->item->params, 'core'); ?>
+	                <?php echo MFormHelper::renderFieldset($this->params_form, 'access2_edit', $this->item->params, 'core'); ?>
                 </div>
-                <div id="additional-pay-form">
+                <div class="col-md-6">
+                    <legend><?php echo \Joomla\CMS\Language\Text::_('CFIELDPARAMS'); ?></legend>
+                    <div id="additional-form">
+		                <?php echo @$this->parameters?>
+                    </div>
+                    <div id="additional-pay-form">
+                    </div>
                 </div>
             </div>
+
 	    <?php echo HTMLHelper::_('uitab.endTab'); ?>
 
 	    <?php echo HTMLHelper::_('uitab.addTab', 'myTab', 'page-emerald', \Joomla\CMS\Language\Text::_('FS_EMERALD')); ?>
