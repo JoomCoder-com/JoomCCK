@@ -19,13 +19,13 @@ defined('_JEXEC') or die();
 		<table class="float-end">
 			<tr>
 				<td width="20px">
-					<div class="alert alert-info" style="margin-bottom: 0px;" rel="tipbottom" data-bs-title="<?php echo \Joomla\CMS\Language\Text::_('CPOSTAUTHOR')?>"></div>
+					<div class="alert alert-info" style="margin-bottom: 0px;" rel="tipbottom" data-bs-original-title="<?php echo \Joomla\CMS\Language\Text::_('CPOSTAUTHOR')?>"></div>
 				</td>
 				<td width="20px">
-					<div class="alert alert-success" style="margin-bottom: 0px;" rel="tipbottom" data-bs-title="<?php echo \Joomla\CMS\Language\Text::_('CPOSTSUBSCR')?>"></div>
+					<div class="alert alert-success" style="margin-bottom: 0px;" rel="tipbottom" data-bs-original-title="<?php echo \Joomla\CMS\Language\Text::_('CPOSTSUBSCR')?>"></div>
 				</td>
 				<td width="20px">
-					<div class="alert alert-success" style="margin-bottom: 0px; background-color: #fff; border-color: #cccccc" rel="tipbottom" data-bs-title="<?php echo \Joomla\CMS\Language\Text::_('CPOSTEVERYONE')?>"></div>
+					<div class="alert alert-success" style="margin-bottom: 0px; background-color: #fff; border-color: #cccccc" rel="tipbottom" data-bs-original-title="<?php echo \Joomla\CMS\Language\Text::_('CPOSTEVERYONE')?>"></div>
 				</td>
 			</tr>
 		</table>

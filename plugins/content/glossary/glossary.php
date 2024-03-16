@@ -95,12 +95,12 @@ class plgContentGlossary extends \Joomla\CMS\Plugin\CMSPlugin
 					$lang->load('com_joomcck', JPATH_ROOT. DIRECTORY_SEPARATOR .'components'. DIRECTORY_SEPARATOR .'com_joomcck');
 					$nums = " (".\Joomla\CMS\Language\Text::_('CHITS').': '.$num[$vall->title].")";
 				}
-				$string = sprintf('<a href="%s"><span data-placement="top" rel="popover" data-bs-title="%s" data-content="%s" class="hasTooltip glossarydef">%s</span></a>',
+				$string = sprintf('<a href="%s"><span data-placement="top" rel="popover" data-bs-original-title="%s" data-content="%s" class="hasTooltip glossarydef">%s</span></a>',
 					$link, htmlspecialchars($vall->field_value, ENT_COMPAT, 'UTF-8'), htmlspecialchars($vall->field_value, ENT_COMPAT, 'UTF-8'), $title);
 			}
 			else
 			{
-				$string = sprintf('<span data-placement="top" rel="popover" data-bs-title="%s" data-content="%s" class="hasTooltip glossarydef">\\1</span>',
+				$string = sprintf('<span data-placement="top" rel="popover" data-bs-original-title="%s" data-content="%s" class="hasTooltip glossarydef">\\1</span>',
 					htmlspecialchars($vall->field_value, ENT_COMPAT, 'UTF-8'), 
 					htmlspecialchars($vall->field_value, ENT_COMPAT, 'UTF-8')
 				);

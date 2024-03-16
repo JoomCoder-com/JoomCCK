@@ -151,7 +151,7 @@ defined('_JEXEC') or die('Restricted access');
                 </label>
                 <div class="<?php echo ($filter->isFilterActive() ? ' active' : NULL) ?>">
 					<?php if($filter->isFilterActive()): ?>
-                        <!-- <img class="filter-close" onclick="Joomcck.cleanFilter('filter_<?php echo $filter->key ?>')" rel="tooltip" data-bs-title="<?php echo \Joomla\CMS\Language\Text::_('CDELETEFILTER') ?>" src="<?php echo \Joomla\CMS\Uri\Uri::root(TRUE) ?>/media/com_joomcck/icons/16/cross-circle.png">-->
+                        <!-- <img class="filter-close" onclick="Joomcck.cleanFilter('filter_<?php echo $filter->key ?>')" rel="tooltip" data-bs-original-title="<?php echo \Joomla\CMS\Language\Text::_('CDELETEFILTER') ?>" src="<?php echo \Joomla\CMS\Uri\Uri::root(TRUE) ?>/media/com_joomcck/icons/16/cross-circle.png">-->
 					<?php endif; ?>
 					<?php echo $f; ?>
                 </div>

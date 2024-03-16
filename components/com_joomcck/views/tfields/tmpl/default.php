@@ -67,11 +67,11 @@ if($saveOrder)
 			<th width="5%" nowrap="nowrap">
 				<?php echo \Joomla\CMS\HTML\HTMLHelper::_('grid.sort', 'CGROUPNAME', 'g.title', $listDirn, $listOrder); ?>
 			</th>
-			<th width="1%"><span rel="tooltip" data-bs-title="<?php echo \Joomla\CMS\Language\Text::_('JGLOBAL_FIELD_KEY_LABEL'); ?>"><?php echo \Joomla\String\StringHelper::substr(\Joomla\CMS\Language\Text::_('JGLOBAL_FIELD_KEY_LABEL'), 0, 1) ?></span></th>
-			<th width="1%"><span rel="tooltip" data-bs-title="<?php echo \Joomla\CMS\Language\Text::_('XML_LABEL_F_REQ'); ?>"><?php echo \Joomla\String\StringHelper::substr(\Joomla\CMS\Language\Text::_('XML_LABEL_F_REQ'), 0, 1) ?></span></th>
-			<th width="1%"><span rel="tooltip" data-bs-title="<?php echo \Joomla\CMS\Language\Text::_('XML_LABEL_F_SEARCHABLE'); ?>"><?php echo \Joomla\String\StringHelper::substr(\Joomla\CMS\Language\Text::_('XML_LABEL_F_SEARCHABLE'), 0, 1) ?></span></th>
-			<th width="1%"><span rel="tooltip" data-bs-title="<?php echo \Joomla\CMS\Language\Text::_('INTRO'); ?>"><?php echo \Joomla\String\StringHelper::substr(\Joomla\CMS\Language\Text::_('XML_LABEL_F_SHOW_INTRO'), 0, 1) ?></span></th>
-			<th width="1%"><span rel="tooltip" data-bs-title="<?php echo \Joomla\CMS\Language\Text::_('FULL'); ?>"><?php echo \Joomla\String\StringHelper::substr(\Joomla\CMS\Language\Text::_('XML_LABEL_F_SHOW_FULL'), 0, 1) ?></span></th>
+			<th width="1%"><span rel="tooltip" data-bs-original-title="<?php echo \Joomla\CMS\Language\Text::_('JGLOBAL_FIELD_KEY_LABEL'); ?>"><?php echo \Joomla\String\StringHelper::substr(\Joomla\CMS\Language\Text::_('JGLOBAL_FIELD_KEY_LABEL'), 0, 1) ?></span></th>
+			<th width="1%"><span rel="tooltip" data-bs-original-title="<?php echo \Joomla\CMS\Language\Text::_('XML_LABEL_F_REQ'); ?>"><?php echo \Joomla\String\StringHelper::substr(\Joomla\CMS\Language\Text::_('XML_LABEL_F_REQ'), 0, 1) ?></span></th>
+			<th width="1%"><span rel="tooltip" data-bs-original-title="<?php echo \Joomla\CMS\Language\Text::_('XML_LABEL_F_SEARCHABLE'); ?>"><?php echo \Joomla\String\StringHelper::substr(\Joomla\CMS\Language\Text::_('XML_LABEL_F_SEARCHABLE'), 0, 1) ?></span></th>
+			<th width="1%"><span rel="tooltip" data-bs-original-title="<?php echo \Joomla\CMS\Language\Text::_('INTRO'); ?>"><?php echo \Joomla\String\StringHelper::substr(\Joomla\CMS\Language\Text::_('XML_LABEL_F_SHOW_INTRO'), 0, 1) ?></span></th>
+			<th width="1%"><span rel="tooltip" data-bs-original-title="<?php echo \Joomla\CMS\Language\Text::_('FULL'); ?>"><?php echo \Joomla\String\StringHelper::substr(\Joomla\CMS\Language\Text::_('XML_LABEL_F_SHOW_FULL'), 0, 1) ?></span></th>
 			<th width="1%" class="nowrap">
 				<?php echo \Joomla\CMS\HTML\HTMLHelper::_('grid.sort', 'ID', 'f.id', $listDirn, $listOrder); ?>
 			</th>
@@ -130,7 +130,7 @@ if($saveOrder)
 						'align' => 'absmiddle'
 					));
 					?>
-					<small><a href="#" rel="tooltip" data-bs-title="<?php echo \Joomla\CMS\Language\Text::_('CFILTERFIELDTYPE') ?>" onclick="Joomcck.setAndSubmit('filter_ftype', '<?php echo $item->field_type ?>')"><?php echo $item->field_type ?></a></small>
+					<small><a href="#" rel="tooltip" data-bs-original-title="<?php echo \Joomla\CMS\Language\Text::_('CFILTERFIELDTYPE') ?>" onclick="Joomcck.setAndSubmit('filter_ftype', '<?php echo $item->field_type ?>')"><?php echo $item->field_type ?></a></small>
 				</td>
 				<td class="center">
 					<?php echo \Joomla\CMS\HTML\HTMLHelper::_('field.state', $item->published, $i, 'tfields.', $canChange); ?>
@@ -158,7 +158,7 @@ if($saveOrder)
 					<?php echo $item->group_field_title; ?>
 				</td>
 				<td>
-					<img style="max-width: 16px;" rel="tooltip" data-bs-title="<?php echo $item->key; ?>" src="<?php echo \Joomla\CMS\Uri\Uri::root(TRUE) ?>/media/com_joomcck/icons/16/key.png"/>
+					<img style="max-width: 16px;" rel="tooltip" data-bs-original-title="<?php echo $item->key; ?>" src="<?php echo \Joomla\CMS\Uri\Uri::root(TRUE) ?>/media/com_joomcck/icons/16/key.png"/>
 				</td>
 				<td><?php echo \Joomla\CMS\HTML\HTMLHelper::_('field.required', $params->get('core.required', 0), $i, 'tfields.', $canChange) ?></td>
 				<td><?php echo \Joomla\CMS\HTML\HTMLHelper::_('field.searchable', $params->get('core.searchable', 0), $i, 'tfields.', $canChange) ?></td>

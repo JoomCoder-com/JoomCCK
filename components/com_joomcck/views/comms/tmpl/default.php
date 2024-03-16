@@ -72,14 +72,14 @@ $listDirn = $this->state->get('list.direction');
 					<?php echo \Joomla\CMS\HTML\HTMLHelper::_('grid.id', $i, $item->id); ?>
 				</td>
 				<td>
-					<a href="javascript:void(0);" rel="tooltip" data-bs-title="<?php echo \Joomla\CMS\Language\Text::_('CFILTERRECORD'); ?>"
+					<a href="javascript:void(0);" rel="tooltip" data-bs-original-title="<?php echo \Joomla\CMS\Language\Text::_('CFILTERRECORD'); ?>"
 					   onclick="document.getElementById('filter_search').value='record:<?php echo $item->record_id; ?>'; document.adminForm.submit();">
 						<?php echo $item->record ?>
 					</a>
-					[<a href="#" rel="tooltip" data-bs-title="<?php echo \Joomla\CMS\Language\Text::_('CFILTERBYTYPE'); ?>" onclick="Joomcck.setAndSubmit('filter_type', <?php echo $item->type_id ?>)"><?php echo $this->escape($item->type); ?></a>]
+					[<a href="#" rel="tooltip" data-bs-original-title="<?php echo \Joomla\CMS\Language\Text::_('CFILTERBYTYPE'); ?>" onclick="Joomcck.setAndSubmit('filter_type', <?php echo $item->type_id ?>)"><?php echo $this->escape($item->type); ?></a>]
 					<br/>
 					<small>
-						<a href="index.php?option=com_joomcck&task=comm.edit&id=<?php echo (int)$item->id; ?>" rel="tooltip" data-bs-title="<?php echo \Joomla\CMS\Language\Text::_('CEDITCOMMENT'); ?>">
+						<a href="index.php?option=com_joomcck&task=comm.edit&id=<?php echo (int)$item->id; ?>" rel="tooltip" data-bs-original-title="<?php echo \Joomla\CMS\Language\Text::_('CEDITCOMMENT'); ?>">
 							<?php echo $body; ?>
 						</a>
 					</small>
@@ -97,18 +97,18 @@ $listDirn = $this->state->get('list.direction');
 						?>
 						<?php if($user->get('username')): ?>
 							<?php echo \Joomla\CMS\HTML\HTMLHelper::link('javascript:void(0);', $user->get('username'), array(
-								'rel' => "tooltip", 'data-bs-title' => \Joomla\CMS\Language\Text::_('CFILTERUSER'), 'onclick' => 'document.getElementById(\'filter_search\').value=\'user:' . $item->user_id . '\'; document.adminForm.submit();'
+								'rel' => "tooltip", 'data-bs-original-title' => \Joomla\CMS\Language\Text::_('CFILTERUSER'), 'onclick' => 'document.getElementById(\'filter_search\').value=\'user:' . $item->user_id . '\'; document.adminForm.submit();'
 							)) ?>
 							<?php //echo \Joomla\CMS\HTML\HTMLHelper::_('ip.block_user', $item->user_id, $item->id);?>
 						<?php else: ?>
-							<?php echo $item->name ? $item->name . " (<a href=\"javascript:void(0);\" rel=\"tooltip\" data-bs-title=\"" . \Joomla\CMS\Language\Text::_('CFILTEREMAIL') . "\" onclick=\"document.getElementById('filter_search').value='email:{$item->email}'; document.adminForm.submit();\">{$item->email}</a>) " : \Joomla\CMS\Language\Text::_('CANONYMOUS') ?>
+							<?php echo $item->name ? $item->name . " (<a href=\"javascript:void(0);\" rel=\"tooltip\" data-bs-original-title=\"" . \Joomla\CMS\Language\Text::_('CFILTEREMAIL') . "\" onclick=\"document.getElementById('filter_search').value='email:{$item->email}'; document.adminForm.submit();\">{$item->email}</a>) " : \Joomla\CMS\Language\Text::_('CANONYMOUS') ?>
 						<?php endif; ?>
 
 						<?php if($item->ip): ?>
 							<div>
 								<?php echo \Joomla\CMS\HTML\HTMLHelper::_('ip.country', $item->ip); ?>
 								<?php echo \Joomla\CMS\HTML\HTMLHelper::link('javascript:void(0);', $item->ip, array(
-									'rel' => "tooltip", 'data-bs-title' => \Joomla\CMS\Language\Text::_('CFILTERIP'), 'onclick' => 'document.getElementById(\'filter_search\').value=\'ip:' . $item->ip . '\'; document.adminForm.submit();'
+									'rel' => "tooltip", 'data-bs-original-title' => \Joomla\CMS\Language\Text::_('CFILTERIP'), 'onclick' => 'document.getElementById(\'filter_search\').value=\'ip:' . $item->ip . '\'; document.adminForm.submit();'
 								)); ?>
 								<?php //echo \Joomla\CMS\HTML\HTMLHelper::_('ip.block_ip', $item->ip, $item->id);?>
 							</div>

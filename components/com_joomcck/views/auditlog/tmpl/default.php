@@ -183,7 +183,7 @@ $this->_filters = true;
 							<?php echo \Joomla\CMS\Language\Text::_($this->type_objects[$item->type_id]->params->get('audit.al' . $item->event . '.msg', 'CAUDLOG' . $item->event)); ?>
                             <a onclick="Joomcck.checkAndSubmit('#fevent<?php echo $item->event; ?>', <?php echo $item->section_id; ?>)"
                                href="javascript:void(0);" rel="tooltip"
-                               data-bs-title="<?php echo \Joomla\CMS\Language\Text::_('CFILTERTIPEVENTS') ?>">
+                               data-bs-original-title="<?php echo \Joomla\CMS\Language\Text::_('CFILTERTIPEVENTS') ?>">
 								<?php echo HTMLFormatHelper::icon('funnel-small.png'); ?></a>
 
 							<?php if ($item->event == ATlog::REC_TAGNEW || $item->event == ATlog::REC_TAGDELETE): ?>
@@ -207,41 +207,41 @@ $this->_filters = true;
 
 							<?php if ($item->event == ATlog::REC_FILE_DELETED): ?>
                                 <a class="btn btn-sm btn-light border" rel="tooltip"
-                                   data-bs-title="<?php echo \Joomla\CMS\Language\Text::_('CRESTOREFILLE'); ?>"
+                                   data-bs-original-title="<?php echo \Joomla\CMS\Language\Text::_('CRESTOREFILLE'); ?>"
                                    href="<?php echo Url::task('records.rectorefile', $item->record_id . '&fid=' . $params->file->id . '&field_id=' . $params->file->field_id) ?>">
 									<?php echo HTMLFormatHelper::icon('universal.png'); ?></a>
 							<?php endif; ?>
 							<?php if ($item->event == ATlog::REC_NEW): ?>
                                 <a class="btn btn-sm btn-light border" rel="tooltip"
-                                   data-bs-title="<?php echo \Joomla\CMS\Language\Text::_('CDELETE'); ?>"
+                                   data-bs-original-title="<?php echo \Joomla\CMS\Language\Text::_('CDELETE'); ?>"
                                    href="<?php echo Url::task('records.delete', $item->record_id) ?>">
 									<?php echo HTMLFormatHelper::icon('cross-button.png'); ?></a>
 							<?php endif; ?>
 							<?php if ($item->event == ATlog::REC_PUBLISHED || ($item->event == ATlog::REC_NEW && @$params->published == 1)): ?>
                                 <a class="btn btn-sm btn-light border" rel="tooltip"
-                                   data-bs-title="<?php echo \Joomla\CMS\Language\Text::_('CUNPUB'); ?>"
+                                   data-bs-original-title="<?php echo \Joomla\CMS\Language\Text::_('CUNPUB'); ?>"
                                    href="<?php echo Url::task('records.sunpub', $item->record_id); ?>">
 									<?php echo HTMLFormatHelper::icon('cross-circle.png'); ?></a>
 							<?php endif; ?>
 							<?php if ($item->event == ATlog::REC_UNPUBLISHED || ($item->event == ATlog::REC_NEW && @$params->published == 0)): ?>
                                 <a class="btn btn-sm btn-light border" rel="tooltip"
-                                   data-bs-title="<?php echo \Joomla\CMS\Language\Text::_('CPUB'); ?>"
+                                   data-bs-original-title="<?php echo \Joomla\CMS\Language\Text::_('CPUB'); ?>"
                                    href="<?php echo Url::task('records.spub', $item->record_id); ?>">
 									<?php echo HTMLFormatHelper::icon('tick.png'); ?></a>
 							<?php endif; ?>
 							<?php if ($item->event == ATlog::REC_EDIT && $this->type_objects[$item->type_id]->params->get('audit.versioning')): ?>
                                 <a class="btn btn-sm btn-light border" rel="tooltip"
-                                   data-bs-title="<?php echo \Joomla\CMS\Language\Text::_('CCOMPAREVERSION'); ?>"
+                                   data-bs-original-title="<?php echo \Joomla\CMS\Language\Text::_('CCOMPAREVERSION'); ?>"
                                    href="<?php echo $url = 'index.php?option=com_joomcck&view=diff&record_id=' . $item->record_id . '&version=' . ($params->version) . '&return=' . Url::back(); ?>">
 									<?php echo HTMLFormatHelper::icon('edit-diff.png'); ?></a>
                                 <a class="btn btn-sm btn-light border" rel="tooltip"
-                                   data-bs-title="<?php echo \Joomla\CMS\Language\Text::sprintf('CROLLBACKVERSION', ($params->version - 1)); ?>"
+                                   data-bs-original-title="<?php echo \Joomla\CMS\Language\Text::sprintf('CROLLBACKVERSION', ($params->version - 1)); ?>"
                                    href="<?php echo Url::task('records.rollback', $item->record_id . '&version=' . ($params->version - 1)); ?>">
 									<?php echo HTMLFormatHelper::icon('arrow-merge-180-left.png'); ?></a>
 							<?php endif; ?>
 							<?php if (!$item->isrecord): ?>
                                 <a class="btn btn-sm btn-light border" rel="tooltip"
-                                   data-bs-title="<?php echo \Joomla\CMS\Language\Text::_('CRESTORE'); ?>"
+                                   data-bs-original-title="<?php echo \Joomla\CMS\Language\Text::_('CRESTORE'); ?>"
                                    href="<?php echo Url::task('records.restore', $item->record_id) ?>">
 									<?php echo HTMLFormatHelper::icon('universal.png'); ?></a>
 							<?php endif; ?>
@@ -267,18 +267,18 @@ $this->_filters = true;
 
                             <a onclick="Joomcck.setAndSubmit('filter_search', 'rid:<?php echo $item->record_id; ?>');"
                                href="javascript:void(0);" rel="tooltip"
-                               data-bs-title="<?php echo \Joomla\CMS\Language\Text::_('CFILTERTIPRECORD') ?>;">
+                               data-bs-original-title="<?php echo \Joomla\CMS\Language\Text::_('CFILTERTIPRECORD') ?>;">
 								<?php echo HTMLFormatHelper::icon('funnel-small.png'); ?></a>
                             <div>
                                 <small>
 									<?php echo \Joomla\CMS\Language\Text::_('CTYPE'); ?>:
-                                    <a href="#" rel="tooltip" data-bs-title="<?php echo \Joomla\CMS\Language\Text::_('CFILTERTIPETYPE'); ?>"
+                                    <a href="#" rel="tooltip" data-bs-original-title="<?php echo \Joomla\CMS\Language\Text::_('CFILTERTIPETYPE'); ?>"
                                        onclick="Joomcck.checkAndSubmit('#ftype<?php echo $item->type_id; ?>', <?php echo $item->type_id; ?>)">
 										<?php echo @$params->type_name; ?></a> |
 
 									<?php echo \Joomla\CMS\Language\Text::_('CSECTION'); ?>:
                                     <a href="#" rel="tooltip"
-                                       data-bs-title="<?php echo \Joomla\CMS\Language\Text::_('CFILTERTIPSECTION'); ?>"
+                                       data-bs-original-title="<?php echo \Joomla\CMS\Language\Text::_('CFILTERTIPSECTION'); ?>"
                                        onclick="Joomcck.checkAndSubmit('#fsection<?php echo $item->section_id; ?>', <?php echo $item->section_id; ?>)">
 										<?php echo @$params->section_name; ?></a>
 
@@ -296,7 +296,7 @@ $this->_filters = true;
 							<?php echo $item->username; ?>
                             <a onclick="Joomcck.checkAndSubmit('#fuser<?php echo $item->user_id; ?>', <?php echo $item->section_id; ?>)"
                                href="javascript:void(0);" rel="tooltip"
-                               data-bs-title="<?php echo \Joomla\CMS\Language\Text::_('CFILTERTIPUSER') ?>">
+                               data-bs-original-title="<?php echo \Joomla\CMS\Language\Text::_('CFILTERTIPUSER') ?>">
 								<?php echo HTMLFormatHelper::icon('funnel-small.png'); ?></a>
                         </td>
                     </tr>

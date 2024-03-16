@@ -56,11 +56,11 @@ $js         = '';
 			<button type="button" class="btn btn-sm btn-light border"><?php echo \Joomla\CMS\Language\Text::_("TA_BBCODEITALIC"); ?></button>
 			<button type="button" class="btn btn-sm btn-light border"><?php echo \Joomla\CMS\Language\Text::_("TA_BBCODEUNDERLINE"); ?></button>
 
-			<button type="button" rel="tooltip" data-bs-title="<?php echo \Joomla\CMS\Language\Text::_("TA_BBCODEURL"); ?>"
+			<button type="button" rel="tooltip" data-bs-original-title="<?php echo \Joomla\CMS\Language\Text::_("TA_BBCODEURL"); ?>"
 					class="btn btn-sm btn-light border"><i class="icon-out-2"></i></button>
-			<button type="button" rel="tooltip" data-bs-title="<?php echo \Joomla\CMS\Language\Text::_("TA_BBCODEIMG"); ?>"
+			<button type="button" rel="tooltip" data-bs-original-title="<?php echo \Joomla\CMS\Language\Text::_("TA_BBCODEIMG"); ?>"
 					class="btn btn-sm btn-light border"><i class="icon-picture"></i></button>
-			<button type="button" rel="tooltip" data-bs-title="<?php echo \Joomla\CMS\Language\Text::_("TA_BBCODECODE"); ?>"
+			<button type="button" rel="tooltip" data-bs-original-title="<?php echo \Joomla\CMS\Language\Text::_("TA_BBCODECODE"); ?>"
 					class="btn btn-sm btn-light border"><i class="icon-tools"></i></button>
 		</div>
 		<div class="float-end form-inline">

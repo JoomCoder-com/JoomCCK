@@ -41,7 +41,7 @@ class FilterHelper
 
 		$patern = '<a class="filter-link" %s href="%s" ' . $nofollow . '>%s</a>';
 
-		return sprintf($patern, ($tip ? ' data-original-title="' . htmlspecialchars($tip, ENT_COMPAT, 'UTF-8') . '"' : NULL), \Joomla\CMS\Router\Route::_($url), $text);
+		return sprintf($patern, ($tip ? ' data-bs-original-title="' . htmlspecialchars($tip, ENT_COMPAT, 'UTF-8') . '"' : NULL), \Joomla\CMS\Router\Route::_($url), $text);
 	}
 
 	public static function filterButton($name, $value, $type, $tip, $section, $icon = 'funnel-small.png')

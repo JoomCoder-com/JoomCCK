@@ -78,7 +78,7 @@ if($this->comment->rate > 10) $bc = 'bg-success';
 								<?php echo HTMLFormatHelper::icon('plus.png');?>
 							</a>
 					<?php endif;?>
-					<big class="badge <?php echo $bc; ?>" rel="tooltip" data-bs-title="<?php echo \Joomla\CMS\Language\Text::sprintf('TOTAL_VOTES', $this->comment->rate_num);?>" id="comment_rate_value_<?php echo $this->comment->id?>"><?php echo $this->comment->rate?></big>
+					<big class="badge <?php echo $bc; ?>" rel="tooltip" data-bs-original-title="<?php echo \Joomla\CMS\Language\Text::sprintf('TOTAL_VOTES', $this->comment->rate_num);?>" id="comment_rate_value_<?php echo $this->comment->id?>"><?php echo $this->comment->rate?></big>
 					<?php if($this->comment->canrate):?>
 							<a href="javascript:void(0);" onclick="ajax_rateComment(<?php echo $this->comment->id?>, 0)">
 								<?php echo HTMLFormatHelper::icon('minus.png');?>

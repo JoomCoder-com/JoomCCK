@@ -39,7 +39,7 @@ felixRating = {
                     var newStar = document.createElement('span');
                     newStar.starNum = star;
                     newStar.setAttribute('rel', 'tooltip');
-                    newStar.setAttribute('data-original-title', stars[star]);
+                    newStar.setAttribute('data-bs-original-title', stars[star]);
                     newStar.reffObj = this;
                     if (this.active) {
                         if (newStar.addEventListener && navigator.appName != 'Opera') {

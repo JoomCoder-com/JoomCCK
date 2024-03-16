@@ -19,7 +19,7 @@ defined('_JEXEC') or die('Restricted access');
 		if(!\Joomla\CMS\Factory::getApplication()->getIdentity()->get('id'))
 		{
 			$url = \Joomla\CMS\Router\Route::_('index.php?option=com_users&view=login&return=' . Url::back());
-			$attr = ' rel="tooltip" data-bs-title="'.\Joomla\CMS\Language\Text::sprintf('MOD_SB_REGISTER', $type->name).'" ';
+			$attr = ' rel="tooltip" data-bs-original-title="'.\Joomla\CMS\Language\Text::sprintf('MOD_SB_REGISTER', $type->name).'" ';
 		}
 		else
 		{

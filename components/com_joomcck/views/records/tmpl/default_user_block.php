@@ -38,7 +38,7 @@ $num = CEventsHelper::showNum('total', 0);
 	<?php if($this->isMe):?>
 		<div class="btn-group float-end">
 			<?php if($params->get('menu.menu_user_cat_manage') && in_array($this->section->params->get('personalize.pcat_submit'), $this->user->getAuthorisedViewLevels())):?>
-				<a class="btn-sm btn-light btn" rel="tooltip" data-bs-title="<?php echo \Joomla\CMS\Language\Text::_($params->get('menu.menu_user_cat_manage_label', 'Manage Categories'))?>" href="<?php echo \Joomla\CMS\Router\Route::_(Url::_('categories').'&return='.Url::back())?>">
+				<a class="btn-sm btn-light btn" rel="tooltip" data-bs-original-title="<?php echo \Joomla\CMS\Language\Text::_($params->get('menu.menu_user_cat_manage_label', 'Manage Categories'))?>" href="<?php echo \Joomla\CMS\Router\Route::_(Url::_('categories').'&return='.Url::back())?>">
 					<img src="<?php echo \Joomla\CMS\Uri\Uri::root(TRUE);?>/media/com_joomcck/icons/16/category.png" align="absmiddle" /></a>
 			<?php endif;?>
 			<?php if($params->get('menu.menu_user_moder') && MECAccess::allowModerate(NULL, NULL, $this->section)):?>
@@ -47,7 +47,7 @@ $num = CEventsHelper::showNum('total', 0);
 			<?php endif;?>
 
 			<?php if($this->section->params->get('personalize.allow_section_set', 1)):?>
-				<a class="btn-sm btn-light btn" rel="tooltip" data-bs-title="<?php echo \Joomla\CMS\Language\Text::sprintf('CSELECTOPTIONS', $this->section->name);?>" href="<?php echo \Joomla\CMS\Router\Route::_('index.php?option=com_joomcck&view=options&layout=section&section_id='.$this->section->id.'&return='.Url::back());?>">
+				<a class="btn-sm btn-light btn" rel="tooltip" data-bs-original-title="<?php echo \Joomla\CMS\Language\Text::sprintf('CSELECTOPTIONS', $this->section->name);?>" href="<?php echo \Joomla\CMS\Router\Route::_('index.php?option=com_joomcck&view=options&layout=section&section_id='.$this->section->id.'&return='.Url::back());?>">
 					<img src="<?php echo \Joomla\CMS\Uri\Uri::root(TRUE);?>/media/com_joomcck/icons/16/gear.png" align="absmiddle" /></a>
 			<?php endif;?>
 		</div>
@@ -73,7 +73,7 @@ $num = CEventsHelper::showNum('total', 0);
 		<?php endif;?>
 
 		<?php if($params->get('menu.menu_user_evented') && CEventsHelper::getNum('section', $this->section->id)):?>
-			<a rel="tooltip" data-bs-title="<?php echo \Joomla\CMS\Language\Text::_($params->get('menu.menu_user_events_label', 'With new events'))?>" href="<?php echo \Joomla\CMS\Router\Route::_(Url::user('events'));?>">
+			<a rel="tooltip" data-bs-original-title="<?php echo \Joomla\CMS\Language\Text::_($params->get('menu.menu_user_events_label', 'With new events'))?>" href="<?php echo \Joomla\CMS\Router\Route::_(Url::user('events'));?>">
 				<?php echo CEventsHelper::showNum('section', $this->section->id)?></a>
 		<?php endif;?>
 	</h1>

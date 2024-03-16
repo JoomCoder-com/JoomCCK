@@ -71,9 +71,9 @@ if(!$back)
 						<?php echo $item->username;?>
 					</td>
 					<td>
-						<a rel="tooltip" data-bs-title="Compare v.<?php echo $item->version;?>" href="<?php echo $url = \Joomla\CMS\Router\Route::_('index.php?option=com_joomcck&view=diff&record_id=' . $item->record_id . '&version=' .$item->version.'&return=' . Url::back()); ?>">
+						<a rel="tooltip" data-bs-original-title="Compare v.<?php echo $item->version;?>" href="<?php echo $url = \Joomla\CMS\Router\Route::_('index.php?option=com_joomcck&view=diff&record_id=' . $item->record_id . '&version=' .$item->version.'&return=' . Url::back()); ?>">
 							<?php echo trim(HTMLFormatHelper::icon('edit-diff.png'));?></a>
-						<a rel="tooltip" data-bs-title="Rollback v.<?php echo $item->version;?>" href="<?php echo Url::task('records.rollback', $item->record_id.'&version='.$item->version); ?>">
+						<a rel="tooltip" data-bs-original-title="Rollback v.<?php echo $item->version;?>" href="<?php echo Url::task('records.rollback', $item->record_id.'&version='.$item->version); ?>">
 							<?php echo trim(HTMLFormatHelper::icon('arrow-merge-180-left.png'));?></a>
 					</td>
 				</tr>

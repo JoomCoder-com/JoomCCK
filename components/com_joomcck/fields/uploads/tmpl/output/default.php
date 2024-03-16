@@ -48,7 +48,7 @@ defined('_JEXEC') or die;
 				}
 			?>
 			<?php if($this->descr && $file->description):?>
-				rel="tooltip" data-bs-title="<?php echo $file->description;?>"
+				rel="tooltip" data-bs-original-title="<?php echo $file->description;?>"
 			<?php endif;?>
 			>
 			<?php echo ($this->params->get('params.allow_edit_title', 0) && $file->title ? $file->title : $file->realname);?>

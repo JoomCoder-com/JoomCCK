@@ -184,7 +184,7 @@ class HTMLFormatHelper
 
 		$file = \Joomla\CMS\Uri\Uri::root() . 'media/com_joomcck/icons/16/follow' . (int)($record->subscribed > 0) . '.png';
 		$alt  = ($record->subscribed ? \Joomla\CMS\Language\Text::_('CMSG_CLICKTOUNFOLLOW') : \Joomla\CMS\Language\Text::_('CMSG_CLICKTOFOLLOW'));
-		$attr = array('data-original-title' => $alt, 'rel' => 'tooltip', 'id' => 'follow_record_' . $record->id);
+		$attr = array('data-bs-original-title' => $alt, 'rel' => 'tooltip', 'id' => 'follow_record_' . $record->id);
 		$out  = \Joomla\CMS\HTML\HTMLHelper::image($file, $alt, $attr);
 
 		return sprintf('<button class="btn btn-sm btn-light border" type="button" onclick="Joomcck.followRecord(%d, %d);">%s</button>',
@@ -216,7 +216,7 @@ class HTMLFormatHelper
 		}
 
 		$file = \Joomla\CMS\Uri\Uri::root() . 'media/com_joomcck/icons/16/edit-diff.png';
-		$attr = array('data-original-title' => \Joomla\CMS\Language\Text::_('CMSG_COMPARE'), 'rel' => 'tooltip');
+		$attr = array('data-bs-original-title' => \Joomla\CMS\Language\Text::_('CMSG_COMPARE'), 'rel' => 'tooltip');
 		$img  = \Joomla\CMS\HTML\HTMLHelper::image($file, \Joomla\CMS\Language\Text::_('Compare'), $attr);
 
 		return sprintf('<button class="btn border btn-sm btn-light %s" id="compare_%d" type="button" onclick="Joomcck.CompareRecord(%d, %d);">%s</button>',
@@ -267,7 +267,7 @@ class HTMLFormatHelper
 
 		$file = \Joomla\CMS\Uri\Uri::root() . 'media/com_joomcck/icons/16/arrow-retweet.png';
 		$alt  = \Joomla\CMS\Language\Text::_('CMSG_REPOST');
-		$attr = array('data-original-title' => $alt, 'rel' => 'tooltip');
+		$attr = array('data-bs-original-title' => $alt, 'rel' => 'tooltip');
 		$img  = \Joomla\CMS\HTML\HTMLHelper::image($file, $alt, $attr);
 
 		return sprintf('<button class="btn btn-co-control btn-sm" id="repost_%d" type="button" onclick="Joomcck.RepostRecord(%d, %d);">%s</button>',
@@ -297,7 +297,7 @@ class HTMLFormatHelper
 		$alt  = ($record->bookmarked ?
 			Mint::_('CMSG_REMOVEBOOKMARK_'.$type->id, \Joomla\CMS\Language\Text::_('CMSG_REMOVEBOOKMARK')) :
 			Mint::_('CMSG_ADDBOOKMARK_'.$type->id, \Joomla\CMS\Language\Text::_('CMSG_ADDBOOKMARK')));
-		$attr = array('data-original-title' => $alt, 'rel' => 'tooltip', 'id' => 'bookmark_' . $record->id);
+		$attr = array('data-bs-original-title' => $alt, 'rel' => 'tooltip', 'id' => 'bookmark_' . $record->id);
 		$out  = \Joomla\CMS\HTML\HTMLHelper::image($file, $alt, $attr);
 
 		return sprintf('<button class="btn border btn-light btn-sm" type="button" onclick="Joomcck.bookmarkRecord(%d, \'%s\', %d);">%s</button>',
@@ -352,7 +352,7 @@ class HTMLFormatHelper
 			return;
 		}
 
-		return ' <img src="' . \Joomla\CMS\Uri\Uri::root(TRUE) . '/media/com_joomcck/icons/16/' . $name . '" align="absmiddle" ' . ($tip ? 'rel="tooltip" data-original-title="' . htmlentities($tip, ENT_COMPAT, 'UTF-8') . '"' : NULL) . '> ';
+		return ' <img src="' . \Joomla\CMS\Uri\Uri::root(TRUE) . '/media/com_joomcck/icons/16/' . $name . '" align="absmiddle" ' . ($tip ? 'rel="tooltip" data-bs-original-title="' . htmlentities($tip, ENT_COMPAT, 'UTF-8') . '"' : NULL) . '> ';
 	}
 
 	public static function formatSize($size)

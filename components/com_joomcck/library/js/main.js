@@ -394,7 +394,7 @@ var _gaq = _gaq || [];
 			}
 			$(this)
 				.attr('src', '<?php echo \Joomla\CMS\Uri\Uri::root(TRUE);?>/media/com_joomcck/icons/16/follow' + json.state + '.png')
-				.attr('data-original-title', json.title);
+				.attr('data-bs-original-title', json.title);
 			Joomcck.redrawBS();
 
 			if(_gaq) {
@@ -423,7 +423,7 @@ var _gaq = _gaq || [];
 			}
 			$(this)
 				.attr('src', '<?php echo \Joomla\CMS\Uri\Uri::root(TRUE);?>/media/com_joomcck/icons/bookmarks/' + img + '/state' + json.state + '.png')
-				.attr('data-original-title', json.title);
+				.attr('data-bs-original-title', json.title);
 			Joomcck.redrawBS();
 			if(_gaq) {
 				_gaq.push(['_trackEvent', 'Bookmark', json.state == 1 ? 'Remove' : 'Add', json.rtitle]);

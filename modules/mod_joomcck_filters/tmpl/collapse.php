@@ -128,12 +128,12 @@ defined('_JEXEC') or die('Restricted access');
 			<?php endif;?>
 			<?php echo $filter->label;?>
 			<?php if($filter->params->get('params.filter_descr')):?>
-				<small rel="tooltip" data-bs-title="<?php echo \Joomla\CMS\Language\Text::_($filter->params->get('params.filter_descr'));?>"><i class="icon-help"></i></small>
+				<small rel="tooltip" data-bs-original-title="<?php echo \Joomla\CMS\Language\Text::_($filter->params->get('params.filter_descr'));?>"><i class="icon-help"></i></small>
 			<?php endif;?>
 		</div>
 		<div id="filter-<?php echo  $filter->key ?>" class="<?php echo ($filter->isFilterActive() ? 'in' : NULL)?> collapse">
 			<?php if($filter->isFilterActive()):?>
-				<!-- <img class="filter-close" onclick="Joomcck.cleanFilter('filter_<?php echo $filter->key?>')" rel="tooltip" data-bs-title="<?php echo \Joomla\CMS\Language\Text::_('CDELETEFILTER')?>" src="<?php echo \Joomla\CMS\Uri\Uri::root(true)?>/media/com_joomcck/icons/16/cross-circle.png">-->
+				<!-- <img class="filter-close" onclick="Joomcck.cleanFilter('filter_<?php echo $filter->key?>')" rel="tooltip" data-bs-original-title="<?php echo \Joomla\CMS\Language\Text::_('CDELETEFILTER')?>" src="<?php echo \Joomla\CMS\Uri\Uri::root(true)?>/media/com_joomcck/icons/16/cross-circle.png">-->
 			<?php endif;?>
 			<?php echo $filter->onRenderFilter($section, TRUE);?>
 		</div>

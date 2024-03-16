@@ -124,13 +124,13 @@ class modJoomcckTagcloudHelper
 			switch ($params->get('item_tag_num', 0))
 			{
 				case '1':
-					$nums[$val->id] = array('rel' => "tooltip", 'data-bs-title' => \Joomla\CMS\Language\Text::_('CTAGHITS') . ': ' . $val->hits);
+					$nums[$val->id] = array('rel' => "tooltip", 'data-bs-original-title' => \Joomla\CMS\Language\Text::_('CTAGHITS') . ': ' . $val->hits);
 					break;
 				case '2':
-					$nums[$val->id] = array('rel' => "tooltip", 'data-bs-title' => \Joomla\CMS\Language\Text::_('CTAGUSAGE') . ': ' . $val->r_usage);
+					$nums[$val->id] = array('rel' => "tooltip", 'data-bs-original-title' => \Joomla\CMS\Language\Text::_('CTAGUSAGE') . ': ' . $val->r_usage);
 					break;
 				case '3':
-					$nums[$val->id] = array('rel' => "tooltip", 'data-bs-title' => \Joomla\CMS\Language\Text::_('CTAGHITS') . ': ' . $val->hits . ', ' . \Joomla\CMS\Language\Text::_('CTAGUSAGE') . ': ' . $val->r_usage);
+					$nums[$val->id] = array('rel' => "tooltip", 'data-bs-original-title' => \Joomla\CMS\Language\Text::_('CTAGHITS') . ': ' . $val->hits . ', ' . \Joomla\CMS\Language\Text::_('CTAGUSAGE') . ': ' . $val->r_usage);
 					break;
 			}
 		}

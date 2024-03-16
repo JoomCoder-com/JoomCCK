@@ -31,20 +31,19 @@ if(is_array($displayData->_filters)){
 ?>
 
 <div class="float-end search-box">
-
     <div class="input-group">
         <input type="text" class="form-control" aria-label="<?php echo \Joomla\CMS\Language\Text::_('CSEARCHPLACEHOLDER'); ?>" placeholder="<?php echo \Joomla\CMS\Language\Text::_('CSEARCHPLACEHOLDER'); ?>" name="filter_search" id="filter_search" value="<?php echo $displayData->state->get('filter.search'); ?>"/>
 	    <?php if(!empty($displayData->_filters)): ?>
-            <button type="button" class="btn btn-outline-secondary" data-bs-toggle="collapse" rel="tooltip" data-bs-target="#list-filters-box" data-bs-title="<?php echo \Joomla\CMS\Language\Text::_('CFILTER'); ?>">
+            <button type="button" class="btn btn-outline-secondary" data-bs-toggle="collapse" rel="tooltip" data-bs-target="#list-filters-box" data-bs-original-title="<?php echo \Joomla\CMS\Language\Text::_('CFILTER'); ?>">
 			    <?php echo HTMLFormatHelper::icon('funnel.png'); ?>
             </button>
 	    <?php endif; ?>
 	    <?php if($filters): ?>
-            <button rel="tooltip" class="btn btn-outline-warning" type="button" id="cob-filters-reset" data-bs-title="<?php echo \Joomla\CMS\Language\Text::_('JSEARCH_FILTER_CLEAR'); ?>">
+            <button rel="tooltip" class="btn btn-outline-warning" type="button" id="cob-filters-reset" data-bs-original-title="<?php echo \Joomla\CMS\Language\Text::_('JSEARCH_FILTER_CLEAR'); ?>">
 			    <?php echo HTMLFormatHelper::icon('cross.png'); ?>
             </button>
 	    <?php endif; ?>
-        <button class="btn btn-outline-secondary" rel="tooltip" type="submit" data-original-title="<?php echo \Joomla\CMS\Language\Text::_('CSEARCH'); ?>">
+        <button class="btn btn-outline-secondary" rel="tooltip" type="submit" data-bs-original-title="<?php echo \Joomla\CMS\Language\Text::_('CSEARCH'); ?>">
 		    <?php echo HTMLFormatHelper::icon('magnifier.png'); ?>
         </button>
     </div>

@@ -17,7 +17,7 @@ $width = $this->params->get('params.qr_width', 120);
 
 <?php if($this->params->get('params.qr_code', 0)):?>
 	<?php $img = '<img src="http://chart.apis.google.com/chart?chs='.$width.'x'.$width.'&cht=qr&chld=L|0&chl=TEL:'.$this->qrvalue.'" width="'.$width.'" height="'.$width.'" align="absmiddle">'; ?>
-	<img style="cursor: pointer" src="<?php echo \Joomla\CMS\Uri\Uri::root(true) ?>/media/com_joomcck/icons/16/barcode-2d.png" rel="popover" data-content="<?php echo htmlentities($img, ENT_QUOTES);?>" data-bs-title="<?php echo \Joomla\CMS\Language\Text::_('T_QR');?>">
+	<img style="cursor: pointer" src="<?php echo \Joomla\CMS\Uri\Uri::root(true) ?>/media/com_joomcck/icons/16/barcode-2d.png" rel="popover" data-content="<?php echo htmlentities($img, ENT_QUOTES);?>" data-bs-original-title="<?php echo \Joomla\CMS\Language\Text::_('T_QR');?>">
 <?php endif; ?>
 
 		

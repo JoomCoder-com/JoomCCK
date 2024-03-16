@@ -196,7 +196,7 @@ class CCommunityHelper
 					$links[0]['label'] = \Joomla\CMS\Factory::getUser($id)->get($section->params->get('personalize.author_mode', 'username'), \Joomla\CMS\Language\Text::_('CGUEST'));
 				}
 				$attr = array(
-					'data-original-title' => str_replace('"', "&quot;", $links[0]['label']),
+					'data-bs-original-title' => str_replace('"', "&quot;", $links[0]['label']),
 					'rel'                 => 'tooltip'
 				);
 				if(isset($links[0]['attr']))
@@ -279,7 +279,7 @@ class CCommunityHelper
 		{
 			$result = self::isOnline($id);
 
-			$name = '<img src="' . \Joomla\CMS\Uri\Uri::root(TRUE) . '/media/com_joomcck/icons/16/status' . ($result ? NULL : '-offline') . '.png" rel="tooltip" data-original-title="' . ($result ? \Joomla\CMS\Language\Text::_('CONLINE') : \Joomla\CMS\Language\Text::_('COFFLINE')) . '" align="absmiddle">' . $name;
+			$name = '<img src="' . \Joomla\CMS\Uri\Uri::root(TRUE) . '/media/com_joomcck/icons/16/status' . ($result ? NULL : '-offline') . '.png" rel="tooltip" data-bs-original-title="' . ($result ? \Joomla\CMS\Language\Text::_('CONLINE') : \Joomla\CMS\Language\Text::_('COFFLINE')) . '" align="absmiddle">' . $name;
 		}
 
 		$cache[$key] = $name;

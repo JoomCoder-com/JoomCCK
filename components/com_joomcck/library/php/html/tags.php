@@ -303,13 +303,13 @@ class JHTMLTags
 				switch ($show_nums)
 				{
 					case '1' :
-						$nums[$val->id] = 'rel="tooltip" data-original-title="' . $list[$val->id] . '::' . \Joomla\CMS\Language\Text::_('CTAGHITS') . ': ' . $val->hits . '"';
+						$nums[$val->id] = 'rel="tooltip" data-bs-original-title="' . $list[$val->id] . '::' . \Joomla\CMS\Language\Text::_('CTAGHITS') . ': ' . $val->hits . '"';
 						break;
 					case '2' :
-						$nums[$val->id] = 'rel="tooltip" data-original-title="' . $list[$val->id] . '::' . \Joomla\CMS\Language\Text::_('CTAGUSAGE') . ': ' . $val->r_usage . '"';
+						$nums[$val->id] = 'rel="tooltip" data-bs-original-title="' . $list[$val->id] . '::' . \Joomla\CMS\Language\Text::_('CTAGUSAGE') . ': ' . $val->r_usage . '"';
 						break;
 					case '3' :
-						$nums[$val->id] = 'rel="tooltip" data-original-title="'.\Joomla\CMS\Language\Text::_('CTAGHITS').': '.$val->hits.', '.\Joomla\CMS\Language\Text::_('CTAGUSAGE').': '.$val->r_usage.'"';
+						$nums[$val->id] = 'rel="tooltip" data-bs-original-title="'.\Joomla\CMS\Language\Text::_('CTAGHITS').': '.$val->hits.', '.\Joomla\CMS\Language\Text::_('CTAGUSAGE').': '.$val->r_usage.'"';
 						break;
 				}
 			}
@@ -431,13 +431,13 @@ class JHTMLTags
 				switch ($show_nums)
 				{
 					case '1' :
-						$nums[$val->id] = 'rel="tooltip" data-original-title="' . $list[$val->id] . '::' . \Joomla\CMS\Language\Text::_('CTAGHITS') . ': ' . $val->hits . '"';
+						$nums[$val->id] = 'rel="tooltip" data-bs-original-title="' . $list[$val->id] . '::' . \Joomla\CMS\Language\Text::_('CTAGHITS') . ': ' . $val->hits . '"';
 						break;
 					case '2' :
-						$nums[$val->id] = 'rel="tooltip" data-original-title="' . $list[$val->id] . '::' . \Joomla\CMS\Language\Text::_('CTAGUSAGE') . ': ' . $val->r_usage . '"';
+						$nums[$val->id] = 'rel="tooltip" data-bs-original-title="' . $list[$val->id] . '::' . \Joomla\CMS\Language\Text::_('CTAGUSAGE') . ': ' . $val->r_usage . '"';
 						break;
 					case '3' :
-						$nums[$val->id] = 'rel="tooltip" data-original-title="'.\Joomla\CMS\Language\Text::_('CTAGHITS').': '.$val->hits.', '.\Joomla\CMS\Language\Text::_('CTAGUSAGE').': '.$val->r_usage.'"';
+						$nums[$val->id] = 'rel="tooltip" data-bs-original-title="'.\Joomla\CMS\Language\Text::_('CTAGHITS').': '.$val->hits.', '.\Joomla\CMS\Language\Text::_('CTAGUSAGE').': '.$val->r_usage.'"';
 						break;
 				}
 			}

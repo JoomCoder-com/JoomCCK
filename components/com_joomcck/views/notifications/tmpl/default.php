@@ -265,7 +265,7 @@ HTMLHelper::_('bootstrap.collapse');
 						<?php if($item->state_new): ?>
 							<a class="btn btn-micro" id="btn-mark-<?php echo $item->id ?>"
 							   onclick="Joomcck.markRead(<?php echo $item->id; ?>);" rel="tooltip"
-							   data-bs-title="<?php echo Text::_('CMARKASREAD') ?>">
+							   data-bs-original-title="<?php echo Text::_('CMARKASREAD') ?>">
 								<?php echo HTMLFormatHelper::icon('asterisk.png'); ?>
 							</a>
 						<?php endif; ?>
