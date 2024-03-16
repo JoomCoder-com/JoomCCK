@@ -65,7 +65,7 @@ $js         = '';
 		</div>
 		<div class="float-end form-inline">
 			<label><?php echo \Joomla\CMS\Language\Text::_("Font size"); ?></label>
-			<select style="width: 50px;">
+			<select class="form-select form-select-sm" style="width: 100px;">
 				<option value="1">1</option>
 				<option value="2">2</option>
 				<option value="3">3</option>
@@ -75,7 +75,7 @@ $js         = '';
 				<option value="7">7</option>
 			</select>
 			<label><?php echo \Joomla\CMS\Language\Text::_("Color"); ?></label>
-			<select style="width: 100px;">
+			<select class="form-select form-select-sm" style="width: 100px;">
 				<option value="red" style="color: red"><?php echo \Joomla\CMS\Language\Text::_("TA_BBCOLORRED"); ?></option>
 				<option value="orange" style="color: orange"><?php echo \Joomla\CMS\Language\Text::_("TA_BBCOLORORANGE"); ?></option>
 				<option value="yellow" style="color: yellow"><?php echo \Joomla\CMS\Language\Text::_("TA_BBCOLORYELLOW"); ?></option>
@@ -121,33 +121,33 @@ endif;
 		var bbEditor<?php echo $id;?> = new MintBBEditor();
 		bbEditor<?php echo $id;?>.init('field_<?php echo $this->id;?>');
 
-		var controls = $$('#controls_<?php echo $this->id;?> button');
-		controls[0].addEvent('click', function() {
+		var controls = jQuery('#controls_<?php echo $this->id;?> button');
+		jQuery(controls[0]).on('click', function() {
 			bbEditor<?php echo $id;?>.doAddTags('[b]', '[/b]');
 		});
-		controls[1].addEvent('click', function() {
+        jQuery(controls[1]).on('click', function() {
 			bbEditor<?php echo $id;?>.doAddTags('[i]', '[/i]');
 		});
-		controls[2].addEvent('click', function() {
+        jQuery(controls[2]).on('click', function() {
 			bbEditor<?php echo $id;?>.doAddTags('[u]', '[/u]');
 		});
-		controls[3].addEvent('click', function() {
+        jQuery(controls[3]).on('click', function() {
 			bbEditor<?php echo $id;?>.doURL();
 		});
-		controls[4].addEvent('click', function() {
+        jQuery(controls[4]).on('click', function() {
 			bbEditor<?php echo $id;?>.doImage();
 		});
-		controls[5].addEvent('click', function() {
+        jQuery(controls[5]).on('click', function() {
 			bbEditor<?php echo $id;?>.doAddTags('[code]', '[/code]');
 		});
 
-		var selects = $$('#controls_<?php echo $this->id;?> select');
+		var selects = jQuery('#controls_<?php echo $this->id;?> select');
 
-		selects[0].addEvent('change', function() {
+		jQuery(selects[0]).on('change', function() {
 			bbEditor<?php echo $id;?>.doFontSize(this.value);
 		});
 
-		selects[1].addEvent('change', function() {
+		jQuery(selects[1]).on('change', function() {
 			bbEditor<?php echo $id;?>.doColor(this.value);
 		});
 	</script>
