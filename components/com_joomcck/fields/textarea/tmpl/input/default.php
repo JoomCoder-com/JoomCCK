@@ -57,11 +57,11 @@ $js         = '';
 			<button type="button" class="btn btn-sm btn-light border"><?php echo \Joomla\CMS\Language\Text::_("TA_BBCODEUNDERLINE"); ?></button>
 
 			<button type="button" rel="tooltip" data-bs-original-title="<?php echo \Joomla\CMS\Language\Text::_("TA_BBCODEURL"); ?>"
-					class="btn btn-sm btn-light border"><i class="icon-out-2"></i></button>
+					class="btn btn-sm btn-light border"><i class="fas fa-link"></i></button>
 			<button type="button" rel="tooltip" data-bs-original-title="<?php echo \Joomla\CMS\Language\Text::_("TA_BBCODEIMG"); ?>"
-					class="btn btn-sm btn-light border"><i class="icon-picture"></i></button>
+					class="btn btn-sm btn-light border"><i class="fas fa-image"></i></button>
 			<button type="button" rel="tooltip" data-bs-original-title="<?php echo \Joomla\CMS\Language\Text::_("TA_BBCODECODE"); ?>"
-					class="btn btn-sm btn-light border"><i class="icon-tools"></i></button>
+					class="btn btn-sm btn-light border"><i class="fas fa-code"></i></button>
 		</div>
 		<div class="float-end form-inline">
 			<label><?php echo \Joomla\CMS\Language\Text::_("Font size"); ?></label>
