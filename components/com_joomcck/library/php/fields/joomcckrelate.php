@@ -515,7 +515,7 @@ class  CFormFieldRelate extends CFormField
 		if($this->content['html'] && ($this->content['total'] >= $this->params->get('params.limit_' . $client, 10)) && in_array($this->params->get('params.show_list_all'), \Joomla\CMS\Factory::getApplication()->getIdentity()->getAuthorisedViewLevels()) && $this->params->get('params.show_list_all_' . $client))
 		{
 			// comparability with easysocial
-			$file = JPATH_ADMINISTRATOR . '/components/com_joomcck/tables/field.php';
+			$file = JPATH_SITE . '/components/com_joomcck/tables/field.php';
 			require_once $file;
 			$db    = \Joomla\CMS\Factory::getDbo();
 			$field = new JoomcckTableField($db);
@@ -678,7 +678,7 @@ class  CFormFieldRelate extends CFormField
 		$save['user_id'] 	= \Joomla\CMS\Factory::getApplication()->getIdentity()->get('id');
 		$save['section_id'] = $this->_getChildSectionId($save['field_id']);
 		$save['type_id'] 	= ($params['field'] == 'child' ?
-			$this->type_id : MModelBase::getInstance('Tfields', 'JoomcckModel')->getFieldTypeId($save['field_id']));
+			$this->type_id : MModelBase::getInstance('Fields', 'JoomcckModel')->getFieldTypeId($save['field_id']));
 
 		if(!$table->save($save))
 		{
