@@ -14,6 +14,11 @@
       "name": "com_joomcck.tom-select",
       "type": "style",
       "uri": "com_joomcck/tom-select.css"
+    },
+    {
+      "name": "com_joomcck.submission",
+      "type": "style",
+      "uri": "com_joomcck/submission.css"
     }
   ]
 }

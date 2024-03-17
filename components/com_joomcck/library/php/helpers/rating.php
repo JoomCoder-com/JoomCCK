@@ -86,6 +86,7 @@ class RatingHelp
 
 	public static function loadRating($tmpl_name, $current, $prod_id, $index, $callbackfunction, $rating_active, $record_id = '')
 	{
+
 		$document = \Joomla\CMS\Factory::getDocument();
 		$document->addScript(\Joomla\CMS\Uri\Uri::root(TRUE) . '/components/com_joomcck/library/js/felixrating.js');
 
@@ -193,26 +194,30 @@ class RatingHelp
 			$doc->addScriptDeclaration("
 				var mr = JSON.parse('" . $record->multirating . "');
 				function FormItemRatingCallBack(vote, ident, index )
-				{
+				{						
+				
 					votes_result = 0;
-
+				
 					if(mr[index] == undefined)
 					{
 						mr[index] = new Object();
 					}
 
 					mr[index] = {'sum' : vote, 'num' : 1};
+				
 
-					mr.each(function(item, index)
+					mr.forEach(function(item)
 					{
 						votes_result += parseInt(item['sum']);
 					});
+								
 
 					rs = Math.round(votes_result / mr.length);
-					$('multirating').value = JSON.encode(mr);
-					$('jform_votes_result').value = rs;
+					jQuery('#multirating').val(JSON.stringify(mr));
+					jQuery('#jform_votes_result').val(rs);
 					var fname = eval('newRating' + index +'_' + ident);
-					fname.setCurrentStar(vote);
+										
+					fname.setCurrentStar(parseInt(vote));
 				}"
 			);
 			$result = json_decode(stripslashes($record->multirating), TRUE);
@@ -222,8 +227,14 @@ class RatingHelp
 			{
 				$parts = explode('::', $option);
 				$out[] = sprintf($pat, NULL, \Joomla\CMS\Language\Text::_($parts[0]),
-					self::loadRating(isset($parts[1]) ? $parts[1] : $type->params->get('properties.tmpl_rating'),
-						round((int)@$result[$key]['sum']), $record->id, $key, 'FormItemRatingCallBack', $active, $key));
+					self::loadRating(
+						isset($parts[1]) ? $parts[1] : $type->params->get('properties.tmpl_rating'),
+						round((int)@$result[$key]['sum']),
+						$record->id,
+						$key,
+						'FormItemRatingCallBack',
+						$active, $key
+					));
 			}
 			$out[]  = '<input id="multirating" type="hidden" name="jform[multirating]" value="' . htmlentities($record->multirating) . '">';
 			$return = '<table class="table table-bordered table-condensed">' . implode('', $out) . '</table>';

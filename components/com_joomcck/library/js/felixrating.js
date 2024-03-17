@@ -42,15 +42,10 @@ felixRating = {
                     newStar.setAttribute('data-bs-original-title', stars[star]);
                     newStar.reffObj = this;
                     if (this.active) {
-                        if (newStar.addEventListener && navigator.appName != 'Opera') {
-                            newStar.addEventListener('click', this.rateUp, true);
-                            newStar.addEventListener('mouseover', this.starTurnOn, true);
-                            newStar.addEventListener('mouseout', this.starTurnOff, true);
-                        } else {
-                            newStar.attachEvent('onclick', this.rateUp);
-                            newStar.attachEvent('onmouseover', this.starTurnOn);
-                            newStar.attachEvent('onmouseout', this.starTurnOff);
-                        }
+
+                        newStar.addEventListener('click', this.rateUp, true);
+                        newStar.addEventListener('mouseover', this.starTurnOn, true);
+                        newStar.addEventListener('mouseout', this.starTurnOff, true);
                     }
                     this.rating_box.appendChild(newStar);
                     this.stars[star] = newStar;
@@ -59,6 +54,10 @@ felixRating = {
             },
 
             setCurrentStar: function (current) {
+
+                console.log(current)
+
+
                 if (current > 0) {
                     var prev = '';
                     var nearest_current = '';
@@ -106,7 +105,9 @@ felixRating = {
             },
 
             rateUp: function (event) {
-                var target = event.target ? event.target : event.srcElement ? event.srcElement : '';
+
+                var target = event.target;
+
                 if (!target.reffObj.rated && target.reffObj.sendingFunction) {
                     target.reffObj.showState(target.reffObj, target.title, target.starNum);
                     if(target.reffObj < 2)
@@ -150,7 +151,7 @@ felixRating = {
             },
 
             showState: function (reffObj, label, last) {
-                p = 0;
+                var p = 0;
                 for (star in reffObj.stars) {
                     if (isNaN(parseInt(star))) {
                         continue;

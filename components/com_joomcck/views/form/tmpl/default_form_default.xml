@@ -15,12 +15,14 @@
 			<field name="form_grouping_type" type="list" label="X_GROUPTIPE"  default="1" description="X_GROUPTIPE_DESCR">
 				<option value="0">X_GRONOTGROUP</option>
 				<option value="1">X_GROTABS</option>
-				<option value="4">X_GROVTABS</option>
 				<option value="2">X_GRESLID</option>
 				<option value="3">X_GROFIELDSET</option>
+				<option value="4">X_GROVTABS</option>
+				<option value="5">X_CARDS</option>
 			</field>
 			<field label="LTCATEGORYSELECT" name="tmpl_category" type="cobtmpls" default="default" tmpltype="categoryselect" />
-			<field name="css" type="textarea" rows="10" cols="39"  default="" label="X_CUSTOMCSS" />
+			<field name="css" type="textarea" class="form-control w-100"  default="" label="X_CUSTOMCSS" />
+			<field name="js" type="textarea" class="form-control w-100"  default="" label="X_CUSTOMJS" />
 			<field name="tab_main" type="text" default="Main" label="X_TABMAIN" />
 			<field name="tab_main_descr" type="textarea" rows="10" cols="39"  default="" label="X_TABMAINDESCR" />
 		</fieldset>

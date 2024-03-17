@@ -206,8 +206,7 @@ $app = \Joomla\CMS\Factory::getApplication();
 <form method="post" action="<?php echo \Joomla\CMS\Uri\Uri::getInstance()->toString()?>" name="adminForm" id="adminForm" class="form-validate" enctype="multipart/form-data">
 	<?php if(in_array($this->tmpl_params->get('tmpl_core.form_button_position', 1), array(1,3))):?>
 		<div class="clearfix mb-3">
-			<?php echo $this->loadTemplate('buttons');?>
-        </div>
+			<?php echo $this->loadTemplate('buttons');?>        </div>
 	<?php endif;?>
 
 	<?php echo $this->loadTemplate('form_'.$this->params->get('properties.tmpl_articleform'));?>
@@ -224,7 +223,9 @@ $app = \Joomla\CMS\Factory::getApplication();
 	<?php endif;?>
 
 	<?php if(in_array($this->tmpl_params->get('tmpl_core.form_button_position', 1), array(2,3))):?>
-		<?php echo $this->loadTemplate('buttons');?>
+		<div class="mt-3">
+			<?php echo $this->loadTemplate('buttons');?>
+        </div>
 	<?php endif;?>
 
 	<?php echo $this->form->getInput('section_id'); ?>

@@ -1,0 +1,70 @@
+.licon {
+    float: right;
+    margin-left: 5px;
+}
+
+.line-brk {
+    margin-left: 0px !important;
+}
+
+.editor textarea {
+    box-sizing: border-box;
+}
+
+.control-group {
+    margin-bottom: 10px;
+    padding: 8px 0;
+    -webkit-transition: all 200ms ease-in-out;
+    -moz-transition: all 200ms ease-in-out;
+    -o-transition: all 200ms ease-in-out;
+    -ms-transition: all 200ms ease-in-out;
+    transition: all 200ms ease-in-out;
+}
+
+.highlight-element {
+
+    animation-name: glow;
+    animation-duration: 1.5s;
+    animation-iteration-count: 1;
+    animation-direction: alternate;
+    animation-timing-function: ease-out;
+
+    -webkit-animation-name: glow;
+    -webkit-animation-duration: 1.5s;
+    -webkit-animation-iteration-count: 1;
+    -webkit-animation-direction: alternate;
+    -webkit-animation-timing-function: ease-out;
+
+    -moz-animation-name: glow;
+    -moz-animation-duration: 1.5s;
+    -moz-animation-iteration-count: 1;
+    -moz-animation-direction: alternate;
+    -moz-animation-timing-function: ease-out;
+}
+
+@-webkit-keyframes glow {
+    0% {
+        background-color: #fdd466;
+    }
+    100% {
+        background-color: transparent;
+    }
+}
+
+@-moz-keyframes glow {
+    0% {
+        background-color: #fdd466;
+    }
+    100% {
+        background-color: transparent;
+    }
+}
+
+@-ms-keyframes glow {
+    0% {
+        background-color: #fdd466;
+    }
+    100% {
+        background-color: transparent;
+    }
+}

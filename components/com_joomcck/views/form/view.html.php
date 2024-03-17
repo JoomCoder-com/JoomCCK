@@ -24,11 +24,11 @@ class JoomcckViewForm extends MViewBase
 	/**
 	 * @var JForm
 	 */
-	protected $form;
+	public $form;
 
-	protected $item;
-	protected $return_page;
-	protected $state;
+	public $item;
+	public $return_page;
+	public $state;
 
 
 	public function display($tpl = NULL)
@@ -265,6 +265,7 @@ class JoomcckViewForm extends MViewBase
 		}
 		
 		$this->multirating = FALSE;
+
 		if ($this->type->params->get('properties.rate_access', 0) == -1)
 		{
 			$this->multirating = RatingHelp::loadFormMultiratings($this->item, $this->type, $section, 2);
