@@ -51,15 +51,23 @@ $listDirn = $this->state->get('list.direction');
 
                 <div class="card shadow">
 
-                    <div class="card-body text-center">
-                        <h3>
+                    <div class="card-header bg-white">
+                        <h3 class="m-0">
                             <a class="link-underline link-underline-opacity-0" href="<?php echo \Joomla\CMS\Router\Route::_('index.php?option=com_joomcck&task=section.edit&id=' . (int)$item->id); ?>">
-                                <?php echo $this->escape($item->name); ?>
+			                    <?php echo $this->escape($item->name); ?>
                             </a>
-                            <small class="badge <?php echo($item->records ? ' border-color-primary' : ' bg-light text-dark border') ?>">
-                                <?php echo $item->records ?>
-                            </small>
                         </h3>
+                    </div>
+
+                    <div class="card-body ">
+                        <small rel="tooltip" data-bs-toggle="tooltip" data-bs-original-title="<?php echo \Joomla\CMS\Language\Text::_('CRECORDS'); ?>" class="badge bg-white  <?php echo($item->records ? 'text-success border border-color-success' : '  text-dark border') ?>">
+		                    <i class="fas fa-file"></i> <?php echo $item->records ?>
+                        </small>
+
+                        <small rel="tooltip" data-bs-toggle="tooltip" data-bs-original-title="<?php echo \Joomla\CMS\Language\Text::_('CCATEGORIES'); ?>" class="badge <?php echo($item->categories ? 'text-success border border-color-success' : ' bg-white text-dark border') ?>">
+                            <i class="fas fa-folder"></i> <?php echo $item->categories ?>
+                        </small>
+
                     </div>
 
                     <div class="card-footer">
@@ -82,108 +90,6 @@ $listDirn = $this->state->get('list.direction');
 
     </div>
 
-
-	<?php echo HTMLFormatHelper::layout('items'); ?>
-
-	<table class="table table-striped">
-		<thead>
-		<tr>
-			<th width="1%">
-				<input type="checkbox" name="checkall-toggle" value="" onclick="Joomla.checkAll(this);"/>
-			</th>
-			<th width="1%" class="nowrap">
-				<?php echo \Joomla\CMS\HTML\HTMLHelper::_('grid.sort', 'JSTATUS', 'a.published', $listDirn, $listOrder); ?>
-			</th>
-			<th>
-				<?php echo \Joomla\CMS\HTML\HTMLHelper::_('grid.sort', 'CSECTIONNAME', 'a.name', $listDirn, $listOrder); ?>
-			</th>
-			<th width="1%"></th>
-			<th width="5%">
-				<?php echo \Joomla\CMS\Language\Text::_('CRECORDS'); ?>
-			</th>
-			<th width="10%">
-				<?php echo \Joomla\CMS\HTML\HTMLHelper::_('grid.sort', 'JGRID_HEADING_LANGUAGE', 'a.language', $listDirn, $listOrder); ?>
-			</th>
-			<th width="1%" class="nowrap">
-				<?php echo \Joomla\CMS\HTML\HTMLHelper::_('grid.sort', 'ID', 'a.id', $listDirn, $listOrder); ?>
-			</th>
-		</tr>
-		</thead>
-		<?php echo HTMLFormatHelper::layout('pagenav', $this); ?>
-		<tbody>
-		<?php foreach($this->items as $i => $item) :
-			$ordering   = ($listOrder == 'f.ordering');
-			$canCheckin = $user->authorise('core.manage', 'com_checkin') || $item->checked_out == $user->get('id') || $item->checked_out == 0;
-			$canChange  = TRUE;
-			$item->params = new \Joomla\Registry\Registry($item->params);
-			?>
-			<tr>
-				<td class="center">
-					<?php echo \Joomla\CMS\HTML\HTMLHelper::_('grid.id', $i, $item->id); ?>
-				</td>
-				<td class="center">
-					<?php echo \Joomla\CMS\HTML\HTMLHelper::_('jgrid.published', $item->published, $i, 'sections.', $canChange); ?>
-				</td>
-				<td class="has-context">
-					<div class="float-start">
-
-						<a href="<?php echo \Joomla\CMS\Router\Route::_('index.php?option=com_joomcck&task=section.edit&id=' . (int)$item->id); ?>">
-							<?php echo $this->escape($item->name); ?>
-						</a>
-					</div>
-					<div class="float-start">
-						<?php
-						// Create dropdown items
-                        Dropdown::edit($item->id, 'section.');
-
-                        Dropdown::addCustomItem(
-	                        '<i class="fas fa-trash text-danger"></i> '.\Joomla\CMS\Language\Text::_('C_TOOLBAR_DELETE'), 'javascript:void(0)',
-                                'onclick="if(!confirm(\'' . \Joomla\CMS\Language\Text::_('C_TOOLBAR_CONFIRMDELET') . '\')){return;}Joomla.listItemTask(\'cb' . $i . '\',\'sections.delete\')"'
-                        );
-
-						if($item->published) :
-                            Dropdown::unpublish('cb' . $i, 'sections.');
-
-						else :
-							Dropdown::publish('cb' . $i, 'sections.');
-						endif;
-
-						if($item->checked_out) :
-                            Dropdown::divider();
-						    Dropdown::checkin('cb' . $i, 'sections.');
-						endif;
-
-						Dropdown::divider();
-                        Dropdown::addCustomItem('<i class="fas fa-eye"></i> '.\Joomla\CMS\Language\Text::_('C_OPENSECTION'), \Joomla\CMS\Router\Route::_(Url::records($item)));
-						Dropdown::divider();
-                        Dropdown::addCustomItem(
-                                '<i class="fas fa-folder-open"></i> '.\Joomla\CMS\Language\Text::_('C_MANAGE_CATS') . ' <span class="badge' . ($item->categories ? ' bg-success' : ' bg-light text-dark border') . '">' . $item->categories . '</span>',
-                                \Joomla\CMS\Router\Route::_('index.php?option=com_joomcck&view=cats&section_id=' . $item->id)
-                        );
-
-						echo Dropdown::render();
-						?>
-					</div>
-				</td>
-				<td nowrap="nowrap">
-					<a rel="tooltip" data-bs-toggle="tooltip" title="<?php echo \Joomla\CMS\Language\Text::_('CCATEGOY_MANAGE'); ?>" href="<?php echo \Joomla\CMS\Router\Route::_('index.php?option=com_joomcck&view=cats&section_id=' . $item->id) ?>">
-						<?php echo \Joomla\CMS\Language\Text::_('CCATEGORIES'); ?>
-					</a>
-					<span class="badge<?php echo($item->fieldnum ? ' bg-success' : ' bg-light text-dark border') ?>"><?php echo $item->fieldnum; ?></span>
-				</td>
-				<td class="center">
-					<span class="badge <?php echo($item->records ? ' bg-info' : ' bg-light text-dark border') ?>"><?php echo $item->records ?></span>
-				</td>
-				<td class="center">
-					<?php echo $item->language; ?>
-				</td>
-				<td class="center">
-					<?php echo (int)$item->id; ?>
-				</td>
-			</tr>
-		<?php endforeach; ?>
-		</tbody>
-	</table>
 
 	<input type="hidden" name="task" value=""/>
 	<input type="hidden" name="boxchecked" value="0"/>
