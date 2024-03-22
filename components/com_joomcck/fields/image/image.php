@@ -176,15 +176,15 @@ class JFormFieldCImage extends CFormField
 				$index = '<html><body></body></html>';
 				if(!is_dir($dest))
 				{
-					\Joomla\Filesystem\Folder::create($dest, 0755);
-					\Joomla\Filesystem\File::write($dest . DIRECTORY_SEPARATOR . 'index.html', $index);
+					\Joomla\Filesystem\Folder::create(JPATH_ROOT . DIRECTORY_SEPARATOR .$dest, 0755);
+					\Joomla\Filesystem\File::write(JPATH_ROOT . DIRECTORY_SEPARATOR .$dest . DIRECTORY_SEPARATOR . 'index.html', $index);
 				}
 
 				$dest .= $date . DIRECTORY_SEPARATOR;
 				if(!is_dir($dest))
 				{
-					\Joomla\Filesystem\Folder::create($dest, 0755);
-					\Joomla\Filesystem\File::write($dest . DIRECTORY_SEPARATOR . 'index.html', $index);
+					\Joomla\Filesystem\Folder::create(JPATH_ROOT . DIRECTORY_SEPARATOR .$dest, 0755);
+					\Joomla\Filesystem\File::write(JPATH_ROOT . DIRECTORY_SEPARATOR .$dest . DIRECTORY_SEPARATOR . 'index.html', $index);
 				}
 
 				$filename = $time . '_' . md5($file['name']);
