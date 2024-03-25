@@ -120,6 +120,7 @@ $wa->useScript('keepalive')
         </div>
 
         <input type="hidden" name="task" value=""/>
+	    <?php echo $this->form->getInput('id');?>
 		<?php echo \Joomla\CMS\HTML\HTMLHelper::_('form.token'); ?>
     </form>
 </div>
