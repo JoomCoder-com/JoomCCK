@@ -52,6 +52,7 @@
         </copy>
         <copy todir="${releasespath}/build/components/com_joomcck/media">
             <fileset dir="./media/com_joomcck">
+                <exclude name="uploads/**"></exclude>
             </fileset>
         </copy>
         <copy file="./administrator/components/com_joomcck/joomcck.xml" todir="${releasespath}/build/components/com_joomcck" />
