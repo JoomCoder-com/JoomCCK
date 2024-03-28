@@ -17,7 +17,7 @@ extract($displayData);
 
 ?>
 <div id="fld-<?php echo $field->id; ?>"
-     class="control-group odd<?php echo $k = 1 - $k ?> <?php echo 'field-' . $field_id; ?> <?php echo $field->fieldclass; ?>">
+     class="control-group odd<?php echo $k = 1 - $k ?> <?php echo 'field-' . $field->id; ?> <?php echo $field->fieldclass; ?>">
 	<?php if ($field->params->get('core.show_lable') == 1 || $field->params->get('core.show_lable') == 3): ?>
 		<label id="lbl-<?php echo $field->id; ?>" for="field_<?php echo $field->id; ?>"
 		       class="control-label <?php echo $field->class; ?>">
