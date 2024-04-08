@@ -35,7 +35,18 @@ class JFormFieldCReadmore extends CFormFieldRelate
 
 		$this->value = array_unique($this->value);
 
-		$this->inputvalue = $this->_render_input($this->params->get('params.input_mode'), $name, $this->request->getInt('section_id'), $this->_getTypes());
+		$this->inputvalue = $this->_render_input(
+				$this->params->get('params.input_mode'),
+				$name,
+				$this->request->getInt('section_id'),
+				$this->_getTypes(),
+				true,
+				[
+					'can_add' => 0,
+					'can_delete' => 0
+				]
+		);
+
 
 		return $this->_display_input();
 	}
@@ -66,8 +77,11 @@ class JFormFieldCReadmore extends CFormFieldRelate
 		$db         = \Joomla\CMS\Factory::getDbo();
 		$section_id = $this->request->getInt('section_id');
 
+		// if autocomplete
+		$titleAlias = $this->params->get('params.input_mode') == 2 ? 'title as text' : 'title';
+
 		$query = $db->getQuery(TRUE);
-		$query->select('id, title');
+		$query->select('id, '.$titleAlias);
 		$query->from('#__js_res_record');
 		if(CStatistics::hasUnPublished($section_id))
 		{
@@ -82,7 +96,11 @@ class JFormFieldCReadmore extends CFormFieldRelate
 			$query->where('user_id = ' . ($user_id ? $user_id : 1));
 		}
 		$db->setQuery($query);
-		return $db->loadAssocList();
+
+		$list = $db->loadObjectList();
+
+
+		return $list;
 	}
 
 	private function _getTypes()

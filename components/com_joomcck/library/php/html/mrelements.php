@@ -435,14 +435,13 @@ class JHTMLMrelements
 			$options['maxOptions'] = $params->get('params.max_result',10);
 
 
-
 		// allow user to add
 		if(isset($options['can_add']))
 			$options['canAdd'] = $options['can_add'];
 		else
 			$options['canAdd'] = $params->get('params.only_values',0) ? 'false' : 'true';
 
-
+		// allow user to delete
 		$options['canDelete'] = isset($options['can_delete']) ? $options['can_delete'] : 'false';
 
 
@@ -455,8 +454,7 @@ class JHTMLMrelements
 			}
 		}
 
-
-
+		// prepare data
 		$data = [
 			'options' => $options,
 			'params' => $params,
@@ -467,7 +465,7 @@ class JHTMLMrelements
 		];
 
 		//use new layout tomSelect
-		return LayoutHelper::render('core.fields.tomSelect',$data,null,['component' => 'com_joomcck','client' => 'site']);
+		return \Joomcck\Layout\Helpers\Layout::render('core.fields.tomSelect',$data);
 
 	}
 	public static function listautocomplete($name, $id, $default = array(), $list = array(), $options = array())

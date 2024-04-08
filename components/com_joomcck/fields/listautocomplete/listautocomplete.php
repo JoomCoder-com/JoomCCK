@@ -33,7 +33,6 @@ class JFormFieldCListautocomplete extends CFormFieldSelectable
 
         }
 
-
 		if($this->isnew && $this->params->get('params.default_val'))
 		{
 			$this->value[] = $this->params->get('params.default_val');

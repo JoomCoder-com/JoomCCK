@@ -8,6 +8,7 @@
  * @license   GNU/GPL http://www.gnu.org/copyleft/gpl.html
  */
 
+use Joomcck\Layout\Helpers\Layout;
 use Joomla\CMS\Factory;
 use Joomla\Registry\Registry;
 
@@ -31,8 +32,10 @@ class  CFormFieldRelate extends CFormField
 		parent::__construct($field, $default);
 	}
 
-	protected function _render_input($type, $name, $section_id, $types, $multi = TRUE)
+	protected function _render_input($type, $name, $section_id, $types, $multi = TRUE,$fieldOptions = [])
 	{
+
+
 		$db      = \Joomla\CMS\Factory::getDbo();
 		$user    = \Joomla\CMS\Factory::getApplication()->getIdentity();
 		$app     = \Joomla\CMS\Factory::getApplication();
@@ -40,6 +43,7 @@ class  CFormFieldRelate extends CFormField
 
 		$attribs = $html = $record_id = '';
 		$default = array();
+
 
         $list = [];
 
@@ -56,6 +60,7 @@ class  CFormFieldRelate extends CFormField
 
         if(empty($types))
             return null;
+
 
 		$query->where("type_id IN(" . implode(',', $types) . ")");
 
@@ -98,7 +103,6 @@ class  CFormFieldRelate extends CFormField
 		}
 
 
-
 		if($this->type == 'parent' && !$this->isFilter)
 		{
 			$table = \Joomla\CMS\Table\Table::getInstance('Field', 'JoomcckTable');
@@ -116,6 +120,7 @@ class  CFormFieldRelate extends CFormField
 		{
 			$query->order($this->params->get('params.input_sort',''));
 		}
+
 
 		$db->setQuery($query);
 		$list = $db->loadObjectList();
@@ -160,6 +165,7 @@ class  CFormFieldRelate extends CFormField
 			}
 		}
 
+
         switch($type)
 		{
 			case 2:
@@ -175,8 +181,11 @@ class  CFormFieldRelate extends CFormField
 
 				}
 
+
 				$html .= $this->_render_autocomplete($multi, array(), $default,
-					($multi ? $this->params->get('params.multi_limit') : 1), $name);
+					($multi ? $this->params->get('params.multi_limit') : 1), $name,$fieldOptions);
+
+
 				break;
 
 			case 3:
@@ -218,6 +227,7 @@ class  CFormFieldRelate extends CFormField
 				break;
 		}
 
+
 		return $html;
 	}
 
@@ -244,18 +254,19 @@ class  CFormFieldRelate extends CFormField
 		}
 	}
 
-	protected function _render_autocomplete($multi, $list, $default, $limit, $name)
+	protected function _render_autocomplete($multi, $list, $default, $limit, $name,$FieldOptions = [])
 	{
         $app = \Joomla\CMS\Factory::getApplication();
 
 
-
         $options['only_suggestions'] = 1;
-        $options['can_add'] = 1;
-        $options['can_delete'] = 1;
+        $options['can_add'] = isset($FieldOptions['can_add']) ? $FieldOptions['can_add'] : 1;
+        $options['can_delete'] =  isset($FieldOptions['can_delete']) ? $FieldOptions['can_delete'] :  1;
         $options['suggestion_limit'] = $this->params->get('params.max_result', 10);
         $options['limit'] = $limit;
         $options['suggestion_url'] =  "index.php?option=com_joomcck&task=ajax.field_call&tmpl=component&field_id={$this->id}&func=onGetList&field={$this->type}&record_id=" . ($app->input->getCmd('option') == 'com_joomcck' ? $app->input->getInt('id', 0) : 0) . "&section_id=" . $app->input->getInt('section_id');
+
+
         
 		return \Joomla\CMS\HTML\HTMLHelper::_('mrelements.pills', $name, "field_" . $this->id, $default, $list, $options);
 	}
@@ -292,121 +303,29 @@ class  CFormFieldRelate extends CFormField
 
 	protected function _render_popup($multi, $default, $section_id, $type_id, $name)
 	{
+
 		$name .= ($multi ? '[]' : NULL);
 		$ids = array();
-		$app = \Joomla\CMS\Factory::getApplication();
 
 		foreach($default as $item)
 		{
 			$ids[] = $item->id;
 		}
+
 		$type_id = implode(',', $type_id);
 
-		$doTask = \Joomla\CMS\Uri\Uri::root(TRUE) . '/index.php?option=com_joomcck&view=elements&layout=records&tmpl=component&section_id=' .
-			$section_id . '&filter_type=' . $type_id . '&mode=form&field_id=' . $this->id;
-		if(!in_array($this->params->get('params.strict_to_user'), \Joomla\CMS\Factory::getApplication()->getIdentity()->getAuthorisedViewLevels()))
-		{
-			$doTask .= '&user_id=' . \Joomla\CMS\Factory::getApplication()->getIdentity()->get('id', 1);
-		}
-		ob_start();
-		?>
-		<style>
-			.list-item {
-				margin-bottom: 5px;
-			}
-		</style>
-		<div id="parent_list<?php echo $this->id; ?>"></div>
-		<a data-toggle="modal" role="button" class="btn btn-sm btn-warning"
-		   href="#modal<?php echo $this->id; ?>"><?php echo \Joomla\CMS\Language\Text::_($this->params->get('params.control_label')) ?></a>
+		$data = [
+			'id' => $this->id,
+			'ids' => $ids,
+			'name' => $name,
+			'params' => $this->params,
+			'multi' => $multi,
+			'default' => $default,
+			'section_id' => $section_id,
+			'type_id' => $type_id
+		];
 
-		<div style="width:770px;" class="modal hide fade" id="modal<?php echo $this->id; ?>" tabindex="-1"
-			 role="dialog">
-			<div class="modal-header">
-				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-				<h3 id="myModalLabel"><?php echo $app->input->get('view') == 'records' ? \Joomla\CMS\Language\Text::_('Select Children') : \Joomla\CMS\Language\Text::_('FS_ATTACHEXIST'); ?></h3>
-			</div>
-
-			<div class="modal-body" style="overflow-x: hidden; max-height:650px; padding:0;">
-			</div>
-
-			<div class="modal-footer">
-				<button class="btn btn-danger" data-dismiss="modal" aria-hidden="true">Close</button>
-			</div>
-		</div>
-
-		<script type="text/javascript">
-			(function ($) {
-
-				window.modal<?php echo $this->id; ?> = $('#modal<?php echo $this->id; ?>');
-				window.elementslist<?php echo $this->id; ?> = $('#parent_list<?php echo $this->id; ?>');
-				window.multi<?php echo $this->id; ?> = <?php echo $multi ? 'true' : 'false';?>;
-				window.limit<?php echo $this->id; ?> = <?php echo $this->params->get('params.multi_limit', 0);?>;
-				window.name<?php echo $this->id; ?> = '<?php echo $name; ?>';
-
-				$('#modal<?php echo $this->id;?>').on('show', function () {
-					var ids = [];
-					$.each(elementslist<?php echo $this->id; ?>.children('div.alert'), function (k, v) {
-						ids.push($(v).attr('rel'));
-					});
-					console.log(ids.join(','));
-					var iframe = $(document.createElement("iframe")).attr({
-						frameborder: "0",
-						width: "100%",
-						height: "510px",
-						src: '<?php echo $doTask;?>&excludes=' + ids.join(',')
-					});
-					$(".modal-body").html(iframe);
-				});
-
-				window.list<?php echo $this->id; ?> = function (id, title) {
-					<?php if(!$multi):?>
-					elementslist<?php echo $this->id; ?>.html('');
-					<?php else: ?>
-					lis = elementslist<?php echo $this->id; ?>.children('div.alert');
-					if (lis.length >= limit<?php echo $this->id; ?>) {
-						alert('<?php echo \Joomla\CMS\Language\Text::sprintf('CSELECTLIMIT', $this->params->get('params.multi_limit'));?>');
-						return false;
-					}
-					error = 0;
-					$.each(lis, function (k, v) {
-						if ($(v).attr('rel') == id) {
-							alert('<?php echo \Joomla\CMS\Language\Text::_('CALREADYSELECTED');?>');
-							error = 1;
-						}
-					});
-					if (error) {
-						return false;
-					}
-					<?php endif;?>
-
-					var el = $(document.createElement('div')).attr({
-						'class': 'alert alert-info list-item',
-						rel: id
-					}).html('<a class="close" data-dismiss="alert" href="#">x</a><span>' + title + '</span><input type="hidden" name="<?php echo $name ?>" value="' + id + '">');
-					elementslist<?php echo $this->id; ?>.append(el);
-					return true;
-				}
-
-				<?php foreach ($default as $item): ?>
-				list<?php echo $this->id; ?>(<?php echo $item->id; ?>, '<?php echo htmlspecialchars($item->title, ENT_COMPAT, 'UTF-8')?>');
-				<?php endforeach;?>
-
-				window.updatelist<?php echo $this->id; ?> = function (list) {
-					var elementslist<?php echo $this->id; ?> = $('#parent_list<?php echo $this->id; ?>');
-					elementslist<?php echo $this->id; ?>.empty();
-					$.each(list, function () {
-						elementslist<?php echo $this->id; ?>.append(this);
-					});
-				}
-			}(jQuery));
-		</script>
-
-		<?php
-		$html = ob_get_contents();
-		ob_end_clean();
-
-
-		return $html;
+		return Layout::render('core.fields.modalAdder',$data);
 
 	}
 

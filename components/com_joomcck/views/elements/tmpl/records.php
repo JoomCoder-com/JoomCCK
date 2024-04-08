@@ -63,7 +63,7 @@ $k = 0;
 					'class': 'alert alert-info list-item',
 					rel: id
 				})
-				.html('<a class="close" data-dismiss="alert" href="#">x</a><span>'+title+'</span><input type="hidden" name="'+inputname+'" value="'+id+'">')
+				.html('<a class="close" data-bs-dismiss="alert" href="#">x</a><span>'+title+'</span><input type="hidden" name="'+inputname+'" value="'+id+'">')
 				.appendTo(list);
 		<?php else: ?>
 			$.ajax({

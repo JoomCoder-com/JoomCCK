@@ -28,12 +28,13 @@ $list = json_encode($list);
 
 $list = str_replace(['"id":','"text":'],['id:','text:'],$list);
 
-
 if(empty($default) && !empty($list)){
 	$default = $list;
 }else{
 	$default = json_encode($default);
 }
+
+
 
 $fieldId = (int) rand(1,2000);
 
