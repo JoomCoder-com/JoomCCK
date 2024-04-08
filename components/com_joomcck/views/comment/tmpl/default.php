@@ -8,9 +8,14 @@
  */
 defined('_JEXEC') or die();
 
-\Joomla\CMS\HTML\HTMLHelper::_('behavior.keepalive');
+
 \Joomla\CMS\HTML\HTMLHelper::_('bootstrap.tooltip');
-\Joomla\CMS\HTML\HTMLHelper::_('behavior.formvalidation');
+
+/** @var Joomla\CMS\WebAsset\WebAssetManager $wa */
+$wa = $this->document->getWebAssetManager();
+$wa->useScript('keepalive')
+	->useScript('form.validate');
+
 
 $app = \Joomla\CMS\Factory::getApplication();
 

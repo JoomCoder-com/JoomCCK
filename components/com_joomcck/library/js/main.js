@@ -799,35 +799,49 @@ var _gaq = _gaq || [];
 		elm.parents('form').submit();
 	};
 
-	Joomcck.editComment = function(id, parent, record) {
-		var url = '<?php echo \Joomla\CMS\Router\Route::_("index.php?option=com_joomcck&view=comment&tmpl=component", FALSE);?>' + '&id=' + id;
+	Joomcck.editComment = function(id, title, parent, record) {
+
+		var url =  Joomla.getOptions('system.paths').rootFull+'index.php?option=com_joomcck&view=comment&tmpl=component' + '&id=' + id;
+
+
 		if(parent) {
 			url += '&parent_id=' + parent + '&record_id=' + record;
 		}
-		var iframe = $(document.createElement('iframe')).attr({
-			'src':         url,
-			'frameborder': "0",
-			'width':       "100%",
-			'height':      "600px"
-		});
-		$('#commentframe').html(iframe);
 
-		if(id) {
-			$('#commentlabel').html('<?php echo htmlentities(\Joomla\CMS\Language\Text::_("CEDITCOMMENT"), ENT_QUOTES, "UTF-8")?>');
-		}
-		else {
-			$('#commentlabel').html('<?php echo htmlentities(\Joomla\CMS\Language\Text::_("CADDCOMMENT"), ENT_QUOTES, "UTF-8")?>');
-		}
+		$('<div id="editCommentModal"></div>').appendTo('body');
+
+		console.log(url);
+
+		$('#editCommentModal').iziModal({
+			title: title,
+			fullscreen: true,
+			closeButton: true,
+			width: '60%',
+			iframe: true,
+			iframeHeight: '600',
+			iframeURL: url,
+			'onClosed': function(){
+				$('#editCommentModal').remove();
+			}
+		});
+
+		$('#editCommentModal').iziModal('open');
+
+
 	};
 
-	Joomcck.field_call_url = '<?php echo \Joomla\CMS\Router\Route::_("index.php?option=com_joomcck&task=ajax.field_call&tmpl=component", FALSE);?>';
+	Joomcck.field_call_url =  Joomla.getOptions('system.paths').rootFull+'index.php?option=com_joomcck&task=ajax.field_call&tmpl=component';
+
+
+
+
 
 }($));
 
 
 function trackComment(comment, id) {
 	$.ajax({
-		url:  '<?php echo \Joomla\CMS\Router\Route::_("index.php?option=com_joomcck&task=ajax.trackcomment&tmpl=component", FALSE); ?>',
+		url:   Joomla.getOptions('system.paths').rootFull+'index.php?option=com_joomcck&task=ajax.trackcomment&tmpl=component',
 		data: {
 			record_id: id
 		}

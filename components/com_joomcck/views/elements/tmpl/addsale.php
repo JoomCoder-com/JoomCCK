@@ -7,7 +7,9 @@
  * @license GNU/GPL http://www.gnu.org/copyleft/gpl.html
  */
 defined('_JEXEC') or die();
-\Joomla\CMS\HTML\HTMLHelper::_('behavior.formvalidation');
+/** @var Joomla\CMS\WebAsset\WebAssetManager $wa */
+$wa = $this->document->getWebAssetManager();
+$wa->useScript('form.validate');
 \Joomla\CMS\HTML\HTMLHelper::_('bootstrap.modal');
 
 ?>
