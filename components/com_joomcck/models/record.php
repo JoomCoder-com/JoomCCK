@@ -585,7 +585,7 @@ class JoomcckModelRecord extends MModelItem
 		return TRUE;
 	}
 
-	public function onComment($id, Array $comment, $num = TRUE)
+	public function onComment($id, $num = TRUE)
 	{
 
 		$record = \Joomla\CMS\Table\Table::getInstance('Record', 'JoomcckTable');

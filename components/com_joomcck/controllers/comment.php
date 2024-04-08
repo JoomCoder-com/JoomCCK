@@ -98,7 +98,7 @@ class JoomcckControllerComment extends MControllerForm
 
 
 		$model_record = MModelBase::getInstance('Record', 'JoomcckModel');
-		$model_record->onComment($validData['record_id'], $validData);
+		$model_record->onComment($validData['record_id']);
 
 		// close popup and reoad page after reply/edit comment
 		if($this->input->getCmd('view') == 'comment')

@@ -38,7 +38,9 @@ class JoomcckControllerComments extends MControllerAdmin
 		parent::delete();
 		
 		$model_record = MModelBase::getInstance('Record', 'JoomcckModel');
-		$model_record->onComment($this->input->get('record_id'), get_class_vars($comment));
+
+
+		$model_record->onComment($this->input->get('record_id'));
 		
 		$record = \Joomla\CMS\Table\Table::getInstance('Record', 'JoomcckTable');
 		$record->load($this->input->getInt('record_id'));

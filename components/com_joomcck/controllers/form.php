@@ -399,7 +399,7 @@ class JoomcckControllerForm extends MControllerForm
 				CEventsHelper::notify('record', CEventsHelper::_COMMENT_NEW, $parent->id, $parent->section_id, 0, 0, 0, get_class_vars($parent));
 
 				$model_record = \Joomla\CMS\MVC\Model\BaseDatabaseModel::getInstance('Record', 'JoomcckModel');
-				$model_record->onComment($record->parent_id, $validData, false);
+				$model_record->onComment($record->parent_id, false);
 
 				/*$db->setQuery("SELECT COUNT(id) FROM `#__js_res_record` WHERE parent_id = {$record->parent_id} AND parent = 'com_joomcck' AND published = 1");
 				$parent->comments = $db->loadResult();
