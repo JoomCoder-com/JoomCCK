@@ -54,8 +54,11 @@ class JoomcckViewRecords extends MViewBase
 
 			return;
 		}
+
+
+
 		$this->section = $section;
-		//$this->section->params->set('general.records_mode', $section->params->set('more.records_mode'));
+
 		$this->section->params->get('general.featured_first', 0);
 		
 		$model->section = $this->section;

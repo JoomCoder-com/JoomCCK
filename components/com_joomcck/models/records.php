@@ -127,6 +127,8 @@ class JoomcckModelRecords extends MModelList
 		$this->context .= $app->input->getInt('section_id');
 		$app->input->set('limitstart', $app->input->getInt('limitstart', 0));
 		$orders = $this->section->params->get('general.orderby', 'r.ctime DESC');
+
+
 		if($this->section->params->get('general.section_home_items') && !$app->input->getInt('cat_id', NULL) && $this->section->categories)
 		{
 			$orders = $this->section->params->get('general.section_home_orderby', $orders);
@@ -134,10 +136,18 @@ class JoomcckModelRecords extends MModelList
 		if($app->input->getCmd('format') == 'feed')
 		{
 			$orders = $this->section->params->get('more.orderby_rss', $orders);
+		}
+
+
+
+		$orders = explode(' ', $orders);
+
+
+		if($app->input->getCmd('format') == 'feed'){
 			$app->input->set('filter_order', $order[0]);
 			$app->input->set('filter_order_Dir', $order[1]);
 		}
-		$orders = explode(' ', $orders);
+
 
 		parent::populateState($orders[0], @$orders[1]);
 

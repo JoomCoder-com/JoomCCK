@@ -220,10 +220,25 @@
             </field>
             <field label="X_SECMAXFEEDITEMS" name="feed_limit" type="text" default="50"/>
             <field name="orderby_rss" type="list" default="r.ctime DESC" label="X_SECORDER">
-                <option value="r.ctime ASC">X_OPTORDERTIMEA</option>
-                <option value="r.ctime DESC">X_OPTORDERTIMED</option>
-                <option value="r.mtime DESC">X_OPTORDERMTIMEA</option>
-                <option value="r.mtime ASC">X_OPTORDERMTIMED</option>
+				<option value="r.ctime ASC">X_OPTORDERTIMEA</option>
+				<option value="r.ctime DESC">X_OPTORDERTIMED</option>
+				<option value="r.extime ASC">X_OPTORDEREXTIMEA</option>
+				<option value="r.extime DESC">X_OPTORDEREXTIMED</option>
+				<option value="r.mtime DESC">X_OPTORDERMTIMEA</option>
+				<option value="r.mtime ASC">X_OPTORDERMTIMED</option>
+				<option value="r.title ASC">X_OPTORDERTITLEA</option>
+				<option value="r.title DESC">X_OPTORDERTITLED</option>
+				<option value="name ASC">X_OPTORDERNAMEA</option>
+				<option value="name DESC">X_OPTORDERNAMED</option>
+				<option value="r.hits DESC">X_OPTORDERHITSA</option>
+				<option value="r.hits ASC">X_OPTORDERHOTSD</option>
+				<option value="r.votes_result DESC">X_OPTORDERVOTESA</option>
+				<option value="r.votes_result ASC">X_OPTORDERVODETD</option>
+				<option value="r.comments DESC">X_OPTORDERCOMMENTA</option>
+				<option value="r.comments ASC">X_OPTORDERCOMMENTD</option>
+				<option value="r.favorite_num DESC">X_OPTORDERFAVORITE</option>
+				<option value="r.favorite_num ASC">X_OPTORDERFAVORITED</option>
+				<option value="RAND() ">X_OPTORDERRAND</option>
             </field>
             <field name="feed_link_type" type="list" default="1" label="X_SECFEEDTYPE">
                 <option value="1">X_SECFEEDTYPESEC</option>
