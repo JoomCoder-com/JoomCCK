@@ -81,7 +81,7 @@ $k = 0;
 							<?php echo $current->field_groups[$group_id]['descr']; ?>
 						<?php endif; ?>
 						<?php foreach ($fields as $field_id => $field): ?>
-							<?php echo Layout::render('core.submission.formFields.field', ['k' => $k, 'field' => $field]) // field part ?>
+							<?php echo Layout::render('core.submission.formFields.field', ['current' => $current,'k' => $k, 'field' => $field]) // field part ?>
 						<?php endforeach; ?>
 					</div>
 				<?php endforeach; ?>
