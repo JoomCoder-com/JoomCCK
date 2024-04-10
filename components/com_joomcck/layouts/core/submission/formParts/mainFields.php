@@ -35,7 +35,7 @@ extract($displayData);
 
 <?php if (isset($current->sorted_fields[0])): // non-grouped fields ?>
 	<?php foreach ($current->sorted_fields[0] as $field_id => $field): ?>
-		<?php echo Layout::render('core.submission.formFields.field', ['k' => $k, 'field' => $field]) // field part ?>
+		<?php echo Layout::render('core.submission.formFields.field', ['current' => $current, 'k' => $k, 'field' => $field]) // field part ?>
 	<?php endforeach; ?>
 
 	<?php unset($current->sorted_fields[0]); ?>
