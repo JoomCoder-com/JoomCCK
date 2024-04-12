@@ -89,6 +89,7 @@ class MEFormHelper
 	{
 		$fieldsets = $form->getFieldsets($group);
 
+
 		$out = '';
 		if($separator == FORM_SEPARATOR_SLIDER)
 		{

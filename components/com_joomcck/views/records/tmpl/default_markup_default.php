@@ -549,33 +549,15 @@ $current_user = \Joomla\CMS\Factory::getUser($this->input->getInt('user_id', $th
 	<?php endif; ?>
 </form>
 
-<!-- --------------  Show category index ---------------------- -->
+<!-- Show category index -->
 <?php if ($this->show_category_index): ?>
     <DIV class="clearfix"></DIV>
 	<?php echo $this->loadTemplate('cindex_' . $this->section->params->get('general.tmpl_category')); ?>
 <?php endif; ?>
 
-<?php if ($markup->get('main.alpha') && $this->alpha && $this->alpha_list && $this->items): ?>
-    <div class="alpha-index">
-		<?php foreach ($this->alpha as $set): ?>
-            <div class="alpha-set">
-				<?php foreach ($set as $alpha): ?>
-					<?php if (in_array($alpha, $this->alpha_list)): ?>
-                        <button type="button" class="badge bg-warning hasTooltip"
-                              onclick="Joomcck.applyFilter('filter_alpha', '<?php echo $alpha ?>')"
-							<?php echo $markup->get('main.alpha_num') ? ' title="' . \Joomla\CMS\Language\Text::plural('CXNRECFOUND',
-									@$this->alpha_totals[$alpha]) . '"' : null; ?>><?php echo $alpha; ?></button>
-					<?php else: ?>
-                        <button disabled class="badge text-bg-light shadow-sm px-2 py-1"><?php echo $alpha; ?></button>
-					<?php endif; ?>
-				<?php endforeach; ?>
-            </div>
-		<?php endforeach; ?>
-    </div>
-    <br>
-<?php endif; ?>
 
-
+<!-- Show Alpha Index -->
+<?php echo Layout::render('core.markup.alphaIndex',['current' => $this]); ?>
 
 
 <?php if ($markup->get('filters.worns') && count($this->worns)): ?>
