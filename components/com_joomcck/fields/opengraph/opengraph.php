@@ -15,24 +15,42 @@ require_once JPATH_ROOT . DIRECTORY_SEPARATOR . 'components/com_joomcck/library/
 
 class JFormFieldCOpengraph extends CFormField
 {
+
+	public $pictureFieldId = 0;
+	public $descriptionFieldId = 0;
+
+	/*
+	 * Doesn't need it
+	 */
 	public function getInput()
 	{
 		return;
 	}	
 
 	public function onRenderFull($record, $type, $section)
-	{		
+	{
+		// set fields ids
+		$this->pictureFieldId = $this->params->get('params.pic_id',0);
+		$this->descriptionFieldId = $this->params->get('params.desc_id',0);
 
-		//init vars
+		// get general upload directory
 		$fupload = ComponentHelper::getParams('com_joomcck')->get('general_upload');
-		$default_pic = $this->params->get('params.default_pic');				
-		$ids = $this->_getFieldId();		
+
+		// get default pictures
+		$default_pic = $this->params->get('params.default_pic','');
+		$default_pic = !empty($default_pic) ? \Joomla\CMS\HTML\HTMLHelper::cleanImageURL($default_pic)->url : '';
+
+
+		// get og type
 		$og_type = $this->params->get('params.og_type');
-		$app_id = $this->params->get('params.app_id');
+
 		$site_name = $this->sitename();
 		$item_title = $record->title;
 		$item_link 	= Route::_($record->href);
 		$out = '';
+		$purl = '';
+
+
 		
 		// get gallery field path
 		if(!empty($ids['pic'])){
@@ -43,11 +61,10 @@ class JFormFieldCOpengraph extends CFormField
 			
 			if(!isset($fparams['params']['select_type'])){ // is gallery field				
 								
-				$purl = $this->routeurl().$fupload.'/'.$subf.'/';				
+				$purl = \Joomla\CMS\Uri\Uri::root().$fupload.'/'.$subf.'/';
 			}
 			
-		}else
-			$purl = '';
+		}
 		
 		
 		// get image url
@@ -65,12 +82,12 @@ class JFormFieldCOpengraph extends CFormField
 					}				
 				
 				}else{ // if simple image field
-					$item_pic_url = $this->routeurl().$pfiles;
+					$item_pic_url = \Joomla\CMS\Uri\Uri::root().$pfiles;
 				}
 				
 			}else{
 				if(!empty($default_pic)){ // default image						
-					$item_pic_url = $this->routeurl().$default_pic;
+					$item_pic_url = \Joomla\CMS\Uri\Uri::root().$default_pic;
 				}else
 					$item_pic_url = '';
 			}			
@@ -79,7 +96,7 @@ class JFormFieldCOpengraph extends CFormField
 		}	
 		elseif(!empty($default_pic)){ // default image
 			
-			$item_pic_url = $this->routeurl().$default_pic;
+			$item_pic_url = \Joomla\CMS\Uri\Uri::root().$default_pic;
 		}	
 		else{ // nothing found
 			
@@ -98,6 +115,8 @@ class JFormFieldCOpengraph extends CFormField
 		$out .= '<meta property="og:title" content="'.$item_title.'">';
 		$out .= '<meta property="og:site_name" content="'.$site_name.'">';
 		$out .= '<meta property="og:url" content="'.$item_link.'">';
+
+		if(!empty($item_desc))
 		$out .= '<meta property="og:description" content="'.$item_desc.'">';		
 		
 		if(!empty($item_pic_url)){
@@ -116,6 +135,10 @@ class JFormFieldCOpengraph extends CFormField
 		
 		// add open graph tags in head
 		Factory::getDocument()->addCustomtag($out);
+		
+	}
+
+	public function setGalleryFieldPath(){
 		
 	}
 
@@ -168,27 +191,7 @@ class JFormFieldCOpengraph extends CFormField
 	private function sitedesc(){
 		return Factory::getDocument()->getMetaData('description');
 	}
-	
-	private function routeurl(){
-		return Factory::getURI()->base();
-	}
-	
-	// return ids
-	private function _getFieldId(){
-	
-		$id = array();
-			
-		if($this->params->get('params.field_type'))
-				
-			$id = array('pic' => $this->params->get('params.pic_id'), 'desc' => $this->params->get('params.desc_id'));
-	
-		else
-				
-			$id = array('pic' => $this->_getFieldIdFromDB($this->params->get('params.pic_key')), 'desc' => $this->_getFieldIdFromDB($this->params->get('params.desc_key')));
-			
-		return $id ;
-	
-	}
+
 	
 	// strip bbcode in desc field
 	private function _stripBBCode($desc) {

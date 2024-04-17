@@ -3,13 +3,8 @@
 	<name>Open Graph</name>
 	<group>SEO</group>
 	<config>
-		<fields name="params">
-			<fieldset name="tmpl">
-				<field type="filelist" name="template_output_list" filter="php$" hide_none="1" hide_default="1" directory="/components/com_joomcck/fields/opengraph/tmpl/output" label="F_TMPLLIST" default="default.php" />
-				<field type="filelist" name="template_output_full" filter="php$" hide_none="1" hide_default="1" directory="/components/com_joomcck/fields/opengraph/tmpl/output" label="F_TMPLFULL" default="default.php" />
-			</fieldset>
-			<fieldset name="general" label="FS_GENERAL" addfieldpath="/administrator/components/com_joomcck/models/fields">
-				<field name="app_id" type="text" default="" label="FB App ID" description="" />
+		<fields name="params" addfieldpath="/administrator/components/com_joomcck/models/fields">
+			<fieldset name="general" label="FS_GENERAL" >
 				<field name="og_type" type="list" default="article" label="Type" description="" multiple="false" required="true">
 				  <option value="article">Article</option>
 				  <option value="book">Book</option>
@@ -38,9 +33,9 @@
 				  <option value="video.website">Website</option>
 				</field>		
 			</fieldset>			
-			<fieldset name="field_pos_list" label="Map Fields" addfieldpath="/administrator/components/com_joomcck/models/fields">
-				<field name="pic_id" showon="og_type:fitness.course" type="text" default="" label="F_PIC_FIELD"/>
-				<field name="desc_id" type="text" default="" label="F_DESC_FIELD"/>
+			<fieldset name="field_pos_list" label="Fields Mapping">
+				<field name="desc_id" type="fieldstype" required="true" allowedFieldsType="text,textarea,html"  default="" label="F_DESC_FIELD"/>
+				<field name="pic_id" type="fieldstype" required="true" allowedFieldsType="image,gallery" default="" label="F_PIC_FIELD"/>
 				<field name="default_pic" type="media" label="F_DEFAULT_PIC"/>
 			</fieldset>
 		</fields>

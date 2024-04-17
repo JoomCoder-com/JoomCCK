@@ -218,4 +218,9 @@ class plgSystemJoomcck extends \Joomla\CMS\Plugin\CMSPlugin
 
 		return TRUE;
 	}
+
+
+
+
+
 }
