@@ -65,12 +65,12 @@ class  JoomcckTableFiles extends \Joomla\CMS\Table\Table
 		foreach ($files as $file) {
 
 			$updateFile = new stdClass();
-			$updateFile->id = $file;
+			$updateFile->filename = $file;
 			$updateFile->saved = 1;
 			$updateFile->record_id = $record_id;
 			$updateFile->field_id = $field_id;
 
-			$this->_db->updateObject('#__js_res_files',$updateFile,'id');
+			$this->_db->updateObject('#__js_res_files',$updateFile,'filename');
 
 		}
 
