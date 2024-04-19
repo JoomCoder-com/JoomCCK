@@ -151,7 +151,9 @@ class JFormFieldCVideo extends CFormFieldUpload
 				$video = array_pop($videos);
 				?>
 				"file": "<?php echo $this->getFileUrl($video); ?>",
+                <?php if(isset($video->duration)): ?>
 				"duration": "<?php echo $video->duration; ?>",
+                <?php endif; ?>
 				"title": "<?php echo($title && $video->title ? $video->title : $video->realname); ?>",
 				"description": "<?php echo $video->description; ?>"
 				<?php
