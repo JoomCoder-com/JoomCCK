@@ -64,10 +64,10 @@ class JFormFieldMETextMask extends \Joomla\CMS\Form\FormField
 		$display = ($this->value->mask_type) ? 'block' : 'none';
 		$readonly = ($this->value->mask_type && $this->value->mask_type != 'custom') ? 'readonly' : '';
 
-		$out .= \Joomla\CMS\HTML\HTMLHelper::_('select.genericlist', $opt, $this->name.'[mask_type]', 'onchange="changeMask'.$this->id.'(this.value)"', 'value', 'text', $this->value->mask_type, $this->id."mask_type");
+		$out .= \Joomla\CMS\HTML\HTMLHelper::_('select.genericlist', $opt, $this->name.'[mask_type]', 'class="form-select" onchange="changeMask'.$this->id.'(this.value)"', 'value', 'text', $this->value->mask_type, $this->id."mask_type");
 
-		$out .= '<input type="text" style="display: '.$display.'" name="'.$this->name.'[mask]" id="'.$this->id.'_mask"
-			value="'.$this->value->mask.'" size="40" '.$readonly.'>';
+		$out .= '<input class="form-control" type="text" style="display: '.$display.'" name="'.$this->name.'[mask]" id="'.$this->id.'_mask"
+			value="'.$this->value->mask.'" '.$readonly.'>';
 		$out .= '<br><span id="add_'.$this->id.'"></span>';
 		$out .= '
 		<script type="text/javascript">
@@ -76,24 +76,24 @@ class JFormFieldMETextMask extends \Joomla\CMS\Form\FormField
 			if(value == "custom")
 			{
 				value = "'.($this->value->mask && $this->value->mask_type == 'custom' ? $this->value->mask : '').'";
-				$("add_'.$this->id.'").set("html", \''.$add.'\');
-				$("'.$this->id.'_mask").setStyle("display", "block");
-				$("'.$this->id.'_mask").removeProperty("readonly");
+				$("#add_'.$this->id.'").html(\''.$add.'\');
+				$("#'.$this->id.'_mask").css("display", "block");
+				$("#'.$this->id.'_mask").removeAttr("readonly");
 			}
 			else if(!value)
 			{
 				value = "";
-				$("'.$this->id.'_mask").setStyle("display", "none");
-				$("add_'.$this->id.'").set("html", "");
-				$("'.$this->id.'_mask").setProperty("readonly", "true");
+				$("#'.$this->id.'_mask").css("display", "none");
+				$("#add_'.$this->id.'").empty();
+				$("#'.$this->id.'_mask").attr("readonly", "true");
 			}
 			else
 			{
-				$("add_'.$this->id.'").set("html", "");
-				$("'.$this->id.'_mask").setStyle("display", "block");
-				$("'.$this->id.'_mask").setProperty("readonly", "true");
+				$("#add_'.$this->id.'").empty();
+				$("#'.$this->id.'_mask").css("display", "block");
+				$("#'.$this->id.'_mask").attr("readonly", "true");
 			}
-			$("'.$this->id.'_mask").value = value;
+			$("#'.$this->id.'_mask").val(value)
 		}
 		'.($this->value->mask_type && $this->value->mask_type == 'custom' ? 'changeMask'.$this->id.'("'.$this->value->mask_type.'")'  : '').'
 		</script>
