@@ -18,7 +18,7 @@ $required = $this->required ? ' required="true" ' : NULL;
 $style = ' style="max-width: ' . $this->params->get('params.width', '450px') . '"';
 ?>
 
-<select name="jform[fields][<?php echo $this->id;?>]" class="elements-list joomcck-chosen-<?php echo $this->id; ?>" id="form_field_list_<?php echo $this->id;?>" <?php echo $required . $style;?>>
+<select name="jform[fields][<?php echo $this->id;?>]" class="form-select elements-list joomcck-chosen-<?php echo $this->id; ?>" id="form_field_list_<?php echo $this->id;?>" <?php echo $required . $style;?>>
 	<option value=""><?php echo \Joomla\CMS\Language\Text::_($this->params->get('params.'.($this->params->get('params.sql_source') ? "sql_" : null).'label', 'S_CHOOSEVALUE'));?></option>
 <?php
 $selected = ($this->value ? $this->value : $this->params->get('params.selected'));
