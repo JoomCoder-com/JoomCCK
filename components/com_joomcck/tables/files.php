@@ -61,9 +61,19 @@ class  JoomcckTableFiles extends \Joomla\CMS\Table\Table
 	{
 		if(!$files) return;
 		$record_id = (int)$record['id'];
-		
-		$this->_db->setQuery("UPDATE #__js_res_files SET saved = 1, record_id = {$record_id}, field_id = {$field_id} WHERE id IN('".implode("','", $files)."')");
-		$this->_db->execute();
+
+		foreach ($files as $file) {
+
+			$updateFile = new stdClass();
+			$updateFile->id = $file;
+			$updateFile->saved = 1;
+			$updateFile->record_id = $record_id;
+			$updateFile->field_id = $field_id;
+
+			$this->_db->updateObject('#__js_res_files',$updateFile,'id');
+
+		}
+
 	}
 
 }
