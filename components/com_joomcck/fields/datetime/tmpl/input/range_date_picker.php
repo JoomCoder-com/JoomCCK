@@ -12,13 +12,13 @@ defined('_JEXEC') or die();
 <div class="">
 	<div class="input-group date mb-3" id="dpfrom<?php echo $this->id; ?>" style="position:relative;">
 	  <span class="add-on input-group-addon btn btn-outline-success">
-		  <span class="glyphicon glyphicon-calendar"><?php echo HTMLFormatHelper::icon('calendar-day.png') ?> From</span>
+		  <span class="fas fa-calendar"></span> From
 	  </span>
 	  <input <?php echo $this->attr ?> type="text" name="bdpfrom_<?php echo $this->id; ?>" value="" />
 	</div>
 	<div class="input-group date" id="dpto<?php echo $this->id; ?>" style="position:relative;">
         <span class="add-on input-group-addon  btn btn-outline-success">
-			  <span class="glyphicon glyphicon-calendar"><?php echo HTMLFormatHelper::icon('calendar-day.png') ?> To</span>
+			  <span class="fas fa-calendar"></span> To
 		  </span>
 			<input <?php echo $this->attr ?> type="text" name="bdpto_<?php echo $this->id; ?>" value="" />
 

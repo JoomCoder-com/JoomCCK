@@ -20,14 +20,14 @@ $filter_id = $module.$this->id;
 <div class="input-append">
 	<div class="input-prepend input-group date" id="dpfrom<?php echo $filter_id; ?>" style="position:relative;">
 	  <span class="add-on input-group-addon">
-		  <span class="glyphicon glyphicon-calendar"><?php echo HTMLFormatHelper::icon('calendar-day.png') ?></span>
+		  <span class="fas fa-calendar"></span>
 	  </span>
 	  <input type="text" name="bdpfrom_<?php echo $filter_id; ?>" value="" />
 	</div>
 	<div class="input-append input-group date" id="dpto<?php echo $filter_id; ?>" style="position:relative;">
 			<input type="text" name="bdpto_<?php echo $filter_id; ?>" value="" />
 		  <span class="add-on input-group-addon">
-			  <span class="glyphicon glyphicon-calendar"><?php echo HTMLFormatHelper::icon('calendar-day.png') ?></span>
+			  <span class="fas fa-calendar"></span>
 		  </span>
 	</div>
 </div>

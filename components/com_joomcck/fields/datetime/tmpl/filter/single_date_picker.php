@@ -18,7 +18,7 @@ defined('_JEXEC') or die();
 <div class="input-group date" id="datetimepicker<?php echo $this->id; ?>" style="position:relative;">
 	<input <?php echo $this->attr ?> type="text" class="input" name="bdp_<?php echo $this->id; ?>" value="" />
 	<span class="input-group-addon">
-		<span class="glyphicon glyphicon-calendar"><?php echo HTMLFormatHelper::icon('calendar-day.png') ?></span>
+		<span class="fas fa-calendar"></span>
 	</span>
 </div>
 <input type="hidden" value="<?php echo $this->value[0];?>" id="filter_<?php echo $module.$this->id;?>" name="filters[<?php echo $this->key;?>][]">

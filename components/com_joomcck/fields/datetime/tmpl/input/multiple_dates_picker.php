@@ -21,7 +21,7 @@ defined('_JEXEC') or die();
 <div class="input-group date" id="datetimepicker<?php echo $this->id; ?>" style="position:relative;">
 	<input <?php echo $this->attr ?> id="mdpinput<?php echo $this->id; ?>" type="text" class="input" name="bdp_<?php echo $this->id; ?>" value="" />
 	<span class="input-group-addon btn btn-outline-success">
-		<span class="glyphicon glyphicon-calendar"><?php echo HTMLFormatHelper::icon('calendar-day.png') ?></span>
+		<span class="fas fa-calendar"></span>
 	</span>
 </div>
 <?php if($this->params->get('params.max_dates', 0) > 0): ?>
