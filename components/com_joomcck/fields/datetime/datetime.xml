@@ -89,7 +89,7 @@
 				</field>
 				<field name="custom" type="metext" label="F_CUSTOMFORMAT" prepend="You can see possible formats &lt;a href='https://momentjs.com/docs/#/displaying/format/' target='_blank'&gt;here&lt;/a&gt;&lt;br /&gt;" description="F_CUSTOMFORMAT_DESCR" />
 
-				<field name="field_id_type" key="id" type="meresourcesfields" size="1" multiple="false" label="F_FIELDWITHEVENTTYPE" description="F_FIELDWITHEVENTTYPEDESCR" filters="'select'"/>
+				<field name="field_id_type" class="form-select" key="id" type="meresourcesfields" size="1" multiple="false" label="F_FIELDWITHEVENTTYPE" description="F_FIELDWITHEVENTTYPEDESCR" filters="'select'"/>
 				<field name="max_dates" type="text" label="F_MAX_DATE" description="F_MAX_DATE_DESCR" default="0" />
 				<field name="min_dates" type="text" label="F_MIN_DATE" description="F_MIN_DATE_DESCR" default="0" />
 			</fieldset>
