@@ -27,12 +27,6 @@ defined('_JEXEC') or die('Restricted access');
 .filter-icon img {
 	margin-bottom: 3px;
 }
-#filter-form input,
-#filter-form select {
-	max-width: 99%;
-	box-sizing: border-box;
-	height: 28px;
-}
 </style>
 <form action="<?php echo \Joomla\CMS\Router\Route::_('index.php');?>" method="post" name="filterform" id="filter-form">
 	<?php if($params->get('filter_search', 1)):?>
@@ -122,7 +116,7 @@ defined('_JEXEC') or die('Restricted access');
 
 	<?php foreach ($filters AS  $filter):?>
 		<?php if(in_array($filter->id, (array)$params->get('field_id_exclude', array()))) continue;?>
-		<div data-bs-toggle="collapse" data-target="#filter-<?php echo  $filter->key ?>" class="filter-label <?php echo ($filter->isFilterActive() ? NULL : 'collapsed')?>">
+		<div data-bs-toggle="collapse" data-bs-target="#filter-<?php echo  $filter->key ?>" class="filter-label <?php echo ($filter->isFilterActive() ? NULL : 'collapsed')?>">
 			<?php if($params->get('show_icons', 1) && $filter->params->get('core.icon')):?>
 				<span class="filter-icon"><?php echo HTMLFormatHelper::icon($filter->params->get('core.icon'));?></span>
 			<?php endif;?>
