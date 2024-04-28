@@ -8,17 +8,13 @@
  */
 defined('_JEXEC') or die();
 
-if($this->params->get('params.chosen', false))
-{
-	\Joomla\CMS\HTML\HTMLHelper::_('formbehavior.chosen', '.joomcck-chosen-'.$this->id);
-}
 
 $class = ' class="' . $this->params->get('core.field_class', 'form-control') . ($this->required ? ' required' : NULL) . '"';
 $required = $this->required ? ' required="true" ' : NULL;
 $style = ' style="max-width: ' . $this->params->get('params.width', '450px') . '"';
 ?>
 
-<select name="jform[fields][<?php echo $this->id;?>]" class="form-select elements-list joomcck-chosen-<?php echo $this->id; ?>" id="form_field_list_<?php echo $this->id;?>" <?php echo $required . $style;?>>
+<select name="jform[fields][<?php echo $this->id;?>]" class="form-select elements-list" id="form_field_list_<?php echo $this->id;?>" <?php echo $required . $style;?>>
 	<option value=""><?php echo \Joomla\CMS\Language\Text::_($this->params->get('params.'.($this->params->get('params.sql_source') ? "sql_" : null).'label', 'S_CHOOSEVALUE'));?></option>
 <?php
 $selected = ($this->value ? $this->value : $this->params->get('params.selected'));
@@ -78,7 +74,7 @@ foreach($this->values as $key => $line):
 ?>
 	<div id="variant_<?php echo $this->id;?>">
 		<a id="show_variant_link_<?php echo $this->id;?>"
-			href="javascript:void(0)" onclick="Joomcck.showAddForm(<?php echo $this->id;?>)">
+			href="javascript:void(0)" onclick="Joomcck.showAddForm(<?php echo $this->id;?>);">
             <?php echo \Joomla\CMS\Language\Text::_($this->params->get('params.user_value_label', 'Your variant'));?>
         </a>
 	</div></p>
