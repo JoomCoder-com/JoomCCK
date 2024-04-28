@@ -30,7 +30,7 @@ $default = $this->default ? date($php_format, strtotime($this->default)) : '';
 
 <div class="input-group date" id="datetimepicker<?php echo $this->id; ?>" style="position:relative;">
 	<input <?php echo $this->attr ?> type="text" value="<?php echo $default; ?>" name="dp_text_<?php echo $this->id; ?>" <?php echo $class . $required; ?> id="dp_text_field_<?php echo $this->id; ?>" data-inputmask="'mask': '<?php echo $mask ?>'"/>
-	<span class="input-group-addon">
+	<span class="input-group-addon input-group-text">
 		<span class="fas fa-calendar"></span>
 	</span>
 </div>
