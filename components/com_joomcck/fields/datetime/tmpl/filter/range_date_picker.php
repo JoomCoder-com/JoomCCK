@@ -17,19 +17,23 @@ $filter_id = $module.$this->id;
 	overflow: visible;
 }
 </style>
-<div class="input-append">
-	<div class="input-prepend input-group date" id="dpfrom<?php echo $filter_id; ?>" style="position:relative;">
-	  <span class="add-on input-group-addon">
+<div class="row">
+	<div class="col">
+        <div class="input-group date" id="dpfrom<?php echo $filter_id; ?>" style="position:relative;">
+	  <span class="add-on input-group-addon input-group-text">
 		  <span class="fas fa-calendar"></span>
 	  </span>
-	  <input type="text" name="bdpfrom_<?php echo $filter_id; ?>" value="" />
-	</div>
-	<div class="input-append input-group date" id="dpto<?php echo $filter_id; ?>" style="position:relative;">
-			<input type="text" name="bdpto_<?php echo $filter_id; ?>" value="" />
-		  <span class="add-on input-group-addon">
+            <input type="text" name="bdpfrom_<?php echo $filter_id; ?>" value="" class="form-control"/>
+        </div>
+    </div>
+	<div class="col">
+        <div class="input-group date" id="dpto<?php echo $filter_id; ?>" style="position:relative;">
+            <input type="text" name="bdpto_<?php echo $filter_id; ?>" value="" class="form-control"/>
+            <span class="add-on input-group-addon  input-group-text">
 			  <span class="fas fa-calendar"></span>
 		  </span>
-	</div>
+        </div>
+    </div>
 </div>
 <input type="hidden" value="<?php echo @$this->value[0];?>" id="filter0_<?php echo $filter_id;?>" name="filters[<?php echo $this->key;?>][0]">
 <input type="hidden" value="<?php echo @$this->value[1];?>" id="filter1_<?php echo $filter_id;?>" name="filters[<?php echo $this->key;?>][1]">
