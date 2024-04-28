@@ -36,6 +36,8 @@ $app = \Joomla\CMS\Factory::getApplication();
         </script>
     </div>
 
+    <div class="mt-4"><br><br></div>
+
 
 	<?php if($app->input->get('tmpl') == 'component'): ?>
 
