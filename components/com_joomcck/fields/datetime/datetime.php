@@ -14,6 +14,16 @@ require_once JPATH_ROOT . '/components/com_joomcck/library/php/cdate.php';
 
 class JFormFieldCDatetime extends CFormField
 {
+	public $format;
+	public $filter_format;
+	public $is_range;
+	public $db_format;
+	public $filter_is_time;
+	public $is_time;
+	public $filter_db_format;
+
+
+
     public function __construct($field, $default)
     {
         parent::__construct($field, $default);
