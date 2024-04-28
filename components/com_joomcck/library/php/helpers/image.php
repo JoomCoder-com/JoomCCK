@@ -40,7 +40,7 @@ class CImgHelper {
 		$key = md5($file.$width.$height.implode('-', $options));
 		$options = new \Joomla\Registry\Registry($options);
 		$index = '';
-		$ext = strtolower(\Joomla\Filesystem\File::getExt($file));
+		$ext = strtolower(\Joomla\CMS\Filesystem\File::getExt($file));
 
 		$path = JPATH_ROOT. DIRECTORY_SEPARATOR .'images/joomcck_thumbs'. DIRECTORY_SEPARATOR .$folder.DIRECTORY_SEPARATOR;
 

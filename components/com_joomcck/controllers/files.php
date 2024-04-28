@@ -353,7 +353,7 @@ class JoomcckControllerFiles extends MControllerAdmin
         }
 
         $filename =  $request->getFileName();
-        $ext  = StringHelper::strtolower(\Joomla\Filesystem\File::getExt($filename));
+        $ext  = StringHelper::strtolower(\Joomla\CMS\Filesystem\File::getExt($filename));
 		$allowedExts =  StringHelper::strtolower($field->params->get('params.file_formats', 'zip, jpg, png, jpeg, gif, txt, md, bmp'));
         $exts    = explode(',', str_replace(' ', '', $allowedExts));
 
@@ -412,7 +412,7 @@ class JoomcckControllerFiles extends MControllerAdmin
         if ($response['finish']) {
             $user = \Joomla\CMS\Factory::getApplication()->getIdentity();
 
-            $ext       = StringHelper::strtolower(\Joomla\Filesystem\File::getExt($response['upload_name']));
+            $ext       = StringHelper::strtolower(\Joomla\CMS\Filesystem\File::getExt($response['upload_name']));
             $subfolder = $ext;
             if ($field_id = $this->input->getInt('field_id')) {
                 $field = \Joomla\CMS\Table\Table::getInstance('Field', 'JoomcckTable');
@@ -445,7 +445,7 @@ class JoomcckControllerFiles extends MControllerAdmin
 
         $time = time();
         $date = date($params->get('folder_format', 'Y-m'), $time);
-        $ext  = StringHelper::strtolower(\Joomla\Filesystem\File::getExt($realname));
+        $ext  = StringHelper::strtolower(\Joomla\CMS\Filesystem\File::getExt($realname));
         $subfolder     = $field->params->get('params.subfolder', $field->field_type);
 
         $dest  = JPATH_ROOT . DIRECTORY_SEPARATOR . $params->get('general_upload') . DIRECTORY_SEPARATOR . $subfolder . DIRECTORY_SEPARATOR;
@@ -569,7 +569,7 @@ class JoomcckControllerFiles extends MControllerAdmin
         $params = \Joomla\CMS\Component\ComponentHelper::getParams('com_joomcck');
         // 		$time = substr($filename, 0, strpos($filename, '_'));
         // 		$date = date($params->get('folder_format'), $time);
-        $ext = \Joomla\Filesystem\File::getExt($filename);
+        $ext = \Joomla\CMS\Filesystem\File::getExt($filename);
         $id  = str_replace('.' . $ext, '', $filename);
 
         $subfolder      = $field_params->get('params.subfolder', $field_table->field_type);

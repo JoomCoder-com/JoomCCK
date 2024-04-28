@@ -340,7 +340,7 @@ class JoomcckControllerImport extends MControllerAdmin
 		$this->key = $this->input->get('json');
 		$file      = $this->input->getString('file');
 
-		$ext        = strtolower(\Joomla\Filesystem\File::getExt($file));
+		$ext        = strtolower(\Joomla\CMS\Filesystem\File::getExt($file));
 		$this->json = JPATH_ROOT . '/tmp/' . $this->key . '.json';
 
 		$upload = JPATH_ROOT . '/tmp/import_uploads/' . urldecode($file);
@@ -403,7 +403,7 @@ class JoomcckControllerImport extends MControllerAdmin
 		$this->db->setQuery("DELETE FROM `#__js_res_import_rows` WHERE `ctime` < NOW() - INTERVAL 1 DAY OR `import` = {$this->key}");
 		$this->db->execute();
 
-		$ext = strtolower(\Joomla\Filesystem\File::getExt($upload));
+		$ext = strtolower(\Joomla\CMS\Filesystem\File::getExt($upload));
 		if($ext == 'csv')
 		{
 			$this->_load_csv($upload, $this->input->get('delimiter', ','));

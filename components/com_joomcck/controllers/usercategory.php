@@ -176,7 +176,7 @@ class JoomcckControllerUsercategory extends MControllerForm
 			$user = \Joomla\CMS\Factory::getApplication()->getIdentity();
 			$id = $model->getState($this->context . '.id');
 			$path = JPATH_ROOT . '/images/usercategories' . DIRECTORY_SEPARATOR . $user->get('id') . DIRECTORY_SEPARATOR;
-			$ext = \Joomla\Filesystem\File::getExt($files['jform']['name']['icon']);
+			$ext = \Joomla\CMS\Filesystem\File::getExt($files['jform']['name']['icon']);
 			if(! is_dir($path))
 			{
 				\Joomla\Filesystem\Folder::create($path, 0755);

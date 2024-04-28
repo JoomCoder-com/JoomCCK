@@ -577,7 +577,7 @@ class packInstallerScript
                 }
                 $files = \Joomla\Filesystem\Folder::files($pack_usercategories_path . DIRECTORY_SEPARATOR . $folder);
                 foreach ($files as $file) {
-                    $ext          = \Joomla\Filesystem\File::getExt($file);
+                    $ext          = \Joomla\CMS\Filesystem\File::getExt($file);
                     $ucid         = str_replace('.' . $ext, '', $file);
                     $new_filename = $this->ids['category_user'][$ucid];
                     $dest         = JPATH_ROOT . '/images/usercategories' . DIRECTORY_SEPARATOR . $new_foldername . DIRECTORY_SEPARATOR . $new_filename . '.' . $ext;
