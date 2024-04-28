@@ -22,8 +22,8 @@ if(!function_exists('dp_get_selected')){
 	}
 }
 ?>
-<div id="dp_simple<?php echo $this->id ?>">
-    <select <?php echo $this->attr ?> class="date_list" style="width:50px" name="dp_day_<?php echo $this->id;?>">
+<div id="dp_simple<?php echo $this->id ?>" class="input-group w-100" style="max-width: 300px;">
+    <select <?php echo $this->attr ?> class="date_list form-select" name="dp_day_<?php echo $this->id;?>">
         <option value="0"><?php echo  \Joomla\CMS\Language\Text::_('D_DAY');?></option>
 		<?php for($i = 1; $i <= 31; $i ++):?>
             <option value="<?php echo $i;?>" <?php echo dp_get_selected($this->default, $i, 'day');?>>
@@ -31,7 +31,7 @@ if(!function_exists('dp_get_selected')){
             </option>
 		<?php endfor; ?>
     </select>
-    <select <?php echo $this->attr ?> class="date_list" style="width:100px" name="dp_month_<?php echo $this->id;?>">
+    <select <?php echo $this->attr ?> class="date_list  form-select" name="dp_month_<?php echo $this->id;?>">
         <option value="0"><?php echo  \Joomla\CMS\Language\Text::_('D_MONTH');?></option>
 		<?php for($i = 1; $i <= 12; $i ++): ?>
             <option value="<?php echo $i;?>" <?php echo dp_get_selected($this->default, $i, 'month');?>>
@@ -39,7 +39,7 @@ if(!function_exists('dp_get_selected')){
             </option>
 		<?php endfor; ?>
     </select>
-    <select <?php echo $this->attr ?> class="date_list" style="width:70px" name="dp_year_<?php echo $this->id;?>">
+    <select <?php echo $this->attr ?> class="date_list form-select" name="dp_year_<?php echo $this->id;?>">
         <option value="0"><?php echo  \Joomla\CMS\Language\Text::_('D_YEAR');?></option>
 		<?php for($i = (date('Y') + $this->params->get('tmpl_simple_select.year_up', 80)); $i >= date('Y') - $this->params->get('tmpl_simple_select.year_down', 15); $i --):	?>
             <option value="<?php echo $i;?>" <?php echo dp_get_selected($this->default, $i, 'year');?>>
