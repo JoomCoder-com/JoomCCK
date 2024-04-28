@@ -9,20 +9,24 @@
  */
 defined('_JEXEC') or die();
 ?>
-<div class="">
-	<div class="input-group date mb-3" id="dpfrom<?php echo $this->id; ?>" style="position:relative;">
+<div class="row">
+	<div class="col">
+        <div class="input-group date mb-3" id="dpfrom<?php echo $this->id; ?>" style="position:relative;">
 	  <span class="add-on input-group-addon btn btn-outline-success">
 		  <span class="fas fa-calendar"></span> From
 	  </span>
-	  <input <?php echo $this->attr ?> type="text" name="bdpfrom_<?php echo $this->id; ?>" value="" />
-	</div>
-	<div class="input-group date" id="dpto<?php echo $this->id; ?>" style="position:relative;">
+            <input <?php echo $this->attr ?> type="text" name="bdpfrom_<?php echo $this->id; ?>" value="" />
+        </div>
+    </div>
+	<div class="col">
+        <div class="input-group date" id="dpto<?php echo $this->id; ?>" style="position:relative;">
         <span class="add-on input-group-addon  btn btn-outline-success">
 			  <span class="fas fa-calendar"></span> To
 		  </span>
-			<input <?php echo $this->attr ?> type="text" name="bdpto_<?php echo $this->id; ?>" value="" />
+            <input <?php echo $this->attr ?> type="text" name="bdpto_<?php echo $this->id; ?>" value="" />
 
-	</div>
+        </div>
+    </div>
 </div>
 
 <input type="hidden" id="pickerfrom<?php echo $this->id; ?>" class="input" name="jform[fields][<?php echo $this->id; ?>][0]" value="<?php echo $this->default ?>" />
