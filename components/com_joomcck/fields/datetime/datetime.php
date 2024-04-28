@@ -22,6 +22,7 @@ class JFormFieldCDatetime extends CFormField
 	public $is_time;
 	public $filter_db_format;
 	public $attr;
+	public $dates;
 
 
 
