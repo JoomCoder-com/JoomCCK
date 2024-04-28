@@ -17,44 +17,38 @@ $data = $this->data;
 
 $prep = $this->params->get('params.prepend', NULL);
 $app = $this->params->get('params.append', NULL);
+
 ?>
 
 <div style="margin: 20px;">
 	<div id="digitslider<?php echo $this->key;?>"></div>
 </div>
 
-<div style="margin: 20px;">
-	<div class="float-start form-inline">
-		<label class=""><?php echo $this->params->get('params.label_min') ?> </label>
-
-		<div class="<?php if($prep) {echo ' input-prepend';} if($app) {echo ' input-append';}?>">
+<div class="row">
+    <div class="col">
+        <label class=""><?php echo $this->params->get('params.label_min') ?> </label>
+        <div class="input-group">
 			<?php if($prep):?>
-				<span class="add-on"><?php echo $prep;?></span>
+                <span class="input-group-text"><?php echo $prep;?></span>
 			<?php endif; ?>
-
-			<input autocomplete="off" type="text" style="width:100px" name="filters[<?php echo $this->key;?>][min]" id="input_minmax_min<?php echo $this->id;?>" value="<?php echo $this->value->get('min', $data->min);?>" />
-
+            <input type="text" name="filters[<?php echo $this->key;?>][min]" autocomplete="off" type="text" class="form-control" id="input_minmax_min<?php echo $this->id;?>" value="<?php echo $this->value->get('min', $data->min);?>">
 			<?php if($app):?>
-				<span class="add-on"><?php echo $app;?></span>
+                <span class="input-group-text"><?php echo $app;?></span>
 			<?php endif; ?>
-		</div>
-	</div>
-
-	<div class="float-end form-inline">
-		<label class=""><?php echo $this->params->get('params.label_max') ?></label>
-
-		<div class="<?php if($prep) {echo ' input-prepend';} if($app) {echo ' input-append';}?>">
+        </div>
+    </div>
+    <div class="col">
+        <label class=""><?php echo $this->params->get('params.label_max') ?></label>
+        <div class="input-group">
 			<?php if($prep):?>
-				<span class="add-on"><?php echo $prep;?></span>
+                <span class="input-group-text"><?php echo $prep;?></span>
 			<?php endif; ?>
-
-			<input autocomplete="off" type="text" style="width:100px" name="filters[<?php echo $this->key;?>][max]" id="input_minmax_max<?php echo $this->id;?>" value="<?php echo $this->value->get('max', $data->max);?>" />
-
+            <input class="form-control" autocomplete="off" type="text" name="filters[<?php echo $this->key;?>][max]" id="input_minmax_max<?php echo $this->id;?>" value="<?php echo $this->value->get('max', $data->max);?>">
 			<?php if($app):?>
-				<span class="add-on"><?php echo $app;?></span>
+                <span class="input-group-text"><?php echo $app;?></span>
 			<?php endif; ?>
-		</div>
-	</div>
+        </div>
+    </div>
 </div>
 <div class="clearfix"></div>
 <br />

@@ -13,6 +13,7 @@ require_once JPATH_ROOT. '/components/com_joomcck/library/php/fields/joomcckfiel
 class JFormFieldCDigits extends CFormField
 {
 	protected $type = 'Digits';
+	public $data;
 
 	public function getInput()
 	{
