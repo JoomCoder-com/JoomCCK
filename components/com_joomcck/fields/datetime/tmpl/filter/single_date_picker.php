@@ -16,8 +16,8 @@ defined('_JEXEC') or die();
 }
 </style>
 <div class="input-group date" id="datetimepicker<?php echo $this->id; ?>" style="position:relative;">
-	<input <?php echo $this->attr ?> type="text" class="input" name="bdp_<?php echo $this->id; ?>" value="" />
-	<span class="input-group-addon">
+	<input <?php echo $this->attr ?> type="text" class="form-control" name="bdp_<?php echo $this->id; ?>" value="" />
+	<span class="input-group-addon input-group-text">
 		<span class="fas fa-calendar"></span>
 	</span>
 </div>
@@ -28,7 +28,7 @@ defined('_JEXEC') or die();
 		$('#datetimepicker<?php echo $this->id; ?>')
 			.datetimepicker({
 				format: '<?php echo $this->filter_format; ?>'
-				<?php echo $this->value[0] ? ", defaultDate: moment('{$this->value[0]}')" : ""; ?>
+				<?php echo isset($this->value[0]) && $this->value[0] ? ", defaultDate: moment('{$this->value[0]}')" : ""; ?>
 			})
 			.on('dp.change', function(e){
 				$('#filter_<?php echo $module.$this->id;?>').val(e.date.format('<?php echo $this->filter_db_format ?>'));

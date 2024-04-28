@@ -55,9 +55,6 @@ felixRating = {
 
             setCurrentStar: function (current) {
 
-                console.log(current)
-
-
                 if (current > 0) {
                     var prev = '';
                     var nearest_current = '';
