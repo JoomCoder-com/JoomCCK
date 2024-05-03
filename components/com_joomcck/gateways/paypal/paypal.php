@@ -15,6 +15,9 @@ require_once JPATH_ROOT . '/components/com_joomcck/library/php/commerce/mintpay.
 
 class MintPayPaypal extends MintPayAbstract
 {
+
+	public $provider;
+
 	const ADP_PARALLEL = 1;
 	const ADP_CHAINED_YOU_PRIMARY = 2;
 	const ADP_CHAINED_SELLER_PRIMARY = 3;
