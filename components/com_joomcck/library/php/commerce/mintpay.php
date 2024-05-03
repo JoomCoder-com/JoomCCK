@@ -28,6 +28,8 @@ class MintPay
 		{
 			return $instances[$key];
 		}
+
+
 		$file = JPATH_ROOT . "/components/com_joomcck/gateways/{$provider}/{$provider}.php";
 		if (!is_file($file))
 		{
