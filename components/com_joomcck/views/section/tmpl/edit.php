@@ -34,40 +34,42 @@ $wa->useScript('keepalive')
 
 			<?php echo HTMLHelper::_('uitab.addTab', 'myTab', 'page-main', \Joomla\CMS\Language\Text::_('FS_FORM')); ?>
 
-            <div class="float-start" style="max-width: 500px; min-width:600px; margin-right: 20px;">
-                <div class="control-group">
-                    <div class="control-label"><?php echo $this->form->getLabel('id'); ?></div>
-                    <div class="controls"><?php echo $this->form->getInput('id'); ?></div>
-                </div>
-                <div class="control-group">
-                    <div class="control-label"><?php echo $this->form->getLabel('name'); ?></div>
-                    <div class="controls"><?php echo $this->form->getInput('name'); ?></div>
-                </div>
-                <div class="control-group">
-                    <div class="control-label"><?php echo $this->form->getLabel('title'); ?></div>
-                    <div class="controls"><?php echo $this->form->getInput('title'); ?></div>
-                </div>
-                <div class="control-group">
-                    <div class="control-label"><?php echo $this->form->getLabel('alias'); ?></div>
-                    <div class="controls"><?php echo $this->form->getInput('alias'); ?></div>
-                </div>
-                <div class="control-group">
-                    <div class="control-label"><?php echo $this->form->getLabel('published'); ?></div>
-                    <div class="controls"><?php echo $this->form->getInput('published'); ?></div>
-                </div>
-                <div class="control-group">
-                    <div class="control-label"><?php echo $this->form->getLabel('access'); ?></div>
-                    <div class="controls"><?php echo $this->form->getInput('access'); ?></div>
-                </div>
-                <div class="control-group">
-                    <div class="control-label"><?php echo $this->form->getLabel('language'); ?></div>
-                    <div class="controls"><?php echo $this->form->getInput('language'); ?></div>
-                </div>
-                <div><?php echo $this->form->getInput('description'); ?></div>
+            <div class="row">
+                <div class="col-md-7">
+                    <div class="control-group">
+                        <div class="control-label"><?php echo $this->form->getLabel('id'); ?></div>
+                        <div class="controls"><?php echo $this->form->getInput('id'); ?></div>
+                    </div>
+                    <div class="control-group">
+                        <div class="control-label"><?php echo $this->form->getLabel('name'); ?></div>
+                        <div class="controls"><?php echo $this->form->getInput('name'); ?></div>
+                    </div>
+                    <div class="control-group">
+                        <div class="control-label"><?php echo $this->form->getLabel('title'); ?></div>
+                        <div class="controls"><?php echo $this->form->getInput('title'); ?></div>
+                    </div>
+                    <div class="control-group">
+                        <div class="control-label"><?php echo $this->form->getLabel('alias'); ?></div>
+                        <div class="controls"><?php echo $this->form->getInput('alias'); ?></div>
+                    </div>
+                    <div class="control-group">
+                        <div class="control-label"><?php echo $this->form->getLabel('published'); ?></div>
+                        <div class="controls"><?php echo $this->form->getInput('published'); ?></div>
+                    </div>
+                    <div class="control-group">
+                        <div class="control-label"><?php echo $this->form->getLabel('access'); ?></div>
+                        <div class="controls"><?php echo $this->form->getInput('access'); ?></div>
+                    </div>
+                    <div class="control-group">
+                        <div class="control-label"><?php echo $this->form->getLabel('language'); ?></div>
+                        <div class="controls"><?php echo $this->form->getInput('language'); ?></div>
+                    </div>
+                    <div><?php echo $this->form->getInput('description'); ?></div>
 
-            </div>
-            <div class="float-start" style="max-width: 500px">
-				<?php echo MFormHelper::renderFieldset($this->params_form, 'general', $this->item->params, 'general', MFormHelper::FIELDSET_SEPARATOR_HEADER, MFormHelper::STYLE_TABLE); ?>
+                </div>
+                <div class="col-md-5">
+		            <?php echo MFormHelper::renderFieldset($this->params_form, 'general', $this->item->params, 'general', MFormHelper::FIELDSET_SEPARATOR_HEADER, MFormHelper::STYLE_TABLE); ?>
+                </div>
             </div>
 
 			<?php echo HTMLHelper::_('uitab.endTab'); ?>
