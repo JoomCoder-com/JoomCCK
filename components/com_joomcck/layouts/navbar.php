@@ -25,10 +25,12 @@ function getActiveClass($view)
 	echo ($view == $cur_view || $view . 's' == $cur_view ? 'active' : NULL) . $disabled;
 }
 
+\Joomla\CMS\HTML\HTMLHelper::_('bootstrap.tooltip', '*[rel^="tooltip"]');
+
 ?>
-<nav class="navbar navbar-expand-md navbar-dark bg-dark mb-3">
+<nav class="navbar navbar-expand-md navbar-dark bg-dark mb-3 rounded shadow-sm">
     <div class="container-fluid">
-        <a class="navbar-brand" href="<?php echo Url::view('cpanel') ?>">JoomCCK</a>
+        <a class="navbar-brand text-white ms-2" href="<?php echo Url::view('cpanel') ?>">JoomCCK</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -120,4 +122,5 @@ function getActiveClass($view)
             </ul>
         </div>
     </div>
+    <a class="btn btn-link text-white" rel="tooltip" title="Documentation" href="https://github.com/JoomCoder-com/JoomCCK/wiki" target="_blank"><i class="fas fa-info-circle"></i></a>
 </nav>
