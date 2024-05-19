@@ -1506,6 +1506,7 @@ class JoomcckModelRecords extends MModelList
 		$this->_db->setQuery($query);
 		$filters = $this->_db->loadObjectList();
 
+
 		$out = array();
 		foreach($filters as $filter)
 		{
@@ -1514,9 +1515,15 @@ class JoomcckModelRecords extends MModelList
 			$default           = \Joomla\CMS\Factory::getApplication()->getUserState('com_joomcck.section' . FilterHelper::key() . '.filter_' . $filter->key);
 			$name              = 'JFormFieldC' . ucfirst($filter->field_type);
 			$out[$filter->key] = new $name($filter, $default);
+
+			// clean value from empty strings
+			ArrayHelper::clean_r($out[$filter->key]->value);
 		}
 
+
 		$cache[$key] = $out;
+
+
 
 		return $cache[$key];
 	}

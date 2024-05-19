@@ -767,7 +767,7 @@ class JoomcckControllerRecords extends MControllerAdmin
 
 		$tags = @$filters['tags'];
 		unset($filters['tags']);
-		if(!is_array($tags))
+		if(!is_array($tags) && !is_null($tags))
 		{
 			$tags = explode(',', $tags);
 
@@ -778,7 +778,7 @@ class JoomcckControllerRecords extends MControllerAdmin
 
 		$users = @$filters['users'];
 		unset($filters['users']);
-		if(!is_array($users))
+		if(!is_array($users) && !is_null($users))
 		{
 			$users = explode(',', $users);
 
@@ -789,7 +789,7 @@ class JoomcckControllerRecords extends MControllerAdmin
 
 		$cats = @$filters['cats'];
 		unset($filters['cats']);
-		if(!is_array($cats))
+		if(!is_array($cats) && !is_null($cats))
 		{
 			$cats = explode(',', $cats);
 
@@ -803,6 +803,8 @@ class JoomcckControllerRecords extends MControllerAdmin
 		$rec_model          = MModelBase::getInstance('Records', 'JoomcckModel');
 		$rec_model->section = $section;
 		$list               = $rec_model->getFilters();
+
+
 		$store              = array();
 		foreach($list as $fkey => $filter)
 		{

@@ -161,11 +161,15 @@ class JoomcckViewRecords extends MViewBase
 
 		$this->items = $this->get('Items');
 		$item_ids = array();
-		foreach($this->items as &$item)
-		{
-			$item = $this->models['record']->_prepareItem($item, 'list');
-			$item_ids[] = $item->id;
+
+		if($this->items){
+			foreach($this->items as &$item)
+			{
+				$item = $this->models['record']->_prepareItem($item, 'list');
+				$item_ids[] = $item->id;
+			}
 		}
+
 
 		\Joomla\CMS\Session\Session::getInstance('com_joomcck', array())->set('joomcck_last_list_ids', $item_ids);
 
@@ -526,6 +530,7 @@ class JoomcckViewRecords extends MViewBase
 				 * $u->get($this->section->params->get('personalize.author_mode'));
 				 * }
 				 */
+
 				$search_strings[] = $w->label . ': ' . $w->text;
 			}
 			$t[] = \Joomla\CMS\Language\Text::_('CSEARCHRESULT') . ' (' . implode(',', $search_strings) . ')';
@@ -767,6 +772,10 @@ class JoomcckViewRecords extends MViewBase
 	public function _fieldsSummary($items)
 	{
 		$fields = $byid = $sort = array();
+
+		if(!$items)
+			return [];
+
 		foreach($items as $item)
 		{
 			foreach($item->fields_by_id as $field)
