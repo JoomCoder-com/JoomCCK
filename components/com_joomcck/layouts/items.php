@@ -99,7 +99,9 @@ $single = preg_replace('/s$/iU', '', $view);
 			                <?php
 			                $type = ItemsStore::getType($type);
 			                ?>
-                            <li><a class="dropdown-item" href="<?php echo Url::add($section, $type, NULL); ?>"><?php echo $type->name; ?></a></li>
+                            <?php if(is_object($type)): ?>
+                                <li><a class="dropdown-item" href="<?php echo Url::add($section, $type, NULL); ?>"><?php echo $type->name; ?></a></li>
+                            <?php endif; ?>
 		                <?php endforeach; ?>
 	                <?php endforeach; ?>
                 </ul>
