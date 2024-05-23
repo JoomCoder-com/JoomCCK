@@ -75,7 +75,6 @@ $single = preg_replace('/s$/iU', '', $view);
 				<li><a href="javascript:void(0);" onclick="listButtonClick('items.change_field');"><?php echo \Joomla\CMS\Language\Text::_('C_TOOLBAR_MASSOP2'); ?></a></li> -->
 				<li><a class="dropdown-item" href="javascript:void(0);" onclick="listButtonClick('items.change_core');"><?php echo \Joomla\CMS\Language\Text::_('C_TOOLBAR_MASSOP3'); ?></a></li>
 			</ul>
-
 		</div>
 	<?php endif; ?>
 </div>
