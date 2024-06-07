@@ -7,6 +7,8 @@
  * @license GNU/GPL http://www.gnu.org/copyleft/gpl.html
  */
 
+use Joomla\CMS\Component\ComponentHelper;
+
 defined ( '_JEXEC' ) or die ( 'Restricted access' );
 jimport('mint.mvc.model.list');
 
@@ -29,7 +31,7 @@ class JoomcckModelSections extends MModelList {
 		$published = $app->getUserStateFromRequest ( $this->context . '.filter.state', 'filter_state', '', 'string' );
 		$this->setState ( 'filter.state', $published );
 
-		parent::populateState ( 'a.name', 'asc' );
+		parent::populateState ( 'a.id', 'desc' );
 	}
 
 	protected function getStoreId($id = '') {
@@ -65,7 +67,7 @@ class JoomcckModelSections extends MModelList {
 			$query->where ( '(a.published IN (0, 1))' );
 		}
 
-		$orderCol = $this->state->get ( 'list.ordering', 'a.ctime');
+		$orderCol = $this->state->get ( 'list.ordering', 'a.name');
 		$orderDirn = $this->state->get ( 'list.direction', 'DESC');
 		$query->order ( $db->escape ( $orderCol . ' ' . $orderDirn ) );
 		$query->group('a.id');

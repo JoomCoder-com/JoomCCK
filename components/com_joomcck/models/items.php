@@ -59,6 +59,8 @@ class JoomcckModelItems extends MModelList
 		$type = $app->getUserStateFromRequest($this->context . '.filter.type', 'filter_type', '', 'INT');
 		$this->setState('filter.type', $type);
 
+
+
 		parent::populateState('a.ctime', 'asc');
 	}
 

@@ -7,6 +7,8 @@
  * @license     GNU General Public License version 2 or later; see LICENSE
  */
 
+use Joomla\CMS\Component\ComponentHelper;
+
 defined('JPATH_PLATFORM') or die;
 
 jimport('mint.mvc.model.base');
@@ -170,6 +172,8 @@ class MModelList extends MModelBase
 
 		try
 		{
+
+
 			$items = $this->_getList($query, $this->getStart(), $this->getState('list.limit'));
 		}
 		catch (RuntimeException $e)
@@ -194,7 +198,7 @@ class MModelList extends MModelBase
 	 */
 	protected function getListQuery()
 	{
-		$db = $this->getDbo();
+		$db    = $this->getDbo();
 		$query = $db->getQuery(true);
 
 		return $query;
@@ -220,7 +224,7 @@ class MModelList extends MModelBase
 
 		// Create the pagination object.
 		$limit = (int) $this->getState('list.limit') - (int) $this->getState('list.links');
-		$page = new \Joomla\CMS\Pagination\Pagination($this->getTotal(), $this->getStart(), $limit);
+		$page  = new \Joomla\CMS\Pagination\Pagination($this->getTotal(), $this->getStart(), $limit);
 
 		// Add the object to the internal cache.
 		$this->cache[$store] = $page;
@@ -425,9 +429,9 @@ class MModelList extends MModelBase
 	/**
 	 * Method to get the data that should be injected in the form.
 	 *
-	 * @return	mixed	The data for the form.
+	 * @return    mixed    The data for the form.
 	 *
-	 * @since	3.2
+	 * @since    3.2
 	 */
 	protected function loadFormData()
 	{
@@ -466,6 +470,8 @@ class MModelList extends MModelBase
 	 */
 	protected function populateState($ordering = null, $direction = null)
 	{
+
+
 		// If the context is set, assume that stateful lists are used.
 		if ($this->context)
 		{
@@ -480,106 +486,44 @@ class MModelList extends MModelBase
 				}
 			}
 
+
 			$limit = 0;
 
-			// Receive & set list options
-			if ($list = $app->getUserStateFromRequest($this->context . '.list', 'list', array(), 'array'))
+
+			$currentView = \Joomla\CMS\Factory::getApplication()->getInput()->get('view', '');
+
+			$itemsViews = ['records'];
+
+			$paramName = !in_array($currentView, $itemsViews) ? 'list_limit' : 'list_limit_items';
+			$listLimit = ComponentHelper::getParams('com_joomcck')->get($paramName, 20);
+
+			$limit = $app->getUserStateFromRequest($this->context . '.list.limit', 'limit', $listLimit, 'uint');
+
+			$this->setState('list.limit', $limit);
+
+
+			// Check if the ordering field is in the white list, otherwise use the incoming value.
+			$value = $app->getUserStateFromRequest($this->context . '.ordercol', 'filter_order', $ordering);
+
+
+			if (!in_array($value, $this->filter_fields))
 			{
-				foreach ($list as $name => $value)
-				{
-					// Extra validations
-					switch ($name)
-					{
-						case 'fullordering':
-							$orderingParts = explode(' ', $value);
-
-							if (count($orderingParts) >= 2)
-							{
-								// Latest part will be considered the direction
-								$fullDirection = end($orderingParts);
-
-								if (in_array(strtoupper($fullDirection), array('ASC', 'DESC', '')))
-								{
-									$this->setState('list.direction', $fullDirection);
-								}
-
-								unset($orderingParts[count($orderingParts) - 1]);
-
-								// The rest will be the ordering
-								$fullOrdering = implode(' ', $orderingParts);
-
-								if (in_array($fullOrdering, $this->filter_fields))
-								{
-									$this->setState('list.ordering', $fullOrdering);
-								}
-							}
-							else
-							{
-								$this->setState('list.ordering', $ordering);
-								$this->setState('list.direction', $direction);
-							}
-							break;
-
-						case 'ordering':
-							if (!in_array($value, $this->filter_fields))
-							{
-								$value = $ordering;
-							}
-							break;
-
-						case 'direction':
-							if (!in_array(strtoupper($value), array('ASC', 'DESC', '')))
-							{
-								$value = $direction;
-							}
-							break;
-
-						case 'limit':
-							$limit = $value;
-							break;
-
-						// Just to keep the default case
-						default:
-							$value = $value;
-							break;
-					}
-
-					$this->setState('list.' . $name, $value);
-				}
+				$value = $ordering;
+				$app->setUserState($this->context . '.ordercol', $value);
 			}
-			else
-			// Keep B/C for components previous to jform forms for filters
+
+			$this->setState('list.ordering', $value);
+
+			// Check if the ordering direction is valid, otherwise use the incoming value.
+			$value = $app->getUserStateFromRequest($this->context . '.orderdirn', 'filter_order_Dir', 'DESC');
+
+			if (!in_array(strtoupper($value), array('ASC', 'DESC', '')))
 			{
-				// Pre-fill the limits
-				
-				$limit = $app->getUserStateFromRequest('list.limit', 'limit',        (int) \Joomla\CMS\Component\ComponentHelper::getComponent('com_joomcck')->getParams()->get('list_limit',20), 'uint');
-
-				$this->setState('list.limit', $limit);
-
-
-
-				// Check if the ordering field is in the white list, otherwise use the incoming value.
-				$value = $app->getUserStateFromRequest($this->context . '.ordercol', 'filter_order', $ordering);
-
-				if (!in_array($value, $this->filter_fields))
-				{
-					$value = $ordering;
-					$app->setUserState($this->context . '.ordercol', $value);
-				}
-
-				$this->setState('list.ordering', $value);
-
-				// Check if the ordering direction is valid, otherwise use the incoming value.
-				$value = $app->getUserStateFromRequest($this->context . '.orderdirn', 'filter_order_Dir', 'DESC');
-
-				if (!in_array(strtoupper($value), array('ASC', 'DESC', '')))
-				{
-					$value = $direction;
-					$app->setUserState($this->context . '.orderdirn', $value);
-				}
-
-				$this->setState('list.direction', $value);
+				$value = $direction;
+				$app->setUserState($this->context . '.orderdirn', $value);
 			}
+
+			$this->setState('list.direction', $value);
 
 			// Support old ordering field
 			$oldOrdering = $app->input->get('filter_order');
@@ -597,7 +541,7 @@ class MModelList extends MModelBase
 				$this->setState('list.direction', $oldDirection);
 			}
 
-			$value = $app->getUserStateFromRequest($this->context . '.limitstart', 'limitstart', 0);
+			$value      = $app->getUserStateFromRequest($this->context . '.limitstart', 'limitstart', 0);
 			$limitstart = ($limit != 0 ? (floor($value / $limit) * $limit) : 0);
 			$this->setState('list.start', $limitstart);
 		}
@@ -611,14 +555,14 @@ class MModelList extends MModelBase
 	/**
 	 * Method to allow derived classes to preprocess the form.
 	 *
-	 * @param   \Joomla\CMS\Form\Form   $form   A \Joomla\CMS\Form\Form object.
-	 * @param   mixed   $data   The data expected for the form.
-	 * @param   string  $group  The name of the plugin group to import (defaults to "content").
+	 * @param   \Joomla\CMS\Form\Form  $form   A \Joomla\CMS\Form\Form object.
+	 * @param   mixed                  $data   The data expected for the form.
+	 * @param   string                 $group  The name of the plugin group to import (defaults to "content").
 	 *
 	 * @return  void
 	 *
-	 * @since   3.2
 	 * @throws  Exception if there is an error in the form event.
+	 * @since   3.2
 	 */
 	protected function preprocessForm(\Joomla\CMS\Form\Form $form, $data, $group = 'content')
 	{
@@ -662,7 +606,7 @@ class MModelList extends MModelBase
 	 */
 	public function getUserStateFromRequest($key, $request, $default = null, $type = 'none', $resetPage = true)
 	{
-		$app = \Joomla\CMS\Factory::getApplication();
+		$app       = \Joomla\CMS\Factory::getApplication();
 		$input     = $app->input;
 		$old_state = $app->getUserState($key);
 		$cur_state = (!is_null($old_state)) ? $old_state : $default;

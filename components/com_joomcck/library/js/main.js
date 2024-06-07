@@ -221,12 +221,17 @@ var _gaq = _gaq || [];
 		table = document.getElementById("sortTable");
 		direction = document.getElementById("directionTable");
 		order = table.options[table.selectedIndex].value;
+
+		console.log(order);
+
 		if(order != ordr) {
 			dirn = 'asc';
 		} else {
 			dirn = direction.options[direction.selectedIndex].value;
 		}
-		Joomla.tableOrdering(order, dirn, '');
+
+
+		Joomla.tableOrdering(order, dirn);
 	};
 
 	Joomcck.addTmplEditLink = function(type, field_id, inside, root) {

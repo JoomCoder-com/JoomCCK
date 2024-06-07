@@ -8,6 +8,7 @@
  * @license   GNU/GPL http://www.gnu.org/copyleft/gpl.html
  */
 
+use Joomla\CMS\Component\ComponentHelper;
 use Joomla\CMS\Factory;
 
 defined('_JEXEC') or die();
@@ -151,7 +152,15 @@ class JoomcckModelRecords extends MModelList
 
 		parent::populateState($orders[0], @$orders[1]);
 
+
 		$this->context = $context;
+
+		// override list limit
+		$listLimit =  ComponentHelper::getParams('com_joomcck')->get('list_limit_items',20);
+		$limit = $app->getUserStateFromRequest('list.limit', 'limit', $listLimit, 'uint');
+		$this->setState('list.limit', $limit);
+
+
 	}
 
 	protected function getStoreId($id = '')
