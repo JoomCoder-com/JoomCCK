@@ -32,13 +32,13 @@ $listDirn  = $this->state->get('list.direction', 'desc');
 		<?php echo \Joomla\CMS\Language\Text::_('COB_SECTIONMANAGER'); ?>
     </h1>
 </div>
-<?php echo HTMLFormatHelper::layout('items'); ?>
 
+<?php echo HTMLFormatHelper::layout('items'); ?>
 
 <div class="clearfix"></div>
 
 <form action="<?php echo $this->action ?>" method="post" name="adminForm" id="adminForm">
-    <div class="card shadow-sm">
+    <div class="card shadow-sm mb-5">
         <div class="card-header bg-white">
             <div class="d-flex justify-content-between align-items-center">
                 <div>
