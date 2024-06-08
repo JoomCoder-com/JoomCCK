@@ -18,7 +18,11 @@
 			</fieldset>
 
 			<fieldset name="filter" label="FS_FILTERGEN">
-				<field name="filter_enable" type="mradio" condition='{"1":["params_params_no_value","params_params_template_filter","params_params_filter_hide","params_params_filter_descr","params_params_template_filter_module","fieldset-name-filter2"]}' class="btn-group" default="0" label="F_ENABLE" description="">
+				<field name="filter_enable" type="mradio" condition='{"1":["params_params_no_value","params_params_template_filter","params_params_filter_hide","params_params_filter_descr","params_params_template_filter_module","fieldset-name-filter2","params_params_filter_show_number"]}' class="btn-group" default="0" label="F_ENABLE" description="">
+					<option value="0">JNO</option>
+					<option value="1">JYES</option>
+				</field>
+				<field name="filter_show_number" type="radio" class="btn-group" default="1" label="F_FBOXSHOWNUMS" description="F_FBOXSHOWNUMS_DESCR">
 					<option value="0">JNO</option>
 					<option value="1">JYES</option>
 				</field>
