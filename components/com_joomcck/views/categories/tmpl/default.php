@@ -47,7 +47,13 @@ if($saveOrder)
 	-->
 </style>
 
-<div class="page-header"><h1><?php echo \Joomla\CMS\Language\Text::sprintf('CSECTIONCATS', $this->section->name); ?></h1></div>
+<div class="page-header">
+    <h1>
+        <?php echo \Joomla\CMS\Language\Text::sprintf('CSECTIONCATS', $this->section->name); ?>
+    </h1>
+</div>
+
+
 <form action="<?php echo \Joomla\CMS\Router\Route::_('index.php?option=com_joomcck&view=categories&section_id=' . $section); ?>" method="post" name="adminForm" id="adminForm">
 	<div class="btn-toolbar clearfix">
 		<div class="float-start">

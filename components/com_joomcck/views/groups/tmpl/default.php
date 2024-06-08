@@ -7,6 +7,8 @@
  * @license GNU/GPL http://www.gnu.org/copyleft/gpl.html
  */
 
+use Joomcck\Layout\Helpers\Layout;
+
 defined('_JEXEC') or die('Restricted access'); ?>
 <?php
 $user	= \Joomla\CMS\Factory::getApplication()->getIdentity();
@@ -25,91 +27,114 @@ if ($saveOrder)
 
 <?php echo HTMLFormatHelper::layout('navbar'); ?>
 
-<a class="btn btn-primary" href="index.php?option=com_joomcck&view=tfields&filter_type=<?php echo $this->state->get('groups.type'); ?>">
-	<?php echo HTMLFormatHelper::icon('arrow-180.png'); ?>
-	<?php \Joomla\CMS\Language\Text::printf('CBACKTOFIELD', $this->type->name);?>
-</a>
+
+
+<div class="page-header">
+    <h1>
+        <img src="<?php echo \Joomla\CMS\Uri\Uri::root(TRUE); ?>/components/com_joomcck/images/icons/sections.png">
+		<?php echo \Joomla\CMS\Language\Text::sprintf('COB_FIELD_GROPMANAGER', $this->type->name); ?>
+        <a class="float-end btn btn-sm btn-outline-dark" href="index.php?option=com_joomcck&view=tfields&filter_type=<?php echo $this->state->get('groups.type'); ?>">
+		    <?php echo HTMLFormatHelper::icon('arrow-180.png'); ?>
+		    <?php \Joomla\CMS\Language\Text::printf('CBACKTOFIELD', $this->type->name);?>
+        </a>
+    </h1>
+
+</div>
+
+<div class="clearfix"></div>
+
+<?php echo HTMLFormatHelper::layout('items'); ?>
+
+<div class="clearfix"></div>
+
+
 
 <form action="<?php echo \Joomla\CMS\Uri\Uri::getInstance()->toString(); ?>" method="post" name="adminForm" id="adminForm">
 
-	<div class="page-header">
-		<h1>
-			<img src="<?php echo \Joomla\CMS\Uri\Uri::root(TRUE); ?>/components/com_joomcck/images/icons/sections.png">
-			<?php echo \Joomla\CMS\Language\Text::sprintf('COB_FIELD_GROPMANAGER', $this->type->name); ?>
-		</h1>
-	</div>
 
-	<?php echo HTMLFormatHelper::layout('items'); ?>
+    <div class="card shadow-sm mb-5">
+        <div class="card-header bg-white">
+            <div class="d-flex justify-content-between align-items-center">
+			    <?php echo Layout::render('admin.list.ordering', $this) ?>
+            </div>
+        </div>
+        <div class="card-body">
+            <table class="table table-hover" id="groupsList">
+                <thead>
+                <th width="1%" class="nowrap center hidden-phone">
+                    <i class="icon-menu-2"></i>
+                </th>
+                <th width="1%">
+                    <input type="checkbox" name="checkall-toggle" value="" onclick="Joomla.checkAll(this)" />
+                </th>
+                <th class="title">
+			        <?php echo \Joomla\CMS\Language\Text::_('CTITLE'); ?>
+                </th>
+                <th width="1%">
+			        <?php echo \Joomla\CMS\Language\Text::_('ID'); ?>
+                </th>
+                </thead>
+                <tbody>
+		        <?php foreach ($this->items as $i => $item) :
+			        $ordering   = ($listOrder == 'g.ordering');
+			        $canCreate  = $user->authorise('core.create',     'com_joomcck.group.'.$item->id);
+			        $canEdit    = $user->authorise('core.edit',       'com_joomcck.group.'.$item->id);
+			        $canCheckin = $user->authorise('core.manage',     'com_checkin') || $item->checked_out == $userId || $item->checked_out == 0;
+			        $canChange = true;
+			        ?>
+                    <tr class="row<?php echo $i % 2; ?>">
+                        <td class="order nowrap center hidden-phone">
+					        <?php if ($canChange) :
+						        $disableClassName = '';
+						        $disabledLabel	  = '';
 
-	<table class="table table-hover" id="groupsList">
-		<thead>
-			<th width="1%" class="nowrap center hidden-phone">
-				<i class="icon-menu-2"></i>
-			</th>
-			<th width="1%">
-				<input type="checkbox" name="checkall-toggle" value="" onclick="Joomla.checkAll(this)" />
-			</th>
-			<th class="title">
-				<?php echo \Joomla\CMS\Language\Text::_('CTITLE'); ?>
-			</th>
-			<th width="1%">
-				<?php echo \Joomla\CMS\Language\Text::_('ID'); ?>
-			</th>
-		</thead>
-		<?php echo HTMLFormatHelper::layout('pagenav', $this); ?>
-		<tbody>
-		<?php foreach ($this->items as $i => $item) :
-			$ordering   = ($listOrder == 'g.ordering');
-			$canCreate  = $user->authorise('core.create',     'com_joomcck.group.'.$item->id);
-			$canEdit    = $user->authorise('core.edit',       'com_joomcck.group.'.$item->id);
-			$canCheckin = $user->authorise('core.manage',     'com_checkin') || $item->checked_out == $userId || $item->checked_out == 0;
-			$canChange = true;
-			?>
-			<tr class="row<?php echo $i % 2; ?>">
-				<td class="order nowrap center hidden-phone">
-					<?php if ($canChange) :
-						$disableClassName = '';
-						$disabledLabel	  = '';
-
-						if (!$saveOrder) :
-							$disabledLabel    = \Joomla\CMS\Language\Text::_('JORDERINGDISABLED');
-							$disableClassName = 'inactive tip-top';
-						endif; ?>
-						<span class="sortable-handler <?php echo $disableClassName?>" title="<?php echo $disabledLabel?>" rel="tooltip">
+						        if (!$saveOrder) :
+							        $disabledLabel    = \Joomla\CMS\Language\Text::_('JORDERINGDISABLED');
+							        $disableClassName = 'inactive tip-top';
+						        endif; ?>
+                                <span class="sortable-handler <?php echo $disableClassName?>" title="<?php echo $disabledLabel?>" rel="tooltip">
 							<i class="icon-menu"></i>
 						</span>
-						<input type="text" style="display:none"  name="order[]" size="5" value="<?php echo $item->ordering;?>" class="width-20 text-area-order " />
-					<?php else : ?>
-						<span class="sortable-handler inactive" >
+                                <input type="text" style="display:none"  name="order[]" size="5" value="<?php echo $item->ordering;?>" class="width-20 text-area-order " />
+					        <?php else : ?>
+                                <span class="sortable-handler inactive" >
 							<i class="icon-menu"></i>
 						</span>
-					<?php endif; ?>
-				</td>
-				<td width="1%">
-					<?php echo \Joomla\CMS\HTML\HTMLHelper::_('grid.id', $i, $item->id); ?>
-				</td>
-				<td >
-					<?php if ($item->checked_out) : ?>
-						<?php echo \Joomla\CMS\HTML\HTMLHelper::_('jgrid.checkedout', $i, $item->checked_out, $item->checked_out_time, 'groups.', $canCheckin); ?>
-					<?php endif; ?>
+					        <?php endif; ?>
+                        </td>
+                        <td width="1%">
+					        <?php echo \Joomla\CMS\HTML\HTMLHelper::_('grid.id', $i, $item->id); ?>
+                        </td>
+                        <td >
+					        <?php if ($item->checked_out) : ?>
+						        <?php echo \Joomla\CMS\HTML\HTMLHelper::_('jgrid.checkedout', $i, $item->checked_out, $item->checked_out_time, 'groups.', $canCheckin); ?>
+					        <?php endif; ?>
 
-					<a href="<?php echo \Joomla\CMS\Router\Route::_('index.php?option=com_joomcck&task=group.edit&id='.(int) $item->id);?>">
-						<?php echo $item->title; ?>
-					</a>
+                            <a href="<?php echo \Joomla\CMS\Router\Route::_('index.php?option=com_joomcck&task=group.edit&id='.(int) $item->id);?>">
+						        <?php echo $item->title; ?>
+                            </a>
 
-				</td>
-				<td>
-					<?php echo $item->id?>
-				</td>
-			</tr>
-			<?php endforeach; ?>
-		</tbody>
-	</table>
+                        </td>
+                        <td>
+					        <?php echo $item->id?>
+                        </td>
+                    </tr>
+		        <?php endforeach; ?>
+                </tbody>
+            </table>
 
-	<input type="hidden" name="type_id" value="<?php echo $this->state->get('groups.type');?>" />
-	<input type="hidden" name="task" value="" />
-	<input type="hidden" name="boxchecked" value="0" />
-	<input type="hidden" name="filter_order" value="<?php echo $listOrder; ?>" />
-	<input type="hidden" name="filter_order_Dir" value="<?php echo $listDirn; ?>" />
-	<?php echo \Joomla\CMS\HTML\HTMLHelper::_('form.token'); ?>
+            <input type="hidden" name="type_id" value="<?php echo $this->state->get('groups.type');?>" />
+            <input type="hidden" name="task" value="" />
+            <input type="hidden" name="boxchecked" value="0" />
+            <input type="hidden" name="filter_order" value="<?php echo $listOrder; ?>" />
+            <input type="hidden" name="filter_order_Dir" value="<?php echo $listDirn; ?>" />
+	        <?php echo \Joomla\CMS\HTML\HTMLHelper::_('form.token'); ?>
+        </div>
+        <div class="card-footer">
+		    <?php echo Layout::render('admin.list.pagination', ['pagination' => $this->pagination]) ?>
+        </div>
+    </div>
+
+
+
 </form>

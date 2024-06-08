@@ -136,6 +136,4 @@ $listDirn	= $this->state->get('list.direction');
         </div>
     </div>
 
-
-
 </form>
