@@ -7,6 +7,9 @@
  * @license GNU/GPL http://www.gnu.org/copyleft/gpl.html
  */
 
+use Joomcck\Layout\Helpers\Layout;
+use Joomla\CMS\Uri\Uri;
+
 defined('_JEXEC') or die('Restricted access');
 
 \Joomla\CMS\HTML\HTMLHelper::_('formbehavior.chosen', '.select');
@@ -51,66 +54,88 @@ $listDirn	= $this->state->get('list.direction');
 
 <?php echo HTMLFormatHelper::layout('navbar'); ?>
 
-<form action="<?php echo \Joomla\CMS\Uri\Uri::getInstance()->toString(); ?>" method="post" name="adminForm"  id="adminForm">
-	<?php echo HTMLFormatHelper::layout('search', $this); ?>
 
-	<div class="page-header">
-		<h1>
-			<img src="<?php echo \Joomla\CMS\Uri\Uri::root(TRUE); ?>/components/com_joomcck/images/icons/tags.png">
-			<?php echo \Joomla\CMS\Language\Text::_('CTAGS'); ?>
-		</h1>
-	</div>
+<div class="page-header">
+    <h1>
+        <img src="<?php echo Uri::root(TRUE); ?>/components/com_joomcck/images/icons/tags.png">
+		<?php echo \Joomla\CMS\Language\Text::_('CTAGS'); ?>
+    </h1>
+</div>
 
-	<?php echo HTMLFormatHelper::layout('filters', $this); ?>
+<?php echo HTMLFormatHelper::layout('items', $this); ?>
 
-	<?php echo HTMLFormatHelper::layout('items', $this); ?>
+<div class="clearfix"></div>
 
-	<table class="table table-striped">
-		<thead>
-			<th width="1%">
-				<input type="checkbox" name="checkall-toggle" value="" onclick="Joomla.checkAll(this)" />
-			</th>
-			<th class="title">
-				<?php echo \Joomla\CMS\HTML\HTMLHelper::_('grid.sort',  'CTAGNAME', 't.tag', $listDirn, $listOrder); ?>
-			</th>
-			<th width="10%" class="nawrap center">
-				<?php echo \Joomla\CMS\HTML\HTMLHelper::_('grid.sort',  'CCREATED', 't.ctime', $listDirn, $listOrder); ?>
-			</th>
-			<th width="15%" class="nowrap center">
-				<?php echo \Joomla\CMS\HTML\HTMLHelper::_('grid.sort', 'CLANGUAGE', 't.language', $listDirn, $listOrder); ?>
-			</th>
-			<th width="1%" class="nowrap">
-				<?php echo \Joomla\CMS\HTML\HTMLHelper::_('grid.sort',  'ID', 't.id', $listDirn, $listOrder); ?>
-			</th>
-		</thead>
-		<?php echo HTMLFormatHelper::layout('pagenav', $this); ?>
-		<tbody>
-		<?php $k=1; foreach ($this->items as $i => $row) :?>
 
-			<tr class="<?php $k = 1 - $k; echo "row$k"; ?>">
-				<td>
-					<?php echo \Joomla\CMS\HTML\HTMLHelper::_('grid.id', $i, $row->id ); ?>
-				</td>
-				<td id="tag_container_<?php echo $row->id; ?>">
-					<a href="javascript: void(0); showForm(<?php echo $row->id; ?>)" id="tag_<?php echo $row->id; ?>"><?php echo $row->tag; ?></a>
-				</td>
-				<td class="nowrap center small">
-					<?php $data = new \Joomla\CMS\Date\Date( $row->ctime ); echo $data->format( \Joomla\CMS\Language\Text::_('CDATE1' ) ); ?>
-				</td>
-				<td class="center">
-					<?php echo $row->language; ?>
-				</td>
-				<td align="center">
-					<?php echo $row->id; ?>
-				</td>
-			</tr>
-		<?php endforeach;?>
-		</tbody>
-	</table>
+<form action="<?php echo Uri::getInstance()->toString(); ?>" method="post" name="adminForm"  id="adminForm">
 
-	<input type="hidden" name="task" value="" />
-	<input type="hidden" name="boxchecked" value="0" />
-	<input type="hidden" name="filter_order" value="<?php echo $listOrder; ?>" />
-	<input type="hidden" name="filter_order_Dir" value="<?php echo $listDirn; ?>" />
-	<?php echo \Joomla\CMS\HTML\HTMLHelper::_('form.token'); ?>
+    <div class="card shadow-sm mb-5">
+        <div class="card-header bg-white">
+            <div class="d-flex justify-content-between align-items-center">
+                <div>
+				    <?php echo HTMLFormatHelper::layout('search', $this); ?>
+                </div>
+			    <?php echo Layout::render('admin.list.ordering', $this) ?>
+            </div>
+
+            <div class="my-2">
+			    <?php echo HTMLFormatHelper::layout('filters', $this); ?>
+            </div>
+        </div>
+        <div class="card-body">
+            <table class="table table-striped">
+                <thead>
+                <th width="1%">
+                    <input type="checkbox" name="checkall-toggle" value="" onclick="Joomla.checkAll(this)" />
+                </th>
+                <th class="title">
+			        <?php echo \Joomla\CMS\HTML\HTMLHelper::_('grid.sort',  'CTAGNAME', 't.tag', $listDirn, $listOrder); ?>
+                </th>
+                <th width="10%" class="nawrap center">
+			        <?php echo \Joomla\CMS\HTML\HTMLHelper::_('grid.sort',  'CCREATED', 't.ctime', $listDirn, $listOrder); ?>
+                </th>
+                <th width="15%" class="nowrap center">
+			        <?php echo \Joomla\CMS\HTML\HTMLHelper::_('grid.sort', 'CLANGUAGE', 't.language', $listDirn, $listOrder); ?>
+                </th>
+                <th width="1%" class="nowrap">
+			        <?php echo \Joomla\CMS\HTML\HTMLHelper::_('grid.sort',  'ID', 't.id', $listDirn, $listOrder); ?>
+                </th>
+                </thead>
+                <tbody>
+		        <?php $k=1; foreach ($this->items as $i => $row) :?>
+
+                    <tr class="<?php $k = 1 - $k; echo "row$k"; ?>">
+                        <td>
+					        <?php echo \Joomla\CMS\HTML\HTMLHelper::_('grid.id', $i, $row->id ); ?>
+                        </td>
+                        <td id="tag_container_<?php echo $row->id; ?>">
+                            <a href="javascript: void(0); showForm(<?php echo $row->id; ?>)" id="tag_<?php echo $row->id; ?>"><?php echo $row->tag; ?></a>
+                        </td>
+                        <td class="nowrap center small">
+					        <?php $data = new \Joomla\CMS\Date\Date( $row->ctime ); echo $data->format( \Joomla\CMS\Language\Text::_('CDATE1' ) ); ?>
+                        </td>
+                        <td class="center">
+					        <?php echo $row->language; ?>
+                        </td>
+                        <td align="center">
+					        <?php echo $row->id; ?>
+                        </td>
+                    </tr>
+		        <?php endforeach;?>
+                </tbody>
+            </table>
+
+            <input type="hidden" name="task" value="" />
+            <input type="hidden" name="boxchecked" value="0" />
+            <input type="hidden" name="filter_order" value="<?php echo $listOrder; ?>" />
+            <input type="hidden" name="filter_order_Dir" value="<?php echo $listDirn; ?>" />
+	        <?php echo \Joomla\CMS\HTML\HTMLHelper::_('form.token'); ?>
+        </div>
+        <div class="card-footer">
+		    <?php echo Layout::render('admin.list.pagination', ['pagination' => $this->pagination]) ?>
+        </div>
+    </div>
+
+
+
 </form>

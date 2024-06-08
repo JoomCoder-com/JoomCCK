@@ -9,6 +9,7 @@
 
 use Joomcck\Html\Helpers\Dropdown;
 use Joomcck\Layout\Helpers\Layout;
+use Joomla\CMS\Uri\Uri;
 
 defined('_JEXEC') or die('Restricted access');
 
@@ -29,7 +30,7 @@ $listDirn = $this->state->get('list.direction');
 
 <div class="page-header">
     <h1>
-        <img src="<?php echo \Joomla\CMS\Uri\Uri::root(TRUE); ?>/components/com_joomcck/images/icons/items.png">
+        <img src="<?php echo Uri::root(TRUE); ?>/components/com_joomcck/images/icons/items.png">
 		<?php echo \Joomla\CMS\Language\Text::_('XML_TOOLBAR_TITLE_RECORDS'); ?>
     </h1>
 </div>
@@ -38,7 +39,7 @@ $listDirn = $this->state->get('list.direction');
 
 <div class="clearfix"></div>
 
-<form action="<?php echo \Joomla\CMS\Uri\Uri::getInstance()->toString() ?>" method="post" id="adminForm" name="adminForm">
+<form action="<?php echo Uri::getInstance()->toString() ?>" method="post" id="adminForm" name="adminForm">
 
     <div class="card shadow-sm mb-5">
 
@@ -243,7 +244,7 @@ $listDirn = $this->state->get('list.direction');
 	        <?php echo \Joomla\CMS\HTML\HTMLHelper::_('form.token'); ?>
         </div>
 
-        <div class="card-footer bg-white">
+        <div class="card-footer">
 		    <?php echo Layout::render('admin.list.pagination', ['pagination' => $this->pagination]) ?>
         </div>
 

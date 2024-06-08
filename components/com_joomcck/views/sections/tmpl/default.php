@@ -165,7 +165,7 @@ $listDirn  = $this->state->get('list.direction', 'desc');
 			<?php echo \Joomla\CMS\HTML\HTMLHelper::_('form.token'); ?>
 
         </div>
-        <div class="card-footer bg-white">
+        <div class="card-footer">
 			<?php echo Layout::render('admin.list.pagination', ['pagination' => $this->pagination]) ?>
         </div>
 
