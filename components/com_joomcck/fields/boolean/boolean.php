@@ -111,6 +111,8 @@ class JFormFieldCBoolean extends CFormField
 		$nums = array();
 		if($this->params->get('params.filter_show_number', 1))
 		{
+
+			// true
 			$db    = \Joomla\CMS\Factory::getDbo();
 			$query = $db->getQuery(TRUE);
 			$q1    = "SELECT count(record_id) as num
@@ -118,6 +120,7 @@ class JFormFieldCBoolean extends CFormField
 				WHERE section_id = '{$section->id}' AND field_key = '{$this->key}'
 				AND field_value = '1' GROUP BY field_value";
 			$db->setQuery($q1);
+
 			if($nums[1] = $db->loadResult())
 			{
 
@@ -126,6 +129,7 @@ class JFormFieldCBoolean extends CFormField
 				$label['true'] .= " <span class='badge $badgeClass'>{$nums[1]}</span>";
 			}
 
+			// false
 			if($this->params->get('params.no_value') == 0)
 			{
 				$q0 = "SELECT count(record_id) as num
@@ -154,12 +158,14 @@ class JFormFieldCBoolean extends CFormField
 			}
 
 			$db->setQuery($q0);
+
 			if($nums[0] = $db->loadResult())
 			{
 				$badgeClass = $nums[0] > 0 ? 'bg-success' : 'bg-light border text-dark';
 
-				$label['true'] .= " <span class='badge $badgeClass'>{$nums[0]}</span>";
+				$label['false'] .= " <span class='badge $badgeClass'>{$nums[0]}</span>";
 			}
+
 		}
 
 		$this->labelvalue = $label;
