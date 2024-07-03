@@ -23,7 +23,8 @@ class JoomcckControllerPacks extends MControllerAdmin
 			$this->input = \Joomla\CMS\Factory::getApplication()->input;
 		}
 	}
-	public function &getModel($name = 'Pack', $prefix = 'JoomcckModel')
+
+	public function getModel($name = 'Pack', $prefix = 'JoomcckModel',$config = [])
 	{
 		$model = parent::getModel($name, $prefix, array('ignore_request' => true));
 		return $model;

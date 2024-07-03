@@ -737,7 +737,7 @@ class CStatistics
 			return 1;
 		}
 
-		if(!array_key_exists($section_id, $out))
+		if(!array_key_exists($section_id, $out) && !is_null($section_id))
 		{
 			$db = \Joomla\CMS\Factory::getDbo();
 			$db->setQuery("SELECT COUNT(*) FROM `#__js_res_record` WHERE section_id = {$section_id} AND published = 0");
