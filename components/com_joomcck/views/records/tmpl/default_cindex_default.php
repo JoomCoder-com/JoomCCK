@@ -42,12 +42,12 @@ $api = new JoomcckApi();
 <?php endif;?>
 
 <?php for($i = 0; $i < $rows; $i ++):?>
-	<div class="row">
+	<div class="row gx-3 gy-3 mb-3">
 		<?php for($c = 0; $c < $cols; $c++):?>
-			<div class="col-md-<?php echo $span[$cols]?> category-box">
+			<div class="col-md-<?php echo $span[$cols]?>">
 				<?php if ($ind < count($cats)): ?>
 					<?php $category = $cats[$ind]; ?>
-					<div class="<?php echo ($params->get('tmpl_core.well', 1) ? 'card' : '')?>">
+					<div class="<?php echo ($params->get('tmpl_core.well', 1) ? 'card ' : '')?>">
 						<?php if($params->get('tmpl_params.cat_img', 1) && $category->image):?>
 							<div>
 								<?php
