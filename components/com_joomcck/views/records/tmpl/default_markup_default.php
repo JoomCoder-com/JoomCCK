@@ -94,7 +94,9 @@ $current_user = \Joomla\CMS\Factory::getUser($this->input->getInt('user_id', $th
 
 <!-- --------------  Show description of the current category or section ---------------------- -->
 <?php if ($this->description): ?>
-	<?php echo $this->description; ?>
+    <div id="jcck-description-block">
+	    <?php echo $this->description; ?>
+    </div>
 <?php endif; ?>
 
 <form method="post" action="<?php echo $this->action; ?>" name="adminForm" id="adminForm" enctype="multipart/form-data">
