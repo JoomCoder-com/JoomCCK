@@ -926,7 +926,7 @@ class JoomcckControllerAjax extends MControllerAdmin
         $record->load($this->input->getInt('rid'));
         
 		$tag_id  = $this->input->get('tid');
-        $tag_text  = $this->input->get('text');
+        $tag_text  = $this->input->get('text','','string');
 
 
         if(!preg_match("/^[0-9]*$/", $tag_id) || empty($tag_id))
