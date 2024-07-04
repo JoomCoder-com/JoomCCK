@@ -123,7 +123,7 @@ class JoomcckControllerRate extends MControllerAdmin
 		$rating = $db->loadObject();
 
 		$options = $type->params->get('properties.rate_multirating_options');
-		$options = explode("\n", $options);
+		$options = explode("\n", (string) $options);
 		ArrayHelper::clean_r($options);
 
 		$out = array('success' => 1);

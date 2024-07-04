@@ -60,14 +60,9 @@ foreach ($exclude as &$value) {
 }
 $helper->exclude = $exclude;
 ?>
-<?php if($params->get('tmpl_core.show_title_index')):?>
-	<h2><?php echo \Joomla\CMS\Language\Text::_('CONTHISPAGE')?></h2>
-	<ul>
-		<?php foreach ($this->items AS $item):?>
-			<li><a href="#record<?php echo $item->id?>"><?php echo $item->title?></a></li>
-		<?php endforeach;?>
-	</ul>
-<?php endif;?>
+
+
+<?php echo Layout::render('core.list.onThisPage',['params' => $params,'items' => $this->items]) ?>
 
 <style>
 	.dl-horizontal dd {
@@ -79,63 +74,64 @@ $helper->exclude = $exclude;
 </style>
 
 
-<?php if($leading && $helper->isnext($this)):?>
-	<div class="items-leading card mb-3">
-		<?php for($i = 0; $i < $leading; $i++): ?>
-			<div class="leading-<?php echo $i;?>">
-				<?php echo $helper->display($this);?>
-			</div>
-		<?php endfor;?>
-	</div>
-<?php endif;?>
-<div class="clearfix"></div>
+<div class="jcck-blog-articles mb-5">
 
-<?php if($intro && $helper->isnext($this)):?>
-	<?php for($r = 0; $r < $rows; $r++):?>
-		<div class="row">
-			<?php for($c = 0; $c < $cols; $c++):?>
-				<div class="col-md-<?php echo round((12 / $cols));?>">
-					<div class="card">
+	<?php if($leading && $helper->isnext($this)):?>
+        <div class="items-leading mb-3">
+			<?php for($i = 0; $i < $leading; $i++): ?>
+                <div class="leading-<?php echo $i;?>">
+					<?php echo $helper->display($this);?>
+                </div>
+			<?php endfor;?>
+        </div>
+	<?php endif;?>
+    <div class="clearfix"></div>
+
+	<?php if($intro && $helper->isnext($this)):?>
+		<?php for($r = 0; $r < $rows; $r++):?>
+            <div class="row">
+				<?php for($c = 0; $c < $cols; $c++):?>
+                    <div class="col-md-<?php echo round((12 / $cols));?>">
 						<?php echo $helper->display($this);?>
                     </div>
-				</div>
-			<?php endfor;?>
-		</div>
-	<?php endfor;?>
-<?php endif;?>
+				<?php endfor;?>
+            </div>
+		<?php endfor;?>
+	<?php endif;?>
 
-<?php if($links && $helper->isnext($this)):?>
-<div class="items-more">
-	<h3><?php echo \Joomla\CMS\Language\Text::_('CMORERECORDS')?></h3>
-	<ul class="nav nav-tabs nav-stacked">
-		<?php foreach ($this->items AS $item):?>
-			<li class="has-context">
-				<div class="float-end controls">
-					<div class="btn-group" style="display: none;">
-						<?php echo HTMLFormatHelper::bookmark($item, $this->submission_types[$item->type_id], $params);?>
-						<?php echo HTMLFormatHelper::follow($item, $this->section);?>
-						<?php echo HTMLFormatHelper::repost($item, $this->section);?>
-						<?php echo HTMLFormatHelper::compare($item, $this->submission_types[$item->type_id], $this->section);?>
-						<?php if($item->controls):?>
-							<a href="#" data-bs-toggle="dropdown" class="dropdown-toggle btn btn-sm">
-								<?php echo HTMLFormatHelper::icon('gear.png');  ?>
-							</a>
-							<ul class="dropdown-menu">
-								<?php echo list_controls($item->controls);?>
-							</ul>
-						<?php endif;?>
-					</div>
-				</div>
+	<?php if($links && $helper->isnext($this)):?>
+        <div class="items-more">
+            <h3><?php echo \Joomla\CMS\Language\Text::_('CMORERECORDS')?></h3>
+            <ul class="nav nav-tabs nav-stacked">
+				<?php foreach ($this->items AS $item):?>
+                    <li class="has-context">
+                        <div class="float-end controls">
+                            <div class="btn-group" style="display: none;">
+								<?php echo HTMLFormatHelper::bookmark($item, $this->submission_types[$item->type_id], $params);?>
+								<?php echo HTMLFormatHelper::follow($item, $this->section);?>
+								<?php echo HTMLFormatHelper::repost($item, $this->section);?>
+								<?php echo HTMLFormatHelper::compare($item, $this->submission_types[$item->type_id], $this->section);?>
+								<?php if($item->controls):?>
+                                    <a href="#" data-bs-toggle="dropdown" class="dropdown-toggle btn btn-sm">
+										<?php echo HTMLFormatHelper::icon('gear.png');  ?>
+                                    </a>
+                                    <ul class="dropdown-menu">
+										<?php echo list_controls($item->controls);?>
+                                    </ul>
+								<?php endif;?>
+                            </div>
+                        </div>
 
-				<a <?php echo $item->nofollow ? 'rel="nofollow"' : '';?> href="<?php echo \Joomla\CMS\Router\Route::_($item->url);?>">
-					<?php echo $item->title;?>
-					<?php echo CEventsHelper::showNum('record', $item->id);?>
-				</a>
+                        <a <?php echo $item->nofollow ? 'rel="nofollow"' : '';?> href="<?php echo \Joomla\CMS\Router\Route::_($item->url);?>">
+							<?php echo $item->title;?>
+							<?php echo CEventsHelper::showNum('record', $item->id);?>
+                        </a>
 
-			</li>
-		<?php endforeach;?>
-	</ul>
+                    </li>
+				<?php endforeach;?>
+            </ul>
+        </div>
+	<?php endif;?>
 </div>
-<?php endif;?>
 
 

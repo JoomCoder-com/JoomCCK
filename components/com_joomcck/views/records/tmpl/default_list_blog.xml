@@ -12,11 +12,15 @@
 
 	<fields name="tmpl_params">
 		<fieldset name="positions" label="Exclude" description="Fields to be excluded of fields that are allowed to be shown in the list">
-			<field name="field_id_exclude" client="list" type="meresourcesfields" size="15" key="id" multiple="true" default="" label="Fields to exclude" description="" />
+			<field name="field_id_exclude" client="list" type="meresourcesfields" class="form-select" size="15" key="id" multiple="true" default="" label="Fields to exclude" description="" />
 			<field name="leading" type="text" size="3" default="1" label="Blog Num Leading" description=""/>
 			<field name="blog_intro" type="text" size="3" default="6" label="Blog Num Intro" description=""/>
 			<field name="blog_cols" type="text" size="3" default="2" label="Blog Columns" description=""/>
 			<field name="blog_links" type="text" size="3" default="10" label="Blog Num Links" description="Number of Items to display as Links."/>
+			<field name="fields_list_layout" type="list" default="default" label="Fields List Layout">
+				<option value="default">Default</option>
+				<option value="descriptionlist">Description List (dl,dt,dd)</option>
+			</field>
 		</fieldset>
 	</fields>
 
