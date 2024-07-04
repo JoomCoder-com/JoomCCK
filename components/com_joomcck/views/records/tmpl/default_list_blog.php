@@ -14,6 +14,7 @@ if(!class_exists('CarticleHelper'))
 	{
 
 		var $k = 0;
+        public $exclude;
 
 		public function isnext($obj)
 		{
@@ -176,8 +177,7 @@ if(!class_exists('CarticleHelper'))
 		}
 	}
 }
-?>
-<?php
+
 $k = 0;
 $params = $this->tmpl_params['list'];
 $leading = $params->get('tmpl_params.leading', 1);
