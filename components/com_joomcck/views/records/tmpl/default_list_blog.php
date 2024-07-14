@@ -8,6 +8,7 @@
  */
 
 use Joomcck\Layout\Helpers\Layout;
+use Joomla\CMS\Language\Text;
 
 defined('_JEXEC') or die('Restricted access');
 
@@ -59,8 +60,8 @@ foreach ($exclude as &$value) {
 	$value = $this->fields_keys_by_id[$value];
 }
 $helper->exclude = $exclude;
-?>
 
+?>
 
 <?php echo Layout::render('core.list.onThisPage',['params' => $params,'items' => $this->items]) ?>
 
@@ -73,7 +74,6 @@ $helper->exclude = $exclude;
 	}
 </style>
 
-
 <div class="jcck-blog-articles mb-5">
 
 	<?php if($leading && $helper->isnext($this)):?>
@@ -85,6 +85,7 @@ $helper->exclude = $exclude;
 			<?php endfor;?>
         </div>
 	<?php endif;?>
+
     <div class="clearfix"></div>
 
 	<?php if($intro && $helper->isnext($this)):?>
@@ -92,7 +93,7 @@ $helper->exclude = $exclude;
             <div class="row">
 				<?php for($c = 0; $c < $cols; $c++):?>
                     <div class="col-md-<?php echo round((12 / $cols));?>">
-						<?php echo $helper->display($this);?>
+						<?php echo $helper->display($this); ?>
                     </div>
 				<?php endfor;?>
             </div>
@@ -101,7 +102,7 @@ $helper->exclude = $exclude;
 
 	<?php if($links && $helper->isnext($this)):?>
         <div class="items-more">
-            <h3><?php echo \Joomla\CMS\Language\Text::_('CMORERECORDS')?></h3>
+            <h3><?php echo Text::_('CMORERECORDS')?></h3>
             <ul class="nav nav-tabs nav-stacked">
 				<?php foreach ($this->items AS $item):?>
                     <li class="has-context">
@@ -132,6 +133,7 @@ $helper->exclude = $exclude;
             </ul>
         </div>
 	<?php endif;?>
+
 </div>
 
 
