@@ -40,6 +40,7 @@ class JoomcckViewRecords extends MViewBase
 			return;
 		}
 
+
 		// ----- GET SECTION ------
 		$section = $this->section = ItemsStore::getSection($app->input->getInt('section_id'));
 

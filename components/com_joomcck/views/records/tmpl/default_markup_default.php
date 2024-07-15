@@ -36,6 +36,7 @@ $current_user = \Joomla\CMS\Factory::getUser($this->input->getInt('user_id', $th
 \Joomla\CMS\Factory::getDocument()->addStyleSheet(\Joomla\CMS\Uri\Uri::root().'/media/com_joomcck/css/joomcck.css');
 
 
+
 ?>
 <?php if ($markup->get('main.css')): ?>
     <style>
@@ -561,7 +562,7 @@ $current_user = \Joomla\CMS\Factory::getUser($this->input->getInt('user_id', $th
 <!-- Show Alpha Index -->
 <?php echo Layout::render('core.markup.alphaIndex',['current' => $this]); ?>
 
-
+<!-- Filters worns -->
 <?php if ($markup->get('filters.worns') && count($this->worns)): ?>
     <div class="filter-worns">
 		<?php foreach ($this->worns as $worn): ?>
@@ -586,8 +587,6 @@ $current_user = \Joomla\CMS\Factory::getUser($this->input->getInt('user_id', $th
     </div>
     <br>
 <?php endif; ?>
-
-
 
 
 <?php if ($this->items): ?>
