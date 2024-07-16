@@ -34,15 +34,18 @@ Class Layout extends LayoutHelper {
 
 		}
 
-		// get layout path in section folder
-		$sectionLayoutFile = self::getSectionLayoutFile($layoutFile);
+		// override core layouts by apps
+		if(strpos('core.', $layoutFile) !== false){
+			// get layout path in section folder
+			$sectionLayoutFile = self::getSectionLayoutFile($layoutFile);
 
-		// render layout if found in layout/apps/sectionName
-		$display = parent::render($sectionLayoutFile, $displayData, $basePath, $options);
+			// render layout if found in layout/apps/sectionName
+			$display = parent::render($sectionLayoutFile, $displayData, $basePath, $options);
 
-		// if not empty return it
-		if(!empty($display))
-			return $display;
+			// if not empty return it
+			if(!empty($display))
+				return $display;
+		}
 
 		// if not return core layout
 		return parent::render($layoutFile, $displayData, $basePath, $options);
