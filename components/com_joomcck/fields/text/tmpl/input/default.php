@@ -33,9 +33,3 @@ $mask = $this->params->get('params.mask', 0);
 	   id="field_<?php echo $this->id;?>" value="<?php echo htmlspecialchars( (string) $this->value, ENT_COMPAT, 'UTF-8');?>"
 	<?php echo $class . $size . $disabled . $readonly . $onchange . $maxLength . $required;?>>
 <?php echo $this->params->get('params.append');?>
-				
-<?php if ($mask->mask_type) :?>
-<script type="text/javascript">
-	initMask(<?php echo $this->id;?>, "<?php echo $mask->mask;?>", "<?php echo $this->mask_type;?>");
-</script>
-<?php endif; ?>

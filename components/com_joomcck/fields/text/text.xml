@@ -76,11 +76,31 @@
 				<field name="regex_val" type="text" default="" size="" label="F_REGEXVAL" />
 			</fieldset>
 			<fieldset name="mask" label="FS_MASK" description="FS_MASK_DESCR">
-				<field type="metextmask" name="mask" label="F_MASK" />
+				<field type="list" name="mask_type" label="F_MASK" default="">
+					<option value="0">Do not use</option>
+					<option value="(###) ### ######">Phone</option>
+					<option value="(###) ###-####">Phone US</option>
+					<option value="mm/dd/yyyy">Date</option>
+					<option value="#####-###">Code</option>
+					<option value="#### #### #### ####">Credit Card</option>
+					<option value="#">Integer</option>
+					<option value="#####.##">Decimal</option>
+					<option value="#,###.##">Numeric with format</option>
+					<option value="$#,###.##">Dollar</option>
+					<option value="€#,###.##">Euro</option>
+					<option value="custom">Custom</option>
+				</field>
+				<field showon="" type="textarea" name="custom_mask" label="Custom Mask" default="" />
 				<field name="show_mask" type="mradio" class="btn-group" default="1" label="F_FBOXSHOWNMASK">
 					<option value="0">JNO</option>
 					<option value="1">JYES</option>
 				</field>
+				<field name="mask_always_visible" type="mradio" class="btn-group" default="1" label="Placeholder always visible">
+					<option value="0">JNO</option>
+					<option value="1">JYES</option>
+				</field>
+
+				<field type="text" name="mask_placeholder_char" label="Placeholder Character" default="#" />
 
 			</fieldset>
 		</fields>
