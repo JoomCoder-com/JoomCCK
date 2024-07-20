@@ -92,7 +92,7 @@
 				</field>
 
 			</fieldset>
-			<fieldset name="full" label="FS_FULLVIEW" description="FS_FULLVIEW_DESCR">
+			<fieldset name="full" label="FS_GALLERY_FULLVIEW" description="FS_GALLERY_FULLVIEW_DESCR">
 				<field name="full_width" type="text" default="800" size="3" label="F_FULLWIDTH" description="" />
 				<field name="full_height" type="text" default="600" size="3" label="F_FULLHEIGHT" description="" />
 				<field name="full_quality" type="text" default="100" size="3" label="F_FULLQUALITY" description="" />
@@ -110,7 +110,7 @@
 				</field>
 			</fieldset>
 
-			<fieldset name="thumbs_list" label="FS_LISTVIEW" description="FS_LISTVIEW_DESCR">
+			<fieldset name="thumbs_list" label="FS_GALLERY_LISTVIEW" description="FS_GALLERY_LISTVIEW_DESCR">
 				<field name="thumbs_list_width" type="text" default="100" size="3" label="F_THUMBWIDTH" description="" />
 				<field name="thumbs_list_height" type="text" default="100" size="3" label="F_THUMBHEIGHT" description="" />
 				<field name="thumbs_list_quality" type="text" default="80" size="3" label="F_THUMBQUALITY" description="" />

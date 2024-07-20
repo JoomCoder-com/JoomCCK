@@ -544,7 +544,16 @@ class com_joomcckInstallerScript
         $files = [
             '/administrator/components/com_joomcck/tables/comments.php',
             '/components/com_joomcck/fields/geo/qwer.php',
-            '/administrator/components/com_joomcck/tables/category.php'
+            '/administrator/components/com_joomcck/tables/category.php',
+	        '/language/en-GB/com_joomcck_field_boolean.ini',
+	        '/language/en-GB/com_joomcck_field_checkbox.ini',
+	        '/language/en-GB/com_joomcck_field_child.ini',
+	        '/language/en-GB/com_joomcck_field_datetime.ini',
+	        '/language/en-GB/com_joomcck_field_digits.ini',
+	        '/language/en-GB/com_joomcck_field_dripcontent.ini',
+	        '/language/en-GB/com_joomcck_field_email.ini',
+	        '/language/en-GB/com_joomcck_field_gallery.ini',
+	        '/language/en-GB/com_joomcck_field_geo.ini',
         ];
 
         foreach ($files as $file) {
