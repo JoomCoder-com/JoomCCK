@@ -57,7 +57,7 @@
 					<option value="^">^</option>
 					<option value="|">|</option>
 				</field>
-				<field name="label" type="text" size="40" default="- Select Element -" label="F_SQLLABEL"/>
+				<field name="label" type="text" size="40" default="- Select Element -" label="F_FIRSTLABEL"/>
 			</fieldset>
 			<fieldset name="users" label="FS_USERSVALUE">
 				<field name="add_value" type="maccesslevel" condition='{"not0":["params_params_user_value_label","params_params_save_new"]}' default="0" label="F_WHOCANADD" description="F_WHOCANADD_DESCR">

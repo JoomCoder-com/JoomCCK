@@ -32,7 +32,7 @@
 					<option value="0">JNO</option>
 					<option value="1">JYES</option>
 				</field>
-				<field name="height" type="text" default="300" size="3" label="F_HEIGHT" description="F_HEIGHT_DESCR" />
+				<field name="height" type="text" default="300" size="3" label="F_EDITOR_HEIGHT" description="F_HEIGHT_DESCR" />
 				<field name="editor_btn" type="meplugins" group="editors-xtd" default="" label="F_BUTTONS" multi="1" size="4" description="F_BUTTONS_DESCR" />
 				<field name="plugins" type="meplugins" group="content" default="pagebreak" label="F_PLUGINS" multi="1" size="5" description="F_PLUGINS_DESCR" />
 			</fieldset>
