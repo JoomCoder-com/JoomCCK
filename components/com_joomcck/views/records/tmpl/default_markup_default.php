@@ -43,44 +43,8 @@ $current_user = \Joomla\CMS\Factory::getUser($this->input->getInt('user_id', $th
         <?php echo $markup->get('main.css');?>
     </style>
 <?php endif; ?>
-<!--  ---------------------------- Show page header ---------------------------------- -->
 
-<!--  If section is personalized load user block -->
-<?php if (($this->section->params->get('personalize.personalize') && $this->input->getInt('user_id')) || $this->isMe): ?>
-	<?php echo $this->loadTemplate('user_block'); ?>
-
-
-    <!-- If title is allowed to be shown -->
-<?php elseif ($markup->get('title.title_show')): ?>
-    <div class="page-header">
-		<?php if (in_array($this->section->params->get('events.subscribe_category'), $this->user->getAuthorisedViewLevels()) && $this->input->getInt('cat_id')): ?>
-            <div class="float-end">
-				<?php echo HTMLFormatHelper::followcat($this->input->getInt('cat_id'), $this->section); ?>
-            </div>
-		<?php elseif (in_array($this->section->params->get('events.subscribe_section'), $this->user->getAuthorisedViewLevels())): ?>
-            <div class="float-end">
-				<?php echo HTMLFormatHelper::followsection($this->section); ?>
-            </div>
-		<?php endif; ?>
-        <h1>
-			<?php echo $this->escape(Mint::_($this->title)); ?>
-			<?php if ($this->category->id): ?>
-				<?php echo CEventsHelper::showNum('category', $this->category->id, true); ?>
-			<?php else: ?>
-				<?php echo CEventsHelper::showNum('section', $this->section->id, true); ?>
-			<?php endif; ?>
-        </h1>
-    </div>
-
-
-    <!-- If menu parameters title is set -->
-<?php elseif ($this->appParams->get('show_page_heading', 0) && $this->appParams->get('page_heading', '')) : ?>
-    <div class="page-header">
-        <h1>
-			<?php echo $this->escape($this->appParams->get('page_heading')); ?>
-        </h1>
-    </div>
-<?php endif; ?>
+<?php echo LayoutHelper::render('core.markup.header',['current' => $this]) ?>
 
 <div id="compare" <?php echo !$this->compare ? 'class="hide"' : ''; ?>>
     <div class="alert alert-info alert-block">
@@ -558,8 +522,6 @@ $current_user = \Joomla\CMS\Factory::getUser($this->input->getInt('user_id', $th
 	<?php echo $this->loadTemplate('cindex_' . $this->section->params->get('general.tmpl_category')); ?>
 <?php endif; ?>
 
-
-<!-- Show Alpha Index -->
 <?php echo Layout::render('core.markup.alphaIndex',['current' => $this]); ?>
 
 <!-- Filters worns -->
@@ -599,7 +561,8 @@ $current_user = \Joomla\CMS\Factory::getUser($this->input->getInt('user_id', $th
     <h4 align="center"><?php echo \Joomla\CMS\Language\Text::_('CNORECFOUNDSEARCH'); ?></h4>
 <?php else: ?>
 	<?php if (((!empty($this->category->id) && $this->category->params->get('submission')) || (empty($this->category->id) && $this->section->params->get('general.section_home_items'))) && !$this->input->get('view_what')): ?>
-        <h4 align="center" class="no-records"
-            id="no-records<?php echo $this->section->id; ?>"><?php echo \Joomla\CMS\Language\Text::_('CNOARTICLESHERE'); ?></h4>
+        <p  class="jcck-no-records alert alert-warning" id="no-records<?php echo $this->section->id; ?>">
+            <i class="fas fa-exclamation-triangle"></i> <?php echo \Joomla\CMS\Language\Text::_('CNOARTICLESHERE'); ?>
+        </p>
 	<?php endif; ?>
 <?php endif; ?>
