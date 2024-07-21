@@ -6,35 +6,6 @@
         <copy file="./language/en-GB/com_joomcck.ini" todir="${releasespath}/build/components/com_joomcck/site/language/en-GB" />
         <copy file="./administrator/language/en-GB/com_joomcck.sys.ini" todir="${releasespath}/build/components/com_joomcck/admin/language/en-GB" />
 
-        <!-- Language files fields -->
-        <copy file="./language/en-GB/com_joomcck_field_audio.ini" todir="${releasespath}/build/components/com_joomcck/site/language/en-GB" />
-        <copy file="./language/en-GB/com_joomcck_field_boolean.ini" todir="${releasespath}/build/components/com_joomcck/site/language/en-GB" />
-        <copy file="./language/en-GB/com_joomcck_field_checkbox.ini" todir="${releasespath}/build/components/com_joomcck/site/language/en-GB" />
-        <copy file="./language/en-GB/com_joomcck_field_datetime.ini" todir="${releasespath}/build/components/com_joomcck/site/language/en-GB" />
-        <copy file="./language/en-GB/com_joomcck_field_digits.ini" todir="${releasespath}/build/components/com_joomcck/site/language/en-GB" />
-        <copy file="./language/en-GB/com_joomcck_field_email.ini" todir="${releasespath}/build/components/com_joomcck/site/language/en-GB" />
-        <copy file="./language/en-GB/com_joomcck_field_gallery.ini" todir="${releasespath}/build/components/com_joomcck/site/language/en-GB" />
-        <copy file="./language/en-GB/com_joomcck_field_html.ini" todir="${releasespath}/build/components/com_joomcck/site/language/en-GB" />
-        <copy file="./language/en-GB/com_joomcck_field_image.ini" todir="${releasespath}/build/components/com_joomcck/site/language/en-GB" />
-        <copy file="./language/en-GB/com_joomcck_field_listautocomplete.ini" todir="${releasespath}/build/components/com_joomcck/site/language/en-GB" />
-        <copy file="./language/en-GB/com_joomcck_field_multiselect.ini" todir="${releasespath}/build/components/com_joomcck/site/language/en-GB" />
-        <copy file="./language/en-GB/com_joomcck_field_passwd.ini" todir="${releasespath}/build/components/com_joomcck/site/language/en-GB" />
-        <copy file="./language/en-GB/com_joomcck_field_paytodownload.ini" todir="${releasespath}/build/components/com_joomcck/site/language/en-GB" />
-        <copy file="./language/en-GB/com_joomcck_field_radio.ini" todir="${releasespath}/build/components/com_joomcck/site/language/en-GB" />
-        <copy file="./language/en-GB/com_joomcck_field_readmore.ini" todir="${releasespath}/build/components/com_joomcck/site/language/en-GB" />
-        <copy file="./language/en-GB/com_joomcck_field_records.ini" todir="${releasespath}/build/components/com_joomcck/site/language/en-GB" />
-        <copy file="./language/en-GB/com_joomcck_field_select.ini" todir="${releasespath}/build/components/com_joomcck/site/language/en-GB" />
-        <copy file="./language/en-GB/com_joomcck_field_status.ini" todir="${releasespath}/build/components/com_joomcck/site/language/en-GB" />
-        <copy file="./language/en-GB/com_joomcck_field_telephone.ini" todir="${releasespath}/build/components/com_joomcck/site/language/en-GB" />
-        <copy file="./language/en-GB/com_joomcck_field_text.ini" todir="${releasespath}/build/components/com_joomcck/site/language/en-GB" />
-        <copy file="./language/en-GB/com_joomcck_field_textarea.ini" todir="${releasespath}/build/components/com_joomcck/site/language/en-GB" />
-        <copy file="./language/en-GB/com_joomcck_field_uploads.ini" todir="${releasespath}/build/components/com_joomcck/site/language/en-GB" />
-        <copy file="./language/en-GB/com_joomcck_field_url.ini" todir="${releasespath}/build/components/com_joomcck/site/language/en-GB" />
-        <copy file="./language/en-GB/com_joomcck_field_video.ini" todir="${releasespath}/build/components/com_joomcck/site/language/en-GB" />
-        <copy file="./language/en-GB/com_joomcck_gateway_paypal.ini" todir="${releasespath}/build/components/com_joomcck/site/language/en-GB" />
-
-        <!-- Language files plugins -->
-
 
         <!-- Language files modules -->
         <copy file="./language/en-GB/mod_joomcck_submitbutton.ini" todir="${releasespath}/build/modules/mod_joomcck_submitbutton/language/en-GB" />
