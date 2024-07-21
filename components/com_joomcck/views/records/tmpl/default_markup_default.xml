@@ -21,6 +21,11 @@
 				<option value="full">CTOOLTIPFULL</option>
 			</field>
 			<field name="css" type="textarea" rows="10" cols="39"  default="" label="X_CUSTOMCSS" />
+			<field name="display_no_records_warning" type="radio" layout="joomla.form.field.radio.switcher"
+				   filter="integer" class="worning btn-group" default="1" label="Display No Records Warning">
+				<option value="0">CNO</option>
+				<option value="1">CYES</option>
+			</field>
 		</fieldset>
 		<fieldset name="alpha" label="CALPHAINDEX">
 			<field name="alpha" type="radio" class="btn-group" default="1" label="X_AIENABLE">

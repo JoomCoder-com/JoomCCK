@@ -8,6 +8,7 @@
  */
 
 use Joomcck\Layout\Helpers\Layout;
+use Joomla\CMS\Language\Text;
 use Joomla\CMS\Layout\LayoutHelper;
 
 defined('_JEXEC') or die('Restricted access');
@@ -35,8 +36,6 @@ $current_user = \Joomla\CMS\Factory::getUser($this->input->getInt('user_id', $th
 // required css file fix issues of UI/UX
 \Joomla\CMS\Factory::getDocument()->addStyleSheet(\Joomla\CMS\Uri\Uri::root().'/media/com_joomcck/css/joomcck.css');
 
-
-
 ?>
 <?php if ($markup->get('main.css')): ?>
     <style>
@@ -48,12 +47,12 @@ $current_user = \Joomla\CMS\Factory::getUser($this->input->getInt('user_id', $th
 
 <div id="compare" <?php echo !$this->compare ? 'class="hide"' : ''; ?>>
     <div class="alert alert-info alert-block">
-        <h4><?php echo \Joomla\CMS\Language\Text::sprintf('CCOMPAREMSG', $this->compare) ?></h4>
+        <h4><?php echo Text::sprintf('CCOMPAREMSG', $this->compare) ?></h4>
         <br><a rel="nofollow"
                href="<?php echo \Joomla\CMS\Router\Route::_('index.php?option=com_joomcck&view=compare&section_id=' . $this->section->id . '&return=' . Url::back()); ?>"
-               class="btn btn-primary"><?php echo \Joomla\CMS\Language\Text::_('CCOMPAREVIEW'); ?></a>
+               class="btn btn-primary"><?php echo Text::_('CCOMPAREVIEW'); ?></a>
         <button onclick="Joomcck.CleanCompare(null, '<?php echo @$this->section->id ?>')"
-                class="btn"><?php echo \Joomla\CMS\Language\Text::_('CCLEANCOMPARE'); ?></button>
+                class="btn"><?php echo Text::_('CCLEANCOMPARE'); ?></button>
     </div>
 </div>
 
@@ -77,13 +76,13 @@ $current_user = \Joomla\CMS\Factory::getUser($this->input->getInt('user_id', $th
 							<?php if (in_array($markup->get('filters.show_search'), $this->user->getAuthorisedViewLevels())): ?>
                                 <input class="form-control form-control-sm" type="text"
                                        style="max-width: 100px; min-width: 50px;"
-                                       placeholder="<?php echo \Joomla\CMS\Language\Text::_('CSEARCHPLACEHOLDER'); ?>" name="filter_search"
+                                       placeholder="<?php echo Text::_('CSEARCHPLACEHOLDER'); ?>" name="filter_search"
                                        value="<?php echo htmlentities($this->state->get('records.search'), ENT_COMPAT, 'utf-8'); ?>"/>
 							<?php endif; ?>
 							<?php if (in_array($markup->get('filters.show_more'), $this->user->getAuthorisedViewLevels())): ?>
                                 <button type="button" class="btn btn-sm btn-light border hasTooltip" data-bs-toggle="collapse"
                                         data-bs-target="#filter-collapse"
-                                        title="<?php echo \Joomla\CMS\Language\Text::_('CMORESEARCHOPTIONS') ?>">
+                                        title="<?php echo Text::_('CMORESEARCHOPTIONS') ?>">
 									<?php echo HTMLFormatHelper::icon('binocular.png'); ?>
                                 </button>
 							<?php endif; ?>
@@ -99,7 +98,7 @@ $current_user = \Joomla\CMS\Factory::getUser($this->input->getInt('user_id', $th
 									<?php if ($markup->get('menu.menu_all_records_icon')): ?>
 										<?php echo HTMLFormatHelper::icon('navigation-180.png'); ?>
 									<?php endif; ?>
-									<?php echo $back ? \Joomla\CMS\Language\Text::_('CGOBACK') : \Joomla\CMS\Language\Text::_($markup->get('menu.menu_all_records', 'All Records')); ?>
+									<?php echo $back ? Text::_('CGOBACK') : Text::_($markup->get('menu.menu_all_records', 'All Records')); ?>
                                 </a>
                             </li>
 						<?php endif; ?>
@@ -110,7 +109,7 @@ $current_user = \Joomla\CMS\Factory::getUser($this->input->getInt('user_id', $th
 									<?php if ($markup->get('menu.menu_home_icon')): ?>
 										<?php echo HTMLFormatHelper::icon($this->section->get('personalize.text_icon', 'home.png')); ?>
 									<?php endif; ?>
-									<?php echo \Joomla\CMS\Language\Text::_($markup->get('menu.menu_home_label', 'Home')); ?>
+									<?php echo Text::_($markup->get('menu.menu_home_label', 'Home')); ?>
                                 </a>
                             </li>
 						<?php endif; ?>
@@ -121,7 +120,7 @@ $current_user = \Joomla\CMS\Factory::getUser($this->input->getInt('user_id', $th
 									<?php if ($markup->get('menu.menu_up_icon')): ?>
 										<?php echo HTMLFormatHelper::icon('arrow-curve-090-left.png'); ?>
 									<?php endif; ?>
-									<?php echo \Joomla\CMS\Language\Text::_($markup->get('menu.menu_up_label', 'Up')); ?>
+									<?php echo Text::_($markup->get('menu.menu_up_label', 'Up')); ?>
                                 </a>
                             </li>
 						<?php endif; ?>
@@ -134,11 +133,11 @@ $current_user = \Joomla\CMS\Factory::getUser($this->input->getInt('user_id', $th
 									$o = array();
 									if (in_array($type->params->get('submission.submission'), $this->user->getAuthorisedViewLevels()) || MECAccess::allowNew($type, $this->section))
 									{
-										$o[] = '<a class="dropdown-item" href="' . Url::add($this->section, $type, $this->category) . '">' . \Joomla\CMS\Language\Text::_($type->name) . '</a>';
+										$o[] = '<a class="dropdown-item" href="' . Url::add($this->section, $type, $this->category) . '">' . Text::_($type->name) . '</a>';
 									}
 									else
 									{
-										$o[] = '<a  class="dropdown-item" disabled class="disabled hasTooltip" title="' . \Joomla\CMS\Language\Text::sprintf($markup->get('menu.menu_user_register', 'Register or login to submit %s'), \Joomla\CMS\Language\Text::_($type->name)) . '">' . \Joomla\CMS\Language\Text::_($type->name) . '</a>';
+										$o[] = '<a  class="dropdown-item" disabled class="disabled hasTooltip" title="' . Text::sprintf($markup->get('menu.menu_user_register', 'Register or login to submit %s'), Text::_($type->name)) . '">' . Text::_($type->name) . '</a>';
 									}
 									if ($o)
 									{
@@ -153,7 +152,7 @@ $current_user = \Joomla\CMS\Factory::getUser($this->input->getInt('user_id', $th
 											<?php if ($markup->get('menu.menu_newrecord_icon')): ?>
 												<?php echo HTMLFormatHelper::icon('plus.png'); ?>
 											<?php endif; ?>
-											<?php echo \Joomla\CMS\Language\Text::_($markup->get('menu.menu_newrecord_label', 'Post here')) ?>
+											<?php echo Text::_($markup->get('menu.menu_newrecord_label', 'Post here')) ?>
                                             <b class="caret"></b>
                                         </a>
                                         <ul class="dropdown-menu">
@@ -168,7 +167,7 @@ $current_user = \Joomla\CMS\Factory::getUser($this->input->getInt('user_id', $th
                                     <a
 										<?php if (!(in_array($submit->params->get('submission.submission'), $this->user->getAuthorisedViewLevels()) || MECAccess::allowNew($submit, $this->section))): ?>
                                             disabled class="disabled btn btn-light border btn-sm hasTooltip" href="#"
-                                            title="<?php echo \Joomla\CMS\Language\Text::sprintf($markup->get('menu.menu_user_register', 'Register or login to submit <b>%s</b>'), \Joomla\CMS\Language\Text::_($submit->name)) ?>"
+                                            title="<?php echo Text::sprintf($markup->get('menu.menu_user_register', 'Register or login to submit <b>%s</b>'), Text::_($submit->name)) ?>"
 										<?php else: ?>
                                             class="btn btn-light border btn-sm" href="<?php echo Url::add($this->section, $submit, $this->category); ?>"
 										<?php endif; ?>
@@ -176,7 +175,7 @@ $current_user = \Joomla\CMS\Factory::getUser($this->input->getInt('user_id', $th
 										<?php if ($markup->get('menu.menu_newrecord_icon')): ?>
 											<?php echo HTMLFormatHelper::icon('plus.png'); ?>
 										<?php endif; ?>
-										<?php echo \Joomla\CMS\Language\Text::sprintf($markup->get('menu.menu_user_single', 'Post %s here'), \Joomla\CMS\Language\Text::_($submit->name)); ?>
+										<?php echo Text::sprintf($markup->get('menu.menu_user_single', 'Post %s here'), Text::_($submit->name)); ?>
                                     </a>
                                 </li>
 							<?php endif; ?>
@@ -188,7 +187,7 @@ $current_user = \Joomla\CMS\Factory::getUser($this->input->getInt('user_id', $th
 									<?php if ($markup->get('menu.menu_templates_icon')): ?>
 										<?php echo HTMLFormatHelper::icon('zones.png'); ?>
 									<?php endif; ?>
-									<?php echo \Joomla\CMS\Language\Text::_($markup->get('menu.menu_templates_label', 'Switch view')) ?>
+									<?php echo Text::_($markup->get('menu.menu_templates_label', 'Switch view')) ?>
                                     <b class="caret"></b>
                                 </a>
                                 <ul class="dropdown-menu">
@@ -216,63 +215,63 @@ $current_user = \Joomla\CMS\Factory::getUser($this->input->getInt('user_id', $th
 									<?php if ($markup->get('menu.menu_ordering_icon')): ?>
 										<?php echo HTMLFormatHelper::icon('sort.png'); ?>
 									<?php endif; ?>
-									<?php echo \Joomla\CMS\Language\Text::_($markup->get('menu.menu_ordering_label', 'Sort By')) ?>
+									<?php echo Text::_($markup->get('menu.menu_ordering_label', 'Sort By')) ?>
                                     <b class="caret"></b>
                                 </a>
                                 <ul class="dropdown-menu">
 									<?php if (@$this->items[0]->searchresult): ?>
                                         <li>
-											<?php echo \Joomla\CMS\HTML\HTMLHelper::_('mrelements.sort', ($markup->get('menu.menu_order_ctime_icon') ? HTMLFormatHelper::icon('document-search-result.png') : null) . ' ' . \Joomla\CMS\Language\Text::_('CORDERRELEVANCE'), 'searchresult', $listDirn, $listOrder); ?></li>
+											<?php echo \Joomla\CMS\HTML\HTMLHelper::_('mrelements.sort', ($markup->get('menu.menu_order_ctime_icon') ? HTMLFormatHelper::icon('document-search-result.png') : null) . ' ' . Text::_('CORDERRELEVANCE'), 'searchresult', $listDirn, $listOrder); ?></li>
 									<?php endif; ?>
 
 									<?php if (in_array($markup->get('menu.menu_order_ctime'), $this->user->getAuthorisedViewLevels())): ?>
                                         <li>
-											<?php echo \Joomla\CMS\HTML\HTMLHelper::_('mrelements.sort', ($markup->get('menu.menu_order_ctime_icon') ? HTMLFormatHelper::icon('core-ctime.png') : null) . ' ' . \Joomla\CMS\Language\Text::_($markup->get('menu.menu_order_ctime_label', 'Created')), 'r.ctime', $listDirn, $listOrder); ?></li>
+											<?php echo \Joomla\CMS\HTML\HTMLHelper::_('mrelements.sort', ($markup->get('menu.menu_order_ctime_icon') ? HTMLFormatHelper::icon('core-ctime.png') : null) . ' ' . Text::_($markup->get('menu.menu_order_ctime_label', 'Created')), 'r.ctime', $listDirn, $listOrder); ?></li>
 									<?php endif; ?>
 
 									<?php if (in_array($markup->get('menu.menu_order_mtime'), $this->user->getAuthorisedViewLevels())): ?>
                                         <li>
-											<?php echo \Joomla\CMS\HTML\HTMLHelper::_('mrelements.sort', ($markup->get('menu.menu_order_mtime_icon') ? HTMLFormatHelper::icon('core-ctime.png') : null) . ' ' . \Joomla\CMS\Language\Text::_($markup->get('menu.menu_order_mtime_label', 'Modified')), 'r.mtime', $listDirn, $listOrder); ?></li>
+											<?php echo \Joomla\CMS\HTML\HTMLHelper::_('mrelements.sort', ($markup->get('menu.menu_order_mtime_icon') ? HTMLFormatHelper::icon('core-ctime.png') : null) . ' ' . Text::_($markup->get('menu.menu_order_mtime_label', 'Modified')), 'r.mtime', $listDirn, $listOrder); ?></li>
 									<?php endif; ?>
 									<?php if (in_array($markup->get('menu.menu_order_extime'), $this->user->getAuthorisedViewLevels())): ?>
                                         <li>
-											<?php echo \Joomla\CMS\HTML\HTMLHelper::_('mrelements.sort', ($markup->get('menu.menu_order_extime_icon') ? HTMLFormatHelper::icon('core-ctime.png') : null) . ' ' . \Joomla\CMS\Language\Text::_($markup->get('menu.menu_order_extime_label', 'Expire')), 'r.extime', $listDirn, $listOrder); ?></li>
+											<?php echo \Joomla\CMS\HTML\HTMLHelper::_('mrelements.sort', ($markup->get('menu.menu_order_extime_icon') ? HTMLFormatHelper::icon('core-ctime.png') : null) . ' ' . Text::_($markup->get('menu.menu_order_extime_label', 'Expire')), 'r.extime', $listDirn, $listOrder); ?></li>
 									<?php endif; ?>
 
 									<?php if (in_array($markup->get('menu.menu_order_title'), $this->user->getAuthorisedViewLevels())): ?>
                                         <li>
-											<?php echo \Joomla\CMS\HTML\HTMLHelper::_('mrelements.sort', ($markup->get('menu.menu_order_title_icon') ? HTMLFormatHelper::icon('edit.png') : null) . ' ' . \Joomla\CMS\Language\Text::_($markup->get('menu.menu_order_title_label', 'Title')), 'r.title', $listDirn, $listOrder); ?></li>
+											<?php echo \Joomla\CMS\HTML\HTMLHelper::_('mrelements.sort', ($markup->get('menu.menu_order_title_icon') ? HTMLFormatHelper::icon('edit.png') : null) . ' ' . Text::_($markup->get('menu.menu_order_title_label', 'Title')), 'r.title', $listDirn, $listOrder); ?></li>
 									<?php endif; ?>
 
 									<?php if (in_array($markup->get('menu.menu_order_hits'), $this->user->getAuthorisedViewLevels())): ?>
                                         <li>
-											<?php echo \Joomla\CMS\HTML\HTMLHelper::_('mrelements.sort', ($markup->get('menu.menu_order_hits_icon') ? HTMLFormatHelper::icon('hand-point-090.png') : null) . ' ' . \Joomla\CMS\Language\Text::_($markup->get('menu.menu_order_hits_label', 'Hist')), 'r.hits', $listDirn, $listOrder); ?></li>
+											<?php echo \Joomla\CMS\HTML\HTMLHelper::_('mrelements.sort', ($markup->get('menu.menu_order_hits_icon') ? HTMLFormatHelper::icon('hand-point-090.png') : null) . ' ' . Text::_($markup->get('menu.menu_order_hits_label', 'Hist')), 'r.hits', $listDirn, $listOrder); ?></li>
 									<?php endif; ?>
 
 									<?php if (in_array($markup->get('menu.menu_order_votes_result'), $this->user->getAuthorisedViewLevels())): ?>
                                         <li>
-											<?php echo \Joomla\CMS\HTML\HTMLHelper::_('mrelements.sort', ($markup->get('menu.menu_order_votes_result_icon') ? HTMLFormatHelper::icon('star.png') : null) . ' ' . \Joomla\CMS\Language\Text::_($markup->get('menu.menu_order_votes_result_label', 'Votes')), 'r.votes_result', $listDirn, $listOrder); ?></li>
+											<?php echo \Joomla\CMS\HTML\HTMLHelper::_('mrelements.sort', ($markup->get('menu.menu_order_votes_result_icon') ? HTMLFormatHelper::icon('star.png') : null) . ' ' . Text::_($markup->get('menu.menu_order_votes_result_label', 'Votes')), 'r.votes_result', $listDirn, $listOrder); ?></li>
 									<?php endif; ?>
 
 									<?php if (in_array($markup->get('menu.menu_order_comments'), $this->user->getAuthorisedViewLevels())): ?>
                                         <li>
-											<?php echo \Joomla\CMS\HTML\HTMLHelper::_('mrelements.sort', ($markup->get('menu.menu_order_comments_icon') ? HTMLFormatHelper::icon('balloon-left.png') : null) . ' ' . \Joomla\CMS\Language\Text::_($markup->get('menu.menu_order_comments_label', 'Comments')), 'r.comments', $listDirn, $listOrder); ?></li>
+											<?php echo \Joomla\CMS\HTML\HTMLHelper::_('mrelements.sort', ($markup->get('menu.menu_order_comments_icon') ? HTMLFormatHelper::icon('balloon-left.png') : null) . ' ' . Text::_($markup->get('menu.menu_order_comments_label', 'Comments')), 'r.comments', $listDirn, $listOrder); ?></li>
 									<?php endif; ?>
 
 									<?php if (in_array($markup->get('menu.menu_order_favorite_num'), $this->user->getAuthorisedViewLevels())): ?>
                                         <li>
-											<?php echo \Joomla\CMS\HTML\HTMLHelper::_('mrelements.sort', ($markup->get('menu.menu_order_favorite_num_icon') ? '<img src="' . \Joomla\CMS\Uri\Uri::root(true) . '/media/com_joomcck/icons/bookmarks/' . $listparams->get('tmpl_core.bookmark_icons', 'star') . '/state1.png" > ' : null) . ' ' . \Joomla\CMS\Language\Text::_($markup->get('menu.menu_order_favorite_num_label', 'Number of bookmarks')), 'r.favorite_num', $listDirn, $listOrder); ?></li>
+											<?php echo \Joomla\CMS\HTML\HTMLHelper::_('mrelements.sort', ($markup->get('menu.menu_order_favorite_num_icon') ? '<img src="' . \Joomla\CMS\Uri\Uri::root(true) . '/media/com_joomcck/icons/bookmarks/' . $listparams->get('tmpl_core.bookmark_icons', 'star') . '/state1.png" > ' : null) . ' ' . Text::_($markup->get('menu.menu_order_favorite_num_label', 'Number of bookmarks')), 'r.favorite_num', $listDirn, $listOrder); ?></li>
 									<?php endif; ?>
 
 									<?php if (in_array($markup->get('menu.menu_order_username'), $this->user->getAuthorisedViewLevels())): ?>
                                         <li>
-											<?php echo \Joomla\CMS\HTML\HTMLHelper::_('mrelements.sort', ($markup->get('menu.menu_order_username_icon') ? HTMLFormatHelper::icon('user.png') : null) . ' ' . \Joomla\CMS\Language\Text::_($markup->get('menu.menu_order_username_label', 'user name')), $this->section->params->get('personalize.author_mode'), $listDirn, $listOrder); ?></li>
+											<?php echo \Joomla\CMS\HTML\HTMLHelper::_('mrelements.sort', ($markup->get('menu.menu_order_username_icon') ? HTMLFormatHelper::icon('user.png') : null) . ' ' . Text::_($markup->get('menu.menu_order_username_label', 'user name')), $this->section->params->get('personalize.author_mode'), $listDirn, $listOrder); ?></li>
 									<?php endif; ?>
 
 									<?php if (in_array($markup->get('menu.menu_order_fields'), $this->user->getAuthorisedViewLevels())): ?>
 										<?php foreach ($this->sortable as $field): ?>
                                             <li>
-												<?php echo \Joomla\CMS\HTML\HTMLHelper::_('mrelements.sort', ($markup->get('menu.menu_order_fields_icon') && ($icon = $field->params->get('core.icon')) ? HTMLFormatHelper::icon($icon) : null) . ' ' . \Joomla\CMS\Language\Text::_($field->label), FieldHelper::sortName($field), $listDirn, $listOrder); ?></li>
+												<?php echo \Joomla\CMS\HTML\HTMLHelper::_('mrelements.sort', ($markup->get('menu.menu_order_fields_icon') && ($icon = $field->params->get('core.icon')) ? HTMLFormatHelper::icon($icon) : null) . ' ' . Text::_($field->label), FieldHelper::sortName($field), $listDirn, $listOrder); ?></li>
 										<?php endforeach; ?>
 									<?php endif; ?>
                                 </ul>
@@ -287,7 +286,7 @@ $current_user = \Joomla\CMS\Factory::getUser($this->input->getInt('user_id', $th
 									<?php if ($markup->get('menu.menu_user_icon')): ?>
 										<?php echo HTMLFormatHelper::icon('user.png'); ?>
 									<?php endif; ?>
-									<?php echo \Joomla\CMS\Language\Text::_($markup->get('menu.menu_user_label', 'My Menu')) ?>
+									<?php echo Text::_($markup->get('menu.menu_user_label', 'My Menu')) ?>
                                     <b class="caret"></b>
                                 </a>
                                 <ul class="dropdown-menu">
@@ -297,7 +296,7 @@ $current_user = \Joomla\CMS\Factory::getUser($this->input->getInt('user_id', $th
 												<?php if ($markup->get('menu.menu_user_my_icon')): ?>
 													<?php echo HTMLFormatHelper::icon($this->section->params->get('personalize.text_icon', 'home.png')); ?>
 												<?php endif; ?>
-												<?php echo \Joomla\CMS\Language\Text::_($markup->get('menu.menu_user_my_label', 'My Homepage')) ?>
+												<?php echo Text::_($markup->get('menu.menu_user_my_label', 'My Homepage')) ?>
                                                 <span class="badge text-bg-light shadow-sm px-2 py-1"><?php echo $counts->created; ?></span>
                                             </a></li>
 									<?php endif; ?>
@@ -309,7 +308,7 @@ $current_user = \Joomla\CMS\Factory::getUser($this->input->getInt('user_id', $th
                                                     <img src="<?php echo \Joomla\CMS\Uri\Uri::root(true); ?>/media/com_joomcck/icons/16/follow1.png"
                                                          align="absmiddle"/>
 												<?php endif; ?>
-												<?php echo \Joomla\CMS\Language\Text::_($markup->get('menu.menu_user_follow_label', 'Watched')) ?>
+												<?php echo Text::_($markup->get('menu.menu_user_follow_label', 'Watched')) ?>
                                                 <span class="badge text-bg-light shadow-sm px-2 py-1"><?php echo $counts->followed; ?></span>
                                             </a></li>
 									<?php endif; ?>
@@ -321,7 +320,7 @@ $current_user = \Joomla\CMS\Factory::getUser($this->input->getInt('user_id', $th
                                                     <img src="<?php echo \Joomla\CMS\Uri\Uri::root(true); ?>/media/com_joomcck/icons/16/bell.png"
                                                          align="absmiddle"/>
 												<?php endif; ?>
-												<?php echo \Joomla\CMS\Language\Text::_($markup->get('menu.menu_user_events_label', 'With new events')) ?>
+												<?php echo Text::_($markup->get('menu.menu_user_events_label', 'With new events')) ?>
 												<?php echo CEventsHelper::showNum('section', $this->section->id) ?>
                                             </a></li>
 									<?php endif; ?>
@@ -333,7 +332,7 @@ $current_user = \Joomla\CMS\Factory::getUser($this->input->getInt('user_id', $th
                                                     <img src="<?php echo \Joomla\CMS\Uri\Uri::root(true) . '/media/com_joomcck/icons/bookmarks/' . $listparams->get('tmpl_core.bookmark_icons', 'star') . '/state1.png'; ?>"
                                                          align="absmiddle"/>
 												<?php endif; ?>
-												<?php echo \Joomla\CMS\Language\Text::_($markup->get('menu.menu_user_favorite_label', 'Bookmarked')) ?>
+												<?php echo Text::_($markup->get('menu.menu_user_favorite_label', 'Bookmarked')) ?>
                                                 <span class="badge text-bg-light shadow-sm px-2 py-1"><?php echo $counts->favorited; ?></span>
                                             </a></li>
 									<?php endif; ?>
@@ -344,7 +343,7 @@ $current_user = \Joomla\CMS\Factory::getUser($this->input->getInt('user_id', $th
                                                     <img src="<?php echo \Joomla\CMS\Uri\Uri::root(true); ?>/media/com_joomcck/icons/16/star.png"
                                                          align="absmiddle"/>
 												<?php endif; ?>
-												<?php echo \Joomla\CMS\Language\Text::_($markup->get('menu.menu_user_rated_label', 'Rated')) ?>
+												<?php echo Text::_($markup->get('menu.menu_user_rated_label', 'Rated')) ?>
                                                 <span class="badge text-bg-light shadow-sm px-2 py-1"><?php echo $counts->rated; ?></span>
                                             </a></li>
 									<?php endif; ?>
@@ -356,7 +355,7 @@ $current_user = \Joomla\CMS\Factory::getUser($this->input->getInt('user_id', $th
                                                     <img src="<?php echo \Joomla\CMS\Uri\Uri::root(true); ?>/media/com_joomcck/icons/16/balloon-left.png"
                                                          align="absmiddle"/>
 												<?php endif; ?>
-												<?php echo \Joomla\CMS\Language\Text::_($markup->get('menu.menu_user_commented_label', 'Commented')) ?>
+												<?php echo Text::_($markup->get('menu.menu_user_commented_label', 'Commented')) ?>
                                                 <span class="badge text-bg-light shadow-sm px-2 py-1"><?php echo $counts->commented; ?></span>
                                             </a></li>
 									<?php endif; ?>
@@ -368,7 +367,7 @@ $current_user = \Joomla\CMS\Factory::getUser($this->input->getInt('user_id', $th
                                                     <img src="<?php echo \Joomla\CMS\Uri\Uri::root(true); ?>/media/com_joomcck/icons/16/hand-point-090.png"
                                                          align="absmiddle"/>
 												<?php endif; ?>
-												<?php echo \Joomla\CMS\Language\Text::_($markup->get('menu.menu_user_visited_label', 'Visited')) ?>
+												<?php echo Text::_($markup->get('menu.menu_user_visited_label', 'Visited')) ?>
                                                 <span class="badge text-bg-light shadow-sm px-2 py-1"><?php echo $counts->visited; ?></span>
                                             </a></li>
 									<?php endif; ?>
@@ -380,7 +379,7 @@ $current_user = \Joomla\CMS\Factory::getUser($this->input->getInt('user_id', $th
                                                     <img src="<?php echo \Joomla\CMS\Uri\Uri::root(true); ?>/media/com_joomcck/icons/16/clock--exclamation.png"
                                                          align="absmiddle"/>
 												<?php endif; ?>
-												<?php echo \Joomla\CMS\Language\Text::_($markup->get('menu.menu_user_expire_label', 'Expired')) ?>
+												<?php echo Text::_($markup->get('menu.menu_user_expire_label', 'Expired')) ?>
                                                 <span class="badge text-bg-light shadow-sm px-2 py-1"><?php echo $counts->expired; ?></span>
                                             </a></li>
 									<?php endif; ?>
@@ -392,7 +391,7 @@ $current_user = \Joomla\CMS\Factory::getUser($this->input->getInt('user_id', $th
                                                     <img src="<?php echo \Joomla\CMS\Uri\Uri::root(true); ?>/media/com_joomcck/icons/16/eye-half.png"
                                                          align="absmiddle"/>
 												<?php endif; ?>
-												<?php echo \Joomla\CMS\Language\Text::_($markup->get('menu.menu_user_hidden_label', 'Hidden')) ?>
+												<?php echo Text::_($markup->get('menu.menu_user_hidden_label', 'Hidden')) ?>
                                                 <span class="badge text-bg-light shadow-sm px-2 py-1"><?php echo $counts->hidden; ?></span>
                                             </a></li>
 									<?php endif; ?>
@@ -404,7 +403,7 @@ $current_user = \Joomla\CMS\Factory::getUser($this->input->getInt('user_id', $th
                                                     <img src="<?php echo \Joomla\CMS\Uri\Uri::root(true); ?>/media/com_joomcck/icons/16/arrow-curve-090-left.png"
                                                          align="absmiddle"/>
 												<?php endif; ?>
-												<?php echo \Joomla\CMS\Language\Text::_($markup->get('menu.menu_user_feature_label', 'Fetured')) ?>
+												<?php echo Text::_($markup->get('menu.menu_user_feature_label', 'Fetured')) ?>
                                                 <span class="badge text-bg-light shadow-sm px-2 py-1"><?php echo $counts->featured; ?></span>
                                             </a></li>
 									<?php endif; ?>
@@ -416,7 +415,7 @@ $current_user = \Joomla\CMS\Factory::getUser($this->input->getInt('user_id', $th
                                                     <img src="<?php echo \Joomla\CMS\Uri\Uri::root(true); ?>/media/com_joomcck/icons/16/minus-circle.png"
                                                          align="absmiddle"/>
 												<?php endif; ?>
-												<?php echo \Joomla\CMS\Language\Text::_($markup->get('menu.menu_user_unpublished_label', 'On Approval')) ?>
+												<?php echo Text::_($markup->get('menu.menu_user_unpublished_label', 'On Approval')) ?>
                                                 <span class="badge text-bg-light shadow-sm px-2 py-1"><?php echo $counts->unpublished; ?></span>
                                             </a></li>
 									<?php endif; ?>
@@ -430,7 +429,7 @@ $current_user = \Joomla\CMS\Factory::getUser($this->input->getInt('user_id', $th
                                                     <img src="<?php echo \Joomla\CMS\Uri\Uri::root(true); ?>/media/com_joomcck/icons/16/user-share.png"
                                                          align="absmiddle"/>
 												<?php endif; ?>
-												<?php echo \Joomla\CMS\Language\Text::_($markup->get('menu.menu_user_moder_label', 'Moderators')) ?>
+												<?php echo Text::_($markup->get('menu.menu_user_moder_label', 'Moderators')) ?>
                                             </a></li>
 									<?php endif; ?>
 
@@ -442,7 +441,7 @@ $current_user = \Joomla\CMS\Factory::getUser($this->input->getInt('user_id', $th
                                                     <img src="<?php echo \Joomla\CMS\Uri\Uri::root(true); ?>/media/com_joomcck/icons/16/gear.png"
                                                          align="absmiddle"/>
 												<?php endif; ?>
-												<?php echo \Joomla\CMS\Language\Text::_($markup->get('menu.menu_user_subscribe_label', 'Options')) ?>
+												<?php echo Text::_($markup->get('menu.menu_user_subscribe_label', 'Options')) ?>
                                             </a></li>
 									<?php endif; ?>
 
@@ -455,7 +454,7 @@ $current_user = \Joomla\CMS\Factory::getUser($this->input->getInt('user_id', $th
                                                     <img src="<?php echo \Joomla\CMS\Uri\Uri::root(true); ?>/media/com_joomcck/icons/16/category.png"
                                                          align="absmiddle"/>
 												<?php endif; ?>
-												<?php echo \Joomla\CMS\Language\Text::_($markup->get('menu.menu_user_cat_manage_label', 'Categories')) ?>
+												<?php echo Text::_($markup->get('menu.menu_user_cat_manage_label', 'Categories')) ?>
                                                 <span class="badge text-bg-light shadow-sm px-2 py-1"><?php echo $counts->categories; ?></span>
                                             </a>
 											<?php if ($markup->get('menu.menu_user_cat_add')): ?>
@@ -467,7 +466,7 @@ $current_user = \Joomla\CMS\Factory::getUser($this->input->getInt('user_id', $th
                                                                 <img src="<?php echo \Joomla\CMS\Uri\Uri::root(true); ?>/media/com_joomcck/icons/16/plus.png"
                                                                      align="absmiddle"/>
 															<?php endif; ?>
-															<?php echo \Joomla\CMS\Language\Text::_($markup->get('menu.menu_user_cat_add_label', 'Add new category')) ?>
+															<?php echo Text::_($markup->get('menu.menu_user_cat_add_label', 'Add new category')) ?>
                                                         </a>
                                                     </li>
                                                 </ul>
@@ -534,14 +533,14 @@ $current_user = \Joomla\CMS\Factory::getUser($this->input->getInt('user_id', $th
 				<?php echo $worn->text ?>
                 <button type="button" class="btn-close hasTooltip" data-bs-dismiss="alert"  aria-label="Close"
                         onclick="Joomcck.cleanFilter('<?php echo $worn->name ?>')"
-                        title="<?php echo \Joomla\CMS\Language\Text::_('CDELETEFILTER') ?>">
+                        title="<?php echo Text::_('CDELETEFILTER') ?>">
                 </button>
             </div>
 		<?php endforeach; ?>
 		<?php if (count($this->worns) > 1): ?>
             <button onclick="Joomla.submitbutton('records.cleanall');" class="alert alert-danger  float-start">
-                <div><?php echo \Joomla\CMS\Language\Text::_('CORESET'); ?></div>
-				<?php echo \Joomla\CMS\Language\Text::_('CODELETEALLFILTERS'); ?>
+                <div><?php echo Text::_('CORESET'); ?></div>
+				<?php echo Text::_('CODELETEALLFILTERS'); ?>
             </button>
 		<?php endif; ?>
 
@@ -558,11 +557,12 @@ $current_user = \Joomla\CMS\Factory::getUser($this->input->getInt('user_id', $th
 	<?php echo Layout::render('core.list.pagination',['params' => $this->tmpl_params['list'],'pagination' => $this->pagination]) ?>
 
 <?php elseif ($this->worns): ?>
-    <h4 align="center"><?php echo \Joomla\CMS\Language\Text::_('CNORECFOUNDSEARCH'); ?></h4>
+    <h4 align="center"><?php echo Text::_('CNORECFOUNDSEARCH'); ?></h4>
 <?php else: ?>
-	<?php if (((!empty($this->category->id) && $this->category->params->get('submission')) || (empty($this->category->id) && $this->section->params->get('general.section_home_items'))) && !$this->input->get('view_what')): ?>
+	<?php if (
+            ((!empty($this->category->id) && $this->category->params->get('submission')) || (empty($this->category->id) && $this->section->params->get('general.section_home_items'))) && !$this->input->get('view_what') && $markup->get('main.display_no_records_warning',1)): ?>
         <p  class="jcck-no-records alert alert-warning" id="no-records<?php echo $this->section->id; ?>">
-            <i class="fas fa-exclamation-triangle"></i> <?php echo \Joomla\CMS\Language\Text::_('CNOARTICLESHERE'); ?>
+            <i class="fas fa-exclamation-triangle"></i> <?php echo Text::_('CNOARTICLESHERE'); ?>
         </p>
 	<?php endif; ?>
 <?php endif; ?>
