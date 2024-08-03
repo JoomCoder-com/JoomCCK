@@ -25,6 +25,8 @@ $listOrder	= $this->escape($this->state->get('list.ordering'));
 $listDirn	= $this->escape($this->state->get('list.direction'));
 $ordering 	= ($listOrder == 'a.lft');
 $saveOrder 	= ($listOrder == 'a.lft' && $listDirn == 'asc');
+
+
 if ($saveOrder)
 {
 	$saveOrderingUrl = 'index.php?option=com_joomcck&task=cats.saveOrderAjax&tmpl=component';
@@ -90,7 +92,13 @@ if ($saveOrder)
                     </th>
                 </tr>
                 </thead>
-                <tbody>
+                <tbody <?php if ($saveOrder) : ?>
+                            class="js-draggable"
+                            data-url="<?php echo $saveOrderingUrl; ?>"
+                            data-direction="<?php echo strtolower($listDirn); ?>"
+                            data-nested="false"
+                        <?php endif; ?>
+                >
 		        <?php
 		        $originalOrders = array();
 		        foreach ($this->items as $i => $item) :
@@ -125,7 +133,14 @@ if ($saveOrder)
 			        {
 				        $parentsStr = "";
 			        }			?>
-                    <tr class="row<?php echo $i % 2; ?>" sortable-group-id="<?php echo $item->parent_id;?>" item-id="<?php echo $item->id?>" parents="<?php echo $parentsStr?>"  level="<?php echo $item->level?>">
+                    <tr
+                            data-draggable-group="<?php echo $item->parent_id; ?>"
+                            data-item-id="<?php echo $item->id ?>"
+                            data-parents="<?php echo $parentsStr ?>"
+                            data-level="<?php echo $item->level ?>"
+
+
+                            class="row<?php echo $i % 2; ?>">
                         <td class="center">
 					        <?php echo \Joomla\CMS\HTML\HTMLHelper::_('grid.id', $i, $item->id); ?>
                         </td>
