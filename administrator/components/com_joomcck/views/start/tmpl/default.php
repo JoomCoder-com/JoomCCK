@@ -24,7 +24,7 @@ $allGood = $configCorrect && $configCorrect;
 
 <?php if($allGood): ?>
 
-    <div class="alert alert-success text-center p-5">
+    <div class="alert alert-light text-center p-5">
 
         <h2 class="mb-4">Now you can start working with JoomCCK, please click on this button to start administration from frontend</h2>
 
