@@ -19,6 +19,7 @@ class JFormFieldCtext extends CFormFieldSelectable
 {
 
 	public $mask_type;
+	public $readmore;
 
 	public function getInput()
 	{
