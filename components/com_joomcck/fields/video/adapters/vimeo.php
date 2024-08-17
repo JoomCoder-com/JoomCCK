@@ -12,12 +12,14 @@ class CVideoAdapterVimeo extends CVideoAdapterAbstarct
 {
 
 	public $key;
+	public $width;
 	static private $tamplate = '<iframe src="//player.vimeo.com/video/%s?portrait=0&amp;color=c9ff23"
-			width="%s" height="%s" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>';
+			 style="max-width:%s" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>';
 
 	public function __construct($params)
 	{
 		$this->params = $params;
+		$this->width = $this->params->get('params.default_width','100%');
 	}
 	
 	public function check($url)
@@ -36,8 +38,7 @@ class CVideoAdapterVimeo extends CVideoAdapterAbstarct
 	{
 		return sprintf(self::$tamplate,
 				$this->key,
-				$this->params->get('width', 350),
-				$this->params->get('height', 200),
+				$this->width,
 				$this->key
 			);
 	}

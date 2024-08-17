@@ -116,7 +116,6 @@
 				<field name="adapters" type="list" multiple="multiple" size="7" label="F_ALLOWADDAPTERS">
 					<option value="youtube">You Tube</option>
 					<option value="vimeo">Vimeo</option>
-					<option value="screencast">Screencast.com</option>
 				</field>
 
 			</fieldset>
