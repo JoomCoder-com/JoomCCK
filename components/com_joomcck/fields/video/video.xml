@@ -76,7 +76,6 @@
 				<field name="allow_download" label="F_ALLOWDOWNL" type="accesslevel" default="1">
 					<option value="0">XML_OPT_NOONE</option>
 				</field>
-				<field name="default_width" type="text" default="640" size="3" label="F_DEFWIDTH" />
 				<field name="sort" type="list" default="0" label="F_SORTBY" description="">
 					<option value="0 ASC">XML_OPT_NAMEASC</option>
 					<option value="0 DESC">XML_OPT_NAMEDESC</option>
@@ -119,6 +118,7 @@
 					<option value="vimeo">Vimeo</option>
 					<option value="screencast">Screencast.com</option>
 				</field>
+
 			</fieldset>
 
 			<fieldset name="emerald" label="F_DOWNLOADSUBSCR" description="F_DOWNLOADSUBSCR_DESCR" addfieldpath="/components/com_emerald/models/fields/">

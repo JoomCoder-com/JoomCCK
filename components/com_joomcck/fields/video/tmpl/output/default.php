@@ -12,7 +12,33 @@ if($vw = $this->request->get('view_what'))
 $key = $client.$this->id.$record->id;
 \Joomla\CMS\Factory::getDocument()->addScript(\Joomla\CMS\Uri\Uri::root(true).'/components/com_joomcck/fields/video/assets/video.js');
 ?>
+<style>
 
+    .video-block {
+        position: relative;
+        padding-bottom: 56.25%; /* 16:9 aspect ratio */
+        height: 0;
+        overflow: hidden;
+        display: block;
+        width: 100%
+    }
+    .video-block iframe {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+    }
+
+    /* Media query for tablets */
+    @media (max-width: 768px) {
+        .video-block iframe {
+            max-width: 100% !important;
+        }
+    }
+
+
+</style>
 <div id="video-block<?php echo $key;?>">
 	<div id="destr<?php echo $key;?>" class="video-block" style="display: none;"><div id="mediaplayer<?php echo $key;?>"></div></div>
 	<div id="htmlplayer<?php echo $key;?>">

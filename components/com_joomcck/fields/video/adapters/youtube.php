@@ -13,12 +13,16 @@ class CVideoAdapterYoutube extends CVideoAdapterAbstarct
 {
 
 	public $key;
+	public $width;
 
-	static private $tamplate = '<iframe width="%s" height="%s" src="%s://www.youtube.com/embed/%s" frameborder="0" allowfullscreen></iframe>';
+	static private $tamplate = '<iframe style="max-width:%s" src="https://www.youtube.com/embed/%s" frameborder="0" allowfullscreen></iframe>';
 
 	public function __construct($params)
 	{
 		$this->params = $params;
+		$this->width = $this->params->get('params.default_width','100%');
+
+
 	}
 
 	public function check($url)
@@ -43,9 +47,7 @@ class CVideoAdapterYoutube extends CVideoAdapterAbstarct
 	public function getHtml()
 	{
 		return sprintf(self::$tamplate,
-				$this->params->get('width', 350),
-				$this->params->get('height', 200),
-				\Joomla\CMS\Uri\Uri::getInstance()->getScheme(),
+				$this->width,
 				$this->key
 			);
 	}
