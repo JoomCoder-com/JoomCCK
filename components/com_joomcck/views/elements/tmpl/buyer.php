@@ -113,7 +113,7 @@ HTMLHelper::_('bootstrap.collapse');
                 <td>
 					<span>
 						<?php if ($order->field): ?>
-                            <button type="button" class="btn btn-micro" data-toggle="collapse"
+                            <button type="button" class="btn btn-sm btn-light border rounded" data-toggle="collapse"
                                     data-target="#field<?php echo $order->id ?>"><i
                                         class="icon-arrow-down-3"></i></button>
 						<?php endif; ?>

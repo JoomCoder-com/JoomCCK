@@ -263,13 +263,13 @@ HTMLHelper::_('bootstrap.collapse');
 				<td nowrap>
 					<div class="btn-group">
 						<?php if($item->state_new): ?>
-							<a class="btn btn-micro" id="btn-mark-<?php echo $item->id ?>"
+							<a class="btn btn-sm btn-light border rounded" id="btn-mark-<?php echo $item->id ?>"
 							   onclick="Joomcck.markRead(<?php echo $item->id; ?>);" rel="tooltip"
 							   data-bs-original-title="<?php echo Text::_('CMARKASREAD') ?>">
 								<?php echo HTMLFormatHelper::icon('asterisk.png'); ?>
 							</a>
 						<?php endif; ?>
-						<a class="btn btn-micro"
+						<a class="btn btn-sm btn-light border rounded"
 						   onclick="if(!confirm('<?php echo Text::_("EVENT_CONFIRM_DELETE") ?>') ) {return;} Joomcck.removeNtf(<?php echo $item->id; ?>);">
 							<?php echo HTMLFormatHelper::icon('cross-button.png'); ?>
 						</a>

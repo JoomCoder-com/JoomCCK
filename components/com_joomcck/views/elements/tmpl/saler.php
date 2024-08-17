@@ -163,7 +163,7 @@ function status($s, $t, $o)
 						<a href="javascript:void(0)" onclick="if(confirm('<?php echo \Joomla\CMS\Language\Text::_('CCONFIRMDELET_1')?>')){window.location = '<?php echo \Joomla\CMS\Router\Route::_('index.php?option=com_joomcck&task=sale.delete&id='.$order->id)?>'}">
 							<?php echo HTMLFormatHelper::icon('cross.png');  ?></a>
 					<?php endif;?>
-					<button type="button" class="btn btn-micro" data-toggle="collapse" data-target="#field<?php echo $order->id?>"><i class="icon-arrow-down-3"></i></button>
+					<button type="button" class="btn btn-sm btn-light border rounded" data-toggle="collapse" data-target="#field<?php echo $order->id?>"><i class="icon-arrow-down-3"></i></button>
 
 					<a href="<?php echo Url::record($order->record_id)?>">
 						<?php echo $order->name?></a>
