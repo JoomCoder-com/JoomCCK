@@ -10,6 +10,8 @@ defined('_JEXEC') or die();
 
 class CVideoAdapterVimeo extends CVideoAdapterAbstarct
 {
+
+	public $key;
 	static private $tamplate = '<iframe src="//player.vimeo.com/video/%s?portrait=0&amp;color=c9ff23"
 			width="%s" height="%s" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>';
 

@@ -10,6 +10,9 @@ defined('_JEXEC') or die();
 
 class CVideoAdapterScreencast extends CVideoAdapterAbstarct
 {
+
+	public $key;
+
 	public function __construct($params)
 	{
 		$this->params = $params;

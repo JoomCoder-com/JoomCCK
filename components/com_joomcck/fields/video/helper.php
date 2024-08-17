@@ -12,6 +12,8 @@ defined('_JEXEC') or die();
 class CVideoAdapterHelper
 {
 
+	public $params;
+
 	static function getVideoCode($params, $url)
 	{
 		$adapters = $params->get('params.adapters', false);
@@ -123,6 +125,8 @@ class CVideoAdapterHelper
 
 class CVideoAdapterAbstarct
 {
+
+	public $params;
 
 	public function __construct($params)
 	{

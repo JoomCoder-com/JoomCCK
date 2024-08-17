@@ -11,6 +11,9 @@ defined('_JEXEC') or die();
 
 class CVideoAdapterYoutube extends CVideoAdapterAbstarct
 {
+
+	public $key;
+
 	static private $tamplate = '<iframe width="%s" height="%s" src="%s://www.youtube.com/embed/%s" frameborder="0" allowfullscreen></iframe>';
 
 	public function __construct($params)
