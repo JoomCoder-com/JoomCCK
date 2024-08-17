@@ -24,7 +24,6 @@ defined('_JEXEC') or die('Restricted access');
 	right: 4px;
 }
 .element-box {
-	position: relative;
 }
 .element-box textarea, .element-box input {
 	margin-bottom: 15px;
@@ -109,10 +108,21 @@ defined('_JEXEC') or die('Restricted access');
 						<?php echo \Joomla\CMS\Language\Text::_('WEUNDERSTAND2');?>
                     </p>
 
-                    <div id="input_links">
+                    <div id="input_links" class="mb-3">
 						<?php foreach ($this->link AS $link):?>
-                            <div class="element-box">
-                                <input class="form-control" name="jform[fields][<?php echo $this->id;?>][link][]" type="text" value="<?php echo $link; ?>"  id="<?php echo $this->formControl.$this->name;?>" /><img align="absmiddle" src="<?php echo Uri::root(TRUE)?>/media/com_joomcck/icons/16/cross-button.png" class="link_delete" onclick="Joomcck.deleteFormElement<?php echo $this->id; ?>('link', this);">
+                            <div class="element-box input-group mb-2">
+                                <input
+                                        class="form-control m-0"
+                                        name="jform[fields][<?php echo $this->id;?>][link][]"
+                                        type="text"
+                                        value="<?php echo $link; ?>"
+                                        id="<?php echo $this->formControl.$this->name;?>"
+                                />
+                                <?php if(!$this->only_one): ?>
+                                <button type="button" class="btn btn-outline-danger" onclick="Joomcck.deleteFormElement<?php echo $this->id; ?>('link', this);">
+                                    <i class="fas fa-times"></i>
+                                </button>
+                                <?php endif; ?>
                             </div>
 						<?php endforeach;?>
                     </div>
@@ -120,8 +130,7 @@ defined('_JEXEC') or die('Restricted access');
 					<?php if(!$this->only_one):?>
                         <div id="link-button">
                             <button class="btn btn-light border" type="button" onclick="Joomcck.addFormElement<?php echo $this->id; ?>('link', <?php echo $this->id; ?>);">
-                                <img src="<?php echo Uri::root(TRUE); ?>/media/com_joomcck/icons/16/plus-button.png" align="absmiddle">
-								<?php echo \Joomla\CMS\Language\Text::_('F_ONEMOREVIDEO'); ?>
+                                <i class="fas fa-plus"></i> <?php echo \Joomla\CMS\Language\Text::_('F_ONEMOREVIDEO'); ?>
                             </button>
                         </div>
 					<?php endif;?>
@@ -141,6 +150,8 @@ defined('_JEXEC') or die('Restricted access');
 
 	Joomcck.addFormElement<?php echo $this->id; ?> = function (type, id)
 	{
+
+
 		if(type == 'embed')
 		{
 			<?php if($this->params->get('params.embed_max_count', 0)): ?>
@@ -176,25 +187,51 @@ defined('_JEXEC') or die('Restricted access');
 			return;
 		}
 
-		var input_div = $(document.createElement("div")).attr({
-			'class': 'element-box'
-		});
+        if(type == 'link'){
+            var input_div = $(document.createElement("div")).attr({
+                'class': 'element-box input-group mb-2'
+            });
 
 
-		var input = $(document.createElement(input)).attr({
-			 type: "text",
-			 name: 'jform[fields][' + id + '][' + type + '][]',
-			 rows: 5
-			}).appendTo(input_div);
+            var input = $(document.createElement(input)).attr({
+                type: "text",
+                name: 'jform[fields][' + id + '][' + type + '][]',
+                class: 'form-control m-0'
+            }).appendTo(input_div);
 
-		var close_link = $(document.createElement("img")).attr({
-			 'class': 'link_delete',
-			 'src': '<?php echo Uri::root(TRUE)?>/media/com_joomcck/icons/16/cross-button.png'
-			}).appendTo(input_div);
+            var close_link = $(document.createElement("button")).attr({
+                'class': 'btn btn-outline-danger',
+                'type' : 'button'
+            }).html("<i class='fas fa-times'></i>").appendTo(input_div);
 
-		close_link.on('click', function(){
-			Joomcck.deleteFormElement<?php echo $this->id; ?>(type, this);
-		});
+            close_link.on('click', function(){
+                Joomcck.deleteFormElement<?php echo $this->id; ?>(type, this);
+            });
+
+
+
+        }else{
+            var input_div = $(document.createElement("div")).attr({
+                'class': 'element-box'
+            });
+
+            var input = $(document.createElement(input)).attr({
+                type: "text",
+                name: 'jform[fields][' + id + '][' + type + '][]',
+                row: 5
+            }).appendTo(input_div);
+
+            var close_link = $(document.createElement("img")).attr({
+                'class': 'link_delete',
+                'src': '<?php echo Uri::root(TRUE)?>/media/com_joomcck/icons/16/cross-button.png'
+            }).appendTo(input_div);
+
+            close_link.on('click', function(){
+                Joomcck.deleteFormElement<?php echo $this->id; ?>(type, this);
+            });
+        }
+
+
 
 		$("#"+central_div).append(input_div);
 
