@@ -1,6 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project name="com_joomcck" basedir="." default="dist" description="Build package file for JoomCCK Pro version">
+
+    <!-- Define properties for version and releasespath -->
+    <property name="version" value="5.9.0" />
+    <property name="releasespath" value="E:\JoomCoder\joomcck"/>
+
     <target name="dirbuild">
+
 
         <!-- Language files component -->
         <copy file="./language/en-GB/com_joomcck.ini" todir="${releasespath}/build/components/com_joomcck/site/language/en-GB" />
