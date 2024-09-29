@@ -341,13 +341,19 @@ class JoomcckControllerFiles extends MControllerAdmin
 
         $request = new Flow\Request();
 
-        $max_upload =  $field->params->get('params.max_size', 2097152);
+        $max_upload =  $field->params->get('params.max_size', 2);
         $max_post     = $this->_convert_size(ini_get('post_max_size'));
         $memory_limit = $this->_convert_size(ini_get('memory_limit'));
+
+		// convert upload to Bytes
+	    $max_upload = $max_upload * 1024 * 1024;
+
         $limit        = min($max_upload, $max_post, $memory_limit);
+	    // convert upload to MB
+	    $limit_mb = $limit / (1024 * 1024);
 
         if ($limit < $request->getTotalSize()) {
-            echo json_encode(['error' => 1, 'msg' => 'Size is bigger than: ' . $limit]);
+            echo json_encode(['error' => 1, 'msg' => 'Size is bigger than: ' . $limit_mb . 'MB']);
             \Joomla\CMS\Factory::getApplication()->close();
             return;
         }

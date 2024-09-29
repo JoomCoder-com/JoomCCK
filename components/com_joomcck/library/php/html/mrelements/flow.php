@@ -92,7 +92,7 @@ HTMLHelper::_('bootstrap.modal');
 </table>
 
 <small><ul><li><?php echo \Joomla\CMS\Language\Text::_('CER_ONLYFORMATS') ?>: <b><?php echo $field->params->get('params.file_formats'); ?></b></li></small>
-<small><li><?php echo \Joomla\CMS\Language\Text::_('CNSG_MAXSIZEPERFILE') ?>: <b><?php echo $field->params->get('params.max_size'); ?> Byte</b></li></ul></small>
+<small><li><?php echo \Joomla\CMS\Language\Text::_('CNSG_MAXSIZEPERFILE') ?>: <b><?php echo $field->params->get('params.max_size'); ?> MB</b></li></ul></small>
 
 <script>
     (function($) {

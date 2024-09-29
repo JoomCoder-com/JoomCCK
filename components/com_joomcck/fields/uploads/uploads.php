@@ -18,10 +18,11 @@ class JFormFieldCUploads extends CFormFieldUpload
 
 	public function getInput()
 	{
+
 		$params['width'] = $this->params->get('params.width', 0);
 		$params['height'] = $this->params->get('params.height', 0);
-
-		$params['max_size'] = ($this->params->get('params.max_size', 2000) * 1024);
+		// in kb
+		$params['max_size'] = ($this->params->get('params.max_size', 2));
 		$params['method'] = $this->params->get('params.method', 'auto');
 		$params['max_count'] = $this->params->get('params.max_count', 0);
 		$params['file_formats'] = $this->params->get('params.file_formats', 'zip, jpg, png, gif, bmp');
