@@ -49,15 +49,15 @@ $view = \Joomla\CMS\Factory::getApplication()->input->getCmd('view');
 	<div class="tab-pane active" id="page-main">
 		<div class="float-start" style="max-width: 500px; min-width:600px; margin-right: 20px;">
 			<div class="control-group">
-				<div class="control-label"><?php echo $this->form->getLabel('name'); ?></div>
+				<div class="form-label"><?php echo $this->form->getLabel('name'); ?></div>
 				<div class="controls"><?php echo $this->form->getInput('name'); ?></div>
 			</div>
 			<div class="control-group">
-				<div class="control-label"><?php echo $this->form->getLabel('menu'); ?></div>
+				<div class="form-label"><?php echo $this->form->getLabel('menu'); ?></div>
 				<div class="controls"><?php echo $this->form->getInput('menu'); ?></div>
 			</div>
 			<div class="control-group">
-				<div class="control-label"><?php echo $this->form->getLabel('type'); ?></div>
+				<div class="form-label"><?php echo $this->form->getLabel('type'); ?></div>
 				<div class="controls"><?php echo $this->form->getInput('type'); ?></div>
 			</div>
 		</div>

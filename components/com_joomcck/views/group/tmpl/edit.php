@@ -34,23 +34,23 @@ $wa->useScript('keepalive')
 	</div>
 
 	<div class="control-group">
-		<div class="control-label"><?php echo $this->form->getLabel('id'); ?></div>
+		<div class="form-label"><?php echo $this->form->getLabel('id'); ?></div>
 		<div class="controls"><?php echo $this->form->getInput('id'); ?></div>
 	</div>
 	<div class="control-group">
-		<div class="control-label"><?php echo $this->form->getLabel('title'); ?></div>
+		<div class="form-label"><?php echo $this->form->getLabel('title'); ?></div>
 		<div class="controls"><?php echo $this->form->getInput('title'); ?></div>
 	</div>
 	<div class="control-group">
-		<div class="control-label"><?php echo $this->form->getLabel('ordering'); ?></div>
+		<div class="form-label"><?php echo $this->form->getLabel('ordering'); ?></div>
 		<div class="controls"><?php echo $this->form->getInput('ordering'); ?></div>
 	</div>
 	<div class="control-group">
-		<div class="control-label"><?php echo $this->form->getLabel('icon'); ?></div>
+		<div class="form-label"><?php echo $this->form->getLabel('icon'); ?></div>
 		<div class="controls"><?php echo $this->form->getInput('icon'); ?></div>
 	</div>
 	<div class="control-group form-vertical">
-		<div class="control-label"><?php echo $this->form->getLabel('description'); ?></div>
+		<div class="form-label"><?php echo $this->form->getLabel('description'); ?></div>
 		<div class="controls"><?php echo $this->form->getInput('description'); ?></div>
 	</div>
 

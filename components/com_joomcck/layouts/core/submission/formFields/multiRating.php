@@ -22,7 +22,7 @@ if (!$current->multirating)
 ?>
 
 <div class="control-group odd<?php echo $k = 1 - $k ?>">
-    <label id="jform_multirating-lbl" class="control-label" for="jform_multirating">
+    <label id="jform_multirating-lbl" class="form-label" for="jform_multirating">
 		<?php echo strip_tags($current->form->getLabel('multirating')); ?>
         <span class="float-end" rel="tooltip"
               title="<?php echo \Joomla\CMS\Language\Text::_('CREQUIRED') ?>"><?php echo HTMLFormatHelper::icon('asterisk-small.png'); ?></span>

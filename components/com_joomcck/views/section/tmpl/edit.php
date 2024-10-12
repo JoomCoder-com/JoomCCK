@@ -37,31 +37,31 @@ $wa->useScript('keepalive')
             <div class="row">
                 <div class="col-md-7">
                     <div class="control-group">
-                        <div class="control-label"><?php echo $this->form->getLabel('id'); ?></div>
+                        <div class="form-label"><?php echo $this->form->getLabel('id'); ?></div>
                         <div class="controls"><?php echo $this->form->getInput('id'); ?></div>
                     </div>
                     <div class="control-group">
-                        <div class="control-label"><?php echo $this->form->getLabel('name'); ?></div>
+                        <div class="form-label"><?php echo $this->form->getLabel('name'); ?></div>
                         <div class="controls"><?php echo $this->form->getInput('name'); ?></div>
                     </div>
                     <div class="control-group">
-                        <div class="control-label"><?php echo $this->form->getLabel('title'); ?></div>
+                        <div class="form-label"><?php echo $this->form->getLabel('title'); ?></div>
                         <div class="controls"><?php echo $this->form->getInput('title'); ?></div>
                     </div>
                     <div class="control-group">
-                        <div class="control-label"><?php echo $this->form->getLabel('alias'); ?></div>
+                        <div class="form-label"><?php echo $this->form->getLabel('alias'); ?></div>
                         <div class="controls"><?php echo $this->form->getInput('alias'); ?></div>
                     </div>
                     <div class="control-group">
-                        <div class="control-label"><?php echo $this->form->getLabel('published'); ?></div>
+                        <div class="form-label"><?php echo $this->form->getLabel('published'); ?></div>
                         <div class="controls"><?php echo $this->form->getInput('published'); ?></div>
                     </div>
                     <div class="control-group">
-                        <div class="control-label"><?php echo $this->form->getLabel('access'); ?></div>
+                        <div class="form-label"><?php echo $this->form->getLabel('access'); ?></div>
                         <div class="controls"><?php echo $this->form->getInput('access'); ?></div>
                     </div>
                     <div class="control-group">
-                        <div class="control-label"><?php echo $this->form->getLabel('language'); ?></div>
+                        <div class="form-label"><?php echo $this->form->getLabel('language'); ?></div>
                         <div class="controls"><?php echo $this->form->getInput('language'); ?></div>
                     </div>
                     <div><?php echo $this->form->getInput('description'); ?></div>

@@ -41,27 +41,27 @@ $wa->useScript('keepalive')
 		</div>
 		<div class="col-md-4">
 			<div class="control-group">
-				<div class="control-label col-md-2"><?php echo $this->form->getLabel('published'); ?></div>
+				<div class="form-label col-md-2"><?php echo $this->form->getLabel('published'); ?></div>
 				<div class="controls"><?php echo $this->form->getInput('published'); ?></div>
 			</div>
 			<div class="control-group">
-				<div class="control-label col-md-2"><?php echo $this->form->getLabel('access'); ?></div>
+				<div class="form-label col-md-2"><?php echo $this->form->getLabel('access'); ?></div>
 				<div class="controls"><?php echo $this->form->getInput('access'); ?></div>
 			</div>
 			<div class="control-group">
-				<div class="control-label col-md-2"><?php echo $this->form->getLabel('id'); ?></div>
+				<div class="form-label col-md-2"><?php echo $this->form->getLabel('id'); ?></div>
 				<div class="controls"><?php echo $this->form->getInput('id'); ?></div>
 			</div>
 			<div class="control-group">
-				<div class="control-label col-md-2"><?php echo $this->form->getLabel('record_id'); ?></div>
+				<div class="form-label col-md-2"><?php echo $this->form->getLabel('record_id'); ?></div>
 				<div class="controls"><?php echo $this->form->getInput('record_id'); ?></div>
 			</div>
 			<div class="control-group">
-				<div class="control-label col-md-2"><?php echo $this->form->getLabel('name'); ?></div>
+				<div class="form-label col-md-2"><?php echo $this->form->getLabel('name'); ?></div>
 				<div class="controls"><?php echo $this->form->getInput('name'); ?></div>
 			</div>
 			<div class="control-group">
-				<div class="control-label col-md-2"><?php echo $this->form->getLabel('email'); ?></div>
+				<div class="form-label col-md-2"><?php echo $this->form->getLabel('email'); ?></div>
 				<div class="controls"><?php echo $this->form->getInput('email'); ?></div>
 			</div>
 		</div>

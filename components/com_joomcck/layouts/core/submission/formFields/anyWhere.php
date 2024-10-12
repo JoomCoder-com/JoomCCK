@@ -23,7 +23,7 @@ if (!$current->anywhere)
 
 
 <div class="control-group odd<?php echo $k = 1 - $k ?>">
-    <label id="anywhere-lbl" class="control-label">
+    <label id="anywhere-lbl" class="form-label">
 		<?php if ($current->tmpl_params->get('tmpl_core.form_anywhere_icon', 1)): ?>
 			<?php echo HTMLFormatHelper::icon('document-share.png'); ?>
 		<?php endif; ?>
@@ -40,7 +40,7 @@ if (!$current->anywhere)
 
 
 <div class="control-group odd<?php echo $k = 1 - $k ?>">
-    <label id="anywherewho-lbl" for="whorepost" class="control-label">
+    <label id="anywherewho-lbl" for="whorepost" class="form-label">
 		<?php if ($current->tmpl_params->get('tmpl_core.form_anywhere_who_icon', 1)): ?>
 			<?php echo HTMLFormatHelper::icon('arrow-retweet.png'); ?>
 		<?php endif; ?>

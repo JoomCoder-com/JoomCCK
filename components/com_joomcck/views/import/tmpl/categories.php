@@ -11,7 +11,7 @@ defined('_JEXEC') or die();
 ?>
 <?php foreach ($this->cols AS $col):?>
 	<div class="control-group">
-		<label class="control-label" for="type"><?php echo $col;?>
+		<label class="form-label" for="type"><?php echo $col;?>
 		</label>
 		<div class="controls">
 			<div class="row">

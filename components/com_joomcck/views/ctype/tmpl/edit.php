@@ -45,19 +45,19 @@ $wa->useScript('keepalive')
                 <div class="row">
                     <div class="col-md-8">
                         <div class="control-group">
-                            <div class="control-label"><?php echo $this->form->getLabel('id'); ?></div>
+                            <div class="form-label"><?php echo $this->form->getLabel('id'); ?></div>
                             <div class="controls"><?php echo $this->form->getInput('id'); ?></div>
                         </div>
                         <div class="control-group">
-                            <div class="control-label"><?php echo $this->form->getLabel('name'); ?></div>
+                            <div class="form-label"><?php echo $this->form->getLabel('name'); ?></div>
                             <div class="controls"><?php echo $this->form->getInput('name'); ?></div>
                         </div>
                         <div class="control-group">
-                            <div class="control-label"><?php echo $this->form->getLabel('published'); ?></div>
+                            <div class="form-label"><?php echo $this->form->getLabel('published'); ?></div>
                             <div class="controls"><?php echo $this->form->getInput('published'); ?></div>
                         </div>
                         <div class="control-group">
-                            <div class="control-label"><?php echo $this->form->getLabel('language'); ?></div>
+                            <div class="form-label"><?php echo $this->form->getLabel('language'); ?></div>
                             <div class="controls"><?php echo $this->form->getInput('language'); ?></div>
                         </div>
 		                <?php echo $this->form->getLabel('description'); ?>

@@ -61,7 +61,7 @@ defined('_JEXEC') || die();
 <form action="<?php echo \Joomla\CMS\Uri\Uri::getInstance()->toString(); ?>" method="post" name="adminForm"
       id="adminForm" class="form-horizontal">
     <div class="control-group">
-        <label class="control-label" for="type"><?php echo \Joomla\CMS\Language\Text::_('CSECTION') ?></label>
+        <label class="form-label" for="type"><?php echo \Joomla\CMS\Language\Text::_('CSECTION') ?></label>
         <div class="controls">
             <select name="section_id" class="form-select">
 				<?php echo \Joomla\CMS\HTML\HTMLHelper::_('select.options', $this->sections, 'value', 'text', 0, true); ?>
@@ -69,7 +69,7 @@ defined('_JEXEC') || die();
         </div>
     </div>
     <div class="control-group">
-        <label class="control-label" for="type"><?php echo \Joomla\CMS\Language\Text::_('CTYPE') ?></label>
+        <label class="form-label" for="type"><?php echo \Joomla\CMS\Language\Text::_('CTYPE') ?></label>
         <div class="controls">
             <select name="type_id" class="form-select">
 				<?php echo \Joomla\CMS\HTML\HTMLHelper::_('select.options', $this->types, 'value', 'text', 0, true); ?>
@@ -77,7 +77,7 @@ defined('_JEXEC') || die();
         </div>
     </div>
     <div class="control-group">
-        <label class="control-label" for="type"><?php echo \Joomla\CMS\Language\Text::_('CCSVDELIMITER') ?></label>
+        <label class="form-label" for="type"><?php echo \Joomla\CMS\Language\Text::_('CCSVDELIMITER') ?></label>
         <div class="controls">
             <select name="delimiter" class="form-select">
                 <option value=","><?php echo \Joomla\CMS\Language\Text::_('CIMPORTDELCOMA') ?></option>
@@ -87,7 +87,7 @@ defined('_JEXEC') || die();
     </div>
 
     <div class="control-group">
-        <label class="control-label" for="type"><?php echo \Joomla\CMS\Language\Text::_('CIMPORTUPLOAD') ?></label>
+        <label class="form-label" for="type"><?php echo \Joomla\CMS\Language\Text::_('CIMPORTUPLOAD') ?></label>
         <div class="controls">
 			<span class="btn btn-success" style="position: relative;">
 			<?php echo \Joomla\CMS\Language\Text::_('CIMPORTUPLOADFILE') ?>

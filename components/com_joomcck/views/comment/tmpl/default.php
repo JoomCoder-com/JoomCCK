@@ -48,7 +48,7 @@ $app = \Joomla\CMS\Factory::getApplication();
 
 	<?php if($this->tmpl_params['comment']->get('tmpl_core.comments_subscribe', 1) && $this->user->get('id') && in_array($this->section->params->get('events.subscribe_record'), $this->user->getAuthorisedViewLevels())):?>
 		<div class="control-group">
-			<div for="follow" class="control-label">
+			<div for="follow" class="form-label">
 				<?php echo $this->form->getInput('subscribe');?>
 				<!-- <input checked="checked" id="follow" type="checkbox" name="subscribe" value="1"> -->
 			</div>
@@ -65,7 +65,7 @@ $app = \Joomla\CMS\Factory::getApplication();
 
 	<?php if(in_array($this->type->params->get('comments.comments_private'), $this->user->getAuthorisedViewLevels())):?>
 		<div class="control-group">
-			<div class="control-label">
+			<div class="form-label">
 				<input name="jform_private" id="prv-chk" value="" class="form-control" type="checkbox" <?php echo ($this->item->private == 1 ? 'checked' : NULL); ?>>
 				<input type="hidden" id="jform_private" name="jform[private]" value=""/>
 			</div>
@@ -109,7 +109,7 @@ $app = \Joomla\CMS\Factory::getApplication();
 
 	<?php if(in_array($this->type->params->get('comments.comment_attach'), $this->user->getAuthorisedViewLevels())):?>
 		<div class="control-group">
-			<label class="control-label">
+			<label class="form-label">
 				<?php echo \Joomla\CMS\Language\Text::_('CATTACH');?>
 			</label>
 			<div class="controls">

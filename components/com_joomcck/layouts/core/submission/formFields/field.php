@@ -20,7 +20,7 @@ extract($displayData);
      class="control-group odd<?php echo $k = 1 - $k ?> <?php echo 'field-' . $field->id; ?> <?php echo $field->fieldclass; ?>">
 	<?php if ($field->params->get('core.show_lable') == 1 || $field->params->get('core.show_lable') == 3): ?>
 		<label id="lbl-<?php echo $field->id; ?>" for="field_<?php echo $field->id; ?>"
-		       class="control-label <?php echo $field->class; ?>">
+		       class="form-label <?php echo $field->class; ?>">
 			<?php if ($field->params->get('core.icon') && $current->tmpl_params->get('tmpl_core.item_icon_fields')): ?>
 				<?php echo HTMLFormatHelper::icon($field->params->get('core.icon')); ?>
 			<?php endif; ?>

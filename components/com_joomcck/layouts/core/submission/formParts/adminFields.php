@@ -22,7 +22,7 @@ if (count($current->core_admin_fields) == 0)
 <div class="admin">
 	<?php foreach ($current->core_admin_fields as $key => $field): ?>
         <div class="control-group odd<?php echo $k = 1 - $k ?>">
-            <label id="jform_<?php echo $field ?>-lbl" class="control-label"
+            <label id="jform_<?php echo $field ?>-lbl" class="form-label"
                    for="jform_<?php echo $field ?>"><?php echo strip_tags($current->form->getLabel($field)); ?></label>
             <div class="controls field-<?php echo $field; ?>">
 				<?php echo $current->form->getInput($field); ?>

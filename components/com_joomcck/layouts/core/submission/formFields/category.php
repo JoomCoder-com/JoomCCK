@@ -18,7 +18,7 @@ extract($displayData);
 <?php if (in_array($current->params->get('submission.allow_category'), $current->user->getAuthorisedViewLevels()) && $current->section->categories): ?>
 	<div class="control-group odd<?php echo $k = 1 - $k ?>">
 		<?php if ($current->tmpl_params->get('tmpl_core.category_label', 1)): ?>
-			<label id="category-lbl" for="category" class="control-label">
+			<label id="category-lbl" for="category" class="form-label">
 				<?php if ($current->tmpl_params->get('tmpl_core.form_category_icon', 1)): ?>
 					<?php echo HTMLFormatHelper::icon('category.png'); ?>
 				<?php endif; ?>
@@ -44,7 +44,7 @@ extract($displayData);
 	</div>
 <?php elseif (!empty($current->category->id)): ?>
 	<div class="control-group odd<?php echo $k = 1 - $k ?>">
-		<label id="category-lbl" for="category" class="control-label">
+		<label id="category-lbl" for="category" class="form-label">
 			<?php if ($current->tmpl_params->get('tmpl_core.form_category_icon', 1)): ?>
 				<?php echo HTMLFormatHelper::icon('category.png'); ?>
 			<?php endif; ?>

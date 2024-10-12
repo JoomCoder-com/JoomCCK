@@ -10,7 +10,7 @@
 defined('_JEXEC') or die;
 ?>
 <div class="control-group">
-	<div class="control-label">
+	<div class="form-label">
 		<?php echo $this->form->getLabel('metadesc'); ?>
 	</div>
 	<div class="controls">
@@ -18,7 +18,7 @@ defined('_JEXEC') or die;
 	</div>
 </div>
 <div class="control-group">
-	<div class="control-label">
+	<div class="form-label">
 		<?php echo $this->form->getLabel('metakey'); ?>
 	</div>
 	<div class="controls">
@@ -32,7 +32,7 @@ defined('_JEXEC') or die;
 				<?php echo $field->input; ?>
 			</div>
 		<?php else: ?>
-			<div class="control-label">
+			<div class="form-label">
 				<?php echo $field->label; ?>
 			</div>
 			<div class="controls">

@@ -59,7 +59,7 @@ $wa->useScript('keepalive')
 			<fieldset class="adminform">
 				<legend><?php echo \Joomla\CMS\Language\Text::_('CSECTIONSETTINGS'); ?></legend>
 				<div class="control-group">
-					<div class="control-label inline">
+					<div class="form-label inline">
 						<?php echo $this->form->getLabel('id'); ?>
 					</div>
 					<div class="controls">
@@ -67,7 +67,7 @@ $wa->useScript('keepalive')
 					</div>
 				</div>
 				<div class="control-group">
-					<div class="control-label inline">
+					<div class="form-label inline">
 						<?php echo $this->form->getLabel('section_id'); ?>
 					</div>
 					<div class="controls">

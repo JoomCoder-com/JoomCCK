@@ -14,7 +14,7 @@ defined('_JEXEC') or die();
 	<div class="col-md-6">
 		<legend><?php echo \Joomla\CMS\Language\Text::_('CIMPORTPARAMS')?></legend>
 		<div class="control-group">
-			<label class="control-label" for="name"><?php echo \Joomla\CMS\Language\Text::_('CNAME');?>
+			<label class="form-label" for="name"><?php echo \Joomla\CMS\Language\Text::_('CNAME');?>
 				<span class="float-end" rel="tooltip" data-bs-original-title="<?php echo \Joomla\CMS\Language\Text::_('CREQUIRED') ?>">
 					<?php echo HTMLFormatHelper::icon('asterisk-small.png');  ?></span>
 			</label>
@@ -26,7 +26,7 @@ defined('_JEXEC') or die();
 			</div>
 		</div>
 		<div class="control-group">
-			<label class="control-label" for="name"><?php echo \Joomla\CMS\Language\Text::_('ID');?>
+			<label class="form-label" for="name"><?php echo \Joomla\CMS\Language\Text::_('ID');?>
 				<span class="float-end" rel="tooltip" data-bs-original-title="<?php echo \Joomla\CMS\Language\Text::_('CREQUIRED') ?>">
 					<?php echo HTMLFormatHelper::icon('asterisk-small.png');  ?></span>
 			</label>
@@ -41,7 +41,7 @@ defined('_JEXEC') or die();
 		<?php if($this->section->categories || ($this->section->params->get('personalize.personalize', 0) && in_array($this->section->params->get('personalize.pcat_submit', 0), $this->user->getAuthorisedViewLevels()))): ?>
 			<legend><?php echo \Joomla\CMS\Language\Text::_('CCATEGORIES')?></legend>
 			<div class="control-group">
-				<label class="control-label" for="name"><?php echo \Joomla\CMS\Language\Text::_('CCATEGORY');?>
+				<label class="form-label" for="name"><?php echo \Joomla\CMS\Language\Text::_('CCATEGORY');?>
 					<span class="float-end" rel="tooltip" data-bs-original-title="<?php echo \Joomla\CMS\Language\Text::_('CREQUIRED') ?>">
 						<?php echo HTMLFormatHelper::icon('asterisk-small.png');  ?></span>
 				</label>
@@ -64,7 +64,7 @@ defined('_JEXEC') or die();
 
 		<?php if($this->type->params->get('properties.item_title') == 1): ?>
 			<div class="control-group">
-				<label class="control-label" for="name"><?php echo \Joomla\CMS\Language\Text::_('CTITLE');?>
+				<label class="form-label" for="name"><?php echo \Joomla\CMS\Language\Text::_('CTITLE');?>
 					<span class="float-end" rel="tooltip" data-bs-original-title="<?php echo \Joomla\CMS\Language\Text::_('CREQUIRED') ?>">
 						<?php echo HTMLFormatHelper::icon('asterisk-small.png');  ?></span>
 				</label>
@@ -78,7 +78,7 @@ defined('_JEXEC') or die();
 		<?php endif;?>
 
 		<div class="control-group">
-			<label class="control-label" for="name">
+			<label class="form-label" for="name">
 				<?php echo \Joomla\CMS\Language\Text::_('CTIME');?>
 			</label>
 
@@ -90,7 +90,7 @@ defined('_JEXEC') or die();
 		</div>
 
 		<div class="control-group">
-			<label class="control-label" for="name">
+			<label class="form-label" for="name">
 				<?php echo \Joomla\CMS\Language\Text::_('MTIME');?>
 			</label>
 
@@ -104,7 +104,7 @@ defined('_JEXEC') or die();
 		<?php foreach($this->fields AS $field): ?>
 			<?php $form = $field->onImportForm($this->heads, $this->item->params); if(empty($form)) continue;  ?>
 			<div class="control-group">
-				<label class="control-label" for="type"><?php echo $field->label;?>
+				<label class="form-label" for="type"><?php echo $field->label;?>
 					<?php if($field->required): ?>
 						<span class="float-end" rel="tooltip" data-bs-original-title="<?php echo \Joomla\CMS\Language\Text::_('CREQUIRED') ?>">
 							<?php echo HTMLFormatHelper::icon('asterisk-small.png');  ?></span>

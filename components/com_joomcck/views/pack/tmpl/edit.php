@@ -34,7 +34,7 @@ $wa->useScript('keepalive')
 	</div>
 
 	<div class="control-group">
-		<div class="control-label inline">
+		<div class="form-label inline">
 			<?php echo $this->form->getLabel('id'); ?>
 		</div>
 		<div class="controls">
@@ -42,7 +42,7 @@ $wa->useScript('keepalive')
 		</div>
 	</div>
 	<div class="control-group">
-		<div class="control-label inline">
+		<div class="form-label inline">
 			<?php echo $this->form->getLabel('name'); ?>
 		</div>
 		<div class="controls">
@@ -56,7 +56,7 @@ $wa->useScript('keepalive')
 
 	<legend><?php echo \Joomla\CMS\Language\Text::_('CPACKSETTINGS'); ?></legend>
 	<div class="control-group">
-		<div class="control-label inline">
+		<div class="form-label inline">
 			<?php echo $this->form->getLabel('user'); ?>
 		</div>
 		<div class="controls">
@@ -64,7 +64,7 @@ $wa->useScript('keepalive')
 		</div>
 	</div>
 	<div class="control-group">
-		<div class="control-label inline">
+		<div class="form-label inline">
 			<?php echo $this->form->getLabel('addkey'); ?>
 		</div>
 		<div class="controls">
@@ -72,7 +72,7 @@ $wa->useScript('keepalive')
 		</div>
 	</div>
 	<div class="control-group">
-		<div class="control-label inline">
+		<div class="form-label inline">
 			<?php echo $this->form->getLabel('demo'); ?>
 		</div>
 		<div class="controls">
@@ -80,7 +80,7 @@ $wa->useScript('keepalive')
 		</div>
 	</div>
 	<div class="control-group">
-		<div class="control-label inline">
+		<div class="form-label inline">
 			<?php echo $this->form->getLabel('version'); ?>
 		</div>
 		<div class="controls">
@@ -88,7 +88,7 @@ $wa->useScript('keepalive')
 		</div>
 	</div>
 	<div class="control-group">
-		<div class="control-label inline">
+		<div class="form-label inline">
 			<?php echo $this->form->getLabel('author_email'); ?>
 		</div>
 		<div class="controls">
@@ -96,7 +96,7 @@ $wa->useScript('keepalive')
 		</div>
 	</div>
 	<div class="control-group">
-		<div class="control-label inline">
+		<div class="form-label inline">
 			<?php echo $this->form->getLabel('author_url'); ?>
 		</div>
 		<div class="controls">
@@ -104,7 +104,7 @@ $wa->useScript('keepalive')
 		</div>
 	</div>
 	<div class="control-group">
-		<div class="control-label inline">
+		<div class="form-label inline">
 			<?php echo $this->form->getLabel('author_name'); ?>
 		</div>
 		<div class="controls">
@@ -112,7 +112,7 @@ $wa->useScript('keepalive')
 		</div>
 	</div>
 	<div class="control-group">
-		<div class="control-label inline">
+		<div class="form-label inline">
 			<?php echo $this->form->getLabel('copyright'); ?>
 		</div>
 		<div class="controls">
@@ -120,7 +120,7 @@ $wa->useScript('keepalive')
 		</div>
 	</div>
 	<div class="control-group">
-		<div class="control-label inline">
+		<div class="form-label inline">
 			<?php echo $this->form->getLabel('add_files'); ?>
 		</div>
 		<div class="controls">

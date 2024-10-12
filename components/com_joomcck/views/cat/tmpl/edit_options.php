@@ -11,7 +11,7 @@ defined('_JEXEC') or die;
 ?>
 
 <div class="control-group">
-	<div class="control-label">
+	<div class="form-label">
 		<?php echo $this->form->getLabel('image'); ?>
 	</div>
 	<div class="controls">
@@ -20,7 +20,7 @@ defined('_JEXEC') or die;
 </div>
 
 <div class="control-group">
-	<div class="control-label">
+	<div class="form-label">
 		<?php echo $this->form->getLabel('created_user_id'); ?>
 	</div>
 	<div class="controls">
@@ -30,7 +30,7 @@ defined('_JEXEC') or die;
 
 <?php if (intval($this->item->created_time)) : ?>
 	<div class="control-group">
-		<div class="control-label">
+		<div class="form-label">
 			<?php echo $this->form->getLabel('created_time'); ?>
 		</div>
 		<div class="controls">
@@ -41,7 +41,7 @@ defined('_JEXEC') or die;
 
 <?php if ($this->item->modified_user_id) : ?>
 	<div class="control-group">
-		<div class="control-label">
+		<div class="form-label">
 			<?php echo $this->form->getLabel('modified_user_id'); ?>
 		</div>
 		<div class="controls">
@@ -49,7 +49,7 @@ defined('_JEXEC') or die;
 		</div>
 	</div>
 	<div class="control-group">
-		<div class="control-label">
+		<div class="form-label">
 			<?php echo $this->form->getLabel('modified_time'); ?>
 		</div>
 		<div class="controls">
@@ -59,7 +59,7 @@ defined('_JEXEC') or die;
 <?php endif; ?>
 
 <div class="control-group">
-	<div class="control-label">
+	<div class="form-label">
 		<?php echo $this->form->getLabel('note'); ?>
 	</div>
 	<div class="controls">

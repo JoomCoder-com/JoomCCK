@@ -17,7 +17,7 @@ extract($displayData);
 ?>
 <?php if ($current->ucategory) : ?>
 	<div class="control-group odd<?php echo $k = 1 - $k ?>">
-		<label id="ucategory-lbl" for="ucatid" class="control-label">
+		<label id="ucategory-lbl" for="ucatid" class="form-label">
 			<?php if ($current->tmpl_params->get('tmpl_core.form_ucategory_icon', 1)): ?>
 				<?php echo HTMLFormatHelper::icon('category.png'); ?>
 			<?php endif; ?>

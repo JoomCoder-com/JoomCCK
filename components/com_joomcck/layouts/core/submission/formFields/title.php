@@ -18,7 +18,7 @@ extract($displayData);
 
 <?php if($current->type->params->get('properties.item_title', 1) == 1):?>
 	<div class="control-group odd<?php echo $k = 1 - $k ?>">
-		<label id="title-lbl" for="jform_title" class="control-label" >
+		<label id="title-lbl" for="jform_title" class="form-label" >
 			<?php if($current->tmpl_params->get('tmpl_core.form_title_icon', 1)):?>
 				<?php echo HTMLFormatHelper::icon($current->tmpl_params->get('tmpl_core.item_icon_title_icon', 'edit.png'));  ?>
 			<?php endif;?>

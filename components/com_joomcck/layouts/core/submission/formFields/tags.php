@@ -29,7 +29,7 @@ if (
 
 ?>
 <div class="control-group odd<?php echo $k = 1 - $k ?>">
-    <label id="tags-lbl" for="tags" class="control-label">
+    <label id="tags-lbl" for="tags" class="form-label">
 		<?php if ($current->tmpl_params->get('tmpl_core.form_tags_icon', 1)): ?>
 			<?php echo HTMLFormatHelper::icon('price-tag.png'); ?>
 		<?php endif; ?>

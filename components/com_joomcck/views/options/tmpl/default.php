@@ -77,11 +77,11 @@ $section = $this->section;
 
     <legend><?php echo \Joomla\CMS\Language\Text::_('CEMAILSETINGS'); ?></legend>
     <div class="control-group">
-        <div class="control-label col-md-2"><?php echo $this->form->getLabel('schedule'); ?></div>
+        <div class="form-label col-md-2"><?php echo $this->form->getLabel('schedule'); ?></div>
         <div class="controls"><?php echo $this->form->getInput('schedule'); ?></div>
     </div>
     <div class="control-group">
-        <div class="control-label col-md-2"><?php echo $this->form->getLabel('language'); ?></div>
+        <div class="form-label col-md-2"><?php echo $this->form->getLabel('language'); ?></div>
         <div class="controls"><?php echo $this->form->getInput('language'); ?></div>
     </div>
 
@@ -189,7 +189,7 @@ $section = $this->section;
                             <div class="row">
 								<?php foreach ($this->notyfications['r'] as $type): ?>
                                     <div class="col-md-3">
-                                        <div class="control-label"><?php echo ucfirst(\Joomla\CMS\Language\Text::sprintf('alert_event_' . $type, strtolower($section->params->get('general.item_label', 'item')))) ?></div>
+                                        <div class="form-label"><?php echo ucfirst(\Joomla\CMS\Language\Text::sprintf('alert_event_' . $type, strtolower($section->params->get('general.item_label', 'item')))) ?></div>
                                         <div class="controls"><?php yesnobutton($type, $section->id, $this->data); ?></div>
                                     </div>
 								<?php endforeach; ?>
@@ -200,7 +200,7 @@ $section = $this->section;
                             <div class="row">
 								<?php foreach ($this->notyfications['c'] as $type): ?>
                                     <div class="col-md-3">
-                                        <div class="control-label"><?php echo \Joomla\CMS\Language\Text::_('alert_event_' . $type) ?></div>
+                                        <div class="form-label"><?php echo \Joomla\CMS\Language\Text::_('alert_event_' . $type) ?></div>
                                         <div class="controls"><?php yesnobutton($type, $section->id, $this->data); ?></div>
                                     </div>
 								<?php endforeach; ?>

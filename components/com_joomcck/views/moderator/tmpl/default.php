@@ -36,28 +36,28 @@ defined('_JEXEC') or die();
     <div class="row">
         <div class="col-md-6">
             <div class="control-group">
-                <label class="control-label" for="inputEmail"><?php echo strip_tags($this->form->getLabel('user_id')); ?></label>
+                <label class="form-label" for="inputEmail"><?php echo strip_tags($this->form->getLabel('user_id')); ?></label>
                 <div class="controls">
 			        <?php echo $this->form->getInput('user_id') ; ?>
                 </div>
             </div>
 
             <div class="control-group">
-                <label class="control-label" for="inputEmail"><?php echo strip_tags($this->form->getLabel('description')); ?></label>
+                <label class="form-label" for="inputEmail"><?php echo strip_tags($this->form->getLabel('description')); ?></label>
                 <div class="controls">
 			        <?php echo $this->form->getInput('description') ; ?>
                 </div>
             </div>
 
             <div class="control-group">
-                <label class="control-label" for="inputEmail"><?php echo strip_tags($this->form->getLabel('icon')); ?></label>
+                <label class="form-label" for="inputEmail"><?php echo strip_tags($this->form->getLabel('icon')); ?></label>
                 <div class="controls">
 			        <?php echo $this->form->getInput('icon') ; ?>
                 </div>
             </div>
 
             <div class="control-group">
-                <label class="control-label" for="inputEmail"><?php echo strip_tags($this->form->getLabel('published')); ?></label>
+                <label class="form-label" for="inputEmail"><?php echo strip_tags($this->form->getLabel('published')); ?></label>
                 <div class="controls">
 			        <?php echo $this->form->getInput('published') ; ?>
                 </div>
@@ -72,7 +72,7 @@ defined('_JEXEC') or die();
                 </div>
 
                 <div class="control-group">
-                    <label class="control-label" for="inputEmail"><?php echo \Joomla\CMS\Language\Text::_('CCATEGORIES'); ?></label>
+                    <label class="form-label" for="inputEmail"><?php echo \Joomla\CMS\Language\Text::_('CCATEGORIES'); ?></label>
                     <div class="controls">
 			            <?php echo \Joomla\CMS\HTML\HTMLHelper::_('mrelements.catselector', 'jform[category][]', $this->section->id, @$this->item->category, 0); ?>
                     </div>
@@ -80,14 +80,14 @@ defined('_JEXEC') or die();
             </div>
 
             <div class="control-group">
-                <label class="control-label" for="inputEmail"><?php echo strip_tags($this->form->getLabel('allow')); ?></label>
+                <label class="form-label" for="inputEmail"><?php echo strip_tags($this->form->getLabel('allow')); ?></label>
                 <div class="controls">
 			        <?php echo $this->form->getInput('allow') ; ?>
                 </div>
             </div>
 
             <div class="control-group">
-                <label class="control-label" for="inputEmail"><?php echo strip_tags($this->form->getLabel('category_limit_mode')); ?></label>
+                <label class="form-label" for="inputEmail"><?php echo strip_tags($this->form->getLabel('category_limit_mode')); ?></label>
                 <div class="controls">
 			        <?php echo $this->form->getInput('category_limit_mode') ; ?>
                 </div>

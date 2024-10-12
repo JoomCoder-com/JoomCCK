@@ -23,7 +23,7 @@ if (count($current->meta) == 0)
 ?>
 <?php foreach ($current->meta as $label => $meta_name): ?>
 	<div class="control-group odd<?php echo $k = 1 - $k ?>">
-		<label id="jform_meta_descr-lbl" class="control-label" title="" for="jform_<?php echo $meta_name; ?>">
+		<label id="jform_meta_descr-lbl" class="form-label" title="" for="jform_<?php echo $meta_name; ?>">
 			<?php echo \Joomla\CMS\Language\Text::_($label); ?>
 		</label>
 		<div class="controls">

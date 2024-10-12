@@ -256,7 +256,7 @@ class MFormHelper
 			{
 				case self::STYLE_CLASSIC:
 
-					$form->setFieldAttribute($field->fieldname, 'labelclass', 'control-label');
+					$form->setFieldAttribute($field->fieldname, 'labelclass', 'form-label');
 					$row[]    = sprintf($tmpl['style-classic'],
 						self::_getLabel($field, TRUE), $form->getInput($field->fieldname, $group, $default));
 					$row_tmpl = 'style-classic-wrap';
@@ -312,7 +312,7 @@ class MFormHelper
 	protected static function _getLabel($field, $lc = FALSE)
 	{
 		$class = $field->required == TRUE ? 'required ' : '';
-		$class .= $lc ? 'control-label' : NULL;
+		$class .= $lc ? 'form-label' : NULL;
 
 		$tooltip = '';
 		$tmpl    = self::_get_templates();

@@ -214,7 +214,7 @@ $app = \Joomla\CMS\Factory::getApplication();
 	<?php if($this->tmpl_params->get('tmpl_core.form_captcha', 1) && !$this->user->get('id')):?>
 		<div class="form-horizontal">
 			<div class="control-group">
-				<label class="control-label">&nbsp;</label>
+				<label class="form-label">&nbsp;</label>
 				<div class="controls">
 					<?php  echo $this->form->getInput('captcha'); ?>
 				</div>

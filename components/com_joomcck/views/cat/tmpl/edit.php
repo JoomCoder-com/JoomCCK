@@ -48,7 +48,7 @@ $wa->useScript('keepalive')
 		<?php echo HTMLHelper::_('uitab.addTab', 'myTab', 'page-details', \Joomla\CMS\Language\Text::_('COM_JOOMCCK_FIELDSET_DETAILS')); ?>
         <div>
             <div class="control-group">
-                <div class="control-label">
+                <div class="form-label">
 					<?php echo $this->form->getLabel('title'); ?>
                 </div>
                 <div class="controls">
@@ -56,7 +56,7 @@ $wa->useScript('keepalive')
                 </div>
             </div>
             <div class="control-group">
-                <div class="control-label">
+                <div class="form-label">
 					<?php echo $this->form->getLabel('alias'); ?>
                 </div>
                 <div class="controls">
@@ -64,7 +64,7 @@ $wa->useScript('keepalive')
                 </div>
             </div>
             <div class="control-group">
-                <div class="control-label">
+                <div class="form-label">
 					<?php echo $this->form->getLabel('parent_id'); ?>
                 </div>
                 <div class="controls">
@@ -81,7 +81,7 @@ $wa->useScript('keepalive')
 		<?php echo HTMLHelper::_('uitab.addTab', 'myTab', 'page-options', \Joomla\CMS\Language\Text::_('COM_JOOMCCK_FIELDSET_OPTIONS')); ?>
         <div>
             <div class="control-group">
-                <div class="control-label">
+                <div class="form-label">
 					<?php echo $this->form->getLabel('published'); ?>
                 </div>
                 <div class="controls">
@@ -89,7 +89,7 @@ $wa->useScript('keepalive')
                 </div>
             </div>
             <div class="control-group">
-                <div class="control-label">
+                <div class="form-label">
 					<?php echo $this->form->getLabel('access'); ?>
                 </div>
                 <div class="controls">
@@ -97,7 +97,7 @@ $wa->useScript('keepalive')
                 </div>
             </div>
             <div class="control-group">
-                <div class="control-label">
+                <div class="form-label">
 					<?php echo $this->form->getLabel('language'); ?>
                 </div>
                 <div class="controls">
@@ -105,7 +105,7 @@ $wa->useScript('keepalive')
                 </div>
             </div>
             <div class="control-group">
-                <div class="control-label">
+                <div class="form-label">
 					<?php echo $this->form->getLabel('id'); ?>
                 </div>
                 <div class="controls">

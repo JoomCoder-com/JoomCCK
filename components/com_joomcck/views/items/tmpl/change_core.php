@@ -22,51 +22,51 @@ defined('_JEXEC') or die('Restricted access');
     </div>
 
     <div class="control-group">
-        <div class="control-label"><?php echo $this->form->getLabel('published'); ?></div>
+        <div class="form-label"><?php echo $this->form->getLabel('published'); ?></div>
         <div class="controls"><?php echo $this->form->getInput('published'); ?></div>
     </div>
     <div class="control-group">
-        <div class="control-label"><?php echo $this->form->getLabel('user_id'); ?></div>
+        <div class="form-label"><?php echo $this->form->getLabel('user_id'); ?></div>
         <div class="controls"><?php echo $this->form->getInput('user_id'); ?></div>
     </div>
     <div class="control-group">
-        <div class="control-label"><?php echo $this->form->getLabel('access'); ?></div>
+        <div class="form-label"><?php echo $this->form->getLabel('access'); ?></div>
         <div class="controls"><?php echo $this->form->getInput('access'); ?></div>
     </div>
     <div class="control-group">
-        <div class="control-label"><?php echo $this->form->getLabel('meta_index'); ?></div>
+        <div class="form-label"><?php echo $this->form->getLabel('meta_index'); ?></div>
         <div class="controls"><?php echo $this->form->getInput('meta_index'); ?></div>
     </div>
     <div class="control-group">
-        <div class="control-label"><?php echo $this->form->getLabel('meta_descr'); ?></div>
+        <div class="form-label"><?php echo $this->form->getLabel('meta_descr'); ?></div>
         <div class="controls"><?php echo $this->form->getInput('meta_descr'); ?></div>
     </div>
     <div class="control-group">
-        <div class="control-label"><?php echo $this->form->getLabel('meta_key'); ?></div>
+        <div class="form-label"><?php echo $this->form->getLabel('meta_key'); ?></div>
         <div class="controls"><?php echo $this->form->getInput('meta_key'); ?></div>
     </div>
     <div class="control-group">
-        <div class="control-label"><?php echo $this->form->getLabel('langs'); ?></div>
+        <div class="form-label"><?php echo $this->form->getLabel('langs'); ?></div>
         <div class="controls"><?php echo $this->form->getInput('langs'); ?></div>
     </div>
     <div class="control-group">
-        <div class="control-label"><?php echo $this->form->getLabel('featured'); ?></div>
+        <div class="form-label"><?php echo $this->form->getLabel('featured'); ?></div>
         <div class="controls"><?php echo $this->form->getInput('featured'); ?></div>
     </div>
     <div class="control-group">
-        <div class="control-label"><?php echo $this->form->getLabel('ftime'); ?></div>
+        <div class="form-label"><?php echo $this->form->getLabel('ftime'); ?></div>
         <div class="controls"><?php echo $this->form->getInput('ftime'); ?></div>
     </div>
     <div class="control-group">
-        <div class="control-label"><?php echo $this->form->getLabel('ctime'); ?></div>
+        <div class="form-label"><?php echo $this->form->getLabel('ctime'); ?></div>
         <div class="controls"><?php echo $this->form->getInput('ctime'); ?></div>
     </div>
     <div class="control-group">
-        <div class="control-label"><?php echo $this->form->getLabel('extime'); ?></div>
+        <div class="form-label"><?php echo $this->form->getLabel('extime'); ?></div>
         <div class="controls"><?php echo $this->form->getInput('extime'); ?></div>
     </div>
     <div class="control-group">
-        <div class="control-label"><?php echo $this->form->getLabel('mtime'); ?></div>
+        <div class="form-label"><?php echo $this->form->getLabel('mtime'); ?></div>
         <div class="controls"><?php echo $this->form->getInput('mtime'); ?></div>
     </div>
 

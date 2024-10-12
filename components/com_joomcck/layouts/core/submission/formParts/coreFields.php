@@ -24,7 +24,7 @@ if (count($current->core_fields) == 0)
 <div class="core">
 	<?php foreach ($current->core_fields as $key => $field): ?>
         <div class="control-group odd<?php echo $k = 1 - $k ?>">
-            <label id="jform_<?php echo $field ?>-lbl" class="control-label" for="jform_<?php echo $field ?>">
+            <label id="jform_<?php echo $field ?>-lbl" class="form-label" for="jform_<?php echo $field ?>">
 				<?php if ($current->tmpl_params->get('tmpl_core.form_' . $field . '_icon', 1)): ?>
 					<?php echo HTMLFormatHelper::icon('core-' . $field . '.png'); ?>
 				<?php endif; ?>
