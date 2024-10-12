@@ -224,10 +224,16 @@ class JoomcckModelRecord extends MModelItem
 
 		$fields[$data->id] = $fields_model->getRecordFields($data, 'all');
 		$sorted            = $final = $keyed = array();
+
+
+
 		foreach($fields[$data->id] as $key => $field)
 		{
+
+
 			if($field->params->get('params.sortable'))
 			{
+
 				self::$sortable[$field->key] = $field;
 			}
 
@@ -247,6 +253,9 @@ class JoomcckModelRecord extends MModelItem
 			{
 				continue;
 			}
+
+
+
 
 
 			if(!in_array($field->params->get('core.field_view_access'), $user->getAuthorisedViewLevels()))
@@ -306,10 +315,14 @@ class JoomcckModelRecord extends MModelItem
 				}
 			}
 
+
+
 			if($result === NULL || $result === '')
 			{
 				continue;
 			}
+
+
 
 
 			$field->result = $result;
@@ -322,6 +335,7 @@ class JoomcckModelRecord extends MModelItem
 			$fg[$field->group_title]['descr'] = $field->group_descr;
 			$fg[$field->group_title]['icon']  = $field->group_icon;
 		}
+
 
 		$data->fields_by_id     = $final;
 		$data->fields_by_groups = $sorted;

@@ -19,6 +19,7 @@ extract($displayData);
 
 <div class="jcck-fields-default">
 	<?php foreach ($item->fields_by_id AS $field):?>
+
 		<?php if(in_array($field->key, $exclude)) continue; ?>
 		<?php if($field->params->get('core.show_lable') > 1):?>
 			<h6 id="<?php echo $field->id;?>-lbl" for="field_<?php echo $field->id;?>" class="<?php echo $field->class;?> card-subtitle">

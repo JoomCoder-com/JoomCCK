@@ -32,12 +32,7 @@ $image->set('image',$cleanedImage->url);
 <?php endif;?>
 
 <img src="<?php echo $url;?>"
-	class="img-polaroid"
-    <?php if($this->params->get('params.img_list_hspace') || $this->params->get('params.img_list_vspace')):?>
-        style="margin: <?php echo $this->params->get('params.img_list_vspace', 0);?> <?php echo $this->params->get('params.img_list_hspace', 0);?>"
-    <?php endif;?>
-	hspace="<?php echo $this->params->get('params.img_hspace');?>"
-	vspace="<?php echo $this->params->get('params.img_vspace');?>"
+	class="<?php echo $this->params->get('params.thumbs_class', '') ?>"
 	alt="<?php echo htmlspecialchars($image->get('image_title', $record->title), ENT_COMPAT, 'UTF-8');?>"
 	title="<?php echo htmlspecialchars($image->get('image_title', $record->title), ENT_COMPAT, 'UTF-8');?>"><?php if($this->params->get('params.lightbox_full', 0)):?></a><?php endif;?>
 

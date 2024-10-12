@@ -777,6 +777,8 @@ class JoomcckViewRecords extends MViewBase
 		if(!$items)
 			return [];
 
+
+
 		foreach($items as $item)
 		{
 			foreach($item->fields_by_id as $field)

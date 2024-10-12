@@ -16,6 +16,9 @@ defined('_JEXEC') or die();
 
 extract($displayData);
 
+
+
+
 ?>
 <article class="card has-context<?php if ($item->featured) {
 	echo ' featured';
@@ -45,6 +48,14 @@ extract($displayData);
             </h2>
         </div>
 
+        <!-- Image field -->
+        <?php if($params->get('tmpl_params.field_image',0) && isset($item->fields_by_id[$params->get('tmpl_params.field_image',0)])):?>
+            <div id="record-image-<?php echo $item->id  ?>">
+                <?php echo $item->fields_by_id[$params->get('tmpl_params.field_image',0)]->result ?>
+            </div>
+        <?php endif; ?>
+
+        <!-- rating field -->
 	    <?php if ($params->get('tmpl_core.item_rating')): ?>
             <div class="content_rating mb-4">
 			    <?php echo $item->rating; ?>

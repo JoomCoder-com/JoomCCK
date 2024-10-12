@@ -39,8 +39,7 @@
 					<option value="0">JNO</option>
 					<option value="1">JYES</option>
 			  	</field>
-				<field name="img_list_hspace" type="text" size="3" default="0" label="F_HSPACE" description="" />
-        		<field name="img_list_vspace" type="text" size="3" default="0" label="F_VSPACE" description="" />
+				<field name="thumbs_list_class" type="text" default="" label="Custom CSS Class" description="You can use bootstrap classes"/>
 				<field name="thumbs_list_height" type="text" default="100" size="3" label="F_THUMBHEIGHT" description=""/>
 				<field name="thumbs_list_width" type="text" default="100" size="3" label="F_THUMBWIDTH" description=""/>
 				<field name="thumbs_list_quality" type="text" default="80" size="3" label="F_THUMBQUALITY" description=""/>
@@ -68,8 +67,7 @@
 					<option value="0">JNO</option>
 					<option value="1">JYES</option>
 			  	</field>
-				<field name="img_hspace" type="text" size="3" default="0" label="F_HSPACE" description="" />
-        		<field name="img_vspace" type="text" size="3" default="0" label="F_VSPACE" description="" />
+				<field name="thumbs_class" type="text" default="" label="Custom CSS Class" description="You can use bootstrap classes"/>
 				<field name="thumbs_height" type="text" default="100" size="3" label="F_RESIZEHEIGHT" description="" />
 				<field name="thumbs_width" type="text" default="100" size="3" label="F_RESIZEWIDTH" description=""/>
 				<field name="thumbs_quality" type="text" default="80" size="3" label="F_RESIZEQUALITY" description=""/>

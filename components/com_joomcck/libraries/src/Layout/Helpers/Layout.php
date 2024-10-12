@@ -12,6 +12,7 @@ namespace Joomcck\Layout\Helpers;
 
 use ItemsStore;
 use Joomla\CMS\Factory;
+use Joomla\CMS\Filesystem\File;
 use Joomla\CMS\Layout\LayoutHelper;
 
 defined('_JEXEC') or die();

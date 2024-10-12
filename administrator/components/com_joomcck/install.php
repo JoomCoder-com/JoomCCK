@@ -8,12 +8,24 @@
  * @license GNU/GPL http://www.gnu.org/copyleft/gpl.html
  */
 
+use Joomla\CMS\Factory;
+
 defined('_JEXEC') || die();
 
 
 
 class com_joomcckInstallerScript
 {
+
+	public $currentVersion;
+
+	public function __construct()
+	{
+
+		$this->currentVersion = $this->getCurrentVersion();
+
+	}
+
     public function install($parent)
     {
         $this->_updateTables(false);
@@ -39,7 +51,11 @@ class com_joomcckInstallerScript
 
 	    include_once JPATH_ROOT.'/components/com_joomcck/api.php';
 
-        $this->_deleteFiles();
+	    // delete files if the current version is lower than 5.10.0
+	    if (version_compare($this->currentVersion, '5.10.0', '<')) {
+		    $this->_deleteFiles59(); // delete files if version lowed than 5.10.0
+	    }
+
         $this->_updateTables();
         //$this->_joomcck();
         $this->_createLink();
@@ -539,7 +555,7 @@ class com_joomcckInstallerScript
         $db->execute();*/
     }
 
-    private function _deleteFiles()
+    private function _deleteFiles59()
     {
         $files = [
             '/administrator/components/com_joomcck/tables/comments.php',
@@ -584,6 +600,7 @@ class com_joomcckInstallerScript
 	        '/language/en-GB/com_joomcck_field_url.ini',
 	        '/language/en-GB/com_joomcck_field_url.ini',
 	        '/language/en-GB/com_joomcck_field_url.ini',
+	        '/components/com_joomcck/layouts/apps/blog/article.php'
         ];
 
         foreach ($files as $file) {
@@ -592,6 +609,28 @@ class com_joomcckInstallerScript
             }
         }
     }
+
+
+	/**
+	 * Get the currently installed version of the component
+	 *
+	 * @return string
+	 */
+	private function getCurrentVersion()
+	{
+		$db = Factory::getDbo();
+		$query = $db->getQuery(true)
+			->select($db->quoteName('manifest_cache'))
+			->from($db->quoteName('#__extensions'))
+			->where($db->quoteName('element') . ' = ' . $db->quote('com_joomcck'))
+			->where($db->quoteName('type') . ' = ' . $db->quote('component'));
+
+		$db->setQuery($query);
+		$manifest = json_decode($db->loadResult(), true);
+
+		return isset($manifest['version']) ? $manifest['version'] : '0.0.0';
+	}
+
 }
 
 class JoomlaTableExtensions extends \Joomla\CMS\Table\Table

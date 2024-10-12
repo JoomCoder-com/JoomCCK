@@ -72,7 +72,7 @@ class JFormFieldCImage extends CFormField
 
 	public function validateField($value, $record, $type, $section)
 	{
-		if($this->params->get('params.select_type', 2) == 2)
+		if($this->params->get('params.select_type', 2) == 2) // upload mode
 		{
 			$file  = new \Joomla\CMS\Input\Files();
 			$file  = $file->get('fields' . $this->id . 'image', FALSE);
@@ -81,11 +81,17 @@ class JFormFieldCImage extends CFormField
 			{
 				$check = $value['image'];
 			}
+
 		}
-		else
+		elseif($this->params->get('params.select_type', 2) == 1){ // joomla media field
+			$check = \Joomla\CMS\HTML\HTMLHelper::cleanImageURL($value['image'])->url;
+		}
+		else // other modes
 		{
 			$check = $value['image'];
 		}
+
+
 
 		$ext = \Joomla\CMS\Filesystem\File::getExt($check);
 
@@ -104,7 +110,7 @@ class JFormFieldCImage extends CFormField
 
 	public function onStoreValues($validData, $record)
 	{
-		if($this->params->get('params.select_type', 2) == 2)
+		if($this->params->get('params.select_type', 2) == 2) // upload mode
 		{
 			$table = \Joomla\CMS\Table\Table::getInstance('Files', 'JoomcckTable');
 			$table->load(array('record_id' => $record->id, 'field_id' => $this->id));
@@ -159,10 +165,12 @@ class JFormFieldCImage extends CFormField
 
 	public function onPrepareSave($value, $record, $type, $section)
 	{
+		// upload mode
 		if($this->params->get('params.select_type', 2) == 2)
 		{
 			$file = new \Joomla\CMS\Input\Files();
 			$file = $file->get('fields' . $this->id . 'image', FALSE);
+
 			if(!$file['error'] && !empty($file['name']))
 			{
 				$time   = time();
@@ -171,6 +179,7 @@ class JFormFieldCImage extends CFormField
 				$ext    = \Joomla\String\StringHelper::strtolower(\Joomla\CMS\Filesystem\File::getExt($file['name']));
 
 				$subfolder = $this->params->get('params.subfolder');
+
 
 				$dest  = $params->get('general_upload') . DIRECTORY_SEPARATOR . $subfolder . DIRECTORY_SEPARATOR;
 				$index = '<html><body></body></html>';

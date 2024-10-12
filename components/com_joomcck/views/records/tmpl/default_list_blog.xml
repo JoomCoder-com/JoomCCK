@@ -21,6 +21,9 @@
 				<option value="default">Default</option>
 				<option value="descriptionlist">Description List (dl,dt,dd)</option>
 			</field>
+
+			<field name="field_image" client="list" type="meresourcesfields" class="form-select" size="15" key="id" multiple="false" default="" label="Field Image" description="" />
+
 		</fieldset>
 	</fields>
 

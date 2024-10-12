@@ -32,9 +32,10 @@ if(!class_exists('CarticleHelper'))
 			}
 			$params = $obj->tmpl_params['list'];
 			$item = $obj->items[$this->k];
+
 			unset($obj->items[$this->k++]);
 			?>
-			<?php echo Layout::render('apps.blog.list.article',['params' => $params,'item' => $item,'obj' => $obj,'exclude' => $this->exclude]) ?>
+			<?php echo Layout::render('core.apps.blog.list.article',['params' => $params,'item' => $item,'obj' => $obj,'exclude' => $this->exclude]) ?>
 		<?php
 		}
 	}
@@ -59,6 +60,12 @@ settype($exclude, 'array');
 foreach ($exclude as &$value) {
 	$value = $this->fields_keys_by_id[$value];
 }
+
+// add image field automatically to exclude list
+if($params->get('tmpl_params.field_image', 0)){
+	$exclude[] = $this->fields_keys_by_id[$params->get('tmpl_params.field_image', 0)];
+}
+
 $helper->exclude = $exclude;
 
 ?>
