@@ -36,7 +36,7 @@ Class Layout extends LayoutHelper {
 		}
 
 		// override core layouts by apps
-		if(strpos('core.', $layoutFile) !== false){
+		if(str_contains($layoutFile, 'core.')){
 			// get layout path in section folder
 			$sectionLayoutFile = self::getSectionLayoutFile($layoutFile);
 
@@ -62,7 +62,13 @@ Class Layout extends LayoutHelper {
 		// get section layout folder name
 		$sectionLayoutFolder = self::kebabToCamelCase($section->alias);
 
-		return str_replace('core','apps.'.$sectionLayoutFolder,$layoutFile);
+
+		if(str_contains($layoutFile, "core.apps.$sectionLayoutFolder."))
+			$layoutFile = str_replace("core.apps.$sectionLayoutFolder.","apps.$sectionLayoutFolder.",$layoutFile);
+		else
+			$layoutFile = str_replace('core.',"apps.$sectionLayoutFolder.",$layoutFile);
+
+		return $layoutFile;
 	}
 
 	public static function kebabToCamelCase($string) {
