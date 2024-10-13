@@ -91,8 +91,6 @@ class JFormFieldCImage extends CFormField
 			$check = $value['image'];
 		}
 
-
-
 		$ext = \Joomla\CMS\Filesystem\File::getExt($check);
 
 		$formats = explode(',', strtolower(str_replace(array(' '), '', $this->params->get('params.formats', 'png,jpg,gif,jpeg,webp,avif'))));
