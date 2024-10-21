@@ -15,12 +15,8 @@ use Joomla\CMS\Factory;
 defined('_JEXEC') or die();
 
 extract($displayData);
-
-
-
-
 ?>
-<article class="card has-context<?php if ($item->featured) {
+<article class="mb-4 card has-context<?php if ($item->featured) {
 	echo ' featured';
 } ?> position-relative">
 

@@ -52,11 +52,11 @@ $listDirn = $this->state->get('list.direction');
                 <div class="card shadow">
 
                     <div class="card-header bg-white">
-                        <h3 class="m-0">
-                            <a class="link-underline link-underline-opacity-0" href="<?php echo \Joomla\CMS\Router\Route::_('index.php?option=com_joomcck&task=section.edit&id=' . (int)$item->id); ?>">
+                        <h5 class="m-0">
+                            <a class="link-underline link-underline-opacity-0" href="<?php echo \Joomla\CMS\Router\Route::_('index.php?option=com_joomcck&view=app&id=' . (int)$item->id); ?>">
 			                    <?php echo $this->escape($item->name); ?>
                             </a>
-                        </h3>
+                        </h5>
                     </div>
 
                     <div class="card-body ">

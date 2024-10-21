@@ -72,7 +72,7 @@ Class Layout extends LayoutHelper {
 	}
 
 	public static function kebabToCamelCase($string) {
-		return lcfirst(str_replace(' ', '', ucwords(str_replace('-', ' ', $string))));
+		return lcfirst(str_replace(' ', '', ucwords(str_replace('-', ' ', (string) $string))));
 	}
 
 
