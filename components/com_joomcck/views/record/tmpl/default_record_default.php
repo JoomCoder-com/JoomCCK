@@ -193,7 +193,7 @@ if($params->get('tmpl_core.item_follow_num'))
 		<br />
 	<?php endif;?>
 
-	<?php echo $this->loadTemplate('tags');?>
+	<?php echo LayoutHelper::render('core.single.recordParts.tags',['current' => $this],null,['component' => 'com_joomcck','client' => 'site'] ) ?>
 
 	<?php if($category || $author || $details || $params->get('tmpl_core.item_rating')): ?>
 		<div class="card article-info p-4">
