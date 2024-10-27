@@ -46,7 +46,13 @@ $wa->useScript('keepalive')
 
 </script>
 
-<form action="<?php echo \Joomla\CMS\Uri\Uri::getInstance()->toString(); ?>" method="post" name="adminForm" id="item-form" class="form-validate">
+<form
+        action="<?php echo \Joomla\CMS\Uri\Uri::getInstance()->toString(); ?>"
+        method="post"
+        name="adminForm"
+        id="item-form"
+        class="w-100 form-validate"
+>
 	<?php echo HTMLFormatHelper::layout('item', $this); ?>
 	<div class="page-header">
 		<h1>
@@ -54,10 +60,10 @@ $wa->useScript('keepalive')
 		</h1>
 	</div>
 
-	<div class="row">
+	<div class="row w-100">
 		<div class="col-md-6 form-horizontal">
 			<fieldset class="adminform">
-				<legend><?php echo \Joomla\CMS\Language\Text::_('CSECTIONSETTINGS'); ?></legend>
+				<legend class="mb-3"><?php echo \Joomla\CMS\Language\Text::_('CSECTIONSETTINGS'); ?></legend>
 				<div class="control-group">
 					<div class="form-label inline">
 						<?php echo $this->form->getLabel('id'); ?>
@@ -80,9 +86,9 @@ $wa->useScript('keepalive')
 		</div>
 		<div class="col-md-6 form-horizontal">
 			<fieldset class="adminform">
-				<legend><?php echo \Joomla\CMS\Language\Text::_('CTYPESETTINGS'); ?></legend>
+				<legend class="mb-3"><?php echo \Joomla\CMS\Language\Text::_('CTYPESETTINGS'); ?></legend>
 				<div id="additional-form">
-					<?php echo @$this->parameters?>
+					<?php echo !isset($this->parameters) ? '<p class="alert alert-warning">Please select section first</p>' : '' ?>
 				</div>
 			</fieldset>
 		</div>
