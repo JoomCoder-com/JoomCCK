@@ -7,8 +7,8 @@
  * @license GNU/GPL http://www.gnu.org/copyleft/gpl.html
  */
 
+use Joomcck\Layout\Helpers\Layout;
 use Joomla\CMS\HTML\HTMLHelper;
-use Joomla\CMS\Layout\LayoutHelper;
 
 defined('_JEXEC') or die();
 
@@ -88,8 +88,8 @@ if($params->get('tmpl_core.item_follow_num'))
 </style>
 <article class="<?php echo $this->appParams->get('pageclass_sfx')?><?php if($item->featured) echo ' article-featured' ?>">
 
-    <?php echo LayoutHelper::render('core.single.recordParts.buttonsManage',['current' => $this],null,['component' => 'com_joomcck','client' => 'site'] ) ?>
-	<?php echo LayoutHelper::render('core.single.recordParts.title',['current' => $this],null,['component' => 'com_joomcck','client' => 'site'] ) ?>
+    <?php echo Layout::render('core.single.recordParts.buttonsManage',['current' => $this]) ?>
+	<?php echo Layout::render('core.single.recordParts.title',['current' => $this]) ?>
 
 	<div class="clearfix"></div>
 
@@ -193,7 +193,7 @@ if($params->get('tmpl_core.item_follow_num'))
 		<br />
 	<?php endif;?>
 
-	<?php echo LayoutHelper::render('core.single.recordParts.tags',['current' => $this],null,['component' => 'com_joomcck','client' => 'site'] ) ?>
+	<?php echo Layout::render('core.single.recordParts.tags',['current' => $this]) ?>
 
 	<?php if($category || $author || $details || $params->get('tmpl_core.item_rating')): ?>
 		<div class="card article-info p-4">

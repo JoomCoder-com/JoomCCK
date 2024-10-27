@@ -13,7 +13,7 @@ defined('_JEXEC') or die('Restricted access'); ?>
 $wa = $this->document->getWebAssetManager();
 $wa->useScript('keepalive')
 	->useScript('form.validate');
-\Joomla\CMS\HTML\HTMLHelper::_('script', 'system/tabs.js', false, true);
+
 ?>
 
 <script type="text/javascript">

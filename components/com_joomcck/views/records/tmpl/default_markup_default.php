@@ -43,7 +43,7 @@ $current_user = \Joomla\CMS\Factory::getUser($this->input->getInt('user_id', $th
     </style>
 <?php endif; ?>
 
-<?php echo LayoutHelper::render('core.markup.header',['current' => $this]) ?>
+<?php echo Layout::render('core.markup.header',['current' => $this]) ?>
 
 <div id="compare" <?php echo !$this->compare ? 'class="hide"' : ''; ?>>
     <div class="alert alert-info alert-block">
@@ -496,7 +496,7 @@ $current_user = \Joomla\CMS\Factory::getUser($this->input->getInt('user_id', $th
         </script>
 
     <!-- filters layout -->
-	<?php echo LayoutHelper::render('core.markup.filters',['current' => $this], null, ['client' => 'site','component' => 'com_joomcck']) ?>
+	<?php echo Layout::render('core.markup.filters',['current' => $this], null, ['client' => 'site','component' => 'com_joomcck']) ?>
 
     <?php endif; ?>
 

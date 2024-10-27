@@ -6,6 +6,9 @@
  * @copyright Copyright (C) 2012 joomcoder (https://www.joomcoder.com). All rights reserved.
  * @license GNU/GPL http://www.gnu.org/copyleft/gpl.html
  */
+
+use Joomcck\Layout\Helpers\Layout;
+
 defined('_JEXEC') or die('Restricted access'); ?>
 <?php
 $cols = count($this->items);
@@ -58,10 +61,9 @@ $width = (100 - (int)$params->get('tmpl_params.lbl_width', 15)) / $cols;
 		<?php for ($i=0; $i< $cols; $i++): ?>
 			<td class="has-context" width="<?php echo $width; ?>%">
 				<div class="relative_ctrls">
-					<?php echo Joomla\CMS\Layout\LayoutHelper::render(
+					<?php echo Layout::render(
 						'core.list.recordParts.buttonsManage',
-						['item' => $item,'disabled' => ['compare'], 'section' => $this->section, 'submissionTypes' => $this->submission_types, "params" => $params],null,['component' => 'com_joomcck','client' => 'site' ]
-					) ?>
+						['item' => $item,'disabled' => ['compare'], 'section' => $this->section, 'submissionTypes' => $this->submission_types, "params" => $params]) ?>
 				<?php if($this->submission_types[$items[$i]->type_id]->params->get('properties.item_title')):?>
 					<<?php echo $params->get('tmpl_params.title_tag', 'h2')?>>
 						<?php if($params->get('tmpl_core.item_link')):?>

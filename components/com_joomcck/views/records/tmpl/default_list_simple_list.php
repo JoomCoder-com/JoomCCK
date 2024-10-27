@@ -6,7 +6,10 @@
  * @copyright Copyright (C) 2012 joomcoder (https://www.joomcoder.com). All rights reserved.
  * @license GNU/GPL http://www.gnu.org/copyleft/gpl.html
  */
-defined('_JEXEC') or die('Restricted access'); 
+
+use Joomcck\Layout\Helpers\Layout;
+
+defined('_JEXEC') or die('Restricted access');
 $k = $p1 = 0;
 $params = $this->tmpl_params['list'];
 $total_fields_keys = $this->total_fields_keys;
@@ -51,10 +54,7 @@ foreach ($exclude as &$value) {
 		?>
 		<div class="has-context<?php if($item->featured) echo ' success' ?>">
 			<a name="record<?php echo $item->id;?>"></a>
-			<?php echo Joomla\CMS\Layout\LayoutHelper::render(
-				'core.list.recordParts.buttonsManage',
-				['item' => $item,'section' => $this->section, 'submissionTypes' => $this->submission_types, "params" => $params],null,['component' => 'com_joomcck','client' => 'site' ]
-			) ?>
+			<?php echo Layout::render('core.list.recordParts.buttonsManage',	['item' => $item,'section' => $this->section, 'submissionTypes' => $this->submission_types, "params" => $params]) ?>
 			<?php if($params->get('tmpl_core.item_title')):?>
 				<?php if($this->submission_types[$item->type_id]->params->get('properties.item_title')):?>
 					<div>

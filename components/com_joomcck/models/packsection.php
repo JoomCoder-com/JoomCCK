@@ -101,49 +101,8 @@ class JoomcckModelPacksection extends MModelAdmin
 			return \Joomla\CMS\Language\Text::_('CNOTYPES');
 		}
 
-		$active = \Joomla\CMS\HTML\HTMLHelper::_('bootstrap.startPane', 'typetabs', array('active' => 'type' . $types[0]));
 
-		$i   = 0;
-		$li_out = $out = $divs = [];
-		foreach($types as $type_id)
-		{
-			if(!$type_id)
-			{
-				continue;
-			}
-			$def  = !empty($default['types'][$type_id]) ? $default['types'][$type_id] : array();
-			$type = ItemsStore::getType($type_id);
-
-			$li_out[] = '<li' . ($i == 0 ? ' class="active"' : '') . '>' . '<a onclick="jQuery(this).tab(\'show\');return false;" href="#type' . $type->id . '">' . $type->name . '</a></li>';
-
-			$form = new \Joomla\CMS\Form\Form('params', array(
-				'control' => 'params[types][' . $type_id . ']'
-			));
-
-			$form->loadFile($file, TRUE, 'config');
-
-			$f = new SimpleXMLElement('<field name="categoryselect_ss" type="radio" class="btn-group"  default="1" label="XML_LABEL_SP_CATEGORYSELECT"><option value="0">CNO</option><option value="1">CYES</option></field>');
-
-			$form->setField($f, 'list_tmpl');
-			$div   = array();
-			$div[] = \Joomla\CMS\HTML\HTMLHelper::_('bootstrap.addPanel', 'typetabs', 'type' . $type_id); //'<div class="tab-pane'.($i == 0 ? ' active' : '').'" id="type'.$type->id.'">';
-			$div[] = MFormHelper::renderFieldset($form, 'sp_type_templates', $def, NULL);
-			$div[] = MFormHelper::renderFieldset($form, 'sp_type_content', $def, NULL);
-			$div[] = MFormHelper::renderFieldset($form, 'sp_type_fields', $def, NULL);
-			$div[] = \Joomla\CMS\HTML\HTMLHelper::_('bootstrap.endPanel');
-
-			$divs[] = implode('', $div);
-			$i++;
-		}
-		$out[] = '<ul class="nav nav-tabs" id="typetabs">';
-		$out[] = implode('', $li_out);
-		$out[] = '</ul>';
-		$out[] = $active;
-		$out[] = implode('', $divs);
-		$out[] = \Joomla\CMS\HTML\HTMLHelper::_('bootstrap.endPane', 'typetabs');
-
-
-		return implode('', $out);
+		return \Joomcck\Layout\Helpers\Layout::render('admin.packer.sectionForm', ['types' => $types, 'default' => $default,'file' => $file]);
 	}
 
 	private function _getTypeFieldNames($type_id)

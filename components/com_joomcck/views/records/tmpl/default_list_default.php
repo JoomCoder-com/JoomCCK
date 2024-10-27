@@ -6,6 +6,9 @@
  * @copyright Copyright (C) 2012 joomcoder (https://www.joomcoder.com). All rights reserved.
  * @license   GNU/GPL http://www.gnu.org/copyleft/gpl.html
  */
+
+use Joomcck\Layout\Helpers\Layout;
+
 defined('_JEXEC') or die('Restricted access');
 
 \Joomla\CMS\HTML\HTMLHelper::_('bootstrap.tooltip', '*[rel^="tooltip"]');
@@ -154,10 +157,9 @@ foreach ($exclude as &$value)
 			<?php if ($params->get('tmpl_core.item_title')): ?>
             <td class="has-context cob-title-td">
                 <div class="relative_ctrls">
-					<?php echo Joomla\CMS\Layout\LayoutHelper::render(
+					<?php echo Layout::render(
 						'core.list.recordParts.buttonsManage',
-						['item' => $item, 'section' => $this->section, 'submissionTypes' => $this->submission_types, "params" => $params], null, ['component' => 'com_joomcck', 'client' => 'site']
-					) ?>
+						['item' => $item, 'section' => $this->section, 'submissionTypes' => $this->submission_types, "params" => $params]) ?>
 					<?php if ($this->submission_types[$item->type_id]->params->get('properties.item_title')): ?>
                     <div class="float-start">
                         <<?php echo $params->get('tmpl_core.title_tag', 'h2'); ?> class="record-title">
