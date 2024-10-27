@@ -600,7 +600,8 @@ class com_joomcckInstallerScript
 	        '/language/en-GB/com_joomcck_field_url.ini',
 	        '/language/en-GB/com_joomcck_field_url.ini',
 	        '/language/en-GB/com_joomcck_field_url.ini',
-	        '/components/com_joomcck/layouts/apps/blog/article.php'
+	        '/components/com_joomcck/layouts/apps/blog/article.php',
+	        '/components/com_joomcck/views/record/tmpl/default_tags.php'
         ];
 
         foreach ($files as $file) {
