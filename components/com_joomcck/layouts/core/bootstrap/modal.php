@@ -25,7 +25,6 @@ HTMLHelper::_('bootstrap.modal');
 ?>
 
 
-
 <div id="<?php echo $id ?>" class="modal fade" data-bs-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="<?php echo $id ?>" aria-hidden="true">
 	<div class="modal-dialog">
 		<div class="modal-content">

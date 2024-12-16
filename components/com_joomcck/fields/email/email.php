@@ -20,7 +20,18 @@ class JFormFieldCEmail extends CFormField
 
 	public $author;
 	public $url;
+	public $url_form;
+	public $key;
 
+
+	public function __construct($field, $default)
+	{
+		parent::__construct($field, $default);
+
+		// register layouts folder
+		\Joomcck\Layout\Helpers\Layout::$defaultBasePath = JPATH_ROOT.'/components/com_joomcck/fields/email/layouts';
+
+	}
 
 	public function getInput()
 	{

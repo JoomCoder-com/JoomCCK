@@ -50,9 +50,18 @@ $key = $record->id.$this->id;
 		})
 	</script>
 <?php endif; ?>
+<style>
+    html,body{
+        width:100% !important;
+        max-width: 640px !important;
+        padding: 0px !important;
+        margin: 0px !important;
+        height: 100% !important;
+    }
+</style>
 <br>
 <form action="<?php echo \Joomla\CMS\Uri\Uri::getInstance()->toString();?>" method="post" enctype="multipart/form-data">
-	<table class="table table-hover">
+	<table class="table table-hover w-100">
 		<?php if ($to):?>
 		<tr>
 			<td width="1%" nowrap="nowrap" ><?php echo \Joomla\CMS\Language\Text::_('E_SENDTO');?>:</td>
@@ -126,8 +135,7 @@ $key = $record->id.$this->id;
 		<tr>
 			<td width="1%" nowrap="nowrap"><?php echo \Joomla\CMS\Language\Text::_('E_MSG');?></td>
 			<td>
-				<textarea id="email_body<?php echo $this->id;?>" style="<?php echo $style ?>" name="email[<?php echo $this->id;?>][body]" class="form-control w-100">
-                    <?php echo $data->get('body', $params->get('params.body'));?></textarea>
+				<textarea id="email_body<?php echo $this->id;?>" style="<?php echo $style ?>" name="email[<?php echo $this->id;?>][body]" class="form-control w-100"><?php echo $data->get('body', $params->get('params.body'));?></textarea>
 
                     <script type="text/javascript">
                         jQuery("#email_body<?php echo $this->id;?>").expanding();
