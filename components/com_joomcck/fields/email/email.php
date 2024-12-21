@@ -21,7 +21,7 @@ class JFormFieldCEmail extends CFormField
 	public $author;
 	public $url;
 	public $url_form;
-	public $key;
+	public $recordKey;
 
 
 	public function __construct($field, $default)
