@@ -526,7 +526,13 @@ $current_user = \Joomla\CMS\Factory::getUser($this->input->getInt('user_id', $th
 <!-- Filters worns -->
 <?php if ($markup->get('filters.worns') && count($this->worns)): ?>
     <div class="filter-worns">
-		<?php foreach ($this->worns as $worn): ?>
+		<?php foreach ($this->worns as $worn):
+
+
+            if(!is_string($worn->text))
+                continue;
+
+            ?>
             <div class="alert alert-info alert-dismissible fade show float-start" role="alert">
 
                 <div><i class="fas fa-filter"></i> <?php echo $worn->label ?></div>

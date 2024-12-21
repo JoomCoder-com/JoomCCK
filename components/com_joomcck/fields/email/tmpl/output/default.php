@@ -46,7 +46,7 @@ if (in_array($params->get('params.send_mail', 3), $this->user->getAuthorisedView
 	$this->url_form = \Joomla\CMS\Uri\Uri::root().'index.php?option=com_joomcck&view=elements&layout=field&id=' . $this->id . '&section_id=' . $section->id . '&func=_getForm&record=' . $record->id . '&tmpl=component&Itemid=' . $this->request->getInt('Itemid') . '&width=640';
 
 	// field key
-	$this->key = $record->id . $this->id;
+	$this->recordKey = $record->id . $this->id;
 
 	switch ($params->get('params.form_style', 1))
 	{

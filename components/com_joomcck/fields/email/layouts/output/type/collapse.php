@@ -19,14 +19,14 @@ HTMLHelper::_('bootstrap.collapse');
 ?>
 
 
-<button class="btn btn-primary btn-sm" type="button" data-bs-toggle="collapse" data-bs-target="#email_form<?php echo $current->key;?>" aria-expanded="false" aria-controls="collapseExample">
+<button class="btn btn-primary btn-sm" type="button" data-bs-toggle="collapse" data-bs-target="#email_form<?php echo $current->recordKey;?>" aria-expanded="false" aria-controls="collapseExample">
 	<?php echo Text::_($current->params->get('params.popup_label', $current->label));?>
 </button>
-<div class="collapse my-3" id="email_form<?php echo $current->key;?>">
+<div class="collapse my-3" id="email_form<?php echo $current->recordKey;?>">
 	<div class="row h-100">
 		<div class="col-md-6">
 			<div class="card card-body h-100">
-				<iframe onload="resizeIframe(this)" id="email_frame<?php echo $current->key;?>" loading="lazy" src="<?php echo $current->url_form ?>" width="100%" height="99%" frameborder="0"></iframe>
+				<iframe onload="resizeIframe(this)" id="email_frame<?php echo $current->recordKey;?>" loading="lazy" src="<?php echo $current->url_form ?>" width="100%" height="99%" frameborder="0"></iframe>
 			</div>
 		</div>
 	</div>

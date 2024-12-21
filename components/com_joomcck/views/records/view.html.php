@@ -532,7 +532,8 @@ class JoomcckViewRecords extends MViewBase
 				 * }
 				 */
 
-				$search_strings[] = $w->label . ': ' . $w->text;
+				if(is_string($w->text))
+					$search_strings[] = $w->label . ': ' . $w->text;
 			}
 			$t[] = \Joomla\CMS\Language\Text::_('CSEARCHRESULT') . ' (' . implode(',', $search_strings) . ')';
 		}
