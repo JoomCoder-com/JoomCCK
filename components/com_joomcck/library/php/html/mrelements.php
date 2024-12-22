@@ -9,6 +9,7 @@
  */
 
 use Joomcck\Assets\Webassets\Webassets;
+use Joomcck\Layout\Helpers\Layout;
 use Joomla\CMS\Layout\LayoutHelper;
 
 defined('_JEXEC') or die();
@@ -184,7 +185,7 @@ class JHTMLMrelements
 		];
 
 		//use new layout tomSelect
-		return \Joomcck\Layout\Helpers\Layout::render('core.fields.tomSelect',$data);
+		return Layout::render('core.fields.tomSelect',$data);
 
 	}
 	public static function listautocomplete($name, $id, $default = array(), $list = array(), $options = array())

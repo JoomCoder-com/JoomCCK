@@ -34,9 +34,13 @@ if(empty($default) && !empty($list)){
 	$default = json_encode($default);
 }
 
-
-
 $fieldId = (int) rand(1,2000);
+
+// fields names
+$valueFieldName = isset($options['valueFieldName']) && $options['valueFieldName'] ? $options['valueFieldName'] : 'id';
+$labelFieldName = isset($options['labelFieldName']) && $options['labelFieldName'] ? $options['labelFieldName'] : 'text';
+$searchFieldName = isset($options['searchFieldName']) && $options['searchFieldName'] ? $options['searchFieldName'] : 'text';
+
 
 ?>
 
@@ -55,9 +59,9 @@ $fieldId = (int) rand(1,2000);
     let tomSelected<?php echo $fieldId ?> = new TomSelect("#<?php echo $id ?>-<?php echo $fieldId ?>",{
         plugins: <?php echo $options['canDelete'] ? "['remove_button']" : "[]"; ?>,
         create: <?php echo $options['canAdd'] ?>,
-        valueField: 'id',
-        labelField: 'text',
-        searchField : 'text',
+        valueField: '<?php echo $valueFieldName ?>',
+        labelField: '<?php echo $labelFieldName ?>',
+        searchField : '<?php echo $searchFieldName ?>',
         options: <?php echo $default ?>,
         items: <?php echo $list ?>,
         maxItems: <?php echo $options['maxItems'] ?>,

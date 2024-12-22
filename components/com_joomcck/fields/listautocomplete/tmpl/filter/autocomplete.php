@@ -6,9 +6,12 @@
  * @copyright Copyright (C) 2012 joomcoder (https://www.joomcoder.com). All rights reserved.
  * @license GNU/GPL http://www.gnu.org/copyleft/gpl.html
  */
+
+use Joomla\CMS\HTML\HTMLHelper;
+
 defined('_JEXEC') or die();
 
-\Joomla\CMS\HTML\HTMLHelper::_('bootstrap.tooltip', '*[rel^="tooltip"]');
+HTMLHelper::_('bootstrap.tooltip', '*[rel^="tooltip"]');
 
 $default = $this->default;
 
@@ -17,17 +20,11 @@ $options['can_add'] = 1;
 $options['can_delete'] = 1;
 $options['suggestion_limit'] = $this->params->get('params.max_result', 10);
 $options['suggestion_url'] = "index.php?option=com_joomcck&task=ajax.field_call&tmpl=component&field_id={$this->id}&func=onFilterGetValues&section_id={$section->id}&field={$this->type}";
-
 ?>
-
 
 <div class="row">
     <div class="col-md-6">
-		<?php
-
-		echo \Joomla\CMS\HTML\HTMLHelper::_('mrelements.pills', "filters[{$this->key}][value]", "filter_" . $this->id, $default, array(), $options);
-
-		?>
+		<?php echo HTMLHelper::_('mrelements.pills', "filters[{$this->key}][value]", "filter_" . $this->id, $default, array(), $options); ?>
     </div>
 	<?php if ($this->params->get('params.total_limit') != 1): ?>
 
