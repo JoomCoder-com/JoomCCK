@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<form>
+    <fieldset name="typemove" addfieldpath="/libraries/mint/forms/fields/">
+        <field name="type_id" type="meresourcestype" class="form-select" default="" alias="1" label="For Type" global="0" append=""/>
+        <field name="sect_from" type="meresourcessection" class="form-select" label="From Section" />
+        <field name="sect_to" type="meresourcessection"  class="form-select" label="To Section" />
+    </fieldset>
+</form>

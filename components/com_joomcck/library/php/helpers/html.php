@@ -276,12 +276,15 @@ class HTMLFormatHelper
 
 	public static function bookmark($record, $type, $params)
 	{
+
 		$user = \Joomla\CMS\Factory::getApplication()->getIdentity();
 
-		if(!$user->get('id'))
+		if(!$user->get('id') || is_null($type))
 		{
 			return NULL;
 		}
+
+
 
 		if(!in_array($type->params->get('properties.item_can_favorite'), $user->getAuthorisedViewLevels()))
 		{

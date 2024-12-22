@@ -6,13 +6,11 @@
  * @copyright Copyright (C) 2012 joomcoder (https://www.joomcoder.com). All rights reserved.
  * @license GNU/GPL http://www.gnu.org/copyleft/gpl.html
  */
-defined('_JEXEC') or die('Restricted access'); ?>
+defined('_JEXEC') or die('Restricted access');
+
+
+?>
 <?php global $app, $option, $Itemid;?>
-<?php if (\Joomla\CMS\Factory::getApplication()->input->getInt('modal', 0)):?>
-<script type="text/javascript">
-	window.parent.SqueezeBox.close();
-</script>
-<?php endif;?>
 
 <?php echo HTMLFormatHelper::layout('navbar'); ?>
 
