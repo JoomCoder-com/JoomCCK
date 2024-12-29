@@ -10,6 +10,8 @@
 
 use Joomla\CMS\HTML\HTMLHelper;
 use Joomla\CMS\Language\Text;
+use Joomla\CMS\Router\Route;
+use Joomla\CMS\Uri\Uri;
 
 defined('_JEXEC') or die();
 if($this->items)
@@ -25,7 +27,7 @@ HTMLHelper::_('bootstrap.collapse');
 
 <?php echo HTMLFormatHelper::layout('navbar'); ?>
 
-	<form action="<?php echo \Joomla\CMS\Router\Route::_('index.php?option=com_joomcck&view=notifications&Itemid=' . \Joomla\CMS\Factory::getApplication()->input->getInt('Itemid')); ?>"
+	<form action="<?php echo Route::_('index.php?option=com_joomcck&view=notifications&Itemid=' . \Joomla\CMS\Factory::getApplication()->input->getInt('Itemid')); ?>"
 		  method="post" name="adminForm" id="adminForm">
 
 		<?php if($this->state->get('filter.search') || (!$this->state->get('filter.search') && $this->items)): ?>
@@ -34,7 +36,7 @@ HTMLHelper::_('bootstrap.collapse');
 
 		<div class="page-header">
 			<h1>
-				<img src="<?php echo \Joomla\CMS\Uri\Uri::root(TRUE); ?>/components/com_joomcck/images/icons/bell.png">
+				<img src="<?php echo Uri::root(TRUE); ?>/components/com_joomcck/images/icons/bell.png">
 				<?php echo Text::_('CNOTIFICATIONS'); ?>
 			</h1>
 		</div>
@@ -55,7 +57,7 @@ HTMLHelper::_('bootstrap.collapse');
 						<?php echo HTMLFormatHelper::icon('asterisk.png'); ?>
 						<?php echo Text::_("CMARKALLREAD"); ?>
 					</button>
-					<button class="btn btn-sm btn-lightt border rounded" type="button" data-bs-toggle="collapse" data-bs-target="#clear_list_block"
+					<button class="btn btn-sm btn-light border rounded" type="button" data-bs-toggle="collapse" data-bs-target="#clear_list_block"
 							rel="{onClose: function() {}}">
 						<?php echo HTMLFormatHelper::icon('cross-button.png'); ?>
 						<?php echo Text::_("CCLEAREVENTS"); ?>
@@ -63,8 +65,11 @@ HTMLHelper::_('bootstrap.collapse');
 				<?php endif; ?>
 			</div>
 			<div class="float-end">
-				<button class="btn btn-sm btn-light float-endt border rounded" type="button"
-						onclick="window.location = '<?php echo \Joomla\CMS\Router\Route::_('index.php?option=com_joomcck&view=options') ?>'">
+				<button
+                        class="btn btn-sm btn-light float-end border rounded"
+                        type="button"
+						onclick="window.location = '<?php echo Route::_('index.php?option=com_joomcck&view=options') ?>'"
+                >
 					<?php echo HTMLFormatHelper::icon('gear.png'); ?>
 					<?php echo Text::_('CEVENTS_SETTINGS'); ?>
 				</button>
@@ -263,11 +268,13 @@ HTMLHelper::_('bootstrap.collapse');
 				<td nowrap>
 					<div class="btn-group">
 						<?php if($item->state_new): ?>
-							<a class="btn btn-sm btn-light border rounded" id="btn-mark-<?php echo $item->id ?>"
-							   onclick="Joomcck.markRead(<?php echo $item->id; ?>);" rel="tooltip"
-							   data-bs-original-title="<?php echo Text::_('CMARKASREAD') ?>">
+                            <a class="btn btn-sm btn-light border rounded"
+                               id="btn-mark-<?php echo $item->id ?>"
+                               onclick="Joomcck.markRead(<?php echo $item->id; ?>);"
+                               rel="tooltip"
+                               data-bs-original-title="<?php echo Text::_('CMARKASREAD') ?>">
 								<?php echo HTMLFormatHelper::icon('asterisk.png'); ?>
-							</a>
+                            </a>
 						<?php endif; ?>
 						<a class="btn btn-sm btn-light border rounded"
 						   onclick="if(!confirm('<?php echo Text::_("EVENT_CONFIRM_DELETE") ?>') ) {return;} Joomcck.removeNtf(<?php echo $item->id; ?>);">
@@ -287,7 +294,7 @@ HTMLHelper::_('bootstrap.collapse');
     (function($) {
         Joomcck.removeNtf = function(id) {
             $.ajax({
-                url: '<?php echo \Joomla\CMS\Router\Route::_("index.php?option=com_joomcck&task=ajax.remove_notification&tmpl=component", FALSE); ?>',
+                url: '<?php echo Route::_("index.php?option=com_joomcck&task=ajax.remove_notification&tmpl=component", FALSE); ?>',
                 dataType: 'json',
                 type: 'POST',
                 context: $('#ntfctn-' + id),
@@ -328,7 +335,7 @@ HTMLHelper::_('bootstrap.collapse');
             });
 
             $.ajax({
-                url: '<?php echo \Joomla\CMS\Router\Route::_("index.php?option=com_joomcck&task=ajax.remove_notification_by&tmpl=component", FALSE); ?>',
+                url: '<?php echo Route::_("index.php?option=com_joomcck&task=ajax.remove_notification_by&tmpl=component", FALSE); ?>',
                 dataType: 'json',
                 type: 'POST',
                 data: {type: type, list: list}
@@ -346,7 +353,7 @@ HTMLHelper::_('bootstrap.collapse');
 
         Joomcck.markRead = function(id) {
             $.ajax({
-                url: '<?php echo \Joomla\CMS\Router\Route::_("index.php?option=com_joomcck&task=ajax.mark_notification&tmpl=component", FALSE); ?>',
+                url: '<?php echo Route::_("index.php?option=com_joomcck&task=ajax.mark_notification&tmpl=component", FALSE); ?>',
                 dataType: 'json',
                 type: 'POST',
                 context: $('#ntfctn-' + id),
