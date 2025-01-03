@@ -66,6 +66,10 @@
 					<option value="3">Select</option>
 					<option value="4">Tag Cloud</option>
 				</field>
+				<field name="show_reset_button" type="radio" layout="joomla.form.field.radio.switcher" filter="integer" default="1" label="Show Reset Button">
+					<option value="0">No</option>
+					<option value="1">Yes</option>
+				</field>
 				<field name="search_placeholder" type="text" size="40" default="Add your keyword here..." label="Search Placeholder Label" />
 				<field name="type_label" type="text" size="40" default="Content Type" label="Content type Label" />
 				<field name="user_label" type="text" size="40" default="Author" label="Users Label" />

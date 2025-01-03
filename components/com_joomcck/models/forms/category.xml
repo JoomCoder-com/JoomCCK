@@ -71,23 +71,23 @@
 
 	<fields name="params">
 		<fieldset name="general" label="CGENERAL">
-			<field name="submission" class="btn-group" type="radio" default="1" label="X_SECSUBMITCATEGORY" description="">
+			<field name="submission" class="btn-group" labelclass="form-label" type="radio" default="1" label="X_SECSUBMITCATEGORY" description="">
 				<option value="0">CNO</option>
 				<option value="1">CYES</option>
 			</field>
-			<field name="access_level" class="btn-group" type="radio" default="0" label="X_INHERITACCESS" description="X_INHERITACCESSDESCR">
+			<field name="access_level" class="btn-group" labelclass="form-label" type="radio" default="0" label="X_INHERITACCESS" description="X_INHERITACCESSDESCR">
 				<option value="0">CNO</option>
 				<option value="1">CYES</option>
 			</field>
 
-			<field label="X_SECIID" name="category_itemid" type="menuitem" default="" description="">
+			<field label="X_SECIID" name="category_itemid" labelclass="form-label" type="menuitem" default="" description="">
 				<option value="">CINHERIT</option>
 			</field>
-			<field label="X_TYPEIID" name="category_item_itemid" type="menuitem" default="" description="">
+			<field label="X_TYPEIID" name="category_item_itemid" labelclass="form-label" type="menuitem" default="" description="">
 				<option value="">X_OPT_IIDSAME</option>
 			</field>
 
-			<field name="orderby" type="list" default="" label="X_SECORDER" description="">
+			<field name="orderby" type="list" default="" labelclass="form-label" label="X_SECORDER" description="">
 				<option value="">CINHERIT</option>
 				<option value="r.ctime ASC">X_OPTORDERTIMEA</option>
 				<option value="r.ctime DESC">X_OPTORDERTIMED</option>
@@ -107,43 +107,43 @@
 				<option value="r.favorite_num ASC">X_OPTORDERFAVORITED</option>
 				<option value="RAND() ">X_OPTORDERRAND</option>
 			</field>
-			<field name="records_mode" type="list" default="" label="X_SECRECORDMOD" description="X_SECRECORDMODEDESCR">
+			<field name="records_mode" type="list" default="" labelclass="form-label" label="X_SECRECORDMOD" description="X_SECRECORDMODEDESCR">
 				<option value="">CINHERIT</option>
 				<option value="0">X_OPTRECORDMODECAT</option>
 				<option value="1">X_OPTRECORDMODECATSUBCAT</option>
 			</field>
-			<field name="featured_first" class="btn-group" type="radio" default="" label="X_SEC_FEATUREFIRST" description="X_SECFEATUREFORSTDECR">
+			<field name="featured_first" class="btn-group" labelclass="form-label" type="radio" default="" label="X_SEC_FEATUREFIRST" description="X_SECFEATUREFORSTDECR">
 				<option value="">CINHERIT</option>
 				<option value="0">CNO</option>
 				<option value="1">CYES</option>
 			</field>
-			<field name="posttype" type="sectiontypes" default="" multiple="true" label="X_SECSUBMITTIPECAT" description="X_SECTYPESUBMITDESCRCAT" />
+			<field name="posttype" type="sectiontypes" default="" labelclass="form-label" multiple="true" label="X_SECSUBMITTIPECAT" description="X_SECTYPESUBMITDESCRCAT" />
 			
 		</fieldset>
 		<fieldset name="general_tmpl" label="X_SECFSLTMPL">
-			<field label="X_SECTMPLMARKAP" name="tmpl_markup" type="cobtmpls" default="" description="X_SECTMPLMARKUPDESCR" tmpltype="markup">
+			<field label="X_SECTMPLMARKAP" name="tmpl_markup" labelclass="form-label" type="cobtmpls" default="" description="X_SECTMPLMARKUPDESCR" tmpltype="markup">
 				<option value="">CINHERIT</option>
 			</field>
-			<field label="X_SECTMPLRECLIST" name="tmpl_list" type="cobtmpls" multi="1" default="" description="X_SECTMPLRECLISTDESCR" tmpltype="itemlist">
+			<field label="X_SECTMPLRECLIST" name="tmpl_list" labelclass="form-label" type="cobtmpls" multi="1" default="" description="X_SECTMPLRECLISTDESCR" tmpltype="itemlist">
 				<option value="">CINHERIT</option>
 			</field>
-			<field label="X_SECTMPLCATINDEX" name="tmpl_category" type="cobtmpls" default="" tmpltype="category">
+			<field label="X_SECTMPLCATINDEX" name="tmpl_category" labelclass="form-label" type="cobtmpls" default="" tmpltype="category">
 				<option value="0">CNONE</option>
 				<option value="">CINHERIT</option>
 			</field>
-			<field label="X_SECTMPLCOMPARE" name="tmpl_compare" type="cobtmpls" default="" description="X_SECCOMPAREDESCR" tmpltype="itemlist">
+			<field label="X_SECTMPLCOMPARE" name="tmpl_compare" labelclass="form-label" type="cobtmpls" default="" description="X_SECCOMPAREDESCR" tmpltype="itemlist">
 				<option value="0">CNONE</option>
 				<option value="">CINHERIT</option>
 			</field>
-            <field name="tmpl_list_default" type="text" default="default"  label="X_SECTMPLDEFAULT" description="X_SECTMPLDEFAULTDESCR" />
+            <field name="tmpl_list_default" type="text" labelclass="form-label" default="default"  label="X_SECTMPLDEFAULT" description="X_SECTMPLDEFAULTDESCR" />
 		</fieldset>
 	</fields>
 	<delete>
-		<field label="X_SECTMPLFILTER" name="tmpl_filters" type="cobtmpls" default="" tmpltype="filters">
+		<field label="X_SECTMPLFILTER" name="tmpl_filters" labelclass="form-label" type="cobtmpls" default="" tmpltype="filters">
 			<option value="0">CNONE</option>
 			<option value="">CINHERIT</option>
 		</field>
-		<field label="X_SECTMPLSECMENU" name="tmpl_menu" type="cobtmpls" default="" description="X_SECTMPLSECMENUDESCR" tmpltype="user_menu">
+		<field label="X_SECTMPLSECMENU" name="tmpl_menu" labelclass="form-label" type="cobtmpls" default="" description="X_SECTMPLSECMENUDESCR" tmpltype="user_menu">
 			<option value="0">CNONE</option>
 			<option value="">CINHERIT</option>
 		</field>

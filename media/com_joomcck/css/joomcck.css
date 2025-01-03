@@ -4,3 +4,8 @@
 .hasTooltip[disabled] {
     pointer-events: all !important;
 }
+
+/* btn-group adds a lot of space at bottom on cassopeia */
+.controls > fieldset, .controls > fieldset .btn-group.radio {
+    margin: 0 !important;
+}

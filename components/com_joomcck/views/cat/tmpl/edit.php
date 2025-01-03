@@ -20,6 +20,11 @@ defined('_JEXEC') or die;
 $wa = $this->document->getWebAssetManager();
 $wa->useScript('keepalive')
 	->useScript('form.validate');
+
+// required css file fix issues of UI/UX
+\Joomla\CMS\Factory::getDocument()->addStyleSheet(\Joomla\CMS\Uri\Uri::root().'/media/com_joomcck/css/joomcck.css');
+
+
 ?>
 
 <script type="text/javascript">
@@ -73,8 +78,8 @@ $wa->useScript('keepalive')
             </div>
             <legend><?php echo $this->form->getLabel('description'); ?></legend>
 			<?php echo $this->form->getInput('description'); ?>
-			<?php echo MFormHelper::renderFieldset($this->form, 'general', $this->item->params, 'params', MFormHelper::FIELDSET_SEPARATOR_HEADER); ?>
-			<?php echo MFormHelper::renderFieldset($this->form, 'general_tmpl', $this->item->params, 'params', MFormHelper::FIELDSET_SEPARATOR_HEADER); ?>
+
+
         </div>
 		<?php echo HTMLHelper::_('uitab.endTab'); ?>
 
@@ -115,6 +120,15 @@ $wa->useScript('keepalive')
 			<?php echo $this->loadTemplate('options'); ?>
         </div>
 		<?php echo HTMLHelper::_('uitab.endTab'); ?>
+
+		<?php echo HTMLHelper::_('uitab.addTab', 'myTab', 'page-general', \Joomla\CMS\Language\Text::_('CGENERAL')); ?>
+		<?php echo $this->form->renderFieldSet('general') ?>
+        <?php echo HTMLHelper::_('uitab.endTab'); ?>
+
+		<?php echo HTMLHelper::_('uitab.addTab', 'myTab', 'page-templates', \Joomla\CMS\Language\Text::_('X_SECFSLTMPL')); ?>
+		<?php echo $this->form->renderFieldSet('general_tmpl') ?>
+        <?php echo HTMLHelper::_('uitab.endTab'); ?>
+
 
 		<?php echo HTMLHelper::_('uitab.addTab', 'myTab', 'page-relative', \Joomla\CMS\Language\Text::_('CRELATIVECAT')); ?>
         <div>

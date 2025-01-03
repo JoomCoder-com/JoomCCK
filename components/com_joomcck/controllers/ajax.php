@@ -1048,7 +1048,6 @@ class JoomcckControllerAjax extends MControllerAdmin
 			AjaxHelper::error(Text::_($fieldclass->getError()));
 		}
 
-
 		AjaxHelper::send($result);
 
 		\Joomla\CMS\Factory::getApplication()->close();

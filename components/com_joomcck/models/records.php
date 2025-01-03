@@ -1239,6 +1239,7 @@ class JoomcckModelRecords extends MModelList
 		ArrayHelper::clean_r($type, TRUE);
 		if($type)
 		{
+
 			if(!$total)
 			{
 				settype($type, 'array');

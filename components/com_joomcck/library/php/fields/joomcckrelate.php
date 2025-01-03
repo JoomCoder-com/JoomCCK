@@ -180,7 +180,6 @@ class  CFormFieldRelate extends CFormField
 
 				}
 
-
 				$html .= $this->_render_autocomplete($multi, array(), $default,
 					($multi ? $this->params->get('params.multi_limit') : 1), $name,$fieldOptions);
 
@@ -194,8 +193,9 @@ class  CFormFieldRelate extends CFormField
 			case 4:
 				if(!$this->required)
 				{
-					array_unshift($list, \Joomla\CMS\HTML\HTMLHelper::_('select.option', '', \Joomla\CMS\Language\Text::_('P_SELECT_ITEM')));
+					array_unshift($list, \Joomla\CMS\HTML\HTMLHelper::_('select.option', '', \Joomla\CMS\Language\Text::_('P_SELECT_ITEM'),'value', 'title'));
 				}
+
 				$html .= $this->_render_select($multi, $list, $this->value, $name);
 				break;
 
@@ -296,7 +296,7 @@ class  CFormFieldRelate extends CFormField
 				$checked = ' checked="checked"';
 			}
 			$ch[] = sprintf($patern, ($i % 2 == 0 ? '<div class="row">' : NULL), $this->id, $k, $type, $checked, $item->value, $name, $attribs,
-				$this->id, $k, htmlspecialchars($item->text, ENT_COMPAT, 'UTF-8'), ($i % 2 != 0 ? '</div>' : NULL));
+				$this->id, $k, htmlspecialchars($item->title, ENT_COMPAT, 'UTF-8'), ($i % 2 != 0 ? '</div>' : NULL));
 			$i++;
 		}
 		$html[] = '<div id="form_field_list_' . $this->id . '">' . implode("\n", $ch) . ($i % 2 != 0 ? '</div>' : NULL) . '</div>';
@@ -336,6 +336,7 @@ class  CFormFieldRelate extends CFormField
 	{
 		$html = array();
 
+
 		$attribs = ($this->required ? ' required="true" ' : '');
 		if($multi)
 		{
@@ -346,7 +347,7 @@ class  CFormFieldRelate extends CFormField
 			$attribs .= ' size="' . (count($list) > 20 ? 20 : count($list)) . '"';
 		}
 		$html[] = '<joomla-field-fancy-select>';
-		$html[] = \Joomla\CMS\HTML\HTMLHelper::_('select.genericlist', $list, $name, $attribs, 'value', 'text', $default);
+		$html[] = \Joomla\CMS\HTML\HTMLHelper::_('select.genericlist', $list, $name, $attribs, 'value', 'title', $default);
 		$html[] = '</joomla-field-fancy-select>';
 
 		Factory::getApplication()->getDocument()->getWebAssetManager()

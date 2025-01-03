@@ -67,6 +67,8 @@ $model->section = $section;
 $filters    = $model->getFilters();
 $worns      = $model->getWorns();
 $state      = $model->getState();
+
+
 $keys_by_id = $model->getKeys($section);
 
 if($params->get('filter_type_type'))
