@@ -139,10 +139,7 @@ class JoomcckModelRecords extends MModelList
 			$orders = $this->section->params->get('more.orderby_rss', $orders);
 		}
 
-
-
 		$orders = explode(' ', $orders);
-
 
 		if($app->input->getCmd('format') == 'feed'){
 			$app->input->set('filter_order', $order[0]);

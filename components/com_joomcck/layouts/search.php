@@ -12,8 +12,10 @@ defined('_JEXEC') or die('Restricted access');
 \Joomla\CMS\HTML\HTMLHelper::_('bootstrap.tooltip', '*[rel^="tooltip"]');
 
 $filters = [];
+
+
 if($displayData->state->get('filter.search')) {
-	$filters['filter.search'] = 'filter.search';
+	$filters['filter.search'] = 'filter_search';
 }
 
 if(is_array($displayData->_filters)){
@@ -27,6 +29,7 @@ if(is_array($displayData->_filters)){
 		}
 	}
 }
+
 
 ?>
 
