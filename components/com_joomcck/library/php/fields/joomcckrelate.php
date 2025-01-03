@@ -548,7 +548,7 @@ class  CFormFieldRelate extends CFormField
 	public function onPrepareSave($value, $record, $type, $section)
 	{
 
-		// clean array
+		// clean array from empty values
 		if(is_array($value))
 			ArrayHelper::clean_r($value);
 

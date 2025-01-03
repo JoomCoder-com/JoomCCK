@@ -187,7 +187,7 @@ foreach ($exclude as &$value)
 
 <?php if ($params->get('tmpl_core.item_author_avatar')): ?>
     <td class="cob-avatar-td">
-        <img src="<?php echo CCommunityHelper::getAvatar($item->user_id, $params->get('tmpl_core.item_author_avatar_width', 40), $params->get('tmpl_core.item_author_avatar_height', 40)); ?>"/>
+        <img class="rounded" src="<?php echo CCommunityHelper::getAvatar($item->user_id, $params->get('tmpl_core.item_author_avatar_width', 40), $params->get('tmpl_core.item_author_avatar_height', 40)); ?>"/>
     </td>
 <?php endif; ?>
 
