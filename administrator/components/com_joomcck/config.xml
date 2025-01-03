@@ -11,11 +11,7 @@
 		</field>
 		<field type="number" default="20" min="5" max="500" step="5" name="list_limit" label="Default List Limit" />
 		<field type="number" default="20" min="5" max="500" step="5" name="list_limit_items" label="Items List Limit" />
-		<field name="community" type="folderlist" label="XML_FIELD_LABEL_CNF_COMMUNITYINTEGR" hide_none="1" hide_default="1" default="com_joomcck" directory="components/com_joomcck/library/php/community" description="XML_FIELD_DESCR_CNF_COMMUNITYINTEGR" />
-		<field label="XML_MODERATOR" name="moderator" type="user" required="true" default="" />
-		<field label="XML_MODERATORGROUP" name="moderator_group" type="accesslevel" default="0">
-			<option value="0">XML_OPT_NOONE</option>
-		</field>
+
 		<field name="captcha" type="plugins" folder="captcha" default="recaptcha" label="XML_CAPTCHA" description="XML_CAPTCHA_DESCR" filter="cmd" >
 			<option value="">JOPTION_USE_DEFAULT</option>
 			<option value="0">JOPTION_DO_NOT_USE</option>
@@ -29,10 +25,7 @@
 			<option value="1">JYES</option>
 			<option value="0">JNO</option>
 		</field>
-		<field name="gravatar" type="radio" class="btn-group" label="XML_FIELD_LABEL_CNF_GRAVATAR" default="1">
-			<option value="1">JYES</option>
-			<option value="0">JNO</option>
-		</field>
+
 		<field name="cron_key" type="text" default="" size="40" label="C_CRONSECRETWORD" />
 		<field name="map_key" type="text" default="" size="40" label="Google map API key" />
 		<field name="tmpl_prefix" type="text" default="" size="40" label="CTMPL_PREFIX" description="CTMPL_PREFIX_DESCR" />
@@ -41,7 +34,17 @@
 			<option value="0">JNO</option>
 		</field>
 	</fieldset>
-
+	<fieldset name="users" label="XML_FSETLBL_CNF_USERS">
+		<field name="community" type="folderlist" label="XML_FIELD_LABEL_CNF_COMMUNITYINTEGR" hide_none="1" hide_default="1" default="com_joomcck" directory="components/com_joomcck/library/php/community" description="XML_FIELD_DESCR_CNF_COMMUNITYINTEGR" />
+		<field name="gravatar" type="radio" class="btn-group" label="XML_FIELD_LABEL_CNF_GRAVATAR" default="1">
+			<option value="1">JYES</option>
+			<option value="0">JNO</option>
+		</field>
+		<field label="XML_MODERATOR" name="moderator" type="user" required="true" default="" />
+		<field label="XML_MODERATORGROUP" name="moderator_group" type="accesslevel" default="0">
+			<option value="0">XML_OPT_NOONE</option>
+		</field>
+	</fieldset>
 	<fieldset name="router" label="XML_FIELD_LABEL_SEF" description="XML_FSETDESC_CNF_SEO">
 		<field label="XML_FIELD_LABEL_CNF_ROUTER" name="sef_router" type="filelist" directory="/components/com_joomcck/routers" hide_none="1" hide_default="1" default="main_router.php" exclude=".html" />
 		<field label="XML_FIELD_LABEL_CNF_CATEGORYPATH" name="sef_category" type="list" default="0" description="XML_FIELD_DESCR_CNF_CATEGORYPATH">
