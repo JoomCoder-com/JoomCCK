@@ -547,6 +547,11 @@ class  CFormFieldRelate extends CFormField
 
 	public function onPrepareSave($value, $record, $type, $section)
 	{
+
+		// clean array
+		if(is_array($value))
+			ArrayHelper::clean_r($value);
+
 		return $value;
 	}
 
@@ -601,6 +606,8 @@ class  CFormFieldRelate extends CFormField
 		$save['section_id'] = $this->_getChildSectionId($save['field_id']);
 		$save['type_id'] 	= ($params['field'] == 'child' ?
 			$this->type_id : MModelBase::getInstance('Fields', 'JoomcckModel')->getFieldTypeId($save['field_id']));
+
+
 
 		if(!$table->save($save))
 		{
