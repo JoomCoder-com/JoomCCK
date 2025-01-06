@@ -183,8 +183,8 @@ $current_user = \Joomla\CMS\Factory::getUser($this->input->getInt('user_id', $th
 
 						<?php if (count($this->list_templates) > 1 && in_array($markup->get('menu.menu_templates'), $this->user->getAuthorisedViewLevels()) && $this->items): ?>
                             <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-bs-toggle="dropdown">
-									<?php if ($markup->get('menu.menu_templates_icon')): ?>
+                                <a href="#" class="dropdown-toggle btn btn-light border btn-sm me-2" data-bs-toggle="dropdown">
+									<?php if ($markup->get('menu.menu_templates_icon',0)): ?>
 										<?php echo HTMLFormatHelper::icon('zones.png'); ?>
 									<?php endif; ?>
 									<?php echo Text::_($markup->get('menu.menu_templates_label', 'Switch view')) ?>

@@ -417,6 +417,48 @@ class JoomcckModelPack extends MModelAdmin
         }
     }
 
+	private function _prepare_templates($params, &$tmpls, $prefix = NULL)
+	{
+		$list = $tmpls->get($prefix . 'tmpl_list', array());
+		settype($list, 'array');
+		$_tpl_names = array();
+		foreach($list AS $tplname)
+		{
+			if(!$tplname)
+			{
+				continue;
+			}
+			$this->_tpl_config[] = 'default_list_' . $tplname;
+			if($params->get('list') && $tmpls->get($prefix . 'tmpl_list', array()))
+			{
+				$this->_tpl[] = 'records/tmpl/default_list_' . $tplname;
+				$_tpl_names[] = $this->_getTmplName($tplname);
+			}
+		}
+		if($_tpl_names)
+		{
+			$tmpls->set($prefix . 'tmpl_list', $_tpl_names);
+		}
+		$this->_tpl_config[] = 'default_cindex_' . $tmpls->get($prefix . 'tmpl_category');
+		if($params->get('cat_index') && $tmpls->get($prefix . 'tmpl_category'))
+		{
+			$this->_tpl[] = 'records/tmpl/default_cindex_' . $tmpls->get($prefix . 'tmpl_category');
+			$tmpls->set($prefix . 'tmpl_category', $this->_getTmplName($tmpls->get($prefix . 'tmpl_category')));
+		}
+		$this->_tpl_config[] = 'default_list_' . $tmpls->get($prefix . 'tmpl_compare');
+		if($params->get('compare') && $tmpls->get($prefix . 'tmpl_compare'))
+		{
+			$this->_tpl[] = 'records/tmpl/default_list_' . $tmpls->get($prefix . 'tmpl_compare');
+			$tmpls->set($prefix . 'tmpl_compare', $this->_getTmplName($tmpls->get($prefix . 'tmpl_compare')));
+		}
+		$this->_tpl_config[] = 'default_markup_' . $tmpls->get($prefix . 'tmpl_markup');
+		if($params->get('markup') && $tmpls->get($prefix . 'tmpl_markup'))
+		{
+			$this->_tpl[] = 'records/tmpl/default_markup_' . $tmpls->get($prefix . 'tmpl_markup');
+			$tmpls->set($prefix . 'tmpl_markup', $this->_getTmplName($tmpls->get($prefix . 'tmpl_markup')));
+		}
+	}
+
     private function _copy_tmpls()
     {
         $this->_tpl = array_unique($this->_tpl);
@@ -725,8 +767,9 @@ class Zipper extends ZipArchive
     public function addDir($path)
     {
         $nodes = glob($path . '/*');
+
         foreach ($nodes as $node) {
-            if (Folder::exists($node)) {
+            if (\Joomla\CMS\Filesystem\Folder::exists($node)) {
                 $this->addDir($node);
             } else if (is_file($node)) {
                 $this->addFile($node, str_replace(PACK_ROOT, PACK_KEY, $node));
