@@ -2,16 +2,14 @@
 <project name="com_joomcck" basedir="." default="dist" description="Build package file for JoomCCK Pro version">
 
     <!-- Define properties for version and releasespath -->
-    <property name="version" value="5.10.0" />
+    <property name="version" value="5.10.1" />
     <property name="releasespath" value="E:\JoomCoder\joomcck"/>
 
     <target name="dirbuild">
 
-
         <!-- Language files component -->
         <copy file="./language/en-GB/com_joomcck.ini" todir="${releasespath}/build/components/com_joomcck/site/language/en-GB" />
         <copy file="./administrator/language/en-GB/com_joomcck.sys.ini" todir="${releasespath}/build/components/com_joomcck/admin/language/en-GB" />
-
 
         <!-- Language files modules -->
         <copy file="./language/en-GB/mod_joomcck_submitbutton.ini" todir="${releasespath}/build/modules/mod_joomcck_submitbutton/language/en-GB" />
