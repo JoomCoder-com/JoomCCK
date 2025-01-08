@@ -12,6 +12,8 @@ use Joomla\CMS\MVC\View\GenericDataException;
 
 defined('_JEXEC') or die();
 
+require_once JPATH_SITE.'/components/com_joomcck/library/php/html/joomcck.php';
+
 /**
  * HTML Article View class for the Content component
  *

@@ -7,6 +7,9 @@
  * @copyright Copyright (C) 2012 joomcoder (https://www.joomcoder.com). All rights reserved.
  * @license   GNU/GPL http://www.gnu.org/copyleft/gpl.html
  */
+
+use Joomla\Language\Text;
+
 defined('_JEXEC') or die('Restricted access');
 \Joomla\CMS\HTML\HTMLHelper::_('bootstrap.tooltip', '*[rel^="tooltip"]');
 ?>
