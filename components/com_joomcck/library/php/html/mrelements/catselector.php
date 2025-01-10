@@ -29,7 +29,7 @@ defined('_JEXEC') or die('Restricted access');
 <div>
 	<?php if(!empty($sections)):?>
 		<div id="main-selector-list">
-			<div class="select-list well" id="select_list1">
+			<div class="select-list w-100" id="select_list1">
 				<ul id="level1" class="nav nav-list">
 					<?php foreach ($sections AS $s):?>
 						<li id="category-<?php echo $s->id; ?>-1">
@@ -41,12 +41,12 @@ defined('_JEXEC') or die('Restricted access');
 		</div>
 	<?php elseif(!empty($categories)):?>
 		<div id="main-selector-list">
-			<div class="select-list well" id="select_list1">
+			<div class="select-list w-100" id="select_list1">
 				<ul id="level1" class="nav nav-list">
 					<?php foreach ($categories AS $c):?>
 						<?php if(in_array($c->id, $ignore)) { continue;} ?>
-						<li id="category-<?php echo $c->section_id; ?>-<?php echo $c->id; ?>">
-							<a class="btn btn-outline-dark" href="javascript:void(0);" <?php if($c->children){ echo 'onclick="CatSelector.get_children('.$c->id.', '.$c->section_id.', 1)"';}else{echo ' class="disabled"';}?>>
+						<li class="w-50 mb-1 p-1" id="category-<?php echo $c->section_id; ?>-<?php echo $c->id; ?>">
+							<a class="btn btn-sm btn-outline-success d-inline-block w-100" href="javascript:void(0);" <?php if($c->children){ echo 'onclick="CatSelector.get_children('.$c->id.', '.$c->section_id.', 1)"';}else{echo ' class="disabled"';}?>>
 								<?php if($c->id != \Joomla\CMS\Factory::getApplication()->input->getInt('id') && $c->params->get('submission', 1)):?>
 									<img class="float-end" id="s_icon<?php echo $c->id;?>"
 										src="<?php echo \Joomla\CMS\Uri\Uri::root(TRUE);?>/media/com_joomcck/icons/16/plus-button.png"
@@ -174,7 +174,7 @@ defined('_JEXEC') or die('Restricted access');
 
 					var fl = $(document.createElement('div'))
 						.attr('id', 'select_list'+ (level+1))
-						.attr('class', 'select-list well');
+						.attr('class', 'select-list w-100');
 					var ul = $(document.createElement('ul'))
 						.attr('id', 'level'+ (level+1))
 						.attr('class', 'nav nav-list');
