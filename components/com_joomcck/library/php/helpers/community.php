@@ -185,6 +185,7 @@ class CCommunityHelper
 				$link[] = array_shift($links);
 				$links  = $link;
 			}
+
 			if(count($links) == 0)
 			{
 				$out = $name;
