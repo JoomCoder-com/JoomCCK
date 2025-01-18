@@ -170,7 +170,7 @@
     },
     {
       "name": "ip",
-      "type": "varchar(20)",
+      "type": "varchar(40)",
       "null": "NO",
       "default": ""
     },

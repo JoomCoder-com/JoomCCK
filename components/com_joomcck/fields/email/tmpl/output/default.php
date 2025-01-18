@@ -9,6 +9,7 @@
 
 use Joomcck\Layout\Helpers\Layout;
 use Joomla\CMS\HTML\HTMLHelper;
+use Joomla\CMS\Language\Text;
 use Joomla\CMS\Router\Route;
 
 defined('_JEXEC') or die();
@@ -24,9 +25,10 @@ if ($this->value && in_array($params->get('params.view_mail', 1), $this->user->g
 	if ($params->get('params.qr_code', 0))
 	{
 		$width = $this->params->get('params.qr_width', 60);
-		$src   = 'http://chart.apis.google.com/chart?chs=' . $width . 'x' . $width . '&cht=qr&chld=L|0&chl=' . $this->value;
 
-		echo \Joomla\CMS\HTML\HTMLHelper::image($src, \Joomla\CMS\Language\Text::_('E_QRCODE'), array('class' => 'qr-image', 'width' => $width, 'height' => $width, 'align' => 'absmiddle'));
+		$src   = 'https://chart.apis.google.com/chart?chs=' . $width . 'x' . $width . '&cht=qr&chld=L|0&chl=' . $this->value;
+
+		echo "<img class='qr-image' height='$width' width='$width' src='$src' alt='". Text::_('E_QRCODE')."' />";
 	}
 
 	echo $fvalue;

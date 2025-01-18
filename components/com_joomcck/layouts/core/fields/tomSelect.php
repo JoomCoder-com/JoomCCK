@@ -24,14 +24,16 @@ $wa = Webassets::$wa;
 $wa->useScript('com_joomcck.tom-select');
 $wa->useStyle('com_joomcck.tom-select');
 
+// tansform to js json format
 $list = json_encode($list);
-
 $list = str_replace(['"id":','"text":'],['id:','text:'],$list);
+
 
 if(empty($default) && !empty($list)){
 	$default = $list;
 }else{
 	$default = json_encode($default);
+	$default = str_replace(['"id":','"text":'],['id:','text:'],$default);
 }
 
 $fieldId = (int) rand(1,2000);
