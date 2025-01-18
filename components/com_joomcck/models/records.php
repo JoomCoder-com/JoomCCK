@@ -1315,6 +1315,7 @@ class JoomcckModelRecords extends MModelList
 			$scount      = explode(" ", $search);
 			ArrayHelper::clean_r($scount);
 
+
 			if($this->section->params->get('more.search_mode') == 1 || ($this->section->params->get('more.search_mode') == 3 && count($scount) == 1))
 			{
 				$words = explode(" ", $search);
