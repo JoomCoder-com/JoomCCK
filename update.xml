@@ -4,10 +4,10 @@
         <description>Advanced Web Application Builder and Content Construction Kit (CCK) for Joomla CMS</description>
         <element>com_joomcck</element>
         <type>component</type>
-        <version>5.10.2</version>
+        <version>5.10.3</version>
         <infourl title="JoomCCK">https://github.com/JoomCoder-com/JoomCCK/releases</infourl>
         <downloads>
-            <downloadurl type="full" download="zip">https://github.com/JoomCoder-com/JoomCCK/releases/download/5.10.2/com_joomcck_v5.10.2_j4.zip</downloadurl>
+            <downloadurl type="full" download="zip">https://github.com/JoomCoder-com/JoomCCK/releases/download/5.10.3/com_joomcck_v5.10.3_j4.zip</downloadurl>
         </downloads>
         <maintainer>JoomCoder</maintainer>
         <maintainerurl>https://www.joomcoder.com</maintainerurl>
