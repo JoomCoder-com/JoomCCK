@@ -8,7 +8,8 @@
  * @license   GNU/GPL http://www.gnu.org/copyleft/gpl.html
  */
 
-use Joomla\Language\Text;
+
+use Joomla\CMS\Language\Text;
 
 defined('_JEXEC') or die('Restricted access');
 \Joomla\CMS\HTML\HTMLHelper::_('bootstrap.tooltip', '*[rel^="tooltip"]');
@@ -47,7 +48,7 @@ defined('_JEXEC') or die('Restricted access');
 	<?php if ($params->get('filter_search', 1)): ?>
         <div class="mb-3 <?php echo($state->get('records.search') ? ' active' : null) ?>">
             <input type="text"
-                   placeholder="<?php echo \Joomla\CMS\Language\Text::_($params->get('search_placeholder', 'Add your keyword here...')) ?>"
+                   placeholder="<?php echo Text::_($params->get('search_placeholder', 'Add your keyword here...')) ?>"
                    class="form-control" name="filter_search" value="<?php echo $state->get('records.search'); ?>"/>
         </div>
 	<?php endif; ?>
@@ -155,13 +156,13 @@ defined('_JEXEC') or die('Restricted access');
 					<?php echo $filter->label; ?>
 					<?php if ($filter->params->get('params.filter_descr')): ?>
                         <small rel="tooltip"
-                               title="<?php echo \Joomla\CMS\Language\Text::_($filter->params->get('params.filter_descr')); ?>"><i
+                               title="<?php echo Text::_($filter->params->get('params.filter_descr')); ?>"><i
                                     class="fas fa-info-circle text-muted"></i></small>
 					<?php endif; ?>
                 </label>
                 <div class="<?php echo($filter->isFilterActive() ? ' active' : null) ?>">
 					<?php if ($filter->isFilterActive()): ?>
-                        <!-- <img class="filter-close" onclick="Joomcck.cleanFilter('filter_<?php echo $filter->key ?>')" rel="tooltip" data-bs-original-title="<?php echo \Joomla\CMS\Language\Text::_('CDELETEFILTER') ?>" src="<?php echo \Joomla\CMS\Uri\Uri::root(true) ?>/media/com_joomcck/icons/16/cross-circle.png">-->
+                        <!-- <img class="filter-close" onclick="Joomcck.cleanFilter('filter_<?php echo $filter->key ?>')" rel="tooltip" data-bs-original-title="<?php echo Text::_('CDELETEFILTER') ?>" src="<?php echo \Joomla\CMS\Uri\Uri::root(true) ?>/media/com_joomcck/icons/16/cross-circle.png">-->
 					<?php endif; ?>
 					<?php echo $f; ?>
                 </div>
@@ -183,7 +184,7 @@ defined('_JEXEC') or die('Restricted access');
 
     <div class="form-actions">
         <button type="submit" class="btn btn-outline-success">
-            <i class="fas fa-search"></i> <?php echo \Joomla\CMS\Language\Text::_('CSEARCH'); ?>
+            <i class="fas fa-search"></i> <?php echo Text::_('CSEARCH'); ?>
         </button>
 		<?php if ($params->get('show_reset_button', 1)): ?>
             <button onclick="Joomla.submitbutton('records.cleanall');" class="btn btn-outline-danger">
