@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form>
+    <fieldset name="basic" addfieldpath="plugins/joomrss/joomcck/elements">
+        <field type="joomcckcategories" name="category" size="10" default="-1" multiple="multiple"/>
+        <field type="user" name="created_by" default="" label="Created by"
+               description="You can change here the name of the user who created the article."/>
+        <field type="list" name="order_by" default="id" label="Order By" description="Order By">
+            <option value="id">Id</option>
+            <option value="ctime">Created Date</option>
+        </field>
+        <field type="list" name="order_dir" default="desc" label="Order Dir" description="Order Dir">
+            <option value="DESC">DESC</option>
+            <option value="ASC">ASC</option>
+        </field>
+        <field type="joomcckelements" name="joomcckelement" size="10" default="0" multiple="multiple"/>
+    </fieldset>
+</form>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<extension version="3.0" type="plugin" group="joomrss" method="upgrade">
+	<name>JoomRSS - JoomCCK</name>
+	<author>JoomCoder</author>
+	<creationDate>01/25/2025</creationDate>
+	<copyright>JoomBoost.com</copyright>
+	<authorEmail>support@joomboost.com</authorEmail>
+	<authorUrl>https://www.joomboost.com</authorUrl>
+	<license>GNU/GPL</license>
+	<version>##VERSION##</version>
+	<description>JoomCCK plugin for JoomRSS</description>
+	<files>
+		<filename plugin="joomcck">joomcck.php</filename>
+		<filename>index.html</filename>
+		<folder>elements</folder>
+		<folder>engine</folder>
+	</files>
+	<config>
+	</config>
+</extension>
