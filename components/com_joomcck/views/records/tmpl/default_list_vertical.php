@@ -40,15 +40,8 @@ $width = (100 - (int)$params->get('tmpl_params.lbl_width', 15)) / $cols;
 	right: 0;
 }
 </style>
-<?php if($params->get('tmpl_core.show_title_index')):?>
-	<h2><?php echo \Joomla\CMS\Language\Text::_('CONTHISPAGE')?></h2>
-	<ul>
-		<?php foreach ($this->items AS $item):?>
-			<li><a href="#record<?php echo $item->id?>"><?php echo $item->title?></a></li>
-		<?php endforeach;?>
-	</ul>
-<?php endif;?>
 
+<?php echo Layout::render('core.list.onThisPage',['params' => $params,'items' => $this->items]) ?>
 
 <table class="table table-hover">
 	<tr>

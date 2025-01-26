@@ -24,14 +24,8 @@ foreach ($exclude as &$value)
 	$value = $this->fields_keys_by_id[$value];
 }
 ?>
-<?php if ($params->get('tmpl_core.show_title_index')): ?>
-    <h2><?php echo \Joomla\CMS\Language\Text::_('CONTHISPAGE') ?></h2>
-    <ul>
-		<?php foreach ($this->items as $item): ?>
-            <li><a href="#record<?php echo $item->id ?>"><?php echo $item->title ?></a></li>
-		<?php endforeach; ?>
-    </ul>
-<?php endif; ?>
+
+<?php echo Layout::render('core.list.onThisPage',['params' => $params,'items' => $this->items]) ?>
 
 <div class="table-responsive">
     <table class="table table-striped cob-section-<?php echo $this->section->id; ?>">
