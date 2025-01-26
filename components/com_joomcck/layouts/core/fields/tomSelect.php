@@ -28,7 +28,6 @@ $wa->useStyle('com_joomcck.tom-select');
 $list = json_encode($list);
 $list = str_replace(['"id":','"text":'],['id:','text:'],$list);
 
-
 if(empty($default) && !empty($list)){
 	$default = $list;
 }else{

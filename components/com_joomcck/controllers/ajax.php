@@ -928,7 +928,6 @@ class JoomcckControllerAjax extends MControllerAdmin
 		$tag_id  = $this->input->get('tid');
         $tag_text  = $this->input->get('text','','string');
 
-
         if(!preg_match("/^[0-9]*$/", $tag_id) || empty($tag_id))
         {
             $tag_table->reset();

@@ -517,13 +517,15 @@ class JHTMLTags
 		$record = MModelBase::getInstance('Record', 'JoomcckModel');
         $record = $record->getItem($record_id);
 		$rtags = json_decode($record->tags ?: '{}', 1);
-        $default = [];
-        foreach ($rtags as $k => $v) {
-            $default[] = [
-                "id"   => $k,
-                "text" => $v
-            ];
-        }
+		$default = [];
+		$selected = [];
+		foreach ($rtags as $k => $v) {
+			$default[] = [
+				"id"   => $k,
+				"text" => $v
+			];
+			$selected[] = $k;
+		}
         
         $options['only_suggestions'] = $attach_only;
         $options['can_add']          = 1;
@@ -534,8 +536,7 @@ class JHTMLTags
 		$options['onAdd'] =  "index.php?option=com_joomcck&task=ajax.add_tags&tmpl=component&rid=".$record->id;
 		$options['onRemove'] = "index.php?option=com_joomcck&task=ajax.remove_tag&tmpl=component&rid=".$record->id;
 
-        
-		$out = \Joomla\CMS\HTML\HTMLHelper::_('mrelements.pills', "tags$record_id", "add-tags-".$record_id, $default, [], $options);
+		$out = \Joomla\CMS\HTML\HTMLHelper::_('mrelements.pills', "tags$record_id", "add-tags-".$record_id, $default, $selected, $options);
         return $out;
         
         /*
