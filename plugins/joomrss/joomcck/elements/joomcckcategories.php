@@ -14,14 +14,13 @@ use Joomla\CMS\HTML\HTMLHelper;
 defined( 'JPATH_BASE' ) or die();
 JFormHelper::loadFieldClass( 'list' );
 
-class JFormFieldjoomcckCategories extends JFormFieldList {
+class JFormFieldjoomcckCategories extends \Joomla\CMS\Form\Field\ListField {
 	public $_name = 'joomcckCategories';
 	public function getInput()  // New method name in J4
 	{
 		$options = $this->getOptions();
 		$size = (count(explode("\n", $options)) < 10) ? count(explode("\n", $options)) : 10;
-
-		return '<select name="' . $this->name . '[]" id="' . $this->id . '" class="form-select" multiple size="' . $size . '">' .
+		return '<select name="' . $this->name . '" id="' . $this->id . '" class="form-select" multiple="true" size="' . $size . '">' .
 			$options .
 			'</select>';
 	}

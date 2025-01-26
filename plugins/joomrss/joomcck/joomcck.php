@@ -18,12 +18,16 @@ use Joomla\CMS\Factory;
 
 defined( '_JEXEC' ) or die();
 
-class addonRss_joomcck {
 
+if(Joomla\CMS\Filesystem\File::exists(JPATH_SITE . '/components/com_joomcck/api.php'))
+	JLoader::register('JoomcckApi', JPATH_SITE . '/components/com_joomcck/api.php');
+
+class addonRss_joomcck {
 
     public static $component = 'com_joomcck';
 
 	function getItems( $rowCf ) {
+
 		$joomcck_types = $rowCf->joomccktypes;
 		$category     = ( isset( $rowCf->category ) ) ? $rowCf->category : array();
 		$created_by   = ( isset( $rowCf->created_by ) ) ? $rowCf->created_by : '';
@@ -71,21 +75,8 @@ class addonRss_joomcck {
 	}
 
 	function getLink( $row ) {
-		global $isJ25;
-		$app        = Factory::getApplication();
-		$user       = Factory::getUser( $row->user_id );
-		$categories = json_decode( $row->categories, true );
-		$cat_id     = '';
-		$cat_title  = '';
 
-		foreach ( $categories as $key => $value ) {
-			$cat_id    = $key;
-			$cat_title = $value;
-		}
-		$cat_alias = \Joomla\Filter\OutputFilter::stringURLSafe( $cat_title );
-		$url = 'index.php?option=com_joomcck&view=record&user_id=' . $user->id . ':' . $user->username . '&cat_id=' . $cat_id . ':' . $cat_alias . '&id=' . $row->id . ':' . $row->alias;
-
-		return $url;
+		return JoomcckApi::getArticleLink($row->id);
 	}
 
 	function getDesc( $row, $rowCf ,$type = 'text') {
