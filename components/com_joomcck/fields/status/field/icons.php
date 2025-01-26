@@ -7,7 +7,7 @@
  * @license GNU/GPL http://www.gnu.org/copyleft/gpl.html
  */
 
-use Joomla\Filesystem\Folder;
+
 
 defined('_JEXEC') or die();
 
@@ -25,7 +25,7 @@ class JFormFieldIcons extends \Joomla\CMS\Form\FormField
 
 		$path = $this->getAttribute('directory','components/com_joomcck/fields/status/icons');
 
-		if (!Folder::exists($path))
+		if (!\Joomla\CMS\Filesystem\Folder::exists($path))
 		{
 			$path = JPATH_ROOT . '/' . $path;
 		}

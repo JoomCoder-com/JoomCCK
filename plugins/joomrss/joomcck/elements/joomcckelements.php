@@ -67,7 +67,7 @@ class JFormFieldjoomcckElements extends \Joomla\CMS\Form\FormField
 	 */
 	private function generateCardHeader()
 	{
-		return '<div class="card">';
+		return '<div class="card border">';
 	}
 
 	/**

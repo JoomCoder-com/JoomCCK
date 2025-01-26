@@ -14,6 +14,12 @@ require_once JPATH_ROOT . '/components/com_joomcck/library/php/fields/joomcckfie
 class JFormFieldCStatus extends CFormField
 {
 
+	public $out;
+	public $statuses;
+	public $color;
+	public $clienttype;
+	public $type_default;
+
 	public function getInput()
 	{
 		$doc = \Joomla\CMS\Factory::getDocument();

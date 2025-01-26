@@ -165,14 +165,7 @@ class JHTMLMrelements
 		$options['canDelete'] = isset($options['can_delete']) ? $options['can_delete'] : 'false';
 
 
-		// if list not used use default as list (to display selected items in dropdown
-		if(empty($list)){
 
-			foreach ($default as $iKey => $iValue){
-				$iValue = (array) $iValue;
-				$list[] = $iValue['id'];
-			}
-		}
 
 		// prepare data
 		$data = [

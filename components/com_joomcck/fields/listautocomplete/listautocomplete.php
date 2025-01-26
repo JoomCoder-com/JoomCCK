@@ -42,7 +42,6 @@ class JFormFieldCListautocomplete extends CFormFieldSelectable
 			$this->value[] = $this->params->get('params.default_val');
 		}
 
-
 		// we use here tomselect layout
 		$this->inputvalue = \Joomla\CMS\HTML\HTMLHelper::_(
 			'mrelements.pills',
