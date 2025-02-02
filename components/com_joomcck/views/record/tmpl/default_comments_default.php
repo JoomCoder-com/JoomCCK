@@ -67,11 +67,11 @@ if($this->comment->rate > 10) $bc = 'bg-success';
 ?>
 <a name="comment<?php echo $this->comment->id?>"></a>
 <div style="margin-left: <?php echo $params->get('tmpl_params.comments_indent') * ($this->comment->level - 1)?>px;" id="comment<?php echo $this->comment->id?>-container">
-	<div class="d-flex mb-2">
+	<div class="d-flex mb-3">
 		<?php if($params->get('tmpl_core.comments_author_avatar')): ?>
 		<div class="me-3 col-md-<?php //echo $this->comment->level > 1 ? 1 : 2; ?>">
 
-            <img src="<?php echo CCommunityHelper::getAvatar($this->comment->user_id, $width, $height);?>" />
+            <img class="rounded-4" src="<?php echo CCommunityHelper::getAvatar($this->comment->user_id, $width, $height);?>" />
 
 		</div>
 		<?php endif;?>
@@ -154,11 +154,6 @@ if($this->comment->rate > 10) $bc = 'bg-success';
 					<?php endforeach;?>
 				</ul>
 			<?php endif;?>
-
-
-			
-			<div class="btn-group" style="display: none">
-			</div>
 		</div>
 	</div>
 	<div class="height-20"></div>

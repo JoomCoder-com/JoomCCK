@@ -538,21 +538,6 @@ class JHTMLTags
 
 		$out = \Joomla\CMS\HTML\HTMLHelper::_('mrelements.pills', "tags$record_id", "add-tags-".$record_id, $default, $selected, $options);
         return $out;
-        
-        /*
-        $options['coma_separate'] = 0;
-		$options['only_values'] = $attach_only;
-		$options['min_length'] = 1;
-		$options['max_result'] = 10;
-		$options['case_sensitive'] = 0;
-		$options['highlight'] = 1;
-		$options['max_items'] = $max_tags;
-		$options['unique'] = 1;
-		$options['record_id'] = $record_id;
-
-		$options['ajax_url'] = 'index.php?option=com_joomcck&task=ajax.tags_list&tmpl=component';
-        $options['ajax_data'] = '';
-        */
 	}
 	public static function form($record, $section_id)
 	{

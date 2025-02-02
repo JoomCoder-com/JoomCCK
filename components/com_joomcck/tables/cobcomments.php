@@ -121,6 +121,12 @@ class JoomcckTableCobcomments extends Nested
 
 	public function store($updateNulls = FALSE)
 	{
+
+		// check user id
+		if(!$this->id)
+			$this->user_id = \Joomla\CMS\Factory::getApplication()->getIdentity()->get('id');
+
+
 		$result = parent::store();
 
 		if($result)
