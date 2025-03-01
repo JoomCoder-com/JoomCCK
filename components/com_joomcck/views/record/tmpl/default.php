@@ -12,7 +12,6 @@ defined('_JEXEC') or die();
 
 <div class="contentpaneopen">
 	<?php echo $this->loadTemplate('record_'.$this->menu_params->get('tmpl_article', $this->type->params->get('properties.tmpl_article', 'default')));?>
-	
 	<div id="comments" class="mt-5">
         <?php echo $this->loadTemplate('comments');?>
     </div>

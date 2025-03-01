@@ -17,6 +17,7 @@ extract($displayData);
 $item   = $current->item;
 $params = $current->tmpl_params['record'];
 
+
 // container class let you customize layout class of container
 $containerClass = !isset($containerClass) ? 'page-header mb-3' : $containerClass;
 

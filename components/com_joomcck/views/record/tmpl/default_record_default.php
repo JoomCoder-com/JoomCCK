@@ -22,6 +22,8 @@ $started = FALSE;
 $i = $o = 0;
 
 
+
+
 if($params->get('tmpl_core.item_categories') && $item->categories_links)
 {
 	$category[] = sprintf('<dt>%s<dt> <dd>%s<dd>', (count($item->categories_links) > 1 ? \Joomla\CMS\Language\Text::_('CCATEGORIES') : \Joomla\CMS\Language\Text::_('CCATEGORY')), implode(', ', $item->categories_links));
