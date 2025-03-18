@@ -14,7 +14,8 @@ use Joomla\CMS\Filesystem\Folder;
 use Joomla\String\StringHelper;
 
 defined('_JEXEC') or die();
-define('DS', DIRECTORY_SEPARATOR);
+if(!defined('DS'))
+	define('DS', DIRECTORY_SEPARATOR);
 
 jimport('mint.resizeimage');
 jimport('mint.mvc.controller.admin');
