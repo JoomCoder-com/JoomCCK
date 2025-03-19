@@ -129,7 +129,8 @@ class JFormFieldCVideo extends CFormFieldUpload
 					$image = $this->_getVideoThumb($video);
 
 					$v[$key_v] .= 'image: "' . $image . '",';
-					$v[$key_v] .= 'duration: "' . $video->duration . '",';
+                    if(isset($video->duration) && $video->duration > 0)
+						$v[$key_v] .= 'duration: "' . $video->duration . '",';
 					$v[$key_v] .= 'description: "' . $video->description . '",';
 					$v[$key_v] .= 'title:"' . ($title && $video->title ? $video->title : $video->realname) . '"}';
 				}
