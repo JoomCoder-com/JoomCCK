@@ -37,7 +37,7 @@ class MFormHelper
 			'style-table-wrap'    => '<table id="table-id-%s" class="table table-bordered table-striped table-hover">%s</table>',
 			'style-classic-wrap'  => '<div id="form-block-id-%s">%s</div>',
 			'description'         => '<p><small>%s</small></p>',
-			'separator2'          => '<h3>%s</h3>%s%s',
+			'separator2'          => '<legend>%s</legend>%s%s',
 			'separator1'          => '<fieldset><legend>%s</legend>%s%s</fieldset>',
 			'separator0'          => '%2$s%3$s',
 			'label'               => '<label id="%s-lbl" for="%s" class="%s" data-bs-toggle="tooltip" title="%s">%s</label>',
