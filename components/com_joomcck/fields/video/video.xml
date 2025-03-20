@@ -19,49 +19,40 @@
 				<field name="max_count" type="text" default="0" size="3" label="F_MAXCOUNTLIMIT" />
 				<field name="max_size" type="text" size="3" label="F_MAXSIZE" description="" default="2048" />
 				<field name="subfolder" type="text" label="F_SPECSUBFOLDER" description="F_SPECSUBFOLDER_DESCR" default="uploads" />
-				<field name="delete_access" type="radio" class="btn-group" default="1" label="F_AUTHORCANDELETE">
+				<field name="delete_access" type="radio" layout="joomla.form.field.radio.switcher" default="1" label="F_AUTHORCANDELETE">
 					<option value="0">JNO</option>
 					<option value="1">JYES</option>
 				</field>
-				<field name="allow_edit_title" type="radio" class="btn-group" default="1" label="F_ALLOWEDITTITLE">
+				<field name="allow_edit_title" type="radio" layout="joomla.form.field.radio.switcher" default="1" label="F_ALLOWEDITTITLE">
 					<option value="0">JNO</option>
 					<option value="1">JYES</option>
 				</field>
-				<field name="allow_add_descr" type="radio" class="btn-group" default="1" label="F_ALLOWADDDESCR">
+				<field name="allow_add_descr" type="radio" layout="joomla.form.field.radio.switcher" default="1" label="F_ALLOWADDDESCR">
 					<option value="0">JNO</option>
 					<option value="1">JYES</option>
 				</field>
 				<field name="uploader" default="1" type="mlist" class="form-select" condition='{"1":["fieldset-name-flow"],"2":["fieldset-name-mooupload"]}' label="F_UPLOADER">
 					<option value="1">Flow</option>
-					<option value="2">Mooupload</option>
-				</field>
-			</fieldset>
-			<fieldset name="mooupload" label="FS_UPLOAD_MOO">
-				<field name="method" type="list" label="F_UPLOADMETHOD">
-					<option value="auto">XML_OPT_AUTO</option>
-					<option value="html5">XML_OPT_HTML5</option>
-					<option value="html4">XML_OPT_HTML4</option>
-					<option value="flash">XML_OPT_FLASH</option>
 				</field>
 			</fieldset>
 			<fieldset name="flow" label="FS_UPLOAD_FLOW">
-				<field name="flow_drop" type="radio" class="btn-group" default="1" label="FF_DROP">
+				<field name="flow_drop" type="radio" layout="joomla.form.field.radio.switcher" default="1" label="FF_DROP">
 					<option value="0">JNO</option>
 					<option value="1">JYES</option>
 				</field>
-				<field name="flow_file" type="radio" class="btn-group" default="1" label="FF_FILE">
+				<field name="flow_file" type="radio" layout="joomla.form.field.radio.switcher" default="1" label="FF_FILE">
 					<option value="0">JNO</option>
 					<option value="1">JYES</option>
 				</field>
-				<field name="flow_img" type="radio" class="btn-group" default="0" label="FF_IMG">
+				<field name="flow_img" type="radio" layout="joomla.form.field.radio.switcher" default="0" label="FF_IMG">
 					<option value="0">JNO</option>
 					<option value="1">JYES</option>
 				</field>
-				<field name="flow_folder" type="radio" class="btn-group" default="1" label="FF_FOLDER">
+				<field name="flow_folder" type="radio" layout="joomla.form.field.radio.switcher" default="1" label="FF_FOLDER">
 					<option value="0">JNO</option>
 					<option value="1">JYES</option>
 				</field>
-				<field name="flow_default" type="radio" class="btn-group" default="1" label="FF_DEFAULT">
+				<field name="flow_default" type="radio" layout="joomla.form.field.radio.switcher" default="1" label="FF_DEFAULT">
 					<option value="0">JNO</option>
 					<option value="1">JYES</option>
 				</field>
@@ -69,7 +60,7 @@
 
 			<fieldset name="advanced" label="FS_FORMATPARAMS">
 				<field type="text" name="command" label="F_FFMPEGCMD" size="40" default="c:\ffmpeg\bin\ffmpeg.exe" description="F_FFMPEGCMDDESCR" />
-				<field name="only_one" type="radio" class="btn-group" default="0" label="F_ONLYONE">
+				<field name="only_one" type="radio" layout="joomla.form.field.radio.switcher" default="0" label="F_ONLYONE">
 					<option value="0">CNO</option>
 					<option value="1">CYES</option>
 				</field>
@@ -90,7 +81,7 @@
 
 			<fieldset name="player" label="F_PLAYERPARAMS">
 				<field name="default_width" type="text" default="640" size="3" label="F_DEFWIDTH" />
-				<field name="listbar" type="radio" class="btn-group" default="1" label="F_SHOWLISTBAR">
+				<field name="listbar" type="radio" layout="joomla.form.field.radio.switcher" default="1" label="F_SHOWLISTBAR">
 					<option value="0">CNO</option>
 					<option value="1">CYES</option>
 				</field>
@@ -125,15 +116,15 @@
 				<field name="subscr_skip" type="accesslevel" default="3" label="F_SUBSCR_SKIPFOR" description="F_SUBSCR_SKIPFORDESCR">
 					<option value="0">XML_OPT_NOONE</option>
 				</field>
-				<field name="subscr_skip_author" type="radio" class="btn-group" default="1" label="F_SUBSCR_SKIPAUTHOR" description="">
+				<field name="subscr_skip_author" type="radio" layout="joomla.form.field.radio.switcher" default="1" label="F_SUBSCR_SKIPAUTHOR" description="">
 					<option value="0">CNO</option>
 					<option value="1">CYES</option>
 				</field>
-				<field name="subscr_skip_moderator" type="radio" class="btn-group" default="1" label="F_SUBSCR_SKIPMODER" description="F_SUBSCR_SKIPMODERDESCR">
+				<field name="subscr_skip_moderator" type="radio" layout="joomla.form.field.radio.switcher" default="1" label="F_SUBSCR_SKIPMODER" description="F_SUBSCR_SKIPMODERDESCR">
 					<option value="0">CNO</option>
 					<option value="1">CYES</option>
 				</field>
-				<field name="subscription_count" type="radio" default="" class="btn-group" multiple="true" label="F_SUBSCR_COUNTLIMIT" description="F_SUBSCR_COUNTLIMITDESCR">
+				<field name="subscription_count" type="radio" default="" layout="joomla.form.field.radio.switcher" multiple="true" label="F_SUBSCR_COUNTLIMIT" description="F_SUBSCR_COUNTLIMITDESCR">
 					<option value="0">CNO</option>
 					<option value="1">CYES</option>
 				</field>
