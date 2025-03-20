@@ -8,6 +8,7 @@ class JFormFieldCVideo extends CFormFieldUpload
     public $link;
     public $embed;
     public $only_one;
+    public $videoOutput;
 
 	public function __construct($field, $default)
 	{
@@ -76,21 +77,18 @@ class JFormFieldCVideo extends CFormFieldUpload
 		{
 			return;
 		}
-		if(!empty($this->value['files']))
-		{
-			\Joomla\CMS\Factory::getDocument()->addScript(\Joomla\CMS\Uri\Uri::root(TRUE) . '/media/com_joomcck/vendors/jwplayer/jwplayer.js');
-		}
+
+
+        $this->videoOutput = $this->loadVideo($record,$client);
 
 		return $this->_display_output($client, $record, $type, $section);
 	}
 
-	public function loadVideo($post)
+	public function loadVideo($record,$client)
 	{
 		$title  = $this->params->get('params.allow_edit_title', 0);
-		$record = ItemsStore::getRecord($this->request->getInt('record_id'));
-
-		$client = $this->request->get('client');
-		$width  = $this->request->getInt('width');
+		$record = ItemsStore::getRecord($record->id);
+		$width  = $this->params->get('params.default_width', 640);
 		$key    = $client . $this->id . $record->id;
 
 		$this->link  = @$this->value['link'];
@@ -106,75 +104,92 @@ class JFormFieldCVideo extends CFormFieldUpload
 
 		$out = array();
 
-		if($this->value)
+		$blocks = array();
+
+
+        // local videos
+		if(!empty($this->value))
 		{
+
+			\Joomla\CMS\Factory::getDocument()->addScript(\Joomla\CMS\Uri\Uri::root(TRUE) . '/media/com_joomcck/vendors/jwplayer/jwplayer.js');
+
 			$videos = $this->getFiles($record);
 			ob_start();
 			?>
-			jwplayer("mediaplayer<?php echo $key ?>").setup({
-			"width": "<?php echo $this->params->get('width'); ?>",
-			"height": "<?php echo $this->params->get('height'); ?>",
+                <script type="text/javascript">
+                    jQuery(document).ready(function($) {
+                    jwplayer("mediaplayer<?php echo $key ?>").setup({
+                    "width": "<?php echo $this->params->get('width'); ?>",
+                    "height": "<?php echo $this->params->get('height'); ?>",
+                    <?php
+                    if(count($videos) > 1)
+                    {
+                        ?>
+                        "playlist": [
+                        <?php
+                        $v        = array();
+                        $duration = 10;
+                        foreach($videos as $key_v => $video)
+                        {
+                            $v[$key_v] = '{sources:[{ file: "' . $this->getFileUrl($video) . '", label:"' . ($title && isset($video->title) && $video->title ? $video->title : $video->realname) . '" }],';
+
+                            $image = $this->_getVideoThumb($video);
+
+                            $v[$key_v] .= 'image: "' . $image . '",';
+
+                            if(isset($video->duration) && $video->duration > 0)
+                                $v[$key_v] .= 'duration: "' . $video->duration . '",';
+
+                            if(isset($video->description) && !empty($video->description))
+                                $v[$key_v] .= 'description: "' . $video->description . '",';
+
+                            $v[$key_v] .= 'title:"' . ($title && isset($video->title) && $video->title ? $video->title : $video->realname) . '"}';
+                        }
+                        echo implode(',', $v);
+                        ?>
+
+                        ]
+                        <?php if($this->params->get('params.listbar', TRUE)): ?>
+                        ,
+                        listbar: {
+                        position: '<?php echo $this->params->get('params.listbar_position', 'right'); ?>',
+                        size: <?php echo $this->params->get('params.listbar_width', 200); ?>
+                        }
+                    <?php endif; ?>
+                        <?php
+                    }
+                    else
+                    {
+                        $video = array_pop($videos);
+                        ?>
+                        "file": "<?php echo $this->getFileUrl($video); ?>",
+                        <?php if(isset($video->duration)): ?>
+                        "duration": "<?php echo $video->duration; ?>",
+                        <?php endif; ?>
+                        "title": "<?php echo($title && $video->title ? $video->title : $video->realname); ?>",
+                        "description": "<?php echo $video->description; ?>"
+                        <?php
+                    }
+                    ?>
+                    });
+                    });
+
+                </script>
+                <div id="mediaplayer<?php echo $key;?>"></div>
 			<?php
-			if(count($videos) > 1)
-			{
-				?>
-				"playlist": [
-				<?php
-				$v        = array();
-				$duration = 10;
-				foreach($videos as $key_v => $video)
-				{
-					$v[$key_v] = '{sources:[{ file: "' . $this->getFileUrl($video) . '", label:"' . ($title && $video->title ? $video->title : $video->realname) . '" }],';
-
-					$image = $this->_getVideoThumb($video);
-
-					$v[$key_v] .= 'image: "' . $image . '",';
-                    if(isset($video->duration) && $video->duration > 0)
-						$v[$key_v] .= 'duration: "' . $video->duration . '",';
-					$v[$key_v] .= 'description: "' . $video->description . '",';
-					$v[$key_v] .= 'title:"' . ($title && $video->title ? $video->title : $video->realname) . '"}';
-				}
-				echo implode(',', $v);
-				?>
-
-				]
-				<?php if($this->params->get('params.listbar', TRUE)): ?>
-				,
-				listbar: {
-				position: '<?php echo $this->params->get('params.listbar_position', 'right'); ?>',
-				size: <?php echo $this->params->get('params.listbar_width', 200); ?>
-				}
-			<?php endif; ?>
-				<?php
-			}
-			else
-			{
-				$video = array_pop($videos);
-				?>
-				"file": "<?php echo $this->getFileUrl($video); ?>",
-                <?php if(isset($video->duration)): ?>
-				"duration": "<?php echo $video->duration; ?>",
-                <?php endif; ?>
-				"title": "<?php echo($title && $video->title ? $video->title : $video->realname); ?>",
-				"description": "<?php echo $video->description; ?>"
-				<?php
-			}
-			?>
-			});
-
-
-			<?php
-			$temp = ob_get_contents();
+			$blocks[] = ob_get_contents();
 			ob_end_clean();
-			$out['js'] = str_replace(array("\n", "\r", "\t"), '', $temp);
+
 		}
 
-		$blocks = array();
+        // embed
 		if(is_array($this->embed))
 		{
 			foreach($this->embed AS $embed)
 				$blocks[] = CVideoAdapterHelper::constrain($embed, $this->params->get('width'));
 		}
+
+        // remote link
 		if(is_array($this->link))
 		{
 
@@ -182,13 +197,21 @@ class JFormFieldCVideo extends CFormFieldUpload
 			{
 				if(in_array(strtolower(pathinfo($link, PATHINFO_EXTENSION)), array('mp4', 'flv', 'webm')))
 				{
-					$blocks[]  = '<div id="mediaplayer' . md5($link) . '"></div>';
-					$out['js'] = <<<JWP
-	jwplayer("mediaplayer{$key}").setup({
+
+                    $md5link = md5($link);
+
+					$blocks[] = <<<JWP
+<script type="text/javascript">
+jQuery(document).ready(function($) {
+   jwplayer("remoteLink{$md5link}").setup({
 		"width": "{$this->params->get('width')}",
 		"height": "{$this->params->get('height')}",
 		"file": "{$link}"
-	});
+	}); 
+});
+	
+    </script>
+<div id="remoteLink$md5link"></div>
 JWP;
 				}
 				else
@@ -202,12 +225,13 @@ JWP;
 			}
 		}
 
+
 		if($blocks)
 		{
 			$out['html'] = '<div class="video-block">' . implode('</div><div class="video-block">', $blocks) . '</div>';
 		}
 
-		return $out;
+		return  implode('', $out);
 	}
 
 	private function constrain($html)

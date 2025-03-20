@@ -293,7 +293,10 @@ class CFormFieldUpload extends CFormField
 
     protected function getFiles($record, $show_hits = false)
     {
+
+
         $list = $this->value;
+
 
         $subfolder = $this->params->get('params.subfolder', false);
 
@@ -312,6 +315,7 @@ class CFormFieldUpload extends CFormField
             $show_hits = false;
         }
 
+
         if ($show_hits) {
             $in = [];
             foreach ($list as $attach) {
@@ -323,12 +327,18 @@ class CFormFieldUpload extends CFormField
                 $list = $files->getFiles($in);
             }
         }
+
+
         foreach ($list as $idx => &$file) {
+
             if (is_array($file)) {
                 $file = \Joomla\Utilities\ArrayHelper::toObject($file);
             }
+
+
             if ($this->params->get('params.show_in_browser', 0) == 0) {
                 $file->url = $this->getDownloadUrl($record, $file, $idx);
+
             } else {
                 $file->url = \Joomla\CMS\Uri\Uri::root(true) . '/' . \Joomla\CMS\Component\ComponentHelper::getParams('com_joomcck')->get('general_upload') . '/' . $subfolder . '/' . str_replace('\\', '/', $file->fullpath);
             }
@@ -349,8 +359,10 @@ class CFormFieldUpload extends CFormField
         switch ($parts[0]) {
             case 0:
                 $title = $this->params->get('params.allow_edit_title', 0);
+
                 foreach ($list as $val) {
-                    $sortArray[] = strtolower($title && $val->title ? $val->title : $val->realname);
+
+                    $sortArray[] = strtolower($title && isset($val->title) && $val->title ? $val->title : $val->realname);
                 }
                 natcasesort($sortArray);
                 array_multisort($sortArray, constant('SORT_' . $parts[1]), $list);

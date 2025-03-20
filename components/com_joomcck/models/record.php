@@ -47,9 +47,6 @@ class JoomcckModelRecord extends MModelItem
 			$query->select('r.*');
 			$query->from('#__js_res_record AS r');
 
-			/* $query->select('u.name AS name, u.username AS username');
-			$query->join('LEFT', '#__users AS u on u.id = r.user_id'); */
-
 			$query->select('uc.name AS ucatname, uc.alias AS ucatalias');
 			$query->join('LEFT', '#__js_res_category_user AS uc on uc.id = r.ucatid');
 
@@ -61,15 +58,53 @@ class JoomcckModelRecord extends MModelItem
 				$query->select("(SELECT id FROM #__js_res_subscribe WHERE ref_id = r.id AND `type` = 'record' AND user_id = " . $user->get('id') . ") as subscribed");
 			}
 
+			// Get section from database or ItemsStore helper
+			$section = ItemsStore::getSection($this->getState('com_joomcck.record.section_id'));
+
+			if($section && $section->params->get('general.marknew'))
+			{
+				// Get the number of days to consider records as new
+				$newDays = (int)$section->params->get('general.newdays', 7); // Default: 7 days
+
+				// Calculate the cutoff date
+				$cutoffDate = $db->quote(date('Y-m-d H:i:s', strtotime('-' . $newDays . ' days')));
+
+				if($user->get('id'))
+				{
+					// For logged-in users
+					$query->select("CASE 
+                    WHEN (SELECT id FROM #__js_res_hits WHERE record_id = r.id AND user_id = " . (int)$user->get('id') . " LIMIT 1) IS NULL 
+                        THEN (CASE WHEN r.ctime >= " . $cutoffDate . " THEN 1 ELSE 0 END)
+                    WHEN (SELECT ctime FROM #__js_res_hits WHERE record_id = r.id AND user_id = " . (int)$user->get('id') . " LIMIT 1) >= " . $cutoffDate . " 
+                        THEN 1
+                    ELSE 0
+                END AS `new`");
+				}
+				else
+				{
+					// For guests based on IP
+					$ip = $db->quote($_SERVER['REMOTE_ADDR']);
+					$query->select("CASE 
+                    WHEN (SELECT id FROM #__js_res_hits WHERE record_id = r.id AND ip = " . $ip . " LIMIT 1) IS NULL 
+                        THEN (CASE WHEN r.ctime >= " . $cutoffDate . " THEN 1 ELSE 0 END)
+                    WHEN (SELECT ctime FROM #__js_res_hits WHERE record_id = r.id AND ip = " . $ip . " LIMIT 1) >= " . $cutoffDate . " 
+                        THEN 1
+                    ELSE 0
+                END AS `new`");
+				}
+			}
+			else
+			{
+				$query->select('0 as `new`');
+			}
+
 			$db->setQuery($query);
-			//echo $query; exit;
 
 			try{
 				$data = $db->loadObject();
 			}catch(RuntimeException $e){
 				throw new RuntimeException($e->getMessage(),$e->getCode());
 			}
-
 
 			if(empty($data))
 			{
@@ -126,25 +161,6 @@ class JoomcckModelRecord extends MModelItem
 		}
 
 		$data->mtime = \Joomla\CMS\Factory::getDate($data->mtime);
-
-		if($section->params->get('general.marknew'))
-		{
-			$data->new = (boolean)empty($data->new);
-			if($data->user_id && ($data->user_id == $user->get('id')))
-			{
-				$data->new = FALSE;
-			}
-
-			/*if($user->get('id'))
-			{
-				$date = \Joomla\CMS\Factory::getDate($user->get('lastvisitDate'))->toUnix();
-				if($date > $data->ctime->toUnix())
-				{
-					$data->new = false;
-				}
-			}
-			*/
-		}
 
 		$data->params = new \Joomla\Registry\Registry($data->params);
 

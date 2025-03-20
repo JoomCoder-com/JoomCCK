@@ -224,23 +224,47 @@ class JoomcckModelRecords extends MModelList
 
 			}
 
+
+			// Add this to the query building part where you fetch multiple records
 			if($section->params->get('general.marknew'))
 			{
+				// Get the number of days to consider records as new
+				$newDays = (int)$section->params->get('general.newdays', 7); // Default: 7 days
+
+				// Calculate the cutoff date
+				$db = \Joomla\CMS\Factory::getDbo();
+				$cutoffDate = $db->quote(date('Y-m-d H:i:s', strtotime('-' . $newDays . ' days')));
+
 				if($user->get('id'))
 				{
-					$query->select("(SELECT id FROM #__js_res_hits
-						WHERE record_id = r.id AND user_id = " . $user->get('id') . " LIMIT 1) AS `new`");
+					// For logged-in users
+					$query->select("CASE 
+            WHEN (SELECT id FROM #__js_res_hits WHERE record_id = r.id AND user_id = " . (int)$user->get('id') . " LIMIT 1) IS NULL 
+                THEN (CASE WHEN r.ctime >= " . $cutoffDate . " THEN 1 ELSE 0 END)
+            WHEN (SELECT ctime FROM #__js_res_hits WHERE record_id = r.id AND user_id = " . (int)$user->get('id') . " LIMIT 1) >= " . $cutoffDate . " 
+                THEN 1
+            ELSE 0
+        END AS `new`");
 				}
 				else
 				{
-					$query->select("(SELECT id FROM #__js_res_hits
-						WHERE record_id = r.id AND ip = '" . $_SERVER['REMOTE_ADDR'] . "' LIMIT 1) AS `new`");
+					// For guests based on IP
+					$ip = $db->quote($_SERVER['REMOTE_ADDR']);
+					$query->select("CASE 
+            WHEN (SELECT id FROM #__js_res_hits WHERE record_id = r.id AND ip = " . $ip . " LIMIT 1) IS NULL 
+                THEN (CASE WHEN r.ctime >= " . $cutoffDate . " THEN 1 ELSE 0 END)
+            WHEN (SELECT ctime FROM #__js_res_hits WHERE record_id = r.id AND ip = " . $ip . " LIMIT 1) >= " . $cutoffDate . " 
+                THEN 1
+            ELSE 0
+        END AS `new`");
 				}
 			}
 			else
 			{
 				$query->select('0 as `new`');
 			}
+
+
 
 			if($section->params->get('personalize.personalize') && $section->params->get('personalize.pcat_submit'))
 			{

@@ -108,6 +108,7 @@
 				<option value="0">CNO</option>
 				<option value="1">CYES</option>
 			</field>
+			<field name="newdays" type="number" size="3" default="7" label="X_SEC_NEWDAYS" description="X_SEC_NEWDAYS_DESCR"/>
 			<field name="show_future_records" type="accesslevel" default="3" label="X_SECWHOSEEFEATURED" description="X_SECFEATUREDDESCR">
 				<option value="0">XML_OPT_NOONE</option>
 			</field>

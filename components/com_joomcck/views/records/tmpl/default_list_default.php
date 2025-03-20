@@ -8,6 +8,8 @@
  */
 
 use Joomcck\Layout\Helpers\Layout;
+use Joomla\CMS\Language\Text;
+use Joomla\CMS\Router\Route;
 
 defined('_JEXEC') or die('Restricted access');
 
@@ -156,17 +158,20 @@ foreach ($exclude as &$value)
 						['item' => $item, 'section' => $this->section, 'submissionTypes' => $this->submission_types, "params" => $params]) ?>
 					<?php if ($this->submission_types[$item->type_id]->params->get('properties.item_title')): ?>
                     <div class="float-start">
-                        <<?php echo $params->get('tmpl_core.title_tag', 'h2'); ?> class="record-title">
+                        <<?php echo $params->get('tmpl_core.title_tag', 'h4'); ?> class="record-title">
 						<?php if ($params->get('tmpl_core.item_link')): ?>
                             <a <?php echo $item->nofollow ? 'rel="nofollow"' : ''; ?>
-                                    href="<?php echo \Joomla\CMS\Router\Route::_($item->url); ?>">
+                                    href="<?php echo Route::_($item->url); ?>">
 								<?php echo $item->title ?>
                             </a>
 						<?php else : ?>
 							<?php echo $item->title ?>
 						<?php endif; ?>
+	                    <?php if ($item->new): ?>
+                            <small class="badge bg-success"><?php echo Text::_('CNEW') ?></small>
+	                    <?php endif; ?>
 						<?php echo CEventsHelper::showNum('record', $item->id); ?>
-                    </<?php echo $params->get('tmpl_core.title_tag', 'h2'); ?> class="record-title">
+                    </<?php echo $params->get('tmpl_core.title_tag', 'h4'); ?> class="record-title">
                 </div>
 				<?php endif; ?>
 </div>
