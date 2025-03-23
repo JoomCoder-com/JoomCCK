@@ -143,16 +143,28 @@ class CFormFieldUpload extends CFormField
 
     public function onStoreValues($validData, $record)
     {
+
+		// some inits
         settype($this->value, 'array');
         $out   = $saved   = [];
         $files = \Joomla\CMS\Table\Table::getInstance('Files', 'JoomcckTable');
+
+		// iterate files
         foreach ($this->value as $key => $file) {
+
+
+			// todo: maybe this one make issue to change marksaved status
             if (!\Joomla\String\StringHelper::strcmp($key, 'subscriptions')) {
+
                 continue;
+
             }
+
             $out[]   = $file['realname'];
-            $saved[] = $file['id'];
+            $saved[] = $file['filename'];
         }
+
+
         $files->markSaved($saved, $validData, $this->id);
 
         return $out;

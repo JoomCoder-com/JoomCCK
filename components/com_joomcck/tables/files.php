@@ -46,6 +46,7 @@ class  JoomcckTableFiles extends \Joomla\CMS\Table\Table
 	}
 	public function prepareSave($files)
 	{
+
 		if(!$files) return;
 
 		settype($files, 'array');
@@ -59,8 +60,12 @@ class  JoomcckTableFiles extends \Joomla\CMS\Table\Table
 	}
 	public function markSaved($files, $record, $field_id = 0)
 	{
+
+		// no need to continue if no files ids
 		if(!$files) return;
-		$record_id = (int)$record['id'];
+
+		// record id
+		$record_id = (int) $record['id'];
 
 		foreach ($files as $file) {
 
