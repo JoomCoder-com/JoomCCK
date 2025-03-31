@@ -23,6 +23,10 @@ class JFormFieldFieldstype extends \Joomla\CMS\Form\Field\ListField
 
 		$fieldsType = $this->buildfieldTypesForSql();
 		$typeId = $this->getTypeIdOfCurrentField();
+		if(!$typeId) {
+			// Return empty list or handle the case when type_id is not available
+			return [];
+		}
 
 		// get fields list
 		$db = \Joomla\CMS\Factory::getDbo();
@@ -66,18 +70,38 @@ class JFormFieldFieldstype extends \Joomla\CMS\Form\Field\ListField
 	}
 
 
-	public function getTypeIdOfCurrentField(){
+	public function getTypeIdOfCurrentField()
+	{
+		$app = \Joomla\CMS\Factory::getApplication();
+		$currentFieldId = $app->input->getInt('id', 0);
 
-		$currentFieldId = \Joomla\CMS\Factory::getApplication()->input->getInt('id',0);
+		// If we're editing an existing field
+		if ($currentFieldId) {
+			$db = \Joomla\CMS\Factory::getDbo();
+			$query = 'SELECT type_id' .
+				' FROM #__js_res_fields' .
+				' WHERE id = ' . $currentFieldId;
+			$db->setQuery($query);
 
-		$db = \Joomla\CMS\Factory::getDbo();
-		$query = 'SELECT type_id' .
-			' FROM #__js_res_fields' .
-			' WHERE id = ' . $currentFieldId;
-		$db->setQuery($query);
+			$result = $db->loadResult();
+			if ($result) {
+				return $result;
+			}
+		}
 
-		return $db->loadResult();
+		// If we're creating a new field or didn't get a result from the database
+		// Try to get type_id from the request
+		$typeId = $app->input->getInt('type_id', 0);
 
+		// If not in request directly, check in jform data
+		if (!$typeId) {
+			$jform = $app->input->get('jform', array(), 'array');
+			if (isset($jform['type_id'])) {
+				$typeId = (int)$jform['type_id'];
+			}
+		}
+
+		return $typeId;
 	}
 
 

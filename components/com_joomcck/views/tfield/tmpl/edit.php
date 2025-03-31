@@ -48,21 +48,24 @@ $wa->useScript('keepalive')
 			Joomcck.redrawBS();
 		});
 	}
-	function ajax_loadfieldform(sel)
-	{
-
+    function ajax_loadfieldform(sel)
+    {
         let selected = $(sel).find(':selected').val();
+        let typeId = $('#jform_type_id').val(); // Get the type_id from the hidden input
 
-		jQuery.ajax({
-			url: '<?php echo \Joomla\CMS\Uri\Uri::base(); ?>index.php?option=com_joomcck&task=ajax.loadfieldform&tmpl=component',
-			context: jQuery('#additional-form'),
-			dataType: 'html',
-			data:{field: selected}
-		}).done(function(data) {
-			jQuery(this).html(data);
-			Joomcck.redrawBS();
-		});
-	}
+        jQuery.ajax({
+            url: '<?php echo \Joomla\CMS\Uri\Uri::base(); ?>index.php?option=com_joomcck&task=ajax.loadfieldform&tmpl=component',
+            context: jQuery('#additional-form'),
+            dataType: 'html',
+            data:{
+                field: selected,
+                type_id: typeId // Add the type_id to the request
+            }
+        }).done(function(data) {
+            jQuery(this).html(data);
+            Joomcck.redrawBS();
+        });
+    }
 	function ajax_loadpayform(sel)
 	{
 

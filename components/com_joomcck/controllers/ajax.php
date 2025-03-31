@@ -1350,6 +1350,7 @@ class JoomcckControllerAjax extends MControllerAdmin
 	}
 	public function loadfieldform()
 	{
+
 		echo MModelBase::getInstance('TField', 'JoomcckModel')->getFieldForm($this->input->get('field'));
 		\Joomla\CMS\Factory::getApplication()->close();
 	}
