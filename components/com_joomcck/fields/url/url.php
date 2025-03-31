@@ -16,6 +16,10 @@ require_once JPATH_ROOT . '/components/com_joomcck/library/php/fields/joomcckfie
 class JFormFieldCUrl extends CFormField
 {
 
+	public $labels;
+	public $author;
+	public $url;
+
 	public function getInput()
 	{
 		$document = \Joomla\CMS\Factory::getDocument();
@@ -272,35 +276,106 @@ class JFormFieldCUrl extends CFormField
 		return $out;
 	}
 
+
+	/**
+	 * Secure implementation of URL redirect functionality
+	 *
+	 * Includes both the security fixes we developed and the client's solution
+	 */
+
 	public function _redirect($post, $record, $field, $get)
 	{
-		$rfields = json_decode($record->fields, TRUE);
+		// Validate request
+		$app = \Joomla\CMS\Factory::getApplication();
 
-		if(!isset($rfields[$this->id]))
-		{
+		// 1. Add CSRF protection
+		\Joomla\CMS\Session\Session::checkToken('get') or die('Invalid Token');
+
+		// 2. Verify record ID is numeric
+		$recordId = isset($record->id) ? (int)$record->id : 0;
+		if (!$recordId) {
+			$app->enqueueMessage(\Joomla\CMS\Language\Text::_('COM_JOOMCCK_ERROR_INVALID_RECORD'), 'error');
+			$app->redirect(\Joomla\CMS\Uri\Uri::root());
 			return;
 		}
+
+		// 3. Get record data
+		$rfields = json_decode($record->fields, TRUE);
+		if (!isset($rfields[$this->id])) {
+			$app->enqueueMessage(\Joomla\CMS\Language\Text::_('COM_JOOMCCK_ERROR_FIELD_NOT_FOUND'), 'error');
+			$app->redirect(\Joomla\CMS\Uri\Uri::root());
+			return;
+		}
+
+		// 4. Get and validate URL parameter using base64 decoding
+		$encodedUrl = isset($get['url']) ? trim($get['url']) : '';
+
+		if (empty($encodedUrl)) {
+			$app->enqueueMessage(\Joomla\CMS\Language\Text::_('COM_JOOMCCK_ERROR_INVALID_URL'), 'error');
+			$app->redirect(\Joomla\CMS\Uri\Uri::root());
+			return;
+		}
+
+		// Decode the URL from base64
+		$urlParam = base64_decode($encodedUrl, true);
+
+		// Validate the base64 decoding was successful
+		if ($urlParam === false) {
+			$app->enqueueMessage(\Joomla\CMS\Language\Text::_('COM_JOOMCCK_ERROR_INVALID_URL_ENCODING'), 'error');
+			$app->redirect(\Joomla\CMS\Uri\Uri::root());
+			return;
+		}
+
+		// 5. Check if URL exists in the record (client's solution)
+		if (!in_array($urlParam, array_column($rfields[$this->id], 'url'), true)) {
+			$app->enqueueMessage('<b><center>Redirect to URL '. htmlspecialchars($urlParam, ENT_QUOTES, 'UTF-8') .' not allowed!</center></b>', 'error');
+			$app->redirect('index.php');
+			return;
+		}
+
+		// 6. Validate URL format before redirect
+		if (!filter_var($urlParam, FILTER_VALIDATE_URL)) {
+			$app->enqueueMessage(\Joomla\CMS\Language\Text::_('COM_JOOMCCK_ERROR_INVALID_URL_FORMAT'), 'error');
+			$app->redirect(\Joomla\CMS\Uri\Uri::root());
+			return;
+		}
+
+		// 7. Make sure it's http or https
+		$scheme = parse_url($urlParam, PHP_URL_SCHEME);
+		if (!in_array($scheme, ['http', 'https'])) {
+			$app->enqueueMessage(\Joomla\CMS\Language\Text::_('COM_JOOMCCK_ERROR_INVALID_URL_PROTOCOL'), 'error');
+			$app->redirect(\Joomla\CMS\Uri\Uri::root());
+			return;
+		}
+
+		// 8. Update hit counter
 		$record_table = \Joomla\CMS\Table\Table::getInstance('Record', 'JoomcckTable');
-		$record_table->load($record->id);
+		if (!$record_table->load($recordId)) {
+			$app->enqueueMessage(\Joomla\CMS\Language\Text::_('COM_JOOMCCK_ERROR_LOADING_RECORD'), 'error');
+			$app->redirect(\Joomla\CMS\Uri\Uri::root());
+			return;
+		}
 
-
-		foreach($rfields[$this->id] as $k => $value)
-		{
-			if(!isset($value['hits']))
-			{
+		foreach ($rfields[$this->id] as $k => $value) {
+			if (!isset($value['hits'])) {
 				$rfields[$this->id][$k]['hits'] = 0;
 			}
 			settype($rfields[$this->id][$k]['hits'], 'int');
-			if($value['url'] == $get['url'])
-			{
+			if ($value['url'] === $urlParam) {
 				$rfields[$this->id][$k]['hits']++;
 			}
 		}
-		$record_table->fields = json_encode($rfields);
-		$record_table->store();
-		\Joomla\CMS\Factory::getApplication()->redirect($get['url']);
 
+		$record_table->fields = json_encode($rfields);
+		if (!$record_table->store()) {
+			$app->enqueueMessage($record_table->getError(), 'error');
+			$app->redirect(\Joomla\CMS\Uri\Uri::root());
+			return;
+		}
+
+		// 9. Finally, do the redirect
+		$app->redirect($urlParam);
 	}
 
 }
-	
+
