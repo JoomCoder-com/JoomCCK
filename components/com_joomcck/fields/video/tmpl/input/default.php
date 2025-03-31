@@ -187,15 +187,16 @@ defined('_JEXEC') or die('Restricted access');
 			return;
 		}
 
+        // Fixed section for the embed element creation
         if(type == 'link'){
             var input_div = $(document.createElement("div")).attr({
                 'class': 'element-box input-group mb-2'
             });
 
-
             var input = $(document.createElement(input)).attr({
                 type: "text",
                 name: 'jform[fields][' + id + '][' + type + '][]',
+                id: '<?php echo $this->formControl.$this->name;?>',
                 class: 'form-control m-0'
             }).appendTo(input_div);
 
@@ -207,18 +208,18 @@ defined('_JEXEC') or die('Restricted access');
             close_link.on('click', function(){
                 Joomcck.deleteFormElement<?php echo $this->id; ?>(type, this);
             });
-
-
-
-        }else{
+        }
+        else{
             var input_div = $(document.createElement("div")).attr({
                 'class': 'element-box'
             });
 
             var input = $(document.createElement(input)).attr({
-                type: "text",
                 name: 'jform[fields][' + id + '][' + type + '][]',
-                row: 5
+                id: '<?php echo $this->formControl.$this->name;?>',
+                cols: 50,
+                rows: 5,
+                class: 'form-control'
             }).appendTo(input_div);
 
             var close_link = $(document.createElement("img")).attr({

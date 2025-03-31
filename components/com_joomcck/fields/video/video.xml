@@ -105,8 +105,8 @@
 				</field>
 				<field name="link_max_count" type="text" default="0" size="3" label="F_LINKMAXCOUNTLIMIT" />
 				<field name="adapters" type="list" multiple="multiple" size="7" label="F_ALLOWADDAPTERS">
-					<option value="youtube">You Tube</option>
-					<option value="vimeo">Vimeo</option>
+					<option value="youtube">YouTube.com</option>
+					<option value="vimeo">Vimeo.com</option>
 				</field>
 
 			</fieldset>
