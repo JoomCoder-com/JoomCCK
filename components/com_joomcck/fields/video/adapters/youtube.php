@@ -15,7 +15,7 @@ class CVideoAdapterYoutube extends CVideoAdapterAbstarct
 	public $key;
 	public $width;
 
-	static private $tamplate = '<iframe style="max-width:%s" src="https://www.youtube.com/embed/%s" frameborder="0" allowfullscreen></iframe>';
+	static private $tamplate = '<iframe  src="https://www.youtube.com/embed/%s" frameborder="0" allowfullscreen></iframe>';
 
 	public function __construct($params)
 	{

@@ -14,11 +14,18 @@ $field = $displayData['field'];
 // Get width
 $width = $field->params->get('width');
 
+// get remote links
+$embeds = isset($field->value['link']) && count($field->value['embed']) > 0 ? $field->value['embed'] : [];
+
+// don't continue if not remote link
+if(empty($embeds))
+	return;
+
 // Loop through embeds
-foreach($field->embed as $embed) {
+foreach($embeds as $embed) {
 	if(empty($embed)) continue;
 	?>
-	<div class="video-block embed-video">
+	<div class="jcck-custom-responsive-embed mb-3">
 		<?php echo CVideoAdapterHelper::constrain($embed, $width); ?>
 	</div>
 	<?php

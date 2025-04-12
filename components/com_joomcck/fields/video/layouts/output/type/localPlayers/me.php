@@ -16,7 +16,7 @@ extract($displayData);
 \Joomla\CMS\Factory::getDocument()->addScript('https://cdnjs.cloudflare.com/ajax/libs/mediaelement-plugins/2.5.0/playlist/playlist.min.js');
 ?>
 
-<div class="video-block local-videos">
+<div class="jcck-video-player-me mb-3">
 	<video id="mediaelement-player-<?php echo $key; ?>" width="100%" height="auto" style="max-width:100%;" preload="none" controls playsinline>
 		<?php foreach($videos as $index => $video): ?>
 			<source src="<?php echo $video->url; ?>" type="video/mp4" title="<?php echo $video->display_title; ?>">

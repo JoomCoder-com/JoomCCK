@@ -15,33 +15,24 @@ $field = $displayData['field'];
 $width = $field->params->get('width');
 $height = $field->params->get('height');
 
+// get remote links
+$remoteLinks = isset($field->value['link']) && count($field->value['link']) > 0 ? $field->value['link'] : [];
+
+// don't continue if not remote link
+if(empty($remoteLinks))
+    return;
+
 // Loop through links
-foreach($field->link as $link) {
+foreach($remoteLinks as $link) {
+
 	if(empty($link)) continue;
 
-	if(in_array(strtolower(pathinfo($link, PATHINFO_EXTENSION)), array('mp4', 'flv', 'webm'))) {
-		$md5link = md5($link);
+	$block = CVideoAdapterHelper::getVideoCode($field->params, $link);
+	if($block) {
 		?>
-		<div class="video-block remote-video">
-			<script type="text/javascript">
-                jQuery(document).ready(function($) {
-                    jwplayer("remoteLink<?php echo $md5link; ?>").setup({
-                        "width": "<?php echo $width; ?>",
-                        "height": "<?php echo $height; ?>",
-                        "file": "<?php echo $link; ?>"
-                    });
-                });
-			</script>
-			<div id="remoteLink<?php echo $md5link; ?>"></div>
-		</div>
-	<?php } else {
-		$block = CVideoAdapterHelper::getVideoCode($field->params, $link);
-		if($block) {
-			?>
-			<div class="video-block remote-video-service">
-				<?php echo $block; ?>
-			</div>
-			<?php
-		}
+        <div class="jcck-custom-responsive-embed mb-3">
+			<?php echo $block; ?>
+        </div>
+		<?php
 	}
 }

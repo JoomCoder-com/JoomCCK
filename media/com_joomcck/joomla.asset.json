@@ -19,6 +19,11 @@
       "name": "com_joomcck.submission",
       "type": "style",
       "uri": "com_joomcck/submission.css"
+    },
+    {
+      "name": "com_joomcck.responsive-video",
+      "type": "style",
+      "uri": "com_joomcck/responsive-video.css"
     }
   ]
 }

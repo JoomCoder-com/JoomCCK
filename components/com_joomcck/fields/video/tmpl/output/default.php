@@ -7,6 +7,7 @@
  * @license GNU/GPL http://www.gnu.org/copyleft/gpl.html
  */
 
+use Joomcck\Assets\Webassets\Webassets;
 use Joomcck\Layout\Helpers\Layout;
 
 defined('_JEXEC') or die();
@@ -17,42 +18,17 @@ if($vw = $this->request->get('view_what')) {
 
 $key = $client . $this->id . $record->id;
 
+// load web assets manager
+$wa = Webassets::$wa;
+
 // Add video JavaScript
 \Joomla\CMS\Factory::getDocument()->addScript(\Joomla\CMS\Uri\Uri::root(true) . '/components/com_joomcck/fields/video/assets/video.js');
 
+// make iframe video responsive
+$wa->useStyle('com_joomcck.responsive-video');
+
 ?>
 
-<style>
-    .video-block {
-        position: relative;
-        padding-bottom: 56.25%; /* 16:9 aspect ratio */
-        height: 0;
-        overflow: hidden;
-        display: block;
-        width: 100%;
-        margin-bottom: 20px;
-    }
-    .video-block iframe,
-    .video-block object,
-    .video-block embed,
-    .video-block video {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-    }
-
-    /* Media query for tablets */
-    @media (max-width: 768px) {
-        .video-block iframe,
-        .video-block object,
-        .video-block embed,
-        .video-block video {
-            max-width: 100% !important;
-        }
-    }
-</style>
 
 <div id="video-block-<?php echo $key; ?>" class="video-field-container">
 	<?php
