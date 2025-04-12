@@ -307,8 +307,11 @@ class CFormFieldUpload extends CFormField
     {
 
 
-        $list = $this->value;
-
+	    if(is_array($this->value) && isset($this->value['files']) && is_array($this->value['files']) ){
+		    $list = $this->value['files'];
+		}else{
+		    $list = $this->value;
+	    }
 
         $subfolder = $this->params->get('params.subfolder', false);
 
@@ -327,7 +330,6 @@ class CFormFieldUpload extends CFormField
             $show_hits = false;
         }
 
-
         if ($show_hits) {
             $in = [];
             foreach ($list as $attach) {
@@ -339,6 +341,7 @@ class CFormFieldUpload extends CFormField
                 $list = $files->getFiles($in);
             }
         }
+
 
 
         foreach ($list as $idx => &$file) {
