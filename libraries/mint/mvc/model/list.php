@@ -487,7 +487,7 @@ class MModelList extends MModelBase
 	 *
 	 * @since   12.2
 	 */
-	protected function populateState($ordering = null, $direction = null)
+	protected function populateState($ordering = null, $direction = 'DESC')
 	{
 
 
@@ -534,7 +534,8 @@ class MModelList extends MModelBase
 			$this->setState('list.ordering', $value);
 
 			// Check if the ordering direction is valid, otherwise use the incoming value.
-			$value = $app->getUserStateFromRequest($this->context . '.orderdirn', 'filter_order_Dir', 'DESC');
+			$value = (string) $app->getUserStateFromRequest($this->context . '.orderdirn', 'filter_order_Dir', $direction);
+
 
 			if (!in_array(strtoupper($value), array('ASC', 'DESC', '')))
 			{
@@ -547,6 +548,8 @@ class MModelList extends MModelBase
 			// Support old ordering field
 			$oldOrdering = $app->input->get('filter_order');
 
+
+
 			if (!empty($oldOrdering) && in_array($value, $this->filter_fields))
 			{
 				$this->setState('list.ordering', $oldOrdering);
@@ -554,6 +557,7 @@ class MModelList extends MModelBase
 
 			// Support old direction field
 			$oldDirection = $app->input->get('filter_order_Dir');
+
 
 			if (!empty($oldDirection) && in_array(strtoupper($oldDirection), array('ASC', 'DESC', '')))
 			{
