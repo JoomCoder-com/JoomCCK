@@ -8,6 +8,8 @@
  */
 
 use Joomla\CMS\Component\ComponentHelper;
+use Joomla\CMS\Factory;
+use Joomla\CMS\Pagination\Pagination;
 
 defined('JPATH_PLATFORM') or die;
 
@@ -224,7 +226,24 @@ class MModelList extends MModelBase
 
 		// Create the pagination object.
 		$limit = (int) $this->getState('list.limit') - (int) $this->getState('list.links');
-		$page  = new \Joomla\CMS\Pagination\Pagination($this->getTotal(), $this->getStart(), $limit);
+		$page = new \Joomla\CMS\Pagination\Pagination($this->getTotal(), $this->getStart(), $limit);
+
+		// Get the current input to retrieve important parameters
+		$app = \Joomla\CMS\Factory::getApplication();
+		$input = $app->input;
+
+		// Get section_id and cat_id from input
+		$sectionId = $input->get('section_id', null);
+		$catId = $input->get('cat_id', null);
+
+		// If section_id and cat_id exist, add them to the pagination parameters
+		if ($sectionId) {
+			$page->setAdditionalUrlParam('section_id', $sectionId);
+		}
+
+		if ($catId) {
+			$page->setAdditionalUrlParam('cat_id', $catId);
+		}
 
 		// Add the object to the internal cache.
 		$this->cache[$store] = $page;
@@ -436,7 +455,7 @@ class MModelList extends MModelBase
 	protected function loadFormData()
 	{
 		// Check the session for previously entered form data.
-		$data = \Joomla\CMS\Factory::getApplication()->getUserState($this->context, new stdClass);
+		$data = Factory::getApplication()->getUserState($this->context, new stdClass);
 
 		// Pre-fill the list options
 		if (!property_exists($data, 'list'))
@@ -475,7 +494,7 @@ class MModelList extends MModelBase
 		// If the context is set, assume that stateful lists are used.
 		if ($this->context)
 		{
-			$app = \Joomla\CMS\Factory::getApplication();
+			$app = Factory::getApplication();
 
 			// Receive & set filters
 			if ($filters = $app->getUserStateFromRequest($this->context . '.filter', 'filter', array(), 'array'))
@@ -490,7 +509,7 @@ class MModelList extends MModelBase
 			$limit = 0;
 
 
-			$currentView = \Joomla\CMS\Factory::getApplication()->getInput()->get('view', '');
+			$currentView = Factory::getApplication()->getInput()->get('view', '');
 
 			$itemsViews = ['records'];
 
@@ -570,7 +589,7 @@ class MModelList extends MModelBase
 		\Joomla\CMS\Plugin\PluginHelper::importPlugin($group);
 
 		// Get the dispatcher.
-		$dispatcher = \Joomla\CMS\Factory::getApplication();
+		$dispatcher = Factory::getApplication();
 
 		// Trigger the form preparation event.
 		$results = $dispatcher->triggerEvent('onContentPrepareForm', array($form, $data));
@@ -606,7 +625,7 @@ class MModelList extends MModelBase
 	 */
 	public function getUserStateFromRequest($key, $request, $default = null, $type = 'none', $resetPage = true)
 	{
-		$app       = \Joomla\CMS\Factory::getApplication();
+		$app       = Factory::getApplication();
 		$input     = $app->input;
 		$old_state = $app->getUserState($key);
 		$cur_state = (!is_null($old_state)) ? $old_state : $default;
