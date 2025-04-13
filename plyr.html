@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Plyr Player with Playlist</title>
+
+    <!-- Plyr CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/plyr/3.7.8/plyr.min.css" />
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background-color: #fff;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Makes video responsive inside player container */
+        .plyr {
+            --plyr-color-main: #3498db;
+            height: 100%;
+        }
+
+        .plyr video {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        .player-wrapper {
+            display: flex;
+            flex-direction: row;
+            position: relative;
+        }
+
+        /* Add mini player controls */
+        .mini-controls {
+            position: absolute;
+            bottom: 70px;
+            right: 10px;
+            z-index: 100;
+            display: none;
+        }
+
+        @media (max-width: 768px) {
+            .mini-controls {
+                display: flex;
+                background-color: rgba(0,0,0,0.5);
+                border-radius: 20px;
+                padding: 5px 10px;
+            }
+        }
+
+        .mini-controls button {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 18px;
+            margin: 0 5px;
+            cursor: pointer;
+            width: 30px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            background-color: rgba(255,255,255,0.2);
+            transition: background-color 0.2s;
+        }
+
+        .mini-controls button:hover {
+            background-color: rgba(255,255,255,0.3);
+        }
+
+        .player-container {
+            flex: 2;
+            min-width: 0;
+        }
+
+        .playlist-container {
+            flex: 1;
+            overflow-y: auto;
+            max-height: 600px;
+            min-width: 250px;
+            background-color: #2c3e50;
+            color: #fff;
+            position: relative; /* For the overlay play indicator */
+        }
+
+        /* Cool hover effect for playlist items */
+        .playlist-item {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .playlist-item::after {
+            content: "▶";
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0);
+            color: white;
+            font-size: 24px;
+            opacity: 0;
+            transition: all 0.3s ease;
+            background-color: rgba(52, 152, 219, 0.7);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .playlist-item:hover::after {
+            opacity: 1;
+            transform: translate(-50%, -50%) scale(1);
+        }
+
+        .playlist-item {
+            padding: 12px 15px;
+            cursor: pointer;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            transition: background-color 0.2s;
+            display: flex;
+            align-items: center;
+        }
+
+        .playlist-item:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+
+        .playlist-item.active {
+            background-color: rgba(255, 255, 255, 0.2);
+            font-weight: bold;
+        }
+
+        .playlist-thumbnail {
+            width: 60px;
+            height: 40px;
+            object-fit: cover;
+            margin-right: 10px;
+            border-radius: 4px;
+        }
+
+        .playlist-item-title {
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        .playlist-duration {
+            margin-left: auto;
+            font-size: 12px;
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .position-controls {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 15px;
+        }
+
+        .position-btn {
+            background-color: #3498db;
+            color: white;
+            border: none;
+            padding: 8px 12px;
+            margin: 0 5px;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+
+        .position-btn:hover {
+            background-color: #2980b9;
+        }
+
+        .position-btn.active {
+            background-color: #2980b9;
+            font-weight: bold;
+        }
+
+        .mobile-notice {
+            text-align: center;
+            font-size: 14px;
+            color: #777;
+            margin-bottom: 10px;
+            display: none;
+        }
+
+        @media (max-width: 768px) {
+            .mobile-notice {
+                display: block;
+            }
+        }
+
+        /* Media queries for responsiveness */
+        /* Mobile styles - force bottom playlist for all positions */
+        @media (max-width: 768px) {
+            /* Force bottom playlist */
+            .player-wrapper.position-right,
+            .player-wrapper.position-left,
+            .player-wrapper.position-bottom {
+                flex-direction: column !important; /* Override any other settings */
+            }
+
+            .playlist-container {
+                max-height: 200px;
+                min-width: 100%;
+                order: 2; /* Always place playlist after the player */
+            }
+
+            .player-container {
+                order: 1; /* Always place player before the playlist */
+                min-height: 180px;
+            }
+
+            .playlist-item {
+                padding: 8px 10px;
+            }
+
+            .playlist-thumbnail {
+                width: 50px;
+                height: 35px;
+            }
+
+            .container {
+                max-width: 100%;
+                margin: 0;
+                border-radius: 0;
+            }
+
+            .position-controls {
+                margin-bottom: 10px;
+            }
+
+            .position-btn {
+                font-size: 14px;
+                padding: 6px 8px;
+            }
+
+            /* Add swipe indicators */
+            .playlist-container:before {
+                content: "Swipe left/right to navigate";
+                display: block;
+                text-align: center;
+                padding: 5px;
+                background-color: rgba(0,0,0,0.3);
+                font-size: 12px;
+                color: rgba(255,255,255,0.8);
+            }
+        }
+
+        /* Small mobile devices */
+        @media (max-width: 480px) {
+            body {
+                padding: 10px;
+            }
+
+            .playlist-container {
+                max-height: 180px;
+            }
+
+            .playlist-thumbnail {
+                width: 40px;
+                height: 30px;
+            }
+
+            .playlist-item-title {
+                font-size: 14px;
+            }
+
+            .playlist-duration {
+                font-size: 11px;
+            }
+        }
+
+        /* Specific styles for different positions */
+        .player-wrapper.position-right {
+            flex-direction: row;
+        }
+
+        .player-wrapper.position-left {
+            flex-direction: row-reverse;
+        }
+
+        .player-wrapper.position-bottom {
+            flex-direction: column;
+        }
+    </style>
+</head>
+<body>
+<div class="position-controls">
+    <button class="position-btn active" data-position="right">Right Playlist</button>
+    <button class="position-btn" data-position="left">Left Playlist</button>
+    <button class="position-btn" data-position="bottom">Bottom Playlist</button>
+</div>
+<div class="mobile-notice">
+    <p>Playlist will appear at the bottom on mobile devices</p>
+</div>
+
+<div class="container">
+    <div class="player-wrapper position-right">
+        <div class="player-container">
+            <div id="player"></div>
+            <div class="mini-controls">
+                <button id="prev-btn" title="Previous video">⏮</button>
+                <button id="next-btn" title="Next video">⏭</button>
+            </div>
+        </div>
+        <div class="playlist-container">
+            <div id="playlist"></div>
+        </div>
+    </div>
+</div>
+
+<!-- Plyr JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/plyr/3.7.8/plyr.min.js"></script>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Sample playlist data - replace with your own
+        const playlistData = [
+            {
+                title: "Big Buck Bunny",
+                source: "https://cdn.plyr.io/static/demo/View_From_A_Blue_Moon_Trailer-576p.mp4",
+                poster: "https://cdn.plyr.io/static/demo/View_From_A_Blue_Moon_Trailer-HD.jpg",
+                type: "video",
+                duration: "0:26"
+            },
+            {
+                title: "Elephant Dream",
+                source: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4",
+                poster: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/images/ElephantsDream.jpg",
+                type: "video",
+                duration: "10:53"
+            },
+            {
+                title: "For Bigger Blazes",
+                source: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4",
+                poster: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/images/ForBiggerBlazes.jpg",
+                type: "video",
+                duration: "0:15"
+            },
+            {
+                title: "For Bigger Escapes",
+                source: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4",
+                poster: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/images/ForBiggerEscapes.jpg",
+                type: "video",
+                duration: "3:31"
+            },
+            {
+                title: "For Bigger Fun",
+                source: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerFun.mp4",
+                poster: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/images/ForBiggerFun.jpg",
+                type: "video",
+                duration: "0:42"
+            }
+        ];
+
+        let currentVideoIndex = 0;
+        let player = null;
+
+        // Initialize Plyr
+        function initPlayer(videoIndex) {
+            const videoSource = playlistData[videoIndex];
+            const playerElement = document.querySelector('#player');
+
+            // Clear the player element
+            playerElement.innerHTML = '';
+
+            // Create video element
+            const video = document.createElement('video');
+            video.controls = true;
+            video.poster = videoSource.poster;
+            video.src = videoSource.source;
+            playerElement.appendChild(video);
+
+            // Create Plyr instance
+            if (player) {
+                player.destroy();
+            }
+
+            player = new Plyr(video, {
+                controls: [
+                    'play-large', 'play', 'progress', 'current-time', 'mute',
+                    'volume', 'settings', 'fullscreen'
+                ],
+                ratio: '16:9',
+                autoplay: false,
+                responsive: true
+            });
+
+            // Handle end of video (autoplay next)
+            player.on('ended', function() {
+                playNext();
+            });
+
+            // Update active playlist item
+            updatePlaylistActiveItem(videoIndex);
+        }
+
+        // Build playlist HTML
+        function buildPlaylist() {
+            const playlistElement = document.querySelector('#playlist');
+            playlistElement.innerHTML = '';
+
+            playlistData.forEach((item, index) => {
+                const playlistItem = document.createElement('div');
+                playlistItem.className = 'playlist-item';
+                playlistItem.dataset.index = index;
+
+                // Create thumbnail image
+                const thumbnail = document.createElement('img');
+                thumbnail.className = 'playlist-thumbnail';
+                thumbnail.src = item.poster;
+                thumbnail.alt = item.title;
+
+                // Create title element
+                const title = document.createElement('div');
+                title.className = 'playlist-item-title';
+                title.textContent = item.title;
+
+                // Create duration element
+                const duration = document.createElement('div');
+                duration.className = 'playlist-duration';
+                duration.textContent = item.duration;
+
+                // Add elements to playlist item
+                playlistItem.appendChild(thumbnail);
+                playlistItem.appendChild(title);
+                playlistItem.appendChild(duration);
+
+                playlistElement.appendChild(playlistItem);
+
+                // Add click event
+                playlistItem.addEventListener('click', function() {
+                    const index = parseInt(this.dataset.index);
+                    currentVideoIndex = index;
+                    initPlayer(index);
+                });
+            });
+        }
+
+        // Update active playlist item
+        function updatePlaylistActiveItem(index) {
+            const playlistItems = document.querySelectorAll('.playlist-item');
+            playlistItems.forEach(item => {
+                item.classList.remove('active');
+            });
+
+            const activeItem = document.querySelector(`.playlist-item[data-index="${index}"]`);
+            if (activeItem) {
+                activeItem.classList.add('active');
+                // Scroll to active item
+                activeItem.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            }
+        }
+
+        // Play next video
+        function playNext() {
+            currentVideoIndex = (currentVideoIndex + 1) % playlistData.length;
+            initPlayer(currentVideoIndex);
+        }
+
+        // Play previous video
+        function playPrevious() {
+            currentVideoIndex = (currentVideoIndex - 1 + playlistData.length) % playlistData.length;
+            initPlayer(currentVideoIndex);
+        }
+
+        // Initialize player with keyboard shortcuts
+        function initKeyboardShortcuts() {
+            document.addEventListener('keydown', function(e) {
+                // Left arrow - previous video
+                if (e.key === 'ArrowLeft' && e.altKey) {
+                    playPrevious();
+                }
+                // Right arrow - next video
+                if (e.key === 'ArrowRight' && e.altKey) {
+                    playNext();
+                }
+            });
+        }
+
+        // Initialize everything
+        buildPlaylist();
+        initPlayer(currentVideoIndex);
+        initKeyboardShortcuts();
+
+        // Add touch swipe support for mobile
+        const playlistContainer = document.querySelector('.playlist-container');
+        let touchStartX = 0;
+        let touchEndX = 0;
+
+        function handleSwipe() {
+            const swipeDistance = touchEndX - touchStartX;
+
+            // Only trigger if the swipe is significant (more than 75px)
+            if (Math.abs(swipeDistance) > 75) {
+                if (swipeDistance < 0) {
+                    // Swipe left - next video
+                    playNext();
+                } else {
+                    // Swipe right - previous video
+                    playPrevious();
+                }
+            }
+        }
+
+        playlistContainer.addEventListener('touchstart', function(e) {
+            touchStartX = e.changedTouches[0].screenX;
+        }, false);
+
+        playlistContainer.addEventListener('touchend', function(e) {
+            touchEndX = e.changedTouches[0].screenX;
+            handleSwipe();
+        }, false);
+
+        // Handle position switching
+        const positionButtons = document.querySelectorAll('.position-btn');
+        positionButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                // Update active button
+                positionButtons.forEach(btn => btn.classList.remove('active'));
+                this.classList.add('active');
+
+                // Update player wrapper position class
+                const position = this.dataset.position;
+                const playerWrapper = document.querySelector('.player-wrapper');
+                playerWrapper.className = `player-wrapper position-${position}`;
+            });
+        });
+
+        // Add mini control button functionality
+        document.getElementById('prev-btn').addEventListener('click', playPrevious);
+        document.getElementById('next-btn').addEventListener('click', playNext);
+    });
+</script>
+</body>
+</html>

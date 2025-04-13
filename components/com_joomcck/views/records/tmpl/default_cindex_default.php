@@ -103,7 +103,7 @@ $api = new JoomcckApi();
 	<ul class="<?php echo $class?>">
 		<?php foreach($category->children as $i => $cat ) :
 		if (!$params->get('tmpl_params.subcat_empty', 1) && !$cat->num_current && !$cat->num_all) continue;  ?>
-			<li <?php if(count($cat->children)){echo 'class="dropdown-submenu"';}?>>
+			<li class="me-2 <?php if(count($cat->children)){echo 'dropdown-submenu';}?>">
 				<?php if($params->get('tmpl_params.subcat_limit', 5) <= $i && (count($category->children) > $params->get('tmpl_params.subcat_limit', 5))):?>
 					<a tabindex="-1" href="<?php echo $category->link;?>"><?php echo \Joomla\CMS\Language\Text::_('CMORECATS').'...'?></a>
 					</li>
@@ -115,7 +115,6 @@ $api = new JoomcckApi();
 							<span class="badge text-bg-light shadow-sm px-2 py-1"><?php echo (int)$cat->records_num; ?></span>
 						<?php endif;?>
 					</a>
-
 					<?php if(count($cat->children)):?>
 						<?php getChilds($cat, $params, "dropdown-menu");?>
 					<?php endif;?>
