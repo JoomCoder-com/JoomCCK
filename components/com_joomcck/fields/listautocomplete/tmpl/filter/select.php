@@ -30,4 +30,4 @@ foreach($this->values as $k => $value)
 
 array_unshift($list, \Joomla\CMS\HTML\HTMLHelper::_('select.option', '', \Joomla\CMS\Language\Text::sprintf('CCSELETFIELD', $this->label)));
 
-echo \Joomla\CMS\HTML\HTMLHelper::_('select.genericlist', $list, "filters[{$this->key}][value]", null, 'class="form-select"', 'text', $default);
+echo \Joomla\CMS\HTML\HTMLHelper::_('select.genericlist', $list, "filters[{$this->key}][value]", 'class="form-select"', 'value','text', $default);
