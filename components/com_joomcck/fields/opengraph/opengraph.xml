@@ -5,38 +5,44 @@
 	<config>
 		<fields name="params" addfieldpath="/administrator/components/com_joomcck/models/fields">
 			<fieldset name="general" label="FS_GENERAL" >
-				<field name="og_type" type="list" default="article" label="Type" description="" multiple="false" required="true">
-				  <option value="article">Article</option>
-				  <option value="book">Book</option>
-				  <option value="books.author">Book Author</option>
-				  <option value="books.genre">Book Genre</option>
-				  <option value="business.business">Business</option>
-				  <option value="fitness.course">Fitness Course</option>
-				  <option value="music.album">Music Album</option>
-				  <option value="music.musician">Music Musician</option>				  
-				  <option value="music.playlist">Music Playlist</option>
-				  <option value="music.song">Music Song</option>
-				  <option value="object">Object (Generic Object)</option>
-				  <option value="place">Place</option>
-				  <option value="product">Product</option>
-				  <option value="product.group">Product Group</option>
-				  <option value="product.item">Product Item</option>
-				  <option value="profile">Profile</option>
-				  <option value="quick_election.election">Election</option>
-				  <option value="restaurant">Restaurant</option>
-				  <option value="restaurant.menu">Restaurant Menu</option>
-				  <option value="restaurant.menu_item">Restaurant Menu Item</option>
-				  <option value="restaurant.menu_section">Restaurant Menu Section</option>
-				  <option value="video.episode">Video Episode</option>
-				  <option value="video.movie">Video Movie</option>
-				  <option value="video.tv_show">Video TV Show</option>
-				  <option value="video.website">Website</option>
-				</field>		
-			</fieldset>			
+				<field name="og_type" type="list" default="article" label="Type" description="Select the OpenGraph content type" multiple="false" required="true">
+					<option value="article">Article</option>
+					<option value="book">Book</option>
+					<option value="books.author">Book Author</option>
+					<option value="books.genre">Book Genre</option>
+					<option value="business.business">Business</option>
+					<option value="fitness.course">Fitness Course</option>
+					<option value="music.album">Music Album</option>
+					<option value="music.musician">Music Musician</option>
+					<option value="music.playlist">Music Playlist</option>
+					<option value="music.song">Music Song</option>
+					<option value="object">Object (Generic Object)</option>
+					<option value="place">Place</option>
+					<option value="product">Product</option>
+					<option value="product.group">Product Group</option>
+					<option value="product.item">Product Item</option>
+					<option value="profile">Profile</option>
+					<option value="quick_election.election">Election</option>
+					<option value="restaurant">Restaurant</option>
+					<option value="restaurant.menu">Restaurant Menu</option>
+					<option value="restaurant.menu_item">Restaurant Menu Item</option>
+					<option value="restaurant.menu_section">Restaurant Menu Section</option>
+					<option value="video.episode">Video Episode</option>
+					<option value="video.movie">Video Movie</option>
+					<option value="video.tv_show">Video TV Show</option>
+					<option value="video.website">Website</option>
+				</field>
+				<field name="fb_app_id" type="text" default="" label="Facebook App ID" description="Enter your Facebook App ID if you have one" />
+				<field name="desc_length" type="text" default="200" label="Description Length" description="Maximum length for description in characters" />
+				<field layout="joomla.form.field.radio.switcher" name="no_split" type="radio" default="1" label="Don't Split Words" description="When truncating description, don't cut in the middle of a word">
+					<option value="0">JNO</option>
+					<option value="1">JYES</option>
+				</field>
+			</fieldset>
 			<fieldset name="field_pos_list" label="Fields Mapping">
-				<field name="desc_id" type="fieldstype" required="true" allowedFieldsType="text,textarea,html"  default="" label="F_DESC_FIELD"/>
-				<field name="pic_id" type="fieldstype" required="true" allowedFieldsType="image,gallery" default="" label="F_PIC_FIELD"/>
-				<field name="default_pic" type="media" label="F_DEFAULT_PIC"/>
+				<field name="desc_id" type="fieldstype" required="true" allowedFieldsType="text,textarea,html" default="" label="F_DESC_FIELD" description="Field to use for OpenGraph description"/>
+				<field name="pic_id" type="fieldstype" allowedFieldsType="image,gallery" default="" label="F_PIC_FIELD" description="Field to use for OpenGraph image"/>
+				<field name="default_pic" type="media" label="F_DEFAULT_PIC" description="Default image to use if no image field is available or empty"/>
 			</fieldset>
 		</fields>
 	</config>
