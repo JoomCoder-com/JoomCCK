@@ -71,7 +71,7 @@ foreach ($exclude as &$value) {
 				<?php foreach ($item->fields_by_id AS $field):?>
 					<?php if(in_array($field->key, $exclude)) continue; ?>
 					<?php if($field->params->get('core.show_lable') > 1):?>
-						<dt id="<?php echo $field->id;?>-lbl" for="field_<?php echo $field->id;?>" class="<?php echo $field->class;?>" >
+						<dt id="<?php echo $field->id;?>-lbl" for="field_<?php echo $field->id;?>" class="mb-4 <?php echo $field->class;?>" >
 							<?php echo $field->label; ?>
 							<?php if($field->params->get('core.icon')):?>
 								<?php echo HTMLFormatHelper::icon($field->params->get('core.icon'));  ?>
