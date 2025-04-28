@@ -226,7 +226,7 @@ if($params->get('tmpl_core.item_follow_num'))
 				</div>
 				<?php if($params->get('tmpl_core.item_author_avatar')):?>
 					<div class="col-md-1 avatar">
-						<img src="<?php echo CCommunityHelper::getAvatar($item->user_id, $params->get('tmpl_core.item_author_avatar_width', 40), $params->get('tmpl_core.item_author_avatar_height', 40));?>" />
+						<img class="w-100 rounded shadow-sm" src="<?php echo CCommunityHelper::getAvatar($item->user_id, $params->get('tmpl_core.item_author_avatar_width', 40), $params->get('tmpl_core.item_author_avatar_height', 40));?>" />
 					</div>
 				<?php endif;?>
 			</div>

@@ -16,19 +16,25 @@ extract($displayData);
 \Joomla\CMS\Factory::getDocument()->addScript('https://cdnjs.cloudflare.com/ajax/libs/mediaelement-plugins/2.5.0/playlist/playlist.min.js');
 ?>
 
-<div class="jcck-video-player-me mb-3">
-	<video id="mediaelement-player-<?php echo $key; ?>" width="100%" height="auto" style="max-width:100%;" preload="none" controls playsinline>
-		<?php foreach($videos as $index => $video): ?>
-			<source src="<?php echo $video->url; ?>" type="video/mp4" title="<?php echo $video->display_title; ?>">
-		<?php endforeach; ?>
-	</video>
+<div id="mediaelement-player-container-<?php echo $key; ?>">
+    <div class="jcck-video-player-me mb-3 w-100">
+        <video id="mediaelement-player-<?php echo $key; ?>" height="auto" preload="none" controls playsinline>
+			<?php foreach($videos as $index => $video): ?>
+                <source src="<?php echo $video->url; ?>" type="video/mp4" title="<?php echo $video->display_title; ?>">
+			<?php endforeach; ?>
+        </video>
+    </div>
 </div>
+
 
 <script type="text/javascript">
     jQuery(document).ready(function($) {
         var player = new MediaElementPlayer('mediaelement-player-<?php echo $key; ?>', {
             features: ['playpause', 'current', 'progress', 'duration', 'volume', 'playlist', 'fullscreen'],
             // Available features: 'playpause', 'current', 'progress', 'duration', 'tracks', 'volume', 'fullscreen', 'playlist'
+
+            // Aspect ratio handling
+            stretching: 'responsive',  // Key setting for handling different aspect ratios
 
             // Playlist plugin settings
             playlist: {
@@ -58,41 +64,17 @@ extract($displayData);
                 loopText: 'Loop',
                 shuffleText: 'Shuffle',
                 playlistTitle: 'Playlist',
-                removeText: 'Remove'
+                removeText: 'Remove',
+
             },
 
             // General player options
             alwaysShowControls: true,
-            enableAutosize: true,
-            stretching: 'fill',
-            iconSprite: '', // Default sprite
-
-            // Enable responsive behavior
-            videoWidth: '100%',
-            videoHeight: 'auto',
 
             // Set initial poster if first video has thumbnail
 			<?php if(reset($videos)->thumbnail): ?>
             poster: '<?php echo reset($videos)->thumbnail; ?>',
 			<?php endif; ?>
-
-            // Success callback
-            success: function(mediaElement, originalNode, instance) {
-                // Player is ready
-                mediaElement.addEventListener('ended', function() {
-                    // Automatically move to next video when current one ends
-                    var playlist = instance.layers.querySelector('.mejs__playlist');
-                    if (playlist) {
-                        var current = playlist.querySelector('.current');
-                        if (current && current.nextElementSibling) {
-                            current.nextElementSibling.click();
-                        } else if (playlist.querySelector('li')) {
-                            // Loop back to first item if at end of playlist
-                            playlist.querySelector('li').click();
-                        }
-                    }
-                });
-            }
         });
     });
 </script>

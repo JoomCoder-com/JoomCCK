@@ -59,7 +59,17 @@
 			</fieldset>
 
 			<fieldset name="advanced" label="FS_FORMATPARAMS">
-				<field type="text" name="command" label="F_FFMPEGCMD" size="40" default="c:\ffmpeg\bin\ffmpeg.exe" description="F_FFMPEGCMDDESCR" />
+				<field name="enable_ffmpeg" type="radio" layout="joomla.form.field.radio.switcher" default="1" label="Enable FFmpeg Processing" description="Enable video processing features that require FFmpeg (thumbnails, duration)">
+					<option value="0">JNO</option>
+					<option value="1">JYES</option>
+				</field>
+				<field type="text" name="command" label="F_FFMPEGCMD" size="40" default="ffmpeg" description="Path to FFmpeg command. Use 'ffmpeg' for Linux/macOS or full path (e.g. 'C:\path\to\ffmpeg\bin\ffmpeg.exe') for Windows." />
+				<field name="thumbnail_quality" type="list" default="medium" label="Thumbnail Quality" description="Set the quality level for video thumbnails">
+					<option value="low">Low (faster, smaller files)</option>
+					<option value="medium">Medium</option>
+					<option value="high">High (slower, larger files)</option>
+				</field>
+				<field name="thumbnail_width" type="text" default="320" size="3" label="Thumbnail Width" description="Width of generated thumbnails in pixels (height will be calculated automatically)" />
 				<field name="only_one" type="radio" layout="joomla.form.field.radio.switcher" default="0" label="F_ONLYONE">
 					<option value="0">CNO</option>
 					<option value="1">CYES</option>

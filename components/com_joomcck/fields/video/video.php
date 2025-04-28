@@ -9,6 +9,9 @@ class JFormFieldCVideo extends CFormFieldUpload
 	public $videos;
 	public $only_one;
 
+	// Flag to track if system requirements are met
+	protected $system_ready = true;
+
 	public function __construct($field, $default)
 	{
 		parent::__construct($field, $default);
@@ -17,6 +20,44 @@ class JFormFieldCVideo extends CFormFieldUpload
 		// register layouts folder
 		\Joomcck\Layout\Helpers\Layout::$defaultBasePath = JPATH_ROOT.'/components/com_joomcck/fields/video/layouts';
 
+		// Check system requirements
+		$this->checkSystemRequirements();
+	}
+
+	/**
+	 * Check if system meets requirements for video processing
+	 * Verifies exec is available and ffmpeg is installed
+	 */
+	protected function checkSystemRequirements()
+	{
+		// Check if ffmpeg processing is enabled in parameters
+		if ($this->params->get('params.enable_ffmpeg', 1) == 0) {
+			$this->system_ready = false;
+			return false;
+		}
+
+		// Check if exec function is available
+		if (!function_exists('exec') || in_array('exec', array_map('trim', explode(',', ini_get('disable_functions'))))) {
+			$this->system_ready = false;
+			\Joomla\CMS\Factory::getApplication()->enqueueMessage('Video field requires exec function to be enabled', 'warning');
+			return false;
+		}
+
+		// Check if ffmpeg is installed by running version command
+		$ffmpeg_command = $this->params->get('params.command', 'ffmpeg');
+		$return_var = null;
+		$output = array();
+
+		// Check ffmpeg by running the version command
+		exec(escapeshellcmd($ffmpeg_command) . " -version 2>&1", $output, $return_var);
+
+		if ($return_var !== 0) {
+			$this->system_ready = false;
+			\Joomla\CMS\Factory::getApplication()->enqueueMessage('Video field requires FFmpeg to be installed and accessible', 'warning');
+			return false;
+		}
+
+		return true;
 	}
 
 	public function getInput()
@@ -74,7 +115,6 @@ class JFormFieldCVideo extends CFormFieldUpload
 			return;
 		}
 
-
 		$this->prepareVideoData($record, $client);
 
 		return $this->_display_output($client, $record, $type, $section);
@@ -105,7 +145,6 @@ class JFormFieldCVideo extends CFormFieldUpload
 					$file->title) ? $file->title : $file->realname;
 			}
 		}
-
 	}
 
 	public function onPrepareSave($value, $record, $type, $section)
@@ -142,15 +181,29 @@ class JFormFieldCVideo extends CFormFieldUpload
 	 */
 	protected function getVideoDuration($params, $val)
 	{
-		$val['duration'] = 0;
-		ob_start();
-		passthru($this->params->get('params.command', 'ffmpeg') . " -i \"" . JPATH_ROOT . DIRECTORY_SEPARATOR .
-			$params->get('general_upload') . DIRECTORY_SEPARATOR .
-			$this->params->get('params.subfolder') . DIRECTORY_SEPARATOR . $val->fullpath . "\" 2>&1");
-		$duration = ob_get_contents();
-		ob_end_clean();
+		if (!$this->system_ready) {
+			return 0;
+		}
 
-		preg_match('/Duration: (.*?),/', $duration, $matches);
+		$duration = 0;
+		$output = array();
+		$return_var = null;
+
+		$file_path = JPATH_ROOT . DIRECTORY_SEPARATOR .
+			$params->get('general_upload') . DIRECTORY_SEPARATOR .
+			$this->params->get('params.subfolder') . DIRECTORY_SEPARATOR . $val->fullpath;
+
+		// Secure the command to prevent command injection
+		$ffmpeg_command = escapeshellcmd($this->params->get('params.command', 'ffmpeg'));
+		$file_path = escapeshellarg($file_path);
+
+		// Execute the command
+		exec("$ffmpeg_command -i $file_path 2>&1", $output, $return_var);
+
+		// Join output and search for duration
+		$output_str = implode("\n", $output);
+
+		preg_match('/Duration: (.*?),/', $output_str, $matches);
 		if(isset($matches[1])) {
 			$duration = $matches[1];
 			$duration_array = explode(':', $duration);
@@ -234,116 +287,75 @@ class JFormFieldCVideo extends CFormFieldUpload
 		return $this->getFileUrl($file);
 	}
 
-	/**
-	 * Generate a thumbnail for a video file
-	 *
-	 * @param object $file The file object
-	 * @return string|false URL to the thumbnail or false on failure
-	 */
 	public function _getVideoThumb($file)
 	{
-		// Early validation
-		if (empty($file) || empty($file->filename) || empty($file->fullpath)) {
+		// Check if FFmpeg processing is enabled and system meets requirements
+		if (!$this->system_ready || $this->params->get('params.enable_ffmpeg', 1) == 0) {
 			return false;
 		}
 
 		$params = \Joomla\CMS\Component\ComponentHelper::getParams('com_joomcck');
-		$root = \Joomla\Filesystem\Path::clean($params->get('general_upload'));
-		$url = str_replace(JPATH_ROOT, '', $root);
-		$url = str_replace("\\", '/', $url);
-		$url = preg_replace('#^\/#iU', '', $url);
-		$url = \Joomla\CMS\Uri\Uri::root(TRUE) . '/' . str_replace("//", "/", $url);
+		$root   = \Joomla\Filesystem\Path::clean($params->get('general_upload'));
+		$url    = str_replace(JPATH_ROOT, '', $root);
+		$url    = str_replace("\\", '/', $url);
+		$url    = preg_replace('#^\/#iU', '', $url);
+		$url    = \Joomla\CMS\Uri\Uri::root(TRUE) . '/' . str_replace("//", "/", $url);
 
-		// Parse file information
 		$parts = explode('_', $file->filename);
-		if (empty($parts[0]) || !is_numeric($parts[0])) {
-			return false;
+		$date  = date($params->get('folder_format', 'Y-m'), (int)$parts[0]);
+
+		$thumb_path = JPATH_ROOT . DIRECTORY_SEPARATOR . $params->get('general_upload') . DIRECTORY_SEPARATOR .
+			'thumbs_cache' . DIRECTORY_SEPARATOR . $this->params->get('params.subfolder') . DIRECTORY_SEPARATOR . $date;
+
+		if(is_file($thumb_path . DIRECTORY_SEPARATOR . $file->filename . '.jpg')) {
+			return $url . '/thumbs_cache/' . $this->params->get('params.subfolder') . '/' . $date . '/' . $file->filename . '.jpg';
 		}
 
-		$date = date($params->get('folder_format', 'Y-m'), (int)$parts[0]);
-
-		// Define paths
-		$thumbsSubdir = 'thumbs_cache';
-		$fieldSubfolder = $this->params->get('params.subfolder');
-
-		// Validate subfolder parameter
-		if (empty($fieldSubfolder) || !preg_match('/^[a-zA-Z0-9_-]+$/', $fieldSubfolder)) {
-			return false;
+		if(!is_dir($thumb_path)) {
+			\Joomla\Filesystem\Folder::create($thumb_path);
 		}
 
-		$thumb_path = JPATH_ROOT . DIRECTORY_SEPARATOR . $params->get('general_upload') .
-			DIRECTORY_SEPARATOR . $thumbsSubdir . DIRECTORY_SEPARATOR .
-			$fieldSubfolder . DIRECTORY_SEPARATOR . $date;
+		// Get thumbnail settings
+		$thumbnail_quality = $this->params->get('params.thumbnail_quality', 'medium');
+		$thumbnail_width = intval($this->params->get('params.thumbnail_width', 320));
 
-		$thumb_filename = $file->filename . '.jpg';
-		$thumb_fullpath = $thumb_path . DIRECTORY_SEPARATOR . $thumb_filename;
-
-		// Check if thumbnail already exists
-		if (is_file($thumb_fullpath)) {
-			return $url . '/' . $thumbsSubdir . '/' . $fieldSubfolder . '/' . $date . '/' . $thumb_filename;
+		// Set quality parameter based on selected quality
+		$quality_value = 2; // Default medium quality
+		switch ($thumbnail_quality) {
+			case 'low':
+				$quality_value = 5;
+				break;
+			case 'medium':
+				$quality_value = 2;
+				break;
+			case 'high':
+				$quality_value = 1;
+				break;
 		}
 
-		// Verify source video exists
-		$source_video_path = JPATH_ROOT . DIRECTORY_SEPARATOR . $params->get('general_upload') .
-			DIRECTORY_SEPARATOR . $fieldSubfolder . DIRECTORY_SEPARATOR . $file->fullpath;
+		// Secure the command to prevent command injection
+		$ffmpeg_command = escapeshellcmd($this->params->get('params.command', 'ffmpeg'));
+		$input_file = escapeshellarg(JPATH_ROOT . DIRECTORY_SEPARATOR .
+			$params->get('general_upload') . DIRECTORY_SEPARATOR .
+			$this->params->get('params.subfolder') . DIRECTORY_SEPARATOR . $file->fullpath);
+		$output_file = escapeshellarg($thumb_path . DIRECTORY_SEPARATOR . $file->filename . '.jpg');
 
-		if (!is_file($source_video_path)) {
-			return false;
+		// Generate a higher quality thumbnail
+		// -ss: seek to position (3 seconds into video)
+		// -frames:v 1: extract just 1 video frame
+		// -q:v: quality (lower number = higher quality, range 1-31)
+		// -vf scale: resize to specified width and maintain aspect ratio with height=-1
+		$command = "$ffmpeg_command -i $input_file -ss 00:00:03 -frames:v 1 -q:v $quality_value -vf scale=$thumbnail_width:-1 $output_file 2>&1";
+
+		// Execute the command
+		$output = array();
+		$return_var = null;
+		exec($command, $output, $return_var);
+
+		if(is_file($thumb_path . DIRECTORY_SEPARATOR . $file->filename . '.jpg')) {
+			return $url . '/thumbs_cache/' . $this->params->get('params.subfolder') . '/' . $date . '/' . $file->filename . '.jpg';
 		}
 
-		// Create thumb directory if it doesn't exist
-		if (!is_dir($thumb_path)) {
-			try {
-				\Joomla\Filesystem\Folder::create($thumb_path, 0755);
-			} catch (\Exception $e) {
-				// Log error
-				\Joomla\CMS\Log\Log::add('Failed to create thumbnail directory: ' . $e->getMessage(), \Joomla\CMS\Log\Log::ERROR, 'com_joomcck');
-				return false;
-			}
-		}
-
-		// Configure thumbnail generation options
-		$timestamp = $this->params->get('params.thumb_timestamp', '00:00:03');
-		$resolution = $this->params->get('params.thumb_resolution', '320x240');
-		$ffmpeg_command = $this->params->get('params.command', 'ffmpeg');
-
-		// Validate command to prevent injection
-		if (!preg_match('/^[a-zA-Z0-9_\-\/\.]+$/', $ffmpeg_command)) {
-			return false;
-		}
-
-		// Build and execute the ffmpeg command safely
-		try {
-			$cmd = sprintf(
-				'%s -i %s -ss %s -vframes 1 -s %s -y %s 2>&1',
-				escapeshellcmd($ffmpeg_command),
-				escapeshellarg($source_video_path),
-				escapeshellarg($timestamp),
-				escapeshellarg($resolution),
-				escapeshellarg($thumb_fullpath)
-			);
-
-			// Execute command
-			$output = [];
-			$return_var = 0;
-			exec($cmd, $output, $return_var);
-
-			if ($return_var !== 0) {
-				// Log error
-				\Joomla\CMS\Log\Log::add('FFmpeg thumbnail generation failed: ' . implode("\n", $output), \Joomla\CMS\Log\Log::ERROR, 'com_joomcck');
-				return false;
-			}
-		} catch (\Exception $e) {
-			// Log error
-			\Joomla\CMS\Log\Log::add('Exception during thumbnail generation: ' . $e->getMessage(), \Joomla\CMS\Log\Log::ERROR, 'com_joomcck');
-			return false;
-		}
-
-		// Check if thumbnail was created
-		if (is_file($thumb_fullpath)) {
-			return $url . '/' . $thumbsSubdir . '/' . $fieldSubfolder . '/' . $date . '/' . $thumb_filename;
-		}
-
-		return false;
+		return FALSE;
 	}
 }
