@@ -108,7 +108,7 @@ if($params->get('tmpl_core.item_follow_num'))
 						<?php endif;?>
 					<?php endif;?>
 				</dt>
-				<dd id="<?php echo 'dd-'.$field_id; ?>" class="<?php echo $field->fieldclass;?><?php echo ($field->params->get('core.label_break') > 1 ? ' line-brk' : NULL) ?>">
+				<dd id="<?php echo 'dd-'.$field_id; ?>" class="mb-4 <?php echo $field->fieldclass;?><?php echo ($field->params->get('core.label_break') > 1 ? ' line-brk' : NULL) ?>">
 					<?php echo $field->result; ?>
 				</dd>
 			<?php endforeach;?>

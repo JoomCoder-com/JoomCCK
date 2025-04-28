@@ -7,6 +7,8 @@
  * @license GNU/GPL http://www.gnu.org/copyleft/gpl.html
  */
 
+use Joomcck\Layout\Helpers\Layout;
+
 defined('_JEXEC') or die();
 
 class CVideoAdapterYoutube extends CVideoAdapterAbstarct
@@ -46,9 +48,11 @@ class CVideoAdapterYoutube extends CVideoAdapterAbstarct
 
 	public function getHtml()
 	{
-		return sprintf(self::$tamplate,
-				$this->width,
-				$this->key
-			);
+
+		return Layout::render('output.type.embedPlayers.youtube', [
+			'key' => $this->key,
+			'width' => $this->width,
+		]);
+
 	}
 }
