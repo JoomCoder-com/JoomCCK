@@ -234,38 +234,116 @@ class JFormFieldCVideo extends CFormFieldUpload
 		return $this->getFileUrl($file);
 	}
 
+	/**
+	 * Generate a thumbnail for a video file
+	 *
+	 * @param object $file The file object
+	 * @return string|false URL to the thumbnail or false on failure
+	 */
 	public function _getVideoThumb($file)
 	{
+		// Early validation
+		if (empty($file) || empty($file->filename) || empty($file->fullpath)) {
+			return false;
+		}
+
 		$params = \Joomla\CMS\Component\ComponentHelper::getParams('com_joomcck');
-		$root   = \Joomla\Filesystem\Path::clean($params->get('general_upload'));
-		$url    = str_replace(JPATH_ROOT, '', $root);
-		$url    = str_replace("\\", '/', $url);
-		$url    = preg_replace('#^\/#iU', '', $url);
-		$url    = \Joomla\CMS\Uri\Uri::root(TRUE) . '/' . str_replace("//", "/", $url);
+		$root = \Joomla\Filesystem\Path::clean($params->get('general_upload'));
+		$url = str_replace(JPATH_ROOT, '', $root);
+		$url = str_replace("\\", '/', $url);
+		$url = preg_replace('#^\/#iU', '', $url);
+		$url = \Joomla\CMS\Uri\Uri::root(TRUE) . '/' . str_replace("//", "/", $url);
 
+		// Parse file information
 		$parts = explode('_', $file->filename);
-		$date  = date($params->get('folder_format', 'Y-m'), (int)$parts[0]);
-
-		$thumb_path = JPATH_ROOT . DIRECTORY_SEPARATOR . $params->get('general_upload') . DIRECTORY_SEPARATOR .
-			'thumbs_cache' . DIRECTORY_SEPARATOR . $this->params->get('params.subfolder') . DIRECTORY_SEPARATOR . $date;
-
-		if(is_file($thumb_path . DIRECTORY_SEPARATOR . $file->filename . '.jpg')) {
-			return $url . '/thumbs_cache/' . $this->params->get('params.subfolder') . '/' . $date . '/' . $file->filename . '.jpg';
+		if (empty($parts[0]) || !is_numeric($parts[0])) {
+			return false;
 		}
 
-		if(!is_dir($thumb_path)) {
-			\Joomla\Filesystem\Folder::create($thumb_path);
+		$date = date($params->get('folder_format', 'Y-m'), (int)$parts[0]);
+
+		// Define paths
+		$thumbsSubdir = 'thumbs_cache';
+		$fieldSubfolder = $this->params->get('params.subfolder');
+
+		// Validate subfolder parameter
+		if (empty($fieldSubfolder) || !preg_match('/^[a-zA-Z0-9_-]+$/', $fieldSubfolder)) {
+			return false;
 		}
 
-		passthru($this->params->get('params.command', 'ffmpeg') . " -i \"" . JPATH_ROOT . DIRECTORY_SEPARATOR .
-			$params->get('general_upload') . DIRECTORY_SEPARATOR .
-			$this->params->get('params.subfolder') . DIRECTORY_SEPARATOR . $file->fullpath .
-			"\" -ss  00:00:03 -s qcif  " . $thumb_path . DIRECTORY_SEPARATOR . $file->filename . '.jpg');
+		$thumb_path = JPATH_ROOT . DIRECTORY_SEPARATOR . $params->get('general_upload') .
+			DIRECTORY_SEPARATOR . $thumbsSubdir . DIRECTORY_SEPARATOR .
+			$fieldSubfolder . DIRECTORY_SEPARATOR . $date;
 
-		if(is_file($thumb_path . DIRECTORY_SEPARATOR . $file->filename . '.jpg')) {
-			return $url . '/thumbs_cache/' . $this->params->get('params.subfolder') . '/' . $date . '/' . $file->filename . '.jpg';
+		$thumb_filename = $file->filename . '.jpg';
+		$thumb_fullpath = $thumb_path . DIRECTORY_SEPARATOR . $thumb_filename;
+
+		// Check if thumbnail already exists
+		if (is_file($thumb_fullpath)) {
+			return $url . '/' . $thumbsSubdir . '/' . $fieldSubfolder . '/' . $date . '/' . $thumb_filename;
 		}
 
-		return FALSE;
+		// Verify source video exists
+		$source_video_path = JPATH_ROOT . DIRECTORY_SEPARATOR . $params->get('general_upload') .
+			DIRECTORY_SEPARATOR . $fieldSubfolder . DIRECTORY_SEPARATOR . $file->fullpath;
+
+		if (!is_file($source_video_path)) {
+			return false;
+		}
+
+		// Create thumb directory if it doesn't exist
+		if (!is_dir($thumb_path)) {
+			try {
+				\Joomla\Filesystem\Folder::create($thumb_path, 0755);
+			} catch (\Exception $e) {
+				// Log error
+				\Joomla\CMS\Log\Log::add('Failed to create thumbnail directory: ' . $e->getMessage(), \Joomla\CMS\Log\Log::ERROR, 'com_joomcck');
+				return false;
+			}
+		}
+
+		// Configure thumbnail generation options
+		$timestamp = $this->params->get('params.thumb_timestamp', '00:00:03');
+		$resolution = $this->params->get('params.thumb_resolution', '320x240');
+		$ffmpeg_command = $this->params->get('params.command', 'ffmpeg');
+
+		// Validate command to prevent injection
+		if (!preg_match('/^[a-zA-Z0-9_\-\/\.]+$/', $ffmpeg_command)) {
+			return false;
+		}
+
+		// Build and execute the ffmpeg command safely
+		try {
+			$cmd = sprintf(
+				'%s -i %s -ss %s -vframes 1 -s %s -y %s 2>&1',
+				escapeshellcmd($ffmpeg_command),
+				escapeshellarg($source_video_path),
+				escapeshellarg($timestamp),
+				escapeshellarg($resolution),
+				escapeshellarg($thumb_fullpath)
+			);
+
+			// Execute command
+			$output = [];
+			$return_var = 0;
+			exec($cmd, $output, $return_var);
+
+			if ($return_var !== 0) {
+				// Log error
+				\Joomla\CMS\Log\Log::add('FFmpeg thumbnail generation failed: ' . implode("\n", $output), \Joomla\CMS\Log\Log::ERROR, 'com_joomcck');
+				return false;
+			}
+		} catch (\Exception $e) {
+			// Log error
+			\Joomla\CMS\Log\Log::add('Exception during thumbnail generation: ' . $e->getMessage(), \Joomla\CMS\Log\Log::ERROR, 'com_joomcck');
+			return false;
+		}
+
+		// Check if thumbnail was created
+		if (is_file($thumb_fullpath)) {
+			return $url . '/' . $thumbsSubdir . '/' . $fieldSubfolder . '/' . $date . '/' . $thumb_filename;
+		}
+
+		return false;
 	}
 }

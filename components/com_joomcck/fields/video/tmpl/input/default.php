@@ -34,6 +34,9 @@ defined('_JEXEC') or die('Restricted access');
 	margin-bottom:10px;
 	font-size: 16px;
 }
+
+joomla-tab button[aria-expanded="true"]:after{ display: none;}
+
 -->
 </style>
 <div id="video-field" class="accordion">
@@ -67,7 +70,7 @@ defined('_JEXEC') or die('Restricted access');
                 <div class="accordion-body">
                     <div id="input_embeds">
 						<?php foreach ($this->embed AS $embed):?>
-                            <div class="element-box">
+                            <div class="element-box position-relative">
 							<textarea class="form-control" style="" name="jform[fields][<?php echo $this->id; ?>][embed][]" cols="50" rows="5"
                                       id="<?php echo $this->formControl.$this->name;?>" ><?php echo $embed;?></textarea>
                                 <img align="absmiddle" src="<?php echo Uri::root(TRUE)?>/media/com_joomcck/icons/16/cross-button.png"
@@ -110,7 +113,7 @@ defined('_JEXEC') or die('Restricted access');
 
                     <div id="input_links" class="mb-3">
 						<?php foreach ($this->link AS $link):?>
-                            <div class="element-box input-group mb-2">
+                            <div class="element-box input-group mb-2 position-relative">
                                 <input
                                         class="form-control m-0"
                                         name="jform[fields][<?php echo $this->id;?>][link][]"
@@ -190,7 +193,7 @@ defined('_JEXEC') or die('Restricted access');
         // Fixed section for the embed element creation
         if(type == 'link'){
             var input_div = $(document.createElement("div")).attr({
-                'class': 'element-box input-group mb-2'
+                'class': 'element-box input-group mb-2 position-relative'
             });
 
             var input = $(document.createElement(input)).attr({
@@ -211,7 +214,7 @@ defined('_JEXEC') or die('Restricted access');
         }
         else{
             var input_div = $(document.createElement("div")).attr({
-                'class': 'element-box'
+                'class': 'element-box position-relative'
             });
 
             var input = $(document.createElement(input)).attr({

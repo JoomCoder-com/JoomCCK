@@ -222,7 +222,7 @@ class JFormFieldCImage extends CFormField
 
 		if(empty($this->value['image']) && $this->params->get('params.default_img', 0))
 		{
-			$this->value['image'] = str_replace('\\', '/', $this->params->get('params.default_img'));
+			$this->value['image'] = str_replace('\\', '/', $this->params->get('params.default_img',''));
 		}
 
 		if(!empty($this->value['image']))
