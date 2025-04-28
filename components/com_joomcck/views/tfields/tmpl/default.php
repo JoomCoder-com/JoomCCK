@@ -161,7 +161,11 @@ if($saveOrder)
 			                    $icon .= "text/text.png";
 		                    }
 		                    echo \Joomla\CMS\HTML\HTMLHelper::image($icon, $item->field_type, array(
-			                    'align' => 'absmiddle'
+			                    'align' => 'absmiddle',
+                                'class' => 'rounded border shadow-sm',
+                                'width' => '24px',
+                                'height' => '24px',
+                                'style' => 'padding: 4px'
 		                    ));
 		                    ?>
                             <small><a href="#" rel="tooltip" data-bs-original-title="<?php echo \Joomla\CMS\Language\Text::_('CFILTERFIELDTYPE') ?>" onclick="Joomcck.setAndSubmit('filter_ftype', '<?php echo $item->field_type ?>')"><?php echo $item->field_type ?></a></small>
