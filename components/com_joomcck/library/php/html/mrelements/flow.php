@@ -19,77 +19,80 @@ HTMLHelper::_('bootstrap.modal');
 
 ?>
 
-<div id="flow-files<?php echo $field->id; ?>" class="flow-files">
-    <?php if($field->params->get('params.flow_drop', 1)): ?>
-    <div class="flow-files-item flow-drop me-2" ondragenter="jQuery(this).addClass('flow-dragover');" ondragend="jQuery(this).removeClass('flow-dragover');" ondrop="jQuery(this).removeClass('flow-dragover');">
-            <?php echo Mint::_('CUP_DROP_FILE_HERE'); ?>
-        </div>
-    <?php endif; ?>
-    <?php if($field->params->get('params.flow_file', 1)): ?>
-	    <button type="button" class="btn btn-light btn-sm flow-files-item flow-browse"><i class="fas fa-file"></i> <?php echo Mint::_('CUP_SELECT_FILE') ?></button>
-    <?php endif; ?>
-	<?php if($field->params->get('params.flow_folder', 1) && !$field->iscomment): ?>
-    	<button type="button" class="btn btn-light btn-sm  flow-browse-folder ms-2"><i class="fas fa-folder"></i> <?php echo Mint::_('CUP_SELECT_FOLDER') ?></button>
-    <?php endif; ?>
-	<?php if($field->params->get('params.flow_img', 1) && !$field->iscomment): ?>
-	    <button type="button" class="btn btn-light btn-sm  flow-files-item flow-browse-image ms-2"><i class="fas fa-image"></i> <?php echo Mint::_('CUP_SELECT_IMAGE') ?></button>
-    <?php endif; ?>
-</div>
-
-<div class="flow-progress-buttons hide" id="flow-buttons-<?php echo $field->id; ?>">
-	<a href="javascript:void(0)" class="btn btn-flow-resume hide">
-		<?php echo Mint::_('CUP_RESUME') ?></a>
-	<a href="javascript:void(0)" class="btn btn-flow-pause">
-		<?php echo Mint::_('CUP_PAUSE') ?></a>
-	<a href="javascript:void(0)" class="btn btn-flow-cancel">
-		<?php echo Mint::_('CUP_CANCEL') ?></a>
-</div>
-<table class="table table-stripped table-bordered" id="flow-list<?php echo $field->id; ?>">
-    <thead>
+<div id="flow-files-container-<?php echo $field->id; ?>" class="position-relative">
+    <div id="flow-files<?php echo $field->id; ?>" class="flow-files">
+		<?php if($field->params->get('params.flow_drop', 1)): ?>
+            <div class="flow-files-item flow-drop me-2" ondragenter="jQuery(this).addClass('flow-dragover');" ondragend="jQuery(this).removeClass('flow-dragover');" ondrop="jQuery(this).removeClass('flow-dragover');">
+				<?php echo Mint::_('CUP_DROP_FILE_HERE'); ?>
+            </div>
+		<?php endif; ?>
+		<?php if($field->params->get('params.flow_file', 1)): ?>
+            <button type="button" class="btn btn-light btn-sm flow-files-item flow-browse"><i class="fas fa-file"></i> <?php echo Mint::_('CUP_SELECT_FILE') ?></button>
+		<?php endif; ?>
+		<?php if($field->params->get('params.flow_folder', 1) && !$field->iscomment): ?>
+            <button type="button" class="btn btn-light btn-sm  flow-browse-folder ms-2"><i class="fas fa-folder"></i> <?php echo Mint::_('CUP_SELECT_FOLDER') ?></button>
+		<?php endif; ?>
+		<?php if($field->params->get('params.flow_img', 1) && !$field->iscomment): ?>
+            <button type="button" class="btn btn-light btn-sm  flow-files-item flow-browse-image ms-2"><i class="fas fa-image"></i> <?php echo Mint::_('CUP_SELECT_IMAGE') ?></button>
+		<?php endif; ?>
+    </div>
+    <div class="flow-progress-buttons hide" id="flow-buttons-<?php echo $field->id; ?>">
+        <a href="javascript:void(0)" class="btn btn-flow-resume hide">
+			<?php echo Mint::_('CUP_RESUME') ?></a>
+        <a href="javascript:void(0)" class="btn btn-flow-pause">
+			<?php echo Mint::_('CUP_PAUSE') ?></a>
+        <a href="javascript:void(0)" class="btn btn-flow-cancel">
+			<?php echo Mint::_('CUP_CANCEL') ?></a>
+    </div>
+    <table class="table table-stripped table-bordered" id="flow-list<?php echo $field->id; ?>">
+        <thead>
         <tr>
             <th>Name</th>
             <th width="1%">Size</th>
         </tr>
-    </thead>
-    <tbody>
-        <?php if($files && !$field->iscomment): ?>
-            <?php foreach($files as $f):
-                settype($f, 'array');
-		        $f['description'] = !isset($f['description']) || empty($f['description']) ? '' : $f['description'];
-                $f['description'] = htmlentities($f['description'], ENT_QUOTES, 'UTF-8');
-		        $f['title'] = !isset($f['title']) || empty($f['title']) ? '' : $f['title'];
-                $f['title'] = htmlentities($f['title'], ENT_QUOTES, 'UTF-8');
-                ?>
-            <tr id="flow-file-<?php echo $f['id'] ?>">
-                <td>
-                    <?php if(!$field->iscomment): ?>
-                        <div class="float-end" id="flow-menu<?php echo $field->id; ?>">
-                            <?php if($can_delete): ?>
-                                <a href="javascript:void(0);" class="btn-delete text-danger" data-id="<?php echo $f['id'] ?>"><i class="fas fa-times"></i></a>
-                            <?php endif; ?>
-                            <?php if($field->params->get('params.allow_edit_title') || $field->params->get('params.allow_add_descr')): ?>
-                                <a href="javascript:void(0);" class="btn-edit text-primary"  data-id="<?php echo $f['id'] ?>" data-json='<?php echo json_encode($f) ?>'><i class="fas fa-edit"></i></a>
-                            <?php endif; ?>
-                            <?php if($field->params->get('params.flow_default', 1)): ?>
-                                <a href="javascript:void(0);" class="hasTooltip btn-make-default" title="<?php echo \Joomla\CMS\Language\Text::_('FF_MAKEDEFAULT') ?>" data-id="<?php echo $f['id'] ?>"><?php echo HTMLFormatHelper::icon((@$f['default'] ? 'status-away' : 'status-offline').'.png') ?></a>
-                            <?php endif; ?>
-                        </div>
+        </thead>
+        <tbody>
+		<?php if($files && !$field->iscomment): ?>
+			<?php foreach($files as $f):
+				settype($f, 'array');
+				$f['description'] = !isset($f['description']) || empty($f['description']) ? '' : $f['description'];
+				$f['description'] = htmlentities($f['description'], ENT_QUOTES, 'UTF-8');
+				$f['title'] = !isset($f['title']) || empty($f['title']) ? '' : $f['title'];
+				$f['title'] = htmlentities($f['title'], ENT_QUOTES, 'UTF-8');
+				?>
+                <tr id="flow-file-<?php echo $f['id'] ?>">
+                    <td>
+						<?php if(!$field->iscomment): ?>
+                            <div class="float-end" id="flow-menu<?php echo $field->id; ?>">
+								<?php if($can_delete): ?>
+                                    <a href="javascript:void(0);" class="btn-delete text-danger" data-id="<?php echo $f['id'] ?>"><i class="fas fa-times"></i></a>
+								<?php endif; ?>
+								<?php if($field->params->get('params.allow_edit_title') || $field->params->get('params.allow_add_descr')): ?>
+                                    <a href="javascript:void(0);" class="btn-edit text-primary"  data-id="<?php echo $f['id'] ?>" data-json='<?php echo json_encode($f) ?>'><i class="fas fa-edit"></i></a>
+								<?php endif; ?>
+								<?php if($field->params->get('params.flow_default', 1)): ?>
+                                    <a href="javascript:void(0);" class="hasTooltip btn-make-default" title="<?php echo \Joomla\CMS\Language\Text::_('FF_MAKEDEFAULT') ?>" data-id="<?php echo $f['id'] ?>"><?php echo HTMLFormatHelper::icon((@$f['default'] ? 'status-away' : 'status-offline').'.png') ?></a>
+								<?php endif; ?>
+                            </div>
 
 
 
 
-                    <?php endif; ?>
-                    <span class="flow-has-descr hasTooltip<?php echo $f['description'] ? '' : ' hide' ?>" title="<?php echo strlen($f['description']) > 100 ? (substr($f['description'], 0, 100)).' ...' : $f['description'] ?>"><i class="fas fa-file-alt"></i></span>
+						<?php endif; ?>
+                        <span class="flow-has-descr hasTooltip<?php echo $f['description'] ? '' : ' hide' ?>" title="<?php echo strlen($f['description']) > 100 ? (substr($f['description'], 0, 100)).' ...' : $f['description'] ?>"><i class="fas fa-file-alt"></i></span>
 
-                    <span class="flow-file-name"><?php echo !empty($f['title']) ? html_entity_decode($f['title']) : $f['realname']; ?></span>
-                    <input type="hidden" name="<?php echo $name ?>[]" value="<?php echo $f['filename'] ?>">
-                </td>
-                <td class="flow-size" nowrap><?php echo $f['size'] ?></td>
-            </tr>
-            <?php endforeach; ?>
-        <?php endif; ?>
-    </tbody>
-</table>
+                        <span class="flow-file-name"><?php echo !empty($f['title']) ? html_entity_decode($f['title']) : $f['realname']; ?></span>
+                        <input type="hidden" name="<?php echo $name ?>[]" value="<?php echo $f['filename'] ?>">
+                    </td>
+                    <td class="flow-size" nowrap><?php echo $f['size'] ?></td>
+                </tr>
+			<?php endforeach; ?>
+		<?php endif; ?>
+        </tbody>
+    </table>
+</div>
+
+
 
 <small><ul><li><?php echo \Joomla\CMS\Language\Text::_('CER_ONLYFORMATS') ?>: <b><?php echo $field->params->get('params.file_formats'); ?></b></li></small>
 <small><li><?php echo \Joomla\CMS\Language\Text::_('CNSG_MAXSIZEPERFILE') ?>: <b><?php echo $field->params->get('params.max_size'); ?> MB</b></li></ul></small>

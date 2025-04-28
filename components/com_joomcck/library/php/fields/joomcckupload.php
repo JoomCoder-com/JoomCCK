@@ -71,7 +71,7 @@ class CFormFieldUpload extends CFormField
         $this->options['autostart']  = $this->params->get('params.autostart');
         $this->options['can_delete'] = $this->_getDeleteAccess();
 
-        $html = \Joomla\CMS\HTML\HTMLHelper::_('mrelements.' . ($this->params->get('params.uploader', 1) == 1 ? "flow" : "mooupload"),
+        $html = \Joomla\CMS\HTML\HTMLHelper::_('mrelements.' . ($this->params->get('params.uploader', 1) == 1 ? "flow" : "flow"),
             "jform[fields][{$this->id}]" . $this->fieldname,
             $default, $this->options, $this);
 
