@@ -490,7 +490,16 @@ class JoomcckViewRecord extends MViewBase
 		{
 			$title = $this->item->title;
 		}
-		$this->document->setTitle(strip_tags($title));
+
+		$titleOverride = Factory::getApplication()->getInput()->get('title_override','','string');
+
+
+		// use overriden title (like title overriden by auto metada field
+		if(!empty($titleOverride)){
+			$this->document->setTitle(strip_tags($titleOverride));
+		}else{
+			$this->document->setTitle(strip_tags($title));
+		}
 
 		foreach($this->document->_links as $lk => $dl)
 		{

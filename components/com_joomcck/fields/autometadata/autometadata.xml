@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<joomcckfield>
+    <name>Auto Metadata</name>
+    <group>SEO</group>
+    <config>
+        <fields name="params" addfieldpath="/administrator/components/com_joomcck/models/fields">
+            <fieldset name="general" label="FS_GENERAL">
+                <field name="use_title" type="radio" layout="joomla.form.field.radio.switcher" default="1" label="Use Title Tag" description="Enable to set the page title">
+                    <option value="0">JNO</option>
+                    <option value="1">JYES</option>
+                </field>
+                <field name="title_prefix" type="text" default="" label="Title Prefix" description="Text to add before the title (optional)" showon="use_title:1" />
+                <field name="title_suffix" type="text" default="" label="Title Suffix" description="Text to add after the title (optional)" showon="use_title:1" />
+                <field name="title_separator" type="text" default=" - " label="Title Separator" description="Separator between title parts" showon="use_title:1" />
+
+                <field name="use_description" type="radio" layout="joomla.form.field.radio.switcher" default="1" label="Use Meta Description" description="Enable to set the meta description">
+                    <option value="0">JNO</option>
+                    <option value="1">JYES</option>
+                </field>
+                <field name="desc_length" type="text" default="160" label="Description Length" description="Maximum length for meta description in characters" showon="use_description:1" />
+                <field name="no_split" type="radio" layout="joomla.form.field.radio.switcher" default="1" label="Don't Split Words" description="When truncating description, don't cut in the middle of a word" showon="use_description:1">
+                    <option value="0">JNO</option>
+                    <option value="1">JYES</option>
+                </field>
+            </fieldset>
+
+            <fieldset name="field_mapping" label="Fields Mapping">
+                <field name="desc_id" type="fieldstype" allowedFieldsType="text,textarea,html" default="" label="Description Field" description="Field to use for the meta description"/>
+            </fieldset>
+
+            <fieldset name="defaults" label="Default Values">
+                <field name="default_title" type="text" default="" label="Default Title" description="Default title if no field is selected or value is empty"/>
+                <field name="default_desc" type="textarea" default="" label="Default Description" description="Default description if no field is selected or value is empty"/>
+            </fieldset>
+        </fields>
+    </config>
+</joomcckfield>
