@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<form>
+	<name>Title Only List</name>
+	<author>JoomCoder</author>
+	<creationDate>Febrary 2012</creationDate>
+	<copyright>Copyright (C) 2005 - 2012 JoomCoder. All rights reserved.</copyright>
+	<license>Commercial (https://www.JoomCoder.com/commercial-license)</license>
+	<authorEmail>support@JoomCoder.com</authorEmail>
+	<authorUrl>www.JoomCoder.com</authorUrl>
+	<version>##VERSION##</version>
+	<description>Template list that display list of titles only, useful for parent and child fields</description>
+
+	<fields name="tmpl_core">
+		<fieldset name="general2" label="CFORMAT">
+			<field name="item_link" type="radio" class="btn-group" default="1" label="CTITLELINK">
+				<option value="0">CNO</option>
+				<option value="1">CYES</option>
+			</field>
+			<field name="title_tag" label="Title tag" type="text" size="3" default="h2"  />
+		</fieldset>
+
+		<fieldset name="elements2" label="CLISTELEMENTS">
+			<field name="item_pagination" type="radio" class="btn-group" default="0" label="CPAGINATION">
+				<option value="0">CNO</option>
+				<option value="1">CYES</option>
+			</field>
+			<field name="item_limit_box" type="radio" class="btn-group" default="0" label="X_PAGLIMITBOX">
+				<option value="0">CNO</option>
+				<option value="1">CYES</option>
+			</field>
+			<field name="item_limit_default" type="text" size="3" default="20" label="X_DEFAULTPAGLIMIT" />
+		</fieldset>
+	</fields>
+</form>

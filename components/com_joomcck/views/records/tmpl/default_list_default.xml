@@ -7,7 +7,7 @@
 	<license>Commercial (https://www.JoomCoder.com/commercial-license)</license>
 	<authorEmail>support@JoomCoder.com</authorEmail>
 	<authorUrl>www.JoomCoder.com</authorUrl>
-	<version>8.40</version>
+	<version>##VERSION##</version>
 	<description>Template list table</description>
 
 	<fields name="tmpl_params">
