@@ -153,29 +153,32 @@ foreach ($exclude as &$value)
 			<?php if ($params->get('tmpl_core.item_title')): ?>
             <td class="has-context cob-title-td">
                 <div class="relative_ctrls">
+
 					<?php echo Layout::render(
 						'core.list.recordParts.buttonsManage',
-						['item' => $item, 'section' => $this->section, 'submissionTypes' => $this->submission_types, "params" => $params]) ?>
+						['item' => $item, 'section' => $this->section, 'submissionTypes' => $this->submission_types, "params" => $params]
+                    ) ?>
+
 					<?php if ($this->submission_types[$item->type_id]->params->get('properties.item_title')): ?>
                     <div class="float-start">
                         <<?php echo $params->get('tmpl_core.title_tag', 'h4'); ?> class="record-title">
-						<?php if ($params->get('tmpl_core.item_link')): ?>
-                            <a <?php echo $item->nofollow ? 'rel="nofollow"' : ''; ?>
-                                    href="<?php echo Route::_($item->url); ?>">
-								<?php echo $item->title ?>
-                            </a>
-						<?php else : ?>
-							<?php echo $item->title ?>
-						<?php endif; ?>
-	                    <?php if ($item->new): ?>
-                            <small class="badge bg-success"><?php echo Text::_('CNEW') ?></small>
-	                    <?php endif; ?>
-						<?php echo CEventsHelper::showNum('record', $item->id); ?>
-                    </<?php echo $params->get('tmpl_core.title_tag', 'h4'); ?> class="record-title">
+                            <?php if ($params->get('tmpl_core.item_link')): ?>
+                                <a <?php echo $item->nofollow ? 'rel="nofollow"' : ''; ?>
+                                        href="<?php echo Route::_($item->url); ?>">
+                                    <?php echo $item->title ?>
+                                </a>
+                            <?php else : ?>
+                                <?php echo $item->title ?>
+                            <?php endif; ?>
+                            <?php if ($item->new): ?>
+                                <small class="badge bg-success"><?php echo Text::_('CNEW') ?></small>
+                            <?php endif; ?>
+                            <?php echo CEventsHelper::showNum('record', $item->id); ?>
+                        </<?php echo $params->get('tmpl_core.title_tag', 'h4'); ?>>
+                    </div>
+				    <?php endif; ?>
                 </div>
-				<?php endif; ?>
-</div>
-    </td>
+            </td>
 <?php endif; ?>
 
 <?php if ($params->get('tmpl_core.item_rating')): ?>
