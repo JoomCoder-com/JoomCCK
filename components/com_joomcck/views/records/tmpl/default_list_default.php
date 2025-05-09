@@ -139,15 +139,15 @@ foreach ($exclude as &$value)
         <tr class="<?php
 		if ($item->featured)
 		{
-			echo ' success';
+			echo ' table-success';
 		}
         elseif ($item->expired)
 		{
-			echo ' error';
+			echo ' table-error';
 		}
         elseif ($item->future)
 		{
-			echo ' warning';
+			echo ' table-warning';
 		}
 		?>">
 			<?php if ($params->get('tmpl_core.item_title')): ?>
