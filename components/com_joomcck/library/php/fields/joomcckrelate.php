@@ -10,6 +10,7 @@
 
 use Joomcck\Layout\Helpers\Layout;
 use Joomla\CMS\Factory;
+use Joomla\CMS\Language\Text;
 use Joomla\Registry\Registry;
 
 defined('_JEXEC') or die();
@@ -32,22 +33,24 @@ class  CFormFieldRelate extends CFormField
 		parent::__construct($field, $default);
 	}
 
-	protected function _render_input($type, $name, $section_id, $types, $multi = TRUE,$fieldOptions = [])
-	{
 
+	public function getList($types,$section_id){
+
+		// inits
 		$db      = Factory::getDbo();
 		$user    = Factory::getApplication()->getIdentity();
 		$app     = Factory::getApplication();
 		$section = ItemsStore::getSection($section_id);
 
-		$attribs = $html = $record_id = '';
-		$default = array();
-
-
-        $list = [];
-
+		// force types to array
 		settype($types, 'array');
 
+		// no need to continue if types is empty
+		if(empty($types))
+			return [];
+
+
+		// start building query
 		$query = $db->getQuery(TRUE);
 		$query->from('#__js_res_record');
 		if(CStatistics::hasUnPublished($section_id))
@@ -56,32 +59,25 @@ class  CFormFieldRelate extends CFormField
 		}
 		$query->where('hidden = 0');
 		$query->where('section_id = ' . (int)$section_id);
-
-        if(empty($types))
-            return null;
-
-
 		$query->where("type_id IN(" . implode(',', $types) . ")");
 
+
 		if($app->input->getInt('id') && $app->input->getCmd('option') == 'com_joomcck' && $app->input->getCmd('view') == 'form')
-		{
 			$query->where('id != ' . $app->input->getInt('id'));
-		}
+
+		// show restrict
 		if(!in_array($section->params->get('general.show_restrict'), $user->getAuthorisedViewLevels()) && !MECAccess::allowRestricted($user, $section))
-		{
 			$query->where("(access IN(" . implode(',', $user->getAuthorisedViewLevels()) . ") OR user_id = " . $user->get('id') . ")");
-		}
 
+		// show future records
 		if(!in_array($section->params->get('general.show_future_records'), $user->getAuthorisedViewLevels()))
-		{
 			$query->where("ctime < " . $db->quote(Factory::getDate()->toSql()));
-		}
 
+		// show past records
 		if(!in_array($section->params->get('general.show_past_records'), $user->getAuthorisedViewLevels()))
-		{
 			$query->where("(extime = '0000-00-00 00:00:00' OR ISNULL(extime) OR extime > '" . Factory::getDate()->toSql() . "')");
-		}
 
+		// strict to user
 		if(!in_array($this->params->get('params.strict_to_user'), $user->getAuthorisedViewLevels()) && $this->user_strict)
 		{
 			if($this->params->get('params.strict_to_user_mode') > 1 && $app->input->getInt('id'))
@@ -105,9 +101,10 @@ class  CFormFieldRelate extends CFormField
 		if($this->type == 'parent' && !$this->isFilter)
 		{
 			$table = \Joomla\CMS\Table\Table::getInstance('Field', 'JoomcckTable');
+
+
 			$table->load($this->params->get('params.child_field'));
 			$child = new Registry($table->params);
-
 			if($child->get('params.multi_parent') == 0)
 			{
 				$query->where("id NOT IN(SELECT record_id FROM #__js_res_record_values WHERE field_id = " . $table->id . ")");
@@ -121,13 +118,35 @@ class  CFormFieldRelate extends CFormField
 		}
 
 
+
 		$db->setQuery($query);
 		$list = $db->loadObjectList();
+
+
+		return is_null($list) ? [] : $list;
+
+	}
+
+	protected function _render_input($type, $name, $section_id, $types, $multi = TRUE,$fieldOptions = [])
+	{
+
+		// inits
+		$app = Factory::getApplication();
+		$db  = Factory::getDbo();
+
+		$attribs = $html = $record_id = '';
+		$default = array();
+
+
+		// get items list
+		$list = $this->getList($types,$section_id);
+
+
+		// no need to continue if there is no items
 		if(count($list) == 0 && empty($this->value))
 		{
 			return NULL;
 		}
-
 
 		if(count($list) == 1 && $this->type == 'child' && ($this->params->get('params.multi_parent') == 0) && ($this->params->get('core.required') == 1))
 		{
@@ -137,7 +156,7 @@ class  CFormFieldRelate extends CFormField
 
 		if($this->params->get('params.multi_limit') && $this->params->get('params.multi_parent', 1) && $type != 10)
 		{
-			$html .= '<p><small>' . \Joomla\CMS\Language\Text::sprintf('CSELECTLIMIT', $this->params->get('params.multi_limit')) . '</small></p>';
+			$html .= '<p><small>' . Text::sprintf('CSELECTLIMIT', $this->params->get('params.multi_limit')) . '</small></p>';
 		}
 
 		if($multi == FALSE)
@@ -165,6 +184,7 @@ class  CFormFieldRelate extends CFormField
 		}
 
 
+
         switch($type)
 		{
 			case 2:
@@ -187,19 +207,23 @@ class  CFormFieldRelate extends CFormField
 				break;
 
 			case 3:
+
+
 				$html .= $this->_render_checkbox($multi, $list, $this->value, $name);
 				break;
 
 			case 4:
 				if(!$this->required)
 				{
-					array_unshift($list, \Joomla\CMS\HTML\HTMLHelper::_('select.option', '', \Joomla\CMS\Language\Text::_('P_SELECT_ITEM'),'value', 'title'));
+					array_unshift($list, \Joomla\CMS\HTML\HTMLHelper::_('select.option', '', Text::_('P_SELECT_ITEM'),'value', 'title'));
 				}
 
 				$html .= $this->_render_select($multi, $list, $this->value, $name);
 				break;
 
 			case 5:
+
+
 				if($this->value)
 				{
 					$query = $db->getQuery(TRUE);
@@ -274,8 +298,14 @@ class  CFormFieldRelate extends CFormField
 		return \Joomla\CMS\HTML\HTMLHelper::_('mrelements.pills', $name, "field_" . $this->id, $default, $list, $options);
 	}
 
+	/*
+	 * $default : saved and default values
+	 * $name: attr name value
+	 */
+
 	protected function _render_checkbox($multi, $list, $default, $name)
 	{
+
 		$type    = 'radio';
 		$ch      = $html = array();
 		$attribs = ($this->required ? ' required="true" ' : '');
@@ -288,6 +318,7 @@ class  CFormFieldRelate extends CFormField
 
 		$patern = '%s<div class="col-md-6"><label class="checkbox" for="field_%d_%d"><input type="%s" %s value="%s" name="%s" %s id="field_%d_%d"/> %s</label></div>%s';
 		$i      = 0;
+
 		foreach($list AS $k => $item)
 		{
 			$checked = NULL;
@@ -481,7 +512,7 @@ class  CFormFieldRelate extends CFormField
 		{
 			if(is_array($value) && count($value) > $this->params->get('params.multi_limit'))
 			{
-				$this->setError(\Joomla\CMS\Language\Text::sprintf('CSELECTLIMITF', $this->params->get('params.multi_limit'), $this->label));
+				$this->setError(Text::sprintf('CSELECTLIMITF', $this->params->get('params.multi_limit'), $this->label));
 			}
 		}
 
@@ -517,11 +548,11 @@ class  CFormFieldRelate extends CFormField
 		}
 		if($this->required)
 		{
-			$js .= "\n\t\tif(!selected{$this->id}){hfid.push({$this->id}); isValid = false; errorText.push('" . addslashes(\Joomla\CMS\Language\Text::sprintf('CFIELDREQUIRED', $this->label)) . "');}";
+			$js .= "\n\t\tif(!selected{$this->id}){hfid.push({$this->id}); isValid = false; errorText.push('" . addslashes(Text::sprintf('CFIELDREQUIRED', $this->label)) . "');}";
 		}
 		if($this->params->get('params.multi_limit'))
 		{
-			$js .= "\n\t\tif(selected{$this->id} > " . $this->params->get('params.multi_limit') . ") {hfid.push({$this->id}); isValid = false; errorText.push('" . addslashes(\Joomla\CMS\Language\Text::sprintf('CSELECTLIMIT', $this->params->get('params.multi_limit'))) . "');}";
+			$js .= "\n\t\tif(selected{$this->id} > " . $this->params->get('params.multi_limit') . ") {hfid.push({$this->id}); isValid = false; errorText.push('" . addslashes(Text::sprintf('CSELECTLIMIT', $this->params->get('params.multi_limit'))) . "');}";
 		}
 
 		return $js;
