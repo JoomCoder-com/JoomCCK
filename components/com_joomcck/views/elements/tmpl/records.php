@@ -60,10 +60,11 @@ $k = 0;
 			}
 			var el = $(document.createElement('div'))
 				.attr({
-					'class': 'alert alert-info list-item',
+					'class': 'alert alert-info alert-dismissible fade show list-item',
+                    'role': 'alert',
 					rel: id
 				})
-				.html('<a class="close" data-bs-dismiss="alert" href="#">x</a><span>'+title+'</span><input type="hidden" name="'+inputname+'" value="'+id+'">')
+				.html('<span>'+title+'</span><button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button><input type="hidden" name="'+inputname+'" value="'+id+'">')
 				.appendTo(list);
 		<?php else: ?>
 			$.ajax({
@@ -92,78 +93,91 @@ $k = 0;
 </script>
 
 <form name="adminForm" id="adminForm" method="post">
-    <div class="input-group">
-        <input type="text" class="form-control form-control-sm" name="filter_search2" id="filter_search2" value="<?php echo $this->state->get('records.search2'); ?>" />
-        <button class="btn btn-sm btn-outline-success" type="submit">
-            <span class="fas fa-search"></span> <?php echo \Joomla\CMS\Language\Text::_('JSEARCH_FILTER_SUBMIT'); ?>
-        </button>
-        <button class="btn btn-sm btn-outline-danger btn-sm" type="button" onclick="document.getElementById('filter_search2').value='';this.form.submit();">
-            <span class="fas fa-eraser"></span> <?php echo \Joomla\CMS\Language\Text::_('JSEARCH_FILTER_CLEAR'); ?>
-        </button>
-		<?php if(\Joomla\CMS\Factory::getApplication()->input->get('mode') == 'form'):?>
-            <button type="button" class="btn btn-sm btn-outline-success" onclick="closeWindow()">
-                <span class="fas fa-check"></span>
-				<?php echo \Joomla\CMS\Language\Text::_('CAPPLY');?></button>
-		<?php endif;?>
+
+
+    <div>
+        <div>
+            <div class="input-group">
+                <input type="text" class="form-control form-control-sm" name="filter_search2" id="filter_search2" value="<?php echo $this->state->get('records.search2'); ?>" />
+                <button class="btn btn-sm btn-outline-success" type="submit">
+                    <span class="fas fa-search"></span> <?php echo \Joomla\CMS\Language\Text::_('JSEARCH_FILTER_SUBMIT'); ?>
+                </button>
+                <button class="btn btn-sm btn-outline-danger btn-sm" type="button" onclick="document.getElementById('filter_search2').value='';this.form.submit();">
+                    <span class="fas fa-eraser"></span> <?php echo \Joomla\CMS\Language\Text::_('JSEARCH_FILTER_CLEAR'); ?>
+                </button>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+
+        <div>
+            <div class="container-fluid">
+			    <?php if(\Joomla\CMS\Factory::getApplication()->input->get('mode') == 'form'):?>
+                <div class="row">
+                    <div class="col-md-8">
+
+					    <?php endif;?>
+
+                        <table class="table">
+                            <thead>
+                            <th width="1%">
+							    <?php echo \Joomla\CMS\Language\Text::_('CNUM'); ?>
+                            </th>
+                            <th>
+							    <?php echo \Joomla\CMS\Language\Text::_('CTITLE')?>
+                            </th>
+                            </thead>
+                            <tbody>
+						    <?php foreach ($this->items AS $i => $item):?>
+                                <tr class="cat-list-row<?php echo $k = 1 - $k; ?>">
+                                    <td><?php echo $this->pagination->getRowOffset($i); ?></td>
+                                    <td><a href="javascript:void(0)" rel="<?php echo $item->id?>"><span><?php echo $item->title?></span></a></td>
+                                </tr>
+						    <?php endforeach;?>
+                            </tbody>
+                        </table>
+                        <div class="float-end"><?php echo $this->pagination->getPagesCounter(); ?></div>
+                        <div class="pagination">
+						    <?php echo $this->pagination->getPagesLinks(); ?>
+                        </div>
+                        <script type="text/javascript">
+                            (function($){
+                                $('a[rel]').on('click', function(){
+                                    attachRecord($(this));
+                                });
+                            }(jQuery))
+                        </script>
+
+					    <?php if(\Joomla\CMS\Factory::getApplication()->input->get('mode') == 'form'):?>
+                    </div>
+                    <div class="col-md-4">
+                        <div id="recordslist">
+
+                        </div>
+                    </div>
+                </div>
+                <script type="text/javascript">
+                    (function($){
+                        var listofselected = $(parent['elementslist<?php echo \Joomla\CMS\Factory::getApplication()->input->getInt('field_id')?>'])
+                            .children('div.alert')
+                            .each(function(){
+                                attachRecord($(this));
+                            });
+                    }(jQuery))
+                </script>
+		    <?php endif;?>
+            </div>
+        </div>
+
+
+	    <?php if(\Joomla\CMS\Factory::getApplication()->input->get('mode') == 'form'):?>
+            <div class="sticky-bottom mt-5 bg-white pt-4 border-top">
+                <button type="button" class="btn btn-sm btn-outline-success" onclick="closeWindow()">
+                    <span class="fas fa-check"></span>
+				    <?php echo \Joomla\CMS\Language\Text::_('CAPPLY');?>
+                </button>
+            </div>
+	    <?php endif;?>
     </div>
-	<div class="clearfix"></div>
-
-	<div class="container-fluid">
-	<?php if(\Joomla\CMS\Factory::getApplication()->input->get('mode') == 'form'):?>
-		<div class="row">
-			<div class="col-md-8">
-
-	<?php endif;?>
-
-		<table class="table">
-			<thead>
-				<th width="1%">
-					<?php echo \Joomla\CMS\Language\Text::_('CNUM'); ?>
-				</th>
-				<th>
-					<?php echo \Joomla\CMS\Language\Text::_('CTITLE')?>
-				</th>
-			</thead>
-			<tbody>
-				<?php foreach ($this->items AS $i => $item):?>
-					<tr class="cat-list-row<?php echo $k = 1 - $k; ?>">
-						<td><?php echo $this->pagination->getRowOffset($i); ?></td>
-						<td><a href="javascript:void(0)" rel="<?php echo $item->id?>"><span><?php echo $item->title?></span></a></td>
-					</tr>
-				<?php endforeach;?>
-			</tbody>
-		</table>
-		<div class="float-end"><?php echo $this->pagination->getPagesCounter(); ?></div>
-		<div class="pagination">
-			<?php echo $this->pagination->getPagesLinks(); ?>
-		</div>
-		<script type="text/javascript">
-			(function($){
-				$('a[rel]').on('click', function(){
-					attachRecord($(this));
-				});
-			}(jQuery))
-		</script>
-
-	<?php if(\Joomla\CMS\Factory::getApplication()->input->get('mode') == 'form'):?>
-			</div>
-			<div class="col-md-4">
-				<div id="recordslist">
-
-				</div>
-			</div>
-		</div>
-		<script type="text/javascript">
-			(function($){
-				var listofselected = $(parent['elementslist<?php echo \Joomla\CMS\Factory::getApplication()->input->getInt('field_id')?>'])
-				.children('div.alert')
-				.each(function(){
-					attachRecord($(this));
-				});
-			}(jQuery))
-		</script>
-	<?php endif;?>
-	</div>
 
 
 	<input type="hidden" name="option" value="com_joomcck" />

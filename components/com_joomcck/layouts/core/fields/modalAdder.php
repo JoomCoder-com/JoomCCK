@@ -60,10 +60,6 @@ if(!in_array($params->get('params.strict_to_user'), \Joomla\CMS\Factory::getAppl
 
 			<div class="modal-body">
 			</div>
-
-			<div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-			</div>
 		</div>
 	</div>
 </div>
@@ -117,9 +113,10 @@ if(!in_array($params->get('params.strict_to_user'), \Joomla\CMS\Factory::getAppl
 			<?php endif;?>
 
             var el = $(document.createElement('div')).attr({
-                'class': 'alert alert-info list-item',
+                'class': 'alert alert-info alert-dismissible fade show list-item',
+                'role': 'alert',
                 rel: id
-            }).html('<a class="close" data-bs-dismiss="alert" href="#">x</a><span>' + title + '</span><input type="hidden" name="<?php echo $name ?>" value="' + id + '">');
+            }).html('<span>' + title + '</span><button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button><input type="hidden" name="<?php echo $name ?>" value="' + id + '">');
             elementslist<?php echo $id; ?>.append(el);
             return true;
         }
