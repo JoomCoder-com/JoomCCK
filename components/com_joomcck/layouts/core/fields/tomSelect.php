@@ -24,27 +24,25 @@ $wa = Webassets::$wa;
 $wa->useScript('com_joomcck.tom-select');
 $wa->useStyle('com_joomcck.tom-select');
 
-// tansform to js json format
-$list = json_encode($list);
-$list = str_replace(['"id":','"text":'],['id:','text:'],$list);
-
-if(empty($default) && !empty($list)){
-	$default = $list;
-}else{
-	$default = json_encode($default);
-	$default = str_replace(['"id":','"text":'],['id:','text:'],$default);
-}
-
-$fieldId = (int) rand(1,2000);
-
 // fields names
 $valueFieldName = isset($options['valueFieldName']) && $options['valueFieldName'] ? $options['valueFieldName'] : 'id';
 $labelFieldName = isset($options['labelFieldName']) && $options['labelFieldName'] ? $options['labelFieldName'] : 'text';
 $searchFieldName = isset($options['searchFieldName']) && $options['searchFieldName'] ? $options['searchFieldName'] : 'text';
 
+// transform to js json format
+$list = json_encode($list);
+$list = str_replace(['"'.$valueFieldName.'":','"'.$labelFieldName.'":'],[''.$valueFieldName.':',''.$labelFieldName.':'],$list);
+
+if(empty($default) && !empty($list)){
+	$default = $list;
+}else{
+	$default = json_encode($default);
+	$default = str_replace(['"id":','"'.$labelFieldName.'":'],['id:',''.$labelFieldName.':'],$default);
+}
+
+$fieldId = (int) rand(1,2000);
 
 ?>
-
 <div id="select-items-<?php echo $id ?>-container">
 	<select
             id="<?php echo $id ?>-<?php echo $fieldId ?>"
@@ -54,7 +52,6 @@ $searchFieldName = isset($options['searchFieldName']) && $options['searchFieldNa
     >
 	</select>
 </div>
-
 <script>
 
     let tomSelected<?php echo $fieldId ?> = new TomSelect("#<?php echo $id ?>-<?php echo $fieldId ?>",{
@@ -94,9 +91,6 @@ $searchFieldName = isset($options['searchFieldName']) && $options['searchFieldNa
 
     // on add new item, select new item
     <?php if(!empty($options['onAdd'])): ?>
-
-
-
     // on create new one
     tomSelected<?php echo $fieldId ?>.on('item_add',function(value,data){
 

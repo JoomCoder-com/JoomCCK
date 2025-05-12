@@ -29,7 +29,7 @@ foreach ($exclude as &$value)
 
 <?php echo Layout::render('core.list.onThisPage',['params' => $params,'items' => $this->items]) ?>
 
-<div class="table-responsive">
+<div class="table-responsive overflow-visible">
     <table class="table table-striped cob-section-<?php echo $this->section->id; ?>">
         <thead>
         <tr>

@@ -107,7 +107,7 @@ class  CFormFieldRelate extends CFormField
 			$child = new Registry($table->params);
 			if($child->get('params.multi_parent') == 0)
 			{
-				$query->where("id NOT IN(SELECT record_id FROM #__js_res_record_values WHERE field_id = " . $table->id . ")");
+				//$query->where("id NOT IN(SELECT record_id FROM #__js_res_record_values WHERE field_id = " . $table->id . ")");
 			}
 		}
 
@@ -188,6 +188,7 @@ class  CFormFieldRelate extends CFormField
         switch($type)
 		{
 			case 2:
+
 				if($this->value)
 				{
 					$query = $db->getQuery(TRUE);
@@ -200,8 +201,14 @@ class  CFormFieldRelate extends CFormField
 
 				}
 
-				$html .= $this->_render_autocomplete($multi, array(), $default,
-					($multi ? $this->params->get('params.multi_limit') : 1), $name,$fieldOptions);
+				// build list for selected items
+				$list = [];
+
+				foreach ($default as $item){
+					$list[] = $item->id;
+				}
+
+				$html .= $this->_render_autocomplete($multi, $list, $default,	($multi ? $this->params->get('params.multi_limit') : 1), $name,$fieldOptions);
 
 
 				break;
@@ -281,9 +288,8 @@ class  CFormFieldRelate extends CFormField
 	{
         $app = Factory::getApplication();
 
-
         $options['only_suggestions'] = 1;
-        $options['can_add'] = isset($FieldOptions['can_add']) ? $FieldOptions['can_add'] : 1;
+        $options['can_add'] = isset($FieldOptions['can_add']) ? $FieldOptions['can_add'] : 0;
         $options['can_delete'] =  isset($FieldOptions['can_delete']) ? $FieldOptions['can_delete'] :  1;
         $options['suggestion_limit'] = $this->params->get('params.max_result', 10);
         $options['limit'] = $limit;
@@ -293,8 +299,6 @@ class  CFormFieldRelate extends CFormField
 		$options['labelFieldName'] = 'title';
 		$options['searchFieldName'] = 'title';
 
-
-        
 		return \Joomla\CMS\HTML\HTMLHelper::_('mrelements.pills', $name, "field_" . $this->id, $default, $list, $options);
 	}
 
@@ -454,9 +458,10 @@ class  CFormFieldRelate extends CFormField
 			$this->content['ids']   = $ids;
 
 			$limit = $this->params->get('params.multi_limit');
+
 			if($this->type == 'child')
 			{
-				$limit = $this->params->get('params.multi_parent', FALSE) ? $this->params->get('params.multi_limit') : 1;
+				$limit = $this->params->get('params.multi_parent', 0) ? $this->params->get('params.multi_limit') : 1;
 			}
 
 			if($this->content['total'] >= $limit)

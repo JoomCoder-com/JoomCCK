@@ -165,8 +165,6 @@ class JHTMLMrelements
 		$options['canDelete'] = isset($options['can_delete']) ? $options['can_delete'] : 'false';
 
 
-
-
 		// prepare data
 		$data = [
 			'options' => $options,
