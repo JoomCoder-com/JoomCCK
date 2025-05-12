@@ -11,6 +11,7 @@
 use Joomcck\Layout\Helpers\Layout;
 use Joomla\CMS\Factory;
 use Joomla\CMS\Language\Text;
+use Joomla\CMS\Table\Table;
 use Joomla\Registry\Registry;
 
 defined('_JEXEC') or die();
@@ -49,9 +50,9 @@ class  CFormFieldRelate extends CFormField
 		if(empty($types))
 			return [];
 
-
 		// start building query
 		$query = $db->getQuery(TRUE);
+		$query->select('id as value, title');
 		$query->from('#__js_res_record');
 		if(CStatistics::hasUnPublished($section_id))
 		{
@@ -62,6 +63,7 @@ class  CFormFieldRelate extends CFormField
 		$query->where("type_id IN(" . implode(',', $types) . ")");
 
 
+		// exclude current if in form view
 		if($app->input->getInt('id') && $app->input->getCmd('option') == 'com_joomcck' && $app->input->getCmd('view') == 'form')
 			$query->where('id != ' . $app->input->getInt('id'));
 
@@ -82,7 +84,7 @@ class  CFormFieldRelate extends CFormField
 		{
 			if($this->params->get('params.strict_to_user_mode') > 1 && $app->input->getInt('id'))
 			{
-				$record = \Joomla\CMS\Table\Table::getInstance('Record', 'JoomcckTable');
+				$record = Table::getInstance('Record', 'JoomcckTable');
 				$record->load($app->input->getInt('id'));
 				$user_id = $record->user_id;
 				if(!$user_id && $this->params->get('params.strict_to_user_mode') == 3)
@@ -94,29 +96,51 @@ class  CFormFieldRelate extends CFormField
 			{
 				$user_id = $user->get('id');
 			}
-			$query->where('user_id = ' . ($user_id ? $user_id : 1));
+
+			$user_id = $user_id ? $user_id : 1;
+
+			$isme = ((int)$user_id === (int)$user->get('id', null));
+
+			if($section->params->get('personalize.post_anywhere'))
+			{
+				if($section->params->get('personalize.records_mode') == 1 || $isme)
+				{
+					// Show all records posted on user home and all records posted by this user on homes of others.
+					$query->where("(id IN (SELECT record_id FROM `#__js_res_record_repost` WHERE host_id = {$user_id}) OR user_id = {$user_id})");
+				}
+				else
+				{
+					// Show only records posted on this user home
+					$query->where("id IN (SELECT record_id FROM `#__js_res_record_repost` WHERE host_id = {$user_id})");
+				}
+			}
+			else
+			{
+				$query->where('user_id = ' . $user_id);
+			}
+
+
 		}
 
-
+		// parent exclude
 		if($this->type == 'parent' && !$this->isFilter)
 		{
-			$table = \Joomla\CMS\Table\Table::getInstance('Field', 'JoomcckTable');
+			$table = Table::getInstance('Field', 'JoomcckTable');
 
 
 			$table->load($this->params->get('params.child_field'));
 			$child = new Registry($table->params);
 			if($child->get('params.multi_parent') == 0)
 			{
-				//$query->where("id NOT IN(SELECT record_id FROM #__js_res_record_values WHERE field_id = " . $table->id . ")");
+				$query->where("id NOT IN(SELECT record_id FROM #__js_res_record_values WHERE field_id = " . $table->id . ")");
 			}
 		}
 
-		$query->select('id as value, title');
+		// sort items
 		if($this->params->get('params.input_sort',''))
 		{
 			$query->order($this->params->get('params.input_sort',''));
 		}
-
 
 
 		$db->setQuery($query);
@@ -193,7 +217,7 @@ class  CFormFieldRelate extends CFormField
 				{
 					$query = $db->getQuery(TRUE);
 					$query->from('#__js_res_record');
-					$query->select('id, title');
+					$query->select('id as value, title');
 					$query->where('id IN (' . implode(',', $this->value) . ')');
 					$db->setQuery($query);
 
@@ -205,7 +229,7 @@ class  CFormFieldRelate extends CFormField
 				$list = [];
 
 				foreach ($default as $item){
-					$list[] = $item->id;
+					$list[] = $item->value;
 				}
 
 				$html .= $this->_render_autocomplete($multi, $list, $default,	($multi ? $this->params->get('params.multi_limit') : 1), $name,$fieldOptions);
@@ -235,7 +259,7 @@ class  CFormFieldRelate extends CFormField
 				{
 					$query = $db->getQuery(TRUE);
 					$query->from('#__js_res_record');
-					$query->select('id, title');
+					$query->select('id as value, title');
 					$query->where('id IN (' . implode(',', $this->value) . ')');
 					$db->setQuery($query);
 					$default = $db->loadObjectList();
@@ -295,7 +319,7 @@ class  CFormFieldRelate extends CFormField
         $options['limit'] = $limit;
         $options['suggestion_url'] =  "index.php?option=com_joomcck&task=ajax.field_call&tmpl=component&field_id={$this->id}&func=onGetList&field={$this->type}&record_id=" . ($app->input->getCmd('option') == 'com_joomcck' ? $app->input->getInt('id', 0) : 0) . "&section_id=" . $app->input->getInt('section_id');
 
-		$options['valueFieldName'] = 'id';
+		$options['valueFieldName'] = 'value';
 		$options['labelFieldName'] = 'title';
 		$options['searchFieldName'] = 'title';
 
@@ -347,7 +371,7 @@ class  CFormFieldRelate extends CFormField
 
 		foreach($default as $item)
 		{
-			$ids[] = $item->id;
+			$ids[] = $item->value;
 		}
 
 		$type_id = implode(',', $type_id);
@@ -596,7 +620,7 @@ class  CFormFieldRelate extends CFormField
 	{
 		$db = Factory::getDbo();
 
-		$table = \Joomla\CMS\Table\Table::getInstance('Record_values', 'JoomcckTable');
+		$table = Table::getInstance('Record_values', 'JoomcckTable');
 
 		if($this->type == 'child')
 		{
@@ -634,7 +658,7 @@ class  CFormFieldRelate extends CFormField
 			return;
 		}
 
-		$field = \Joomla\CMS\Table\Table::getInstance('Field', 'JoomcckTable');
+		$field = Table::getInstance('Field', 'JoomcckTable');
 		$field->load($save['field_id']);
 
 		$save['field_label'] = $field->label;
