@@ -88,8 +88,10 @@ class JoomcckModelSection extends MModelAdmin
 
 		if(!$id && $view != 'section')
 		{
-			$id = \Joomla\CMS\Factory::getApplication()->input->getInt('section_id');
+			$id = \Joomla\CMS\Factory::getApplication()->getInput()->get('section_id',0,'int');
 		}
+
+		$id = is_array($id) ? $id[0] : $id;
 
 		if(isset($cache[$id]))
 		{

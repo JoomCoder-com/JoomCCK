@@ -1252,16 +1252,19 @@ class JoomcckControllerAjax extends MControllerAdmin
 		$query .= " LIMIT 0, " . $this->input->get('notiflimit', 5);
 
 		$db->setQuery($query);
-		$result = $db->loadObjectList();
 
-		if($db->getError())
-		{
-			AjaxHelper::error(Text::_($db->getError()));
 
+		try{
+			$result = $db->loadObjectList();
+		} catch (RangeException $e){
+
+			AjaxHelper::error(Text::_($e->getMessage()));
 			return " ";
 		}
+
 		$list = array();
 		$k    = 0;
+
 		foreach($result as $i => $item)
 		{
 			$list[$i]       = new stdClass();
