@@ -2,18 +2,23 @@
 /**
  * MediaElement.js player sublayout
  */
+
+use Joomla\CMS\Factory;
+use Joomla\CMS\Uri\Uri;
+
 defined('_JEXEC') or die();
 
 // Extract variables
 extract($displayData);
 
-// Add MediaElement.js CSS and JS
-\Joomla\CMS\Factory::getDocument()->addStyleSheet('https://cdnjs.cloudflare.com/ajax/libs/mediaelement/4.2.16/mediaelementplayer.min.css');
-\Joomla\CMS\Factory::getDocument()->addScript('https://cdnjs.cloudflare.com/ajax/libs/mediaelement/4.2.16/mediaelement-and-player.min.js');
+// Add MediaElement.js Player CSS and JS
+Factory::getDocument()->addStyleSheet(Uri::root(TRUE) . '/media/com_joomcck/css/mediaelement/mediaelementplayer.min.css');
+Factory::getDocument()->addScript(Uri::root(TRUE) . '/media/com_joomcck/js/mediaelement/mediaelement-and-player.min.js');
 
-// Add MediaElement.js Playlist plugin
-\Joomla\CMS\Factory::getDocument()->addStyleSheet('https://cdnjs.cloudflare.com/ajax/libs/mediaelement-plugins/2.5.0/playlist/playlist.min.css');
-\Joomla\CMS\Factory::getDocument()->addScript('https://cdnjs.cloudflare.com/ajax/libs/mediaelement-plugins/2.5.0/playlist/playlist.min.js');
+// Add MediaElement.js Playlist plugin CSS and JS
+Factory::getDocument()->addStyleSheet(Uri::root(TRUE) . '/media/com_joomcck/css/mediaelement/playlist.min.css');
+Factory::getDocument()->addScript(Uri::root(TRUE) . '/media/com_joomcck/js/mediaelement/playlist.min.js');
+
 ?>
 
 <div id="mediaelement-player-container-<?php echo $key; ?>">
