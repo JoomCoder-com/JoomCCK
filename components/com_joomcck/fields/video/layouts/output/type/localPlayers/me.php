@@ -16,14 +16,16 @@ Factory::getDocument()->addStyleSheet(Uri::root(TRUE) . '/media/com_joomcck/css/
 Factory::getDocument()->addScript(Uri::root(TRUE) . '/media/com_joomcck/js/mediaelement/mediaelement-and-player.min.js');
 
 // Add MediaElement.js Playlist plugin CSS and JS
+if (count($videos) > 1):
 Factory::getDocument()->addStyleSheet(Uri::root(TRUE) . '/media/com_joomcck/css/mediaelement/playlist.min.css');
 Factory::getDocument()->addScript(Uri::root(TRUE) . '/media/com_joomcck/js/mediaelement/playlist.min.js');
+endif;
 
 ?>
 
 <div id="mediaelement-player-container-<?php echo $key; ?>">
     <div class="jcck-video-player-me mb-3 w-100">
-        <video id="mediaelement-player-<?php echo $key; ?>" height="auto" preload="none" controls playsinline>
+        <video id="mediaelement-player-<?php echo $key; ?>" height="auto" preload="true" controls playsinline>
 			<?php foreach($videos as $index => $video): ?>
                 <source src="<?php echo $video->url; ?>" type="video/mp4" title="<?php echo $video->display_title; ?>">
 			<?php endforeach; ?>
@@ -42,24 +44,8 @@ Factory::getDocument()->addScript(Uri::root(TRUE) . '/media/com_joomcck/js/media
             stretching: 'responsive',  // Key setting for handling different aspect ratios
 
             // Playlist plugin settings
+	        <?php if(count($videos) > 1): ?>
             playlist: {
-				<?php if(count($videos) > 1): ?>
-                // Enable playlist
-                playlist: [
-					<?php foreach($videos as $index => $video): ?>
-                    {
-                        src: '<?php echo $video->url; ?>',
-                        type: 'video/mp4',
-                        title: '<?php echo addslashes($video->display_title); ?>',
-						<?php if($video->thumbnail): ?>
-                        poster: '<?php echo $video->thumbnail; ?>',
-						<?php endif; ?>
-                        description: '<?php echo addslashes(isset($video->description) ? \Joomla\CMS\HTML\HTMLHelper::_('string.truncate', $video->description, 100) : ''); ?>'
-                    }<?php echo ($index < count($videos) - 1) ? ',' : ''; ?>
-					<?php endforeach; ?>
-                ],
-				<?php endif; ?>
-
                 // Playlist options
                 loop: false,
                 autoplay: false,
@@ -72,6 +58,7 @@ Factory::getDocument()->addScript(Uri::root(TRUE) . '/media/com_joomcck/js/media
                 removeText: 'Remove',
 
             },
+	        <?php endif; ?>
 
             // General player options
             alwaysShowControls: true,

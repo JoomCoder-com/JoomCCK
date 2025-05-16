@@ -20,7 +20,7 @@ class JFormFieldCVideo extends CFormFieldUpload
 		// register layouts folder
 		\Joomcck\Layout\Helpers\Layout::$defaultBasePath = JPATH_ROOT.'/components/com_joomcck/fields/video/layouts';
 
-		// Check system requirements
+		// Check system requirements of ffmpeg and other things
 		$this->checkSystemRequirements();
 	}
 
@@ -30,8 +30,11 @@ class JFormFieldCVideo extends CFormFieldUpload
 	 */
 	protected function checkSystemRequirements()
 	{
+
+		$ffmpeg_enabled = $this->params->get('params.enable_ffmpeg', 1);
+
 		// Check if ffmpeg processing is enabled in parameters
-		if ($this->params->get('params.enable_ffmpeg', 1) == 0) {
+		if (!$ffmpeg_enabled) {
 			$this->system_ready = false;
 			return false;
 		}
@@ -181,6 +184,8 @@ class JFormFieldCVideo extends CFormFieldUpload
 	 */
 	protected function getVideoDuration($params, $val)
 	{
+
+		// no need to continue if no ffmpeg or exec disabled ...
 		if (!$this->system_ready) {
 			return 0;
 		}
@@ -289,8 +294,10 @@ class JFormFieldCVideo extends CFormFieldUpload
 
 	public function _getVideoThumb($file)
 	{
-		// Check if FFmpeg processing is enabled and system meets requirements
-		if (!$this->system_ready || $this->params->get('params.enable_ffmpeg', 1) == 0) {
+
+
+		// No need to continue if no ffmpeg or exec disabled ...
+		if (!$this->system_ready) {
 			return false;
 		}
 

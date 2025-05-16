@@ -105,7 +105,7 @@ HTMLHelper::_('bootstrap.modal');
     </div>
 
 
-    <ul class="text-muted list-unstyle mt-3">
+    <ul class="text-muted list-unstyled mt-3">
         <li>
             <small>
                 <i class="fas fa-info-circle"></i> <?php echo \Joomla\CMS\Language\Text::_('CER_ONLYFORMATS') ?>:
