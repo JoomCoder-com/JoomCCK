@@ -43,9 +43,6 @@ class  CFormFieldRelate extends CFormField
 		$app     = Factory::getApplication();
 		$section = ItemsStore::getSection($section_id);
 
-		// force types to array
-		settype($types, 'array');
-
 		// no need to continue if types is empty
 		if(empty($types))
 			return [];
@@ -157,6 +154,9 @@ class  CFormFieldRelate extends CFormField
 		// inits
 		$app = Factory::getApplication();
 		$db  = Factory::getDbo();
+
+		// force types to array
+		settype($types, 'array');
 
 		$attribs = $html = $record_id = '';
 		$default = array();
