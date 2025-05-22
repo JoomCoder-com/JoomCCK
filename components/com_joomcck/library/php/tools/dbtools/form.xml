@@ -7,6 +7,7 @@
             <option value="3">ANALYZE</option>
             <option value="4">TRUNCATE (empty)</option>
             <option value="5">CHECK</option>
+            <option value="6">UPDATE DATABASE STRUCTURE</option>
         </field>
         <field type="medbtables" name="db_tables" label="Tables" description="" default="" multiple="multiple" size="20"
                required="true"/>

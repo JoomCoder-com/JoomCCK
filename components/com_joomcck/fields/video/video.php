@@ -31,7 +31,7 @@ class JFormFieldCVideo extends CFormFieldUpload
 	protected function checkSystemRequirements()
 	{
 
-		$ffmpeg_enabled = $this->params->get('params.enable_ffmpeg', 1);
+		$ffmpeg_enabled = (int) $this->params->get('params.enable_ffmpeg', 0);
 
 		// Check if ffmpeg processing is enabled in parameters
 		if (!$ffmpeg_enabled) {
@@ -126,7 +126,7 @@ class JFormFieldCVideo extends CFormFieldUpload
 	protected function prepareVideoData($record, $client)
 	{
 		// Set width and height
-		$width = $this->params->get('params.default_width', 640);
+		$width = (int) $this->params->get('params.default_width', 640);
 		$height = round(($width / 16) * 9, 0);
 
 		$this->params->set('width', $width);

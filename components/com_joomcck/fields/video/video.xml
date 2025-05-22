@@ -59,7 +59,7 @@
 			</fieldset>
 
 			<fieldset name="advanced" label="FS_FORMATPARAMS">
-				<field name="enable_ffmpeg" type="radio" layout="joomla.form.field.radio.switcher" default="1" label="Enable FFmpeg Processing" description="Enable video processing features that require FFmpeg (thumbnails, duration)">
+				<field name="enable_ffmpeg" type="radio" layout="joomla.form.field.radio.switcher" filter="integer" default="0" label="Enable FFmpeg Processing" description="Enable video processing features that require FFmpeg (thumbnails, duration)">
 					<option value="0">JNO</option>
 					<option value="1">JYES</option>
 				</field>
@@ -69,7 +69,7 @@
 					<option value="medium">Medium</option>
 					<option value="high">High (slower, larger files)</option>
 				</field>
-				<field name="thumbnail_width" type="text" default="320" size="3" label="Thumbnail Width" description="Width of generated thumbnails in pixels (height will be calculated automatically)" />
+				<field name="thumbnail_width" type="number" filter="integer" default="320" size="3" label="Thumbnail Width (px)" description="Width of generated thumbnails in pixels (height will be calculated automatically)" />
 				<field name="only_one" type="radio" layout="joomla.form.field.radio.switcher" default="0" label="F_ONLYONE">
 					<option value="0">CNO</option>
 					<option value="1">CYES</option>
@@ -94,7 +94,7 @@
 					<option value="me">MediaElement.js (Recommended)</option>
 					<option value="jwplayer">JW Player (Legacy)</option>
 				</field>
-				<field name="default_width" type="text" default="640" size="3" label="F_DEFWIDTH" />
+				<field name="default_width" type="number" default="640" filter="integer" size="3" label="F_DEFWIDTH" />
 				<field name="listbar" type="radio" layout="joomla.form.field.radio.switcher" default="1" label="F_SHOWLISTBAR">
 					<option value="0">CNO</option>
 					<option value="1">CYES</option>
