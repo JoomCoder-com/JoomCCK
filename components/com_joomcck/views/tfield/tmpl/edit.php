@@ -140,48 +140,43 @@ $wa->useScript('keepalive')
 
 	    <?php echo HTMLHelper::_('uitab.endTab'); ?>
 	    <?php echo HTMLHelper::_('uitab.addTab', 'myTab', 'page-display', Text::_('XML_LABEL_F_DISPLAY')); ?>
-	    <?php // echo MFormHelper::renderFieldset($this->params_form, 'general', $this->item->params, 'core',1,2); ?>
-	    <?php echo $this->params_form->renderFieldset('display'); ?>
+            <?php echo $this->params_form->renderFieldset('display'); ?>
 	    <?php echo HTMLHelper::_('uitab.endTab'); ?>
 	    <?php echo HTMLHelper::_('uitab.addTab', 'myTab', 'page-general', Text::_('XML_LABEL_F_GP')); ?>
-	        <?php // echo MFormHelper::renderFieldset($this->params_form, 'general', $this->item->params, 'core',1,2); ?>
              <?php echo $this->params_form->renderFieldset('general'); ?>
 	    <?php echo HTMLHelper::_('uitab.endTab'); ?>
 
 	    <?php echo HTMLHelper::_('uitab.addTab', 'myTab', 'page-label', Text::_('CLABEL')); ?>
-	        <?php // echo MFormHelper::renderFieldset($this->params_form, 'label', $this->item->params, 'core'); ?>
-	    <?php echo $this->params_form->renderFieldset('label'); ?>
+	        <?php echo $this->params_form->renderFieldset('label'); ?>
 	    <?php echo HTMLHelper::_('uitab.endTab'); ?>
 
 	    <?php echo HTMLHelper::_('uitab.addTab', 'myTab', 'page-label', Text::_('CACCESS')); ?>
+            <div class="card mb-4">
+                <div class="card-header">
+                    <h5 class="m-0"><?php echo Text::_('XML_LABEL_F_VIEW_ACCESS'); ?></h5>
+                </div>
+                <div class="card-body">
+                    <?php echo $this->params_form->renderFieldset('access2_view'); ?>
+                </div>
+            </div>
 
-	    <div class="card mb-4">
-            <div class="card-header">
-                <h5 class="m-0"><?php echo Text::_('XML_LABEL_F_VIEW_ACCESS'); ?></h5>
+            <div class="card mb-4">
+                <div class="card-header">
+                    <h5 class="m-0"><?php echo Text::_('XML_LABEL_F_SUBMIT_ACCESS'); ?></h5>
+                </div>
+                <div class="card-body">
+                    <?php echo $this->params_form->renderFieldset('access2_submit'); ?>
+                </div>
             </div>
-            <div class="card-body">
-	            <?php echo $this->params_form->renderFieldset('access2_view'); ?>
-            </div>
-        </div>
 
-        <div class="card mb-4">
-            <div class="card-header">
-                <h5 class="m-0"><?php echo Text::_('XML_LABEL_F_SUBMIT_ACCESS'); ?></h5>
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="m-0"><?php echo Text::_('XML_LABEL_F_EDIT_ACCESS'); ?></h5>
+                </div>
+                <div class="card-body">
+                    <?php echo $this->params_form->renderFieldset('access2_edit'); ?>
+                </div>
             </div>
-            <div class="card-body">
-			    <?php echo $this->params_form->renderFieldset('access2_submit'); ?>
-            </div>
-        </div>
-
-        <div class="card">
-            <div class="card-header">
-                <h5 class="m-0"><?php echo Text::_('XML_LABEL_F_EDIT_ACCESS'); ?></h5>
-            </div>
-            <div class="card-body">
-			    <?php echo $this->params_form->renderFieldset('access2_edit'); ?>
-            </div>
-        </div>
-
 	    <?php echo HTMLHelper::_('uitab.endTab'); ?>
 
 	    <?php echo HTMLHelper::_('uitab.addTab', 'myTab', 'page-emerald', Text::_('FS_EMERALD')); ?>

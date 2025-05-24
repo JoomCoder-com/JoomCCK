@@ -58,7 +58,14 @@
 			</field>
 			<field labelclass="form-label" name="lable_class" type="text" size="20" default=""
 				   label="XML_LABEL_F_LBL_CLASS"/>
-			<field labelclass="form-label" name="icon" type="fieldicon" default=""
+			<field labelclass="form-label" name="label_icon_type" type="list" default="0"
+				   label="XML_LABEL_F_LBL_ICON_TYPE" filter="integer">
+				<option value="0">Image</option>
+				<option value="1">Font</option>
+			</field>
+			<field showon="label_icon_type:1" labelclass="form-label" name="label_icon_class" type="text" size="20" default="" hint="Example: fas fa-list"
+				   label="XML_LABEL_F_LBL_ICON_CLASS"/>
+			<field showon="label_icon_type:0" labelclass="form-label" name="icon" type="fieldicon" default=""
 				   label="XML_LABEL_F_LBL_ICON"/>
 		</fieldset>
 		<fieldset name="access2_view" label="XML_LABEL_F_VIEW_ACCESS">
