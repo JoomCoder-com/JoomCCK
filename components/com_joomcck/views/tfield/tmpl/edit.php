@@ -8,6 +8,7 @@
  */
 
 use Joomla\CMS\HTML\HTMLHelper;
+use Joomla\CMS\Language\Text;
 
 defined('_JEXEC') or die('Restricted access'); ?>
 <?php
@@ -15,6 +16,9 @@ defined('_JEXEC') or die('Restricted access'); ?>
 $wa = $this->document->getWebAssetManager();
 $wa->useScript('keepalive')
 	->useScript('form.validate');
+
+// required css file fix issues of UI/UX
+\Joomla\CMS\Factory::getDocument()->addStyleSheet(\Joomla\CMS\Uri\Uri::root().'/media/com_joomcck/css/joomcck.css');
 
 ?>
 <script type="text/javascript">
@@ -25,7 +29,7 @@ $wa->useScript('keepalive')
 			Joomla.submitform(task, document.getElementById('adminForm'));
 		}
 		else {
-			alert('<?php echo $this->escape(\Joomla\CMS\Language\Text::_('JGLOBAL_VALIDATION_FORM_FAILED'));?>');
+			alert('<?php echo $this->escape(Text::_('JGLOBAL_VALIDATION_FORM_FAILED'));?>');
 		}
 	}
 	function ajax_load_sub_params(sel, dir) {
@@ -87,17 +91,17 @@ $wa->useScript('keepalive')
 <form action="<?php echo \Joomla\CMS\Uri\Uri::getInstance()->toString(); ?>" method="post" name="adminForm" id="adminForm" class="form-horizontal">
 	<?php echo HTMLFormatHelper::layout('item', $this); ?>
 
-	<div class="page-geader">
-		<h1><?php echo empty($this->item->id) ? \Joomla\CMS\Language\Text::_('CNEWFIELD') : \Joomla\CMS\Language\Text::sprintf('CEDITFIELDS', $this->item->label); ?></h1>
+	<div class="page-header">
+		<h1><?php echo empty($this->item->id) ? Text::_('CNEWFIELD') : Text::sprintf('CEDITFIELDS', $this->item->label); ?></h1>
 	</div>
 
     <div id="joomcckContainer">
 
 	    <?php echo HTMLHelper::_('uitab.startTabSet', 'myTab', ['active' => 'page-main', 'recall' => true, 'breakpoint' => 768]); ?>
-	    <?php echo HTMLHelper::_('uitab.addTab', 'myTab', 'page-main', \Joomla\CMS\Language\Text::_('FS_FORM')); ?>
+	    <?php echo HTMLHelper::_('uitab.addTab', 'myTab', 'page-main', Text::_('FS_FORM')); ?>
 
             <div class="row">
-                <div class="col-md-6">
+                <div class="col-md-4">
                     <div class="control-group">
                         <div class="form-label"><?php echo $this->form->getLabel('id'); ?></div>
                         <div class="controls"><?php echo $this->form->getInput('id'); ?></div>
@@ -122,14 +126,10 @@ $wa->useScript('keepalive')
                         <div class="form-label"><?php echo $this->form->getLabel('group_id'); ?></div>
                         <div class="controls"><?php echo $this->form->getInput('group_id'); ?></div>
                     </div>
-	                <?php echo MFormHelper::renderFieldset($this->params_form, 'general', $this->item->params, 'core'); ?>
-	                <?php echo MFormHelper::renderFieldset($this->params_form, 'label', $this->item->params, 'core'); ?>
-	                <?php echo MFormHelper::renderFieldset($this->params_form, 'access2_view', $this->item->params, 'core'); ?>
-	                <?php echo MFormHelper::renderFieldset($this->params_form, 'access2_submit', $this->item->params, 'core'); ?>
-	                <?php echo MFormHelper::renderFieldset($this->params_form, 'access2_edit', $this->item->params, 'core'); ?>
+
                 </div>
-                <div class="col-md-6">
-                    <legend><?php echo \Joomla\CMS\Language\Text::_('CFIELDPARAMS'); ?></legend>
+                <div class="col-md-8">
+                    <legend><?php echo Text::_('CFIELDPARAMS'); ?></legend>
                     <div id="additional-form">
 		                <?php echo @$this->parameters?>
                     </div>
@@ -139,9 +139,53 @@ $wa->useScript('keepalive')
             </div>
 
 	    <?php echo HTMLHelper::_('uitab.endTab'); ?>
+	    <?php echo HTMLHelper::_('uitab.addTab', 'myTab', 'page-display', Text::_('XML_LABEL_F_DISPLAY')); ?>
+	    <?php // echo MFormHelper::renderFieldset($this->params_form, 'general', $this->item->params, 'core',1,2); ?>
+	    <?php echo $this->params_form->renderFieldset('display'); ?>
+	    <?php echo HTMLHelper::_('uitab.endTab'); ?>
+	    <?php echo HTMLHelper::_('uitab.addTab', 'myTab', 'page-general', Text::_('XML_LABEL_F_GP')); ?>
+	        <?php // echo MFormHelper::renderFieldset($this->params_form, 'general', $this->item->params, 'core',1,2); ?>
+             <?php echo $this->params_form->renderFieldset('general'); ?>
+	    <?php echo HTMLHelper::_('uitab.endTab'); ?>
 
-	    <?php echo HTMLHelper::_('uitab.addTab', 'myTab', 'page-emerald', \Joomla\CMS\Language\Text::_('FS_EMERALD')); ?>
-            <p class="lead"><?php echo \Joomla\CMS\Language\Text::_('FS_EMERALDINTEGRATE')?>
+	    <?php echo HTMLHelper::_('uitab.addTab', 'myTab', 'page-label', Text::_('CLABEL')); ?>
+	        <?php // echo MFormHelper::renderFieldset($this->params_form, 'label', $this->item->params, 'core'); ?>
+	    <?php echo $this->params_form->renderFieldset('label'); ?>
+	    <?php echo HTMLHelper::_('uitab.endTab'); ?>
+
+	    <?php echo HTMLHelper::_('uitab.addTab', 'myTab', 'page-label', Text::_('CACCESS')); ?>
+
+	    <div class="card mb-4">
+            <div class="card-header">
+                <h5 class="m-0"><?php echo Text::_('XML_LABEL_F_VIEW_ACCESS'); ?></h5>
+            </div>
+            <div class="card-body">
+	            <?php echo $this->params_form->renderFieldset('access2_view'); ?>
+            </div>
+        </div>
+
+        <div class="card mb-4">
+            <div class="card-header">
+                <h5 class="m-0"><?php echo Text::_('XML_LABEL_F_SUBMIT_ACCESS'); ?></h5>
+            </div>
+            <div class="card-body">
+			    <?php echo $this->params_form->renderFieldset('access2_submit'); ?>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-header">
+                <h5 class="m-0"><?php echo Text::_('XML_LABEL_F_EDIT_ACCESS'); ?></h5>
+            </div>
+            <div class="card-body">
+			    <?php echo $this->params_form->renderFieldset('access2_edit'); ?>
+            </div>
+        </div>
+
+	    <?php echo HTMLHelper::_('uitab.endTab'); ?>
+
+	    <?php echo HTMLHelper::_('uitab.addTab', 'myTab', 'page-emerald', Text::_('FS_EMERALD')); ?>
+            <p class="lead"><?php echo Text::_('FS_EMERALDINTEGRATE')?>
             <div class="float-start" style="max-width: 500px; margin-right: 20px;">
                 <?php echo MFormHelper::renderFieldset($this->params_form, 'sp', $this->item->params, 'emerald'); ?>
                 <?php echo MFormHelper::renderFieldset($this->params_form, 'sp4', $this->item->params, 'emerald'); ?>

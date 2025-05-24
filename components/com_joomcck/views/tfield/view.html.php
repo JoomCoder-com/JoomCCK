@@ -35,6 +35,7 @@ class JoomcckViewTField extends MViewBase
 		$this->user = \Joomla\CMS\Factory::getApplication()->getIdentity();
 		$params = new \Joomla\CMS\Form\Form('params', array('control' => 'params'));
 		$params->loadFile(JPATH_COMPONENT. '/models/forms/params.field.xml');
+		$params->bind($this->item->params);
 		$this->params_form = $params;
 
 		$this->params_groups = array('core' => \Joomla\CMS\Language\Text::_('FS_GENERAL'),
