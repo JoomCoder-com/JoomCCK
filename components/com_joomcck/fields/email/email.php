@@ -22,6 +22,7 @@ class JFormFieldCEmail extends CFormField
 	public $url;
 	public $url_form;
 	public $recordKey;
+	public $layoutFolder;
 
 
 	public function __construct($field, $default)
@@ -29,7 +30,7 @@ class JFormFieldCEmail extends CFormField
 		parent::__construct($field, $default);
 
 		// register layouts folder
-		\Joomcck\Layout\Helpers\Layout::$defaultBasePath = JPATH_ROOT.'/components/com_joomcck/fields/email/layouts';
+		$this->layoutFolder = __DIR__ . '/layouts';
 
 	}
 

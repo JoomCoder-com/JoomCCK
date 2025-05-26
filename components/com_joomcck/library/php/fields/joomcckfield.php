@@ -38,8 +38,6 @@ class CFormField extends \Joomla\CMS\Form\FormField
 	public $js;
 	public $inputvalue;
 	public $labelvalue;
-
-
 	/**
 	 * @var \Joomla\Registry\Registry
 	 */
@@ -61,7 +59,6 @@ class CFormField extends \Joomla\CMS\Form\FormField
 
 	public function __construct($field, $default)
 	{
-
 
 
 		if(is_array($field->params))

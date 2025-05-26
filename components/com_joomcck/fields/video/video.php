@@ -1,4 +1,7 @@
 <?php
+
+use Joomla\CMS\Factory;
+
 defined('_JEXEC') or die();
 require_once JPATH_ROOT . '/components/com_joomcck/library/php/fields/joomcckupload.php';
 
@@ -7,6 +10,7 @@ class JFormFieldCVideo extends CFormFieldUpload
 	public $link;
 	public $embed;
 	public $videos;
+	public $layoutFolder;
 	public $only_one;
 
 	// Flag to track if system requirements are met
@@ -17,8 +21,8 @@ class JFormFieldCVideo extends CFormFieldUpload
 		parent::__construct($field, $default);
 		require_once dirname(__FILE__) . DIRECTORY_SEPARATOR . 'helper.php';
 
-		// register layouts folder
-		\Joomcck\Layout\Helpers\Layout::$defaultBasePath = JPATH_ROOT.'/components/com_joomcck/fields/video/layouts';
+		// set layout folder
+		$this->layoutFolder = __DIR__.'/layouts';
 
 		// Check system requirements of ffmpeg and other things
 		$this->checkSystemRequirements();
@@ -31,6 +35,10 @@ class JFormFieldCVideo extends CFormFieldUpload
 	protected function checkSystemRequirements()
 	{
 
+		// this warnings should be displayed on form view only
+		$view = Factory::getApplication()->input->get('view');
+		$layout = Factory::getApplication()->input->get('layout');
+
 		$ffmpeg_enabled = (int) $this->params->get('params.enable_ffmpeg', 0);
 
 		// Check if ffmpeg processing is enabled in parameters
@@ -42,7 +50,10 @@ class JFormFieldCVideo extends CFormFieldUpload
 		// Check if exec function is available
 		if (!function_exists('exec') || in_array('exec', array_map('trim', explode(',', ini_get('disable_functions'))))) {
 			$this->system_ready = false;
-			\Joomla\CMS\Factory::getApplication()->enqueueMessage('Video field requires exec function to be enabled', 'warning');
+
+			if($view == 'tfield')
+				Factory::getApplication()->enqueueMessage('Video field requires exec function to be enabled', 'warning');
+
 			return false;
 		}
 
@@ -56,7 +67,10 @@ class JFormFieldCVideo extends CFormFieldUpload
 
 		if ($return_var !== 0) {
 			$this->system_ready = false;
-			\Joomla\CMS\Factory::getApplication()->enqueueMessage('Video field requires FFmpeg to be installed and accessible', 'warning');
+
+			if($view == 'tfield')
+				Factory::getApplication()->enqueueMessage('Video field requires FFmpeg to be installed and accessible', 'warning');
+
 			return false;
 		}
 
@@ -135,18 +149,21 @@ class JFormFieldCVideo extends CFormFieldUpload
 		// Prepare videos and their URLs
 		$this->videos = [];
 
-		if (!empty($this->value)) {
+		// no need to continue if no local files uploaded
+		if(!isset($this->value['files']))
+			return;
+		if(empty($this->value['files']))
+			return;
 
-			$files = $this->getFiles($record);
+		$files = $this->getFiles($record);
 
-			foreach ($files as $key => $file) {
-				$this->videos[$key] = $file;
-				$this->videos[$key]->url = $this->getFileUrl($file);
-				$this->videos[$key]->thumbnail = $this->_getVideoThumb($file);
-				$this->videos[$key]->display_title = ($this->params->get('params.allow_edit_title', 1) &&
-					isset($file->title) &&
-					$file->title) ? $file->title : $file->realname;
-			}
+		foreach ($files as $key => $file) {
+			$this->videos[$key] = $file;
+			$this->videos[$key]->url = $this->getFileUrl($file);
+			$this->videos[$key]->thumbnail = $this->_getVideoThumb($file);
+			$this->videos[$key]->display_title = ($this->params->get('params.allow_edit_title', 1) &&
+				isset($file->title) &&
+				$file->title) ? $file->title : $file->realname;
 		}
 	}
 

@@ -51,8 +51,8 @@ class CVideoAdapterYoutube extends CVideoAdapterAbstarct
 
 		return Layout::render('output.type.embedPlayers.youtube', [
 			'key' => $this->key,
-			'width' => $this->width,
-		]);
+			'width' => $this->width
+		],JPATH_ROOT . '/components/com_joomcck/fields/video/layouts');
 
 	}
 }

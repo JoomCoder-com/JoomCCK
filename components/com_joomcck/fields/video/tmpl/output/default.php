@@ -33,29 +33,29 @@ $wa->useStyle('com_joomcck.responsive-video');
 <div id="video-block-<?php echo $key; ?>" class="video-field-container">
 	<?php
 	// Use layouts for each video type
-	if(!empty($this->value['files'])) {
+	if(isset($this->value['files']) && !empty($this->value['files'])) {
 		echo Layout::render('output.type.local', array(
 			'field' => $this,
 			'record' => $record,
 			'client' => $client,
 			'key' => $key
-		));
+		),$this->layoutFolder);
 	}
 
-	if(!empty($this->value['embed'])) {
+	if(isset($this->value['embed']) && !empty($this->value['embed'])) {
 		echo Layout::render('output.type.embed', array(
 			'field' => $this,
 			'record' => $record,
 			'client' => $client
-		));
+		),$this->layoutFolder);
 	}
 
-	if(!empty($this->value['link'])) {
+	if(isset($this->value['link']) && !empty($this->value['link'])) {
 		echo Layout::render('output.type.remote', array(
 			'field' => $this,
 			'record' => $record,
 			'client' => $client
-		));
+		),$this->layoutFolder);
 	}
 	?>
 </div>

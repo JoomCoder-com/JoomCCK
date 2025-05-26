@@ -37,4 +37,4 @@ echo Layout::render('output.type.localPlayers.' . $player, [
 	'videos' => $videos,
 	'width' => $width,
 	'height' => $height
-]);
+],JPATH_ROOT . '/components/com_joomcck/fields/video/layouts');

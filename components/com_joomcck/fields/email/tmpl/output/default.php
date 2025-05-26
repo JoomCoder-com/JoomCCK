@@ -54,18 +54,18 @@ if (in_array($params->get('params.send_mail', 3), $this->user->getAuthorisedView
 	{
 
 		case 1 :
-			echo Layout::render('output.type.collapse', ['current' => $this]); // email form collapse using BS
+			echo Layout::render('output.type.collapse', ['current' => $this], $this->layoutFolder); // email form collapse using BS
 
 			break;
 
 		case 2:
 
-			echo Layout::render('output.type.modal', ['current' => $this]); // email form open as bootstrap modal
+			echo Layout::render('output.type.modal', ['current' => $this], $this->layoutFolder); // email form open as bootstrap modal
 
 			break;
 
 		case 3 :
-			echo Layout::render('output.type.fixed', ['current' => $this]); // email form displayed in fixed area
+			echo Layout::render('output.type.fixed', ['current' => $this], $this->layoutFolder); // email form displayed in fixed area
 			break;
 
 	}
