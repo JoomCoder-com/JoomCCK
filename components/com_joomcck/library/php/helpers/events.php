@@ -11,6 +11,8 @@ use Joomla\CMS\Factory;
 
 defined('_JEXEC') or die();
 
+require_once JPATH_ROOT . '/components/com_joomcck/library/php/helpers/itemsstore.php';
+
 class CEventsHelper
 {
 
@@ -253,6 +255,9 @@ class CEventsHelper
 
 	static public function notification($event, $filter)
 	{
+
+
+
 		$record  = ItemsStore::getRecord($event->ref_1);
 		$section = ItemsStore::getSection($event->ref_2);
 		$type    = ItemsStore::getType($record->type_id);
