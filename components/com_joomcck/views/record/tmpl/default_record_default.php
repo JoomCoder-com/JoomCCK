@@ -99,10 +99,11 @@ if($params->get('tmpl_core.item_follow_num'))
 				<dt id="<?php echo 'dt-'.$field_id; ?>" class="<?php echo $field->class;?>">
 					<?php if($field->params->get('core.show_lable') > 1):?>
 						<label id="<?php echo $field->id;?>-lbl">
-							<?php echo $field->label; ?>
-							<?php if($field->params->get('core.icon')):?>
-								<?php echo HTMLFormatHelper::icon($field->params->get('core.icon'));  ?>
-							<?php endif;?>
+							<?php if (!$field->params->get('core.label_icon_type', 0) && !empty($field->params->get('core.icon',''))): // image icon used ?>
+								<?php echo HTMLFormatHelper::icon($field->params->get('core.icon')); ?>
+							<?php elseif (!empty($field->params->get('core.label_icon_class', ''))): // font icon used ?>
+                                <i class="<?php echo $field->params->get('core.label_icon_class') ?>"></i>
+							<?php endif; ?><?php echo $field->label; ?>
 						</label>
 						<?php if($field->params->get('core.label_break') > 1):?>
 						<?php endif;?>
@@ -159,10 +160,11 @@ if($params->get('tmpl_core.item_follow_num'))
 					<dt id="<?php echo 'dt-'.$field_id; ?>" class="<?php echo $field->class;?>">
 						<?php if($field->params->get('core.show_lable') > 1):?>
 							<label id="<?php echo $field->id;?>-lbl">
-								<?php echo $field->label; ?>
-								<?php if($field->params->get('core.icon')):?>
-									<?php echo HTMLFormatHelper::icon($field->params->get('core.icon'));  ?>
-								<?php endif;?>
+								<?php if (!$field->params->get('core.label_icon_type', 0) && !empty($field->params->get('core.icon',''))): // image icon used ?>
+									<?php echo HTMLFormatHelper::icon($field->params->get('core.icon')); ?>
+								<?php elseif (!empty($field->params->get('core.label_icon_class', ''))): // font icon used ?>
+                                    <i class="<?php echo $field->params->get('core.label_icon_class') ?>"></i>
+								<?php endif; ?><?php echo $field->label; ?>
 							</label>
 							<?php if($field->params->get('core.label_break') > 1):?>
 							<?php endif;?>
