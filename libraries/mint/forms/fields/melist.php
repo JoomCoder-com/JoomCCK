@@ -36,6 +36,8 @@ class JFormMEFieldList extends \Joomla\CMS\Form\FormField
 	 */
 	protected function getInput()
 	{
+
+
 		// Initialize variables.
 		$html = array();
 		$attr = '';
@@ -55,6 +57,11 @@ class JFormMEFieldList extends \Joomla\CMS\Form\FormField
 			
 			if(!preg_match('/\[\]$/iU', $this->name))
 				$this->name .= '[]';
+		}
+
+		if($this->class || $this->element['class'])
+		{
+			$attr .= ' class="'.$this->class.'"';
 		}
 
 		// Initialize JavaScript field attributes.

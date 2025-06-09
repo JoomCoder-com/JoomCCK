@@ -22,6 +22,7 @@ class JFormFieldMeresourcessection extends JFormMEFieldList
 	protected function getOptions()
 	{
 
+
 		// load joomcck lang
 		$lang = \Joomla\CMS\Factory::getLanguage();
 		$lang->load('com_joomcck',JPATH_ROOT,$lang->getTag(),true);
