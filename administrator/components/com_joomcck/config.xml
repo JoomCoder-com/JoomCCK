@@ -9,14 +9,21 @@
 			<option value="Y-m-d">YYYY-MM-DD</option>
 			<option value="Y/m/d">YYYY/MM/DD</option>
 		</field>
-		<field type="number" default="20" min="5" max="500" step="5" name="list_limit" label="Default List Limit" />
-		<field type="number" default="20" min="5" max="500" step="5" name="list_limit_items" label="Items List Limit" />
 
 		<field name="captcha" type="plugins" folder="captcha" default="recaptcha" label="XML_CAPTCHA" description="XML_CAPTCHA_DESCR" filter="cmd" >
 			<option value="">JOPTION_USE_DEFAULT</option>
 			<option value="0">JOPTION_DO_NOT_USE</option>
 		</field>
 
+		<field name="cron_key" type="text" default="" size="40" label="C_CRONSECRETWORD" />
+		<field name="map_key" type="text" default="" size="40" label="Google map API key" />
+
+
+	</fieldset>
+
+	<fieldset name="display" label="XML_FSETLBL_CNF_DISPLAY">
+		<field type="number" default="20" min="5" max="500" step="5" name="list_limit" label="Default List Limit" />
+		<field type="number" default="20" min="5" max="500" step="5" name="list_limit_items" label="Items List Limit" />
 		<field name="compatibility" type="radio" class="btn-group" label="XML_FIELD_LABEL_CNF_COMPAT" default="0" description="XML_FIELD_LABEL_CNF_COMPATDESCR">
 			<option value="1">JYES</option>
 			<option value="0">JNO</option>
@@ -25,15 +32,13 @@
 			<option value="1">JYES</option>
 			<option value="0">JNO</option>
 		</field>
-
-		<field name="cron_key" type="text" default="" size="40" label="C_CRONSECRETWORD" />
-		<field name="map_key" type="text" default="" size="40" label="Google map API key" />
 		<field name="tmpl_prefix" type="text" default="" size="40" label="CTMPL_PREFIX" description="CTMPL_PREFIX_DESCR" />
 		<field name="tmpl_full" type="radio" class="btn-group" label="XML_FIELD_LABEL_CNF_TMPL_FULL" description="XML_FIELD_LABEL_CNF_TMPL_FULL_DESCR" default="0">
 			<option value="1">JYES</option>
 			<option value="0">JNO</option>
 		</field>
 	</fieldset>
+
 	<fieldset name="users" label="XML_FSETLBL_CNF_USERS">
 		<field name="community" type="folderlist" label="XML_FIELD_LABEL_CNF_COMMUNITYINTEGR" hide_none="1" hide_default="1" default="com_joomcck" directory="components/com_joomcck/library/php/community" description="XML_FIELD_DESCR_CNF_COMMUNITYINTEGR" />
 		<field name="gravatar" type="radio" class="btn-group" label="XML_FIELD_LABEL_CNF_GRAVATAR" default="1">
