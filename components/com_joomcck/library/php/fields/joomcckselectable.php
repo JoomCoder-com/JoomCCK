@@ -218,7 +218,7 @@ class CFormFieldSelectable extends CFormField
 		return $value;
 	}
 
-	private function _getvalue()
+	public function _getvalue()
 	{
 		$value = $this->value;
 

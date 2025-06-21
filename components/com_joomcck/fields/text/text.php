@@ -37,6 +37,114 @@ class JFormFieldCtext extends CFormFieldSelectable
 		return $this->_display_input();
 	}
 
+
+	public function onFilterGetValues($post)
+	{
+		$db = \Joomla\CMS\Factory::getDbo();
+		$query = $db->getQuery(TRUE);
+
+		$section = ItemsStore::getSection($post['section_id']);
+
+		// Get unique values from database for this text field
+		$query->select('DISTINCT field_value as text, field_value as id');
+		$query->from('#__js_res_record_values');
+		$query->where("section_id = {$section->id}");
+		$query->where("`field_key` = '{$this->key}'");
+		$query->where("field_value != ''");
+		$query->where("field_value IS NOT NULL");
+
+		// Exclude unpublished records
+		$query->where("record_id NOT IN(SELECT r.id FROM #__js_res_record AS r WHERE r.section_id = {$post['section_id']} AND (r.published = 0 OR r.hidden = 1 OR r.archive = 1))");
+
+		// Add search term if provided
+		if (!empty($post['term'])) {
+			$term = $db->escape($post['term']);
+			$query->where("field_value LIKE '%{$term}%'");
+		}
+
+		// Limit results for performance
+		$limit = $this->params->get('params.max_result', 10);
+		$query->setLimit($limit);
+
+		// Order by frequency (most used first)
+		if ($this->params->get('params.filter_show_number', 1)) {
+			$query->select('COUNT(record_id) as num');
+			$query->group('field_value');
+			$query->order('num DESC, field_value ASC');
+		} else {
+			$query->order('field_value ASC');
+		}
+
+		$db->setQuery($query);
+		$list = $db->loadObjectList();
+
+		$out = [];
+		if ($list) {
+			foreach ($list as $item) {
+				$out[] = [
+					'id' => $item->text,
+					'text' => $item->text
+				];
+			}
+		}
+
+		return $out;
+	}
+
+
+	/**
+	 * Override the filter rendering to use proper autocomplete
+	 */
+	public function onRenderFilter($section, $module = FALSE)
+	{
+		// Set the filter template to use autocomplete
+		$this->params->set('params.template_filter', 'autocomplete.php');
+
+		// Get current filter value
+		$this->default = $this->_getvalue();
+
+		// Render the filter using autocomplete template
+		return $this->_display_filter($section, $module);
+	}
+
+	/**
+	 * Enhanced filter where condition for text fields
+	 */
+	public function onFilterWhere($section, &$query)
+	{
+		$value = $this->_getvalue();
+
+		if (!$value) {
+			return NULL;
+		}
+
+		$db = \Joomla\CMS\Factory::getDbo();
+		$conditions = [];
+
+		foreach ($value as $text) {
+			if ($this->params->get('params.filter_exact_match', 0)) {
+				// Exact match
+				$conditions[] = "field_value = '" . $db->escape($text) . "'";
+			} else {
+				// Partial match (default for text fields)
+				$conditions[] = "field_value LIKE '%" . $db->escape($text) . "%'";
+			}
+		}
+
+		if (empty($conditions)) {
+			return NULL;
+		}
+
+		// Build the query
+		$whereClause = "(" . implode(' OR ', $conditions) . ")";
+		$sql = "SELECT record_id FROM `#__js_res_record_values` 
+            WHERE {$whereClause} 
+            AND section_id = {$section->id} 
+            AND field_key = '{$this->key}'";
+
+		return $this->getIds($sql);
+	}
+
 	public function addTextMask()
 	{
 

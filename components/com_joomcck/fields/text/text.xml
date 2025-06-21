@@ -21,7 +21,7 @@
 				</field>
 			</fieldset>
 			<fieldset name="filter" label="FS_FILTERGEN">
-				<field name="filter_enable" type="mradio" condition='{"1":["params_params_template_filter","params_params_filter_hide","params_params_filter_descr","params_params_template_filter_module","fieldset-name-filter2"]}' class="btn-group" default="0" label="F_ENABLE" description="">
+				<field name="filter_enable" type="mradio" condition='{"1":["params_params_template_filter","params_params_filter_hide","params_params_filter_descr","params_params_template_filter_module","fieldset-name-filter2","fieldset-name-filter3"]}' class="btn-group" default="0" label="F_ENABLE" description="">
 					<option value="0">JNO</option>
 					<option value="1">JYES</option>
 				</field>
@@ -32,6 +32,19 @@
 					<option value="1">JYES</option>
 				</field>
 				<field name="filter_descr" type="text" default="" size="40" label="F_DESCR" description="" />
+			</fieldset>
+
+
+			<fieldset name="filter3" label="Filtering - Autocomplete">
+				<field name="filter_exact_match" type="radio" default="0"
+					   label="Exact Match Filter" description="Enable exact match filtering">
+					<option value="0">No (Partial match)</option>
+					<option value="1">Yes (Exact match)</option>
+				</field>
+
+				<field name="max_result" type="number" default="10"
+					   label="Max Autocomplete Results"
+					   description="Maximum number of suggestions to show" />
 			</fieldset>
 
 			<fieldset name="filter2" label="FS_FILTERFIELDSPEC">
