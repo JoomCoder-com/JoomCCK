@@ -47,7 +47,7 @@ foreach($this->values as $key => $line):
 	}
 	else
 	{
-		$value = htmlspecialchars($line, ENT_COMPAT, 'UTF-8');
+		$value = htmlspecialchars(isset($val[0]) ? $val[0] : $line, ENT_COMPAT, 'UTF-8');
 		$text = \Joomla\CMS\Language\Text::_($val[0]);
 	}
 
