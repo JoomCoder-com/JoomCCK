@@ -9,6 +9,7 @@
 
 use Joomla\CMS\MVC\View\GenericDataException;
 use Joomla\CMS\Table\Nested;
+use Joomla\CMS\Table\Table;
 
 defined('_JEXEC') or die('Restricted access');
 
@@ -41,7 +42,7 @@ class JoomcckTableCobCategory extends Nested
 	}
 
 
-	protected function _getAssetParentId(\Joomla\CMS\Table\Table $table = null, $id = null)
+	protected function _getAssetParentId(?Table $table = null, $id = null)
 	{
 		// Initialise variables.
 		$assetId = null;

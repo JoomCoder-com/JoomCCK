@@ -7,6 +7,8 @@
  * @license GNU/GPL http://www.gnu.org/copyleft/gpl.html
  */
 
+use Joomla\CMS\Table\Table;
+
 defined('_JEXEC') or die('Restricted access');
 jimport('joomla.table.table');
 jimport('legacy.access.rules');
@@ -31,7 +33,7 @@ class JoomcckTableSection extends \Joomla\CMS\Table\Table
 		return $this->title;
 	}
 
-	protected function _getAssetParentId(\Joomla\CMS\Table\Table $table = null, $id = null)
+	protected function _getAssetParentId(?Table $table = null, $id = null)
 	{
 		// Initialise variables.
 		$assetId = null;
