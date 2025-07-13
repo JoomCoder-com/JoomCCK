@@ -35,6 +35,7 @@ if($this->params->get('params.full_mode', 0)){
 		<?php endif;?>
 
 		<img src="<?php echo $url;?>"
+             loading="lazy"
 		     class="figure-img img-fluid rounded <?php echo $this->params->get('params.thumbs_class', '') ?>"
 		     alt="<?php echo htmlspecialchars($image->get('image_title', $record->title), ENT_COMPAT, 'UTF-8');?>"
 		     title="<?php echo htmlspecialchars($image->get('image_title', $record->title), ENT_COMPAT, 'UTF-8');?>"><?php if($this->params->get('params.lightbox_full', 0)):?></a><?php endif;?>
