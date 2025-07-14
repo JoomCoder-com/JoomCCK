@@ -8,6 +8,9 @@
  * @license   GNU/GPL http://www.gnu.org/copyleft/gpl.html
  */
 
+use Joomla\Filesystem\File;
+use Joomla\Filesystem\Folder;
+
 defined('_JEXEC') or die();
 require_once JPATH_ROOT . '/components/com_joomcck/library/php/fields/joomcckfield.php';
 
@@ -118,7 +121,7 @@ class JFormFieldCImage extends CFormField
 			{
 				if($table->id)
 				{
-					\Joomla\Filesystem\File::delete(JPATH_ROOT . DIRECTORY_SEPARATOR . $table->fullpath);
+					File::delete(JPATH_ROOT . DIRECTORY_SEPARATOR . $table->fullpath);
 					$table->delete();
 				}
 			}
@@ -143,7 +146,7 @@ class JFormFieldCImage extends CFormField
 					{
 						if(strtolower($this->value['filename']) != strtolower($table->filename))
 						{
-							\Joomla\Filesystem\File::delete(JPATH_ROOT . DIRECTORY_SEPARATOR . $table->fullpath);
+							File::delete(JPATH_ROOT . DIRECTORY_SEPARATOR . $table->fullpath);
 							$table->delete();
 							$table->reset();
 							$table->id = NULL;
@@ -183,21 +186,21 @@ class JFormFieldCImage extends CFormField
 				$index = '<html><body></body></html>';
 				if(!is_dir($dest))
 				{
-					\Joomla\Filesystem\Folder::create(JPATH_ROOT . DIRECTORY_SEPARATOR .$dest, 0755);
-					\Joomla\Filesystem\File::write(JPATH_ROOT . DIRECTORY_SEPARATOR .$dest . DIRECTORY_SEPARATOR . 'index.html', $index);
+					Folder::create(JPATH_ROOT . DIRECTORY_SEPARATOR .$dest, 0755);
+					File::write(JPATH_ROOT . DIRECTORY_SEPARATOR .$dest . DIRECTORY_SEPARATOR . 'index.html', $index);
 				}
 
 				$dest .= $date . DIRECTORY_SEPARATOR;
 				if(!is_dir($dest))
 				{
-					\Joomla\Filesystem\Folder::create(JPATH_ROOT . DIRECTORY_SEPARATOR .$dest, 0755);
-					\Joomla\Filesystem\File::write(JPATH_ROOT . DIRECTORY_SEPARATOR .$dest . DIRECTORY_SEPARATOR . 'index.html', $index);
+					Folder::create(JPATH_ROOT . DIRECTORY_SEPARATOR .$dest, 0755);
+					File::write(JPATH_ROOT . DIRECTORY_SEPARATOR .$dest . DIRECTORY_SEPARATOR . 'index.html', $index);
 				}
 
 				$filename = $time . '_' . md5($file['name']);
-				$dest .= \Joomla\Filesystem\File::stripExt($filename) . '.' . $ext;
+				$dest .= File::stripExt($filename) . '.' . $ext;
 
-				if(\Joomla\Filesystem\File::upload($file['tmp_name'], JPATH_ROOT . DIRECTORY_SEPARATOR . $dest))
+				if(File::upload($file['tmp_name'], JPATH_ROOT . DIRECTORY_SEPARATOR . $dest))
 				{
 					$value['image']    = str_replace('\\', '/', $dest);
 					$value['realname'] = $file['name'];
@@ -218,19 +221,28 @@ class JFormFieldCImage extends CFormField
 
 	public function onRenderFull($record, $type, $section, $client = 'full')
 	{
-		$user = \Joomla\CMS\Factory::getApplication()->getIdentity();
 
-		if(empty($this->value['image']) && $this->params->get('params.default_img', 0))
-		{
-			$this->value['image'] = str_replace('\\', '/', $this->params->get('params.default_img',''));
+		// Add this check to ensure $this->value is an array
+		if (!is_array($this->value)) {
+			$this->value = array();
+			$this->value['image'] = '';
 		}
 
+		// if no image, use default image
+		if(empty($this->value['image']) && $this->params->get('params.default_img', ''))
+		{
+			$defaultImage = \Joomla\CMS\HTML\HTMLHelper::cleanImageURL($this->params->get('params.default_img', ''));
+			$this->value['image'] = $defaultImage->url;
+		}
+
+		// use uploaded image
 		if(!empty($this->value['image']))
 		{
 			return $this->_display_output($client, $record, $type, $section);
 		}
 
-		return;
+		// don't do anything
+		return false;
 	}
 
 	public function onRenderList($record, $type, $section)
@@ -266,12 +278,12 @@ class JFormFieldCImage extends CFormField
 		$upload_path = DIRECTORY_SEPARATOR . \Joomla\CMS\Component\ComponentHelper::getParams('com_joomcck')->get('general_upload') . DIRECTORY_SEPARATOR . $this->params->get('params.subfolder');
 		if(!is_dir(JPATH_ROOT . $upload_path))
 		{
-			\Joomla\Filesystem\Folder::create(JPATH_ROOT . $upload_path, 0755);
-			\Joomla\Filesystem\File::write(JPATH_ROOT . $upload_path . DIRECTORY_SEPARATOR . 'index.html', $index = '<html><body></body></html>');
+			Folder::create(JPATH_ROOT . $upload_path, 0755);
+			File::write(JPATH_ROOT . $upload_path . DIRECTORY_SEPARATOR . 'index.html', $index = '<html><body></body></html>');
 		}
 		$upload_path .= DIRECTORY_SEPARATOR . time() . '_' . md5($file) . '.' . strtolower(\Joomla\CMS\Filesystem\File::getExt(basename($file)));
 
-		if(\Joomla\Filesystem\File::copy($file, JPATH_ROOT . $upload_path))
+		if(File::copy($file, JPATH_ROOT . $upload_path))
 		{
 			$upload_path = str_replace('\\', '/', $upload_path);
 
@@ -318,7 +330,7 @@ class JFormFieldCImage extends CFormField
 
 			if(!$files_table->record_id || !$files_table->saved || !($type->params->get('audit.audit_log') && $type->params->get('audit.al27.on')))
 			{
-				\Joomla\Filesystem\File::delete($full_file_path);
+				File::delete($full_file_path);
 				$files_table->delete();
 			}
 			else
