@@ -2,7 +2,7 @@
 <project name="com_joomcck" basedir="." default="dist" description="Build package file for JoomCCK Pro version">
 
     <!-- Define properties for version and releasespath -->
-    <property name="version" value="5.14.0" />
+    <property name="version" value="5.15.0" />
     <property name="releasespath" value="E:\JoomCoder\joomcck"/>
 
     <target name="dirbuild">
