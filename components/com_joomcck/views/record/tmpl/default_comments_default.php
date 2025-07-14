@@ -60,14 +60,14 @@ if($this->comment->level > 1)
 	$width = 50;
 	$height = 50;
 }
-$bc = '';
+$bc = 'bg-light text-dark border';
 if($this->comment->rate > 0) $bc = 'bg-info';
 if($this->comment->rate < 0) $bc = 'bg-dark';
 if($this->comment->rate > 10) $bc = 'bg-success';
 ?>
 <a name="comment<?php echo $this->comment->id?>"></a>
 <div style="margin-left: <?php echo $params->get('tmpl_params.comments_indent') * ($this->comment->level - 1)?>px;" id="comment<?php echo $this->comment->id?>-container">
-	<div class="d-flex mb-3">
+	<div class="d-flex mb-3 shadow-sm p-3 border  rounded has-context<?php echo  $this->comment->private ? ' private' : null; echo  !$this->comment->published ? ' published' : null?>">
 		<?php if($params->get('tmpl_core.comments_author_avatar')): ?>
 		<div class="me-3 col-md-<?php //echo $this->comment->level > 1 ? 1 : 2; ?>">
 
@@ -75,7 +75,7 @@ if($this->comment->rate > 10) $bc = 'bg-success';
 
 		</div>
 		<?php endif;?>
-		<div class="flex-grow-1 col-md-<?php //echo $this->comment->level > 1 ? 11 : 10; ?> has-context<?php echo  $this->comment->private ? ' private' : null; echo  !$this->comment->published ? ' published' : null?>">
+		<div class="flex-grow-1 col-md-<?php //echo $this->comment->level > 1 ? 11 : 10; ?>">
 
 			<?php if(in_array($this->type->params->get('comments.comments_rate_view', 1), $this->user->getAuthorisedViewLevels())):?>
 				<div class="float-end">

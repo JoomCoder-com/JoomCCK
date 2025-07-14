@@ -90,35 +90,8 @@ if(JoomcckCommentHelper::laded($this->item->id)) {
 	<?php endif;?>
 
 	<form method="post" name="adminForm" id="adminForm" class="form-validate mt-4" enctype="multipart/form-data">
-		<?php if(count($this->comments)):?>
-			<?php foreach ($this->comments AS $comment):?>
-				<?php if(empty($comment->id)) continue;?>
-				<?php $this->comment = $comment;?>
-				<?php echo $this->loadTemplate('comments_'.$this->type->params->get('properties.tmpl_comment', 'default'));?>
-				<?php if(!empty($comment->sub_comments)):?>
-						<?php foreach ($comment->sub_comments AS $sub_comment):?>
-							<?php $this->comment = $sub_comment;?>
-							<?php echo $this->loadTemplate('comments_'.$this->type->params->get('properties.tmpl_comment', 'default'));?>
-						<?php endforeach;?>
-				<?php endif;?>
-			<?php endforeach;?>
 
-			<div class="pagination">
-				<div style="text-align: center;">
-					<?php echo $this->comments_pagination->getPagesCounter(); ?>
-
-					<?php  if ($this->tmpl_params['comment']->get('tmpl_core.comemnts_limit_box', 1)) : ?>
-						<?php echo $this->comments_pagination->getLimitBox();?>
-					<?php endif; ?>
-				</div>
-				<?php echo $this->comments_pagination->getPagesLinks(); ?>
-			</div>
-			<div class="clearfix"></div>
-		<?php else :?>
-			<?php if($this->tmpl_params['comment']->get('tmpl_core.comments_nocomment', 0) && in_array($this->item->params->get('comments.comments_access_post', $this->type->params->get('comments.comments_access_post')), $this->user->getAuthorisedViewLevels())):?>
-				<p class="alert alert-info"><?php echo \Joomla\CMS\Language\Text::_('CMSG_NOCOMMENTSBEFORST');?></p>
-			<?php endif;?>
-		<?php endif;?>
+        <?php echo \Joomcck\Layout\Helpers\Layout::render('core.comments.list',['current' => $this]) ?>
 
 
 		<?php if(MECAccess::allowCommentPost($this->type, $this->item, $this->section)):?>
