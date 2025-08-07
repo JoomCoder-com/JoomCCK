@@ -355,6 +355,7 @@ class JoomcckViewRecord extends MViewBase
 
 
 		if( !is_null($expire) &&
+			isset($item->extime) &&
 			(
 				($item->extime != '0000-00-00 00:00:00' || !is_null($this->extime)) &&
 				$now > $expire
