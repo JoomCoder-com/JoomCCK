@@ -22,8 +22,6 @@ class JFormFieldCEmail extends CFormField
 	public $url;
 	public $url_form;
 	public $recordKey;
-	public $layoutFolder;
-
 
 	public function __construct($field, $default)
 	{

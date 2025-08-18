@@ -20,8 +20,19 @@ class JFormFieldCImage extends CFormField
 	public $directory;
 	public $script_loaded;
 
+	public function __construct($field, $default)
+	{
+		parent::__construct($field, $default);
+
+		// register layouts folder
+		$this->layoutFolder = __DIR__ . '/layouts';
+
+	}
+
 	public function getInput()
 	{
+
+
 		\Joomla\CMS\Factory::getDocument()->addScript(\Joomla\CMS\Uri\Uri::root(TRUE) . '/components/com_joomcck/fields/image/assets/input.js');
 		$params = $this->params;
 		$user   = \Joomla\CMS\Factory::getApplication()->getIdentity();

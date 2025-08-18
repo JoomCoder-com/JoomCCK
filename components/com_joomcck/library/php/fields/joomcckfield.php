@@ -12,8 +12,8 @@ defined('_JEXEC') or die();
 jimport('joomla.html.html');
 jimport('joomla.form.formfield');
 
-class CFormField extends \Joomla\CMS\Form\FormField
-{
+class CFormField extends \Joomla\CMS\Form\FormField{
+	public $layoutFolder;
 
 	public $label_orig;
 
@@ -106,6 +106,10 @@ class CFormField extends \Joomla\CMS\Form\FormField
 
 		FieldHelper::loadLang($this->type);
 		$this->user = \Joomla\CMS\Factory::getApplication()->getIdentity();
+
+		// register layouts folder
+		$this->layoutFolder = __DIR__ . '/layouts';
+
 	}
 
 	protected  function _display_filter($section, $module = false)
