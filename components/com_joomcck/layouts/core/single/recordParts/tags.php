@@ -60,7 +60,8 @@ if(
 			$current->type->params->get('properties.item_tag_htmltags', 'h1, h2, h3, h4, h5, h6, strong, em, b, i, big'),
 			$current->type->params->get('properties.item_tag_relevance', 0),
 			$current->type->params->get('properties.item_tag_num', 0),
-			$current->type->params->get('properties.item_tags_max', 25)
+			$current->type->params->get('properties.item_tags_max', 25),
+			$current->type->params->get('properties.item_tag_nofollow', 1)
 		);
 		?>
 		<style>

@@ -86,6 +86,10 @@
 				<option value="3">CTAGSHOWNUM_BOTH</option>
 			</field>
 			<field name="item_tags_max" type="text" default="25" label="CTAGSMAX" size="3" />
+			<field name="item_tag_nofollow" type="mradio" class="btn-group" default="1" label="Add nofollow to tag filter links" description="Add rel='nofollow' attribute to tag filter links for better SEO">
+				<option value="0">CNO</option>
+				<option value="1">CYES</option>
+			</field>
 		</fieldset>
 		<fieldset name="templates" label="CFSLTMPL">
 			<field label="CTMPLFULLARTICLE" name="tmpl_article" type="cobtmpls" default="default" tmpltype="article" />

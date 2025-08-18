@@ -190,7 +190,7 @@ class JHTMLTags
 		return Joomcck\Layout\Helpers\Layout::render('core.bootstrap.toggleButtons',$data);
     }
     
-	public static function tagcloud($section, $html_tags, $relevance)
+	public static function tagcloud($section, $html_tags, $relevance, $nofollow = true)
 	{
 		$db = \Joomla\CMS\Factory::getDbo();
 
@@ -215,7 +215,8 @@ class JHTMLTags
 		foreach ( $list as $id => &$tag )
 		{
 			$url = FilterHelper::url('task=records.filter&filter_name[0]=filter_tag&filter_val[0]='.$tag->id, $section);
-			$tag->tag = \Joomla\CMS\HTML\HTMLHelper::link(\Joomla\CMS\Router\Route::_($url), $tag->tag);
+			$attributes = $nofollow ? 'rel="nofollow"' : '';
+			$tag->tag = \Joomla\CMS\HTML\HTMLHelper::link(\Joomla\CMS\Router\Route::_($url), $tag->tag, $attributes);
 			if ($relevance)
 			{
 				if ($relevance == 3)
@@ -251,7 +252,7 @@ class JHTMLTags
 
     }
     
-	public static function fetch($list, $record_id, $section_id, $cat_id, $html_tags, $relevance, $show_nums, $max_tags)
+	public static function fetch($list, $record_id, $section_id, $cat_id, $html_tags, $relevance, $show_nums, $max_tags, $nofollow = true)
 	{
 		$out = array();
 		$nums = null;
@@ -374,12 +375,19 @@ class JHTMLTags
 		foreach ( $indexes as $i => $id)// => &$tag )
 		{
 			$tag = $list[$id];
-			$tag =  \Joomla\CMS\HTML\HTMLHelper::link(\Joomla\CMS\Router\Route::_($link.'&filter_val[0]='.$id), $tag, ($nums ? $nums[$id] : NULL));
+			$attributes = '';
+			if ($nums && isset($nums[$id])) {
+				$attributes .= $nums[$id];
+			}
+			if ($nofollow) {
+				$attributes .= ($attributes ? ' ' : '') . 'rel="nofollow"';
+			}
+			$tag =  \Joomla\CMS\HTML\HTMLHelper::link(\Joomla\CMS\Router\Route::_($link.'&filter_val[0]='.$id), $tag, $attributes);
 			$out[] = '<li class="tag_element" id="tag-' . $id . '">' .$tag. '</li>';
 		}
 		return implode(' ', $out);
 	}
-	public static function fetch2($list, $record_id, $section_id, $cat_id, $html_tags, $relevance, $show_nums, $max_tags)
+	public static function fetch2($list, $record_id, $section_id, $cat_id, $html_tags, $relevance, $show_nums, $max_tags, $nofollow = true)
 	{
 		$out = array();
 		$nums = null;
@@ -503,9 +511,16 @@ class JHTMLTags
 		{
 			//$tag = $list[$id];
 			//$tag =  \Joomla\CMS\HTML\HTMLHelper::link(\Joomla\CMS\Router\Route::_($link.'&filter_val[0]='.$id), $tag, ($nums ? $nums[$id] : NULL));
+			$attributes = '';
+			if ($nums && isset($nums[$id])) {
+				$attributes .= $nums[$id];
+			}
+			if ($nofollow) {
+				$attributes .= ($attributes ? ' ' : '') . 'rel="nofollow"';
+			}
 			$out[] = array(
 				'id' => $id,
-				'attr' => ($nums && isset($nums[$id]) ? $nums[$id] : NULL),
+				'attr' => $attributes,
 				'tag' => $list[$id],
 				'link' => \Joomla\CMS\Router\Route::_($link.'&filter_val[0]='.$id)
 			);
