@@ -84,6 +84,20 @@ class JFormFieldCSignature extends CFormField
 		return $this->_display_input();
 	}
 
+	protected function _display_input()
+	{
+		// Include input template
+		$templateFile = JPATH_ROOT . '/components/com_joomcck/fields/signature/tmpl/input/default.php';
+		if (file_exists($templateFile))
+		{
+			ob_start();
+			include $templateFile;
+			return ob_get_clean();
+		}
+
+		return Text::_('COM_JOOMCCK_FIELD_SIGNATURE_TEMPLATE_NOT_FOUND');
+	}
+
 	public function onJSValidate()
 	{
 		if ($this->required)
@@ -173,6 +187,26 @@ class JFormFieldCSignature extends CFormField
 	{
 		// Signatures are not typically filterable
 		return NULL;
+	}
+
+	public function onRenderFull($record, $type, $section)
+	{
+		return $this->_render('full', $record, $type, $section);
+	}
+
+	public function onRenderList($record, $type, $section)
+	{
+		return $this->_render('list', $record, $type, $section);
+	}
+
+	protected function _render($view, $record, $type, $section)
+	{
+		if (!$this->value)
+		{
+			return;
+		}
+
+		return $this->_display_output($view, $record, $type, $section);
 	}
 
 	public function onPrepareValueByType($value, $type, $record)

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<fieldparams>
+    <form>
+        <fields name="tmpl_list">
+            <fieldset name="general" label="COM_JOOMCCK_FIELD_SIGNATURE_OUTPUT_GENERAL">
+                <field name="show_border" type="radio"
+                       layout="joomla.form.field.radio.switcher" default="0" label="COM_JOOMCCK_FIELD_SIGNATURE_SHOW_BORDER" description="COM_JOOMCCK_FIELD_SIGNATURE_SHOW_BORDER_DESC">
+                    <option value="0">JNO</option>
+                    <option value="1">JYES</option>
+                </field>
+                <field name="max_display_width" type="number" default="300" label="COM_JOOMCCK_FIELD_SIGNATURE_MAX_DISPLAY_WIDTH" description="COM_JOOMCCK_FIELD_SIGNATURE_MAX_DISPLAY_WIDTH_DESC" min="50" max="1000" step="10" />
+                <field name="max_display_height" type="number" default="150" label="COM_JOOMCCK_FIELD_SIGNATURE_MAX_DISPLAY_HEIGHT" description="COM_JOOMCCK_FIELD_SIGNATURE_MAX_DISPLAY_HEIGHT_DESC" min="50" max="500" step="10" />
+                <field name="alt_text" type="text" default="" label="COM_JOOMCCK_FIELD_SIGNATURE_ALT_TEXT" description="COM_JOOMCCK_FIELD_SIGNATURE_ALT_TEXT_DESC" />
+            </fieldset>
+            <fieldset name="display_options" label="COM_JOOMCCK_FIELD_SIGNATURE_DISPLAY_OPTIONS">
+                <field name="show_timestamp" type="list"
+                       layout="joomla.form.field.radio.switcher" default="1" label="COM_JOOMCCK_FIELD_SIGNATURE_SHOW_TIMESTAMP" description="COM_JOOMCCK_FIELD_SIGNATURE_SHOW_TIMESTAMP_DESC">
+                    <option value="0">JNO</option>
+                    <option value="1">JYES</option>
+                </field>
+                <field name="link_to_full" type="mradio"
+                       layout="joomla.form.field.radio.switcher" default="1" label="COM_JOOMCCK_FIELD_SIGNATURE_LINK_TO_FULL" description="COM_JOOMCCK_FIELD_SIGNATURE_LINK_TO_FULL_DESC">
+                    <option value="0">JNO</option>
+                    <option value="1">JYES</option>
+                </field>
+                <field name="date_format" type="text" default="Y-m-d H:i:s" label="COM_JOOMCCK_FIELD_SIGNATURE_DATE_FORMAT" description="COM_JOOMCCK_FIELD_SIGNATURE_DATE_FORMAT_DESC" />
+            </fieldset>
+            <fieldset name="styling" label="COM_JOOMCCK_FIELD_SIGNATURE_STYLING">
+                <field name="container_classes" type="text" default="" label="COM_JOOMCCK_FIELD_SIGNATURE_CONTAINER_CLASSES" description="COM_JOOMCCK_FIELD_SIGNATURE_CONTAINER_CLASSES_DESC" />
+                <field name="image_classes" type="text" default="img-thumbnail" label="COM_JOOMCCK_FIELD_SIGNATURE_IMAGE_CLASSES" description="COM_JOOMCCK_FIELD_SIGNATURE_IMAGE_CLASSES_DESC" />
+            </fieldset>
+        </fields>
+    </form>
+</fieldparams>

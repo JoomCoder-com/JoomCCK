@@ -355,31 +355,6 @@ js;
 		{
 			return;
 		}
-		$readmore = null;
-		if ($view == 'list' && $this->params->get('params.length', 0) > 0)
-		{
-			$this->value = HTMLFormatHelper::substrHTML($this->value, $this->params->get('params.length'));
-			$readmore    = \Joomla\CMS\HTML\HTMLHelper::link($record->url, $this->params->get('params.seemore', '>>>'), array('title' => \Joomla\CMS\Language\Text::_('TEXT_READMORE')));
-		}
-		$value = $this->value;
-		if ($this->params->get('params.filter_enable'))
-		{
-			$tip = ($this->params->get('params.filter_tip') ? \Joomla\CMS\Language\Text::sprintf($this->params->get('params.filter_tip'), '<b>' . $this->label . '</b>', '<b>' . $value . '</b>') : null);
-
-			switch ($this->params->get('params.filter_linkage'))
-			{
-				case 1 :
-					$value = FilterHelper::filterLink('filter_' . $this->id, $value, $value, $this->type_id, $tip, $section);
-					break;
-
-				case 2 :
-					$value = $value . ' ' . FilterHelper::filterButton('filter_' . $this->id, $value, $this->type_id, $tip, $section, $this->params->get('params.filter_icon', 'funnel-small.png'));
-					break;
-			}
-		}
-
-		$this->value    = $value;
-		$this->readmore = $readmore;
 
 		return $this->_display_output($view, $record, $type, $section);
 	}
