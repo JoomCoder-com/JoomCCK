@@ -28,7 +28,7 @@ if($currency_symbol === 'custom') {
 
 $symbol_position = $this->params->get('params.symbol_position', 'before');
 $show_symbol = $this->params->get('params.show_symbol_input', 1);
-$placeholder = $this->params->get('params.input_placeholder', '0.00');
+$placeholder = $this->params->get('params.input_placeholder', '0.00') ?? '0.00';
 $field_size = $this->params->get('params.field_size', 10);
 $decimals = $this->params->get('params.decimals_num', 2);
 $max_length = $this->params->get('params.max_num', 15);
