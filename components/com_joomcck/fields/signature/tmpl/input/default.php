@@ -74,7 +74,7 @@ $borderStyle = $showBorder ? 'border: 1px solid ' . $borderColor . ';' : '';
     <!-- Existing signature display -->
     <?php if (!empty($existingSignature)): ?>
     <div class="signature-existing card mb-3" id="signature_existing_<?php echo $this->id; ?>">
-        <div class="card-header">
+        <div class="card-header text-center">
             <strong><?php echo Text::_('COM_JOOMCCK_FIELD_SIGNATURE_CURRENT'); ?></strong>
         </div>
         <div class="card-body text-center">
@@ -98,7 +98,7 @@ $borderStyle = $showBorder ? 'border: 1px solid ' . $borderColor . ';' : '';
          id="signature_canvas_container_<?php echo $this->id; ?>" 
          <?php echo empty($existingSignature) ? '' : 'style="display: none;"'; ?>>
         
-        <div class="card-header">
+        <div class="card-header text-center">
             <h6 class="mb-0"><?php echo Text::_('COM_JOOMCCK_FIELD_SIGNATURE_DRAW'); ?></h6>
         </div>
         
