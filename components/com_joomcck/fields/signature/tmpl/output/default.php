@@ -62,6 +62,8 @@ $signatureFile = ltrim($signatureFile, '/');
 
 // Get the full file path for existence check
 $fullPath = JPATH_ROOT . '/' . $signatureFile;
+
+
 $signatureExists = file_exists($fullPath);
 
 if ($signatureExists) {
