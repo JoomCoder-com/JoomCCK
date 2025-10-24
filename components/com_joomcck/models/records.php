@@ -1770,9 +1770,9 @@ class JoomcckModelRecords extends MModelList
 		$app = \Joomla\CMS\Factory::getApplication();
 
 		$skipers = $app->getUserState('skipers.all', array());
-		settype($this->value, 'array');
-		//var_dump($this->value);
 
+        if(!is_array($this->value))
+            $this->value = (array) $this->value;
 
 		foreach($ids as $id)
 		{
