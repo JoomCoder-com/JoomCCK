@@ -9,7 +9,7 @@
 
 use Joomla\CMS\Factory;
 
-defined('JPATH_PLATFORM') or die();
+defined('_JEXEC') or die();
 
 jimport('joomla.html.html');
 jimport('joomla.form.formfield');

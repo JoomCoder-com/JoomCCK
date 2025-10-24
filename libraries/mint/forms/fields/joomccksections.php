@@ -9,7 +9,7 @@
 
 use Joomla\CMS\Form\Field\ListField;
 
-defined('JPATH_PLATFORM') or die;
+defined('_JEXEC') or die;
 define('_DS', DIRECTORY_SEPARATOR);
 
 

@@ -10,7 +10,7 @@
 
 use Joomla\CMS\Layout\LayoutHelper;
 
-defined('JPATH_PLATFORM') || die;
+defined('_JEXEC') || die;
 
 jimport('joomla.html.html');
 jimport('joomla.form.formfield');

@@ -7,7 +7,7 @@
  * @license GNU/GPL http://www.gnu.org/copyleft/gpl.html
  */
 
-defined('JPATH_PLATFORM') or die;
+defined('_JEXEC') or die;
 
 define('FORM_SEPARATOR_NONE', 0);
 define('FORM_SEPARATOR_SLIDER', 1);

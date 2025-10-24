@@ -8,7 +8,7 @@
 
 namespace Joomla\Component\Joomcck\Site\Service;
 
-\defined('JPATH_PLATFORM') or die;
+\defined('_JEXEC') or die;
 
 use \Joomla\CMS\Component\ComponentHelper;
 use \Joomla\CMS\Factory;

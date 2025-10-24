@@ -9,7 +9,6 @@ use Joomla\Component\Finder\Administrator\Indexer\Indexer;
 
 defined('JPATH_BASE') or die;
 
-require_once JPATH_ADMINISTRATOR . '/components/com_finder/helpers/indexer/adapter.php';
 require_once JPATH_SITE.'/components/com_joomcck/library/php/helpers/itemsstore.php';
 
 class plgFinderJoomcck extends Adapter

@@ -6,7 +6,7 @@
  * @copyright Copyright (C) 2012 joomcoder (https://www.joomcoder.com). All rights reserved.
  * @license   GNU/GPL http://www.gnu.org/copyleft/gpl.html
  */
-defined('JPATH_PLATFORM') or die();
+defined('_JEXEC') or die();
 
 jimport('joomla.form.formfield');
 

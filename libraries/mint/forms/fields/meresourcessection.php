@@ -7,7 +7,7 @@
  * @license   GNU/GPL http://www.gnu.org/copyleft/gpl.html
  */
 
-defined('JPATH_PLATFORM') or die;
+defined('_JEXEC') or die;
 define('_DS', DIRECTORY_SEPARATOR);
 
 jimport('joomla.html.html');

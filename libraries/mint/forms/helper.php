@@ -10,7 +10,7 @@
 
 use Joomla\CMS\HTML\HTMLHelper;
 
-defined('JPATH_PLATFORM') or die;
+defined('_JEXEC') or die;
 
 \Joomla\CMS\Form\Form::addFieldPath(JPATH_ROOT . '/libraries/mint/forms/elements');
 \Joomla\CMS\Form\Form::addFieldPath(JPATH_ROOT . '/components/com_joomcck/library/php/fields');

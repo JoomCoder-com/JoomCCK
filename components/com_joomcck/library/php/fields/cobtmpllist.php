@@ -9,7 +9,7 @@
 
 use Joomla\CMS\HTML\HTMLHelper;
 
-defined('JPATH_PLATFORM') || die;
+defined('_JEXEC') || die;
 
 jimport('joomla.filesystem.folder');
 jimport('joomla.filesystem.file');
