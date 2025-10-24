@@ -49,7 +49,7 @@ foreach($this->values as $key => $line)
 }
 $size = ' size="' . (count($options) > $params->get('params.list_limit', 5) ? $params->get('params.list_limit', 5) : count($options)) . '"';
 
-
+$selectClasses = "w-100 form-control elements-list";
 
 // Tom Select initialization if enabled
 if ($params->get('params.use_tomselect', 0)){
@@ -92,7 +92,12 @@ JS;
     // add inline js code use web asset
     $wa->addInlineScript($initTomSelect);
 
+
+    $selectClasses = "elements-list";
+
 }
+
+
 
 
 ?>
@@ -101,7 +106,7 @@ JS;
 <?php endif; ?>
 
 <select onchange="Joomcck.countFieldValues(this, <?php echo $this->id;?>, <?php echo $params->get('params.total_limit');?>, 'select')" multiple="multiple"
-name="jform[fields][<?php echo $this->id;?>][]" class="w-100 form-control elements-list" id="form_field_list_<?php echo $this->id;?>" <?php echo $required . $style . $size;?>>
+name="jform[fields][<?php echo $this->id;?>][]" class="<?php echo $selectClasses ?>" id="form_field_list_<?php echo $this->id;?>" <?php echo $required . $style . $size;?>>
 	<?php echo implode("\n", $options);?>
 </select>
 
