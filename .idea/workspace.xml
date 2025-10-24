@@ -1,0 +1,745 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="56471339-08e6-4822-be41-39ef341f7407" name="Changes" comment="Fixed - many other issues fixed" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ComposerSettings" synchronizationState="DONT_SYNCHRONIZE">
+    <pharConfigPath>$PROJECT_DIR$/components/com_joomcck/libraries/composer.json</pharConfigPath>
+    <execution>
+      <phar pharPath="$PROJECT_DIR$/composer.phar" interpreterId="765a8aaa-b58a-4262-a582-dbe0a65a3fbe" />
+    </execution>
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="SCHEME" value="Project" />
+  </component>
+  <component name="Git.Settings">
+    <favorite-branches>
+      <branch-storage>
+        <map>
+          <entry type="REMOTE">
+            <value>
+              <list>
+                <branch-info repo="$PROJECT_DIR$" source="free/HEAD" />
+              </list>
+            </value>
+          </entry>
+        </map>
+      </branch-storage>
+    </favorite-branches>
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="extended" />
+      </map>
+    </option>
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="JoomlaConfiguration" enabled="true">
+    <joomlaConfigPath>C:\xampp\htdocs\JoomCCK\configuration.php</joomlaConfigPath>
+    <joomlaPath>C:\xampp\htdocs\JoomCCK</joomlaPath>
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="NamedScopeManager">
+    <scope name="JoomCCK" pattern="file[JoomCCK]:administrator/components/com_joomcck//*||file[JoomCCK]:components/com_joomcck//*||file[JoomCCK]:modules/mod_joomcck_category//*||file[JoomCCK]:modules/mod_joomcck_filters//*||file[JoomCCK]:modules/mod_joomcck_records//*||file[JoomCCK]:modules/mod_joomcck_submitbutton//*||file[JoomCCK]:modules/mod_joomcck_tagcloud//*||file[JoomCCK]:plugins/content/joomcck//*||file[JoomCCK]:plugins/content/glossary//*||file[JoomCCK]:plugins/search/joomcck//*||file[JoomCCK]:plugins/finder/joomcck//*||file[JoomCCK]:plugins/system/joomcck//*||file[JoomCCK]:libraries/mint//*" />
+    <scope name="JoomCCK Extended" pattern="file[JoomCCK]:modules/mod_joomcck_followers//*||file[JoomCCK]:modules/mod_joomcck_ifollow//*||file[JoomCCK]:modules/mod_joomcck_notifications//*||file[JoomCCK]:modules/mod_joomcck_participants//*||file[JoomCCK]:modules/mod_joomcck_sectionstatistics//*||file[JoomCCK]:modules/mod_joomcck_userstatistics//*||file[JoomCCK]:components/com_joomcck/fields/audio//*||file[JoomCCK]:components/com_joomcck/fields/boolean//*||file[JoomCCK]:components/com_joomcck/fields/checkbox//*||file[JoomCCK]:components/com_joomcck/fields/child//*||file[JoomCCK]:components/com_joomcck/fields/datetime//*||file[JoomCCK]:components/com_joomcck/fields/digits//*||file[JoomCCK]:components/com_joomcck/fields/dripcontent//*||file[JoomCCK]:components/com_joomcck/fields/email//*||file[JoomCCK]:components/com_joomcck/fields/gallery//*||file[JoomCCK]:components/com_joomcck/fields/geo//*||file[JoomCCK]:components/com_joomcck/fields/html//*||file[JoomCCK]:components/com_joomcck/fields/image//*||file[JoomCCK]:components/com_joomcck/fields/j2store//*||file[JoomCCK]:components/com_joomcck/fields/listautocomplete//*||file[JoomCCK]:components/com_joomcck/fields/multilevelselect//*||file[JoomCCK]:components/com_joomcck/fields/multiselect//*||file[JoomCCK]:components/com_joomcck/fields/parent//*||file[JoomCCK]:components/com_joomcck/fields/passwd//*||file[JoomCCK]:components/com_joomcck/fields/paytoaccess//*||file[JoomCCK]:components/com_joomcck/fields/paytodownload//*||file[JoomCCK]:components/com_joomcck/fields/payvoucher//*||file[JoomCCK]:components/com_joomcck/fields/q2c//*||file[JoomCCK]:components/com_joomcck/fields/radio//*||file[JoomCCK]:components/com_joomcck/fields/readmore//*||file[JoomCCK]:components/com_joomcck/fields/records//*||file[JoomCCK]:components/com_joomcck/fields/register//*||file[JoomCCK]:components/com_joomcck/fields/related_access//*||file[JoomCCK]:components/com_joomcck/fields/select//*||file[JoomCCK]:components/com_joomcck/fields/status//*||file[JoomCCK]:components/com_joomcck/fields/telephone//*||file[JoomCCK]:components/com_joomcck/fields/text//*||file[JoomCCK]:components/com_joomcck/fields/textarea//*||file[JoomCCK]:components/com_joomcck/fields/uploads//*||file[JoomCCK]:components/com_joomcck/fields/url//*||file[JoomCCK]:components/com_joomcck/fields/video//*||file:components/com_joomcck/views/records/tmpl/default_list_calendar.php||file:components/com_joomcck/views/records/tmpl/default_list_calendar.xml||file:components/com_joomcck/views/records/tmpl/default_list_gallery_mod.php||file:components/com_joomcck/views/records/tmpl/default_list_gallery_mod.xml||file[JoomCCK]:plugins/mint//*||file[JoomCCK]:media/com_joomcck//*" />
+  </component>
+  <component name="PhpWorkspaceProjectConfiguration" interpreter_name="PHP 8.4">
+    <include_path>
+      <path value="$PROJECT_DIR$/../../bin/php/php8.3.14" />
+    </include_path>
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 7
+}</component>
+  <component name="ProjectId" id="2WQT1JKby4TglHwdXJLqa0Ws3iv" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager": "true",
+    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "junie.onboarding.icon.badge.shown": "true",
+    "last_opened_file_path": "C:/wamp64/www/JoomCCK/components/com_joomcck/fields/signature/tmpl/output",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "run.code.analysis.last.selected.profile": "pProject Default",
+    "settings.editor.selected.configurable": "reference.webide.settings.project.settings.php",
+    "to.speed.mode.migration.done": "true",
+    "vue.rearranger.settings.migration": "true"
+  }
+}]]></component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\wamp64\www\JoomCCK\components\com_joomcck\fields\signature\tmpl\output" />
+      <recent name="C:\wamp64\www\JoomCCK\components\com_joomcck\fields\signature" />
+      <recent name="C:\wamp64\www\JoomCCK\components\com_joomcck\fields\image\layouts\input" />
+      <recent name="E:\wamp64\www\JoomCCK\media\com_joomcck\css\mediaelement" />
+      <recent name="E:\wamp64\www\JoomCCK\media\com_joomcck\js\mediaelement" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\wamp64\www\JoomCCK\components\com_joomcck\layouts\core\comments" />
+      <recent name="E:\wamp64\www\JoomCCK\media\com_joomcck\css\mediaelement" />
+      <recent name="E:\wamp64\www\JoomCCK\media\com_joomcck\css" />
+      <recent name="E:\wamp64\www\JoomCCK\media\com_joomcck\js\mediaelement" />
+      <recent name="E:\wamp64\www\JoomCCK\media\com_joomcck\js\mediaelement\plugins" />
+    </key>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-js-predefined-d6986cc7102b-9c94529fcfe0-JavaScript-PS-252.26199.163" />
+        <option value="bundled-php-predefined-a98d8de5180a-f0a8ef430dfa-com.jetbrains.php.sharedIndexes-PS-252.26199.163" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="StructureViewState">
+    <option name="selectedTab" value="PHP" />
+  </component>
+  <component name="SvnConfiguration">
+    <configuration>C:\Users\amine\AppData\Roaming\Subversion</configuration>
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="56471339-08e6-4822-be41-39ef341f7407" name="Changes" comment="" />
+      <created>1696663587640</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1696663587640</updated>
+      <workItem from="1696663589847" duration="3000000" />
+      <workItem from="1696721580341" duration="19000" />
+      <workItem from="1697036529996" duration="6386000" />
+      <workItem from="1697111200703" duration="2345000" />
+      <workItem from="1697298796742" duration="449000" />
+      <workItem from="1699693634018" duration="7995000" />
+      <workItem from="1699746278417" duration="1724000" />
+      <workItem from="1699749598118" duration="1142000" />
+      <workItem from="1699849134191" duration="2785000" />
+      <workItem from="1699854489097" duration="11000" />
+      <workItem from="1699854619837" duration="24533000" />
+      <workItem from="1699883841763" duration="308000" />
+      <workItem from="1700045501523" duration="129000" />
+      <workItem from="1700214361125" duration="645000" />
+      <workItem from="1701092894751" duration="1642000" />
+      <workItem from="1702359490022" duration="1133000" />
+      <workItem from="1702443016479" duration="653000" />
+      <workItem from="1703750553435" duration="44000" />
+      <workItem from="1704397630621" duration="8292000" />
+      <workItem from="1704464514169" duration="5876000" />
+      <workItem from="1704573801165" duration="3101000" />
+      <workItem from="1704719783748" duration="18000" />
+      <workItem from="1704810280470" duration="6415000" />
+      <workItem from="1704897107966" duration="10000" />
+      <workItem from="1705348162470" duration="145000" />
+      <workItem from="1705348921373" duration="874000" />
+      <workItem from="1705505463816" duration="8141000" />
+      <workItem from="1705692611196" duration="3671000" />
+      <workItem from="1705879451215" duration="6477000" />
+      <workItem from="1705967926927" duration="16000" />
+      <workItem from="1706980643702" duration="774000" />
+      <workItem from="1706981434132" duration="1567000" />
+      <workItem from="1707678493556" duration="3041000" />
+      <workItem from="1707688334545" duration="7314000" />
+      <workItem from="1708709255585" duration="785000" />
+      <workItem from="1710004970805" duration="11621000" />
+      <workItem from="1710149570160" duration="12000" />
+      <workItem from="1710187398952" duration="148000" />
+      <workItem from="1710187578938" duration="3310000" />
+      <workItem from="1710243369767" duration="1769000" />
+      <workItem from="1710594006795" duration="4070000" />
+      <workItem from="1710598420317" duration="7171000" />
+      <workItem from="1710677403080" duration="14931000" />
+      <workItem from="1710775898021" duration="17000" />
+      <workItem from="1711120601208" duration="4210000" />
+      <workItem from="1711295566392" duration="103000" />
+      <workItem from="1711389450011" duration="2674000" />
+      <workItem from="1711488175392" duration="35000" />
+      <workItem from="1711666310802" duration="7281000" />
+      <workItem from="1711823088955" duration="149000" />
+      <workItem from="1711920186499" duration="1538000" />
+      <workItem from="1712144412165" duration="450000" />
+      <workItem from="1712572738048" duration="6161000" />
+      <workItem from="1712596057129" duration="617000" />
+      <workItem from="1712648080721" duration="4142000" />
+      <workItem from="1712770507282" duration="2206000" />
+      <workItem from="1712831842487" duration="3114000" />
+      <workItem from="1712838075876" duration="14000" />
+      <workItem from="1712920202499" duration="1856000" />
+      <workItem from="1712931412655" duration="3219000" />
+      <workItem from="1713388972726" duration="1700000" />
+      <workItem from="1713535635918" duration="9552000" />
+      <workItem from="1713627660777" duration="9000" />
+      <workItem from="1714279465652" duration="7240000" />
+      <workItem from="1714711812907" duration="2402000" />
+      <workItem from="1714957260621" duration="145000" />
+      <workItem from="1715339289020" duration="1426000" />
+      <workItem from="1715340734056" duration="344000" />
+      <workItem from="1715683039349" duration="2641000" />
+      <workItem from="1715709797699" duration="1651000" />
+      <workItem from="1716062027393" duration="3157000" />
+      <workItem from="1716131524686" duration="3618000" />
+      <workItem from="1716375496974" duration="1232000" />
+      <workItem from="1716486562020" duration="43000" />
+      <workItem from="1716487712548" duration="133000" />
+      <workItem from="1716487849790" duration="2807000" />
+      <workItem from="1717379166608" duration="6414000" />
+      <workItem from="1717789933845" duration="5998000" />
+      <workItem from="1717824064516" duration="4398000" />
+      <workItem from="1719973174845" duration="1591000" />
+      <workItem from="1720052551397" duration="7046000" />
+      <workItem from="1720120443667" duration="925000" />
+      <workItem from="1720946893729" duration="5810000" />
+      <workItem from="1721037397177" duration="13748000" />
+      <workItem from="1721123043531" duration="1080000" />
+      <workItem from="1721478193506" duration="5770000" />
+      <workItem from="1721585923917" duration="3485000" />
+      <workItem from="1722106303528" duration="1599000" />
+      <workItem from="1722709721329" duration="4003000" />
+      <workItem from="1723893065971" duration="7548000" />
+      <workItem from="1723919736404" duration="2419000" />
+      <workItem from="1724508842815" duration="1879000" />
+      <workItem from="1726333599024" duration="2154000" />
+      <workItem from="1727589898551" duration="1508000" />
+      <workItem from="1728384278513" duration="1664000" />
+      <workItem from="1728411296112" duration="598000" />
+      <workItem from="1728760126040" duration="6334000" />
+      <workItem from="1728766538052" duration="5606000" />
+      <workItem from="1729474111387" duration="2054000" />
+      <workItem from="1730016823011" duration="3091000" />
+      <workItem from="1730275701373" duration="637000" />
+      <workItem from="1733310097995" duration="5415000" />
+      <workItem from="1734373716709" duration="6943000" />
+      <workItem from="1734387708541" duration="5000" />
+      <workItem from="1734748780454" duration="3214000" />
+      <workItem from="1734828009110" duration="9636000" />
+      <workItem from="1735489165475" duration="1893000" />
+      <workItem from="1735924283715" duration="13364000" />
+      <workItem from="1736195259658" duration="6463000" />
+      <workItem from="1736203372787" duration="4004000" />
+      <workItem from="1736341739789" duration="1019000" />
+      <workItem from="1736343329247" duration="3697000" />
+      <workItem from="1736525799626" duration="3772000" />
+      <workItem from="1737088736055" duration="15313000" />
+      <workItem from="1737833909595" duration="217000" />
+      <workItem from="1737834134246" duration="2598000" />
+      <workItem from="1737919532979" duration="8134000" />
+      <workItem from="1737997869642" duration="5479000" />
+      <workItem from="1738517654104" duration="890000" />
+      <workItem from="1738522722487" duration="933000" />
+      <workItem from="1738525644551" duration="3295000" />
+      <workItem from="1739778384133" duration="1687000" />
+      <workItem from="1740341107817" duration="845000" />
+      <workItem from="1740426143272" duration="57000" />
+      <workItem from="1740514193899" duration="642000" />
+      <workItem from="1740860525374" duration="5467000" />
+      <workItem from="1741221788779" duration="594000" />
+      <workItem from="1742149283669" duration="692000" />
+      <workItem from="1742210313796" duration="23000" />
+      <workItem from="1742301584581" duration="9513000" />
+      <workItem from="1742386010833" duration="164000" />
+      <workItem from="1742412486170" duration="8623000" />
+      <workItem from="1742490459001" duration="8898000" />
+      <workItem from="1742565848109" duration="3000" />
+      <workItem from="1742649292642" duration="229000" />
+      <workItem from="1742673641761" duration="4817000" />
+      <workItem from="1743385744230" duration="5088000" />
+      <workItem from="1744486645969" duration="4280000" />
+      <workItem from="1744491076452" duration="1481000" />
+      <workItem from="1744492572631" duration="1948000" />
+      <workItem from="1744546140464" duration="7230000" />
+      <workItem from="1744625284881" duration="3127000" />
+      <workItem from="1745861933862" duration="18895000" />
+      <workItem from="1746078372760" duration="539000" />
+      <workItem from="1746472585125" duration="2649000" />
+      <workItem from="1746653235343" duration="3891000" />
+      <workItem from="1746789169930" duration="1613000" />
+      <workItem from="1746791605852" duration="2654000" />
+      <workItem from="1746799036329" duration="439000" />
+      <workItem from="1746879887037" duration="11370000" />
+      <workItem from="1747055989503" duration="11813000" />
+      <workItem from="1747247570196" duration="265000" />
+      <workItem from="1747247970237" duration="89000" />
+      <workItem from="1747248065937" duration="1901000" />
+      <workItem from="1747427150102" duration="4160000" />
+      <workItem from="1747507075232" duration="1872000" />
+      <workItem from="1747519334128" duration="3000" />
+      <workItem from="1747519852729" duration="613000" />
+      <workItem from="1747521227771" duration="2000" />
+      <workItem from="1747879687149" duration="4646000" />
+      <workItem from="1748104975051" duration="6798000" />
+      <workItem from="1748163233282" duration="33000" />
+      <workItem from="1748285954637" duration="7025000" />
+      <workItem from="1748337115583" duration="64000" />
+      <workItem from="1748337183075" duration="2000" />
+      <workItem from="1748801926836" duration="3106000" />
+      <workItem from="1749367397017" duration="5307000" />
+      <workItem from="1749504821876" duration="6450000" />
+      <workItem from="1749840662267" duration="18000" />
+      <workItem from="1750540991323" duration="615000" />
+      <workItem from="1750541768580" duration="4842000" />
+      <workItem from="1752387455672" duration="10916000" />
+      <workItem from="1752475219832" duration="2830000" />
+      <workItem from="1753804432660" duration="150000" />
+      <workItem from="1754583792927" duration="2287000" />
+      <workItem from="1754586107952" duration="111000" />
+      <workItem from="1754599267766" duration="616000" />
+      <workItem from="1754881037299" duration="17000" />
+      <workItem from="1755496997882" duration="5059000" />
+      <workItem from="1755505222751" duration="72000" />
+      <workItem from="1756917970399" duration="77000" />
+      <workItem from="1756918057776" duration="277000" />
+      <workItem from="1756920031353" duration="7254000" />
+      <workItem from="1756937868261" duration="7774000" />
+      <workItem from="1757053237043" duration="3517000" />
+      <workItem from="1760641690292" duration="1927000" />
+      <workItem from="1761302157572" duration="83000" />
+    </task>
+    <task id="LOCAL-00021" summary="New feature - support J5 [Extended version] [P2]">
+      <created>1699859635782</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1699859635782</updated>
+    </task>
+    <task id="LOCAL-00022" summary="Imporved - Build of extended version [P1]">
+      <created>1699862085015</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1699862085015</updated>
+    </task>
+    <task id="LOCAL-00023" summary="Improved - Build of extended version [P2]&#10;Improved - some old integrations removed">
+      <created>1699863401613</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1699863401613</updated>
+    </task>
+    <task id="LOCAL-00024" summary="Improved - Build of extended version [P3]">
+      <created>1699870998098</created>
+      <option name="number" value="00024" />
+      <option name="presentableId" value="LOCAL-00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1699870998098</updated>
+    </task>
+    <task id="LOCAL-00025" summary="Improved - Build of extended version [P4]">
+      <created>1699874352262</created>
+      <option name="number" value="00025" />
+      <option name="presentableId" value="LOCAL-00025" />
+      <option name="project" value="LOCAL" />
+      <updated>1699874352262</updated>
+    </task>
+    <task id="LOCAL-00026" summary="Improved - Build of extended version [P5] Final">
+      <created>1699879052289</created>
+      <option name="number" value="00026" />
+      <option name="presentableId" value="LOCAL-00026" />
+      <option name="project" value="LOCAL" />
+      <updated>1699879052289</updated>
+    </task>
+    <task id="LOCAL-00027" summary="Fixed - removed non needed language files">
+      <created>1699879312338</created>
+      <option name="number" value="00027" />
+      <option name="presentableId" value="LOCAL-00027" />
+      <option name="project" value="LOCAL" />
+      <updated>1699879312338</updated>
+    </task>
+    <task id="LOCAL-00028" summary="Fixed - some issues in build file">
+      <created>1699882243469</created>
+      <option name="number" value="00028" />
+      <option name="presentableId" value="LOCAL-00028" />
+      <option name="project" value="LOCAL" />
+      <updated>1699882243469</updated>
+    </task>
+    <task id="LOCAL-00029" summary="Improved - JoomCCK Extended alert">
+      <created>1699882895029</created>
+      <option name="number" value="00029" />
+      <option name="presentableId" value="LOCAL-00029" />
+      <option name="project" value="LOCAL" />
+      <updated>1699882895029</updated>
+    </task>
+    <task id="LOCAL-00030" summary="Server xml update to last release">
+      <created>1699883255100</created>
+      <option name="number" value="00030" />
+      <option name="presentableId" value="LOCAL-00030" />
+      <option name="project" value="LOCAL" />
+      <updated>1699883255101</updated>
+    </task>
+    <task id="LOCAL-00031" summary="Server xml update to last release">
+      <created>1699883298942</created>
+      <option name="number" value="00031" />
+      <option name="presentableId" value="LOCAL-00031" />
+      <option name="project" value="LOCAL" />
+      <updated>1699883298942</updated>
+    </task>
+    <task id="LOCAL-00032" summary="Fixed - extended version notice not displaying">
+      <created>1700045571722</created>
+      <option name="number" value="00032" />
+      <option name="presentableId" value="LOCAL-00032" />
+      <option name="project" value="LOCAL" />
+      <updated>1700045571722</updated>
+    </task>
+    <task id="LOCAL-00033" summary="Fixed - fatal error on notifications settings">
+      <created>1701093614340</created>
+      <option name="number" value="00033" />
+      <option name="presentableId" value="LOCAL-00033" />
+      <option name="project" value="LOCAL" />
+      <updated>1701093614340</updated>
+    </task>
+    <task id="LOCAL-00034" summary="Fixed - follow buttons js error">
+      <created>1701094134162</created>
+      <option name="number" value="00034" />
+      <option name="presentableId" value="LOCAL-00034" />
+      <option name="project" value="LOCAL" />
+      <updated>1701094134162</updated>
+    </task>
+    <task id="LOCAL-00035" summary="Fixed - joomla core media field not working [Field Image]&#10;Improved - support of webp and avif images [Field Image]&#10;Fixed - js validation was not working">
+      <created>1704402226440</created>
+      <option name="number" value="00035" />
+      <option name="presentableId" value="LOCAL-00035" />
+      <option name="project" value="LOCAL" />
+      <updated>1704402226440</updated>
+    </task>
+    <task id="LOCAL-00036" summary="Fixed - default image not displaying in list view [Image Field]">
+      <created>1704402748664</created>
+      <option name="number" value="00036" />
+      <option name="presentableId" value="LOCAL-00036" />
+      <option name="project" value="LOCAL" />
+      <updated>1704402748664</updated>
+    </task>
+    <task id="LOCAL-00037" summary="Fixed - fatal error on Geo and multiselect fields">
+      <created>1704403163467</created>
+      <option name="number" value="00037" />
+      <option name="presentableId" value="LOCAL-00037" />
+      <option name="project" value="LOCAL" />
+      <updated>1704403163467</updated>
+    </task>
+    <task id="LOCAL-00038" summary="Fixed - language file not loaded in field [Backend]">
+      <created>1704403496961</created>
+      <option name="number" value="00038" />
+      <option name="presentableId" value="LOCAL-00038" />
+      <option name="project" value="LOCAL" />
+      <updated>1704403496961</updated>
+    </task>
+    <task id="LOCAL-00039" summary="Fixed - template overwrite was not working [Records module]">
+      <created>1704404256090</created>
+      <option name="number" value="00039" />
+      <option name="presentableId" value="LOCAL-00039" />
+      <option name="project" value="LOCAL" />
+      <updated>1704404256090</updated>
+    </task>
+    <task id="LOCAL-00040" summary="Fixed - z-index issue in some frontend templates for modals">
+      <created>1704404708077</created>
+      <option name="number" value="00040" />
+      <option name="presentableId" value="LOCAL-00040" />
+      <option name="project" value="LOCAL" />
+      <updated>1704404708077</updated>
+    </task>
+    <task id="LOCAL-00041" summary="Update file">
+      <created>1704405170850</created>
+      <option name="number" value="00041" />
+      <option name="presentableId" value="LOCAL-00041" />
+      <option name="project" value="LOCAL" />
+      <updated>1704405170850</updated>
+    </task>
+    <task id="LOCAL-00042" summary="Update pkg file">
+      <created>1704469216028</created>
+      <option name="number" value="00042" />
+      <option name="presentableId" value="LOCAL-00042" />
+      <option name="project" value="LOCAL" />
+      <updated>1704469216028</updated>
+    </task>
+    <task id="LOCAL-00043" summary="Fixed - some issues compatiblity with J5">
+      <created>1704471497321</created>
+      <option name="number" value="00043" />
+      <option name="presentableId" value="LOCAL-00043" />
+      <option name="project" value="LOCAL" />
+      <updated>1704471497321</updated>
+    </task>
+    <task id="LOCAL-00044" summary="Fixed - some issues compatiblity with J5">
+      <created>1704471883030</created>
+      <option name="number" value="00044" />
+      <option name="presentableId" value="LOCAL-00044" />
+      <option name="project" value="LOCAL" />
+      <updated>1704471883030</updated>
+    </task>
+    <task id="LOCAL-00045" summary="Improved - UI/UX improved [Geo Field]">
+      <created>1704810942228</created>
+      <option name="number" value="00045" />
+      <option name="presentableId" value="LOCAL-00045" />
+      <option name="project" value="LOCAL" />
+      <updated>1704810942228</updated>
+    </task>
+    <task id="LOCAL-00046" summary="Fixed issues in fields">
+      <created>1704814479101</created>
+      <option name="number" value="00046" />
+      <option name="presentableId" value="LOCAL-00046" />
+      <option name="project" value="LOCAL" />
+      <updated>1704814479101</updated>
+    </task>
+    <task id="LOCAL-00047" summary="Fixed some issues">
+      <created>1704814693543</created>
+      <option name="number" value="00047" />
+      <option name="presentableId" value="LOCAL-00047" />
+      <option name="project" value="LOCAL" />
+      <updated>1704814693543</updated>
+    </task>
+    <task id="LOCAL-00048" summary="Fixed some issues&#10;&#10;(cherry picked from commit 1f2483e2292985aafbc20bda55477dee76a22e3b)">
+      <created>1704815236980</created>
+      <option name="number" value="00048" />
+      <option name="presentableId" value="LOCAL-00048" />
+      <option name="project" value="LOCAL" />
+      <updated>1704815236980</updated>
+    </task>
+    <task id="LOCAL-00049" summary="Map list layout UI/UX improved">
+      <created>1704815709960</created>
+      <option name="number" value="00049" />
+      <option name="presentableId" value="LOCAL-00049" />
+      <option name="project" value="LOCAL" />
+      <updated>1704815709960</updated>
+    </task>
+    <task id="LOCAL-00050" summary="Fixed - auto thumb fatal error on full list [Gallery Field]">
+      <created>1705507324107</created>
+      <option name="number" value="00050" />
+      <option name="presentableId" value="LOCAL-00050" />
+      <option name="project" value="LOCAL" />
+      <updated>1705507324107</updated>
+    </task>
+    <task id="LOCAL-00051" summary="Improved - add BS5 support on category select layout [Categories module]">
+      <created>1705531110345</created>
+      <option name="number" value="00051" />
+      <option name="presentableId" value="LOCAL-00051" />
+      <option name="project" value="LOCAL" />
+      <updated>1705531110345</updated>
+    </task>
+    <task id="LOCAL-00052" summary="New Feature - Collapsible layout by @Giorgi625 [Categories module]">
+      <created>1705531409191</created>
+      <option name="number" value="00052" />
+      <option name="presentableId" value="LOCAL-00052" />
+      <option name="project" value="LOCAL" />
+      <updated>1705531409191</updated>
+    </task>
+    <task id="LOCAL-00053" summary="Last changes from free version">
+      <created>1705532658352</created>
+      <option name="number" value="00053" />
+      <option name="presentableId" value="LOCAL-00053" />
+      <option name="project" value="LOCAL" />
+      <updated>1705532658353</updated>
+    </task>
+    <task id="LOCAL-00054" summary="Fixed - save fields ordering was not working [Field Manager] [Free Package]">
+      <created>1705533971782</created>
+      <option name="number" value="00054" />
+      <option name="presentableId" value="LOCAL-00054" />
+      <option name="project" value="LOCAL" />
+      <updated>1705533971782</updated>
+    </task>
+    <task id="LOCAL-00055" summary="Fixed - UI/UX transparent sticky tabs header [Modal params] [Free Package]">
+      <created>1705534114460</created>
+      <option name="number" value="00055" />
+      <option name="presentableId" value="LOCAL-00055" />
+      <option name="project" value="LOCAL" />
+      <updated>1705534114461</updated>
+    </task>
+    <task id="LOCAL-00056" summary="Fixed - possible issue of new section">
+      <created>1705586319978</created>
+      <option name="number" value="00056" />
+      <option name="presentableId" value="LOCAL-00056" />
+      <option name="project" value="LOCAL" />
+      <updated>1705586319978</updated>
+    </task>
+    <task id="LOCAL-00057" summary="Fixed - some missed language constants [Free Package]">
+      <created>1705588327208</created>
+      <option name="number" value="00057" />
+      <option name="presentableId" value="LOCAL-00057" />
+      <option name="project" value="LOCAL" />
+      <updated>1705588327208</updated>
+    </task>
+    <task id="LOCAL-00058" summary="Fixed - remove url query parts if has already an itemId [Routing] [Sections]">
+      <created>1705693802447</created>
+      <option name="number" value="00058" />
+      <option name="presentableId" value="LOCAL-00058" />
+      <option name="project" value="LOCAL" />
+      <updated>1705693802447</updated>
+    </task>
+    <task id="LOCAL-00059" summary="Improved - support all units in max width of field [Select field] [Free Package]">
+      <created>1705694108436</created>
+      <option name="number" value="00059" />
+      <option name="presentableId" value="LOCAL-00059" />
+      <option name="project" value="LOCAL" />
+      <updated>1705694108436</updated>
+    </task>
+    <task id="LOCAL-00060" summary="New Feature - change global list limit from config [Free Package]">
+      <created>1705879724172</created>
+      <option name="number" value="00060" />
+      <option name="presentableId" value="LOCAL-00060" />
+      <option name="project" value="LOCAL" />
+      <updated>1705879724173</updated>
+    </task>
+    <task id="LOCAL-00061" summary="Fixed - publish nested category, doesn't work">
+      <created>1705884378623</created>
+      <option name="number" value="00061" />
+      <option name="presentableId" value="LOCAL-00061" />
+      <option name="project" value="LOCAL" />
+      <updated>1705884378623</updated>
+    </task>
+    <task id="LOCAL-00062" summary="Untracked files">
+      <created>1705884477057</created>
+      <option name="number" value="00062" />
+      <option name="presentableId" value="LOCAL-00062" />
+      <option name="project" value="LOCAL" />
+      <updated>1705884477057</updated>
+    </task>
+    <task id="LOCAL-00063" summary="Updater XML file updated">
+      <created>1705885168168</created>
+      <option name="number" value="00063" />
+      <option name="presentableId" value="LOCAL-00063" />
+      <option name="project" value="LOCAL" />
+      <updated>1705885168168</updated>
+    </task>
+    <task id="LOCAL-00064" summary="Improved - count badges UI/UX improved">
+      <created>1706981232180</created>
+      <option name="number" value="00064" />
+      <option name="presentableId" value="LOCAL-00064" />
+      <option name="project" value="LOCAL" />
+      <updated>1706981232181</updated>
+    </task>
+    <task id="LOCAL-00065" summary="Improved - count badges UI/UX improved [P2]">
+      <created>1706981325205</created>
+      <option name="number" value="00065" />
+      <option name="presentableId" value="LOCAL-00065" />
+      <option name="project" value="LOCAL" />
+      <updated>1706981325205</updated>
+    </task>
+    <task id="LOCAL-00066" summary="New Feature - more rating templates added by @Giorgi625">
+      <created>1706981635021</created>
+      <option name="number" value="00066" />
+      <option name="presentableId" value="LOCAL-00066" />
+      <option name="project" value="LOCAL" />
+      <updated>1706981635022</updated>
+    </task>
+    <task id="LOCAL-00067" summary="Improved - add comment form UI/UX improved">
+      <created>1707690327668</created>
+      <option name="number" value="00067" />
+      <option name="presentableId" value="LOCAL-00067" />
+      <option name="project" value="LOCAL" />
+      <updated>1707690327668</updated>
+    </task>
+    <task id="LOCAL-00068" summary="Improved - Events to log params UI/UX improved [Audit Trail Settings]">
+      <created>1707783719873</created>
+      <option name="number" value="00068" />
+      <option name="presentableId" value="LOCAL-00068" />
+      <option name="project" value="LOCAL" />
+      <updated>1707783719873</updated>
+    </task>
+    <task id="LOCAL-00069" summary="Improved - User online status param moved outside personalization fieldset">
+      <created>1707784018296</created>
+      <option name="number" value="00069" />
+      <option name="presentableId" value="LOCAL-00069" />
+      <option name="project" value="LOCAL" />
+      <updated>1707784018296</updated>
+    </task>
+    <option name="localTasksCounter" value="357" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.History.Properties">
+    <option name="COLUMN_ID_ORDER">
+      <list>
+        <option value="Default.Root" />
+        <option value="Default.Author" />
+        <option value="Default.Date" />
+        <option value="Default.Subject" />
+        <option value="Space.CommitStatus" />
+      </list>
+    </option>
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="RECENT_FILTERS">
+      <map>
+        <entry key="Branch">
+          <value>
+            <list>
+              <RecentGroup>
+                <option name="FILTER_VALUES">
+                  <option value="extended/main" />
+                </option>
+              </RecentGroup>
+              <RecentGroup>
+                <option name="FILTER_VALUES">
+                  <option value="main" />
+                </option>
+              </RecentGroup>
+              <RecentGroup>
+                <option name="FILTER_VALUES">
+                  <option value="free/main" />
+                </option>
+              </RecentGroup>
+            </list>
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
+    <option name="CHECK_NEW_TODO" value="false" />
+    <MESSAGE value="Jlex integration removed cuz now supported by JLex art developers" />
+    <MESSAGE value="Fixed - fatal error if notifications module loaded outside JoomCCK component" />
+    <MESSAGE value="Fixed - some missed language constants [Full article template]" />
+    <MESSAGE value="Improved - support font icon [Default article template]" />
+    <MESSAGE value="Fixed - missed class attr support [MEList field]" />
+    <MESSAGE value="Improved - suffix and prefix support bootstrap 5 [Text Field]" />
+    <MESSAGE value="Improved - display options moved to a new tab [Config]" />
+    <MESSAGE value="New Feature - Partial or exact match filter option  [Text Field] [Filtering]&#10;New Feature - max autocomplete result [Text Field] [Filtering]&#10;Fixed - autocomplete not working  [Text Field] [Filtering]" />
+    <MESSAGE value="Fixed - missed default config [Title only list layout]" />
+    <MESSAGE value="Fixed - select value wrong if css selector used [Select field]" />
+    <MESSAGE value="Improved - lazy loading added by default [Image Field]" />
+    <MESSAGE value="Improved - PHP 8.4 support" />
+    <MESSAGE value="Improved - PHP 8.4 support [Image Field]" />
+    <MESSAGE value="Improved - Comments list now use JLayout for better reuse [Single Record]&#10;Improved - Comments list UI/UX improved" />
+    <MESSAGE value="New version in update XML" />
+    <MESSAGE value="Claude integration" />
+    <MESSAGE value="Fixed - some php warnings" />
+    <MESSAGE value="Claude Agent memory updated" />
+    <MESSAGE value="Improved - UI/UX of file upload now use BS5 [Image Field]&#10;Improved - Input types now use JLayout for better reuse [Image Field]&#10;Improved - hide preview and delete button if no image yet saved  [Image Field]" />
+    <MESSAGE value="Fixed - missed lang constant [Date time field]" />
+    <MESSAGE value="New Feature - tag links now have the rel=&quot;nofollow&quot; attribute by default" />
+    <MESSAGE value="New update [XML]" />
+    <MESSAGE value="Signature field" />
+    <MESSAGE value="Fixed - issues of uploading signature" />
+    <MESSAGE value="Fixed - many other issues fixed" />
+    <option name="LAST_COMMIT_MESSAGE" value="Fixed - many other issues fixed" />
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
+  </component>
+</project>
