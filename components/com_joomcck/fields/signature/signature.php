@@ -25,10 +25,10 @@ class JFormFieldCSignature extends CFormField
 	public function __construct($field, $default)
 	{
 		parent::__construct($field, $default);
-		
-		// Load language file
-		$lang = Factory::getLanguage();
-		$lang->load('com_joomcck_field_signature', JPATH_ROOT . '/components/com_joomcck/fields/signature');
+
+		// Set up directory for signature storage
+		$this->directory = rtrim(str_replace('\\', '/', $this->params->get('params.directory', 'images/signatures')), '/') . '/';
+
 	}
 
 	public function getInput()
@@ -36,13 +36,11 @@ class JFormFieldCSignature extends CFormField
 		// Load signature JavaScript
 		Factory::getDocument()->addScript(Uri::root(TRUE) . '/components/com_joomcck/fields/signature/assets/signature.js');
 		Factory::getDocument()->addStyleSheet(Uri::root(TRUE) . '/components/com_joomcck/fields/signature/assets/signature.css');
-		
-		$params = $this->params;
+
 		$user = Factory::getApplication()->getIdentity();
 		$doc = Factory::getDocument();
 		
-		// Set up directory for signature storage
-		$this->directory = rtrim(str_replace('\\', '/', $params->get('params.directory', 'images/signatures')), '/') . '/';
+
 		
 		// Ensure directory exists
 		$fullPath = JPATH_ROOT . '/' . $this->directory;
@@ -111,8 +109,6 @@ class JFormFieldCSignature extends CFormField
 		{
 			return json_encode([]);
 		}
-
-
 		// If we have signature data (base64), save it as an image file
 		if (!empty($value['signature_data']) && trim($value['signature_data']) !== '')
 		{
@@ -126,13 +122,14 @@ class JFormFieldCSignature extends CFormField
 			
 			// Decode base64 data
 			$imageData = base64_decode($signatureData);
-			
+
+
 			if ($imageData !== false)
 			{
 				// Generate unique filename
 				$filename = 'signature_' . $record->id . '_' . $this->id . '_' . time() . '.png';
 				$filepath = JPATH_ROOT . '/' . rtrim($this->directory, '/') . '/' . $filename;
-				
+
 				// Save the image file
 				if (File::write($filepath, $imageData))
 				{
