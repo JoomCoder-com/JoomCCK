@@ -49,7 +49,48 @@ class JFormFieldCMultiselect extends CFormFieldSelectable
 			$this->value[] = $this->params->get('params.default_val');
 		}
 
+		// Set Tom Select options if enabled
+		if($params->get('params.use_tomselect'))
+		{
+			$this->tomSelectOptions = $this->_getTomSelectOptions();
+			// Use tomselect template when Tom Select is enabled
+			$this->params->set('params.template_input', 'tomselect.php');
+		}
+
 		return $this->_display_input();
+	}
+
+	/**
+	 * Get Tom Select configuration options
+	 * @return array
+	 */
+	protected function _getTomSelectOptions()
+	{
+		$params = $this->params;
+		$options = array();
+
+		// Basic Tom Select options
+		$options['use_tomselect'] = true;
+		$options['canDelete'] = true; // Enable remove button by default
+		$options['canAdd'] = false; // Disable create functionality for simplicity
+
+		// Enable remove_button plugin by default for visual enhancement
+		$options['plugins'] = array('remove_button');
+
+		// Search control (enabled by default)
+		$options['search'] = (bool)$params->get('params.tomselect_search', 1);
+
+		// Placeholder text
+		$placeholder = $params->get('params.tomselect_placeholder', '');
+		if($placeholder)
+		{
+			$options['placeholder'] = $placeholder;
+		}
+
+		// Set default search field
+		$options['searchField'] = 'text';
+
+		return $options;
 	}
 
 	public function onJSValidate()
