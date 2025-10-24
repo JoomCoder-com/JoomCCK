@@ -320,7 +320,7 @@ class JFormFieldCEmail extends CFormField
 			$data['subject'] = \Joomla\CMS\Language\Text::_($this->params->get('params.subject', 'No subject set in email field'));
 		}
 
-		$files = new \Joomla\CMS\Input\Files();
+		$files = new \Joomla\Input\Files();
 		$files = $files->get('email_' . $this->id, array());
 
 

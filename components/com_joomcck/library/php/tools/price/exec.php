@@ -3,7 +3,7 @@
 defined('_JEXEC') or die();
 
 $app = \Joomla\CMS\Factory::getApplication();
-$file = new \Joomla\CMS\Input\Files();
+$file = new \Joomla\Input\Files();
 $db = \Joomla\CMS\Factory::getDBO();
 $table_record = \Joomla\CMS\Table\Table::getInstance('Record', 'JoomcckTable');
 $table_value = \Joomla\CMS\Table\Table::getInstance('Record_values', 'JoomcckTable');
