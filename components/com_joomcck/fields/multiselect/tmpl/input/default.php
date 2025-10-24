@@ -9,11 +9,6 @@
 defined('_JEXEC') or die();
 $params = $this->params;
 
-if($params->get('params.chosen', false))
-{
-	\Joomla\CMS\HTML\HTMLHelper::_('formbehavior.chosen', '.joomcck-chosen-'.$this->id);
-}
-
 $class = ' class="' . $params->get('core.field_class', 'form-control') . ($this->required ? ' required' : NULL) . '"';
 $required = $this->required ? ' required="true" ' : NULL;
 $style = ' style="max-width: ' . $params->get('params.width', '450') . 'px; max-height: ' . $params->get('params.height', '70px') . 'px"';
@@ -59,7 +54,7 @@ $size = ' size="' . (count($options) > $params->get('params.list_limit', 5) ? $p
 <?php endif; ?>
 
 <select onchange="Joomcck.countFieldValues(this, <?php echo $this->id;?>, <?php echo $params->get('params.total_limit');?>, 'select')" multiple="multiple"
-name="jform[fields][<?php echo $this->id;?>][]" class="w-100 form-control elements-list joomcck-chosen-<?php echo $this->id; ?>" id="form_field_list_<?php echo $this->id;?>" <?php echo $required . $style . $size;?>>
+name="jform[fields][<?php echo $this->id;?>][]" class="w-100 form-control elements-list" id="form_field_list_<?php echo $this->id;?>" <?php echo $required . $style . $size;?>>
 	<?php echo implode("\n", $options);?>
 </select>
 

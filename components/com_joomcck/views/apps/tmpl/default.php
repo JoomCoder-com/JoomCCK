@@ -15,7 +15,6 @@ defined('_JEXEC') or die('Restricted access');
 $user = \Joomla\CMS\Factory::getApplication()->getIdentity();
 $userId = $user->get('id');
 \Joomla\CMS\HTML\HTMLHelper::_('dropdown.init');
-\Joomla\CMS\HTML\HTMLHelper::_('formbehavior.chosen', '.select');
 \Joomla\CMS\HTML\HTMLHelper::_('bootstrap.tooltip', '*[rel^="tooltip"]');
 $listOrder = $this->state->get('list.ordering');
 $listDirn = $this->state->get('list.direction');

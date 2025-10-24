@@ -16,7 +16,6 @@ defined('_JEXEC') or die;
 \Joomla\CMS\HTML\HTMLHelper::_('bootstrap.tooltip');
 \Joomla\CMS\HTML\HTMLHelper::_('behavior.multiselect');
 \Joomla\CMS\HTML\HTMLHelper::_('dropdown.init');
-\Joomla\CMS\HTML\HTMLHelper::_('formbehavior.chosen', '.select');
 
 $user		= \Joomla\CMS\Factory::getApplication()->getIdentity();
 $userId		= $user->get('id');

@@ -13,7 +13,6 @@ use Joomcck\Layout\Helpers\Layout;
 defined('_JEXEC') or die('Restricted access');
 
 \Joomla\CMS\HTML\HTMLHelper::_('dropdown.init');
-\Joomla\CMS\HTML\HTMLHelper::_('formbehavior.chosen', '.select');
 
 $user   = \Joomla\CMS\Factory::getApplication()->getIdentity();
 $userId = $user->get('id');

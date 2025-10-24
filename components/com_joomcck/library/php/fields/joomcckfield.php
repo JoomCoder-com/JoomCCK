@@ -163,7 +163,7 @@ class CFormField extends \Joomla\CMS\Form\FormField{
 
 		// get output tmpl params
 		$outputParams = $this->params->get('tmpl_'.$tmplName,[]);
-		$outputParams = new \JRegistry($outputParams);
+		$outputParams = new \Joomla\Registry\Registry($outputParams);
 
 		ob_start();
 

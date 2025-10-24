@@ -21,7 +21,6 @@ $listOrder = $this->state->get('list.ordering');
 $listDirn = $this->state->get('list.direction');
 
 \Joomla\CMS\HTML\HTMLHelper::_('dropdown.init');
-\Joomla\CMS\HTML\HTMLHelper::_('formbehavior.chosen', '.select');
 
 $canOrder = $user->authorise('core.edit.state', 'com_joomcck.tfields');
 $saveOrder = $listOrder == 'f.ordering';

@@ -19,7 +19,6 @@ $userId = $user->get('id');
 $listOrder = $this->state->get('list.ordering');
 $listDirn = $this->state->get('list.direction');
 
-\Joomla\CMS\HTML\HTMLHelper::_('formbehavior.chosen', '.select');
 ?>
 
 <?php echo HTMLFormatHelper::layout('navbar'); ?>
