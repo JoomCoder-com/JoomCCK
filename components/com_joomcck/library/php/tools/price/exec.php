@@ -24,7 +24,7 @@ if($file['error'] > 0 OR $file['size'] == 0)
 	return FALSE;
 }
 
-if(strtolower(\Joomla\CMS\Filesystem\File::getExt($file['name'])) != 'json')
+if(strtolower(pathinfo($file['name'],PATHINFO_EXTENSION)) != 'json')
 {
 	$app->enqueueMessage('Error: wrong file extension. Could be only JSON!', 'error');
 

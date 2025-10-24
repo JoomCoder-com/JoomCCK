@@ -84,7 +84,7 @@ class JFormFieldCAudio extends CFormFieldUpload
 	public function onConvert($params)
 	{
 		$name   = $params['file']['upload_name'];
-		$ext = \Joomla\CMS\Filesystem\File::getExt($name);
+		$ext = pathinfo($name,PATHINFO_EXTENSION);
 		$parts  = explode("_", $name);
 		$params = \Joomla\CMS\Component\ComponentHelper::getParams('com_joomcck');
 		$root   =\Joomla\Filesystem\Path::clean(JPATH_ROOT . DIRECTORY_SEPARATOR . $params->get('general_upload'));
@@ -110,7 +110,7 @@ class JFormFieldCAudio extends CFormFieldUpload
 	{
 		$descriptorspec = array(0 => array("file", JPATH_ROOT . '/logs/convertion_in.txt', "a"), 1 => array("file", JPATH_ROOT . '/logs/convertion_out.txt', "a"), 2 => array("file", JPATH_ROOT . '/logs/convertion_err.txt', "a"));
 
-		$_ext    = \Joomla\CMS\Filesystem\File::getExt($src);
+		$_ext    = pathinfo($src,PATHINFO_EXTENSION);
 		$command = sprintf('%s -i "%s" %s "%s"',
 			$this->params->get('params.command', 'ffmpeg'), $src, $codec, str_replace('.' . $_ext, '.' . $ext, $src));
 

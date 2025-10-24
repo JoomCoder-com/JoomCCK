@@ -295,7 +295,7 @@ class JoomcckModelPack extends MModelAdmin
             $joomcck_params = \Joomla\CMS\Component\ComponentHelper::getParams('com_joomcck');
             foreach ($files as $file) {
                 $params        = new \Joomla\Registry\Registry($fields[$file->field_id]->params);
-                $subfolder     = $params->get('params.subfolder', \Joomla\CMS\Filesystem\File::getExt($file->filename));
+                $subfolder     = $params->get('params.subfolder', pathinfo($file->filename,PATHINFO_EXTENSION));
                 $file_fullpath = str_replace($joomcck_params->get('general_upload') . DIRECTORY_SEPARATOR . $subfolder . DIRECTORY_SEPARATOR, '', $file->fullpath);
                 $dest          = PACK_ROOT . '/uploads/' . $subfolder . DIRECTORY_SEPARATOR . $file_fullpath;
                 $folder        = dirname($dest);

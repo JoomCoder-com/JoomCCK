@@ -331,7 +331,7 @@ class JFormFieldCEmail extends CFormField
 			{
 				continue;
 			}
-			$ext = \Joomla\CMS\Filesystem\File::getExt($file['name']);
+			$ext = pathinfo($file['name'],PATHINFO_EXTENSION);
 			ArrayHelper::clean_r($formats);
 			if(!in_array(strtolower($ext), $formats))
 			{

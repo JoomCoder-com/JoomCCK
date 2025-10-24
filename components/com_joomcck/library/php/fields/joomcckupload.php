@@ -437,7 +437,7 @@ class CFormFieldUpload extends CFormField
             $time = time();
             //$date = date('Y-m', $time);
             $date      = date($params->get('folder_format', 'Y-m'), $time);
-            $ext       = strtolower(\Joomla\CMS\Filesystem\File::getExt($filename));
+            $ext       = strtolower(pathinfo($filename,PATHINFO_EXTENSION));
             $subfolder = $field->params->get('params.subfolder', $ext);
 
             $dest  = JPATH_ROOT . DIRECTORY_SEPARATOR . $params->get('general_upload') . DIRECTORY_SEPARATOR . $subfolder . DIRECTORY_SEPARATOR;
@@ -672,7 +672,7 @@ class CFormFieldUpload extends CFormField
                 continue;
             }
 
-            $ext      = \Joomla\String\StringHelper::strtolower(\Joomla\CMS\Filesystem\File::getExt($file));
+            $ext      = \Joomla\String\StringHelper::strtolower(pathinfo($file,PATHINFO_EXTENSION));
             $new_name = \Joomla\CMS\Factory::getDate($record->ctime)->toUnix() . '_' . md5($file) . '.' . $ext;
 
             $file = $this->_find_import_file($params->get('field.' . $this->id . '.path'), $file);

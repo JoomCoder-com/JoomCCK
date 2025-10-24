@@ -105,7 +105,7 @@ class JFormFieldCImage extends CFormField
 			$check = $value['image'];
 		}
 
-		$ext = \Joomla\CMS\Filesystem\File::getExt($check);
+		$ext = pathinfo($check, PATHINFO_EXTENSION);
 
 		$formats = explode(',', strtolower(str_replace(array(' '), '', $this->params->get('params.formats', 'png,jpg,gif,jpeg,webp,avif'))));
 
@@ -150,7 +150,7 @@ class JFormFieldCImage extends CFormField
 						'field_id'   => $this->id,
 						'saved'      => 1,
 						'fullpath'   => $this->value['image'],
-						'ext'        => \Joomla\CMS\Filesystem\File::getExt($this->value['filename'])
+						'ext'        => pathinfo($this->value['filename'],PATHINFO_EXTENSION)
 					);
 
 					if($table->id)
@@ -188,7 +188,7 @@ class JFormFieldCImage extends CFormField
 				$time   = time();
 				$params = \Joomla\CMS\Component\ComponentHelper::getParams('com_joomcck');
 				$date   = date($params->get('folder_format', 'Y-m'), $time);
-				$ext    = \Joomla\String\StringHelper::strtolower(\Joomla\CMS\Filesystem\File::getExt($file['name']));
+				$ext    = pathinfo($file['name'],PATHINFO_EXTENSION);
 
 				$subfolder = $this->params->get('params.subfolder');
 
@@ -292,7 +292,7 @@ class JFormFieldCImage extends CFormField
 			Folder::create(JPATH_ROOT . $upload_path, 0755);
 			File::write(JPATH_ROOT . $upload_path . DIRECTORY_SEPARATOR . 'index.html', $index = '<html><body></body></html>');
 		}
-		$upload_path .= DIRECTORY_SEPARATOR . time() . '_' . md5($file) . '.' . strtolower(\Joomla\CMS\Filesystem\File::getExt(basename($file)));
+		$upload_path .= DIRECTORY_SEPARATOR . time() . '_' . md5($file) . '.' . strtolower(pathinfo(basename($file),PATHINFO_EXTENSION));
 
 		if(File::copy($file, JPATH_ROOT . $upload_path))
 		{
