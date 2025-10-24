@@ -284,10 +284,8 @@ js;
 
 	public function validateField($value, $record, $type, $section)
 	{
-		$mask = $this->params->get('params.mask', null);
-
-
-		if (isset($mask->mask_type) && $this->params->get('params.show_mask', 1))
+		$mask = $this->params->get('params.mask', 0);
+		if ($mask->mask_type && $this->params->get('params.show_mask', 1))
 		{
 			if ($value == $mask->mask)
 			{

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <joomcckfield>
-	<name>Signature</name>
+	<name>COM_JOOMCCK_FIELD_SIGNATURE_LABEL</name>
 	<group>Advanced Form Elements</group>
 
 	<config>
@@ -9,6 +9,13 @@
 				<field class="form-select" type="cobtmpllist" name="template_input" onchange="ajax_load_sub_params(this, 'components/com_joomcck/fields/signature/tmpl/input');" filter="php$" hide_none="1" hide_default="1" directory="components/com_joomcck/fields/signature/tmpl/input" label="F_TMPLINPUT" default="default.php" />
 				<field class="form-select" type="cobtmpllist" name="template_output_list" onchange="ajax_load_sub_params(this, 'components/com_joomcck/fields/signature/tmpl/output');" filter="php$" hide_none="1" hide_default="1" directory="components/com_joomcck/fields/signature/tmpl/output" label="F_TMPLLIST" default="default.php" />
 				<field class="form-select" type="cobtmpllist" name="template_output_full" onchange="ajax_load_sub_params(this, 'components/com_joomcck/fields/signature/tmpl/output');" filter="php$" hide_none="1" hide_default="1" directory="components/com_joomcck/fields/signature/tmpl/output" label="F_TMPLFULL" default="default.php" />
+			</fieldset>
+
+			<fieldset name="core">
+				<field name="sortable" type="mradio" class="btn-group" default="0" label="F_SORTABLE" description="">
+					<option value="0">JNO</option>
+					<option value="1">JYES</option>
+				</field>
 			</fieldset>
 
 			<fieldset name="signature_settings" label="COM_JOOMCCK_FIELD_SIGNATURE_SETTINGS">
