@@ -277,6 +277,8 @@ class  CFormFieldRelate extends CFormField
 					$db->setQuery($query);
 					$default = $db->loadObjectList();
 				}
+
+
 				$html .= $this->_render_display($default, $name);
 				break;
 		}
@@ -290,7 +292,7 @@ class  CFormFieldRelate extends CFormField
 		$li = array();
 		foreach($default AS $record)
 		{
-			$li[] = $record->text . "<input type=\"hidden\" id=\"jformfields{$this->id}\" value=\"{$record->value}\" name=\"{$name}\">";
+			$li[] = $record->title . "<input type=\"hidden\" id=\"jformfields{$this->id}\" value=\"{$record->value}\" name=\"{$name}\">";
 		}
 		//var_dump($li);
 		if(!$li)
@@ -646,7 +648,7 @@ class  CFormFieldRelate extends CFormField
 		{
 			$this->setError('Limit reached.');
 
-			return;;
+			return;
 		}
 
 		$table->load($save);
