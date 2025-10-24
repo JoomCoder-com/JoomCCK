@@ -677,22 +677,59 @@ var _gaq = _gaq || [];
 			}
 
 			if(data.inputtype == 'option') {
-				var inpt = $(document.createElement('option'))
-					.attr('value', input.val())
-					.attr('selected', 'selected')
-					.html(input.val())
-					.click(function() {
-						Joomcck.countFieldValues(this, data.id, data.limit, data.inputtype);
-					});
-
 				var sel = $('#form_field_list_' + data.id);
+				var newValue = input.val();
+				
+				// Check if this field is using Tom Select
+				if(window.joomcckTomSelectFields && window.joomcckTomSelectFields[data.id]) {
+					var tomSelectInstance = window.joomcckTomSelectFields[data.id];
+					
+					// Add the new option to Tom Select
+					tomSelectInstance.addOption({
+						value: newValue,
+						text: newValue
+					});
+					
+					// Get current selections and preserve them
+					var currentValues = tomSelectInstance.getValue();
+					var newValues = [];
+					
+					// Ensure currentValues is always an array for consistent handling
+					if(Array.isArray(currentValues)) {
+						newValues = currentValues.slice(); // Create a copy
+					} else if(currentValues) {
+						newValues = [currentValues];
+					}
+					
+					// Handle selection based on limit
+					if(data.limit && newValues.length >= data.limit) {
+						// If limit is reached, replace the last selected item with the new one
+						newValues[newValues.length - 1] = newValue;
+					} else {
+						// Add the new value to the existing selections
+						newValues.push(newValue);
+					}
+					
+					tomSelectInstance.setValue(newValues);
+				} else {
+					// Fallback for regular select (when Tom Select is not enabled)
+					var inpt = $(document.createElement('option'))
+						.attr('value', newValue)
+						.attr('selected', 'selected')
+						.html(newValue)
+						.click(function() {
+							Joomcck.countFieldValues(this, data.id, data.limit, data.inputtype);
+						});
 
-				sel.append(inpt);
-				sel.trigger("liszt:updated");
+					sel.append(inpt);
 
-				if(data.field_type == 'multiselect') {
-					sel.attr('size', (parseInt(sel.attr('size')) + 1));
+					if(data.field_type == 'multiselect') {
+						sel.attr('size', (parseInt(sel.attr('size')) + 1));
+					}
 				}
+				
+				// Trigger field value counting for both cases
+				Joomcck.countFieldValues(sel[0], data.id, data.limit, data.inputtype);
 			}
 			else {
 				var inpt = $(document.createElement('input'))
@@ -714,9 +751,11 @@ var _gaq = _gaq || [];
 							.attr({'class': data.inputtype})
 							.append(inpt, input.val())))
 					.appendTo($('#elements-list-' + data.id));
+					
+				// Trigger field value counting for checkbox/radio
+				Joomcck.countFieldValues(inpt[0], data.id, data.limit, data.inputtype);
 			}
 
-			Joomcck.countFieldValues(inpt, data.id, data.limit, data.inputtype);
 			bc.trigger('click');
 		});
 
@@ -732,6 +771,7 @@ var _gaq = _gaq || [];
 
 		var field = $('[name^=jform\\[fields\\]\\[' + field_id + '\\]]');
 		var selected = 0;
+		
 		if(type == 'checkbox') {
 			$.each(field, function(key, obj) {
 				if(obj.checked) {
@@ -740,11 +780,19 @@ var _gaq = _gaq || [];
 			});
 		}
 		if(type == 'option') {
-			$.each(field[0].options, function(key, obj) {
-				if(obj.selected) {
-					selected++;
-				}
-			});
+			// Check if this field is using Tom Select
+			if(window.joomcckTomSelectFields && window.joomcckTomSelectFields[field_id]) {
+				var tomSelectInstance = window.joomcckTomSelectFields[field_id];
+				var currentValues = tomSelectInstance.getValue();
+				selected = Array.isArray(currentValues) ? currentValues.length : (currentValues ? 1 : 0);
+			} else {
+				// Fallback for regular select elements
+				$.each(field[0].options, function(key, obj) {
+					if(obj.selected) {
+						selected++;
+					}
+				});
+			}
 		}
 		// todo: check getSelected if still works, cuz i think used by mootools not jquery of vanilla
 		if(type == 'select') {
@@ -760,7 +808,19 @@ var _gaq = _gaq || [];
 				val.removeAttr('checked', '');
 			}
 			else if(type == 'option') {
-				val.removeAttr('selected', '');
+				// Handle Tom Select limit enforcement
+				if(window.joomcckTomSelectFields && window.joomcckTomSelectFields[field_id]) {
+					var tomSelectInstance = window.joomcckTomSelectFields[field_id];
+					var currentValues = tomSelectInstance.getValue();
+					if(Array.isArray(currentValues) && currentValues.length > limit) {
+						// Remove excess selections (keep only the first 'limit' items)
+						var limitedValues = currentValues.slice(0, limit);
+						tomSelectInstance.setValue(limitedValues);
+					}
+				} else {
+					// Fallback for regular select
+					val.removeAttr('selected', '');
+				}
 			}
 			// todo: check getSelected if still works, cuz i think used by mootools not jquery of vanilla
 			else if(type == 'select') {

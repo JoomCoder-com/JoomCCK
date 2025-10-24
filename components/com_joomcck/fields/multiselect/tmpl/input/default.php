@@ -85,7 +85,14 @@ if ($params->get('params.use_tomselect', 0)){
 
     $initTomSelect = <<<JS
 document.addEventListener('DOMContentLoaded', function() {
-    new TomSelect('#form_field_list_$this->id', $settingsJson);
+    // Store Tom Select instance globally for add variant functionality
+    window.tomSelect_$this->id = new TomSelect('#form_field_list_$this->id', $settingsJson);
+    
+    // Mark this field as using Tom Select for the add variant function
+    if (typeof window.joomcckTomSelectFields === 'undefined') {
+        window.joomcckTomSelectFields = {};
+    }
+    window.joomcckTomSelectFields[$this->id] = window.tomSelect_$this->id;
 });
 JS;
 
