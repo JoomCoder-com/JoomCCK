@@ -6,6 +6,9 @@
  * @copyright Copyright (C) 2012 joomcoder (https://www.joomcoder.com). All rights reserved.
  * @license GNU/GPL http://www.gnu.org/copyleft/gpl.html
  */
+
+use Joomcck\Assets\Webassets\Webassets;
+
 defined('_JEXEC') or die();
 $params = $this->params;
 
@@ -77,3 +80,42 @@ name="jform[fields][<?php echo $this->id;?>][]" class="w-100 form-control elemen
 			href="javascript:void(0)" onclick="Joomcck.showAddForm(<?php echo $this->id;?>)"><?php echo \Joomla\CMS\Language\Text::_($this->params->get('params.user_value_label', 'Your variant'));?></a>
 	</div></p>
 <?php endif;?>
+
+<?php
+// Tom Select initialization if enabled
+if ($params->get('params.use_tomselect', 0)):
+	// Load Tom Select assets
+	$wa = Webassets::$wa;
+    $wa->useScript('com_joomcck.tom-select');
+    $wa->useStyle('com_joomcck.tom-select');
+	
+	// Prepare Tom Select settings
+	$tomSelectSettings = array();
+	
+	// Add plugins
+	$tomSelectSettings['plugins'] = array('remove_button');
+	
+	// Search functionality
+	if (!$params->get('params.tomselect_search', 1)) {
+		$tomSelectSettings['searchField'] = false;
+	}
+	
+	// Placeholder
+	$placeholder = $params->get('params.tomselect_placeholder', '');
+	if ($placeholder) {
+		$tomSelectSettings['placeholder'] = $placeholder;
+	}
+	
+	// Max items from total limit
+	if ($params->get('params.total_limit')) {
+		$tomSelectSettings['maxItems'] = (int)$params->get('params.total_limit');
+	}
+	
+	$settingsJson = json_encode($tomSelectSettings);
+?>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+	new TomSelect('#form_field_list_<?php echo $this->id; ?>', <?php echo $settingsJson; ?>);
+});
+</script>
+<?php endif; ?>
