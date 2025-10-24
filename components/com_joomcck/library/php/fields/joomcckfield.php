@@ -156,13 +156,22 @@ class CFormField extends \Joomla\CMS\Form\FormField{
 
 	protected  function _display_output($client, $record, $type, $section)
 	{
+
+		// some inits
+		$tmpl = $this->params->get('params.template_output_'.$client,  'default.php'); // output tmpl filename
+		$tmplName = explode('.', $tmpl)[0]; // output tmpl name
+
+		// get output tmpl params
+		$outputParams = $this->params->get('tmpl_'.$tmplName,[]);
+		$outputParams = new \JRegistry($outputParams);
+
 		ob_start();
 
 		$template = \Joomla\CMS\Factory::getApplication()->getTemplate();
-		$tpath = JPATH_THEMES . '/' . $template . '/html/com_joomcck/fields/'.$this->type.'/output/' . $this->params->get('params.template_output_'.$client,  'default.php');
+		$tpath = JPATH_THEMES . '/' . $template . '/html/com_joomcck/fields/'.$this->type.'/output/' . $tmpl;
 		if(!is_file($tpath))
 		{
-			$tpath = JPATH_ROOT. '/components/com_joomcck/fields'. DIRECTORY_SEPARATOR .$this->type. DIRECTORY_SEPARATOR .'tmpl/output'. DIRECTORY_SEPARATOR .$this->params->get('params.template_output_'.$client,  'default.php');
+			$tpath = JPATH_ROOT. '/components/com_joomcck/fields/' .$this->type. '/tmpl/output/'. $tmpl;
 		}
 		include $tpath;
 		$out = ob_get_contents();
