@@ -661,7 +661,6 @@ class JoomcckModelRecord extends MModelItem
 	{
 		$db = $this->getDbo();
 		$user = \Joomla\CMS\Factory::getApplication()->getIdentity();
-		$nullDate = $db->getNullDate();
 
 		$query = $db->getQuery(true)
 			->select('r.id, r.title, r.alias')
@@ -669,8 +668,7 @@ class JoomcckModelRecord extends MModelItem
 			->where('r.section_id = ' . (int) $section->id)
 			->where('r.published = 1')
 			->where('r.id > ' . (int) $record->id)
-			->where('(r.publish_up = ' . $db->quote($nullDate) . ' OR r.publish_up <= ' . $db->quote(\Joomla\CMS\Factory::getDate()->toSql()) . ')')
-			->where('(r.publish_down = ' . $db->quote($nullDate) . ' OR r.publish_down >= ' . $db->quote(\Joomla\CMS\Factory::getDate()->toSql()) . ')')
+			->where('r.ctime <= ' . $db->quote(\Joomla\CMS\Factory::getDate()->toSql()))
 			->where('r.access IN (' . implode(',', $user->getAuthorisedViewLevels()) . ')')
 			->order('r.id ASC');
 
@@ -679,7 +677,7 @@ class JoomcckModelRecord extends MModelItem
 			$categoryIds = array_keys($record->categories);
 			if (!empty($categoryIds)) {
 				$query->join('LEFT', '#__js_res_record_category AS rc ON r.id = rc.record_id')
-					->where('rc.category_id IN (' . implode(',', array_map('intval', $categoryIds)) . ')');
+					->where('rc.catid IN (' . implode(',', array_map('intval', $categoryIds)) . ')');
 			}
 		}
 
@@ -709,7 +707,6 @@ class JoomcckModelRecord extends MModelItem
 	{
 		$db = $this->getDbo();
 		$user = \Joomla\CMS\Factory::getApplication()->getIdentity();
-		$nullDate = $db->getNullDate();
 
 		$query = $db->getQuery(true)
 			->select('r.id, r.title, r.alias')
@@ -717,8 +714,7 @@ class JoomcckModelRecord extends MModelItem
 			->where('r.section_id = ' . (int) $section->id)
 			->where('r.published = 1')
 			->where('r.id < ' . (int) $record->id)
-			->where('(r.publish_up = ' . $db->quote($nullDate) . ' OR r.publish_up <= ' . $db->quote(\Joomla\CMS\Factory::getDate()->toSql()) . ')')
-			->where('(r.publish_down = ' . $db->quote($nullDate) . ' OR r.publish_down >= ' . $db->quote(\Joomla\CMS\Factory::getDate()->toSql()) . ')')
+			->where('r.ctime <= ' . $db->quote(\Joomla\CMS\Factory::getDate()->toSql()))
 			->where('r.access IN (' . implode(',', $user->getAuthorisedViewLevels()) . ')')
 			->order('r.id DESC');
 
@@ -727,7 +723,7 @@ class JoomcckModelRecord extends MModelItem
 			$categoryIds = array_keys($record->categories);
 			if (!empty($categoryIds)) {
 				$query->join('LEFT', '#__js_res_record_category AS rc ON r.id = rc.record_id')
-					->where('rc.category_id IN (' . implode(',', array_map('intval', $categoryIds)) . ')');
+					->where('rc.catid IN (' . implode(',', array_map('intval', $categoryIds)) . ')');
 			}
 		}
 

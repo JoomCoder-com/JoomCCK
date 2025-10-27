@@ -208,14 +208,6 @@ class JoomcckViewRecord extends MViewBase
         $this->navigation->next = $model->getNextRecord($this->item, $this->section, $this->type);
         $this->navigation->previous = $model->getPreviousRecord($this->item, $this->section, $this->type);
         $this->navigation->position = $this->type->params->get('properties.navigation_position', 'bottom');
-
-
-        echo '<pre>';
-        echo var_dump($this->navigation);
-        echo '</pre>';
-        die;
-
-
     }
 
     private function _checkCategoryAccess($item, $section)

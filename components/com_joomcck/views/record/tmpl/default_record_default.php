@@ -236,6 +236,9 @@ if($params->get('tmpl_core.item_follow_num'))
 	<?php endif;?>
 </article>
 
+<?php echo Layout::render('core.single.recordParts.navigation',['current' => $this]) ?>
+
+
 <?php if($started):?>
 	<script type="text/javascript">
 		<?php if(in_array($params->get('tmpl_params.item_grouping_type', 0), array(1))):?>
