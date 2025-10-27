@@ -11,7 +11,22 @@ defined('_JEXEC') or die();
 ?>
 
 <div class="contentpaneopen">
+	<?php 
+	// Show navigation at top if enabled
+	if ($this->navigation && ($this->navigation->position == 'top' || $this->navigation->position == 'both')): 
+		echo $this->loadTemplate('navigation');
+	endif;
+	?>
+	
 	<?php echo $this->loadTemplate('record_'.$this->menu_params->get('tmpl_article', $this->type->params->get('properties.tmpl_article', 'default')));?>
+	
+	<?php 
+	// Show navigation at bottom if enabled
+	if ($this->navigation && ($this->navigation->position == 'bottom' || $this->navigation->position == 'both')): 
+		echo $this->loadTemplate('navigation');
+	endif;
+	?>
+	
 	<div id="comments" class="mt-5">
         <?php echo $this->loadTemplate('comments');?>
     </div>

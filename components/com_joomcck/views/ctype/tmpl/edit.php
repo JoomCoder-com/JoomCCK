@@ -73,6 +73,7 @@ $wa->useScript('keepalive')
                 <div class="row">
                     <div class="col-md-8">
 		                <?php echo MFormHelper::renderFieldset($this->params_form, 'templates', $this->item->params, 'properties'); ?>
+                        <?php echo MFormHelper::renderFieldset($this->params_form, 'navigation', $this->item->params, 'properties'); ?>
 		                <?php echo MFormHelper::renderFieldset($this->params_form, 'tags', $this->item->params, 'properties'); ?>
                     </div>
                     <div class="col-md-4">

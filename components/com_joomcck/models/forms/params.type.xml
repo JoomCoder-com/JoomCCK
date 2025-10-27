@@ -97,6 +97,17 @@
 			<field label="CTMPLRATING" name="tmpl_rating" type="cobtmpls" noparams="1" default="default" tmpltype="rating" />
 			<field label="CTMPLCOMMENT" name="tmpl_comment" type="cobtmpls" default="default" tmpltype="comments" />
 		</fieldset>
+		<fieldset name="navigation" label="CNAVIGATION">
+			<field name="show_navigation" type="radio" layout="joomla.form.field.radio.switcher" label="CNAVIGATION_SHOW" default="0">
+				<option value="0">CNO</option>
+				<option value="1">CYES</option>
+			</field>
+			<field name="navigation_position" type="list" label="CNAVIGATION_POSITION" default="bottom" showon="show_navigation:1">
+				<option value="top">CNAVIGATION_TOP</option>
+				<option value="bottom">CNAVIGATION_BOTTOM</option>
+				<option value="both">CNAVIGATION_BOTH</option>
+			</field>
+		</fieldset>
 		<fieldset name="rating" label="CFSLRATING">
 			<field name="rate_access" type="maccesslevel" default="0" condition='{"not0":["params_properties_rate_access_author","params_properties_rate_multirating_sort","params_properties_rate_multirating_tmpl","params_properties_rate_multirating","params_properties_rate_smart_minimum","params_properties_rate_smart_before","params_properties_rate_multirating_options","params_properties_rate_mode"]}' label="CRATEWHOCANRATE">
 				<option value="0">XML_OPT_NOONE</option>

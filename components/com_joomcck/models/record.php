@@ -647,4 +647,97 @@ class JoomcckModelRecord extends MModelItem
 		}
 
 	}
+
+	/**
+	 * Get the next record in the same section
+	 *
+	 * @param   object  $record   Current record object
+	 * @param   object  $section  Section object
+	 * @param   object  $type     Type object
+	 *
+	 * @return  object|null  Next record object or null if not found
+	 */
+	public function getNextRecord($record, $section, $type)
+	{
+		$db = $this->getDbo();
+		$user = \Joomla\CMS\Factory::getApplication()->getIdentity();
+		$nullDate = $db->getNullDate();
+
+		$query = $db->getQuery(true)
+			->select('r.id, r.title, r.alias')
+			->from('#__js_res_record AS r')
+			->where('r.section_id = ' . (int) $section->id)
+			->where('r.published = 1')
+			->where('r.id > ' . (int) $record->id)
+			->where('(r.publish_up = ' . $db->quote($nullDate) . ' OR r.publish_up <= ' . $db->quote(\Joomla\CMS\Factory::getDate()->toSql()) . ')')
+			->where('(r.publish_down = ' . $db->quote($nullDate) . ' OR r.publish_down >= ' . $db->quote(\Joomla\CMS\Factory::getDate()->toSql()) . ')')
+			->where('r.access IN (' . implode(',', $user->getAuthorisedViewLevels()) . ')')
+			->order('r.id ASC');
+
+		// Add category filter if current record has categories
+		if (!empty($record->categories) && is_array($record->categories)) {
+			$categoryIds = array_keys($record->categories);
+			if (!empty($categoryIds)) {
+				$query->join('LEFT', '#__js_res_record_category AS rc ON r.id = rc.record_id')
+					->where('rc.category_id IN (' . implode(',', array_map('intval', $categoryIds)) . ')');
+			}
+		}
+
+		$db->setQuery($query, 0, 1);
+		$result = $db->loadObject();
+
+
+
+
+		if ($result) {
+			$result->url = Url::record($result, $type, $section);
+		}
+
+		return $result;
+	}
+
+	/**
+	 * Get the previous record in the same section
+	 *
+	 * @param   object  $record   Current record object
+	 * @param   object  $section  Section object
+	 * @param   object  $type     Type object
+	 *
+	 * @return  object|null  Previous record object or null if not found
+	 */
+	public function getPreviousRecord($record, $section, $type)
+	{
+		$db = $this->getDbo();
+		$user = \Joomla\CMS\Factory::getApplication()->getIdentity();
+		$nullDate = $db->getNullDate();
+
+		$query = $db->getQuery(true)
+			->select('r.id, r.title, r.alias')
+			->from('#__js_res_record AS r')
+			->where('r.section_id = ' . (int) $section->id)
+			->where('r.published = 1')
+			->where('r.id < ' . (int) $record->id)
+			->where('(r.publish_up = ' . $db->quote($nullDate) . ' OR r.publish_up <= ' . $db->quote(\Joomla\CMS\Factory::getDate()->toSql()) . ')')
+			->where('(r.publish_down = ' . $db->quote($nullDate) . ' OR r.publish_down >= ' . $db->quote(\Joomla\CMS\Factory::getDate()->toSql()) . ')')
+			->where('r.access IN (' . implode(',', $user->getAuthorisedViewLevels()) . ')')
+			->order('r.id DESC');
+
+		// Add category filter if current record has categories
+		if (!empty($record->categories) && is_array($record->categories)) {
+			$categoryIds = array_keys($record->categories);
+			if (!empty($categoryIds)) {
+				$query->join('LEFT', '#__js_res_record_category AS rc ON r.id = rc.record_id')
+					->where('rc.category_id IN (' . implode(',', array_map('intval', $categoryIds)) . ')');
+			}
+		}
+
+		$db->setQuery($query, 0, 1);
+		$result = $db->loadObject();
+
+		if ($result) {
+			$result->url = Url::record($result, $type, $section);
+		}
+
+		return $result;
+	}
 }
