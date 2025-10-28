@@ -107,6 +107,16 @@
 				<option value="bottom">CNAVIGATION_BOTTOM</option>
 				<option value="both">CNAVIGATION_BOTH</option>
 			</field>
+			<field name="navigation_same_category" type="radio" layout="joomla.form.field.radio.switcher" label="CNAVIGATION_SAME_CATEGORY" description="CNAVIGATION_SAME_CATEGORY_DESC" default="0" showon="show_navigation:1">
+				<option value="0">CNO</option>
+				<option value="1">CYES</option>
+			</field>
+			<field name="navigation_same_type" type="radio" layout="joomla.form.field.radio.switcher" label="CNAVIGATION_SAME_TYPE" description="CNAVIGATION_SAME_TYPE_DESC" default="0" showon="show_navigation:1">
+				<option value="0">CNO</option>
+				<option value="1">CYES</option>
+			</field>
+			<field name="navigation_prev_text" type="text" label="CNAVIGATION_PREV_TEXT" description="CNAVIGATION_PREV_TEXT_DESC" default="" showon="show_navigation:1" />
+			<field name="navigation_next_text" type="text" label="CNAVIGATION_NEXT_TEXT" description="CNAVIGATION_NEXT_TEXT_DESC" default="" showon="show_navigation:1" />
 		</fieldset>
 		<fieldset name="rating" label="CFSLRATING">
 			<field name="rate_access" type="maccesslevel" default="0" condition='{"not0":["params_properties_rate_access_author","params_properties_rate_multirating_sort","params_properties_rate_multirating_tmpl","params_properties_rate_multirating","params_properties_rate_smart_minimum","params_properties_rate_smart_before","params_properties_rate_multirating_options","params_properties_rate_mode"]}' label="CRATEWHOCANRATE">

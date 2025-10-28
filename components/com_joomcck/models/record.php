@@ -661,6 +661,7 @@ class JoomcckModelRecord extends MModelItem
 	{
 		$db = $this->getDbo();
 		$user = \Joomla\CMS\Factory::getApplication()->getIdentity();
+		$typeParams = $type->params;
 
 		$query = $db->getQuery(true)
 			->select('r.id, r.title, r.alias')
@@ -672,12 +673,20 @@ class JoomcckModelRecord extends MModelItem
 			->where('r.access IN (' . implode(',', $user->getAuthorisedViewLevels()) . ')')
 			->order('r.id ASC');
 
-		// Add category filter if current record has categories
-		if (!empty($record->categories) && is_array($record->categories)) {
-			$categoryIds = array_keys($record->categories);
-			if (!empty($categoryIds)) {
-				$query->join('LEFT', '#__js_res_record_category AS rc ON r.id = rc.record_id')
-					->where('rc.catid IN (' . implode(',', array_map('intval', $categoryIds)) . ')');
+		// Add type filter if navigation_same_type is enabled
+		if ($typeParams->get('properties.navigation_same_type', 0)) {
+			$query->where('r.type_id = ' . (int) $record->type_id);
+		}
+
+		// Add category filter based on navigation_same_category setting
+		if ($typeParams->get('properties.navigation_same_category', 0)) {
+			// Only filter by category if the option is enabled
+			if (!empty($record->categories) && is_array($record->categories)) {
+				$categoryIds = array_keys($record->categories);
+				if (!empty($categoryIds)) {
+					$query->join('LEFT', '#__js_res_record_category AS rc ON r.id = rc.record_id')
+						->where('rc.catid IN (' . implode(',', array_map('intval', $categoryIds)) . ')');
+				}
 			}
 		}
 
@@ -707,6 +716,7 @@ class JoomcckModelRecord extends MModelItem
 	{
 		$db = $this->getDbo();
 		$user = \Joomla\CMS\Factory::getApplication()->getIdentity();
+		$typeParams = $type->params;
 
 		$query = $db->getQuery(true)
 			->select('r.id, r.title, r.alias')
@@ -718,12 +728,20 @@ class JoomcckModelRecord extends MModelItem
 			->where('r.access IN (' . implode(',', $user->getAuthorisedViewLevels()) . ')')
 			->order('r.id DESC');
 
-		// Add category filter if current record has categories
-		if (!empty($record->categories) && is_array($record->categories)) {
-			$categoryIds = array_keys($record->categories);
-			if (!empty($categoryIds)) {
-				$query->join('LEFT', '#__js_res_record_category AS rc ON r.id = rc.record_id')
-					->where('rc.catid IN (' . implode(',', array_map('intval', $categoryIds)) . ')');
+		// Add type filter if navigation_same_type is enabled
+		if ($typeParams->get('properties.navigation_same_type', 0)) {
+			$query->where('r.type_id = ' . (int) $record->type_id);
+		}
+
+		// Add category filter based on navigation_same_category setting
+		if ($typeParams->get('properties.navigation_same_category', 0)) {
+			// Only filter by category if the option is enabled
+			if (!empty($record->categories) && is_array($record->categories)) {
+				$categoryIds = array_keys($record->categories);
+				if (!empty($categoryIds)) {
+					$query->join('LEFT', '#__js_res_record_category AS rc ON r.id = rc.record_id')
+						->where('rc.catid IN (' . implode(',', array_map('intval', $categoryIds)) . ')');
+				}
 			}
 		}
 
