@@ -16,6 +16,7 @@ class JoomcckViewRecord extends MViewBase
 
 
     public $navigation = null;
+    public $navPosition = 'bottom';
 
     function display($tpl = NULL)
     {
@@ -207,7 +208,7 @@ class JoomcckViewRecord extends MViewBase
         $this->navigation = new stdClass();
         $this->navigation->next = $model->getNextRecord($this->item, $this->section, $this->type);
         $this->navigation->previous = $model->getPreviousRecord($this->item, $this->section, $this->type);
-        $this->navigation->position = $this->type->params->get('properties.navigation_position', 'bottom');
+        $this->navPosition = $this->type->params->get('properties.navigation_position', 'bottom');
     }
 
     private function _checkCategoryAccess($item, $section)

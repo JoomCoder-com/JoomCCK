@@ -16,7 +16,7 @@ use Joomla\CMS\Layout\LayoutHelper;
 <div class="contentpaneopen">
 	<?php
 	// Show navigation at top if enabled
-	if ($this->navigation->position == 'top' || $this->navigation->position == 'both'):
+	if ($this->navPosition == 'top' || $this->navPosition == 'both'):
         echo Layout::render('core.single.recordParts.navigation',['current' => $this]);
 	endif;
 	?>
@@ -25,7 +25,7 @@ use Joomla\CMS\Layout\LayoutHelper;
 
 	<?php
 	// Show navigation at bottom if enabled
-	if ($this->navigation->position == 'bottom' || $this->navigation->position == 'both'):
+	if ($this->navPosition== 'bottom' || $this->navPosition == 'both'):
         echo Layout::render('core.single.recordParts.navigation',['current' => $this]);
 	endif;
 	?>
