@@ -19,16 +19,30 @@ if (!$current->navigation || (!$current->navigation->next && !$current->navigati
 }
 
 $lang = \Joomla\CMS\Factory::getLanguage();
+
+// Get custom text from type parameters or use default language constants
+$typeParams = $current->type->params;
+$prevText = $typeParams->get('properties.navigation_prev_text', '');
+$nextText = $typeParams->get('properties.navigation_next_text', '');
+
+// Use custom text if provided, otherwise use language constants
+$prevText = !empty($prevText) ? $prevText : \Joomla\CMS\Language\Text::_('CPREVIOUS_RECORD');
+$nextText = !empty($nextText) ? $nextText : \Joomla\CMS\Language\Text::_('CNEXT_RECORD');
+
+// Get navigation position for CSS classes
+$navPosition = $current->navigation->position ?? 'bottom';
+$positionClass = 'nav-position-' . $navPosition;
 ?>
 
-<div class="joomcck-navigation my-4">
+
+<div class="joomcck-navigation <?php echo $positionClass; ?> my-4">
     <div class="row">
         <?php if ($current->navigation->previous): ?>
             <div class="col-md-6 text-start">
                 <div class="joomcck-nav-previous">
                     <a href="<?php echo $current->navigation->previous->url; ?>" class="btn btn-outline-primary" title="<?php echo $current->navigation->previous->title ?>">
                         <i class="fa fa-chevron-left" aria-hidden="true"></i>
-                        <span class="nav-label"><?php echo \Joomla\CMS\Language\Text::_('CPREVIOUS_RECORD'); ?></span>
+                        <span class="nav-label"><?php echo htmlspecialchars($prevText); ?></span>
                     </a>
                     <div class="nav-title">
                         <small><?php echo \Joomla\CMS\HTML\Helpers\StringHelper::truncate($current->navigation->previous->title, 50) ?></small>
@@ -43,7 +57,7 @@ $lang = \Joomla\CMS\Factory::getLanguage();
             <div class="col-md-6 text-end">
                 <div class="joomcck-nav-next">
                     <a href="<?php echo $current->navigation->next->url; ?>" class="btn btn-outline-primary" title="<?php echo $current->navigation->next->title ?>">
-                        <span class="nav-label"><?php echo \Joomla\CMS\Language\Text::_('CNEXT_RECORD'); ?></span>
+                        <span class="nav-label"><?php echo htmlspecialchars($nextText); ?></span>
                         <i class="fa fa-chevron-right" aria-hidden="true"></i>
                     </a>
                     <div class="nav-title">
