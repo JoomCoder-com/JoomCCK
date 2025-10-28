@@ -16,7 +16,8 @@ $single = preg_replace('/s$/iU', '', $view);
 <div class="d-flex justify-content-between mt-4">
     <div class="d-flex justify-content-start align-items-center ms-3">
         <img src="<?php echo \Joomla\CMS\Uri\Uri::root(TRUE); ?>/components/com_joomcck/images/arrow-turn-270-left.png" alt="Select and" class="arrow ms-2"/>
-		<?php if(!in_array($view, array('tags', 'votes', 'items'))): ?>
+
+        <?php if(!in_array($view, array('tags', 'votes', 'items'))): ?>
             <div class="btn-group ms-2">
                 <button type="button" class="btn-submit btn btn-light border" onclick="if (document.adminForm.boxchecked.value==0){alert('<?php echo \Joomla\CMS\Language\Text::_('SELECTFIRST', TRUE) ?>');}else{Joomla.submitbutton('<?php echo $single; ?>.edit');}">
 					<?php echo \Joomla\CMS\Language\Text::_('CEDIT'); ?>
@@ -41,6 +42,7 @@ $single = preg_replace('/s$/iU', '', $view);
 				<?php echo \Joomla\CMS\Language\Text::_('CDELETE'); ?>
             </button>
         </div>
+
 		<?php if($view == 'tfields'): ?>
             <div class="btn-group ms-2">
                 <a class="btn btn-outline-dark m" href="<?php echo \Joomla\CMS\Router\Route::_('index.php?option=com_joomcck&view=groups&type_id=' . $displayData->state->get('filter.type')); ?>">
@@ -78,6 +80,7 @@ $single = preg_replace('/s$/iU', '', $view);
             </div>
 		<?php endif; ?>
     </div>
+
 	<?php if(!in_array($view, array('tags', 'votes', 'comms'))): ?>
         <div>
 			<?php if($view == 'items'): ?>
