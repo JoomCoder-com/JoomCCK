@@ -7,12 +7,12 @@
  * @license   GNU/GPL http://www.gnu.org/copyleft/gpl.html
  */
 
-use Joomcck\Html\Helpers\Dropdown;
+
 use Joomcck\Layout\Helpers\Layout;
 
 defined('_JEXEC') or die('Restricted access');
 
-\Joomla\CMS\HTML\HTMLHelper::_('dropdown.init');
+
 
 $user   = \Joomla\CMS\Factory::getApplication()->getIdentity();
 $userId = $user->get('id');

@@ -7,15 +7,16 @@
  * @license   GNU/GPL http://www.gnu.org/copyleft/gpl.html
  */
 
-use Joomcck\Assets\Webassets\Webassets;
 use Joomcck\Html\Helpers\Dropdown;
-use Joomla\CMS\Factory;
 use Joomla\CMS\Language\Text;
 
 defined('_JEXEC') or die();
 
 
 extract($displayData);
+
+
+Dropdown::init();
 
 // Create dropdown items
 Dropdown::edit($item->id, 'ctype.');
@@ -33,7 +34,7 @@ endif;
 
 
 Dropdown::divider();
-Dropdown::addCustomItem(Text::_('C_MANAGE_FIELDS') . ' <span class="badge ' . ($item->fieldnum ? ' bg-success' : ' bg-light text-dark border') . '">' . $item->fieldnum . '</span>', \Joomla\CMS\Router\Route::_('index.php?option=com_joomcck&view=tfields&filter_type=' . $item->id));
+    Dropdown::addCustomItem(Text::_('C_MANAGE_FIELDS') . ' <span class="badge ' . ($item->fieldnum ? ' bg-success' : ' bg-light text-dark border') . '">' . $item->fieldnum . '</span>', \Joomla\CMS\Router\Route::_('index.php?option=com_joomcck&view=tfields&filter_type=' . $item->id));
 
 
 ?>

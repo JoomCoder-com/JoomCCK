@@ -23,10 +23,13 @@ jimport('joomla.html.html');
 require_once JPATH_ROOT . '/components/com_joomcck/library/php/fields/joomcckfield.php';
 require_once JPATH_ROOT . '/components/com_joomcck/api.php';
 
+#[\AllowDynamicProperties]
 class  CFormFieldRelate extends CFormField
 {
 	public $isFilter = FALSE;
 	public $user_strict = TRUE;
+
+    public $field_key = null;
 
 	public function __construct($field, $default)
 	{
