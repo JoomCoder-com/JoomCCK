@@ -325,12 +325,10 @@ class JoomcckViewRecord extends MViewBase
         $now = \Joomla\CMS\Factory::getDate()->toUnix();
 
 
-        if (!is_null($expire) &&
-            isset($item->extime) &&
-            (
-                ($item->extime != '0000-00-00 00:00:00' || !is_null($this->extime)) &&
-                $now > $expire
-            ) &&
+        if (
+            !is_null($expire) &&
+            ($item->extime != '0000-00-00 00:00:00' || !is_null($this->extime)) &&
+            $now > $expire &&
             !in_array($section->params->get('general.show_past_records'), $user->getAuthorisedViewLevels()) &&
             !MECAccess::allowRestricted($user, $section)
         ) {
