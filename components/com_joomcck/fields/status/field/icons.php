@@ -26,7 +26,7 @@ class JFormFieldIcons extends \Joomla\CMS\Form\FormField
 
 		$path = $this->getAttribute('directory','components/com_joomcck/fields/status/icons');
 
-		if (!Folder::exists($path))
+		if (!is_dir($path))
 		{
 			$path = JPATH_ROOT . '/' . $path;
 		}
@@ -39,7 +39,7 @@ class JFormFieldIcons extends \Joomla\CMS\Form\FormField
 		
 		$atr = array('border' => 0, 'align' => 'absmiddle', 'style' => 'float:left;padding:2px;margin:0;');
 		echo "<style>.jsicon {margin:2px;}.icon_name{line-height:26px;}</style>";
-		if (Folder::exists($path))
+		if (is_dir($path))
 		{
 			if ($dh = opendir($path))
 			{
