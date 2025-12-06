@@ -16,33 +16,34 @@ class JHTMLJoomcck
 	public static function yesno($require, $name, $default)
 	{
 		$fname = str_replace(array('[',']'), '-', $name);
+		$id = 'switch-' . $fname;
 		ob_start()
 		?>
-		<style>
-		div.btn-group[data-toggle=buttons-radio] input[type=radio] {
-		  display:    block;
-		  position:   absolute;
-		  top:        0;
-		  left:       0;
-		  width:      100%;
-		  height:     100%;
-		  opacity:    0;
-		}?
-		</style>
-
-		<div class="btn-group" data-toggle="buttons-radio">
-			<button id="y<?php echo $fname;?>" type="button" class="btn<?php echo $default == 1 ? ' active btn-success' : NULL ?>">
-				Yes
-				<input type="radio" name="<?php echo $name?>" value="1" <?php echo ($default == 1 ? ' checked="checked"' : NULL);?> />
-			</button>
-			<button id="n<?php echo $fname;?>" type="button" class="btn<?php echo $default == 0 ? ' active btn-danger' : NULL ?>">
-				No
-				<input type="radio" name="<?php echo $name?>" <?php echo ($default == 0 ? ' checked="checked"' : NULL);?> value="0" />
-			</button>
+		<input type="hidden" name="<?php echo $name; ?>" value="0">
+		<div class="form-check form-switch">
+			<input class="form-check-input" type="checkbox" role="switch" id="<?php echo $id; ?>" name="<?php echo $name; ?>" value="1" <?php echo ($default == 1 ? ' checked="checked"' : ''); ?>>
+			<label class="form-check-label" for="<?php echo $id; ?>">
+				<span class="switch-label-yes" style="<?php echo $default == 1 ? '' : 'display:none;'; ?>">Yes</span>
+				<span class="switch-label-no" style="<?php echo $default == 0 ? '' : 'display:none;'; ?>">No</span>
+			</label>
 		</div>
 
 		<script>
-			Joomcck.yesno('#y<?php echo $fname;?>', '#n<?php echo $fname;?>');
+		(function() {
+			const switchEl = document.getElementById('<?php echo $id; ?>');
+			const labelYes = switchEl.parentElement.querySelector('.switch-label-yes');
+			const labelNo = switchEl.parentElement.querySelector('.switch-label-no');
+
+			switchEl.addEventListener('change', function() {
+				if (this.checked) {
+					labelYes.style.display = '';
+					labelNo.style.display = 'none';
+				} else {
+					labelYes.style.display = 'none';
+					labelNo.style.display = '';
+				}
+			});
+		})();
 		</script>
 		<?php
 		$result = ob_get_contents();

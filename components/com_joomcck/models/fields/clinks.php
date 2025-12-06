@@ -29,8 +29,7 @@ class JFormFieldClinks extends \Joomla\CMS\Form\FormField
 		</tr>';
 		$req[] = \Joomla\CMS\HTML\HTMLHelper::_('select.option', '0', \Joomla\CMS\Language\Text::_('CNO'));
 		$req[] = \Joomla\CMS\HTML\HTMLHelper::_('select.option', '1', \Joomla\CMS\Language\Text::_('CYES'));
-		
-		$html[] = '<p style="clear:both" class="small"><a href="http://support.joomcoder.com/en/joomcck-7/questions/How+to+add+aditional+Contact+or+Link+fields+to+Adress+%26+Map+field%3F-1375.html" target="_blank">'.\Joomla\CMS\Language\Text::_('How to add custom links').'</a></p>';
+
 		$html[] = '<table class="table table-striped">';
 		$html[] = '<thead><tr><th>'.\Joomla\CMS\Language\Text::_('CFIELD').'</th>';
 		$html[] = '<th width="1%">'.\Joomla\CMS\Language\Text::_('CSHOW').'</th>';
@@ -43,7 +42,7 @@ class JFormFieldClinks extends \Joomla\CMS\Form\FormField
 		foreach ($fields AS $name => $field)
 		{
 			$data = new \Joomla\Registry\Registry($field);
-			$show = \Joomla\CMS\HTML\HTMLHelper::_('select.genericlist', $showopt, $this->name.'['.$name.'][show]', 'style="max-width:100px;"', 'value', 'text', (isset($this->value->$name->show) ? (int)$this->value->$name->show : 0));
+			$show = \Joomla\CMS\HTML\HTMLHelper::_('select.genericlist', $showopt, $this->name.'['.$name.'][show]', ' class="form-control form-control-sm" style="max-width:100px;"', 'value', 'text', (isset($this->value->$name->show) ? (int)$this->value->$name->show : 0));
 			$require = \Joomla\CMS\HTML\HTMLHelper::_('Joomcck.yesno', $req, $this->name.'['.$name.'][req]', (isset($this->value->$name->req) ? $this->value->$name->req : 0));
 			$icon = \Joomla\CMS\HTML\HTMLHelper::_('Joomcck.yesno', $req, $this->name.'['.$name.'][icon]', (isset($this->value->$name->icon) ? $this->value->$name->icon : 1));
 			

@@ -43,7 +43,7 @@ class JFormFieldCaddress extends \Joomla\CMS\Form\FormField
 		foreach ($fields AS $name => $field)
 		{
 			$data = new \Joomla\Registry\Registry($field);
-			$show = \Joomla\CMS\HTML\HTMLHelper::_('select.genericlist', $showopt, $this->name.'['.$name.'][show]', 'style="max-width:100px;"', 'value', 'text', (isset($this->value->$name->show) ? (int)$this->value->$name->show : 0));
+			$show = \Joomla\CMS\HTML\HTMLHelper::_('select.genericlist', $showopt, $this->name.'['.$name.'][show]', ' class="form-control form-control-sm" style="max-width:100px;"', 'value', 'text', (isset($this->value->$name->show) ? (int)$this->value->$name->show : 0));
 			$require = \Joomla\CMS\HTML\HTMLHelper::_('Joomcck.yesno', $req, $this->name.'['.$name.'][req]', (isset($this->value->$name->req) ? $this->value->$name->req : 0));
 			$icon = \Joomla\CMS\HTML\HTMLHelper::_('Joomcck.yesno', $req, $this->name.'['.$name.'][icon]', (isset($this->value->$name->icon) ? $this->value->$name->icon : 1));
 
