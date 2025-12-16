@@ -35,7 +35,8 @@ defined('_JEXEC') || die();
 <ul class="nav nav-pills mb-4">
     <li class="nav-item"><a class="nav-link active">1. <?php echo \Joomla\CMS\Language\Text::_('CIMPORTUPLOAD') ?></a></li>
     <li class="nav-item"><a class="nav-link">2. <?php echo \Joomla\CMS\Language\Text::_('CIMPORTCONFIG') ?></a></li>
-    <li class="nav-item"><a class="nav-link">3. <?php echo \Joomla\CMS\Language\Text::_('CIMPORTFINISH') ?></a></li>
+    <li class="nav-item"><a class="nav-link">3. <?php echo \Joomla\CMS\Language\Text::_('CIMPORTPREVIEW') ?></a></li>
+    <li class="nav-item"><a class="nav-link">4. <?php echo \Joomla\CMS\Language\Text::_('CIMPORTFINISH') ?></a></li>
 </ul>
 
 <div id="upload-progress-wrap" class="mb-3 d-none">
@@ -80,51 +81,52 @@ defined('_JEXEC') || die();
 
 <form action="<?php echo \Joomla\CMS\Uri\Uri::getInstance()->toString(); ?>" method="post" name="adminForm"
       id="adminForm" class="form-horizontal">
-    <div class="control-group">
-        <label class="form-label" for="section_id"><?php echo \Joomla\CMS\Language\Text::_('CSECTION') ?></label>
-        <div class="controls">
-            <select name="section_id" id="section_id" class="form-select">
-                <option value=""><?php echo \Joomla\CMS\Language\Text::_('CSELECTSECTION') ?></option>
-				<?php echo \Joomla\CMS\HTML\HTMLHelper::_('select.options', $this->sections, 'value', 'text', 0, true); ?>
-            </select>
+    <div id="import-form-fields">
+        <div class="control-group">
+            <label class="form-label" for="section_id"><?php echo \Joomla\CMS\Language\Text::_('CSECTION') ?></label>
+            <div class="controls">
+                <select name="section_id" id="section_id" class="form-select">
+                    <option value=""><?php echo \Joomla\CMS\Language\Text::_('CSELECTSECTION') ?></option>
+                    <?php echo \Joomla\CMS\HTML\HTMLHelper::_('select.options', $this->sections, 'value', 'text', 0, true); ?>
+                </select>
+            </div>
         </div>
-    </div>
-    <div class="control-group" id="type-hint">
-        <label class="form-label"><?php echo \Joomla\CMS\Language\Text::_('CTYPE') ?></label>
-        <div class="controls">
-            <div class="alert alert-info mb-0"><?php echo \Joomla\CMS\Language\Text::_('CSELECTSECTIONFIRST') ?></div>
+        <div class="control-group" id="type-hint">
+            <label class="form-label"><?php echo \Joomla\CMS\Language\Text::_('CTYPE') ?></label>
+            <div class="controls">
+                <div class="alert alert-info mb-0"><?php echo \Joomla\CMS\Language\Text::_('CSELECTSECTIONFIRST') ?></div>
+            </div>
         </div>
-    </div>
-    <div class="control-group" id="type-select" style="display:none;">
-        <label class="form-label" for="type_id"><?php echo \Joomla\CMS\Language\Text::_('CTYPE') ?></label>
-        <div class="controls">
-            <select name="type_id" id="type_id" class="form-select">
-                <option value="">- <?php echo \Joomla\CMS\Language\Text::_('CSELECT') ?> -</option>
-            </select>
+        <div class="control-group" id="type-select" style="display:none;">
+            <label class="form-label" for="type_id"><?php echo \Joomla\CMS\Language\Text::_('CTYPE') ?></label>
+            <div class="controls">
+                <select name="type_id" id="type_id" class="form-select">
+                    <option value="">- <?php echo \Joomla\CMS\Language\Text::_('CSELECT') ?> -</option>
+                </select>
+            </div>
         </div>
-    </div>
-    <div class="control-group">
-        <label class="form-label" for="type"><?php echo \Joomla\CMS\Language\Text::_('CCSVDELIMITER') ?></label>
-        <div class="controls">
-            <select name="delimiter" class="form-select">
-                <option value="auto"><?php echo \Joomla\CMS\Language\Text::_('CIMPORTDELAUTO') ?></option>
-                <option value=","><?php echo \Joomla\CMS\Language\Text::_('CIMPORTDELCOMA') ?></option>
-                <option value=";"><?php echo \Joomla\CMS\Language\Text::_('CIMPORTDELSEMI') ?></option>
-                <option value="&#9;"><?php echo \Joomla\CMS\Language\Text::_('CIMPORTDELTAB') ?></option>
-            </select>
+        <div class="control-group">
+            <label class="form-label" for="type"><?php echo \Joomla\CMS\Language\Text::_('CCSVDELIMITER') ?></label>
+            <div class="controls">
+                <select name="delimiter" class="form-select">
+                    <option value="auto"><?php echo \Joomla\CMS\Language\Text::_('CIMPORTDELAUTO') ?></option>
+                    <option value=","><?php echo \Joomla\CMS\Language\Text::_('CIMPORTDELCOMA') ?></option>
+                    <option value=";"><?php echo \Joomla\CMS\Language\Text::_('CIMPORTDELSEMI') ?></option>
+                    <option value="&#9;"><?php echo \Joomla\CMS\Language\Text::_('CIMPORTDELTAB') ?></option>
+                </select>
+            </div>
         </div>
-    </div>
 
-    <div class="control-group">
-        <label class="form-label" for="type"><?php echo \Joomla\CMS\Language\Text::_('CIMPORTUPLOAD') ?></label>
-        <div class="controls">
-			<span class="btn btn-success" style="position: relative;">
-			<?php echo \Joomla\CMS\Language\Text::_('CIMPORTUPLOADFILE') ?>
-			<input id="fileupload" type="file" name="files[]">
-			</span>
+        <div class="control-group">
+            <label class="form-label" for="type"><?php echo \Joomla\CMS\Language\Text::_('CIMPORTUPLOAD') ?></label>
+            <div class="controls">
+                <span class="btn btn-success" style="position: relative;">
+                <?php echo \Joomla\CMS\Language\Text::_('CIMPORTUPLOADFILE') ?>
+                <input id="fileupload" type="file" name="files[]">
+                </span>
+            </div>
         </div>
     </div>
-
 
     <div class="form-actions border rounded p-3 mb-4 d-flex justify-content-end">
         <button class=" btn btn-primary" id="next-step" disabled="disabled"><?php echo \Joomla\CMS\Language\Text::_('CNEXT') ?></button>
@@ -136,6 +138,7 @@ defined('_JEXEC') || die();
 
 <script>
     (function ($) {
+        var $formFields = $('#import-form-fields');
         var $uploadWrap = $('#upload-progress-wrap');
         var $uploadBar = $('#progress .progress-bar');
         var $uploadLabel = $('#upload-label');
@@ -158,6 +161,10 @@ defined('_JEXEC') || die();
                 $uploadLabel.text('<?php echo \Joomla\CMS\Language\Text::_('CIMPORTUPLOAD') ?>');
                 $parseLabel.text('<?php echo \Joomla\CMS\Language\Text::_('CIMPORTPARCE') ?>');
             },
+            start: function () {
+                // Hide form fields when upload starts
+                $formFields.slideUp('fast');
+            },
             done: function (e, data) {
                 $uploadBar.removeClass('progress-bar-animated')
                     .css('width', '100%')
@@ -168,6 +175,8 @@ defined('_JEXEC') || die();
                     if (file.error) {
                         $uploadBar.removeClass('bg-success').addClass('bg-danger');
                         $uploadLabel.text(file.error);
+                        // Show form fields again on error
+                        $formFields.slideDown('fast');
                         return;
                     }
                     $.ajax({
@@ -186,6 +195,10 @@ defined('_JEXEC') || die();
                     return false;
                 });
             },
+            fail: function () {
+                // Show form fields again on upload failure
+                $formFields.slideDown('fast');
+            },
             progressall: function (e, data) {
                 var progress = parseInt(data.loaded / data.total * 100, 10);
                 $uploadWrap.removeClass('d-none');
@@ -199,6 +212,8 @@ defined('_JEXEC') || die();
                 if (data.error) {
                     $parseBar.removeClass('progress-bar-animated').addClass('bg-danger').css('width', '100%');
                     $parseLabel.text(data.error);
+                    // Show form fields again on parse error
+                    $formFields.slideDown('fast');
                 } else if (data.status < 100) {
                     $parseBar.css('width', data.status + '%');
                     $parseLabel.text(data.msg + ' ' + data.status + '%');

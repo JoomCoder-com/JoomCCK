@@ -102,6 +102,51 @@ class JoomcckViewImport extends MViewBase
 			break;
 
 			case 3:
+				// Preview step
+				$type = ItemsStore::getType($app->input->get('type_id'));
+				$this->type = $type;
+
+				$preset_id = $app->input->get('preset');
+				$this->preset = $this->get('Preset');
+
+				if (!$this->preset || !$this->preset->id)
+				{
+					$app->enqueueMessage(\Joomla\CMS\Language\Text::_('CIMPORTPRESETNOTFOUND'), 'error');
+					$app->redirect(\Joomla\CMS\Router\Route::_('index.php?option=com_joomcck&view=import&step=2&section_id=' . $app->input->get('section_id') . '&type_id=' . $app->input->get('type_id'), false));
+					return;
+				}
+
+				// Get preview rows (max 5)
+				$db = \Joomla\CMS\Factory::getDbo();
+				$import_key = \Joomla\CMS\Factory::getSession()->get('key', NULL, 'import');
+				$db->setQuery("SELECT * FROM #__js_res_import_rows WHERE `import` = " . $db->quote($import_key) . " LIMIT 5");
+				$rows = $db->loadObjectList();
+
+				$this->preview_rows = array();
+				foreach($rows as $row)
+				{
+					$this->preview_rows[] = new \Joomla\Registry\Registry($row->text);
+				}
+
+				// Get total count
+				$db->setQuery("SELECT COUNT(*) FROM #__js_res_import_rows WHERE `import` = " . $db->quote($import_key));
+				$this->total_rows = $db->loadResult();
+
+				// Get mapped fields (fields that have a column assigned)
+				$this->fields = MModelBase::getInstance('Fields', 'JoomcckModel')->getFormFields($type->id);
+				$this->mapped_fields = array();
+				foreach($this->fields as $field)
+				{
+					$fname = $this->preset->params->get('field.' . $field->id . '.fname', '');
+					if($fname && $fname != '0')
+					{
+						$this->mapped_fields[] = $field;
+					}
+				}
+
+				break;
+
+			case 4:
 				$this->statistic = new \Joomla\Registry\Registry(\Joomla\CMS\Factory::getSession()->get('importstat'));
 
 				break;
@@ -119,7 +164,11 @@ class JoomcckViewImport extends MViewBase
 		$this->fields = MModelBase::getInstance('Fields', 'JoomcckModel')->getFormFields($type->id);
 		$this->item = $this->get('Preset');
 
-		//var_dump($this->item);
+		if (!$this->item)
+		{
+			$this->item = new stdClass();
+			$this->item->params = new \Joomla\Registry\Registry();
+		}
 
 		parent::display($tpl);
 		\Joomla\CMS\Factory::getApplication()->close();
@@ -174,7 +223,7 @@ class JoomcckViewImport extends MViewBase
 	public function fieldlist($name, $default)
 	{
 		static $list = null;
-		
+
 		if($list === null)
 		{
 			foreach($this->heads as $head)
@@ -182,8 +231,8 @@ class JoomcckViewImport extends MViewBase
 			ArrayHelper::clean_r($list);
 			array_unshift($list, \Joomla\CMS\Language\Text::_('CIMPORTNOIMPORT'));
 		}
-		
-		return \Joomla\CMS\HTML\HTMLHelper::_('select.genericlist', $list, 'import[field][' . $name.']', 'class="col-md-12"', 'value', 'text', $default);
+
+		return \Joomla\CMS\HTML\HTMLHelper::_('select.genericlist', $list, 'import[field][' . $name.']', 'class="form-select" id="importfield' . $name . '"', 'value', 'text', $default);
 	}
 
 }

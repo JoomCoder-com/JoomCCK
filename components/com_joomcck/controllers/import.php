@@ -31,31 +31,21 @@ class JoomcckControllerImport extends MControllerAdmin
 	{
 		$user   = \Joomla\CMS\Factory::getApplication()->getIdentity();
 		$app    = \Joomla\CMS\Factory::getApplication();
-		$params = $this->input->get('import', array(), 'array');
 
 		$imports = \Joomla\CMS\Table\Table::getInstance('Import', 'JoomcckTable');
 
-		if($this->input->get('preset') == 'new')
+		// Coming from preview step - just load existing preset (params already saved)
+		$imports->load($this->input->get('preset'));
+
+		if (!$imports->id)
 		{
-			$save = array(
-				'user_id'    => $user->get('id'),
-				'section_id' => $this->input->get('section_id'),
-				'params'     => json_encode($params),
-				'name'       => $params['name'],
-				'crossids'   => '[]'
-			);
-			$imports->save($save);
-		}
-		else
-		{
-			$imports->load($this->input->get('preset'));
-			$imports->params = json_encode($params);
-			$imports->name   = $params['name'];
-			$imports->store();
+			$app->enqueueMessage(\Joomla\CMS\Language\Text::_('CIMPORTPRESETNOTFOUND'), 'error');
+			$app->redirect(\Joomla\CMS\Router\Route::_('index.php?option=com_joomcck&view=import&step=1&section_id=' . $this->input->get('section_id'), false));
+			return;
 		}
 
 		$db = \Joomla\CMS\Factory::getDbo();
-
+		$start_time = microtime(true);
 
 		try
 		{
@@ -70,8 +60,9 @@ class JoomcckControllerImport extends MControllerAdmin
 
 
 			$params     = new Registry($imports->params);
-			$conversion = new Registry($imports->crossids);
-			$crossids   = json_decode($imports->crossids, TRUE);
+			$crossids_data = $imports->crossids ?: '{}';
+			$conversion = new Registry($crossids_data);
+			$crossids   = json_decode($crossids_data, TRUE) ?: array();
 			$import_key = \Joomla\CMS\Factory::getSession()->get('key', NULL, 'import');
 			$type       = ItemsStore::getType($this->input->getInt('type_id'));
 			$section    = ItemsStore::getSection($this->input->getInt('section_id'));
@@ -90,7 +81,13 @@ class JoomcckControllerImport extends MControllerAdmin
 			$record_table = \Joomla\CMS\Table\Table::getInstance('Record', 'JoomcckTable');
 			$cat_table    = \Joomla\CMS\Table\Table::getInstance('Record_category', 'JoomcckTable');
 
-			$stat = array();
+			$stat = array(
+				'new' => 0,
+				'old' => 0,
+				'skipped' => 0
+			);
+			$field_ids = array();
+			$import_method = $params->get('method', 'update'); // update, skip, duplicate
 
 			foreach($list AS $record)
 			{
@@ -106,22 +103,49 @@ class JoomcckControllerImport extends MControllerAdmin
 				$id = $conversion->get($id_original, NULL);
 
 				$data = array();
-				if($id)
+
+				// Handle import methods
+				if($import_method == 'duplicate')
+				{
+					// Force add: Always create new records, never update
+					$record_table->id = NULL;
+					$data['id']       = NULL;
+					$isNew = TRUE;
+					$stat['new']++;
+				}
+				elseif($id)
 				{
 					$record_table->load($id);
-				}
 
-				if($record_table->id)
-				{
-					$isNew = FALSE;
-					@$stat['old']++;
+					if($record_table->id)
+					{
+						if($import_method == 'skip')
+						{
+							// Skip: Don't import if record already exists
+							$stat['skipped']++;
+							$record_table->reset();
+							$record_table->id = NULL;
+							continue;
+						}
+
+						// Update: Update existing record (default behavior)
+						$isNew = FALSE;
+						$stat['old']++;
+					}
+					else
+					{
+						$record_table->id = NULL;
+						$data['id']       = NULL;
+						$isNew = TRUE;
+						$stat['new']++;
+					}
 				}
 				else
 				{
 					$record_table->id = NULL;
 					$data['id']       = NULL;
 					$isNew = TRUE;
-					@$stat['new']++;
+					$stat['new']++;
 				}
 
 				switch($type->params->get('properties.item_title'))
@@ -312,12 +336,17 @@ class JoomcckControllerImport extends MControllerAdmin
 		}
 		catch(Exception $e)
 		{
-
 			Factory::getApplication()->enqueueMessage( $e->getMessage(), 'warning');
 		}
 
+		// Add extra statistics
+		$params = new Registry($imports->params);
+		$stat['preset_name'] = $imports->name;
+		$stat['import_method'] = $params->get('method', 'update');
+		$stat['duration'] = round(microtime(true) - $start_time, 2);
+
 		\Joomla\CMS\Factory::getSession()->set('importstat', $stat);
-		\Joomla\CMS\Factory::getApplication()->redirect(\Joomla\CMS\Router\Route::_('index.php?option=com_joomcck&view=import&step=3&section_id=' . $imports->section_id, FALSE));
+		\Joomla\CMS\Factory::getApplication()->redirect(\Joomla\CMS\Router\Route::_('index.php?option=com_joomcck&view=import&step=4&section_id=' . $imports->section_id, FALSE));
 	}
 
 	private function _get_cat($id)
@@ -602,6 +631,52 @@ class JoomcckControllerImport extends MControllerAdmin
 		)));
 	}
 
+	public function preview()
+	{
+		$user   = \Joomla\CMS\Factory::getApplication()->getIdentity();
+		$app    = \Joomla\CMS\Factory::getApplication();
+
+		// Get form data - use raw POST to ensure nested arrays are captured correctly
+		$params = $app->input->post->getArray(array('import' => 'array'));
+		$params = isset($params['import']) ? $params['import'] : array();
+
+		// Fallback to direct POST if empty
+		if (empty($params) && !empty($_POST['import']))
+		{
+			$params = $_POST['import'];
+		}
+
+		$imports = \Joomla\CMS\Table\Table::getInstance('Import', 'JoomcckTable');
+
+		if($this->input->get('preset') == 'new')
+		{
+			$save = array(
+				'user_id'    => $user->get('id'),
+				'section_id' => $this->input->get('section_id'),
+				'params'     => json_encode($params),
+				'name'       => $params['name'] ?? '',
+				'crossids'   => '[]'
+			);
+			$imports->save($save);
+		}
+		else
+		{
+			$imports->load($this->input->get('preset'));
+			$imports->params = json_encode($params);
+			$imports->name   = $params['name'] ?? $imports->name;
+			$imports->store();
+		}
+
+		// Redirect to preview step
+		$app->redirect(\Joomla\CMS\Router\Route::_(
+			'index.php?option=com_joomcck&view=import&step=3' .
+			'&section_id=' . $this->input->get('section_id') .
+			'&type_id=' . $this->input->get('type_id') .
+			'&preset=' . $imports->id,
+			false
+		));
+	}
+
 	public function getTypes()
 	{
 		\Joomla\CMS\Session\Session::checkToken('get') or jexit(\Joomla\CMS\Language\Text::_('JINVALID_TOKEN'));
@@ -635,6 +710,56 @@ class JoomcckControllerImport extends MControllerAdmin
 		$types = $db->loadObjectList();
 
 		echo json_encode($types ?: []);
+		\Joomla\CMS\Factory::getApplication()->close();
+	}
+
+	public function deletePreset()
+	{
+		\Joomla\CMS\Session\Session::checkToken('get') or jexit(\Joomla\CMS\Language\Text::_('JINVALID_TOKEN'));
+
+		$preset_id = $this->input->getInt('preset_id', 0);
+		$user = \Joomla\CMS\Factory::getApplication()->getIdentity();
+
+		if (!$preset_id)
+		{
+			echo json_encode(['success' => false, 'message' => 'Invalid preset ID']);
+			\Joomla\CMS\Factory::getApplication()->close();
+		}
+
+		$db = \Joomla\CMS\Factory::getDbo();
+
+		// Check if preset belongs to current user
+		$query = $db->getQuery(true)
+			->select('id')
+			->from('#__js_res_import')
+			->where('id = ' . $preset_id)
+			->where('user_id = ' . (int) $user->get('id'));
+
+		$db->setQuery($query);
+		$exists = $db->loadResult();
+
+		if (!$exists)
+		{
+			echo json_encode(['success' => false, 'message' => 'Preset not found or access denied']);
+			\Joomla\CMS\Factory::getApplication()->close();
+		}
+
+		// Delete the preset
+		$query = $db->getQuery(true)
+			->delete('#__js_res_import')
+			->where('id = ' . $preset_id);
+
+		$db->setQuery($query);
+
+		if ($db->execute())
+		{
+			echo json_encode(['success' => true]);
+		}
+		else
+		{
+			echo json_encode(['success' => false, 'message' => 'Database error']);
+		}
+
 		\Joomla\CMS\Factory::getApplication()->close();
 	}
 }

@@ -707,9 +707,9 @@ class CFormFieldUpload extends CFormField
     public function onImportForm($heads, $defaults)
     {
         $out = $this->_import_fieldlist($heads, $defaults->get('field.' . $this->id . '.fname'), 'fname');
-        $out .= sprintf('<div><small>%s</small></div><input type="text" name="import[field][%d][separator]" value="%s" class="col-md-2" >',
+        $out .= sprintf('<div class="mt-2"><small class="text-muted">%s</small></div><input type="text" name="import[field][%d][separator]" value="%s" class="form-control" style="width:80px;">',
             \Joomla\CMS\Language\Text::_('CMULTIVALFIELDSEPARATOR'), $this->id, $defaults->get('field.' . $this->id . '.separator', ','));
-        $out .= sprintf('<div><small>%s</small></div><input type="text" name="import[field][%d][path]" value="%s" class="col-md-12" >',
+        $out .= sprintf('<div class="mt-2"><small class="text-muted">%s</small></div><input type="text" name="import[field][%d][path]" value="%s" class="form-control">',
             \Joomla\CMS\Language\Text::_('CFILESPATH'), $this->id, $defaults->get('field.' . $this->id . '.path', 'files'));
 
         return $out;

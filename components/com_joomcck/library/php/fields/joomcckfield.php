@@ -418,7 +418,7 @@ class CFormField extends \Joomla\CMS\Form\FormField{
 
 		$add_name = "[$this->id]".($name ? "[$name]" : null);
 
-		return \Joomla\CMS\HTML\HTMLHelper::_('select.genericlist', $list, 'import[field]' . $add_name, 'class="col-md-12"', 'value', 'text', $default);
+		return \Joomla\CMS\HTML\HTMLHelper::_('select.genericlist', $list, 'import[field]' . $add_name, 'class="form-select"', 'value', 'text', $default);
 	}
 	protected function _find_import_file($path, $file)
 	{

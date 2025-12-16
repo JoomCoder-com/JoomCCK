@@ -88,7 +88,7 @@ class JFormFieldCCheckbox extends CFormFieldSelectable
     public function onImportForm($heads, $defaults)
     {
         $out = $this->_import_fieldlist($heads, $defaults->get('field.' . $this->id . '.fname'), 'fname');
-        $out .= sprintf('<div><small>%s</small></div><input type="text" name="import[field][%d][separator]" value="%s" class="col-md-2" >',
+        $out .= sprintf('<div class="mt-2"><small class="text-muted">%s</small></div><input type="text" name="import[field][%d][separator]" value="%s" class="form-control" style="width:80px;">',
             \Joomla\CMS\Language\Text::_('CMULTIVALFIELDSEPARATOR'), $this->id, $defaults->get('field.' . $this->id . '.separator', ','));
 
         return $out;

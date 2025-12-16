@@ -9,120 +9,83 @@
 \Joomla\CMS\HTML\HTMLHelper::_('bootstrap.tooltip', '*[rel^="tooltip"]');
 defined('_JEXEC') or die();
 ?>
-<br>
-<div class="row">
+<div class="row mt-3">
 	<div class="col-md-6">
-		<legend><?php echo \Joomla\CMS\Language\Text::_('CIMPORTPARAMS')?></legend>
-		<div class="control-group">
-			<label class="form-label" for="name"><?php echo \Joomla\CMS\Language\Text::_('CNAME');?>
-				<span class="float-end" rel="tooltip" data-bs-original-title="<?php echo \Joomla\CMS\Language\Text::_('CREQUIRED') ?>">
-					<?php echo HTMLFormatHelper::icon('asterisk-small.png');  ?></span>
+		<h5 class="border-bottom pb-2 mb-3"><?php echo \Joomla\CMS\Language\Text::_('CIMPORTPARAMS')?></h5>
+		<div class="mb-3">
+			<label class="form-label" for="importname"><?php echo \Joomla\CMS\Language\Text::_('CNAME');?>
+				<span class="text-danger">*</span>
 			</label>
-
-			<div class="controls">
-				<div class="row">
-					<input type="text" class="col-md-12" name="import[name]" id=importname"  value="<?php echo $this->item->params->get('name'); ?>">
-				</div>
-			</div>
+			<input type="text" class="form-control" name="import[name]" id="importname" value="<?php echo $this->item->params->get('name'); ?>">
 		</div>
-		<div class="control-group">
-			<label class="form-label" for="name"><?php echo \Joomla\CMS\Language\Text::_('ID');?>
-				<span class="float-end" rel="tooltip" data-bs-original-title="<?php echo \Joomla\CMS\Language\Text::_('CREQUIRED') ?>">
-					<?php echo HTMLFormatHelper::icon('asterisk-small.png');  ?></span>
+		<div class="mb-3">
+			<label class="form-label" for="importfieldid"><?php echo \Joomla\CMS\Language\Text::_('ID');?>
+				<span class="text-danger">*</span>
 			</label>
-
-			<div class="controls">
-				<div class="row">
-					<?php echo $this->fieldlist('id', $this->item->params->get('field.id'));?>
-					<small><?php echo \Joomla\CMS\Language\Text::_('CIMPORTUNIQID')?></small>
-				</div>
-			</div>
+			<?php echo $this->fieldlist('id', $this->item->params->get('field.id'));?>
+			<small class="text-muted"><?php echo \Joomla\CMS\Language\Text::_('CIMPORTUNIQID')?></small>
+		</div>
+		<div class="mb-3">
+			<label class="form-label" for="importmethod"><?php echo \Joomla\CMS\Language\Text::_('CIMPORTMETHOD');?></label>
+			<select name="import[method]" id="importmethod" class="form-select">
+				<option value="update"<?php echo ($this->item->params->get('method', 'update') == 'update') ? ' selected' : ''; ?>><?php echo \Joomla\CMS\Language\Text::_('CIMPORTMETHOD_UPDATE');?></option>
+				<option value="skip"<?php echo ($this->item->params->get('method') == 'skip') ? ' selected' : ''; ?>><?php echo \Joomla\CMS\Language\Text::_('CIMPORTMETHOD_SKIP');?></option>
+				<option value="duplicate"<?php echo ($this->item->params->get('method') == 'duplicate') ? ' selected' : ''; ?>><?php echo \Joomla\CMS\Language\Text::_('CIMPORTMETHOD_DUPLICATE');?></option>
+			</select>
+			<small class="text-muted"><?php echo \Joomla\CMS\Language\Text::_('CIMPORTMETHOD_DESC')?></small>
 		</div>
 		<?php if($this->section->categories || ($this->section->params->get('personalize.personalize', 0) && in_array($this->section->params->get('personalize.pcat_submit', 0), $this->user->getAuthorisedViewLevels()))): ?>
-			<legend><?php echo \Joomla\CMS\Language\Text::_('CCATEGORIES')?></legend>
-			<div class="control-group">
-				<label class="form-label" for="name"><?php echo \Joomla\CMS\Language\Text::_('CCATEGORY');?>
-					<span class="float-end" rel="tooltip" data-bs-original-title="<?php echo \Joomla\CMS\Language\Text::_('CREQUIRED') ?>">
-						<?php echo HTMLFormatHelper::icon('asterisk-small.png');  ?></span>
+			<h5 class="border-bottom pb-2 mb-3 mt-4"><?php echo \Joomla\CMS\Language\Text::_('CCATEGORIES')?></h5>
+			<div class="mb-3">
+				<label class="form-label" for="importfieldcategory"><?php echo \Joomla\CMS\Language\Text::_('CCATEGORY');?>
+					<span class="text-danger">*</span>
 				</label>
-
-				<div class="controls">
-					<div class="row">
-						<?php echo $this->fieldlist('category', $this->item->params->get('field.category'));?>
-					</div>
-				</div>
+				<?php echo $this->fieldlist('category', $this->item->params->get('field.category'));?>
 			</div>
-			<div id="progress" class="progress progress-striped active" style="display: none;">
-				<div class="bar" style="width: 100%;"></div>
+			<div id="import-progress" class="progress mb-3" style="display: none; height: 8px;">
+				<div class="progress-bar progress-bar-striped progress-bar-animated" style="width: 100%;"></div>
 			</div>
-			<div id="cat-list">
-			</div>
+			<div id="cat-list"></div>
 		<?php endif; ?>
 	</div>
 	<div class="col-md-6">
-		<legend><?php echo \Joomla\CMS\Language\Text::_('CIMPORTFIELDASSOC')?></legend>
+		<h5 class="border-bottom pb-2 mb-3"><?php echo \Joomla\CMS\Language\Text::_('CIMPORTFIELDASSOC')?></h5>
 
 		<?php if($this->type->params->get('properties.item_title') == 1): ?>
-			<div class="control-group">
-				<label class="form-label" for="name"><?php echo \Joomla\CMS\Language\Text::_('CTITLE');?>
-					<span class="float-end" rel="tooltip" data-bs-original-title="<?php echo \Joomla\CMS\Language\Text::_('CREQUIRED') ?>">
-						<?php echo HTMLFormatHelper::icon('asterisk-small.png');  ?></span>
+			<div class="mb-3">
+				<label class="form-label" for="importfieldtitle"><?php echo \Joomla\CMS\Language\Text::_('CTITLE');?>
+					<span class="text-danger">*</span>
 				</label>
-
-				<div class="controls">
-					<div class="row">
-						<?php echo $this->fieldlist('title', $this->item->params->get('field.title'));?>
-					</div>
-				</div>
+				<?php echo $this->fieldlist('title', $this->item->params->get('field.title'));?>
 			</div>
 		<?php endif;?>
 
-		<div class="control-group">
-			<label class="form-label" for="name">
-				<?php echo \Joomla\CMS\Language\Text::_('CTIME');?>
-			</label>
-
-			<div class="controls">
-				<div class="row">
-					<?php echo $this->fieldlist('ctime', $this->item->params->get('field.ctime'));?>
-				</div>
-			</div>
+		<div class="mb-3">
+			<label class="form-label" for="importfieldctime"><?php echo \Joomla\CMS\Language\Text::_('CIMPORT_CTIME');?></label>
+			<?php echo $this->fieldlist('ctime', $this->item->params->get('field.ctime'));?>
 		</div>
 
-		<div class="control-group">
-			<label class="form-label" for="name">
-				<?php echo \Joomla\CMS\Language\Text::_('MTIME');?>
-			</label>
-
-			<div class="controls">
-				<div class="row">
-					<?php echo $this->fieldlist('mtime', $this->item->params->get('field.mtime'));?>
-				</div>
-			</div>
+		<div class="mb-3">
+			<label class="form-label" for="importfieldmtime"><?php echo \Joomla\CMS\Language\Text::_('CIMPORT_MTIME');?></label>
+			<?php echo $this->fieldlist('mtime', $this->item->params->get('field.mtime'));?>
 		</div>
 
 		<?php foreach($this->fields AS $field): ?>
-			<?php $form = $field->onImportForm($this->heads, $this->item->params); if(empty($form)) continue;  ?>
-			<div class="control-group">
-				<label class="form-label" for="type"><?php echo $field->label;?>
+			<?php $form = $field->onImportForm($this->heads, $this->item->params); if(empty($form)) continue; ?>
+			<div class="mb-3 <?php echo ($field->required ? 'required' : '') ?>">
+				<label class="form-label"><?php echo $field->label;?>
 					<?php if($field->required): ?>
-						<span class="float-end" rel="tooltip" data-bs-original-title="<?php echo \Joomla\CMS\Language\Text::_('CREQUIRED') ?>">
-							<?php echo HTMLFormatHelper::icon('asterisk-small.png');  ?></span>
+						<span class="text-danger">*</span>
 					<?php endif;?>
 				</label>
-
-				<div class="controls">
-					<div class="row <?php echo ($field->required ? 'required' : null) ?>">
-						<?php echo $form;?>
-					</div>
-				</div>
+				<?php echo $form;?>
 			</div>
 		<?php endforeach;?>
 	</div>
 </div>
 
 <script type="text/javascript">
-	if(jQuery('#importfieldcategory').val() != '') {
+	if(jQuery('#importfieldcategory').val() && jQuery('#importfieldcategory').val() != '0') {
 		categoryload();
 	}
 </script>
