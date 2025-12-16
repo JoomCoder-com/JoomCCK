@@ -456,8 +456,19 @@ class JoomcckControllerImport extends MControllerAdmin
 				}
 				else
 				{
+					$headerCount = count($header);
+					$rowCount = count($row);
+
+					if ($rowCount < $headerCount)
+					{
+						$row = array_pad($row, $headerCount, '');
+					}
+					elseif ($rowCount > $headerCount)
+					{
+						$row = array_slice($row, 0, $headerCount);
+					}
+
 					$data = array_combine($header, $row);
-					//$data = array_map("utf8_encode", $data);
 					$this->_row($data);
 				}
 			}

@@ -61,9 +61,10 @@ defined('_JEXEC') || die();
 <form action="<?php echo \Joomla\CMS\Uri\Uri::getInstance()->toString(); ?>" method="post" name="adminForm"
       id="adminForm" class="form-horizontal">
     <div class="control-group">
-        <label class="form-label" for="type"><?php echo \Joomla\CMS\Language\Text::_('CSECTION') ?></label>
+        <label class="form-label" for="section_id"><?php echo \Joomla\CMS\Language\Text::_('CSECTION') ?></label>
         <div class="controls">
-            <select name="section_id" class="form-select">
+            <select name="section_id" id="section_id" class="form-select">
+                <option value=""><?php echo \Joomla\CMS\Language\Text::_('CSELECTSECTION') ?></option>
 				<?php echo \Joomla\CMS\HTML\HTMLHelper::_('select.options', $this->sections, 'value', 'text', 0, true); ?>
             </select>
         </div>
