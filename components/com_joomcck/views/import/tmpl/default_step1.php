@@ -38,13 +38,25 @@ defined('_JEXEC') || die();
     <li class="nav-item"><a class="nav-link">3. <?php echo \Joomla\CMS\Language\Text::_('CIMPORTFINISH') ?></a></li>
 </ul>
 
-<div id="progress" class="progress progress-striped hide">
-    <div class="bar" style="width: 0%;"></div>
-</div>
-<div id="progress2" class="progress progress-striped hide">
-    <div class="bar" style="width: 0%;"></div>
+<div id="upload-progress-wrap" class="mb-3 d-none">
+    <div class="d-flex align-items-center mb-1">
+        <i class="fa fa-upload me-2 text-primary"></i>
+        <span id="upload-label" class="small fw-semibold"><?php echo \Joomla\CMS\Language\Text::_('CIMPORTUPLOAD') ?></span>
+    </div>
+    <div id="progress" class="progress" style="height: 8px;">
+        <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" style="width: 0%;"></div>
+    </div>
 </div>
 
+<div id="parse-progress-wrap" class="mb-3 d-none">
+    <div class="d-flex align-items-center mb-1">
+        <i class="fa fa-cog me-2 text-primary"></i>
+        <span id="parse-label" class="small fw-semibold"><?php echo \Joomla\CMS\Language\Text::_('CIMPORTPARCE') ?></span>
+    </div>
+    <div id="progress2" class="progress" style="height: 8px;">
+        <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" style="width: 0%;"></div>
+    </div>
+</div>
 
 <style>
     #fileupload {
@@ -55,6 +67,14 @@ defined('_JEXEC') || die();
         opacity: 0;
         filter: alpha(opacity=0);
         transform: translate(-300px, 0) scale(4);
+    }
+    .progress {
+        background-color: #e9ecef;
+        border-radius: 4px;
+        overflow: hidden;
+    }
+    .progress-bar {
+        transition: width 0.3s ease;
     }
 </style>
 
@@ -116,6 +136,13 @@ defined('_JEXEC') || die();
 
 <script>
     (function ($) {
+        var $uploadWrap = $('#upload-progress-wrap');
+        var $uploadBar = $('#progress .progress-bar');
+        var $uploadLabel = $('#upload-label');
+        var $parseWrap = $('#parse-progress-wrap');
+        var $parseBar = $('#progress2 .progress-bar');
+        var $parseLabel = $('#parse-label');
+
         $('#fileupload').fileupload({
             url: '<?php echo \Joomla\CMS\Router\Route::_('index.php?option=com_joomcck&task=import.upload&tmpl=component', false); ?>',
             dataType: 'json',
@@ -125,25 +152,22 @@ defined('_JEXEC') || die();
             singleFileUploads: true,
             type: 'POST',
             change: function () {
-                $('#progress2').hide();
-                $('#progress2 .bar').text('').css('width', '0').removeClass('bar-warning').removeClass('bar-success');
-                $('#progress .bar').text('').css('width', '0').removeClass('bar-warning').removeClass('bar-success');
+                $parseWrap.addClass('d-none');
+                $parseBar.css('width', '0').removeClass('bg-success bg-danger');
+                $uploadBar.css('width', '0').removeClass('bg-success bg-danger');
+                $uploadLabel.text('<?php echo \Joomla\CMS\Language\Text::_('CIMPORTUPLOAD') ?>');
+                $parseLabel.text('<?php echo \Joomla\CMS\Language\Text::_('CIMPORTPARCE') ?>');
             },
             done: function (e, data) {
-                console.log(data);
-                $('#progress').removeClass('active');
-                $('#progress .bar')
-                    .text('<?php echo \Joomla\CMS\Language\Text::_('CIMPORTUPLOADFINISH') ?>')
+                $uploadBar.removeClass('progress-bar-animated')
                     .css('width', '100%')
-                    .addClass('bar-success').removeClass('bar-warning');
+                    .addClass('bg-success');
+                $uploadLabel.text('<?php echo \Joomla\CMS\Language\Text::_('CIMPORTUPLOADFINISH') ?>');
 
                 $.each(data.result.files, function (index, file) {
                     if (file.error) {
-                        $('#progress .bar')
-                            .text(file.error)
-                            .css('width', '100%')
-                            .addClass('bar-warning')
-                            .removeClass('bar-success');
+                        $uploadBar.removeClass('bg-success').addClass('bg-danger');
+                        $uploadLabel.text(file.error);
                         return;
                     }
                     $.ajax({
@@ -151,7 +175,8 @@ defined('_JEXEC') || die();
                         dataType: 'json',
                         type: 'POST',
                         beforeSend: function () {
-                            $('#progress2').show().addClass('active');
+                            $parseWrap.removeClass('d-none');
+                            $parseBar.addClass('progress-bar-animated');
                             setTimeout(function () {
                                 updatebar('<?php echo $jsoncode ?>');
                             }, 200);
@@ -162,48 +187,34 @@ defined('_JEXEC') || die();
                 });
             },
             progressall: function (e, data) {
-
                 var progress = parseInt(data.loaded / data.total * 100, 10);
-                $('#progress').show().addClass('active');
-                $('#progress .bar')
-                    .css('width', progress + '%')
-                    .html('<?php echo \Joomla\CMS\Language\Text::_('CIMPORTUPLOAD') ?> <b>' + progress + '%</b>')
-                    .removeClass('bar-success').removeClass('bar-warning');
+                $uploadWrap.removeClass('d-none');
+                $uploadBar.css('width', progress + '%');
+                $uploadLabel.text('<?php echo \Joomla\CMS\Language\Text::_('CIMPORTUPLOAD') ?> ' + progress + '%');
             }
         });
 
         function updatebar(name) {
             $.getJSON('<?php echo \Joomla\CMS\Uri\Uri::root(); ?>tmp/' + name + '.json', {dataType: 'json'}, function (data) {
                 if (data.error) {
-                    $('#progress').removeClass('active');
-                    $('#progress2 .bar')
-                        .text(data.error)
-                        .css('width', '100%')
-                        .addClass('bar-warning')
-                        .removeClass('bar-success');
+                    $parseBar.removeClass('progress-bar-animated').addClass('bg-danger').css('width', '100%');
+                    $parseLabel.text(data.error);
                 } else if (data.status < 100) {
-                    $('#progress2 .bar')
-                        .css('width', data.status + '%')
-                        .html(data.msg + ' <b>' + data.status + '%</b>');
+                    $parseBar.css('width', data.status + '%');
+                    $parseLabel.text(data.msg + ' ' + data.status + '%');
                     setTimeout(function () {
                         updatebar(name);
                     }, 200);
                 } else if (data.status >= 100) {
-                    $('#progress2').removeClass('active');
-                    $('#progress2 .bar')
-                        .text('<?php echo \Joomla\CMS\Language\Text::_('CIMPORTANYLIZEFINISH') ?>')
-                        .css('width', '100%').removeClass('bar-warning')
-                        .addClass('bar-success');
-
+                    $parseBar.removeClass('progress-bar-animated').addClass('bg-success').css('width', '100%');
+                    $parseLabel.text('<?php echo \Joomla\CMS\Language\Text::_('CIMPORTANYLIZEFINISH') ?>');
                     $('#next-step').removeAttr('disabled');
                 }
-
             }).fail(function () {
                 setTimeout(function () {
                     updatebar(name);
                 }, 200);
             });
-
         }
 
         // Dynamic type filtering based on section selection
