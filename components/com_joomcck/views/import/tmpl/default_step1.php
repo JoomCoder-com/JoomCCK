@@ -68,11 +68,17 @@ defined('_JEXEC') || die();
             </select>
         </div>
     </div>
-    <div class="control-group">
-        <label class="form-label" for="type"><?php echo \Joomla\CMS\Language\Text::_('CTYPE') ?></label>
+    <div class="control-group" id="type-hint">
+        <label class="form-label"><?php echo \Joomla\CMS\Language\Text::_('CTYPE') ?></label>
         <div class="controls">
-            <select name="type_id" class="form-select">
-				<?php echo \Joomla\CMS\HTML\HTMLHelper::_('select.options', $this->types, 'value', 'text', 0, true); ?>
+            <div class="alert alert-info mb-0"><?php echo \Joomla\CMS\Language\Text::_('CSELECTSECTIONFIRST') ?></div>
+        </div>
+    </div>
+    <div class="control-group" id="type-select" style="display:none;">
+        <label class="form-label" for="type_id"><?php echo \Joomla\CMS\Language\Text::_('CTYPE') ?></label>
+        <div class="controls">
+            <select name="type_id" id="type_id" class="form-select">
+                <option value="">- <?php echo \Joomla\CMS\Language\Text::_('CSELECT') ?> -</option>
             </select>
         </div>
     </div>
@@ -198,5 +204,37 @@ defined('_JEXEC') || die();
             });
 
         }
+
+        // Dynamic type filtering based on section selection
+        $('select[name="section_id"]').on('change', function() {
+            var section_id = $(this).val();
+            var typeSelect = $('#type_id');
+            var typeHint = $('#type-hint');
+            var typeSelectWrap = $('#type-select');
+
+            if (!section_id) {
+                typeHint.show();
+                typeSelectWrap.hide();
+                typeSelect.html('<option value="">- <?php echo \Joomla\CMS\Language\Text::_('CSELECT') ?> -</option>');
+                return;
+            }
+
+            typeHint.hide();
+            typeSelectWrap.show();
+            typeSelect.html('<option value=""><?php echo \Joomla\CMS\Language\Text::_('CLOADING') ?></option>');
+
+            $.ajax({
+                url: '<?php echo \Joomla\CMS\Router\Route::_('index.php?option=com_joomcck&task=import.getTypes&tmpl=component&' . \Joomla\CMS\Session\Session::getFormToken() . '=1', false); ?>',
+                data: { section_id: section_id },
+                dataType: 'json'
+            }).done(function(types) {
+                typeSelect.html('<option value="">- <?php echo \Joomla\CMS\Language\Text::_('CSELECT') ?> -</option>');
+                $.each(types, function(i, type) {
+                    typeSelect.append('<option value="' + type.value + '">' + type.text + '</option>');
+                });
+            }).fail(function() {
+                typeSelect.html('<option value=""><?php echo \Joomla\CMS\Language\Text::_('CERROR') ?></option>');
+            });
+        });
     }(jQuery));
 </script>

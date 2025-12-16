@@ -590,4 +590,40 @@ class JoomcckControllerImport extends MControllerAdmin
 			'msg'    => \Joomla\CMS\Language\Text::_($msg)
 		)));
 	}
+
+	public function getTypes()
+	{
+		\Joomla\CMS\Session\Session::checkToken('get') or jexit(\Joomla\CMS\Language\Text::_('JINVALID_TOKEN'));
+
+		$section_id = $this->input->getInt('section_id', 0);
+
+		if (!$section_id)
+		{
+			echo json_encode([]);
+			\Joomla\CMS\Factory::getApplication()->close();
+		}
+
+		$section = ItemsStore::getSection($section_id);
+		$params = new Registry($section->params);
+		$typeIds = $params->get('general.type', []);
+
+		if (empty($typeIds))
+		{
+			echo json_encode([]);
+			\Joomla\CMS\Factory::getApplication()->close();
+		}
+
+		$db = \Joomla\CMS\Factory::getDbo();
+		$query = $db->getQuery(true)
+			->select('id AS value, name AS text')
+			->from('#__js_res_types')
+			->where('published = 1')
+			->where('id IN (' . implode(',', array_map('intval', $typeIds)) . ')');
+
+		$db->setQuery($query);
+		$types = $db->loadObjectList();
+
+		echo json_encode($types ?: []);
+		\Joomla\CMS\Factory::getApplication()->close();
+	}
 }
