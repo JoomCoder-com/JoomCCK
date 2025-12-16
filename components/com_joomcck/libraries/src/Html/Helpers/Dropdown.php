@@ -1,9 +1,9 @@
 <?php
 /**
- * Joomcck by joomcoder
+ * Joomcck by JoomBoost
  * a component for Joomla! 1.7 - 2.5 CMS (http://www.joomla.org)
- * Author Website: https://www.joomcoder.com/
- * @copyright Copyright (C) 2012 joomcoder (https://www.joomcoder.com). All rights reserved.
+ * Author Website: https://www.joomBoost.com/
+ * @copyright Copyright (C) 2012 JoomBoost (https://www.joomBoost.com). All rights reserved.
  * @license   GNU/GPL http://www.gnu.org/copyleft/gpl.html
  */
 
@@ -13,62 +13,103 @@ use Joomla\CMS\Factory;
 use Joomla\CMS\HTML\HTMLHelper;
 use Joomla\CMS\Language\Text;
 use Joomla\CMS\Router\Route;
+
 defined('_JEXEC') or die();
 
-Class Dropdown extends \Joomla\CMS\HTML\Helpers\Dropdown{
-
-	public static function addCustomItem($label, $link = 'javascript:void(0)', $linkAttributes = '', $className = '', $ajaxLoad = false, $jsCallBackFunc = null)
-	{
-
-		$linkAttributes = "class='dropdown-item' ".$linkAttributes;
-
-		// add icon automatically
-		switch ($label){
-			case Text::_('JACTION_EDIT'):
-				$label = "<i class='fas fa-edit'></i> ".$label;
-				break;
-			case Text::_('JTOOLBAR_PUBLISH'):
-				$label = "<i class='fas fa-check'></i> ".$label;
-				break;
-			case Text::_('JTOOLBAR_UNPUBLISH'):
-				$label = "<i class='fas fa-times text-muted'></i> ".$label;
-				break;
-			case Text::_('JTOOLBAR_CHECKIN'):
-				$label = "<i class='fas fa-unlock'></i> ".$label;
-				break;
-		}
-
-
-        static::start();
-
-        if ($ajaxLoad) {
-            $href = ' href = "javascript:void(0)" onclick="loadAjax(\'' . $link . '\', \'' . $jsCallBackFunc . '\')"';
-        } else {
-            $href = ' href = "' . $link . '" ';
-        }
-
-        $dropDownList = static::$dropDownList;
-        $dropDownList .= '<li class="' . $className . '"><a ' . $linkAttributes . $href . ' >';
-        $dropDownList .= $label;
-        $dropDownList .= '</a></li>';
-        static::$dropDownList = $dropDownList;
-	}
-
+/**
+ * Dropdown helper class - fully overridden for Joomla 5.4+/6 compatibility
+ * Uses vanilla JavaScript and Bootstrap 5 click-based dropdowns
+ */
+class Dropdown
+{
+    /**
+     * @var array Track loaded state
+     */
+    protected static $loaded = [];
 
     /**
-     * Append an edit item to the current dropdown menu
+     * @var string HTML markup for the dropdown list
+     */
+    protected static $dropDownList = null;
+
+    /**
+     * Initialize dropdown - load Bootstrap dropdown and vanilla JS contextAction
+     *
+     * @return void
+     */
+    public static function init()
+    {
+        if (isset(static::$loaded[__METHOD__])) {
+            return;
+        }
+
+        // Load Bootstrap 5 dropdown
+        HTMLHelper::_('bootstrap.dropdown', '.dropdown-toggle');
+
+        // Add vanilla JS contextAction function for publish/unpublish/checkin actions
+        Factory::getDocument()->addScriptDeclaration("
+            window.contextAction = function(cbId, task) {
+                document.querySelectorAll('input[name=\"cid[]\"]').forEach(function(el) {
+                    el.checked = false;
+                });
+                var cb = document.getElementById(cbId);
+                if (cb) {
+                    cb.checked = true;
+                }
+                Joomla.submitbutton(task);
+            };
+        ");
+
+        static::$loaded[__METHOD__] = true;
+    }
+
+    /**
+     * Start a new dropdown menu
+     *
+     * @return void
+     */
+    public static function start()
+    {
+        if (isset(static::$loaded[__METHOD__]) && static::$loaded[__METHOD__]) {
+            return;
+        }
+
+        static::$dropDownList = '<div class="btn-group">
+            <a href="#" data-bs-toggle="dropdown" class="dropdown-toggle btn btn-secondary btn-sm">
+                <span class="caret"></span>
+            </a>
+            <ul class="dropdown-menu">';
+
+        static::$loaded[__METHOD__] = true;
+    }
+
+    /**
+     * Render the dropdown menu
+     *
+     * @return string HTML markup
+     */
+    public static function render()
+    {
+        $html = static::$dropDownList . '</ul></div>';
+
+        static::$dropDownList = null;
+        static::$loaded[__CLASS__ . '::start'] = false;
+
+        return $html;
+    }
+
+    /**
+     * Add edit item to dropdown
      *
      * @param integer $id Record ID
      * @param string $prefix Task prefix
-     * @param string $customLink The custom link if dont use default Joomla action format
+     * @param string $customLink Custom link URL
      *
-     * @return  void
-     *
-     * @since   3.0
+     * @return void
      */
     public static function edit($id, $prefix = '', $customLink = '')
     {
-        // static::start();
+        static::start();
 
         if (!$customLink) {
             $option = Factory::getApplication()->getInput()->getCmd('option');
@@ -84,14 +125,12 @@ Class Dropdown extends \Joomla\CMS\HTML\Helpers\Dropdown{
     }
 
     /**
-     * Append a publish item to the current dropdown menu
+     * Add publish item to dropdown
      *
-     * @param string $checkboxId ID of corresponding checkbox of the record
-     * @param string $prefix The task prefix
+     * @param string $checkboxId Checkbox ID
+     * @param string $prefix Task prefix
      *
-     * @return  void
-     *
-     * @since   3.0
+     * @return void
      */
     public static function publish($checkboxId, $prefix = '')
     {
@@ -100,14 +139,12 @@ Class Dropdown extends \Joomla\CMS\HTML\Helpers\Dropdown{
     }
 
     /**
-     * Append an unpublish item to the current dropdown menu
+     * Add unpublish item to dropdown
      *
-     * @param string $checkboxId ID of corresponding checkbox of the record
-     * @param string $prefix The task prefix
+     * @param string $checkboxId Checkbox ID
+     * @param string $prefix Task prefix
      *
-     * @return  void
-     *
-     * @since   3.0
+     * @return void
      */
     public static function unpublish($checkboxId, $prefix = '')
     {
@@ -116,14 +153,12 @@ Class Dropdown extends \Joomla\CMS\HTML\Helpers\Dropdown{
     }
 
     /**
-     * Append a featured item to the current dropdown menu
+     * Add featured item to dropdown
      *
-     * @param string $checkboxId ID of corresponding checkbox of the record
-     * @param string $prefix The task prefix
+     * @param string $checkboxId Checkbox ID
+     * @param string $prefix Task prefix
      *
-     * @return  void
-     *
-     * @since   3.0
+     * @return void
      */
     public static function featured($checkboxId, $prefix = '')
     {
@@ -132,14 +167,12 @@ Class Dropdown extends \Joomla\CMS\HTML\Helpers\Dropdown{
     }
 
     /**
-     * Append an unfeatured item to the current dropdown menu
+     * Add unfeatured item to dropdown
      *
-     * @param string $checkboxId ID of corresponding checkbox of the record
-     * @param string $prefix The task prefix
+     * @param string $checkboxId Checkbox ID
+     * @param string $prefix Task prefix
      *
-     * @return  void
-     *
-     * @since   3.0
+     * @return void
      */
     public static function unfeatured($checkboxId, $prefix = '')
     {
@@ -148,14 +181,12 @@ Class Dropdown extends \Joomla\CMS\HTML\Helpers\Dropdown{
     }
 
     /**
-     * Append an archive item to the current dropdown menu
+     * Add archive item to dropdown
      *
-     * @param string $checkboxId ID of corresponding checkbox of the record
-     * @param string $prefix The task prefix
+     * @param string $checkboxId Checkbox ID
+     * @param string $prefix Task prefix
      *
-     * @return  void
-     *
-     * @since   3.0
+     * @return void
      */
     public static function archive($checkboxId, $prefix = '')
     {
@@ -164,14 +195,12 @@ Class Dropdown extends \Joomla\CMS\HTML\Helpers\Dropdown{
     }
 
     /**
-     * Append an unarchive item to the current dropdown menu
+     * Add unarchive item to dropdown
      *
-     * @param string $checkboxId ID of corresponding checkbox of the record
-     * @param string $prefix The task prefix
+     * @param string $checkboxId Checkbox ID
+     * @param string $prefix Task prefix
      *
-     * @return  void
-     *
-     * @since   3.0
+     * @return void
      */
     public static function unarchive($checkboxId, $prefix = '')
     {
@@ -180,14 +209,12 @@ Class Dropdown extends \Joomla\CMS\HTML\Helpers\Dropdown{
     }
 
     /**
-     * Append a trash item to the current dropdown menu
+     * Add trash item to dropdown
      *
-     * @param string $checkboxId ID of corresponding checkbox of the record
-     * @param string $prefix The task prefix
+     * @param string $checkboxId Checkbox ID
+     * @param string $prefix Task prefix
      *
-     * @return  void
-     *
-     * @since   3.0
+     * @return void
      */
     public static function trash($checkboxId, $prefix = '')
     {
@@ -196,14 +223,12 @@ Class Dropdown extends \Joomla\CMS\HTML\Helpers\Dropdown{
     }
 
     /**
-     * Append an untrash item to the current dropdown menu
+     * Add untrash item to dropdown
      *
-     * @param string $checkboxId ID of corresponding checkbox of the record
-     * @param string $prefix The task prefix
+     * @param string $checkboxId Checkbox ID
+     * @param string $prefix Task prefix
      *
-     * @return  void
-     *
-     * @since   3.0
+     * @return void
      */
     public static function untrash($checkboxId, $prefix = '')
     {
@@ -212,14 +237,12 @@ Class Dropdown extends \Joomla\CMS\HTML\Helpers\Dropdown{
     }
 
     /**
-     * Append a checkin item to the current dropdown menu
+     * Add checkin item to dropdown
      *
-     * @param string $checkboxId ID of corresponding checkbox of the record
-     * @param string $prefix The task prefix
+     * @param string $checkboxId Checkbox ID
+     * @param string $prefix Task prefix
      *
-     * @return  void
-     *
-     * @since   3.0
+     * @return void
      */
     public static function checkin($checkboxId, $prefix = '')
     {
@@ -228,14 +251,62 @@ Class Dropdown extends \Joomla\CMS\HTML\Helpers\Dropdown{
     }
 
     /**
-     * Writes a divider between dropdown items
+     * Add divider to dropdown (Bootstrap 5 compatible)
      *
-     * @return  void
-     *
-     * @since   3.0
+     * @return void
      */
     public static function divider()
     {
-        static::$dropDownList .= '<li class="divider"></li>';
+        static::$dropDownList .= '<li><hr class="dropdown-divider"></li>';
+    }
+
+    /**
+     * Add custom item to dropdown
+     *
+     * @param string $label Item label
+     * @param string $link Item link
+     * @param string $linkAttributes Additional link attributes
+     * @param string $className Item class name
+     * @param boolean $ajaxLoad Use AJAX loading
+     * @param string $jsCallBackFunc JS callback function
+     *
+     * @return void
+     */
+    public static function addCustomItem(
+        $label,
+        $link = 'javascript:void(0)',
+        $linkAttributes = '',
+        $className = '',
+        $ajaxLoad = false,
+        $jsCallBackFunc = null
+    ) {
+        static::start();
+
+        // Add dropdown-item class
+        $linkAttributes = 'class="dropdown-item" ' . $linkAttributes;
+
+        // Add icons automatically based on label
+        switch ($label) {
+            case Text::_('JACTION_EDIT'):
+                $label = '<i class="fas fa-edit"></i> ' . $label;
+                break;
+            case Text::_('JTOOLBAR_PUBLISH'):
+                $label = '<i class="fas fa-check"></i> ' . $label;
+                break;
+            case Text::_('JTOOLBAR_UNPUBLISH'):
+                $label = '<i class="fas fa-times text-muted"></i> ' . $label;
+                break;
+            case Text::_('JTOOLBAR_CHECKIN'):
+                $label = '<i class="fas fa-unlock"></i> ' . $label;
+                break;
+        }
+
+        if ($ajaxLoad) {
+            $href = ' href="javascript:void(0)" onclick="loadAjax(\'' . $link . '\', \'' . $jsCallBackFunc . '\')"';
+        } else {
+            $href = ' href="' . $link . '"';
+        }
+
+        static::$dropDownList .= '<li class="' . $className . '"><a ' . $linkAttributes . $href . '>' . $label . '</a></li>';
     }
 }
