@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<metadata>
+	<layout title="CURLAUDITLOG">
+		<message>CURLAUDITLOGDESCR</message>
+	</layout>
+	<fields name="request">
+		<fieldset name="request" label="Menu Item Options" addfieldpath="/libraries/mint/forms/fields">
+			<field
+				name="section_id"
+				type="meresourcessection"
+				default=""
+				label="Pre-filter by Section"
+				description="Optional: Pre-filter audit log to show only events from a specific section. Leave empty to show all sections the user has access to."
+				class="form-select"
+				select="1"
+			/>
+		</fieldset>
+	</fields>
+	<fields name="params">
+		<fieldset name="display" label="Display Options">
+			<field
+				name="limit"
+				type="list"
+				default="20"
+				label="Default List Limit"
+				description="Number of log entries to display per page by default"
+			>
+				<option value="10">10</option>
+				<option value="20">20</option>
+				<option value="50">50</option>
+				<option value="100">100</option>
+			</field>
+			<field
+				name="show_page_heading"
+				type="radio"
+				default="1"
+				label="Show Page Heading"
+				description="Show or hide the page heading"
+				class="btn-group"
+			>
+				<option value="0">JHIDE</option>
+				<option value="1">JSHOW</option>
+			</field>
+			<field
+				name="page_heading"
+				type="text"
+				default=""
+				label="Page Heading"
+				description="Optional page heading to override the default 'Audit Log' title"
+				size="40"
+			/>
+		</fieldset>
+	</fields>
+</metadata>
