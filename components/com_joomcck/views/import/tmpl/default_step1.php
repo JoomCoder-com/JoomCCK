@@ -80,8 +80,10 @@ defined('_JEXEC') || die();
         <label class="form-label" for="type"><?php echo \Joomla\CMS\Language\Text::_('CCSVDELIMITER') ?></label>
         <div class="controls">
             <select name="delimiter" class="form-select">
+                <option value="auto"><?php echo \Joomla\CMS\Language\Text::_('CIMPORTDELAUTO') ?></option>
                 <option value=","><?php echo \Joomla\CMS\Language\Text::_('CIMPORTDELCOMA') ?></option>
                 <option value=";"><?php echo \Joomla\CMS\Language\Text::_('CIMPORTDELSEMI') ?></option>
+                <option value="&#9;"><?php echo \Joomla\CMS\Language\Text::_('CIMPORTDELTAB') ?></option>
             </select>
         </div>
     </div>

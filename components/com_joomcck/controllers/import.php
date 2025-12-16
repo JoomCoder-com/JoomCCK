@@ -406,7 +406,12 @@ class JoomcckControllerImport extends MControllerAdmin
 		$ext = strtolower(pathinfo($upload,PATHINFO_EXTENSION));
 		if($ext == 'csv')
 		{
-			$this->_load_csv($upload, $this->input->get('delimiter', ','));
+			$delimiter = $this->input->get('delimiter', 'auto');
+			if ($delimiter === 'auto')
+			{
+				$delimiter = $this->_detect_delimiter($upload);
+			}
+			$this->_load_csv($upload, $delimiter);
 		}
 		elseif($ext == 'json')
 		{
@@ -458,6 +463,75 @@ class JoomcckControllerImport extends MControllerAdmin
 			}
 			fclose($handle);
 		}
+	}
+
+	/**
+	 * Auto-detect CSV delimiter by analyzing file content
+	 *
+	 * @param   string  $filename  Path to the CSV file
+	 * @return  string  The detected delimiter character
+	 */
+	private function _detect_delimiter($filename)
+	{
+		$delimiters = [',', ';', "\t", '|'];
+		$results = [];
+
+		// Read first 5 lines for analysis
+		$handle = fopen($filename, 'r');
+		if ($handle === false)
+		{
+			return ','; // Default fallback
+		}
+
+		$lines = [];
+		for ($i = 0; $i < 5 && ($line = fgets($handle)) !== false; $i++)
+		{
+			$lines[] = $line;
+		}
+		fclose($handle);
+
+		if (empty($lines))
+		{
+			return ','; // Default fallback
+		}
+
+		// Count occurrences of each delimiter per line
+		foreach ($delimiters as $delimiter)
+		{
+			$counts = [];
+			foreach ($lines as $line)
+			{
+				$counts[] = substr_count($line, $delimiter);
+			}
+
+			// Check consistency (same count on each line) and count > 0
+			$uniqueCounts = array_unique($counts);
+			$consistent = count($uniqueCounts) === 1 && $counts[0] > 0;
+
+			$results[$delimiter] = [
+				'count' => array_sum($counts),
+				'consistent' => $consistent,
+				'avg' => $counts[0] ?? 0
+			];
+		}
+
+		// Prefer consistent delimiters, then by count
+		$best = ','; // Default fallback
+		$bestScore = 0;
+
+		foreach ($results as $delim => $data)
+		{
+			// Give much higher score to consistent delimiters
+			$score = $data['consistent'] ? ($data['avg'] * 1000) : $data['count'];
+
+			if ($score > $bestScore)
+			{
+				$bestScore = $score;
+				$best = $delim;
+			}
+		}
+
+		return $best;
 	}
 
 	private function _row($data)
