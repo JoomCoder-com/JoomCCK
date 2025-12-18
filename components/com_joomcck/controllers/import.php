@@ -183,7 +183,7 @@ class JoomcckControllerImport extends MControllerAdmin
 				$record_table->bind($data);
 				$record_fields = json_decode($record_table->fields, TRUE);
 
-				if(!$record_table->check())
+				if(!$record_table->check_cli())
 				{
 					throw new Exception($record_table->getError());
 				}
