@@ -37,9 +37,7 @@ defined('_JEXEC') or die();
 		<?php if($this->section->categories || ($this->section->params->get('personalize.personalize', 0) && in_array($this->section->params->get('personalize.pcat_submit', 0), $this->user->getAuthorisedViewLevels()))): ?>
 			<h5 class="border-bottom pb-2 mb-3 mt-4"><?php echo \Joomla\CMS\Language\Text::_('CCATEGORIES')?></h5>
 			<div class="mb-3">
-				<label class="form-label" for="importfieldcategory"><?php echo \Joomla\CMS\Language\Text::_('CCATEGORY');?>
-					<span class="text-danger">*</span>
-				</label>
+				<label class="form-label" for="importfieldcategory"><?php echo \Joomla\CMS\Language\Text::_('CCATEGORY');?></label>
 				<?php echo $this->fieldlist('category', $this->item->params->get('field.category'));?>
 			</div>
 			<div id="import-progress" class="progress mb-3" style="display: none; height: 8px;">

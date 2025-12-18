@@ -84,13 +84,6 @@ defined('_JEXEC') or die();
 				submit = false;
 				return false;
 			}
-			<?php if($this->section->categories || ($this->section->params->get('personalize.personalize', 0) && in_array($this->section->params->get('personalize.pcat_submit', 0), $this->user->getAuthorisedViewLevels()))):?>
-			if($('#importfieldcategory').val() == 0) {
-				alert('Set Category');
-				submit = false;
-				return false;
-			}
-			<?php endif;?>
 
 			<?php if($this->type->params->get('properties.item_title') == 1):?>
 			if($('#importfieldtitle').val() == 0) {
