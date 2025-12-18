@@ -93,7 +93,8 @@ class JoomcckControllerImport extends MControllerAdmin
 			{
 				$row = new Registry($record->text);
 
-				if(!$row->get($params->get('field.title')))
+				// Only require title when type has standard titles enabled
+				if($type->params->get('properties.item_title') == 1 && !$row->get($params->get('field.title')))
 				{
 					continue;
 				}
