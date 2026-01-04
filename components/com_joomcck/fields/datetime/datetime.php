@@ -23,6 +23,42 @@ class JFormFieldCDatetime extends CFormField
 	public $filter_db_format;
 	public $attr;
 	public $dates;
+	public $td_format;
+	public $td_filter_format;
+	public $td_db_format;
+
+    /**
+     * Convert Moment.js format tokens to Tempus Dominus 6 format tokens
+     * @param string $momentFormat Moment.js format string
+     * @return string Tempus Dominus format string
+     */
+    public static function convertToTDFormat($momentFormat)
+    {
+        $replacements = [
+            'YYYY' => 'yyyy',
+            'YY' => 'yy',
+            'DD' => 'dd',
+            'D' => 'd',
+            'MMMM' => 'MMMM',
+            'MMM' => 'MMM',
+            'MM' => 'MM',
+            'M' => 'M',
+            'dddd' => 'EEEE',
+            'ddd' => 'EEE',
+            'HH' => 'HH',
+            'H' => 'H',
+            'hh' => 'hh',
+            'h' => 'h',
+            'mm' => 'mm',
+            'm' => 'm',
+            'ss' => 'ss',
+            's' => 's',
+            'A' => 'T',
+            'a' => 't',
+        ];
+
+        return strtr($momentFormat, $replacements);
+    }
 
 
 
@@ -62,6 +98,11 @@ class JFormFieldCDatetime extends CFormField
             $this->filter_is_time = true;
             $this->filter_db_format .= ' HH:mm:ss';
         }
+
+        // Convert formats to Tempus Dominus 6 format tokens
+        $this->td_format = self::convertToTDFormat($this->format);
+        $this->td_filter_format = self::convertToTDFormat($this->filter_format);
+        $this->td_db_format = self::convertToTDFormat($this->db_format);
     }
 
     public function getInput()
@@ -71,16 +112,10 @@ class JFormFieldCDatetime extends CFormField
         $lang       = strtolower(\Joomla\CMS\Factory::getLanguage()->getTag());
         $short_lang = substr($lang, 0, 2);
 
-        $doc->addScript(\Joomla\CMS\Uri\Uri::root(true) . '/media/com_joomcck/vendors/moment/min/moment.min.js');
-        $doc->addScript(\Joomla\CMS\Uri\Uri::root(true) . '/media/com_joomcck/vendors/moment/locale/en-gb.js');
-        if (is_file(JPATH_ROOT . '/media/com_joomcck/vendors/moment/locale/' . $lang . '.js')) {
-            $doc->addScript(\Joomla\CMS\Uri\Uri::root(true) . '/media/com_joomcck/vendors/moment/locale/' . $lang . '.js');
-        }
-        if (is_file(JPATH_ROOT . '/media/com_joomcck/vendors/moment/locale/' . $short_lang . '.js')) {
-            $doc->addScript(\Joomla\CMS\Uri\Uri::root(true) . '/media/com_joomcck/vendors/moment/locale/' . $short_lang . '.js');
-        }
-        $doc->addScript(\Joomla\CMS\Uri\Uri::root(true) . '/media/com_joomcck/vendors/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js');
-        $doc->addStyleSheet(\Joomla\CMS\Uri\Uri::root(true) . '/media/com_joomcck/vendors/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css');
+        // Tempus Dominus 6 - Date/Time Picker
+        $doc->addStyleSheet(\Joomla\CMS\Uri\Uri::root(true) . '/media/com_joomcck/vendors/tempus-dominus/css/tempus-dominus.min.css');
+        $doc->addScript(\Joomla\CMS\Uri\Uri::root(true) . '/media/com_joomcck/vendors/tempus-dominus/js/popper.min.js', [], ['type' => 'text/javascript']);
+        $doc->addScript(\Joomla\CMS\Uri\Uri::root(true) . '/media/com_joomcck/vendors/tempus-dominus/js/tempus-dominus.min.js', [], ['type' => 'text/javascript']);
 
         settype($this->value, 'array');
 
@@ -229,16 +264,10 @@ class JFormFieldCDatetime extends CFormField
         $lang       = strtolower(\Joomla\CMS\Factory::getLanguage()->getTag());
         $short_lang = substr($lang, 0, 2);
 
-        $doc->addScript(\Joomla\CMS\Uri\Uri::root(true) . '/media/com_joomcck/vendors/moment/min/moment.min.js');
-        $doc->addScript(\Joomla\CMS\Uri\Uri::root(true) . '/media/com_joomcck/vendors/moment/locale/en-gb.js');
-        if (is_file(JPATH_ROOT . '/media/com_joomcck/vendors/moment/locale/' . $lang . '.js')) {
-            $doc->addScript(\Joomla\CMS\Uri\Uri::root(true) . '/media/com_joomcck/vendors/moment/locale/' . $lang . '.js');
-        }
-        if (is_file(JPATH_ROOT . '/media/com_joomcck/vendors/moment/locale/' . $short_lang . '.js')) {
-            $doc->addScript(\Joomla\CMS\Uri\Uri::root(true) . '/media/com_joomcck/vendors/moment/locale/' . $short_lang . '.js');
-        }
-        $doc->addScript(\Joomla\CMS\Uri\Uri::root(true) . '/media/com_joomcck/vendors/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js');
-        $doc->addStyleSheet(\Joomla\CMS\Uri\Uri::root(true) . '/media/com_joomcck/vendors/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css');
+        // Tempus Dominus 6 - Date/Time Picker
+        $doc->addStyleSheet(\Joomla\CMS\Uri\Uri::root(true) . '/media/com_joomcck/vendors/tempus-dominus/css/tempus-dominus.min.css');
+        $doc->addScript(\Joomla\CMS\Uri\Uri::root(true) . '/media/com_joomcck/vendors/tempus-dominus/js/popper.min.js', [], ['type' => 'text/javascript']);
+        $doc->addScript(\Joomla\CMS\Uri\Uri::root(true) . '/media/com_joomcck/vendors/tempus-dominus/js/tempus-dominus.min.js', [], ['type' => 'text/javascript']);
 
         return $this->_display_filter($section, $module);
     }

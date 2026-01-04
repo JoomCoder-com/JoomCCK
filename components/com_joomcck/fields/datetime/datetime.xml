@@ -33,17 +33,24 @@
 
 			<fieldset name="filter2" label="FS_FILTERFIELDSPEC">
 				<field name="filter_format" type="mlist" class="form-select" condition='{"100":["params_params_filter_custom"]}' label="F_INPUTFORMAT" default="D MMMM YYYY" description="F_INPUTFORMAT_DESCR">
-					<option value="hh:mm A, dddd, d MMMM Y">12:46 AM, Tuesday, 30 December 2007</option>
+					<option value="hh:mm A, dddd, D MMMM YYYY">12:46 AM, Tuesday, 30 December 2007</option>
 					<option value="dddd, D MMMM YYYY">Tuesday, 30 December 2007</option>
 					<option value="hh:mm A, D MMMM YYYY">12:46 AM, 30 December 2007</option>
 					<option value="hh:mm A, D MMM YYYY">12:46 AM, 30 Dec 2007</option>
-					<option value="hh:mm A, MMMM YYYY">12:46 AM, 30 December</option>
+					<option value="hh:mm A, D MMMM">12:46 AM, 30 December</option>
 					<option value="D MMMM YYYY">30 December 2007</option>
-					<option value="hh:mm A, D MMM YYYY">12:46 AM, 30 Dec 2007</option>
 					<option value="D MMM YYYY">30 Dec 2007</option>
 					<option value="D MMMM">30 December</option>
 					<option value="D MMM">30 Dec</option>
 					<option value="dddd">Tuesday</option>
+					<option value="HH:mm, dddd, D MMMM YYYY">14:46, Tuesday, 30 December 2007 (24h)</option>
+					<option value="HH:mm, D MMMM YYYY">14:46, 30 December 2007 (24h)</option>
+					<option value="HH:mm, D MMM YYYY">14:46, 30 Dec 2007 (24h)</option>
+					<option value="DD/MM/YYYY HH:mm">30/12/2007 14:46 (24h)</option>
+					<option value="DD.MM.YYYY HH:mm">30.12.2007 14:46 (24h)</option>
+					<option value="YYYY-MM-DD HH:mm">2007-12-30 14:46 (24h)</option>
+					<option value="DD/MM/YYYY">30/12/2007</option>
+					<option value="DD.MM.YYYY">30.12.2007</option>
 					<option value="100">XML_OPT_CUSTOM</option>
 				</field>
 				<field name="filter_custom" type="metext" label="F_CUSTOMFORMAT" prepend="You can see possible formats &lt;a href='https://momentjs.com/docs/#/displaying/format/' target='_blank'&gt;here&lt;/a&gt;&lt;br /&gt;" description="F_CUSTOMFORMAT_DESCR" />
@@ -74,17 +81,24 @@
 				<field name="custom_input" type="text" default="" label="F_INPUTCUSTOM" description="F_INPUTCUSTOM_DESCR" />
 
 				<field name="format" type="mlist" class="form-select" condition='{"100":["params_params_custom"]}' label="F_INPUTFORMAT" default="D MMMM YYYY" description="F_INPUTFORMAT_DESCR">
-					<option value="hh:mm A, dddd, d MMMM Y">12:46 AM, Tuesday, 30 December 2007</option>
+					<option value="hh:mm A, dddd, D MMMM YYYY">12:46 AM, Tuesday, 30 December 2007</option>
 					<option value="dddd, D MMMM YYYY">Tuesday, 30 December 2007</option>
 					<option value="hh:mm A, D MMMM YYYY">12:46 AM, 30 December 2007</option>
 					<option value="hh:mm A, D MMM YYYY">12:46 AM, 30 Dec 2007</option>
-					<option value="hh:mm A, MMMM YYYY">12:46 AM, 30 December</option>
+					<option value="hh:mm A, D MMMM">12:46 AM, 30 December</option>
 					<option value="D MMMM YYYY">30 December 2007</option>
-					<option value="hh:mm A, D MMM YYYY">12:46 AM, 30 Dec 2007</option>
 					<option value="D MMM YYYY">30 Dec 2007</option>
 					<option value="D MMMM">30 December</option>
 					<option value="D MMM">30 Dec</option>
 					<option value="dddd">Tuesday</option>
+					<option value="HH:mm, dddd, D MMMM YYYY">14:46, Tuesday, 30 December 2007 (24h)</option>
+					<option value="HH:mm, D MMMM YYYY">14:46, 30 December 2007 (24h)</option>
+					<option value="HH:mm, D MMM YYYY">14:46, 30 Dec 2007 (24h)</option>
+					<option value="DD/MM/YYYY HH:mm">30/12/2007 14:46 (24h)</option>
+					<option value="DD.MM.YYYY HH:mm">30.12.2007 14:46 (24h)</option>
+					<option value="YYYY-MM-DD HH:mm">2007-12-30 14:46 (24h)</option>
+					<option value="DD/MM/YYYY">30/12/2007</option>
+					<option value="DD.MM.YYYY">30.12.2007</option>
 					<option value="100">XML_OPT_CUSTOM</option>
 				</field>
 				<field name="custom" type="metext" label="F_CUSTOMFORMAT" prepend="You can see possible formats &lt;a href='https://momentjs.com/docs/#/displaying/format/' target='_blank'&gt;here&lt;/a&gt;&lt;br /&gt;" description="F_CUSTOMFORMAT_DESCR" />
@@ -113,13 +127,20 @@
 					<option value="l, d F Y">Tuesday, 30 December 2007</option>
 					<option value="h:i A, d F Y">12:46 AM, 30 December 2007</option>
 					<option value="h:i A, d M Y">12:46 AM, 30 Dec 2007</option>
-					<option value="h:i A, F Y">12:46 AM, 30 December</option>
+					<option value="h:i A, d F">12:46 AM, 30 December</option>
 					<option value="d F Y">30 December 2007</option>
-					<option value="h:i A, d M">12:46 AM, 30 Dec</option>
 					<option value="d M Y">30 Dec 2007</option>
 					<option value="d F">30 December</option>
 					<option value="d M">30 Dec</option>
 					<option value="l">Tuesday</option>
+					<option value="H:i, l, d F Y">14:46, Tuesday, 30 December 2007 (24h)</option>
+					<option value="H:i, d F Y">14:46, 30 December 2007 (24h)</option>
+					<option value="H:i, d M Y">14:46, 30 Dec 2007 (24h)</option>
+					<option value="d/m/Y H:i">30/12/2007 14:46 (24h)</option>
+					<option value="d.m.Y H:i">30.12.2007 14:46 (24h)</option>
+					<option value="Y-m-d H:i">2007-12-30 14:46 (24h)</option>
+					<option value="d/m/Y">30/12/2007</option>
+					<option value="d.m.Y">30.12.2007</option>
 					<option value="100">XML_OPT_CUSTOM</option>
 				</field>
 				<field name="custom_out" type="metext" label="F_CUSTOMFORMAT" prepend="You can see characters list &lt;a href='http://php.net/manual/en/function.date.php' target='_blank'&gt;here&lt;/a&gt;&lt;br /&gt;" description="" />
