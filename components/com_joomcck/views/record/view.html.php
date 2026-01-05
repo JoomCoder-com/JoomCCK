@@ -255,7 +255,14 @@ class JoomcckViewRecord extends MViewBase
         $app = \Joomla\CMS\Factory::getApplication();
         $db = \Joomla\CMS\Factory::getDbo();
 
+        // Check if article is expired and user can view expired articles via show_past_records setting
+        $expire = !is_null($item->extime) ? \Joomla\CMS\Factory::getDate($item->extime)->toUnix() : null;
+        $now = \Joomla\CMS\Factory::getDate()->toUnix();
+        $isExpired = !is_null($expire) && $item->extime != '0000-00-00 00:00:00' && $now > $expire;
+        $canViewExpired = $isExpired && in_array($section->params->get('general.show_past_records'), $user->getAuthorisedViewLevels());
+
         if (
+            !$canViewExpired &&
             !in_array($item->access, $user->getAuthorisedViewLevels()) &&
             !MECAccess::allowRestricted($user, $section) &&
             !($user->get('id') == $item->user_id && $item->user_id)
