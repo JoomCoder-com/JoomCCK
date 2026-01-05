@@ -794,9 +794,15 @@ var _gaq = _gaq || [];
 				});
 			}
 		}
-		// todo: check getSelected if still works, cuz i think used by mootools not jquery of vanilla
-		if(type == 'select') {
-			selected = val.getSelected().length;
+
+		// Toggle "Add variant" button based on limit
+		var variantLink = $('#show_variant_link_' + field_id);
+		if(variantLink.length && limit > 0) {
+			if(selected >= limit) {
+				variantLink.addClass('disabled').css('pointer-events', 'none').css('opacity', '0.5');
+			} else {
+				variantLink.removeClass('disabled').css('pointer-events', '').css('opacity', '');
+			}
 		}
 
 		if(selected > limit) {
@@ -821,14 +827,6 @@ var _gaq = _gaq || [];
 					// Fallback for regular select
 					val.removeAttr('selected', '');
 				}
-			}
-			// todo: check getSelected if still works, cuz i think used by mootools not jquery of vanilla
-			else if(type == 'select') {
-				$.each(val.getSelected(), function(k, v) {
-					if(k + 1 > limit) {
-						v.selected = false;
-					}
-				});
 			}
 		}
 	};
