@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <extension version="3.0" type="plugin" group="content" method="upgrade">
-	<name>Content - Glossary</name>
+	<name>Content - JoomCCK Glossary</name>
 	<creationDate>04/04/2023</creationDate>
 	<author>JoomCoder</author>
 	<authorEmail>support@joomcoder.com</authorEmail>
@@ -8,13 +8,7 @@
 	<copyright>Copyright JoomCoder</copyright>
 	<license>License, for example GNU/GPL</license>
 	<version>##VERSION##</version>
-	<description>This plugin allow you to turn Mighty resources section
-		into glossary. In Mighty resources you create section and add articles
-		there, that will be glossary list. Then in this plugin you select that
-		section	and all words will be highlighted, linked and tooltiped. Good 
-		is you can have public glossary list on the site, and even allow other 
-		users to submit new glossary elements. Note: You need turn on 
-		glossary plugin in HTML field. Glossary works only in HTML field.
+	<description>This plugin allow you to turn JoomCCK section into glossary. In JoomCCK you create section and add articles there, that will be glossary list. Then in this plugin you select that section	and all words will be highlighted, linked and tooltiped. Good is you can have public glossary list on the site, and even allow other users to submit new glossary elements. Note: You need turn on glossary plugin in HTML field. Glossary works only in HTML field.
 	</description>
 	<files>
 		<filename plugin="glossary">glossary.php</filename>

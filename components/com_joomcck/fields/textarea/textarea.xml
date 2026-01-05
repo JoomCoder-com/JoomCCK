@@ -96,7 +96,18 @@
 			</field>
 			<field type="textarea" cols="35" rows="2" name="filter_attr"  label="F_FILTERATTRSLIST" default="" description="F_FILTERATTRSLIST_DESCR" />
 		</fieldset>
-
+		<fieldset label="FS_AUTOLINK" name="autolink">
+			<field name="autolink_tags" type="radio" class="btn-group" default="0" label="F_AUTOLINKTAGS" description="F_AUTOLINKTAGS_DESC">
+				<option value="0">JNO</option>
+				<option value="1">JYES</option>
+			</field>
+			<field name="autolink_max_per_tag" type="text" default="1" size="3" label="F_AUTOLINKMAXPERTAG" description="F_AUTOLINKMAXPERTAG_DESC" />
+			<field name="autolink_max_total" type="text" default="10" size="3" label="F_AUTOLINKMAXLINKS" description="F_AUTOLINKMAXLINKS_DESC" />
+			<field name="autolink_nofollow" type="radio" class="btn-group" default="0" label="F_AUTOLINKNOFOLLOW" description="F_AUTOLINKNOFOLLOW_DESC">
+				<option value="0">JNO</option>
+				<option value="1">JYES</option>
+			</field>
+		</fieldset>
 
 	</fields>
 

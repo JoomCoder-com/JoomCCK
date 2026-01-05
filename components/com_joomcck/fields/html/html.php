@@ -182,7 +182,94 @@ class JFormFieldCHtml extends CFormField
 			$dispatcher->triggerEvent('onContentPrepare', array('com_joomcck.record', &$row, &$this->params, $this->request->getInt('limitstart', 0)));
 			$value = $row->text;
 		}
+
+		// Auto-link tags feature (Extended version only)
+		$value = $this->applyAutoLink($value);
+
 		return $value;
+	}
+
+	/**
+	 * Apply auto-linking of tag keywords (Extended version only)
+	 *
+	 * @param string $value Content to process
+	 * @return string Processed content with tag links
+	 */
+	private function applyAutoLink($value)
+	{
+		// Check if auto-link is enabled for this field
+		if (!$this->params->get('params.autolink_tags', 0)) {
+			return $value;
+		}
+
+		// Check if AutoLinkHelper exists (Extended version only)
+		$helperPath = JPATH_SITE . '/components/com_joomcck/library/php/helpers/autolink.php';
+		if (!file_exists($helperPath)) {
+			return $value;
+		}
+
+		// Get section ID from current context
+		$sectionId = $this->request->getInt('section_id', 0);
+		if (!$sectionId) {
+			return $value;
+		}
+
+		require_once $helperPath;
+
+		// Load tags for this section
+		$tags = $this->loadTagsForAutoLink($sectionId);
+		if (empty($tags)) {
+			return $value;
+		}
+
+		// Create helper with field-specific options
+		$helper = new AutoLinkHelper([
+			'max_links_per_tag' => (int) $this->params->get('params.autolink_max_per_tag', 1),
+			'max_links_total' => (int) $this->params->get('params.autolink_max_total', 10),
+			'nofollow' => (bool) $this->params->get('params.autolink_nofollow', 0),
+		]);
+
+		return $helper->process($value, $tags, $sectionId);
+	}
+
+	/**
+	 * Load tags for auto-linking from database
+	 *
+	 * @param int $sectionId Section ID
+	 * @return array Array of tag objects
+	 */
+	private function loadTagsForAutoLink($sectionId)
+	{
+		static $tagCache = [];
+
+		if (isset($tagCache[$sectionId])) {
+			return $tagCache[$sectionId];
+		}
+
+		$db = \Joomla\CMS\Factory::getDbo();
+		$lang = \Joomla\CMS\Factory::getLanguage()->getTag();
+
+		$query = $db->getQuery(true)
+			->select('DISTINCT t.id, t.tag, t.slug, t.language')
+			->from($db->quoteName('#__js_res_tags', 't'))
+			->innerJoin($db->quoteName('#__js_res_tags_history', 'th') . ' ON th.tag_id = t.id')
+			->where($db->quoteName('th.section_id') . ' = ' . (int) $sectionId)
+			->where('(' . $db->quoteName('t.language') . ' IN (' .
+				$db->quote('*') . ', ' . $db->quote($lang) . ') OR ' .
+				$db->quoteName('t.language') . ' = ' . $db->quote('') . ')')
+			->group('t.id, t.tag, t.slug, t.language')
+			->having('COUNT(th.id) >= 1')
+			->order('LENGTH(t.tag) DESC, t.tag ASC');
+
+		$db->setQuery($query);
+
+		try {
+			$tagCache[$sectionId] = $db->loadObjectList() ?: [];
+		} catch (\Exception $e) {
+			$tagCache[$sectionId] = [];
+		}
+
+		return $tagCache[$sectionId];
 	}
 	private function _filter($value)
 	{

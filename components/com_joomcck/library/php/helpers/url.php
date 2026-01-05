@@ -357,4 +357,31 @@ class Url
 		return $url;
 	}
 
+	/**
+	 * Generate URL for tag filter page (used by auto-link feature)
+	 *
+	 * @param int    $tagId     Tag ID
+	 * @param int    $sectionId Section ID
+	 * @param string $tagSlug   Tag slug (optional, for cleaner URLs)
+	 *
+	 * @return string Routed URL
+	 */
+	static public function tagFilter($tagId, $sectionId, $tagSlug = '')
+	{
+		$section = ItemsStore::getSection((int) $sectionId);
+
+		$url = 'index.php?option=com_joomcck&task=records.filter'
+			 . '&section_id=' . $sectionId
+			 . '&filter_name[0]=filter_tag'
+			 . '&filter_val[0]=' . (int) $tagId;
+
+		// Add Itemid from section if available
+		if ($section && $section->params->get('general.category_itemid'))
+		{
+			$url .= '&Itemid=' . $section->params->get('general.category_itemid');
+		}
+
+		return \Joomla\CMS\Router\Route::_($url);
+	}
+
 }
