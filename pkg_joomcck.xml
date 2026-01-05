@@ -28,7 +28,7 @@
         <folder enable="1" type="plugin" id="content_glossary" group="content">plugins/plg_content_glossary</folder>
         <folder enable="1" type="plugin" id="content_joomcck" group="content">plugins/plg_content_joomcck</folder>
         <folder enable="1" type="plugin" id="finder_joomcck" group="finder">plugins/plg_finder_joomcck</folder>
-        <folder enable="1" type="plugin" id="search_joomcck" group="search">plugins/plg_search_joomcck</folder>
+        <folder enable="0" type="plugin" id="search_joomcck" group="search">plugins/plg_search_joomcck</folder>
 
         <!-- Install modules -->
         <file type="module" id="mod_joomcck_category" client="site">modules/mod_joomcck_category</file>
