@@ -26,7 +26,7 @@ if ($this->value && in_array($params->get('params.view_mail', 1), $this->user->g
 	{
 		$width = $this->params->get('params.qr_width', 60);
 
-		$src   = 'https://chart.apis.google.com/chart?chs=' . $width . 'x' . $width . '&cht=qr&chld=L|0&chl=' . $this->value;
+		$src   = 'https://api.qrserver.com/v1/create-qr-code/?size=' . $width . 'x' . $width . '&data=' . urlencode($this->value);
 
 		echo "<img class='qr-image' height='$width' width='$width' src='$src' alt='". Text::_('E_QRCODE')."' />";
 	}

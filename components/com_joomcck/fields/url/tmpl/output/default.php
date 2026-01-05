@@ -123,10 +123,10 @@ if($this->params->get('params.links_sort', 0))
 	<?php if($this->params->get('params.qr_code', 0)): ?>
 		<?php
 		// Secure QR code URL
-		$qrImagePath = 'https://chart.apis.google.com/chart?chs=' .
+		$qrImagePath = 'https://api.qrserver.com/v1/create-qr-code/?size=' .
 			(int)$this->params->get('params.qr_width', 80) . 'x' .
 			(int)$this->params->get('params.qr_width', 80) .
-			'&cht=qr&chld=L|0&chl=' . urlencode($url);
+			'&data=' . urlencode($url);
 		?>
 
         <img

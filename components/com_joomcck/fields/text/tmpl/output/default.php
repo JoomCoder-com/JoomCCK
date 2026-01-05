@@ -11,9 +11,9 @@ defined('_JEXEC') or die();
 
 <?php echo $this->params->get('params.prepend');?>
 
-<?php if($this->params->get('params.qr_code', 0)) : 
+<?php if($this->params->get('params.qr_code', 0)) :
     $width = $this->params->get('params.qr_width', 60); ?>
-	<img src="http://chart.apis.google.com/chart?chs=<?php echo $width;?>x<?php echo $width;?>&cht=qr&chld=L|0&chl=<?php echo urlencode(strip_tags($this->value));?>" 
+	<img src="https://api.qrserver.com/v1/create-qr-code/?size=<?php echo $width;?>x<?php echo $width;?>&data=<?php echo urlencode(strip_tags($this->value));?>"
 			title="<?php echo \Joomla\CMS\Language\Text::_('TXT_QR');?>" class="qr-image" width="<?php echo $width;?>" height="<?php echo $width;?>" align="absmiddle">
 <?php endif; ?>
 
