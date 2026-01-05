@@ -1,17 +1,56 @@
 <?xml version="1.0" encoding="utf-8"?>
-<extension version="3.0" type="plugin" group="finder" method="upgrade">
-	<name>Smart Search - Joomcck</name>
+<extension type="plugin" group="finder" method="upgrade">
+	<name>plg_finder_joomcck</name>
 	<author>JoomCoder</author>
-	<creationDate>Jan 2012</creationDate>
-	<license>http://www.gnu.org/licenses/gpl-2.0.html GNU/GPL</license>
-	<authorEmail>info@mightyextensions.com</authorEmail>
-	<authorUrl>http://www.mightyextensions.com</authorUrl>
+	<creationDate>Jan 2024</creationDate>
+	<copyright>Copyright (C) 2024 JoomCoder - All rights reserved.</copyright>
+	<license>GNU General Public License version 2 or later; see LICENSE.txt</license>
+	<authorEmail>info@joomcoder.com</authorEmail>
+	<authorUrl>https://www.joomcoder.com</authorUrl>
 	<version>##VERSION##</version>
-	<copyright>Copyright (C) 2010 JoomCoder - All rights reserved.</copyright>
-	<license>GNU General Public License version 2 or later; see	LICENSE.txt</license>
-	<description>Joomcck smart search plugin.</description>
+	<description>PLG_FINDER_JOOMCCK_XML_DESCRIPTION</description>
+	<namespace path="src">Joomla\Plugin\Finder\Joomcck</namespace>
+	<scriptfile>script.php</scriptfile>
 	<files>
-		<file plugin="joomcck">joomcck.php</file>
-    	<filename>index.html</filename>
+		<folder plugin="joomcck">services</folder>
+		<folder>src</folder>
+		<filename>script.php</filename>
+		<filename>index.html</filename>
 	</files>
+	<languages folder="administrator/language">
+		<language tag="en-GB">en-GB/plg_finder_joomcck.ini</language>
+		<language tag="en-GB">en-GB/plg_finder_joomcck.sys.ini</language>
+	</languages>
+	<config>
+		<fields name="params">
+			<fieldset name="basic">
+				<field
+					name="taxonomies"
+					type="list"
+					label="PLG_FINDER_JOOMCCK_TAXONOMIES_LABEL"
+					description="PLG_FINDER_JOOMCCK_TAXONOMIES_DESC"
+					default="type,section,category,language,author,tags"
+					multiple="true"
+				>
+					<option value="type">PLG_FINDER_JOOMCCK_TAXONOMIES_TYPE</option>
+					<option value="section">PLG_FINDER_JOOMCCK_TAXONOMIES_SECTION</option>
+					<option value="category">PLG_FINDER_JOOMCCK_TAXONOMIES_CATEGORY</option>
+					<option value="language">PLG_FINDER_JOOMCCK_TAXONOMIES_LANGUAGE</option>
+					<option value="author">PLG_FINDER_JOOMCCK_TAXONOMIES_AUTHOR</option>
+					<option value="tags">PLG_FINDER_JOOMCCK_TAXONOMIES_TAGS</option>
+				</field>
+				<field
+					name="index_custom_fields"
+					type="radio"
+					label="PLG_FINDER_JOOMCCK_INDEX_CUSTOM_FIELDS_LABEL"
+					description="PLG_FINDER_JOOMCCK_INDEX_CUSTOM_FIELDS_DESC"
+					default="1"
+					class="btn-group btn-group-yesno"
+				>
+					<option value="1">JYES</option>
+					<option value="0">JNO</option>
+				</field>
+			</fieldset>
+		</fields>
+	</config>
 </extension>
