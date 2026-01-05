@@ -72,7 +72,7 @@ class JFormFieldCMultiselect extends CFormFieldSelectable
 
 	public function validateField($value, $record, $type, $section)
 	{
-		if($this->params->get('params.total_limit'))
+		if($this->params->get('params.total_limit') && is_array($value))
 		{
 			if(count($value) > $this->params->get('params.total_limit'))
 			{
