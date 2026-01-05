@@ -72,6 +72,26 @@ class JoomcckController extends MControllerBase
 			{
 				$this->input->set('tmpl', 'component');
 			}
+
+			// Handle fullscreen toggle via URL parameter
+			if($this->input->getCmd('joomcck_fullscreen_toggle'))
+			{
+				$session = \Joomla\CMS\Factory::getSession();
+				$current = $session->get('joomcck_fullscreen', 0);
+				$session->set('joomcck_fullscreen', $current ? 0 : 1);
+
+				// Redirect to same page without toggle param (one-time redirect)
+				$uri = \Joomla\CMS\Uri\Uri::getInstance();
+				$uri->delVar('joomcck_fullscreen_toggle');
+				$app->redirect($uri->toString());
+			}
+
+			// Apply fullscreen from session (no redirect, just set input)
+			$session = \Joomla\CMS\Factory::getSession();
+			if($session->get('joomcck_fullscreen', 0))
+			{
+				$this->input->set('tmpl', 'component');
+			}
 		}
 
 		$prefix = \Joomla\CMS\Component\ComponentHelper::getParams('com_joomcck')->get('tmpl_prefix');
