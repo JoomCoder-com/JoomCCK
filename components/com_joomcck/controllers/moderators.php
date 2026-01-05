@@ -23,9 +23,11 @@ class JoomcckControllerModerators extends MControllerAdmin
         $this->view_list = 'moderators';
 	}
     
-    public function &getModel($name = 'Moderator', $prefix = 'JoomcckModel')
+    public function getModel($name = '', $prefix = '', $config = [])
 	{
-		$model = parent::getModel($name, $prefix, array('ignore_request' => true));
-		return $model;
+		$name = $name ?: 'Moderator';
+		$prefix = $prefix ?: 'JoomcckModel';
+		$config = $config ?: ['ignore_request' => true];
+		return parent::getModel($name, $prefix, $config);
 	}
 }

@@ -111,9 +111,9 @@ defined('_JEXEC') or die();
 
 	                        <?php foreach ($this->form->getFieldset($name) as $field) :   ?>
                                 <li class="list-group-item">
-                                    <input class="form-check-input me-1" id="<?php echo $field->id ?>" type="checkbox" value="<?php echo $field->value ?>" name="<?php echo $field->name ?>">
+                                    <input class="form-check-input me-1" id="<?php echo $field->id ?>" type="checkbox" value="<?php echo $field->value ?>" name="<?php echo $field->name ?>"<?php echo (!empty($this->item->params[$field->fieldname])) ? ' checked' : ''; ?>>
 
-                                    <label class="form-check-label" for="<?php echo $field->id ?>"><?php echo $field->description ? 'rel="tooltip" data-bs-original-title="'.htmlentities(\Joomla\CMS\Language\Text::_($field->description), ENT_QUOTES, 'UTF-8').'"' : NULL; ?><?php echo strip_tags($field->label); ?></label>
+                                    <label class="form-check-label" for="<?php echo $field->id ?>"<?php echo $field->description ? ' rel="tooltip" data-bs-original-title="'.htmlentities(\Joomla\CMS\Language\Text::_($field->description), ENT_QUOTES, 'UTF-8').'"' : ''; ?>><?php echo strip_tags($field->label); ?></label>
                                 </li>
 	                        <?php endforeach; ?>
                         </ul>

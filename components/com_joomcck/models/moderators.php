@@ -36,7 +36,6 @@ class JoomcckModelModerators extends MModelList
 		$query->leftJoin('#__users AS u ON m.user_id = u.id');
 		$query->select('s.name AS section');
 		$query->leftJoin('#__js_res_sections AS s ON m.section_id = s.id');
-		$query->where('m.user_id != ' . $user->get('id'));
 		// 		$query->where('cu.section_id = '.$section_id);
 
 		$search = $this->getState('filter.search', 0);

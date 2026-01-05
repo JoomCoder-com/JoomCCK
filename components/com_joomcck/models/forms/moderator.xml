@@ -2,7 +2,7 @@
 <form>
 	<field name="id" type="hidden" />
 
-	<field name="user_id" type="meuser" label="CUSER" class="form-control" />
+	<field name="user_id" type="meusermoderator" label="CUSER" class="form-control" />
 
 	<field name="section_id" type="hidden"/>
 
@@ -72,13 +72,6 @@
 
 	<field name="icon" type="filelist" directory="/components/com_joomcck/images/moderator"
 		default="" label="CICON" hide_default="1" />
-
-
-	<field id="published" name="published" type="list" label="CSTATE"
-		class="form-select" size="1" default="1">
-		<option value="1">JPUBLISHED</option>
-		<option value="0">JUNPUBLISHED</option>
-	</field>
 
 	<field name="user" type="text" label="User" class="readonly"
 		readonly="true" />
