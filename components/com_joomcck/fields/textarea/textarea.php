@@ -215,7 +215,7 @@ class JFormFieldCTextarea extends CFormField
 		}
 
 		// Check if AutoLinkHelper exists (Extended version only)
-		$helperPath = JPATH_SITE . '/components/com_joomcck/library/php/helpers/autolink.php';
+		$helperPath = JPATH_SITE . '/components/com_joomcck/extended/autolink.php';
 		if (!file_exists($helperPath)) {
 			return $value;
 		}

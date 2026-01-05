@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension type="file" method="upgrade">
+    <name>JoomCCK - Extended Features</name>
+    <author>JoomCoder</author>
+    <license>GPL GNU</license>
+    <authorEmail>support@joomcoder.com</authorEmail>
+    <authorUrl>https://www.joomcoder.com</authorUrl>
+    <creationDate>01/05/2026</creationDate>
+    <copyright>(c) 2026 JoomCoder</copyright>
+    <version>##VERSION##</version>
+    <description>JoomCCK - Extended Features (Auto-Link Tags, etc.)</description>
+    <fileset>
+        <files target="components/com_joomcck">
+            <folder>extended</folder>
+        </files>
+    </fileset>
+</extension>

@@ -51,6 +51,7 @@
 				<field type="textarea" cols="35" rows="2" name="filter_attr" label="F_FILTERATTRLIST" default="rel" description="F_FILTERATTRLIST_DESCR" />
 			</fieldset>
 			<fieldset label="FS_AUTOLINK" name="autolink">
+				<field name="autolink_extended_warning" type="extendedonly" />
 				<field name="autolink_tags" type="radio" class="btn-group" default="0" label="F_AUTOLINKTAGS" description="F_AUTOLINKTAGS_DESC">
 					<option value="0">JNO</option>
 					<option value="1">JYES</option>
