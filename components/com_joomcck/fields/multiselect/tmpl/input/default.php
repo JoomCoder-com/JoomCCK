@@ -112,7 +112,7 @@ JS;
 <p><small><?php echo \Joomla\CMS\Language\Text::sprintf("CSELECTLIMIT", $params->get('params.total_limit'));?></small></p>
 <?php endif; ?>
 
-<select onchange="Joomcck.countFieldValues(this, <?php echo $this->id;?>, <?php echo $params->get('params.total_limit');?>, 'select')" multiple="multiple"
+<select onchange="Joomcck.countFieldValues(this, <?php echo $this->id;?>, <?php echo $params->get('params.total_limit');?>, 'option')" multiple="multiple"
 name="jform[fields][<?php echo $this->id;?>][]" class="<?php echo $selectClasses ?>" id="form_field_list_<?php echo $this->id;?>" <?php echo $required . $style . $size;?>>
 	<?php echo implode("\n", $options);?>
 </select>
