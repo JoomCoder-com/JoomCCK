@@ -7,7 +7,14 @@
 
 .input-append img { vertical-align: middle }
 
+/* Hide dropdown by default in management views */
 .has-context .btn-group {
+    display: none;
     margin-bottom: -3px;
     margin-top: -3px;
+}
+
+/* Show dropdown on row hover */
+tr:hover .has-context .btn-group {
+    display: inline-flex;
 }

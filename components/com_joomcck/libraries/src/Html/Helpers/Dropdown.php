@@ -74,7 +74,7 @@ class Dropdown
             return;
         }
 
-        static::$dropDownList = '<div class="btn-group">
+        static::$dropDownList = '<div class="btn-group ms-2">
             <a href="#" data-bs-toggle="dropdown" class="dropdown-toggle btn btn-secondary btn-sm">
                 <span class="caret"></span>
             </a>
