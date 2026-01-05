@@ -58,6 +58,30 @@ class JoomcckModelModerator extends MModelAdmin
 		{
 			$row = parent::getItem($id);
 
+			// Convert params to array
+			if (isset($row->params))
+			{
+				$paramsData = $row->params;
+
+				// Handle case where params is array with JSON string at index 0
+				if (is_array($paramsData) && isset($paramsData[0]) && is_string($paramsData[0]))
+				{
+					$paramsData = $paramsData[0];
+				}
+
+				// Convert JSON string to array
+				if (is_string($paramsData))
+				{
+					$registry = new \Joomla\Registry\Registry;
+					$registry->loadString($paramsData);
+					$row->params = $registry->toArray();
+				}
+				elseif (!is_array($paramsData))
+				{
+					$row->params = [];
+				}
+			}
+
 			$row->allow               = isset($row->params['allow']) ? $row->params['allow'] : NULL;
 			$row->category_limit_mode = isset($row->params['category_limit_mode']) ? $row->params['category_limit_mode'] : NULL;
 			$row->category            = isset($row->params['category']) ? $row->params['category'] : array();

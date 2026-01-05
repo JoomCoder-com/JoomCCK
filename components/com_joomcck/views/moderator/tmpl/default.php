@@ -109,11 +109,15 @@ defined('_JEXEC') or die();
 
                         <ul class="list-group">
 
-	                        <?php foreach ($this->form->getFieldset($name) as $field) :   ?>
+	                        <?php foreach ($this->form->getFieldset($name) as $field) :
+								$fieldName = $field->fieldname;
+								$isChecked = isset($this->item->params[$fieldName]) && $this->item->params[$fieldName] == '1';
+							?>
                                 <li class="list-group-item">
-                                    <input class="form-check-input me-1" id="<?php echo $field->id ?>" type="checkbox" value="<?php echo $field->value ?>" name="<?php echo $field->name ?>"<?php echo (!empty($this->item->params[$field->fieldname])) ? ' checked' : ''; ?>>
-
-                                    <label class="form-check-label" for="<?php echo $field->id ?>"<?php echo $field->description ? ' rel="tooltip" data-bs-original-title="'.htmlentities(\Joomla\CMS\Language\Text::_($field->description), ENT_QUOTES, 'UTF-8').'"' : ''; ?>><?php echo strip_tags($field->label); ?></label>
+									<div class="form-check form-switch">
+										<input class="form-check-input" type="checkbox" role="switch" id="<?php echo $field->id ?>" value="1" name="<?php echo $field->name ?>"<?php echo $isChecked ? ' checked' : ''; ?>>
+										<label class="form-check-label" for="<?php echo $field->id ?>"<?php echo $field->description ? ' rel="tooltip" data-bs-original-title="'.htmlentities(\Joomla\CMS\Language\Text::_($field->description), ENT_QUOTES, 'UTF-8').'"' : ''; ?>><?php echo strip_tags($field->label); ?></label>
+									</div>
                                 </li>
 	                        <?php endforeach; ?>
                         </ul>
