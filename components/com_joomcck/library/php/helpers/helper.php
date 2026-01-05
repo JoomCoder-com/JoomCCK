@@ -24,7 +24,9 @@ class MapHelper
 		$map_key = \Joomla\CMS\Component\ComponentHelper::getParams('com_joomcck')->get('map_key');
 		list($lang, $region) = explode('-', \Joomla\CMS\Factory::getLanguage()->getTag());
 
-		\Joomla\CMS\Factory::getDocument()->addScript('//maps.googleapis.com/maps/api/js?language=' . $lang . '&region=' . $region . '&key=' . $map_key . '&sensor=true&libraries=weather,panoramio,visualization,places');
+		// Note: weather and panoramio libraries were removed by Google (2014/2016)
+		// Note: sensor parameter is deprecated
+		\Joomla\CMS\Factory::getDocument()->addScript('//maps.googleapis.com/maps/api/js?language=' . $lang . '&region=' . $region . '&key=' . $map_key . '&libraries=visualization,places');
 
 		$loaded = 1;
 	}
