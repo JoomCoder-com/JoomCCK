@@ -20,6 +20,9 @@ $wa->useScript('keepalive')
 // required css file fix issues of UI/UX
 \Joomla\CMS\Factory::getDocument()->addStyleSheet(\Joomla\CMS\Uri\Uri::root().'/media/com_joomcck/css/joomcck.css');
 
+// Extended version notice for extended-only fieldsets
+require_once JPATH_SITE . '/components/com_joomcck/library/php/helpers/extended.php';
+MExtendedHelper::renderNotice();
 ?>
 <script type="text/javascript">
 	
