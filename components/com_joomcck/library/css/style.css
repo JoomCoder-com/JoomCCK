@@ -12,6 +12,12 @@
     display: none;
     margin-bottom: -3px;
     margin-top: -3px;
+    margin-left: 5px;
+}
+
+
+body.view-records .has-context .btn-group{
+    margin-left: 0px;
 }
 
 /* Show dropdown on row hover */
