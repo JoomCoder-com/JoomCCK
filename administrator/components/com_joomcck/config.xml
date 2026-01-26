@@ -37,6 +37,10 @@
 			<option value="1">JYES</option>
 			<option value="0">JNO</option>
 		</field>
+		<field name="ui_system" type="list" default="legacy" label="XML_FIELD_LABEL_CNF_UI_SYSTEM" description="XML_FIELD_DESCR_CNF_UI_SYSTEM">
+			<option value="legacy">XML_OPT_UI_LEGACY</option>
+			<option value="modern">XML_OPT_UI_MODERN</option>
+		</field>
 	</fieldset>
 
 	<fieldset name="users" label="XML_FSETLBL_CNF_USERS">

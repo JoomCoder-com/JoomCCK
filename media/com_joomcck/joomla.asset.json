@@ -24,6 +24,45 @@
       "name": "com_joomcck.responsive-video",
       "type": "style",
       "uri": "com_joomcck/responsive-video.css"
+    },
+    {
+      "name": "com_joomcck.modern-css",
+      "type": "style",
+      "uri": "com_joomcck/css/modern/tailwind.css",
+      "version": "4.1.0"
+    },
+    {
+      "name": "com_joomcck.vue",
+      "type": "script",
+      "uri": "com_joomcck/js/vue/lib/vue.global.prod.js",
+      "version": "3.5.26",
+      "attributes": {
+        "defer": true
+      }
+    },
+    {
+      "name": "com_joomcck.vue-core",
+      "type": "script",
+      "uri": "com_joomcck/js/vue/joomcck-vue.js",
+      "dependencies": ["com_joomcck.vue", "jquery"]
+    },
+    {
+      "name": "com_joomcck.vue-validation-rules",
+      "type": "script",
+      "uri": "com_joomcck/js/vue/mixins/validation-rules.js",
+      "dependencies": ["com_joomcck.vue-core"]
+    },
+    {
+      "name": "com_joomcck.form-validator",
+      "type": "script",
+      "uri": "com_joomcck/js/vue/components/form-validator.js",
+      "dependencies": ["com_joomcck.vue-validation-rules"]
+    },
+    {
+      "name": "com_joomcck.jquery-bridge",
+      "type": "script",
+      "uri": "com_joomcck/js/vue/bridges/jquery-bridge.js",
+      "dependencies": ["com_joomcck.form-validator"]
     }
   ]
 }
