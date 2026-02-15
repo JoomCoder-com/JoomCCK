@@ -18,17 +18,29 @@ class JoomcckControllerTools extends MControllerForm
 	public function __construct($config = array())
 	{
 		parent::__construct($config);
-		
+
 		if(!$this->input)
 		{
 			$this->input = \Joomla\CMS\Factory::getApplication()->input;
+		}
+
+		// Security: require authenticated admin for all tool operations
+		$user = \Joomla\CMS\Factory::getApplication()->getIdentity();
+		if (!$user->get('id'))
+		{
+			throw new \Exception(\Joomla\CMS\Language\Text::_('JGLOBAL_YOU_MUST_LOGIN_FIRST'), 403);
+		}
+		if (!MECAccess::isAdmin())
+		{
+			throw new \Exception(\Joomla\CMS\Language\Text::_('JERROR_ALERTNOAUTHOR'), 403);
 		}
 	}
 
 	public function save($key = NULL, $urlVar = NULL)
 	{
+		\Joomla\CMS\Session\Session::checkToken('request') or jexit(\Joomla\CMS\Language\Text::_('JINVALID_TOKEN'));
 
-		$name = $this->input->get('name');
+		$name = preg_replace('/[^a-zA-Z0-9_]/', '', $this->input->getCmd('name'));
 		$uri  = \Joomla\CMS\Uri\Uri::getInstance();
 
 		$params = new \Joomla\Registry\Registry('');

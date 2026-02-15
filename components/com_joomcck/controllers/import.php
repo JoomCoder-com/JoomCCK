@@ -24,11 +24,24 @@ class JoomcckControllerImport extends MControllerAdmin
 		{
 			$this->input = \Joomla\CMS\Factory::getApplication()->input;
 		}
+
+		// Security: require authenticated admin for all import operations
+		$user = \Joomla\CMS\Factory::getApplication()->getIdentity();
+		if (!$user->get('id'))
+		{
+			throw new \Exception(\Joomla\CMS\Language\Text::_('JGLOBAL_YOU_MUST_LOGIN_FIRST'), 403);
+		}
+		if (!MECAccess::isAdmin())
+		{
+			throw new \Exception(\Joomla\CMS\Language\Text::_('JERROR_ALERTNOAUTHOR'), 403);
+		}
 	}
 
 
 	public function import()
 	{
+		\Joomla\CMS\Session\Session::checkToken('request') or jexit(\Joomla\CMS\Language\Text::_('JINVALID_TOKEN'));
+
 		$user   = \Joomla\CMS\Factory::getApplication()->getIdentity();
 		$app    = \Joomla\CMS\Factory::getApplication();
 
@@ -367,6 +380,8 @@ class JoomcckControllerImport extends MControllerAdmin
 
 	public function analize()
 	{
+		\Joomla\CMS\Session\Session::checkToken('request') or jexit(\Joomla\CMS\Language\Text::_('JINVALID_TOKEN'));
+
 		$this->key = $this->input->get('json');
 		$file      = $this->input->getString('file');
 
@@ -593,6 +608,8 @@ class JoomcckControllerImport extends MControllerAdmin
 
 	public function upload()
 	{
+		\Joomla\CMS\Session\Session::checkToken('request') or jexit(\Joomla\CMS\Language\Text::_('JINVALID_TOKEN'));
+
 		require_once JPATH_ROOT . '/components/com_joomcck/library/php/UploadHandler.php';
 
 		$options = array(
@@ -634,6 +651,8 @@ class JoomcckControllerImport extends MControllerAdmin
 
 	public function preview()
 	{
+		\Joomla\CMS\Session\Session::checkToken('request') or jexit(\Joomla\CMS\Language\Text::_('JINVALID_TOKEN'));
+
 		$user   = \Joomla\CMS\Factory::getApplication()->getIdentity();
 		$app    = \Joomla\CMS\Factory::getApplication();
 
