@@ -1,0 +1,14 @@
+{
+  "name": "joomcck-modern-css",
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "build": "npx @tailwindcss/cli -i app.css -o ../modern-daisyui.css --minify",
+    "dev": "npx @tailwindcss/cli -i app.css -o ../modern-daisyui.css --watch"
+  },
+  "devDependencies": {
+    "@tailwindcss/cli": "^4.1.18",
+    "daisyui": "^5.5.18",
+    "tailwindcss": "^4.1.18"
+  }
+}
