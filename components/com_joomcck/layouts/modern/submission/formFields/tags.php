@@ -29,7 +29,7 @@ if (
 }
 ?>
 
-<div class="jcck-form-group mb-4 p-3 rounded transition-colors hover:bg-gray-50"
+<div class="jcck-form-group mb-4 p-3 rounded transition-colors hover:bg-base-200"
      data-field-name="tags"
      data-field-type="tags"
      data-required="false">

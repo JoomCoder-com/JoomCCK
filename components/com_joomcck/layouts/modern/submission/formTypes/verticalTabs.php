@@ -3,7 +3,8 @@
  * Joomcck by joomcoder
  * Modern UI - Vertical Tabs Form Type Layout
  *
- * Vue.js + Tailwind CSS version of the vertical tabs form layout.
+ * DaisyUI + Tailwind CSS version of the vertical tabs form layout.
+ * Uses JS for tab switching since DaisyUI has no vertical tabs component.
  *
  * @copyright Copyright (C) 2020 joomcoder (https://www.joomcoder.com). All rights reserved.
  * @license   GNU/GPL http://www.gnu.org/copyleft/gpl.html
@@ -55,7 +56,7 @@ if (count($current->core_fields)) {
                 <?php foreach ($tabs as $index => $tab): ?>
                     <button type="button"
                             class="jcck-vtab-btn w-full flex items-center gap-2 px-4 py-3 rounded-lg text-left text-sm font-medium transition-colors
-                                   <?php echo $index === 0 ? 'bg-joomcck-primary text-white shadow-sm' : 'text-gray-700 hover:bg-gray-100'; ?>"
+                                   <?php echo $index === 0 ? 'bg-primary text-primary-content shadow-sm' : 'text-base-content hover:bg-base-200'; ?>"
                             data-vtab-target="#vtab-<?php echo $tab['id']; ?>"
                             role="tab"
                             aria-selected="<?php echo $index === 0 ? 'true' : 'false'; ?>">
@@ -69,7 +70,7 @@ if (count($current->core_fields)) {
         </div>
 
         <?php // Tab Content ?>
-        <div class="flex-grow min-w-0 border-l border-gray-200 pl-6">
+        <div class="flex-grow min-w-0 border-l border-base-300 pl-6">
 
             <?php // Main Fields Panel ?>
             <div id="vtab-main-tab" class="jcck-vtab-panel" role="tabpanel">
@@ -81,7 +82,7 @@ if (count($current->core_fields)) {
                 <?php foreach ($current->sorted_fields as $group_id => $fields): ?>
                     <div id="vtab-tab-<?php echo $group_id; ?>" class="jcck-vtab-panel hidden" role="tabpanel">
                         <?php if (!empty($current->field_groups[$group_id]['descr'])): ?>
-                            <div class="mb-4 p-3 bg-blue-50 text-blue-700 rounded text-sm">
+                            <div class="jcck-alert jcck-alert-info mb-4">
                                 <?php echo $current->field_groups[$group_id]['descr']; ?>
                             </div>
                         <?php endif; ?>
@@ -137,8 +138,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
             // Deactivate all
             tabButtons.forEach(function(b) {
-                b.classList.remove('bg-joomcck-primary', 'text-white', 'shadow-sm');
-                b.classList.add('text-gray-700', 'hover:bg-gray-100');
+                b.classList.remove('bg-primary', 'text-primary-content', 'shadow-sm');
+                b.classList.add('text-base-content', 'hover:bg-base-200');
                 b.setAttribute('aria-selected', 'false');
             });
 
@@ -147,8 +148,8 @@ document.addEventListener('DOMContentLoaded', function() {
             });
 
             // Activate clicked
-            this.classList.add('bg-joomcck-primary', 'text-white', 'shadow-sm');
-            this.classList.remove('text-gray-700', 'hover:bg-gray-100');
+            this.classList.add('bg-primary', 'text-primary-content', 'shadow-sm');
+            this.classList.remove('text-base-content', 'hover:bg-base-200');
             this.setAttribute('aria-selected', 'true');
 
             if (targetPanel) {

@@ -44,9 +44,9 @@ $validationRules = $validationRules ?? [];
     padding: 0.25rem 0;
 }
 
-.jcck-modern-form-wrapper input.border-red-500,
-.jcck-modern-form-wrapper select.border-red-500,
-.jcck-modern-form-wrapper textarea.border-red-500 {
+.jcck-modern-form-wrapper input.border-error,
+.jcck-modern-form-wrapper select.border-error,
+.jcck-modern-form-wrapper textarea.border-error {
     animation: jcck-pulse-error 0.5s ease-in-out;
 }
 
@@ -62,9 +62,9 @@ $validationRules = $validationRules ?? [];
 }
 
 /* Success state */
-.jcck-modern-form-wrapper input.border-green-500,
-.jcck-modern-form-wrapper select.border-green-500,
-.jcck-modern-form-wrapper textarea.border-green-500 {
+.jcck-modern-form-wrapper input.border-success,
+.jcck-modern-form-wrapper select.border-success,
+.jcck-modern-form-wrapper textarea.border-success {
     animation: jcck-pulse-success 0.3s ease-in-out;
 }
 

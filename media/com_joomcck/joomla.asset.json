@@ -28,7 +28,7 @@
     {
       "name": "com_joomcck.modern-css",
       "type": "style",
-      "uri": "com_joomcck/css/modern-daisyui.css",
+      "uri": "com_joomcck/modern-daisyui.css",
       "version": "4.1.0"
     },
     {

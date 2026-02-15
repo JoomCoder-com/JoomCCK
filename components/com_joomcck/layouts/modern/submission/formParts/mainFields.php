@@ -19,7 +19,7 @@ extract($displayData);
 
 <?php // Main fields post description ?>
 <?php if ($current->tmpl_params->get('tmpl_params.tab_main_descr')): ?>
-    <div class="mb-4 p-4 bg-blue-50 border border-blue-200 rounded-lg text-blue-800">
+    <div class="jcck-alert jcck-alert-info mb-4">
         <?php echo $current->tmpl_params->get('tmpl_params.tab_main_descr'); ?>
     </div>
 <?php endif; ?>

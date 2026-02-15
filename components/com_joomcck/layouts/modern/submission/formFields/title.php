@@ -17,7 +17,7 @@ extract($displayData);
 ?>
 
 <?php if ($current->type->params->get('properties.item_title', 1) == 1): ?>
-    <div class="jcck-form-group mb-4 p-3 rounded transition-colors hover:bg-gray-50"
+    <div class="jcck-form-group mb-4 p-3 rounded transition-colors hover:bg-base-200"
          data-field-name="title"
          data-field-type="text"
          data-required="true">
@@ -35,7 +35,7 @@ extract($displayData);
         </label>
 
         <div class="mt-2">
-            <div id="field-alert-title" class="jcck-alert-error mb-2 field-error-message" style="display:none"></div>
+            <div id="field-alert-title" class="jcck-alert jcck-alert-error mb-2 field-error-message" style="display:none"></div>
             <?php echo $current->form->getInput('title'); ?>
         </div>
 

@@ -26,7 +26,7 @@ $containerClasses = [
     'p-3',
     'rounded',
     'transition-colors',
-    'hover:bg-gray-50',
+    'hover:bg-base-200',
     'field-' . $field->id,
     $field->fieldclass
 ];
@@ -64,7 +64,7 @@ foreach ($dataAttributes as $key => $value) {
                 <?php if (!$field->params->get('core.label_icon_type', 0) && !empty($field->params->get('core.icon', ''))): ?>
                     <?php echo HTMLFormatHelper::icon($field->params->get('core.icon')); ?>
                 <?php elseif (!empty($field->params->get('core.label_icon_class', ''))): ?>
-                    <i class="<?php echo $field->params->get('core.label_icon_class') ?> text-gray-500"></i>
+                    <i class="<?php echo $field->params->get('core.label_icon_class') ?> text-base-content/60"></i>
                 <?php endif; ?>
             <?php endif; ?>
 
@@ -82,7 +82,7 @@ foreach ($dataAttributes as $key => $value) {
 
             <?php // Help tooltip ?>
             <?php if ($field->description): ?>
-                <span class="text-gray-400 hover:text-info cursor-help transition-colors"
+                <span class="text-base-content/40 hover:text-info cursor-help transition-colors"
                       rel="tooltip"
                       title="<?php echo htmlspecialchars(($field->translateDescription ? Text::_($field->description) : $field->description), ENT_COMPAT, 'UTF-8'); ?>">
                     <i class="fas fa-question-circle"></i>
@@ -100,7 +100,7 @@ foreach ($dataAttributes as $key => $value) {
 
         <?php // Error message container (hidden by default, shown by Vue) ?>
         <div id="field-alert-<?php echo $field->id ?>"
-             class="jcck-alert-error mb-2 field-error-message"
+             class="jcck-alert jcck-alert-error mb-2 field-error-message"
              style="display: none;">
         </div>
 

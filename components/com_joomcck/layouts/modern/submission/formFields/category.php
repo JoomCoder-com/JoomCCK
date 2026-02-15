@@ -17,7 +17,7 @@ extract($displayData);
 ?>
 
 <?php if (in_array($current->params->get('submission.allow_category'), $current->user->getAuthorisedViewLevels()) && $current->section->categories): ?>
-    <div class="jcck-form-group mb-4 p-3 rounded transition-colors hover:bg-gray-50"
+    <div class="jcck-form-group mb-4 p-3 rounded transition-colors hover:bg-base-200"
          data-field-name="category"
          data-field-type="category"
          data-required="<?php echo (!$current->type->params->get('submission.first_category', 0) && in_array($current->type->params->get('submission.allow_category', 1), $current->user->getAuthorisedViewLevels())) ? 'true' : 'false'; ?>">
@@ -39,10 +39,10 @@ extract($displayData);
         <?php endif; ?>
 
         <div class="mt-2">
-            <div id="field-alert-category" class="jcck-alert-error mb-2 field-error-message" style="display:none"></div>
+            <div id="field-alert-category" class="jcck-alert jcck-alert-error mb-2 field-error-message" style="display:none"></div>
 
             <?php if (!empty($current->allow_multi_msg)): ?>
-                <div class="jcck-alert-warning mb-3">
+                <div class="jcck-alert jcck-alert-warning mb-3">
                     <?php echo Text::_($current->type->params->get('emerald.type_multicat_subscription_msg')); ?>
                     <a href="<?php echo EmeraldApi::getLink('list', true, $current->type->params->get('emerald.type_multicat_subscription')); ?>" class="font-medium underline">
                         <?php echo Text::_('CSUBSCRIBENOW'); ?>
@@ -56,7 +56,7 @@ extract($displayData);
     </div>
 
 <?php elseif (!empty($current->category->id)): ?>
-    <div class="jcck-form-group mb-4 p-3 rounded bg-gray-50"
+    <div class="jcck-form-group mb-4 p-3 rounded bg-base-200"
          data-field-name="category"
          data-field-type="category-readonly">
 
@@ -68,8 +68,8 @@ extract($displayData);
             <span><?php echo Text::_($current->tmpl_params->get('tmpl_core.form_label_category', 'Category')); ?></span>
         </label>
 
-        <div class="mt-2 text-gray-700">
-            <div id="field-alert-category" class="jcck-alert-error mb-2 field-error-message" style="display:none"></div>
+        <div class="mt-2 text-base-content">
+            <div id="field-alert-category" class="jcck-alert jcck-alert-error mb-2 field-error-message" style="display:none"></div>
             <span class="font-medium"><?php echo $current->section->name; ?></span>
             <?php echo $current->category->crumbs; ?>
         </div>

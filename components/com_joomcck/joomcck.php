@@ -8,6 +8,7 @@
  */
 
 use Joomcck\Assets\Webassets\Webassets;
+use Joomcck\Ui\Helpers\UiSystemHelper;
 
 defined('_JEXEC') or die();
 
@@ -16,6 +17,9 @@ require_once __DIR__ . '/libraries/vendor/autoload.php';
 
 // init webassets
 Webassets::init();
+
+// Load Modern UI assets (DaisyUI + Tailwind) globally when enabled
+UiSystemHelper::loadModernAssets();
 
 // load JoomCCK API (will be replaced in future with Joomla API integration
 require_once __DIR__ . '/api.php';

@@ -3,7 +3,7 @@
  * Joomcck by joomcoder
  * Modern UI - Fieldsets Form Type Layout
  *
- * Vue.js + Tailwind CSS version of the fieldsets form layout.
+ * DaisyUI + Tailwind CSS version of the fieldsets form layout.
  *
  * @copyright Copyright (C) 2020 joomcoder (https://www.joomcoder.com). All rights reserved.
  * @license   GNU/GPL http://www.gnu.org/copyleft/gpl.html
@@ -22,9 +22,9 @@ $k = 0;
 <div id="joomcck-submission-form" class="jcck-form-fieldsets space-y-6">
 
     <?php // Main Fields Fieldset ?>
-    <fieldset class="border border-gray-300 rounded-lg p-4">
-        <legend class="px-3 text-lg font-semibold text-gray-900 flex items-center gap-2">
-            <i class="fas fa-edit text-joomcck-primary"></i>
+    <fieldset class="jcck-fieldset bg-base-200 border-base-300 rounded-lg border p-4">
+        <legend class="jcck-fieldset-legend flex items-center gap-2">
+            <i class="fas fa-edit text-primary"></i>
             <?php echo Text::_($current->tmpl_params->get('tmpl_params.tab_main', 'Main')); ?>
         </legend>
         <?php echo Layout::render('core.submission.formParts.mainFields', ['current' => $current, 'k' => $k]); ?>
@@ -33,16 +33,16 @@ $k = 0;
     <?php // Grouped Fields Fieldsets ?>
     <?php if (isset($current->sorted_fields)): ?>
         <?php foreach ($current->sorted_fields as $group_id => $fields): ?>
-            <fieldset class="border border-gray-300 rounded-lg p-4">
-                <legend class="px-3 text-lg font-semibold text-gray-900 flex items-center gap-2">
+            <fieldset class="jcck-fieldset bg-base-200 border-base-300 rounded-lg border p-4">
+                <legend class="jcck-fieldset-legend flex items-center gap-2">
                     <?php if (!empty($current->field_groups[$group_id]['icon'])): ?>
-                        <i class="<?php echo $current->field_groups[$group_id]['icon']; ?> text-joomcck-primary"></i>
+                        <i class="<?php echo $current->field_groups[$group_id]['icon']; ?> text-primary"></i>
                     <?php endif; ?>
                     <?php echo $current->field_groups[$group_id]['name']; ?>
                 </legend>
 
                 <?php if (!empty($current->field_groups[$group_id]['descr'])): ?>
-                    <div class="mb-4 p-3 bg-blue-50 text-blue-700 rounded text-sm">
+                    <div class="jcck-alert jcck-alert-info mb-4">
                         <?php echo $current->field_groups[$group_id]['descr']; ?>
                     </div>
                 <?php endif; ?>
@@ -58,9 +58,9 @@ $k = 0;
 
     <?php // Metadata Fieldset ?>
     <?php if (count($current->meta)): ?>
-        <fieldset class="border border-gray-300 rounded-lg p-4">
-            <legend class="px-3 text-lg font-semibold text-gray-900 flex items-center gap-2">
-                <i class="fas fa-tags text-joomcck-secondary"></i>
+        <fieldset class="jcck-fieldset bg-base-200 border-base-300 rounded-lg border p-4">
+            <legend class="jcck-fieldset-legend flex items-center gap-2">
+                <i class="fas fa-tags text-secondary"></i>
                 <?php echo Text::_('CMETADATA'); ?>
             </legend>
             <?php echo Layout::render('core.submission.formParts.metaFields', ['current' => $current, 'k' => $k]); ?>
@@ -69,9 +69,9 @@ $k = 0;
 
     <?php // Admin Fields Fieldset ?>
     <?php if (count($current->core_admin_fields)): ?>
-        <fieldset class="border border-amber-300 rounded-lg p-4 bg-amber-50/30">
-            <legend class="px-3 text-lg font-semibold text-amber-800 flex items-center gap-2">
-                <i class="fas fa-user-shield text-amber-600"></i>
+        <fieldset class="jcck-fieldset border-warning bg-warning/10 rounded-lg border p-4">
+            <legend class="jcck-fieldset-legend flex items-center gap-2 text-warning">
+                <i class="fas fa-user-shield text-warning"></i>
                 <?php echo Text::_('CSPECIALFIELD'); ?>
             </legend>
             <?php echo Layout::render('core.submission.formParts.adminFields', ['current' => $current, 'k' => $k]); ?>
@@ -80,9 +80,9 @@ $k = 0;
 
     <?php // Core Fields Fieldset ?>
     <?php if (count($current->core_fields)): ?>
-        <fieldset class="border border-gray-300 rounded-lg p-4">
-            <legend class="px-3 text-lg font-semibold text-gray-900 flex items-center gap-2">
-                <i class="fas fa-cog text-joomcck-secondary"></i>
+        <fieldset class="jcck-fieldset bg-base-200 border-base-300 rounded-lg border p-4">
+            <legend class="jcck-fieldset-legend flex items-center gap-2">
+                <i class="fas fa-cog text-secondary"></i>
                 <?php echo Text::_('CCOREFIELDS'); ?>
             </legend>
             <?php echo Layout::render('core.submission.formParts.coreFields', ['current' => $current, 'k' => $k]); ?>
