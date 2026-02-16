@@ -1,0 +1,13 @@
+@import "tailwindcss";
+
+/* Scan JoomCCK template files for class usage */
+@source "../components/com_joomcck/layouts/modern/**/*.php";
+@source "../components/com_joomcck/views/**/*.php";
+@source "../modules/**/*.php";
+@source "../media/com_joomcck/js/vue/**/*.js";
+
+@plugin "daisyui" {
+  prefix: jcck-;
+  themes: light --default, dark --prefersdark;
+  logs: true;
+}
