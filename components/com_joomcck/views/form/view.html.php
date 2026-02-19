@@ -175,10 +175,10 @@ class JoomcckViewForm extends MViewBase
 
                     $query->select("COUNT(id)");
                     $query->from("#__js_res_record");
-                    $query->where("section_id = '{$section->id}'");
-                    $query->where("type_id = '{$this->type->id}'");
-                    $query->where("user_id = '{$user->id}'");
-                    $query->where("parent_id = '{$parent_id}'");
+                    $query->where("section_id = " . (int)$section->id);
+                    $query->where("type_id = " . (int)$this->type->id);
+                    $query->where("user_id = " . (int)$user->id);
+                    $query->where("parent_id = " . (int)$parent_id);
                     $query->where("parent = 'com_joomcck'");
 
                     $db->setQuery($query);
@@ -192,10 +192,10 @@ class JoomcckViewForm extends MViewBase
                             $query = $db->getQuery(true);
                             $query->select("id");
                             $query->from("#__js_res_record");
-                            $query->where("section_id = '{$section->id}'");
-                            $query->where("type_id = '{$this->type->id}'");
-                            $query->where("user_id = '{$user->id}'");
-                            $query->where("parent_id = '{$parent_id}'");
+                            $query->where("section_id = " . (int)$section->id);
+                            $query->where("type_id = " . (int)$this->type->id);
+                            $query->where("user_id = " . (int)$user->id);
+                            $query->where("parent_id = " . (int)$parent_id);
                             $query->where("parent = 'com_joomcck'");
 
                             $db->setQuery($query);

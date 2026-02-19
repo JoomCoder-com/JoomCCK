@@ -818,7 +818,7 @@ class JoomcckModelCat extends MModelAdmin
 			$db = \Joomla\CMS\Factory::getDbo();
 			foreach($pks AS $id)
 			{
-				$db->setQuery("UPDATE `#__js_res_record_category` SET published = '{$value}' WHERE catid = {$id}");
+				$db->setQuery("UPDATE `#__js_res_record_category` SET published = " . (int)$value . " WHERE catid = " . (int)$id);
 				$db->execute();
 			}
 		}

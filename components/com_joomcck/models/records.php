@@ -292,7 +292,7 @@ class JoomcckModelRecords extends MModelList
 			}
 			elseif($field_orders)
 			{
-				$query->select("(SELECT `field_value` FROM #__js_res_record_values WHERE record_id = r.id AND field_key = '{$field_orders[1]}' LIMIT 1) AS field_value");
+				$query->select("(SELECT `field_value` FROM #__js_res_record_values WHERE record_id = r.id AND field_key = " . $db->quote($field_orders[1]) . " LIMIT 1) AS field_value");
 				if($field_orders[2] == 'digits')
 				{
 					$query->order("field_value + 0 " . $orderDirn);
@@ -528,13 +528,18 @@ class JoomcckModelRecords extends MModelList
 
 		if($cat)
 		{
-			$cat_sql = 'SELECT c.id FROM `#__js_res_categories` AS c WHERE c.id IN (' . $cat . ')
+			// Validate cat as comma-separated integers
+			$cat_ids = array_map('intval', explode(',', $cat));
+			$cat_ids = array_filter($cat_ids);
+			$cat_safe = implode(',', $cat_ids);
+
+			$cat_sql = 'SELECT c.id FROM `#__js_res_categories` AS c WHERE c.id IN (' . $cat_safe . ')
 				AND c.access IN (' . implode(',', $user->getAuthorisedViewLevels()) . ') AND c.published = 1';
 
 			if($this->section->params->get('general.records_mode'))
 			{
-				settype($cat, 'integer');
-				$sql = "SELECT lft, rgt FROM `#__js_res_categories` WHERE id = {$cat}";
+				$cat = (int)$cat;
+				$sql = "SELECT lft, rgt FROM `#__js_res_categories` WHERE id = " . $cat;
 				$db->setQuery($sql);
 				$res = $db->loadObject();
 
@@ -545,7 +550,7 @@ class JoomcckModelRecords extends MModelList
 
 				$cat_sql = "SELECT id FROM `#__js_res_categories`
 					WHERE lft >= " . (int)$res->lft . " AND rgt <= " . (int)$res->rgt . "
-					AND section_id = {$this->section->id}
+					AND section_id = " . (int)$this->section->id . "
 					AND published = 1
 					AND access IN (" . implode(',', $user->getAuthorisedViewLevels()) . ")";
 			}
@@ -712,7 +717,7 @@ class JoomcckModelRecords extends MModelList
 			{
 				$parent_id = $app->input->getInt('parent_id');
 				$parent    = $app->input->get('parent', 'com_joomcck');
-				$access[]  = "r.access = 3 AND r.parent_id = {$parent_id} AND r.parent = '{$parent}'";
+				$access[]  = "r.access = 3 AND r.parent_id = " . (int)$parent_id . " AND r.parent = " . $db->quote($parent);
 			}
 
 
@@ -756,8 +761,8 @@ class JoomcckModelRecords extends MModelList
 		{
 			$parent_id = $app->input->getInt('parent_id', 0);
 			$parent    = $app->input->get('parent', 'com_joomcck');
-			$query->where("r.parent_id = {$parent_id}");
-			$query->where("r.parent = '{$parent}'");
+			$query->where("r.parent_id = " . (int)$parent_id);
+			$query->where("r.parent = " . $db->quote($parent));
 		}
 		else
 		{
@@ -973,8 +978,8 @@ class JoomcckModelRecords extends MModelList
 
 			if($in_key && $from_key && $record_id)
 			{
-				$from_values = "SELECT fv1.field_value FROM #__js_res_record_values fv1 WHERE fv1.field_key = '{$from_key}' AND  fv1.record_id = " . $record_id;
-				$sql         = "SELECT fv2.record_id FROM #__js_res_record_values AS fv2 WHERE fv2.section_id = {$this->section->id} AND fv2.field_key = '{$in_key}' AND fv2.field_value IN ({$from_values})";
+				$from_values = "SELECT fv1.field_value FROM #__js_res_record_values fv1 WHERE fv1.field_key = " . $db->quote($from_key) . " AND  fv1.record_id = " . (int)$record_id;
+				$sql         = "SELECT fv2.record_id FROM #__js_res_record_values AS fv2 WHERE fv2.section_id = " . (int)$this->section->id . " AND fv2.field_key = " . $db->quote($in_key) . " AND fv2.field_value IN ({$from_values})";
 				$ids         = $this->getIds($sql);
 				if(empty($ids))
 				{
@@ -1006,9 +1011,9 @@ class JoomcckModelRecords extends MModelList
 
 			if($in_key && $from_key)
 			{
-				$from_values = "SELECT field_value FROM #__js_res_record_values WHERE field_key = '{$from_key}' AND  record_id = " . $app->input->getInt('id');
-				$sql         = "SELECT record_id FROM #__js_res_record_values WHERE section_id = {$this->section->id}
-					AND field_key = '{$in_key}' AND field_value IN ({$from_values})";
+				$from_values = "SELECT field_value FROM #__js_res_record_values WHERE field_key = " . $db->quote($from_key) . " AND  record_id = " . $app->input->getInt('id');
+				$sql         = "SELECT record_id FROM #__js_res_record_values WHERE section_id = " . (int)$this->section->id . "
+					AND field_key = " . $db->quote($in_key) . " AND field_value IN ({$from_values})";
 				$ids         = $this->getIds($sql);
 				if(empty($ids))
 				{
@@ -1046,7 +1051,7 @@ class JoomcckModelRecords extends MModelList
 
 			$dist = (((1 / 115.1666667) * $dist) / 2);
 
-			$sql = "SELECT field_value, value_index FROM #__js_res_record_values WHERE value_index IN('lat','lng') AND record_id = $record_id AND field_id = $field_id";
+			$sql = "SELECT field_value, value_index FROM #__js_res_record_values WHERE value_index IN('lat','lng') AND record_id = " . (int)$record_id . " AND field_id = " . (int)$field_id;
 			$db->setQuery($sql);
 			$data = $db->loadAssocList('value_index', 'field_value');
 
@@ -1092,7 +1097,7 @@ class JoomcckModelRecords extends MModelList
 			$field_id  = $app->input->getInt('_rfid');
 			if($record_id && $field_id)
 			{
-				$sql = "SELECT field_value FROM #__js_res_record_values WHERE record_id = {$record_id} AND field_id = {$field_id}";
+				$sql = "SELECT field_value FROM #__js_res_record_values WHERE record_id = " . (int)$record_id . " AND field_id = " . (int)$field_id;
 				$ids = $this->getIds($sql);
 			}
 			if(empty($ids))
@@ -1112,13 +1117,17 @@ class JoomcckModelRecords extends MModelList
 		if($view_what == 'show_all_parents')
 		{
 			$field_id   = $app->input->getInt('_rfaid');
-			$section_id = $app->input->getString('_rsid');
+			$section_id_raw = $app->input->getString('_rsid');
+			// Validate as comma-separated integers
+			$section_id_arr = array_map('intval', explode(',', $section_id_raw));
+			$section_id_arr = array_filter($section_id_arr);
+			$section_id = implode(',', $section_id_arr);
 
 			if($section_id && $field_id)
 			{
 				$sql = "SELECT field_value FROM #__js_res_record_values
-					WHERE record_id IN (SELECT id FROM #__js_res_record as r WHERE r.user_id = '{$user->id}' AND r.section_id IN ({$section_id}))
-					AND field_id = {$field_id}";
+					WHERE record_id IN (SELECT id FROM #__js_res_record as r WHERE r.user_id = " . (int)$user->id . " AND r.section_id IN ({$section_id}))
+					AND field_id = " . (int)$field_id;
 				$ids = $this->getIds($sql);
 			}
 			if(empty($ids))
@@ -1140,7 +1149,7 @@ class JoomcckModelRecords extends MModelList
 			$field_id  = $app->input->getInt('_rfid');
 			if($record_id && $field_id)
 			{
-				$sql = "SELECT record_id FROM #__js_res_record_values WHERE field_value = '{$record_id}' AND field_id = {$field_id}";
+				$sql = "SELECT record_id FROM #__js_res_record_values WHERE field_value = " . $db->quote((int)$record_id) . " AND field_id = " . (int)$field_id;
 				$ids = $this->getIds($sql);
 			}
 			if(empty($ids))
@@ -1160,13 +1169,17 @@ class JoomcckModelRecords extends MModelList
 		if($view_what == 'show_all_children')
 		{
 			$field_id   = $app->input->getInt('_rfaid');
-			$section_id = $app->input->getString('_rsid');
+			$section_id_raw = $app->input->getString('_rsid');
+			// Validate as comma-separated integers
+			$section_id_arr = array_map('intval', explode(',', $section_id_raw));
+			$section_id_arr = array_filter($section_id_arr);
+			$section_id = implode(',', $section_id_arr);
 
 			if($section_id && $field_id)
 			{
 				$sql = "SELECT record_id FROM #__js_res_record_values
-					WHERE field_value IN (SELECT id FROM #__js_res_record as r WHERE r.user_id = '{$user->id}' AND r.section_id IN ({$section_id}))
-					AND field_id = {$field_id}";
+					WHERE field_value IN (SELECT id FROM #__js_res_record as r WHERE r.user_id = " . (int)$user->id . " AND r.section_id IN ({$section_id}))
+					AND field_id = " . (int)$field_id;
 				$ids = $this->getIds($sql);
 			}
 			if(empty($ids))
@@ -1196,12 +1209,12 @@ class JoomcckModelRecords extends MModelList
 				return $query;
 			}
 
-			$sql = "SELECT field_value FROM #__js_res_record_values WHERE record_id = '{$record_id}' AND field_id = {$field_id}";
+			$sql = "SELECT field_value FROM #__js_res_record_values WHERE record_id = " . (int)$record_id . " AND field_id = " . (int)$field_id;
 			$ids = $this->getIds($sql);
 
 			if($strict)
 			{
-				$sql  = "SELECT record_id FROM #__js_res_record_values WHERE field_value = '{$record_id}' AND field_id = {$field_id}";
+				$sql  = "SELECT record_id FROM #__js_res_record_values WHERE field_value = " . $db->quote((int)$record_id) . " AND field_id = " . (int)$field_id;
 				$ids2 = $this->getIds($sql);
 			}
 
@@ -1299,7 +1312,7 @@ class JoomcckModelRecords extends MModelList
 
 			if(count($scount) == 1)
 			{
-				$string = "r.fieldsdata LIKE '%" . $db->escape($search2) . "%'";
+				$string = "r.fieldsdata LIKE " . $db->quote('%' . $db->escape($search2, true) . '%', false);
 				$query->where($string);
 			}
 			else if(count($scount) > 2)
@@ -1345,13 +1358,13 @@ class JoomcckModelRecords extends MModelList
 				$words = explode(" ", $search);
 				if(count($words) == 1)
 				{
-					$string = "r.fieldsdata LIKE '%" . $db->escape($words[0]) . "%'";
+					$string = "r.fieldsdata LIKE " . $db->quote('%' . $db->escape($words[0], true) . '%', false);
 				}
 				else
 				{
 					foreach($words AS $w)
 					{
-						$string[] = "r.fieldsdata LIKE '%" . $db->escape($w) . "%'";
+						$string[] = "r.fieldsdata LIKE " . $db->quote('%' . $db->escape($w, true) . '%', false);
 					}
 
 					$string = "(".implode(' AND ', $string).")";
@@ -1402,7 +1415,7 @@ class JoomcckModelRecords extends MModelList
 		if($alpha)
 		{
 			$this->worns['alpha'] = WornHelper::getItem('filter_alpha', \Joomla\CMS\Language\Text::_('CSTARTWITH'), $alpha);
-			$query->where("r.title like '{$alpha}%'");
+			$query->where("r.title LIKE " . $db->quote($db->escape($alpha, true) . '%', false));
 		}
 
 		$tag = $this->getState('records.tag');
@@ -1417,7 +1430,8 @@ class JoomcckModelRecords extends MModelList
 				$this->worns['tags'] = WornHelper::getItem('filter_tag', \Joomla\CMS\Language\Text::_('CTAGS'), $tag, implode(', ', $taglabels));
 			}
 
-			$sql = "SELECT record_id from #__js_res_tags_history WHERE tag_id IN(" . implode(',', $db->quote($tag)) . ") AND section_id = {$this->section->id}";
+			$tag_ids = array_map('intval', $tag);
+			$sql = "SELECT record_id from #__js_res_tags_history WHERE tag_id IN(" . implode(',', $tag_ids) . ") AND section_id = " . (int)$this->section->id;
 
 			$db->setQuery($sql);
 			$ids   = $db->loadColumn();

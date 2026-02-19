@@ -84,10 +84,11 @@ class JFormFieldCDigits extends CFormField
 			return null;
 		}
 
+		$db = \Joomla\CMS\Factory::getDbo();
 		$ids = $this->getIds("SELECT record_id FROM #__js_res_record_values
-			WHERE (field_value + 0 BETWEEN {$value['min']} AND {$value['max']})
-			  AND section_id = {$section->id}
-			  AND field_key = '{$this->key}'");
+			WHERE (field_value + 0 BETWEEN " . (float)$value['min'] . " AND " . (float)$value['max'] . ")
+			  AND section_id = " . (int)$section->id . "
+			  AND field_key = " . $db->quote($this->key));
 
 		return $ids;
 	}
@@ -102,8 +103,8 @@ class JFormFieldCDigits extends CFormField
 			$query = $db->getQuery(TRUE);
 			$query->select('MAX(field_value + 0) as max, MIN(field_value + 0) as min');
 			$query->from('#__js_res_record_values');
-			$query->where("section_id = {$section->id}");
-			$query->where("`field_key` = '{$this->key}'");
+			$query->where("section_id = " . (int)$section->id);
+			$query->where("`field_key` = " . $db->quote($this->key));
 			$db->setQuery($query);
 
 			$out[$this->id] = $db->loadObject();

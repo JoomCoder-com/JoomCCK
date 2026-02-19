@@ -130,12 +130,13 @@ class JFormFieldCStatus extends CFormField
 			return NULL;
 		}
 
+		$db = \Joomla\CMS\Factory::getDbo();
 		foreach($value as $text)
 		{
-			$sql[] = "field_value = '$text'";
+			$sql[] = "field_value = " . $db->quote($text);
 		}
 
-		$ids = $this->getIds("SELECT record_id FROM #__js_res_record_values WHERE (" . implode(' OR ', $sql) . ") AND section_id = {$section->id} AND field_key = '{$this->key}'");
+		$ids = $this->getIds("SELECT record_id FROM #__js_res_record_values WHERE (" . implode(' OR ', $sql) . ") AND section_id = " . (int)$section->id . " AND field_key = " . $db->quote($this->key));
 
 		return $ids;
 	}
@@ -148,8 +149,8 @@ class JFormFieldCStatus extends CFormField
 
 		$query->select('field_value');
 		$query->from('#__js_res_record_values');
-		$query->where("section_id = {$section->id}");
-		$query->where("`field_key` = '{$this->key}'");
+		$query->where("section_id = " . (int)$section->id);
+		$query->where("`field_key` = " . $db->quote($this->key));
 		$query->group('field_value');
 
 		if($this->params->get('params.filter_show_number', 1))

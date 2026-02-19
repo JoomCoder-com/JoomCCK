@@ -147,8 +147,8 @@ class CFormFieldSelectable extends CFormField
 
 		$query->select('field_value');
 		$query->from('#__js_res_record_values');
-		$query->where("section_id = {$section->id}");
-		$query->where("`field_key` = '{$this->key}'");
+		$query->where("section_id = " . (int)$section->id);
+		$query->where("`field_key` = " . $db->quote($this->key));
 		$query->group('field_value');
 
 		if($this->params->get('params.filter_show_number', 1))
@@ -166,7 +166,7 @@ class CFormFieldSelectable extends CFormField
 
 		if(CStatistics::hasUnPublished($section->id))
 		{
-			$query->where("record_id IN(SELECT r.id FROM #__js_res_record AS r WHERE r.section_id = {$section->id} AND r.published = 1 AND r.hidden = 0)");
+			$query->where("record_id IN(SELECT r.id FROM #__js_res_record AS r WHERE r.section_id = " . (int)$section->id . " AND r.published = 1 AND r.hidden = 0)");
 		}
 
 		$db->setQuery($query);
@@ -257,7 +257,8 @@ class CFormFieldSelectable extends CFormField
 
 		if(isset($this->value['by']) && $this->value['by'] == 'all')
 		{
-			$pattern = "SELECT record_id FROM #__js_res_record_values WHERE section_id = {$section->id} AND field_key = '{$this->key}' AND ";
+			$db = \Joomla\CMS\Factory::getDbo();
+			$pattern = "SELECT record_id FROM #__js_res_record_values WHERE section_id = " . (int)$section->id . " AND field_key = " . $db->quote($this->key) . " AND ";
 			$list = array();
 			foreach($value as $text)
 			{
@@ -277,7 +278,8 @@ class CFormFieldSelectable extends CFormField
 				$sql[] = $this->_fieldtypecondition($text);
 			}
 
-			$ids = $this->getIds("SELECT record_id FROM `#__js_res_record_values` WHERE (" . implode(' OR ', $sql) . ") AND section_id = {$section->id} AND field_key = '{$this->key}'");
+			$db = \Joomla\CMS\Factory::getDbo();
+			$ids = $this->getIds("SELECT record_id FROM `#__js_res_record_values` WHERE (" . implode(' OR ', $sql) . ") AND section_id = " . (int)$section->id . " AND field_key = " . $db->quote($this->key));
 		}
 
 		return $ids;
@@ -285,12 +287,13 @@ class CFormFieldSelectable extends CFormField
 
 	private function _fieldtypecondition($text)
 	{
+		$db = \Joomla\CMS\Factory::getDbo();
 		if($this->type == 'text')
 		{
-			return " field_value LIKE '%" . \Joomla\CMS\Factory::getDbo()->escape($text) . "%' ";
+			return " field_value LIKE " . $db->quote('%' . $db->escape($text, true) . '%', false) . " ";
 		}
 
-		return " field_value = '" . \Joomla\CMS\Factory::getDbo()->escape($text) . "' ";
+		return " field_value = " . $db->quote($text) . " ";
 	}
 
 	public function onRenderFull($record, $type, $section)
@@ -400,10 +403,10 @@ class CFormFieldSelectable extends CFormField
 
 		$query->select('field_value as text');
 		$query->from('#__js_res_record_values');
-		$query->where("section_id = {$section->id}");
-		$query->where("`field_key` = '{$this->key}'");
+		$query->where("section_id = " . (int)$section->id);
+		$query->where("`field_key` = " . $db->quote($this->key));
 		$query->group('field_value');
-		$query->where("record_id NOT IN(SELECT r.id FROM #__js_res_record AS r WHERE r.section_id = {$post['section_id']} AND (r.published = 0 OR r.hidden = 1 OR r.archive = 1))");
+		$query->where("record_id NOT IN(SELECT r.id FROM #__js_res_record AS r WHERE r.section_id = " . (int)$post['section_id'] . " AND (r.published = 0 OR r.hidden = 1 OR r.archive = 1))");
 
 		if($this->params->get('params.filter_show_number', 1))
 		{

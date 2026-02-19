@@ -48,18 +48,17 @@ class JFormFieldCtext extends CFormFieldSelectable
 		// Get unique values from database for this text field
 		$query->select('DISTINCT field_value as text, field_value as id');
 		$query->from('#__js_res_record_values');
-		$query->where("section_id = {$section->id}");
-		$query->where("`field_key` = '{$this->key}'");
+		$query->where("section_id = " . (int)$section->id);
+		$query->where("`field_key` = " . $db->quote($this->key));
 		$query->where("field_value != ''");
 		$query->where("field_value IS NOT NULL");
 
 		// Exclude unpublished records
-		$query->where("record_id NOT IN(SELECT r.id FROM #__js_res_record AS r WHERE r.section_id = {$post['section_id']} AND (r.published = 0 OR r.hidden = 1 OR r.archive = 1))");
+		$query->where("record_id NOT IN(SELECT r.id FROM #__js_res_record AS r WHERE r.section_id = " . (int)$post['section_id'] . " AND (r.published = 0 OR r.hidden = 1 OR r.archive = 1))");
 
 		// Add search term if provided
 		if (!empty($post['term'])) {
-			$term = $db->escape($post['term']);
-			$query->where("field_value LIKE '%{$term}%'");
+			$query->where("field_value LIKE " . $db->quote('%' . $db->escape($post['term'], true) . '%', false));
 		}
 
 		// Limit results for performance
@@ -124,10 +123,10 @@ class JFormFieldCtext extends CFormFieldSelectable
 		foreach ($value as $text) {
 			if ($this->params->get('params.filter_exact_match', 0)) {
 				// Exact match
-				$conditions[] = "field_value = '" . $db->escape($text) . "'";
+				$conditions[] = "field_value = " . $db->quote($text);
 			} else {
 				// Partial match (default for text fields)
-				$conditions[] = "field_value LIKE '%" . $db->escape($text) . "%'";
+				$conditions[] = "field_value LIKE " . $db->quote('%' . $db->escape($text, true) . '%', false);
 			}
 		}
 
@@ -137,10 +136,10 @@ class JFormFieldCtext extends CFormFieldSelectable
 
 		// Build the query
 		$whereClause = "(" . implode(' OR ', $conditions) . ")";
-		$sql = "SELECT record_id FROM `#__js_res_record_values` 
-            WHERE {$whereClause} 
-            AND section_id = {$section->id} 
-            AND field_key = '{$this->key}'";
+		$sql = "SELECT record_id FROM `#__js_res_record_values`
+            WHERE {$whereClause}
+            AND section_id = " . (int)$section->id . "
+            AND field_key = " . $db->quote($this->key);
 
 		return $this->getIds($sql);
 	}

@@ -51,12 +51,13 @@ class JFormFieldCBoolean extends CFormField
 		if($this->value)
 		{
 
+			$db = \Joomla\CMS\Factory::getDbo();
 			if($this->params->get('params.no_value') == 0 || $this->value == 'true')
 			{
 				$ids = $this->getIds("SELECT record_id FROM `#__js_res_record_values`
 					WHERE field_value + 0 = " . ($this->value == 'true' ? 1 : -1) . "
-					AND section_id = {$section->id}
-					AND field_key = '{$this->key}'");
+					AND section_id = " . (int)$section->id . "
+					AND field_key = " . $db->quote($this->key));
 
 				return $ids;
 
@@ -68,8 +69,8 @@ class JFormFieldCBoolean extends CFormField
 			{
 				$ids = $this->getIds("SELECT record_id FROM `#__js_res_record_values`
 					WHERE field_value + 0 = 1
-					AND section_id = {$section->id}
-					AND field_key = '{$this->key}'");
+					AND section_id = " . (int)$section->id . "
+					AND field_key = " . $db->quote($this->key));
 
 				return $ids;
 
@@ -117,7 +118,7 @@ class JFormFieldCBoolean extends CFormField
 			$query = $db->getQuery(TRUE);
 			$q1    = "SELECT count(record_id) as num
 				FROM `#__js_res_record_values`
-				WHERE section_id = '{$section->id}' AND field_key = '{$this->key}'
+				WHERE section_id = " . (int)$section->id . " AND field_key = " . $db->quote($this->key) . "
 				AND field_value = '1' GROUP BY field_value";
 			$db->setQuery($q1);
 
@@ -134,22 +135,22 @@ class JFormFieldCBoolean extends CFormField
 			{
 				$q0 = "SELECT count(record_id) as num
 				FROM `#__js_res_record_values`
-				WHERE section_id = '{$section->id}' AND field_key = '{$this->key}'
+				WHERE section_id = " . (int)$section->id . " AND field_key = " . $db->quote($this->key) . "
 				AND field_value = '-1' GROUP BY field_value";
 			}
 			else
 			{
 				$sql = "SELECT record_id FROM `#__js_res_record_values`
 					WHERE field_value = '1'
-					AND section_id = {$section->id}
-					AND field_key = '{$this->key}'";
+					AND section_id = " . (int)$section->id . "
+					AND field_key = " . $db->quote($this->key);
 				$db->setQuery($sql);
 				$ids   = $db->loadColumn();
 				$ids[] = 0;
 
 				$q0 = "SELECT COUNT(r.id) as num
 					FROM `#__js_res_record` AS r
-					WHERE r.section_id = '{$section->id}'
+					WHERE r.section_id = " . (int)$section->id . "
 					AND r.hidden = 0 AND r.id NOT IN (" . implode(',', $ids) . ")";
 				if(!CStatistics::hasUnPublished($section->id))
 				{

@@ -95,7 +95,8 @@ class JFormFieldCEmail extends CFormField
 
 	public function onFilterWhere($section, &$query)
 	{
-		$ids = $this->getIds("SELECT record_id FROM #__js_res_record_values WHERE field_value = '{$this->value}' AND section_id = {$section->id} AND field_key = '{$this->key}'");
+		$db = \Joomla\CMS\Factory::getDbo();
+		$ids = $this->getIds("SELECT record_id FROM #__js_res_record_values WHERE field_value = " . $db->quote($this->value) . " AND section_id = " . (int)$section->id . " AND field_key = " . $db->quote($this->key));
 
 		return $ids;
 	}
@@ -455,8 +456,8 @@ class JFormFieldCEmail extends CFormField
 
 		$query->select("field_value as value, CONCAT(field_value, ' <span class=badge>', count(record_id), '</span>') as label");
 		$query->from('#__js_res_record_values');
-		$query->where("field_key = '{$this->key}'");
-		$query->where("field_value LIKE '%{$q}%'");
+		$query->where("field_key = " . $db->quote($this->key));
+		$query->where("field_value LIKE " . $db->quote('%' . $db->escape($q, true) . '%', false));
 		$query->group('field_value');
 		$db->setQuery($query, 0, 10);
 		$result = $db->loadObjectList();

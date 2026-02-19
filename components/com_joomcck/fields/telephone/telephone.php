@@ -93,7 +93,8 @@ class JFormFieldCTelephone extends CFormField
 
 	public function onFilterWhere($section, &$query)
 	{
-		$ids = $this->getIds("SELECT record_id FROM #__js_res_record_values WHERE field_value = '{$this->value}' AND section_id = {$section->id} AND field_key = '{$this->key}'");
+		$db = \Joomla\CMS\Factory::getDbo();
+		$ids = $this->getIds("SELECT record_id FROM #__js_res_record_values WHERE field_value = " . $db->quote($this->value) . " AND section_id = " . (int)$section->id . " AND field_key = " . $db->quote($this->key));
 		return $ids;
 	}
 
@@ -180,11 +181,11 @@ class JFormFieldCTelephone extends CFormField
 		$db = \Joomla\CMS\Factory::getDbo();
 		$code1 = $value['country'] . '-' . $value['region'];
 		$code2 = $value['country'];
-		$sql = "SELECT * FROM `#__js_res_field_telephone` where phone_code = '$code1'";
+		$sql = "SELECT * FROM `#__js_res_field_telephone` where phone_code = " . $db->quote($code1);
 		$db->setQuery($sql);
 		if (!$res = $db->loadObject())
 		{
-			$sql = "SELECT * FROM `#__js_res_field_telephone` where phone_code = '$code2'";
+			$sql = "SELECT * FROM `#__js_res_field_telephone` where phone_code = " . $db->quote($code2);
 			$db->setQuery($sql);
 			$res = $db->loadObject();
 		}
@@ -197,9 +198,9 @@ class JFormFieldCTelephone extends CFormField
 		$word = $this->request->getWord('q');
 		$code = $this->request->getInt('q');
 		if ($code)
-			$where[] = "phone_code like '$code%'";
+			$where[] = "phone_code LIKE " . $db->quote($db->escape($code, true) . '%', false);
 		if ($word)
-			$where[] = "name like '%$word%'";
+			$where[] = "name LIKE " . $db->quote('%' . $db->escape($word, true) . '%', false);
 		$db = \Joomla\CMS\Factory::getDbo();
 		$query = $db->getQuery(true);
 		$query->select("*");
@@ -231,7 +232,7 @@ class JFormFieldCTelephone extends CFormField
 
 		$field = $this->request->get('field');
 		$section = $this->request->get('section');
-		$where = "REPLACE(field_value, '.', '' ) like '%$q%' AND type_id = '{$this->type_id}' AND section_id = '$section' AND field_type = '$field'";
+		$where = "REPLACE(field_value, '.', '' ) LIKE " . $db->quote('%' . $db->escape($q, true) . '%', false) . " AND type_id = " . (int)$this->type_id . " AND section_id = " . (int)$section . " AND field_type = " . $db->quote($field);
 		$query = $db->getQuery(true);
 		$query->select("*, COUNT(record_id) as num");
 		$query->from('#__js_res_record_values');
