@@ -196,15 +196,22 @@ class  CFormFieldRelate extends CFormField
 			$record_id = $app->input->getInt('id');
 			if($this->type == 'child')
 			{
-				$default_query = "SELECT field_value FROM #__js_res_record_values WHERE record_id = '{$record_id}' AND field_id = {$this->id}";
+				$default_query = $db->getQuery(true)
+					->select($db->quoteName('field_value'))
+					->from($db->quoteName('#__js_res_record_values'))
+					->where($db->quoteName('record_id') . ' = ' . (int)$record_id)
+					->where($db->quoteName('field_id') . ' = ' . (int)$this->id);
 			}
 			elseif($this->type == 'parent')
 			{
-				$default_query = "SELECT record_id FROM #__js_res_record_values WHERE field_value = '{$record_id}' AND field_id = " . $this->params->get('params.child_field');
+				$default_query = $db->getQuery(true)
+					->select($db->quoteName('record_id'))
+					->from($db->quoteName('#__js_res_record_values'))
+					->where($db->quoteName('field_value') . ' = ' . $db->quote($record_id))
+					->where($db->quoteName('field_id') . ' = ' . (int)$this->params->get('params.child_field'));
 			}
 			if(!empty($default_query))
 			{
-
 				$db->setQuery($default_query);
 				$this->value = $db->loadColumn();
 			}
@@ -690,7 +697,12 @@ class  CFormFieldRelate extends CFormField
 	private function _getChildSectionId($field_id)
 	{
 		$db = Factory::getDbo();
-		$db->setQuery("SELECT section_id from #__js_res_record_values WHERE field_id = {$field_id} AND field_type = 'child'");
+		$query = $db->getQuery(true)
+			->select($db->quoteName('section_id'))
+			->from($db->quoteName('#__js_res_record_values'))
+			->where($db->quoteName('field_id') . ' = ' . (int)$field_id)
+			->where($db->quoteName('field_type') . ' = ' . $db->quote('child'));
+		$db->setQuery($query);
 
 		return $db->loadResult();
 	}
@@ -705,18 +717,30 @@ class  CFormFieldRelate extends CFormField
 	private function _getRecordsIds($record_id, $field_id, $view_what)
 	{
 
-        if(empty($field_id) || empty($field_id) || empty($view_what))
+        if(empty($field_id) || empty($record_id) || empty($view_what))
             return [];
 
+		$record_id = (int)$record_id;
+		$field_id = (int)$field_id;
 
 		$db = Factory::getDbo();
 		if($view_what == 'show_parents')
 		{
-			$db->setQuery("SELECT field_value FROM #__js_res_record_values WHERE record_id = {$record_id} AND field_id = {$field_id}");
+			$query = $db->getQuery(true)
+				->select($db->quoteName('field_value'))
+				->from($db->quoteName('#__js_res_record_values'))
+				->where($db->quoteName('record_id') . ' = ' . $record_id)
+				->where($db->quoteName('field_id') . ' = ' . $field_id);
+			$db->setQuery($query);
 		}
 		if($view_what == 'show_children')
 		{
-			$db->setQuery("SELECT record_id FROM #__js_res_record_values WHERE field_value = '{$record_id}' AND field_id = {$field_id}");
+			$query = $db->getQuery(true)
+				->select($db->quoteName('record_id'))
+				->from($db->quoteName('#__js_res_record_values'))
+				->where($db->quoteName('field_value') . ' = ' . $db->quote($record_id))
+				->where($db->quoteName('field_id') . ' = ' . $field_id);
+			$db->setQuery($query);
 		}
 
 		return $db->loadColumn();

@@ -38,17 +38,30 @@ class JoomcckControllerItems extends JoomcckControllerRecords
     }
     public function applychco()
     {
+		\Joomla\CMS\Session\Session::checkToken('request') or jexit(\Joomla\CMS\Language\Text::_('JINVALID_TOKEN'));
+
 		$db = \Joomla\CMS\Factory::getDbo();
 		$app = \Joomla\CMS\Factory::getApplication();
-		
+
         $form = $this->input->get('jform', [], 'array');
         $cid = $this->input->get('cid', [], 'array');
+        $cid = \Joomla\Utilities\ArrayHelper::toInteger($cid);
+
+        if (empty($cid)) {
+            $app->enqueueMessage(Mint::_('CNOCHANGE'));
+            $this->setRedirect(
+                \Joomla\CMS\Router\Route::_('index.php?option=' . $this->option . '&view=items', false)
+            );
+            return;
+        }
 
         $int = ['published', 'access', 'meta_index', 'langs', 'featured', 'user_id'];
         $str = ['meta_descr', 'meta_key', 'ftime', 'ctime', 'extime', 'mtime'];
 
-		$sql = [];
-		
+		$query = $db->getQuery(true);
+		$query->update($db->quoteName('#__js_res_record'));
+		$hasUpdates = false;
+
 		foreach ($int as $value) {
 			if($value == 'user_id' && (int)$form[$value] == 0) {
 				continue;
@@ -59,17 +72,19 @@ class JoomcckControllerItems extends JoomcckControllerRecords
 			if($value == 'featured') {
 				$form['ftime'] = NULL;
 			}
-			$sql[] = sprintf('`%s` = %d', $value, $form[$value]);
+			$query->set($db->quoteName($value) . ' = ' . (int)$form[$value]);
+			$hasUpdates = true;
 		}
 		foreach ($str as $value) {
 			if(empty($form[$value])) {
 				continue;
 			}
-			$sql[] = sprintf("`%s` = '%s'", $value, $db->escape($form[$value]));
+			$query->set($db->quoteName($value) . ' = ' . $db->quote($form[$value]));
+			$hasUpdates = true;
 		}
 
-		if(!empty($sql)) {
-			$query = sprintf('UPDATE `#__js_res_record` SET %s WHERE id IN(%s)',implode(', ', $sql), implode(',', $cid));
+		if($hasUpdates) {
+			$query->where($db->quoteName('id') . ' IN (' . implode(',', $cid) . ')');
 			$db->setQuery($query);
 			$db->execute();
 			$app->enqueueMessage(\Joomla\CMS\Language\Text::printf('COM_JOOMCCK_N_ITEMS_UPDATED', count($cid)));

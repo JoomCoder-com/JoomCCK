@@ -41,10 +41,11 @@ class JoomcckModelTfield extends MModelAdmin
 
 	public function getFieldForm($field_type, $default = array())
 	{
+		$field_type = preg_replace('/[^a-zA-Z0-9_-]/', '', $field_type);
 		$file = JPATH_ROOT . '/components/com_joomcck/fields' . DIRECTORY_SEPARATOR . $field_type . DIRECTORY_SEPARATOR . $field_type . '.xml';
 		if(!is_file($file))
 		{
-			echo "File not found: {$file}";
+			return '';
 		}
 
 		FieldHelper::loadLang($field_type);
@@ -53,7 +54,10 @@ class JoomcckModelTfield extends MModelAdmin
 			'control' => 'params'
 		));
 
-		$form->loadFile($file, TRUE, 'config');
+		if(!$form->loadFile($file, TRUE, 'config'))
+		{
+			return '';
+		}
 
 		return MFormHelper::renderGroup($form, $default, 'params');
 	}

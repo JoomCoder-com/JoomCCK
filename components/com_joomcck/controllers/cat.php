@@ -34,25 +34,48 @@ class JoomcckControllerCat extends MControllerForm
 
 		$db = \Joomla\CMS\Factory::getDbo();
 
-		$db->setQuery("SELECT id, categories FROM `#__js_res_record` WHERE id IN (SELECT record_id FROM `#__js_res_record_category` WHERE catid = {$id})");
+		$query = $db->getQuery(true)
+			->select($db->quoteName(['id', 'categories']))
+			->from($db->quoteName('#__js_res_record'))
+			->where($db->quoteName('id') . ' IN (SELECT record_id FROM ' . $db->quoteName('#__js_res_record_category') . ' WHERE catid = ' . (int)$id . ')');
+		$db->setQuery($query);
 		$list = $db->loadObjectList();
 
 		foreach ($list as $key => $item)
 		{
 			$categories = json_decode($item->categories, true);
 			$categories[$id] = $validData['title'];
-			$cats = $db->escape(json_encode($categories));
-			$db->setQuery("UPDATE `#__js_res_record` SET categories = '{$cats}' WHERE id = {$item->id}");
+			$query = $db->getQuery(true)
+				->update($db->quoteName('#__js_res_record'))
+				->set($db->quoteName('categories') . ' = ' . $db->quote(json_encode($categories)))
+				->where($db->quoteName('id') . ' = ' . (int)$item->id);
+			$db->setQuery($query);
 			$db->execute();
 		}
 
-		$db->setQuery("SELECT COUNT(*) FROM `#__js_res_categories` WHERE section_id = {$section->id}");
+		$query = $db->getQuery(true)
+			->select('COUNT(*)')
+			->from($db->quoteName('#__js_res_categories'))
+			->where($db->quoteName('section_id') . ' = ' . (int)$section->id);
+		$db->setQuery($query);
 		$section->categories = $db->loadResult();
 		$section->store();
 
+		$published = (int)$validData['published'];
+		$access = (int)$validData['access'];
 
-		$db->setQuery("UPDATE `#__js_res_record_category` SET published = '{$validData['published']}', access = '{$validData['access']}' WHERE catid = {$id}")->execute();
-		$db->setQuery("UPDATE `#__js_res_categories` SET published = '{$validData['published']}' WHERE id = {$id}")->execute();
+		$query = $db->getQuery(true)
+			->update($db->quoteName('#__js_res_record_category'))
+			->set($db->quoteName('published') . ' = ' . $published)
+			->set($db->quoteName('access') . ' = ' . $access)
+			->where($db->quoteName('catid') . ' = ' . (int)$id);
+		$db->setQuery($query)->execute();
+
+		$query = $db->getQuery(true)
+			->update($db->quoteName('#__js_res_categories'))
+			->set($db->quoteName('published') . ' = ' . $published)
+			->where($db->quoteName('id') . ' = ' . (int)$id);
+		$db->setQuery($query)->execute();
 	}
 	/**
 	 * Constructor.

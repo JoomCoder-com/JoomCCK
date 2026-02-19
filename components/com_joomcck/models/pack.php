@@ -87,8 +87,12 @@ class JoomcckModelPack extends MModelAdmin
         $result = parent::delete($pks);
 
         if ($result) {
+            $pks = \Joomla\Utilities\ArrayHelper::toInteger($pks);
             $db = \Joomla\CMS\Factory::getDbo();
-            $db->setQuery("DELETE FROM #__js_res_packs_sections WHERE pack_id IN (" . implode(',', $pks) . ")");
+            $query = $db->getQuery(true)
+                ->delete($db->quoteName('#__js_res_packs_sections'))
+                ->where($db->quoteName('pack_id') . ' IN (' . implode(',', $pks) . ')');
+            $db->setQuery($query);
             $db->execute();
         }
     }
@@ -634,7 +638,24 @@ class JoomcckModelPack extends MModelAdmin
     private function _getItems($table_name, $where = [], $order = 'id')
     {
         $db = \Joomla\CMS\Factory::getDbo();
-        $db->setQuery("SELECT * FROM `#__js_res_{$table_name}` WHERE " . implode(' AND ', $where) . " ORDER BY {$order}");
+        // Whitelist table names to prevent SQL injection via dynamic table name
+        $allowedTables = [
+            'categories', 'fields', 'fields_group', 'field_multilevelselect',
+            'field_stepaccess', 'record', 'category_user', 'comments', 'vote',
+            'tags_history', 'tags', 'favorite', 'record_values', 'record_category',
+            'sales', 'files', 'notifications', 'subscribe', 'subscribe_user',
+            'subscribe_cat', 'moderators', 'user_post_map', 'user_options',
+            'user_options_autofollow'
+        ];
+        if (!in_array($table_name, $allowedTables)) {
+            return [];
+        }
+        // Whitelist order columns
+        $allowedOrders = ['id', 'level ASC', 'lft', 'lft ASC'];
+        if (!in_array($order, $allowedOrders)) {
+            $order = 'id';
+        }
+        $db->setQuery("SELECT * FROM " . $db->quoteName('#__js_res_' . $table_name) . " WHERE " . implode(' AND ', $where) . " ORDER BY " . $order);
         $items = $db->loadObjectList('id');
 
         return is_array($items) ? $items : [];

@@ -33,7 +33,11 @@ class JoomcckViewElements extends MViewBase
 		$this->isme = $this->user->get('id') == $this->author;
 
 		$db = \Joomla\CMS\Factory::getDbo();
-		$db->setQuery("SELECT * FROM `#__js_res_user_options` WHERE user_id = {$this->author}");
+		$query = $db->getQuery(true)
+			->select('*')
+			->from($db->quoteName('#__js_res_user_options'))
+			->where($db->quoteName('user_id') . ' = ' . (int)$this->author);
+		$db->setQuery($query);
 		$this->params = new \Joomla\Registry\Registry(@$db->loadObject()->params);
 
 		$this->state = $model->getState();

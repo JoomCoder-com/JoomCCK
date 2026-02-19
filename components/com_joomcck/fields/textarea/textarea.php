@@ -171,16 +171,19 @@ class JFormFieldCTextarea extends CFormField
 		{
 			if(preg_match_all("/:([^\s<]*):/iU", $value, $matches))
 			{
-				$names = array_map(
-					function ($val)
+				$db = \Joomla\CMS\Factory::getDbo();
+				$quotedNames = array_map(
+					function ($val) use ($db)
 					{
-						return strip_tags(trim(\Joomla\CMS\Factory::getDbo()->escape($val)));
+						return $db->quote(strip_tags(trim($val)));
 					}, $matches[1]
 				);
-				$names = implode("','", $names);
 
-				$db = \Joomla\CMS\Factory::getDbo();
-				$db->setQuery("SELECT username, id FROM #__users WHERE username IN ('{$names}')");
+				$query = $db->getQuery(true)
+					->select($db->quoteName(['username', 'id']))
+					->from($db->quoteName('#__users'))
+					->where($db->quoteName('username') . ' IN (' . implode(',', $quotedNames) . ')');
+				$db->setQuery($query);
 				$users = $db->loadObjectList();
 
 				foreach($users AS $user)

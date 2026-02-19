@@ -44,9 +44,10 @@ class JoomcckControllerTools extends MControllerForm
 		$uri  = \Joomla\CMS\Uri\Uri::getInstance();
 
 		$params = new \Joomla\Registry\Registry('');
-		if(@$_POST['jform'])
+		$jform = $this->input->post->get('jform', [], 'array');
+		if(!empty($jform))
 		{
-			$params->loadArray(@$_POST['jform']);
+			$params->loadArray($jform);
 		}
 
 

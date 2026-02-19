@@ -168,25 +168,53 @@ class JoomcckControllerUsercategory extends MControllerForm
 
 	public function postSaveHook(MModelBase $model, $validData = array())
 	{
+		$app = \Joomla\CMS\Factory::getApplication();
+		$files = $app->input->files->get('jform', [], 'array');
 
-		$files = $_FILES;
-
-		if(! empty($files['jform']['name']['icon']))
+		if(!empty($files['icon']['name']))
 		{
 			$user = \Joomla\CMS\Factory::getApplication()->getIdentity();
-			$id = $model->getState($this->context . '.id');
-			$path = JPATH_ROOT . '/images/usercategories' . DIRECTORY_SEPARATOR . $user->get('id') . DIRECTORY_SEPARATOR;
-			$ext = pathinfo($files['jform']['name']['icon'],PATHINFO_EXTENSION);
-			if(! is_dir($path))
-			{
-				\Joomla\Filesystem\Folder::create($path, 0755);
-				\Joomla\Filesystem\File::write($path . DIRECTORY_SEPARATOR . 'index.html', @$a);
+			if (!$user->get('id')) {
+				return;
 			}
 
-			if(\Joomla\Filesystem\File::upload($files['jform']['tmp_name']['icon'], $path . $id . '.' . $ext))
+			$id = (int)$model->getState($this->context . '.id');
+			$path = JPATH_ROOT . '/images/usercategories' . DIRECTORY_SEPARATOR . $user->get('id') . DIRECTORY_SEPARATOR;
+			$ext = strtolower(pathinfo($files['icon']['name'], PATHINFO_EXTENSION));
+
+			// Whitelist allowed image extensions
+			$allowedExts = ['jpg', 'jpeg', 'png', 'gif', 'bmp', 'webp', 'svg'];
+			if (!in_array($ext, $allowedExts)) {
+				$app->enqueueMessage(\Joomla\CMS\Language\Text::_('JERROR_ILLEGAL_FILE_EXTENSION'), 'warning');
+				return;
+			}
+
+			// Verify MIME type matches an image
+			if (function_exists('finfo_open')) {
+				$finfo = finfo_open(FILEINFO_MIME_TYPE);
+				$mimeType = finfo_file($finfo, $files['icon']['tmp_name']);
+				finfo_close($finfo);
+				$allowedMimes = ['image/jpeg', 'image/png', 'image/gif', 'image/bmp', 'image/webp', 'image/svg+xml'];
+				if (!in_array($mimeType, $allowedMimes)) {
+					$app->enqueueMessage(\Joomla\CMS\Language\Text::_('JERROR_ILLEGAL_FILE_EXTENSION'), 'warning');
+					return;
+				}
+			}
+
+			if(!is_dir($path))
+			{
+				\Joomla\Filesystem\Folder::create($path, 0755);
+				\Joomla\Filesystem\File::write($path . DIRECTORY_SEPARATOR . 'index.html', '<html><body></body></html>');
+			}
+
+			if(\Joomla\Filesystem\File::upload($files['icon']['tmp_name'], $path . $id . '.' . $ext))
 			{
 				$db = \Joomla\CMS\Factory::getDbo();
-				$db->setQuery('UPDATE #__js_res_category_user SET icon = "' . $id . '.' . $ext . '" WHERE id = ' . $id);
+				$query = $db->getQuery(true)
+					->update($db->quoteName('#__js_res_category_user'))
+					->set($db->quoteName('icon') . ' = ' . $db->quote($id . '.' . $ext))
+					->where($db->quoteName('id') . ' = ' . (int)$id);
+				$db->setQuery($query);
 				$db->execute();
 			}
 		}

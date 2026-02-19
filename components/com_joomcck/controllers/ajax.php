@@ -43,26 +43,36 @@ class JoomcckControllerAjax extends MControllerAdmin
 			}
 		}
 
-		$query = "SELECT name, username FROM `#__users` WHERE username LIKE '%" . $db->escape($input->get('q')) . "%' OR name LIKE '%" . $db->escape(\Joomla\CMS\Factory::getApplication()->input->get('q')) . "%'";
+		$searchTerm = $db->quote('%' . $db->escape($input->getString('q', ''), true) . '%', false);
+		$query = $db->getQuery(true)
+			->select($db->quoteName(['name', 'username']))
+			->from($db->quoteName('#__users'))
+			->where($db->quoteName('username') . ' LIKE ' . $searchTerm . ' OR ' . $db->quoteName('name') . ' LIKE ' . $searchTerm);
 		$db->setQuery($query);
 		$list = $db->loadObjectList();
 
 		$out = array();
 		foreach($list AS $user)
 		{
-
 			$out[] = $user;
 		}
 
+		header('Content-Type: application/json');
 		echo json_encode($out);
 		\Joomla\CMS\Factory::getApplication()->close();
 	}
 
 	public function icons()
 	{
-		$dir = JPATH_ROOT . '/' . $this->input->getPath('dir');
+		$dir = realpath(JPATH_ROOT . '/' . $this->input->getPath('dir'));
 
 		$out = array();
+		if($dir === false || strpos($dir, realpath(JPATH_ROOT)) !== 0)
+		{
+			AjaxHelper::send($out);
+			return;
+		}
+
 		if(is_dir($dir))
 		{
 			if($dh = opendir($dir))
@@ -621,16 +631,26 @@ class JoomcckControllerAjax extends MControllerAdmin
 
 	public function removeucicon()
 	{
-		$file     = $this->input->get('file');
-		$id       = $this->input->get('id');
-		$user     = \Joomla\CMS\Factory::getApplication()->getIdentity();
+		$user = \Joomla\CMS\Factory::getApplication()->getIdentity();
+		if(!$user->get('id'))
+		{
+			AjaxHelper::error(Text::_('AJAX_PLEASELOGIN'));
+			return;
+		}
+
+		$file     = $this->input->getCmd('file');
+		$id       = $this->input->getInt('id');
 		$fullpath = JPATH_ROOT . '/images/usercategories/' . $user->get('id') . DIRECTORY_SEPARATOR . $file;
 		if(is_file($fullpath))
 		{
 			if(\Joomla\Filesystem\File::delete($fullpath))
 			{
 				$db = \Joomla\CMS\Factory::getDbo();
-				$db->setQuery('UPDATE #__js_res_category_user SET icon = "" WHERE id = ' . $id);
+				$query = $db->getQuery(true)
+					->update($db->quoteName('#__js_res_category_user'))
+					->set($db->quoteName('icon') . ' = ' . $db->quote(''))
+					->where($db->quoteName('id') . ' = ' . (int)$id);
+				$db->setQuery($query);
 				$db->execute();
 				AjaxHelper::send(1);
 			}
@@ -644,8 +664,8 @@ class JoomcckControllerAjax extends MControllerAdmin
 	public function category_children()
 	{
 		$db      = \Joomla\CMS\Factory::getDbo();
-		$parent  = $this->input->get('parent');
-		$section = $this->input->get('section');
+		$parent  = $this->input->getInt('parent');
+		$section = $this->input->getInt('section');
 
 		$db->setQuery(
 			"SELECT
@@ -662,8 +682,8 @@ class JoomcckControllerAjax extends MControllerAdmin
 			FROM `#__js_res_categories` AS c
 			LEFT JOIN `#__js_res_sections` AS s ON s.id = c.section_id
 			WHERE c.published = 1
-			AND c.section_id = {$section}
-			AND c.parent_id = {$parent}
+			AND c.section_id = " . (int)$section . "
+			AND c.parent_id = " . (int)$parent . "
 			ORDER BY c.lft ASC
 		");
 
@@ -676,6 +696,7 @@ class JoomcckControllerAjax extends MControllerAdmin
 			$cat->path   = htmlentities($cat->path, ENT_QUOTES, 'UTF-8');
 		}
 
+		header('Content-Type: application/json');
 		echo json_encode($categories);
 		\Joomla\CMS\Factory::getApplication()->close();
 	}
@@ -691,7 +712,9 @@ class JoomcckControllerAjax extends MControllerAdmin
 		$category              = $cat_model->getItem($this->input->getInt('cat_id'));
 		$cats_model->section   = $category->section_id;
 		$cats_model->parent_id = $category->id;
-		$cats_model->order     = $this->input->get('order', 'c.lft ASC');
+		$allowedOrders = ['c.lft ASC', 'c.lft DESC', 'c.title ASC', 'c.title DESC', 'c.id ASC', 'c.id DESC'];
+		$order = $this->input->getString('order', 'c.lft ASC');
+		$cats_model->order     = in_array($order, $allowedOrders) ? $order : 'c.lft ASC';
 		$cats_model->levels    = 1;
 		$cats_model->all       = 0;
 		$cats_model->nums      = 1;
@@ -724,7 +747,7 @@ class JoomcckControllerAjax extends MControllerAdmin
 			$sql = $db->getQuery(true);
 			$sql->select('count(rc.catid) as num, rc.catid');
 			$sql->from('#__js_res_record_category AS rc');
-			$sql->where("rc.section_id = {$section->id}");
+			$sql->where("rc.section_id = " . (int)$section->id);
 			$sql->group('rc.catid');
 
 			if($section->params->get('general.cat_mode'))
@@ -816,9 +839,14 @@ class JoomcckControllerAjax extends MControllerAdmin
 		$db = \Joomla\CMS\Factory::getDbo();
 
 		$sql = $db->getQuery(TRUE);
-		$sql->select('id, ' . $section->params->get('personalize.author_mode', 'username') . ' AS text');
+		$authorMode = $section->params->get('personalize.author_mode', 'username');
+		$allowedColumns = ['username', 'name', 'email'];
+		if (!in_array($authorMode, $allowedColumns)) {
+			$authorMode = 'username';
+		}
+		$sql->select($db->quoteName('id') . ', ' . $db->quoteName($authorMode) . ' AS text');
 		$sql->from('#__users');
-		$sql->where("id IN(SELECT user_id FROM #__js_res_record WHERE section_id = {$section->id})");
+		$sql->where("id IN(SELECT user_id FROM #__js_res_record WHERE section_id = " . (int)$section->id . ")");
 
 		$db->setQuery($sql);
 
@@ -844,9 +872,10 @@ class JoomcckControllerAjax extends MControllerAdmin
 		$sql->from('#__js_res_record');
 		$sql->where('published = 1');
 		$sql->where('hidden = 0');
-		$sql->where("ctime < " . $db->quote(\Joomla\CMS\Factory::getDate()->toSql()));
-		$sql->where("(extime = '0000-00-00 00:00:00' OR ISNULL(extime) OR extime > '" . \Joomla\CMS\Factory::getDate()->toSql() . "')");
-		$sql->where("id IN (SELECT record_id FROM #__js_res_record_category WHERE catid = '{$catid}')");
+		$now = $db->quote(\Joomla\CMS\Factory::getDate()->toSql());
+		$sql->where($db->quoteName('ctime') . ' < ' . $now);
+		$sql->where('(' . $db->quoteName('extime') . ' = ' . $db->quote('0000-00-00 00:00:00') . ' OR ISNULL(' . $db->quoteName('extime') . ') OR ' . $db->quoteName('extime') . ' > ' . $now . ')');
+		$sql->where($db->quoteName('id') . ' IN (SELECT record_id FROM ' . $db->quoteName('#__js_res_record_category') . ' WHERE ' . $db->quoteName('catid') . ' = ' . (int)$catid . ')');
 		$db->setQuery($sql, 0, ($limit ? $limit + 1 : 0));
 		$items = array();
 		if($recs = $db->loadObjectList())
@@ -990,7 +1019,7 @@ class JoomcckControllerAjax extends MControllerAdmin
 		$field     = $field_table->field_type;
 		$func      = $this->input->get('func');
 		$record_id = $this->input->getInt('record_id');
-		$params    = $_REQUEST;
+		$params    = $this->input->getArray();
 
 		if(!$field)
 		{
@@ -1112,29 +1141,28 @@ class JoomcckControllerAjax extends MControllerAdmin
 
 	public function remove_notification()
 	{
-		$id         = $this->input->getInt('id');
 		$section_id = $this->input->getInt('section_id');
 
 		$user  = \Joomla\CMS\Factory::getApplication()->getIdentity();
 		$db    = \Joomla\CMS\Factory::getDbo();
 		$query = $db->getQuery(TRUE);
 		$query->delete();
-		$query->from('#__js_res_notifications');
-		$query->where('user_id = ' . $user->id);
+		$query->from($db->quoteName('#__js_res_notifications'));
+		$query->where($db->quoteName('user_id') . ' = ' . (int)$user->id);
 		if($section_id)
 		{
-			$query->where('ref_2 = ' . $section_id);
+			$query->where($db->quoteName('ref_2') . ' = ' . (int)$section_id);
 		}
-		if($id != 'all')
+		if($this->input->getCmd('id') !== 'all')
 		{
-			if(!is_array($id))
+			$ids = $this->input->get('id', array(), 'array');
+			$ids = \Joomla\Utilities\ArrayHelper::toInteger($ids);
+			if(!empty($ids))
 			{
-				settype($id, 'array');
+				$query->where($db->quoteName('id') . ' IN (' . implode(', ', $ids) . ')');
 			}
-			$query->where('id IN (' . implode(', ', $id) . ')');
 		}
 		$db->setQuery($query);
-		$db->execute();
 
 		try {
 			$db->execute();
@@ -1147,8 +1175,8 @@ class JoomcckControllerAjax extends MControllerAdmin
 
 	public function remove_notification_by()
 	{
-		$type = $this->input->get('type');
-		$list = $this->input->get('list');
+		$type = $this->input->getCmd('type');
+		$list = $this->input->get('list', array(), 'array');
 		if(!count($list) && $type != 'read')
 		{
 			echo json_encode(
@@ -1163,36 +1191,40 @@ class JoomcckControllerAjax extends MControllerAdmin
 		$db         = \Joomla\CMS\Factory::getDbo();
 		if($type == 'selected')
 		{
-			$ids = $list;
+			$ids = \Joomla\Utilities\ArrayHelper::toInteger($list);
 		}
 		else
 		{
 			$user  = \Joomla\CMS\Factory::getApplication()->getIdentity();
 			$query = $db->getQuery(TRUE);
-			$query->select(' id ');
-			$query->from('#__js_res_notifications');
-			$query->where(' user_id = ' . $user->id);
+			$query->select($db->quoteName('id'));
+			$query->from($db->quoteName('#__js_res_notifications'));
+			$query->where($db->quoteName('user_id') . ' = ' . (int)$user->id);
 			if($section_id)
 			{
-				$query->where('ref_2 = ' . $section_id);
+				$query->where($db->quoteName('ref_2') . ' = ' . (int)$section_id);
 			}
 
 			switch($type)
 			{
 				case 'event':
-					$query->where("type IN ('" . implode("', '", $list) . "')");
+					$quotedList = array_map(function($v) use ($db) { return $db->quote($v); }, $list);
+					$query->where($db->quoteName('type') . ' IN (' . implode(', ', $quotedList) . ')');
 					break;
 				case 'record':
-					$query->where("ref_1 IN (" . implode(",", $list) . ")");
+					$intList = \Joomla\Utilities\ArrayHelper::toInteger($list);
+					$query->where($db->quoteName('ref_1') . ' IN (' . implode(',', $intList) . ')');
 					break;
 				case 'section':
-					$query->where("ref_2 IN (" . implode(",", $list) . ")");
+					$intList = \Joomla\Utilities\ArrayHelper::toInteger($list);
+					$query->where($db->quoteName('ref_2') . ' IN (' . implode(',', $intList) . ')');
 					break;
 				case 'eventer':
-					$query->where("eventer IN (" . implode(",", $list) . ")");
+					$intList = \Joomla\Utilities\ArrayHelper::toInteger($list);
+					$query->where($db->quoteName('eventer') . ' IN (' . implode(',', $intList) . ')');
 					break;
 				case 'read':
-					$query->where("state_new = 0");
+					$query->where($db->quoteName('state_new') . ' = 0');
 					break;
 			}
 
@@ -1200,15 +1232,16 @@ class JoomcckControllerAjax extends MControllerAdmin
 			$ids = $db->loadColumn();
 		}
 
-		if(!count($ids))
+		$ids = \Joomla\Utilities\ArrayHelper::toInteger($ids);
+		if(empty($ids))
 		{
 			return;
 		}
 
 		$query = $db->getQuery(TRUE);
 		$query->delete();
-		$query->from('#__js_res_notifications');
-		$query->where("id IN (" . implode(", ", $ids) . ")");
+		$query->from($db->quoteName('#__js_res_notifications'));
+		$query->where($db->quoteName('id') . ' IN (' . implode(', ', $ids) . ')');
 		$db->setQuery($query);
 
 
@@ -1226,32 +1259,28 @@ class JoomcckControllerAjax extends MControllerAdmin
 	public function get_notifications()
 	{
 		$ids        = $this->input->get('exist', array(0), 'array');
+		$ids        = \Joomla\Utilities\ArrayHelper::toInteger($ids);
 		$section_id = $this->input->getInt('section_id');
 		$user       = \Joomla\CMS\Factory::getApplication()->getIdentity();
 		$db         = \Joomla\CMS\Factory::getDbo();
 		$query      = $db->getQuery(TRUE);
 
 		$query->select('*');
-		$query->from('#__js_res_notifications');
-		$query->where('user_id = ' . $user->id);
-		$query->where('notified = 0');
+		$query->from($db->quoteName('#__js_res_notifications'));
+		$query->where($db->quoteName('user_id') . ' = ' . (int)$user->id);
+		$query->where($db->quoteName('notified') . ' = 0');
 		if($section_id)
 		{
-			if(!is_array($section_id))
-			{
-				settype($section_id, 'array');
-			}
-			$query->where('ref_2 IN (' . implode(', ', $section_id) . ')');
+			$query->where($db->quoteName('ref_2') . ' = ' . (int)$section_id);
 		}
-		if(count($ids))
+		if(!empty($ids))
 		{
-			$query->where('id NOT IN (' . implode(', ', $ids) . ')');
+			$query->where($db->quoteName('id') . ' NOT IN (' . implode(', ', $ids) . ')');
 		}
-		$query->order('ctime DESC');
+		$query->order($db->quoteName('ctime') . ' DESC');
 
-		$query .= " LIMIT 0, " . $this->input->get('notiflimit', 5);
-
-		$db->setQuery($query);
+		$limit = $this->input->getInt('notiflimit', 5);
+		$db->setQuery($query, 0, $limit);
 
 
 		try{
@@ -1337,14 +1366,25 @@ class JoomcckControllerAjax extends MControllerAdmin
 	}
 	public function loadfieldparams()
 	{
-		$xml = JPATH_ROOT.$this->input->getString('dir').DIRECTORY_SEPARATOR.str_replace('.php', '.xml', $this->input->get('value'));
-		$xml =\Joomla\Filesystem\Path::clean($xml);
+		$dir = $this->input->getString('dir');
+		$value = $this->input->getCmd('value');
+		$xml = \Joomla\Filesystem\Path::clean(JPATH_ROOT . $dir . DIRECTORY_SEPARATOR . str_replace('.php', '.xml', $value));
+
+		$resolvedPath = realpath(dirname($xml));
+		if($resolvedPath === false || strpos($resolvedPath, realpath(JPATH_ROOT)) !== 0)
+		{
+			\Joomla\CMS\Factory::getApplication()->close();
+			return;
+		}
+
 		$form = '';
-		
-		$segments = explode('/', $this->input->getString('dir'));
-		FieldHelper::loadLang($segments[4]);
+
+		$segments = explode('/', $dir);
+		if(isset($segments[4])) {
+			FieldHelper::loadLang($segments[4]);
+		}
 		if(is_file($xml)) {
-			$form = MFormHelper::getFieldParams($xml, $this->input->get('fid'), str_replace('.php', '', $this->input->get('value')));
+			$form = MFormHelper::getFieldParams($xml, $this->input->get('fid'), str_replace('.php', '', $value));
 		}
 
 		echo $form;
@@ -1369,10 +1409,11 @@ class JoomcckControllerAjax extends MControllerAdmin
 
 		$field = MModelBase::getInstance('TField', 'JoomcckModel')->getItem($this->input->get('fid'));
 
+		$gateway = preg_replace('/[^a-zA-Z0-9_-]/', '', $gateway);
 		$xml = JPATH_ROOT . '/components/com_joomcck/gateways' . DIRECTORY_SEPARATOR . $gateway . DIRECTORY_SEPARATOR . $gateway . '.xml';
 		if(! is_file($xml))
 		{
-			echo "File not found: {$xml}";
+			echo 'Gateway configuration not found';
 		}
 		$out = array();
 

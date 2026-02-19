@@ -70,23 +70,30 @@ class JoomcckTableRecord extends \Joomla\CMS\Table\Table
 
 	public function onFollow()
 	{
-		$this->_db->setQuery("SELECT COUNT(*) FROM #__js_res_subscribe WHERE ref_id = {$this->id} and `type` = 'record'");
-		$this->_db->execute();
+		$query = $this->_db->getQuery(true)
+			->select('COUNT(*)')
+			->from($this->_db->quoteName('#__js_res_subscribe'))
+			->where($this->_db->quoteName('ref_id') . ' = ' . (int)$this->id)
+			->where($this->_db->quoteName('type') . ' = ' . $this->_db->quote('record'));
+		$this->_db->setQuery($query);
 		$this->subscriptions_num = $this->_db->loadResult();
 		$this->store();
 	}
 
 	public function onBookmark()
 	{
-		$this->_db->setQuery("SELECT COUNT(*) FROM #__js_res_favorite WHERE record_id = " . $this->id);
-		$this->_db->execute();
+		$query = $this->_db->getQuery(true)
+			->select('COUNT(*)')
+			->from($this->_db->quoteName('#__js_res_favorite'))
+			->where($this->_db->quoteName('record_id') . ' = ' . (int)$this->id);
+		$this->_db->setQuery($query);
 		$this->favorite_num = $this->_db->loadResult();
 		$this->store();
 	}
 
 	public function onRepost()
 	{
-		$this->_db->setQuery("SELECT host_id FROM `#__js_res_record_repost` WHERE record_id = " . $this->id);
+		$this->_db->setQuery("SELECT host_id FROM `#__js_res_record_repost` WHERE record_id = " . (int)$this->id);
 		$this->_db->execute();
 		$this->repostedby = json_encode($this->_db->loadColumn());
 		$this->store();
@@ -440,8 +447,13 @@ class JoomcckTableRecord extends \Joomla\CMS\Table\Table
 
 		if($type->params->get('properties.item_title_unique'))
 		{
-			$sql = "SELECT id from #__js_res_record WHERE title = '{$this->_db->escape($this->title)}' AND type_id = {$this->type_id} AND id NOT IN(" . (int)@$this->id . ")";
-			$this->_db->setQuery($sql);
+			$query = $this->_db->getQuery(true)
+				->select($this->_db->quoteName('id'))
+				->from($this->_db->quoteName('#__js_res_record'))
+				->where($this->_db->quoteName('title') . ' = ' . $this->_db->quote($this->title))
+				->where($this->_db->quoteName('type_id') . ' = ' . (int)$this->type_id)
+				->where($this->_db->quoteName('id') . ' NOT IN(' . (int)$this->id . ')');
+			$this->_db->setQuery($query);
 			if($this->_db->loadResult())
 			{
 				$this->setError(\Joomla\CMS\Language\Text::_('C_MSG_TITLEEXISTS'));

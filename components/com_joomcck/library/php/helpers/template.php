@@ -35,7 +35,6 @@ class CTmpl
 
 			$file = array();
 		}
-		var_dump($json1, $json3);
 		return new \Joomla\Registry\Registry($file);
 	}
 	static public function prepareTemplate($type, $name, &$params)

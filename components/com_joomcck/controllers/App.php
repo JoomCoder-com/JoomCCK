@@ -150,7 +150,6 @@ class JoomcckControllerApp extends MControllerForm
         ]);
 
         if (!$et->extension_id) {
-			var_dump('no ext it');
 			return;
 		}
 		

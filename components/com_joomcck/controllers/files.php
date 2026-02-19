@@ -37,19 +37,30 @@ class JoomcckControllerFiles extends MControllerAdmin
 
         $db = \Joomla\CMS\Factory::getDbo();
 
-        $db->setQuery("SELECT id, fields FROM #__js_res_record WHERE section_id = " . $section_id);
+        $query = $db->getQuery(true)
+            ->select($db->quoteName(['id', 'fields']))
+            ->from($db->quoteName('#__js_res_record'))
+            ->where($db->quoteName('section_id') . ' = ' . (int)$section_id);
+        $db->setQuery($query);
         $records = $db->loadObjectList();
 
         foreach ($records as $record) {
             $data = json_decode($record->fields, TRUE);
-            $db->setQuery("SELECT id, filename, realname, ext, size, title, description, width, height, fullpath, params
-			FROM #__js_res_files
-			WHERE record_id = {$record->id} AND field_id = {$field_id}");
+            $query = $db->getQuery(true)
+                ->select($db->quoteName(['id', 'filename', 'realname', 'ext', 'size', 'title', 'description', 'width', 'height', 'fullpath', 'params']))
+                ->from($db->quoteName('#__js_res_files'))
+                ->where($db->quoteName('record_id') . ' = ' . (int)$record->id)
+                ->where($db->quoteName('field_id') . ' = ' . (int)$field_id);
+            $db->setQuery($query);
 
             $data[$field_id] = $db->loadAssocList();
             $data            = json_encode($data);
 
-            $db->setQuery("UPDATE #__js_res_record SET fields = '{$data}' WHERE id = " . $record->id);
+            $query = $db->getQuery(true)
+                ->update($db->quoteName('#__js_res_record'))
+                ->set($db->quoteName('fields') . ' = ' . $db->quote($data))
+                ->where($db->quoteName('id') . ' = ' . (int)$record->id);
+            $db->setQuery($query);
             $db->execute();
         }
     }
@@ -106,6 +117,15 @@ class JoomcckControllerFiles extends MControllerAdmin
 
             return;
         }
+
+        // Access control: verify user can view this record
+        $user = Factory::getApplication()->getIdentity();
+        if (!in_array($record->access, $user->getAuthorisedViewLevels()) && $record->user_id != $user->get('id')) {
+            Factory::getApplication()->enqueueMessage(\Joomla\CMS\Language\Text::_('JERROR_ALERTNOAUTHOR'), 'warning');
+            $this->setRedirect($return);
+            return;
+        }
+
         $values  = json_decode($record->fields, TRUE);
         $default = @$values[$field_id];
 
@@ -206,12 +226,13 @@ class JoomcckControllerFiles extends MControllerAdmin
             $browser = 'OTHER';
         }
 
+        $safeFilename = str_replace(['"', "\r", "\n"], '', basename($files->realname));
         header('Content-Type: ' . (($browser == 'IE' || $browser == 'OPERA') ? 'application/octetstream' : 'application/octet-stream'));
         header('Expires: ' . gmdate('D, d M Y H:i:s') . ' GMT');
         header('Content-Transfer-Encoding: binary');
-        header('Content-Length: ' . $files->size);
+        header('Content-Length: ' . (int)$files->size);
         header('Content-Encoding: none');
-        header('Content-Disposition: attachment; filename="' . $files->realname . '"');
+        header('Content-Disposition: attachment; filename="' . $safeFilename . '"');
         header('Cache-Control: no-cache, must-revalidate');
         header('Pragma: no-cache');
 
@@ -243,10 +264,16 @@ class JoomcckControllerFiles extends MControllerAdmin
 
     public function download_attach()
     {
+        $user = Factory::getApplication()->getIdentity();
+        if (!$user->get('id')) {
+            Factory::getApplication()->enqueueMessage(\Joomla\CMS\Language\Text::_('JGLOBAL_YOU_MUST_LOGIN_FIRST'), 'warning');
+            return;
+        }
+
         $params = \Joomla\CMS\Component\ComponentHelper::getParams('com_joomcck');
 
         $files = \Joomla\CMS\Table\Table::getInstance('Files', 'JoomcckTable');
-        if ($id = $this->input->get('id', 0)) {
+        if ($id = $this->input->getInt('id', 0)) {
             $files->load($id);
         }
         if (!$files->id) {
@@ -276,12 +303,13 @@ class JoomcckControllerFiles extends MControllerAdmin
             $browser = 'OTHER';
         }
 
+        $safeFilename = str_replace(['"', "\r", "\n"], '', basename($files->realname));
         header('Content-Type: ' . (($browser == 'IE' || $browser == 'OPERA') ? 'application/octetstream' : 'application/octet-stream'));
         header('Expires: ' . gmdate('D, d M Y H:i:s') . ' GMT');
         header('Content-Transfer-Encoding: binary');
-        header('Content-Length: ' . $files->size);
+        header('Content-Length: ' . (int)$files->size);
         header('Content-Encoding: none');
-        header('Content-Disposition: attachment; filename="' . $files->realname . '"');
+        header('Content-Disposition: attachment; filename="' . $safeFilename . '"');
         header('Cache-Control: no-cache, must-revalidate');
         header('Pragma: no-cache');
 
@@ -296,8 +324,14 @@ class JoomcckControllerFiles extends MControllerAdmin
     }
     public function upload()
     {
+        \Joomla\CMS\Session\Session::checkToken('request') or jexit(\Joomla\CMS\Language\Text::_('JINVALID_TOKEN'));
 
-
+        $user = \Joomla\CMS\Factory::getApplication()->getIdentity();
+        if (!$user->get('id')) {
+            echo json_encode(['error' => 1, 'msg' => \Joomla\CMS\Language\Text::_('JGLOBAL_YOU_MUST_LOGIN_FIRST')]);
+            \Joomla\CMS\Factory::getApplication()->close();
+            return;
+        }
 
         $loader = new Flow\Autoloader();
         $loader->autoload('vendors\flow\php\src\Flow\ConfigInterface');
@@ -331,7 +365,7 @@ class JoomcckControllerFiles extends MControllerAdmin
             $field = \Joomla\CMS\Table\Table::getInstance('Field', 'JoomcckTable');
             $field->load($this->input->getInt('field_id'));
             if (!$field->id) {
-                echo json_encode(['error' => 1, 'msg' => 'Cannot load field: ' . $this->input->getInt('field_id')]);
+                echo json_encode(['error' => 1, 'msg' => 'Cannot load field configuration']);
                 \Joomla\CMS\Factory::getApplication()->close();
                 return;
             }
@@ -364,7 +398,15 @@ class JoomcckControllerFiles extends MControllerAdmin
         $exts    = explode(',', str_replace(' ', '', $allowedExts));
 
         if (!in_array($ext, $exts)) {
-            echo json_encode(['error' => 1, 'msg' => 'Not allowed extension <b>' . $ext . '</b>: ' . implode(', ', $exts)]);
+            echo json_encode(['error' => 1, 'msg' => 'Not allowed extension: ' . htmlspecialchars($ext, ENT_QUOTES, 'UTF-8') . '. Allowed: ' . implode(', ', $exts)]);
+            \Joomla\CMS\Factory::getApplication()->close();
+            return;
+        }
+
+        // Block dangerous extensions that could execute on server
+        $dangerousExts = ['php', 'phtml', 'php3', 'php4', 'php5', 'php7', 'phps', 'pht', 'phar', 'cgi', 'pl', 'py', 'jsp', 'asp', 'aspx', 'sh', 'bash', 'exe', 'bat', 'cmd', 'com', 'htaccess'];
+        if (in_array($ext, $dangerousExts)) {
+            echo json_encode(['error' => 1, 'msg' => 'File type not permitted for security reasons']);
             \Joomla\CMS\Factory::getApplication()->close();
             return;
         }
@@ -398,7 +440,7 @@ class JoomcckControllerFiles extends MControllerAdmin
                 }
             }
         } else {
-            echo json_encode(['error' => 2, 'msg' => 'Couldnot save: ' . $src]);
+            echo json_encode(['error' => 2, 'msg' => 'Could not save uploaded file']);
             \Joomla\CMS\Factory::getApplication()->close();
             return;
         }
@@ -410,15 +452,33 @@ class JoomcckControllerFiles extends MControllerAdmin
 
     public function mooupload()
     {
+        \Joomla\CMS\Session\Session::checkToken('request') or jexit(\Joomla\CMS\Language\Text::_('JINVALID_TOKEN'));
+
+        $user = \Joomla\CMS\Factory::getApplication()->getIdentity();
+        if (!$user->get('id')) {
+            header('Content-Type: application/json');
+            echo json_encode(['error' => 1, 'msg' => \Joomla\CMS\Language\Text::_('JGLOBAL_YOU_MUST_LOGIN_FIRST')]);
+            \Joomla\CMS\Factory::getApplication()->close();
+            return;
+        }
 
         require_once JPATH_ROOT . '/media/com_joomcck/js/mooupload/mooupload.php';
 
         $upload   = new Mooupload();
         $response = $upload->upload();
         if ($response['finish']) {
-            $user = \Joomla\CMS\Factory::getApplication()->getIdentity();
 
             $ext       = StringHelper::strtolower(pathinfo($response['upload_name'],PATHINFO_EXTENSION));
+
+            // Block dangerous extensions
+            $dangerousExts = ['php', 'phtml', 'php3', 'php4', 'php5', 'php7', 'phps', 'pht', 'phar', 'cgi', 'pl', 'py', 'jsp', 'asp', 'aspx', 'sh', 'bash', 'exe', 'bat', 'cmd', 'com', 'htaccess'];
+            if (in_array($ext, $dangerousExts)) {
+                header('Content-Type: application/json');
+                echo json_encode(['error' => 1, 'msg' => 'File type not permitted for security reasons']);
+                \Joomla\CMS\Factory::getApplication()->close();
+                return;
+            }
+
             $subfolder = $ext;
             if ($field_id = $this->input->getInt('field_id')) {
                 $field = \Joomla\CMS\Table\Table::getInstance('Field', 'JoomcckTable');
@@ -436,9 +496,9 @@ class JoomcckControllerFiles extends MControllerAdmin
         }
 
 
-        header('Cache-Control', 'no-cache, must-revalidate');
-	    header('Expires', 'Mon, 26 Jul 1997 05:00:00 GMT');
-	    header('Content-type', 'application/json');
+        header('Cache-Control: no-cache, must-revalidate');
+	    header('Expires: Mon, 26 Jul 1997 05:00:00 GMT');
+	    header('Content-Type: application/json');
 
         echo json_encode($response);
 

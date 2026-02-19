@@ -81,7 +81,7 @@ class JoomcckControllerImport extends MControllerAdmin
 			$section    = ItemsStore::getSection($this->input->getInt('section_id'));
 
 
-			$db->setQuery("SELECT * FROM #__js_res_import_rows WHERE `import` = '{$import_key}'");
+			$db->setQuery("SELECT * FROM #__js_res_import_rows WHERE `import` = " . $db->quote($import_key));
 			$list = $db->loadObjectList();
 
 			if(!$list)
@@ -338,7 +338,11 @@ class JoomcckControllerImport extends MControllerAdmin
 
 				if(!empty($fulltext))
 				{
-					$db->setQuery("UPDATE `#__js_res_record` SET fieldsdata = '" . $db->escape(strip_tags(implode(', ', $fulltext))) . "' WHERE id = $item->id");
+					$query = $db->getQuery(true)
+						->update($db->quoteName('#__js_res_record'))
+						->set($db->quoteName('fieldsdata') . ' = ' . $db->quote(strip_tags(implode(', ', $fulltext))))
+						->where($db->quoteName('id') . ' = ' . (int)$item->id);
+					$db->setQuery($query);
 					$db->execute();
 				}
 
@@ -367,10 +371,15 @@ class JoomcckControllerImport extends MControllerAdmin
 	{
 		static $categories = array();
 
+		$id = (int)$id;
 		if(!array_key_exists($id, $categories))
 		{
 			$db = \Joomla\CMS\Factory::getDbo();
-			$db->setQuery("SELECT id, title FROM #__js_res_categories WHERE id = {$id}");
+			$query = $db->getQuery(true)
+				->select($db->quoteName(['id', 'title']))
+				->from($db->quoteName('#__js_res_categories'))
+				->where($db->quoteName('id') . ' = ' . $id);
+			$db->setQuery($query);
 
 			$categories[$id] = json_encode($db->loadAssocList('id', 'title'));
 		}
@@ -445,7 +454,7 @@ class JoomcckControllerImport extends MControllerAdmin
 		$this->db    = \Joomla\CMS\Factory::getDbo();
 		$this->heads = array();
 
-		$this->db->setQuery("DELETE FROM `#__js_res_import_rows` WHERE `ctime` < NOW() - INTERVAL 1 DAY OR `import` = {$this->key}");
+		$this->db->setQuery("DELETE FROM `#__js_res_import_rows` WHERE `ctime` < NOW() - INTERVAL 1 DAY OR `import` = " . $this->db->quote($this->key));
 		$this->db->execute();
 
 		$ext = strtolower(pathinfo($upload,PATHINFO_EXTENSION));
@@ -597,9 +606,11 @@ class JoomcckControllerImport extends MControllerAdmin
 			return;
 		}
 
-		$sql = "INSERT INTO #__js_res_import_rows (id, `import`,`text`,`ctime`) VALUES (null, %d, '%s', NOW())";
-		$sql = sprintf($sql, $this->key, $this->db->escape(json_encode($data)));
-		$this->db->setQuery($sql);
+		$query = $this->db->getQuery(true)
+			->insert($this->db->quoteName('#__js_res_import_rows'))
+			->columns($this->db->quoteName(['import', 'text', 'ctime']))
+			->values($this->db->quote($this->key) . ', ' . $this->db->quote(json_encode($data)) . ', NOW()');
+		$this->db->setQuery($query);
 		$this->db->execute();
 
 		$columns     = array_keys($data);

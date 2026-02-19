@@ -550,33 +550,37 @@ class JFormFieldCDatetime extends CFormField
     public function getCalendarEvents($post)
     {
         $app   = \Joomla\CMS\Factory::getApplication();
-        $start = date('Y-m-d', ($app->input->get('from') / 1000));
-        $end   = date('Y-m-d', ($app->input->get('to') / 1000));
+        $start = date('Y-m-d', ($app->input->getInt('from') / 1000));
+        $end   = date('Y-m-d', ($app->input->getInt('to') / 1000));
 
         $db    = \Joomla\CMS\Factory::getDbo();
         $query = $db->getQuery(true);
+        $quotedKey = $db->quote($this->key);
+        $quotedStart = $db->quote($start);
+        $quotedEnd = $db->quote($end);
+
         if ($this->params->get('params.type', 'single') == 'range') {
 
-            $query->select('rv1.record_id');
-            $query->from('#__js_res_record_values AS rv1');
-            $query->leftJoin("#__js_res_record_values AS rv2 ON
-				rv2.record_id = rv1.record_id AND
-				rv2.value_index = 1 AND
-				rv2.field_key = '{$this->key}'");
-            $query->where("rv1.field_key = '$this->key'");
-            $query->where('rv1.value_index = 0');
-            $query->where("(
-				(DATE(rv1.field_value) BETWEEN '{$start}' AND '{$end}')
-				OR
-				(DATE(rv2.field_value) BETWEEN '{$start}' AND '{$end}')
-				OR
-				(DATE(rv1.field_value) < '{$start}'	AND DATE(rv2.field_value) > '{$end}')
-			)");
+            $query->select($db->quoteName('rv1.record_id'));
+            $query->from($db->quoteName('#__js_res_record_values', 'rv1'));
+            $query->leftJoin($db->quoteName('#__js_res_record_values', 'rv2') . ' ON '
+				. $db->quoteName('rv2.record_id') . ' = ' . $db->quoteName('rv1.record_id') . ' AND '
+				. $db->quoteName('rv2.value_index') . ' = 1 AND '
+				. $db->quoteName('rv2.field_key') . ' = ' . $quotedKey);
+            $query->where($db->quoteName('rv1.field_key') . ' = ' . $quotedKey);
+            $query->where($db->quoteName('rv1.value_index') . ' = 0');
+            $query->where('('
+				. '(DATE(' . $db->quoteName('rv1.field_value') . ') BETWEEN ' . $quotedStart . ' AND ' . $quotedEnd . ')'
+				. ' OR '
+				. '(DATE(' . $db->quoteName('rv2.field_value') . ') BETWEEN ' . $quotedStart . ' AND ' . $quotedEnd . ')'
+				. ' OR '
+				. '(DATE(' . $db->quoteName('rv1.field_value') . ') < ' . $quotedStart . ' AND DATE(' . $db->quoteName('rv2.field_value') . ') > ' . $quotedEnd . ')'
+			. ')');
         } else {
-            $query->select('record_id');
-            $query->from('#__js_res_record_values');
-            $query->where("field_key = '$this->key'");
-            $query->where("(DATE(field_value) BETWEEN '{$start}' AND '{$end}' )");
+            $query->select($db->quoteName('record_id'));
+            $query->from($db->quoteName('#__js_res_record_values'));
+            $query->where($db->quoteName('field_key') . ' = ' . $quotedKey);
+            $query->where('(DATE(' . $db->quoteName('field_value') . ') BETWEEN ' . $quotedStart . ' AND ' . $quotedEnd . ')');
         }
 
         $db->setQuery($query);
@@ -602,7 +606,7 @@ class JFormFieldCDatetime extends CFormField
         $db->setQuery($query);
         $list = $db->loadAssocList();
 
-        $db->setQuery("SELECT id FROM `#__js_res_fields` WHERE published = 1 AND `key` = '" . $this->key . "'");
+        $db->setQuery("SELECT id FROM `#__js_res_fields` WHERE published = 1 AND `key` = " . $db->quote($this->key));
         $fields_ids = $db->loadColumn();
 
         foreach ($list as &$event) {

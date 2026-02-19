@@ -81,7 +81,6 @@ class JoomcckViewTemplates extends MViewBase
 			<i class="icon-edit"></i> '.\Joomla\CMS\Language\Text::_('CSAVE').'
 			</button>';
 
-		var_dump($app->input->get('inner'));
 		if($app->input->get('inner'))
 		{
 			$this->buttons['saveclose'] = '<button type="button" class="btn" onclick="javascript:Joomla.submitbutton(\'templates.saveclose\')">
