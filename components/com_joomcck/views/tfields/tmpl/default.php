@@ -76,6 +76,9 @@ if($saveOrder)
                     <th class="title">
 				        <?php echo \Joomla\CMS\HTML\HTMLHelper::_('grid.sort', 'CFIELDLABEL', 'f.label', $listDirn, $listOrder); ?>
                     </th>
+                    <th>
+				        <?php echo \Joomla\CMS\HTML\HTMLHelper::_('grid.sort', 'JFIELD_ALIAS_LABEL', 'f.alias', $listDirn, $listOrder); ?>
+                    </th>
                     <th width="1%">
 		                <?php echo \Joomla\CMS\HTML\HTMLHelper::_('grid.sort', 'CTYPE', 'f.field_type', $listDirn, $listOrder); ?>
                     </th>
@@ -147,6 +150,9 @@ if($saveOrder)
 							        <?php echo $this->escape($item->label); ?>
                                 </a>
                             </div>
+                        </td>
+                        <td>
+                            <small><?php echo $this->escape($item->alias); ?></small>
                         </td>
                         <td nowrap="nowrap">
 		                    <?php

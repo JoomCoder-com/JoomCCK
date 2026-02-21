@@ -62,6 +62,35 @@ class JoomcckTableField extends \Joomla\CMS\Table\Table
 			return false;
 		}
 
+		// Auto-generate alias from label if empty
+		$this->alias = trim($this->alias);
+		if (empty($this->alias)) {
+			$this->alias = $this->label;
+		}
+		$this->alias = \Joomla\CMS\Application\ApplicationHelper::stringURLSafe($this->alias);
+		if (trim(str_replace('-', '', $this->alias)) === '') {
+			$this->alias = \Joomla\CMS\Factory::getDate()->format('Y-m-d-H-i-s');
+		}
+
+		// Ensure alias is unique within same type_id
+		$db = $this->getDbo();
+		$original = $this->alias;
+		$i = 2;
+		while (true) {
+			$query = $db->getQuery(true)
+				->select('id')
+				->from($db->quoteName('#__js_res_fields'))
+				->where($db->quoteName('alias') . ' = ' . $db->quote($this->alias))
+				->where($db->quoteName('type_id') . ' = ' . (int) $this->type_id);
+			if ($this->id) {
+				$query->where($db->quoteName('id') . ' != ' . (int) $this->id);
+			}
+			$db->setQuery($query);
+			if (!$db->loadResult()) break;
+			$this->alias = $original . '-' . $i;
+			$i++;
+		}
+
 		if(trim($this->user_id) == '') {
 			$this->user_id = (int)\Joomla\CMS\Factory::getApplication()->getIdentity()->get('id');
 		}

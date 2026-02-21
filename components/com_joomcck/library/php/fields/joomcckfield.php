@@ -28,6 +28,7 @@ class CFormField extends \Joomla\CMS\Form\FormField{
 	public $group_id;
 	public $group_icon;
 	public $ordering;
+	public $alias_keys = [];
 	public $group_order;
 	public $record;
 	public $values;
@@ -328,6 +329,18 @@ class CFormField extends \Joomla\CMS\Form\FormField{
 		{
 			$db = \Joomla\CMS\Factory::getDbo();
 		}
+
+		// Expand field_key condition for alias-based cross-type matching
+		if (!empty($this->alias_keys) && count($this->alias_keys) > 1) {
+			$quoted = array_map([$db, 'quote'], $this->alias_keys);
+			$inClause = 'field_key IN (' . implode(',', $quoted) . ')';
+			$sql = str_replace(
+				'field_key = ' . $db->quote($this->key),
+				$inClause,
+				$sql
+			);
+		}
+
 		if(! isset($ids[md5($sql)]))
 		{
 			$db->setQuery($sql);

@@ -114,6 +114,10 @@ MExtendedHelper::renderNotice();
                         <div class="controls"><?php echo $this->form->getInput('label'); ?></div>
                     </div>
                     <div class="control-group">
+                        <div class="form-label"><?php echo $this->form->getLabel('alias'); ?></div>
+                        <div class="controls"><?php echo $this->form->getInput('alias'); ?></div>
+                    </div>
+                    <div class="control-group">
                         <div class="form-label"><?php echo $this->form->getLabel('field_type'); ?></div>
                         <div class="controls"><?php echo $this->form->getInput('field_type'); ?></div>
                     </div>

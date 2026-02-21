@@ -1541,8 +1541,9 @@ class JoomcckModelRecords extends MModelList
 		if(count($types) > 1)
 		{
 			$query->select('count(f.id) as nums');
+			$query->select('GROUP_CONCAT(DISTINCT f.`key`) as alias_keys');
 			$query->having('nums > 1');
-			$query->group('f.`key`');
+			$query->group('COALESCE(NULLIF(f.alias, \'\'), f.`key`)');
 		}
 		$key = md5((string)$query);
 
@@ -1563,6 +1564,11 @@ class JoomcckModelRecords extends MModelList
 			$default           = \Joomla\CMS\Factory::getApplication()->getUserState('com_joomcck.section' . FilterHelper::key() . '.filter_' . $filter->key);
 			$name              = 'JFormFieldC' . ucfirst($filter->field_type);
 			$out[$filter->key] = new $name($filter, $default);
+
+			// Set alias_keys for cross-type key expansion
+			if (isset($filter->alias_keys) && $filter->alias_keys) {
+				$out[$filter->key]->alias_keys = explode(',', $filter->alias_keys);
+			}
 
 			// clean value from empty strings
 			ArrayHelper::clean_r($out[$filter->key]->value);

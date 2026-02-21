@@ -57,6 +57,11 @@ class com_joomcckInstallerScript
 	    }
 
         $this->_updateTables();
+
+        if (version_compare($this->currentVersion, '6.3.0', '<')) {
+            $this->_migrateFieldAliases();
+        }
+
         //$this->_joomcck();
         $this->_createLink();
 
@@ -534,6 +539,47 @@ class com_joomcckInstallerScript
         (236,'Zambia','ZM','ZMB','260'), (237,'Zimbabwe','ZW','ZWE','263');");
 		$db->execute();
 	}
+
+    private function _migrateFieldAliases()
+    {
+        $db = \Joomla\CMS\Factory::getDbo();
+        $query = $db->getQuery(true)
+            ->select('id, label, type_id')
+            ->from('#__js_res_fields')
+            ->where('alias = ' . $db->quote('') . ' OR alias IS NULL');
+        $db->setQuery($query);
+        $fields = $db->loadObjectList();
+
+        foreach ($fields as $field) {
+            $alias = \Joomla\CMS\Application\ApplicationHelper::stringURLSafe($field->label);
+            if (trim(str_replace('-', '', $alias)) === '') {
+                $alias = 'field-' . $field->id;
+            }
+
+            // Ensure uniqueness within type_id
+            $original = $alias;
+            $i = 2;
+            while (true) {
+                $check = $db->getQuery(true)
+                    ->select('id')
+                    ->from('#__js_res_fields')
+                    ->where('alias = ' . $db->quote($alias))
+                    ->where('type_id = ' . (int) $field->type_id)
+                    ->where('id != ' . (int) $field->id);
+                $db->setQuery($check);
+                if (!$db->loadResult()) break;
+                $alias = $original . '-' . $i;
+                $i++;
+            }
+
+            $update = $db->getQuery(true)
+                ->update('#__js_res_fields')
+                ->set('alias = ' . $db->quote($alias))
+                ->where('id = ' . (int) $field->id);
+            $db->setQuery($update);
+            $db->execute();
+        }
+    }
 
     private function _deleteFiles59()
     {

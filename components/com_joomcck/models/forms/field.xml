@@ -3,6 +3,8 @@
 	<field id="id" name="id" type="hidden" default="0" label="ID" readonly="true" class="readonly" />
 	<field id="label" name="label" type="text" default="" label="XFORM_FIELDLABEL"
 		required="true" />
+	<field id="alias" name="alias" type="text" default="" label="JFIELD_ALIAS_LABEL"
+		description="JFIELD_ALIAS_DESC" hint="JFIELD_ALIAS_PLACEHOLDER" />
 	<field id="published" name="published" type="list" label="JSTATUS"
 		class="form-select" size="1" default="1">
 		<option value="1">JPUBLISHED</option> 

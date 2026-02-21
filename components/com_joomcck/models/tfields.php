@@ -26,6 +26,7 @@ class JoomcckModelTfields extends MModelList
 				'f.published',
 				'f.access',
 				'f.label',
+				'f.alias',
 				'g.title'
 			);
 		}
