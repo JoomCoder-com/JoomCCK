@@ -540,7 +540,7 @@ class com_joomcckInstallerScript
 		$db->execute();
 	}
 
-    private function _migrateFieldAliases()
+    public function _migrateFieldAliases()
     {
         $db = \Joomla\CMS\Factory::getDbo();
         $query = $db->getQuery(true)

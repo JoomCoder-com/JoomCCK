@@ -81,6 +81,7 @@ switch($params->get('db_action'))
 
 		$install = new com_joomcckInstallerScript();
 		$install->_updateTables();
+		$install->_migrateFieldAliases();
 		$app->enqueueMessage('Database structure updated!','success');
 
 
