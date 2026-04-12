@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 72 56" role="img" aria-label="JoomCCK">
+    <g fill="none" stroke-linejoin="round" stroke-linecap="round">
+        <path d="M 8 28 C 8 12, 28 12, 36 28 C 44 44, 64 44, 64 28 C 64 12, 44 12, 36 28 C 28 44, 8 44, 8 28 Z"
+              stroke="#0f1b2d" stroke-width="10"/>
+        <path d="M 8 28 C 8 12, 28 12, 36 28 C 44 44, 64 44, 64 28 C 64 12, 44 12, 36 28 C 28 44, 8 44, 8 28 Z"
+              stroke="#29c5ff" stroke-width="6"/>
+    </g>
+</svg>

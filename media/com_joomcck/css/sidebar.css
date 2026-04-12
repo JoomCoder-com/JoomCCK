@@ -78,30 +78,22 @@ body.jcck-sidebar-mini .jcck-sidebar { width: var(--jcck-sidebar-mini-width); }
 
 .jcck-sidebar-brand:hover { color: #fff; text-decoration: none; }
 
-.jcck-sidebar-brand-mark {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    width: 32px;
+.jcck-sidebar-brand-full,
+.jcck-sidebar-brand-mini {
+    display: block;
     height: 32px;
-    background: var(--jcck-sidebar-active);
-    color: #fff;
-    border-radius: 6px;
-    font-weight: 700;
-    flex: 0 0 32px;
+    width: auto;
+    max-width: 100%;
+    flex: 0 1 auto;
 }
 
-.jcck-sidebar-brand-text {
-    overflow: hidden;
-    white-space: nowrap;
-    text-overflow: ellipsis;
-}
+.jcck-sidebar-brand-mini { display: none; }
 
 .jcck-sidebar-mini {
     background: transparent;
     border: 0;
-    color: var(--jcck-sidebar-muted);
-    padding: 6px 8px;
+    color: var(--jcck-sidebar-fg);
+    padding: 8px 10px;
     border-radius: 4px;
     cursor: pointer;
     line-height: 1;
@@ -115,9 +107,10 @@ body.jcck-sidebar-mini .jcck-sidebar { width: var(--jcck-sidebar-mini-width); }
 
 body.jcck-sidebar-mini .jcck-sidebar-mini-icon { transform: rotate(180deg); }
 
-/* In mini mode, hide the brand so the expand button owns the header row
- * and doesn't overlap with the "J" mark in the 64px rail. */
-body.jcck-sidebar-mini .jcck-sidebar-brand { display: none; }
+/* In mini mode, swap the full horizontal logo for the compact infinity mark. */
+body.jcck-sidebar-mini .jcck-sidebar-brand-full { display: none; }
+body.jcck-sidebar-mini .jcck-sidebar-brand-mini { display: block; height: 22px; }
+body.jcck-sidebar-mini .jcck-sidebar-brand { flex: 0 0 auto; }
 
 body.jcck-sidebar-mini .jcck-sidebar-header {
     justify-content: center;

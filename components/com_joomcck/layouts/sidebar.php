@@ -92,19 +92,14 @@ $groups = [
        aria-label="JoomCCK"
        tabindex="-1">
 	<div class="jcck-sidebar-header">
-		<a class="jcck-sidebar-brand" href="<?php echo Url::view('cpanel'); ?>">
-			<span class="jcck-sidebar-brand-mark">J</span>
-			<span class="jcck-sidebar-brand-text">JoomCCK</span>
+		<a class="jcck-sidebar-brand" href="<?php echo Url::view('cpanel'); ?>" aria-label="JoomCCK">
+			<img class="jcck-sidebar-brand-full"
+			     src="<?php echo $baseUrl; ?>/media/com_joomcck/images/joomcck-logo.svg?v=<?php echo $cssVer; ?>"
+			     alt="JoomCCK">
+			<img class="jcck-sidebar-brand-mini"
+			     src="<?php echo $baseUrl; ?>/media/com_joomcck/images/joomcck-logo-mini.svg?v=<?php echo $cssVer; ?>"
+			     alt="" aria-hidden="true">
 		</a>
-		<button type="button"
-		        class="jcck-sidebar-mini"
-		        data-jcck-sidebar-mini
-		        aria-controls="jcck-sidebar"
-		        aria-pressed="false"
-		        title="<?php echo Text::_('CSIDEBAR_MINIMIZE'); ?>"
-		        aria-label="<?php echo Text::_('CSIDEBAR_MINIMIZE'); ?>">
-			<i class="fas fa-angle-double-left jcck-sidebar-mini-icon"></i>
-		</button>
 		<button type="button"
 		        class="jcck-sidebar-close"
 		        data-jcck-sidebar-mobile-close
@@ -143,6 +138,15 @@ $groups = [
 	        aria-expanded="false"
 	        aria-label="<?php echo Text::_('CSIDEBAR_OPEN'); ?>">
 		<span></span><span></span><span></span>
+	</button>
+	<button type="button"
+	        class="jcck-sidebar-mini"
+	        data-jcck-sidebar-mini
+	        aria-controls="jcck-sidebar"
+	        aria-pressed="false"
+	        title="<?php echo Text::_('CSIDEBAR_MINIMIZE'); ?>"
+	        aria-label="<?php echo Text::_('CSIDEBAR_MINIMIZE'); ?>">
+		<i class="fas fa-angle-double-left jcck-sidebar-mini-icon"></i>
 	</button>
 	<div class="jcck-topbar-spacer"></div>
 	<a class="jcck-topbar-doc"
