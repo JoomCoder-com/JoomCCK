@@ -126,7 +126,7 @@ function getActiveClass($view)
     <?php
     $session = \Joomla\CMS\Factory::getSession();
     $isFullscreen = $session->get('joomcck_fullscreen', 0);
-    $toggleUrl = \Joomla\CMS\Uri\Uri::getInstance();
+    $toggleUrl = clone \Joomla\CMS\Uri\Uri::getInstance();
     $toggleUrl->setVar('joomcck_fullscreen_toggle', 1);
     ?>
     <a class="btn btn-link text-white" rel="tooltip" title="<?php echo \Joomla\CMS\Language\Text::_('CFULLSCREEN_TOGGLE'); ?>" href="<?php echo $toggleUrl->toString(); ?>"><i class="fas <?php echo $isFullscreen ? 'fa-compress' : 'fa-expand'; ?>"></i></a>
