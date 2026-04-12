@@ -11,6 +11,7 @@ use Joomla\CMS\HTML\HTMLHelper;
 use Joomla\CMS\Language\Text;
 
 defined('_JEXEC') or die('Restricted access'); ?>
+<?php echo HTMLFormatHelper::layout('navbar'); ?>
 <?php
 /** @var Joomla\CMS\WebAsset\WebAssetManager $wa */
 $wa = $this->document->getWebAssetManager();

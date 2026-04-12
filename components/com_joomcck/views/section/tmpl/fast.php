@@ -9,6 +9,9 @@
      */
 
 defined('_JEXEC') || die('Restricted access');
+
+echo HTMLFormatHelper::layout('navbar');
+
 $view = \Joomla\CMS\Factory::getApplication()->input->getCmd('view');
 \Joomla\CMS\HTML\HTMLHelper::_('behavior.formvalidator');
 \Joomla\CMS\HTML\HTMLHelper::_('behavior.keepalive');

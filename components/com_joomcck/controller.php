@@ -48,9 +48,32 @@ class JoomcckController extends MControllerBase
 			return;
 		}
 
+		// Fullscreen admin UI: toggle + session-state application. Runs for every
+		// view (including `form`) so editing a record preserves the sidebar shell.
+		// Guarded by MECAccess::isAdmin() so public/guest submissions are unaffected.
+		if(MECAccess::isAdmin())
+		{
+			if($this->input->getCmd('joomcck_fullscreen_toggle'))
+			{
+				$session = \Joomla\CMS\Factory::getSession();
+				$current = $session->get('joomcck_fullscreen', 0);
+				$session->set('joomcck_fullscreen', $current ? 0 : 1);
+
+				$uri = \Joomla\CMS\Uri\Uri::getInstance();
+				$uri->delVar('joomcck_fullscreen_toggle');
+				$app->redirect($uri->toString());
+			}
+
+			$session = \Joomla\CMS\Factory::getSession();
+			if($session->get('joomcck_fullscreen', 0))
+			{
+				$this->input->set('tmpl', 'component');
+			}
+		}
+
 		if(in_array($this->input->get('view'),
-                array('cpanel', 'items', 'sections', 'section', 'ctypes', 'ctype', 
-                    'tfields', 'tfield', 'groups', 'group', 'templates', 'packs', 
+                array('cpanel', 'items', 'sections', 'section', 'ctypes', 'ctype',
+                    'tfields', 'tfield', 'groups', 'group', 'templates', 'packs',
                     'pack', 'tools', 'votes', 'tags', 'comms', 'comm', 'moderators',
                     'cats','auditlog','notifications','import'))
 		)
@@ -69,26 +92,6 @@ class JoomcckController extends MControllerBase
 			}
 
 			if(\Joomla\CMS\Component\ComponentHelper::getParams('com_joomcck')->get('tmpl_full'))
-			{
-				$this->input->set('tmpl', 'component');
-			}
-
-			// Handle fullscreen toggle via URL parameter
-			if($this->input->getCmd('joomcck_fullscreen_toggle'))
-			{
-				$session = \Joomla\CMS\Factory::getSession();
-				$current = $session->get('joomcck_fullscreen', 0);
-				$session->set('joomcck_fullscreen', $current ? 0 : 1);
-
-				// Redirect to same page without toggle param (one-time redirect)
-				$uri = \Joomla\CMS\Uri\Uri::getInstance();
-				$uri->delVar('joomcck_fullscreen_toggle');
-				$app->redirect($uri->toString());
-			}
-
-			// Apply fullscreen from session (no redirect, just set input)
-			$session = \Joomla\CMS\Factory::getSession();
-			if($session->get('joomcck_fullscreen', 0))
 			{
 				$this->input->set('tmpl', 'component');
 			}

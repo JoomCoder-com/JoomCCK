@@ -8,6 +8,8 @@
  */
 defined('_JEXEC') or die();
 
+echo HTMLFormatHelper::layout('navbar');
+
 \Joomla\CMS\HTML\HTMLHelper::_('bootstrap.tooltip', '*[rel^="tooltip"]');
 
 ?>

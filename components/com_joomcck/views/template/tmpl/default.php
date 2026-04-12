@@ -9,6 +9,8 @@
 
 defined('_JEXEC') or die('Restricted access');
 
+echo HTMLFormatHelper::layout('navbar');
+
 \Joomla\CMS\HTML\HTMLHelper::_('bootstrap.tooltip');
 /** @var Joomla\CMS\WebAsset\WebAssetManager $wa */
 $wa = $this->document->getWebAssetManager();

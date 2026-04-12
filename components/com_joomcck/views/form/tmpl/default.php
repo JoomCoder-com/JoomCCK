@@ -17,6 +17,8 @@ $app = \Joomla\CMS\Factory::getApplication();
 //$params = $this->state->get('params');
 ?>
 
+<?php echo HTMLFormatHelper::layout('navbar'); ?>
+
 <script type="text/javascript">
 	Joomla.submitbutton = function(task) {
 

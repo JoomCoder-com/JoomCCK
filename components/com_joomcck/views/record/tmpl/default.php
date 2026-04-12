@@ -13,6 +13,8 @@ use Joomcck\Layout\Helpers\Layout;
 use Joomla\CMS\Layout\LayoutHelper;
 ?>
 
+<?php echo HTMLFormatHelper::layout('navbar'); ?>
+
 <div class="contentpaneopen">
 	<?php
 	// Show navigation at top if enabled

@@ -11,6 +11,8 @@ use Joomla\CMS\HTML\HTMLHelper;
 
 defined('_JEXEC') or die;
 
+echo HTMLFormatHelper::layout('navbar');
+
 // Include the component HTML helpers.
 \Joomla\CMS\HTML\HTMLHelper::addIncludePath(JPATH_COMPONENT . '/helpers/html');
 
