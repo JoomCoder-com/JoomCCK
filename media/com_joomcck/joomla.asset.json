@@ -63,6 +63,28 @@
       "type": "script",
       "uri": "com_joomcck/js/vue/bridges/jquery-bridge.js",
       "dependencies": ["com_joomcck.form-validator"]
+    },
+    {
+      "name": "com_joomcck.chartjs",
+      "type": "script",
+      "uri": "com_joomcck/js/vendor/chart.umd.js",
+      "version": "4.4.3",
+      "attributes": {
+        "defer": true
+      }
+    },
+    {
+      "name": "com_joomcck.cpanel-dashboard",
+      "type": "script",
+      "uri": "com_joomcck/js/cpanel/dashboard.js",
+      "version": "1.0",
+      "dependencies": ["com_joomcck.chartjs", "jquery"]
+    },
+    {
+      "name": "com_joomcck.cpanel-dashboard",
+      "type": "style",
+      "uri": "com_joomcck/css/cpanel/dashboard.css",
+      "version": "1.0"
     }
   ]
 }
