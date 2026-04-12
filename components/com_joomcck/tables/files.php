@@ -58,6 +58,25 @@ class  JoomcckTableFiles extends \Joomla\CMS\Table\Table
 
 		return json_encode($this->_db->loadAssocList());
 	}
+	public function markDeleted($filenameOrId, $userId = null)
+	{
+		$key = is_numeric($filenameOrId) ? 'id' : 'filename';
+
+		if (!$this->load(array($key => $filenameOrId))) {
+			return false;
+		}
+
+		if ($userId === null) {
+			$userId = (int) \Joomla\CMS\Factory::getApplication()->getIdentity()->id;
+		}
+
+		$this->saved      = 2;
+		$this->deleted_at = \Joomla\CMS\Factory::getDate()->toSql();
+		$this->deleted_by = (int) $userId;
+
+		return $this->store();
+	}
+
 	public function markSaved($files, $record, $field_id = 0)
 	{
 

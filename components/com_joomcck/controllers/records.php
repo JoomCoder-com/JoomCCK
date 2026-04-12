@@ -519,35 +519,38 @@ class JoomcckControllerRecords extends MControllerAdmin
 		$db->setQuery("SELECT * FROM #__js_res_files WHERE record_id = " . $this->input->getInt('id'));
 		$files = $db->loadObjectList('id');
 
-
-		if(!empty($files) && !$type->params->get('audit.versioning'))
+		if(!empty($files))
 		{
-			$field_table   = \Joomla\CMS\Table\Table::getInstance('Field', 'JoomcckTable');
-			$joomcck_params = \Joomla\CMS\Component\ComponentHelper::getParams('com_joomcck');
+			$userId = (int) \Joomla\CMS\Factory::getApplication()->getIdentity()->id;
+			$now    = \Joomla\CMS\Factory::getDate()->toSql();
+			$ids    = implode(',', array_map('intval', array_keys($files)));
 
-			foreach($files AS $file)
+			$db->setQuery("UPDATE #__js_res_files
+				SET `saved` = 2, `deleted_at` = " . $db->quote($now) . ", `deleted_by` = " . $userId . "
+				WHERE id IN (" . $ids . ")");
+			$db->execute();
+
+			if(!$type->params->get('audit.versioning'))
 			{
-				$field_table->load($file->field_id);
-				$field_params = new \Joomla\Registry\Registry($field_table->params);
-				$subfolder    = $field_params->get('params.subfolder', $field_table->field_type);
-				if(is_file(JPATH_ROOT . DIRECTORY_SEPARATOR . $joomcck_params->get('general_upload') . DIRECTORY_SEPARATOR . $subfolder . DIRECTORY_SEPARATOR . $file->fullpath))
+				$field_table   = \Joomla\CMS\Table\Table::getInstance('Field', 'JoomcckTable');
+				$joomcck_params = \Joomla\CMS\Component\ComponentHelper::getParams('com_joomcck');
+
+				foreach($files AS $file)
 				{
-					unlink(JPATH_ROOT . DIRECTORY_SEPARATOR . $joomcck_params->get('general_upload') . DIRECTORY_SEPARATOR . $subfolder . DIRECTORY_SEPARATOR . $file->fullpath);
-				}
-				// deleting image field files
-				elseif(is_file(JPATH_ROOT . DIRECTORY_SEPARATOR . $file->fullpath))
-				{
-					unlink(JPATH_ROOT . DIRECTORY_SEPARATOR . $file->fullpath);
+					$field_table->load($file->field_id);
+					$field_params = new \Joomla\Registry\Registry($field_table->params);
+					$subfolder    = $field_params->get('params.subfolder', $field_table->field_type);
+					if(is_file(JPATH_ROOT . DIRECTORY_SEPARATOR . $joomcck_params->get('general_upload') . DIRECTORY_SEPARATOR . $subfolder . DIRECTORY_SEPARATOR . $file->fullpath))
+					{
+						unlink(JPATH_ROOT . DIRECTORY_SEPARATOR . $joomcck_params->get('general_upload') . DIRECTORY_SEPARATOR . $subfolder . DIRECTORY_SEPARATOR . $file->fullpath);
+					}
+					// deleting image field files
+					elseif(is_file(JPATH_ROOT . DIRECTORY_SEPARATOR . $file->fullpath))
+					{
+						unlink(JPATH_ROOT . DIRECTORY_SEPARATOR . $file->fullpath);
+					}
 				}
 			}
-			$db->setQuery("DELETE FROM #__js_res_files WHERE id IN (" . implode(',', array_keys($files)) . ")");
-			$db->execute();
-		}
-
-		if($files)
-		{
-			$db->setQuery("UPDATE #__js_res_files SET `saved` = 2 WHERE id IN (" . implode(',', array_keys($files)) . ")");
-			$db->execute();
 		}
 
 		if($type->params->get('audit.versioning'))

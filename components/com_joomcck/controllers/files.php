@@ -642,28 +642,28 @@ class JoomcckControllerFiles extends MControllerAdmin
         $full_file_path = JPATH_ROOT . DIRECTORY_SEPARATOR . $params->get('general_upload') . DIRECTORY_SEPARATOR . $subfolder . DIRECTORY_SEPARATOR . $files_table->fullpath;
 
 
-        if (is_file($full_file_path)) {
-            $out = array(
-                'success' => 1
-            );
+        $out = array(
+            'success' => is_file($full_file_path) ? 1 : 2
+        );
 
-            if (!$files_table->record_id || !$files_table->saved || !($type->params->get('audit.audit_log') && $type->params->get('audit.al27.on'))) {
-                \Joomla\Filesystem\File::delete($full_file_path);
-                $files_table->delete();
-            } else {
-                $files_table->saved = 2;
-                $files_table->store();
+        if (is_file($full_file_path)) {
+            \Joomla\Filesystem\File::delete($full_file_path);
+        }
+
+        if (!$files_table->record_id || !$files_table->saved) {
+            // Unlinked/unsaved temp file — hard delete is safe, nothing to audit.
+            $files_table->delete();
+        } else {
+            $file_snapshot = $files_table->getProperties();
+            $files_table->markDeleted($files_table->id);
+
+            if ($type->params->get('audit.audit_log') && $type->params->get('audit.al27.on')) {
                 $data             = $record_table->id ? $record_table->getProperties() : array();
-                $data['file']     = $files_table->getProperties();
+                $data['file']     = $file_snapshot;
                 $data['field']    = $field_table->label;
                 $data['field_id'] = $field_table->id;
                 ATlog::log($data, ATlog::REC_FILE_DELETED, 0, $files_table->field_id);
             }
-        } else {
-            $files_table->delete();
-            $out = array(
-                'success' => 2
-            );
         }
         $out['id'] = $id;
         if ($out['success'] > 0 && $record_table->id && $files_table->saved) {

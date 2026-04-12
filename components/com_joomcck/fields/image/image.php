@@ -333,34 +333,32 @@ class JFormFieldCImage extends CFormField
 
 		$full_file_path = JPATH_ROOT . DIRECTORY_SEPARATOR . $file;
 
+		$out = array(
+			'success' => is_file($full_file_path) ? 1 : 2
+		);
+
 		if(is_file($full_file_path))
 		{
-			$out = array(
-				'success' => 1
-			);
+			File::delete($full_file_path);
+		}
 
-			if(!$files_table->record_id || !$files_table->saved || !($type->params->get('audit.audit_log') && $type->params->get('audit.al27.on')))
+		if(!$files_table->record_id || !$files_table->saved)
+		{
+			$files_table->delete();
+		}
+		else
+		{
+			$file_snapshot = $files_table->getProperties();
+			$files_table->markDeleted($files_table->id);
+
+			if($type->params->get('audit.audit_log') && $type->params->get('audit.al27.on'))
 			{
-				File::delete($full_file_path);
-				$files_table->delete();
-			}
-			else
-			{
-				$files_table->saved = 2;
-				$files_table->store();
 				$data             = $record_table->id ? $record_table->getProperties() : array();
-				$data['file']     = $files_table->getProperties();
+				$data['file']     = $file_snapshot;
 				$data['field']    = $this->label;
 				$data['field_id'] = $this->id;
 				ATlog::log($data, ATlog::REC_FILE_DELETED, 0, $files_table->field_id);
 			}
-
-		}
-		else
-		{
-			$out = array(
-				'success' => 2
-			);
 		}
 
 		if($out['success'] > 0 && $record_table->id && $files_table->saved)
