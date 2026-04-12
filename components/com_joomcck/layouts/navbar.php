@@ -14,15 +14,26 @@ if(!MECAccess::isAdmin())
 	return;
 }
 
+// In fullscreen mode (tmpl=component) render the left off-canvas sidebar
+// instead of the top navbar. The sidebar layout handles its own asset loading.
+if (\Joomla\CMS\Factory::getApplication()->input->getCmd('tmpl') === 'component')
+{
+	echo HTMLFormatHelper::layout('sidebar');
+	return;
+}
+
 $view = \Joomla\CMS\Factory::getApplication()->input->getCmd('view');
 $disabled = (\Joomla\CMS\Factory::getApplication()->input->getCmd('boxchecked') ? ' disabled' : NULL);
 $img_url = \Joomla\CMS\Uri\Uri::root(TRUE) . '/media/com_joomcck/icons/16/';
-function getActiveClass($view)
+if (!function_exists('getActiveClass'))
 {
-	$disabled = (\Joomla\CMS\Factory::getApplication()->input->getCmd('boxchecked', 0) ? ' disabled' : NULL);
-	$cur_view = \Joomla\CMS\Factory::getApplication()->input->getCmd('view');
+	function getActiveClass($view)
+	{
+		$disabled = (\Joomla\CMS\Factory::getApplication()->input->getCmd('boxchecked', 0) ? ' disabled' : NULL);
+		$cur_view = \Joomla\CMS\Factory::getApplication()->input->getCmd('view');
 
-	echo ($view == $cur_view || $view . 's' == $cur_view ? 'active' : NULL) . $disabled;
+		echo ($view == $cur_view || $view . 's' == $cur_view ? 'active' : NULL) . $disabled;
+	}
 }
 
 \Joomla\CMS\HTML\HTMLHelper::_('bootstrap.tooltip', '*[rel^="tooltip"]');
