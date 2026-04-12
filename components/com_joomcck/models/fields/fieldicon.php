@@ -29,23 +29,20 @@ class JFormFieldFieldicon extends \Joomla\CMS\Form\FormField
 		}
 
 		$html = '<div class="border p-3 rounded">';
+		$searchId = 'icon_param_search_'.$this->fieldname;
 		$html  .= '<input type="hidden" name="'.$this->name.'" id="icon_param'.$this->fieldname.'" value="'.$this->value.'">';
 		$html .= '<div class="input-group mb-3">
             <span class="input-group-text"><i class="fas fa-filter"></i> '.\Joomla\CMS\Language\Text::_('LTFILTERS').'</span>
-              <input id="icon_param_search" class="form-control form-control-sm" type="text" value="" >
+              <input id="'.$searchId.'" class="form-control form-control-sm js-icon-filter" type="text" value="" >
             </div>';
 		$html .= '<script type="text/javascript">
-         (function($){jQuery(document).ready(function($) {
-           $("#icon_param_search").on("input", function (){
-             var imgSearch = $(this).val();
-             var imgBox = $(this).parent().next().next().next().next().next().next().next();
-             imgBox.children().each(function( index ) {
-               var ico_name = String($(this).attr("src")).split("/").pop();
-               if(ico_name.indexOf(imgSearch) >= 0){
-                 $(this).show();
-               }else{
-                 $(this).hide();
-               }
+         (function($){jQuery(function($) {
+           $(document).on("input", "#'.$searchId.'", function (){
+             var q = String($(this).val()).toLowerCase();
+             var $grid = $(this).closest(".border").find(".js-icon-grid");
+             $grid.children("img").each(function () {
+               var name = String($(this).attr("src")).split("/").pop().toLowerCase();
+               $(this).toggle(name.indexOf(q) >= 0);
              });
            });
          });})(jQuery);
@@ -53,7 +50,7 @@ class JFormFieldFieldicon extends \Joomla\CMS\Form\FormField
 		$html .= '<img id="icon_img'.$this->fieldname.'" align="absmiddle" src="'.\Joomla\CMS\Uri\Uri::root().
 			($this->value ? $path.$this->value : 'media/com_joomcck/blank.png').'"> <span id="icon_name'.$this->fieldname.'" class="icon_name">'.$this->value.'</span>';
 		$html .= ' <a class="btn btn-sm border bg-light" href="javascript:void(0)" title="Delete curent icon" onclick="mrSetIcon'.$this->fieldname.'(\'\')"><i class="fas fa-times"></i></a>';
-		$html .= '<div class="mt-3" style="clear:both"></div><div style="height:58px;width:100%;overflow-x:hidden;overflow-y:scroll">';
+		$html .= '<div class="mt-3" style="clear:both"></div><div class="js-icon-grid" style="height:58px;width:100%;overflow-x:hidden;overflow-y:scroll">';
 		$html .= "<script type=\"text/javascript\">function mrSetIcon{$this->fieldname}(file){document.getElementById('icon_img".$this->fieldname."').src = '".\Joomla\CMS\Uri\Uri::root().$path."' + file;	document.getElementById('icon_name".$this->fieldname."').innerHTML = file;	document.getElementById('icon_param".$this->fieldname."').value = file;}</script>";
 		
 		$atr = array(
