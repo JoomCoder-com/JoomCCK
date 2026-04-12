@@ -114,5 +114,95 @@
 		var stored = null;
 		try { stored = localStorage.getItem(STORAGE_KEY); } catch (e) { /* storage disabled */ }
 		setMini(stored === '1', false);
+
+		setupToastBridge();
 	});
+
+	/**
+	 * Convert Joomla's <joomla-alert> system messages into Bootstrap toasts.
+	 * The #system-message-container is hard-coded into the site template, so
+	 * we leave it in place and transform each alert into a toast as it appears.
+	 * Works for both alerts already in the DOM on load and any added later
+	 * by Joomla's core.js (e.g. after an AJAX action).
+	 */
+	function setupToastBridge() {
+		var container = document.getElementById('system-message-container');
+		if (!container || !window.bootstrap || !window.bootstrap.Toast) { return; }
+
+		var typeToClass = {
+			success: 'text-bg-success',
+			info:    'text-bg-info',
+			notice:  'text-bg-info',
+			warning: 'text-bg-warning',
+			danger:  'text-bg-danger',
+			error:   'text-bg-danger'
+		};
+
+		var toastStack = document.createElement('div');
+		toastStack.className = 'toast-container position-fixed top-0 end-0 p-3';
+		toastStack.style.zIndex = '2000';
+		document.body.appendChild(toastStack);
+
+		function buildToast(type, message) {
+			var toast = document.createElement('div');
+			toast.className = 'toast align-items-center border-0 ' + (typeToClass[type] || 'text-bg-info');
+			toast.setAttribute('role', 'alert');
+			toast.setAttribute('aria-live', 'assertive');
+			toast.setAttribute('aria-atomic', 'true');
+
+			var flex = document.createElement('div');
+			flex.className = 'd-flex';
+
+			var bodyEl = document.createElement('div');
+			bodyEl.className = 'toast-body';
+			bodyEl.textContent = message;
+
+			var closeBtn = document.createElement('button');
+			closeBtn.type = 'button';
+			closeBtn.className = 'btn-close btn-close-white me-2 m-auto';
+			closeBtn.setAttribute('data-bs-dismiss', 'toast');
+			closeBtn.setAttribute('aria-label', 'Close');
+
+			flex.appendChild(bodyEl);
+			flex.appendChild(closeBtn);
+			toast.appendChild(flex);
+			return toast;
+		}
+
+		function convert(alert) {
+			if (alert.dataset.jcckToastDone === '1') { return; }
+			alert.dataset.jcckToastDone = '1';
+
+			var type    = (alert.getAttribute('type') || 'info').toLowerCase();
+			var msgEl   = alert.querySelector('.alert-message');
+			var message = (msgEl ? msgEl.textContent : alert.textContent || '').trim();
+			if (!message) { alert.remove(); return; }
+
+			var toast = buildToast(type, message);
+			toastStack.appendChild(toast);
+
+			var bsToast = new window.bootstrap.Toast(toast, { autohide: true, delay: 4500 });
+			toast.addEventListener('hidden.bs.toast', function () { toast.remove(); });
+			bsToast.show();
+
+			alert.remove();
+		}
+
+		// Process anything already rendered.
+		container.querySelectorAll('joomla-alert').forEach(convert);
+
+		// Watch for alerts added later (AJAX flashes, deferred messages).
+		new MutationObserver(function (mutations) {
+			mutations.forEach(function (m) {
+				m.addedNodes.forEach(function (node) {
+					if (node.nodeType !== 1) { return; }
+					if (node.tagName && node.tagName.toLowerCase() === 'joomla-alert') {
+						convert(node);
+					} else if (node.querySelectorAll) {
+						node.querySelectorAll('joomla-alert').forEach(convert);
+					}
+				});
+			});
+		}).observe(container, { childList: true, subtree: true });
+	}
 })();

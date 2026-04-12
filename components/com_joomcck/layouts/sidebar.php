@@ -23,7 +23,7 @@ $baseUrl = Uri::root(true);
 // Enqueue sidebar assets (only rendered in fullscreen mode).
 $doc = Factory::getDocument();
 $doc->addStyleSheet($baseUrl . '/media/com_joomcck/css/sidebar.css?v=1.3');
-$doc->addScript($baseUrl . '/media/com_joomcck/js/sidebar.js?v=1.3', [], ['defer' => true]);
+$doc->addScript($baseUrl . '/media/com_joomcck/js/sidebar.js?v=1.4', [], ['defer' => true]);
 
 // Bootstrap tooltips — surface link labels when the sidebar is collapsed
 // to its icon rail. Joomla's helper attaches Bootstrap 5 tooltip to matching
