@@ -24,9 +24,9 @@ class packInstallerScript
     /**
      * Constructor
      *
-     * @param \Joomla\CMS\Adapter\AdapterInstance$adapter The object responsible for running this script
+     * @param \Joomla\CMS\Installer\InstallerAdapter $adapter The object responsible for running this script
      */
-    public function __construct(\Joomla\CMS\Adapter\AdapterInstance$adapter)
+    public function __construct(\Joomla\CMS\Installer\InstallerAdapter $adapter)
     {
         \Joomla\CMS\Table\Table::addIncludePath(JPATH_ADMINISTRATOR . DIRECTORY_SEPARATOR . 'components/com_joomcck/tables');
         $this->key = (string) $adapter->getParent()->manifest->key;
@@ -49,10 +49,10 @@ class packInstallerScript
      * Called on installation
      *
      *
-     * @param  \Joomla\CMS\Adapter\AdapterInstance$adapter The object responsible for running this script
+     * @param  \Joomla\CMS\Installer\InstallerAdapter $adapter The object responsible for running this script
      * @return boolean          True on success
      */
-    public function install(\Joomla\CMS\Adapter\AdapterInstance$adapter)
+    public function install(\Joomla\CMS\Installer\InstallerAdapter $adapter)
     {
         $this->pack = $this->_getObject('pack');
         $this->_loadUsers();
@@ -208,10 +208,10 @@ class packInstallerScript
      * Called on update
      *
      *
-     * @param  \Joomla\CMS\Adapter\AdapterInstance$adapter The object responsible for running this script
+     * @param  \Joomla\CMS\Installer\InstallerAdapter $adapter The object responsible for running this script
      * @return boolean          True on success
      */
-    public function update(\Joomla\CMS\Adapter\AdapterInstance$adapter)
+    public function update(\Joomla\CMS\Installer\InstallerAdapter $adapter)
     {
         $this->install($adapter);
     }
@@ -223,9 +223,9 @@ class packInstallerScript
     /**
      * Called on uninstallation
      *
-     * @param \Joomla\CMS\Adapter\AdapterInstance$adapter The object responsible for running this script
+     * @param \Joomla\CMS\Installer\InstallerAdapter $adapter The object responsible for running this script
      */
-    public function uninstall(\Joomla\CMS\Adapter\AdapterInstance$adapter)
+    public function uninstall(\Joomla\CMS\Installer\InstallerAdapter $adapter)
     {
 
     }
@@ -729,7 +729,7 @@ class packInstallerScript
                 if ($k == 'user_id') {
                     $val = (array_key_exists($row[$k], $this->ids['users']) ?
                         $this->ids['users'][$row[$k]] :
-                        \Joomla\CMS\Component\ComponentHelper::getPrams('com_joomcck')->get('moderator'));
+                        \Joomla\CMS\Component\ComponentHelper::getParams('com_joomcck')->get('moderator'));
                 } else {
                     $val = @$this->ids[$v][$row[$k]];
                 }
