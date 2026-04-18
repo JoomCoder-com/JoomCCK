@@ -64,10 +64,50 @@ class JoomcckController extends MControllerBase
 				$app->redirect($uri->toString());
 			}
 
+			// Global section switcher: `set_section=<id>` persists the selection
+			// in session, then redirects to the clean URL. `0` clears the filter.
+			if($this->input->get('set_section', null, 'raw') !== null)
+			{
+				$session = \Joomla\CMS\Factory::getSession();
+				$session->set('joomcck_section_id', (int) $this->input->getInt('set_section'));
+
+				$uri = \Joomla\CMS\Uri\Uri::getInstance();
+				$uri->delVar('set_section');
+				$app->redirect($uri->toString());
+			}
+
 			$session = \Joomla\CMS\Factory::getSession();
 			if($session->get('joomcck_fullscreen', 0))
 			{
 				$this->input->set('tmpl', 'component');
+			}
+
+			// Auto-apply the session-stored section id to list views. Each model
+			// still reads its own filter via getUserStateFromRequest; we pre-seed
+			// the request with both key flavors (section_id, filter_section) so
+			// models pick it up without per-model changes. Skipped when the
+			// request already carries a section param (per-view filter bars, or
+			// links that scope themselves explicitly).
+			//
+			// Sentinel: `null` means the switcher was never touched — we leave
+			// per-view state alone. `0` means "All sections" was explicitly
+			// picked — we inject it so models overwrite any stale per-view
+			// user state with the unfiltered default.
+			$sectionListViews = array(
+				'items', 'cats', 'comms', 'votes', 'moderators',
+				'auditlog', 'notifications', 'tags', 'ctypes',
+				'tfields', 'groups', 'templates', 'packs',
+			);
+			if(in_array($this->input->getCmd('view'), $sectionListViews, true))
+			{
+				$savedSection = $session->get('joomcck_section_id', null);
+				$reqHasSection = $this->input->get('section_id', null, 'raw') !== null
+					|| $this->input->get('filter_section', null, 'raw') !== null;
+				if($savedSection !== null && !$reqHasSection)
+				{
+					$this->input->set('section_id', (int) $savedSection);
+					$this->input->set('filter_section', (int) $savedSection);
+				}
 			}
 		}
 

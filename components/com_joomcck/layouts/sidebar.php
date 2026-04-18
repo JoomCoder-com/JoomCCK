@@ -51,6 +51,23 @@ if (!function_exists('jcckSidebarActive'))
 $toggleUrl = clone Uri::getInstance();
 $toggleUrl->setVar('joomcck_fullscreen_toggle', 1);
 
+// Global section switcher: lists published sections and reads the active
+// selection from session. The controller consumes `set_section=<id>` to
+// persist the pick and then redirects to a clean URL. Reuses the cpanel
+// model's query (only published sections) to avoid duplicating the SQL.
+if (!class_exists('JoomcckModelCpanel'))
+{
+	require_once JPATH_ROOT . '/components/com_joomcck/models/cpanel.php';
+}
+$switcherSections = (new JoomcckModelCpanel())->getSectionsList();
+$switcherActiveId = (int) Factory::getSession()->get('joomcck_section_id', 0);
+
+$switcherBase    = clone Uri::getInstance();
+$switcherBase->delVar('set_section');
+$switcherBaseStr = $switcherBase->toString();
+// Raw separator — htmlspecialchars on the final URL handles the encoding.
+$switcherSep     = (strpos($switcherBaseStr, '?') === false) ? '?' : '&';
+
 // Close the <main> wrapper before </body>. Layouts can't emit balanced tags
 // across view output, so we hook onAfterRender to append the closer once
 // the full body has been composed.
@@ -85,6 +102,46 @@ $groups = [
 		['view' => 'notifications', 'route' => 'notifications', 'icon' => 'bell.png',            'label' => 'XML_SUBMENU_NOTIFY'],
 	],
 ];
+
+// When a section is active in the switcher, swap the Sections list menu
+// entry with a direct link to Edit Section for the current pick, and move
+// it to the top of the primary group for quick access. The section name is
+// kept out of the visible label (to avoid clutter, especially when the
+// sidebar is collapsed) but included in the tooltip.
+if ($switcherActiveId > 0)
+{
+	$switcherActiveName = '';
+	foreach ($switcherSections as $s)
+	{
+		if ((int) $s->id === $switcherActiveId)
+		{
+			$switcherActiveName = $s->name;
+			break;
+		}
+	}
+
+	$editEntry = [
+		'view'        => 'section',
+		'route'       => 'sections',
+		'icon'        => 'folder.png',
+		'label'       => 'CSIDEBAR_EDIT_SECTION',
+		'href'        => \Joomla\CMS\Router\Route::_(
+			'index.php?option=com_joomcck&task=section.edit&id=' . $switcherActiveId
+		),
+		'label_extra' => $switcherActiveName,
+	];
+
+	foreach ($groups['CSIDEBAR_GROUP_PRIMARY'] as $i => $item)
+	{
+		if ($item['route'] === 'sections')
+		{
+			unset($groups['CSIDEBAR_GROUP_PRIMARY'][$i]);
+			break;
+		}
+	}
+	array_unshift($groups['CSIDEBAR_GROUP_PRIMARY'], $editEntry);
+	$groups['CSIDEBAR_GROUP_PRIMARY'] = array_values($groups['CSIDEBAR_GROUP_PRIMARY']);
+}
 ?>
 <aside id="jcck-sidebar"
        class="jcck-sidebar"
@@ -112,14 +169,19 @@ $groups = [
 		<div class="jcck-sidebar-group">
 			<div class="jcck-sidebar-group-label"><?php echo Text::_($labelKey); ?></div>
 			<ul class="jcck-sidebar-list">
-				<?php foreach ($items as $item): $label = Text::_($item['label']); ?>
+				<?php foreach ($items as $item): ?>
+					<?php
+						$label   = Text::_($item['label']);
+						$href    = !empty($item['href']) ? $item['href'] : Url::view($item['route']);
+						$tooltip = !empty($item['label_extra']) ? $label . ': ' . $item['label_extra'] : $label;
+					?>
 					<li class="jcck-sidebar-item <?php echo jcckSidebarActive($item['view']); ?>">
 						<a class="jcck-sidebar-link"
-						   href="<?php echo Url::view($item['route']); ?>"
+						   href="<?php echo $href; ?>"
 						   data-bs-placement="right"
-						   title="<?php echo htmlspecialchars($label, ENT_QUOTES); ?>">
+						   title="<?php echo htmlspecialchars($tooltip, ENT_QUOTES); ?>">
 							<span class="jcck-sidebar-icon"><?php echo HTMLFormatHelper::icon($item['icon']); ?></span>
-							<span class="jcck-sidebar-label"><?php echo $label; ?></span>
+							<span class="jcck-sidebar-label"><?php echo htmlspecialchars($label, ENT_QUOTES); ?></span>
 						</a>
 					</li>
 				<?php endforeach; ?>
@@ -148,6 +210,24 @@ $groups = [
 	        aria-label="<?php echo Text::_('CSIDEBAR_MINIMIZE'); ?>">
 		<i class="fas fa-angle-double-left jcck-sidebar-mini-icon"></i>
 	</button>
+	<div class="jcck-topbar-switcher-wrap">
+		<i class="fas fa-folder jcck-topbar-switcher-icon" aria-hidden="true"></i>
+		<select class="jcck-topbar-section-switcher form-select form-select-sm"
+		        aria-label="<?php echo Text::_('CSIDEBAR_SECTION_FILTER'); ?>"
+		        title="<?php echo Text::_('CSIDEBAR_SECTION_FILTER'); ?>"
+		        onchange="if(this.value){window.location.href=this.value;}">
+			<option value="<?php echo htmlspecialchars($switcherBaseStr . $switcherSep . 'set_section=0', ENT_QUOTES); ?>"
+			        <?php echo $switcherActiveId === 0 ? 'selected' : ''; ?>>
+				<?php echo Text::_('CSIDEBAR_SECTION_ALL'); ?>
+			</option>
+			<?php foreach ($switcherSections as $switcherSection): ?>
+				<option value="<?php echo htmlspecialchars($switcherBaseStr . $switcherSep . 'set_section=' . (int) $switcherSection->id, ENT_QUOTES); ?>"
+				        <?php echo $switcherActiveId === (int) $switcherSection->id ? 'selected' : ''; ?>>
+					<?php echo htmlspecialchars($switcherSection->name, ENT_QUOTES); ?>
+				</option>
+			<?php endforeach; ?>
+		</select>
+	</div>
 	<div class="jcck-topbar-spacer"></div>
 	<a class="jcck-topbar-doc"
 	   rel="tooltip noopener"
