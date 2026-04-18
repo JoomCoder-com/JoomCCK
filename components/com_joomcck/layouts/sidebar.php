@@ -244,4 +244,4 @@ if ($switcherActiveId > 0)
 	</a>
 </div>
 
-<main class="jcck-main p-4">
+<main class="jcck-main">

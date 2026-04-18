@@ -14,6 +14,7 @@
     --jcck-sidebar-active: #0d6efd;
     --jcck-sidebar-border: rgba(255, 255, 255, 0.08);
     --jcck-topbar-height: 48px;
+    --jcck-main-max: 1400px;
     --jcck-transition: 0.2s ease;
 }
 
@@ -293,13 +294,30 @@ body.jcck-sidebar-mini .jcck-topbar { margin-left: var(--jcck-sidebar-mini-width
     color: #fff;
 }
 
-/* Main content wrapper — carries Bootstrap p-4 plus the sidebar push */
+/* Main content wrapper — pushed right by the sidebar and padded for
+ * breathing room. On wide viewports the horizontal padding grows so the
+ * content column caps at --jcck-main-max and sits centred in the area
+ * next to the sidebar. Vertical padding stays fixed across breakpoints. */
 .jcck-main {
     margin-left: var(--jcck-sidebar-width);
-    transition: margin-left var(--jcck-transition);
+    transition: margin-left var(--jcck-transition), padding var(--jcck-transition);
+    padding: 1.5rem;
 }
 
 body.jcck-sidebar-mini .jcck-main { margin-left: var(--jcck-sidebar-mini-width); }
+
+/* Kick in the centering once the viewport can actually fit the capped
+ * column. Below this width the default 1.5rem side padding wins. */
+@media (min-width: 1600px) {
+    .jcck-main {
+        padding-left:  max(1.5rem, calc((100vw - var(--jcck-sidebar-width) - var(--jcck-main-max)) / 2));
+        padding-right: max(1.5rem, calc((100vw - var(--jcck-sidebar-width) - var(--jcck-main-max)) / 2));
+    }
+    body.jcck-sidebar-mini .jcck-main {
+        padding-left:  max(1.5rem, calc((100vw - var(--jcck-sidebar-mini-width) - var(--jcck-main-max)) / 2));
+        padding-right: max(1.5rem, calc((100vw - var(--jcck-sidebar-mini-width) - var(--jcck-main-max)) / 2));
+    }
+}
 
 /* Mobile hamburger (in topbar) + mobile close (×, in sidebar header).
  * Hidden on desktop, surfaced by the mobile media query. */
