@@ -11,53 +11,52 @@ defined('_JEXEC') or die('Restricted access');
 
 \Joomla\CMS\HTML\HTMLHelper::_('bootstrap.tooltip', '*[rel^="tooltip"]');
 
-$filters = [];
+// Count active filters (including free-text search) — drives the badge on
+// the filter toggle. The search input itself has been moved into the drawer.
+$activeCount = 0;
 
-
-if($displayData->state->get('filter.search')) {
-	$filters['filter.search'] = 'filter_search';
+if ($displayData->state->get('filter.search'))
+{
+	$activeCount++;
 }
 
-if(is_array($displayData->_filters)){
-	foreach ($displayData->_filters AS $i => $filter) {
-		// Exclude type filter in fields llist
-		if($displayData->input->get('view') == 'tfields' && $filter['id'] == 'filter_type') {
+if (is_array($displayData->_filters))
+{
+	foreach ($displayData->_filters as $filter)
+	{
+		if ($displayData->input->get('view') == 'tfields' && $filter['id'] == 'filter_type')
+		{
 			continue;
 		}
-		if($displayData->state->get(str_replace('_', '.', $filter['id']))) {
-			$filters[str_replace('_', '.', $filter['id'])] = $filter['id'];
+		if ($displayData->state->get(str_replace('_', '.', $filter['id'])))
+		{
+			$activeCount++;
 		}
 	}
 }
 
+if (empty($displayData->_filters))
+{
+	// No registered filters → nothing to toggle. Still emit a hidden search
+	// input so views that want only a keyword search continue to work.
+	?>
+	<div class="float-end search-box">
+		<div class="input-group">
+			<input type="text" class="form-control" aria-label="<?php echo \Joomla\CMS\Language\Text::_('CSEARCHPLACEHOLDER'); ?>" placeholder="<?php echo \Joomla\CMS\Language\Text::_('CSEARCHPLACEHOLDER'); ?>" name="filter_search" id="filter_search" value="<?php echo htmlspecialchars((string) $displayData->state->get('filter.search'), ENT_QUOTES, 'UTF-8'); ?>"/>
+		</div>
+	</div>
+	<?php
+	return;
+}
 
 ?>
 
 <div class="float-end search-box">
-    <div class="input-group">
-        <input type="text" class="form-control" aria-label="<?php echo \Joomla\CMS\Language\Text::_('CSEARCHPLACEHOLDER'); ?>" placeholder="<?php echo \Joomla\CMS\Language\Text::_('CSEARCHPLACEHOLDER'); ?>" name="filter_search" id="filter_search" value="<?php echo $displayData->state->get('filter.search'); ?>"/>
-	    <?php if(!empty($displayData->_filters)): ?>
-            <button type="button" class="btn btn-outline-secondary" data-bs-toggle="collapse" rel="tooltip" data-bs-target="#list-filters-box" data-bs-original-title="<?php echo \Joomla\CMS\Language\Text::_('CFILTER'); ?>">
-			    <?php echo HTMLFormatHelper::icon('funnel.png'); ?>
-            </button>
-	    <?php endif; ?>
-	    <?php if($filters): ?>
-            <button rel="tooltip" class="btn btn-outline-warning" type="button" id="cob-filters-reset" data-bs-original-title="<?php echo \Joomla\CMS\Language\Text::_('JSEARCH_FILTER_CLEAR'); ?>">
-			    <?php echo HTMLFormatHelper::icon('cross.png'); ?>
-            </button>
-	    <?php endif; ?>
-        <button class="btn btn-outline-secondary" rel="tooltip" type="submit" data-bs-original-title="<?php echo \Joomla\CMS\Language\Text::_('CSEARCH'); ?>">
-		    <?php echo HTMLFormatHelper::icon('magnifier.png'); ?>
-        </button>
-    </div>
+	<button type="button" class="btn btn-outline-secondary jc-filter-toggle" data-bs-toggle="offcanvas" rel="tooltip" data-bs-target="#list-filters-box" aria-controls="list-filters-box" data-bs-original-title="<?php echo \Joomla\CMS\Language\Text::_('CFILTER'); ?>">
+		<?php echo HTMLFormatHelper::icon('funnel.png'); ?>
+		<span class="jc-filter-toggle-label"><?php echo \Joomla\CMS\Language\Text::_('CFILTER'); ?></span>
+		<?php if ($activeCount): ?>
+			<span class="jc-filter-count"><?php echo $activeCount; ?></span>
+		<?php endif; ?>
+	</button>
 </div>
-<script>
-(function($){
-	$('#cob-filters-reset').click(function(){
-		<?php foreach($filters as $filter): ?>
-		document.getElementById('<?php echo $filter ?>').value = '';
-		<?php endforeach; ?>
-		this.form.submit();
-	});
-}(jQuery))
-</script>

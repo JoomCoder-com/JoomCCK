@@ -1,0 +1,245 @@
+/*
+ * JoomCCK Admin - Filters Drawer & Chips
+ * Right-side offcanvas filter panel + inline chip summary for admin list views.
+ * Matches the Cassiopeia/admin card UI language: Bootstrap 5 form controls,
+ * soft shadows, rounded corners, restrained primary accent.
+ */
+
+/* ---------- Offcanvas drawer ---------- */
+
+.jc-filters-offcanvas {
+    --jc-drawer-width: 400px;
+    width: var(--jc-drawer-width);
+    max-width: 92vw;
+    display: flex;
+    flex-direction: column;
+    border-left: 1px solid var(--bs-border-color, #dee2e6);
+    box-shadow: -8px 0 24px rgba(15, 23, 42, 0.08);
+}
+
+.jc-filters-offcanvas .offcanvas-header {
+    border-bottom: 1px solid var(--bs-border-color, #dee2e6);
+    padding: 1rem 1.25rem;
+    flex: 0 0 auto;
+    background: #fff;
+}
+
+.jc-filters-offcanvas .offcanvas-title {
+    font-size: 1rem;
+    font-weight: 600;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.55rem;
+    margin: 0;
+}
+
+.jc-filters-offcanvas .offcanvas-title i {
+    color: var(--bs-primary, #0d6efd);
+    font-size: 0.95em;
+}
+
+.jc-filters-body {
+    padding: 1.25rem;
+    overflow-y: auto;
+    flex: 1 1 auto;
+    -webkit-overflow-scrolling: touch;
+    background: #fff;
+}
+
+.jc-filters-body .jc-filter-row {
+    margin-bottom: 1rem;
+}
+
+.jc-filters-body .jc-filter-row:last-child {
+    margin-bottom: 0;
+}
+
+.jc-filters-body .jc-filter-label {
+    display: block;
+    margin-bottom: 0.35rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: var(--bs-body-color, #212529);
+}
+
+.jc-filters-body .form-control,
+.jc-filters-body .form-select {
+    width: 100%;
+}
+
+/* ---------- Footer action bar ---------- */
+
+.jc-filters-footer {
+    border-top: 1px solid var(--bs-border-color, #dee2e6);
+    padding: 0.85rem 1.25rem;
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+    justify-content: flex-end;
+    background: #fff;
+    flex: 0 0 auto;
+}
+
+.jc-filters-footer .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
+}
+
+.jc-filters-footer .btn i {
+    font-size: 0.85em;
+}
+
+/* Push "Clear" to the left, "Apply" to the right */
+.jc-filters-footer #jc-filters-clear {
+    margin-right: auto;
+}
+
+/* ---------- Filter toggle button (funnel + label) ---------- */
+
+.jc-filter-toggle {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    padding: 0.375rem 0.9rem;
+}
+
+.jc-filter-toggle img {
+    vertical-align: middle;
+}
+
+.jc-filter-toggle .jc-filter-toggle-label {
+    font-weight: 500;
+}
+
+.jc-filter-toggle .jc-filter-count {
+    position: absolute;
+    top: -6px;
+    right: -6px;
+    min-width: 18px;
+    height: 18px;
+    padding: 0 5px;
+    font-size: 0.7rem;
+    font-weight: 600;
+    line-height: 18px;
+    text-align: center;
+    border-radius: 999px;
+    background: var(--bs-primary, #0d6efd);
+    color: #fff;
+    box-shadow: 0 0 0 2px #fff;
+    pointer-events: none;
+}
+
+@media (max-width: 575.98px) {
+    .jc-filter-toggle .jc-filter-toggle-label {
+        display: none;
+    }
+}
+
+/* ---------- Filter chips ---------- */
+
+.jc-chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    margin: 0.5rem 0 0;
+    padding: 0;
+    list-style: none;
+}
+
+.jc-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.25rem 0.35rem 0.25rem 0.7rem;
+    background: rgba(var(--bs-primary-rgb, 13, 110, 253), 0.08);
+    color: var(--bs-primary, #0d6efd);
+    border: 1px solid rgba(var(--bs-primary-rgb, 13, 110, 253), 0.25);
+    border-radius: 999px;
+    font-size: 0.8rem;
+    line-height: 1.2;
+    max-width: 100%;
+    transition: background-color 0.15s ease, border-color 0.15s ease;
+}
+
+.jc-chip:hover {
+    background: rgba(var(--bs-primary-rgb, 13, 110, 253), 0.14);
+    border-color: rgba(var(--bs-primary-rgb, 13, 110, 253), 0.4);
+}
+
+.jc-chip > .jc-chip-label {
+    font-weight: 600;
+    color: inherit;
+}
+
+.jc-chip > .jc-chip-value {
+    font-weight: 400;
+    color: inherit;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    max-width: 18rem;
+}
+
+.jc-chip > .jc-chip-close {
+    flex: 0 0 auto;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 20px;
+    height: 20px;
+    padding: 0;
+    margin-left: 0.15rem;
+    background: transparent;
+    color: inherit;
+    border: 0;
+    border-radius: 999px;
+    font-size: 1rem;
+    line-height: 1;
+    cursor: pointer;
+    opacity: 0.55;
+    transition: background-color 0.15s ease, opacity 0.15s ease;
+}
+
+.jc-chip > .jc-chip-close:hover {
+    background: rgba(var(--bs-primary-rgb, 13, 110, 253), 0.2);
+    opacity: 1;
+}
+
+/* Clear-all variant — subtle danger tone, button element */
+
+.jc-chip.jc-chip-clear {
+    background: rgba(var(--bs-danger-rgb, 220, 53, 69), 0.08);
+    color: var(--bs-danger, #dc3545);
+    border-color: rgba(var(--bs-danger-rgb, 220, 53, 69), 0.3);
+    cursor: pointer;
+    padding: 0.25rem 0.75rem;
+    appearance: none;
+    font-family: inherit;
+    font-size: 0.8rem;
+}
+
+.jc-chip.jc-chip-clear:hover {
+    background: rgba(var(--bs-danger-rgb, 220, 53, 69), 0.16);
+    border-color: rgba(var(--bs-danger-rgb, 220, 53, 69), 0.45);
+}
+
+.jc-chip.jc-chip-clear i {
+    font-size: 0.75em;
+    opacity: 0.9;
+}
+
+/* ---------- Responsive ---------- */
+
+@media (max-width: 575.98px) {
+    .jc-filters-offcanvas {
+        --jc-drawer-width: 100vw;
+    }
+
+    .jc-chip > .jc-chip-value {
+        max-width: 10rem;
+    }
+}
