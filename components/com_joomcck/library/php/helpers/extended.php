@@ -13,7 +13,14 @@ use Joomla\CMS\Language\Text;
 class MExtendedHelper
 {
 	/**
-	 * Check if extended version is installed (has PHP files in extended folder)
+	 * Check if the JoomCCK Extended package is installed and usable.
+	 *
+	 * Requires BOTH signals so a broken install (package row without files,
+	 * or files without the package row) reports as not extended:
+	 *   1. A `pkg_joomcckextended` row in `#__extensions` with `enabled = 1`.
+	 *   2. The `components/com_joomcck/extended/` folder contains PHP files.
+	 *
+	 * Database errors are swallowed so the helper is safe to call early.
 	 *
 	 * @return boolean
 	 */
@@ -21,10 +28,28 @@ class MExtendedHelper
 	{
 		static $isExtended = null;
 
-		if ($isExtended === null) {
-			$extendedPath = JPATH_SITE . '/components/com_joomcck/extended';
-			$isExtended = is_dir($extendedPath) && count(glob($extendedPath . '/*.php')) > 0;
+		if ($isExtended !== null) {
+			return $isExtended;
 		}
+
+		try {
+			$db    = \Joomla\CMS\Factory::getDbo();
+			$query = $db->getQuery(true)
+				->select($db->quoteName('enabled'))
+				->from($db->quoteName('#__extensions'))
+				->where($db->quoteName('type') . ' = ' . $db->quote('package'))
+				->where($db->quoteName('element') . ' = ' . $db->quote('pkg_joomcckextended'));
+			$db->setQuery($query);
+
+			$packageEnabled = (int) $db->loadResult() === 1;
+		} catch (\Throwable $e) {
+			$packageEnabled = false;
+		}
+
+		$extendedPath  = JPATH_SITE . '/components/com_joomcck/extended';
+		$folderPresent = is_dir($extendedPath) && count(glob($extendedPath . '/*.php')) > 0;
+
+		$isExtended = $packageEnabled && $folderPresent;
 
 		return $isExtended;
 	}
