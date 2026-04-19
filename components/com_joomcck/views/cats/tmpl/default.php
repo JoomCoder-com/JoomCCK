@@ -35,37 +35,30 @@ if ($saveOrder)
 
 <?php echo HTMLFormatHelper::layout('navbar'); ?>
 
-<div class="page-header">
-    <h1>
-        <img src="<?php echo \Joomla\CMS\Uri\Uri::root(TRUE); ?>/components/com_joomcck/images/icons/sections.png">
-		<?php echo \Joomla\CMS\Language\Text::sprintf('COB_CATSOF', $this->section->text); ?>
-    </h1>
-</div>
+<form action="<?php echo \Joomla\CMS\Router\Route::_('index.php?option=com_joomcck&view=cats&section_id=' . $section); ?>" method="post" name="adminForm" id="adminForm" class="cck-list-shell">
 
-
-<?php echo HTMLFormatHelper::layout('items'); ?>
-<div class="clearfix"></div>
-
-<form action="<?php echo \Joomla\CMS\Router\Route::_('index.php?option=com_joomcck&view=cats&section_id='.$section);?>" method="post" name="adminForm" id="adminForm">
-
-
-	<div class="card shadow-sm mb-5">
-
-        <div class="card-header bg-white">
-            <div class="d-flex justify-content-between align-items-center">
-                <div>
-					<?php echo HTMLFormatHelper::layout('search', $this); ?>
-                </div>
-				<?php echo Layout::render('admin.list.ordering', $this) ?>
-            </div>
-
-            <div class="my-2">
-				<?php echo HTMLFormatHelper::layout('filters', $this); ?>
-            </div>
+    <div class="cck-list-titlebar mb-4">
+        <h2 class="cck-list-title">
+            <img src="<?php echo \Joomla\CMS\Uri\Uri::root(true); ?>/components/com_joomcck/images/icons/sections.png" alt="">
+            <span><?php echo \Joomla\CMS\Language\Text::sprintf('COB_CATSOF', $this->section->text); ?></span>
+        </h2>
+        <div class="cck-list-title-actions">
+            <?php echo HTMLFormatHelper::layout('search', $this); ?>
+            <?php echo Layout::render('admin.list.add', $this); ?>
         </div>
+    </div>
+
+    <div class="cck-list-action-bar">
+        <?php echo HTMLFormatHelper::layout('items'); ?>
+        <?php echo Layout::render('admin.list.ordering', $this); ?>
+    </div>
+
+    <?php echo HTMLFormatHelper::layout('filters', $this); ?>
+
+    <div class="card cck-list-card">
 
         <div class="card-body">
-            <table class="table table-striped" id="categoryList">
+            <table class="table table-hover align-middle mb-0" id="categoryList">
                 <thead>
                 <tr>
                     <th width="1%">
@@ -139,8 +132,8 @@ if ($saveOrder)
                             data-level="<?php echo $item->level ?>"
 
 
-                            class="row<?php echo $i % 2; ?>">
-                        <td class="center">
+                    >
+                        <td class="cck-col-check">
 					        <?php echo \Joomla\CMS\HTML\HTMLHelper::_('grid.id', $i, $item->id); ?>
                         </td>
                         <td class="order nowrap center hidden-phone">
@@ -170,11 +163,12 @@ if ($saveOrder)
 					        <?php if ($item->checked_out) : ?>
 						        <?php echo \Joomla\CMS\HTML\HTMLHelper::_('jgrid.checkedout', $i, $item->editor, $item->checked_out_time, 'cats.', $canCheckin); ?>
 					        <?php endif; ?>
-					        <?php if ($canEdit || $canEditOwn) : ?>
-                                <a href="<?php echo \Joomla\CMS\Router\Route::_('index.php?option=com_joomcck&view=category&task=cat.edit&id='.$item->id.'&section_id='.$section);?>">
-							        <?php echo $this->escape($item->title); ?></a>
-					        <?php else : ?>
-						        <?php echo $this->escape($item->title); ?>
+					        <?php if ($canEdit || $canEditOwn): ?>
+                                <a class="cck-item-title" href="<?php echo \Joomla\CMS\Router\Route::_('index.php?option=com_joomcck&view=category&task=cat.edit&id=' . $item->id . '&section_id=' . $section); ?>">
+							        <?php echo $this->escape($item->title); ?>
+                                </a>
+					        <?php else: ?>
+						        <span class="cck-item-title"><?php echo $this->escape($item->title); ?></span>
 					        <?php endif; ?>
                             <span class="small" title="<?php echo $this->escape($item->path);?>">
 							<?php if (empty($item->note)) : ?>
@@ -195,9 +189,8 @@ if ($saveOrder)
 						        <?php echo $item->language_title ? $this->escape($item->language_title) : \Joomla\CMS\Language\Text::_('JUNDEFINED'); ?>
 					        <?php endif;?>
                         </td>
-                        <td class="center hidden-phone">
-						<span title="<?php echo sprintf('%d-%d', $item->lft, $item->rgt);?>">
-							<?php echo (int) $item->id; ?></span>
+                        <td class="text-end hidden-phone">
+                            <span class="cck-id" title="<?php echo sprintf('%d-%d', $item->lft, $item->rgt); ?>"><?php echo (int) $item->id; ?></span>
                         </td>
                     </tr>
 		        <?php endforeach; ?>

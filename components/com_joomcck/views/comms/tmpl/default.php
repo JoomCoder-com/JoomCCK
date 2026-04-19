@@ -23,33 +23,28 @@ $listDirn = $this->state->get('list.direction');
 
 <?php echo HTMLFormatHelper::layout('navbar'); ?>
 
+<form action="<?php echo $this->action; ?>" method="post" name="adminForm" id="adminForm" class="cck-list-shell">
 
-<div class="page-header">
-    <h1>
-        <img src="<?php echo \Joomla\CMS\Uri\Uri::root(TRUE); ?>/components/com_joomcck/images/icons/comments.png">
-		<?php echo \Joomla\CMS\Language\Text::_('CCOMMENTS'); ?>
-    </h1>
-</div>
-<?php echo HTMLFormatHelper::layout('items', $this); ?>
-<div class="clearfix"></div>
-
-
-<form action="<?php echo $this->action ?>" method="post" name="adminForm" id="adminForm">
-    <div class="card shadow-sm mb-5">
-        <div class="card-header bg-white">
-            <div class="d-flex justify-content-between align-items-center">
-                <div>
-				    <?php echo HTMLFormatHelper::layout('search', $this); ?>
-                </div>
-			    <?php echo Layout::render('admin.list.ordering', $this) ?>
-            </div>
-
-            <div class="my-2">
-			    <?php echo HTMLFormatHelper::layout('filters', $this); ?>
-            </div>
+    <div class="cck-list-titlebar mb-4">
+        <h2 class="cck-list-title">
+            <img src="<?php echo \Joomla\CMS\Uri\Uri::root(true); ?>/components/com_joomcck/images/icons/comments.png" alt="">
+            <span><?php echo \Joomla\CMS\Language\Text::_('CCOMMENTS'); ?></span>
+        </h2>
+        <div class="cck-list-title-actions">
+            <?php echo HTMLFormatHelper::layout('search', $this); ?>
         </div>
+    </div>
+
+    <div class="cck-list-action-bar">
+        <?php echo HTMLFormatHelper::layout('items', $this); ?>
+        <?php echo Layout::render('admin.list.ordering', $this); ?>
+    </div>
+
+    <?php echo HTMLFormatHelper::layout('filters', $this); ?>
+
+    <div class="card cck-list-card">
         <div class="card-body">
-            <table class="table table-hover" id="articleList">
+            <table class="table table-hover align-middle mb-0" id="articleList">
                 <thead>
                 <th width="1%">
                     <input type="checkbox" name="checkall-toggle" value="" title="<?php echo \Joomla\CMS\Language\Text::_('JGLOBAL_CHECK_ALL'); ?>" onclick="Joomla.checkAll(this)"/>
@@ -78,8 +73,8 @@ $listDirn = $this->state->get('list.direction');
 				    $body       = substr(strip_tags($item->comment), 0, 100);
 				    ?>
 
-                    <tr class="row<?php echo $i % 2; ?>">
-                        <td>
+                    <tr>
+                        <td class="cck-col-check">
 						    <?php echo \Joomla\CMS\HTML\HTMLHelper::_('grid.id', $i, $item->id); ?>
                         </td>
                         <td>
@@ -136,8 +131,8 @@ $listDirn = $this->state->get('list.direction');
                             </small>
                         </td>
 
-                        <td align="center">
-                            <small><?php echo $item->id; ?></small>
+                        <td class="text-end">
+                            <span class="cck-id"><?php echo (int) $item->id; ?></span>
                         </td>
                     </tr>
 			    <?php endforeach; ?>

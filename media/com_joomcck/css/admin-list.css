@@ -1,0 +1,418 @@
+/*
+ * JoomCCK admin list views — shared card, toolbar, table and footer styling.
+ *
+ * Scoped to `.cck-list-card` / `.cck-list-shell` so nothing leaks into front-end
+ * pages. Design tokens mirror the existing sidebar palette (see sidebar.css)
+ * so list views feel native to the fullscreen admin shell.
+ */
+
+:root {
+    --cck-list-radius: 10px;
+    --cck-list-border-color: rgba(15, 23, 42, 0.08);
+    --cck-list-divider: rgba(15, 23, 42, 0.06);
+    --cck-list-header-bg: #ffffff;
+    --cck-list-thead-bg: #f8fafc;
+    --cck-list-row-hover: rgba(13, 110, 253, 0.04);
+    --cck-list-muted: #6b7280;
+    --cck-list-title: #0f172a;
+    --cck-list-accent: #0d6efd;
+    --cck-list-ok-bg: rgba(22, 163, 74, 0.12);
+    --cck-list-ok-fg: #15803d;
+    --cck-list-off-bg: rgba(100, 116, 139, 0.12);
+    --cck-list-off-fg: #475569;
+}
+
+/* ------- Shell spacing (title row above card) ------- */
+
+.cck-list-shell {
+    display: block;
+    margin: 1.25rem 0 1.5rem 0;
+}
+
+/* Collapse any legacy .page-header above the card when the redesigned shell
+   is rendered — per-view templates now put the title inside the card-header. */
+.cck-list-shell ~ .page-header,
+.cck-list-shell .page-header {
+    display: none;
+}
+
+/* ------- Card ------- */
+
+.cck-list-card {
+    border: 1px solid var(--cck-list-border-color);
+    border-radius: var(--cck-list-radius);
+    box-shadow: 0 1px 2px rgba(15, 23, 42, 0.04);
+    background: var(--cck-list-header-bg);
+    overflow: hidden; /* clip table corners inside rounded card */
+}
+
+/* Title and action bars now live ABOVE the card. The card-header rule is
+   kept as a no-op fallback for any legacy template that hasn't been
+   migrated yet. */
+.cck-list-card > .card-header {
+    background: var(--cck-list-header-bg);
+    border-bottom: 1px solid var(--cck-list-divider);
+    padding: 0.85rem 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+}
+
+.cck-list-card > .card-body {
+    padding: 0;
+}
+
+.cck-list-card > .card-footer {
+    background: var(--cck-list-header-bg);
+    border-top: 1px solid var(--cck-list-divider);
+    padding: 0.55rem 1rem;
+}
+
+/* ------- Header rows ------- */
+
+.cck-list-titlebar {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.75rem;
+    row-gap: 0.5rem;
+    margin-bottom: 0.6rem;
+}
+
+.cck-list-title {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.65rem;
+    margin: 0;
+    font-size: 1.65rem;
+    font-weight: 600;
+    color: var(--cck-list-title);
+    line-height: 1.15;
+    letter-spacing: -0.015em;
+}
+
+.cck-list-title img {
+    width: 34px;
+    height: 34px;
+    object-fit: contain;
+}
+
+.cck-list-title-actions {
+    margin-left: auto;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+}
+
+.cck-list-action-bar {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.5rem;
+    row-gap: 0.5rem;
+    margin-bottom: 0.85rem;
+}
+
+.cck-list-action-bar .cck-list-primary-actions {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    flex-wrap: wrap;
+}
+
+.cck-list-action-bar .btn {
+    --bs-btn-padding-y: 0.28rem;
+    --bs-btn-padding-x: 0.7rem;
+}
+
+/* Sort input-group — compact, right aligned. Override Bootstrap's
+   default input-group width: 100% so the group doesn't claim the full
+   row inside the action bar. */
+.cck-list-sort {
+    display: inline-flex;
+    align-items: stretch;
+    width: auto;
+    flex: 0 1 auto;
+    max-width: 420px;
+}
+
+.cck-list-sort > .form-select {
+    width: auto;
+    flex: 1 1 0;
+    min-width: 0;
+}
+
+.cck-list-sort .input-group-text {
+    background: var(--cck-list-thead-bg);
+    border-color: var(--cck-list-border-color);
+    color: var(--cck-list-muted);
+    font-size: 0.8rem;
+    font-weight: 500;
+}
+
+.cck-list-sort .form-select {
+    border-color: var(--cck-list-border-color);
+    font-size: 0.85rem;
+}
+
+/* Filter toggle icon spacing (shared with layouts/search.php output) */
+.cck-list-titlebar .jc-filter-toggle .jc-filter-toggle-label {
+    margin-left: 0.35rem;
+}
+
+/* ------- Table ------- */
+
+.cck-list-card > .card-body > table.table {
+    margin-bottom: 0;
+    border-color: var(--cck-list-divider);
+}
+
+.cck-list-card > .card-body > table.table > thead {
+    background: var(--cck-list-thead-bg);
+}
+
+.cck-list-card > .card-body > table.table > thead th {
+    font-size: 0.78rem;
+    font-weight: 600;
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
+    color: var(--cck-list-muted);
+    border-bottom: 1px solid var(--cck-list-divider);
+    padding: 0.7rem 0.75rem;
+    white-space: nowrap;
+}
+
+.cck-list-card > .card-body > table.table > thead th a {
+    color: inherit;
+    text-decoration: none;
+}
+
+.cck-list-card > .card-body > table.table > thead th a:hover {
+    color: var(--cck-list-accent);
+}
+
+.cck-list-card > .card-body > table.table > tbody > tr {
+    transition: background-color 0.12s ease;
+}
+
+.cck-list-card > .card-body > table.table > tbody > tr:hover {
+    background-color: var(--cck-list-row-hover);
+}
+
+.cck-list-card > .card-body > table.table > tbody > tr > td {
+    padding: 0.7rem 0.75rem;
+    vertical-align: middle;
+    border-bottom: 1px solid var(--cck-list-divider);
+}
+
+.cck-list-card > .card-body > table.table > tbody > tr:last-child > td {
+    border-bottom: 0;
+}
+
+/* Bootstrap's striping (.row0/.row1 legacy) — override so hover is visible */
+.cck-list-card > .card-body > table.table > tbody > tr.row0,
+.cck-list-card > .card-body > table.table > tbody > tr.row1 {
+    background-color: transparent;
+}
+
+/* Name cell — make the primary link feel like a real clickable title */
+.cck-list-card .cck-item-title {
+    font-weight: 600;
+    color: var(--cck-list-title);
+    text-decoration: none;
+}
+
+.cck-list-card .cck-item-title:hover {
+    color: var(--cck-list-accent);
+    text-decoration: underline;
+}
+
+/* Status pill — reuses BS5 badge rhythm with custom tints */
+.cck-status-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3rem;
+    padding: 0.18rem 0.55rem;
+    border-radius: 999px;
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+    line-height: 1;
+}
+
+.cck-status-pill--on {
+    background: var(--cck-list-ok-bg);
+    color: var(--cck-list-ok-fg);
+}
+
+.cck-status-pill--off {
+    background: var(--cck-list-off-bg);
+    color: var(--cck-list-off-fg);
+}
+
+.cck-status-pill::before {
+    content: '';
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: currentColor;
+    opacity: 0.8;
+}
+
+/* Inherit style for Joomla's jgrid.published output. Without touching PHP, we
+   restyle the .btn-micro Joomla emits so the existing cell renders as our
+   pill. Kept to a modest set of overrides to avoid breaking the click area. */
+.cck-list-card .btn-micro.active,
+.cck-list-card .btn-micro.btn-success {
+    background: var(--cck-list-ok-bg) !important;
+    color: var(--cck-list-ok-fg) !important;
+    border-color: transparent !important;
+    box-shadow: none !important;
+}
+
+.cck-list-card .btn-micro:not(.active),
+.cck-list-card .btn-micro.btn-danger {
+    background: var(--cck-list-off-bg) !important;
+    color: var(--cck-list-off-fg) !important;
+    border-color: transparent !important;
+    box-shadow: none !important;
+}
+
+.cck-list-card .btn-micro {
+    border-radius: 999px !important;
+    padding: 0.22rem 0.55rem !important;
+    font-size: 0.72rem !important;
+    line-height: 1 !important;
+}
+
+/* ID cell — small monospace with # prefix */
+.cck-id {
+    display: inline-block;
+    font-family: var(--bs-font-monospace, SFMono-Regular, Menlo, monospace);
+    font-size: 0.78rem;
+    color: var(--cck-list-muted);
+}
+
+.cck-id::before {
+    content: '#';
+    opacity: 0.6;
+    margin-right: 1px;
+}
+
+/* Checkbox column — tighten */
+.cck-list-card .cck-col-check {
+    width: 34px;
+    padding-left: 0.9rem !important;
+}
+
+/* Inline badges (e.g. Fields count) */
+.cck-list-card .badge {
+    font-weight: 600;
+    letter-spacing: 0;
+}
+
+/* ------- Footer ------- */
+
+.cck-list-footer {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.75rem;
+    width: 100%;
+    margin: 0;
+}
+
+.cck-list-footer .joomcckPageLinks .pagination {
+    margin-bottom: 0;
+}
+
+.cck-list-footer .joomcckPageLinks .page-link {
+    font-size: 0.85rem;
+    padding: 0.3rem 0.6rem;
+}
+
+.cck-list-footer .cck-list-meta {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+    font-size: 0.8rem;
+    color: var(--cck-list-muted);
+}
+
+.cck-list-footer .cck-list-meta .bullet {
+    opacity: 0.4;
+}
+
+.cck-list-footer .joomcckLimitBox {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-size: 0.8rem;
+    color: var(--cck-list-muted);
+}
+
+.cck-list-footer .joomcckLimitBox select {
+    --bs-form-select-padding-y: 0.2rem;
+    --bs-form-select-padding-x: 0.5rem;
+    font-size: 0.82rem;
+    padding: 0.2rem 1.6rem 0.2rem 0.5rem;
+    height: auto;
+    min-width: 70px;
+}
+
+.cck-list-footer .joomcckLimitBox small {
+    font-size: 0.78rem;
+}
+
+/* ------- Chip row spacing (uses existing .jc-chips from drawer CSS) ------- */
+
+.cck-list-card .jc-chips,
+.cck-list-shell > .jc-chips {
+    margin: 0 0 0.75rem 0;
+}
+
+/* ------- Responsive ------- */
+
+@media (max-width: 767.98px) {
+    .cck-list-title {
+        font-size: 1.35rem;
+    }
+
+    .cck-list-title img {
+        width: 28px;
+        height: 28px;
+    }
+
+    .cck-list-sort {
+        width: 100%;
+        min-width: 0;
+    }
+
+    .cck-list-action-bar .cck-list-primary-actions {
+        width: 100%;
+    }
+
+    .cck-list-card > .card-body > table.table > thead th,
+    .cck-list-card > .card-body > table.table > tbody > tr > td {
+        padding: 0.55rem 0.55rem;
+    }
+}
+
+@media (max-width: 575.98px) {
+    .cck-list-card > .card-header {
+        padding: 0.7rem 0.75rem;
+    }
+
+    .cck-list-card > .card-footer {
+        padding: 0.5rem 0.75rem;
+    }
+
+    .cck-list-footer {
+        justify-content: center;
+        text-align: center;
+    }
+}

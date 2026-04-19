@@ -34,33 +34,29 @@ if($saveOrder)
 
 <?php echo HTMLFormatHelper::layout('navbar'); ?>
 
-<div class="page-header">
-    <h1>
-        <img src="<?php echo \Joomla\CMS\Uri\Uri::root(TRUE); ?>/components/com_joomcck/images/icons/sections.png">
-		<?php echo \Joomla\CMS\Language\Text::sprintf('COB_FIELDSOF', $this->type->name); ?>
-    </h1>
-</div>
-<?php echo HTMLFormatHelper::layout('items', $this); ?>
+<form action="<?php echo Route::_('index.php?option=com_joomcck&view=tfields'); ?>" method="post" name="adminForm" id="adminForm" class="cck-list-shell">
 
-<div class="clearfix"></div>
-
-<form action="<?php echo Route::_('index.php?option=com_joomcck&view=tfields'); ?>" method="post" name="adminForm" id="adminForm">
-
-    <div class="card shadow-sm mb-5">
-        <div class="card-header bg-white">
-            <div class="d-flex justify-content-between align-items-center">
-                <div>
-				    <?php echo HTMLFormatHelper::layout('search', $this); ?>
-                </div>
-			    <?php echo Layout::render('admin.list.ordering', $this) ?>
-            </div>
-
-            <div class="my-2">
-			    <?php echo HTMLFormatHelper::layout('filters', $this); ?>
-            </div>
+    <div class="cck-list-titlebar mb-4">
+        <h2 class="cck-list-title">
+            <img src="<?php echo \Joomla\CMS\Uri\Uri::root(true); ?>/components/com_joomcck/images/icons/sections.png" alt="">
+            <span><?php echo \Joomla\CMS\Language\Text::sprintf('COB_FIELDSOF', $this->type->name); ?></span>
+        </h2>
+        <div class="cck-list-title-actions">
+            <?php echo HTMLFormatHelper::layout('search', $this); ?>
+            <?php echo Layout::render('admin.list.add', $this); ?>
         </div>
+    </div>
+
+    <div class="cck-list-action-bar">
+        <?php echo HTMLFormatHelper::layout('items', $this); ?>
+        <?php echo Layout::render('admin.list.ordering', $this); ?>
+    </div>
+
+    <?php echo HTMLFormatHelper::layout('filters', $this); ?>
+
+    <div class="card cck-list-card">
         <div class="card-body">
-            <table class="table table-hover" id="fieldsList">
+            <table class="table table-hover align-middle mb-0" id="fieldsList">
                 <thead>
                 <tr>
                     <th width="1%">
@@ -146,7 +142,7 @@ if($saveOrder)
                                     <img alt="Icon" src="<?php echo \Joomla\CMS\Uri\Uri::root(TRUE) ?>/media/com_joomcck/icons/16/<?php echo $params->get('core.icon'); ?>" align="absmiddle">
 						        <?php endif; ?>
 
-                                <a href="<?php echo Route::_('index.php?option=com_joomcck&task=tfield.edit&id=' . (int)$item->id); ?>">
+                                <a class="cck-item-title" href="<?php echo Route::_('index.php?option=com_joomcck&task=tfield.edit&id=' . (int)$item->id); ?>">
 							        <?php echo $this->escape($item->label); ?>
                                 </a>
                             </div>
@@ -189,8 +185,8 @@ if($saveOrder)
                         <td><?php echo \Joomla\CMS\HTML\HTMLHelper::_('field.searchable', $params->get('core.searchable', 0), $i, 'tfields.', $canChange) ?></td>
                         <td><?php echo \Joomla\CMS\HTML\HTMLHelper::_('field.show_intro', $params->get('core.show_intro', 0), $i, 'tfields.', $canChange) ?></td>
                         <td><?php echo \Joomla\CMS\HTML\HTMLHelper::_('field.show_full', $params->get('core.show_full', 0), $i, 'tfields.', $canChange) ?></td>
-                        <td class="center">
-                            <small><?php echo (int)$item->id; ?></small>
+                        <td class="text-end">
+                            <span class="cck-id"><?php echo (int)$item->id; ?></span>
                         </td>
                     </tr>
 		        <?php endforeach; ?>

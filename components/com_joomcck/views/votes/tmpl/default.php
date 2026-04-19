@@ -22,35 +22,28 @@ $listDirn = $this->escape($this->state->get('list.direction'));
 
 <?php echo HTMLFormatHelper::layout('navbar'); ?>
 
-<div class="page-header">
-    <h1>
-        <img src="<?php echo \Joomla\CMS\Uri\Uri::root(TRUE); ?>/components/com_joomcck/images/icons/votes.png">
-		<?php echo \Joomla\CMS\Language\Text::_('CVOTES'); ?>
-    </h1>
-</div>
+<form action="<?php echo \Joomla\CMS\Uri\Uri::getInstance()->toString(); ?>" method="post" name="adminForm" id="adminForm" class="cck-list-shell">
 
-
-<?php echo HTMLFormatHelper::layout('items', $this); ?>
-
-<div class="clearfix"></div>
-
-<form action="<?php echo \Joomla\CMS\Uri\Uri::getInstance()->toString() ?>" method="post" name="adminForm" id="adminForm">
-
-    <div class="card shadow-sm bg-5">
-        <div class="card-header bg-white">
-            <div class="d-flex justify-content-between align-items-center">
-                <div>
-				    <?php echo HTMLFormatHelper::layout('search', $this); ?>
-                </div>
-			    <?php echo Layout::render('admin.list.ordering', $this) ?>
-            </div>
-
-            <div class="my-2">
-			    <?php echo HTMLFormatHelper::layout('filters', $this); ?>
-            </div>
+    <div class="cck-list-titlebar mb-4">
+        <h2 class="cck-list-title">
+            <img src="<?php echo \Joomla\CMS\Uri\Uri::root(true); ?>/components/com_joomcck/images/icons/votes.png" alt="">
+            <span><?php echo \Joomla\CMS\Language\Text::_('CVOTES'); ?></span>
+        </h2>
+        <div class="cck-list-title-actions">
+            <?php echo HTMLFormatHelper::layout('search', $this); ?>
         </div>
+    </div>
+
+    <div class="cck-list-action-bar">
+        <?php echo HTMLFormatHelper::layout('items', $this); ?>
+        <?php echo Layout::render('admin.list.ordering', $this); ?>
+    </div>
+
+    <?php echo HTMLFormatHelper::layout('filters', $this); ?>
+
+    <div class="card cck-list-card">
         <div class="card-body">
-            <table class="table table-hover" id="articleList">
+            <table class="table table-hover align-middle mb-0" id="articleList">
                 <thead>
                 <tr>
                     <th width="1%">
@@ -78,8 +71,8 @@ $listDirn = $this->escape($this->state->get('list.direction'));
                 </thead>
                 <tbody>
 		        <?php foreach($this->items as $i => $item) : ?>
-                    <tr class="row<?php echo $i % 2; ?>">
-                        <td><?php echo \Joomla\CMS\HTML\HTMLHelper::_('grid.id', $i, $item->id); ?></td>
+                    <tr>
+                        <td class="cck-col-check"><?php echo \Joomla\CMS\HTML\HTMLHelper::_('grid.id', $i, $item->id); ?></td>
                         <td>
                             <small>
                                 <a href="#" rel="tooltip" data-bs-original-title="<?php echo \Joomla\CMS\Language\Text::_('CFILTERBYVOTE'); ?>" onclick="Joomcck.setAndSubmit('filter_votes', '<?php echo $item->vote ?>')">
@@ -136,8 +129,8 @@ $listDirn = $this->escape($this->state->get('list.direction'));
 						        echo $data->format(\Joomla\CMS\Language\Text::_('CDATE1')); ?>
                             </small>
                         </td>
-                        <td align="center">
-                            <small><?php echo $item->id; ?></small>
+                        <td class="text-end">
+                            <span class="cck-id"><?php echo (int) $item->id; ?></span>
                         </td>
                     </tr>
 		        <?php endforeach; ?>

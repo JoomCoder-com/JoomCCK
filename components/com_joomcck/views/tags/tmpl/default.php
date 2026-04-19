@@ -54,35 +54,28 @@ $listDirn	= $this->state->get('list.direction');
 <?php echo HTMLFormatHelper::layout('navbar'); ?>
 
 
-<div class="page-header">
-    <h1>
-        <img src="<?php echo Uri::root(TRUE); ?>/components/com_joomcck/images/icons/tags.png">
-		<?php echo \Joomla\CMS\Language\Text::_('CTAGS'); ?>
-    </h1>
-</div>
+<form action="<?php echo Uri::getInstance()->toString(); ?>" method="post" name="adminForm" id="adminForm" class="cck-list-shell">
 
-<?php echo HTMLFormatHelper::layout('items', $this); ?>
-
-<div class="clearfix"></div>
-
-
-<form action="<?php echo Uri::getInstance()->toString(); ?>" method="post" name="adminForm"  id="adminForm">
-
-    <div class="card shadow-sm mb-5">
-        <div class="card-header bg-white">
-            <div class="d-flex justify-content-between align-items-center">
-                <div>
-				    <?php echo HTMLFormatHelper::layout('search', $this); ?>
-                </div>
-			    <?php echo Layout::render('admin.list.ordering', $this) ?>
-            </div>
-
-            <div class="my-2">
-			    <?php echo HTMLFormatHelper::layout('filters', $this); ?>
-            </div>
+    <div class="cck-list-titlebar mb-4">
+        <h2 class="cck-list-title">
+            <img src="<?php echo Uri::root(true); ?>/components/com_joomcck/images/icons/tags.png" alt="">
+            <span><?php echo \Joomla\CMS\Language\Text::_('CTAGS'); ?></span>
+        </h2>
+        <div class="cck-list-title-actions">
+            <?php echo HTMLFormatHelper::layout('search', $this); ?>
         </div>
+    </div>
+
+    <div class="cck-list-action-bar">
+        <?php echo HTMLFormatHelper::layout('items', $this); ?>
+        <?php echo Layout::render('admin.list.ordering', $this); ?>
+    </div>
+
+    <?php echo HTMLFormatHelper::layout('filters', $this); ?>
+
+    <div class="card cck-list-card">
         <div class="card-body">
-            <table class="table table-striped">
+            <table class="table table-hover align-middle mb-0">
                 <thead>
                 <th width="1%">
                     <input type="checkbox" name="checkall-toggle" value="" onclick="Joomla.checkAll(this)" />
@@ -103,21 +96,21 @@ $listDirn	= $this->state->get('list.direction');
                 <tbody>
 		        <?php $k=1; foreach ($this->items as $i => $row) :?>
 
-                    <tr class="<?php $k = 1 - $k; echo "row$k"; ?>">
-                        <td>
-					        <?php echo \Joomla\CMS\HTML\HTMLHelper::_('grid.id', $i, $row->id ); ?>
+                    <tr>
+                        <td class="cck-col-check">
+					        <?php echo \Joomla\CMS\HTML\HTMLHelper::_('grid.id', $i, $row->id); ?>
                         </td>
                         <td id="tag_container_<?php echo $row->id; ?>">
-                            <a href="javascript: void(0); showForm(<?php echo $row->id; ?>)" id="tag_<?php echo $row->id; ?>"><?php echo $row->tag; ?></a>
+                            <a class="cck-item-title" href="javascript: void(0); showForm(<?php echo $row->id; ?>)" id="tag_<?php echo $row->id; ?>"><?php echo $row->tag; ?></a>
                         </td>
-                        <td class="nowrap center small">
-					        <?php $data = new \Joomla\CMS\Date\Date( $row->ctime ); echo $data->format( \Joomla\CMS\Language\Text::_('CDATE1' ) ); ?>
+                        <td class="text-center small text-muted d-none d-md-table-cell">
+					        <?php $data = new \Joomla\CMS\Date\Date($row->ctime); echo $data->format(\Joomla\CMS\Language\Text::_('CDATE1')); ?>
                         </td>
-                        <td class="center">
+                        <td class="text-center d-none d-md-table-cell">
 					        <?php echo $row->language; ?>
                         </td>
-                        <td align="center">
-					        <?php echo $row->id; ?>
+                        <td class="text-end">
+                            <span class="cck-id"><?php echo (int) $row->id; ?></span>
                         </td>
                     </tr>
 		        <?php endforeach;?>

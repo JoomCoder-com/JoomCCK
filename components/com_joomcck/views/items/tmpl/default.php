@@ -28,36 +28,30 @@ $listDirn = $this->state->get('list.direction');
 
 <?php echo HTMLFormatHelper::layout('navbar'); ?>
 
-<div class="page-header">
-    <h1>
-        <img src="<?php echo Uri::root(TRUE); ?>/components/com_joomcck/images/icons/items.png">
-		<?php echo Text::_('XML_TOOLBAR_TITLE_RECORDS'); ?>
-    </h1>
-</div>
+<form action="<?php echo Uri::getInstance()->toString(); ?>" method="post" id="adminForm" name="adminForm" class="cck-list-shell">
 
-<?php echo HTMLFormatHelper::layout('items', $this); ?>
-
-<div class="clearfix"></div>
-
-<form action="<?php echo Uri::getInstance()->toString() ?>" method="post" id="adminForm" name="adminForm">
-
-    <div class="card shadow-sm mb-5">
-
-        <div class="card-header bg-white">
-            <div class="d-flex justify-content-between align-items-center">
-                <div>
-			        <?php echo HTMLFormatHelper::layout('search', $this); ?>
-                </div>
-		        <?php echo Layout::render('admin.list.ordering', $this) ?>
-            </div>
-
-            <div class="my-2">
-		        <?php echo HTMLFormatHelper::layout('filters', $this); ?>
-            </div>
+    <div class="cck-list-titlebar mb-4">
+        <h2 class="cck-list-title">
+            <img src="<?php echo Uri::root(true); ?>/components/com_joomcck/images/icons/items.png" alt="">
+            <span><?php echo Text::_('XML_TOOLBAR_TITLE_RECORDS'); ?></span>
+        </h2>
+        <div class="cck-list-title-actions">
+            <?php echo HTMLFormatHelper::layout('search', $this); ?>
+            <?php echo Layout::render('admin.list.add', $this); ?>
         </div>
+    </div>
+
+    <div class="cck-list-action-bar">
+        <?php echo HTMLFormatHelper::layout('items', $this); ?>
+        <?php echo Layout::render('admin.list.ordering', $this); ?>
+    </div>
+
+    <?php echo HTMLFormatHelper::layout('filters', $this); ?>
+
+    <div class="card cck-list-card">
 
         <div class="card-body">
-            <table class="table table-hover" id="articleList">
+            <table class="table table-hover align-middle mb-0" id="articleList">
                 <thead>
                 <th width="1%">
                     <input type="checkbox" name="checkall-toggle" value="" title="<?php echo Text::_('JGLOBAL_CHECK_ALL'); ?>" onclick="Joomla.checkAll(this)"/>
@@ -82,8 +76,8 @@ $listDirn = $this->state->get('list.direction');
 			        $canCheckin = $user->authorise('core.manage', 'com_checkin') || $item->checked_out == $user->get('id') || $item->checked_out == 0;
 			        $canChange  = TRUE;
 			        ?>
-                    <tr class="row<?php echo $i % 2; ?>">
-                        <td class="center">
+                    <tr>
+                        <td class="cck-col-check">
 					        <?php echo \Joomla\CMS\HTML\HTMLHelper::_('grid.id', $i, $item->id); ?>
                         </td>
                         <td class="center">
@@ -160,8 +154,8 @@ $listDirn = $this->state->get('list.direction');
 						        <?php if($item->checked_out) : ?>
 							        <?php echo \Joomla\CMS\HTML\HTMLHelper::_('jgrid.checkedout', $i, $item->checked_out, $item->checked_out_time, 'records.', $canCheckin); ?>
 						        <?php endif; ?>
-                                <a title="<?php echo Text::_('CEDITRECORD'); ?>" href="<?php echo Url::edit((int)$item->id); ?>">
-                                    <big><?php echo strip_tags($item->title); ?></big>
+                                <a class="cck-item-title" title="<?php echo Text::_('CEDITRECORD'); ?>" href="<?php echo Url::edit((int)$item->id); ?>">
+                                    <?php echo strip_tags($item->title); ?>
                                 </a>
                                 <br/>
                                 <small>
@@ -227,10 +221,8 @@ $listDirn = $this->state->get('list.direction');
 						        <?php endif; ?>
                             </small>
                         </td>
-                        <td class="center">
-                            <small>
-						        <?php echo (int)$item->id; ?>
-                            </small>
+                        <td class="text-end">
+                            <span class="cck-id"><?php echo (int)$item->id; ?></span>
                         </td>
                     </tr>
 		        <?php endforeach; ?>

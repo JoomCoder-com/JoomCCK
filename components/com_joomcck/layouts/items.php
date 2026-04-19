@@ -1,134 +1,120 @@
 <?php
 /**
- * by joomcoder
- * a component for Joomla! 3.x CMS (http://www.joomla.org)
- * Author Website: https://www.joomcoder.com/
+ * Secondary action bar for admin list views.
  *
- * @copyright Copyright (C) 2007-2014 joomcoder (https://www.joomcoder.com). All rights reserved.
- * @license   GNU/GPL http://www.gnu.org/copyleft/gpl.html
+ * Emits Edit / Publish / Unpublish / Delete plus per-view extras
+ * (Reset, Mass, Manage Groups). The primary "Add" action lives in a
+ * separate layout (admin.list.add) so templates can render it in the
+ * card-header title bar.
+ *
+ * Backward compatibility: legacy templates that still call
+ * HTMLFormatHelper::layout('items') will get only the secondary actions;
+ * they must add a Layout::render('admin.list.add', $this) call separately
+ * if they also want the Add button rendered by this layout.
+ *
+ * Also the single point of inclusion for admin-list.css — all list views
+ * route through this layout, so enqueue once here.
  */
 
 defined('_JEXEC') or die('Restricted access');
-$view   = \Joomla\CMS\Factory::getApplication()->input->getCmd('view');
+
+use Joomla\CMS\Factory;
+use Joomla\CMS\Language\Text;
+use Joomla\CMS\Uri\Uri;
+
+$cssPath = '/media/com_joomcck/css/admin-list.css';
+$cssVer  = @filemtime(JPATH_ROOT . $cssPath) ?: 'auto';
+Factory::getDocument()->addStyleSheet(Uri::root(true) . $cssPath, ['version' => (string) $cssVer]);
+
+$view   = Factory::getApplication()->input->getCmd('view');
 $single = preg_replace('/s$/iU', '', $view);
+
+$showEdit        = !in_array($view, ['tags', 'votes', 'items'], true);
+$showPublish     = !in_array($view, ['packs', 'packsections', 'tags', 'votes'], true);
 ?>
 
-<div class="d-flex justify-content-between mt-4">
-    <div class="d-flex justify-content-start align-items-center ms-3">
-        <img src="<?php echo \Joomla\CMS\Uri\Uri::root(TRUE); ?>/components/com_joomcck/images/arrow-turn-270-left.png" alt="Select and" class="arrow ms-2"/>
+<div class="cck-list-primary-actions" role="group" aria-label="<?php echo htmlspecialchars(Text::_('CACTIONS', true), ENT_QUOTES, 'UTF-8'); ?>">
 
-        <?php if(!in_array($view, array('tags', 'votes', 'items'))): ?>
-            <div class="btn-group ms-2">
-                <button type="button" class="btn-submit btn btn-light border" onclick="if (document.adminForm.boxchecked.value==0){alert('<?php echo \Joomla\CMS\Language\Text::_('SELECTFIRST', TRUE) ?>');}else{Joomla.submitbutton('<?php echo $single; ?>.edit');}">
-					<?php echo \Joomla\CMS\Language\Text::_('CEDIT'); ?>
-                </button>
-            </div>
+	<?php if ($showEdit || $showPublish): ?>
+	<div class="btn-group btn-group-sm" role="group">
+		<?php if ($showEdit): ?>
+			<button type="button" class="btn btn-outline-secondary"
+			        onclick="if (document.adminForm.boxchecked.value==0){alert('<?php echo Text::_('SELECTFIRST', true); ?>');}else{Joomla.submitbutton('<?php echo $single; ?>.edit');}">
+				<i class="fas fa-pen" aria-hidden="true"></i>
+				<span class="ms-1"><?php echo Text::_('CEDIT'); ?></span>
+			</button>
 		<?php endif; ?>
 
-		<?php if(!in_array($view, array('packs', 'packsections', 'tags', 'votes'))): ?>
-            <div class="btn-group ms-2" >
-                <button type="button" class="btn-submit btn btn-light border" onclick="if (document.adminForm.boxchecked.value==0){alert('<?php echo \Joomla\CMS\Language\Text::_('SELECTFIRST', TRUE) ?>');}else{Joomla.submitbutton('<?php echo $view; ?>.publish');}">
-					<?php echo \Joomla\CMS\Language\Text::_('C_TOOLBAR_PUB'); ?>
-                </button>
-
-                <button type="button" class="btn-submit btn btn-light border" onclick="if (document.adminForm.boxchecked.value==0){alert('<?php echo \Joomla\CMS\Language\Text::_('SELECTFIRST', TRUE) ?>');}else{Joomla.submitbutton('<?php echo $view; ?>.unpublish');}">
-					<?php echo \Joomla\CMS\Language\Text::_('C_TOOLBAR_UNPUB'); ?>
-                </button>
-            </div>
+		<?php if ($showPublish): ?>
+			<button type="button" class="btn btn-outline-secondary"
+			        onclick="if (document.adminForm.boxchecked.value==0){alert('<?php echo Text::_('SELECTFIRST', true); ?>');}else{Joomla.submitbutton('<?php echo $view; ?>.publish');}">
+				<i class="fas fa-check" aria-hidden="true"></i>
+				<span class="ms-1"><?php echo Text::_('C_TOOLBAR_PUB'); ?></span>
+			</button>
+			<button type="button" class="btn btn-outline-secondary"
+			        onclick="if (document.adminForm.boxchecked.value==0){alert('<?php echo Text::_('SELECTFIRST', true); ?>');}else{Joomla.submitbutton('<?php echo $view; ?>.unpublish');}">
+				<i class="fas fa-ban" aria-hidden="true"></i>
+				<span class="ms-1"><?php echo Text::_('C_TOOLBAR_UNPUB'); ?></span>
+			</button>
 		<?php endif; ?>
+	</div>
+	<?php endif; ?>
 
-        <div class="btn-group ms-2">
-            <button type="button" class="btn-submit btn btn-danger" onclick="listButtonClick('<?php echo $view ?>.delete')">
-				<?php echo \Joomla\CMS\Language\Text::_('CDELETE'); ?>
-            </button>
-        </div>
+	<div class="btn-group btn-group-sm" role="group">
+		<button type="button" class="btn btn-outline-danger"
+		        onclick="listButtonClick('<?php echo $view; ?>.delete')">
+			<i class="fas fa-trash" aria-hidden="true"></i>
+			<span class="ms-1"><?php echo Text::_('CDELETE'); ?></span>
+		</button>
+	</div>
 
-		<?php if($view == 'tfields'): ?>
-            <div class="btn-group ms-2">
-                <a class="btn btn-outline-dark m" href="<?php echo \Joomla\CMS\Router\Route::_('index.php?option=com_joomcck&view=groups&type_id=' . $displayData->state->get('filter.type')); ?>">
-					<?php echo HTMLFormatHelper::icon('block.png'); ?>
-					<?php echo \Joomla\CMS\Language\Text::_('CMANAGEGROUP') ?>
-                </a>
-            </div>
-		<?php endif; ?>
+	<?php if ($view === 'tfields'): ?>
+		<a class="btn btn-sm btn-outline-secondary"
+		   href="<?php echo \Joomla\CMS\Router\Route::_('index.php?option=com_joomcck&view=groups&type_id=' . $displayData->state->get('filter.type')); ?>">
+			<?php echo HTMLFormatHelper::icon('block.png'); ?>
+			<span class="ms-1"><?php echo Text::_('CMANAGEGROUP'); ?></span>
+		</a>
+	<?php endif; ?>
 
-		<?php if($view == 'items'): ?>
-            <div class="btn-group ms-2">
-                <button class="btn btn-light border dropdown-toggle" data-bs-toggle="dropdown" type="button" aria-expanded="false">
-					<?php echo \Joomla\CMS\Language\Text::_('CRESET'); ?>
-                </button>
-                <ul class="dropdown-menu">
-                    <li><a class="dropdown-item" href="javascript:void(0);" onclick="listButtonClick('items.reset_hits')"><?php echo \Joomla\CMS\Language\Text::_('C_TOOLBAR_RESET_HITS'); ?></a></li>
-                    <li><a class="dropdown-item" href="javascript:void(0);" onclick="listButtonClick('items.reset_com')"><?php echo \Joomla\CMS\Language\Text::_('C_TOOLBAR_RESET_COOMENT'); ?></a></li>
-                    <li><a class="dropdown-item" href="javascript:void(0);" onclick="listButtonClick('items.reset_vote')"><?php echo \Joomla\CMS\Language\Text::_('C_TOOLBAR_RESET_RATING'); ?></a></li>
-                    <li><a class="dropdown-item" href="javascript:void(0);" onclick="listButtonClick('items.reset_fav')"><?php echo \Joomla\CMS\Language\Text::_('C_TOOLBAR_RESET_FAVORIT'); ?></a></li>
-                    <li><a class="dropdown-item" href="javascript:void(0);" onclick="listButtonClick('items.reset_ctime')"><?php echo \Joomla\CMS\Language\Text::_('C_TOOLBAR_RESET_CTIME'); ?></a></li>
-                    <li><a class="dropdown-item" href="javascript:void(0);" onclick="listButtonClick('items.reset_mtime')"><?php echo \Joomla\CMS\Language\Text::_('C_TOOLBAR_RESET_MTIME'); ?></a></li>
-                    <li><a class="dropdown-item" href="javascript:void(0);" onclick="listButtonClick('items.reset_extime')"><?php echo \Joomla\CMS\Language\Text::_('C_TOOLBAR_RESET_EXTIME'); ?></a></li>
-                </ul>
-            </div>
-            <div class="btn-group ms-2">
-                <button id="massDropdownButton" type="button" class="btn btn-light border dropdown-toggle" data-bs-toggle="dropdown" type="button" aria-expanded="false">
-					<?php echo \Joomla\CMS\Language\Text::_('CMASS'); ?>
-                </button>
-
-                <ul class="dropdown-menu" aria-labelledby="massDropdownButton">
-                    <!-- <li><a href="javascript:void(0);" onclick="listButtonClick('items.change_category');"><?php echo \Joomla\CMS\Language\Text::_('C_TOOLBAR_MASSOP1'); ?></a></li>
-				<li><a href="javascript:void(0);" onclick="listButtonClick('items.change_field');"><?php echo \Joomla\CMS\Language\Text::_('C_TOOLBAR_MASSOP2'); ?></a></li> -->
-                    <li><a class="dropdown-item" href="javascript:void(0);" onclick="listButtonClick('items.change_core');"><?php echo \Joomla\CMS\Language\Text::_('C_TOOLBAR_MASSOP3'); ?></a></li>
-                </ul>
-            </div>
-		<?php endif; ?>
-    </div>
-
-	<?php if(!in_array($view, array('tags', 'votes', 'comms'))): ?>
-        <div>
-			<?php if($view == 'items'): ?>
-                <div class="btn-group" role="group">
-                    <button id="btnGroupDrop1" type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-						<?php echo \Joomla\CMS\Language\Text::_('CADD'); ?>
-                    </button>
-                    <ul class="dropdown-menu" aria-labelledby="btnGroupDrop1">
-						<?php foreach($displayData->sections AS $section): ?>
-							<?php
-							$section->params = new \Joomla\Registry\Registry($section->params);
-							$section->id     = $section->value;
-							$types           = $section->params->get('general.type');
-							?>
-                            <li><h6 class="dropdown-header"><?php echo $section->text; ?></h6></li>
-							<?php foreach($types AS $type): ?>
-								<?php
-								$type = ItemsStore::getType($type);
-								?>
-								<?php if(is_object($type) && isset($type->name)):
-									?>
-                                    <li>
-                                        <a class="dropdown-item" href="<?php echo Url::add($section, $type, NULL); ?>">
-											<?php echo $type->name; ?>
-                                        </a>
-                                    </li>
-								<?php endif; ?>
-							<?php endforeach; ?>
-						<?php endforeach; ?>
-                    </ul>
-                </div>
-			<?php else: ?>
-                <button type="button" class="btn-submit btn btn-primary" onclick="Joomla.submitbutton('<?php echo $single; ?>.add');">
-					<?php echo \Joomla\CMS\Language\Text::_('CADD'); ?>
-                </button>
-			<?php endif; ?>
-        </div>
+	<?php if ($view === 'items'): ?>
+		<div class="btn-group btn-group-sm" role="group">
+			<button class="btn btn-outline-secondary dropdown-toggle" data-bs-toggle="dropdown" type="button" aria-expanded="false">
+				<i class="fas fa-rotate-left" aria-hidden="true"></i>
+				<span class="ms-1"><?php echo Text::_('CRESET'); ?></span>
+			</button>
+			<ul class="dropdown-menu">
+				<li><a class="dropdown-item" href="javascript:void(0);" onclick="listButtonClick('items.reset_hits')"><?php echo Text::_('C_TOOLBAR_RESET_HITS'); ?></a></li>
+				<li><a class="dropdown-item" href="javascript:void(0);" onclick="listButtonClick('items.reset_com')"><?php echo Text::_('C_TOOLBAR_RESET_COOMENT'); ?></a></li>
+				<li><a class="dropdown-item" href="javascript:void(0);" onclick="listButtonClick('items.reset_vote')"><?php echo Text::_('C_TOOLBAR_RESET_RATING'); ?></a></li>
+				<li><a class="dropdown-item" href="javascript:void(0);" onclick="listButtonClick('items.reset_fav')"><?php echo Text::_('C_TOOLBAR_RESET_FAVORIT'); ?></a></li>
+				<li><a class="dropdown-item" href="javascript:void(0);" onclick="listButtonClick('items.reset_ctime')"><?php echo Text::_('C_TOOLBAR_RESET_CTIME'); ?></a></li>
+				<li><a class="dropdown-item" href="javascript:void(0);" onclick="listButtonClick('items.reset_mtime')"><?php echo Text::_('C_TOOLBAR_RESET_MTIME'); ?></a></li>
+				<li><a class="dropdown-item" href="javascript:void(0);" onclick="listButtonClick('items.reset_extime')"><?php echo Text::_('C_TOOLBAR_RESET_EXTIME'); ?></a></li>
+			</ul>
+		</div>
+		<div class="btn-group btn-group-sm" role="group">
+			<button id="massDropdownButton" type="button" class="btn btn-outline-secondary dropdown-toggle"
+			        data-bs-toggle="dropdown" aria-expanded="false">
+				<i class="fas fa-layer-group" aria-hidden="true"></i>
+				<span class="ms-1"><?php echo Text::_('CMASS'); ?></span>
+			</button>
+			<ul class="dropdown-menu" aria-labelledby="massDropdownButton">
+				<li><a class="dropdown-item" href="javascript:void(0);" onclick="listButtonClick('items.change_core');"><?php echo Text::_('C_TOOLBAR_MASSOP3'); ?></a></li>
+			</ul>
+		</div>
 	<?php endif; ?>
 </div>
 
 <script type="text/javascript">
-	function listButtonClick(task) {
-		if(document.adminForm.boxchecked.value == 0) {
-			alert('<?php echo \Joomla\CMS\Language\Text::_('C_MSG_SELECTITEM', TRUE) ?>');
-			return;
-		}
-		if(confirm('<?php echo \Joomla\CMS\Language\Text::_('CSURE'); ?>')) {
-			Joomla.submitbutton(task);
-		}
+	if (typeof window.listButtonClick !== 'function') {
+		window.listButtonClick = function (task) {
+			if (document.adminForm.boxchecked.value == 0) {
+				alert('<?php echo Text::_('C_MSG_SELECTITEM', true); ?>');
+				return;
+			}
+			if (confirm('<?php echo Text::_('CSURE'); ?>')) {
+				Joomla.submitbutton(task);
+			}
+		};
 	}
 </script>

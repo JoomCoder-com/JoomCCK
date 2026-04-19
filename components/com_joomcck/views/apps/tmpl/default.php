@@ -7,92 +7,77 @@
  * @license   GNU/GPL http://www.gnu.org/copyleft/gpl.html
  */
 
-use Joomcck\Html\Helpers\Dropdown;
+use Joomla\CMS\Factory;
+use Joomla\CMS\HTML\HTMLHelper;
+use Joomla\CMS\Language\Text;
+use Joomla\CMS\Router\Route;
 
 defined('_JEXEC') or die('Restricted access');
-?>
-<?php
-$user = \Joomla\CMS\Factory::getApplication()->getIdentity();
+
+$user   = Factory::getApplication()->getIdentity();
 $userId = $user->get('id');
-\Joomla\CMS\HTML\HTMLHelper::_('dropdown.init');
-\Joomla\CMS\HTML\HTMLHelper::_('bootstrap.tooltip', '*[rel^="tooltip"]');
+
+HTMLHelper::_('dropdown.init');
+HTMLHelper::_('bootstrap.tooltip', '*[rel^="tooltip"]');
+
 $listOrder = $this->state->get('list.ordering');
-$listDirn = $this->state->get('list.direction');
+$listDirn  = $this->state->get('list.direction');
 ?>
 
 <?php echo HTMLFormatHelper::layout('navbar'); ?>
 
-<form action="<?php echo $this->action ?>" method="post" name="adminForm" id="adminForm">
+<form action="<?php echo $this->action; ?>" method="post" name="adminForm" id="adminForm" class="cck-list-shell">
 
-	<?php echo HTMLFormatHelper::layout('search', $this); ?>
-
-	<div class="mb-4 border-bottom pb-3">
-		<h1>
+	<div class="cck-list-titlebar mb-4">
+		<h2 class="cck-list-title">
 			<i class="fas fa-shapes text-muted"></i>
-			<?php echo \Joomla\CMS\Language\Text::_('COB_APPS_MANAGER'); ?>
-		</h1>
-		<?php echo HTMLFormatHelper::layout('filters', $this); ?>
+			<span><?php echo Text::_('COB_APPS_MANAGER'); ?></span>
+		</h2>
+		<div class="cck-list-title-actions">
+			<?php echo HTMLFormatHelper::layout('search', $this); ?>
+		</div>
 	</div>
 
+	<?php echo HTMLFormatHelper::layout('filters', $this); ?>
 
-
-    <div id="joomscckAppsContainer ">
-
-	    <div class="row">
-		    <?php foreach($this->items as $i => $item) :
-			    $ordering   = ($listOrder == 'f.ordering');
-			    $canCheckin = $user->authorise('core.manage', 'com_checkin') || $item->checked_out == $user->get('id') || $item->checked_out == 0;
-			    $canChange  = TRUE;
-			    $item->params = new \Joomla\Registry\Registry($item->params);
-			    ?>
-
-            <div class="col-md-3 mb-3">
-
-                <div class="card shadow">
-
-                    <div class="card-header bg-white">
-                        <h5 class="m-0">
-                            <a class="link-underline link-underline-opacity-0" href="<?php echo \Joomla\CMS\Router\Route::_('index.php?option=com_joomcck&view=app&id=' . (int)$item->id); ?>">
-			                    <?php echo $this->escape($item->name); ?>
-                            </a>
-                        </h5>
-                    </div>
-
-                    <div class="card-body ">
-                        <small rel="tooltip" data-bs-toggle="tooltip" data-bs-original-title="<?php echo \Joomla\CMS\Language\Text::_('CRECORDS'); ?>" class="badge bg-white  <?php echo($item->records ? 'text-success border border-color-success' : '  text-dark border') ?>">
-		                    <i class="fas fa-file"></i> <?php echo $item->records ?>
-                        </small>
-
-                        <small rel="tooltip" data-bs-toggle="tooltip" data-bs-original-title="<?php echo \Joomla\CMS\Language\Text::_('CCATEGORIES'); ?>" class="badge <?php echo($item->categories ? 'text-success border border-color-success' : ' bg-white text-dark border') ?>">
-                            <i class="fas fa-folder"></i> <?php echo $item->categories ?>
-                        </small>
-
-                    </div>
-
-                    <div class="card-footer">
-	                    <?php echo \Joomla\CMS\HTML\HTMLHelper::_('jgrid.published', $item->published, $i, 'sections.', $canChange); ?>
-	                    <?php if($item->checked_out) : ?>
-		                    <?php echo \Joomla\CMS\HTML\HTMLHelper::_('jgrid.checkedout', $i, $item->checked_out, $item->checked_out_time, 'sections.', $canCheckin); ?>
-	                    <?php endif; ?>
-                    </div>
-
-                </div>
-
-
-            </div>
-
-
-
-		    <?php endforeach; ?>
-        </div>
-
-
-    </div>
-
+	<div class="row g-3 mt-1">
+		<?php foreach ($this->items as $i => $item):
+			$canCheckin   = $user->authorise('core.manage', 'com_checkin') || $item->checked_out == $user->get('id') || $item->checked_out == 0;
+			$item->params = new \Joomla\Registry\Registry($item->params);
+			?>
+			<div class="col-md-4 col-lg-3">
+				<div class="card cck-list-card h-100">
+					<div class="card-header d-flex align-items-center gap-2">
+						<a class="cck-item-title flex-grow-1 text-decoration-none" href="<?php echo Route::_('index.php?option=com_joomcck&view=app&id=' . (int) $item->id); ?>">
+							<?php echo $this->escape($item->name); ?>
+						</a>
+					</div>
+					<div class="card-body">
+						<div class="d-flex flex-wrap gap-2">
+							<span rel="tooltip" data-bs-toggle="tooltip" data-bs-original-title="<?php echo Text::_('CRECORDS'); ?>"
+							      class="badge <?php echo $item->records ? 'bg-success-subtle text-success-emphasis border border-success-subtle' : 'bg-light text-dark border'; ?>">
+								<i class="fas fa-file me-1"></i><?php echo $item->records; ?>
+							</span>
+							<span rel="tooltip" data-bs-toggle="tooltip" data-bs-original-title="<?php echo Text::_('CCATEGORIES'); ?>"
+							      class="badge <?php echo $item->categories ? 'bg-success-subtle text-success-emphasis border border-success-subtle' : 'bg-light text-dark border'; ?>">
+								<i class="fas fa-folder me-1"></i><?php echo $item->categories; ?>
+							</span>
+						</div>
+					</div>
+					<div class="card-footer d-flex align-items-center gap-2">
+						<?php echo HTMLHelper::_('jgrid.published', $item->published, $i, 'sections.', true); ?>
+						<?php if ($item->checked_out): ?>
+							<?php echo HTMLHelper::_('jgrid.checkedout', $i, $item->checked_out, $item->checked_out_time, 'sections.', $canCheckin); ?>
+						<?php endif; ?>
+					</div>
+				</div>
+			</div>
+		<?php endforeach; ?>
+	</div>
 
 	<input type="hidden" name="task" value=""/>
 	<input type="hidden" name="boxchecked" value="0"/>
 	<input type="hidden" name="filter_order" value="<?php echo $listOrder; ?>"/>
 	<input type="hidden" name="filter_order_Dir" value="<?php echo $listDirn; ?>"/>
-	<?php echo \Joomla\CMS\HTML\HTMLHelper::_('form.token'); ?>
+	<?php echo HTMLHelper::_('form.token'); ?>
 </form>
