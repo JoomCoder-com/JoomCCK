@@ -65,9 +65,9 @@ foreach ($displayData->_filters as $filter)
 	// Skip the type filter on the tfields view — matches search.php behavior.
 	if ($view === 'tfields' && $filter['id'] === 'filter_type') continue;
 
-	$stateKey = str_replace('_', '.', $filter['id']);
-	if (!$displayData->state->get($stateKey)) continue;
-
+	// Source of truth is the rendered <option selected> markup. Checking
+	// state via !$value would falsely drop "0" selections (e.g. filter_state
+	// = "0" for Unpublished), since "0" is falsy in PHP.
 	$valueText = $selectedOptionText($filter['element']);
 	if ($valueText === null) continue;
 
@@ -185,5 +185,13 @@ $chipInputIds = array_column($chips, 'inputId');
 
 	var clearBtn = document.getElementById('jc-filters-clear');
 	if (clearBtn) clearBtn.addEventListener('click', clearAll);
+
+	// Auto-submit when a drawer filter <select> changes — restores the
+	// immediate-filter behavior of the legacy inline filter bar.
+	document.querySelectorAll('#list-filters-box select').forEach(function (select) {
+		select.addEventListener('change', function () {
+			form.submit();
+		});
+	});
 })();
 </script>
