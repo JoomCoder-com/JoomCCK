@@ -82,21 +82,23 @@ $app->getDispatcher()->addListener('onAfterRender', static function () use ($app
 });
 
 $groups = [
-	'CSIDEBAR_GROUP_PRIMARY' => [
+	'CSIDEBAR_GROUP_BUILD' => [
 		['view' => 'item',     'route' => 'items',     'icon' => 'blue-documents-stack.png', 'label' => 'XML_SUBMENU_RECORDS'],
 		['view' => 'section',  'route' => 'sections',  'icon' => 'folder.png',               'label' => 'XML_SUBMENU_SECTIONS'],
 		['view' => 'ctype',    'route' => 'ctypes',    'icon' => 'category.png',             'label' => 'XML_SUBMENU_TYPES'],
 		['view' => 'template', 'route' => 'templates', 'icon' => 'document-text-image.png',  'label' => 'XML_SUBMENU_TEMPLATES'],
 	],
-	'CSIDEBAR_GROUP_CONTENT' => [
-		['view' => 'pack',      'route' => 'packs',     'icon' => 'luggage.png',        'label' => 'XML_SUBMENU_PACK'],
-		['view' => 'import',    'route' => 'import',    'icon' => 'drive-download.png', 'label' => 'XML_SUBMENU_IMPORT'],
-		['view' => 'moderator', 'route' => 'moderators','icon' => 'user-share.png',     'label' => 'CMODERATORS'],
-		['view' => 'vote',      'route' => 'votes',     'icon' => 'star.png',           'label' => 'XML_SUBMENU_VOTES'],
-		['view' => 'comm',      'route' => 'comms',     'icon' => 'balloons.png',       'label' => 'XML_SUBMENU_COMMENTS'],
-		['view' => 'tag',       'route' => 'tags',      'icon' => 'price-tag.png',      'label' => 'XML_SUBMENU_TAGS'],
+	'CSIDEBAR_GROUP_ENGAGEMENT' => [
+		['view' => 'vote',      'route' => 'votes',      'icon' => 'star.png',         'label' => 'XML_SUBMENU_VOTES'],
+		['view' => 'comm',      'route' => 'comms',      'icon' => 'balloons.png',     'label' => 'XML_SUBMENU_COMMENTS'],
+		['view' => 'tag',       'route' => 'tags',       'icon' => 'price-tag.png',    'label' => 'XML_SUBMENU_TAGS'],
+		['view' => 'moderator', 'route' => 'moderators', 'icon' => 'user-share.png',   'label' => 'CMODERATORS'],
 	],
-	'CSIDEBAR_GROUP_TOOLS' => [
+	'CSIDEBAR_GROUP_DATA' => [
+		['view' => 'pack',   'route' => 'packs',  'icon' => 'luggage.png',         'label' => 'XML_SUBMENU_PACK'],
+		['view' => 'import', 'route' => 'import', 'icon' => 'drive-download.png',  'label' => 'XML_SUBMENU_IMPORT'],
+	],
+	'CSIDEBAR_GROUP_SYSTEM' => [
 		['view' => 'tool',          'route' => 'tools',         'icon' => 'hammer.png',          'label' => 'XML_SUBMENU_TOOLS'],
 		['view' => 'auditlog',      'route' => 'auditlog',      'icon' => 'clipboard-list.png',  'label' => 'XML_SUBMENU_AUDIT'],
 		['view' => 'notifications', 'route' => 'notifications', 'icon' => 'bell.png',            'label' => 'XML_SUBMENU_NOTIFY'],
@@ -131,16 +133,16 @@ if ($switcherActiveId > 0)
 		'label_extra' => $switcherActiveName,
 	];
 
-	foreach ($groups['CSIDEBAR_GROUP_PRIMARY'] as $i => $item)
+	foreach ($groups['CSIDEBAR_GROUP_BUILD'] as $i => $item)
 	{
 		if ($item['route'] === 'sections')
 		{
-			unset($groups['CSIDEBAR_GROUP_PRIMARY'][$i]);
+			unset($groups['CSIDEBAR_GROUP_BUILD'][$i]);
 			break;
 		}
 	}
-	array_unshift($groups['CSIDEBAR_GROUP_PRIMARY'], $editEntry);
-	$groups['CSIDEBAR_GROUP_PRIMARY'] = array_values($groups['CSIDEBAR_GROUP_PRIMARY']);
+	array_unshift($groups['CSIDEBAR_GROUP_BUILD'], $editEntry);
+	$groups['CSIDEBAR_GROUP_BUILD'] = array_values($groups['CSIDEBAR_GROUP_BUILD']);
 }
 ?>
 <aside id="jcck-sidebar"
