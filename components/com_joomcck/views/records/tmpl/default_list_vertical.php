@@ -66,6 +66,9 @@ $width = (100 - (int)$params->get('tmpl_params.lbl_width', 15)) / $cols;
 						<?php else :?>
 							<?php echo $items[$i]->title?>
 						<?php endif;?>
+						<?php if (!$items[$i]->published):?>
+							<small class="badge bg-warning text-dark"><?php echo \Joomla\CMS\Language\Text::_('JUNPUBLISHED');?></small>
+						<?php endif;?>
 						<?php echo CEventsHelper::showNum('record', $items[$i]->id);?>
 					</<?php echo $params->get('tmpl_params.title_tag', 'h2')?>>
 				<?php endif;?>

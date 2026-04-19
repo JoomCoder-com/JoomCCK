@@ -29,6 +29,9 @@ $containerClass = !isset($containerClass) ? 'mb-6 pb-2 border-b border-gray-200'
 			<?php if ($item->new): ?>
 				<span class="jcck-badge jcck-badge-success text-xs"><?php echo Text::_('CNEW') ?></span>
 			<?php endif; ?>
+			<?php if (!$item->published): ?>
+				<span class="jcck-badge bg-amber-100 text-amber-900 text-xs"><?php echo Text::_('JUNPUBLISHED') ?></span>
+			<?php endif; ?>
 			<?php echo CEventsHelper::showNum('record', $item->id); ?>
 		</<?php echo $params->get('tmpl_params.title_tag', 'h1') ?>>
 	</div>

@@ -804,7 +804,23 @@ class JoomcckModelRecords extends MModelList
 		{
 			if(CStatistics::hasUnPublished($this->section->id))
 			{
-				$query->where('r.published = 1');
+				$dummy         = new stdClass();
+				$dummy->params = new \Joomla\Registry\Registry();
+				$canSeeAll     = $user->authorise('core.admin', 'com_joomcck')
+					|| MECAccess::allowPublish(NULL, $dummy, $this->section);
+
+				if(!$canSeeAll)
+				{
+					$uid = (int) $user->get('id');
+					if($uid)
+					{
+						$query->where('(r.published = 1 OR r.user_id = ' . $uid . ')');
+					}
+					else
+					{
+						$query->where('r.published = 1');
+					}
+				}
 			}
 		}
 

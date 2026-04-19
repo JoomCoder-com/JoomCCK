@@ -34,6 +34,9 @@ $containerClass = !isset($containerClass) ? 'page-header mb-3' : $containerClass
 		<?php if ($item->new): ?>
             <small class="badge bg-success"><?php echo Text::_('CNEW') ?></small>
 		<?php endif; ?>
+		<?php if (!$item->published): ?>
+            <small class="badge bg-warning text-dark"><?php echo Text::_('JUNPUBLISHED') ?></small>
+		<?php endif; ?>
 		<?php echo CEventsHelper::showNum('record', $item->id); ?>
         </<?php echo $params->get('tmpl_params.title_tag', 'h1') ?>>
 

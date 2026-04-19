@@ -60,6 +60,9 @@ foreach ($exclude as &$value) {
 							<?php else:?>
 								<?php echo $item->title?>
 							<?php endif;?>
+							<?php if (!$item->published):?>
+								<small class="badge bg-warning text-dark"><?php echo \Joomla\CMS\Language\Text::_('JUNPUBLISHED');?></small>
+							<?php endif;?>
 							<?php echo CEventsHelper::showNum('record', $item->id);?>
 						</h2>
 					</div>
