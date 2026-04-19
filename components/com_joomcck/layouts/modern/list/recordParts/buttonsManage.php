@@ -9,6 +9,7 @@
  * @license   GNU/GPL http://www.gnu.org/copyleft/gpl.html
  */
 
+use Joomcck\Layout\Helpers\Layout;
 use Joomla\CMS\Factory;
 
 defined('_JEXEC') or die();
@@ -18,32 +19,35 @@ extract($displayData);
 $user = Factory::getApplication()->getIdentity();
 $disabled = !isset($disabled) ? [] : $disabled;
 
+if (!$user->id) {
+	return;
+}
+
+$type = $submissionTypes[$item->type_id];
 ?>
 
-<?php if($user->id):?>
-	<div class="user-ctrls">
-		<div class="flex items-center gap-1" role="group" style="display: none;">
-			<?php echo HTMLFormatHelper::bookmark($item, $submissionTypes[$item->type_id], $params);?>
-			<?php echo HTMLFormatHelper::follow($item, $section);?>
-			<?php echo HTMLFormatHelper::repost($item, $section);?>
-			<?php if(!in_array('compare', $disabled)): ?>
-				<?php echo HTMLFormatHelper::compare($item, $submissionTypes[$item->type_id], $section);?>
-			<?php endif; ?>
-			<?php if($item->controls):?>
-				<div class="relative jcck-dropdown-container">
-					<button type="button"
-							class="bg-white border border-gray-300 text-gray-500 px-2 py-1 rounded text-sm hover:bg-gray-50 transition-colors"
-							onclick="this.parentElement.querySelector('.jcck-dropdown-menu').classList.toggle('hidden')">
-						<i class="fas fa-ellipsis-v"></i>
-					</button>
-					<ul class="jcck-dropdown-menu hidden absolute right-0 z-10 mt-1 bg-white rounded-lg shadow-lg border border-gray-200 py-1 min-w-48">
-						<?php echo list_controls($item->controls);?>
-					</ul>
-				</div>
-			<?php endif;?>
-		</div>
+<div class="user-ctrls">
+	<div class="flex items-center gap-1" role="group" style="display: none;">
+		<?php echo Layout::render('core.list.recordParts.buttonBookmark', ['record' => $item, 'type' => $type, 'params' => $params]); ?>
+		<?php echo Layout::render('core.list.recordParts.buttonFollow',   ['record' => $item, 'section' => $section, 'params' => $params]); ?>
+		<?php echo Layout::render('core.list.recordParts.buttonRepost',   ['record' => $item, 'section' => $section]); ?>
+		<?php if (!in_array('compare', $disabled)): ?>
+			<?php echo Layout::render('core.list.recordParts.buttonCompare', ['record' => $item, 'type' => $type, 'section' => $section]); ?>
+		<?php endif; ?>
+		<?php if ($item->controls): ?>
+			<div class="relative jcck-dropdown-container">
+				<button type="button"
+						class="bg-white border border-gray-300 text-gray-500 px-2 py-1 rounded text-sm hover:bg-gray-50 transition-colors"
+						onclick="this.parentElement.querySelector('.jcck-dropdown-menu').classList.toggle('hidden')">
+					<i class="fas fa-ellipsis-v"></i>
+				</button>
+				<ul class="jcck-dropdown-menu hidden absolute right-0 z-10 mt-1 bg-white rounded-lg shadow-lg border border-gray-200 py-1 min-w-48">
+					<?php echo list_controls($item->controls); ?>
+				</ul>
+			</div>
+		<?php endif; ?>
 	</div>
-<?php endif;?>
+</div>
 
 <script>
 (function() {

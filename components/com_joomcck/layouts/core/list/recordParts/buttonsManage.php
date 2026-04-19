@@ -7,7 +7,7 @@
  * @license   GNU/GPL http://www.gnu.org/copyleft/gpl.html
  */
 
-use Joomcck\Assets\Webassets\Webassets;
+use Joomcck\Layout\Helpers\Layout;
 use Joomla\CMS\Factory;
 
 defined('_JEXEC') or die();
@@ -18,26 +18,27 @@ extract($displayData);
 $user = Factory::getApplication()->getIdentity();
 $disabled = !isset($disabled) ? [] : $disabled;
 
+if (!$user->id) {
+	return;
+}
 
+$type = $submissionTypes[$item->type_id];
 ?>
 
-
-<?php if($user->id):?>
-	<div class="user-ctrls">
-		<div class="btn-group" role="group" style="display: none;">
-			<?php echo HTMLFormatHelper::bookmark($item, $submissionTypes[$item->type_id], $params);?>
-			<?php echo HTMLFormatHelper::follow($item, $section);?>
-			<?php echo HTMLFormatHelper::repost($item, $section);?>
-            <?php if(!in_array('compare', $disabled)): ?>
-			<?php echo HTMLFormatHelper::compare($item, $submissionTypes[$item->type_id], $section);?>
-            <?php endif; ?>
-			<?php if($item->controls):?>
-				<button type="button" data-bs-toggle="dropdown" class="dropdown-toggle btn btn-sm bg-light border">
-				</button>
-				<ul class="dropdown-menu">
-					<?php echo list_controls($item->controls);?>
-				</ul>
-			<?php endif;?>
-		</div>
+<div class="user-ctrls">
+	<div class="btn-group" role="group" style="display: none;">
+		<?php echo Layout::render('core.list.recordParts.buttonBookmark', ['record' => $item, 'type' => $type, 'params' => $params]); ?>
+		<?php echo Layout::render('core.list.recordParts.buttonFollow',   ['record' => $item, 'section' => $section, 'params' => $params]); ?>
+		<?php echo Layout::render('core.list.recordParts.buttonRepost',   ['record' => $item, 'section' => $section]); ?>
+		<?php if (!in_array('compare', $disabled)): ?>
+			<?php echo Layout::render('core.list.recordParts.buttonCompare', ['record' => $item, 'type' => $type, 'section' => $section]); ?>
+		<?php endif; ?>
+		<?php if ($item->controls): ?>
+			<button type="button" data-bs-toggle="dropdown" class="dropdown-toggle btn btn-sm bg-light border">
+			</button>
+			<ul class="dropdown-menu">
+				<?php echo list_controls($item->controls); ?>
+			</ul>
+		<?php endif; ?>
 	</div>
-<?php endif;?>
+</div>

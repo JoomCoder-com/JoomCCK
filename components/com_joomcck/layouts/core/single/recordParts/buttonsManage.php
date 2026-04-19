@@ -7,8 +7,10 @@
  * @license   GNU/GPL http://www.gnu.org/copyleft/gpl.html
  */
 
-use Joomcck\Assets\Webassets\Webassets;
+use Joomcck\Layout\Helpers\Layout;
 use Joomla\CMS\Factory;
+use Joomla\CMS\Language\Text;
+use Joomla\CMS\Router\Route;
 
 defined('_JEXEC') or die();
 
@@ -23,30 +25,27 @@ $containerClass = !isset($containerClass) ? 'float-end controls' : $containerCla
 
 ?>
 
-<?php if(!$current->print):?>
+<?php if (!$current->print): ?>
 	<div class="<?php echo $containerClass ?>">
 		<div class="btn-group">
-			<?php if($params->get('tmpl_core.item_print')):?>
-				<a class="btn btn-sm btn-light border" onclick="window.open('<?php echo \Joomla\CMS\Router\Route::_($current->item->url.'&tmpl=component&print=1');?>','win2','status=no,toolbar=no,scrollbars=yes,titlebar=no,menubar=no,resizable=yes,width=640,height=480,directories=no,location=no'); return false;">
-					<?php echo HTMLFormatHelper::icon('printer.png', \Joomla\CMS\Language\Text::_('CPRINT'));  ?></a>
-			<?php endif;?>
+			<?php echo Layout::render('core.single.recordParts.buttonPrint', ['record' => $item, 'params' => $params]); ?>
 
-			<?php if($current->user->get('id')):?>
-				<?php echo HTMLFormatHelper::bookmark($item, $current->type, $params);?>
-				<?php echo HTMLFormatHelper::follow($item, $current->section);?>
-				<?php echo HTMLFormatHelper::repost($item, $current->section);?>
-				<?php if($item->controls):?>
+			<?php if ($current->user->get('id')): ?>
+				<?php echo Layout::render('core.single.recordParts.buttonBookmark', ['record' => $item, 'type' => $current->type, 'params' => $params]); ?>
+				<?php echo Layout::render('core.single.recordParts.buttonFollow',   ['record' => $item, 'section' => $current->section, 'params' => $params]); ?>
+				<?php echo Layout::render('core.single.recordParts.buttonRepost',   ['record' => $item, 'section' => $current->section]); ?>
+				<?php if ($item->controls): ?>
 					<button type="button" data-bs-toggle="dropdown" class="dropdown-toggle btn btn-sm btn-light border">
-						<?php echo HTMLFormatHelper::icon('gear.png');  ?></button>
+						<?php echo HTMLFormatHelper::icon('gear.png'); ?></button>
 					<ul class="dropdown-menu">
-						<?php echo list_controls($item->controls);?>
+						<?php echo list_controls($item->controls); ?>
 					</ul>
-				<?php endif;?>
-			<?php endif;?>
+				<?php endif; ?>
+			<?php endif; ?>
 		</div>
 	</div>
-<?php else:?>
+<?php else: ?>
 	<div class="float-end controls">
-		<a href="#" class="btn btn-sm btn-light border" onclick="window.print();return false;"><?php echo HTMLFormatHelper::icon('printer.png', \Joomla\CMS\Language\Text::_('CPRINT'));  ?></a>
+		<a href="#" class="btn btn-sm btn-light border" onclick="window.print();return false;"><?php echo HTMLFormatHelper::icon('printer.png', Text::_('CPRINT')); ?></a>
 	</div>
-<?php endif;?>
+<?php endif; ?>

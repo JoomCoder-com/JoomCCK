@@ -8,6 +8,7 @@
  * @license   GNU/GPL http://www.gnu.org/copyleft/gpl.html
  */
 
+use Joomcck\Layout\Helpers\Layout;
 use Joomla\CMS\HTML\HTMLHelper;
 
 defined('_JEXEC') or die();
@@ -163,148 +164,39 @@ class HTMLFormatHelper
 		}
 	}
 
-	public static function follow($record, $section)
+	public static function follow($record, $section, $params = null)
 	{
-		$user = \Joomla\CMS\Factory::getApplication()->getIdentity();
-
-		if(!$user->get('id'))
-		{
-			return NULL;
-		}
-
-		if(!in_array($section->params->get('events.subscribe_record'), $user->getAuthorisedViewLevels()))
-		{
-			return NULL;
-		}
-
-		if(!in_array($record->access, $user->getAuthorisedViewLevels()))
-		{
-			return NULL;
-		}
-
-		$file = \Joomla\CMS\Uri\Uri::root() . 'media/com_joomcck/icons/16/follow' . (int)($record->subscribed > 0) . '.png';
-		$alt  = ($record->subscribed ? \Joomla\CMS\Language\Text::_('CMSG_CLICKTOUNFOLLOW') : \Joomla\CMS\Language\Text::_('CMSG_CLICKTOFOLLOW'));
-		$attr = array('data-bs-original-title' => $alt, 'rel' => 'tooltip', 'id' => 'follow_record_' . $record->id);
-		$out  = \Joomla\CMS\HTML\HTMLHelper::image($file, $alt, $attr);
-
-		return sprintf('<button class="btn btn-sm btn-light border" type="button" onclick="Joomcck.followRecord(%d, %d);">%s</button>',
-			$record->id, \Joomla\CMS\Factory::getApplication()->input->getInt('section_id'), $out);
+		return Layout::render('core.list.recordParts.buttonFollow', [
+			'record'  => $record,
+			'section' => $section,
+			'params'  => $params,
+		]);
 	}
 
 	public static function compare($record, $type, $section)
 	{
-
-		if(!$type->params->get('properties.item_compare'))
-		{
-			return NULL;
-		}
-
-		$app = \Joomla\CMS\Factory::getApplication();
-
-		if($app->input->get('api') == 1)
-		{
-			return NULL;
-		}
-
-		$list = $app->getUserState("compare.set{$section->id}");
-		ArrayHelper::clean_r($list);
-
-		$hide = '';
-		if(in_array($record->id, $list))
-		{
-			$hide = ' hide';
-		}
-
-		$file = \Joomla\CMS\Uri\Uri::root() . 'media/com_joomcck/icons/16/edit-diff.png';
-		$attr = array('data-bs-original-title' => \Joomla\CMS\Language\Text::_('CMSG_COMPARE'), 'rel' => 'tooltip');
-		$img  = \Joomla\CMS\HTML\HTMLHelper::image($file, \Joomla\CMS\Language\Text::_('Compare'), $attr);
-
-		return sprintf('<button class="btn border btn-sm btn-light %s" id="compare_%d" type="button" onclick="Joomcck.CompareRecord(%d, %d);">%s</button>',
-			$hide, $record->id, $record->id, $app->input->getInt('section_id'), $img);
-
+		return Layout::render('core.list.recordParts.buttonCompare', [
+			'record'  => $record,
+			'type'    => $type,
+			'section' => $section,
+		]);
 	}
 
 	public static function repost($record, $section)
 	{
-		$user = \Joomla\CMS\Factory::getApplication()->getIdentity();
-
-		if(!$user->get('id'))
-		{
-			return NULL;
-		}
-		if(!$record->user_id)
-		{
-			return NULL;
-		}
-		if($user->get('id') == $record->user_id)
-		{
-			return NULL;
-		}
-
-		if(!$section->params->get('personalize.personalize'))
-		{
-			return NULL;
-		}
-		if(!$section->params->get('personalize.post_anywhere'))
-		{
-			return NULL;
-		}
-
-		if(in_array($user->get('id'), $record->repostedby))
-		{
-			return NULL;
-		}
-
-		if($record->whorepost == 0 && ($record->user_id != $user->get('id')))
-		{
-			return NULL;
-		}
-
-		if($record->whorepost == 1 && ($record->user_id != $user->get('id')) && !CUsrHelper::is_follower($record->user_id, $user->get('id'), $section))
-		{
-			return NULL;
-		}
-
-		$file = \Joomla\CMS\Uri\Uri::root() . 'media/com_joomcck/icons/16/arrow-retweet.png';
-		$alt  = \Joomla\CMS\Language\Text::_('CMSG_REPOST');
-		$attr = array('data-bs-original-title' => $alt, 'rel' => 'tooltip');
-		$img  = \Joomla\CMS\HTML\HTMLHelper::image($file, $alt, $attr);
-
-		return sprintf('<button class="btn btn-co-control btn-sm" id="repost_%d" type="button" onclick="Joomcck.RepostRecord(%d, %d);">%s</button>',
-			$record->id, $record->id, \Joomla\CMS\Factory::getApplication()->input->getInt('section_id'), $img);
+		return Layout::render('core.list.recordParts.buttonRepost', [
+			'record'  => $record,
+			'section' => $section,
+		]);
 	}
 
 	public static function bookmark($record, $type, $params)
 	{
-
-		$user = \Joomla\CMS\Factory::getApplication()->getIdentity();
-
-		if(!$user->get('id') || is_null($type))
-		{
-			return NULL;
-		}
-
-
-
-		if(!in_array($type->params->get('properties.item_can_favorite'), $user->getAuthorisedViewLevels()))
-		{
-			return NULL;
-		}
-
-		if(!in_array($record->access, $user->getAuthorisedViewLevels()))
-		{
-			return NULL;
-		}
-
-		$file = \Joomla\CMS\Uri\Uri::root() . 'media/com_joomcck/icons/bookmarks/' . $params->get('tmpl_core.bookmark_icons', 'star') . '/state' . (int)($record->bookmarked > 0) . '.png';
-		$alt  = ($record->bookmarked ?
-			Mint::_('CMSG_REMOVEBOOKMARK_'.$type->id, \Joomla\CMS\Language\Text::_('CMSG_REMOVEBOOKMARK')) :
-			Mint::_('CMSG_ADDBOOKMARK_'.$type->id, \Joomla\CMS\Language\Text::_('CMSG_ADDBOOKMARK')));
-		$attr = array('data-bs-original-title' => $alt, 'rel' => 'tooltip', 'id' => 'bookmark_' . $record->id);
-		$out  = \Joomla\CMS\HTML\HTMLHelper::image($file, $alt, $attr);
-
-		return sprintf('<button class="btn border btn-light btn-sm" type="button" onclick="Joomcck.bookmarkRecord(%d, \'%s\', %d);">%s</button>',
-			$record->id, $params->get('tmpl_core.bookmark_icons', 'star'), \Joomla\CMS\Factory::getApplication()->input->getInt('section_id'), $out);
+		return Layout::render('core.list.recordParts.buttonBookmark', [
+			'record' => $record,
+			'type'   => $type,
+			'params' => $params,
+		]);
 	}
 
 	public static function bb2html($text, $attr = NULL)
