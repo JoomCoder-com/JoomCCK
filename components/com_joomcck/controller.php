@@ -124,7 +124,14 @@ class JoomcckController extends MControllerBase
 				$app->setHeader('status', 403, true);
 				$app->redirect(\Joomla\CMS\Router\Route::_('index.php?option=com_users&view=login&return='.base64_encode(\Joomla\CMS\Uri\Uri::getInstance()->toString()), false));
 			}
-			if(!MECAccess::isAdmin())
+			// The admin entry (administrator/components/com_joomcck/joomcck.php)
+			// already enforces core.manage on com_joomcck, so requests that arrived
+			// through the administrator application are trusted here. Without this
+			// bypass, admin-URL loads (e.g. the "edit template" modal iframe) would
+			// fall into the frontend-only MECAccess::isAdmin() check below and
+			// redirect to the site homepage for Joomla Super Users who aren't
+			// mapped to the configured JoomCCK moderator_group.
+			if(!$app->isClient('administrator') && !MECAccess::isAdmin())
 			{
 				$app->enqueueMessage(\Joomla\CMS\Language\Text::_('CCANNOTACCESSADMINAREA'),'warning');
 				$app->setHeader('status', 403, true);

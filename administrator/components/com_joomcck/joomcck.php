@@ -31,6 +31,15 @@ if(!\Joomla\CMS\Factory::getApplication()->getIdentity()->authorise('core.manage
 
 }
 
+// The admin entry dispatches via MControllerBase::getInstance, which resolves
+// to the SHARED frontend JoomcckController (see libraries/mint/mvc/controller/base.php).
+// That controller — and the views/models it loads — assume the frontend api.php
+// bootstrap has run (JLoader prefix, table/model include paths, and the helper
+// classes in components/com_joomcck/library/php/helpers/ like MECAccess). Load
+// it here so admin URLs (e.g. the "edit template" modal iframe) work the same
+// as frontend ones.
+require_once JPATH_ROOT . '/components/com_joomcck/api.php';
+
 // check if config already set
 if(!\Joomla\CMS\Component\ComponentHelper::getParams('com_joomcck')->get('general_upload'))
 {
@@ -44,7 +53,14 @@ $input = Factory::getApplication()->input;
 
 $input->set('view', $input->get('view', 'start'));
 
-$controller = MControllerBase::getInstance('Joomcck');
+// Force the shared (frontend) component path so the instantiated controller
+// resolves views/models/tables/helpers against components/com_joomcck instead
+// of the near-empty admin views directory. Without this, MControllerBase's
+// constructor seeds $basePath from JPATH_COMPONENT (admin side here) and
+// getView() throws "View not found".
+$controller = MControllerBase::getInstance('Joomcck', array(
+	'base_path' => JPATH_ROOT . '/components/com_joomcck',
+));
 $controller->execute(\Joomla\CMS\Factory::getApplication()->input->get('task'));
 $controller->redirect();
 

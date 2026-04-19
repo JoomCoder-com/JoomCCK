@@ -28,7 +28,10 @@ class JFormFieldMersubtmpls extends \Joomla\CMS\Form\Field\ListField
 	protected function getInput()
 	{
 
-		// load iziModal library
+		// iziModal + main.js both still rely on jQuery's `$`; Joomla 5+ no longer
+		// ships it by default, so load the framework explicitly or main.js's IIFE
+		// will throw ReferenceError and Joomcck.addTmplEditLink never gets defined.
+		\Joomla\CMS\HTML\HTMLHelper::_('jquery.framework');
 		$document = \Joomla\CMS\Factory::getDocument();
 		$document->addStyleSheet(\Joomla\CMS\Uri\Uri::root().'media/com_joomcck/css/iziModal.min.css');
 		$document->addScript(\Joomla\CMS\Uri\Uri::root().'media/com_joomcck/js/iziModal.min.js');
@@ -74,10 +77,14 @@ class JFormFieldMersubtmpls extends \Joomla\CMS\Form\Field\ListField
 		$multi = $this->element['multi'] ? 'size="5" multiple="multiple"' : NULL;
 
 
+		// Route the modal through the admin entry when the field renders in the
+		// Joomla backend. Admin entry enforces core.manage on com_joomcck, so we
+		// don't depend on MECAccess::isAdmin() for this case.
+		$root = \Joomla\CMS\Uri\Uri::root() . ($app->isClient('administrator') ? 'administrator/' : '');
 		$script     = "<script type='text/javascript'>
-			Joomcck.addTmplEditLink('{$tmpltype}', '{$this->id}', '" . $app->input->get('tmpl') . "', '" . \Joomla\CMS\Uri\Uri::root() . "');
+			Joomcck.addTmplEditLink('{$tmpltype}', '{$this->id}', '" . $app->input->get('tmpl') . "', '" . $root . "');
 		</script>";
-		$javascript = " onchange=\"Joomcck.addTmplEditLink('{$tmpltype}', '{$this->id}', '" . $app->input->get('tmpl') . "', '" . \Joomla\CMS\Uri\Uri::root() . "')\"";
+		$javascript = " onchange=\"Joomcck.addTmplEditLink('{$tmpltype}', '{$this->id}', '" . $app->input->get('tmpl') . "', '" . $root . "')\"";
 
 		if($noparams)
 		{

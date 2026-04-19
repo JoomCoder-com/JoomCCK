@@ -41,6 +41,12 @@ class JoomcckViewTemplates extends MViewBase
 	public function display_form($tpl = NULL)
 	{
 		\Joomla\CMS\HTML\HTMLHelper::_('bootstrap.framework');
+		// The form's Save / Close / Save & Close buttons call Joomcck.submitTask
+		// and Joomcck.closeIframeModal (defined in main.js, which expects jQuery).
+		// Load both so the buttons work whether the view is opened directly or
+		// inside the module-edit iframe modal.
+		\Joomla\CMS\HTML\HTMLHelper::_('jquery.framework');
+		\Joomla\CMS\Factory::getDocument()->addScript(\Joomla\CMS\Uri\Uri::root() . 'components/com_joomcck/library/js/main.js');
 
 		$app   = \Joomla\CMS\Factory::getApplication();
 		$model = $this->getModel();
