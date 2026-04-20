@@ -8,8 +8,6 @@
  */
 defined('_JEXEC') or die('Restricted access');
 
-echo HTMLFormatHelper::layout('navbar');
-
 $cats_model = MModelBase::getInstance('Categories', 'JoomcckModel');
 $cats_model->section = $this->section;
 $cats_model->parent_id = 1;
