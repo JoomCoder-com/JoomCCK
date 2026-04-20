@@ -29,7 +29,6 @@ $ranges = [
 ];
 
 $ajaxBase    = Uri::root(true) . '/index.php?option=com_joomcck&task=cpanel.getStats';
-$newRecBase  = 'index.php?option=com_joomcck&view=form';
 
 $quickLinks = [
 	['items',         'fas fa-file',         Text::_('XML_SUBMENU_RECORDS')],
@@ -51,38 +50,19 @@ $quickLinks = [
 echo HTMLFormatHelper::layout('navbar');
 ?>
 
-<div class="page-header mb-3 d-flex align-items-center">
+<div class="page-header mb-3 d-flex align-items-center gap-2">
 	<h1 class="flex-grow-1 m-0"><?php echo Text::_('C_CPANEL'); ?></h1>
+	<label for="jcck-filter-range" class="fw-semibold text-muted small m-0">Range</label>
+	<select id="jcck-filter-range" data-filter="range" class="form-select form-select-sm" style="width:auto">
+		<?php foreach ($ranges as $key => $label): ?>
+			<option value="<?php echo $key; ?>"<?php echo $this->currentRange === $key ? ' selected' : ''; ?>><?php echo htmlspecialchars($label, ENT_QUOTES); ?></option>
+		<?php endforeach; ?>
+	</select>
 </div>
 
-<div class="jcck-dash" data-ajax-base="<?php echo htmlspecialchars($ajaxBase, ENT_QUOTES); ?>">
-
-	<!-- Toolbar: section + range filter -->
-	<div class="jcck-toolbar">
-		<label for="jcck-filter-section">Section</label>
-		<select id="jcck-filter-section" data-filter="section" class="form-select form-select-sm" style="width:auto">
-			<option value="0"<?php echo $this->currentSectionId === 0 ? ' selected' : ''; ?>>All sections</option>
-			<?php foreach ($this->sections as $s): ?>
-				<option value="<?php echo (int)$s->id; ?>"<?php echo $this->currentSectionId === (int)$s->id ? ' selected' : ''; ?>><?php echo htmlspecialchars($s->name, ENT_QUOTES); ?></option>
-			<?php endforeach; ?>
-		</select>
-
-		<label for="jcck-filter-range" class="ms-2">Range</label>
-		<select id="jcck-filter-range" data-filter="range" class="form-select form-select-sm" style="width:auto">
-			<?php foreach ($ranges as $key => $label): ?>
-				<option value="<?php echo $key; ?>"<?php echo $this->currentRange === $key ? ' selected' : ''; ?>><?php echo htmlspecialchars($label, ENT_QUOTES); ?></option>
-			<?php endforeach; ?>
-		</select>
-
-		<span class="spacer"></span>
-
-		<a class="btn btn-primary btn-sm"
-		   data-action="new-record"
-		   data-base="<?php echo htmlspecialchars($newRecBase, ENT_QUOTES); ?>"
-		   href="<?php echo htmlspecialchars($newRecBase . ($this->currentSectionId ? '&section_id=' . $this->currentSectionId : ''), ENT_QUOTES); ?>">
-			<i class="fas fa-plus"></i> <?php echo $trans('CNEWRECORD', 'New record'); ?>
-		</a>
-	</div>
+<div class="jcck-dash"
+     data-ajax-base="<?php echo htmlspecialchars($ajaxBase, ENT_QUOTES); ?>"
+     data-section-id="<?php echo (int) $this->currentSectionId; ?>">
 
 	<!-- KPI row -->
 	<div class="jcck-kpis">

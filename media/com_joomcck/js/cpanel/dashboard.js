@@ -10,11 +10,12 @@ function jcckDashInit() {
 	const root = document.querySelector('.jcck-dash');
 	if (!root) return;
 
-	const baseUrl       = root.dataset.ajaxBase;
-	const sectionSelect = root.querySelector('[data-filter="section"]');
-	const rangeSelect   = root.querySelector('[data-filter="range"]');
-	const newRecordBtn  = root.querySelector('[data-action="new-record"]');
-	const topTabs       = root.querySelector('.jcck-top-tabs');
+	const baseUrl     = root.dataset.ajaxBase;
+	const rangeSelect = root.querySelector('[data-filter="range"]');
+	const topTabs     = root.querySelector('.jcck-top-tabs');
+	// Section is driven by the global top-bar switcher (sidebar.php); the view
+	// server-renders the current value into data-section-id on page load.
+	const sectionId   = parseInt(root.dataset.sectionId || '0', 10) || 0;
 
 	const charts = { growth: null, donut: null, sparks: {} };
 	let currentPayload = null;
@@ -250,27 +251,20 @@ function jcckDashInit() {
 		drawDonut(payload.distribution);
 		renderActivity(payload.activity || []);
 		renderTop(payload);
-
-		if (newRecordBtn) {
-			const base = newRecordBtn.dataset.base || '';
-			newRecordBtn.href = base + (payload.filter.section_id ? '&section_id=' + payload.filter.section_id : '');
-		}
 	}
 
-	function syncUrl(sectionId, range) {
+	function syncUrl(range) {
 		if (!window.history || !history.replaceState) return;
 		const url = new URL(window.location.href);
-		if (sectionId) url.searchParams.set('section_id', sectionId); else url.searchParams.delete('section_id');
 		url.searchParams.set('range', range);
 		history.replaceState(null, '', url.toString());
 	}
 
 	function fetchStats() {
-		const sectionId = parseInt(sectionSelect ? sectionSelect.value : 0, 10) || 0;
-		const range     = rangeSelect ? rangeSelect.value : '30d';
+		const range = rangeSelect ? rangeSelect.value : '30d';
 
 		root.classList.add('jcck-loading');
-		syncUrl(sectionId, range);
+		syncUrl(range);
 
 		const url = baseUrl + '&section_id=' + sectionId + '&range=' + encodeURIComponent(range);
 		fetch(url, { credentials: 'same-origin', headers: { 'Accept': 'application/json' } })
@@ -293,8 +287,7 @@ function jcckDashInit() {
 		catch (e) { console.error('JoomCCK dashboard: bad boot payload', e); }
 	}
 
-	if (sectionSelect) sectionSelect.addEventListener('change', fetchStats);
-	if (rangeSelect)   rangeSelect.addEventListener('change', fetchStats);
+	if (rangeSelect) rangeSelect.addEventListener('change', fetchStats);
 
 	if (topTabs) {
 		topTabs.addEventListener('click', e => {

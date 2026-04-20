@@ -15,7 +15,6 @@ class JoomcckViewCpanel extends MViewBase
 {
 	public $hasExtendedVersion = false;
 
-	public $sections         = [];
 	public $currentSectionId = 0;
 	public $currentRange     = '30d';
 	public $dashboard        = [];
@@ -27,17 +26,13 @@ class JoomcckViewCpanel extends MViewBase
 		$app   = \Joomla\CMS\Factory::getApplication();
 		$input = $app->input;
 
-		// Filter resolution: request → user state → default
-		$sectionFromReq = $input->get('section_id', null, 'INT');
-		$rangeFromReq   = $input->get('range', null, 'CMD');
+		// Section: driven by the global top-bar switcher in sidebar.php, which
+		// writes `joomcck_section_id` to session. Cpanel no longer owns its own
+		// section filter, so we just read that shared value.
+		$this->currentSectionId = (int) \Joomla\CMS\Factory::getSession()->get('joomcck_section_id', 0);
 
-		if ($sectionFromReq !== null) {
-			$this->currentSectionId = (int) $sectionFromReq;
-			$app->setUserState('com_joomcck.cpanel.section_id', $this->currentSectionId);
-		} else {
-			$this->currentSectionId = (int) $app->getUserState('com_joomcck.cpanel.section_id', 0);
-		}
-
+		// Range: cpanel-specific user state with URL override.
+		$rangeFromReq = $input->get('range', null, 'CMD');
 		if ($rangeFromReq && in_array($rangeFromReq, ['7d', '30d', '90d', 'ytd', 'all'], true)) {
 			$this->currentRange = $rangeFromReq;
 			$app->setUserState('com_joomcck.cpanel.range', $this->currentRange);
@@ -48,7 +43,6 @@ class JoomcckViewCpanel extends MViewBase
 
 		require_once JPATH_COMPONENT_SITE . '/models/cpanel.php';
 		$model           = new JoomcckModelCpanel();
-		$this->sections  = $model->getSectionsList();
 		$this->dashboard = $model->getDashboard($this->currentSectionId, $this->currentRange);
 
 		// Enqueue dashboard assets. Use addScript/addStyleSheet directly — the
