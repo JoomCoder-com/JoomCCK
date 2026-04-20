@@ -51,15 +51,23 @@ if(!\Joomla\CMS\Component\ComponentHelper::getParams('com_joomcck')->get('genera
 
 $input = Factory::getApplication()->input;
 
-$input->set('view', $input->get('view', 'start'));
+$viewName = $input->get('view', 'start');
+$input->set('view', $viewName);
 
-// Force the shared (frontend) component path so the instantiated controller
-// resolves views/models/tables/helpers against components/com_joomcck instead
-// of the near-empty admin views directory. Without this, MControllerBase's
-// constructor seeds $basePath from JPATH_COMPONENT (admin side here) and
-// getView() throws "View not found".
+// Most admin URLs share the frontend views/models (the admin views dir is
+// near-empty and MControllerBase's default JPATH_COMPONENT seed otherwise
+// throws "View not found"). The exceptions are the admin-only landing pages
+// — `start` (default) and `about` — which exist only under administrator/.../
+// views/. Pick base_path per view so MControllerBase (view class lookup) and
+// MViewBase (template lookup, which reuses the same basePath) both resolve
+// the right directory.
+$adminOnlyViews = ['start', 'about'];
+$basePath = in_array($viewName, $adminOnlyViews, true)
+	? JPATH_ROOT . '/administrator/components/com_joomcck'
+	: JPATH_ROOT . '/components/com_joomcck';
+
 $controller = MControllerBase::getInstance('Joomcck', array(
-	'base_path' => JPATH_ROOT . '/components/com_joomcck',
+	'base_path' => $basePath,
 ));
 $controller->execute(\Joomla\CMS\Factory::getApplication()->input->get('task'));
 $controller->redirect();
