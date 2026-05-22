@@ -20,7 +20,7 @@ $filter_id = $module.$this->id;
 	<div class="col-auto">
 		<div class="input-group" id="dpfrom<?php echo $filter_id; ?>" data-td-target-input="nearest" data-td-target-toggle="nearest">
 			<button class="btn btn-outline-secondary" type="button" data-td-target="#dpfrom<?php echo $filter_id; ?>" data-td-toggle="datetimepicker">
-				<span class="fas fa-calendar"></span> <?php echo \Joomla\CMS\Language\Text::_('FROM'); ?>
+				<span class="fas fa-calendar"></span> <?php echo \Joomla\CMS\Language\Text::_('CFROM'); ?>
 			</button>
 			<input type="text" name="bdpfrom_<?php echo $filter_id; ?>" value="" class="form-control" data-td-target="#dpfrom<?php echo $filter_id; ?>" />
 		</div>
@@ -28,7 +28,7 @@ $filter_id = $module.$this->id;
 	<div class="col-auto">
 		<div class="input-group" id="dpto<?php echo $filter_id; ?>" data-td-target-input="nearest" data-td-target-toggle="nearest">
 			<button class="btn btn-outline-secondary" type="button" data-td-target="#dpto<?php echo $filter_id; ?>" data-td-toggle="datetimepicker">
-				<span class="fas fa-calendar"></span> <?php echo \Joomla\CMS\Language\Text::_('TO'); ?>
+				<span class="fas fa-calendar"></span> <?php echo \Joomla\CMS\Language\Text::_('CTO'); ?>
 			</button>
 			<input type="text" name="bdpto_<?php echo $filter_id; ?>" value="" class="form-control" data-td-target="#dpto<?php echo $filter_id; ?>" />
 		</div>
