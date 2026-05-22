@@ -33,12 +33,9 @@ $type = $submissionTypes[$item->type_id];
 		<?php if (!in_array('compare', $disabled)): ?>
 			<?php echo Layout::render('core.list.recordParts.buttonCompare', ['record' => $item, 'type' => $type, 'section' => $section]); ?>
 		<?php endif; ?>
-		<?php if ($item->controls): ?>
-			<button type="button" data-bs-toggle="dropdown" class="dropdown-toggle btn btn-sm bg-light border">
-			</button>
-			<ul class="dropdown-menu">
-				<?php echo list_controls($item->controls); ?>
-			</ul>
+		<?php if (isset($params) && is_object($params) && $params->get('tmpl_core.item_edit_button')): ?>
+			<?php echo Layout::render('core.list.recordParts.buttonEdit', ['record' => $item, 'type' => $type, 'section' => $section]); ?>
 		<?php endif; ?>
+		<?php echo Layout::render('core.list.recordParts.controlsMenu', ['controls' => $item->controls, 'record' => $item]); ?>
 	</div>
 </div>

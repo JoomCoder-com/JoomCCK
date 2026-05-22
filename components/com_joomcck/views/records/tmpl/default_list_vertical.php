@@ -92,7 +92,14 @@ $width = (100 - (int)$params->get('tmpl_params.lbl_width', 15)) / $cols;
 					<?php endif;?>
 					<?php echo CCommunityHelper::getName($items[$i]->user_id, $this->section);?>
 					<?php if($params->get('tmpl_core.item_author_filter') && $items[$i]->user_id):?>
-						<?php echo FilterHelper::filterButton('filter_user', $items[$i]->user_id, NULL, \Joomla\CMS\Language\Text::sprintf('CSHOWALLUSERREC', CCommunityHelper::getName($items[$i]->user_id, $this->section, array('nohtml' => 1))), $this->section);?>
+						<?php echo \Joomcck\Layout\Helpers\Layout::render('core.list.recordParts.recordFilter', [
+							'name'    => 'filter_user',
+							'value'   => $items[$i]->user_id,
+							'type'    => null,
+							'tip'     => \Joomla\CMS\Language\Text::sprintf('CSHOWALLUSERREC', CCommunityHelper::getName($items[$i]->user_id, $this->section, array('nohtml' => 1))),
+							'section' => $this->section,
+							'icon'    => $params->get('tmpl_core.item_author_filter_icon', 'funnel-small.png'),
+						]);?>
 					<?php endif;?>
 				</td>
 			<?php endfor; ?>
@@ -125,7 +132,14 @@ $width = (100 - (int)$params->get('tmpl_params.lbl_width', 15)) / $cols;
 				<td nowrap="nowrap">
 					<?php echo $items[$i]->type_name;?>
 					<?php if($params->get('tmpl_core.item_type_filter')):?>
-						<?php echo FilterHelper::filterButton('filter_type', $items[$i]->type_id, NULL, \Joomla\CMS\Language\Text::sprintf('CSHOWALLTYPEREC', $items[$i]->type_name), $this->section);?>
+						<?php echo \Joomcck\Layout\Helpers\Layout::render('core.list.recordParts.recordFilter', [
+							'name'    => 'filter_type',
+							'value'   => $items[$i]->type_id,
+							'type'    => null,
+							'tip'     => \Joomla\CMS\Language\Text::sprintf('CSHOWALLTYPEREC', $items[$i]->type_name),
+							'section' => $this->section,
+							'icon'    => $params->get('tmpl_core.item_type_filter_icon', 'funnel-small.png'),
+						]);?>
 					<?php endif;?>
 				</td>
 			<?php endfor; ?>

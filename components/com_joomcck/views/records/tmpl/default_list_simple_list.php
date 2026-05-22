@@ -105,7 +105,14 @@ foreach ($exclude as &$value) {
 				$author[] = \Joomla\CMS\Language\Text::sprintf('CWRITTENBY', CCommunityHelper::getName($item->user_id, $this->section));
 				if($params->get('tmpl_core.item_author_filter'))
 				{
-					$author[] = FilterHelper::filterButton('filter_user', $item->user_id, NULL, \Joomla\CMS\Language\Text::sprintf('CSHOWALLUSERREC', CCommunityHelper::getName($item->user_id, $this->section, array('nohtml' => 1))), $this->section);
+					$author[] = \Joomcck\Layout\Helpers\Layout::render('core.list.recordParts.recordFilter', [
+						'name'    => 'filter_user',
+						'value'   => $item->user_id,
+						'type'    => null,
+						'tip'     => \Joomla\CMS\Language\Text::sprintf('CSHOWALLUSERREC', CCommunityHelper::getName($item->user_id, $this->section, array('nohtml' => 1))),
+						'section' => $this->section,
+						'icon'    => $params->get('tmpl_core.item_author_filter_icon', 'funnel-small.png'),
+					]);
 				}
 			}
 			if($params->get('tmpl_core.item_ctime'))
@@ -125,7 +132,14 @@ foreach ($exclude as &$value) {
 
 			if($params->get('tmpl_core.item_type'))
 			{
-				$details[] = sprintf('%s: %s %s', \Joomla\CMS\Language\Text::_('CTYPE'), $item->type_name, ($params->get('tmpl_core.item_type_filter') ? FilterHelper::filterButton('filter_type', $item->type_id, NULL, \Joomla\CMS\Language\Text::sprintf('CSHOWALLTYPEREC', $item->type_name), $this->section) : NULL));
+				$details[] = sprintf('%s: %s %s', \Joomla\CMS\Language\Text::_('CTYPE'), $item->type_name, ($params->get('tmpl_core.item_type_filter') ? \Joomcck\Layout\Helpers\Layout::render('core.list.recordParts.recordFilter', [
+					'name'    => 'filter_type',
+					'value'   => $item->type_id,
+					'type'    => null,
+					'tip'     => \Joomla\CMS\Language\Text::sprintf('CSHOWALLTYPEREC', $item->type_name),
+					'section' => $this->section,
+					'icon'    => $params->get('tmpl_core.item_type_filter_icon', 'funnel-small.png'),
+				]) : NULL));
 			}
 			if($params->get('tmpl_core.item_hits'))
 			{

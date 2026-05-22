@@ -7,49 +7,23 @@
  * @license   GNU/GPL http://www.gnu.org/copyleft/gpl.html
  */
 
-use Joomla\CMS\Factory;
 use Joomla\CMS\HTML\HTMLHelper;
-use Joomla\CMS\Language\Text;
-use Joomla\CMS\Uri\Uri;
 
 defined('_JEXEC') or die();
 
 extract($displayData);
 
-$user = Factory::getApplication()->getIdentity();
-if (!$user->get('id')) {
-	return;
-}
-if (!$record->user_id) {
-	return;
-}
-if ($user->get('id') == $record->user_id) {
-	return;
-}
-if (!$section->params->get('personalize.personalize')) {
-	return;
-}
-if (!$section->params->get('personalize.post_anywhere')) {
-	return;
-}
-if (in_array($user->get('id'), $record->repostedby)) {
-	return;
-}
-if ($record->whorepost == 0 && ($record->user_id != $user->get('id'))) {
-	return;
-}
-if ($record->whorepost == 1 && ($record->user_id != $user->get('id')) && !CUsrHelper::is_follower($record->user_id, $user->get('id'), $section)) {
+// Raw values and permission gating live in HTMLFormatHelper::repostData().
+$data = HTMLFormatHelper::repostData($record, $section);
+if (!$data) {
 	return;
 }
 
-$file      = Uri::root() . 'media/com_joomcck/icons/16/arrow-retweet.png';
-$alt       = Text::_('CMSG_REPOST');
-$sectionId = Factory::getApplication()->input->getInt('section_id');
-$img       = HTMLHelper::image($file, $alt, [
-	'data-bs-original-title' => $alt,
+$img = HTMLHelper::image($data['icon'], $data['alt'], [
+	'data-bs-original-title' => $data['tip'],
 	'rel'                    => 'tooltip',
 ]);
 ?>
-<button class="btn btn-co-control btn-sm" id="repost_<?php echo (int) $record->id; ?>" type="button" onclick="Joomcck.RepostRecord(<?php echo (int) $record->id; ?>, <?php echo (int) $sectionId; ?>);">
+<button class="btn btn-co-control btn-sm" id="<?php echo $data['id']; ?>" type="button" onclick="<?php echo $data['onclick']; ?>">
 	<?php echo $img; ?>
 </button>

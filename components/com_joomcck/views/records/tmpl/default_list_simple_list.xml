@@ -15,7 +15,7 @@
 			<field name="field_id_exclude" client="list" type="meresourcesfields" size="15" key="id" multiple="true" default="" label="Fields to exclude" description="" />
 		</fieldset>
 	</fields>
-	<fields name="tmpl_core">
+	<fields name="tmpl_core" addfieldpath="/libraries/mint/forms/fields">
 		<fieldset name="general2" label="CFORMAT">
 			<field name="item_link" type="accesslevel" default="1" label="CTITLELINK">
 				<option value="0">XML_OPT_NOONE</option>
@@ -44,8 +44,8 @@
 				<option value="d/m/y">30/12/07</option>
 				<option value="m/d/y">12/30/07</option>
 			</field>
-			<field name="bookmark_icons" label="X_ICONBOOKMARK" type="folderlist" hide_none="1" hide_default="1" default="star" directory="media/com_joomcck/icons/bookmarks"  />
-			<field name="follow_icons" label="X_ICONFOLLOW" type="folderlist" hide_none="1" hide_default="1" default="default" directory="media/com_joomcck/icons/follow" />
+			<field name="bookmark_icons" label="X_ICONBOOKMARK" type="mjiconpack" hide_none="1" hide_default="1" default="star" directory="media/com_joomcck/icons/bookmarks"  />
+			<field name="follow_icons" label="X_ICONFOLLOW" type="mjiconpack" hide_none="1" hide_default="1" default="default" directory="media/com_joomcck/icons/follow" />
 	</fieldset>
 
 		<fieldset name="elements2" label="CLISTELEMENTS">
@@ -125,6 +125,10 @@
 				<option value="0">CNO</option>
 				<option value="1">CYES</option>
 			</field>
+			<field name="item_edit_button" type="radio" class="btn-group" default="0" label="X_EDITBUTTON" description="X_EDITBUTTON_DESC">
+				<option value="0">CNO</option>
+				<option value="1">CYES</option>
+			</field>
 			<field name="item_readon" type="radio" class="btn-group" default="0" label="CREADMORE" description="">
 				<option value="0">CNO</option>
 				<option value="1">CYES</option>
@@ -139,6 +143,8 @@
 				<option value="0">CNO</option>
 				<option value="1">CYES</option>
 			</field>
+			<field name="item_type_filter_icon" type="imagelist" default="funnel-small.png" directory="components/com_joomcck/images/filter/" label="X_FILTERICON_TYPE" description="X_FILTERICON_DESC" />
+			<field name="item_author_filter_icon" type="imagelist" default="funnel-small.png" directory="components/com_joomcck/images/filter/" label="X_FILTERICON_AUTHOR" description="X_FILTERICON_DESC" />
 		</fieldset>
 	</fields>
 </form>

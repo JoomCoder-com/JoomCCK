@@ -199,6 +199,241 @@ class HTMLFormatHelper
 		]);
 	}
 
+	public static function edit($record, $type, $section)
+	{
+		return Layout::render('core.list.recordParts.buttonEdit', [
+			'record'  => $record,
+			'type'    => $type,
+			'section' => $section,
+		]);
+	}
+
+	/**
+	 * Raw values for the bookmark button, or NULL when the current user may not bookmark this
+	 * record. Lets a template build its own markup without the default button HTML wrapper.
+	 *
+	 * @return  array|null  Keys: state, pack, icon, alt, tip, id, onclick, sectionId
+	 */
+	public static function bookmarkData($record, $type, $params = NULL)
+	{
+		$user = \Joomla\CMS\Factory::getApplication()->getIdentity();
+
+		if(!$user->get('id') || is_null($type))
+		{
+			return NULL;
+		}
+		if(!in_array($type->params->get('properties.item_can_favorite'), $user->getAuthorisedViewLevels()))
+		{
+			return NULL;
+		}
+		if(!in_array($record->access, $user->getAuthorisedViewLevels()))
+		{
+			return NULL;
+		}
+
+		$pack      = (!empty($params) && is_object($params) && method_exists($params, 'get')) ? $params->get('tmpl_core.bookmark_icons', 'star') : 'star';
+		$state     = (int) ($record->bookmarked > 0);
+		$sectionId = \Joomla\CMS\Factory::getApplication()->input->getInt('section_id');
+		$tip       = $record->bookmarked
+			? Mint::_('CMSG_REMOVEBOOKMARK_' . $type->id, \Joomla\CMS\Language\Text::_('CMSG_REMOVEBOOKMARK'))
+			: Mint::_('CMSG_ADDBOOKMARK_' . $type->id, \Joomla\CMS\Language\Text::_('CMSG_ADDBOOKMARK'));
+
+		return array(
+			'state'     => $state,
+			'pack'      => $pack,
+			'icon'      => \Joomla\CMS\Uri\Uri::root() . 'media/com_joomcck/icons/bookmarks/' . $pack . '/state' . $state . '.png',
+			'alt'       => $tip,
+			'tip'       => $tip,
+			'id'        => 'bookmark_' . $record->id,
+			'onclick'   => sprintf("Joomcck.bookmarkRecord(%d, '%s', %d);", (int) $record->id, htmlspecialchars($pack, ENT_QUOTES, 'UTF-8'), (int) $sectionId),
+			'sectionId' => (int) $sectionId,
+		);
+	}
+
+	/**
+	 * Raw values for the follow button, or NULL when the current user may not follow this record.
+	 *
+	 * @return  array|null  Keys: state, pack, icon, alt, tip, id, onclick, sectionId
+	 */
+	public static function followData($record, $section, $params = NULL)
+	{
+		$user = \Joomla\CMS\Factory::getApplication()->getIdentity();
+
+		if(!$user->get('id'))
+		{
+			return NULL;
+		}
+		if(!in_array($section->params->get('events.subscribe_record'), $user->getAuthorisedViewLevels()))
+		{
+			return NULL;
+		}
+		if(!in_array($record->access, $user->getAuthorisedViewLevels()))
+		{
+			return NULL;
+		}
+
+		$state     = (int) ($record->subscribed > 0);
+		$sectionId = \Joomla\CMS\Factory::getApplication()->input->getInt('section_id');
+
+		if(!empty($params) && is_object($params) && method_exists($params, 'get'))
+		{
+			$pack = $params->get('tmpl_core.follow_icons', 'default');
+			$icon = \Joomla\CMS\Uri\Uri::root() . 'media/com_joomcck/icons/follow/' . $pack . '/state' . $state . '.png';
+		}
+		else
+		{
+			$pack = NULL;
+			$icon = \Joomla\CMS\Uri\Uri::root() . 'media/com_joomcck/icons/16/follow' . $state . '.png';
+		}
+
+		$tip = $record->subscribed ? \Joomla\CMS\Language\Text::_('CMSG_CLICKTOUNFOLLOW') : \Joomla\CMS\Language\Text::_('CMSG_CLICKTOFOLLOW');
+
+		return array(
+			'state'     => $state,
+			'pack'      => $pack,
+			'icon'      => $icon,
+			'alt'       => $tip,
+			'tip'       => $tip,
+			'id'        => 'follow_record_' . $record->id,
+			'onclick'   => sprintf('Joomcck.followRecord(%d, %d);', (int) $record->id, (int) $sectionId),
+			'sectionId' => (int) $sectionId,
+		);
+	}
+
+	/**
+	 * Raw values for the repost button, or NULL when the current user may not repost this record.
+	 *
+	 * @return  array|null  Keys: icon, alt, tip, id, onclick, sectionId
+	 */
+	public static function repostData($record, $section)
+	{
+		$user = \Joomla\CMS\Factory::getApplication()->getIdentity();
+
+		if(!$user->get('id'))
+		{
+			return NULL;
+		}
+		if(!$record->user_id)
+		{
+			return NULL;
+		}
+		if($user->get('id') == $record->user_id)
+		{
+			return NULL;
+		}
+		if(!$section->params->get('personalize.personalize'))
+		{
+			return NULL;
+		}
+		if(!$section->params->get('personalize.post_anywhere'))
+		{
+			return NULL;
+		}
+		if(in_array($user->get('id'), $record->repostedby))
+		{
+			return NULL;
+		}
+		if($record->whorepost == 0 && ($record->user_id != $user->get('id')))
+		{
+			return NULL;
+		}
+		if($record->whorepost == 1 && ($record->user_id != $user->get('id')) && !CUsrHelper::is_follower($record->user_id, $user->get('id'), $section))
+		{
+			return NULL;
+		}
+
+		$sectionId = \Joomla\CMS\Factory::getApplication()->input->getInt('section_id');
+		$tip       = \Joomla\CMS\Language\Text::_('CMSG_REPOST');
+
+		return array(
+			'icon'      => \Joomla\CMS\Uri\Uri::root() . 'media/com_joomcck/icons/16/arrow-retweet.png',
+			'alt'       => $tip,
+			'tip'       => $tip,
+			'id'        => 'repost_' . $record->id,
+			'onclick'   => sprintf('Joomcck.RepostRecord(%d, %d);', (int) $record->id, (int) $sectionId),
+			'sectionId' => (int) $sectionId,
+		);
+	}
+
+	/**
+	 * Raw values for the compare button, or NULL when comparison is unavailable.
+	 *
+	 * @return  array|null  Keys: icon, alt, tip, id, hidden, onclick, sectionId
+	 */
+	public static function compareData($record, $type, $section)
+	{
+		if(!$type->params->get('properties.item_compare'))
+		{
+			return NULL;
+		}
+
+		$app = \Joomla\CMS\Factory::getApplication();
+
+		if($app->input->get('api') == 1)
+		{
+			return NULL;
+		}
+
+		$list = $app->getUserState("compare.set{$section->id}");
+		ArrayHelper::clean_r($list);
+
+		$sectionId = $app->input->getInt('section_id');
+
+		return array(
+			'icon'      => \Joomla\CMS\Uri\Uri::root() . 'media/com_joomcck/icons/16/edit-diff.png',
+			'alt'       => \Joomla\CMS\Language\Text::_('Compare'),
+			'tip'       => \Joomla\CMS\Language\Text::_('CMSG_COMPARE'),
+			'id'        => 'compare_' . $record->id,
+			'hidden'    => in_array($record->id, $list),
+			'onclick'   => sprintf('Joomcck.CompareRecord(%d, %d);', (int) $record->id, (int) $sectionId),
+			'sectionId' => (int) $sectionId,
+		);
+	}
+
+	/**
+	 * Raw values for the print button, or NULL when printing is disabled for the template.
+	 *
+	 * @return  array|null  Keys: url, tip, onclick
+	 */
+	public static function printData($record, $params = NULL)
+	{
+		if(!empty($params) && is_object($params) && method_exists($params, 'get'))
+		{
+			if(!$params->get('tmpl_core.item_print'))
+			{
+				return NULL;
+			}
+		}
+
+		$url = \Joomla\CMS\Router\Route::_($record->url . '&tmpl=component&print=1');
+
+		return array(
+			'url'     => $url,
+			'tip'     => \Joomla\CMS\Language\Text::_('CPRINT'),
+			'onclick' => sprintf("window.open('%s','win2','status=no,toolbar=no,scrollbars=yes,titlebar=no,menubar=no,resizable=yes,width=640,height=480,directories=no,location=no'); return false;", htmlspecialchars($url, ENT_QUOTES, 'UTF-8')),
+		);
+	}
+
+	/**
+	 * Raw values for the edit link, or NULL when the current user may not edit this record. Lets a
+	 * template place an edit button anywhere, independent of the settings dropdown.
+	 *
+	 * @return  array|null  Keys: href, label, icon
+	 */
+	public static function editData($record, $type, $section)
+	{
+		if(!MECAccess::allowEdit($record, $type, $section))
+		{
+			return NULL;
+		}
+
+		return array(
+			'href'  => Url::edit($record->id . ':' . $record->alias),
+			'label' => \Joomla\CMS\Language\Text::_('CEDIT'),
+			'icon'  => \Joomla\CMS\Uri\Uri::root(TRUE) . '/media/com_joomcck/icons/16/pencil.png',
+		);
+	}
+
 	public static function bb2html($text, $attr = NULL)
 	{
 

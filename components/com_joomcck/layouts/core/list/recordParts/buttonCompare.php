@@ -7,35 +7,23 @@
  * @license   GNU/GPL http://www.gnu.org/copyleft/gpl.html
  */
 
-use Joomla\CMS\Factory;
 use Joomla\CMS\HTML\HTMLHelper;
-use Joomla\CMS\Language\Text;
-use Joomla\CMS\Uri\Uri;
 
 defined('_JEXEC') or die();
 
 extract($displayData);
 
-if (!$type->params->get('properties.item_compare')) {
+// Raw values and permission gating live in HTMLFormatHelper::compareData().
+$data = HTMLFormatHelper::compareData($record, $type, $section);
+if (!$data) {
 	return;
 }
 
-$app = Factory::getApplication();
-if ($app->input->get('api') == 1) {
-	return;
-}
-
-$list = $app->getUserState("compare.set{$section->id}");
-ArrayHelper::clean_r($list);
-
-$hide = in_array($record->id, $list) ? ' hide' : '';
-$file = Uri::root() . 'media/com_joomcck/icons/16/edit-diff.png';
-$img  = HTMLHelper::image($file, Text::_('Compare'), [
-	'data-bs-original-title' => Text::_('CMSG_COMPARE'),
+$img = HTMLHelper::image($data['icon'], $data['alt'], [
+	'data-bs-original-title' => $data['tip'],
 	'rel'                    => 'tooltip',
 ]);
-$sectionId = $app->input->getInt('section_id');
 ?>
-<button class="btn border btn-sm btn-light<?php echo $hide; ?>" id="compare_<?php echo (int) $record->id; ?>" type="button" onclick="Joomcck.CompareRecord(<?php echo (int) $record->id; ?>, <?php echo (int) $sectionId; ?>);">
+<button class="btn border btn-sm btn-light<?php echo $data['hidden'] ? ' hide' : ''; ?>" id="<?php echo $data['id']; ?>" type="button" onclick="<?php echo $data['onclick']; ?>">
 	<?php echo $img; ?>
 </button>

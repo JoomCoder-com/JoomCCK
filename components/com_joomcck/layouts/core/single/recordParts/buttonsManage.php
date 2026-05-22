@@ -34,13 +34,10 @@ $containerClass = !isset($containerClass) ? 'float-end controls' : $containerCla
 				<?php echo Layout::render('core.single.recordParts.buttonBookmark', ['record' => $item, 'type' => $current->type, 'params' => $params]); ?>
 				<?php echo Layout::render('core.single.recordParts.buttonFollow',   ['record' => $item, 'section' => $current->section, 'params' => $params]); ?>
 				<?php echo Layout::render('core.single.recordParts.buttonRepost',   ['record' => $item, 'section' => $current->section]); ?>
-				<?php if ($item->controls): ?>
-					<button type="button" data-bs-toggle="dropdown" class="dropdown-toggle btn btn-sm btn-light border">
-						<?php echo HTMLFormatHelper::icon('gear.png'); ?></button>
-					<ul class="dropdown-menu">
-						<?php echo list_controls($item->controls); ?>
-					</ul>
+				<?php if (is_object($params) && $params->get('tmpl_core.item_edit_button')): ?>
+					<?php echo Layout::render('core.single.recordParts.buttonEdit', ['record' => $item, 'type' => $current->type, 'section' => $current->section]); ?>
 				<?php endif; ?>
+				<?php echo Layout::render('core.single.recordParts.controlsMenu', ['controls' => $item->controls, 'record' => $item]); ?>
 			<?php endif; ?>
 		</div>
 	</div>

@@ -92,6 +92,143 @@ class JoomcckControllerAjax extends MControllerAdmin
 		AjaxHelper::send($out);
 	}
 
+	/**
+	 * Upload a custom icon pack (a .zip of images) into a folder under media/com_joomcck/icons/ so it
+	 * appears in the matching folderlist/mjiconpack selector. Returns the new pack name as JSON.
+	 *
+	 * Security: requires com_joomcck manage rights + a valid CSRF token; the target is confined to
+	 * media/com_joomcck/icons/ via realpath; every entry is flattened to its basename (no zip-slip)
+	 * and must be a whitelisted image type; size and file-count are capped.
+	 */
+	public function uploadIconPack()
+	{
+		$app  = \Joomla\CMS\Factory::getApplication();
+		$user = $app->getIdentity();
+
+		if(!$user->get('id') || !$user->authorise('core.manage', 'com_joomcck'))
+		{
+			AjaxHelper::error(Text::_('JERROR_ALERTNOAUTHOR'));
+			return;
+		}
+
+		if(!\Joomla\CMS\Session\Session::checkToken('post'))
+		{
+			AjaxHelper::error(Text::_('JINVALID_TOKEN'));
+			return;
+		}
+
+		// Target directory must live under media/com_joomcck/icons/ and physically resolve there.
+		$directory = trim(str_replace('\\', '/', $this->input->post->getString('directory', '')), '/');
+		$relBase   = 'media/com_joomcck/icons/';
+		$absBase   = realpath(JPATH_ROOT . '/' . $relBase);
+		$absDir    = realpath(JPATH_ROOT . '/' . $directory);
+
+		if(strpos($directory, $relBase) !== 0 || $absBase === false || $absDir === false || strpos($absDir, $absBase) !== 0)
+		{
+			AjaxHelper::error(Text::_('X_ICONPACK_BADDIR'));
+			return;
+		}
+
+		// Sanitize the destination folder (pack) name.
+		$pack = preg_replace('/[^A-Za-z0-9_-]/', '', $this->input->post->getString('name', ''));
+		if($pack === '')
+		{
+			AjaxHelper::error(Text::_('X_ICONPACK_NONAME'));
+			return;
+		}
+
+		$file = $this->input->files->get('pack');
+		if(empty($file) || empty($file['tmp_name']) || !empty($file['error']))
+		{
+			AjaxHelper::error(Text::_('X_ICONPACK_NOFILE'));
+			return;
+		}
+		if($file['size'] > 5 * 1024 * 1024)
+		{
+			AjaxHelper::error(Text::_('X_ICONPACK_TOOBIG'));
+			return;
+		}
+		if(strtolower(pathinfo($file['name'], PATHINFO_EXTENSION)) !== 'zip')
+		{
+			AjaxHelper::error(Text::_('X_ICONPACK_NOTZIP'));
+			return;
+		}
+
+		$allowed = array('png', 'gif', 'jpg', 'jpeg', 'webp', 'svg');
+
+		$zip = new \ZipArchive();
+		if($zip->open($file['tmp_name']) !== true)
+		{
+			AjaxHelper::error(Text::_('X_ICONPACK_BADZIP'));
+			return;
+		}
+
+		$target = $absDir . DIRECTORY_SEPARATOR . $pack;
+		\Joomla\Filesystem\Folder::create($target);
+
+		$written  = 0;
+		$maxFiles = 50;
+		for($i = 0; $i < $zip->numFiles && $written < $maxFiles; $i++)
+		{
+			$entry = $zip->getNameIndex($i);
+			if($entry === false || substr($entry, -1) === '/')
+			{
+				continue;
+			}
+
+			// Flatten to the basename only: a crafted path can never escape the target folder.
+			$name = basename(str_replace('\\', '/', $entry));
+			$ext  = strtolower(pathinfo($name, PATHINFO_EXTENSION));
+			if(!in_array($ext, $allowed, true))
+			{
+				continue;
+			}
+
+			$content = $zip->getFromIndex($i);
+			if($content === false)
+			{
+				continue;
+			}
+
+			\Joomla\Filesystem\File::write($target . DIRECTORY_SEPARATOR . $name, $content);
+			$written++;
+		}
+		$zip->close();
+
+		if($written === 0)
+		{
+			\Joomla\Filesystem\Folder::delete($target);
+			AjaxHelper::error(Text::_('X_ICONPACK_NOIMAGES'));
+			return;
+		}
+
+		// Bookmark/follow buttons toggle between two states, so both icons must be present.
+		if(strpos($directory, '/bookmarks') !== false || strpos($directory, '/follow') !== false)
+		{
+			if(!self::iconExists($target, 'state0') || !self::iconExists($target, 'state1'))
+			{
+				\Joomla\Filesystem\Folder::delete($target);
+				AjaxHelper::error(Text::_('X_ICONPACK_NEEDSTATES'));
+				return;
+			}
+		}
+
+		AjaxHelper::send($pack);
+	}
+
+	private static function iconExists($dir, $base)
+	{
+		foreach(array('png', 'gif', 'jpg', 'jpeg', 'webp', 'svg') as $ext)
+		{
+			if(is_file($dir . DIRECTORY_SEPARATOR . $base . '.' . $ext))
+			{
+				return true;
+			}
+		}
+
+		return false;
+	}
+
 	public function mainJS()
 	{
 		//$this->input->set('view', 'assets');

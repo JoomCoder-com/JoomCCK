@@ -199,7 +199,14 @@ foreach ($exclude as &$value)
 <?php if ($params->get('tmpl_core.item_author') == 1): ?>
     <td nowrap="nowrap" class="cob-author-td"><?php echo CCommunityHelper::getName($item->user_id, $this->section); ?>
 		<?php if ($params->get('tmpl_core.item_author_filter') /* && $item->user_id */): ?>
-			<?php echo FilterHelper::filterButton('filter_user', $item->user_id, null, \Joomla\CMS\Language\Text::sprintf('CSHOWALLUSERREC', CCommunityHelper::getName($item->user_id, $this->section, true)), $this->section); ?>
+			<?php echo \Joomcck\Layout\Helpers\Layout::render('core.list.recordParts.recordFilter', [
+				'name'    => 'filter_user',
+				'value'   => $item->user_id,
+				'type'    => null,
+				'tip'     => \Joomla\CMS\Language\Text::sprintf('CSHOWALLUSERREC', CCommunityHelper::getName($item->user_id, $this->section, true)),
+				'section' => $this->section,
+				'icon'    => $params->get('tmpl_core.item_author_filter_icon', 'funnel-small.png'),
+			]); ?>
 		<?php endif; ?>
     </td>
 <?php endif; ?>
@@ -207,7 +214,14 @@ foreach ($exclude as &$value)
 <?php if ($params->get('tmpl_core.item_type') == 1): ?>
     <td nowrap="nowrap" class="cob-type-td"><?php echo $item->type_name; ?>
 		<?php if ($params->get('tmpl_core.item_type_filter')): ?>
-			<?php echo FilterHelper::filterButton('filter_type', $item->type_id, null, \Joomla\CMS\Language\Text::sprintf('CSHOWALLTYPEREC', $item->type_name), $this->section); ?>
+			<?php echo \Joomcck\Layout\Helpers\Layout::render('core.list.recordParts.recordFilter', [
+				'name'    => 'filter_type',
+				'value'   => $item->type_id,
+				'type'    => null,
+				'tip'     => \Joomla\CMS\Language\Text::sprintf('CSHOWALLTYPEREC', $item->type_name),
+				'section' => $this->section,
+				'icon'    => $params->get('tmpl_core.item_type_filter_icon', 'funnel-small.png'),
+			]); ?>
 		<?php endif; ?>
     </td>
 <?php endif; ?>
