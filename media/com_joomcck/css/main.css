@@ -1,5 +1,10 @@
 /* New CSS for Joomla 4 */
 
+
+body.com_joomcck .btn-group{
+   margin: 0px !important;
+}
+
 #joomcckContainer joomla-tab{
     width: 100% !important;
 }
