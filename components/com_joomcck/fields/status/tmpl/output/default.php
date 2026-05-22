@@ -54,7 +54,19 @@ foreach($this->statuses as $key => $status)
 function changeStatus<?php echo $id;?>(to, type)
 {
 	if(!to) return;
-	
+
+	// Close the dropdown immediately on selection (Bootstrap API if present, vanilla fallback) — issue #443
+	var _btn = document.getElementById('field_<?php echo $id;?>_button');
+	if(_btn){
+		if(window.bootstrap && bootstrap.Dropdown){
+			bootstrap.Dropdown.getOrCreateInstance(_btn).hide();
+		} else {
+			_btn.setAttribute('aria-expanded', 'false');
+			_btn.classList.remove('show');
+			if(_btn.nextElementSibling) _btn.nextElementSibling.classList.remove('show');
+		}
+	}
+
 	jQuery.ajax({
 		url: Joomcck.field_call_url,
 		type:'post',
