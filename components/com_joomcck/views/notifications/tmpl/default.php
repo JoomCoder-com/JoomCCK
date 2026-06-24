@@ -294,7 +294,7 @@ HTMLHelper::_('bootstrap.collapse');
     (function($) {
         Joomcck.removeNtf = function(id) {
             $.ajax({
-                url: '<?php echo Route::_("index.php?option=com_joomcck&task=ajax.remove_notification&tmpl=component", FALSE); ?>',
+                url: '<?php echo Route::_("index.php?option=com_joomcck&task=ajax.remove_notification&tmpl=component&" . \Joomla\CMS\Session\Session::getFormToken() . "=1", FALSE); ?>',
                 dataType: 'json',
                 type: 'POST',
                 context: $('#ntfctn-' + id),
@@ -335,7 +335,7 @@ HTMLHelper::_('bootstrap.collapse');
             });
 
             $.ajax({
-                url: '<?php echo Route::_("index.php?option=com_joomcck&task=ajax.remove_notification_by&tmpl=component", FALSE); ?>',
+                url: '<?php echo Route::_("index.php?option=com_joomcck&task=ajax.remove_notification_by&tmpl=component&" . \Joomla\CMS\Session\Session::getFormToken() . "=1", FALSE); ?>',
                 dataType: 'json',
                 type: 'POST',
                 data: {type: type, list: list}
@@ -353,7 +353,7 @@ HTMLHelper::_('bootstrap.collapse');
 
         Joomcck.markRead = function(id) {
             $.ajax({
-                url: '<?php echo Route::_("index.php?option=com_joomcck&task=ajax.mark_notification&tmpl=component", FALSE); ?>',
+                url: '<?php echo Route::_("index.php?option=com_joomcck&task=ajax.mark_notification&tmpl=component&" . \Joomla\CMS\Session\Session::getFormToken() . "=1", FALSE); ?>',
                 dataType: 'json',
                 type: 'POST',
                 context: $('#ntfctn-' + id),

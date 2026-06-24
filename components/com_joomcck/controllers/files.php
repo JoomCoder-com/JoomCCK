@@ -613,6 +613,14 @@ class JoomcckControllerFiles extends MControllerAdmin
 
     public function uploadremove()
     {
+        $app  = \Joomla\CMS\Factory::getApplication();
+        $user = $app->getIdentity();
+        if (!$user->get('id')) {
+            echo json_encode(array('success' => 0, 'msg' => \Joomla\CMS\Language\Text::_('JGLOBAL_YOU_MUST_LOGIN_FIRST')));
+            $app->close();
+            return;
+        }
+
         $filename = $this->input->get('filename');
 
         $files_table  = \Joomla\CMS\Table\Table::getInstance('Files', 'JoomcckTable');
@@ -629,6 +637,15 @@ class JoomcckControllerFiles extends MControllerAdmin
         $field_table->load($files_table->field_id);
         $field_params = new \Joomla\Registry\Registry($field_table->params);
         $record_table->load($files_table->record_id);
+
+        // A logged-in user may only remove files attached to a saved record they
+        // own (or that they may moderate). Unsaved/unlinked temp files belong to
+        // the current submission flow and are handled below.
+        if ($files_table->record_id && $files_table->saved && $record_table->user_id != $user->get('id') && !MECAccess::isAdmin()) {
+            echo json_encode(array('success' => 0, 'msg' => \Joomla\CMS\Language\Text::_('JERROR_ALERTNOAUTHOR')));
+            $app->close();
+            return;
+        }
 
         $type = ItemsStore::getType($files_table->type_id);
 

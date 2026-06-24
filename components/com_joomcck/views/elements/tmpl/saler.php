@@ -52,7 +52,7 @@ function status($s, $t, $o)
 		var b = $('#bar_' + order);
 		b.slideDown('quick', function(){
 			$.ajax({
-				url: '<?php echo \Joomla\CMS\Router\Route::_("index.php?option=com_joomcck&task=ajax.status&tmpl=component", FALSE); ?>',
+				url: '<?php echo \Joomla\CMS\Router\Route::_("index.php?option=com_joomcck&task=ajax.status&tmpl=component&" . \Joomla\CMS\Session\Session::getFormToken() . "=1", FALSE); ?>',
 				dataType: 'json',
 				type: 'POST',
 				data:{

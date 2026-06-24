@@ -91,6 +91,7 @@ class JoomcckModelTags extends MModelList
 		$app = \Joomla\CMS\Factory::getApplication();
 
 		$cid = $app->input->get('cid', array(), 'post', 'array');
+		$cid = \Joomla\Utilities\ArrayHelper::toInteger($cid);
 
 		$query = 'DELETE FROM #__js_res_tags WHERE id IN (' . implode(',', $cid) . ')';
 
@@ -140,7 +141,7 @@ class JoomcckModelTags extends MModelList
 		$id = $app->input->getInt('id');
 		$tag = $app->input->getString('tag');
 
-		$query = ' SELECT a.* FROM #__js_res_tags AS a WHERE a.tag = "' . $tag . '"';
+		$query = ' SELECT a.* FROM #__js_res_tags AS a WHERE a.tag = ' . $db->quote($tag);
 		$exist_item = $this->_getList($query);
 
 		if(count($exist_item) > 1 || (count($exist_item) == 1 && $exist_item[0]->id != $id))
@@ -149,7 +150,7 @@ class JoomcckModelTags extends MModelList
 			return false;
 		}
 
-		$query = 'UPDATE #__js_res_tags SET tag = "' . $tag . '" WHERE id =' . $id;
+		$query = 'UPDATE #__js_res_tags SET tag = ' . $db->quote($tag) . ' WHERE id = ' . (int) $id;
 
 		$db->setQuery($query);
 		$db->execute();
