@@ -28,6 +28,34 @@ class JoomcckControllerAjax extends MControllerAdmin
 		}
 	}
 
+	/**
+	 * Enforce an anti-CSRF token on state-changing AJAX tasks before dispatch.
+	 * Read-only / asset tasks (e.g. mainJS, get_notifications, *_filter, category_*)
+	 * are intentionally omitted and stay token-free. The token is carried by the
+	 * server-rendered request URLs that trigger these tasks (their views/helpers and
+	 * main.js append Session::getFormToken()). `remove_log` is deliberately excluded
+	 * because its caller could not be located in the component; it relies on its
+	 * per-method login + MECAccess::isAdmin() guard instead, to avoid breaking an
+	 * untracked caller. Per-method login/ACL checks remain in force on top of this.
+	 */
+	public function execute($task)
+	{
+		$writeTasks = array(
+			'status', 'remove_tag', 'add_tags', 'mark_notification', 'remove_notification',
+			'remove_notification_by', 'repost', 'follow', 'bookmark', 'followsection',
+			'followuser', 'followcat', 'followallsection', 'unfollowallsection', 'removeucicon',
+		);
+
+		if(in_array(strtolower((string) $task), $writeTasks, true) && !\Joomla\CMS\Session\Session::checkToken('request'))
+		{
+			AjaxHelper::error(Text::_('JINVALID_TOKEN'));
+
+			return;
+		}
+
+		return parent::execute($task);
+	}
+
 	public function usermention()
 	{
 		$db    = \Joomla\CMS\Factory::getDbo();
@@ -235,6 +263,9 @@ class JoomcckControllerAjax extends MControllerAdmin
 		//$this->input->set('layout', 'mainjs');
 
 		header('content-type: application/javascript');
+		// main.js embeds a per-session CSRF token in its AJAX URLs; prevent the
+		// browser from serving a stale copy with an expired token.
+		header('Cache-Control: no-cache, no-store, must-revalidate');
 
 		include JPATH_ROOT . '/components/com_joomcck/library/js/main.js';
 
@@ -307,6 +338,12 @@ class JoomcckControllerAjax extends MControllerAdmin
 
 	public function status()
 	{
+		$user = \Joomla\CMS\Factory::getApplication()->getIdentity();
+		if(!$user->get('id'))
+		{
+			AjaxHelper::error(Text::_('AJAX_PLEASELOGIN'));
+		}
+
 		$order = \Joomla\CMS\Table\Table::getInstance('Sales', 'JoomcckTable');
 		$order->load($this->input->getInt('order_id'));
 
@@ -972,6 +1009,7 @@ class JoomcckControllerAjax extends MControllerAdmin
 	{
 		$section_id = $this->input->getInt('section_id');
 		$section    = ItemsStore::getSection($section_id);
+		$user       = \Joomla\CMS\Factory::getApplication()->getIdentity();
 
 		$db = \Joomla\CMS\Factory::getDbo();
 
@@ -979,6 +1017,13 @@ class JoomcckControllerAjax extends MControllerAdmin
 		$authorMode = $section->params->get('personalize.author_mode', 'username');
 		$allowedColumns = ['username', 'name', 'email'];
 		if (!in_array($authorMode, $allowedColumns)) {
+			$authorMode = 'username';
+		}
+		// This backs the public author-filter autocomplete (filters.filter_user
+		// defaults to the Public view level), so guests must be able to use it.
+		// Never expose author email addresses to anonymous visitors, though —
+		// fall back to the public username label for guests.
+		if ($authorMode === 'email' && !$user->get('id')) {
 			$authorMode = 'username';
 		}
 		$sql->select($db->quoteName('id') . ', ' . $db->quoteName($authorMode) . ' AS text');
@@ -1061,6 +1106,31 @@ class JoomcckControllerAjax extends MControllerAdmin
 		if(!$tag_id)
 			die('Error');
 
+		$user = \Joomla\CMS\Factory::getApplication()->getIdentity();
+
+		$access_record = \Joomla\CMS\Table\Table::getInstance('Record', 'JoomcckTable');
+		$access_record->load($this->input->getInt('rid'));
+		if(!$access_record->id)
+		{
+			AjaxHelper::error(Text::_('JERROR_ALERTNOAUTHOR'));
+		}
+
+		// Mirror the record-detail tag editor's own access gate (see
+		// layouts/.../single/recordParts/tags.php): a user may add/remove tags only
+		// if the type grants them item_can_add_tag / item_can_attach_tag, or they
+		// moderate the section. This authorizes exactly who can see the editor —
+		// closing the unauthenticated path without breaking community tagging.
+		$access_type    = ItemsStore::getType($access_record->type_id);
+		$access_section = ItemsStore::getSection($access_record->section_id);
+		if(!(
+			MECAccess::allowAccessAuthor($access_type, 'properties.item_can_add_tag', $access_record->user_id)
+			|| MECAccess::allowAccessAuthor($access_type, 'properties.item_can_attach_tag', $access_record->user_id)
+			|| MECAccess::allowUserModerate($user, $access_section, 'allow_tags')
+		))
+		{
+			AjaxHelper::error(Text::_('JERROR_ALERTNOAUTHOR'));
+		}
+
 
 		$table  = \Joomla\CMS\Table\Table::getInstance('Taghistory', 'JoomcckTable');
 		$table->load(array(
@@ -1085,6 +1155,30 @@ class JoomcckControllerAjax extends MControllerAdmin
 	public function add_tags()
 	{
 		$user = \Joomla\CMS\Factory::getApplication()->getIdentity();
+
+		$access_record = \Joomla\CMS\Table\Table::getInstance('Record', 'JoomcckTable');
+		$access_record->load($this->input->getInt('rid'));
+		if(!$access_record->id)
+		{
+			AjaxHelper::error(Text::_('JERROR_ALERTNOAUTHOR'));
+		}
+
+		// Mirror the record-detail tag editor's own access gate (see
+		// layouts/.../single/recordParts/tags.php): a user may add/remove tags only
+		// if the type grants them item_can_add_tag / item_can_attach_tag, or they
+		// moderate the section. This authorizes exactly who can see the editor —
+		// closing the unauthenticated path without breaking community tagging.
+		$access_type    = ItemsStore::getType($access_record->type_id);
+		$access_section = ItemsStore::getSection($access_record->section_id);
+		if(!(
+			MECAccess::allowAccessAuthor($access_type, 'properties.item_can_add_tag', $access_record->user_id)
+			|| MECAccess::allowAccessAuthor($access_type, 'properties.item_can_attach_tag', $access_record->user_id)
+			|| MECAccess::allowUserModerate($user, $access_section, 'allow_tags')
+		))
+		{
+			AjaxHelper::error(Text::_('JERROR_ALERTNOAUTHOR'));
+		}
+
 		$tag_table     = \Joomla\CMS\Table\Table::getInstance('Tags', 'JoomcckTable');
 		$taghist_table = \Joomla\CMS\Table\Table::getInstance('Taghistory', 'JoomcckTable');
         
@@ -1220,6 +1314,12 @@ class JoomcckControllerAjax extends MControllerAdmin
 
 	public function mark_notification()
 	{
+		$user = \Joomla\CMS\Factory::getApplication()->getIdentity();
+		if(!$user->get('id'))
+		{
+			AjaxHelper::error(Text::_('AJAX_PLEASELOGIN'));
+		}
+
 		$id         = $this->input->get('id');
 		$section_id = $this->input->getInt('section_id');
 		$client     = $this->input->getInt('client', 'module');
@@ -1257,6 +1357,11 @@ class JoomcckControllerAjax extends MControllerAdmin
 			$table = \Joomla\CMS\Table\Table::getInstance('Notificat', 'JoomcckTable');
 			$table->load($id);
 
+			if($table->id && $table->user_id != $user->get('id'))
+			{
+				AjaxHelper::error(Text::_('JERROR_ALERTNOAUTHOR'));
+			}
+
 			if($client == 'component')
 			{
 				$table->state_new = 0;
@@ -1281,6 +1386,11 @@ class JoomcckControllerAjax extends MControllerAdmin
 		$section_id = $this->input->getInt('section_id');
 
 		$user  = \Joomla\CMS\Factory::getApplication()->getIdentity();
+		if(!$user->get('id'))
+		{
+			AjaxHelper::error(Text::_('AJAX_PLEASELOGIN'));
+		}
+
 		$db    = \Joomla\CMS\Factory::getDbo();
 		$query = $db->getQuery(TRUE);
 		$query->delete();
@@ -1312,6 +1422,12 @@ class JoomcckControllerAjax extends MControllerAdmin
 
 	public function remove_notification_by()
 	{
+		$user = \Joomla\CMS\Factory::getApplication()->getIdentity();
+		if(!$user->get('id'))
+		{
+			AjaxHelper::error(Text::_('AJAX_PLEASELOGIN'));
+		}
+
 		$type = $this->input->getCmd('type');
 		$list = $this->input->get('list', array(), 'array');
 		if(!count($list) && $type != 'read')
@@ -1379,6 +1495,7 @@ class JoomcckControllerAjax extends MControllerAdmin
 		$query->delete();
 		$query->from($db->quoteName('#__js_res_notifications'));
 		$query->where($db->quoteName('id') . ' IN (' . implode(', ', $ids) . ')');
+		$query->where($db->quoteName('user_id') . ' = ' . (int)$user->id);
 		$db->setQuery($query);
 
 
@@ -1395,6 +1512,12 @@ class JoomcckControllerAjax extends MControllerAdmin
 
 	public function get_notifications()
 	{
+		$user = \Joomla\CMS\Factory::getApplication()->getIdentity();
+		if(!$user->get('id'))
+		{
+			AjaxHelper::error(Text::_('AJAX_PLEASELOGIN'));
+		}
+
 		$ids        = $this->input->get('exist', array(0), 'array');
 		$ids        = \Joomla\Utilities\ArrayHelper::toInteger($ids);
 		$section_id = $this->input->getInt('section_id');
@@ -1443,6 +1566,12 @@ class JoomcckControllerAjax extends MControllerAdmin
 
 	public function remove_log()
 	{
+		$user = \Joomla\CMS\Factory::getApplication()->getIdentity();
+		if(!$user->get('id') || !MECAccess::isAdmin())
+		{
+			AjaxHelper::error(Text::_('JERROR_ALERTNOAUTHOR'));
+		}
+
 		$id = $this->input->getInt('id');
 
 		$db    = \Joomla\CMS\Factory::getDbo();

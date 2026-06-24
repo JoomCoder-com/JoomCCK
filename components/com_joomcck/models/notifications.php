@@ -52,33 +52,35 @@ class JoomcckModelnotifications extends MModelList
 		$query->select('*, TO_DAYS(CURRENT_DATE) - TO_DAYS(ctime) as days');
 		$query->from('#__js_res_notifications');
 		
-		$query->where('user_id = ' . $user->id);
+		$query->where('user_id = ' . (int) $user->id);
 		if($show_new)
 			$query->where('state_new = 1' );
 		if($section_id)
-			$query->where('ref_2 = '.$section_id);
+			$query->where('ref_2 = '.(int) $section_id);
 		if($event)
-			$query->where("type = '".$event."'");
+			$query->where('type = ' . $db->quote($event));
 		
 		$sql = $query;
 		if($search)
 		{
 			if(strstr($search, 'secid:'))
 			{
-				$query->where('ref_2 = '.str_replace('secid:', '', $search));
+				$query->where('ref_2 = '.(int) str_replace('secid:', '', $search));
 			}
 			else if(strstr($search, 'rid:'))
 			{
-				$query->where('ref_1 = '.str_replace('rid:', '', $search));
+				$query->where('ref_1 = '.(int) str_replace('rid:', '', $search));
 			}
 			else if(strstr($search, 'uid:'))
 			{
-				$query->where("eventer = ".str_replace('uid:', '', $search));
+				$query->where('eventer = '.(int) str_replace('uid:', '', $search));
 			}
 			else 
 			{
-				$where[] = "ref_1 IN (SELECT id FROM #__js_res_record WHERE title LIKE '%$search%')";
-				$where[] = "ref_2 IN (SELECT id FROM #__js_res_sections WHERE name LIKE '$search%')";
+				$like     = $db->quote('%' . $db->escape($search, true) . '%');
+				$likePref = $db->quote($db->escape($search, true) . '%');
+				$where[] = "ref_1 IN (SELECT id FROM #__js_res_record WHERE title LIKE " . $like . ")";
+				$where[] = "ref_2 IN (SELECT id FROM #__js_res_sections WHERE name LIKE " . $likePref . ")";
 				
 				$query->where(implode(' OR ', $where));
 			}
