@@ -877,6 +877,14 @@ class JoomcckControllerRecords extends MControllerAdmin
 
 	public function copy()
 	{
+		$app = \Joomla\CMS\Factory::getApplication();
+		\Joomla\CMS\Session\Session::checkToken() or jexit(\Joomla\CMS\Language\Text::_('JINVALID_TOKEN'));
+		$user = $app->getIdentity();
+		if(!$user->get('id') || (!$app->isClient('administrator') && !MECAccess::isAdmin()))
+		{
+			throw new GenericDataException(\Joomla\CMS\Language\Text::_('JERROR_ALERTNOAUTHOR'), 403);
+		}
+
 		$ids = $this->input->get('cid', array(), '', 'array');
 
 		if(empty($ids))

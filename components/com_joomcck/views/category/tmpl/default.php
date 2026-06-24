@@ -30,7 +30,7 @@ $image_url = \Joomla\CMS\Uri\Uri::root(TRUE).CImgHelper::getThumb(JPATH_ROOT.'/i
 	{
 
 		$.ajax({
-			url:'<?php echo \Joomla\CMS\Router\Route::_('index.php?option=com_joomcck&task=ajax.removeucicon&tmpl=component', false); ?>',
+			url:'<?php echo \Joomla\CMS\Router\Route::_('index.php?option=com_joomcck&task=ajax.removeucicon&tmpl=component&' . \Joomla\CMS\Session\Session::getFormToken() . '=1', false); ?>',
 			type:'post',
 			data:{file: file, id: id},
 			dataType: 'json'
