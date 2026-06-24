@@ -614,6 +614,14 @@ class JoomcckControllerFiles extends MControllerAdmin
     public function uploadremove()
     {
         $app  = \Joomla\CMS\Factory::getApplication();
+        // Anti-CSRF: no in-component UI calls this task, so requiring a token
+        // breaks no legitimate flow while closing the CSRF vector against an
+        // admin victim (the login/owner check below would otherwise allow it).
+        if (!\Joomla\CMS\Session\Session::checkToken('request')) {
+            echo json_encode(array('success' => 0, 'msg' => \Joomla\CMS\Language\Text::_('JINVALID_TOKEN')));
+            $app->close();
+            return;
+        }
         $user = $app->getIdentity();
         if (!$user->get('id')) {
             echo json_encode(array('success' => 0, 'msg' => \Joomla\CMS\Language\Text::_('JGLOBAL_YOU_MUST_LOGIN_FIRST')));

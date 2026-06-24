@@ -98,7 +98,7 @@ class Kunena2Joomcck {
 	private function saveComments($id, $params)
 	{
 		$db = \Joomla\CMS\Factory::getDbo();
-		$db->setQuery("SELECT * FROM `#__kunena_messages` WHERE parent = {$id} ORDER BY `time` ASC");
+		$db->setQuery("SELECT * FROM `#__kunena_messages` WHERE parent = " . (int) $id . " ORDER BY `time` ASC");
 
 		$list = $db->loadObjectList();
 
@@ -140,7 +140,7 @@ class Kunena2Joomcck {
 
 		}
 
-		$db->setQuery("DELETE FROM `#__kunena_messages` WHERE parent = {$id}");
+		$db->setQuery("DELETE FROM `#__kunena_messages` WHERE parent = " . (int) $id . "");
 		$db->execute();
 
 		$db->setQuery('UPDATE `#__js_res_comments` SET parent_id = 1 WHERE record_id = ' . $this->record->id);
@@ -148,7 +148,7 @@ class Kunena2Joomcck {
 
 		$db->setQuery("SELECT COUNT(*)
 			  FROM `#__js_res_comments`
-		 	 WHERE record_id = {$this->record->id} AND published = 1");
+		 	 WHERE record_id = " . (int) $this->record->id . " AND published = 1");
 
 		$this->record->comments = $db->loadResult();
 		$this->record->store();

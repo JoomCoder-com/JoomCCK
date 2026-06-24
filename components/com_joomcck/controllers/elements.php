@@ -70,7 +70,7 @@ class JoomcckControllerElements extends MControllerAdmin
 		{
 			foreach ($data['autofollow'] AS $sid)
 			{
-				$sql = "INSERT INTO #__js_res_user_options_autofollow VALUES (NULL, {$me->id}, {$sid})";
+				$sql = "INSERT INTO #__js_res_user_options_autofollow VALUES (NULL, " . (int) $me->id . ", " . (int) $sid . ")";
 				$db->setQuery($sql);
 				$db->execute();
 			}

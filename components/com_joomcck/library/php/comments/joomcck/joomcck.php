@@ -149,7 +149,7 @@ class JoomcckCommentsJoomcck extends JoomcckComments
 	{
 		$db = \Joomla\CMS\Factory::getDbo();
 
-		$db->setQuery("SELECT fieldsdata FROM #__js_res_record WHERE published = 1 AND hidden = 0 AND parent_id = {$item->id} AND parent = 'com_joomcck'");
+		$db->setQuery("SELECT fieldsdata FROM #__js_res_record WHERE published = 1 AND hidden = 0 AND parent_id = " . (int) $item->id . " AND parent = 'com_joomcck'");
 		$list = $db->loadColumn();
 
 		return implode(', ', $list);

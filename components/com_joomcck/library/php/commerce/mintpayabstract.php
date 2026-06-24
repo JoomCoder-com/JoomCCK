@@ -362,7 +362,7 @@ class MintPayAbstract
 	public function count($order_id)
 	{
 		$db = \Joomla\CMS\Factory::getDbo();
-		$db->setQuery("UPDATE #__js_res_sales SET `num` = `num` + 1 WHERE id = {$order_id}");
+		$db->setQuery("UPDATE #__js_res_sales SET `num` = `num` + 1 WHERE id = " . (int) $order_id);
 		$db->execute();
 	}
 

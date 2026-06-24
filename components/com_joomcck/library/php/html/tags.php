@@ -34,7 +34,7 @@ class JHTMLTags
 		$query = $db->getQuery(true);
 		$query->select('tag, id');
 		$query->from('#__js_res_tags');
-		$query->where("id IN(SELECT tag_id FROM #__js_res_tags_history WHERE section_id = {$section->id})");
+		$query->where("id IN(SELECT tag_id FROM #__js_res_tags_history WHERE section_id = " . (int) $section->id . ")");
 		$query->order('tag');
 		$db->setQuery($query);
 		$list = $db->loadObjectList();
@@ -63,7 +63,7 @@ class JHTMLTags
 		$query = $db->getQuery(true);
 		$query->select('tag as text, id as value');
 		$query->from('#__js_res_tags');
-		$query->where("id IN(SELECT tag_id FROM #__js_res_tags_history WHERE section_id = {$section->id})");
+		$query->where("id IN(SELECT tag_id FROM #__js_res_tags_history WHERE section_id = " . (int) $section->id . ")");
 		$query->order('tag');
 		$db->setQuery($query);
 		$list = $db->loadObjectList();
@@ -165,7 +165,7 @@ class JHTMLTags
 		$query = $db->getQuery(true);
 		$query->select('tag, id');
 		$query->from('#__js_res_tags');
-		$query->where("id IN(SELECT tag_id FROM #__js_res_tags_history WHERE section_id = {$section->id})");
+		$query->where("id IN(SELECT tag_id FROM #__js_res_tags_history WHERE section_id = " . (int) $section->id . ")");
 		$query->order('tag');
 
 		$db->setQuery($query);
@@ -197,7 +197,7 @@ class JHTMLTags
 		$query = $db->getQuery(true);
 		$query->select('tag, id');
 		$query->from('#__js_res_tags');
-		$query->where("id IN(SELECT tag_id FROM #__js_res_tags_history WHERE section_id = {$section->id})");
+		$query->where("id IN(SELECT tag_id FROM #__js_res_tags_history WHERE section_id = " . (int) $section->id . ")");
 		$query->order('tag');
 
 		$db->setQuery($query);
@@ -281,7 +281,7 @@ class JHTMLTags
 			$query->select('(SELECT COUNT(*) FROM #__js_res_tags_history WHERE tag_id = t.id) as r_usage');
 			$query->select('(SELECT SUM(hits) FROM #__js_res_tags_history WHERE tag_id = t.id) as hits');
 			$query->from('#__js_res_tags AS t');
-			$query->where('t.id IN (' . implode(', ', array_keys($list)) . ')');
+			$query->where('t.id IN (' . implode(', ', \Joomla\Utilities\ArrayHelper::toInteger(array_keys($list))) . ')');
 			/*
 			echo $query; //exit;
 			$query->select('t.tag, h.tag_id as id, COUNT(h.record_id) as r_usage, SUM(h.hits) as hits');
@@ -416,7 +416,7 @@ class JHTMLTags
 			$query->select('(SELECT COUNT(*) FROM #__js_res_tags_history WHERE tag_id = t.id) as r_usage');
 			$query->select('(SELECT SUM(hits) FROM #__js_res_tags_history WHERE tag_id = t.id) as hits');
 			$query->from('#__js_res_tags AS t');
-			$query->where('t.id IN (' . implode(', ', array_keys($list)) . ')');
+			$query->where('t.id IN (' . implode(', ', \Joomla\Utilities\ArrayHelper::toInteger(array_keys($list))) . ')');
 			/*
 			echo $query; //exit;
 			$query->select('t.tag, h.tag_id as id, COUNT(h.record_id) as r_usage, SUM(h.hits) as hits');
@@ -588,7 +588,7 @@ class JHTMLTags
 		{
 			$sql = "SELECT t.tag FROM #__js_res_tags AS t
 			LEFT JOIN #__js_res_tags_history AS th On th.tag_id = t.id
-			WHERE th.section_id = {$section_id} ". @$where .
+			WHERE th.section_id = " . (int) $section_id . " ". @$where .
 					"AND th.user_id = ".$user->get('id').
 					" GROUP BY t.id
 					ORDER BY t.tag ASC";
@@ -612,7 +612,7 @@ class JHTMLTags
 				{
 					$sql = "SELECT t.tag, th.hits FROM #__js_res_tags AS t
 					LEFT JOIN #__js_res_tags_history AS th On th.tag_id = t.id
-					WHERE th.section_id = {$section_id} ". @$where .
+					WHERE th.section_id = " . (int) $section_id . " ". @$where .
 							"AND th.user_id = ".$user->get('id').
 							" GROUP BY t.id
 							ORDER BY th.hits DESC
@@ -625,7 +625,7 @@ class JHTMLTags
 
 					$sql = "SELECT t.tag, th.ctime FROM #__js_res_tags AS t
 					LEFT JOIN #__js_res_tags_history AS th On th.tag_id = t.id
-					WHERE th.section_id = {$section_id} ". @$where .
+					WHERE th.section_id = " . (int) $section_id . " ". @$where .
 							"AND th.user_id = ".$user->get('id').
 							" GROUP BY t.id
 							ORDER BY th.ctime DESC
@@ -636,7 +636,7 @@ class JHTMLTags
 
 					$sql = "SELECT t.tag, count(th.record_id) as total FROM #__js_res_tags AS t
 					LEFT JOIN #__js_res_tags_history AS th On th.tag_id = t.id
-					WHERE th.section_id = {$section_id} ". @$where .
+					WHERE th.section_id = " . (int) $section_id . " ". @$where .
 							"AND th.user_id = ".$user->get('id').
 							" GROUP BY t.id
 							ORDER BY total DESC

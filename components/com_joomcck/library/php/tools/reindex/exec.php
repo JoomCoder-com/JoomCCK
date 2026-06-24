@@ -15,7 +15,7 @@ if(!is_array($types))
 	settype($types, 'array');
 }
 $db = \Joomla\CMS\Factory::getDbo();
-$db->setQuery('SELECT id, title, type_id, section_id, user_id, fields FROM `#__js_res_record` WHERE type_id IN (' . implode(',', $types) . ')');
+$db->setQuery('SELECT id, title, type_id, section_id, user_id, fields FROM `#__js_res_record` WHERE type_id IN (' . implode(',', \Joomla\Utilities\ArrayHelper::toInteger($types)) . ')');
 $ids   = $db->loadObjectList();
 $count = 0;
 if(!empty($ids))

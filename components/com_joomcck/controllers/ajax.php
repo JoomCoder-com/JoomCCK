@@ -33,10 +33,10 @@ class JoomcckControllerAjax extends MControllerAdmin
 	 * Read-only / asset tasks (e.g. mainJS, get_notifications, *_filter, category_*)
 	 * are intentionally omitted and stay token-free. The token is carried by the
 	 * server-rendered request URLs that trigger these tasks (their views/helpers and
-	 * main.js append Session::getFormToken()). `remove_log` is deliberately excluded
-	 * because its caller could not be located in the component; it relies on its
-	 * per-method login + MECAccess::isAdmin() guard instead, to avoid breaking an
-	 * untracked caller. Per-method login/ACL checks remain in force on top of this.
+	 * main.js append Session::getFormToken()). `remove_log` has no in-component UI
+	 * caller, so enforcing the token here breaks no legitimate flow while closing the
+	 * CSRF vector against a logged-in admin. Per-method login/ACL checks remain in
+	 * force on top of this.
 	 */
 	public function execute($task)
 	{
@@ -44,6 +44,7 @@ class JoomcckControllerAjax extends MControllerAdmin
 			'status', 'remove_tag', 'add_tags', 'mark_notification', 'remove_notification',
 			'remove_notification_by', 'repost', 'follow', 'bookmark', 'followsection',
 			'followuser', 'followcat', 'followallsection', 'unfollowallsection', 'removeucicon',
+			'remove_log',
 		);
 
 		if(in_array(strtolower((string) $task), $writeTasks, true) && !\Joomla\CMS\Session\Session::checkToken('request'))

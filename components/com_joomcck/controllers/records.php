@@ -118,7 +118,7 @@ class JoomcckControllerRecords extends MControllerAdmin
 		}
 
 		$db = \Joomla\CMS\Factory::getDbo();
-		$db->setQuery("DELETE FROM `#__js_res_record_repost` WHERE record_id = {$this->record->id} AND host_id = " . \Joomla\CMS\Factory::getApplication()->getIdentity()->get('id'));
+		$db->setQuery("DELETE FROM `#__js_res_record_repost` WHERE record_id = " . (int) $this->record->id . " AND host_id = " . \Joomla\CMS\Factory::getApplication()->getIdentity()->get('id'));
 		$db->execute();
 
 		$this->record->onRepost();
@@ -218,7 +218,7 @@ class JoomcckControllerRecords extends MControllerAdmin
 		}
 
 		$db = \Joomla\CMS\Factory::getDbo();
-		$db->setQuery("SELECT * FROM #__js_res_audit_versions WHERE `version` = {$version} AND record_id = {$this->record->id}");
+		$db->setQuery("SELECT * FROM #__js_res_audit_versions WHERE `version` = " . (int) $version . " AND record_id =" . (int) $this->record->id . "");
 		$restore = $db->loadObject();
 
 		if(!$restore)
@@ -268,7 +268,7 @@ class JoomcckControllerRecords extends MControllerAdmin
 		}
 
 		$db  = \Joomla\CMS\Factory::getDbo();
-		$sql = "DELETE FROM {$name} WHERE {$ref} = " . $this->record->id;
+		$sql = "DELETE FROM {$name} WHERE {$ref} = " . (int) $this->record->id;
 		if($table_class == 'Votes')
 		{
 			$sql .= " AND ref_type = 'record' ";
@@ -316,7 +316,7 @@ class JoomcckControllerRecords extends MControllerAdmin
 		CEventsHelper::notify('record', CEventsHelper::_RECORD_EXTENDED, $this->record->id, $this->record->section_id, 0, 0, 0, $data);
 
 		$db = \Joomla\CMS\Factory::getDbo();
-		$db->setQuery("DELETE FROM #__js_res_notifications WHERE `type` = 'record_expired' AND ref_1 = {$this->record->id}");
+		$db->setQuery("DELETE FROM #__js_res_notifications WHERE `type` = 'record_expired' AND ref_1 = " . (int) $this->record->id . "");
 		$db->execute();
 		//CEmeraldHelper::countLimit('type', 'extend', $this->type, $user->id);
 

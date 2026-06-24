@@ -569,7 +569,7 @@ class MECAccess
 		}
 
 		$db = \Joomla\CMS\Factory::getDbo();
-		$sql = "SELECT id FROM #__js_res_categories WHERE id NOT IN (" . implode(',', $cats) . ") AND section_id = {$section->id}";
+		$sql = "SELECT id FROM #__js_res_categories WHERE id NOT IN (" . implode(',', \Joomla\Utilities\ArrayHelper::toInteger($cats)) . ") AND section_id = " . (int) $section->id;
 		$db->setQuery($sql);
 		$cats = $db->loadColumn();
 		ArrayHelper::clean_r($cats);
@@ -595,7 +595,7 @@ class MECAccess
 
 		$query->select("c.id");
 		$query->from('#__js_res_categories AS c');
-		$query->where('c.section_id = ' . $section->id);
+		$query->where('c.section_id = ' . (int) $section->id);
 		$query->where('c.published = 1');
 
 		foreach($cats as $cat) {
@@ -628,7 +628,7 @@ class MECAccess
 
 		$db = \Joomla\CMS\Factory::getDbo();
 
-		$sql = "SELECT level, lft, rgt FROM #__js_res_categories WHERE id = {$cat_id}";
+		$sql = "SELECT level, lft, rgt FROM #__js_res_categories WHERE id = " . (int) $cat_id;
 		$db->setQuery($sql);
 		$parent = $db->loadObject();
 		$out[$cat_id] = $parent;

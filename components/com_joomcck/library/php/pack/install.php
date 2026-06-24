@@ -641,7 +641,7 @@ class packInstallerScript
         $model->register($data);
 
         $db  = \Joomla\CMS\Factory::getDbo();
-        $sql = "SELECT id FROM `#__users` WHERE email = '{$user['email']}' OR username = '{$user['username']}'";
+        $sql = "SELECT id FROM `#__users` WHERE email = " . $db->quote($user['email']) . " OR username = " . $db->quote($user['username']);
         $db->setQuery($sql);
 
         return $db->loadResult();
@@ -650,7 +650,7 @@ class packInstallerScript
     {
         $db = \Joomla\CMS\Factory::getDbo();
 
-        $sql = "SELECT id FROM `#__users` WHERE email = '{$user['email']}' OR username = '{$user['username']}'";
+        $sql = "SELECT id FROM `#__users` WHERE email = " . $db->quote($user['email']) . " OR username = " . $db->quote($user['username']);
         $db->setQuery($sql);
 
         return $db->loadResult();
@@ -697,7 +697,7 @@ class packInstallerScript
             }
             if ($file == 'tags') {
                 $db  = \Joomla\CMS\Factory::getDBO();
-                $sql = "SELECT id FROM #__js_res_tags WHERE LOWER(`tag`) = '" . \Joomla\String\StringHelper::strtolower($row['tag']) . "'";
+                $sql = "SELECT id FROM #__js_res_tags WHERE LOWER(`tag`) = " . $db->quote(\Joomla\String\StringHelper::strtolower($row['tag']));
                 $db->setQuery($sql);
                 $tid = $db->loadResult();
                 if ($tid) {
@@ -844,7 +844,7 @@ class packInstallerScript
             $row        = array_shift($content);
             $section_id = @$row['section_id'];
             if ($section_id) {
-                $query = "UPDATE `#__js_res_categories` SET `path` = REPLACE(`path`, 'root/', '') WHERE `section_id` = {$section_id}";
+                $query = "UPDATE `#__js_res_categories` SET `path` = REPLACE(`path`, 'root/', '') WHERE `section_id` = " . (int) $section_id;
                 $db->setQuery($query);
                 $db->execute();
             }

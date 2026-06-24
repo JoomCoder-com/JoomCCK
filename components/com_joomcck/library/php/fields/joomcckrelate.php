@@ -228,7 +228,7 @@ class  CFormFieldRelate extends CFormField
 					$query = $db->getQuery(TRUE);
 					$query->from('#__js_res_record');
 					$query->select('id as value, title');
-					$query->where('id IN (' . implode(',', $this->value) . ')');
+					$query->where('id IN (' . implode(',', \Joomla\Utilities\ArrayHelper::toInteger((array) $this->value)) . ')');
 					$db->setQuery($query);
 
 					$default = $db->loadObjectList();
@@ -270,7 +270,7 @@ class  CFormFieldRelate extends CFormField
 					$query = $db->getQuery(TRUE);
 					$query->from('#__js_res_record');
 					$query->select('id as value, title');
-					$query->where('id IN (' . implode(',', $this->value) . ')');
+					$query->where('id IN (' . implode(',', \Joomla\Utilities\ArrayHelper::toInteger((array) $this->value)) . ')');
 					$db->setQuery($query);
 					$default = $db->loadObjectList();
 				}
@@ -283,7 +283,7 @@ class  CFormFieldRelate extends CFormField
 					$query = $db->getQuery(TRUE);
 					$query->from('#__js_res_record');
 					$query->select('id as value, title');
-					$query->where('id IN (' . implode(',', $this->value) . ')');
+					$query->where('id IN (' . implode(',', \Joomla\Utilities\ArrayHelper::toInteger((array) $this->value)) . ')');
 					$db->setQuery($query);
 					$default = $db->loadObjectList();
 				}

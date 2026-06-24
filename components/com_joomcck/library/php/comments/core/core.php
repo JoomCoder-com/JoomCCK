@@ -24,7 +24,7 @@ class JoomcckCommentsCore extends JoomcckComments {
 
 		$db = \Joomla\CMS\Factory::getDbo();
 
-		$db->setQuery("SELECT comment FROM #__js_res_comments WHERE published = 1 AND record_id = {$item->id}");
+		$db->setQuery("SELECT comment FROM #__js_res_comments WHERE published = 1 AND record_id = " . (int) $item->id . "");
 		$list = $db->loadColumn();
 
 		return implode(', ', $list);

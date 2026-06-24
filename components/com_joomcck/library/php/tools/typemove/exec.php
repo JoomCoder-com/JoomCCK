@@ -5,7 +5,7 @@ defined('_JEXEC') or die();
 $app = \Joomla\CMS\Factory::getApplication();
 $db = \Joomla\CMS\Factory::getDBO();
 
-$type_id = $params->get('type_id');
+$type_id = (int)$params->get('type_id');
 $from = (int)$params->get('sect_from');
 $to = (int)$params->get('sect_to');
 

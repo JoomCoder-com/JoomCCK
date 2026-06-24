@@ -8,7 +8,7 @@ $db = \Joomla\CMS\Factory::getDBO();
 $table_record = \Joomla\CMS\Table\Table::getInstance('Record', 'JoomcckTable');
 $table_value = \Joomla\CMS\Table\Table::getInstance('Record_values', 'JoomcckTable');
 
-$section_id = $params->get('section_id');
+$section_id = (int)$params->get('section_id');
 $from = (int)$params->get('cat_from');
 $to = (int)$params->get('cat_to');
 

@@ -55,13 +55,13 @@ class JoomcckControllerTfield extends MControllerForm
 	public function postSaveHook(MModelBase $model, $data = array())
 	{
 		$table = \Joomla\CMS\Table\Table::getInstance('Field', 'JoomcckTable');
-		$table->reorder('type_id ='. $data['type_id']);
+		$table->reorder('type_id ='. (int) $data['type_id']);
 
 
 		$db = \Joomla\CMS\Factory::getDbo();
 		$key = 'k'.md5($data['label'].'-'.$data['field_type']);
 
-		$db->setQuery("UPDATE #__js_res_record_values SET field_key = '{$key}', field_type = '{$data['field_type']}', field_label = '". $db->escape($data['label']) ."' WHERE field_id = ".$model->getState('tfield.id'));
+		$db->setQuery("UPDATE #__js_res_record_values SET field_key = '{$key}', field_type = ". $db->quote($data['field_type']) .", field_label = '". $db->escape($data['label']) ."' WHERE field_id = ". (int) $model->getState('tfield.id'));
 		$db->execute();
 	}
 

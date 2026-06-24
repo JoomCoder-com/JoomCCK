@@ -224,7 +224,7 @@ class JoomcckControllerForm extends MControllerForm
 
 			if($cids)
 			{
-				$sql = 'DELETE FROM #__js_res_record_category WHERE record_id = ' . $record_id . ' AND catid NOT IN (' . implode(',', $cids) . ')';
+				$sql = 'DELETE FROM #__js_res_record_category WHERE record_id = ' . (int) $record_id . ' AND catid NOT IN (' . implode(',', \Joomla\Utilities\ArrayHelper::toInteger($cids)) . ')';
 				$db->setQuery($sql);
 				$db->execute();
 			}
@@ -318,7 +318,7 @@ class JoomcckControllerForm extends MControllerForm
 					$post_table->reset();
 				}
 			}
-			$sql = "SELECT host_id FROM `#__js_res_record_repost` WHERE record_id = {$record_id}";
+			$sql = "SELECT host_id FROM `#__js_res_record_repost` WHERE record_id = " . (int) $record_id;
 			$db->setQuery($sql);
 			$posts = $db->loadColumn();
 		}
@@ -338,12 +338,12 @@ class JoomcckControllerForm extends MControllerForm
 		if($record->parent_id && $type->params->get('properties.rate_access') == -1)
 		{
 			$query = "SELECT COUNT(*) as total, SUM(votes_result) / COUNT(*) AS rating
-                FROM #__js_res_record WHERE parent_id = $record->parent_id AND parent = 'com_joomcck'";
+                FROM #__js_res_record WHERE parent_id = " . (int) $record->parent_id . " AND parent = 'com_joomcck'";
 			$db->setQuery($query);
 			$new = $db->loadObject();
 
 			$query = "UPDATE #__js_res_record SET votes_result = " . (int)$new->rating . ",  votes = " . (int)$new->total . "
-                WHERE id = {$record->parent_id}";
+                WHERE id = " . (int) $record->parent_id;
 			$db->setQuery($query);
 			$db->execute();
 		}

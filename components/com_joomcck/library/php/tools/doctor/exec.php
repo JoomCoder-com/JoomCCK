@@ -16,7 +16,7 @@ $list = $db->loadObjectList();
 foreach($list AS $item)
 {
 	$db->setQuery("DELETE FROM `#__js_res_subscribe`
-		WHERE user_id = {$item->user_id} AND ref_id = {$item->ref_id} AND `type` = 'record'");
+		WHERE user_id = " . (int) $item->user_id . " AND ref_id = " . (int) $item->ref_id . " AND `type` = 'record'");
 	$db->execute();
 }
 
@@ -35,7 +35,7 @@ $list = $db->loadObjectList();
 foreach($list AS $item)
 {
 	$db->setQuery("DELETE FROM `#__js_res_favorite`
-		WHERE user_id = {$item->user_id} AND record_id = {$item->record_id}");
+		WHERE user_id = " . (int) $item->user_id . " AND record_id = " . (int) $item->record_id . "");
 	$db->execute();
 }
 

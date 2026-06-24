@@ -265,7 +265,7 @@ class CCommunityHelper
 
 			if(!isset($icons[$section->id]))
 			{
-				$sql = "SELECT user_id, icon FROM #__js_res_moderators WHERE published = 1 AND section_id = {$section->id}";
+				$sql = "SELECT user_id, icon FROM #__js_res_moderators WHERE published = 1 AND section_id = " . (int) $section->id;
 				$db->setQuery($sql);
 				$icons[$section->id] = $db->loadObjectList('user_id');
 			}
@@ -357,7 +357,7 @@ class CCommunityHelper
 		}
 
 		$db  = \Joomla\CMS\Factory::getDbo();
-		$sql = "SELECT session_id  FROM #__session WHERE client_id = 0 AND userid = {$user_id}";
+		$sql = "SELECT session_id  FROM #__session WHERE client_id = 0 AND userid = " . (int) $user_id;
 		$db->setQuery($sql);
 		$out[$user_id] = (boolean)$db->loadResult();
 

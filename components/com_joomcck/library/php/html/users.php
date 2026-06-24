@@ -22,7 +22,7 @@ class JHTMLUsers
 		}
 		else
 		{
-			$db->setQuery("SELECT host_id FROM `#__js_res_record_repost` WHERE record_id = {$record->id} AND is_reposted = 0");
+			$db->setQuery("SELECT host_id FROM `#__js_res_record_repost` WHERE record_id = " . (int) $record->id . " AND is_reposted = 0");
 			$ids = $db->loadColumn();
 			$isme = $user->get('id') == @$record->user_id;
 		}
@@ -58,7 +58,7 @@ class JHTMLUsers
 		$query = $db->getQuery(true);
 		$query->select($section->params->get('personalize.author_mode', 'username').' as name, id');
 		$query->from('#__users');
-		$query->where("id IN(SELECT user_id FROM #__js_res_record WHERE section_id = {$section->id})");
+		$query->where("id IN(SELECT user_id FROM #__js_res_record WHERE section_id = " . (int) $section->id . ")");
 		$db->setQuery($query);
 		$list = $db->loadObjectList();
 
@@ -84,7 +84,7 @@ class JHTMLUsers
 		$query = $db->getQuery(true);
 		$query->select($section->params->get('personalize.author_mode', 'username').' AS text, id as value');
 		$query->from('#__users');
-		$query->where("id IN(SELECT user_id FROM #__js_res_record WHERE section_id = {$section->id})");
+		$query->where("id IN(SELECT user_id FROM #__js_res_record WHERE section_id = " . (int) $section->id . ")");
 		$db->setQuery($query);
 		$list = $db->loadObjectList();
 

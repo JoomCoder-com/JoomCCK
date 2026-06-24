@@ -97,10 +97,10 @@ class JoomcckControllerRate extends MControllerAdmin
 		{
 			case 2 : // bayesian rating
 				$sql1 = "SELECT COUNT(*) AS count FROM #__js_res_vote AS v
-				WHERE v.ref_type = 'record' AND v.section_id = {$record->section_id} AND idx = {$index} GROUP BY v.ref_id";
+				WHERE v.ref_type = 'record' AND v.section_id = " . (int) $record->section_id . " AND idx = " . (int) $index . " GROUP BY v.ref_id";
 
 				$sql2 = "SELECT AVG(v.vote) FROM #__js_res_vote as v
-				WHERE v.ref_type = 'record' AND v.section_id = {$record->section_id} AND idx = {$index}";
+				WHERE v.ref_type = 'record' AND v.section_id = " . (int) $record->section_id . " AND idx = " . (int) $index . "";
 
 				$db->setQuery($sql1);
 				$result = $db->loadColumn();
@@ -109,14 +109,14 @@ class JoomcckControllerRate extends MControllerAdmin
 				$db->setQuery($sql2);
 				$avg['vote'] = $db->loadResult();
 
-				$sql = "SELECT COUNT(*) AS total, ((" . $avg['num_vote'] . " * " . $avg['vote'] . ") + (COUNT(vote) * AVG(vote))) / (" . $avg['num_vote'] . " + COUNT(vote)) AS rating FROM #__js_res_vote WHERE ref_type = 'record' AND ref_id = {$record->id} AND idx = {$index} GROUP BY ref_id";
+				$sql = "SELECT COUNT(*) AS total, ((" . $avg['num_vote'] . " * " . $avg['vote'] . ") + (COUNT(vote) * AVG(vote))) / (" . $avg['num_vote'] . " + COUNT(vote)) AS rating FROM #__js_res_vote WHERE ref_type = 'record' AND ref_id = " . (int) $record->id . " AND idx = " . (int) $index . " GROUP BY ref_id";
 				break;
 			case 3 : // smart rating
-				$sql = "SELECT COUNT(*) AS total, if(count(id) >= " . $type->params->get('properties.rate_smart_minimum') . ", sum(vote) / count(id), 0) AS rating FROM " . "#__js_res_vote WHERE ref_type = 'record' AND ref_id = {$record->id} AND ctime > '" . \Joomla\CMS\Factory::getDate()->toSql() . "' - INTERVAL " . $type->params->get('properties.rate_smart_before') . " DAY AND idx = {$index} GROUP BY ref_id";
+				$sql = "SELECT COUNT(*) AS total, if(count(id) >= " . $type->params->get('properties.rate_smart_minimum') . ", sum(vote) / count(id), 0) AS rating FROM " . "#__js_res_vote WHERE ref_type = 'record' AND ref_id = " . (int) $record->id . " AND ctime > '" . \Joomla\CMS\Factory::getDate()->toSql() . "' - INTERVAL " . $type->params->get('properties.rate_smart_before') . " DAY AND idx = " . (int) $index . " GROUP BY ref_id";
 
 				break;
 			default : // plain rating
-				$sql = "SELECT COUNT(*) AS total, SUM(vote) / COUNT(*) AS rating FROM " . "#__js_res_vote WHERE ref_type = 'record' AND ref_id = {$record->id} AND idx = {$index} GROUP BY ref_id";
+				$sql = "SELECT COUNT(*) AS total, SUM(vote) / COUNT(*) AS rating FROM " . "#__js_res_vote WHERE ref_type = 'record' AND ref_id = " . (int) $record->id . " AND idx = " . (int) $index . " GROUP BY ref_id";
 				break;
 		}
 		$db->setQuery($sql);
@@ -141,13 +141,13 @@ class JoomcckControllerRate extends MControllerAdmin
 			$total_num = ceil($total_num/count($options));
 			$total_rating = $total/count($options);
 			$multirating = json_encode($ratings);
-			$sql = "UPDATE #__js_res_record SET votes_result = " . (int)$total_rating . ",  votes = " . (int)$total_num . ", multirating = '".$db->escape($multirating)."'  WHERE id = {$record->id}";
+			$sql = "UPDATE #__js_res_record SET votes_result = " . (int)$total_rating . ",  votes = " . (int)$total_num . ", multirating = '".$db->escape($multirating)."'  WHERE id = " . (int) $record->id . "";
 			$out['result'] = round((int)$total_rating);
 			$out['votes'] = $total_num;
 		}
 		else
 		{
-			$sql = "UPDATE #__js_res_record SET votes_result = " . (int)$rating->rating . ",  votes = " . (int)$rating->total . "  WHERE id = {$record->id}";
+			$sql = "UPDATE #__js_res_record SET votes_result = " . (int)$rating->rating . ",  votes = " . (int)$rating->total . "  WHERE id = " . (int) $record->id . "";
 		}
 
     	$db->setQuery($sql);
@@ -162,19 +162,19 @@ class JoomcckControllerRate extends MControllerAdmin
         if($record->parent_id && $type->params->get('properties.rate_access') == -1)
         {
             $query = "SELECT COUNT(*) as total, SUM(votes_result) / COUNT(*) AS rating
-                FROM #__js_res_record WHERE parent_id = $record->parent_id AND parent = 'com_joomcck'";
+                FROM #__js_res_record WHERE parent_id = " . (int) $record->parent_id . " AND parent = 'com_joomcck'";
             $db->setQuery($query);
             $new = $db->loadObject();
 
             $query = "UPDATE #__js_res_record SET votes_result = " . (int)$new->rating . ",  votes = " . (int)$new->total . "
-                WHERE id = {$record->parent_id}";
+                WHERE id = " . (int) $record->parent_id . "";
             $db->setQuery($query);
             $db->execute();
         }
 
 		if(!isset($out['result']))
 		{
-			$sql = "SELECT votes_result FROM #__js_res_record WHERE id = {$record->id}";
+			$sql = "SELECT votes_result FROM #__js_res_record WHERE id = " . (int) $record->id . "";
 			$db->setQuery($sql);
 			$out['result'] = round((int)$db->loadResult());
 			$out['votes'] = $record->votes + 1;
@@ -206,11 +206,11 @@ class JoomcckControllerRate extends MControllerAdmin
 		$this->_saveVote('file', $file->id, $vote, $file->section_id);
 
 		$db = \Joomla\CMS\Factory::getDbo();
-		$sql = "SELECT COUNT(*) AS total, SUM(vote) / COUNT(*) AS rating FROM " . "#__js_res_vote WHERE ref_type = 'file' AND ref_id = {$file->id} GROUP BY ref_id";
+		$sql = "SELECT COUNT(*) AS total, SUM(vote) / COUNT(*) AS rating FROM " . "#__js_res_vote WHERE ref_type = 'file' AND ref_id = " . (int) $file->id . " GROUP BY ref_id";
 		$db->setQuery($sql);
 		$rating = $db->loadObject();
 
-		$sql = "UPDATE #__js_res_files SET rating = " . (int)$rating->rating . ",  rating_nums = " . (int)$rating->total . "  WHERE id = {$file->id}";
+		$sql = "UPDATE #__js_res_files SET rating = " . (int)$rating->rating . ",  rating_nums = " . (int)$rating->total . "  WHERE id = " . (int) $file->id . "";
 		$db->setQuery($sql);
 		$db->execute();
 
@@ -227,10 +227,10 @@ class JoomcckControllerRate extends MControllerAdmin
 
 		$cookie_domain = $config->get('cookie_domain', '');
 		$cookie_path = $config->get('cookie_path', '/');
-		setcookie("{$type}_rate_{$id}_{$index}", 1, time() + 365 * 86400, $cookie_path, $cookie_domain);
+		setcookie("{$type}_rate_{$id}_" . (int) $index . "", 1, time() + 365 * 86400, $cookie_path, $cookie_domain);
 
 		$session = \Joomla\CMS\Factory::getSession();
-		$session->set("{$type}_rate_{$id}_{$index}", 1);
+		$session->set("{$type}_rate_{$id}_" . (int) $index . "", 1);
 
 		$user = \Joomla\CMS\Factory::getApplication()->getIdentity();
 
@@ -291,13 +291,13 @@ class JoomcckControllerRate extends MControllerAdmin
 			{
 				$result = false;
 			}
-			if($user->get('id') && $this->input->getInt($type."_rate_{$id}_{$index}", 0))
+			if($user->get('id') && $this->input->getInt($type."_rate_{$id}_" . (int) $index . "", 0))
 			{
 				$result = false;
 			}
 
 			$ses = \Joomla\CMS\Factory::getSession();
-			if($ses->get($type."_rate_{$id}_{$index}"))
+			if($ses->get($type."_rate_{$id}_" . (int) $index . ""))
 			{
 				$result = false;
 			}

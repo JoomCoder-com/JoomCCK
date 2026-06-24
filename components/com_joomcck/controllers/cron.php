@@ -91,7 +91,7 @@ class JoomcckControllerCron extends MControllerAdmin
 		else
 		{
 			$sql = "SELECT id FROM #__users WHERE block = 0 AND id IN(
-				SELECT user_id FROM #__js_res_user_options WHERE schedule = {$type} AND lastsend < NOW() - INTERVAL {$period})";
+				SELECT user_id FROM #__js_res_user_options WHERE schedule = " . (int) $type . " AND lastsend < NOW() - INTERVAL {$period})";
 			$db->setQuery($sql);
 			$users = $db->loadColumn();
 		}
@@ -101,7 +101,7 @@ class JoomcckControllerCron extends MControllerAdmin
 			return;
 		}
 
-		$sql = "SELECT * FROM #__js_res_notifications WHERE user_id IN (" . implode(',', $users) . ") AND alerted = 0 ORDER BY id DESC";
+		$sql = "SELECT * FROM #__js_res_notifications WHERE user_id IN (" . implode(',', \Joomla\Utilities\ArrayHelper::toInteger($users)) . ") AND alerted = 0 ORDER BY id DESC";
 		$db->setQuery($sql);
 		$notes = $db->loadObjectList();
 
@@ -219,12 +219,12 @@ class JoomcckControllerCron extends MControllerAdmin
 			{
 				if($note_ids)
 				{
-					$sql = "UPDATE #__js_res_notifications SET alerted = 1 WHERE id IN (" . implode(',', $note_ids) . ")";
+					$sql = "UPDATE #__js_res_notifications SET alerted = 1 WHERE id IN (" . implode(',', \Joomla\Utilities\ArrayHelper::toInteger($note_ids)) . ")";
 					$db->setQuery($sql);
 					$db->execute();
 				}
 
-				$sql = "UPDATE #__js_res_user_options SET lastsend = NOW() WHERE user_id = {$user_id}";
+				$sql = "UPDATE #__js_res_user_options SET lastsend = NOW() WHERE user_id = " . (int) $user_id;
 				$db->setQuery($sql);
 				$db->execute();
 
