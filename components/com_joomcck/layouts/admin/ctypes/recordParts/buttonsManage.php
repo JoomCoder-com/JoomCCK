@@ -20,7 +20,7 @@ Dropdown::init();
 
 // Create dropdown items
 Dropdown::edit($item->id, 'ctype.');
-Dropdown::addCustomItem('<i class="fas fa-trash text-danger"></i> '. Text::_('C_TOOLBAR_DELETE'), 'javascript:void(0)', 'onclick="if(!confirm(\'' . Text::_('C_TOOLBAR_CONFIRMDELET') . '\')){return;}Joomla.listItemTask(\'cb' . $i . '\',\'types.delete\')"');
+Dropdown::addCustomItem('<i class="fas fa-trash text-danger"></i> '. Text::_('C_TOOLBAR_DELETE'), 'javascript:void(0)', 'onclick="if(!confirm(\'' . Text::_('C_TOOLBAR_CONFIRMDELET') . '\')){return;}Joomla.listItemTask(\'cb' . $i . '\',\'ctypes.delete\')"');
 if ($item->published) :
     Dropdown::unpublish('cb' . $i, 'ctypes.');
 else :
