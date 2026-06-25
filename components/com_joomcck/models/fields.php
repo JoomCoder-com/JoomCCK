@@ -51,7 +51,6 @@ class JoomcckModelFields extends MModelList
 		if($module_field = \Joomla\CMS\Factory::getApplication()->input->get('module_video'))
 		{
 			settype($module_field, 'array');
-			$module_field = \Joomla\Utilities\ArrayHelper::toInteger($module_field);
 			$query->where("f.id IN (".implode(',', $module_field).")");
 		}
 		

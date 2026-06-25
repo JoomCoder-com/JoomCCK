@@ -252,7 +252,7 @@ class JoomcckModelUsers extends MModelList
 				$query->where('map2.group_id = '.(int) $groupId);
 			}
 			if (isset($groups)) {
-				$query->where('map2.group_id IN ('.implode(',', \Joomla\Utilities\ArrayHelper::toInteger($groups)).')');
+				$query->where('map2.group_id IN ('.implode(',', $groups).')');
 			}
 		}
 
@@ -274,7 +274,7 @@ class JoomcckModelUsers extends MModelList
 		// Filter by excluded users
 		$excluded = $this->getState('filter.excluded');
 		if (!empty($excluded)) {
-			$query->where('id NOT IN ('.implode(',', \Joomla\Utilities\ArrayHelper::toInteger($excluded)).')');
+			$query->where('id NOT IN ('.implode(',', $excluded).')');
 		}
 
 		// Add the list ordering clause.

@@ -354,7 +354,7 @@ var _gaq = _gaq || [];
 		$('img', button).attr('src', '<?php echo \Joomla\CMS\Uri\Uri::root(TRUE);?>/components/com_joomcck/images/load.gif');
 
 		$.ajax({
-			url:      '<?php echo \Joomla\CMS\Router\Route::_("index.php?option=com_joomcck&task=ajax.repost&tmpl=component&" . \Joomla\CMS\Session\Session::getFormToken() . "=1", FALSE); ?>',
+			url:      '<?php echo \Joomla\CMS\Router\Route::_("index.php?option=com_joomcck&task=ajax.repost&tmpl=component", FALSE); ?>',
 			dataType: 'json',
 			type:     'POST',
 			data:     {
@@ -381,7 +381,7 @@ var _gaq = _gaq || [];
 	Joomcck.followRecord = function(id, section) {
 		$('#follow_record_' + id).attr('src', '<?php echo \Joomla\CMS\Uri\Uri::root(TRUE);?>/components/com_joomcck/images/load.gif');
 		$.ajax({
-			url:      '<?php echo \Joomla\CMS\Router\Route::_("index.php?option=com_joomcck&task=ajax.follow&tmpl=component&" . \Joomla\CMS\Session\Session::getFormToken() . "=1", FALSE); ?>',
+			url:      '<?php echo \Joomla\CMS\Router\Route::_("index.php?option=com_joomcck&task=ajax.follow&tmpl=component", FALSE); ?>',
 			context:  $('#follow_record_' + id),
 			dataType: 'json',
 			type:     'POST',
@@ -411,7 +411,7 @@ var _gaq = _gaq || [];
 	Joomcck.bookmarkRecord = function(id, img) {
 		$('#bookmark_' + id).attr('src', '<?php echo \Joomla\CMS\Uri\Uri::root(TRUE);?>/components/com_joomcck/images/load.gif');
 		$.ajax({
-			url:      '<?php echo \Joomla\CMS\Router\Route::_("index.php?option=com_joomcck&task=ajax.bookmark&tmpl=component&" . \Joomla\CMS\Session\Session::getFormToken() . "=1", FALSE); ?>',
+			url:      '<?php echo \Joomla\CMS\Router\Route::_("index.php?option=com_joomcck&task=ajax.bookmark&tmpl=component", FALSE); ?>',
 			context:  $('#bookmark_' + id),
 			dataType: 'json',
 			type:     'POST',
@@ -440,7 +440,7 @@ var _gaq = _gaq || [];
 		$('#follow_' + id).attr('src', '<?php echo \Joomla\CMS\Uri\Uri::root(TRUE);?>/components/com_joomcck/images/load.gif');
 
 		$.ajax({
-			url:      '<?php echo \Joomla\CMS\Router\Route::_("index.php?option=com_joomcck&task=ajax.followsection&tmpl=component&" . \Joomla\CMS\Session\Session::getFormToken() . "=1", FALSE); ?>',
+			url:      '<?php echo \Joomla\CMS\Router\Route::_("index.php?option=com_joomcck&task=ajax.followsection&tmpl=component", FALSE); ?>',
 			context:  $('#follow_' + id),
 			dataType: 'json',
 			type:     'POST',
@@ -478,7 +478,7 @@ var _gaq = _gaq || [];
 	Joomcck.followUser = function(id, section) {
 		$('#followuser_' + id).attr('src', '<?php echo \Joomla\CMS\Uri\Uri::root(TRUE);?>/components/com_joomcck/images/load.gif');
 		$.ajax({
-			url:      '<?php echo \Joomla\CMS\Router\Route::_("index.php?option=com_joomcck&task=ajax.followuser&tmpl=component&" . \Joomla\CMS\Session\Session::getFormToken() . "=1", FALSE); ?>',
+			url:      '<?php echo \Joomla\CMS\Router\Route::_("index.php?option=com_joomcck&task=ajax.followuser&tmpl=component", FALSE); ?>',
 			dataType: 'json',
 			type:     'POST',
 			data:     {
@@ -517,7 +517,7 @@ var _gaq = _gaq || [];
 		$('#follow_' + id).attr('src', '<?php echo \Joomla\CMS\Uri\Uri::root(TRUE);?>/components/com_joomcck/images/load.gif');
 
 		$.ajax({
-			url:      '<?php echo \Joomla\CMS\Router\Route::_("index.php?option=com_joomcck&task=ajax.followcat&tmpl=component&" . \Joomla\CMS\Session\Session::getFormToken() . "=1", FALSE); ?>',
+			url:      '<?php echo \Joomla\CMS\Router\Route::_("index.php?option=com_joomcck&task=ajax.followcat&tmpl=component", FALSE); ?>',
 			dataType: 'json',
 			type:     'POST',
 			data:     {

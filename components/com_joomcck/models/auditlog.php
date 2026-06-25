@@ -98,25 +98,25 @@ class JoomcckModelAuditlog extends MModelList
 
 		if($fce && $fcs)
 		{
-			$query->where('al.ctime BETWEEN ' . $db->quote($fcs) . ' AND ' . $db->quote($fce));
+			$query->where("al.ctime BETWEEN '{$fcs}' AND '{$fce}'");
 		}
 
 		$event_id = $this->state->get('auditlog.event_id');
 		if($event_id)
 		{
-			$query->where('al.event IN (' . implode(',', \Joomla\Utilities\ArrayHelper::toInteger($event_id)) . ')');
+			$query->where('al.event IN (' . implode(',', $event_id) . ')');
 		}
 
 		$user_id = $this->state->get('auditlog.user_id');
 		if($user_id)
 		{
-			$query->where('al.user_id IN (' . implode(',', \Joomla\Utilities\ArrayHelper::toInteger($user_id)) . ')');
+			$query->where('al.user_id IN (' . implode(',', $user_id) . ')');
 		}
 
 		$type_id = $this->state->get('auditlog.type_id');
 		if($type_id)
 		{
-			$query->where('al.type_id IN (' . implode(',', \Joomla\Utilities\ArrayHelper::toInteger($type_id)) . ')');
+			$query->where('al.type_id IN (' . implode(',', $type_id) . ')');
 		}
 		else
 		{
@@ -128,7 +128,7 @@ class JoomcckModelAuditlog extends MModelList
 		$section_id = $this->state->get('auditlog.section_id');
 		if($section_id)
 		{
-			$query->where('al.section_id IN (' . implode(',', \Joomla\Utilities\ArrayHelper::toInteger($section_id)) . ')');
+			$query->where('al.section_id IN (' . implode(',', $section_id) . ')');
 		}
 		else
 		{
@@ -192,7 +192,7 @@ class JoomcckModelAuditlog extends MModelList
 			$type_id = $this->state->get('auditlog.type_id');
 			if($type_id)
 			{
-				$query->where('a.type_id IN (' . implode(',', \Joomla\Utilities\ArrayHelper::toInteger($type_id)) . ')');
+				$query->where('a.type_id IN (' . implode(',', $type_id) . ')');
 			}
 			else
 			{
@@ -205,7 +205,7 @@ class JoomcckModelAuditlog extends MModelList
 			ArrayHelper::clean_r($section_id, TRUE);
 			$section_id = \Joomla\Utilities\ArrayHelper::toInteger($section_id);
 
-			$section_id = implode(',', \Joomla\Utilities\ArrayHelper::toInteger($section_id));
+			$section_id = implode(',', $section_id);
 
 			if(!empty($section_id))
 			{
@@ -262,7 +262,7 @@ class JoomcckModelAuditlog extends MModelList
 			$type_id = $this->state->get('auditlog.type_id');
 			if($type_id)
 			{
-				$query->where('a.type_id IN (' . implode(',', \Joomla\Utilities\ArrayHelper::toInteger($type_id)) . ')');
+				$query->where('a.type_id IN (' . implode(',', $type_id) . ')');
 			}
 			else
 			{
@@ -275,7 +275,7 @@ class JoomcckModelAuditlog extends MModelList
 			$section_id = \Joomla\Utilities\ArrayHelper::toInteger($section_id);
 			if($section_id)
 			{
-				$query->where('a.section_id IN (' . implode(',', \Joomla\Utilities\ArrayHelper::toInteger($section_id)) . ')');
+				$query->where('a.section_id IN (' . implode(',', $section_id) . ')');
 			}
 			else
 			{

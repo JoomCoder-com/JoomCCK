@@ -101,7 +101,7 @@ class JoomcckModelTfields extends MModelList
 
 		if($ftype = $this->getState('filter.types'))
 		{
-			$query->where('f.field_type IN (' . $query->quote($ftype) . ')');
+			$query->where('f.field_type IN ("' . $ftype . '")');
 		}
 
 		$published = $this->getState('filter.state');

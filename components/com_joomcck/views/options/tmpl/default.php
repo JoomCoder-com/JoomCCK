@@ -358,7 +358,7 @@ function yesnobutton($type, $section_id, $default)
             if (!confirm('<?php echo \Joomla\CMS\Language\Text::_('CSURE')?>')) return;
             $('#bro-ba').slideDown('quick', function () {
                 $.ajax({
-                    url: '<?php echo \Joomla\CMS\Router\Route::_('index.php?option=com_joomcck&task=ajax.unfollowallsection&tmpl=component&' . \Joomla\CMS\Session\Session::getFormToken() . '=1', false); ?>',
+                    url: '<?php echo \Joomla\CMS\Router\Route::_('index.php?option=com_joomcck&task=ajax.unfollowallsection&tmpl=component', false); ?>',
                     dataType: 'json',
                     type: 'POST',
                     data: {
@@ -395,7 +395,7 @@ function yesnobutton($type, $section_id, $default)
         Joomcck.ajax_subscr_sec = function (id) {
             $('#bro-ba').slideDown('quick', function () {
                 $.ajax({
-                    url: '<?php echo \Joomla\CMS\Router\Route::_('index.php?option=com_joomcck&task=ajax.followallsection&tmpl=component&' . \Joomla\CMS\Session\Session::getFormToken() . '=1', false); ?>',
+                    url: '<?php echo \Joomla\CMS\Router\Route::_('index.php?option=com_joomcck&task=ajax.followallsection&tmpl=component', false); ?>',
                     dataType: 'json',
                     type: 'POST',
                     data: {

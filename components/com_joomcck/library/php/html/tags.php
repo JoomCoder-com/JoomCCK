@@ -548,8 +548,8 @@ class JHTMLTags
         $options['suggestion_limit'] = 10;
         $options['limit']            = $max_tags;
         $options['suggestion_url']  = 'index.php?option=com_joomcck&task=ajax.tags_list&tmpl=component';
-		$options['onAdd'] =  "index.php?option=com_joomcck&task=ajax.add_tags&tmpl=component&rid=".$record->id."&".\Joomla\CMS\Session\Session::getFormToken()."=1";
-		$options['onRemove'] = "index.php?option=com_joomcck&task=ajax.remove_tag&tmpl=component&rid=".$record->id."&".\Joomla\CMS\Session\Session::getFormToken()."=1";
+		$options['onAdd'] =  "index.php?option=com_joomcck&task=ajax.add_tags&tmpl=component&rid=".$record->id;
+		$options['onRemove'] = "index.php?option=com_joomcck&task=ajax.remove_tag&tmpl=component&rid=".$record->id;
 
 		$out = \Joomla\CMS\HTML\HTMLHelper::_('mrelements.pills', "tags$record_id", "add-tags-".$record_id, $default, $selected, $options);
         return $out;

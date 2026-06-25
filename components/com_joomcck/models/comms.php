@@ -81,24 +81,23 @@ class JoomcckModelComms extends MModelList {
 			if (substr ( $search, 0, 8 ) == 'country:') {
 				$query->join ( 'LEFT', '#__js_ip_2_country AS i ON i.ip_from <= inet_aton(a.ip) AND i.ip_to >= inet_aton(a.ip)' );
 				$code = strtoupper ( substr ( $search, 8, 11 ) );
-				$query->where ( 'i.code = ' . $db->quote ( $code ) );
+				$query->where ( "i.code = '{$code}'" );
 			} elseif (substr ( $search, 0, 5 ) == 'user:') {
 				$query->where ( '(u.id = ' . ( int ) str_replace ( 'user:', '', $search ) . ')' );
 			} elseif (substr ( $search, 0, 6 ) == 'email:') {
-				$query->where ( '(a.email = ' . $db->quote ( str_replace ( 'email:', '', $search ) ) . ')' );
+				$query->where ( '(a.email = \'' . str_replace ( 'email:', '', $search ) . '\')' );
 			} elseif (substr ( $search, 0, 7 ) == 'record:') {
 				$query->where ( "r.id = ". ( int ) str_replace ( 'record:', '', $search ) );
 			} elseif (substr ( $search, 0, 3 ) == 'ip:') {
-				$query->where ( '(a.ip = ' . $db->quote ( str_replace ( 'ip:', '', $search ) ) . ')' );
+				$query->where ( '(a.ip = \'' . str_replace ( 'ip:', '', $search ) . '\')' );
 			} else {
 			//	$w [] = "a.subject  LIKE '%" . $search . "%'";
-				$like = $db->quote ( '%' . $db->escape ( $search, true ) . '%' );
-				$w [] = "a.comment  LIKE " . $like;
-				$w [] = "r.title    LIKE " . $like;
-				$w [] = "u.username LIKE " . $like;
-				$w [] = "a.ip LIKE " . $like;
-				$w [] = "u.email    LIKE " . $like;
-				$w [] = "a.id = " . $db->quote ( $search );
+				$w [] = "a.comment  LIKE '%" . $search . "%'";
+				$w [] = "r.title    LIKE '%" . $search . "%'";
+				$w [] = "u.username LIKE '%" . $search . "%'";
+				$w [] = "a.ip LIKE '%" . $search . "%'";
+				$w [] = "u.email    LIKE '%" . $search . "%'";
+				$w [] = "a.id = '" . $search . "'";
 				$query->where ( '(' . implode ( ' OR ', $w ) . ')' );
 			}
 		}

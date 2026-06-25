@@ -77,14 +77,13 @@ class JoomcckModelVotes extends MModelList
 			} elseif (substr ( $search, 0, 5 ) == 'user:') {
 				$query->where ( '(u.id = ' . ( int ) str_replace ( 'user:', '', $search ) . ')' );
 			} elseif (substr ( $search, 0, 3 ) == 'ip:') {
-				$query->where ( '(a.ip = ' . $db->quote ( str_replace ( 'ip:', '', $search ) ) . ')' );
+				$query->where ( '(a.ip = \'' . str_replace ( 'ip:', '', $search ) . '\')' );
 			} else {
-				$like = $db->quote ( '%' . $db->escape ( $search, true ) . '%' );
-				$w [] = "r.title    LIKE " . $like;
-				$w [] = "u.username LIKE " . $like;
-				$w [] = "a.ip LIKE " . $like;
-				$w [] = "u.email    LIKE " . $like;
-				$w [] = "a.id = " . $db->quote ( $search );
+				$w [] = "r.title    LIKE '%" . $search . "%'";
+				$w [] = "u.username LIKE '%" . $search . "%'";
+				$w [] = "a.ip LIKE '%" . $search . "%'";
+				$w [] = "u.email    LIKE '%" . $search . "%'";
+				$w [] = "a.id = '" . $search . "'";
 				$query->where ( '(' . implode ( ' OR ', $w ) . ')' );
 			}
 		}

@@ -44,7 +44,7 @@ class JoomcckModelFollows extends MModelList
 	{
 		$user = \Joomla\CMS\Factory::getApplication()->getIdentity();
 		$db = \Joomla\CMS\Factory::getDbo();
-		$db->setQuery("SELECT u_id as id FROM #__js_res_subscribe_user WHERE section_id = ".(int)$section->id." AND exclude = ".(int)$section->follow." AND user_id = {$user->id}");
+		$db->setQuery("SELECT u_id as id FROM #__js_res_subscribe_user WHERE section_id = {$section->id} AND exclude = ".(int)$section->follow." AND user_id = {$user->id}");
 
 		$list = $db->loadObjectList();
 		foreach ($list AS &$cat)
@@ -59,14 +59,14 @@ class JoomcckModelFollows extends MModelList
 	{
 		$user = \Joomla\CMS\Factory::getApplication()->getIdentity();
 		$db = \Joomla\CMS\Factory::getDbo();
-		$db->setQuery("SELECT count(*) FROM #__js_res_record WHERE section_id = ".(int)$section_id." AND (user_id = " . $user->get('id') . " OR access IN(".implode(',', $user->getAuthorisedViewLevels())."))");
+		$db->setQuery("SELECT count(*) FROM #__js_res_record WHERE section_id = {$section_id} AND (user_id = " . $user->get('id') . " OR access IN(".implode(',', $user->getAuthorisedViewLevels())."))");
 		return (int)$db->loadResult();
 	}
 	public function getSubRecords($section_id)
 	{
 		$user = \Joomla\CMS\Factory::getApplication()->getIdentity();
 		$db = \Joomla\CMS\Factory::getDbo();
-		$db->setQuery("SELECT count(*) FROM #__js_res_subscribe WHERE `type` = 'record' AND section_id = ".(int)$section_id." AND user_id = {$user->id}");
+		$db->setQuery("SELECT count(*) FROM #__js_res_subscribe WHERE `type` = 'record' AND section_id = {$section_id} AND user_id = {$user->id}");
 		return (int)$db->loadResult();
 	}
 	public function getListQuery()

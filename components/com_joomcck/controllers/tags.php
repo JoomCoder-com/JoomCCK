@@ -27,13 +27,6 @@ class JoomcckControllerTags extends MControllerBase
 	}
 	function delete()
 	{
-		$app = \Joomla\CMS\Factory::getApplication();
-		\Joomla\CMS\Session\Session::checkToken() or jexit(\Joomla\CMS\Language\Text::_('JINVALID_TOKEN'));
-		$user = $app->getIdentity();
-		if(!$user->get('id') || (!$app->isClient('administrator') && !MECAccess::isAdmin()))
-		{
-			throw new \Exception(\Joomla\CMS\Language\Text::_('JERROR_ALERTNOAUTHOR'), 403);
-		}
 
 		$model = $this->getModel('tags', 'JoomcckModel');
 		$model->_deleteTag();
@@ -43,14 +36,6 @@ class JoomcckControllerTags extends MControllerBase
 
 	function save()
 	{
-		$app = \Joomla\CMS\Factory::getApplication();
-		\Joomla\CMS\Session\Session::checkToken() or jexit(\Joomla\CMS\Language\Text::_('JINVALID_TOKEN'));
-		$user = $app->getIdentity();
-		if(!$user->get('id') || (!$app->isClient('administrator') && !MECAccess::isAdmin()))
-		{
-			throw new \Exception(\Joomla\CMS\Language\Text::_('JERROR_ALERTNOAUTHOR'), 403);
-		}
-
 		$model = $this->getModel('tags', 'JoomcckModel');
 		if($model->_saveTag())
 		{
