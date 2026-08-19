@@ -53,6 +53,16 @@ class JoomcckControllerPack extends MControllerForm
 
 	public function build()
 	{
+		// GHSA-whf2-8p4w-v6xv: pack building recursively deletes/writes files under
+		// /cache and produces a downloadable archive; require an authenticated admin
+		// plus a CSRF token. The build link in views/packs/tmpl/default.php carries it.
+		\Joomla\CMS\Session\Session::checkToken('request') or jexit(\Joomla\CMS\Language\Text::_('JINVALID_TOKEN'));
+		$user = \Joomla\CMS\Factory::getApplication()->getIdentity();
+		if(!$user->get('id') || (!\Joomla\CMS\Factory::getApplication()->isClient('administrator') && !MECAccess::isAdmin()))
+		{
+			throw new \Exception(\Joomla\CMS\Language\Text::_('JERROR_ALERTNOAUTHOR'), 403);
+		}
+
 		$model = $this->getModel();
 		$pack_id = $this->input->getInt('pack_id', 0);
 		$msg = '';

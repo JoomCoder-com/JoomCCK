@@ -211,7 +211,12 @@ class JFormFieldCImage extends CFormField
 				$filename = $time . '_' . md5($file['name']);
 				$dest .= File::stripExt($filename) . '.' . $ext;
 
-				if(File::upload($file['tmp_name'], JPATH_ROOT . DIRECTORY_SEPARATOR . $dest))
+				// GHSA-whf2-8p4w-v6xv: only write files whose extension is one of the
+				// field's allowed image formats, so an uploaded .php (or other
+				// executable) can never be planted. Covers the authenticated save path
+				// too, not only the (now hook-blocked) public field dispatcher.
+				$formats = explode(',', strtolower(str_replace(' ', '', $this->params->get('params.formats', 'png,jpg,gif,jpeg,webp,avif'))));
+				if(in_array(strtolower((string) $ext), $formats, true) && File::upload($file['tmp_name'], JPATH_ROOT . DIRECTORY_SEPARATOR . $dest))
 				{
 					$value['image']    = str_replace('\\', '/', $dest);
 					$value['realname'] = $file['name'];
@@ -317,6 +322,21 @@ class JFormFieldCImage extends CFormField
 	{
 		$input = \Joomla\CMS\Factory::getApplication()->input;
 		$file  = $input->getString('file');
+
+		// GHSA-whf2-8p4w-v6xv: `file` is joined to JPATH_ROOT and passed to
+		// File::delete() below. Confine it to the component upload area so it cannot
+		// remove arbitrary site files (e.g. configuration.php) via an absolute path
+		// or a traversal sequence.
+		$gu_params     = \Joomla\CMS\Component\ComponentHelper::getParams('com_joomcck');
+		$uploadRoot    = \Joomla\Filesystem\Path::clean(JPATH_ROOT . DIRECTORY_SEPARATOR . $gu_params->get('general_upload', 'images'));
+		$requestedPath = \Joomla\Filesystem\Path::clean(JPATH_ROOT . DIRECTORY_SEPARATOR . (string) $file);
+		if($file === '' || strpos((string) $file, '..') !== FALSE || $uploadRoot === \Joomla\Filesystem\Path::clean(JPATH_ROOT) || strpos($requestedPath, $uploadRoot . DIRECTORY_SEPARATOR) !== 0)
+		{
+			echo json_encode(array('success' => 2));
+			\Joomla\CMS\Factory::getApplication()->close();
+
+			return;
+		}
 
 		$files_table  = \Joomla\CMS\Table\Table::getInstance('Files', 'JoomcckTable');
 		$record_table = \Joomla\CMS\Table\Table::getInstance('Record', 'JoomcckTable');

@@ -90,6 +90,14 @@ class JoomcckControllerField extends MControllerAdmin
 			throw new GenericDataException(\Joomla\CMS\Language\Text::_('AJAX_METHODNOTFOUND'), 500);
 			return ;
 		}
+
+		// GHSA-whf2-8p4w-v6xv: the field class decides whether $func may be reached
+		// through this public dispatcher (blocks record-pipeline hooks by default).
+		if(!$fieldclass->isDispatchable($func))
+		{
+			throw new GenericDataException(\Joomla\CMS\Language\Text::_('JERROR_ALERTNOAUTHOR'), 403);
+		}
+
 		$result = $fieldclass->$func($_POST, $record, $this, (count($_POST) ? null : $_GET) );
 
 		if($fieldclass->getErrors())

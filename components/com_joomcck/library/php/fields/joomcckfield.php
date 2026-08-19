@@ -13,6 +13,58 @@ jimport('joomla.html.html');
 jimport('joomla.form.formfield');
 
 class CFormField extends \Joomla\CMS\Form\FormField{
+
+	/**
+	 * Record save/delete pipeline hooks. These run only inside the trusted record
+	 * pipeline (see tables/record.php / models/record.php) with validated arguments.
+	 * They must never be invoked directly through the public field dispatchers
+	 * (task=field.call, task=ajax.field_call, view=elements&layout=field), where the
+	 * request would supply their arguments and they become unauthenticated
+	 * file-write / file-delete primitives. GHSA-whf2-8p4w-v6xv.
+	 *
+	 * @var string[] lower-cased method names
+	 */
+	protected static $dispatchBlacklist = array(
+		'onpreparesave', 'oncleanvalue', 'oncopy', 'oncomment', 'onpreparefulltextsearch',
+	);
+
+	/**
+	 * Optional strict allow-list. When a field type declares a non-empty list, the
+	 * dispatchers enforce default-deny: ONLY these methods may be called through the
+	 * public field dispatchers. Leave empty to fall back to the pipeline-hook
+	 * blacklist above (the safe default that keeps every existing field AJAX call and
+	 * the payment IPN callbacks working without per-field enumeration).
+	 *
+	 * @var string[] method names (case-insensitive)
+	 */
+	protected static $dispatchWhitelist = array();
+
+	/**
+	 * Policy check used by the public field dispatchers: may $func be invoked on this
+	 * field via an anonymous frontend request? The field class owns this decision, so
+	 * a field can tighten it (declare $dispatchWhitelist) without touching the
+	 * dispatchers. GHSA-whf2-8p4w-v6xv.
+	 *
+	 * @param   string  $func
+	 * @return  bool
+	 */
+	public function isDispatchable($func)
+	{
+		$func = strtolower((string) $func);
+
+		if ($func === '')
+		{
+			return false;
+		}
+
+		if (!empty(static::$dispatchWhitelist))
+		{
+			return in_array($func, array_map('strtolower', static::$dispatchWhitelist), true);
+		}
+
+		return !in_array($func, static::$dispatchBlacklist, true);
+	}
+
 	public $layoutFolder;
 
 	public $label_orig;

@@ -482,6 +482,11 @@ class JoomcckControllerRecords extends MControllerAdmin
 
 	public function delete()
 	{
+		// GHSA-whf2-8p4w-v6xv: this task unlinks the record's uploaded files but had
+		// no CSRF token (cf. copy()). The delete links built by Url::task() carry the
+		// token in the request.
+		\Joomla\CMS\Session\Session::checkToken('request') or jexit(\Joomla\CMS\Language\Text::_('JINVALID_TOKEN'));
+
 		if(!$this->_checkAccess('Delete', $this->input->getInt('id')))
 		{
 			$this->_finish('CNORIGHTSTODELETE');

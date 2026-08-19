@@ -1301,6 +1301,13 @@ class JoomcckControllerAjax extends MControllerAdmin
 			AjaxHelper::error(Text::_('AJAX_METHODNOTFOUND'));
 		}
 
+		// GHSA-whf2-8p4w-v6xv: the field class decides whether $func may be reached
+		// through this public dispatcher (blocks record-pipeline hooks by default).
+		if(!$fieldclass->isDispatchable($func))
+		{
+			AjaxHelper::error(Text::_('JERROR_ALERTNOAUTHOR'));
+		}
+
 		$result = $fieldclass->$func($params, $record);
 
 		if($fieldclass->getErrors())

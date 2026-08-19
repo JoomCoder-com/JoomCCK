@@ -228,6 +228,12 @@ class JoomcckViewElements extends MViewBase
 			throw new Exception( \Joomla\CMS\Language\Text::_('AJAX_METHODNOTFOUND').$func,500);
 
 		}
+		// GHSA-whf2-8p4w-v6xv: the field class decides whether $func may be reached
+		// through this public dispatcher (blocks record-pipeline hooks by default).
+		if(!$fieldclass->isDispatchable($func))
+		{
+			throw new Exception(\Joomla\CMS\Language\Text::_('JERROR_ALERTNOAUTHOR'), 403);
+		}
 		$this->context = $fieldclass->$func($record, $section);
 
 		parent::display($tpl);

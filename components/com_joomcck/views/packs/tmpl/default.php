@@ -90,7 +90,7 @@ $listDirn  = $this->state->get('list.direction');
 							<span class="badge bg-success">9.<?php echo $item->version; ?></span>
 						</td>
 						<td class="text-center">
-							<a class="btn btn-primary btn-sm" href="<?php echo Route::_('index.php?option=com_joomcck&task=pack.build&pack_id=' . $item->id); ?>">
+							<a class="btn btn-primary btn-sm" href="<?php echo Route::_('index.php?option=com_joomcck&task=pack.build&pack_id=' . $item->id . '&' . \Joomla\CMS\Session\Session::getFormToken() . '=1'); ?>">
 								<i class="fas fa-hammer" aria-hidden="true"></i>
 								<span class="ms-1"><?php echo Text::_('CBUILD'); ?></span>
 							</a>

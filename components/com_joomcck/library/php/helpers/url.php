@@ -95,7 +95,11 @@ class Url
 	static public function task($task, $id, $return = FALSE)
 	{
 		$r = ($return ? $return : self::back());
-		$url = 'index.php?option=com_joomcck&task=' . $task . '&id=' . $id . '&return=' . $r;
+		$url = 'index.php?option=com_joomcck&task=' . $task . '&id=' . $id . '&return=' . $r
+			// GHSA-whf2-8p4w-v6xv: carry an anti-CSRF token on state-changing task
+			// links (records.delete enforces it; tasks that do not check simply ignore
+			// the extra request parameter).
+			. '&' . \Joomla\CMS\Session\Session::getFormToken() . '=1';
 
 		return \Joomla\CMS\Router\Route::_($url);
 	}

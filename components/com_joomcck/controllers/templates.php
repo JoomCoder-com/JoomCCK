@@ -26,6 +26,16 @@ class JoomcckControllerTemplates extends MControllerForm
 			$this->input = \Joomla\CMS\Factory::getApplication()->input;
 		}
 		$this->registerTask('saveclose', 'save');
+
+		// GHSA-whf2-8p4w-v6xv: every task on this controller installs, copies,
+		// renames, deletes or writes template files (server-executed code). Gate
+		// the whole controller behind a Joomla Super User. Per-task CSRF tokens
+		// are still enforced in each action below.
+		$user = \Joomla\CMS\Factory::getApplication()->getIdentity();
+		if(!$user->get('id') || !$user->authorise('core.admin'))
+		{
+			throw new \Exception(\Joomla\CMS\Language\Text::_('JERROR_ALERTNOAUTHOR'), 403);
+		}
 	}
 
 	public function getModel($name = 'Templates', $prefix = 'JoomcckModel', $config = array())
@@ -162,6 +172,10 @@ class JoomcckControllerTemplates extends MControllerForm
 
 	public function save($key = NULL, $urlVar = NULL)
 	{
+		// GHSA-whf2-8p4w-v6xv: this task lacked a CSRF token. ACL (Super User)
+		// is enforced in the constructor.
+		\Joomla\CMS\Session\Session::checkToken() or jexit(\Joomla\CMS\Language\Text::_('JINVALID_TOKEN'));
+
 		$uri    = \Joomla\CMS\Uri\Uri::getInstance();
 		$app    = \Joomla\CMS\Factory::getApplication();
 		$task   = $this->input->getCmd('task');
@@ -169,10 +183,26 @@ class JoomcckControllerTemplates extends MControllerForm
 		$name   = $this->input->get('name');
 		$config = $this->input->get('config');
 
+		// Reject type/name/config that are unknown or could escape the configs dir.
+		$validTypes = array('itemlist', 'filters', 'comments', 'article', 'rating', 'articleform', 'categoryselect', 'category', 'user_menu');
+		if(!in_array($type, $validTypes, true)
+			|| (string) $name === '' || strpbrk((string) $name, "/\\") !== FALSE || strpos((string) $name, '..') !== FALSE
+			|| (string) $config === '' || strpbrk((string) $config, "/\\") !== FALSE || strpos((string) $config, '..') !== FALSE)
+		{
+			throw new \Exception(\Joomla\CMS\Language\Text::_('JERROR_ALERTNOAUTHOR'), 403);
+		}
+
 		$regestry = new \Joomla\Registry\Registry();
 		$regestry->loadArray($this->input->get('jform', array(), 'array'));
 
 		$file = JoomcckTmplHelper::getTmplFile($type, $name, TRUE) . '.' . $config . '.json';
+
+		// Path containment: the resolved config file must stay inside configs/.
+		$configsDir = \Joomla\Filesystem\Path::clean(JPATH_ROOT . '/components/com_joomcck/configs');
+		if(strpos(\Joomla\Filesystem\Path::clean($file), $configsDir . DIRECTORY_SEPARATOR) !== 0)
+		{
+			throw new \Exception(\Joomla\CMS\Language\Text::_('JERROR_ALERTNOAUTHOR'), 403);
+		}
 
 		$reg_string = $regestry->toString();
 		\Joomla\Filesystem\File::write($file, $reg_string);

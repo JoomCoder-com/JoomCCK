@@ -1,0 +1,23 @@
+# JoomCCK GHSA-whf2-8p4w-v6xv defense-in-depth.
+# These template/config files are always include()d by PHP, never fetched
+# directly, so denying direct web access breaks nothing and neutralises the
+# "write a .php file here then GET it" step of an arbitrary-file-write attack.
+<FilesMatch "\.(php|php[3457]?|phtml|phps|pht|phar|inc|json)$">
+    <IfModule mod_authz_core.c>
+        Require all denied
+    </IfModule>
+    <IfModule !mod_authz_core.c>
+        Order allow,deny
+        Deny from all
+    </IfModule>
+</FilesMatch>
+# Belt and braces: never let PHP engine run in this tree.
+<IfModule mod_php.c>
+    php_flag engine off
+</IfModule>
+<IfModule mod_php7.c>
+    php_flag engine off
+</IfModule>
+<IfModule mod_php8.c>
+    php_flag engine off
+</IfModule>

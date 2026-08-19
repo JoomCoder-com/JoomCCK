@@ -58,10 +58,50 @@ class JoomcckControllerTemplate extends MControllerForm
 
 	public function save($key = NULL, $urlVar = NULL)
 	{
+		// Anti-CSRF: the legitimate editor form already emits the token
+		// (views/template/tmpl/default.php). GHSA-whf2-8p4w-v6xv.
+		\Joomla\CMS\Session\Session::checkToken() or jexit(\Joomla\CMS\Language\Text::_('JINVALID_TOKEN'));
+
+		// Writing a template file means writing server-executed code. Require a
+		// Joomla Super User (global core.admin), never merely a JoomCCK moderator.
+		$user = \Joomla\CMS\Factory::getApplication()->getIdentity();
+		if(!$user->get('id') || !$user->authorise('core.admin'))
+		{
+			throw new \Exception(\Joomla\CMS\Language\Text::_('JERROR_ALERTNOAUTHOR'), 403);
+		}
+
 		$data = $this->input->post->get('jform', array(), 'array');
 
-		$file     = explode('.', $data['ident']);
-		$filename = JoomcckTmplHelper::getTmplFile($file[1], $file[0]) . '.' . $this->input->get('ext');
+		// Extension allow-list: exactly the four the UI edits (edit_php/xml/css/js).
+		$ext = strtolower((string) $this->input->get('ext'));
+		if(!in_array($ext, array('php', 'xml', 'css', 'js'), true))
+		{
+			throw new \Exception(\Joomla\CMS\Language\Text::_('JERROR_ALERTNOAUTHOR'), 403);
+		}
+
+		// ident is "<name>.<type>"; reject anything that could escape the tmpl dir.
+		$ident = isset($data['ident']) ? (string) $data['ident'] : '';
+		$file  = explode('.', $ident);
+		if(count($file) !== 2 || $file[0] === '' || strpbrk($file[0], "/\\") !== FALSE || strpos($file[0], '..') !== FALSE)
+		{
+			throw new \Exception(\Joomla\CMS\Language\Text::_('JERROR_ALERTNOAUTHOR'), 403);
+		}
+
+		$base     = JoomcckTmplHelper::getTmplFile($file[1], $file[0]);
+		$filename = $base . '.' . $ext;
+
+		// Path containment: the resolved file must stay inside the template dir
+		// that its type maps to. Blocks traversal even if a prefix absorbs a "..".
+		$allowedDir = JoomcckTmplHelper::getTmplPath($file[1]);
+		if($base === '' || !$allowedDir)
+		{
+			throw new \Exception(\Joomla\CMS\Language\Text::_('JERROR_ALERTNOAUTHOR'), 403);
+		}
+		$allowedDir = \Joomla\Filesystem\Path::clean($allowedDir);
+		if(strpos(\Joomla\Filesystem\Path::clean($filename), $allowedDir . DIRECTORY_SEPARATOR) !== 0)
+		{
+			throw new \Exception(\Joomla\CMS\Language\Text::_('JERROR_ALERTNOAUTHOR'), 403);
+		}
 
 		if(!\Joomla\Filesystem\File::write($filename, $data['source']))
 		{
@@ -96,7 +136,7 @@ class JoomcckControllerTemplate extends MControllerForm
 		self::editFile('js');
 	}
 
-	public function editFile($ext)
+	protected function editFile($ext)
 	{
 		$app     = \Joomla\CMS\Factory::getApplication();
 		$tmpl    = str_replace(array('[', ']', ','), array('', '', '.'), $app->input->getString('id'));
