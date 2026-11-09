@@ -197,6 +197,67 @@ class com_joomcckInstallerScript
     }
 
 	/**
+	 * Run one schema change. A failure is reported as a warning instead of aborting the
+	 * whole install/update half way through.
+	 *
+	 * @param   string  $sql
+	 * @param   string  $label  message prefix shown on success, empty for none
+	 *
+	 * @return  bool  true when the query ran
+	 */
+	private function _runSchemaQuery($sql, $label)
+	{
+		$db  = \Joomla\CMS\Factory::getDbo();
+		$app = \Joomla\CMS\Factory::getApplication();
+
+		try {
+			$db->setQuery($sql);
+			$db->execute();
+		} catch (\RuntimeException $e) {
+			$app->enqueueMessage('JoomCCK database update could not run: ' . $sql . ' (' . $e->getMessage() . ')', 'warning');
+
+			return false;
+		}
+
+		if ($label) {
+			$app->enqueueMessage($label . $sql);
+		}
+
+		return true;
+	}
+
+	/**
+	 * Column type for comparison. MySQL 8.0.19+ no longer reports integer display widths
+	 * (int(11) is shown as int), so they are ignored.
+	 *
+	 * @param   string  $type
+	 *
+	 * @return  string
+	 */
+	private function _normalizeType($type)
+	{
+		return preg_replace('/^(tinyint|smallint|mediumint|int|integer|bigint)\(\d+\)/', '$1', strtolower(trim((string) $type)));
+	}
+
+	/**
+	 * Compare a column default from DESCRIBE with the one in the table definition.
+	 * NULL and 0 differ: a NOT NULL column that lost its default must be repaired.
+	 *
+	 * @param   mixed  $current
+	 * @param   mixed  $expected
+	 *
+	 * @return  bool
+	 */
+	private function _sameDefault($current, $expected)
+	{
+		if (($current === null) !== ($expected === null)) {
+			return false;
+		}
+
+		return (string) $current === (string) $expected;
+	}
+
+	/**
 	 *
 	 * @param  bool|TRUE   $update
 	 * @throws Exception
@@ -220,8 +281,9 @@ class com_joomcckInstallerScript
 				continue;
 			}
 
-			$table  = $prefix . str_replace('.json', '', $file);
-			$source = json_decode(file_get_contents(JPATH_ROOT . '/administrator/components/com_joomcck/library/db/' . $file));
+			$table   = $prefix . str_replace('.json', '', $file);
+			$source  = json_decode(file_get_contents(JPATH_ROOT . '/administrator/components/com_joomcck/library/db/' . $file));
+			$altered = false;
 
 			if (in_array($table, $list)) {
 				$db->setQuery("DESCRIBE `{$table}`");
@@ -250,20 +312,15 @@ class com_joomcckInstallerScript
 					if (empty($info[$field->name])) {
 						$sql = "ALTER TABLE `{$table}` ADD COLUMN " . $update_field;
 					} elseif (
-						strtolower($info[$field->name]->Type) != strtolower($field->type) ||
+						$this->_normalizeType($info[$field->name]->Type) !== $this->_normalizeType($field->type) ||
 						strtolower($info[$field->name]->Null) != strtolower($field->null) ||
-						$info[$field->name]->Default != $field->default
+						!$this->_sameDefault($info[$field->name]->Default, $field->default)
 					) {
 						$sql = "ALTER TABLE `{$table}` CHANGE COLUMN `{$field->name}` " . $update_field;
 					}
 
 					if ($sql) {
-						if ($update) {
-							\Joomla\CMS\Factory::getApplication()->enqueueMessage("Table update: " . $sql);
-						}
-
-						$db->setQuery($sql);
-						$db->execute();
+						$altered = $this->_runSchemaQuery($sql, $update ? 'Table update: ' : '') || $altered;
 					}
 				}
 
@@ -275,11 +332,7 @@ class com_joomcckInstallerScript
 
 				if (!empty($diff)) {
 					$sql = sprintf("ALTER TABLE `%s` DROP COLUMN `%s`", $table, implode("`, DROP COLUMN `", $diff));
-					$db->setQuery($sql);
-					$db->execute();
-					if ($update) {
-						\Joomla\CMS\Factory::getApplication()->enqueueMessage("Column drop: " . $sql);
-					}
+					$altered = $this->_runSchemaQuery($sql, $update ? 'Column drop: ' : '') || $altered;
 				}
 
 				$db->setQuery("SHOW INDEXES FROM `{$table}`");
@@ -301,46 +354,38 @@ class com_joomcckInstallerScript
 								$key_name,
 								implode(" ASC, ", $array)
 							);
-							$db->setQuery($sql);
-							$db->execute();
-							if ($update) {
-								\Joomla\CMS\Factory::getApplication()->enqueueMessage("Index update: " . $sql);
-							}
+							$altered = $this->_runSchemaQuery($sql, $update ? 'Index update: ' : '') || $altered;
 						}
 					}
 				}
 
-				if (!empty($source->primary)) {
-					$all_keys[] = 'PRIMARY';
+				// Only drop indexes JoomCCK itself retired (listed in "retired_keys" of the table
+				// definition). Any other index not in the definition was added by the site owner.
+				$retired = array_intersect((array) ($source->retired_keys ?? []), $real_keys);
+
+				if (!empty($retired)) {
+					$sql = sprintf("ALTER TABLE `%s` DROP INDEX `%s`", $table, implode("`, DROP INDEX `", $retired));
+					$altered = $this->_runSchemaQuery($sql, $update ? 'Index drop: ' : '') || $altered;
 				}
 
-				$diff = array_diff($real_keys, $all_keys);
+				$db->setQuery("SHOW TABLE STATUS WHERE Name = " . $db->quote($table));
+				$status = $db->loadObject();
 
-				if (!empty($diff) && $file != 'js_res_country.json') {
-					$sql = sprintf("ALTER TABLE `%s` DROP INDEX %s", $table, implode(", DROP INDEX ", $diff));
-					$db->setQuery($sql);
-					$db->execute();
-					if ($update) {
-						\Joomla\CMS\Factory::getApplication()->enqueueMessage("Index drop: " . $sql);
-					}
+				if ($status->Engine != $source->engine) {
+					$altered = $this->_runSchemaQuery("ALTER TABLE `{$table}` ENGINE = {$source->engine}", $update ? 'Engine changed: ' : '') || $altered;
 				}
 
-				$db->setQuery("SHOW TABLE STATUS WHERE Name = '{$table}'");
-				$engine = $db->loadObject()->Engine;
+				// Convert to utf8mb4 (emoji support) only when the table or one of its columns still uses another charset.
+				$db->setQuery(
+					"SELECT COUNT(*) FROM information_schema.COLUMNS WHERE TABLE_SCHEMA = DATABASE() AND TABLE_NAME = " . $db->quote($table)
+					. " AND CHARACTER_SET_NAME IS NOT NULL AND CHARACTER_SET_NAME <> 'utf8mb4'"
+				);
 
-				if ($engine != $source->engine) {
-					$db->setQuery("ALTER TABLE `{$table}` ENGINE = {$source->engine}");
-					$db->execute();
-					if ($update) {
-						\Joomla\CMS\Factory::getApplication()->enqueueMessage("Engine changed: " . $source->engine);
-					}
-				}
-
-				// Convert existing table to utf8mb4 for emoji support
-				$db->setQuery("ALTER TABLE `{$table}` CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci");
-				$db->execute();
-				if ($update) {
-					\Joomla\CMS\Factory::getApplication()->enqueueMessage("Table converted to utf8mb4: " . $table);
+				if (stripos((string) $status->Collation, 'utf8mb4') !== 0 || $db->loadResult()) {
+					$altered = $this->_runSchemaQuery(
+						"ALTER TABLE `{$table}` CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci",
+						$update ? 'Table converted to utf8mb4: ' : ''
+					) || $altered;
 				}
 
 			} else {
@@ -394,8 +439,10 @@ class com_joomcckInstallerScript
 				}
 			}
 
-			$db->setQuery("OPTIMIZE TABLE {$table}");
-			$db->execute();
+			// Rebuild only the tables changed above; optimizing every table on every update is slow on big sites.
+			if ($altered) {
+				$this->_runSchemaQuery("OPTIMIZE TABLE `{$table}`", '');
+			}
 		}
 
 		// Rest of the method remains the same for inserting default data
