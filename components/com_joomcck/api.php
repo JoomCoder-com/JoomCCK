@@ -21,7 +21,13 @@ jimport('mint.mvc.view.base');
 jimport('mint.forms.helper');
 jimport('mint.helper');
 
-\Joomla\CMS\HTML\HTMLHelper::_('bootstrap.framework');
+// The installer includes this file too; from the command line there is no document to add assets to.
+$jcckApp = \Joomla\CMS\Factory::getApplication();
+if (method_exists($jcckApp, 'getDocument') && $jcckApp->getDocument())
+{
+	\Joomla\CMS\HTML\HTMLHelper::_('bootstrap.framework');
+}
+unset($jcckApp);
 
 JLoader::discover('MModel', JPATH_LIBRARIES.'/mint/mvc/model');
 JLoader::discover('MView', JPATH_LIBRARIES.'/mint/mvc/view');
