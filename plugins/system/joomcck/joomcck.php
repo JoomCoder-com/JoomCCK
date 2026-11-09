@@ -141,82 +141,52 @@ class plgSystemJoomcck extends \Joomla\CMS\Plugin\CMSPlugin
 
 	public function onUserAfterDelete($user, $success, $msg)
 	{
-		$this->db = \Joomla\CMS\Factory::getDbo();
+		$userId = (int) ($user['id'] ?? 0);
 
-		$this->db->setQuery("SELECT id FROM `#__js_res_record` WHERE user_id = " . $user['id']);
-		$records   = $this->db->loadColumn();
-		$records[] = 0;
+		// Only clean up when Joomla actually deleted the user.
+		if (!$success || !$userId)
+		{
+			return true;
+		}
 
-		$this->db->setQuery("DELETE FROM `#__js_res_record`WHERE user_id = " . $user['id']);
-		$this->db->execute();
+		$db = \Joomla\CMS\Factory::getDbo();
 
-		$this->db->setQuery("DELETE FROM `#__js_res_audit_log` WHERE user_id = {$user['id']} OR record_id IN(" . implode($records, ',') . ")");
-		$this->db->execute();
+		$db->setQuery('SELECT id FROM `#__js_res_record` WHERE user_id = ' . $userId);
+		$ids = implode(',', array_map('intval', $db->loadColumn()) ?: [0]);
 
-		$this->db->setQuery("DELETE FROM `#__js_res_audit_restore` WHERE record_id IN(" . implode($records, ',') . ")");
-		$this->db->execute();
+		// Table => WHERE clause removing the user's own rows and rows tied to the user's records.
+		$cleanup = [
+			'record'                  => "user_id = $userId",
+			'audit_log'               => "user_id = $userId OR record_id IN($ids)",
+			'audit_restore'           => "record_id IN($ids)",
+			'audit_versions'          => "user_id = $userId OR record_id IN($ids)",
+			'category_user'           => "user_id = $userId",
+			'comments'                => "user_id = $userId OR record_id IN($ids)",
+			'favorite'                => "user_id = $userId OR record_id IN($ids)",
+			'hits'                    => "user_id = $userId OR record_id IN($ids)",
+			'import'                  => "user_id = $userId",
+			'moderators'              => "user_id = $userId",
+			'notifications'           => "user_id = $userId OR ref_1 IN($ids)",
+			'record_category'         => "record_id IN($ids)",
+			'record_repost'           => "record_id IN($ids)",
+			'record_values'           => "record_id IN($ids)",
+			'sales'                   => "user_id = $userId OR record_id IN($ids)",
+			'subscribe'               => "user_id = $userId OR (ref_id IN($ids) AND `type` = 'record')",
+			'subscribe_cat'           => "user_id = $userId",
+			'subscribe_user'          => "user_id = $userId OR u_id = $userId",
+			'tags_history'            => "user_id = $userId OR record_id IN($ids)",
+			'user_options'            => "user_id = $userId",
+			'user_options_autofollow' => "user_id = $userId",
+			'user_post_map'           => "user_id = $userId",
+			'vote'                    => "user_id = $userId OR (ref_id IN($ids) AND `ref_type` = 'record')",
+		];
 
-		$this->db->setQuery("DELETE FROM `#__js_res_audit_versions` WHERE user_id = {$user['id']} OR record_id IN(" . implode($records, ',') . ")");
-		$this->db->execute();
+		foreach ($cleanup as $table => $where)
+		{
+			$db->setQuery("DELETE FROM `#__js_res_$table` WHERE $where")->execute();
+		}
 
-		$this->db->setQuery("DELETE FROM `#__js_res_category_user` WHERE user_id = {$user['id']}");
-		$this->db->execute();
-
-		$this->db->setQuery("DELETE FROM `#__js_res_comments` WHERE user_id = {$user['id']} OR record_id IN(" . implode($records, ',') . ")");
-		$this->db->execute();
-
-		$this->db->setQuery("DELETE FROM `#__js_res_favorite` WHERE user_id = {$user['id']} OR record_id IN(" . implode($records, ',') . ")");
-		$this->db->execute();
-
-		$this->db->setQuery("DELETE FROM `#__js_res_hits` WHERE user_id = {$user['id']} OR record_id IN(" . implode($records, ',') . ")");
-		$this->db->execute();
-
-		$this->db->setQuery("DELETE FROM `#__js_res_import` WHERE user_id = {$user['id']}");
-		$this->db->execute();
-
-		$this->db->setQuery("DELETE FROM `#__js_res_moderators` WHERE user_id = {$user['id']}");
-		$this->db->execute();
-
-		$this->db->setQuery("DELETE FROM `#__js_res_notifications` WHERE user_id = {$user['id']} OR ref_1 IN(" . implode($records, ',') . ")");
-		$this->db->execute();
-
-		$this->db->setQuery("DELETE FROM `#__js_res_record_category` WHERE record_id IN(" . implode($records, ',') . ")");
-		$this->db->execute();
-
-		$this->db->setQuery("DELETE FROM `#__js_res_record_repost` WHERE record_id IN(" . implode($records, ',') . ")");
-		$this->db->execute();
-
-		$this->db->setQuery("DELETE FROM `#__js_res_record_values` WHERE record_id IN(" . implode($records, ',') . ")");
-		$this->db->execute();
-
-		$this->db->setQuery("DELETE FROM `#__js_res_sales` WHERE user_id = {$user['id']} OR record_id IN(" . implode($records, ',') . ")");
-		$this->db->execute();
-
-		$this->db->setQuery("DELETE FROM `#__js_res_subscribe` WHERE user_id = {$user['id']} OR (ref_id IN(" . implode($records, ',') . ") AND `type` = 'record')");
-		$this->db->execute();
-
-		$this->db->setQuery("DELETE FROM `#__js_res_subscribe_cat` WHERE user_id = {$user['id']}");
-		$this->db->execute();
-
-		$this->db->setQuery("DELETE FROM `#__js_res_subscribe_user` WHERE user_id = {$user['id']} OR u_id = {$user['id']}");
-		$this->db->execute();
-
-		$this->db->setQuery("DELETE FROM `#__js_res_tags_history` WHERE user_id = {$user['id']} OR record_id IN(" . implode($records, ',') . ")");
-		$this->db->execute();
-
-		$this->db->setQuery("DELETE FROM `#__js_res_user_options` WHERE user_id = {$user['id']}");
-		$this->db->execute();
-
-		$this->db->setQuery("DELETE FROM `#__js_res_user_options_autofollow` WHERE user_id = {$user['id']}");
-		$this->db->execute();
-
-		$this->db->setQuery("DELETE FROM `#__js_res_user_post_map` WHERE user_id = {$user['id']}");
-		$this->db->execute();
-
-		$this->db->setQuery("DELETE FROM `#__js_res_vote` WHERE user_id = {$user['id']} OR (ref_id IN(" . implode($records, ',') . ") AND `ref_type` = 'record')");
-		$this->db->execute();
-
-		return TRUE;
+		return true;
 	}
 
 
