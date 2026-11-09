@@ -288,7 +288,7 @@ class JoomcckModelRecords extends MModelList
 
 			if($this->state->get('records.ordering'))
 			{
-				$query->order($db->escape($this->state->get('records.ordering') . ' ' . $this->state->get('records.direction')));
+				$query->order($this->_localeOrder($db->escape($this->state->get('records.ordering')), $db->escape($this->state->get('records.direction'))));
 			}
 			elseif($field_orders)
 			{
@@ -297,11 +297,14 @@ class JoomcckModelRecords extends MModelList
 				{
 					$query->order("field_value + 0 " . $orderDirn);
 				}
-				$query->order("field_value " . $orderDirn);
+				else
+				{
+					$query->order($this->_localeOrder('field_value', $db->escape($orderDirn)));
+				}
 			}
 			else
 			{
-				$query->order($db->escape($orderCol . ' ' . $orderDirn));
+				$query->order($this->_localeOrder($db->escape($orderCol), $db->escape($orderDirn)));
 			}
 
 			if(($orderCol == 'name' || $orderCol == 'username'))
@@ -1747,6 +1750,68 @@ class JoomcckModelRecords extends MModelList
 		$types[$this->section->id] = $db->loadColumn();
 
 		return $types[$this->section->id];
+	}
+
+	/**
+	 * Build an ORDER BY clause that sorts text columns using the alphabet of the
+	 * current site language (e.g. Finnish/Swedish Å, Ä, Ö after Z). Non-text
+	 * columns are returned unchanged.
+	 */
+	private function _localeOrder($col, $dir)
+	{
+		$col = trim((string) $col);
+		$dir = trim((string) $dir);
+
+		if (!in_array($col, ['r.title', 'title', 'field_value', 'name', 'username', 'r.alias'], true))
+		{
+			return trim($col . ' ' . $dir);
+		}
+
+		$collation = $this->_getLocaleCollation();
+
+		return trim($col . ($collation ? ' COLLATE ' . $collation : '') . ' ' . $dir);
+	}
+
+	private function _getLocaleCollation()
+	{
+		static $collation = null;
+
+		if ($collation !== null)
+		{
+			return $collation;
+		}
+
+		$map = [
+			'fi' => 'swedish', 'sv' => 'swedish', 'da' => 'danish', 'nb' => 'danish', 'nn' => 'danish', 'no' => 'danish',
+			'de' => 'german2', 'es' => 'spanish', 'pl' => 'polish', 'cs' => 'czech', 'sk' => 'slovak', 'hu' => 'hungarian',
+			'tr' => 'turkish', 'et' => 'estonian', 'lv' => 'latvian', 'lt' => 'lithuanian', 'ro' => 'romanian',
+			'sl' => 'slovenian', 'hr' => 'croatian', 'is' => 'icelandic', 'vi' => 'vietnamese',
+		];
+
+		$lang       = strtolower(substr(\Joomla\CMS\Factory::getLanguage()->getTag(), 0, 2));
+		$collation  = '';
+
+		if (isset($map[$lang]))
+		{
+			$db = $this->getDbo();
+			$charset = method_exists($db, 'hasUTF8mb4Support') && $db->hasUTF8mb4Support() ? 'utf8mb4' : 'utf8';
+			$name    = $charset . '_' . $map[$lang] . '_ci';
+
+			try
+			{
+				$db->setQuery('SHOW COLLATION WHERE Collation = ' . $db->quote($name));
+				if ($db->loadResult())
+				{
+					$collation = $name;
+				}
+			}
+			catch (\Exception $e)
+			{
+				$collation = '';
+			}
+		}
+
+		return $collation;
 	}
 
 	public function getAlphas()
