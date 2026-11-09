@@ -1528,7 +1528,8 @@ class JoomcckControllerAjax extends MControllerAdmin
 
 		$ids        = $this->input->get('exist', array(0), 'array');
 		$ids        = \Joomla\Utilities\ArrayHelper::toInteger($ids);
-		$section_id = $this->input->getInt('section_id');
+		// The notifications module sends a list (section_id[]=..); getInt() would turn it into 1.
+		$section_id = array_filter(\Joomla\Utilities\ArrayHelper::toInteger((array) $this->input->get('section_id', array(), 'array')));
 		$user       = \Joomla\CMS\Factory::getApplication()->getIdentity();
 		$db         = \Joomla\CMS\Factory::getDbo();
 		$query      = $db->getQuery(TRUE);
@@ -1539,7 +1540,7 @@ class JoomcckControllerAjax extends MControllerAdmin
 		$query->where($db->quoteName('notified') . ' = 0');
 		if($section_id)
 		{
-			$query->where($db->quoteName('ref_2') . ' = ' . (int)$section_id);
+			$query->where($db->quoteName('ref_2') . ' IN (' . implode(',', $section_id) . ')');
 		}
 		if(!empty($ids))
 		{
