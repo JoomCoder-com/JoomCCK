@@ -226,6 +226,15 @@ class CEventsHelper
 		ArrayHelper::clean_r($list);
 		$list = \Joomla\Utilities\ArrayHelper::toInteger($list);
 
+		// Skip ids of deleted users (e.g. the owner of an imported or orphaned record): loading
+		// a user that does not exist throws a TypeError on Joomla 6 and breaks the page.
+		if($list)
+		{
+			$usersDb = Factory::getDbo();
+			$usersDb->setQuery('SELECT id FROM #__users WHERE id IN (' . implode(',', $list) . ')');
+			$list = \Joomla\Utilities\ArrayHelper::toInteger($usersDb->loadColumn());
+		}
+
 		if(!$list)
 		{
 			return;
