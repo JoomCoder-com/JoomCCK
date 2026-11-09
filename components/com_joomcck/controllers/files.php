@@ -324,7 +324,11 @@ class JoomcckControllerFiles extends MControllerAdmin
     }
     public function upload()
     {
-        \Joomla\CMS\Session\Session::checkToken('request') or jexit(\Joomla\CMS\Language\Text::_('JINVALID_TOKEN'));
+        if (!\Joomla\CMS\Session\Session::checkToken('request')) {
+            echo json_encode(['error' => 1, 'msg' => \Joomla\CMS\Language\Text::_('JINVALID_TOKEN')]);
+            \Joomla\CMS\Factory::getApplication()->close();
+            return;
+        }
 
         $user = \Joomla\CMS\Factory::getApplication()->getIdentity();
         if (!$user->get('id')) {

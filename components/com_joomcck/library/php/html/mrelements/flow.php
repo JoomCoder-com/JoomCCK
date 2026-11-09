@@ -127,7 +127,7 @@ HTMLHelper::_('bootstrap.modal');
                 chunkSize: 1024 * 1024,
                 testChunks: false,
                 query: {
-                    upload_token: 'my_token'
+                    '<?php echo \Joomla\CMS\Session\Session::getFormToken(); ?>': 1
                 }
             });
 
@@ -298,7 +298,14 @@ HTMLHelper::_('bootstrap.modal');
                 menu.hide();
             });
             flow.on('fileSuccess', function (file, data) {
-                data = JSON.parse(data);
+                try {
+                    data = JSON.parse(data);
+                } catch (e) {
+                    $("#flow-file-" + file.uniqueIdentifier).addClass('warning');
+                    Joomcck.fieldError(<?php echo $field->id; ?>,
+                        '<?php echo \Joomla\CMS\Language\Text::_('Upload error: ') ?>' + $('<div>').text(String(data)).html().substring(0, 300));
+                    return;
+                }
                 var row = $("#flow-file-" + file.uniqueIdentifier);
                 row.find('td a.btn-edit').css('display', 'inline').data('id', data.id).data('json', data);
                 row.find('td .flow-info').hide();
