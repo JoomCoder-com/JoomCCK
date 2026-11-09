@@ -54,30 +54,11 @@ class  CFormFieldRelate extends CFormField
 		$query = $db->getQuery(TRUE);
 		$query->select('id as value, title');
 		$query->from('#__js_res_record');
-		if(CStatistics::hasUnPublished($section_id))
-		{
-			$query->where('published = 1');
-		}
-		$query->where('hidden = 0');
-		$query->where('section_id = ' . (int)$section_id);
-		$query->where("type_id IN(" . implode(',', $types) . ")");
-
+		$this->_applyVisibility($query, $section_id, $types);
 
 		// exclude current if in form view
 		if($app->input->getInt('id') && $app->input->getCmd('option') == 'com_joomcck' && $app->input->getCmd('view') == 'form')
 			$query->where('id != ' . $app->input->getInt('id'));
-
-		// show restrict
-		if(!in_array($section->params->get('general.show_restrict'), $user->getAuthorisedViewLevels()) && !MECAccess::allowRestricted($user, $section))
-			$query->where("(access IN(" . implode(',', $user->getAuthorisedViewLevels()) . ") OR user_id = " . $user->get('id') . ")");
-
-		// show future records
-		if(!in_array($section->params->get('general.show_future_records'), $user->getAuthorisedViewLevels()))
-			$query->where("ctime < " . $db->quote(Factory::getDate()->toSql()));
-
-		// show past records
-		if(!in_array($section->params->get('general.show_past_records'), $user->getAuthorisedViewLevels()))
-			$query->where("(extime = '0000-00-00 00:00:00' OR ISNULL(extime) OR extime > '" . Factory::getDate()->toSql() . "')");
 
 		// strict to user
 		if(!in_array($this->params->get('params.strict_to_user'), $user->getAuthorisedViewLevels()) && $this->user_strict)
@@ -149,6 +130,111 @@ class  CFormFieldRelate extends CFormField
 
 		return is_null($list) ? [] : $list;
 
+	}
+
+	/**
+	 * Restrict a query on #__js_res_record to the records the current user may see in the
+	 * given section and types: published, not hidden, view access, future and past records.
+	 *
+	 * @param   \Joomla\Database\QueryInterface  $query
+	 * @param   int                              $section_id
+	 * @param   array                            $types       type ids
+	 *
+	 * @return  void
+	 */
+	protected function _applyVisibility($query, $section_id, $types)
+	{
+		$db      = Factory::getDbo();
+		$user    = Factory::getApplication()->getIdentity();
+		$section = ItemsStore::getSection($section_id);
+		$levels  = $user->getAuthorisedViewLevels();
+
+		$types = array_filter(\Joomla\Utilities\ArrayHelper::toInteger((array) $types));
+		$types = $types ?: [0];
+
+		if(CStatistics::hasUnPublished($section_id))
+		{
+			$query->where('published = 1');
+		}
+		$query->where('hidden = 0');
+		$query->where('section_id = ' . (int) $section_id);
+		$query->where('type_id IN(' . implode(',', $types) . ')');
+
+		if(!in_array($section->params->get('general.show_restrict'), $levels) && !MECAccess::allowRestricted($user, $section))
+		{
+			$query->where('(access IN(' . implode(',', $levels) . ') OR user_id = ' . (int) $user->get('id') . ')');
+		}
+
+		if(!in_array($section->params->get('general.show_future_records'), $levels))
+		{
+			$query->where('ctime < ' . $db->quote(Factory::getDate()->toSql()));
+		}
+
+		if(!in_array($section->params->get('general.show_past_records'), $levels))
+		{
+			$query->where("(extime = '0000-00-00 00:00:00' OR ISNULL(extime) OR extime > " . $db->quote(Factory::getDate()->toSql()) . ')');
+		}
+	}
+
+	/**
+	 * Load id (as value) and title of the given records.
+	 *
+	 * With a section, only the records the current user may see there are returned. Pass
+	 * no section only for ids read from the relation table of the record being edited.
+	 *
+	 * @param   mixed     $ids
+	 * @param   int|null  $section_id
+	 * @param   array     $types
+	 *
+	 * @return  array
+	 */
+	protected function _loadRecords($ids, $section_id = null, $types = [])
+	{
+		$ids = array_unique(array_filter(\Joomla\Utilities\ArrayHelper::toInteger((array) $ids)));
+
+		if(empty($ids))
+		{
+			return [];
+		}
+
+		$db    = Factory::getDbo();
+		$query = $db->getQuery(true)
+			->select('id AS value, title')
+			->from($db->quoteName('#__js_res_record'))
+			->where('id IN (' . implode(',', $ids) . ')');
+
+		if($section_id !== null)
+		{
+			if(!$section_id)
+			{
+				return [];
+			}
+
+			$this->_applyVisibility($query, $section_id, $types);
+		}
+
+		$db->setQuery($query);
+
+		return $db->loadObjectList() ?: [];
+	}
+
+	/**
+	 * Comma separated, escaped titles of the given records that the current user may see.
+	 *
+	 * @param   mixed  $ids
+	 * @param   int    $section_id
+	 * @param   array  $types
+	 *
+	 * @return  string
+	 */
+	protected function _visibleTitles($ids, $section_id, $types)
+	{
+		$titles = array_map(
+			static fn($item) => htmlspecialchars((string) $item->title, ENT_QUOTES, 'UTF-8'),
+			$this->_loadRecords($ids, (int) $section_id, $types)
+		);
+
+		return implode(', ', $titles);
 	}
 
 	protected function _render_input($type, $name, $section_id, $types, $multi = TRUE,$fieldOptions = [])
@@ -235,14 +321,7 @@ class  CFormFieldRelate extends CFormField
 
 				if($this->value)
 				{
-					$query = $db->getQuery(TRUE);
-					$query->from('#__js_res_record');
-					$query->select('id as value, title');
-					$query->where('id IN (' . implode(',', \Joomla\Utilities\ArrayHelper::toInteger((array) $this->value)) . ')');
-					$db->setQuery($query);
-
-					$default = $db->loadObjectList();
-
+					$default = $this->_loadRecords($this->value, $loadedFromDb ? null : $section_id, $types);
 				}
 
 				// build list for selected items
@@ -277,12 +356,7 @@ class  CFormFieldRelate extends CFormField
 
 				if($this->value)
 				{
-					$query = $db->getQuery(TRUE);
-					$query->from('#__js_res_record');
-					$query->select('id as value, title');
-					$query->where('id IN (' . implode(',', \Joomla\Utilities\ArrayHelper::toInteger((array) $this->value)) . ')');
-					$db->setQuery($query);
-					$default = $db->loadObjectList();
+					$default = $this->_loadRecords($this->value, $loadedFromDb ? null : $section_id, $types);
 				}
 				$html .= $this->_render_popup($multi, $default, $section_id, $types, $name);
 				break;
@@ -290,14 +364,8 @@ class  CFormFieldRelate extends CFormField
 			case 10:
 				if($this->value)
 				{
-					$query = $db->getQuery(TRUE);
-					$query->from('#__js_res_record');
-					$query->select('id as value, title');
-					$query->where('id IN (' . implode(',', \Joomla\Utilities\ArrayHelper::toInteger((array) $this->value)) . ')');
-					$db->setQuery($query);
-					$default = $db->loadObjectList();
+					$default = $this->_loadRecords($this->value, $loadedFromDb ? null : $section_id, $types);
 				}
-
 
 				$html .= $this->_render_display($default, $name);
 				break;
@@ -332,14 +400,7 @@ class  CFormFieldRelate extends CFormField
 			return $list;
 		}
 
-		$db    = Factory::getDbo();
-		$query = $db->getQuery(true)
-			->select('id AS value, title')
-			->from($db->quoteName('#__js_res_record'))
-			->where('id IN (' . implode(',', $missing) . ')');
-		$db->setQuery($query);
-
-		return array_merge($list, $db->loadObjectList() ?: []);
+		return array_merge($list, $this->_loadRecords($missing));
 	}
 
 	protected function _render_display($default, $name)
@@ -347,7 +408,7 @@ class  CFormFieldRelate extends CFormField
 		$li = array();
 		foreach($default AS $record)
 		{
-			$li[] = $record->title . "<input type=\"hidden\" id=\"jformfields{$this->id}\" value=\"{$record->value}\" name=\"{$name}\">";
+			$li[] = htmlspecialchars((string) $record->title, ENT_QUOTES, 'UTF-8') . "<input type=\"hidden\" id=\"jformfields{$this->id}\" value=\"" . (int) $record->value . "\" name=\"{$name}\">";
 		}
 		//var_dump($li);
 		if(!$li)
@@ -515,15 +576,7 @@ class  CFormFieldRelate extends CFormField
 			$this->show_btn_new = NULL;
 		}
 
-		if(in_array($this->params->get('params.add_existing'), Factory::getApplication()->getIdentity()->getAuthorisedViewLevels()))
-		{
-			$this->show_btn_exist = TRUE;
-		}
-		if($this->params->get('params.add_existing_auth') && (Factory::getApplication()->getIdentity()->get('id') == $record->user_id && $record->user_id))
-		{
-			$this->show_btn_exist = TRUE;
-		}
-		if($this->params->get('params.add_existing') == '-1' && Factory::getApplication()->getIdentity()->get('id') == $record->user_id && $record->user_id)
+		if($this->_canAttachExisting($record))
 		{
 			$this->show_btn_exist = TRUE;
 		}
@@ -650,16 +703,9 @@ class  CFormFieldRelate extends CFormField
 
 		if(!empty($value))
 		{
-			settype($value, 'array');
-			$value[] = 0;
+			$titles = array_map(static fn($item) => $item->title, $this->_loadRecords($value));
 
-			$db  = Factory::getDbo();
-			$sql = "SELECT title FROM #__js_res_record WHERE id IN(" . implode(',', $value) . ")";
-			$db->setQuery($sql);
-
-			$list = $db->loadColumn();
-
-			return implode(', ', $list);
+			return implode(', ', $titles);
 		}
 	}
 
@@ -675,7 +721,44 @@ class  CFormFieldRelate extends CFormField
 
 	public function onAttachExisting($params, $record)
 	{
-		$db = Factory::getDbo();
+		if(!\Joomla\CMS\Session\Session::checkToken('request'))
+		{
+			$this->setError(Text::_('JINVALID_TOKEN'));
+
+			return;
+		}
+
+		$params['record_id'] = (int) ($params['record_id'] ?? 0);
+		$params['attach']    = (int) ($params['attach'] ?? 0);
+
+		if(!in_array($this->type, ['child', 'parent'], true)
+			|| empty($record->id) || (int) $record->id !== $params['record_id']
+			|| (int) $record->type_id !== (int) $this->type_id
+			|| !$this->_canAttachExisting($record))
+		{
+			$this->setError(Text::_('JERROR_ALERTNOAUTHOR'));
+
+			return;
+		}
+
+		// The record to attach must be one the user can see in the related section.
+		if($this->type == 'child')
+		{
+			$target_section = $this->params->get('params.parent_section');
+			$target_types   = [$this->params->get('params.parent_type')];
+		}
+		else
+		{
+			$target_section = $this->params->get('params.child_section');
+			$target_types   = [MModelBase::getInstance('Fields', 'JoomcckModel')->getFieldTypeId((int) $this->params->get('params.child_field'))];
+		}
+
+		if(!$this->_loadRecords([$params['attach']], (int) $target_section, $target_types))
+		{
+			$this->setError(Text::_('JERROR_ALERTNOAUTHOR'));
+
+			return;
+		}
 
 		$table = Table::getInstance('Record_values', 'JoomcckTable');
 
@@ -737,6 +820,28 @@ class  CFormFieldRelate extends CFormField
 		CEventsHelper::notify('record', $this->type . '_attached', $record->id, $record->section_id, 0, 0, $this->id, $record, $this->params->get('params.notify_attach'));
 
 		return 1;
+	}
+
+	/**
+	 * May the current user attach existing records to $record through this field?
+	 * Same rule as the "Attach existing" button.
+	 *
+	 * @param   object  $record
+	 *
+	 * @return  bool
+	 */
+	protected function _canAttachExisting($record)
+	{
+		$user    = Factory::getApplication()->getIdentity();
+		$isOwner = $record->user_id && (int) $user->get('id') === (int) $record->user_id;
+		$access  = $this->params->get('params.add_existing');
+
+		if(in_array($access, $user->getAuthorisedViewLevels()))
+		{
+			return true;
+		}
+
+		return $isOwner && ($this->params->get('params.add_existing_auth') || $access == '-1');
 	}
 
 	private function _getChildSectionId($field_id)

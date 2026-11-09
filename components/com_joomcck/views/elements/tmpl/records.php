@@ -76,7 +76,8 @@ $k = 0;
 					func:'onAttachExisting',
 					field:'<?php echo \Joomla\CMS\Factory::getApplication()->input->get('type');?>',
 					record_id:<?php echo \Joomla\CMS\Factory::getApplication()->input->getInt('record_id');?>,
-					attach:id
+					attach:id,
+					'<?php echo \Joomla\CMS\Session\Session::getFormToken(); ?>': 1
 				}
 			}).done(function(json) {
 				if(!json.success)

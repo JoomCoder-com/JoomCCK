@@ -26,6 +26,8 @@ class CFormField extends \Joomla\CMS\Form\FormField{
 	 */
 	protected static $dispatchBlacklist = array(
 		'onpreparesave', 'oncleanvalue', 'oncopy', 'oncomment', 'onpreparefulltextsearch',
+		// Called by the records model with the filter value; never meant for the dispatchers.
+		'onfilterwornlabel',
 	);
 
 	/**
