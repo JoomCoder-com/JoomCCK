@@ -26,11 +26,8 @@ if (empty($videos)) {
 	return;
 }
 
-// Get selected video player
-$player = $field->params->get('params.video_player', 'videojs');
-
-// Load player layout
-echo Layout::render('output.type.localPlayers.' . $player, [
+// MediaElement.js is the only local player (JW Player was removed)
+echo Layout::render('output.type.localPlayers.me', [
 	'field' => $field,
 	'record' => $record,
 	'key' => $key,

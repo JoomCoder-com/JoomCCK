@@ -11,6 +11,14 @@ defined('_JEXEC') or die();
 // Extract variables
 extract($displayData);
 
+// MIME type by file extension (MediaElement needs a correct type to pick the renderer)
+$mimeOf = static function ($url) {
+	$ext = strtolower(pathinfo((string) parse_url($url, PHP_URL_PATH), PATHINFO_EXTENSION));
+	$map = ['mp4' => 'video/mp4', 'm4v' => 'video/mp4', 'mov' => 'video/mp4', 'webm' => 'video/webm', 'ogv' => 'video/ogg', 'ogg' => 'video/ogg'];
+
+	return $map[$ext] ?? 'video/mp4';
+};
+
 // Add MediaElement.js Player CSS and JS
 Factory::getDocument()->addStyleSheet(Uri::root(TRUE) . '/media/com_joomcck/css/mediaelement/mediaelementplayer.min.css');
 Factory::getDocument()->addScript(Uri::root(TRUE) . '/media/com_joomcck/js/mediaelement/mediaelement-and-player.min.js');
@@ -27,7 +35,7 @@ endif;
     <div class="jcck-video-player-me mb-3 w-100">
         <video id="mediaelement-player-<?php echo $key; ?>" height="auto" preload="true" controls playsinline>
 			<?php foreach($videos as $index => $video): ?>
-                <source src="<?php echo $video->url; ?>" type="video/mp4" title="<?php echo $video->display_title; ?>">
+                <source src="<?php echo $video->url; ?>" type="<?php echo $mimeOf($video->url); ?>" title="<?php echo htmlspecialchars((string) $video->display_title, ENT_QUOTES, 'UTF-8'); ?>">
 			<?php endforeach; ?>
         </video>
     </div>

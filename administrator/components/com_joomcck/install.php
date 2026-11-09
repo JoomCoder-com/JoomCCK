@@ -58,6 +58,8 @@ class com_joomcckInstallerScript
 
         $this->_updateTables();
 
+        $this->_deleteJwPlayer();
+
         if (version_compare($this->currentVersion, '6.3.0', '<')) {
             $this->_migrateFieldAliases();
         }
@@ -578,6 +580,24 @@ class com_joomcckInstallerScript
                 ->where('id = ' . (int) $field->id);
             $db->setQuery($update);
             $db->execute();
+        }
+    }
+
+    /**
+     * JW Player was replaced by MediaElement.js in the Audio and Video fields.
+     * Remove the old library and the video layout from existing installs.
+     */
+    private function _deleteJwPlayer()
+    {
+        foreach (['/media/com_joomcck/jwplayer', '/media/com_joomcck/vendors/jwplayer'] as $folder) {
+            if (is_dir(JPATH_ROOT . $folder)) {
+                \Joomla\Filesystem\Folder::delete(JPATH_ROOT . $folder);
+            }
+        }
+
+        $file = '/components/com_joomcck/fields/video/layouts/output/type/localPlayers/jwplayer.php';
+        if (is_file(JPATH_ROOT . $file)) {
+            \Joomla\Filesystem\File::delete(JPATH_ROOT . $file);
         }
     }
 

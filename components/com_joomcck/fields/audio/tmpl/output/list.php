@@ -10,11 +10,11 @@
 defined('_JEXEC') or die();
 ?>
 
-    <div style="display: block">
-        <div id="mediaplayer<?php echo $record->id; ?>"></div>
-    </div>
-    <div class="clearfix"></div>
-    <table class="table table-condensed" id="playlist_table">
+<?php
+$playerId = 'jcck-audio-' . (int) $this->id . '-' . (int) $record->id;
+echo $this->renderPlayer($record, 'tmpl_list');
+?>
+    <table class="table table-condensed" id="<?php echo $playerId; ?>-table">
         <thead>
         <tr>
             <th><?php echo \Joomla\CMS\Language\Text::_('CNAME'); ?></th>
@@ -47,20 +47,17 @@ defined('_JEXEC') or die();
 		<?php foreach ($this->tracks as $k => $file): ?>
 
 			<?php
-			$tracks[] = "{sources:[{'file':'" . $this->getFileUrl($file) . "', 'title':'" . ($file->title ? $file->title : $file->realname) . "'}]}";
-			$data     = new \Joomla\Registry\Registry($file->params);
+			$data = new \Joomla\Registry\Registry($file->params);
 			?>
             <tr valign="middle">
                 <td>
-                    <a href="javascript:void(0)" id="file_play_<?php echo $record->id; ?>_<?php echo $k; ?>"
-                       onclick="play<?php echo $record->id; ?>(<?php echo $k; ?>)">
+                    <a href="javascript:void(0)" class="jcck-audio-play" data-index="<?php echo (int) $k; ?>">
                         <img src="<?php echo \Joomla\CMS\Uri\Uri::root(true) ?>/media/com_joomcck/icons/16/control.png"
                              alt="<?php echo \Joomla\CMS\Language\Text::_('P_PLAY') ?>" align="absmiddle"></a>
-                    <a href="javascript:void(0)" id="file_stop_<?php echo $record->id; ?>_<?php echo $k; ?>"
-                       onclick="stop<?php echo $record->id; ?>(<?php echo $k; ?>)" style="display:none">
+                    <a href="javascript:void(0)" class="jcck-audio-stop" data-index="<?php echo (int) $k; ?>" style="display:none">
                         <img src="<?php echo \Joomla\CMS\Uri\Uri::root(true) ?>/media/com_joomcck/icons/16/control-stop-square.png"
                              alt="<?php echo \Joomla\CMS\Language\Text::_('P_STOP') ?>" align="absmiddle"></a>
-					<?php echo $file->title ? $file->title : $file->realname; ?>
+					<?php echo htmlspecialchars($file->title ? $file->title : $file->realname, ENT_QUOTES, 'UTF-8'); ?>
 					<?php if ($data->get('comment') && $this->params->get('tmpl_list.show_comment')): ?>
 						<?php echo $data->get('comment'); ?>
 					<?php endif; ?>
@@ -118,33 +115,54 @@ defined('_JEXEC') or die();
         </tbody>
     </table>
 
-    <script type="text/javascript">
-        var player<?php echo $record->id;?> = jwplayer("mediaplayer<?php echo $record->id;?>").setup({
-            "width": "<?php echo $this->params->get('tmpl_list.width');?>",
-            "controlbar": "bottom",
-            "repeat": "true",
-            "playlist": [<?php echo implode(',', $tracks)?>]
-			<?php if ($this->params->get('tmpl_list.listbar', false)):?>
-            ,
-            "listbar": {
-                "position": 'bottom',
-                "size": '200'
+    <script>
+        (function () {
+            var id = <?php echo json_encode($playerId); ?>;
+
+            function sync(playing) {
+                var api = window.JcckAudio && window.JcckAudio[id],
+                    table = document.getElementById(id + '-table');
+                if (!api || !table) return;
+                var cur = api.current();
+                table.querySelectorAll('.jcck-audio-play').forEach(function (a) {
+                    a.style.display = (playing && +a.dataset.index === cur) ? 'none' : 'inline-block';
+                });
+                table.querySelectorAll('.jcck-audio-stop').forEach(function (a) {
+                    a.style.display = (playing && +a.dataset.index === cur) ? 'inline-block' : 'none';
+                });
             }
-			<?php endif;?>
-        });
 
-        function stop<?php echo $record->id;?>(idx) {
-            $("#file_stop_<?php echo $record->id;?>_" + idx).setStyle("display", "none");
-            $("#file_play_<?php echo $record->id;?>_" + idx).setStyle("display", "inline-block");
-            player<?php echo $record->id;?>.stop();
-        }
+            function bindMedia() {
+                var api = window.JcckAudio && window.JcckAudio[id];
+                if (!api || !api.media || api.media._jcckList) return;
+                api.media._jcckList = true;
+                ['play', 'playing'].forEach(function (ev) { api.media.addEventListener(ev, function () { sync(true); }); });
+                ['pause', 'ended'].forEach(function (ev) { api.media.addEventListener(ev, function () { sync(false); }); });
+            }
 
-        function play<?php echo $record->id;?>(index) {
-            player<?php echo $record->id;?>.playlistItem(index);
-            $('#playlist_table').getElements("a[id^=file_play_<?php echo $record->id;?>_]").setStyle("display", "inline-block");
-            $('#playlist_table').getElements("a[id^=file_stop_<?php echo $record->id;?>_]").setStyle("display", "none");
-            $("#file_play_<?php echo $record->id;?>_" + index).setStyle("display", "none");
-            $("#file_stop_<?php echo $record->id;?>_" + index).setStyle("display", "inline-block");
-        }
+            document.addEventListener('jcck:audio-ready', function (e) {
+                if (e.detail === id) bindMedia();
+            });
+
+            function init() {
+                var table = document.getElementById(id + '-table');
+                if (!table) return;
+                bindMedia();
+
+                table.addEventListener('click', function (e) {
+                    var api = window.JcckAudio && window.JcckAudio[id],
+                        a = e.target.closest('.jcck-audio-play, .jcck-audio-stop');
+                    if (!api || !a) return;
+                    e.preventDefault();
+                    a.classList.contains('jcck-audio-play') ? api.play(+a.dataset.index) : api.stop();
+                });
+            }
+
+            if (document.readyState === 'loading') {
+                document.addEventListener('DOMContentLoaded', init);
+            } else {
+                init();
+            }
+        })();
     </script>
 <?php
