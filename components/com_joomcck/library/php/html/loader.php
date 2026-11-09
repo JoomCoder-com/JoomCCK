@@ -7,7 +7,6 @@
 * @license GNU/GPL http://www.gnu.org/copyleft/gpl.html
 */
 defined('_JEXEC') or die();
-require_once JPATH_ROOT. '/libraries/joomla/form/fields/groupedlist.php';
 
 class JHTMLLoader
 {
