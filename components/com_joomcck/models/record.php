@@ -160,7 +160,8 @@ class JoomcckModelRecord extends MModelItem
 			$data->future = TRUE;
 		}
 
-		$data->mtime = \Joomla\CMS\Factory::getDate($data->mtime);
+		// Never-modified records have a NULL mtime; fall back to the creation date.
+		$data->mtime = \Joomla\CMS\Factory::getDate($data->mtime ?? $data->created);
 
 		$data->params = new \Joomla\Registry\Registry($data->params);
 
