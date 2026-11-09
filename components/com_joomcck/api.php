@@ -552,11 +552,27 @@ class JoomcckApi
 		$back_user  = $app->input->get('user_id');
 		$back_uc    = $app->input->get('ucat_id');
 		$back_limit = $app->input->get('limit', NULL);
+		$back_start = $app->input->get('limitstart', NULL);
+		$back_catid = $app->input->get('cat_id', NULL);
 
-		$state_limit = $app->getUserState('global.list.limit', 20);
+		// The records model saves limit and limitstart in the user session (under its global key
+		// and under the section's own key). Back them up so this embedded list does not change
+		// the page size or page of the next normal list view of that section.
+		$state_limit         = $app->getUserState('global.list.limit', 20);
+		$state_list_limit    = $app->getUserState('list.limit');
+		$state_section_limit = $app->getUserState('com_joomcck.records' . $section_id . '.list.limit');
+		$state_section_start = $app->getUserState('com_joomcck.records' . $section_id . '.limitstart');
 		$state_ord   = $app->getUserState('com_joomcck.records' . $section_id . '.ordercol');
 		$state_ordd  = $app->getUserState('com_joomcck.records' . $section_id . '.orderdirn');
 		$app->input->set('section_id', $section_id);
+		// cat_id belongs to the page we are embedded in. When that page is another section (e.g. a
+		// parent record showing its children), a leftover cat_id makes field filter links point to
+		// a category of the wrong section.
+		if($back_catid && ItemsStore::getCategory((int) $back_catid)->section_id != $section_id)
+		{
+			$app->input->set('cat_id', $cat_id);
+		}
+		$app->input->set('limitstart', 0);
 		$app->input->set('view_what', $view_what);
 		$app->input->set('force_cat_id', $cat_id);
 		$app->input->set('user_id', $user_id);
@@ -627,9 +643,14 @@ class JoomcckApi
 		$app->input->set('user_id', $back_user);
 		$app->input->set('ucat_id', $back_uc);
 		$app->input->set('limit', $back_limit);
+		$app->input->set('limitstart', $back_start);
+		$app->input->set('cat_id', $back_catid);
 		$app->input->set('api', 0);
 
 		$app->setUserState('global.list.limit', $state_limit);
+		$app->setUserState('list.limit', $state_list_limit);
+		$app->setUserState('com_joomcck.records' . $section_id . '.list.limit', $state_section_limit);
+		$app->setUserState('com_joomcck.records' . $section_id . '.limitstart', $state_section_start);
 		$app->setUserState('com_joomcck.records' . $section_id . '.ordercol', $state_ord);
 		$app->setUserState('com_joomcck.records' . $section_id . '.orderdirn', $state_ordd);
 
