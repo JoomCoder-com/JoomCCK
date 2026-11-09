@@ -164,10 +164,42 @@ class  CFormFieldRelate extends CFormField
 		$attribs = $html = $record_id = '';
 		$default = array();
 
+		// In the edit form, load the current relations from the relation table. The record JSON
+		// is not reliable: relations created from the other side never write it.
+		if($app->input->getInt('id') && $app->input->getCmd('option') == 'com_joomcck' && $app->input->getCmd('view') == 'form')
+		{
+			$record_id = $app->input->getInt('id');
+			$default_query = null;
+			if($this->type == 'child')
+			{
+				$default_query = $db->getQuery(true)
+					->select($db->quoteName('field_value'))
+					->from($db->quoteName('#__js_res_record_values'))
+					->where($db->quoteName('record_id') . ' = ' . (int)$record_id)
+					->where($db->quoteName('field_id') . ' = ' . (int)$this->id);
+			}
+			elseif($this->type == 'parent')
+			{
+				$default_query = $db->getQuery(true)
+					->select($db->quoteName('record_id'))
+					->from($db->quoteName('#__js_res_record_values'))
+					->where($db->quoteName('field_value') . ' = ' . $db->quote($record_id))
+					->where($db->quoteName('field_id') . ' = ' . (int)$this->params->get('params.child_field'));
+			}
+			if($default_query)
+			{
+				$db->setQuery($default_query);
+				$this->value = $db->loadColumn();
+			}
+		}
 
 		// get items list
 		$list = $this->getList($types,$section_id);
 
+		// getList() filters (one parent per child, strict to user, access, dates) can hide records
+		// that are already related. Add them back, otherwise the form does not resubmit them and
+		// saving the record silently deletes those relations.
+		$list = $this->_addRelatedToList($list);
 
 		// no need to continue if there is no items
 		if(count($list) == 0 && empty($this->value))
@@ -190,34 +222,6 @@ class  CFormFieldRelate extends CFormField
 		{
 			$this->params->set('params.multi_limit', 1);
 		}
-
-		if($app->input->getInt('id') && $app->input->getCmd('option') == 'com_joomcck' && $app->input->getCmd('view') == 'form')
-		{
-			$record_id = $app->input->getInt('id');
-			if($this->type == 'child')
-			{
-				$default_query = $db->getQuery(true)
-					->select($db->quoteName('field_value'))
-					->from($db->quoteName('#__js_res_record_values'))
-					->where($db->quoteName('record_id') . ' = ' . (int)$record_id)
-					->where($db->quoteName('field_id') . ' = ' . (int)$this->id);
-			}
-			elseif($this->type == 'parent')
-			{
-				$default_query = $db->getQuery(true)
-					->select($db->quoteName('record_id'))
-					->from($db->quoteName('#__js_res_record_values'))
-					->where($db->quoteName('field_value') . ' = ' . $db->quote($record_id))
-					->where($db->quoteName('field_id') . ' = ' . (int)$this->params->get('params.child_field'));
-			}
-			if(!empty($default_query))
-			{
-				$db->setQuery($default_query);
-				$this->value = $db->loadColumn();
-			}
-		}
-
-
 
         switch($type)
 		{
@@ -295,6 +299,41 @@ class  CFormFieldRelate extends CFormField
 
 
 		return $html;
+	}
+
+	/**
+	 * Append the records in $this->value that are missing from $list.
+	 *
+	 * @param   array  $list  objects with value/title, as returned by getList()
+	 *
+	 * @return  array
+	 */
+	protected function _addRelatedToList(array $list)
+	{
+		$current = \Joomla\Utilities\ArrayHelper::toInteger((array) $this->value);
+		$current = array_filter($current);
+
+		if(empty($current))
+		{
+			return $list;
+		}
+
+		$listed  = array_map(static fn($item) => (int) $item->value, $list);
+		$missing = array_diff($current, $listed);
+
+		if(empty($missing))
+		{
+			return $list;
+		}
+
+		$db    = Factory::getDbo();
+		$query = $db->getQuery(true)
+			->select('id AS value, title')
+			->from($db->quoteName('#__js_res_record'))
+			->where('id IN (' . implode(',', $missing) . ')');
+		$db->setQuery($query);
+
+		return array_merge($list, $db->loadObjectList() ?: []);
 	}
 
 	protected function _render_display($default, $name)
