@@ -97,7 +97,16 @@ class com_joomcckInstallerScript
 
         $params = json_decode(($et->params ?: '{}'));
         if (empty($params->moderator)) {
-            $params->moderator = \Joomla\CMS\Factory::getApplication()->getIdentity()->get('id');
+            // No identity when installing from the Joomla CLI: fall back to the first Super User.
+            $identity = \Joomla\CMS\Factory::getApplication()->getIdentity();
+            $moderator = $identity ? (int) $identity->get('id') : 0;
+
+            if (!$moderator) {
+                $db->setQuery("SELECT user_id FROM `#__user_usergroup_map` WHERE group_id = 8 ORDER BY user_id ASC", 0, 1);
+                $moderator = (int) $db->loadResult();
+            }
+
+            $params->moderator = $moderator;
         }
         if (empty($params->general_upload)) {
             $params->general_upload = 'uploads';
