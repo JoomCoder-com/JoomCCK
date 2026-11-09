@@ -753,7 +753,8 @@ class  CFormFieldRelate extends CFormField
 			$target_types   = [MModelBase::getInstance('Fields', 'JoomcckModel')->getFieldTypeId((int) $this->params->get('params.child_field'))];
 		}
 
-		if(!$this->_loadRecords([$params['attach']], (int) $target_section, $target_types))
+		if(!$this->_loadRecords([$params['attach']], (int) $target_section, $target_types)
+			|| !$this->_canPickForAttach($params['attach'], $record))
 		{
 			$this->setError(Text::_('JERROR_ALERTNOAUTHOR'));
 
@@ -805,8 +806,7 @@ class  CFormFieldRelate extends CFormField
 		$save['field_key'] 	= $field->key;
 		$save['user_id'] 	= Factory::getApplication()->getIdentity()->get('id');
 		$save['section_id'] = $this->_getChildSectionId($save['field_id']);
-		$save['type_id'] 	= ($params['field'] == 'child' ?
-			$this->type_id : MModelBase::getInstance('Fields', 'JoomcckModel')->getFieldTypeId($save['field_id']));
+		$save['type_id'] 	= MModelBase::getInstance('Fields', 'JoomcckModel')->getFieldTypeId((int) $save['field_id']);
 
 
 
@@ -842,6 +842,70 @@ class  CFormFieldRelate extends CFormField
 		}
 
 		return $isOwner && ($this->params->get('params.add_existing_auth') || $access == '-1');
+	}
+
+	/**
+	 * Is $attach_id one of the records the "attach existing" popup offers for $record?
+	 * Applies the popup's "strict to user" and "one parent per child" rules
+	 * (views/elements/view.html.php::_records()).
+	 *
+	 * @param   int     $attach_id
+	 * @param   object  $record     the record the existing one is attached to
+	 *
+	 * @return  bool
+	 */
+	protected function _canPickForAttach($attach_id, $record)
+	{
+		$user = Factory::getApplication()->getIdentity();
+
+		if(!in_array($this->params->get('params.strict_to_user'), $user->getAuthorisedViewLevels()))
+		{
+			$user_id = (int) $user->get('id');
+
+			if($this->params->get('params.strict_to_user_mode') > 1)
+			{
+				$user_id = (int) $record->user_id;
+
+				if(!$user_id && $this->params->get('params.strict_to_user_mode') == 3)
+				{
+					$user_id = (int) $user->get('id');
+				}
+			}
+
+			$attach = Table::getInstance('Record', 'JoomcckTable');
+			$attach->load((int) $attach_id);
+
+			if(!$user_id || (int) $attach->user_id !== $user_id)
+			{
+				return false;
+			}
+		}
+
+		if($this->type == 'parent')
+		{
+			$child_field = Table::getInstance('Field', 'JoomcckTable');
+			$child_field->load((int) $this->params->get('params.child_field'));
+			$child_params = new Registry($child_field->params);
+
+			if($child_params->get('params.multi_parent') == 0)
+			{
+				$db = Factory::getDbo();
+				$db->setQuery(
+					$db->getQuery(true)
+						->select('COUNT(*)')
+						->from($db->quoteName('#__js_res_record_values'))
+						->where($db->quoteName('field_id') . ' = ' . (int) $child_field->id)
+						->where($db->quoteName('record_id') . ' = ' . (int) $attach_id)
+				);
+
+				if($db->loadResult())
+				{
+					return false;
+				}
+			}
+		}
+
+		return true;
 	}
 
 	private function _getChildSectionId($field_id)
