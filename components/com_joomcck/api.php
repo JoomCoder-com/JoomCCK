@@ -22,12 +22,14 @@ jimport('mint.forms.helper');
 jimport('mint.helper');
 
 // The installer includes this file too; from the command line there is no document to add assets to.
-$jcckApp = \Joomla\CMS\Factory::getApplication();
-if (method_exists($jcckApp, 'getDocument') && $jcckApp->getDocument())
+$jcckApp         = \Joomla\CMS\Factory::getApplication();
+$jcckHasDocument = method_exists($jcckApp, 'getDocument') && $jcckApp->getDocument();
+unset($jcckApp);
+
+if ($jcckHasDocument)
 {
 	\Joomla\CMS\HTML\HTMLHelper::_('bootstrap.framework');
 }
-unset($jcckApp);
 
 JLoader::discover('MModel', JPATH_LIBRARIES.'/mint/mvc/model');
 JLoader::discover('MView', JPATH_LIBRARIES.'/mint/mvc/view');
@@ -49,30 +51,33 @@ foreach (glob(JPATH_ROOT.'/components/com_joomcck/library/php/helpers/*.php') as
 
 \Joomla\CMS\Factory::getLanguage()->load('com_joomcck', JPATH_ROOT);
 
-if(\Joomla\CMS\Component\ComponentHelper::getParams('com_joomcck')->get('compatibility'))
+if ($jcckHasDocument)
 {
-	\Joomla\CMS\HTML\HTMLHelper::_('bootstrap.loadCss');
-}
+	if(\Joomla\CMS\Component\ComponentHelper::getParams('com_joomcck')->get('compatibility'))
+	{
+		\Joomla\CMS\HTML\HTMLHelper::_('bootstrap.loadCss');
+	}
 
-\Joomla\CMS\HTML\HTMLHelper::_('bootstrap.tooltip');
-\Joomla\CMS\HTML\HTMLHelper::_('bootstrap.modal');
-\Joomla\CMS\HTML\HTMLHelper::_('bootstrap.popover', '*[rel="popover"]',
-	array(
-		'placement' => 'bottom',
-		'trigger'   => 'click'
-	)
-);
-\Joomla\CMS\HTML\HTMLHelper::_('bootstrap.tooltip', '*[rel^="tooltip"]');
-\Joomla\CMS\HTML\HTMLHelper::_('bootstrap.tooltip', '*[rel="tooltipright"]',
-	array(
-		'placement' => 'right'
-	)
-);
-\Joomla\CMS\HTML\HTMLHelper::_('bootstrap.tooltip', '*[rel="tooltipbottom"]',
-	array(
-		'placement' => 'bottom'
-	)
-);
+	\Joomla\CMS\HTML\HTMLHelper::_('bootstrap.tooltip');
+	\Joomla\CMS\HTML\HTMLHelper::_('bootstrap.modal');
+	\Joomla\CMS\HTML\HTMLHelper::_('bootstrap.popover', '*[rel="popover"]',
+		array(
+			'placement' => 'bottom',
+			'trigger'   => 'click'
+		)
+	);
+	\Joomla\CMS\HTML\HTMLHelper::_('bootstrap.tooltip', '*[rel^="tooltip"]');
+	\Joomla\CMS\HTML\HTMLHelper::_('bootstrap.tooltip', '*[rel="tooltipright"]',
+		array(
+			'placement' => 'right'
+		)
+	);
+	\Joomla\CMS\HTML\HTMLHelper::_('bootstrap.tooltip', '*[rel="tooltipbottom"]',
+		array(
+			'placement' => 'bottom'
+		)
+	);
+}
 
 $em_api = JPATH_ROOT . '/components/com_emerald/api.php';
 if(is_file($em_api))
