@@ -17,6 +17,17 @@ class JoomcckTableGroup extends \Joomla\CMS\Table\Table
 		parent::__construct('#__js_res_fields_group', 'id', $_db);
 	}
 
+	public function check()
+	{
+		// Sites whose checked_out column lost its default reject an insert that omits it.
+		if (empty($this->checked_out))
+		{
+			$this->checked_out = 0;
+		}
+
+		return parent::check();
+	}
+
 	public function delete($pk = null)
 	{
 		$k = $this->_tbl_key;
