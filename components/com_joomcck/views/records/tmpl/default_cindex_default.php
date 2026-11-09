@@ -33,7 +33,6 @@ $cols = $params->get('tmpl_params.cat_cols', 3);
 $rows = count($cats) / $params->get('tmpl_params.cat_cols',  3);
 $rows = ceil($rows);
 $ind = 0;
-$span = array(1=>12,2=>6,3=>4,4=>3,6=>12);
 $api = new JoomcckApi();
 ?>
 
@@ -44,7 +43,7 @@ $api = new JoomcckApi();
 <?php for($i = 0; $i < $rows; $i ++):?>
 	<div class="row gx-3 gy-3 mb-3">
 		<?php for($c = 0; $c < $cols; $c++):?>
-			<div class="col-md-<?php echo $span[$cols]?>">
+			<div class="col-12 col-md">
 				<?php if ($ind < count($cats)): ?>
 					<?php $category = $cats[$ind]; ?>
 					<div class="<?php echo ($params->get('tmpl_core.well', 1) ? 'card ' : '')?>">

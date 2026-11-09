@@ -60,7 +60,7 @@ $ind   = 0;
 			<?php for ($c = 0;
 			$c < $cols;
 			$c++): ?>
-            <div class="col-md-4">
+            <div class="col-12 col-md">
 				<?php for ($i = 0;
 				$i < $rows;
 				$i++): ?>
