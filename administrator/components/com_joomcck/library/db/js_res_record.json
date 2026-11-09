@@ -341,7 +341,7 @@
     },
     "idx_name": {
       "type": "KEY",
-      "fields": "`title`"
+      "fields": "`title`(250)"
     },
     "idx_comment": {
       "type": "KEY",
