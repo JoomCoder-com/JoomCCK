@@ -264,8 +264,9 @@ class com_joomcckInstallerScript
 	 */
 	public function _updateTables($update = true)
 	{
-		$prefix = \Joomla\CMS\Factory::getApplication()->getCfg('dbprefix');
+		// getCfg() does not exist on the console application (Joomla CLI installs/updates).
 		$db     = \Joomla\CMS\Factory::getDbo();
+		$prefix = $db->getPrefix();
 
 		// Set connection charset to utf8mb4 for emoji support
 		$db->setQuery("SET NAMES utf8mb4 COLLATE utf8mb4_unicode_ci");
