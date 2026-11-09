@@ -163,6 +163,7 @@ class  CFormFieldRelate extends CFormField
 
 		$attribs = $html = $record_id = '';
 		$default = array();
+		$loadedFromDb = false;
 
 		// In the edit form, load the current relations from the relation table. The record JSON
 		// is not reliable: relations created from the other side never write it.
@@ -189,7 +190,8 @@ class  CFormFieldRelate extends CFormField
 			if($default_query)
 			{
 				$db->setQuery($default_query);
-				$this->value = $db->loadColumn();
+				$this->value  = $db->loadColumn();
+				$loadedFromDb = true;
 			}
 		}
 
@@ -198,8 +200,12 @@ class  CFormFieldRelate extends CFormField
 
 		// getList() filters (one parent per child, strict to user, access, dates) can hide records
 		// that are already related. Add them back, otherwise the form does not resubmit them and
-		// saving the record silently deletes those relations.
-		$list = $this->_addRelatedToList($list);
+		// saving the record silently deletes those relations. Only for ids read from the relation
+		// table: in filters $this->value comes from the request and must not reveal hidden titles.
+		if($loadedFromDb)
+		{
+			$list = $this->_addRelatedToList($list);
+		}
 
 		// no need to continue if there is no items
 		if(count($list) == 0 && empty($this->value))
