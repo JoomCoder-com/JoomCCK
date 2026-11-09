@@ -44,6 +44,12 @@ class JoomcckViewRecords extends MViewBase
 		// ----- GET SECTION ------
 		$section = $this->section = ItemsStore::getSection($app->input->getInt('section_id'));
 
+		// Section deleted (e.g. a stale menu item still points to it).
+		if(empty($section->id))
+		{
+			throw new \Exception(\Joomla\CMS\Language\Text::_('CNOSECTION'), 404);
+		}
+
 		if($section->published == 0)
 		{
 			\Joomla\CMS\Factory::getApplication()->enqueueMessage(\Joomla\CMS\Language\Text::_('CERR_SECTIONUNPUB'),'warning');
@@ -266,7 +272,16 @@ class JoomcckViewRecords extends MViewBase
 
 	private function _redirect()
 	{
-		$app = \Joomla\CMS\Factory::getApplication()->redirect(\Joomla\CMS\Router\Route::_('index.php?Itemid=' . $this->section->params->get('general.noaccess_redirect')));
+		$app    = \Joomla\CMS\Factory::getApplication();
+		$itemId = (int) $this->section->params->get('general.noaccess_redirect');
+
+		// No target, or a target pointing back at this page, would redirect forever: go home instead.
+		if (!$itemId || $itemId === $app->input->getInt('Itemid'))
+		{
+			$app->redirect(\Joomla\CMS\Uri\Uri::root());
+		}
+
+		$app->redirect(\Joomla\CMS\Router\Route::_('index.php?Itemid=' . $itemId, false));
 	}
 
 	private function _personalize()
