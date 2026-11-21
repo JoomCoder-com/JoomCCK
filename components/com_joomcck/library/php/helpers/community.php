@@ -306,6 +306,14 @@ class CCommunityHelper
 			}
 			$file = JPATH_ROOT . '/components/com_joomcck/library/php/community/' . $component . '/' . $component . '.php';
 
+			// The integration may have been removed (EasySocial and SLogin were dropped from the Extended package):
+			// fall back to the built-in profiles instead of failing every page.
+			if(!is_file($file))
+			{
+				$component = 'com_joomcck';
+				$file      = JPATH_ROOT . '/components/com_joomcck/library/php/community/com_joomcck/com_joomcck.php';
+			}
+
 			include_once $file;
 			$name = 'CCommunity' . ucfirst($component);
 			if(!class_exists($name))
